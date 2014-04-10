@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="NGw-zI-bIO">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="X2n-9X-aSq">
+            <objects>
+                <viewController storyboardIdentifier="loginScreen" id="NGw-zI-bIO" customClass="STLoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o48-Z3-eaD"/>
+                        <viewControllerLayoutGuide type="bottom" id="P1H-lz-gaZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="khT-Yw-sWu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status_splash_r4_login" translatesAutoresizingMaskIntoConstraints="NO" id="oGC-Ih-RnU">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="h24-29-8mf"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oGC-Ih-RnU" secondAttribute="trailing" id="3GA-dv-Srx"/>
+                            <constraint firstItem="oGC-Ih-RnU" firstAttribute="top" secondItem="o48-Z3-eaD" secondAttribute="bottom" id="NLv-55-peU"/>
+                            <constraint firstItem="oGC-Ih-RnU" firstAttribute="leading" secondItem="khT-Yw-sWu" secondAttribute="leading" id="X61-PE-a2I"/>
+                            <constraint firstItem="P1H-lz-gaZ" firstAttribute="top" secondItem="oGC-Ih-RnU" secondAttribute="bottom" id="k1F-ey-pKx"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="wL2-WN-AkN"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5tL-8W-SPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="611" y="114"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="status_splash_r4_login" width="320" height="568"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
