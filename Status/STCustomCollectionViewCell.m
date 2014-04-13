@@ -43,11 +43,15 @@
 }
 
 - (void)setUpWithDictionary:(NSDictionary *)setupDict forFlowType:(int)flowType{
+    // if setupDict is nil, the cell will be setted as a placeholder
+    if (setupDict == nil) {
+        [self setupAsPlaceholderForFlowType:flowType];
+        return;
+    }
+    
     [self setUpVisualsForFlowType:flowType];
     
     self.setUpDict = setupDict;
-    
-    //self.profileNameLabel.text = setupDict[@"user_name"];
     
     int numberOfLikes = [setupDict[@"number_of_likes"] intValue];
     NSString * likesString = (numberOfLikes == 1) ? @"Like" : @"Likes";
@@ -57,7 +61,6 @@
     self.likesNumberBtn.titleLabel.numberOfLines = 2;
     BOOL isLiked = [setupDict[@"post_liked_by_current_user"] boolValue];
     
-    //[self.likeBtn setSelected:isLiked];
     if (isLiked) {
         [self.likeBtn setImage:[UIImage imageNamed:@"btn_liked"] forState:UIControlStateNormal];
         [self.likeBtn setImage:[UIImage imageNamed:@"btn_liked_pressed"] forState:UIControlStateHighlighted];
@@ -77,7 +80,6 @@
         case STFlowTypeMyProfile:
         case STFlowTypeUserProfile:{
             [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"], setupDict[@"small_photo_link"]]];
-            //self.profileNameLabel.text = [NSString stringWithFormat:@"%@ Profile ", self.profileNameLabel.text];
             [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", setupDict[@"user_name"]] forState:UIControlStateNormal];
             break;
         }
@@ -89,22 +91,19 @@
     
 }
 
-- (void)setUpVisualsForFlowType: (int)flowType{
+- (void)setUpVisualsForFlowType: (STFlowType)flowType{
     
     // TO DO : highlight buttons or images for marking the flow
     
     switch (flowType) {
         case STFlowTypeSinglePost:
         case STFlowTypeAllPosts:{
-            //self.profileNameLabel.hidden = NO;
             self.profileNameBtn.hidden = NO;
-            //self.backBtn.hidden = YES;
             self.likesNumberBtn.hidden = NO;
             break;
         }
         case STFlowTypeMyProfile:
         case STFlowTypeUserProfile:{
-            //self.profileNameLabel.hidden = NO;
             self.profileNameBtn.hidden = NO;
             self.backBtn.hidden = NO;
             self.likesNumberBtn.hidden = NO;
@@ -115,9 +114,8 @@
     }
 }
 
-
-- (void)updateLikeBtn{
-
+- (void)setupAsPlaceholderForFlowType:(STFlowType)type{
+    
 }
 
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{

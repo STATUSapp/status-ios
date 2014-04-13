@@ -10,7 +10,7 @@
 
 @interface STCustomCollectionViewCell : UICollectionViewCell
 
-- (void)setUpWithPicturesURLs:(NSArray *)urlArray;
+    // if setupDict is nil, the cell will be setted as a placeholder
 - (void)setUpWithDictionary: (NSDictionary *)setupDict forFlowType: (int) flowType;
 
 @end

@@ -37,6 +37,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     BOOL _refresing;
     BOOL _pressedOnRefreshBth;
     UIButton *_refreshBtn;
+    BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -539,14 +540,43 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     STCustomCollectionViewCell *cell = (STCustomCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"FlowCollectionCellIdentifier" forIndexPath:indexPath];
     
-    NSDictionary *cellDict = self.postsDataSource[indexPath.row];
+    NSDictionary *cellDict = (_isPlaceholderSinglePost ? nil : self.postsDataSource[indexPath.row]); // the cell will know to setup as placeholder if setupDict is nil
     [cell setUpWithDictionary:cellDict forFlowType:self.flowType];
     
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [self.postsDataSource count];
+    _isPlaceholderSinglePost = NO;
+    NSInteger numberOfItems = [self.postsDataSource count];
+    
+    switch (self.flowType) {
+        case STFlowTypeAllPosts:
+            return numberOfItems;
+            break;
+        case STFlowTypeUserProfile:{
+            if (numberOfItems > 0) {
+                return numberOfItems;
+            } else {
+                _isPlaceholderSinglePost = YES;
+                return 1; // there will be a placeholder post
+            }
+            break;
+        }
+        case STFlowTypeMyProfile:{
+            if (numberOfItems > 0) {
+                return numberOfItems;
+            } else {
+                _isPlaceholderSinglePost = YES;
+                return 1; // there will be a placeholder post
+            }
+            break;
+        }
+            
+        default:
+            return numberOfItems;
+            break;
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
