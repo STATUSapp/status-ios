@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *shareBtn;
 @property (weak, nonatomic) IBOutlet UIButton *likesNumberBtn;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -126,6 +127,7 @@
     if (urlArray.count == 1) {
         [[STImageCacheController sharedInstance] loadImageWithName:urlArray[0] andCompletion:^(UIImage *img) {
             weakSelf.bigPictureImageView.image=img;
+            [weakSelf.activityIndicator stopAnimating];
             weakSelf.smallPictureImageView.hidden = YES;
         }];
     }
@@ -133,6 +135,7 @@
     {
         [[STImageCacheController sharedInstance] loadImageWithName:urlArray[0] andCompletion:^(UIImage *img) {
             weakSelf.bigPictureImageView.image = img;
+            [weakSelf.activityIndicator stopAnimating];
         }];
         [[STImageCacheController sharedInstance] loadImageWithName:urlArray[1] andCompletion:^(UIImage *img) {
             weakSelf.smallPictureImageView.hidden = FALSE;
@@ -143,7 +146,8 @@
 
 - (void)prepareForReuse{
     [super prepareForReuse];
-    self.bigPictureImageView.image = nil;
+    self.bigPictureImageView.image = [UIImage imageNamed:@"placeholder"];
+    [self.activityIndicator startAnimating];
     self.smallPictureImageView.image = nil;
     self.setUpDict = nil;
     self.bigPictureImageView.hidden = NO;

@@ -14,10 +14,13 @@
 #import "AppDelegate.h"
 #import "STFlowTemplateViewController.h"
 
+const float kNoNotifHeight = 24.f;
+
 @interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *_notificationDataSource;
 }
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noNotifHeight;
 @property (weak, nonatomic) IBOutlet UITableView *notificationTable;
 @end
 
@@ -35,6 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _noNotifHeight.constant = 0.f;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -43,6 +47,8 @@
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
             _notificationDataSource = [NSArray arrayWithArray:response[@"data"]];
             
+            _noNotifHeight.constant = _notificationDataSource.count>0?0.f:kNoNotifHeight;
+            
             [(AppDelegate *)[UIApplication sharedApplication].delegate setBadgeNumber:0];
             [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
             
@@ -50,7 +56,7 @@
         }
         
     } andErrorCompletion:^(NSError *error) {
-        
+        _noNotifHeight.constant = _notificationDataSource.count>0?0.f:kNoNotifHeight;
     }];
 }
 

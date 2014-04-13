@@ -63,7 +63,8 @@
         if(error==nil)
         {
             [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [weakSelf.delegate performSelector:@selector(imageWasPosted)];
+            //[weakSelf.navigationController popViewControllerAnimated:YES];
         }
     }];
 }
@@ -102,7 +103,8 @@
             else
             {
                 [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-                [weakSelf.navigationController popViewControllerAnimated:YES];
+                [weakSelf.delegate performSelector:@selector(imageWasPosted)];
+                //[weakSelf.navigationController popViewControllerAnimated:YES];
             }
 
         }

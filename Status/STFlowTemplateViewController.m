@@ -28,7 +28,7 @@ int const kTopOptionTag = 121;
 int const kNoPostsAlertTag = 13;
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate>
 {
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
@@ -43,6 +43,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *notifNumberLabel;
 
 @property (strong, nonatomic) NSMutableArray *postsDataSource;
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *leftSwipe;
 
 @end
 
@@ -74,12 +75,15 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
         if (self.flowType == STFlowTypeMyProfile)
             [self addTopOption];
     }
-
     [self setupVisuals];
     [self initCustomShareView];
     [self updateNotificationsNumber];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationsNumber) name:STNotificationBadgeValueDidChanged object:nil];
-  
+//    UIBarButtonItem *customBackButton = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStyleBordered target:self action:@selector(navigateBack)];
+//    self.navigationItem.backBarButtonItem = customBackButton;
+//    
+//    self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
+//    [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -200,6 +204,23 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
                 NSLog(@"APN Token deleted.");
             else  NSLog(@"APN token NOT deleted.");
         } orError:nil];
+    }
+}
+
+#pragma mark - STShareImageDelegate
+
+-(void)imageWasPosted{
+    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+    flowCtrl.flowType = STFlowTypeMyProfile;
+    flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
+    
+    AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
+    NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
+//replace all the stack with the main flow and the user profile flow
+    if ([[viewCtrl lastObject] isKindOfClass:[STSharePhotoViewController class]]) {
+        NSArray *newFlow = @[[viewCtrl firstObject], flowCtrl];
+        [navCtrl setViewControllers:newFlow animated:YES];
     }
 }
 
@@ -350,8 +371,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
         
     }];
 }
-
-- (IBAction)onTapBack:(id)sender {
+- (IBAction)onSwipeLeftOnEdge:(id)sender {
     if (self.flowType == STFlowTypeAllPosts) {
         NSInteger currentRow = [[[self.collectionView indexPathsForVisibleItems] objectAtIndex:0] row];
         if (currentRow>0) {
@@ -372,7 +392,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
         else
             [self.navigationController popViewControllerAnimated:YES];
     }
-    
+}
+
+- (IBAction)onTapBack:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)onTapCameraUpload:(id)sender {
@@ -400,7 +423,13 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
                                                     withObject:[NSDictionary dictionaryWithDictionary:dict]];
                     [weakSelf.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:currentRow inSection:0]]];
                     
-                    
+                    BOOL isLiked = [cellDict[@"post_liked_by_current_user"] boolValue];
+                    if (!isLiked && weakSelf.postsDataSource.count>currentRow+1) {
+                        [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentRow+1 inSection:0]
+                                                        atScrollPosition:UICollectionViewScrollPositionNone
+                                                                animated:YES];
+                    }
+
                 }
             } andErrorCompletion:^(NSError *error) {
                 
@@ -410,12 +439,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
     } orError:^(NSError *error) {
         
     }];
-    BOOL isLiked = [cellDict[@"post_liked_by_current_user"] boolValue];
-    if (!isLiked && weakSelf.postsDataSource.count>currentRow+1) {
-        [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentRow+1 inSection:0]
-                                        atScrollPosition:UICollectionViewScrollPositionNone
-                                                animated:YES];
-    }
 }
 
 - (IBAction)onDismissShareOptions:(id)sender {
@@ -625,6 +648,18 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
     [self.postsDataSource replaceObjectAtIndex:index withObject:dict];
 }
 
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    if ([gestureRecognizer isEqual:_leftSwipe]) {
+        NSIndexPath *currentIndex = [self.collectionView.indexPathsForVisibleItems firstObject];
+        if (currentIndex.row == 0) {
+            return YES;
+        }
+    }
+    
+    return NO;
+   
+}
+
 #pragma mark - UIActionSheetDelegate
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
@@ -704,6 +739,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate>
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
         viewController.imgData = data;
+        viewController.delegate = self;
         [self.navigationController pushViewController:viewController animated:NO];
     }];
     

@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol STSharePhotoDelegate <NSObject>
+
+-(void)imageWasPosted;
+
+@end
+
 @interface STSharePhotoViewController : UIViewController
 @property (nonatomic, strong) NSData *imgData;
+@property (nonatomic, weak) id <STSharePhotoDelegate> delegate;
 @end

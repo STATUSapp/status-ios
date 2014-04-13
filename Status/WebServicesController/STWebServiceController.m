@@ -19,6 +19,7 @@
         
         _sharedManager = [[self alloc] init];
         _sharedManager.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL] sessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        _sharedManager.sessionManager.operationQueue.maxConcurrentOperationCount = 1;
         NSArray *responseSerializers = @[[AFJSONResponseSerializer serializer], [AFHTTPResponseSerializer serializer]];
         [_sharedManager.sessionManager setResponseSerializer:[AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:responseSerializers]];
         //_sharedManager.sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
