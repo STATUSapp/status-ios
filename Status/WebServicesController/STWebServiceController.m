@@ -92,6 +92,8 @@
 }
 
 -(void) loginUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:info];
+    params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
     [self.sessionManager POST:kLoginUser parameters:info success:^(NSURLSessionDataTask *task, id responseObject) {
         /*NSDictionary *responseDict = [NSJSONSerialization
                                       JSONObjectWithData:responseObject
@@ -106,6 +108,8 @@
 }
 
 -(void) registerUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:info];
+    params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
     [self.sessionManager POST:kRegisterUser parameters:info success:^(NSURLSessionDataTask *task, id responseObject) {
         /*NSDictionary *responseDict = [NSJSONSerialization
                                       JSONObjectWithData:responseObject
@@ -282,6 +286,13 @@
         NSLog(@"Error: %@", error.debugDescription);
         errorCompletion(error);
     }];
+}
+
+#pragma mark - Helpers
+
+-(NSNumber *) getTimeZoneOffsetFromGMT{
+    NSTimeZone *localTime = [NSTimeZone systemTimeZone];
+    return @(localTime.secondsFromGMT/3600);
 }
 
 @end
