@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *likesNumberBtn;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *bigCameraProfileBtn;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -115,7 +116,14 @@
 }
 
 - (void)setupAsPlaceholderForFlowType:(STFlowType)type{
+    self.bigCameraProfileBtn.hidden = NO;
+    self.smallPictureImageView.hidden = YES;
+    self.bigPictureImageView.hidden = NO;
+    self.bigPictureImageView.image = [UIImage imageNamed:@"placeholder"];
     
+    self.likeBtn.hidden = YES;
+    self.likesNumberBtn.hidden = YES;
+    self.shareBtn.hidden = YES;
 }
 
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{
@@ -151,6 +159,11 @@
     self.bigPictureImageView.hidden = NO;
     self.smallPictureImageView.hidden = NO;
     self.likesNumberBtn.selected = NO;
+    
+    self.bigCameraProfileBtn.hidden = YES;
+    self.likeBtn.hidden = YES;
+    self.likesNumberBtn.hidden = YES;
+    self.shareBtn.hidden = YES;
 }
 
 - (NSString *)reuseIdentifier{

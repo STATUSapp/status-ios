@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -158,11 +158,27 @@
                                                     <rect key="frame" x="142" y="265" width="37" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </activityIndicatorView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsn-2p-BXN">
+                                                    <rect key="frame" x="89" y="230" width="142" height="108"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="142" id="oR4-bU-AeX"/>
+                                                        <constraint firstAttribute="height" constant="108" id="ud4-6S-RK9"/>
+                                                    </constraints>
+                                                    <state key="normal" image="btn_big_camera_normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="btn_big_camera_pressed"/>
+                                                    <connections>
+                                                        <action selector="onTapBigCameraProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5vz-vR-7cK"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="Rin-Xs-XdC" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" id="5ph-mf-YbG"/>
+                                            <constraint firstAttribute="centerY" secondItem="vsn-2p-BXN" secondAttribute="centerY" id="6lN-Lk-rBh"/>
                                             <constraint firstAttribute="trailing" secondItem="cxh-Ou-nQE" secondAttribute="trailing" constant="20" id="7fO-ug-cSK"/>
                                             <constraint firstAttribute="centerX" secondItem="TdE-nO-7e0" secondAttribute="centerX" id="E6r-Qa-HZu"/>
                                             <constraint firstAttribute="bottom" secondItem="xrb-Mu-BG1" secondAttribute="bottom" constant="9" id="FIo-Js-UFq"/>
@@ -171,6 +187,7 @@
                                             <constraint firstAttribute="centerX" secondItem="Rin-Xs-XdC" secondAttribute="centerX" id="fUG-N3-Flu"/>
                                             <constraint firstItem="Rin-Xs-XdC" firstAttribute="top" secondItem="B45-j8-lL1" secondAttribute="top" id="fZc-nQ-SvX"/>
                                             <constraint firstAttribute="centerY" secondItem="TdE-nO-7e0" secondAttribute="centerY" id="h5u-F8-Q2g"/>
+                                            <constraint firstAttribute="centerX" secondItem="vsn-2p-BXN" secondAttribute="centerX" id="iVp-Ge-VFj"/>
                                             <constraint firstAttribute="bottom" secondItem="Rin-Xs-XdC" secondAttribute="bottom" id="oIe-5L-TuG"/>
                                             <constraint firstAttribute="centerY" secondItem="Rin-Xs-XdC" secondAttribute="centerY" id="qmd-9C-0ai"/>
                                             <constraint firstAttribute="trailing" secondItem="xrb-Mu-BG1" secondAttribute="trailing" constant="20" id="vyj-mn-Hq0"/>
@@ -179,6 +196,7 @@
                                         <connections>
                                             <outlet property="activityIndicator" destination="TdE-nO-7e0" id="xU4-iU-DyD"/>
                                             <outlet property="backBtn" destination="a03-6i-MLx" id="9yc-ZP-POB"/>
+                                            <outlet property="bigCameraProfileBtn" destination="vsn-2p-BXN" id="BMy-q4-gBU"/>
                                             <outlet property="bigPictureImageView" destination="Rin-Xs-XdC" id="Uwm-ky-5Jb"/>
                                             <outlet property="likeBtn" destination="YxA-3M-tHB" id="rRt-0j-T2I"/>
                                             <outlet property="likesNumberBtn" destination="x4D-Dx-EvO" id="ARP-wX-94X"/>
@@ -800,6 +818,8 @@
         <image name="back button" width="22" height="22"/>
         <image name="btn_back_normal" width="32" height="32"/>
         <image name="btn_back_pressed" width="32" height="32"/>
+        <image name="btn_big_camera_normal" width="142" height="108"/>
+        <image name="btn_big_camera_pressed" width="142" height="108"/>
         <image name="btn_camera_normal" width="38" height="35"/>
         <image name="btn_camera_pressed" width="38" height="35"/>
         <image name="btn_like_normal" width="71" height="35"/>

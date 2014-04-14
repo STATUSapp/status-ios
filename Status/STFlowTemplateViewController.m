@@ -441,6 +441,21 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         
     }];
 }
+- (IBAction)onTapBigCameraProfile:(id)sender {
+    switch (self.flowType) {
+        case STFlowTypeMyProfile:{
+            [self onTapCameraUpload:sender];
+            break;
+        }
+        case STFlowTypeUserProfile:{
+            break;
+        }
+            
+        default:
+            return;
+            break;
+    }
+}
 
 - (IBAction)onDismissShareOptions:(id)sender {
     [UIView animateWithDuration:0.33f animations:^{
