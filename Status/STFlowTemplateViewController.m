@@ -339,6 +339,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = STFlowTypeMyProfile;
     flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
+    flowCtrl.userName = [[STFacebookController sharedInstance] getUDValueForKey:USER_NAME];
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 
@@ -556,6 +557,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     STCustomCollectionViewCell *cell = (STCustomCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"FlowCollectionCellIdentifier" forIndexPath:indexPath];
     
     NSDictionary *cellDict = (_isPlaceholderSinglePost ? nil : self.postsDataSource[indexPath.row]); // the cell will know to setup as placeholder if setupDict is nil
+    cell.username = self.userName;
     [cell setUpWithDictionary:cellDict forFlowType:self.flowType];
     
     return cell;
@@ -745,7 +747,13 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                         // Delete the items from the data source.
                         [self deleteItemsFromDataSourceAtIndexPaths:selectedItemsIndexPaths];
                         // Now delete the items from the collection view.
-                        [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
+                        if ([self.postsDataSource count]) {
+                            [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
+                        } else {
+#warning redo this
+                            [self.collectionView reloadData];
+                        }
+                        
                         
                     } completion:nil];
                 }

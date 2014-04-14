@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIButton *bigCameraProfileBtn;
+@property (weak, nonatomic) IBOutlet UILabel *noPhotosLabel;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -49,6 +50,8 @@
         [self setupAsPlaceholderForFlowType:flowType];
         return;
     }
+    
+    
     
     [self setUpVisualsForFlowType:flowType];
     
@@ -113,6 +116,9 @@
         default:
             break;
     }
+    
+    self.bigCameraProfileBtn.hidden = YES;
+    self.noPhotosLabel.hidden = YES;
 }
 
 - (void)setupAsPlaceholderForFlowType:(STFlowType)type{
@@ -124,6 +130,23 @@
     self.likeBtn.hidden = YES;
     self.likesNumberBtn.hidden = YES;
     self.shareBtn.hidden = YES;
+    self.noPhotosLabel.hidden = NO;
+    [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", self.username] forState:UIControlStateNormal];
+    
+    [self.activityIndicator stopAnimating];
+    
+    switch (type) {
+        case STFlowTypeMyProfile:{
+            self.noPhotosLabel.text = @"You don't have any photo. Take a photo.";
+            break;
+        }
+        case STFlowTypeUserProfile:{
+            self.noPhotosLabel.text = [NSString stringWithFormat:@"Ask %@ to take a photo.", self.username];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{
@@ -161,9 +184,10 @@
     self.likesNumberBtn.selected = NO;
     
     self.bigCameraProfileBtn.hidden = YES;
-    self.likeBtn.hidden = YES;
-    self.likesNumberBtn.hidden = YES;
-    self.shareBtn.hidden = YES;
+    self.likeBtn.hidden = NO;
+    self.likesNumberBtn.hidden = NO;
+    self.shareBtn.hidden = NO;
+    self.noPhotosLabel.hidden = YES;
 }
 
 - (NSString *)reuseIdentifier{

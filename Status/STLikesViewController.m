@@ -11,6 +11,7 @@
 #import "STLikeCell.h"
 #import "STImageCacheController.h"
 #import "STFlowTemplateViewController.h"
+#import "STFacebookController.h"
 
 @interface STLikesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -72,6 +73,10 @@
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = STFlowTypeUserProfile;
     flowCtrl.userID = dict[@"user_id"];
+    flowCtrl.userName = dict[@"user_name"];
+    if ([flowCtrl.userID isEqualToString:[STFacebookController sharedInstance].currentUserId ]) {
+        flowCtrl.flowType = STFlowTypeMyProfile;
+    }
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 

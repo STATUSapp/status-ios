@@ -173,6 +173,16 @@
                                                         <action selector="onTapBigCameraProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5vz-vR-7cK"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any photo. Take a photo" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="142" translatesAutoresizingMaskIntoConstraints="NO" id="26T-Jv-ckc">
+                                                    <rect key="frame" x="89" y="131" width="142" height="72"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="142" id="cLO-Ub-WpH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -190,7 +200,10 @@
                                             <constraint firstAttribute="centerX" secondItem="vsn-2p-BXN" secondAttribute="centerX" id="iVp-Ge-VFj"/>
                                             <constraint firstAttribute="bottom" secondItem="Rin-Xs-XdC" secondAttribute="bottom" id="oIe-5L-TuG"/>
                                             <constraint firstAttribute="centerY" secondItem="Rin-Xs-XdC" secondAttribute="centerY" id="qmd-9C-0ai"/>
+                                            <constraint firstItem="vsn-2p-BXN" firstAttribute="width" secondItem="26T-Jv-ckc" secondAttribute="width" id="rXk-Ec-eGJ"/>
+                                            <constraint firstItem="vsn-2p-BXN" firstAttribute="centerX" secondItem="26T-Jv-ckc" secondAttribute="centerX" id="sTA-Ep-Rux"/>
                                             <constraint firstAttribute="trailing" secondItem="xrb-Mu-BG1" secondAttribute="trailing" constant="20" id="vyj-mn-Hq0"/>
+                                            <constraint firstItem="vsn-2p-BXN" firstAttribute="top" secondItem="26T-Jv-ckc" secondAttribute="bottom" constant="27" id="wUS-Gb-ddc"/>
                                         </constraints>
                                         <size key="customSize" width="320" height="568"/>
                                         <connections>
@@ -200,6 +213,7 @@
                                             <outlet property="bigPictureImageView" destination="Rin-Xs-XdC" id="Uwm-ky-5Jb"/>
                                             <outlet property="likeBtn" destination="YxA-3M-tHB" id="rRt-0j-T2I"/>
                                             <outlet property="likesNumberBtn" destination="x4D-Dx-EvO" id="ARP-wX-94X"/>
+                                            <outlet property="noPhotosLabel" destination="26T-Jv-ckc" id="9zl-nB-boG"/>
                                             <outlet property="profileNameBtn" destination="XcX-uQ-GoJ" id="eld-su-rDd"/>
                                             <outlet property="shareBtn" destination="G6Z-ve-JeS" id="4eW-7u-QZj"/>
                                             <outlet property="smallPictureImageView" destination="cxh-Ou-nQE" id="mPd-VA-UI2"/>
