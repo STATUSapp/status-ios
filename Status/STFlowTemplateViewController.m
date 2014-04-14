@@ -34,9 +34,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSLayoutConstraint *_shareOptionsViewContraint;
     NSLayoutConstraint *_topOptionConstraint;
     NSDictionary *_lastNotif;
-    BOOL _refresing;
-    BOOL _pressedOnRefreshBth;
-    UIButton *_refreshBtn;
+
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -79,12 +77,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [self setupVisuals];
     [self initCustomShareView];
     [self updateNotificationsNumber];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationsNumber) name:STNotificationBadgeValueDidChanged object:nil];
-//    UIBarButtonItem *customBackButton = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStyleBordered target:self action:@selector(navigateBack)];
-//    self.navigationItem.backBarButtonItem = customBackButton;
-//    
-//    self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
-//    [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateNotificationsNumber)
+                                                 name:STNotificationBadgeValueDidChanged
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -214,7 +210,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = STFlowTypeMyProfile;
     flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
-    
+    flowCtrl.userName = [[STFacebookController sharedInstance] getUDValueForKey:USER_NAME];
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
     NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
@@ -230,7 +226,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (void)getDataSourceWithOffset:(long) offset{
     NSLog(@"Offset: %ld", offset);
     __weak STFlowTemplateViewController *weakSelf = self;
-    _refresing = TRUE;
     switch (self.flowType) {
         case STFlowTypeAllPosts:{
             [[STWebServiceController sharedInstance] getPostsWithOffset:offset withCompletion:^(NSDictionary *response) {
@@ -244,10 +239,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                     [weakSelf.collectionView reloadData];
                     
                 }
-                _refresing = FALSE;
             } andErrorCompletion:^(NSError *error) {
                 NSLog(@"error with %@", error.description);
-                _refresing = FALSE;
             }];
             break;
         }
@@ -259,19 +252,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #else
                 weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
-                if (weakSelf.postsDataSource.count == 0) {
-//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"This user has no uploaded photos. You 'll be redirected to previous screen. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                    [alert setTag:kNoPostsAlertTag];
-//                    [alert show];
-                }
-                else
-                    [weakSelf.collectionView reloadData];
+                [weakSelf.collectionView reloadData];
                 
-                _refresing = FALSE;
                 
             } andErrorCompletion:^(NSError *error) {
                 NSLog(@"error with %@", error.description);
-                _refresing = FALSE;
             }];
             break;
         }
@@ -287,7 +272,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         default:
             break;
     }
-    //_refreshBtn.hidden = FALSE;
 }
 
 #pragma mark - Actions
@@ -304,7 +288,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         STZoomablePostViewController *viewController = (STZoomablePostViewController *) [storyboard instantiateViewControllerWithIdentifier:@"zoomableView"];
         NSDictionary *dict = [self getCurrentDictionary];
         viewController.postPhotoLink = dict[@"full_photo_link"];
-        //[self.navigationController pushViewController:viewController animated:NO];
         [self presentViewController:viewController animated:NO completion:nil];
     }
 }
@@ -601,14 +584,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-    // adding this BOOL to resolve the reloadData problem calling this function twice
-    if (_refresing == TRUE) {
-        return;
-    }
-    if (_pressedOnRefreshBth == TRUE) {
-        _pressedOnRefreshBth = FALSE;
-        return;
-    }
 #if PAGGING_ENABLED
     if (self.flowType == STFlowTypeAllPosts) {
         NSDictionary *dict = [self.postsDataSource objectAtIndex:indexPath.row];
@@ -638,56 +613,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #endif
 }
 
--(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    UICollectionReusableView *reusableview = nil;
-    if (kind == UICollectionElementKindSectionFooter) {
-        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                                                                                  withReuseIdentifier:@"footer"
-                                                                                         forIndexPath:indexPath];
-        
-        _refreshBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 250, 100, 100)];
-        [_refreshBtn setTitle:@"Refresh" forState:UIControlStateNormal];
-        [_refreshBtn addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventTouchUpInside];
-        [headerView addSubview:_refreshBtn];
-
-        if (self.postsDataSource.count == 0) {
-            UIButton *addPhotoBt = [[UIButton alloc] initWithFrame:CGRectMake(20, 9, 40, 40)];
-            [addPhotoBt setImage:[UIImage imageNamed:@"btn_camera_normal"] forState:UIControlStateNormal];
-            [addPhotoBt setImage:[UIImage imageNamed:@"btn_camera_pressed"] forState:UIControlStateHighlighted];
-            [addPhotoBt setImage:[UIImage imageNamed:@"btn_camera_pressed"] forState:UIControlStateSelected];
-            [addPhotoBt setTag:100];
-            [addPhotoBt addTarget:self action:@selector(onTapCameraUpload:) forControlEvents:UIControlEventTouchUpInside];
-            [headerView addSubview:addPhotoBt];
-        }
-        else
-            [[headerView viewWithTag:100] removeFromSuperview];
-        
-        reusableview = headerView;
-    }
-    return reusableview;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    
-    if (self.flowType == STFlowTypeSinglePost) {
-        return CGSizeZero;
-    }
-    
-    return CGSizeMake(100, 568);
-}
-
--(void) refresh:(id) sender{
-    _pressedOnRefreshBth = TRUE;
-    if (self.flowType == STFlowTypeAllPosts) {
-        [self getDataSourceWithOffset:1];
-    }
-    else
-    {
-        [self getDataSourceWithOffset:self.postsDataSource.count];
-    }
-    
-}
 -(void) markDataSourceSeenAtIndex:(long) index{
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self.postsDataSource objectAtIndex:index]];
@@ -750,8 +675,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                         if ([self.postsDataSource count]) {
                             [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
                         } else {
-#warning redo this
-                            [self.collectionView reloadData];
+                            NSIndexPath *firstIndx = [NSIndexPath indexPathForRow:0 inSection:0];
+                            [self.collectionView reloadItemsAtIndexPaths:@[firstIndx]];
                         }
                         
                         
@@ -849,6 +774,5 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             [self performSegueWithIdentifier:@"notifSegue" sender:nil];
         }
     }
-    
 }
 @end
