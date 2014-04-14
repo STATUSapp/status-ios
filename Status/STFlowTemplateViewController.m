@@ -410,9 +410,14 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                     
                     BOOL isLiked = [cellDict[@"post_liked_by_current_user"] boolValue];
                     if (!isLiked && weakSelf.postsDataSource.count>currentRow+1) {
-                        [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentRow+1 inSection:0]
-                                                        atScrollPosition:UICollectionViewScrollPositionNone
-                                                                animated:YES];
+//                        [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentRow+1 inSection:0]
+//                                                        atScrollPosition:UICollectionViewScrollPositionNone
+//                                                                animated:YES];
+                        
+                        [weakSelf performSelector:@selector(goToNextPostWithRow:)
+                                       withObject:@(currentRow+1)
+                                       afterDelay:0.33f];
+                        
                     }
 
                 }
@@ -532,6 +537,12 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSDictionary *dict = [self.postsDataSource objectAtIndex:[[visibleInxPath objectAtIndex:0] row]];
     
     return dict;
+}
+
+-(void) goToNextPostWithRow:(NSNumber *) currentRow{
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentRow.integerValue inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionNone
+                                            animated:YES];
 }
 
 #pragma mark - Collection View Data Source & Delegate
