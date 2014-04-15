@@ -504,20 +504,35 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (IBAction)onSharePostToFacebook:(id)sender {
     [self getCurrentImageDataWithCompletion:^(UIImage *img) {
         NSData *imgData = UIImageJPEGRepresentation(img, 1.0);
-        [[STFacebookController sharedInstance] shareImageWithData:imgData andCompletion:^(id result, NSError *error) {
-            if(error==nil)
-                [[[UIAlertView alloc] initWithTitle:@"Success"
-                                            message:@"Your photo was posted."
-                                           delegate:nil cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil, nil] show];
-            else
-                [[[UIAlertView alloc] initWithTitle:@"Error"
-                                            message:@"Something went wrong. You can try again later."
-                                           delegate:nil cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil, nil] show];
-        }];
+        
+        if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
+            [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_stream"]
+                                                    defaultAudience:FBSessionDefaultAudienceFriends
+                                                  completionHandler:^(FBSession *session, NSError *error) {
+                                                      [self sharePhotoOnFacebookWithImgData:imgData];
+                                                  }];
+            
+        }
+        else
+            [self sharePhotoOnFacebookWithImgData:imgData];
     }];
 }
+
+- (void)sharePhotoOnFacebookWithImgData:(NSData *)imgData{
+    [[STFacebookController sharedInstance] shareImageWithData:imgData andCompletion:^(id result, NSError *error) {
+        if(error==nil)
+            [[[UIAlertView alloc] initWithTitle:@"Success"
+                                        message:@"Your photo was posted."
+                                       delegate:nil cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil] show];
+        else
+            [[[UIAlertView alloc] initWithTitle:@"Error"
+                                        message:@"Something went wrong. You can try again later."
+                                       delegate:nil cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil] show];
+    }];
+}
+
 - (IBAction)onSavePostLocally:(id)sender {
     [self getCurrentImageDataWithCompletion:^(UIImage *img) {
         UIImageWriteToSavedPhotosAlbum(img, self, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
