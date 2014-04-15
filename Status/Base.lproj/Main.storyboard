@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Flow Template View Controller-->
@@ -727,8 +727,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="likes your photo." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="97" translatesAutoresizingMaskIntoConstraints="NO" id="Xdp-Mx-gZs">
-                                                    <rect key="frame" x="84" y="28" width="97" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sdgfsdfg sdfgldf sdfkg sdfg sdfg" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="132" translatesAutoresizingMaskIntoConstraints="NO" id="Xdp-Mx-gZs">
+                                                    <rect key="frame" x="84" y="25" width="132" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -760,8 +760,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="mAI-2V-ibh" firstAttribute="leading" secondItem="H10-S8-1tq" secondAttribute="leading" constant="16" id="4jF-yH-aui"/>
-                                                <constraint firstItem="Xdp-Mx-gZs" firstAttribute="top" secondItem="ijF-HU-uXA" secondAttribute="bottom" constant="1" id="6ch-bd-9uf"/>
-                                                <constraint firstItem="Xdp-Mx-gZs" firstAttribute="leading" secondItem="zLu-PD-Bhw" secondAttribute="trailing" constant="8" id="CEV-HO-eYW"/>
+                                                <constraint firstItem="Xdp-Mx-gZs" firstAttribute="top" secondItem="ijF-HU-uXA" secondAttribute="bottom" constant="-2" id="7k5-oO-puB"/>
+                                                <constraint firstItem="Xdp-Mx-gZs" firstAttribute="leading" secondItem="zLu-PD-Bhw" secondAttribute="trailing" constant="8" id="KBJ-h9-VsY"/>
                                                 <constraint firstItem="p1o-Ab-gIN" firstAttribute="top" secondItem="H10-S8-1tq" secondAttribute="top" constant="11" id="OdN-ez-gm2"/>
                                                 <constraint firstAttribute="trailing" secondItem="83t-DH-ybh" secondAttribute="trailing" constant="15" id="YVu-eR-JdA"/>
                                                 <constraint firstAttribute="bottom" secondItem="mAI-2V-ibh" secondAttribute="bottom" id="cRx-eN-Gce"/>
@@ -775,12 +775,14 @@
                                                 <constraint firstItem="ee3-Ov-apI" firstAttribute="leading" secondItem="H10-S8-1tq" secondAttribute="leading" id="tT0-n6-Qhn"/>
                                                 <constraint firstItem="ijF-HU-uXA" firstAttribute="leading" secondItem="zLu-PD-Bhw" secondAttribute="trailing" constant="8" id="txW-G4-1mo"/>
                                                 <constraint firstItem="83t-DH-ybh" firstAttribute="top" secondItem="H10-S8-1tq" secondAttribute="top" constant="33" id="u9c-i4-BGN"/>
+                                                <constraint firstAttribute="trailing" secondItem="Xdp-Mx-gZs" secondAttribute="trailing" constant="104" id="uQB-s1-PMF"/>
                                                 <constraint firstItem="ijF-HU-uXA" firstAttribute="top" secondItem="H10-S8-1tq" secondAttribute="top" constant="11" id="uoy-eS-dYO"/>
                                                 <constraint firstAttribute="bottom" secondItem="ee3-Ov-apI" secondAttribute="bottom" id="wDR-8l-h7x"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageLbl" destination="ijF-HU-uXA" id="YdA-Yp-qqG"/>
+                                            <outlet property="notificationTextTrailingConstraint" destination="uQB-s1-PMF" id="gLa-UU-YBb"/>
                                             <outlet property="notificationTypeMessage" destination="Xdp-Mx-gZs" id="8Q8-Ld-ezU"/>
                                             <outlet property="postImg" destination="p1o-Ab-gIN" id="RQB-gJ-G0g"/>
                                             <outlet property="seenCircle" destination="83t-DH-ybh" id="3j6-i2-Ite"/>

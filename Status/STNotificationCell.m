@@ -7,6 +7,9 @@
 //
 
 #import "STNotificationCell.h"
+@interface STNotificationCell()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationTextTrailingConstraint;
+@end
 
 @implementation STNotificationCell
 
@@ -33,4 +36,17 @@
 -(void)prepareForReuse{
     self.seenCircle.hidden = NO;
 }
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    // the notification label should extend if there is no photo on the right part of the cell
+    
+    if (self.postImg.image == nil) {
+        self.notificationTextTrailingConstraint.constant = 54;
+    } else {
+        self.notificationTextTrailingConstraint.constant = 104;
+    }
+}
+
 @end
