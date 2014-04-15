@@ -32,5 +32,5 @@ typedef void (^downloadImageCompletion) (NSURL *imageURL);
 -(void) getPostDetails:(NSString *) postID withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) getNotificationsWithCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) deletePost:(NSString *) post_id withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
-
+-(void) inviteUserToUpload:(NSString *) userId withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
 @end

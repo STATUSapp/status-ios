@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *postImg;
 @property (weak, nonatomic) IBOutlet UIImageView *seenCircle;
+@property (weak, nonatomic) IBOutlet UILabel *notificationTypeMessage;
 
 @end

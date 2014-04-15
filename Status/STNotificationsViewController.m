@@ -13,6 +13,7 @@
 #import "STImageCacheController.h"
 #import "AppDelegate.h"
 #import "STFlowTemplateViewController.h"
+#import "STFacebookController.h"
 
 const float kNoNotifHeight = 24.f;
 
@@ -20,7 +21,7 @@ const float kNoNotifHeight = 24.f;
 {
     NSArray *_notificationDataSource;
 }
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noNotifHeight;
+@property (weak, nonatomic) IBOutlet UILabel *noNotifLabel;
 @property (weak, nonatomic) IBOutlet UITableView *notificationTable;
 @end
 
@@ -38,7 +39,6 @@ const float kNoNotifHeight = 24.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _noNotifHeight.constant = 0.f;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -46,8 +46,7 @@ const float kNoNotifHeight = 24.f;
 	[[STWebServiceController sharedInstance] getNotificationsWithCompletion:^(NSDictionary *response) {
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
             _notificationDataSource = [NSArray arrayWithArray:response[@"data"]];
-            
-            _noNotifHeight.constant = _notificationDataSource.count>0?0.f:kNoNotifHeight;
+            _noNotifLabel.hidden = _notificationDataSource.count>0;
             
             [(AppDelegate *)[UIApplication sharedApplication].delegate setBadgeNumber:0];
             [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
@@ -56,7 +55,7 @@ const float kNoNotifHeight = 24.f;
         }
         
     } andErrorCompletion:^(NSError *error) {
-        _noNotifHeight.constant = _notificationDataSource.count>0?0.f:kNoNotifHeight;
+        _noNotifLabel.hidden = NO;
     }];
 }
 
@@ -119,22 +118,73 @@ const float kNoNotifHeight = 24.f;
     cell.seenCircle.hidden = [dict[@"seen"] boolValue];
     cell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];
     cell.timeLbl.text = [self notificationTimeIntervalSinceDate:[ self dateFromServerDate:dict[@"date"]]];
-    
+    cell.notificationTypeMessage.text = [self getNotificationTypeStringForType:[dict[@"type"] integerValue]];
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
-    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = STFlowTypeSinglePost;
-    flowCtrl.postID = dict[@"post_id"];
-    flowCtrl.userID = dict[@"user_id"];
-    flowCtrl.userName = dict[@"user_name"];
-    [self.navigationController pushViewController:flowCtrl animated:YES];
+    STNotificationType notifType = [dict[@"type"] integerValue];
+    
+    switch (notifType) {
+        case STNotificationTypeLike:{
+            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+            flowCtrl.flowType = STFlowTypeSinglePost;
+            flowCtrl.postID = dict[@"post_id"];
+            flowCtrl.userID = dict[@"user_id"];
+            flowCtrl.userName = dict[@"user_name"];
+            [self.navigationController pushViewController:flowCtrl animated:YES];
+        }
+            break;
+        case STNotificationTypeInvite:
+        {
+            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+            flowCtrl.flowType = STFlowTypeMyProfile;
+            flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
+            flowCtrl.userName = [[STFacebookController sharedInstance] getUDValueForKey:USER_NAME];
+            [self.navigationController pushViewController:flowCtrl animated:YES];
+        }
+            break;
+        case STNotificationTypeUploaded:
+        {
+            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+            flowCtrl.flowType = STFlowTypeUserProfile;
+            flowCtrl.userID = dict[@"user_id"];
+            [self.navigationController pushViewController:flowCtrl animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _notificationDataSource.count;
+}
+
+
+#pragma mark - Helper
+
+-(NSString *) getNotificationTypeStringForType:(STNotificationType) type{
+    NSString *str = @"";
+    switch (type) {
+        case STNotificationTypeLike:
+            str = @"likes your photo.";
+            break;
+        case STNotificationTypeInvite:
+            str = @"asked you to upload a photo.";
+            break;
+        case STNotificationTypeUploaded:
+            str = @"uploaded a photo.";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return str;
 }
 
 @end

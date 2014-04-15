@@ -22,10 +22,13 @@
 #import "STTopOption.h"
 #import "STNotificationsViewController.h"
 #import "STZoomablePostViewController.h"
+#import "STFooterView.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
 int const kNoPostsAlertTag = 13;
+int const kInviteUserToUpload = 14;
+
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate>
@@ -34,7 +37,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSLayoutConstraint *_shareOptionsViewContraint;
     NSLayoutConstraint *_topOptionConstraint;
     NSDictionary *_lastNotif;
-
+    UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -238,9 +241,12 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #endif
                     [weakSelf.collectionView reloadData];
                     
+                    [_refreshBt setEnabled:YES];
+                    
                 }
             } andErrorCompletion:^(NSError *error) {
                 NSLog(@"error with %@", error.description);
+                [_refreshBt setEnabled:YES];
             }];
             break;
         }
@@ -275,6 +281,15 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 #pragma mark - Actions
+- (IBAction)onTapRefreshFromFooter:(id)sender {
+    _refreshBt = (UIButton *) sender;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_refreshBt setEnabled:NO];
+    });
+    
+    [self getDataSourceWithOffset:0];
+    
+}
 
 - (void)updateNotificationsNumber{
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -358,7 +373,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 - (IBAction)onSwipeLeftOnEdge:(id)sender {
     if (self.flowType == STFlowTypeAllPosts) {
-        NSInteger currentRow = [[[self.collectionView indexPathsForVisibleItems] objectAtIndex:0] row];
+        NSArray *indxPath = [self.collectionView indexPathsForVisibleItems];
+        if (indxPath.count == 0) {
+            return;
+        }
+        NSInteger currentRow = [[indxPath objectAtIndex:0] row];
         if (currentRow>0) {
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentRow-1 inSection:0]
                                         atScrollPosition:UICollectionViewScrollPositionNone
@@ -369,13 +388,16 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     else
     {
         NSArray *viewCtrl = self.navigationController.viewControllers;
-        UIViewController *preLastCtrl = [viewCtrl objectAtIndex:viewCtrl.count-2];
-        if ([preLastCtrl isKindOfClass:[STLikesViewController class]]||
-            [preLastCtrl isKindOfClass:[STNotificationsViewController class]]) {
-            [self.navigationController popToViewController:[viewCtrl objectAtIndex:viewCtrl.count-3] animated:YES];
+        if (viewCtrl.count>=2) {
+            UIViewController *preLastCtrl = [viewCtrl objectAtIndex:viewCtrl.count-2];
+            if ([preLastCtrl isKindOfClass:[STLikesViewController class]]||
+                [preLastCtrl isKindOfClass:[STNotificationsViewController class]]) {
+                [self.navigationController popToViewController:[viewCtrl objectAtIndex:viewCtrl.count-3] animated:YES];
+            }
+            else
+                [self.navigationController popViewControllerAnimated:YES];
         }
-        else
-            [self.navigationController popViewControllerAnimated:YES];
+       
     }
 }
 
@@ -390,7 +412,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (IBAction)onTapLike:(id)sender {
-    __block NSInteger currentRow = [[[self.collectionView indexPathsForVisibleItems] objectAtIndex:0] row];
+    NSArray *indxPats = [self.collectionView indexPathsForVisibleItems];
+    if (indxPats.count ==0) {
+        return;
+    }
+    __block NSInteger currentRow = [[indxPats objectAtIndex:0] row];
     __block NSMutableDictionary *cellDict = [NSMutableDictionary dictionaryWithDictionary:self.postsDataSource[currentRow]];
 
     __weak STFlowTemplateViewController *weakSelf = self;
@@ -437,6 +463,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             break;
         }
         case STFlowTypeUserProfile:{
+            [self inviteUserToUpload];
             break;
         }
             
@@ -444,6 +471,26 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             return;
             break;
     }
+}
+
+-(void) inviteUserToUpload{
+    [[STWebServiceController sharedInstance] inviteUserToUpload:_userID withCompletion:^(NSDictionary *response) {
+        int statusCode = [response[@"status_code"] integerValue];
+        if (statusCode == STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", _userName];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
+                                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Go Home", nil];
+            alert.tag = kInviteUserToUpload;
+            [alert show];
+            
+        }
+        else
+        {
+            NSLog(@"Error");
+        }
+    } orError:^(NSError *error) {
+        
+    }];
 }
 
 - (IBAction)onDismissShareOptions:(id)sender {
@@ -624,6 +671,26 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #endif
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionFooter) {
+        STFooterView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footerView" forIndexPath:indexPath];
+        reusableview = headerView;
+    }
+    
+    return reusableview;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    if (_flowType == STFlowTypeAllPosts) {
+        return self.view.bounds.size;
+    }
+    
+    return CGSizeZero;
+}
+
 -(void) markDataSourceSeenAtIndex:(long) index{
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self.postsDataSource objectAtIndex:index]];
@@ -700,6 +767,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             
         }
     }
+    else if (alertView.tag == kInviteUserToUpload){
+        if (buttonIndex ==1) {
+            [self onTapBack:nil];
+        }
+    }
     
 }
 
@@ -773,7 +845,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (notif!=nil) {
         [self setNotificationsNumber:[notif[@"aps"][@"badge"] integerValue]];
     }
-    if ([[self.navigationController.viewControllers lastObject] isKindOfClass:[STFlowTemplateViewController class]]) {
+    UIViewController *lastVC = [self.navigationController.viewControllers lastObject];
+    if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
         
         if ([STWebServiceController sharedInstance].accessToken == nil) {
             //wait for the login to be performed and after handle the notification
@@ -784,6 +857,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             _lastNotif = nil;
             [self performSegueWithIdentifier:@"notifSegue" sender:nil];
         }
+    }
+    else if ([lastVC isKindOfClass:[STNotificationsViewController class]]){
+        //TODO: update The UI
     }
 }
 @end

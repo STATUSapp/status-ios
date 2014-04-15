@@ -13,6 +13,7 @@
 #import "STFlowTemplateViewController.h"
 #import "KeychainItemWrapper.h"
 #import "STImageCacheController.h"
+#import "AppDelegate.h"
 
 @implementation STFacebookController
 +(STFacebookController *) sharedInstance{
@@ -126,7 +127,7 @@
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     if (self.logoutDelegate&&[self.logoutDelegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
-        [self.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
+        [self.logoutDelegate performSelector:@selector(facebookControllerDidLoggedOut)];
     }
     [self deleteAccessToken];
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
@@ -168,6 +169,15 @@
     [pic startWithCompletionHandler:^(FBRequestConnection *connection,
                                       id result,
                                       NSError *error) {
+        if (error!=nil) {
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
+                [self.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
+            }
+            [self deleteAccessToken];
+            [[STImageCacheController sharedInstance] cleanTemporaryFolder];
+            [STWebServiceController sharedInstance].isPerformLoginOrRegistration = false;
+            return ;
+        }
         NSDictionary *resultDic = (NSDictionary<FBGraphUser> *) result;
         
         //weakSelf.currentUserPhotoLink = resultDic[@"picture"][@"data"][@"url"];

@@ -93,12 +93,9 @@
                                                               [self postCurrentPhoto];
                                                           }];
                     
-                    
-                    
                 }
                 else
                     [self postCurrentPhoto];
-                
             }
             else
             {

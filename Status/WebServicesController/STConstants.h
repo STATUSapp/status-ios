@@ -27,13 +27,21 @@ typedef enum STFlowCellType{
 
 typedef enum STWebservicesCodes{
     STWebservicesSuccesCod=200,
-    STWebservicesNeedRegistrationCod=404
+    STWebservicesNeedRegistrationCod=404,
+    STWebservicesFounded = 302
 }STWebservicesCodes;
 
 typedef enum STTopOptionType{
     STTopOptionTypeUserProfile = 0,
     STTopOptionTypeLogout
 }STTopOptionType;
+
+typedef enum STNotificationType{
+    STNotificationTypeLike = 1,
+    STNotificationTypeInvite,
+    STNotificationTypeUploaded
+} STNotificationType;
+
 
 #pragma mark - Constant Strings
 
@@ -53,6 +61,7 @@ extern NSString *const kSetApnToken;
 extern NSString *const kGetPost;
 extern NSString *const kGetNotifications;
 extern NSString *const kDeletePost;
+extern NSString *const kInviteToUpload;
 
 #pragma mark - Local Notifications
 

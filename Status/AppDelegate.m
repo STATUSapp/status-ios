@@ -91,6 +91,7 @@
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"Notif: %@", userInfo);
     self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
     [[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
    

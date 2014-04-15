@@ -288,6 +288,20 @@
     }];
 }
 
+-(void) inviteUserToUpload:(NSString *) userId withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion{
+    [self.sessionManager POST:kInviteToUpload parameters:@{@"user_id":userId, @"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
+        /*NSDictionary *responseDict = [NSJSONSerialization
+         JSONObjectWithData:responseObject
+         options:NSJSONReadingMutableLeaves
+         error:nil];*/
+        completion(responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error: %@", error.debugDescription);
+        errorCompletion(error);
+    }];
+}
+
 #pragma mark - Helpers
 
 -(NSNumber *) getTimeZoneOffsetFromGMT{
