@@ -29,4 +29,8 @@
 -(NSString *)reuseIdentifier{
     return @"notificationCell";
 }
+
+-(void)prepareForReuse{
+    self.seenCircle.hidden = NO;
+}
 @end

@@ -857,8 +857,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #pragma mark - Helper
 
 -(void) handleNotification:(NSDictionary *) notif{
-    if (notif!=nil) {
-        [self setNotificationsNumber:[notif[@"aps"][@"badge"] integerValue]];
+    if (notif == nil) {
+        return;
     }
     UIViewController *lastVC = [self.navigationController.viewControllers lastObject];
     if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
@@ -874,7 +874,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         }
     }
     else if ([lastVC isKindOfClass:[STNotificationsViewController class]]){
-        //TODO: update The UI
+        [(STNotificationsViewController *)lastVC getNotificationsFromServer];
     }
 }
 @end

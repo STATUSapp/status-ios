@@ -42,6 +42,10 @@ const float kNoNotifHeight = 24.f;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [self getNotificationsFromServer];
+}
+
+-(void) getNotificationsFromServer{
     __weak STNotificationsViewController *weakSelf = self;
 	[[STWebServiceController sharedInstance] getNotificationsWithCompletion:^(NSDictionary *response) {
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
@@ -181,6 +185,7 @@ const float kNoNotifHeight = 24.f;
             break;
             
         default:
+            str = @"likes your photo.";
             break;
     }
     

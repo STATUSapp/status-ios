@@ -94,7 +94,7 @@
 -(void) loginUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:info];
     params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
-    [self.sessionManager POST:kLoginUser parameters:info success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.sessionManager POST:kLoginUser parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         /*NSDictionary *responseDict = [NSJSONSerialization
                                       JSONObjectWithData:responseObject
                                       options:NSJSONReadingMutableLeaves
@@ -110,7 +110,7 @@
 -(void) registerUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:info];
     params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
-    [self.sessionManager POST:kRegisterUser parameters:info success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.sessionManager POST:kRegisterUser parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         /*NSDictionary *responseDict = [NSJSONSerialization
                                       JSONObjectWithData:responseObject
                                       options:NSJSONReadingMutableLeaves
