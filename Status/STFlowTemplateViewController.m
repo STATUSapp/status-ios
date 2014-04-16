@@ -246,13 +246,13 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                         [weakSelf.refreshBt setEnabled:YES];
                         [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
                     });
-                    
-                    
-                    
                 }
             } andErrorCompletion:^(NSError *error) {
                 NSLog(@"error with %@", error.description);
-                [weakSelf.refreshBt setEnabled:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.refreshBt setEnabled:YES];
+                    [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
+                });
             }];
             break;
         }
@@ -483,7 +483,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(void) inviteUserToUpload{
     [[STWebServiceController sharedInstance] inviteUserToUpload:_userID withCompletion:^(NSDictionary *response) {
-        int statusCode = [response[@"status_code"] integerValue];
+        NSInteger statusCode = [response[@"status_code"] integerValue];
         if (statusCode == STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
             NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", _userName];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self

@@ -93,8 +93,10 @@
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"Notif: %@", userInfo);
     self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
    
-    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
         [self handleNotification:userInfo];
     }
     
@@ -103,7 +105,6 @@
 #pragma mark - Helper
 
 -(void) handleNotification:(NSDictionary *) notif{
-    [[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
     
     if (notif!=nil) {
         UINavigationController *navController = (UINavigationController *)self.window.rootViewController;

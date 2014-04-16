@@ -160,6 +160,14 @@ const float kNoNotifHeight = 24.f;
             break;
             
         default:
+        {
+            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+            flowCtrl.flowType = STFlowTypeSinglePost;
+            flowCtrl.postID = dict[@"post_id"];
+            flowCtrl.userID = dict[@"user_id"];
+            flowCtrl.userName = dict[@"user_name"];
+            [self.navigationController pushViewController:flowCtrl animated:YES];
+        }
             break;
     }
 }

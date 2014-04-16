@@ -12,35 +12,35 @@
 #define  POSTS_PAGGING 10
 #pragma mark - Enums
 
-typedef enum STFlowType{
+typedef NS_ENUM(NSUInteger,STFlowType){
     STFlowTypeAllPosts = 0,
     STFlowTypeUserProfile,
     STFlowTypeMyProfile,
     STFlowTypeSinglePost
-}STFlowType;
+};
 
-typedef enum STFlowCellType{
+typedef NS_ENUM(NSUInteger,STFlowCellType){
     STFlowCellTypeNoPicture = 0,
     STFlowCellTypeSimplePost,
     STFlowCellTypeNotificationOrUserProfile
-} STFlowCellType;
+};
 
-typedef enum STWebservicesCodes{
+typedef NS_ENUM(NSUInteger,STWebservicesCodes){
     STWebservicesSuccesCod=200,
     STWebservicesNeedRegistrationCod=404,
     STWebservicesFounded = 302
-}STWebservicesCodes;
+};
 
-typedef enum STTopOptionType{
+typedef NS_ENUM(NSUInteger,STTopOptionType){
     STTopOptionTypeUserProfile = 0,
     STTopOptionTypeLogout
-}STTopOptionType;
+};
 
-typedef enum STNotificationType{
+typedef NS_ENUM(NSUInteger,STNotificationType){
     STNotificationTypeLike = 1,
     STNotificationTypeInvite,
     STNotificationTypeUploaded
-} STNotificationType;
+};
 
 
 #pragma mark - Constant Strings
