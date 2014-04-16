@@ -173,12 +173,9 @@
                                                         <action selector="onTapBigCameraProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5vz-vR-7cK"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any photo. Take a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="142" translatesAutoresizingMaskIntoConstraints="NO" id="26T-Jv-ckc">
-                                                    <rect key="frame" x="89" y="84" width="142" height="119"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any photo. Take a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="219" translatesAutoresizingMaskIntoConstraints="NO" id="26T-Jv-ckc">
+                                                    <rect key="frame" x="51" y="142" width="219" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="142" id="cLO-Ub-WpH"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -193,17 +190,16 @@
                                             <constraint firstAttribute="centerX" secondItem="TdE-nO-7e0" secondAttribute="centerX" id="E6r-Qa-HZu"/>
                                             <constraint firstAttribute="bottom" secondItem="xrb-Mu-BG1" secondAttribute="bottom" constant="9" id="FIo-Js-UFq"/>
                                             <constraint firstAttribute="bottom" secondItem="cxh-Ou-nQE" secondAttribute="bottom" constant="63" id="I46-YB-9el"/>
+                                            <constraint firstItem="vsn-2p-BXN" firstAttribute="top" secondItem="26T-Jv-ckc" secondAttribute="bottom" constant="28" id="PtC-aT-7zE"/>
                                             <constraint firstItem="xrb-Mu-BG1" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" constant="20" id="Znf-Bf-cMr"/>
                                             <constraint firstAttribute="centerX" secondItem="Rin-Xs-XdC" secondAttribute="centerX" id="fUG-N3-Flu"/>
                                             <constraint firstItem="Rin-Xs-XdC" firstAttribute="top" secondItem="B45-j8-lL1" secondAttribute="top" id="fZc-nQ-SvX"/>
                                             <constraint firstAttribute="centerY" secondItem="TdE-nO-7e0" secondAttribute="centerY" id="h5u-F8-Q2g"/>
                                             <constraint firstAttribute="centerX" secondItem="vsn-2p-BXN" secondAttribute="centerX" id="iVp-Ge-VFj"/>
+                                            <constraint firstItem="vsn-2p-BXN" firstAttribute="centerX" secondItem="26T-Jv-ckc" secondAttribute="centerX" constant="-0.5" id="m3k-PC-k1q"/>
                                             <constraint firstAttribute="bottom" secondItem="Rin-Xs-XdC" secondAttribute="bottom" id="oIe-5L-TuG"/>
                                             <constraint firstAttribute="centerY" secondItem="Rin-Xs-XdC" secondAttribute="centerY" id="qmd-9C-0ai"/>
-                                            <constraint firstItem="vsn-2p-BXN" firstAttribute="width" secondItem="26T-Jv-ckc" secondAttribute="width" id="rXk-Ec-eGJ"/>
-                                            <constraint firstItem="vsn-2p-BXN" firstAttribute="centerX" secondItem="26T-Jv-ckc" secondAttribute="centerX" id="sTA-Ep-Rux"/>
                                             <constraint firstAttribute="trailing" secondItem="xrb-Mu-BG1" secondAttribute="trailing" constant="20" id="vyj-mn-Hq0"/>
-                                            <constraint firstItem="vsn-2p-BXN" firstAttribute="top" secondItem="26T-Jv-ckc" secondAttribute="bottom" constant="27" id="wUS-Gb-ddc"/>
                                         </constraints>
                                         <size key="customSize" width="320" height="568"/>
                                         <connections>

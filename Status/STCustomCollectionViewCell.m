@@ -137,11 +137,11 @@
     
     switch (type) {
         case STFlowTypeMyProfile:{
-            self.noPhotosLabel.text = @"You don't have any photo. Take a photo.";
+            self.noPhotosLabel.text = @"You don't have any photo. Take a photo";
             break;
         }
         case STFlowTypeUserProfile:{
-            self.noPhotosLabel.text = [NSString stringWithFormat:@"Ask %@ to take a photo.", self.username];
+            self.noPhotosLabel.text = [NSString stringWithFormat:@"Ask %@ to take a photo", self.username];
             break;
         }
         default:
