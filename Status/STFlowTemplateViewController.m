@@ -43,6 +43,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
 @property (weak, nonatomic) IBOutlet UILabel *notifNumberLabel;
+@property (strong, nonatomic) UIButton * refreshBt;
 
 @property (strong, nonatomic) NSMutableArray *postsDataSource;
 @property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *leftSwipe;
@@ -241,12 +242,17 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #endif
                     [weakSelf.collectionView reloadData];
                     
-                    [_refreshBt setEnabled:YES];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.refreshBt setEnabled:YES];
+                        [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
+                    });
+                    
+                    
                     
                 }
             } andErrorCompletion:^(NSError *error) {
                 NSLog(@"error with %@", error.description);
-                [_refreshBt setEnabled:YES];
+                [weakSelf.refreshBt setEnabled:YES];
             }];
             break;
         }
@@ -282,9 +288,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - Actions
 - (IBAction)onTapRefreshFromFooter:(id)sender {
-    _refreshBt = (UIButton *) sender;
+    self.refreshBt = (UIButton *) sender;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_refreshBt setEnabled:NO];
+        [self.refreshBt setEnabled:NO];
+        [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateNormal];
+        [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateHighlighted];
     });
     
     [self getDataSourceWithOffset:0];
