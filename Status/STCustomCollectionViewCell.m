@@ -22,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *shareBtn;
 @property (weak, nonatomic) IBOutlet UIButton *likesNumberBtn;
-@property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIButton *bigCameraProfileBtn;
 @property (weak, nonatomic) IBOutlet UILabel *noPhotosLabel;
@@ -58,10 +57,9 @@
     self.setUpDict = setupDict;
     
     int numberOfLikes = [setupDict[@"number_of_likes"] intValue];
-    NSString * likesString = (numberOfLikes == 1) ? @"Like" : @"Likes";
     
     [self.profileNameBtn setTitle:setupDict[@"user_name"] forState:UIControlStateNormal];
-    [self.likesNumberBtn setTitle:[NSString stringWithFormat:@"%d %@", numberOfLikes, likesString] forState:UIControlStateNormal];
+    [self.likesNumberBtn setTitle:[NSString stringWithFormat:@"%d", numberOfLikes] forState:UIControlStateNormal];
     self.likesNumberBtn.titleLabel.numberOfLines = 2;
     BOOL isLiked = [setupDict[@"post_liked_by_current_user"] boolValue];
     
@@ -109,7 +107,6 @@
         case STFlowTypeMyProfile:
         case STFlowTypeUserProfile:{
             self.profileNameBtn.hidden = NO;
-            self.backBtn.hidden = NO;
             self.likesNumberBtn.hidden = NO;
             break;
         }

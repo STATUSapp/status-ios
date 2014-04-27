@@ -409,7 +409,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
 }
 
-- (IBAction)onTapBack:(id)sender {
+- (IBAction)onTapMenu:(id)sender {
+    // the old onTapBack method
+    // TODO : implement menu here
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -757,7 +760,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == kNoPostsAlertTag) {
-        [self onTapBack:nil];
+        [self onTapMenu:nil];
     }
     else if (alertView.tag == kDeletePostTag)
     {
@@ -792,7 +795,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
     else if (alertView.tag == kInviteUserToUpload){
         if (buttonIndex ==1) {
-            [self onTapBack:nil];
+            [self onTapMenu:nil];
         }
     }
     
