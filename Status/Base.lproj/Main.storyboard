@@ -298,11 +298,11 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a03-6i-MLx" userLabel="BtnHome">
-                                <rect key="frame" x="0.0" y="8" width="40" height="40"/>
+                                <rect key="frame" x="11" y="8" width="42" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="qCb-mO-C9H"/>
+                                    <constraint firstAttribute="width" constant="42" id="qCb-mO-C9H"/>
                                     <constraint firstAttribute="height" constant="40" id="qLl-6P-PdJ"/>
                                 </constraints>
                                 <state key="normal" image="btn_menu_normal">
@@ -357,7 +357,7 @@
                             <constraint firstItem="EXg-xB-dpW" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="1SK-B1-c94"/>
                             <constraint firstAttribute="trailing" secondItem="EXg-xB-dpW" secondAttribute="trailing" id="C0m-pD-QkA"/>
                             <constraint firstItem="a03-6i-MLx" firstAttribute="centerY" secondItem="xpi-9T-wvY" secondAttribute="centerY" id="KjU-GQ-LLm"/>
-                            <constraint firstItem="a03-6i-MLx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="PGF-ga-Tfi"/>
+                            <constraint firstItem="a03-6i-MLx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="11" id="PGF-ga-Tfi"/>
                             <constraint firstItem="Pm5-yu-40q" firstAttribute="top" secondItem="EXg-xB-dpW" secondAttribute="bottom" id="VFp-PL-y7N"/>
                             <constraint firstItem="EXg-xB-dpW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="a9e-5h-4go"/>
                             <constraint firstAttribute="trailing" secondItem="xpi-9T-wvY" secondAttribute="trailing" constant="20" id="bC2-B6-3Tr"/>
@@ -378,11 +378,88 @@
                     <connections>
                         <outlet property="collectionView" destination="EXg-xB-dpW" id="9Di-MC-Elo"/>
                         <outlet property="leftSwipe" destination="ij2-2N-pep" id="MKQ-ye-c5z"/>
+                        <outlet property="menuImageView" destination="ZqF-Qy-Zqd" id="vQe-Gy-XbJ"/>
+                        <outlet property="menuView" destination="gS4-jD-fvB" id="meB-jJ-hg9"/>
                         <outlet property="notifBtn" destination="tIE-Kz-jAY" id="7Yz-ej-1nl"/>
                         <outlet property="notifNumberLabel" destination="DtM-Db-eT0" id="iIj-Nm-agt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="gS4-jD-fvB" userLabel="menuView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqF-Qy-Zqd">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSh-0x-giN">
+                            <rect key="frame" x="34" y="121" width="208" height="46"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                            <state key="normal" title="Home">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickHome:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SDJ-Uz-O6Q"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmr-vJ-ZfI">
+                            <rect key="frame" x="34" y="216" width="203" height="55"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                            <state key="normal" title="How it works">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickHowItWorks:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MCp-4c-Dbh"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6W-fy-nTi">
+                            <rect key="frame" x="34" y="308" width="203" height="55"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                            <state key="normal" title="Me">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onTapMyProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hHt-S3-FYv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5K-xt-HRj">
+                            <rect key="frame" x="24" y="24" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="x menu STAUS">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onCloseMenu:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZWy-Vo-fYO"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                </view>
                 <swipeGestureRecognizer direction="down" id="tbL-Ub-pis" userLabel="Swipe Gesture Down">
                     <connections>
                         <action selector="onSwipeDown:" destination="vXZ-lx-hvc" id="b6f-xV-VKp"/>
@@ -936,6 +1013,7 @@
         <image name="selected state" width="320" height="60"/>
         <image name="share button" width="319" height="48"/>
         <image name="share button pressed" width="319" height="48"/>
+        <image name="x menu STAUS" width="15" height="15"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -23,6 +23,7 @@
 #import "STNotificationsViewController.h"
 #import "STZoomablePostViewController.h"
 #import "STFooterView.h"
+#import "UIImage+ImageEffects.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
@@ -47,6 +48,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 @property (strong, nonatomic) NSMutableArray *postsDataSource;
 @property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *leftSwipe;
+@property (weak, nonatomic) IBOutlet UIView *menuView;
+@property (weak, nonatomic) IBOutlet UIImageView *menuImageView;
 
 @end
 
@@ -342,6 +345,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(IBAction)onTapMyProfile:(id)sender{
     [self onSwipeUp:nil];
+    [self onCloseMenu:nil];
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = STFlowTypeMyProfile;
     flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
@@ -408,12 +412,31 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
        
     }
 }
+- (IBAction)onCloseMenu:(id)sender {
+    [UIView animateWithDuration:0.33 animations:^{
+        _menuView.alpha = 0.f;
+    } completion:^(BOOL finished) {
+        _menuImageView.image = nil;
+        [_menuView removeFromSuperview];
+    }];
+    
+}
+- (IBAction)onClickHome:(id)sender {
+    [self onCloseMenu:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+- (IBAction)onClickHowItWorks:(id)sender {
+    [self onCloseMenu:nil];
+    //TODO: implement tutorial here
+}
 
 - (IBAction)onTapMenu:(id)sender {
-    // the old onTapBack method
-    // TODO : implement menu here
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    _menuView.alpha = 0.f;
+    _menuImageView.image = [self blurCurrentScreen];
+    [self.view addSubview:_menuView];
+    [UIView animateWithDuration:0.33 animations:^{
+        _menuView.alpha = 1.f;
+    }];
 }
 
 - (IBAction)onTapCameraUpload:(id)sender {
@@ -887,5 +910,15 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     else if ([lastVC isKindOfClass:[STNotificationsViewController class]]){
         [(STNotificationsViewController *)lastVC getNotificationsFromServer];
     }
+}
+
+-(UIImage *)blurCurrentScreen{
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.view.layer renderInContext:context];
+    UIImage *imageFromCurrentView = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return [imageFromCurrentView applyDarkEffect];
 }
 @end

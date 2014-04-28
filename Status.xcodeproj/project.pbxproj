@@ -61,6 +61,7 @@
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
 		17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
+		17F6BB7D190ED8BD00B41E3A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F6BB7C190ED8BD00B41E3A /* UIImage+ImageEffects.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -169,6 +170,8 @@
 		17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomShareView.h; sourceTree = "<group>"; };
 		17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomShareView.m; sourceTree = "<group>"; };
 		17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
+		17F6BB7B190ED8BD00B41E3A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		17F6BB7C190ED8BD00B41E3A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomCollectionViewCell.h; sourceTree = "<group>"; };
 		317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomCollectionViewCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -179,12 +182,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172EAE6918B0B12E00C5637B /* CoreGraphics.framework in Frameworks */,
 				070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */,
 				17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */,
 				31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */,
 				172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */,
 				172EAEB918B0BAE000C5637B /* SystemConfiguration.framework in Frameworks */,
-				172EAE6918B0B12E00C5637B /* CoreGraphics.framework in Frameworks */,
 				176B107D18D5BFA0008B3FD8 /* FacebookSDK.framework in Frameworks */,
 				172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */,
 				172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */,
@@ -207,6 +210,7 @@
 		172EAE5A18B0B12D00C5637B = {
 			isa = PBXGroup;
 			children = (
+				17F6BB7A190ED8BD00B41E3A /* Categories */,
 				172EAF0A18B0D18400C5637B /* WebServicesController */,
 				172EAEF018B0BB4800C5637B /* UIKit+AFNetworking */,
 				172EAE9B18B0B46300C5637B /* AFNetworking */,
@@ -379,6 +383,16 @@
 			path = Status/WebServicesController;
 			sourceTree = "<group>";
 		};
+		17F6BB7A190ED8BD00B41E3A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				17F6BB7B190ED8BD00B41E3A /* UIImage+ImageEffects.h */,
+				17F6BB7C190ED8BD00B41E3A /* UIImage+ImageEffects.m */,
+			);
+			name = Categories;
+			path = Status/Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -504,6 +518,7 @@
 				172EAF0318B0BB4800C5637B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				172EAEB318B0B46300C5637B /* AFSecurityPolicy.m in Sources */,
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
+				17F6BB7D190ED8BD00B41E3A /* UIImage+ImageEffects.m in Sources */,
 				17AC07EE18B2A6800088E863 /* STImageCacheController.m in Sources */,
 				070058E618BF68680014E1D3 /* STFacebookController.m in Sources */,
 				172EAF0818B0BB4800C5637B /* UIRefreshControl+AFNetworking.m in Sources */,
