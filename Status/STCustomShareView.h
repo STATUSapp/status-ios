@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fbTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImgContraint;
+@property (weak, nonatomic) IBOutlet UIView *shadowView;
 
 -(void) setUpForThreeButtons:(BOOL)isThree;
 -(void) setForDissmiss:(BOOL) isDissmissed;

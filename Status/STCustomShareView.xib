@@ -143,6 +143,7 @@
                 <outlet property="deletaBtn" destination="3To-xL-SWq" id="gzk-s3-sHr"/>
                 <outlet property="fbTopConstraint" destination="PRA-Fs-CUY" id="kOW-sL-X0o"/>
                 <outlet property="saveTopConstraint" destination="sIA-z6-eEw" id="ZYP-kk-Egd"/>
+                <outlet property="shadowView" destination="h9b-m3-HbM" id="h5b-F3-MPN"/>
             </connections>
         </view>
     </objects>

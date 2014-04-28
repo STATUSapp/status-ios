@@ -356,10 +356,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (IBAction)onTapShare:(id)sender {
     NSDictionary *dict = [self getCurrentDictionary];
     BOOL isOwner = [dict[@"is_owner"] boolValue];
-    
+    _shareOptionsView.shadowView.alpha = 0.0;
     [UIView animateWithDuration:0.33f animations:^{
         [_shareOptionsView setUpForThreeButtons:isOwner?NO:YES];
         _shareOptionsView.hidden=FALSE;
+        _shareOptionsView.shadowView.alpha = 0.5;
         [_shareOptionsView setForDissmiss:NO];
         [self.view layoutIfNeeded];
         
@@ -530,6 +531,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (IBAction)onDismissShareOptions:(id)sender {
     [UIView animateWithDuration:0.33f animations:^{
         [_shareOptionsView setForDissmiss:YES];
+        _shareOptionsView.shadowView.alpha = 0.0;
         [self.view layoutIfNeeded];
     }  completion:^(BOOL finished) {
         _shareOptionsView.hidden = TRUE;
