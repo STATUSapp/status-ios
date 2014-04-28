@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,7 +11,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9b-m3-HbM">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="450"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -129,7 +129,7 @@
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="bottom" secondItem="3To-xL-SWq" secondAttribute="bottom" constant="64" id="nZ6-oZ-cob"/>
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="top" secondItem="a46-Fq-RUX" secondAttribute="top" constant="-61" id="sIA-z6-eEw"/>
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="bottom" secondItem="KOU-gd-BIt" secondAttribute="bottom" constant="7" id="uCS-3F-yCj"/>
-                <constraint firstAttribute="bottom" secondItem="h9b-m3-HbM" secondAttribute="bottom" constant="58" id="uQr-HK-oeb"/>
+                <constraint firstAttribute="bottom" secondItem="h9b-m3-HbM" secondAttribute="bottom" constant="118" id="uQr-HK-oeb"/>
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="leading" secondItem="b75-0M-y77" secondAttribute="leading" id="uqk-Ia-jVo"/>
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="leading" secondItem="a46-Fq-RUX" secondAttribute="leading" id="vEW-Mi-bwQ"/>
                 <constraint firstAttribute="trailing" secondItem="h9b-m3-HbM" secondAttribute="trailing" id="yaF-xh-TJp"/>
