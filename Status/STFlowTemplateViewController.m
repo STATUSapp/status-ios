@@ -94,6 +94,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+
+}
+
+- (void)presentTutorialAutomatically{
     if ([[NSUserDefaults standardUserDefaults] valueForKey:kSTTutorialIsSeen] == nil) {
         [self onClickHowItWorks:nil];
         [[NSUserDefaults standardUserDefaults] setObject:kSTTutorialIsSeen forKey:kSTTutorialIsSeen];
@@ -190,7 +194,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #pragma mark - FacebookController Delegate
 
 -(void)facebookControllerDidLoggedIn{
-    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    __weak STFlowTemplateViewController * weakSelf = self;
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
+        [weakSelf presentTutorialAutomatically];
+    }];
     [self addTopOption];
     self.postsDataSource = [NSMutableArray array];
     [self getDataSourceWithOffset:0];
@@ -435,10 +442,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 - (IBAction)onClickHowItWorks:(id)sender {
     [self onCloseMenu:nil];
-    //TODO: implement tutorial here
-    
     STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];
     tutorialVC.backgroundImageForLastElement = [self snapshotOfCurrentScreen];
+    tutorialVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:tutorialVC animated:YES completion:nil];
 }
 
