@@ -185,6 +185,10 @@
     self.likesNumberBtn.hidden = NO;
     self.shareBtn.hidden = NO;
     self.noPhotosLabel.hidden = YES;
+    
+    self.profileNameBtn.layer.shadowOpacity = 1.0;
+    self.profileNameBtn.layer.shadowRadius = 2;
+    self.profileNameBtn.layer.shadowOffset = CGSizeMake(3.0f, 1.0f);
 }
 
 - (NSString *)reuseIdentifier{

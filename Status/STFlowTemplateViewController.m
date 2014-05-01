@@ -101,11 +101,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 -(void) addTopOption{
-    if (self.flowType == STFlowTypeMyProfile || self.flowType == STFlowTypeAllPosts) {
+    if (self.flowType == STFlowTypeMyProfile) {
         if ([self.view viewWithTag:kTopOptionTag]==nil) {
             NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"STTopOption" owner:self options:nil];
             STTopOption *topOption = (STTopOption *)[array objectAtIndex:0];
-            [topOption initWithType: (self.flowType == STFlowTypeMyProfile)?STTopOptionTypeLogout:STTopOptionTypeUserProfile];
+            [topOption initForLogout];
             [topOption setTag:kTopOptionTag];
             [topOption setTranslatesAutoresizingMaskIntoConstraints:NO];
             [self.view addSubview:topOption];
@@ -120,12 +120,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             
             [self.view addConstraints:@[_topOptionConstraint]];
         }
-        
-        else
-        {
-            STTopOption *topOption = (STTopOption *)[self.view viewWithTag:kTopOptionTag];
-            [topOption updateBasicInfo];
-        }
+
     }
 }
 
@@ -344,8 +339,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 -(IBAction)onTapMyProfile:(id)sender{
-    [self onSwipeUp:nil];
     [self onCloseMenu:nil];
+    if (_flowType == STFlowTypeMyProfile) {
+        return;
+    }
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = STFlowTypeMyProfile;
     flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;

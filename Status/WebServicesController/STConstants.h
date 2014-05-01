@@ -31,11 +31,6 @@ typedef NS_ENUM(NSUInteger,STWebservicesCodes){
     STWebservicesFounded = 302
 };
 
-typedef NS_ENUM(NSUInteger,STTopOptionType){
-    STTopOptionTypeUserProfile = 0,
-    STTopOptionTypeLogout
-};
-
 typedef NS_ENUM(NSUInteger,STNotificationType){
     STNotificationTypeLike = 1,
     STNotificationTypeInvite,

@@ -11,9 +11,6 @@
 
 @interface STTopOption : UIView
 
--(void) initWithType:(STTopOptionType) type;
--(void) updateBasicInfo;
-@property (weak, nonatomic) IBOutlet UIButton *actionButton;
-@property (weak, nonatomic) IBOutlet UIImageView *currentUserImg;
-@property (weak, nonatomic) IBOutlet UILabel *currentUserName;
+-(void) initForLogout;
+
 @end
