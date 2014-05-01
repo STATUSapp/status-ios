@@ -14,6 +14,8 @@ static NSInteger const  kSTNumberOfTutorialImages = 5;
 
 @interface STTutorialViewController ()
 
+@property (strong, nonatomic) UIPageControl * pageControl;
+
 @end
 
 @implementation STTutorialViewController
@@ -40,6 +42,10 @@ static NSInteger const  kSTNumberOfTutorialImages = 5;
     dismissTap.cancelsTouchesInView = NO;
     dismissTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:dismissTap];
+    
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(10, 50, 300, 50)];
+    self.pageControl.numberOfPages = kSTNumberOfTutorialImages;
+    [self.view addSubview:self.pageControl];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,6 +89,10 @@ static NSInteger const  kSTNumberOfTutorialImages = 5;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return kSTNumberOfTutorialImages;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    self.pageControl.currentPage = [(STTutorialCell*)[self.collectionView visibleCells].firstObject tag];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
