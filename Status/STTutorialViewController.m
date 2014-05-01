@@ -45,6 +45,7 @@ static NSInteger const  kSTNumberOfTutorialImages = 5;
     
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(10, 50, 300, 50)];
     self.pageControl.numberOfPages = kSTNumberOfTutorialImages;
+    self.pageControl.userInteractionEnabled = NO;
     [self.view addSubview:self.pageControl];
 }
 
