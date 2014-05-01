@@ -24,11 +24,13 @@
 #import "STZoomablePostViewController.h"
 #import "STFooterView.h"
 #import "UIImage+ImageEffects.h"
+#import "STTutorialViewController.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
 int const kNoPostsAlertTag = 13;
 int const kInviteUserToUpload = 14;
+static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
@@ -88,6 +90,14 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                                              selector:@selector(updateNotificationsNumber)
                                                  name:STNotificationBadgeValueDidChanged
                                                object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:kSTTutorialIsSeen] == nil) {
+        [self onClickHowItWorks:nil];
+        [[NSUserDefaults standardUserDefaults] setObject:kSTTutorialIsSeen forKey:kSTTutorialIsSeen];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -426,6 +436,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (IBAction)onClickHowItWorks:(id)sender {
     [self onCloseMenu:nil];
     //TODO: implement tutorial here
+    
+    STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];
+    tutorialVC.backgroundImageForLastElement = [self snapshotOfCurrentScreen];
+    [self presentViewController:tutorialVC animated:YES completion:nil];
 }
 
 - (IBAction)onTapMenu:(id)sender {
@@ -912,12 +926,18 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 -(UIImage *)blurCurrentScreen{
+    UIImage * imageFromCurrentView = [self snapshotOfCurrentScreen];
+    return [imageFromCurrentView applyDarkEffect];
+}
+
+- (UIImage *)snapshotOfCurrentScreen{
     UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.view.layer renderInContext:context];
     UIImage *imageFromCurrentView = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return [imageFromCurrentView applyDarkEffect];
+    return imageFromCurrentView;
 }
+
 @end

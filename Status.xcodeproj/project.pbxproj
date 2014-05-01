@@ -62,6 +62,8 @@
 		17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
 		17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
 		17F6BB7D190ED8BD00B41E3A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F6BB7C190ED8BD00B41E3A /* UIImage+ImageEffects.m */; };
+		1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */; };
+		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -172,6 +174,10 @@
 		17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
 		17F6BB7B190ED8BD00B41E3A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		17F6BB7C190ED8BD00B41E3A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		1DFCCAC7191236AA00B9230E /* STTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialViewController.h; sourceTree = "<group>"; };
+		1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialViewController.m; sourceTree = "<group>"; };
+		1DFCCACA191238A000B9230E /* STTutorialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialCell.h; sourceTree = "<group>"; };
+		1DFCCACB191238A000B9230E /* STTutorialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialCell.m; sourceTree = "<group>"; };
 		317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomCollectionViewCell.h; sourceTree = "<group>"; };
 		317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomCollectionViewCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -260,6 +266,10 @@
 				178907B618B294BA00AC4355 /* LoginScene.storyboard */,
 				178907B818B295DD00AC4355 /* STLoginViewController.h */,
 				178907B918B295DD00AC4355 /* STLoginViewController.m */,
+				1DFCCAC7191236AA00B9230E /* STTutorialViewController.h */,
+				1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */,
+				1DFCCACA191238A000B9230E /* STTutorialCell.h */,
+				1DFCCACB191238A000B9230E /* STTutorialCell.m */,
 				172EAE7B18B0B12E00C5637B /* STFlowTemplateViewController.h */,
 				172EAE7C18B0B12E00C5637B /* STFlowTemplateViewController.m */,
 				17B1B5B118BA225E0079661B /* STSharePhotoViewController.h */,
@@ -499,6 +509,7 @@
 				172EAEAF18B0B46300C5637B /* AFHTTPRequestOperation.m in Sources */,
 				172EAF0618B0BB4800C5637B /* UIImageView+AFNetworking.m in Sources */,
 				17B1B5B318BA225E0079661B /* STSharePhotoViewController.m in Sources */,
+				1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */,
 				172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */,
 				172EAEB018B0B46300C5637B /* AFHTTPRequestOperationManager.m in Sources */,
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
@@ -520,6 +531,7 @@
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
 				17F6BB7D190ED8BD00B41E3A /* UIImage+ImageEffects.m in Sources */,
 				17AC07EE18B2A6800088E863 /* STImageCacheController.m in Sources */,
+				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
 				070058E618BF68680014E1D3 /* STFacebookController.m in Sources */,
 				172EAF0818B0BB4800C5637B /* UIRefreshControl+AFNetworking.m in Sources */,
 				172EAF0918B0BB4800C5637B /* UIWebView+AFNetworking.m in Sources */,
