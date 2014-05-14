@@ -78,7 +78,7 @@ static NSInteger const  kSTNumberOfTutorialImages = 5;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     STTutorialCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([STTutorialCell class]) forIndexPath:indexPath];
-    cell.tutorialImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%d", kSTTutorialImagePrefix, indexPath.row]];
+    cell.tutorialImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%ld", kSTTutorialImagePrefix, (long)indexPath.row]];
     
     if (indexPath.row == kSTNumberOfTutorialImages - 1) {
         cell.backgroundView = [[UIImageView alloc] initWithImage:self.backgroundImageForLastElement];

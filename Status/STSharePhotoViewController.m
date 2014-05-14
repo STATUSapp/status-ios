@@ -87,7 +87,7 @@
             if (weakSelf.facebookBtn.selected==TRUE) {
                 //add publish stream permissions if does not exists
                 if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
-                    [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_stream"]
+                    [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
                                                             defaultAudience:FBSessionDefaultAudienceFriends
                                                           completionHandler:^(FBSession *session, NSError *error) {
                                                               [self postCurrentPhoto];

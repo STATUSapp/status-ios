@@ -559,7 +559,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         NSData *imgData = UIImageJPEGRepresentation(img, 1.0);
         
         if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
-            [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_stream"]
+            [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
                                                     defaultAudience:FBSessionDefaultAudienceFriends
                                                   completionHandler:^(FBSession *session, NSError *error) {
                                                       [self sharePhotoOnFacebookWithImgData:imgData];
