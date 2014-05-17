@@ -13,6 +13,19 @@
 
 @implementation STNotificationCell
 
+- (STNotificationRegionType)regionForPointOfTap:(CGPoint)pointOfTap{
+    
+    if (CGRectContainsPoint(self.userImg.frame, pointOfTap)) {
+        return STNotificationRegionTypeUserRelated;
+    }
+    
+    if (CGRectContainsPoint(self.messageLbl.frame, pointOfTap)) {
+        return STNotificationRegionTypeUserRelated;
+    }
+    
+    return STNotificationRegionTypePostRelated;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -17,12 +17,13 @@
 
 const float kNoNotifHeight = 24.f;
 
-@interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {
     NSArray *_notificationDataSource;
 }
 @property (weak, nonatomic) IBOutlet UILabel *noNotifLabel;
 @property (weak, nonatomic) IBOutlet UITableView *notificationTable;
+@property (strong, nonatomic) UITapGestureRecognizer * tapOnRow;
 @end
 
 @implementation STNotificationsViewController
@@ -39,6 +40,12 @@ const float kNoNotifHeight = 24.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // add gesture recognizer to use instead of didSelectRowAtIndexPath
+    _tapOnRow = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    _tapOnRow.numberOfTapsRequired = 1;
+    _tapOnRow.numberOfTouchesRequired = 1;
+    [self.notificationTable addGestureRecognizer:_tapOnRow];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -105,28 +112,49 @@ const float kNoNotifHeight = 24.f;
     return resultDate;
 }
 
+#pragma mark - DidSelectedNotification
 
-#pragma mark - UITableView Delegate
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    STNotificationCell *cell = (STNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
-    NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"post_photo_link"]
-                                                 andCompletion:^(UIImage *img) {
-                                                     cell.postImg.image = img;
-                                                 }];
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"user_photo_link"]
-                                                 andCompletion:^(UIImage *img) {
-                                                     cell.userImg.image = img;
-                                                 }];
-    cell.seenCircle.hidden = [dict[@"seen"] boolValue];
-    cell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];
-    cell.timeLbl.text = [self notificationTimeIntervalSinceDate:[ self dateFromServerDate:dict[@"date"]]];
-    cell.notificationTypeMessage.text = [self getNotificationTypeStringForType:[dict[@"type"] integerValue]];
-    return cell;
+- (void)handleTap:(id)sender {
+    if (sender != _tapOnRow) {
+        return;
+    }
+    
+    CGPoint pointOfTapInTableView = [_tapOnRow locationInView:self.notificationTable];
+    NSIndexPath * indexPathOfSelectedRow = [self.notificationTable indexPathForRowAtPoint:pointOfTapInTableView];
+    STNotificationCell * cell = (STNotificationCell *)[self.notificationTable cellForRowAtIndexPath:indexPathOfSelectedRow];
+    CGPoint pointOfTapInCell = [_tapOnRow locationInView:cell.contentView];
+    
+    switch ([cell regionForPointOfTap:pointOfTapInCell]) {
+        case STNotificationRegionTypeUserRelated:
+            [self onTapUserNameOrUserProfilePictureAtIndexPath:indexPathOfSelectedRow];
+            break;
+        case STNotificationRegionTypePostRelated:
+            [self onTapPostPictureAtIndexPath:indexPathOfSelectedRow];
+            break;
+            
+        default:
+            break;
+    }
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)onTapUserNameOrUserProfilePictureAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
+    STNotificationType notifType = [dict[@"type"] integerValue];
+    
+    switch (notifType) {
+            
+        default:
+        {
+            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+            flowCtrl.flowType = STFlowTypeUserProfile;
+            flowCtrl.userID = dict[@"user_id"];
+            [self.navigationController pushViewController:flowCtrl animated:YES];
+        }
+            break;
+    }
+}
+
+- (void)onTapPostPictureAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
     STNotificationType notifType = [dict[@"type"] integerValue];
@@ -172,6 +200,72 @@ const float kNoNotifHeight = 24.f;
     }
 }
 
+#pragma mark - UITableView Delegate
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    STNotificationCell *cell = (STNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
+    NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
+    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"post_photo_link"]
+                                                 andCompletion:^(UIImage *img) {
+                                                     cell.postImg.image = img;
+                                                 }];
+    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"user_photo_link"]
+                                                 andCompletion:^(UIImage *img) {
+                                                     cell.userImg.image = img;
+                                                 }];
+    cell.seenCircle.hidden = [dict[@"seen"] boolValue];
+    cell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];
+    cell.timeLbl.text = [self notificationTimeIntervalSinceDate:[ self dateFromServerDate:dict[@"date"]]];
+    cell.notificationTypeMessage.text = [self getNotificationTypeStringForType:[dict[@"type"] integerValue]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
+//    STNotificationType notifType = [dict[@"type"] integerValue];
+//    
+//    switch (notifType) {
+//        case STNotificationTypeLike:{
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeSinglePost;
+//            flowCtrl.postID = dict[@"post_id"];
+//            flowCtrl.userID = dict[@"user_id"];
+//            flowCtrl.userName = dict[@"user_name"];
+//            [self.navigationController pushViewController:flowCtrl animated:YES];
+//        }
+//            break;
+//        case STNotificationTypeInvite:
+//        {
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeMyProfile;
+//            flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
+//            flowCtrl.userName = [[STFacebookController sharedInstance] getUDValueForKey:USER_NAME];
+//            [self.navigationController pushViewController:flowCtrl animated:YES];
+//        }
+//            break;
+//        case STNotificationTypeUploaded:
+//        {
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeUserProfile;
+//            flowCtrl.userID = dict[@"user_id"];
+//            [self.navigationController pushViewController:flowCtrl animated:YES];
+//        }
+//            break;
+//            
+//        default:
+//        {
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeSinglePost;
+//            flowCtrl.postID = dict[@"post_id"];
+//            flowCtrl.userID = dict[@"user_id"];
+//            flowCtrl.userName = dict[@"user_name"];
+//            [self.navigationController pushViewController:flowCtrl animated:YES];
+//        }
+//            break;
+//    }
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _notificationDataSource.count;
 }
@@ -198,6 +292,20 @@ const float kNoNotifHeight = 24.f;
     }
     
     return str;
+}
+
+#pragma mark - UIGestureRecognizer delegate method
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer == _tapOnRow) {
+        CGPoint pointOfTap = [gestureRecognizer locationInView:gestureRecognizer.view];
+        if ([self.notificationTable indexPathForRowAtPoint:pointOfTap]) {
+            return YES;
+        }
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end
