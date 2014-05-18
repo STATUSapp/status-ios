@@ -57,6 +57,9 @@ extern NSString *const kGetPost;
 extern NSString *const kGetNotifications;
 extern NSString *const kDeletePost;
 extern NSString *const kInviteToUpload;
+extern NSString *const kSetUserLocation;
+extern NSString *const kGetUnreadNotificationsCount;
+extern NSString *const kGetNearbyPosts;
 
 #pragma mark - Local Notifications
 

@@ -10,6 +10,8 @@
 #import "STConstants.h"
 #import "STImageCacheController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import <CoreLocation/CoreLocation.h>
+#import "STLocationManager.h"
 
 @implementation STWebServiceController
 +(STWebServiceController *) sharedInstance{
@@ -204,6 +206,20 @@
     }];
 }
 
+-(void) getNearbyPostsWithOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
+    long limit = 50;
+#if PAGGING_ENABLED
+    limit = POSTS_PAGGING;
+#endif
+    [self.sessionManager GET:kGetNearbyPosts parameters:@{@"limit": @(limit), @"offset":@(offset), @"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error: %@", error.debugDescription);
+        errorCompletion(error);
+    }];
+}
+
 -(void) setPostSeen:(NSString *) postId withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion{
     //__weak STWebServiceController *weakSelf = self;
     NSLog(@"Send set_seen to post id : %@", postId);
@@ -274,6 +290,16 @@
     }];
 }
 
+-(void) getUnreadNotificationsCountWithCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
+    [self.sessionManager GET:kGetUnreadNotificationsCount parameters:@{@"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error: %@", error.debugDescription);
+        errorCompletion(error);
+    }];
+}
+
 -(void) deletePost:(NSString *) post_id withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion{
     [self.sessionManager POST:kDeletePost parameters:@{@"post_id":post_id, @"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
         /*NSDictionary *responseDict = [NSJSONSerialization
@@ -294,6 +320,17 @@
          JSONObjectWithData:responseObject
          options:NSJSONReadingMutableLeaves
          error:nil];*/
+        completion(responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error: %@", error.debugDescription);
+        errorCompletion(error);
+    }];
+}
+
+-(void) setUserLocationWithCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion{
+    CLLocationCoordinate2D coord = [STLocationManager sharedInstance].latestLocation.coordinate;
+    [self.sessionManager POST:kSetUserLocation parameters:@{@"lat":@(coord.latitude),@"lng":@(coord.longitude), @"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
         completion(responseObject);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

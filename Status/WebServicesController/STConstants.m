@@ -8,10 +8,10 @@
 
 #import "STConstants.h"
 
-//NSString *const kBaseURL = @"http://dev.simplebig.ro/status/api/";
-//NSString *const kBasePhotoDownload = @"http://dev.simplebig.ro/status/media/";
-NSString *const kBaseURL = @"http://status.glazeon.com/api/";
-NSString *const kBasePhotoDownload = @"http://status.glazeon.com/media/";
+NSString *const kBaseURL = @"http://dev.simplebig.ro/status/api/";
+NSString *const kBasePhotoDownload = @"http://dev.simplebig.ro/status/media/";
+//NSString *const kBaseURL = @"http://status.glazeon.com/api/";
+//NSString *const kBasePhotoDownload = @"http://status.glazeon.com/media/";
 
 //NSString *const kGetPosts = @"get_posts2";
 NSString *const kGetPosts = @"get_posts";
@@ -28,6 +28,9 @@ NSString *const kGetPost = @"get_post";
 NSString *const kGetNotifications = @"get_notifications";
 NSString *const kDeletePost = @"delete_photo";
 NSString *const kInviteToUpload = @"invite_to_upload";
+NSString *const kSetUserLocation = @"set_user_location";
+NSString *const kGetUnreadNotificationsCount = @"get_unread_notifications_count";
+NSString *const kGetNearbyPosts = @"get_nearby_post";
 
 #pragma mark - Local Notifications
 

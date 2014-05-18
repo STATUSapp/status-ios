@@ -92,9 +92,25 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                                                object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self checkForNotificationNumber];
+}
 
+-(void)checkForNotificationNumber{
+    __weak STFlowTemplateViewController *weakSelf = self;
+    if ([STWebServiceController sharedInstance].accessToken != nil &&
+        [STWebServiceController sharedInstance].accessToken.length > 0) {
+        [[STWebServiceController sharedInstance] getUnreadNotificationsCountWithCompletion:^(NSDictionary *response) {
+            [weakSelf setNotificationsNumber:[response[@"count"] integerValue]];
+        } andErrorCompletion:nil];
+        
+#warning move this to the right place and threat as UserProfileFlow
+        
+        [[STWebServiceController sharedInstance] getNearbyPostsWithOffset:0 completion:^(NSDictionary *response) {
+            NSLog(@"response : %@", response);
+        } andErrorCompletion:nil];
+    }
 }
 
 - (void)presentTutorialAutomatically{
@@ -201,6 +217,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [self addTopOption];
     self.postsDataSource = [NSMutableArray array];
     [self getDataSourceWithOffset:0];
+    [self checkForNotificationNumber];
     [self handleNotification:_lastNotif];
 }
 

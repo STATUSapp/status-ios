@@ -8,6 +8,7 @@
 
 #import "STLocationManager.h"
 #import "STWebServiceController.h"
+#import "STConstants.h"
 
 static const double kGPSRecordTime = 1800;//seconds, half an hour
 static const double kGPSAccuracyMetters = 150;
@@ -80,8 +81,13 @@ static STLocationManager *_locationManager;
 }
 
 -(void)sendLocationToServer{
-    NSLog(@"Location sent: %@", _latestLocation);
-    //send location to server API
+    [[STWebServiceController sharedInstance] setUserLocationWithCompletion:^(NSDictionary *response) {
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            NSLog(@"Set User Location: %@", _latestLocation);
+        }
+    } orError:^(NSError *error) {
+        NSLog(@"Set User location error: %@", error);
+    }];
 }
 -(void)restartLocationManager{
     if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive)

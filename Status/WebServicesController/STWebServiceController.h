@@ -31,6 +31,9 @@ typedef void (^downloadImageCompletion) (NSURL *imageURL);
 -(void) setAPNToken:(NSString *) apn_token withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
 -(void) getPostDetails:(NSString *) postID withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) getNotificationsWithCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
+-(void) getUnreadNotificationsCountWithCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) deletePost:(NSString *) post_id withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
 -(void) inviteUserToUpload:(NSString *) userId withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
+-(void) setUserLocationWithCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
+-(void) getNearbyPostsWithOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 @end
