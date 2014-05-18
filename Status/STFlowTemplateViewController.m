@@ -104,12 +104,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         [[STWebServiceController sharedInstance] getUnreadNotificationsCountWithCompletion:^(NSDictionary *response) {
             [weakSelf setNotificationsNumber:[response[@"count"] integerValue]];
         } andErrorCompletion:nil];
-        
-#warning move this to the right place and threat as UserProfileFlow
-        
-        [[STWebServiceController sharedInstance] getNearbyPostsWithOffset:0 completion:^(NSDictionary *response) {
-            NSLog(@"response : %@", response);
-        } andErrorCompletion:nil];
     }
 }
 
@@ -207,6 +201,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
 }
 
+- (void)updateNotificationsNumber{
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [self setNotificationsNumber:app.badgeNumber];
+}
+
 #pragma mark - FacebookController Delegate
 
 -(void)facebookControllerDidLoggedIn{
@@ -288,6 +287,20 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             }];
             break;
         }
+        case STFlowTypeDiscoverNearby: {
+            [[STWebServiceController sharedInstance] getNearbyPostsWithOffset:offset completion:^(NSDictionary *response) {
+#if PAGGING_ENABLED
+                [weakSelf.postsDataSource addObjectsFromArray:response[@"data"]];
+#else
+                weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
+#endif
+                [weakSelf.collectionView reloadData];
+                
+            } andErrorCompletion:^(NSError *error) {
+                NSLog(@"error with %@", error.description);
+            }];
+            break;
+        }
         case STFlowTypeMyProfile:
         case STFlowTypeUserProfile:{
             [[STWebServiceController sharedInstance] getUserPosts:self.userID withOffset:offset completion:^(NSDictionary *response) {
@@ -331,10 +344,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
 }
 
-- (void)updateNotificationsNumber{
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [self setNotificationsNumber:app.badgeNumber];
-}
 - (IBAction)onPinchCurrentPost:(id)sender {
     
     //avoid apple bug on receiving this event twice
@@ -463,6 +472,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     tutorialVC.backgroundImageForLastElement = [self snapshotOfCurrentScreen];
     tutorialVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:tutorialVC animated:YES completion:nil];
+}
+- (IBAction)onClickNearby:(id)sender {
+    [self onCloseMenu:nil];
+    [self pushFlowControllerWithType:STFlowTypeDiscoverNearby];
 }
 
 - (IBAction)onTapMenu:(id)sender {
@@ -695,6 +708,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     switch (self.flowType) {
         case STFlowTypeAllPosts:
+        case STFlowTypeDiscoverNearby:
             return numberOfItems;
             break;
         case STFlowTypeUserProfile:{

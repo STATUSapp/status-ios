@@ -14,15 +14,10 @@
 
 typedef NS_ENUM(NSUInteger,STFlowType){
     STFlowTypeAllPosts = 0,
+    STFlowTypeDiscoverNearby,
     STFlowTypeUserProfile,
     STFlowTypeMyProfile,
     STFlowTypeSinglePost
-};
-
-typedef NS_ENUM(NSUInteger,STFlowCellType){
-    STFlowCellTypeNoPicture = 0,
-    STFlowCellTypeSimplePost,
-    STFlowCellTypeNotificationOrUserProfile
 };
 
 typedef NS_ENUM(NSUInteger,STWebservicesCodes){

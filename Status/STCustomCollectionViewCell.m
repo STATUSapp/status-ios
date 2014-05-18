@@ -79,6 +79,12 @@
             [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"]]];
             break;
         }
+        case STFlowTypeDiscoverNearby:{
+            NSLog(@"%@", setupDict);
+            [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"], setupDict[@"small_photo_link"]]];
+            [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@", setupDict[@"user_name"]] forState:UIControlStateNormal];
+            break;
+        }
         case STFlowTypeMyProfile:
         case STFlowTypeUserProfile:{
             [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"], setupDict[@"small_photo_link"]]];
@@ -104,6 +110,7 @@
             self.likesNumberBtn.hidden = NO;
             break;
         }
+        case STFlowTypeDiscoverNearby:
         case STFlowTypeMyProfile:
         case STFlowTypeUserProfile:{
             self.profileNameBtn.hidden = NO;
