@@ -16,6 +16,7 @@
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *facebookBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @end
 
 @implementation STSharePhotoViewController
@@ -64,7 +65,11 @@
         {
             [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
             [weakSelf.delegate performSelector:@selector(imageWasPosted)];
-            //[weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            [weakSelf.delegate performSelector:@selector(imageWasPosted)];
         }
     }];
 }
@@ -76,9 +81,7 @@
 }
 
 - (IBAction)onClickShare:(id)sender {
-    
-    __block UIButton *btn = (UIButton *) sender;
-    btn.enabled = FALSE;
+    _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
     [[STWebServiceController sharedInstance] uploadPictureWithData:imgData withCompletion:^(NSDictionary *response) {
         
@@ -101,19 +104,19 @@
             {
                 [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
                 [weakSelf.delegate performSelector:@selector(imageWasPosted)];
-                //[weakSelf.navigationController popViewControllerAnimated:YES];
             }
 
         }
         else
+        {
             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        
-        btn.enabled = TRUE;
-        
-        
+            weakSelf.shareButton.enabled = TRUE;
+            
+        }
+ 
     } orError:^(NSError *error) {
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        btn.enabled = TRUE;
+        weakSelf.shareButton.enabled = TRUE;
     }];
 }
 

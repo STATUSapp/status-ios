@@ -616,6 +616,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="facebookBtn" destination="bwH-1Q-z14" id="V2p-wO-cO9"/>
+                        <outlet property="shareButton" destination="cmG-Rz-GiZ" id="Bwz-qO-Z2Y"/>
                         <outlet property="sharedImageView" destination="Q7a-gI-yrt" id="8o2-zB-v4s"/>
                     </connections>
                 </viewController>
