@@ -13,6 +13,7 @@
 #import "STConstants.h"
 #import "STFacebookController.h"
 #import "STImageCacheController.h"
+#import "STLocationManager.h"
 
 @implementation AppDelegate
 
@@ -42,8 +43,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
+    //[[STLocationManager sharedInstance] startLocationUpdates];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

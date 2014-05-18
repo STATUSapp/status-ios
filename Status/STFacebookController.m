@@ -14,6 +14,7 @@
 #import "KeychainItemWrapper.h"
 #import "STImageCacheController.h"
 #import "AppDelegate.h"
+#import "STLocationManager.h"
 
 @implementation STFacebookController
 +(STFacebookController *) sharedInstance{
@@ -147,6 +148,7 @@
 -(void)loadTokenFromKeyChain {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
     [STWebServiceController sharedInstance].accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
+    //[[STLocationManager sharedInstance] startLocationUpdates];
     NSLog(@"Loaded Access Token: %@",[STWebServiceController sharedInstance].accessToken);
 }
 
@@ -195,6 +197,7 @@
                     
                     if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                         [STWebServiceController sharedInstance].accessToken = response[@"token"];
+                        [[STLocationManager sharedInstance] startLocationUpdates];
                         [weakSelf saveAccessToken:response[@"token"]];
                         [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
                         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
@@ -215,6 +218,7 @@
             }
             else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
                 [STWebServiceController sharedInstance].accessToken = response[@"token"];
+                [[STLocationManager sharedInstance] startLocationUpdates];
                 [weakSelf saveAccessToken:response[@"token"]];
                 weakSelf.currentUserId = response[@"user_id"];
                 [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
