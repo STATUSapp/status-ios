@@ -7,6 +7,7 @@
 //
 
 #import "STNotificationCell.h"
+#import "UIImageView+TouchesEffects.h"
 @interface STNotificationCell()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationTextTrailingConstraint;
 @end

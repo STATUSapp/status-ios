@@ -64,6 +64,8 @@
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
 		17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
+		1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */; };
+		1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */; };
 		1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */; };
 		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
@@ -179,6 +181,10 @@
 		17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomShareView.h; sourceTree = "<group>"; };
 		17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomShareView.m; sourceTree = "<group>"; };
 		17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
+		1DFBB385192E9C9F003B7A53 /* UIImageView+TouchesEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TouchesEffects.h"; sourceTree = "<group>"; };
+		1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TouchesEffects.m"; sourceTree = "<group>"; };
+		1DFBB389192EA003003B7A53 /* STTapAnimationLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTapAnimationLabel.h; sourceTree = "<group>"; };
+		1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTapAnimationLabel.m; sourceTree = "<group>"; };
 		1DFCCAC7191236AA00B9230E /* STTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialViewController.h; sourceTree = "<group>"; };
 		1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialViewController.m; sourceTree = "<group>"; };
 		1DFCCACA191238A000B9230E /* STTutorialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialCell.h; sourceTree = "<group>"; };
@@ -222,6 +228,7 @@
 		172EAE5A18B0B12D00C5637B = {
 			isa = PBXGroup;
 			children = (
+				1DFBB388192E9FCC003B7A53 /* Custom Controls */,
 				17F6BB7A190ED8BD00B41E3A /* Categories */,
 				172EAF0A18B0D18400C5637B /* WebServicesController */,
 				172EAEF018B0BB4800C5637B /* UIKit+AFNetworking */,
@@ -407,9 +414,21 @@
 			children = (
 				076CF4EF1910F2F200C4096C /* UIImage+ImageEffects.h */,
 				076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */,
+				1DFBB385192E9C9F003B7A53 /* UIImageView+TouchesEffects.h */,
+				1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */,
 			);
 			name = Categories;
 			path = Status/Categories;
+			sourceTree = "<group>";
+		};
+		1DFBB388192E9FCC003B7A53 /* Custom Controls */ = {
+			isa = PBXGroup;
+			children = (
+				1DFBB389192EA003003B7A53 /* STTapAnimationLabel.h */,
+				1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */,
+			);
+			name = "Custom Controls";
+			path = "Status/Custom Controls";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,6 +545,7 @@
 				17B1B5B318BA225E0079661B /* STSharePhotoViewController.m in Sources */,
 				1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */,
 				172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */,
+				1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */,
 				172EAEB018B0B46300C5637B /* AFHTTPRequestOperationManager.m in Sources */,
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
 				172EAF1418B0D4B700C5637B /* STConstants.m in Sources */,
@@ -553,6 +573,7 @@
 				172EAEB118B0B46300C5637B /* AFHTTPSessionManager.m in Sources */,
 				172EAF0D18B0D25100C5637B /* STWebServiceController.m in Sources */,
 				172EAF0418B0BB4800C5637B /* UIAlertView+AFNetworking.m in Sources */,
+				1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */,
 				172EAEB518B0B46300C5637B /* AFURLRequestSerialization.m in Sources */,
 				172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */,
 				172EAF0218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m in Sources */,
