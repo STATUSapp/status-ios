@@ -148,6 +148,7 @@ const float kNoNotifHeight = 24.f;
             STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeUserProfile;
             flowCtrl.userID = dict[@"user_id"];
+            flowCtrl.userName = dict[@"user_name"];
             [self.navigationController pushViewController:flowCtrl animated:YES];
         }
             break;
