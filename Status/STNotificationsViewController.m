@@ -291,6 +291,7 @@ const float kNoNotifHeight = 24.f;
             str = @"likes your photo.";
             break;
     }
+    
     return str;
 }
 
