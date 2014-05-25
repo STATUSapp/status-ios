@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+typedef void (^STNewLocationBlock)();
 
 @interface STLocationManager : NSObject
 
@@ -15,5 +16,6 @@
 @property (nonatomic, strong) CLLocation *latestLocation;
 -(void)restartLocationManager;
 -(void)startLocationUpdates;
+- (void)startLocationUpdatesWithCompletion:(STNewLocationBlock) completion;
 +(BOOL)locationUpdateEnabled;
 @end

@@ -17,6 +17,7 @@ static const double kGPSTimestampSeconds = 15.0;
 {
     CLLocationManager *_locationManager;
 }
+@property (copy) STNewLocationBlock newLocationBlock;
 @end
 
 @implementation STLocationManager
@@ -63,7 +64,7 @@ static STLocationManager *_locationManager;
         return;
     }
     
-    if (_latestLocation!=nil) {
+    if (self.newLocationBlock ==nil && _latestLocation!=nil) {
         howRecent = [locationDate timeIntervalSinceDate:_latestLocation.timestamp];
         
         if (fabs(howRecent) < kGPSRecordTime) {
@@ -81,9 +82,14 @@ static STLocationManager *_locationManager;
 }
 
 -(void)sendLocationToServer{
+    STLocationManager *weakSelf = self;
     [[STWebServiceController sharedInstance] setUserLocationWithCompletion:^(NSDictionary *response) {
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
             NSLog(@"Set User Location: %@", _latestLocation);
+            if (weakSelf.newLocationBlock != nil) {
+                weakSelf.newLocationBlock();
+                weakSelf.newLocationBlock = nil;
+            }
         }
     } orError:^(NSError *error) {
         NSLog(@"Set User location error: %@", error);
@@ -98,12 +104,15 @@ static STLocationManager *_locationManager;
 }
 
 - (void)startLocationUpdates{
-    
     if ([STWebServiceController sharedInstance].accessToken!=nil &&
         [STWebServiceController sharedInstance].accessToken.length > 0) {
         [_locationManager startUpdatingLocation];
     }
-    
+}
+
+- (void)startLocationUpdatesWithCompletion:(STNewLocationBlock) completion{
+    self.newLocationBlock = completion;
+    [self startLocationUpdates];
 }
 
 - (void)stopLocationUpdates{

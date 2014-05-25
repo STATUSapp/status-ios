@@ -290,12 +290,23 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         }
         case STFlowTypeDiscoverNearby: {
             [[STWebServiceController sharedInstance] getNearbyPostsWithOffset:offset completion:^(NSDictionary *response) {
+                
+                if ([response[@"status_code"] integerValue] == 404) {
+                    //user has no location force an update
+                    
+                    [[STLocationManager sharedInstance] startLocationUpdatesWithCompletion:^{
+                        [weakSelf getDataSourceWithOffset:offset];
+                    }];
+                }
+                else
+                {
 #if PAGGING_ENABLED
-                [weakSelf.postsDataSource addObjectsFromArray:response[@"data"]];
+                    [weakSelf.postsDataSource addObjectsFromArray:response[@"data"]];
 #else
-                weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
+                    weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
-                [weakSelf.collectionView reloadData];
+                    [weakSelf.collectionView reloadData];
+                }
                 
             } andErrorCompletion:^(NSError *error) {
                 NSLog(@"error with %@", error.description);
