@@ -15,5 +15,5 @@
 @property (nonatomic, strong) CLLocation *latestLocation;
 -(void)restartLocationManager;
 -(void)startLocationUpdates;
-
++(BOOL)locationUpdateEnabled;
 @end

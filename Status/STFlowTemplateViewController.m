@@ -25,6 +25,7 @@
 #import "STFooterView.h"
 #import "UIImage+ImageEffects.h"
 #import "STTutorialViewController.h"
+#import "STLocationManager.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
@@ -474,8 +475,20 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [self presentViewController:tutorialVC animated:YES completion:nil];
 }
 - (IBAction)onClickNearby:(id)sender {
-    [self onCloseMenu:nil];
-    [self pushFlowControllerWithType:STFlowTypeDiscoverNearby];
+    if (_flowType != STFlowTypeDiscoverNearby) {
+        if (![STLocationManager locationUpdateEnabled]) {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You need to allow STATUS to access your location in order to see nearby friends." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        }
+        else
+        {
+            [self onCloseMenu:nil];
+            [self pushFlowControllerWithType:STFlowTypeDiscoverNearby];
+        }
+    }
+    else
+    {
+        [self onCloseMenu:nil];
+    }
 }
 
 - (IBAction)onTapMenu:(id)sender {

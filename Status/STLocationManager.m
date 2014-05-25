@@ -20,9 +20,7 @@ static const double kGPSTimestampSeconds = 15.0;
 @end
 
 @implementation STLocationManager
-
 static STLocationManager *_locationManager;
-
 + (STLocationManager*)sharedInstance
 {
     static dispatch_once_t onceToken;
@@ -73,11 +71,13 @@ static STLocationManager *_locationManager;
             return;
         }
     }
-   
-    
     _latestLocation = currentLocation;
     [self sendLocationToServer];
     [self restartLocationManager];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    NSLog(@"Location Manager Fails with error: %@", error.debugDescription);
 }
 
 -(void)sendLocationToServer{
@@ -108,6 +108,10 @@ static STLocationManager *_locationManager;
 
 - (void)stopLocationUpdates{
     [_locationManager stopUpdatingLocation];
+}
+
++(BOOL)locationUpdateEnabled{
+    return [CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized;
 }
 
 @end
