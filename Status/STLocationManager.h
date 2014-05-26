@@ -16,6 +16,7 @@ typedef void (^STNewLocationBlock)();
 @property (nonatomic, strong) CLLocation *latestLocation;
 -(void)restartLocationManager;
 -(void)startLocationUpdates;
+- (void)stopLocationUpdates;
 - (void)startLocationUpdatesWithCompletion:(STNewLocationBlock) completion;
 +(BOOL)locationUpdateEnabled;
 @end

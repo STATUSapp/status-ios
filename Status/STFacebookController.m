@@ -131,6 +131,9 @@
         [self.logoutDelegate performSelector:@selector(facebookControllerDidLoggedOut)];
     }
     [self deleteAccessToken];
+    [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
+    [[STLocationManager sharedInstance] stopLocationUpdates];
+    [[STLocationManager sharedInstance] setLatestLocation:nil];
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
 }
 
@@ -155,6 +158,7 @@
 -(void)deleteAccessToken {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
     [keychainWrapperAccessToken resetKeychainItem];
+    [STWebServiceController sharedInstance].accessToken = nil;
 }
 
 -(void) saveAccessToken:(NSString *) accessToken{
