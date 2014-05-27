@@ -65,6 +65,9 @@
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
 		17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
+		17EEE58719351BB700D02C1B /* STChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58619351BB700D02C1B /* STChatRoomViewController.m */; };
+		17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58919351C9100D02C1B /* STMessageSendCell.m */; };
+		17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */; };
 		1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */; };
 		1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */; };
 		1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */; };
@@ -183,6 +186,12 @@
 		17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomShareView.h; sourceTree = "<group>"; };
 		17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomShareView.m; sourceTree = "<group>"; };
 		17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
+		17EEE58519351BB700D02C1B /* STChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatRoomViewController.h; sourceTree = "<group>"; };
+		17EEE58619351BB700D02C1B /* STChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatRoomViewController.m; sourceTree = "<group>"; };
+		17EEE58819351C9100D02C1B /* STMessageSendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMessageSendCell.h; sourceTree = "<group>"; };
+		17EEE58919351C9100D02C1B /* STMessageSendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageSendCell.m; sourceTree = "<group>"; };
+		17EEE58B19351CAF00D02C1B /* STMessageReceivedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMessageReceivedCell.h; sourceTree = "<group>"; };
+		17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageReceivedCell.m; sourceTree = "<group>"; };
 		1DFBB385192E9C9F003B7A53 /* UIImageView+TouchesEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TouchesEffects.h"; sourceTree = "<group>"; };
 		1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TouchesEffects.m"; sourceTree = "<group>"; };
 		1DFBB389192EA003003B7A53 /* STTapAnimationLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTapAnimationLabel.h; sourceTree = "<group>"; };
@@ -281,6 +290,12 @@
 				172EAE7818B0B12E00C5637B /* Main.storyboard */,
 				178907B618B294BA00AC4355 /* LoginScene.storyboard */,
 				17ACEB611933C4E600CFC909 /* ChatScene.storyboard */,
+				17EEE58519351BB700D02C1B /* STChatRoomViewController.h */,
+				17EEE58619351BB700D02C1B /* STChatRoomViewController.m */,
+				17EEE58819351C9100D02C1B /* STMessageSendCell.h */,
+				17EEE58919351C9100D02C1B /* STMessageSendCell.m */,
+				17EEE58B19351CAF00D02C1B /* STMessageReceivedCell.h */,
+				17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */,
 				178907B818B295DD00AC4355 /* STLoginViewController.h */,
 				178907B918B295DD00AC4355 /* STLoginViewController.m */,
 				1DFCCAC7191236AA00B9230E /* STTutorialViewController.h */,
@@ -547,6 +562,7 @@
 				172EAF0618B0BB4800C5637B /* UIImageView+AFNetworking.m in Sources */,
 				076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */,
 				17B1B5B318BA225E0079661B /* STSharePhotoViewController.m in Sources */,
+				17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */,
 				1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */,
 				172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */,
 				1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */,
@@ -567,6 +583,7 @@
 				172EAEB418B0B46300C5637B /* AFURLConnectionOperation.m in Sources */,
 				172EAF0518B0BB4800C5637B /* UIButton+AFNetworking.m in Sources */,
 				172EAF0318B0BB4800C5637B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				17EEE58719351BB700D02C1B /* STChatRoomViewController.m in Sources */,
 				172EAEB318B0B46300C5637B /* AFSecurityPolicy.m in Sources */,
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
 				17AC07EE18B2A6800088E863 /* STImageCacheController.m in Sources */,
@@ -580,6 +597,7 @@
 				1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */,
 				172EAEB518B0B46300C5637B /* AFURLRequestSerialization.m in Sources */,
 				172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */,
+				17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */,
 				172EAF0218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				172EAEB718B0B46300C5637B /* AFURLSessionManager.m in Sources */,
 				070B31BD18C772EF00765189 /* STNotificationCell.m in Sources */,

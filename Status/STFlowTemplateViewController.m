@@ -26,6 +26,7 @@
 #import "UIImage+ImageEffects.h"
 #import "STTutorialViewController.h"
 #import "STLocationManager.h"
+#import "STChatRoomViewController.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
@@ -150,7 +151,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 -(void) presentLoginScene{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
     STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
     [self presentViewController:viewController animated:NO completion:nil];
 }
@@ -343,6 +344,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
 }
 
+- (IBAction)onChat:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    STChatRoomViewController *viewController = (STChatRoomViewController *) [storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    [self presentViewController:viewController animated:NO completion:nil];
+}
 #pragma mark - Actions
 - (IBAction)onTapRefreshFromFooter:(id)sender {
     self.refreshBt = (UIButton *) sender;
