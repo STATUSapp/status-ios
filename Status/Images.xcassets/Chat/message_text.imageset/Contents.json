@@ -6,17 +6,14 @@
     },
     {
       "resizing" : {
-        "mode" : "9-part",
+        "mode" : "3-part-vertical",
         "center" : {
           "mode" : "fill",
-          "width" : 1,
           "height" : 1
         },
         "capInsets" : {
-          "bottom" : 40,
           "top" : 40,
-          "right" : 127,
-          "left" : 23
+          "bottom" : 40
         }
       },
       "idiom" : "universal",

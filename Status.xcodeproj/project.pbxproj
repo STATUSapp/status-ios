@@ -56,6 +56,8 @@
 		172EAF1418B0D4B700C5637B /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAF1318B0D4B700C5637B /* STConstants.m */; };
 		172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 172F0D1C18CC8AEB00CD1493 /* STTopOption.m */; };
 		172F0D1F18CC8B0200CD1493 /* STTopOption.xib in Resources */ = {isa = PBXBuildFile; fileRef = 172F0D1E18CC8B0200CD1493 /* STTopOption.xib */; };
+		176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2411936645500F5C4DA /* HPGrowingTextView.m */; };
+		176CE2451936645500F5C4DA /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2431936645500F5C4DA /* HPTextViewInternal.m */; };
 		177458391928C41C005B994B /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 177458381928C41B005B994B /* STLocationManager.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		178907B718B294BA00AC4355 /* LoginScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178907B618B294BA00AC4355 /* LoginScene.storyboard */; };
@@ -174,6 +176,10 @@
 		172F0D1B18CC8AEB00CD1493 /* STTopOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTopOption.h; sourceTree = "<group>"; };
 		172F0D1C18CC8AEB00CD1493 /* STTopOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTopOption.m; sourceTree = "<group>"; };
 		172F0D1E18CC8B0200CD1493 /* STTopOption.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STTopOption.xib; sourceTree = "<group>"; };
+		176CE2401936645500F5C4DA /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
+		176CE2411936645500F5C4DA /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		176CE2421936645500F5C4DA /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		176CE2431936645500F5C4DA /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		177458371928C41B005B994B /* STLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocationManager.h; sourceTree = "<group>"; };
 		177458381928C41B005B994B /* STLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocationManager.m; sourceTree = "<group>"; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -432,6 +438,17 @@
 			path = Status/WebServicesController;
 			sourceTree = "<group>";
 		};
+		176CE23F1936645500F5C4DA /* ChatGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				176CE2401936645500F5C4DA /* HPGrowingTextView.h */,
+				176CE2411936645500F5C4DA /* HPGrowingTextView.m */,
+				176CE2421936645500F5C4DA /* HPTextViewInternal.h */,
+				176CE2431936645500F5C4DA /* HPTextViewInternal.m */,
+			);
+			path = ChatGrowingTextView;
+			sourceTree = "<group>";
+		};
 		17F6BB7A190ED8BD00B41E3A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +464,7 @@
 		1DFBB388192E9FCC003B7A53 /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
+				176CE23F1936645500F5C4DA /* ChatGrowingTextView */,
 				1DFBB389192EA003003B7A53 /* STTapAnimationLabel.h */,
 				1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */,
 			);
@@ -598,6 +616,8 @@
 				172EAF0818B0BB4800C5637B /* UIRefreshControl+AFNetworking.m in Sources */,
 				172EAF0918B0BB4800C5637B /* UIWebView+AFNetworking.m in Sources */,
 				172EAEB118B0B46300C5637B /* AFHTTPSessionManager.m in Sources */,
+				176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */,
+				176CE2451936645500F5C4DA /* HPTextViewInternal.m in Sources */,
 				172EAF0D18B0D25100C5637B /* STWebServiceController.m in Sources */,
 				172EAF0418B0BB4800C5637B /* UIAlertView+AFNetworking.m in Sources */,
 				1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */,
@@ -693,7 +713,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "226DCA74-7297-4722-BFEA-7D43F279CE60";
+				PROVISIONING_PROFILE = "91DFAC7A-C7B4-4D8B-A81A-97E9F24B5CD8";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -745,7 +765,7 @@
 				INFOPLIST_FILE = "Status/Status-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "87BF6B33-0149-4224-BC8A-BC8E8A4D402A";
+				PROVISIONING_PROFILE = "6A369F4F-9C23-47ED-91AD-CFE564338DD4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
