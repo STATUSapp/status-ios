@@ -39,4 +39,15 @@
     // Configure the view for the selected state
 }
 
+-(void)configureCellWithMessage:(NSString *) message{
+    
+    CGSize labelSize = [STBubbleCell sizeForText:message];
+    _messageWidthContraint.constant = labelSize.width;
+    _bubleWidthContraint.constant = labelSize.width + 30;
+    CGRect rect = _messageLbl.frame;
+    rect.size = labelSize;
+    _messageLbl.frame = rect;
+    _messageLbl.text = message;
+}
+
 @end

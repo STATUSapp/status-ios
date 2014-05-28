@@ -346,8 +346,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 - (IBAction)onChat:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STChatRoomViewController *viewController = (STChatRoomViewController *) [storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    [self presentViewController:viewController animated:NO completion:nil];
+    UINavigationController *navCtrl = [storyboard instantiateViewControllerWithIdentifier:@"messages_nav_ctrl"];
+    STChatRoomViewController *viewController = (STChatRoomViewController *)[navCtrl.viewControllers firstObject];
+    //use this viewController to send data to it bu present the navigationCtrl
+    //[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    [self presentViewController:navCtrl animated:NO completion:nil];
 }
 #pragma mark - Actions
 - (IBAction)onTapRefreshFromFooter:(id)sender {

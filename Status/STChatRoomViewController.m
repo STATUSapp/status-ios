@@ -60,31 +60,32 @@
     NSString *identifier = [self getIdentifierForIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
+    NSString *message = [self getStringForIndexPath:indexPath];
     if (indexPath.row%2==0) {
-        NSString *message = [self getStringForIndexPath:indexPath];
         [(STMessageReceivedCell *)cell configureCellWithMessage:message];
     }
     else
     {
-        
+        [(STMessageSendCell *)cell configureCellWithMessage:message];
     }
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *message = [self getStringForIndexPath:indexPath];
     if (indexPath.row%2 ==0 ) {
-        NSString *message = [self getStringForIndexPath:indexPath];
         return [STMessageReceivedCell cellHeightForText:message];
     }
+    else
+        return [STMessageSendCell cellHeightForText:message];
     
     return 50.f;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 16;
+    return 30;
 }
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STBubbleCell.h"
 
-@interface STMessageReceivedCell : UITableViewCell
+@interface STMessageReceivedCell : STBubbleCell
 
-+(float)cellHeightForText:(NSString *)message;
 -(void)configureCellWithMessage:(NSString *) message;
 @end

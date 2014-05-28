@@ -41,35 +41,15 @@
     // Configure the view for the selected state
 }
 
-+ (CGSize)sizeForText:(NSString *)message {
-    CGRect labelRect = [message
-                        boundingRectWithSize:CGSizeMake(185.f, MAXFLOAT)
-                        options:NSStringDrawingUsesLineFragmentOrigin
-                        attributes:@{
-                                     NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:16.f]
-                                     }
-                        context:nil];
-    return labelRect.size;
-}
-
 -(void)configureCellWithMessage:(NSString *) message{
     
-    CGSize labelSize = [STMessageReceivedCell sizeForText:message];
+    CGSize labelSize = [STBubbleCell sizeForText:message];
     _messageWidthConstraint.constant = labelSize.width;
     _bubleWidthConstraint.constant = labelSize.width + 27;
     CGRect rect = _messageLbl.frame;
     rect.size = labelSize;
     _messageLbl.frame = rect;
     _messageLbl.text = message;
-    NSLog(@"Message: %@", message);
-    NSLog(@"Message Frame = %@", NSStringFromCGRect(_messageLbl.frame));
-}
-
-+(float)cellHeightForText:(NSString *)message{
-    CGSize size = [STMessageReceivedCell sizeForText:message];
-    NSLog(@"Message: %@", message);
-    NSLog(@"Message Size = %@", NSStringFromCGSize(size));
-    return size.height + 29.f;
 }
 
 @end

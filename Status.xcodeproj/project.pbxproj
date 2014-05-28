@@ -13,6 +13,7 @@
 		070F9F3618E2D8A7008556AB /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 070F9F3518E2D8A7008556AB /* KeychainItemWrapper.m */; };
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
 		0715651218FD890400F7B3BB /* STFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0715651118FD890400F7B3BB /* STFooterView.m */; };
+		0722C49D1935B6BD000B18F8 /* STBubbleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722C49C1935B6BD000B18F8 /* STBubbleCell.m */; };
 		0765FC4718D0850D0044762E /* STZoomablePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765FC4618D0850D0044762E /* STZoomablePostViewController.m */; };
 		076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */; };
 		07903A6C192A1EBB002136F8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07903A6B192A1EBB002136F8 /* FacebookSDK.framework */; };
@@ -98,6 +99,8 @@
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0715651018FD890400F7B3BB /* STFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFooterView.h; sourceTree = "<group>"; };
 		0715651118FD890400F7B3BB /* STFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFooterView.m; sourceTree = "<group>"; };
+		0722C49B1935B6BD000B18F8 /* STBubbleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBubbleCell.h; sourceTree = "<group>"; };
+		0722C49C1935B6BD000B18F8 /* STBubbleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBubbleCell.m; sourceTree = "<group>"; };
 		0765FC4518D0850D0044762E /* STZoomablePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STZoomablePostViewController.h; sourceTree = "<group>"; };
 		0765FC4618D0850D0044762E /* STZoomablePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STZoomablePostViewController.m; sourceTree = "<group>"; };
 		076CF4EF1910F2F200C4096C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -296,6 +299,8 @@
 				17EEE58919351C9100D02C1B /* STMessageSendCell.m */,
 				17EEE58B19351CAF00D02C1B /* STMessageReceivedCell.h */,
 				17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */,
+				0722C49B1935B6BD000B18F8 /* STBubbleCell.h */,
+				0722C49C1935B6BD000B18F8 /* STBubbleCell.m */,
 				178907B818B295DD00AC4355 /* STLoginViewController.h */,
 				178907B918B295DD00AC4355 /* STLoginViewController.m */,
 				1DFCCAC7191236AA00B9230E /* STTutorialViewController.h */,
@@ -566,6 +571,7 @@
 				1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */,
 				172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */,
 				1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */,
+				0722C49D1935B6BD000B18F8 /* STBubbleCell.m in Sources */,
 				172EAEB018B0B46300C5637B /* AFHTTPRequestOperationManager.m in Sources */,
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
 				172EAF1418B0D4B700C5637B /* STConstants.m in Sources */,

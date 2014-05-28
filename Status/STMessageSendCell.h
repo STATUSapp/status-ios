@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STBubbleCell.h"
 
-@interface STMessageSendCell : UITableViewCell
-
+@interface STMessageSendCell : STBubbleCell
+-(void)configureCellWithMessage:(NSString *) message;
 @end
