@@ -42,7 +42,7 @@
 -(void)configureCellWithMessage:(NSString *) message{
     
     CGSize labelSize = [STBubbleCell sizeForText:message];
-    _messageWidthContraint.constant = labelSize.width;
+    _messageWidthContraint.constant = labelSize.width + 1;
     _bubleWidthContraint.constant = labelSize.width + 30;
     CGRect rect = _messageLbl.frame;
     rect.size = labelSize;

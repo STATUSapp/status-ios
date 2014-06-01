@@ -11,5 +11,5 @@
 
 @interface STMessageReceivedCell : STBubbleCell
 
--(void)configureCellWithMessage:(NSString *) message;
+-(void)configureCellWithMessage:(NSString *) message andUserImage:(UIImage *)img;
 @end

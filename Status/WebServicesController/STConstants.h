@@ -32,6 +32,12 @@ typedef NS_ENUM(NSUInteger,STNotificationType){
     STNotificationTypeUploaded
 };
 
+typedef NS_ENUM(NSUInteger,STWebSockerStatus){
+    STWebSockerStatusClosed =0,
+    STWebSockerStatusConnecting,
+    STWebSockerStatusConnected
+};
+
 
 #pragma mark - Constant Strings
 

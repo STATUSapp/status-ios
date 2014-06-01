@@ -7,6 +7,7 @@
 //
 
 #import "STMessageReceivedCell.h"
+#import "UIImageView+Mask.h"
 
 @interface STMessageReceivedCell()
 
@@ -41,15 +42,16 @@
     // Configure the view for the selected state
 }
 
--(void)configureCellWithMessage:(NSString *) message{
+-(void)configureCellWithMessage:(NSString *) message andUserImage:(UIImage *)img{
     
     CGSize labelSize = [STBubbleCell sizeForText:message];
-    _messageWidthConstraint.constant = labelSize.width;
+    _messageWidthConstraint.constant = labelSize.width +1;
     _bubleWidthConstraint.constant = labelSize.width + 27;
     CGRect rect = _messageLbl.frame;
     rect.size = labelSize;
     _messageLbl.frame = rect;
     _messageLbl.text = message;
+    [_userPicture maskImage:img];
 }
 
 @end

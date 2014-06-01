@@ -151,7 +151,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 -(void) presentLoginScene{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
     STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
     [self presentViewController:viewController animated:NO completion:nil];
 }
@@ -346,11 +346,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 - (IBAction)onChat:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    UINavigationController *navCtrl = [storyboard instantiateViewControllerWithIdentifier:@"messages_nav_ctrl"];
-    STChatRoomViewController *viewController = (STChatRoomViewController *)[navCtrl.viewControllers firstObject];
-    //use this viewController to send data to it bu present the navigationCtrl
-    //[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    [self presentViewController:navCtrl animated:NO completion:nil];
+    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    viewController.userInfo = [self getCurrentDictionary];
+    [self.navigationController pushViewController:viewController animated:YES];
+    [self onCloseMenu:nil];
 }
 #pragma mark - Actions
 - (IBAction)onTapRefreshFromFooter:(id)sender {
@@ -389,6 +388,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (flowType==STFlowTypeUserProfile) {
         NSDictionary *dict = [self getCurrentDictionary];
         flowCtrl.userID = dict[@"user_id"];
+        flowCtrl.userName = dict[@"user_name"];
     }
     
     [self.navigationController pushViewController:flowCtrl animated:YES];

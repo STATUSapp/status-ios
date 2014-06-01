@@ -10,10 +10,17 @@
 #import "STMessageReceivedCell.h"
 #import "STMessageSendCell.h"
 #import "HPGrowingTextView.h"
+#import "UIImageView+Mask.h"
+#import "STImageCacheController.h"
+#import "STChatController.h"
+#import "STFlowTemplateViewController.h"
+#import "STFacebookController.h"
 
-@interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate>
+@interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate>
 {
     NSMutableArray *_messages;
+    UIImage *userImage;
+    STChatController *chatController;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -21,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *userImg;
+@property (weak, nonatomic) IBOutlet UIButton *userNameLbl;
 
 
 @end
@@ -31,7 +40,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+
     }
     return self;
 }
@@ -50,8 +59,20 @@
                                                object:nil];
     _messages = [NSMutableArray new];
     [self generateStringsWithNumber:@(20)];
-    [_tableView reloadData];
-    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];    [self initiateCustomControls];
+    //[_tableView reloadData];
+    [self initiateCustomControls];
+    [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateNormal];
+    [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateHighlighted];
+    
+    [[STImageCacheController sharedInstance] loadImageWithName:_userInfo[@"small_photo_link"] andCompletion:^(UIImage *img) {
+        userImage = img;
+        [_tableView reloadData];
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [_userImg maskImage:userImage];
+    }];
+    chatController = [STChatController sharedInstance];
+    chatController.delegate = self;
+    [chatController reconnect];
 }
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -70,12 +91,8 @@
     
 }
 
--(void)resignTextView
-{
-	[_textView resignFirstResponder];
-}
+#pragma mark - Keyboard Notifications
 
-//Code from Brett Schumann
 -(void) keyboardWillShow:(NSNotification *)note{
     // get keyboard size and loctaion
 	CGRect keyboardBounds;
@@ -92,13 +109,24 @@
 	// animations settings
     
     [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(animationShowStopped)];
     [UIView setAnimationDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
     [UIView setAnimationCurve:[note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
     [UIView setAnimationBeginsFromCurrentState:YES];
     _containerView.frame = containerFrame;
     [UIView commitAnimations];
-    _bottomTextViewConstraint.constant = keyboardBounds.size.height;
+
+}
+
+-(void) animationShowStopped{
     
+    [UIView animateWithDuration:0.1 animations:^{
+        [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+
+    }];
+    
+    _bottomTextViewConstraint.constant = 216.f; //keyboardBounds.size.height;
 
 }
 
@@ -108,14 +136,18 @@
     containerFrame.origin.y = self.view.bounds.size.height - containerFrame.size.height;     
     
     [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDelegate:self];
+//    [UIView setAnimationDidStopSelector:@selector(animationHideStopped)];
     [UIView setAnimationDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
     [UIView setAnimationCurve:[note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
     [UIView setAnimationBeginsFromCurrentState:YES];
     _containerView.frame = containerFrame;
-    [self.view layoutIfNeeded];
-    [UIView commitAnimations];
     _bottomTextViewConstraint.constant = 0;
+    [UIView commitAnimations];
+    
 }
+
+#pragma mark - Growing Text Delegate
 
 - (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height
 {
@@ -124,7 +156,7 @@
     r.size.height -= diff;
     r.origin.y += diff;
     [UIView animateWithDuration:0.25 animations:^{
-        _heightConstraint.constant = height;
+        _heightConstraint.constant = height + 7;
         //_bottomTextViewConstraint.constant =
         //_containerView.frame = r;
     }];
@@ -145,19 +177,53 @@
 -(BOOL)growingTextViewShouldReturn:(HPGrowingTextView *)growingTextView{
     return [_textView resignFirstResponder];
 }
+
+-(void)resignTextView
+{
+	[_textView resignFirstResponder];
+}
+
+#pragma mark - IBActions
+
 - (IBAction)onSendButtonPressed:(id)sender {
     [_messages addObject:_textView.text];
+    [chatController sendMessage:_textView.text];
     [_textView setText:@""];
     [_textView resignFirstResponder];
     
     [_tableView reloadData];
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
+- (IBAction)onClickBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)onClickUserName:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+    flowCtrl.flowType = STFlowTypeUserProfile;
+    flowCtrl.userID = _userInfo[@"user_id"];
+    flowCtrl.userName = _userInfo[@"user_name"];
+    if ([flowCtrl.userID isEqualToString:[STFacebookController sharedInstance].currentUserId ]) {
+        flowCtrl.flowType = STFlowTypeMyProfile;
+    }
+    [self.navigationController pushViewController:flowCtrl animated:YES];
+}
+- (IBAction)onClickDelete:(id)sender {
+    [chatController close];
+    //chatController.delegate = nil;
+}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - STChatControllerDelegate
+
+-(void)chatDidClose{
+    NSLog(@"Chat did close");
+}
+-(void)chatDidReceivedMesasage:(NSString *)message{
+    [_messages addObject:message];
+    [_tableView reloadData];
+    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 #pragma mark - UITableViewDelegate
@@ -184,7 +250,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     NSString *message = [_messages objectAtIndex:indexPath.row];
     if (indexPath.row%2==0) {
-        [(STMessageReceivedCell *)cell configureCellWithMessage:message];
+        [(STMessageReceivedCell *)cell configureCellWithMessage:message andUserImage:userImage];
     }
     else
     {
@@ -210,6 +276,11 @@
     return _messages.count;
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
