@@ -38,6 +38,8 @@ typedef NS_ENUM(NSUInteger,STNotificationType){
 extern NSString *const kBaseURL;
 extern NSString *const kBasePhotoDownload;
 
+extern NSString *const kSTAdUnitID;
+
 extern NSString *const kGetPosts;
 extern NSString *const kLoginUser;
 extern NSString *const kRegisterUser;

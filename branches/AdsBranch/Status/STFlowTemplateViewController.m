@@ -27,6 +27,8 @@
 #import "STTutorialViewController.h"
 #import "STLocationManager.h"
 
+#import "GADInterstitial.h"
+
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
 int const kNoPostsAlertTag = 13;
@@ -35,8 +37,10 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate, GADInterstitialDelegate>
 {
+    GADInterstitial * _interstitial;
+    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
     NSLayoutConstraint *_topOptionConstraint;
@@ -91,6 +95,15 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                                              selector:@selector(updateNotificationsNumber)
                                                  name:STNotificationBadgeValueDidChanged
                                                object:nil];
+    
+    // setup interstitial ad
+    _interstitial = [[GADInterstitial alloc] init];
+    
+    GADRequest * request = [GADRequest request];
+    request.testDevices = @[GAD_SIMULATOR_ID];
+    [_interstitial loadRequest:[GADRequest request]];
+    _interstitial.adUnitID = kSTAdUnitID;
+    _interstitial.delegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -123,6 +136,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _interstitial.delegate = nil;
 }
 
 -(void) addTopOption{
@@ -205,6 +219,30 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (void)updateNotificationsNumber{
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:app.badgeNumber];
+}
+
+#pragma mark - AdMob delegate methods
+
+- (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSLog(@"error %@", error.localizedDescription);
+}
+
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+    [_interstitial presentFromRootViewController:self];
+}
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+//    _interstitial.delegate = nil;
+//    _interstitial = nil;
+//    
+//    _interstitial = [[GADInterstitial alloc] init];
+//    _interstitial.adUnitID = kSTAdUnitID;
+//    
+//    GADRequest * request = [GADRequest request];
+//    request.testDevices = @[GAD_SIMULATOR_ID];
+//    
+//    [_interstitial loadRequest:[GADRequest request]];
+//    _interstitial.delegate = self;
 }
 
 #pragma mark - FacebookController Delegate
