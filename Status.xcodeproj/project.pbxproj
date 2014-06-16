@@ -75,6 +75,8 @@
 		17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58919351C9100D02C1B /* STMessageSendCell.m */; };
 		17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
+		1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */; };
+		1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C1212193B777D003DB198 /* STConversationCell.m */; };
 		1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */; };
 		1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */; };
 		1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */; };
@@ -212,6 +214,10 @@
 		17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageReceivedCell.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
+		1D5C120E193B74C5003DB198 /* STConversationsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationsListViewController.h; sourceTree = "<group>"; };
+		1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationsListViewController.m; sourceTree = "<group>"; };
+		1D5C1211193B777D003DB198 /* STConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationCell.h; sourceTree = "<group>"; };
+		1D5C1212193B777D003DB198 /* STConversationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationCell.m; sourceTree = "<group>"; };
 		1DFBB385192E9C9F003B7A53 /* UIImageView+TouchesEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TouchesEffects.h"; sourceTree = "<group>"; };
 		1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TouchesEffects.m"; sourceTree = "<group>"; };
 		1DFBB389192EA003003B7A53 /* STTapAnimationLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTapAnimationLabel.h; sourceTree = "<group>"; };
@@ -315,6 +321,10 @@
 				17ACEB611933C4E600CFC909 /* ChatScene.storyboard */,
 				17EEE58519351BB700D02C1B /* STChatRoomViewController.h */,
 				17EEE58619351BB700D02C1B /* STChatRoomViewController.m */,
+				1D5C120E193B74C5003DB198 /* STConversationsListViewController.h */,
+				1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */,
+				1D5C1211193B777D003DB198 /* STConversationCell.h */,
+				1D5C1212193B777D003DB198 /* STConversationCell.m */,
 				17EEE58819351C9100D02C1B /* STMessageSendCell.h */,
 				17EEE58919351C9100D02C1B /* STMessageSendCell.m */,
 				17EEE58B19351CAF00D02C1B /* STMessageReceivedCell.h */,
@@ -625,8 +635,10 @@
 				0765FC4718D0850D0044762E /* STZoomablePostViewController.m in Sources */,
 				172EAF0718B0BB4800C5637B /* UIProgressView+AFNetworking.m in Sources */,
 				172EAEB218B0B46300C5637B /* AFNetworkReachabilityManager.m in Sources */,
+				1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */,
 				178907BA18B295DD00AC4355 /* STLoginViewController.m in Sources */,
 				17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */,
+				1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */,
 				070F9F3618E2D8A7008556AB /* KeychainItemWrapper.m in Sources */,
 				0715651218FD890400F7B3BB /* STFooterView.m in Sources */,
 				177458391928C41C005B994B /* STLocationManager.m in Sources */,

@@ -27,6 +27,7 @@
 #import "STTutorialViewController.h"
 #import "STLocationManager.h"
 #import "STChatRoomViewController.h"
+#import "STConversationsListViewController.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
@@ -512,12 +513,19 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (IBAction)onTapMenu:(id)sender {
-    _menuView.alpha = 0.f;
-    _menuImageView.image = [self blurCurrentScreen];
-    [self.view addSubview:_menuView];
-    [UIView animateWithDuration:0.33 animations:^{
-        _menuView.alpha = 1.f;
-    }];
+    
+    STConversationsListViewController * vc = [[UIStoryboard storyboardWithName:@"ChatScene" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([STConversationsListViewController class])];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+//    _menuView.alpha = 0.f;
+//    _menuImageView.image = [self blurCurrentScreen];
+//    [self.view addSubview:_menuView];
+//    [UIView animateWithDuration:0.33 animations:^{
+//        _menuView.alpha = 1.f;
+//    }];
 }
 
 - (IBAction)onTapCameraUpload:(id)sender {
