@@ -28,6 +28,8 @@
 #import "STLocationManager.h"
 
 #import "GADInterstitial.h"
+#import "STRemoveAdsViewController.h"
+#import "STInviteFriendsViewController.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
@@ -47,6 +49,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSDictionary *_lastNotif;
     UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
+    BOOL _isInterstitialLoaded;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -97,13 +100,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                                                object:nil];
     
     // setup interstitial ad
-    _interstitial = [[GADInterstitial alloc] init];
-    
-    GADRequest * request = [GADRequest request];
-    request.testDevices = @[GAD_SIMULATOR_ID];
-    [_interstitial loadRequest:[GADRequest request]];
-    _interstitial.adUnitID = kSTAdUnitID;
-    _interstitial.delegate = self;
+
+    [self setupInterstitial];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -223,26 +221,55 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - AdMob delegate methods
 
+- (void)setupInterstitial {
+    _interstitial.delegate = nil;
+    _interstitial = nil;
+    
+    _interstitial = [[GADInterstitial alloc] init];
+    _interstitial.adUnitID = kSTAdUnitID;
+    
+    GADRequest * request = [GADRequest request];
+    request.testDevices = @[GAD_SIMULATOR_ID];
+    
+    [_interstitial loadRequest:[GADRequest request]];
+    _interstitial.delegate = self;
+    _isInterstitialLoaded = NO;
+}
+
 - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error {
+    _isInterstitialLoaded = NO;
     NSLog(@"error %@", error.localizedDescription);
 }
 
 - (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
-    [_interstitial presentFromRootViewController:self];
+    _isInterstitialLoaded = YES;
 }
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-//    _interstitial.delegate = nil;
-//    _interstitial = nil;
-//    
-//    _interstitial = [[GADInterstitial alloc] init];
-//    _interstitial.adUnitID = kSTAdUnitID;
-//    
-//    GADRequest * request = [GADRequest request];
-//    request.testDevices = @[GAD_SIMULATOR_ID];
-//    
-//    [_interstitial loadRequest:[GADRequest request]];
-//    _interstitial.delegate = self;
+    [self setupInterstitial];
+}
+
+#pragma mark - Interstitial Controllers method
+
+- (void)presentInterstitialControllerForIndexPath:(NSIndexPath *)indexPath {
+    NSInteger index = indexPath.row;
+    
+    if (index %10 == 3) {
+        STInviteFriendsViewController * inviteFriendsVC = [STInviteFriendsViewController newInstance];
+        inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:inviteFriendsVC animated:YES completion:nil];
+    }
+    
+    if (index %10 == 5) {
+        STRemoveAdsViewController * removeAdsVC = [STRemoveAdsViewController newInstance];
+        removeAdsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:removeAdsVC animated:YES completion:nil];
+    }
+    
+    if (index %10 == 7 && _isInterstitialLoaded) {
+        [_interstitial presentFromRootViewController:self];
+    }
+    
 }
 
 #pragma mark - FacebookController Delegate
@@ -803,6 +830,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self presentInterstitialControllerForIndexPath:indexPath];
+    
 #if PAGGING_ENABLED
     if (self.flowType == STFlowTypeAllPosts) {
         NSDictionary *dict = [self.postsDataSource objectAtIndex:indexPath.row];
