@@ -102,7 +102,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     // setup interstitial ad
 
-    [self setupInterstitial];
+    [self setupInterstitialAds];
     _numberOfSeenPosts = 0;
 }
 
@@ -223,7 +223,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - AdMob delegate methods
 
-- (void)setupInterstitial {
+- (void)setupInterstitialAds {
     _interstitial.delegate = nil;
     _interstitial = nil;
     
@@ -231,7 +231,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     _interstitial.adUnitID = kSTAdUnitID;
     
     GADRequest * request = [GADRequest request];
-    request.testDevices = @[GAD_SIMULATOR_ID];
+//    request.testDevices = @[GAD_SIMULATOR_ID];
     
     [_interstitial loadRequest:[GADRequest request]];
     _interstitial.delegate = self;
@@ -248,7 +248,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    [self setupInterstitial];
+    [self setupInterstitialAds];
 }
 
 #pragma mark - Interstitial Controllers method
