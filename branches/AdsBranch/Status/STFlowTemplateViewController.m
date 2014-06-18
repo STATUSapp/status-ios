@@ -50,6 +50,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
     BOOL _isInterstitialLoaded;
+    NSInteger _numberOfSeenPosts;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -102,6 +103,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     // setup interstitial ad
 
     [self setupInterstitial];
+    _numberOfSeenPosts = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -251,25 +253,58 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - Interstitial Controllers method
 
-- (void)presentInterstitialControllerForIndexPath:(NSIndexPath *)indexPath {
-    NSInteger index = indexPath.row;
+- (void)presentInterstitialControllerForIndex:(NSInteger)index {
     
-    if (index %10 == 3) {
-        STInviteFriendsViewController * inviteFriendsVC = [STInviteFriendsViewController newInstance];
-        inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:inviteFriendsVC animated:YES completion:nil];
+    if (index == 0 || index %10 != 0) {
+        return;
     }
     
-    if (index %10 == 5) {
-        STRemoveAdsViewController * removeAdsVC = [STRemoveAdsViewController newInstance];
-        removeAdsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:removeAdsVC animated:YES completion:nil];
+    // TODO: calculate the booleans below properly
+    
+    BOOL shouldPresentInviter = YES;
+    BOOL shouldPresentAds = YES;
+    
+    
+    NSMutableArray * allowedIntestitials = [NSMutableArray array];
+    
+    if (shouldPresentAds) {
+        [allowedIntestitials addObjectsFromArray:@[@(STInterstitialTypeAds), @(STInterstitialTypeRemoveAds)]];
     }
     
-    if (index %10 == 7 && _isInterstitialLoaded) {
-        [_interstitial presentFromRootViewController:self];
+    if (shouldPresentInviter) {
+        [allowedIntestitials addObject:@(STInterstitialTypeInviter)];
     }
     
+    index = index / 10 - 1;
+    
+    STInterstitialType interstitialToPresent = [[allowedIntestitials objectAtIndex: (index % [allowedIntestitials count] )] integerValue];
+    
+    [self presentIntrestialControllerWithType:interstitialToPresent];
+}
+
+- (void) presentIntrestialControllerWithType:(STInterstitialType)interstitialType {
+    
+    switch (interstitialType) {
+        case STInterstitialTypeAds: {
+            [_interstitial presentFromRootViewController:self];
+            break;
+        }
+        case STInterstitialTypeRemoveAds: {
+            STRemoveAdsViewController * removeAdsVC = [STRemoveAdsViewController newInstance];
+            removeAdsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:removeAdsVC animated:YES completion:nil];
+            break;
+        }
+        case STInterstitialTypeInviter: {
+            STInviteFriendsViewController * inviteFriendsVC = [STInviteFriendsViewController newInstance];
+            inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:inviteFriendsVC animated:YES completion:nil];
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - FacebookController Delegate
@@ -830,8 +865,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+   
+    _numberOfSeenPosts++;
     
-    [self presentInterstitialControllerForIndexPath:indexPath];
+    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
     
 #if PAGGING_ENABLED
     if (self.flowType == STFlowTypeAllPosts) {
