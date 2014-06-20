@@ -244,8 +244,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172EAEB918B0BAE000C5637B /* SystemConfiguration.framework in Frameworks */,
 				1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */,
+				172EAEB918B0BAE000C5637B /* SystemConfiguration.framework in Frameworks */,
 				1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */,
 				172EAE6918B0B12E00C5637B /* CoreGraphics.framework in Frameworks */,
 				1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */,
@@ -611,6 +611,9 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
 							};
 						};
 					};

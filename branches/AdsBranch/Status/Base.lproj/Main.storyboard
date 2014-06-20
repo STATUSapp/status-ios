@@ -1028,6 +1028,9 @@
                             <constraint firstItem="r4i-Cd-2ZV" firstAttribute="centerX" secondItem="pL0-e7-yGI" secondAttribute="centerX" constant="0.5" id="wgo-qN-4y9"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="removeAdsBtn" destination="Rpl-dR-Bqy" id="lnR-hY-Cqh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uqb-KS-opa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
