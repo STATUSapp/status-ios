@@ -632,11 +632,56 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 //    
 //    [self.navigationController pushViewController:vc animated:YES];
 //    
-//    
-    
+//
     _menuView.alpha = 0.f;
     _menuImageView.image = [self blurCurrentScreen];
+    _menuView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    /*
+    [_menuView addConstraint:[NSLayoutConstraint constraintWithItem:_menuView
+                                                          attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f]];
+    [_menuView addConstraint:[NSLayoutConstraint constraintWithItem:_menuView
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0f constant:0.f]];
+    [_menuView addConstraint:[NSLayoutConstraint constraintWithItem:_menuView
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1.0f constant:0.f]];
+    [_menuView addConstraint:[NSLayoutConstraint constraintWithItem:_menuView
+                                                          attribute:NSLayoutAttributeLeading
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.f]];
+*/
+    
     [self.view addSubview:_menuView];
+    
+    UIView *buttonsView = [_menuView viewWithTag:107];
+    
+    NSLayoutConstraint* cn = [NSLayoutConstraint constraintWithItem:buttonsView
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:_menuView
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.0
+                                                           constant:0];
+    [_menuView addConstraint:cn];
+    NSLayoutConstraint* cn1 = [NSLayoutConstraint constraintWithItem:buttonsView
+                                      attribute:NSLayoutAttributeCenterY
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:_menuView
+                                      attribute:NSLayoutAttributeCenterY
+                                     multiplier:1.0
+                                       constant:0];
+    [_menuView addConstraint:cn1];
     [UIView animateWithDuration:0.33 animations:^{
         _menuView.alpha = 1.f;
     }];

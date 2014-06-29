@@ -7,12 +7,14 @@
 //
 
 #import "STInviteFriendsViewController.h"
-#import "JBWhatsAppActivity.h"
+#import "STWhatsAppActivity.h"
 #import "STConstants.h"
-
+#import "STFacebookActivity.h"
 
 @interface STInviteFriendsViewController ()
-
+{
+    UIActivityViewController *activityViewController;
+}
 @end
 
 @implementation STInviteFriendsViewController
@@ -33,22 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - IBActions
-
-- (IBAction)onInviteYourFriends:(id)sender {
     NSString *inviteText = STInviteText;
     NSString *inviteLink = STInviteLink;
     
-    NSArray *applicationActivities = @[[[JBWhatsAppActivity alloc] init]];
+    NSArray *applicationActivities = @[[STWhatsAppActivity new],[STFacebookActivity new]];
     NSArray *excludedActivities    = @[UIActivityTypePostToWeibo,
                                        UIActivityTypePrint,
                                        UIActivityTypeCopyToPasteboard,
@@ -62,9 +52,23 @@
     NSArray *activityItems         = @[inviteText, inviteLink];
     
     
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
+    activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
     activityViewController.excludedActivityTypes = excludedActivities;
-    
+    UIActivityViewControllerCompletionHandler completion = ^(NSString *activityType, BOOL completed){
+        //TODO: add tracker
+    };
+    [activityViewController setCompletionHandler:completion];}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - IBActions
+
+- (IBAction)onInviteYourFriends:(id)sender {
+
     [self presentViewController:activityViewController animated:YES completion:^{
         
     }];

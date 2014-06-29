@@ -400,98 +400,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70M-6p-RIw">
-                            <rect key="frame" x="34" y="191" width="203" height="55"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                            <state key="normal" title="Nearby">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onClickNearby:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hfk-Rj-nRJ"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSh-0x-giN">
-                            <rect key="frame" x="34" y="110" width="208" height="55"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                            <state key="normal" title="Home">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onClickHome:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SDJ-Uz-O6Q"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmr-vJ-ZfI">
-                            <rect key="frame" x="34" y="343" width="203" height="55"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                            <state key="normal" title="How it works">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onClickHowItWorks:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MCp-4c-Dbh"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="af1-Lq-vQl">
-                            <rect key="frame" x="34" y="272" width="203" height="55"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                            <state key="normal" title="Friends">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <segue destination="OZV-os-N5E" kind="modal" id="EqM-eu-0lo"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6W-fy-nTi">
-                            <rect key="frame" x="34" y="424" width="203" height="55"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                            <state key="normal" title="Me">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onTapMyProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hHt-S3-FYv"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5K-xt-HRj">
-                            <rect key="frame" x="24" y="8" width="40" height="40"/>
+                            <rect key="frame" x="24" y="15" width="40" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="x menu STAUS">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -500,6 +410,108 @@
                                 <action selector="onCloseMenu:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZWy-Vo-fYO"/>
                             </connections>
                         </button>
+                        <view tag="107" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tcb-uj-c9Y">
+                            <rect key="frame" x="0.0" y="110" width="320" height="369"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eU-By-Ymg">
+                                    <rect key="frame" x="34" y="314" width="203" height="55"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                                    <state key="normal" title="Me">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onTapMyProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gTl-cR-t50"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ1-Vx-dAP">
+                                    <rect key="frame" x="34" y="0.0" width="208" height="55"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                                    <state key="normal" title="Home">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onClickHome:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="b9A-Ru-zcp"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayI-W4-ZZ8">
+                                    <rect key="frame" x="34" y="81" width="203" height="55"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                                    <state key="normal" title="Nearby">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onClickNearby:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Vco-O8-bJz"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UG-bu-798">
+                                    <rect key="frame" x="34" y="162" width="203" height="55"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                                    <state key="normal" title="Friends">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="OZV-os-N5E" kind="modal" id="gEh-Sj-BQD"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Eh-Nk-tGn">
+                                    <rect key="frame" x="34" y="233" width="203" height="55"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                                    <state key="normal" title="How it works">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onClickHowItWorks:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Y9V-5L-SCt"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="9Eh-Nk-tGn" firstAttribute="leading" secondItem="RQ1-Vx-dAP" secondAttribute="leading" id="IdH-CD-z2p"/>
+                                <constraint firstItem="9Eh-Nk-tGn" firstAttribute="leading" secondItem="ayI-W4-ZZ8" secondAttribute="leading" id="bfF-VU-LXk"/>
+                                <constraint firstItem="9Eh-Nk-tGn" firstAttribute="leading" secondItem="5UG-bu-798" secondAttribute="leading" id="zzW-gQ-W86"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                 </view>
@@ -1165,6 +1177,7 @@
         <!--Invite Friends View Controller-->
         <scene sceneID="KPm-oB-afc">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nzH-XJ-K9e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="STInviteFriendsViewController" id="OZV-os-N5E" customClass="STInviteFriendsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2i2-9t-Q49"/>
@@ -1196,23 +1209,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Zu-E5-nN6">
-                                <rect key="frame" x="76" y="231" width="169" height="169"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="169" id="T74-gg-pbk"/>
-                                    <constraint firstAttribute="width" constant="169" id="fZy-4Z-9AE"/>
-                                </constraints>
-                                <state key="normal" image="invite friends icon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="invite friends icon pressed"/>
-                                <connections>
-                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="eHG-Ps-6vs"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXA-Mz-F6B">
-                                <rect key="frame" x="59" y="462" width="202" height="40"/>
+                                <rect key="frame" x="59" y="497" width="202" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="invite your friends button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1222,25 +1220,79 @@
                                     <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="w2r-KJ-oEZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPY-y5-31R">
+                                <rect key="frame" x="57" y="449" width="202" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="invite your friends button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="invite your friends button"/>
+                                <connections>
+                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="sf3-z5-Q8G"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVw-Ox-YTC">
+                                <rect key="frame" x="57" y="401" width="202" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="invite your friends button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="invite your friends button"/>
+                                <connections>
+                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="gAi-TN-ECE"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wM-Ex-g3W">
+                                <rect key="frame" x="0.0" y="157" width="320" height="236"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXM-E5-SdM">
+                                        <rect key="frame" x="75" y="34" width="169" height="169"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="169" id="aae-cD-1yQ"/>
+                                            <constraint firstAttribute="height" constant="169" id="teQ-Gg-Tad"/>
+                                        </constraints>
+                                        <state key="normal" image="invite friends icon">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="invite friends icon pressed"/>
+                                        <connections>
+                                            <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="3sX-gC-7An"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="EXM-E5-SdM" secondAttribute="centerY" id="HxT-h1-z0T"/>
+                                    <constraint firstAttribute="centerX" secondItem="EXM-E5-SdM" secondAttribute="centerX" id="KWo-qR-Vyv"/>
+                                    <constraint firstAttribute="width" constant="320" id="WSS-SZ-5ob"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="8wM-Ex-g3W" firstAttribute="top" secondItem="eOO-th-bI0" secondAttribute="bottom" constant="2" id="2Sa-j7-R8a"/>
                             <constraint firstItem="r66-Ru-p8k" firstAttribute="leading" secondItem="ZUF-St-TST" secondAttribute="leading" id="6Vh-rC-aZM"/>
                             <constraint firstItem="unO-1H-P1W" firstAttribute="top" secondItem="2i2-9t-Q49" secondAttribute="bottom" constant="60" id="7ME-eE-PKP"/>
-                            <constraint firstItem="GPP-WN-OR9" firstAttribute="top" secondItem="aXA-Mz-F6B" secondAttribute="bottom" constant="66" id="7eU-4A-0Aj"/>
+                            <constraint firstItem="GPP-WN-OR9" firstAttribute="top" secondItem="aXA-Mz-F6B" secondAttribute="bottom" constant="31" id="7eU-4A-0Aj"/>
                             <constraint firstItem="r66-Ru-p8k" firstAttribute="centerX" secondItem="unO-1H-P1W" secondAttribute="centerX" constant="-0.5" id="BUd-He-F8Y"/>
-                            <constraint firstAttribute="centerY" secondItem="1Zu-E5-nN6" secondAttribute="centerY" constant="-31.5" id="HAv-nY-dlq"/>
+                            <constraint firstItem="aXA-Mz-F6B" firstAttribute="leading" secondItem="cVw-Ox-YTC" secondAttribute="leading" constant="2" id="ESG-dk-4ss"/>
+                            <constraint firstItem="iPY-y5-31R" firstAttribute="top" secondItem="cVw-Ox-YTC" secondAttribute="bottom" constant="8" id="Ivf-3P-vO9"/>
                             <constraint firstItem="eOO-th-bI0" firstAttribute="top" secondItem="unO-1H-P1W" secondAttribute="bottom" constant="17" id="MgT-TZ-gkA"/>
+                            <constraint firstItem="aXA-Mz-F6B" firstAttribute="top" secondItem="iPY-y5-31R" secondAttribute="bottom" constant="8" id="S8v-mN-tze"/>
+                            <constraint firstAttribute="trailing" secondItem="8wM-Ex-g3W" secondAttribute="trailing" id="XA3-dP-6BM"/>
                             <constraint firstItem="GPP-WN-OR9" firstAttribute="top" secondItem="r66-Ru-p8k" secondAttribute="bottom" id="XMj-B2-cIv"/>
                             <constraint firstAttribute="trailing" secondItem="r66-Ru-p8k" secondAttribute="trailing" id="cvM-vt-BIV"/>
                             <constraint firstItem="eOO-th-bI0" firstAttribute="centerX" secondItem="r66-Ru-p8k" secondAttribute="centerX" constant="0.5" id="fXi-l1-pUj"/>
+                            <constraint firstItem="aXA-Mz-F6B" firstAttribute="leading" secondItem="iPY-y5-31R" secondAttribute="leading" constant="2" id="mgZ-Vc-FID"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="centerX" secondItem="r66-Ru-p8k" secondAttribute="centerX" id="nAo-5G-btV"/>
                             <constraint firstItem="r66-Ru-p8k" firstAttribute="top" secondItem="2i2-9t-Q49" secondAttribute="bottom" id="sz4-k4-O4p"/>
-                            <constraint firstAttribute="centerX" secondItem="1Zu-E5-nN6" secondAttribute="centerX" constant="-0.5" id="vCA-dA-jcF"/>
+                            <constraint firstItem="cVw-Ox-YTC" firstAttribute="top" secondItem="8wM-Ex-g3W" secondAttribute="bottom" constant="8" id="vS7-cf-KVc"/>
+                            <constraint firstItem="8wM-Ex-g3W" firstAttribute="leading" secondItem="ZUF-St-TST" secondAttribute="leading" id="xJH-EX-Drs"/>
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nzH-XJ-K9e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1106" y="1509"/>
         </scene>
