@@ -75,6 +75,7 @@
 		17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58919351C9100D02C1B /* STMessageSendCell.m */; };
 		17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
+		1D022D731960AB4800CA30E3 /* JBWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D022D721960AB4800CA30E3 /* JBWhatsAppActivity.m */; };
 		1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */; };
 		1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C1212193B777D003DB198 /* STConversationCell.m */; };
 		1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */; };
@@ -224,6 +225,8 @@
 		17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageReceivedCell.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
+		1D022D711960AB4800CA30E3 /* JBWhatsAppActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBWhatsAppActivity.h; sourceTree = "<group>"; };
+		1D022D721960AB4800CA30E3 /* JBWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBWhatsAppActivity.m; sourceTree = "<group>"; };
 		1D5C120E193B74C5003DB198 /* STConversationsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationsListViewController.h; sourceTree = "<group>"; };
 		1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationsListViewController.m; sourceTree = "<group>"; };
 		1D5C1211193B777D003DB198 /* STConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationCell.h; sourceTree = "<group>"; };
@@ -570,6 +573,15 @@
 			path = Status/Categories;
 			sourceTree = "<group>";
 		};
+		1D022D701960AB4800CA30E3 /* WhatsappActivity */ = {
+			isa = PBXGroup;
+			children = (
+				1D022D711960AB4800CA30E3 /* JBWhatsAppActivity.h */,
+				1D022D721960AB4800CA30E3 /* JBWhatsAppActivity.m */,
+			);
+			path = WhatsappActivity;
+			sourceTree = "<group>";
+		};
 		1DE2D586194FA55E00A29A86 /* GoogleMobileAdsSdkiOS-6.9.3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +652,7 @@
 		1DFBB388192E9FCC003B7A53 /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
+				1D022D701960AB4800CA30E3 /* WhatsappActivity */,
 				176CE23F1936645500F5C4DA /* ChatGrowingTextView */,
 				1DFBB389192EA003003B7A53 /* STTapAnimationLabel.h */,
 				1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */,
@@ -760,6 +773,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D022D731960AB4800CA30E3 /* JBWhatsAppActivity.m in Sources */,
 				172EAEAF18B0B46300C5637B /* AFHTTPRequestOperation.m in Sources */,
 				172EAF0618B0BB4800C5637B /* UIImageView+AFNetworking.m in Sources */,
 				076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */,
