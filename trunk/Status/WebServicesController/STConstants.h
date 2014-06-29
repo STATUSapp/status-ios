@@ -73,3 +73,8 @@ extern NSString *const kGetNearbyPosts;
 #pragma mark - Local Notifications
 
 extern NSString *const STNotificationBadgeValueDidChanged;
+
+#pragma mark - Invite Friends
+
+extern NSString *const STInviteText;
+extern NSString *const STInviteLink;

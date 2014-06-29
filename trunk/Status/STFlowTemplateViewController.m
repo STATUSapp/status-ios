@@ -361,6 +361,20 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - Get Data Source for Flow Type
 
+-(NSMutableArray *)removeDuplicatesFromArray:(NSArray *)array{
+    
+    NSMutableArray *sheetArray = [NSMutableArray arrayWithArray:array];
+    NSArray *idsArray = [_postsDataSource valueForKey:@"id"];
+    
+    for (NSDictionary *dict in array) {
+        if ([idsArray containsObject:dict[@"id"]]) {
+            NSLog(@"Duplicate found");
+            [sheetArray removeObject:dict];
+        }
+    }
+    return sheetArray;
+}
+
 - (void)getDataSourceWithOffset:(long) offset{
     NSLog(@"Offset: %ld", offset);
     __weak STFlowTemplateViewController *weakSelf = self;
@@ -370,7 +384,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
 #if PAGGING_ENABLED
-                    [weakSelf.postsDataSource addObjectsFromArray:response[@"data"]];
+                    [weakSelf.postsDataSource addObjectsFromArray:[self removeDuplicatesFromArray:response[@"data"]]];
 #else
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
@@ -403,7 +417,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 else
                 {
 #if PAGGING_ENABLED
-                    [weakSelf.postsDataSource addObjectsFromArray:response[@"data"]];
+                    [weakSelf.postsDataSource addObjectsFromArray:[self removeDuplicatesFromArray:response[@"data"]]];
 #else
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
@@ -419,7 +433,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         case STFlowTypeUserProfile:{
             [[STWebServiceController sharedInstance] getUserPosts:self.userID withOffset:offset completion:^(NSDictionary *response) {
 #if PAGGING_ENABLED
-                [weakSelf.postsDataSource addObjectsFromArray:response[@"data"]];
+                [weakSelf.postsDataSource addObjectsFromArray:[self removeDuplicatesFromArray:response[@"data"]]];
 #else
                 weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif

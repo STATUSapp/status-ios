@@ -37,3 +37,8 @@ NSString *const kGetNearbyPosts = @"get_nearby_post";
 #pragma mark - Local Notifications
 
 NSString *const STNotificationBadgeValueDidChanged = @"STNotificationBadgeValueDidChanged";
+
+#pragma mark - Invite Friends
+
+NSString *const STInviteText = @"Checkout this new great app, STATUS";
+NSString *const STInviteLink = @"http://bit.ly/Njw1k4";

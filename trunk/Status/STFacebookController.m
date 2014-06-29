@@ -91,7 +91,7 @@
      NSDictionary *dictPrivacy = [NSDictionary dictionaryWithObjectsAndKeys:@"CUSTOM",@"value", @"ALL_FRIENDS", @"friends", nil];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"what's YOUR status? via http://bit.ly/Njw1k4" ,@"message",
+                                   [NSString stringWithFormat:@"what's YOUR status? via %@",STInviteLink] ,@"message",
                                    [self stringFromDict:dictPrivacy],@"privacy",
                                    @"STATUS", @"title",
                                    @"what's YOUR status?", @"description",

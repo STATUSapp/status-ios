@@ -7,6 +7,9 @@
 //
 
 #import "STInviteFriendsViewController.h"
+#import "JBWhatsAppActivity.h"
+#import "STConstants.h"
+
 
 @interface STInviteFriendsViewController ()
 
@@ -42,7 +45,29 @@
 #pragma mark - IBActions
 
 - (IBAction)onInviteYourFriends:(id)sender {
-    [[[UIAlertView alloc] initWithTitle:@"Remove Ads" message:@"In Construction" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    NSString *inviteText = STInviteText;
+    NSString *inviteLink = STInviteLink;
+    
+    NSArray *applicationActivities = @[[[JBWhatsAppActivity alloc] init]];
+    NSArray *excludedActivities    = @[UIActivityTypePostToWeibo,
+                                       UIActivityTypePrint,
+                                       UIActivityTypeCopyToPasteboard,
+                                       UIActivityTypeAssignToContact,
+                                       UIActivityTypeSaveToCameraRoll,
+                                       UIActivityTypeAddToReadingList,
+                                       UIActivityTypePostToFlickr,
+                                       UIActivityTypePostToVimeo,
+                                       UIActivityTypePostToTencentWeibo,
+                                       UIActivityTypeAirDrop];
+    NSArray *activityItems         = @[inviteText, inviteLink];
+    
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
+    activityViewController.excludedActivityTypes = excludedActivities;
+    
+    [self presentViewController:activityViewController animated:YES completion:^{
+        
+    }];
 }
 
 
