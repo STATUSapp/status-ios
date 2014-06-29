@@ -46,6 +46,7 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
     if ([SKPaymentQueue canMakePayments]) {
         SKProductsRequest * request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:removeAdsInAppPurchaseProductID]];
         request.delegate = self;
+        [request start];
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Info" message:@"Please enable In App Purchase in Settings" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     }
