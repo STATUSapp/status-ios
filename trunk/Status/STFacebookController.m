@@ -210,6 +210,7 @@
                         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
                         weakSelf.currentUserId = response[@"user_id"];
                         [weakSelf announceDelegate];
+                        [weakSelf measureRegister];
                     }
                     else
                     {
@@ -296,6 +297,11 @@
 
 - (void)setTrackerAsExistingUser {
     [MobileAppTracker setExistingUser:YES];
+    [MobileAppTracker measureAction:@"login"];
+}
+
+- (void)measureRegister {
+    [MobileAppTracker measureAction:@"register"];
 }
 
 @end
