@@ -34,6 +34,9 @@ NSString *const kSetUserLocation = @"set_user_location";
 NSString *const kGetUnreadNotificationsCount = @"get_unread_notifications_count";
 NSString *const kGetNearbyPosts = @"get_nearby_post";
 
+NSString *const kMATAdvertiserID = @"21414";
+NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";
+
 #pragma mark - Local Notifications
 
 NSString *const STNotificationBadgeValueDidChanged = @"STNotificationBadgeValueDidChanged";

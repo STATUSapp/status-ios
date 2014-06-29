@@ -62,8 +62,11 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
 
 - (IBAction)onTapRemoveAds:(id)sender {
 //    [[[UIAlertView alloc] initWithTitle:@"Remove Ads" message:@"In Construction" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-    SKPayment * payment = [SKPayment paymentWithProduct:_product];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    
+    if (_product) {
+        SKPayment * payment = [SKPayment paymentWithProduct:_product];
+        [[SKPaymentQueue defaultQueue] addPayment:payment];
+    }
 }
 
 - (void)removeAds {

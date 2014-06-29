@@ -15,6 +15,11 @@
 #import "STImageCacheController.h"
 #import "STLocationManager.h"
 
+#import <MobileAppTracker/MobileAppTracker.h>
+#import <AdSupport/AdSupport.h>
+
+static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
+
 @implementation AppDelegate
 
 - (void)setBadgeNumber:(NSInteger)badgeNumber{
@@ -31,6 +36,26 @@
     self.badgeNumber = application.applicationIconBadgeNumber;
     [[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
     [self handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+    
+    
+    // setup Mobile App Tracker
+    
+    // Account Configuration info - must be set
+    [MobileAppTracker initializeWithMATAdvertiserId:kMATAdvertiserID
+                                   MATConversionKey:kMATConversionKey];
+    
+    // Used to pass us the IFA, enables highly accurate 1-to-1 attribution.
+    // Required for many advertising networks.
+    [MobileAppTracker setAppleAdvertisingIdentifier:[[ASIdentifierManager sharedManager] advertisingIdentifier]
+                         advertisingTrackingEnabled:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
+    
+    NSString * newInstall = [[NSUserDefaults standardUserDefaults] objectForKey:kSTNewInstallKey];
+    
+    if (newInstall == nil) {
+        [MobileAppTracker measureAction:@"install"];
+        [[NSUserDefaults standardUserDefaults] setObject:kSTNewInstallKey forKey:kSTNewInstallKey];
+    }
+    
     return YES;
 }
 							
@@ -59,6 +84,9 @@
     STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
     [viewController updateNotificationsNumber];
     [[STFacebookController sharedInstance] loadTokenFromKeyChain];
+    
+    // MAT will not function without the measureSession call included
+    [MobileAppTracker measureSession];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

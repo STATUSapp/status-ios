@@ -16,6 +16,9 @@
 #import "AppDelegate.h"
 #import "STLocationManager.h"
 
+#import <MobileAppTracker/MobileAppTracker.h>
+#import <AdSupport/AdSupport.h>
+
 @implementation STFacebookController
 +(STFacebookController *) sharedInstance{
     static STFacebookController *_sharedManager = nil;
@@ -221,6 +224,7 @@
                 
             }
             else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
+                [weakSelf setTrackerAsExistingUser];
                 [STWebServiceController sharedInstance].accessToken = response[@"token"];
                 [[STLocationManager sharedInstance] startLocationUpdates];
                 [weakSelf saveAccessToken:response[@"token"]];
@@ -288,6 +292,10 @@
     if (self.delegate&&[self.delegate respondsToSelector:@selector(facebookControllerDidLoggedIn)]) {
         [self.delegate performSelector:@selector(facebookControllerDidLoggedIn)];
     }
+}
+
+- (void)setTrackerAsExistingUser {
+    [MobileAppTracker setExistingUser:YES];
 }
 
 @end

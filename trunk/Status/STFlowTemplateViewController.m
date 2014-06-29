@@ -41,7 +41,7 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate, GADInterstitialDelegate>
 {
     GADInterstitial * _interstitial;
     

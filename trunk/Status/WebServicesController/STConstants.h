@@ -70,6 +70,9 @@ extern NSString *const kSetUserLocation;
 extern NSString *const kGetUnreadNotificationsCount;
 extern NSString *const kGetNearbyPosts;
 
+extern NSString *const kMATAdvertiserID;
+extern NSString *const kMATConversionKey;
+
 #pragma mark - Local Notifications
 
 extern NSString *const STNotificationBadgeValueDidChanged;

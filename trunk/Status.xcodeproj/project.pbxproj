@@ -56,7 +56,6 @@
 		172EAF1418B0D4B700C5637B /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAF1318B0D4B700C5637B /* STConstants.m */; };
 		172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 172F0D1C18CC8AEB00CD1493 /* STTopOption.m */; };
 		172F0D1F18CC8B0200CD1493 /* STTopOption.xib in Resources */ = {isa = PBXBuildFile; fileRef = 172F0D1E18CC8B0200CD1493 /* STTopOption.xib */; };
-		1754D693196029D5004BFE4F /* JBWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1754D692196029D5004BFE4F /* JBWhatsAppActivity.m */; };
 		176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2411936645500F5C4DA /* HPGrowingTextView.m */; };
 		176CE2451936645500F5C4DA /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2431936645500F5C4DA /* HPTextViewInternal.m */; };
 		177458391928C41C005B994B /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 177458381928C41B005B994B /* STLocationManager.m */; };
@@ -78,6 +77,8 @@
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
 		1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */; };
 		1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C1212193B777D003DB198 /* STConversationCell.m */; };
+		1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */; };
+		1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
 		1DE2D5AB194FA59300A29A86 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AA194FA59300A29A86 /* libGoogleAdMobAds.a */; };
 		1DE2D5AD194FA5D600A29A86 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */; };
 		1DE2D5AF194FA5DF00A29A86 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */; };
@@ -191,8 +192,6 @@
 		172F0D1B18CC8AEB00CD1493 /* STTopOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTopOption.h; sourceTree = "<group>"; };
 		172F0D1C18CC8AEB00CD1493 /* STTopOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTopOption.m; sourceTree = "<group>"; };
 		172F0D1E18CC8B0200CD1493 /* STTopOption.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STTopOption.xib; sourceTree = "<group>"; };
-		1754D691196029D5004BFE4F /* JBWhatsAppActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBWhatsAppActivity.h; sourceTree = "<group>"; };
-		1754D692196029D5004BFE4F /* JBWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBWhatsAppActivity.m; sourceTree = "<group>"; };
 		176CE2401936645500F5C4DA /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
 		176CE2411936645500F5C4DA /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		176CE2421936645500F5C4DA /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
@@ -229,6 +228,8 @@
 		1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationsListViewController.m; sourceTree = "<group>"; };
 		1D5C1211193B777D003DB198 /* STConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationCell.h; sourceTree = "<group>"; };
 		1D5C1212193B777D003DB198 /* STConversationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationCell.m; sourceTree = "<group>"; };
+		1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
+		1D98A4C219603064007F4AB2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1DE2D589194FA55E00A29A86 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
 		1DE2D58A194FA55E00A29A86 /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
 		1DE2D58B194FA55E00A29A86 /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
@@ -284,9 +285,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */,
+				1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */,
+				172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */,
 				172EAEB918B0BAE000C5637B /* SystemConfiguration.framework in Frameworks */,
 				1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */,
+				1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */,
+				1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */,
 				172EAE6918B0B12E00C5637B /* CoreGraphics.framework in Frameworks */,
 				1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */,
 				1DE2D5AF194FA5DF00A29A86 /* AudioToolbox.framework in Frameworks */,
@@ -299,7 +303,6 @@
 				1DE2D5AB194FA59300A29A86 /* libGoogleAdMobAds.a in Frameworks */,
 				17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */,
 				31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */,
-				172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */,
 				172EAEB918B0BAE000C5637B /* SystemConfiguration.framework in Frameworks */,
 				172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */,
 				172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */,
@@ -348,6 +351,8 @@
 		172EAE6518B0B12E00C5637B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D98A4C219603064007F4AB2 /* iAd.framework */,
+				1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */,
 				1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */,
 				1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */,
 				1DE2D5B0194FA5E800A29A86 /* AVFoundation.framework */,
@@ -528,15 +533,6 @@
 			path = Status/WebServicesController;
 			sourceTree = "<group>";
 		};
-		1754D690196029D5004BFE4F /* WhatsappActivity */ = {
-			isa = PBXGroup;
-			children = (
-				1754D691196029D5004BFE4F /* JBWhatsAppActivity.h */,
-				1754D692196029D5004BFE4F /* JBWhatsAppActivity.m */,
-			);
-			path = WhatsappActivity;
-			sourceTree = "<group>";
-		};
 		176CE23F1936645500F5C4DA /* ChatGrowingTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -644,7 +640,6 @@
 		1DFBB388192E9FCC003B7A53 /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
-				1754D690196029D5004BFE4F /* WhatsappActivity */,
 				176CE23F1936645500F5C4DA /* ChatGrowingTextView */,
 				1DFBB389192EA003003B7A53 /* STTapAnimationLabel.h */,
 				1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */,
@@ -765,7 +760,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1754D693196029D5004BFE4F /* JBWhatsAppActivity.m in Sources */,
 				172EAEAF18B0B46300C5637B /* AFHTTPRequestOperation.m in Sources */,
 				172EAF0618B0BB4800C5637B /* UIImageView+AFNetworking.m in Sources */,
 				076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */,
