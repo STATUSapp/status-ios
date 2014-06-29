@@ -20,7 +20,6 @@
 		07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */; };
 		07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
-		172EAE6918B0B12E00C5637B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
 		172EAE7118B0B12E00C5637B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE6F18B0B12E00C5637B /* InfoPlist.strings */; };
 		172EAE7318B0B12E00C5637B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAE7218B0B12E00C5637B /* main.m */; };
@@ -42,7 +41,6 @@
 		172EAEB518B0B46300C5637B /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAEAA18B0B46300C5637B /* AFURLRequestSerialization.m */; };
 		172EAEB618B0B46300C5637B /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAEAC18B0B46300C5637B /* AFURLResponseSerialization.m */; };
 		172EAEB718B0B46300C5637B /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAEAE18B0B46300C5637B /* AFURLSessionManager.m */; };
-		172EAEB918B0BAE000C5637B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
 		172EAF0218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAEF218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m */; };
 		172EAF0318B0BB4800C5637B /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAEF418B0BB4800C5637B /* UIActivityIndicatorView+AFNetworking.m */; };
@@ -56,14 +54,16 @@
 		172EAF1418B0D4B700C5637B /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAF1318B0D4B700C5637B /* STConstants.m */; };
 		172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 172F0D1C18CC8AEB00CD1493 /* STTopOption.m */; };
 		172F0D1F18CC8B0200CD1493 /* STTopOption.xib in Resources */ = {isa = PBXBuildFile; fileRef = 172F0D1E18CC8B0200CD1493 /* STTopOption.xib */; };
-		1754D693196029D5004BFE4F /* STWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1754D692196029D5004BFE4F /* STWhatsAppActivity.m */; };
 		176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2411936645500F5C4DA /* HPGrowingTextView.m */; };
 		176CE2451936645500F5C4DA /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2431936645500F5C4DA /* HPTextViewInternal.m */; };
 		177458391928C41C005B994B /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 177458381928C41B005B994B /* STLocationManager.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		178907B718B294BA00AC4355 /* LoginScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178907B618B294BA00AC4355 /* LoginScene.storyboard */; };
 		178907BA18B295DD00AC4355 /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178907B918B295DD00AC4355 /* STLoginViewController.m */; };
-		1794DD541960A00A0009066D /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD531960A00A0009066D /* STFacebookActivity.m */; };
+		1794DD571960D2A40009066D /* STWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD561960D2A40009066D /* STWhatsAppActivity.m */; };
+		1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD5C1960D3020009066D /* STFacebookActivity.m */; };
+		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
+		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
@@ -77,7 +77,6 @@
 		17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58919351C9100D02C1B /* STMessageSendCell.m */; };
 		17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
-		1D022D731960AB4800CA30E3 /* JBWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D022D721960AB4800CA30E3 /* JBWhatsAppActivity.m */; };
 		1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */; };
 		1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C1212193B777D003DB198 /* STConversationCell.m */; };
 		1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */; };
@@ -195,8 +194,6 @@
 		172F0D1B18CC8AEB00CD1493 /* STTopOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTopOption.h; sourceTree = "<group>"; };
 		172F0D1C18CC8AEB00CD1493 /* STTopOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTopOption.m; sourceTree = "<group>"; };
 		172F0D1E18CC8B0200CD1493 /* STTopOption.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STTopOption.xib; sourceTree = "<group>"; };
-		1754D691196029D5004BFE4F /* STWhatsAppActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWhatsAppActivity.h; sourceTree = "<group>"; };
-		1754D692196029D5004BFE4F /* STWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhatsAppActivity.m; sourceTree = "<group>"; };
 		176CE2401936645500F5C4DA /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
 		176CE2411936645500F5C4DA /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		176CE2421936645500F5C4DA /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
@@ -207,8 +204,10 @@
 		178907B618B294BA00AC4355 /* LoginScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginScene.storyboard; sourceTree = "<group>"; };
 		178907B818B295DD00AC4355 /* STLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoginViewController.h; sourceTree = "<group>"; };
 		178907B918B295DD00AC4355 /* STLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginViewController.m; sourceTree = "<group>"; };
-		1794DD521960A00A0009066D /* STFacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookActivity.h; sourceTree = "<group>"; };
-		1794DD531960A00A0009066D /* STFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookActivity.m; sourceTree = "<group>"; };
+		1794DD551960D2A40009066D /* STWhatsAppActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWhatsAppActivity.h; sourceTree = "<group>"; };
+		1794DD561960D2A40009066D /* STWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhatsAppActivity.m; sourceTree = "<group>"; };
+		1794DD5B1960D3020009066D /* STFacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookActivity.h; sourceTree = "<group>"; };
+		1794DD5C1960D3020009066D /* STFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookActivity.m; sourceTree = "<group>"; };
 		17AB89E4193B0DF600A6E7FD /* STChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatController.h; sourceTree = "<group>"; };
 		17AB89E5193B0DF600A6E7FD /* STChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatController.m; sourceTree = "<group>"; };
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
@@ -231,8 +230,6 @@
 		17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageReceivedCell.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
-		1D022D711960AB4800CA30E3 /* JBWhatsAppActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBWhatsAppActivity.h; sourceTree = "<group>"; };
-		1D022D721960AB4800CA30E3 /* JBWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBWhatsAppActivity.m; sourceTree = "<group>"; };
 		1D5C120E193B74C5003DB198 /* STConversationsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationsListViewController.h; sourceTree = "<group>"; };
 		1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationsListViewController.m; sourceTree = "<group>"; };
 		1D5C1211193B777D003DB198 /* STConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationCell.h; sourceTree = "<group>"; };
@@ -296,23 +293,21 @@
 			files = (
 				1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */,
 				172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */,
-				172EAEB918B0BAE000C5637B /* SystemConfiguration.framework in Frameworks */,
+				1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */,
 				1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */,
 				1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */,
 				1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */,
-				172EAE6918B0B12E00C5637B /* CoreGraphics.framework in Frameworks */,
+				1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */,
 				1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */,
 				1DE2D5AF194FA5DF00A29A86 /* AudioToolbox.framework in Frameworks */,
 				1DE2D5AD194FA5D600A29A86 /* AdSupport.framework in Frameworks */,
 				17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */,
 				1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */,
 				07903A6C192A1EBB002136F8 /* FacebookSDK.framework in Frameworks */,
-				172EAE6918B0B12E00C5637B /* CoreGraphics.framework in Frameworks */,
 				070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */,
 				1DE2D5AB194FA59300A29A86 /* libGoogleAdMobAds.a in Frameworks */,
 				17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */,
 				31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */,
-				172EAEB918B0BAE000C5637B /* SystemConfiguration.framework in Frameworks */,
 				172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */,
 				172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */,
 			);
@@ -542,17 +537,6 @@
 			path = Status/WebServicesController;
 			sourceTree = "<group>";
 		};
-		1754D690196029D5004BFE4F /* WhatsappActivity */ = {
-			isa = PBXGroup;
-			children = (
-				1754D691196029D5004BFE4F /* STWhatsAppActivity.h */,
-				1754D692196029D5004BFE4F /* STWhatsAppActivity.m */,
-				1794DD521960A00A0009066D /* STFacebookActivity.h */,
-				1794DD531960A00A0009066D /* STFacebookActivity.m */,
-			);
-			path = WhatsappActivity;
-			sourceTree = "<group>";
-		};
 		176CE23F1936645500F5C4DA /* ChatGrowingTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,8 +577,10 @@
 		1D022D701960AB4800CA30E3 /* WhatsappActivity */ = {
 			isa = PBXGroup;
 			children = (
-				1D022D711960AB4800CA30E3 /* JBWhatsAppActivity.h */,
-				1D022D721960AB4800CA30E3 /* JBWhatsAppActivity.m */,
+				1794DD5B1960D3020009066D /* STFacebookActivity.h */,
+				1794DD5C1960D3020009066D /* STFacebookActivity.m */,
+				1794DD551960D2A40009066D /* STWhatsAppActivity.h */,
+				1794DD561960D2A40009066D /* STWhatsAppActivity.m */,
 			);
 			path = WhatsappActivity;
 			sourceTree = "<group>";
@@ -790,7 +776,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1754D693196029D5004BFE4F /* STWhatsAppActivity.m in Sources */,
 				172EAEAF18B0B46300C5637B /* AFHTTPRequestOperation.m in Sources */,
 				172EAF0618B0BB4800C5637B /* UIImageView+AFNetworking.m in Sources */,
 				076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */,
@@ -814,7 +799,6 @@
 				1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */,
 				070F9F3618E2D8A7008556AB /* KeychainItemWrapper.m in Sources */,
 				0715651218FD890400F7B3BB /* STFooterView.m in Sources */,
-				1794DD541960A00A0009066D /* STFacebookActivity.m in Sources */,
 				177458391928C41C005B994B /* STLocationManager.m in Sources */,
 				17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */,
 				172EAEB618B0B46300C5637B /* AFURLResponseSerialization.m in Sources */,
@@ -840,6 +824,7 @@
 				1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */,
 				172EAEB518B0B46300C5637B /* AFURLRequestSerialization.m in Sources */,
 				172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */,
+				1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */,
 				17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */,
 				172EAF0218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				172EAEB718B0B46300C5637B /* AFURLSessionManager.m in Sources */,
@@ -847,6 +832,7 @@
 				172EAE7718B0B12E00C5637B /* AppDelegate.m in Sources */,
 				1DE2D5BB1950DB4600A29A86 /* STInviteFriendsViewController.m in Sources */,
 				172EAE7318B0B12E00C5637B /* main.m in Sources */,
+				1794DD571960D2A40009066D /* STWhatsAppActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
