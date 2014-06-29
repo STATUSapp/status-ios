@@ -29,6 +29,10 @@
 #import "STChatRoomViewController.h"
 #import "STConversationsListViewController.h"
 
+#import "GADInterstitial.h"
+#import "STRemoveAdsViewController.h"
+#import "STInviteFriendsViewController.h"
+
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
 int const kNoPostsAlertTag = 13;
@@ -39,12 +43,16 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate>
 {
+    GADInterstitial * _interstitial;
+    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
     NSLayoutConstraint *_topOptionConstraint;
     NSDictionary *_lastNotif;
     UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
+    BOOL _isInterstitialLoaded;
+    NSInteger _numberOfSeenPosts;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -93,6 +101,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                                              selector:@selector(updateNotificationsNumber)
                                                  name:STNotificationBadgeValueDidChanged
                                                object:nil];
+    
+    // setup interstitial ad
+
+    [self setupInterstitialAds];
+    _numberOfSeenPosts = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -125,6 +138,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _interstitial.delegate = nil;
 }
 
 -(void) addTopOption{
@@ -207,6 +221,92 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (void)updateNotificationsNumber{
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:app.badgeNumber];
+}
+
+#pragma mark - AdMob delegate methods
+
+- (void)setupInterstitialAds {
+    _interstitial.delegate = nil;
+    _interstitial = nil;
+    
+    _interstitial = [[GADInterstitial alloc] init];
+    _interstitial.adUnitID = kSTAdUnitID;
+    
+    GADRequest * request = [GADRequest request];
+//    request.testDevices = @[GAD_SIMULATOR_ID];
+    
+    [_interstitial loadRequest:[GADRequest request]];
+    _interstitial.delegate = self;
+    _isInterstitialLoaded = NO;
+}
+
+- (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error {
+    _isInterstitialLoaded = NO;
+    NSLog(@"error %@", error.localizedDescription);
+}
+
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+    _isInterstitialLoaded = YES;
+}
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    [self setupInterstitialAds];
+}
+
+#pragma mark - Interstitial Controllers method
+
+- (void)presentInterstitialControllerForIndex:(NSInteger)index {
+    
+    if (index == 0 || index %10 != 0) {
+        return;
+    }
+    
+    // TODO: calculate the booleans below properly
+    
+    BOOL shouldPresentInviter = YES;
+    BOOL shouldPresentAds = YES;
+    
+    
+    NSMutableArray * allowedIntestitials = [NSMutableArray array];
+    
+    if (shouldPresentAds) {
+        [allowedIntestitials addObjectsFromArray:@[@(STInterstitialTypeAds), @(STInterstitialTypeRemoveAds)]];
+    }
+    
+    if (shouldPresentInviter) {
+        [allowedIntestitials addObject:@(STInterstitialTypeInviter)];
+    }
+    
+    index = index / 10 - 1;
+    
+    STInterstitialType interstitialToPresent = [[allowedIntestitials objectAtIndex: (index % [allowedIntestitials count] )] integerValue];
+    
+    [self presentIntrestialControllerWithType:interstitialToPresent];
+}
+
+- (void) presentIntrestialControllerWithType:(STInterstitialType)interstitialType {
+    
+    switch (interstitialType) {
+        case STInterstitialTypeAds: {
+            [_interstitial presentFromRootViewController:self];
+            break;
+        }
+        case STInterstitialTypeRemoveAds: {
+            STRemoveAdsViewController * removeAdsVC = [STRemoveAdsViewController newInstance];
+            removeAdsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:removeAdsVC animated:YES completion:nil];
+            break;
+        }
+        case STInterstitialTypeInviter: {
+            STInviteFriendsViewController * inviteFriendsVC = [STInviteFriendsViewController newInstance];
+            inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:inviteFriendsVC animated:YES completion:nil];
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - FacebookController Delegate
@@ -513,19 +613,19 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (IBAction)onTapMenu:(id)sender {
+//    
+//    STConversationsListViewController * vc = [[UIStoryboard storyboardWithName:@"ChatScene" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([STConversationsListViewController class])];
+//    
+//    [self.navigationController pushViewController:vc animated:YES];
+//    
+//    
     
-    STConversationsListViewController * vc = [[UIStoryboard storyboardWithName:@"ChatScene" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([STConversationsListViewController class])];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    
-    
-//    _menuView.alpha = 0.f;
-//    _menuImageView.image = [self blurCurrentScreen];
-//    [self.view addSubview:_menuView];
-//    [UIView animateWithDuration:0.33 animations:^{
-//        _menuView.alpha = 1.f;
-//    }];
+    _menuView.alpha = 0.f;
+    _menuImageView.image = [self blurCurrentScreen];
+    [self.view addSubview:_menuView];
+    [UIView animateWithDuration:0.33 animations:^{
+        _menuView.alpha = 1.f;
+    }];
 }
 
 - (IBAction)onTapCameraUpload:(id)sender {
@@ -782,6 +882,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+   
+    _numberOfSeenPosts++;
+    
+    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
+    
 #if PAGGING_ENABLED
     if (self.flowType == STFlowTypeAllPosts) {
         NSDictionary *dict = [self.postsDataSource objectAtIndex:indexPath.row];

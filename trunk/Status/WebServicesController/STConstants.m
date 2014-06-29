@@ -13,6 +13,8 @@
 NSString *const kBaseURL = @"http://status.glazeon.com/api/";
 NSString *const kBasePhotoDownload = @"http://status.glazeon.com/media/";
 
+NSString *const kSTAdUnitID = @"ca-app-pub-2971682460090432/5255730305";
+
 //NSString *const kGetPosts = @"get_posts2";
 NSString *const kGetPosts = @"get_posts";
 NSString *const kLoginUser = @"login_user";

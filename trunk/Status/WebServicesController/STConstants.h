@@ -20,6 +20,12 @@ typedef NS_ENUM(NSUInteger,STFlowType){
     STFlowTypeSinglePost
 };
 
+typedef NS_ENUM(NSUInteger, STInterstitialType){
+    STInterstitialTypeAds = 0,
+    STInterstitialTypeRemoveAds,
+    STInterstitialTypeInviter
+};
+
 typedef NS_ENUM(NSUInteger,STWebservicesCodes){
     STWebservicesSuccesCod=200,
     STWebservicesNeedRegistrationCod=404,
@@ -43,6 +49,8 @@ typedef NS_ENUM(NSUInteger,STWebSockerStatus){
 
 extern NSString *const kBaseURL;
 extern NSString *const kBasePhotoDownload;
+
+extern NSString *const kSTAdUnitID;
 
 extern NSString *const kGetPosts;
 extern NSString *const kLoginUser;
