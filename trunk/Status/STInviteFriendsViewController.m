@@ -14,7 +14,6 @@
 
 @interface STInviteFriendsViewController ()
 {
-    UIActivityViewController *activityViewController;
     UIButton *tappedButton;
 }
 @property (weak, nonatomic) IBOutlet UIButton *firstInvite;
@@ -71,7 +70,7 @@
 - (IBAction)onInviteYourFriends:(id)sender {
 
     tappedButton = sender;
-    
+    [(UIButton *)sender setUserInteractionEnabled:NO];
     NSString *inviteText = STInviteText;
     NSString *inviteLink = STInviteLink;
     
@@ -89,10 +88,9 @@
     NSArray *activityItems         = @[inviteText, inviteLink];
     
     
-    activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
     activityViewController.excludedActivityTypes = excludedActivities;
     UIActivityViewControllerCompletionHandler completion = ^(NSString *activityType, BOOL completed){
-        
         //TODO: check if this works for all
         if (completed == YES) {
             [[STInviteController sharedInstance] setCurrentDateForInviteNumber:@(tappedButton.tag)];
@@ -107,7 +105,7 @@
     [activityViewController setCompletionHandler:completion];
     
     [self presentViewController:activityViewController animated:YES completion:^{
-        
+        [(UIButton *)sender setUserInteractionEnabled:YES];
     }];
 }
 

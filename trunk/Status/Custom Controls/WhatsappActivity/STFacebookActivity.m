@@ -29,7 +29,7 @@
     params.link =
     [NSURL URLWithString:activityItems[1]];
     params.name = @"STATUS";
-    params.caption = @"";
+    params.caption = activityItems[0];
     //params.picture = [NSURL URLWithString:@"http://i.imgur.com/g3Qc1HN.png"];
     params.linkDescription = activityItems[0];
 
@@ -65,17 +65,5 @@
             NSLog(@"result %@", results);
         }
     }];
-    
-//    [FBDialogs presentMessageDialogWithLink:[NSURL URLWithString:@"https://developers.facebook.com/ios"]
-//                                    handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-//                                        if(error) {
-//                                            // An error occurred, we need to handle the error
-//                                            // See: https://developers.facebook.com/docs/ios/errors
-//                                            NSLog(@"%@",[NSString stringWithFormat:@"Error messaging link: %@", error.description]);
-//                                        } else {
-//                                            // Success
-//                                            NSLog(@"result %@", results);
-//                                        }
-//                                    }];
 }
 @end

@@ -43,5 +43,5 @@ NSString *const STNotificationBadgeValueDidChanged = @"STNotificationBadgeValueD
 
 #pragma mark - Invite Friends
 
-NSString *const STInviteText = @"Checkout this new great app, STATUS";
+NSString *const STInviteText = @"I'm sending you one of my 3 special friend invites on Get STATUS.\nYou can chat with happy & positive people around you, discover and share wonderful moments and receive hundreds of likes.";
 NSString *const STInviteLink = @"http://bit.ly/Njw1k4";

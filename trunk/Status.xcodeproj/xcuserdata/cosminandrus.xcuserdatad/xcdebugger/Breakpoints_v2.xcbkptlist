@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Status/STFlowTemplateViewController.m"
-            timestampString = "417685598.021688"
+            timestampString = "425829925.913645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "-getDataSourceWithOffset:"
-            landmarkType = "5">
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "@implementation STFlowTemplateViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Status/STFlowTemplateViewController.m"
-            timestampString = "417685598.021688"
+            timestampString = "425829925.913645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "688"
-            endingLineNumber = "688"
-            landmarkName = "-deleteItemsFromDataSourceAtIndexPaths:"
+            startingLineNumber = "699"
+            endingLineNumber = "699"
+            landmarkName = "-onTapMenu:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -72,12 +72,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Status/STFlowTemplateViewController.m"
-            timestampString = "417685598.021688"
+            timestampString = "425829925.913645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "579"
-            endingLineNumber = "579"
-            landmarkName = "-collectionView:viewForSupplementaryElementOfKind:atIndexPath:"
+            startingLineNumber = "589"
+            endingLineNumber = "589"
+            landmarkName = "-onSwipeLeftOnEdge:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -120,6 +120,54 @@
             startingLineNumber = "162"
             endingLineNumber = "162"
             landmarkName = "-setPostLiked:withCompletion:orError:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Status/AppDelegate.m"
+            timestampString = "425828179.276153"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "-application:openURL:sourceApplication:annotation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Status/STTutorialViewController.m"
+            timestampString = "425830419.398609"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-dismissViewController"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Status/STInviteFriendsViewController.m"
+            timestampString = "425834747.317399"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-dismissController:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
