@@ -483,7 +483,7 @@
                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <segue destination="OZV-os-N5E" kind="modal" id="gEh-Sj-BQD"/>
+                                        <segue destination="OZV-os-N5E" kind="modal" identifier="inviteSegue" id="gEh-Sj-BQD"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Eh-Nk-tGn">
@@ -1204,54 +1204,20 @@
                                     <action selector="dismissController:" destination="OZV-os-N5E" eventType="touchUpInside" id="NaY-Va-ni2"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status logo" translatesAutoresizingMaskIntoConstraints="NO" id="unO-1H-P1W">
-                                <rect key="frame" x="62" y="80" width="197" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is more fun with friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOO-th-bI0">
-                                <rect key="frame" x="36" y="125" width="249" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXA-Mz-F6B">
-                                <rect key="frame" x="59" y="497" width="202" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="invite your friends button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="invite your friends button"/>
-                                <connections>
-                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="w2r-KJ-oEZ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPY-y5-31R">
-                                <rect key="frame" x="57" y="449" width="202" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="invite your friends button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="invite your friends button"/>
-                                <connections>
-                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="sf3-z5-Q8G"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVw-Ox-YTC">
-                                <rect key="frame" x="57" y="401" width="202" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="invite your friends button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="invite your friends button"/>
-                                <connections>
-                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="gAi-TN-ECE"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wM-Ex-g3W">
                                 <rect key="frame" x="0.0" y="157" width="320" height="236"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-DM-vN2">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="236"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dismissController:" destination="OZV-os-N5E" eventType="touchUpInside" id="XyN-Fs-5IO"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXM-E5-SdM">
                                         <rect key="frame" x="75" y="34" width="169" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1263,18 +1229,65 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" image="invite friends icon pressed"/>
-                                        <connections>
-                                            <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="3sX-gC-7An"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="IWW-DM-vN2" secondAttribute="trailing" id="EFh-7l-5Br"/>
                                     <constraint firstAttribute="centerY" secondItem="EXM-E5-SdM" secondAttribute="centerY" id="HxT-h1-z0T"/>
                                     <constraint firstAttribute="centerX" secondItem="EXM-E5-SdM" secondAttribute="centerX" id="KWo-qR-Vyv"/>
+                                    <constraint firstItem="IWW-DM-vN2" firstAttribute="leading" secondItem="8wM-Ex-g3W" secondAttribute="leading" id="PjW-1V-x8l"/>
                                     <constraint firstAttribute="width" constant="320" id="WSS-SZ-5ob"/>
+                                    <constraint firstItem="IWW-DM-vN2" firstAttribute="height" secondItem="8wM-Ex-g3W" secondAttribute="height" id="dki-JG-RHF"/>
+                                    <constraint firstItem="IWW-DM-vN2" firstAttribute="width" secondItem="8wM-Ex-g3W" secondAttribute="width" id="fbm-80-4l3"/>
+                                    <constraint firstAttribute="bottom" secondItem="IWW-DM-vN2" secondAttribute="bottom" id="hmr-iN-Fdg"/>
+                                    <constraint firstItem="IWW-DM-vN2" firstAttribute="top" secondItem="8wM-Ex-g3W" secondAttribute="top" id="sWo-Oq-tf1"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status logo" translatesAutoresizingMaskIntoConstraints="NO" id="unO-1H-P1W">
+                                <rect key="frame" x="62" y="80" width="197" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is more fun with friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOO-th-bI0">
+                                <rect key="frame" x="36" y="125" width="249" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXA-Mz-F6B">
+                                <rect key="frame" x="59" y="497" width="202" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="invite your friends button pressed">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="invite your friends button"/>
+                                <connections>
+                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="w2r-KJ-oEZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPY-y5-31R">
+                                <rect key="frame" x="57" y="449" width="202" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="invited button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="invited button pressed"/>
+                                <connections>
+                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="sf3-z5-Q8G"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVw-Ox-YTC">
+                                <rect key="frame" x="57" y="401" width="202" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="invite your friends button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="invite your friends button pressed"/>
+                                <connections>
+                                    <action selector="onInviteYourFriends:" destination="OZV-os-N5E" eventType="touchUpInside" id="gAi-TN-ECE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -1298,6 +1311,11 @@
                             <constraint firstItem="8wM-Ex-g3W" firstAttribute="leading" secondItem="ZUF-St-TST" secondAttribute="leading" id="xJH-EX-Drs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="firstInvite" destination="cVw-Ox-YTC" id="uqr-Ie-qus"/>
+                        <outlet property="secondinvite" destination="iPY-y5-31R" id="Uhx-dx-qLu"/>
+                        <outlet property="thirdinvite" destination="aXA-Mz-F6B" id="Cly-4K-6bJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nzH-XJ-K9e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1327,6 +1345,9 @@
         <image name="invite friends icon" width="182" height="131"/>
         <image name="invite friends icon pressed" width="182" height="131"/>
         <image name="invite your friends button" width="202" height="40"/>
+        <image name="invite your friends button pressed" width="202" height="40"/>
+        <image name="invited button" width="202" height="40"/>
+        <image name="invited button pressed" width="202" height="40"/>
         <image name="megaphone" width="169" height="169"/>
         <image name="megaphone pressed" width="169" height="169"/>
         <image name="notification yellow circle" width="15" height="15"/>

@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol STTutorialDelegate <NSObject>
+
+-(void)tutorialDidDissmiss;
+
+@end
+
 @interface STTutorialViewController : UICollectionViewController
 
 @property (nonatomic, strong) UIImage * backgroundImageForLastElement;
-
+@property (nonatomic, weak) id <STTutorialDelegate> delegate;
 + (STTutorialViewController *)newInstance;
 
 @end

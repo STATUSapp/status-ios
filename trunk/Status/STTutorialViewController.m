@@ -8,6 +8,7 @@
 
 #import "STTutorialViewController.h"
 #import "STTutorialCell.h"
+#import "STInviteController.h"
 
 static NSString * const kSTTutorialImagePrefix = @"tutorial_";
 static NSInteger const  kSTNumberOfTutorialImages = 5;
@@ -59,7 +60,13 @@ static NSInteger const  kSTNumberOfTutorialImages = 5;
 
 - (void)dismissViewController{
     if ([(STTutorialCell*)[self.collectionView visibleCells].firstObject tag] == kSTNumberOfTutorialImages - 1) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            if (_delegate && [_delegate respondsToSelector:@selector(tutorialDidDissmiss)]) {
+                [_delegate performSelector:@selector(tutorialDidDissmiss)];
+            }
+        }];
+        
+        
     }
 }
 

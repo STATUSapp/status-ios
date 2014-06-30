@@ -10,11 +10,16 @@
 #import "STWhatsAppActivity.h"
 #import "STConstants.h"
 #import "STFacebookActivity.h"
+#import "STInviteController.h"
 
 @interface STInviteFriendsViewController ()
 {
     UIActivityViewController *activityViewController;
+    UIButton *tappedButton;
 }
+@property (weak, nonatomic) IBOutlet UIButton *firstInvite;
+@property (weak, nonatomic) IBOutlet UIButton *secondinvite;
+@property (weak, nonatomic) IBOutlet UIButton *thirdinvite;
 @end
 
 @implementation STInviteFriendsViewController
@@ -35,6 +40,38 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self loadButtons];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)loadButtons{
+    BOOL valid = [[STInviteController sharedInstance] validInviteNumber:@(_firstInvite.tag)];
+    [_firstInvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button":@"invited button"] forState:UIControlStateNormal];
+    [_firstInvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
+    
+    valid = [[STInviteController sharedInstance] validInviteNumber:@(_secondinvite.tag)];
+    [_secondinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button":@"invited button"] forState:UIControlStateNormal];
+    [_secondinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
+    
+    valid = [[STInviteController sharedInstance] validInviteNumber:@(_thirdinvite.tag)];
+    [_thirdinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button":@"invited button"] forState:UIControlStateNormal];
+    [_thirdinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
+
+    
+}
+
+#pragma mark - IBActions
+
+- (IBAction)onInviteYourFriends:(id)sender {
+
+    tappedButton = sender;
+    
     NSString *inviteText = STInviteText;
     NSString *inviteLink = STInviteLink;
     
@@ -55,20 +92,20 @@
     activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
     activityViewController.excludedActivityTypes = excludedActivities;
     UIActivityViewControllerCompletionHandler completion = ^(NSString *activityType, BOOL completed){
-        //TODO: add tracker
+        
+        //TODO: check if this works for all
+        if (completed == YES) {
+            [[STInviteController sharedInstance] setCurrentDateForInviteNumber:@(tappedButton.tag)];
+            tappedButton = nil;
+            [self loadButtons];
+        }
+        
     };
-    [activityViewController setCompletionHandler:completion];}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - IBActions
-
-- (IBAction)onInviteYourFriends:(id)sender {
-
+    
+    
+    
+    [activityViewController setCompletionHandler:completion];
+    
     [self presentViewController:activityViewController animated:YES completion:^{
         
     }];
@@ -89,5 +126,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

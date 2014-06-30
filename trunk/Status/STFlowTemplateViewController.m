@@ -32,6 +32,7 @@
 #import "GADInterstitial.h"
 #import "STRemoveAdsViewController.h"
 #import "STInviteFriendsViewController.h"
+#import "STInviteController.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
@@ -41,7 +42,8 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate, GADInterstitialDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate,
+GADInterstitialDelegate, STTutorialDelegate>
 {
     GADInterstitial * _interstitial;
     
@@ -263,7 +265,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     // TODO: calculate the booleans below properly
     
-    BOOL shouldPresentInviter = YES;
+    BOOL shouldPresentInviter = [[STInviteController sharedInstance] shouldInviteBeAvailable];
     BOOL shouldPresentAds = YES;
     
     
@@ -306,6 +308,14 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             
         default:
             break;
+    }
+}
+
+#pragma mark - STTutorialDelegate
+
+-(void)tutorialDidDissmiss{
+    if ([[STInviteController sharedInstance] shouldInviteBeAvailable]) {
+        [self presentIntrestialControllerWithType:STInterstitialTypeInviter];
     }
 }
 
@@ -605,6 +615,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (IBAction)onClickHowItWorks:(id)sender {
     [self onCloseMenu:nil];
     STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];
+    tutorialVC.delegate = self;
     tutorialVC.backgroundImageForLastElement = [self snapshotOfCurrentScreen];
     tutorialVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:tutorialVC animated:YES completion:nil];
@@ -1135,6 +1146,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         NSDictionary *dict = [self getCurrentDictionary];
         STLikesViewController *viewController = (STLikesViewController *)[segue destinationViewController];
         viewController.postId = dict[@"post_id"];
+    }
+    else if ([segue.identifier isEqualToString:@"inviteSegue"]){
+        [self onCloseMenu:nil];
     }
 }
 
