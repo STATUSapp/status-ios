@@ -1049,11 +1049,16 @@
                                     <action selector="onTapRemoveAds:" destination="4Q1-kp-NX1" eventType="touchUpInside" id="OBA-l4-L37"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="2am-yf-tUJ">
+                                <rect key="frame" x="269" y="472" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="EyG-kb-FNl" firstAttribute="top" secondItem="2V2-Ym-L7J" secondAttribute="bottom" constant="60" id="4Wd-42-AMj"/>
                             <constraint firstItem="Aam-EK-QwC" firstAttribute="centerX" secondItem="pL0-e7-yGI" secondAttribute="centerX" constant="0.5" id="CpN-E5-iS2"/>
+                            <constraint firstItem="2am-yf-tUJ" firstAttribute="leading" secondItem="Rpl-dR-Bqy" secondAttribute="trailing" constant="8" id="GCd-cj-mHI"/>
                             <constraint firstItem="r4i-Cd-2ZV" firstAttribute="top" secondItem="EyG-kb-FNl" secondAttribute="bottom" constant="17" id="GOz-5w-FC1"/>
                             <constraint firstItem="c5P-ko-Bh3" firstAttribute="top" secondItem="pL0-e7-yGI" secondAttribute="bottom" id="LZy-v0-fOK"/>
                             <constraint firstItem="Aam-EK-QwC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="r4i-Cd-2ZV" secondAttribute="bottom" constant="20" id="QQK-UP-FGI"/>
@@ -1061,6 +1066,7 @@
                             <constraint firstAttribute="trailing" secondItem="pL0-e7-yGI" secondAttribute="trailing" id="ZUR-je-QtL"/>
                             <constraint firstItem="Aam-EK-QwC" firstAttribute="top" secondItem="r4i-Cd-2ZV" secondAttribute="bottom" priority="300" constant="66" id="aJg-TS-ciw"/>
                             <constraint firstItem="Rpl-dR-Bqy" firstAttribute="centerX" secondItem="pL0-e7-yGI" secondAttribute="centerX" id="az6-Xy-R7l"/>
+                            <constraint firstItem="Rpl-dR-Bqy" firstAttribute="centerY" secondItem="2am-yf-tUJ" secondAttribute="centerY" id="fBc-Ul-Tg7"/>
                             <constraint firstItem="pL0-e7-yGI" firstAttribute="centerX" secondItem="EyG-kb-FNl" secondAttribute="centerX" constant="-0.5" id="fTC-9k-F0o"/>
                             <constraint firstItem="pL0-e7-yGI" firstAttribute="top" secondItem="2V2-Ym-L7J" secondAttribute="bottom" id="gE2-kB-WCL"/>
                             <constraint firstItem="Rpl-dR-Bqy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Aam-EK-QwC" secondAttribute="bottom" constant="20" id="nq8-kd-pW5"/>
@@ -1069,6 +1075,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="2am-yf-tUJ" id="9vu-2F-Ggh"/>
                         <outlet property="removeAdsBtn" destination="Rpl-dR-Bqy" id="lnR-hY-Cqh"/>
                     </connections>
                 </viewController>
@@ -1177,7 +1184,6 @@
         <!--Invite Friends View Controller-->
         <scene sceneID="KPm-oB-afc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nzH-XJ-K9e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="STInviteFriendsViewController" id="OZV-os-N5E" customClass="STInviteFriendsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2i2-9t-Q49"/>
@@ -1293,6 +1299,7 @@
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nzH-XJ-K9e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1106" y="1509"/>
         </scene>

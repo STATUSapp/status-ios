@@ -13,8 +13,10 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
 
 @interface STRemoveAdsViewController ()<SKPaymentTransactionObserver, SKProductsRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *removeAdsBtn;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (strong, nonatomic) SKProduct * product;
+@property (strong, nonatomic) SKProductsRequest * request;
 
 @end
 
@@ -40,13 +42,18 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     [self getProductInfo];
     _removeAdsBtn.enabled = NO;
+    [_activityIndicator startAnimating];
 }
 
 - (void)getProductInfo {
     if ([SKPaymentQueue canMakePayments]) {
-        SKProductsRequest * request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:removeAdsInAppPurchaseProductID]];
-        request.delegate = self;
-        [request start];
+        if (_request == nil) {
+            _request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:removeAdsInAppPurchaseProductID]];
+            _request.delegate = self;
+        }
+        
+        [_request start];
+        
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Info" message:@"Please enable In App Purchase in Settings" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     }
@@ -85,6 +92,7 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
     if (products.count) {
         _product = products.firstObject;
         _removeAdsBtn.enabled = YES;
+        [_activityIndicator stopAnimating];
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Product was not found" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     }
@@ -103,7 +111,7 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
                 break;
                 
             case SKPaymentTransactionStateFailed:
-                [[[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Transaction failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                [[[UIAlertView alloc] initWithTitle:@"Something went wrong" message:transaction.error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
                 [[SKPaymentQueue defaultQueue]
                  finishTransaction:transaction];
                 break;
@@ -124,5 +132,11 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)dealloc {
+    _product = nil;
+    [_request cancel];
+    _request.delegate = nil;
+}
 
 @end
