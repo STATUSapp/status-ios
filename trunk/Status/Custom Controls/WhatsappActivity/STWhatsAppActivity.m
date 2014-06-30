@@ -23,6 +23,7 @@
 //
 
 #import "STWhatsAppActivity.h"
+#import "STInviteController.h"
 
 @implementation STWhatsAppActivity
 
@@ -78,6 +79,10 @@
     if ([[UIApplication sharedApplication] canOpenURL: whatsAppURL]) {
         [[UIApplication sharedApplication] openURL: whatsAppURL];
     }    
+}
+
+-(void)activityDidFinish:(BOOL)completed{
+    [[STInviteController sharedInstance] setCurrentDateForSelectedItem];
 }
 
 @end

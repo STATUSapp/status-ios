@@ -8,6 +8,7 @@
 
 #import "STFacebookActivity.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "STInviteController.h"
 
 @implementation STFacebookActivity
 - (NSString *)activityType {
@@ -63,7 +64,9 @@
         } else {
             // Success
             NSLog(@"result %@", results);
+            [[STInviteController sharedInstance] setCurrentDateForSelectedItem];
         }
     }];
 }
+
 @end

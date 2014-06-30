@@ -18,6 +18,8 @@
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
 
+#import "STInviteController.h"
+
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @implementation AppDelegate
@@ -79,6 +81,10 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    if ([[STInviteController sharedInstance] shouldInviteBeAvailable]) {
+        [[STInviteController sharedInstance] callTheDelegate];
+    }
+    
     [FBAppCall handleDidBecomeActive];
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];

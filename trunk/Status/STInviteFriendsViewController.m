@@ -12,10 +12,8 @@
 #import "STFacebookActivity.h"
 #import "STInviteController.h"
 
-@interface STInviteFriendsViewController ()
-{
-    UIButton *tappedButton;
-}
+@interface STInviteFriendsViewController ()<STInviteProtocol>
+
 @property (weak, nonatomic) IBOutlet UIButton *firstInvite;
 @property (weak, nonatomic) IBOutlet UIButton *secondinvite;
 @property (weak, nonatomic) IBOutlet UIButton *thirdinvite;
@@ -39,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [STInviteController sharedInstance].delegate = self;
     [self loadButtons];
 }
 
@@ -69,7 +67,7 @@
 
 - (IBAction)onInviteYourFriends:(id)sender {
 
-    tappedButton = sender;
+    [STInviteController sharedInstance].selectedButtonTag = @(((UIButton*)sender).tag);
     [(UIButton *)sender setUserInteractionEnabled:NO];
     NSString *inviteText = STInviteText;
     NSString *inviteLink = STInviteLink;
@@ -93,15 +91,9 @@
     UIActivityViewControllerCompletionHandler completion = ^(NSString *activityType, BOOL completed){
         //TODO: check if this works for all
         if (completed == YES) {
-            [[STInviteController sharedInstance] setCurrentDateForInviteNumber:@(tappedButton.tag)];
-            tappedButton = nil;
-            [self loadButtons];
+            [[STInviteController sharedInstance] setCurrentDateForSelectedItem];
         }
-        
     };
-    
-    
-    
     [activityViewController setCompletionHandler:completion];
     
     [self presentViewController:activityViewController animated:YES completion:^{
@@ -125,5 +117,12 @@
 }
 */
 
+-(void)setNewDates{
+    [self loadButtons];
+}
+
+-(void)dealloc{
+    [STInviteController sharedInstance].delegate = nil;
+}
 
 @end

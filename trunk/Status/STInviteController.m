@@ -26,10 +26,21 @@ static long const kWeekSeconds = 3600*24*7;
     return [NSString stringWithFormat:@"inviteNumber%d", number.integerValue];
 }
 
--(void)setCurrentDateForInviteNumber:(NSNumber *)number{
+-(void)setCurrentDateForSelectedItem{
+    if (_selectedButtonTag==nil) {
+        return;
+    }
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:[NSDate date] forKey:[self keyForNumber:number]];
+    [ud setObject:[NSDate date] forKey:[self keyForNumber:_selectedButtonTag]];
+    _selectedButtonTag = nil;
     [ud synchronize];
+    [self callTheDelegate];
+}
+
+-(void)callTheDelegate{
+    if (_delegate && [_delegate respondsToSelector:@selector(setNewDates)]) {
+        [_delegate performSelector:@selector(setNewDates)];
+    }
 }
 
 -(BOOL)validInviteNumber:(NSNumber *)number{
@@ -66,12 +77,20 @@ static long const kWeekSeconds = 3600*24*7;
     NSDate *oneWeekLaterDate = [latestInviteDate dateByAddingTimeInterval:kWeekSeconds];
     
     if ([oneWeekLaterDate compare:currentDate] == NSOrderedAscending) {
+        [self resetDates];
         return YES;
     }
     
     return NO;
     
     
+}
+
+-(void)resetDates{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:nil forKey:[self keyForNumber:@(0)]];
+    [ud setObject:nil forKey:[self keyForNumber:@(1)]];
+    [ud setObject:nil forKey:[self keyForNumber:@(2)]];
 }
 
 @end
