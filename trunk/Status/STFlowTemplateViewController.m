@@ -93,6 +93,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     else
     {
         [self getDataSourceWithOffset:0];
+        //[self processCurrentPost:nil];
         if (self.flowType == STFlowTypeMyProfile)
             [self addTopOption];
     }
@@ -329,6 +330,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     [self addTopOption];
     self.postsDataSource = [NSMutableArray array];
     [self getDataSourceWithOffset:0];
+    //[self processCurrentPost:nil];
     [self checkForNotificationNumber];
     [self handleNotification:_lastNotif];
 }
@@ -374,10 +376,10 @@ GADInterstitialDelegate, STTutorialDelegate>
 -(NSMutableArray *)removeDuplicatesFromArray:(NSArray *)array{
     
     NSMutableArray *sheetArray = [NSMutableArray arrayWithArray:array];
-    NSArray *idsArray = [_postsDataSource valueForKey:@"id"];
+    NSArray *idsArray = [_postsDataSource valueForKey:@"full_photo_link"];
     
     for (NSDictionary *dict in array) {
-        if ([idsArray containsObject:dict[@"id"]]) {
+        if ([idsArray containsObject:dict[@"full_photo_link"]]) {
             NSLog(@"Duplicate found");
             [sheetArray removeObject:dict];
         }
@@ -387,6 +389,11 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 - (void)getDataSourceWithOffset:(long) offset{
     NSLog(@"Offset: %ld", offset);
+#ifdef DEBUG
+    if (_postsDataSource.count>=10) {
+        return;
+    }
+#endif
     __weak STFlowTemplateViewController *weakSelf = self;
     switch (self.flowType) {
         case STFlowTypeAllPosts:{
@@ -485,7 +492,8 @@ GADInterstitialDelegate, STTutorialDelegate>
         [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateHighlighted];
     });
     
-    [self getDataSourceWithOffset:0];
+    //[self getDataSourceWithOffset:0];
+    [self processCurrentPost:nil];
     
 }
 
@@ -646,53 +654,9 @@ GADInterstitialDelegate, STTutorialDelegate>
 //
     _menuView.alpha = 0.f;
     _menuImageView.image = [self blurCurrentScreen];
-    _menuView.translatesAutoresizingMaskIntoConstraints = NO;
-
-    /*
-    [_menuView addConstraint:[NSLayoutConstraint constraintWithItem:_menuView
-                                                          attribute:NSLayoutAttributeTop
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f]];
-    [_menuView addConstraint:[NSLayoutConstraint constraintWithItem:_menuView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1.0f constant:0.f]];
-    [_menuView addConstraint:[NSLayoutConstraint constraintWithItem:_menuView
-                                                          attribute:NSLayoutAttributeTrailing
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeTrailing
-                                                         multiplier:1.0f constant:0.f]];
-    [_menuView addConstraint:[NSLayoutConstraint constraintWithItem:_menuView
-                                                          attribute:NSLayoutAttributeLeading
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.f]];
-*/
     
     [self.view addSubview:_menuView];
-    
-    UIView *buttonsView = [_menuView viewWithTag:107];
-    
-    NSLayoutConstraint* cn = [NSLayoutConstraint constraintWithItem:buttonsView
-                                                          attribute:NSLayoutAttributeCenterX
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:_menuView
-                                                          attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0
-                                                           constant:0];
-    [_menuView addConstraint:cn];
-    NSLayoutConstraint* cn1 = [NSLayoutConstraint constraintWithItem:buttonsView
-                                      attribute:NSLayoutAttributeCenterY
-                                      relatedBy:NSLayoutRelationEqual
-                                         toItem:_menuView
-                                      attribute:NSLayoutAttributeCenterY
-                                     multiplier:1.0
-                                       constant:0];
-    [_menuView addConstraint:cn1];
+
     [UIView animateWithDuration:0.33 animations:^{
         _menuView.alpha = 1.f;
     }];
@@ -705,6 +669,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 }
 
 - (IBAction)onTapLike:(id)sender {
+    [(UIButton *)sender setUserInteractionEnabled:NO];
     NSArray *indxPats = [self.collectionView indexPathsForVisibleItems];
     if (indxPats.count ==0) {
         return;
@@ -714,6 +679,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 
     __weak STFlowTemplateViewController *weakSelf = self;
     [[STWebServiceController sharedInstance] setPostLiked:cellDict[@"post_id"] withCompletion:^(NSDictionary *response) {
+        [(UIButton *)sender setUserInteractionEnabled:YES];
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
 
             [[STWebServiceController sharedInstance] getPostDetails:cellDict[@"post_id"] withCompletion:^(NSDictionary *response) {
@@ -729,9 +695,6 @@ GADInterstitialDelegate, STTutorialDelegate>
                     
                     BOOL isLiked = [cellDict[@"post_liked_by_current_user"] boolValue];
                     if (!isLiked && weakSelf.postsDataSource.count>currentRow+1) {
-//                        [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentRow+1 inSection:0]
-//                                                        atScrollPosition:UICollectionViewScrollPositionNone
-//                                                                animated:YES];
                         
                         [weakSelf performSelector:@selector(goToNextPostWithRow:)
                                        withObject:@(currentRow+1)
@@ -951,24 +914,31 @@ GADInterstitialDelegate, STTutorialDelegate>
     return self.view.frame.size;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-   
-    _numberOfSeenPosts++;
+-(void)loadNextImage:(NSString *)nextImage{
     
-    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
+    [[STImageCacheController sharedInstance] loadImageWithName:nextImage andCompletion:nil];
+}
+
+- (void)processCurrentPost:(NSIndexPath *)indexPath {
+    NSIndexPath *usedIndx = indexPath;
+    if (usedIndx == nil) {
+        usedIndx = [[_collectionView indexPathsForVisibleItems] firstObject];
+    }
+    if (usedIndx == nil) {
+        usedIndx = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
     
-#if PAGGING_ENABLED
     if (self.flowType == STFlowTypeAllPosts) {
-        NSDictionary *dict = [self.postsDataSource objectAtIndex:indexPath.row];
+        NSDictionary *dict = [self.postsDataSource objectAtIndex:usedIndx.row];
         if ([dict[@"post_seen"] boolValue] == TRUE) {
             return;
         }
         __weak STFlowTemplateViewController *weakSelf = self;
         [[STWebServiceController sharedInstance] setPostSeen:dict[@"post_id"] withCompletion:^(NSDictionary *response) {
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-                [weakSelf markDataSourceSeenAtIndex:indexPath.row];
-                int indexOffset = indexPath.row%POSTS_PAGGING;
-                if (indexOffset == POSTS_PAGGING-2) {
+                [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
+                int indexOffset = usedIndx.row%POSTS_PAGGING;
+                if (indexOffset == POSTS_PAGGING-3) {
                     [weakSelf getDataSourceWithOffset:POSTS_PAGGING-indexOffset-1];
                 }
             }
@@ -979,11 +949,26 @@ GADInterstitialDelegate, STTutorialDelegate>
     }
     else if(self.flowType != STFlowTypeSinglePost)
     {
-        if (indexPath.row%POSTS_PAGGING == POSTS_PAGGING-2) {
+        if (usedIndx.row%POSTS_PAGGING == POSTS_PAGGING-2) {
             [self getDataSourceWithOffset:self.postsDataSource.count];
         }
     }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+   
+    _numberOfSeenPosts++;
+    
+    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
+    
+#if PAGGING_ENABLED
+    [self processCurrentPost:indexPath];
 #endif
+    if (_postsDataSource.count>indexPath.row+1) {
+        NSDictionary *nextDict = [_postsDataSource objectAtIndex:indexPath.row];
+        [self loadNextImage:nextDict[@"full_photo_link"]];
+    }
+    
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath

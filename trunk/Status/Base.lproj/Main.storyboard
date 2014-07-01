@@ -68,7 +68,6 @@
                                                             <state key="normal" image="btn_like_normal">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
-                                                            <state key="disabled" image="btn_liked"/>
                                                             <state key="highlighted" image="btn_like_pressed"/>
                                                             <connections>
                                                                 <action selector="onTapLike:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6JX-iV-A8l"/>
@@ -432,7 +431,7 @@
                                         <action selector="onTapMyProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gTl-cR-t50"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ1-Vx-dAP">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ1-Vx-dAP">
                                     <rect key="frame" x="34" y="0.0" width="208" height="55"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
@@ -450,7 +449,7 @@
                                         <action selector="onClickHome:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="b9A-Ru-zcp"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayI-W4-ZZ8">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayI-W4-ZZ8">
                                     <rect key="frame" x="34" y="81" width="203" height="55"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
@@ -468,7 +467,7 @@
                                         <action selector="onClickNearby:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Vco-O8-bJz"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UG-bu-798">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UG-bu-798">
                                     <rect key="frame" x="34" y="162" width="203" height="55"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
@@ -486,7 +485,7 @@
                                         <segue destination="OZV-os-N5E" kind="modal" identifier="inviteSegue" id="gEh-Sj-BQD"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Eh-Nk-tGn">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Eh-Nk-tGn">
                                     <rect key="frame" x="34" y="233" width="203" height="55"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
@@ -506,14 +505,9 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="9Eh-Nk-tGn" firstAttribute="leading" secondItem="RQ1-Vx-dAP" secondAttribute="leading" id="IdH-CD-z2p"/>
-                                <constraint firstItem="9Eh-Nk-tGn" firstAttribute="leading" secondItem="ayI-W4-ZZ8" secondAttribute="leading" id="bfF-VU-LXk"/>
-                                <constraint firstItem="9Eh-Nk-tGn" firstAttribute="leading" secondItem="5UG-bu-798" secondAttribute="leading" id="zzW-gQ-W86"/>
-                            </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <swipeGestureRecognizer direction="down" id="tbL-Ub-pis" userLabel="Swipe Gesture Down">
                     <connections>
@@ -1225,10 +1219,10 @@
                                             <constraint firstAttribute="width" constant="169" id="aae-cD-1yQ"/>
                                             <constraint firstAttribute="height" constant="169" id="teQ-Gg-Tad"/>
                                         </constraints>
-                                        <state key="normal" image="invite friends icon">
+                                        <state key="normal" image="3 friends icon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="highlighted" image="invite friends icon pressed"/>
+                                        <state key="highlighted" image="3 friends icon pressed"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1323,6 +1317,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="3 friends icon" width="139" height="87"/>
+        <image name="3 friends icon pressed" width="139" height="87"/>
         <image name="back button" width="22" height="22"/>
         <image name="btn_big_camera_normal" width="142" height="108"/>
         <image name="btn_big_camera_pressed" width="142" height="108"/>
@@ -1330,7 +1326,6 @@
         <image name="btn_camera_pressed" width="47" height="47"/>
         <image name="btn_like_normal" width="77" height="77"/>
         <image name="btn_like_pressed" width="77" height="77"/>
-        <image name="btn_liked" width="77" height="77"/>
         <image name="btn_menu_normal" width="21" height="20"/>
         <image name="btn_notif_normal" width="37" height="30"/>
         <image name="btn_notif_selected" width="37" height="30"/>
@@ -1342,8 +1337,6 @@
         <image name="facebook share button" width="160" height="46"/>
         <image name="facebook share button pressed" width="160" height="46"/>
         <image name="grey line" width="288" height="1"/>
-        <image name="invite friends icon" width="182" height="131"/>
-        <image name="invite friends icon pressed" width="182" height="131"/>
         <image name="invite your friends button" width="202" height="40"/>
         <image name="invite your friends button pressed" width="202" height="40"/>
         <image name="invited button" width="202" height="40"/>

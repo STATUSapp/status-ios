@@ -32,14 +32,18 @@
     __block UIImage *img = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         [[STWebServiceController sharedInstance] downloadImage:imageFullLink withCompletion:^(NSURL *imageURL) {
-            img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-            completion(img);
+            if (completion!=nil) {
+                img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+                completion(img);
+            }
         }];
     }
     else
     {
-        img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageFullPath]];
-        completion(img);
+        if (completion!=nil) {
+            img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageFullPath]];
+            completion(img);
+        }
     }
 }
 

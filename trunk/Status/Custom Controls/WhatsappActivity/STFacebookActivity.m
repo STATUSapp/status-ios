@@ -31,7 +31,7 @@
     [NSURL URLWithString:activityItems[1]];
     params.name = @"STATUS";
     params.caption = activityItems[0];
-    //params.picture = [NSURL URLWithString:@"http://i.imgur.com/g3Qc1HN.png"];
+    params.picture = [NSURL URLWithString:@"http://status.glazeon.com/logo120p.png"];
     params.linkDescription = activityItems[0];
 
     return params;
