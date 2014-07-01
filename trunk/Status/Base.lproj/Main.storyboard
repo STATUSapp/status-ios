@@ -225,11 +225,11 @@
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvU-Bo-FXq">
-                                            <rect key="frame" x="69" y="96" width="182" height="377"/>
+                                            <rect key="frame" x="35" y="84" width="250" height="400"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ip-Pi-iIK">
-                                                    <rect key="frame" x="20" y="319" width="142" height="38"/>
+                                                    <rect key="frame" x="54" y="342" width="142" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
                                                     <state key="normal" title="Refresh">
@@ -243,37 +243,70 @@
                                                         <action selector="onTapRefreshFromFooter:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Iln-OC-rhi"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="142" translatesAutoresizingMaskIntoConstraints="NO" id="lR7-n3-ZAe">
-                                                    <rect key="frame" x="20" y="282" width="142" height="37"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="22" translatesAutoresizingMaskIntoConstraints="NO" id="lR7-n3-ZAe">
+                                                    <rect key="frame" x="114" y="308" width="22" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="25"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBM-3v-gBq">
-                                                    <rect key="frame" x="20" y="157" width="142" height="108"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="btn_big_camera_normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted" image="btn_big_camera_pressed"/>
-                                                    <connections>
-                                                        <action selector="onTapBigCameraProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aHT-YU-2Pi"/>
-                                                        <action selector="onTapCameraUpload:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="03u-Ol-UEJ"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You saw all the photos.   Take a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="142" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-um-646">
-                                                    <rect key="frame" x="20" y="20" width="142" height="119"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You saw all the photos. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="130" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-um-646">
+                                                    <rect key="frame" x="60" y="20" width="130" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBM-3v-gBq">
+                                                    <rect key="frame" x="19" y="96" width="212" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="Take a photo button">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="Take a photo button pressed"/>
+                                                    <connections>
+                                                        <action selector="onTapBigCameraProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aHT-YU-2Pi"/>
+                                                        <action selector="onTapCameraUpload:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="03u-Ol-UEJ"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APg-dy-xJ1">
+                                                    <rect key="frame" x="20" y="149" width="212" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="see people nearby button">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="see people nearby button pressed"/>
+                                                    <connections>
+                                                        <action selector="onClickNearbyFromYouSawAllThePhotos:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mUF-24-bY5"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBz-Mu-QRI">
+                                                    <rect key="frame" x="20" y="202" width="212" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="invite friends button">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="invite friends button pressed"/>
+                                                    <connections>
+                                                        <action selector="onCLickInviteFriendsFromYouSawAllThePhotos:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KbD-Fr-H3k"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMv-J9-1VF">
+                                                    <rect key="frame" x="20" y="255" width="212" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="chat button">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="chat button pressed"/>
+                                                    <connections>
+                                                        <action selector="onClickChatFromYouSawAllThePhotos:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ILo-J3-mCj"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="377" id="RYM-sk-9Wu"/>
-                                                <constraint firstAttribute="width" constant="182" id="el8-ax-MYf"/>
+                                                <constraint firstAttribute="height" constant="400" id="RYM-sk-9Wu"/>
+                                                <constraint firstAttribute="width" constant="250" id="el8-ax-MYf"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -1319,6 +1352,8 @@
     <resources>
         <image name="3 friends icon" width="139" height="87"/>
         <image name="3 friends icon pressed" width="139" height="87"/>
+        <image name="Take a photo button" width="212" height="45"/>
+        <image name="Take a photo button pressed" width="212" height="45"/>
         <image name="back button" width="22" height="22"/>
         <image name="btn_big_camera_normal" width="142" height="108"/>
         <image name="btn_big_camera_pressed" width="142" height="108"/>
@@ -1333,10 +1368,14 @@
         <image name="btn_nrLikes_pressed" width="34" height="33"/>
         <image name="btn_share_normal" width="47" height="47"/>
         <image name="btn_share_pressed" width="47" height="47"/>
+        <image name="chat button" width="212" height="45"/>
+        <image name="chat button pressed" width="212" height="45"/>
         <image name="email button" width="160" height="46"/>
         <image name="facebook share button" width="160" height="46"/>
         <image name="facebook share button pressed" width="160" height="46"/>
         <image name="grey line" width="288" height="1"/>
+        <image name="invite friends button" width="212" height="45"/>
+        <image name="invite friends button pressed" width="212" height="45"/>
         <image name="invite your friends button" width="202" height="40"/>
         <image name="invite your friends button pressed" width="202" height="40"/>
         <image name="invited button" width="202" height="40"/>
@@ -1349,6 +1388,8 @@
         <image name="placeholder notifications screen" width="60" height="60"/>
         <image name="remove ads button" width="202" height="40"/>
         <image name="remove ads button pressed" width="202" height="40"/>
+        <image name="see people nearby button" width="212" height="45"/>
+        <image name="see people nearby button pressed" width="212" height="45"/>
         <image name="selected grey area notifications screen" width="320" height="82"/>
         <image name="selected state" width="320" height="60"/>
         <image name="share button" width="319" height="48"/>

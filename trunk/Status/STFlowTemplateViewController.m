@@ -284,10 +284,10 @@ GADInterstitialDelegate, STTutorialDelegate>
     
     STInterstitialType interstitialToPresent = [[allowedIntestitials objectAtIndex: (index % [allowedIntestitials count] )] integerValue];
     
-    [self presentIntrestialControllerWithType:interstitialToPresent];
+    [self presentInterstitialControllerWithType:interstitialToPresent];
 }
 
-- (void) presentIntrestialControllerWithType:(STInterstitialType)interstitialType {
+- (void) presentInterstitialControllerWithType:(STInterstitialType)interstitialType {
     
     switch (interstitialType) {
         case STInterstitialTypeAds: {
@@ -316,7 +316,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 -(void)tutorialDidDissmiss{
     if ([[STInviteController sharedInstance] shouldInviteBeAvailable]) {
-        [self presentIntrestialControllerWithType:STInterstitialTypeInviter];
+        [self presentInterstitialControllerWithType:STInterstitialTypeInviter];
     }
 }
 
@@ -643,6 +643,16 @@ GADInterstitialDelegate, STTutorialDelegate>
     {
         [self onCloseMenu:nil];
     }
+}
+- (IBAction)onClickNearbyFromYouSawAllThePhotos:(id)sender {
+    [self onClickNearby:sender];
+}
+- (IBAction)onCLickInviteFriendsFromYouSawAllThePhotos:(id)sender {
+    [self presentInterstitialControllerWithType:STInterstitialTypeInviter];
+}
+
+- (IBAction)onClickChatFromYouSawAllThePhotos:(id)sender {
+    [self onChat:sender];
 }
 
 - (IBAction)onTapMenu:(id)sender {
