@@ -235,7 +235,6 @@ GADInterstitialDelegate, STTutorialDelegate>
     _interstitial = [[GADInterstitial alloc] init];
     _interstitial.adUnitID = kSTAdUnitID;
     
-    GADRequest * request = [GADRequest request];
 //    request.testDevices = @[GAD_SIMULATOR_ID];
     
     [_interstitial loadRequest:[GADRequest request]];
@@ -865,7 +864,18 @@ GADInterstitialDelegate, STTutorialDelegate>
         return [NSDictionary dictionary];
     }
     NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
-    NSDictionary *dict = [self.postsDataSource objectAtIndex:[[visibleInxPath objectAtIndex:0] row]];
+    NSInteger indexOfVisibleCell;
+    NSDictionary * dict = nil;
+    
+    if (visibleInxPath.count) {
+        indexOfVisibleCell =  [[visibleInxPath objectAtIndex:0] row];
+    } else {
+        return dict;
+    }
+    
+    if (self.postsDataSource.count - 1 >= indexOfVisibleCell) {
+        dict = [self.postsDataSource objectAtIndex:indexOfVisibleCell];
+    }
     
     return dict;
 }
