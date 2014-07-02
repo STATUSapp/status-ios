@@ -388,11 +388,11 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 - (void)getDataSourceWithOffset:(long) offset{
     NSLog(@"Offset: %ld", offset);
-#ifdef DEBUG
-    if (_postsDataSource.count>=10) {
-        return;
-    }
-#endif
+//#ifdef DEBUG
+//    if (_postsDataSource.count>=10) {
+//        return;
+//    }
+//#endif
     __weak STFlowTemplateViewController *weakSelf = self;
     switch (self.flowType) {
         case STFlowTypeAllPosts:{
@@ -405,7 +405,6 @@ GADInterstitialDelegate, STTutorialDelegate>
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
                     [weakSelf.collectionView reloadData];
-                    
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [weakSelf.refreshBt setEnabled:YES];
                         [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
@@ -490,11 +489,7 @@ GADInterstitialDelegate, STTutorialDelegate>
         [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateNormal];
         [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateHighlighted];
     });
-    
-    if(_postsDataSource.count == 0)
-        [self getDataSourceWithOffset:0];
-    else
-        [self processCurrentPost:[NSIndexPath indexPathForRow:_postsDataSource.count-1 inSection:0]];
+   [self getDataSourceWithOffset:0];
     
 }
 
@@ -864,18 +859,12 @@ GADInterstitialDelegate, STTutorialDelegate>
         return [NSDictionary dictionary];
     }
     NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
-    NSInteger indexOfVisibleCell;
-    NSDictionary * dict = nil;
-    
-    if (visibleInxPath.count) {
-        indexOfVisibleCell =  [[visibleInxPath objectAtIndex:0] row];
-    } else {
-        return dict;
+    NSDictionary *dict = [NSDictionary dictionary];
+    if (visibleInxPath.count == 0) {
+        dict = [_postsDataSource lastObject];
     }
-    
-    if (self.postsDataSource.count - 1 >= indexOfVisibleCell) {
-        dict = [self.postsDataSource objectAtIndex:indexOfVisibleCell];
-    }
+    else
+        dict = [self.postsDataSource objectAtIndex:[[visibleInxPath objectAtIndex:0] row]];
     
     return dict;
 }
@@ -936,9 +925,11 @@ GADInterstitialDelegate, STTutorialDelegate>
     return self.view.frame.size;
 }
 
--(void)loadNextImage:(NSString *)nextImage{
-    
-    [[STImageCacheController sharedInstance] loadImageWithName:nextImage andCompletion:nil];
+-(void)loadImageAtIndex:(NSInteger)index{
+    if (_postsDataSource.count>index+1) {
+        NSDictionary *nextDict = [_postsDataSource objectAtIndex:index];
+        [[STImageCacheController sharedInstance] loadImageWithName:nextDict[@"full_photo_link"] andCompletion:nil];
+    }
 }
 
 - (void)processCurrentPost:(NSIndexPath *)indexPath {
@@ -986,10 +977,8 @@ GADInterstitialDelegate, STTutorialDelegate>
 #if PAGGING_ENABLED
     [self processCurrentPost:indexPath];
 #endif
-    if (_postsDataSource.count>indexPath.row+1) {
-        NSDictionary *nextDict = [_postsDataSource objectAtIndex:indexPath.row];
-        [self loadNextImage:nextDict[@"full_photo_link"]];
-    }
+    [self loadImageAtIndex:indexPath.row+1];
+    [self loadImageAtIndex:indexPath.row+2];
     
 }
 
