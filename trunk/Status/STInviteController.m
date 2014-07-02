@@ -23,7 +23,7 @@ static long const kWeekSeconds = 3600*24*7;
 }
 
 -(NSString *)keyForNumber:(NSNumber *)number{
-    return [NSString stringWithFormat:@"inviteNumber%d", number.integerValue];
+    return [NSString stringWithFormat:@"inviteNumber%ld", (long)number.integerValue];
 }
 
 -(void)setCurrentDateForSelectedItem{
@@ -31,6 +31,14 @@ static long const kWeekSeconds = 3600*24*7;
         return;
     }
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    if (_selectedButtonTag.integerValue == 4) {//general button
+        for (int i=0; i<3; i++) {
+            if ([ud valueForKey:[self keyForNumber:@(i)]] == nil) {
+                _selectedButtonTag = @(i);
+            }
+        }
+    }
+    
     [ud setObject:[NSDate date] forKey:[self keyForNumber:_selectedButtonTag]];
     _selectedButtonTag = nil;
     [ud synchronize];

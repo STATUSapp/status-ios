@@ -49,16 +49,16 @@
 
 -(void)loadButtons{
     BOOL valid = [[STInviteController sharedInstance] validInviteNumber:@(_firstInvite.tag)];
-    [_firstInvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button":@"invited button"] forState:UIControlStateNormal];
-    [_firstInvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
+    [_firstInvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friend button":@"invited button"] forState:UIControlStateNormal];
+    [_firstInvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friend button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
     
     valid = [[STInviteController sharedInstance] validInviteNumber:@(_secondinvite.tag)];
-    [_secondinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button":@"invited button"] forState:UIControlStateNormal];
-    [_secondinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
+    [_secondinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friend button":@"invited button"] forState:UIControlStateNormal];
+    [_secondinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friend button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
     
     valid = [[STInviteController sharedInstance] validInviteNumber:@(_thirdinvite.tag)];
-    [_thirdinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button":@"invited button"] forState:UIControlStateNormal];
-    [_thirdinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friends button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
+    [_thirdinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friend button":@"invited button"] forState:UIControlStateNormal];
+    [_thirdinvite setImage:[UIImage imageNamed:valid == NO ? @"invite your friend button pressed":@"invited button pressed"] forState:UIControlStateHighlighted];
 
     
 }

@@ -492,8 +492,10 @@ GADInterstitialDelegate, STTutorialDelegate>
         [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateHighlighted];
     });
     
-    //[self getDataSourceWithOffset:0];
-    [self processCurrentPost:nil];
+    if(_postsDataSource.count == 0)
+        [self getDataSourceWithOffset:0];
+    else
+        [self processCurrentPost:[NSIndexPath indexPathForRow:_postsDataSource.count-1 inSection:0]];
     
 }
 
@@ -719,7 +721,7 @@ GADInterstitialDelegate, STTutorialDelegate>
         }
         
     } orError:^(NSError *error) {
-        
+        [(UIButton *)sender setUserInteractionEnabled:YES];
     }];
 }
 - (IBAction)onTapBigCameraProfile:(id)sender {
