@@ -14,5 +14,5 @@
 
     // if setupDict is nil, the cell will be setted as a placeholder
 - (void)setUpWithDictionary: (NSDictionary *)setupDict forFlowType: (int) flowType;
-
+- (void)setUpPlaceholderBeforeLoading;
 @end

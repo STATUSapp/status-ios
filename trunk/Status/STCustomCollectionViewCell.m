@@ -126,6 +126,7 @@
 }
 
 - (void)setupAsPlaceholderForFlowType:(STFlowType)type{
+    [self.contentView sendSubviewToBack:_bigPictureImageView];
     self.bigCameraProfileBtn.hidden = NO;
     self.smallPictureImageView.hidden = YES;
     self.bigPictureImageView.hidden = NO;
@@ -151,6 +152,11 @@
         default:
             break;
     }
+}
+
+-(void)setUpPlaceholderBeforeLoading{
+    [self.contentView bringSubviewToFront:_bigPictureImageView];
+    self.bigPictureImageView.image = [UIImage imageNamed:@"placeholder"];
 }
 
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{

@@ -1391,6 +1391,8 @@
         <image name="facebook share button" width="160" height="46"/>
         <image name="facebook share button pressed" width="160" height="46"/>
         <image name="grey line" width="288" height="1"/>
+        <image name="invite friends button" width="212" height="45"/>
+        <image name="invite friends button pressed" width="212" height="45"/>
         <image name="invite your friend button" width="202" height="40"/>
         <image name="invite your friend button pressed" width="202" height="40"/>
         <image name="invited button" width="202" height="40"/>

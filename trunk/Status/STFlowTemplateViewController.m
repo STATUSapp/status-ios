@@ -53,6 +53,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     NSDictionary *_lastNotif;
     UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
+    BOOL _isDataSourceLoaded;
     BOOL _isInterstitialLoaded;
     NSInteger _numberOfSeenPosts;
 }
@@ -404,6 +405,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 #else
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
+                    _isDataSourceLoaded = YES;
                     [weakSelf.collectionView reloadData];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [weakSelf.refreshBt setEnabled:YES];
@@ -436,6 +438,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 #else
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
+                    _isDataSourceLoaded = YES;
                     [weakSelf.collectionView reloadData];
                 }
                 
@@ -452,6 +455,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 #else
                 weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
+                _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
                 
                 
@@ -463,6 +467,7 @@ GADInterstitialDelegate, STTutorialDelegate>
         case STFlowTypeSinglePost:{
             [[STWebServiceController sharedInstance] getPostDetails:self.postID withCompletion:^(NSDictionary *response) {
                 weakSelf.postsDataSource = [NSMutableArray arrayWithObject:response[@"data"]];
+                _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
             } andErrorCompletion:^(NSError *error) {
                 
@@ -879,7 +884,10 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     STCustomCollectionViewCell *cell = (STCustomCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"FlowCollectionCellIdentifier" forIndexPath:indexPath];
-    
+   
+    if (_isPlaceholderSinglePost && !_isDataSourceLoaded) {
+        [cell setUpPlaceholderBeforeLoading];
+    }
     NSDictionary *cellDict = (_isPlaceholderSinglePost ? nil : self.postsDataSource[indexPath.row]); // the cell will know to setup as placeholder if setupDict is nil
     cell.username = self.userName;
     [cell setUpWithDictionary:cellDict forFlowType:self.flowType];
