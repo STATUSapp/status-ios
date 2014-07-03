@@ -94,7 +94,6 @@ GADInterstitialDelegate, STTutorialDelegate>
     else
     {
         [self getDataSourceWithOffset:0];
-        //[self processCurrentPost:nil];
         if (self.flowType == STFlowTypeMyProfile)
             [self addTopOption];
     }
@@ -330,7 +329,6 @@ GADInterstitialDelegate, STTutorialDelegate>
     [self addTopOption];
     self.postsDataSource = [NSMutableArray array];
     [self getDataSourceWithOffset:0];
-    //[self processCurrentPost:nil];
     [self checkForNotificationNumber];
     [self handleNotification:_lastNotif];
 }
@@ -406,6 +404,7 @@ GADInterstitialDelegate, STTutorialDelegate>
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
                     _isDataSourceLoaded = YES;
+                    [weakSelf loadImages];
                     [weakSelf.collectionView reloadData];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [weakSelf.refreshBt setEnabled:YES];
@@ -438,6 +437,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 #else
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
+                    [weakSelf loadImages];
                     _isDataSourceLoaded = YES;
                     [weakSelf.collectionView reloadData];
                 }
@@ -455,6 +455,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 #else
                 weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
+                [weakSelf loadImages];
                 _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
                 
@@ -467,6 +468,7 @@ GADInterstitialDelegate, STTutorialDelegate>
         case STFlowTypeSinglePost:{
             [[STWebServiceController sharedInstance] getPostDetails:self.postID withCompletion:^(NSDictionary *response) {
                 weakSelf.postsDataSource = [NSMutableArray arrayWithObject:response[@"data"]];
+                [weakSelf loadImages];
                 _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
             } andErrorCompletion:^(NSError *error) {
@@ -668,9 +670,46 @@ GADInterstitialDelegate, STTutorialDelegate>
     
     [self.view addSubview:_menuView];
 
+    [self addContraintForMenu];
+    
     [UIView animateWithDuration:0.33 animations:^{
         _menuView.alpha = 1.f;
     }];
+}
+
+-(void)addContraintForMenu{
+    [self.view addConstraint:[NSLayoutConstraint
+                           constraintWithItem:_menuView
+                           attribute:NSLayoutAttributeTop
+                           relatedBy:NSLayoutRelationEqual
+                           toItem:self.topLayoutGuide
+                           attribute:NSLayoutAttributeTop
+                           multiplier:1.f
+                           constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:_menuView
+                              attribute:NSLayoutAttributeBottom
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.bottomLayoutGuide
+                              attribute:NSLayoutAttributeBottom
+                              multiplier:1.f
+                              constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:_menuView
+                              attribute:NSLayoutAttributeTrailing
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeTrailing
+                              multiplier:1.f
+                              constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:_menuView
+                              attribute:NSLayoutAttributeLeading
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeLeading
+                              multiplier:1.f
+                              constant:0]];
 }
 
 - (IBAction)onTapCameraUpload:(id)sender {
@@ -940,6 +979,14 @@ GADInterstitialDelegate, STTutorialDelegate>
     }
 }
 
+-(void)loadImages{
+    NSLog(@"Start loading image link");
+    for (NSString *imageLink in [_postsDataSource valueForKey:@"full_photo_link"]) {
+        [[STImageCacheController sharedInstance] loadImageWithName:imageLink
+                                                     andCompletion:nil];
+    }
+}
+
 - (void)processCurrentPost:(NSIndexPath *)indexPath {
     NSIndexPath *usedIndx = indexPath;
     if (usedIndx == nil) {
@@ -959,7 +1006,7 @@ GADInterstitialDelegate, STTutorialDelegate>
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                 [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
                 int indexOffset = usedIndx.row%POSTS_PAGGING;
-                if (indexOffset == POSTS_PAGGING-3) {
+                if (indexOffset == POSTS_PAGGING-4) {
                     [weakSelf getDataSourceWithOffset:POSTS_PAGGING-indexOffset-1];
                 }
             }
@@ -985,8 +1032,8 @@ GADInterstitialDelegate, STTutorialDelegate>
 #if PAGGING_ENABLED
     [self processCurrentPost:indexPath];
 #endif
-    [self loadImageAtIndex:indexPath.row+1];
-    [self loadImageAtIndex:indexPath.row+2];
+    //[self loadImageAtIndex:indexPath.row+1];
+    //[self loadImageAtIndex:indexPath.row+2];
     
 }
 

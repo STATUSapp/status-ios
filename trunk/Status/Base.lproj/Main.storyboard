@@ -414,7 +414,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="gS4-jD-fvB" userLabel="menuView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gS4-jD-fvB" userLabel="menuView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -442,12 +442,12 @@
                                 <action selector="onCloseMenu:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZWy-Vo-fYO"/>
                             </connections>
                         </button>
-                        <view tag="107" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tcb-uj-c9Y">
-                            <rect key="frame" x="0.0" y="110" width="320" height="369"/>
+                        <view tag="107" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tcb-uj-c9Y">
+                            <rect key="frame" x="0.0" y="110" width="320" height="379"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eU-By-Ymg">
-                                    <rect key="frame" x="34" y="314" width="203" height="55"/>
+                                    <rect key="frame" x="34" y="324" width="203" height="55"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                                     <state key="normal" title="Me">
@@ -519,7 +519,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Eh-Nk-tGn">
-                                    <rect key="frame" x="34" y="233" width="203" height="55"/>
+                                    <rect key="frame" x="34" y="243" width="203" height="55"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                                     <state key="normal" title="How it works">
@@ -538,9 +538,18 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="379" id="OX6-dM-EcU"/>
+                                <constraint firstAttribute="width" constant="320" id="b0x-BF-oYx"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="Tcb-uj-c9Y" secondAttribute="centerY" constant="-15" id="GiR-ue-5ZD"/>
+                        <constraint firstAttribute="width" constant="320" id="cH6-e6-gjL"/>
+                        <constraint firstAttribute="centerX" secondItem="Tcb-uj-c9Y" secondAttribute="centerX" id="fNX-YN-xG1"/>
+                    </constraints>
                 </view>
                 <swipeGestureRecognizer direction="down" id="tbL-Ub-pis" userLabel="Swipe Gesture Down">
                     <connections>
@@ -1232,11 +1241,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wM-Ex-g3W">
-                                <rect key="frame" x="0.0" y="167" width="320" height="113"/>
+                                <rect key="frame" x="0.0" y="145" width="320" height="175"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-DM-vN2">
-                                        <rect key="frame" x="0.0" y="-1" width="320" height="114"/>
+                                        <rect key="frame" x="0.0" y="-1" width="320" height="176"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1246,11 +1255,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXM-E5-SdM">
-                                        <rect key="frame" x="76" y="-28" width="169" height="169"/>
+                                        <rect key="frame" x="91" y="44" width="139" height="87"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="169" id="aae-cD-1yQ"/>
-                                            <constraint firstAttribute="height" constant="169" id="teQ-Gg-Tad"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="aQC-Wy-Vgz"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="dAQ-NZ-fHK"/>
                                         </constraints>
                                         <state key="normal" image="3 friends icon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1275,18 +1284,18 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status logo" translatesAutoresizingMaskIntoConstraints="NO" id="unO-1H-P1W">
-                                <rect key="frame" x="62" y="90" width="197" height="28"/>
+                                <rect key="frame" x="62" y="70" width="197" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is more fun with friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOO-th-bI0">
-                                <rect key="frame" x="36" y="135" width="249" height="30"/>
+                                <rect key="frame" x="36" y="113" width="249" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can invite only 3 special friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="qWu-0u-uc1">
-                                <rect key="frame" x="46" y="283" width="225" height="60"/>
+                                <rect key="frame" x="46" y="323" width="225" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="h5y-eG-0ir"/>
@@ -1297,7 +1306,7 @@
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXA-Mz-F6B">
-                                <rect key="frame" x="59" y="480" width="202" height="40"/>
+                                <rect key="frame" x="59" y="503" width="202" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="invite your friend button pressed">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1308,7 +1317,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPY-y5-31R">
-                                <rect key="frame" x="57" y="425" width="202" height="40"/>
+                                <rect key="frame" x="57" y="448" width="202" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="invited button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1319,7 +1328,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVw-Ox-YTC">
-                                <rect key="frame" x="57" y="370" width="202" height="40"/>
+                                <rect key="frame" x="57" y="393" width="202" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="invite your friend button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1334,20 +1343,20 @@
                         <constraints>
                             <constraint firstItem="8wM-Ex-g3W" firstAttribute="top" secondItem="eOO-th-bI0" secondAttribute="bottom" constant="2" id="2Sa-j7-R8a"/>
                             <constraint firstItem="r66-Ru-p8k" firstAttribute="leading" secondItem="ZUF-St-TST" secondAttribute="leading" id="6Vh-rC-aZM"/>
-                            <constraint firstItem="unO-1H-P1W" firstAttribute="top" secondItem="2i2-9t-Q49" secondAttribute="bottom" constant="70" id="7ME-eE-PKP"/>
-                            <constraint firstItem="GPP-WN-OR9" firstAttribute="top" secondItem="aXA-Mz-F6B" secondAttribute="bottom" constant="48" id="7eU-4A-0Aj"/>
+                            <constraint firstItem="unO-1H-P1W" firstAttribute="top" secondItem="2i2-9t-Q49" secondAttribute="bottom" constant="50" id="7ME-eE-PKP"/>
+                            <constraint firstItem="GPP-WN-OR9" firstAttribute="top" secondItem="aXA-Mz-F6B" secondAttribute="bottom" constant="25" id="7eU-4A-0Aj"/>
                             <constraint firstItem="r66-Ru-p8k" firstAttribute="centerX" secondItem="unO-1H-P1W" secondAttribute="centerX" constant="-0.5" id="BUd-He-F8Y"/>
                             <constraint firstAttribute="trailing" secondItem="qWu-0u-uc1" secondAttribute="trailing" constant="49" id="Bq1-dG-fp5"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="leading" secondItem="cVw-Ox-YTC" secondAttribute="leading" constant="2" id="ESG-dk-4ss"/>
                             <constraint firstItem="iPY-y5-31R" firstAttribute="top" secondItem="cVw-Ox-YTC" secondAttribute="bottom" constant="15" id="Ivf-3P-vO9"/>
-                            <constraint firstItem="eOO-th-bI0" firstAttribute="top" secondItem="unO-1H-P1W" secondAttribute="bottom" constant="17" id="MgT-TZ-gkA"/>
+                            <constraint firstItem="eOO-th-bI0" firstAttribute="top" secondItem="unO-1H-P1W" secondAttribute="bottom" constant="15" id="MgT-TZ-gkA"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="top" secondItem="iPY-y5-31R" secondAttribute="bottom" constant="15" id="S8v-mN-tze"/>
+                            <constraint firstItem="cVw-Ox-YTC" firstAttribute="top" secondItem="qWu-0u-uc1" secondAttribute="bottom" constant="10" id="VhN-gM-fdd"/>
                             <constraint firstAttribute="trailing" secondItem="8wM-Ex-g3W" secondAttribute="trailing" id="XA3-dP-6BM"/>
                             <constraint firstItem="GPP-WN-OR9" firstAttribute="top" secondItem="r66-Ru-p8k" secondAttribute="bottom" id="XMj-B2-cIv"/>
                             <constraint firstAttribute="trailing" secondItem="r66-Ru-p8k" secondAttribute="trailing" id="cvM-vt-BIV"/>
                             <constraint firstItem="eOO-th-bI0" firstAttribute="centerX" secondItem="r66-Ru-p8k" secondAttribute="centerX" constant="0.5" id="fXi-l1-pUj"/>
                             <constraint firstItem="qWu-0u-uc1" firstAttribute="leading" secondItem="ZUF-St-TST" secondAttribute="leading" constant="46" id="gg6-c5-vrj"/>
-                            <constraint firstItem="cVw-Ox-YTC" firstAttribute="top" secondItem="qWu-0u-uc1" secondAttribute="bottom" constant="27" id="lfp-y1-DSM"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="leading" secondItem="iPY-y5-31R" secondAttribute="leading" constant="2" id="mgZ-Vc-FID"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="centerX" secondItem="r66-Ru-p8k" secondAttribute="centerX" id="nAo-5G-btV"/>
                             <constraint firstItem="qWu-0u-uc1" firstAttribute="top" secondItem="8wM-Ex-g3W" secondAttribute="bottom" constant="3" id="nc5-DV-vu6"/>
