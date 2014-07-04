@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 typedef void (^loadImageCompletion)(UIImage *img);
+typedef void (^downloadImageComp)(NSString *downloadedImage);
 @interface STImageCacheController : NSObject
 
 +(STImageCacheController *) sharedInstance;
@@ -15,4 +16,6 @@ typedef void (^loadImageCompletion)(UIImage *img);
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion;
 -(NSString *) getImageCachePath;
 -(void) cleanTemporaryFolder;
+-(void)startImageDownloadForNewDataSource:(NSArray *)newPosts;
+
 @end

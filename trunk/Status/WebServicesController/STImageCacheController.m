@@ -9,6 +9,12 @@
 #import "STImageCacheController.h"
 #import "STWebServiceController.h"
 
+@interface STImageCacheController()
+{
+    NSMutableArray *currentPosts;
+}
+@end
+
 @implementation STImageCacheController
 +(STImageCacheController *) sharedInstance{
     static STImageCacheController *_sharedManager = nil;
@@ -47,6 +53,25 @@
     }
 }
 
+-(void) downloadImageWithName:(NSString *) imageFullLink andCompletion:(downloadImageComp) completion{
+    
+    if ([imageFullLink isKindOfClass:[NSNull class]]) {
+        imageFullLink = nil;
+    }
+    NSString *usedLastPath = [imageFullLink lastPathComponent];
+    NSString *imageCachePath = [self getImageCachePath];
+    NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:usedLastPath];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
+        [[STWebServiceController sharedInstance] downloadImage:imageFullLink withCompletion:^(NSURL *imageURL) {
+            completion(imageFullLink);
+        }];
+    }
+    else
+    {
+        completion(imageFullLink);
+    }
+}
+
 -(NSString *) getImageCachePath{
     
     //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -71,6 +96,23 @@
             NSLog(@"Delete has failed");
         }
     }
+}
+
+-(void)startImageDownloadForNewDataSource:(NSArray *)newPosts{
+    currentPosts = [NSMutableArray arrayWithArray:[newPosts valueForKey:@"full_photo_link"]];
+    [self loadNextPhoto];
+}
+
+-(void)loadNextPhoto{
+    while (currentPosts.count == 0) {
+        return;
+    }
+    __weak STImageCacheController *weakSelf = self;
+    [self downloadImageWithName:[currentPosts firstObject] andCompletion:^(NSString *downloadedImage) {
+        [currentPosts removeObject:downloadedImage];
+        [weakSelf loadNextPhoto];
+    }];
+    
 }
 
 @end

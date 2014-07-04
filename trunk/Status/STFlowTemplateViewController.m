@@ -399,12 +399,13 @@ GADInterstitialDelegate, STTutorialDelegate>
                 
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
 #if PAGGING_ENABLED
-                    [weakSelf.postsDataSource addObjectsFromArray:[self removeDuplicatesFromArray:response[@"data"]]];
+                    NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
+                    [weakSelf.postsDataSource addObjectsFromArray:newPosts];
 #else
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
                     _isDataSourceLoaded = YES;
-                    [weakSelf loadImages];
+                    [weakSelf loadImages:newPosts];
                     [weakSelf.collectionView reloadData];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [weakSelf.refreshBt setEnabled:YES];
@@ -433,11 +434,12 @@ GADInterstitialDelegate, STTutorialDelegate>
                 else
                 {
 #if PAGGING_ENABLED
-                    [weakSelf.postsDataSource addObjectsFromArray:[self removeDuplicatesFromArray:response[@"data"]]];
+                    NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
+                    [weakSelf.postsDataSource addObjectsFromArray:newPosts];
 #else
                     weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
-                    [weakSelf loadImages];
+                    [weakSelf loadImages:newPosts];
                     _isDataSourceLoaded = YES;
                     [weakSelf.collectionView reloadData];
                 }
@@ -451,11 +453,12 @@ GADInterstitialDelegate, STTutorialDelegate>
         case STFlowTypeUserProfile:{
             [[STWebServiceController sharedInstance] getUserPosts:self.userID withOffset:offset completion:^(NSDictionary *response) {
 #if PAGGING_ENABLED
-                [weakSelf.postsDataSource addObjectsFromArray:[self removeDuplicatesFromArray:response[@"data"]]];
+                NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
+                [weakSelf.postsDataSource addObjectsFromArray:newPosts];
 #else
                 weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
 #endif
-                [weakSelf loadImages];
+                [weakSelf loadImages:newPosts];
                 _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
                 
@@ -468,7 +471,7 @@ GADInterstitialDelegate, STTutorialDelegate>
         case STFlowTypeSinglePost:{
             [[STWebServiceController sharedInstance] getPostDetails:self.postID withCompletion:^(NSDictionary *response) {
                 weakSelf.postsDataSource = [NSMutableArray arrayWithObject:response[@"data"]];
-                [weakSelf loadImages];
+                [weakSelf loadImages:response[@"data"]];
                 _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
             } andErrorCompletion:^(NSError *error) {
@@ -979,12 +982,14 @@ GADInterstitialDelegate, STTutorialDelegate>
     }
 }
 
--(void)loadImages{
-    NSLog(@"Start loading image link");
-    for (NSString *imageLink in [_postsDataSource valueForKey:@"full_photo_link"]) {
-        [[STImageCacheController sharedInstance] loadImageWithName:imageLink
-                                                     andCompletion:nil];
-    }
+-(void)loadImages:(NSArray *)array{
+//    NSLog(@"Start loading image link");
+//    for (NSString *imageLink in [_postsDataSource valueForKey:@"full_photo_link"]) {
+//        [[STImageCacheController sharedInstance] loadImageWithName:imageLink
+//                                                     andCompletion:nil];
+//    }
+    
+    [[STImageCacheController sharedInstance] startImageDownloadForNewDataSource:array];
 }
 
 - (void)processCurrentPost:(NSIndexPath *)indexPath {
