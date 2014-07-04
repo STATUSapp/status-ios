@@ -1294,12 +1294,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can invite only 3 special friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="qWu-0u-uc1">
-                                <rect key="frame" x="46" y="323" width="225" height="60"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can invite  only 3 special friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="qWu-0u-uc1">
+                                <rect key="frame" x="35" y="323" width="246" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="h5y-eG-0ir"/>
-                                    <constraint firstAttribute="width" constant="225" id="yjJ-bh-ok4"/>
+                                    <constraint firstAttribute="width" constant="246" id="yjJ-bh-ok4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1346,7 +1346,7 @@
                             <constraint firstItem="unO-1H-P1W" firstAttribute="top" secondItem="2i2-9t-Q49" secondAttribute="bottom" constant="50" id="7ME-eE-PKP"/>
                             <constraint firstItem="GPP-WN-OR9" firstAttribute="top" secondItem="aXA-Mz-F6B" secondAttribute="bottom" constant="25" id="7eU-4A-0Aj"/>
                             <constraint firstItem="r66-Ru-p8k" firstAttribute="centerX" secondItem="unO-1H-P1W" secondAttribute="centerX" constant="-0.5" id="BUd-He-F8Y"/>
-                            <constraint firstAttribute="trailing" secondItem="qWu-0u-uc1" secondAttribute="trailing" constant="49" id="Bq1-dG-fp5"/>
+                            <constraint firstAttribute="trailing" secondItem="qWu-0u-uc1" secondAttribute="trailing" constant="39" id="Bq1-dG-fp5"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="leading" secondItem="cVw-Ox-YTC" secondAttribute="leading" constant="2" id="ESG-dk-4ss"/>
                             <constraint firstItem="iPY-y5-31R" firstAttribute="top" secondItem="cVw-Ox-YTC" secondAttribute="bottom" constant="15" id="Ivf-3P-vO9"/>
                             <constraint firstItem="eOO-th-bI0" firstAttribute="top" secondItem="unO-1H-P1W" secondAttribute="bottom" constant="15" id="MgT-TZ-gkA"/>
@@ -1356,7 +1356,7 @@
                             <constraint firstItem="GPP-WN-OR9" firstAttribute="top" secondItem="r66-Ru-p8k" secondAttribute="bottom" id="XMj-B2-cIv"/>
                             <constraint firstAttribute="trailing" secondItem="r66-Ru-p8k" secondAttribute="trailing" id="cvM-vt-BIV"/>
                             <constraint firstItem="eOO-th-bI0" firstAttribute="centerX" secondItem="r66-Ru-p8k" secondAttribute="centerX" constant="0.5" id="fXi-l1-pUj"/>
-                            <constraint firstItem="qWu-0u-uc1" firstAttribute="leading" secondItem="ZUF-St-TST" secondAttribute="leading" constant="46" id="gg6-c5-vrj"/>
+                            <constraint firstItem="qWu-0u-uc1" firstAttribute="leading" secondItem="ZUF-St-TST" secondAttribute="leading" constant="35" id="gg6-c5-vrj"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="leading" secondItem="iPY-y5-31R" secondAttribute="leading" constant="2" id="mgZ-Vc-FID"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="centerX" secondItem="r66-Ru-p8k" secondAttribute="centerX" id="nAo-5G-btV"/>
                             <constraint firstItem="qWu-0u-uc1" firstAttribute="top" secondItem="8wM-Ex-g3W" secondAttribute="bottom" constant="3" id="nc5-DV-vu6"/>
