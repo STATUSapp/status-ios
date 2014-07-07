@@ -14,6 +14,7 @@
 #import "STFacebookController.h"
 #import "STImageCacheController.h"
 #import "STLocationManager.h"
+#import "STIAPHelper.h"
 
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
@@ -32,6 +33,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [STIAPHelper sharedInstance];
     [FBLoginView class];
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
     [application setStatusBarHidden:YES];

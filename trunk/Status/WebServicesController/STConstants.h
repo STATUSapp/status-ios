@@ -73,6 +73,9 @@ extern NSString *const kGetNearbyPosts;
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;
 
+extern NSString *const kRemoveAdsInAppPurchaseProductID;
+extern NSString *const IAPHelperProductPurchasedNotification;
+
 #pragma mark - Local Notifications
 
 extern NSString *const STNotificationBadgeValueDidChanged;

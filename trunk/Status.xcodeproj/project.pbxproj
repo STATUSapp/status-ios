@@ -96,6 +96,7 @@
 		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
+		CDEB0579196AA00F008089B2 /* STIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEB0578196AA00F008089B2 /* STIAPHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -287,6 +288,8 @@
 		317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomCollectionViewCell.h; sourceTree = "<group>"; };
 		317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomCollectionViewCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CDEB0577196AA00F008089B2 /* STIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIAPHelper.h; sourceTree = "<group>"; };
+		CDEB0578196AA00F008089B2 /* STIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIAPHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,12 +440,14 @@
 				172F0D1B18CC8AEB00CD1493 /* STTopOption.h */,
 				172F0D1C18CC8AEB00CD1493 /* STTopOption.m */,
 				172F0D1E18CC8B0200CD1493 /* STTopOption.xib */,
-				1DE2D5B61950DB3100A29A86 /* STRemoveAdsViewController.h */,
-				1DE2D5B71950DB3100A29A86 /* STRemoveAdsViewController.m */,
 				1DE2D5B91950DB4600A29A86 /* STInviteFriendsViewController.h */,
 				1DE2D5BA1950DB4600A29A86 /* STInviteFriendsViewController.m */,
 				0719E5AC19619FE700F85382 /* STInviteController.h */,
 				0719E5AD19619FE700F85382 /* STInviteController.m */,
+				1DE2D5B61950DB3100A29A86 /* STRemoveAdsViewController.h */,
+				1DE2D5B71950DB3100A29A86 /* STRemoveAdsViewController.m */,
+				CDEB0577196AA00F008089B2 /* STIAPHelper.h */,
+				CDEB0578196AA00F008089B2 /* STIAPHelper.m */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -790,6 +795,7 @@
 				172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */,
 				1DE2D5B81950DB3100A29A86 /* STRemoveAdsViewController.m in Sources */,
 				1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */,
+				CDEB0579196AA00F008089B2 /* STIAPHelper.m in Sources */,
 				0722C49D1935B6BD000B18F8 /* STBubbleCell.m in Sources */,
 				172EAEB018B0B46300C5637B /* AFHTTPRequestOperationManager.m in Sources */,
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
@@ -980,7 +986,7 @@
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "6A369F4F-9C23-47ED-91AD-CFE564338DD4";
+				PROVISIONING_PROFILE = "87BF6B33-0149-4224-BC8A-BC8E8A4D402A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -990,7 +996,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

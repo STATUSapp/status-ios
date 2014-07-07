@@ -34,6 +34,8 @@
 #import "STInviteFriendsViewController.h"
 #import "STInviteController.h"
 
+#import "STIAPHelper.h"
+
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
 int const kNoPostsAlertTag = 13;
@@ -266,7 +268,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     // TODO: calculate the booleans below properly
     
     BOOL shouldPresentInviter = [[STInviteController sharedInstance] shouldInviteBeAvailable];
-    BOOL shouldPresentAds = YES;
+    BOOL shouldPresentAds = ![[STIAPHelper sharedInstance] productPurchased:kRemoveAdsInAppPurchaseProductID];
     
     
     NSMutableArray * allowedIntestitials = [NSMutableArray array];

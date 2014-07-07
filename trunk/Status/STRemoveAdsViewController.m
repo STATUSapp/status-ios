@@ -7,16 +7,17 @@
 //
 
 #import "STRemoveAdsViewController.h"
+#import "STIAPHelper.h"
 #import <StoreKit/StoreKit.h>
 
-static NSString const * removeAdsInAppPurchaseProductID = @"1";
 
-@interface STRemoveAdsViewController ()<SKPaymentTransactionObserver, SKProductsRequestDelegate>
+@interface STRemoveAdsViewController (){
+    NSArray * _products;
+    SKProduct * _removeAdsProduct;
+}
 @property (weak, nonatomic) IBOutlet UIButton *removeAdsBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (strong, nonatomic) SKProduct * product;
-@property (strong, nonatomic) SKProductsRequest * request;
 
 @end
 
@@ -39,24 +40,48 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    [self getProductInfo];
     _removeAdsBtn.enabled = NO;
     [_activityIndicator startAnimating];
+    [self loadProductsInfo];
+    
 }
 
-- (void)getProductInfo {
-    if ([SKPaymentQueue canMakePayments]) {
-        if (_request == nil) {
-            _request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:removeAdsInAppPurchaseProductID]];
-            _request.delegate = self;
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)productPurchased:(NSNotification *)notification {
+    
+    NSString * productIdentifier = notification.object;
+    [_products enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
+        if ([product.productIdentifier isEqualToString:productIdentifier]) {
+            [self dismissController:nil];
+            [[[UIAlertView alloc] initWithTitle:@"Congratulations"
+                                        message:@"You have now an ads free STATUS app"
+                                       delegate:nil cancelButtonTitle:@"OK"
+                              otherButtonTitles: nil]
+             show];
         }
+    }];
+    
+}
         
-        [_request start];
-        
-    } else {
-        [[[UIAlertView alloc] initWithTitle:@"Info" message:@"Please enable In App Purchase in Settings" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-    }
+
+- (void)loadProductsInfo {
+    _products = nil;
+    
+    [[STIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+        if (success) {
+            _products = products;
+            _removeAdsProduct = _products.count ? _products.firstObject : nil;
+        }
+        [_activityIndicator stopAnimating];
+        _removeAdsBtn.enabled = YES;
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,59 +93,19 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
 #pragma mark - IBActions
 
 - (IBAction)onTapRemoveAds:(id)sender {
-//    [[[UIAlertView alloc] initWithTitle:@"Remove Ads" message:@"In Construction" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-    
-    if (_product) {
-        SKPayment * payment = [SKPayment paymentWithProduct:_product];
-        [[SKPaymentQueue defaultQueue] addPayment:payment];
-    }
-}
 
-- (void)removeAds {
-    [[[UIAlertView alloc] initWithTitle:@"Remove Ads" message:@"In Construction" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    [[STIAPHelper sharedInstance] buyProduct:_removeAdsProduct];
+    _removeAdsBtn.enabled = NO;
+    [_activityIndicator startAnimating];
 }
 
 - (IBAction)dismissController:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Payment methods
-#pragma mark - SKProductsRequestDelegate
 
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-    NSArray * products = response.products;
-    if (products.count) {
-        _product = products.firstObject;
-        _removeAdsBtn.enabled = YES;
-        [_activityIndicator stopAnimating];
-    } else {
-        [[[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Product was not found" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-    }
-}
 
-#pragma mark - SKPaymentTransactionObserver
 
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
-    for (SKPaymentTransaction *transaction in transactions)
-    {
-        switch (transaction.transactionState) {
-            case SKPaymentTransactionStatePurchased:
-                [self removeAds];
-                [[SKPaymentQueue defaultQueue]
-                 finishTransaction:transaction];
-                break;
-                
-            case SKPaymentTransactionStateFailed:
-                [[[UIAlertView alloc] initWithTitle:@"Something went wrong" message:transaction.error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-                [[SKPaymentQueue defaultQueue]
-                 finishTransaction:transaction];
-                break;
-                
-            default:
-                break;
-        }
-    }
-}
 
 /*
 #pragma mark - Navigation
@@ -133,10 +118,5 @@ static NSString const * removeAdsInAppPurchaseProductID = @"1";
 }
 */
 
-- (void)dealloc {
-    _product = nil;
-    [_request cancel];
-    _request.delegate = nil;
-}
 
 @end
