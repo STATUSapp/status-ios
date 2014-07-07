@@ -103,6 +103,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    
+    [MobileAppTracker applicationDidOpenURL:[url absoluteString] sourceApplication:sourceApplication];
 
     BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
     return wasHandled;

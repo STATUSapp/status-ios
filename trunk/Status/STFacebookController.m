@@ -301,7 +301,7 @@
 }
 
 - (void)measureRegister {
-    [MobileAppTracker measureAction:@"register"];
+    [MobileAppTracker measureAction:@"registration"];
 }
 
 @end
