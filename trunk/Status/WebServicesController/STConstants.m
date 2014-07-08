@@ -8,10 +8,15 @@
 
 #import "STConstants.h"
 
+# pragma mark - Ammadeuss Dev
 //NSString *const kBaseURL = @"http://dev.simplebig.ro/status/api/";
 //NSString *const kBasePhotoDownload = @"http://dev.simplebig.ro/status/media/";
+#pragma mark - Production Server
 NSString *const kBaseURL = @"http://status.glazeon.com/api/";
 NSString *const kBasePhotoDownload = @"http://status.glazeon.com/media/";
+#pragma mark - Denis Dev
+//NSString *const kBaseURL = @"http://status.glazeon.com/dev/index.php?r=api/";
+//NSString *const kBasePhotoDownload = @"http://status.glazeon.com/media/";
 
 NSString *const kSTAdUnitID = @"ca-app-pub-2971682460090432/5255730305";
 

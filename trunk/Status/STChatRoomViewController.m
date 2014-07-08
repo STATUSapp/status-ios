@@ -187,7 +187,7 @@
 
 - (IBAction)onSendButtonPressed:(id)sender {
     [_messages addObject:_textView.text];
-    [chatController sendMessage:_textView.text];
+    [chatController sendMessage:_textView.text inRoom:_roomId];
     [_textView setText:@""];
     [_textView resignFirstResponder];
     
@@ -224,6 +224,14 @@
     [_messages addObject:message];
     [_tableView reloadData];
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+-(void)chatDidOpenRoom:(NSString *)roomId{
+    _roomId = roomId;
+}
+-(void)chatDidAuthenticate{
+    //TODO: check if this is right
+    [chatController openChatRoomForUserId:_userInfo[@"id"]];
 }
 
 #pragma mark - UITableViewDelegate
