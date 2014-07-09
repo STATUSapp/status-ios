@@ -21,6 +21,7 @@
     NSMutableArray *_messages;
     UIImage *userImage;
     STChatController *chatController;
+    NSString *_roomId;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -58,18 +59,23 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     _messages = [NSMutableArray new];
-    [self generateStringsWithNumber:@(20)];
+    if (_roomId!=nil) {
+        _messages = [NSMutableArray arrayWithArray:[chatController conversationWithRoomId:_roomId]];
+        
+    }
+   
+    //[self generateStringsWithNumber:@(20)];
     //[_tableView reloadData];
     [self initiateCustomControls];
     [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateNormal];
     [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateHighlighted];
     
-    [[STImageCacheController sharedInstance] loadImageWithName:_userInfo[@"small_photo_link"] andCompletion:^(UIImage *img) {
-        userImage = img;
-        [_tableView reloadData];
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        [_userImg maskImage:userImage];
-    }];
+//    [[STImageCacheController sharedInstance] loadImageWithName:_userInfo[@"small_photo_link"] andCompletion:^(UIImage *img) {
+//        userImage = img;
+//        [_tableView reloadData];
+//        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//        [_userImg maskImage:userImage];
+//    }];
     chatController = [STChatController sharedInstance];
     chatController.delegate = self;
     [chatController reconnect];
@@ -231,7 +237,9 @@
 }
 -(void)chatDidAuthenticate{
     //TODO: check if this is right
-    [chatController openChatRoomForUserId:_userInfo[@"id"]];
+    //Ammadeuss Id
+    NSString *userId = @"16";
+    [chatController openChatRoomForUserId:userId];
 }
 
 #pragma mark - UITableViewDelegate

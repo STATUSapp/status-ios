@@ -73,7 +73,8 @@ int const kChatPort = 9001;
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;
 {
     NSError *err = nil;
-    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:message options:NSJSONReadingMutableLeaves error:&err];
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
     NSLog(@"Received \"%@\"", response);
     
     if ([response[@"type"] isEqualToString:@"login"]) {
@@ -85,15 +86,15 @@ int const kChatPort = 9001;
         }
     }
     else if ([response[@"type"] isEqualToString:@"getRoomId"]){
-        NSLog(@"Room Id: %@", response[@"roomId"]);
+        NSLog(@"Room Id: %@", response[@"roomID"]);
         if (_delegate && [_delegate respondsToSelector:@selector(chatDidOpenRoom:)]) {
-            [_delegate performSelector:@selector(chatDidOpenRoom:) withObject:response[@"roomId"]];
+            [_delegate performSelector:@selector(chatDidOpenRoom:) withObject:response[@"roomID"]];
         }
         
     }
     else if ([response[@"type"] isEqualToString:@"message"]){
         //TODO: save into local plist and notify user;
-        [self addMessage:response[@"message"] received:YES forRoomId:response[@"roomId"]];
+        [self addMessage:response[@"message"] received:YES forRoomId:response[@"roomID"]];
         [_delegate chatDidReceivedMesasage:response[@"message"]];
     }
     
@@ -119,6 +120,8 @@ int const kChatPort = 9001;
 }
 
 -(void)openChatRoomForUserId:(NSString *)userId{
+    if(userId==nil)
+        return;
     NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"getRoomId", @"userId": userId} options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     [_webSocket send:jsonString];

@@ -291,6 +291,9 @@
 }
 
 -(void) getUnreadNotificationsCountWithCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
+    if (_accessToken==nil) {
+        return;
+    }
     [self.sessionManager GET:kGetUnreadNotificationsCount parameters:@{@"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
         completion(responseObject);
         
@@ -331,6 +334,17 @@
 -(void) setUserLocationWithCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion{
     CLLocationCoordinate2D coord = [STLocationManager sharedInstance].latestLocation.coordinate;
     [self.sessionManager POST:kSetUserLocation parameters:@{@"lat":@(coord.latitude),@"lng":@(coord.longitude), @"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error: %@", error.debugDescription);
+        errorCompletion(error);
+    }];
+}
+
+-(void) getAllUsersWithOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
+    long limit = 100;
+    [self.sessionManager GET:kGetAllUsers parameters:@{@"limit": @(limit), @"offset":@(offset), @"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
         completion(responseObject);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

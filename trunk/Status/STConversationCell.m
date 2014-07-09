@@ -61,7 +61,9 @@
                dateOfLastMessage:(NSDate *)date
                    showsYouLabel:(BOOL)showsYouLabel
                      andIsUnread:(BOOL)isUnread {
-    [_profileImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+    if (![imageUrl isEqual:[NSNull null]]) {
+        [_profileImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+    }
     _fullNameLbl.text = profileName;
     _lastMessageLbl.text = lastMessage;
     _youLbl.hidden = !showsYouLabel;

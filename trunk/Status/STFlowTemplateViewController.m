@@ -118,6 +118,8 @@ GADInterstitialDelegate, STTutorialDelegate>
     [self checkForNotificationNumber];
 }
 
+//TODO: move this on a global level
+
 -(void)checkForNotificationNumber{
     __weak STFlowTemplateViewController *weakSelf = self;
     if ([STWebServiceController sharedInstance].accessToken != nil &&
@@ -487,11 +489,18 @@ GADInterstitialDelegate, STTutorialDelegate>
 }
 
 - (IBAction)onChat:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    viewController.userInfo = [self getCurrentDictionary];
-    [self.navigationController pushViewController:viewController animated:YES];
-    [self onCloseMenu:nil];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+//    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+//    viewController.userInfo = [self getCurrentDictionary];
+//    [self.navigationController pushViewController:viewController animated:YES];
+//    [self onCloseMenu:nil];
+    
+    
+    STConversationsListViewController * vc = [[UIStoryboard storyboardWithName:@"ChatScene" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([STConversationsListViewController class])];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
 #pragma mark - Actions
 - (IBAction)onTapRefreshFromFooter:(id)sender {
@@ -664,12 +673,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 }
 
 - (IBAction)onTapMenu:(id)sender {
-//    
-//    STConversationsListViewController * vc = [[UIStoryboard storyboardWithName:@"ChatScene" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([STConversationsListViewController class])];
-//    
-//    [self.navigationController pushViewController:vc animated:YES];
-//    
-//
+
     _menuView.alpha = 0.f;
     _menuImageView.image = [self blurCurrentScreen];
     

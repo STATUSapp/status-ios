@@ -8,8 +8,12 @@
 
 #import "STConversationsListViewController.h"
 #import "STConversationCell.h"
+#import "STWebServiceController.h"
 
 @interface STConversationsListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+{
+    NSMutableArray *_usersArray;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
@@ -29,7 +33,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    __weak STConversationsListViewController *weakSelf = self;
+    [[STWebServiceController sharedInstance] getAllUsersWithOffset:0 completion:^(NSDictionary *response) {
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            _usersArray = [NSMutableArray arrayWithArray:response[@"data"]];
+            [weakSelf.tableView reloadData];
+        }
+        
+    } andErrorCompletion:^(NSError *error) {
+        NSLog(@"Error on getting users");
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,13 +65,14 @@
 #pragma mark - UITableView datasource and delegate methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return _usersArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     STConversationCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([STConversationCell class])];
-    
-    [cell setupWithProfileImageUrl:@"https://www.facebook.com/photo.php?fbid=10152828292371102&set=a.137404931101.134647.26081741101&type=1" profileName:@"Simona Halep" lastMessage:@"Simona Halep makes Romania proud" dateOfLastMessage:nil showsYouLabel:(indexPath.row % 4 == 0) andIsUnread:(indexPath.row % 2 == 0)];
+    NSDictionary *dict = _usersArray[indexPath.row];
+    //TODO: add last message and if it's read. 
+    [cell setupWithProfileImageUrl:dict[@"small_photo_link"] profileName:dict[@"user_name"] lastMessage:@"Simona Halep makes Romania proud" dateOfLastMessage:nil showsYouLabel:(indexPath.row % 4 == 0) andIsUnread:(indexPath.row % 2 == 0)];
     
     return cell;
 }
