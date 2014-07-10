@@ -115,20 +115,11 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self checkForNotificationNumber];
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [self setNotificationsNumber:appDelegate.badgeNumber];
 }
 
 //TODO: move this on a global level
-
--(void)checkForNotificationNumber{
-    __weak STFlowTemplateViewController *weakSelf = self;
-    if ([STWebServiceController sharedInstance].accessToken != nil &&
-        [STWebServiceController sharedInstance].accessToken.length > 0) {
-        [[STWebServiceController sharedInstance] getUnreadNotificationsCountWithCompletion:^(NSDictionary *response) {
-            [weakSelf setNotificationsNumber:[response[@"count"] integerValue]];
-        } andErrorCompletion:nil];
-    }
-}
 
 - (void)presentTutorialAutomatically{
     if ([[NSUserDefaults standardUserDefaults] valueForKey:kSTTutorialIsSeen] == nil) {
@@ -333,7 +324,8 @@ GADInterstitialDelegate, STTutorialDelegate>
     [self addTopOption];
     self.postsDataSource = [NSMutableArray array];
     [self getDataSourceWithOffset:0];
-    [self checkForNotificationNumber];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelegate checkForNotificationNumber];
     [self handleNotification:_lastNotif];
 }
 
@@ -495,10 +487,10 @@ GADInterstitialDelegate, STTutorialDelegate>
 //    [self.navigationController pushViewController:viewController animated:YES];
 //    [self onCloseMenu:nil];
     
-    
+#ifdef DEBUG
     STConversationsListViewController * vc = [[UIStoryboard storyboardWithName:@"ChatScene" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([STConversationsListViewController class])];
-    
     [self.navigationController pushViewController:vc animated:YES];
+#endif
     
     
 }

@@ -28,6 +28,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 - (void)setBadgeNumber:(NSInteger)badgeNumber{
     _badgeNumber = badgeNumber;
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
+    [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
     
 }
 
@@ -38,7 +39,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
     [application setStatusBarHidden:YES];
     self.badgeNumber = application.applicationIconBadgeNumber;
-    [[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
     [self handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     
@@ -133,7 +134,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     NSLog(@"Notif: %@", userInfo);
     self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
    
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
         [self handleNotification:userInfo];
@@ -149,6 +150,18 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
         UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
         STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers firstObject];
         [viewController handleNotification:notif];
+    }
+}
+
+-(void)checkForNotificationNumber{
+    __weak AppDelegate *weakSelf = self;
+    if ([STWebServiceController sharedInstance].accessToken != nil &&
+        [STWebServiceController sharedInstance].accessToken.length > 0) {
+        [[STWebServiceController sharedInstance] getUnreadNotificationsCountWithCompletion:^(NSDictionary *response) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.badgeNumber = [response[@"count"] integerValue];
+            });
+        } andErrorCompletion:nil];
     }
 }
 

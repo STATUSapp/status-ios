@@ -59,9 +59,7 @@ const float kNoNotifHeight = 24.f;
             _notificationDataSource = [NSArray arrayWithArray:response[@"data"]];
             _noNotifLabel.hidden = _notificationDataSource.count>0;
             
-            [(AppDelegate *)[UIApplication sharedApplication].delegate setBadgeNumber:0];
-            [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
-            
+            [(AppDelegate *)[UIApplication sharedApplication].delegate setBadgeNumber:0];            
             [weakSelf.notificationTable reloadData];
         }
         
