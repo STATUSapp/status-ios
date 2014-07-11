@@ -467,7 +467,7 @@ GADInterstitialDelegate, STTutorialDelegate>
         case STFlowTypeSinglePost:{
             [[STWebServiceController sharedInstance] getPostDetails:self.postID withCompletion:^(NSDictionary *response) {
                 weakSelf.postsDataSource = [NSMutableArray arrayWithObject:response[@"data"]];
-                [weakSelf loadImages:response[@"data"]];
+                [weakSelf loadImages:@[response[@"data"]]];
                 _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
             } andErrorCompletion:^(NSError *error) {
