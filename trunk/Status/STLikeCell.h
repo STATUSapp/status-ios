@@ -10,5 +10,6 @@
 
 @interface STLikeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *userName;
+@property (weak, nonatomic) IBOutlet UIButton *chatButton;
 @property (weak, nonatomic) IBOutlet UIImageView *userPhoto;
 @end

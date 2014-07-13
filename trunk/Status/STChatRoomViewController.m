@@ -16,12 +16,16 @@
 #import "STFlowTemplateViewController.h"
 #import "STFacebookController.h"
 
-@interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate>
+int const kBlockUserTag = 100;
+
+@interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIAlertViewDelegate>
 {
     NSMutableArray *_messages;
     UIImage *userImage;
     STChatController *chatController;
     NSString *_roomId;
+    
+    UIAlertView *statusAlert;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -64,21 +68,22 @@
         
     }
    
-    //[self generateStringsWithNumber:@(20)];
+    [self generateStringsWithNumber:@(20)];
     //[_tableView reloadData];
     [self initiateCustomControls];
     [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateNormal];
     [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateHighlighted];
     
-//    [[STImageCacheController sharedInstance] loadImageWithName:_userInfo[@"small_photo_link"] andCompletion:^(UIImage *img) {
-//        userImage = img;
-//        [_tableView reloadData];
-//        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-//        [_userImg maskImage:userImage];
-//    }];
+    [[STImageCacheController sharedInstance] loadImageWithName:_userInfo[@"small_photo_link"] andCompletion:^(UIImage *img) {
+        userImage = img;
+        [_tableView reloadData];
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [_userImg maskImage:userImage];
+    }];
     chatController = [STChatController sharedInstance];
     chatController.delegate = self;
-    [chatController reconnect];
+    chatController.rechabilityDelegate = self;
+    //[chatController reconnect];
 }
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -190,6 +195,11 @@
 }
 
 #pragma mark - IBActions
+- (IBAction)onLoadMore:(id)sender {
+    NSLog(@"Load More pressed");
+    //TODO - implement load more messages function
+    
+}
 
 - (IBAction)onSendButtonPressed:(id)sender {
     [_messages addObject:_textView.text];
@@ -217,14 +227,16 @@
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {
-    [chatController close];
-    //chatController.delegate = nil;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Block User" message:[NSString stringWithFormat:@"Are you sure you want to block %@? That means you will not be able to chat with %@.",_userInfo[@"user_name"],_userInfo[@"user_name"]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    alertView.tag = kBlockUserTag;
+    [alertView show];
 }
 
 #pragma mark - STChatControllerDelegate
 
 -(void)chatDidClose{
     NSLog(@"Chat did close");
+    [self showStatusAlertWithMessage:@"Your chat connection appears to be offline. You can wait or you can Go Back"];
 }
 -(void)chatDidReceivedMesasage:(NSString *)message{
     [_messages addObject:message];
@@ -236,10 +248,51 @@
     _roomId = roomId;
 }
 -(void)chatDidAuthenticate{
-    //TODO: check if this is right
-    //Ammadeuss Id
-    NSString *userId = @"16";
-    [chatController openChatRoomForUserId:userId];
+    [self hideStatusAlert];
+    //TODO: check if roomId exists
+    //TODO if yes, openRoom
+    //TODO: if no request room to be opened
+    //[chatController openChatRoomForUserId:userId];
+}
+
+#pragma mark - STRechabilityDelegate
+
+-(void)networkOff{
+    [self showStatusAlertWithMessage:@"Your internet connection appears to be offline. You can wait for better connection or you can Go Back"];
+}
+
+-(void)networkOn{
+    [self hideStatusAlert];
+    [chatController reconnect];
+}
+
+#pragma mark Helpers
+
+-(void)showStatusAlertWithMessage:(NSString *)message{
+    //TODO: remove this mockup
+    return;
+    if (statusAlert==nil) {
+        statusAlert = [[UIAlertView alloc] initWithTitle:@"Chat" message:message delegate:self cancelButtonTitle:@"GO BACK" otherButtonTitles:nil, nil];
+        [statusAlert show];
+    }
+}
+
+-(void)hideStatusAlert{
+    [statusAlert dismissWithClickedButtonIndex:0 animated:YES];
+    statusAlert = nil;
+    
+}
+
+#pragma mark UIAlertViewDelegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == kBlockUserTag) {
+        if (buttonIndex == 1) {
+            //TODO - implement block user function
+        }
+    }
+    else
+        [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDelegate
@@ -299,6 +352,9 @@
 }
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    chatController.delegate = nil;
+    chatController.rechabilityDelegate = nil;
+    //TODO: implement leave_room
 }
 
 @end

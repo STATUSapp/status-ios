@@ -96,6 +96,7 @@
 -(void) loginUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:info];
     params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
+    params[@"app_version"] = [self getAppVersion];
     [self.sessionManager POST:kLoginUser parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         /*NSDictionary *responseDict = [NSJSONSerialization
                                       JSONObjectWithData:responseObject
@@ -112,6 +113,7 @@
 -(void) registerUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:info];
     params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
+    params[@"app_version"] = [self getAppVersion];
     [self.sessionManager POST:kRegisterUser parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         /*NSDictionary *responseDict = [NSJSONSerialization
                                       JSONObjectWithData:responseObject
@@ -358,6 +360,16 @@
 -(NSNumber *) getTimeZoneOffsetFromGMT{
     NSTimeZone *localTime = [NSTimeZone systemTimeZone];
     return @(localTime.secondsFromGMT/3600);
+}
+
+-(NSString *)getAppVersion{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+    
+    NSString *buildVersion = infoDictionary[(NSString*)kCFBundleVersionKey];
+    
+    NSLog(@"Version: %@", buildVersion);
+    
+    return buildVersion;
 }
 
 @end

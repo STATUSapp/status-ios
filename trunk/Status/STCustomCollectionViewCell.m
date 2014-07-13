@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIButton *bigCameraProfileBtn;
 @property (weak, nonatomic) IBOutlet UILabel *noPhotosLabel;
+@property (weak, nonatomic) IBOutlet UIButton *chatButton;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -49,7 +50,7 @@
         [self setupAsPlaceholderForFlowType:flowType];
         return;
     }
-    
+    //TODO: check for app version and enable/disable chatButton
     
     
     [self setUpVisualsForFlowType:flowType];

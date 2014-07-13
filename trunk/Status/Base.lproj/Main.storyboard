@@ -46,14 +46,6 @@
                                                         <constraint firstAttribute="width" constant="320" id="w8W-Cv-79Q"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cxh-Ou-nQE">
-                                                    <rect key="frame" x="247" y="405" width="65" height="65"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="65" id="ItT-Wd-2A5"/>
-                                                        <constraint firstAttribute="height" constant="65" id="T7F-U7-4ku"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrb-Mu-BG1">
                                                     <rect key="frame" x="20" y="467" width="280" height="92"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -174,25 +166,41 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6w-uM-H3b">
+                                                    <rect key="frame" x="239" y="419" width="65" height="65"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="65" id="VFQ-f4-Det"/>
+                                                        <constraint firstAttribute="height" constant="65" id="Zfs-hU-kXH"/>
+                                                    </constraints>
+                                                    <state key="normal" image="user chat button">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected" image="user chat button pressed"/>
+                                                    <state key="highlighted" image="user chat button pressed"/>
+                                                    <connections>
+                                                        <action selector="onChatWithUser:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aEV-vm-Aoa"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="Rin-Xs-XdC" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" id="5ph-mf-YbG"/>
                                             <constraint firstAttribute="centerY" secondItem="vsn-2p-BXN" secondAttribute="centerY" id="6lN-Lk-rBh"/>
-                                            <constraint firstAttribute="trailing" secondItem="cxh-Ou-nQE" secondAttribute="trailing" constant="8" id="7fO-ug-cSK"/>
+                                            <constraint firstItem="e6w-uM-H3b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XcX-uQ-GoJ" secondAttribute="trailing" constant="1" id="8A9-F7-tgJ"/>
                                             <constraint firstAttribute="trailing" secondItem="xrb-Mu-BG1" secondAttribute="trailing" constant="20" id="8Vj-l5-Nqp"/>
                                             <constraint firstItem="xrb-Mu-BG1" firstAttribute="top" secondItem="XcX-uQ-GoJ" secondAttribute="bottom" constant="-13" id="B6u-lm-KnN"/>
                                             <constraint firstAttribute="centerX" secondItem="TdE-nO-7e0" secondAttribute="centerX" id="E6r-Qa-HZu"/>
-                                            <constraint firstItem="cxh-Ou-nQE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XcX-uQ-GoJ" secondAttribute="trailing" constant="1" id="MbD-Pc-6Q2"/>
+                                            <constraint firstItem="G6Z-ve-JeS" firstAttribute="top" secondItem="e6w-uM-H3b" secondAttribute="bottom" constant="10" id="IvP-9F-RiL"/>
                                             <constraint firstItem="vsn-2p-BXN" firstAttribute="top" secondItem="26T-Jv-ckc" secondAttribute="bottom" constant="28" id="PtC-aT-7zE"/>
                                             <constraint firstAttribute="bottom" secondItem="xrb-Mu-BG1" secondAttribute="bottom" constant="9" id="Q6s-Ex-pSW"/>
                                             <constraint firstItem="xrb-Mu-BG1" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" constant="20" id="Tsg-N8-YXV"/>
-                                            <constraint firstItem="xrb-Mu-BG1" firstAttribute="top" secondItem="cxh-Ou-nQE" secondAttribute="bottom" constant="-3" id="XXg-Uv-4zn"/>
                                             <constraint firstAttribute="centerX" secondItem="Rin-Xs-XdC" secondAttribute="centerX" id="fUG-N3-Flu"/>
                                             <constraint firstItem="Rin-Xs-XdC" firstAttribute="top" secondItem="B45-j8-lL1" secondAttribute="top" id="fZc-nQ-SvX"/>
                                             <constraint firstAttribute="centerY" secondItem="TdE-nO-7e0" secondAttribute="centerY" id="h5u-F8-Q2g"/>
                                             <constraint firstAttribute="centerX" secondItem="vsn-2p-BXN" secondAttribute="centerX" id="iVp-Ge-VFj"/>
+                                            <constraint firstAttribute="trailing" secondItem="e6w-uM-H3b" secondAttribute="trailing" constant="16" id="jKD-QX-tbc"/>
                                             <constraint firstItem="XcX-uQ-GoJ" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" constant="20" id="kQm-Ee-wYw"/>
                                             <constraint firstItem="vsn-2p-BXN" firstAttribute="centerX" secondItem="26T-Jv-ckc" secondAttribute="centerX" constant="-0.5" id="m3k-PC-k1q"/>
                                             <constraint firstAttribute="bottom" secondItem="Rin-Xs-XdC" secondAttribute="bottom" id="oIe-5L-TuG"/>
@@ -203,12 +211,12 @@
                                             <outlet property="activityIndicator" destination="TdE-nO-7e0" id="xU4-iU-DyD"/>
                                             <outlet property="bigCameraProfileBtn" destination="vsn-2p-BXN" id="BMy-q4-gBU"/>
                                             <outlet property="bigPictureImageView" destination="Rin-Xs-XdC" id="Uwm-ky-5Jb"/>
+                                            <outlet property="chatButton" destination="e6w-uM-H3b" id="O1x-Wg-dai"/>
                                             <outlet property="likeBtn" destination="YxA-3M-tHB" id="rRt-0j-T2I"/>
                                             <outlet property="likesNumberBtn" destination="x4D-Dx-EvO" id="ARP-wX-94X"/>
                                             <outlet property="noPhotosLabel" destination="26T-Jv-ckc" id="9zl-nB-boG"/>
                                             <outlet property="profileNameBtn" destination="XcX-uQ-GoJ" id="eld-su-rDd"/>
                                             <outlet property="shareBtn" destination="G6Z-ve-JeS" id="4eW-7u-QZj"/>
-                                            <outlet property="smallPictureImageView" destination="cxh-Ou-nQE" id="mPd-VA-UI2"/>
                                             <outlet property="takePhotoBtn" destination="NVs-pJ-agK" id="t1A-XK-CaC"/>
                                         </connections>
                                     </collectionViewCell>
@@ -341,7 +349,46 @@
                                     <action selector="onTapMenu:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="y3P-Xd-7j6"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpi-9T-wvY">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7P-nF-88w" userLabel="chatsView">
+                                <rect key="frame" x="180" y="0.0" width="56" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37t-6b-5GT">
+                                        <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="main chat button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" image="main chat button pressed"/>
+                                        <state key="highlighted" image="main chat button pressed"/>
+                                        <connections>
+                                            <action selector="onChat:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cg9-n0-qTG"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdG-sE-lKe">
+                                        <rect key="frame" x="37" y="9" width="14" height="15"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.53531472489999998" blue="0.1009779096" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="0.53531472489999998" blue="0.1009779096" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="4nc-ZW-C9Y"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="14" id="7xK-ns-vsP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="A1v-of-l3U"/>
+                                    <constraint firstItem="xdG-sE-lKe" firstAttribute="top" secondItem="i7P-nF-88w" secondAttribute="top" constant="9" id="fge-6l-Er6"/>
+                                    <constraint firstAttribute="bottom" secondItem="xdG-sE-lKe" secondAttribute="bottom" constant="32" id="iEG-W9-pVl"/>
+                                    <constraint firstAttribute="trailing" secondItem="xdG-sE-lKe" secondAttribute="trailing" constant="5" id="kHS-Rx-k9h"/>
+                                    <constraint firstAttribute="height" constant="56" id="lZP-LT-H6Q"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpi-9T-wvY" userLabel="notifView">
                                 <rect key="frame" x="244" y="0.0" width="56" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -385,11 +432,14 @@
                         <constraints>
                             <constraint firstItem="EXg-xB-dpW" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="1SK-B1-c94"/>
                             <constraint firstAttribute="trailing" secondItem="EXg-xB-dpW" secondAttribute="trailing" id="C0m-pD-QkA"/>
+                            <constraint firstItem="i7P-nF-88w" firstAttribute="top" secondItem="1o8-wb-j5w" secondAttribute="bottom" id="ElM-Jo-XQ0"/>
                             <constraint firstItem="a03-6i-MLx" firstAttribute="centerY" secondItem="xpi-9T-wvY" secondAttribute="centerY" id="KjU-GQ-LLm"/>
                             <constraint firstItem="a03-6i-MLx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="24" id="PGF-ga-Tfi"/>
                             <constraint firstItem="Pm5-yu-40q" firstAttribute="top" secondItem="EXg-xB-dpW" secondAttribute="bottom" id="VFp-PL-y7N"/>
                             <constraint firstItem="EXg-xB-dpW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="a9e-5h-4go"/>
+                            <constraint firstItem="xpi-9T-wvY" firstAttribute="leading" secondItem="i7P-nF-88w" secondAttribute="trailing" constant="8" id="aLS-dh-3VD"/>
                             <constraint firstAttribute="trailing" secondItem="xpi-9T-wvY" secondAttribute="trailing" constant="20" id="bC2-B6-3Tr"/>
+                            <constraint firstItem="i7P-nF-88w" firstAttribute="centerX" secondItem="a03-6i-MLx" secondAttribute="centerX" constant="163" id="mP7-QH-BsI"/>
                             <constraint firstItem="xpi-9T-wvY" firstAttribute="top" secondItem="1o8-wb-j5w" secondAttribute="bottom" id="rlr-mJ-ho2"/>
                             <constraint firstItem="xpi-9T-wvY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="244" id="zYh-HK-FLS"/>
                         </constraints>
@@ -411,6 +461,7 @@
                         <outlet property="menuView" destination="gS4-jD-fvB" id="meB-jJ-hg9"/>
                         <outlet property="notifBtn" destination="tIE-Kz-jAY" id="7Yz-ej-1nl"/>
                         <outlet property="notifNumberLabel" destination="DtM-Db-eT0" id="iIj-Nm-agt"/>
+                        <outlet property="unreadMessagesLbl" destination="xdG-sE-lKe" id="VtR-Ua-FhY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -418,16 +469,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNR-J6-Bs3">
-                            <rect key="frame" x="270" y="10" width="50" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onChat:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZdP-ZW-X1v"/>
-                            </connections>
-                        </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqF-Qy-Zqd">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -772,16 +813,29 @@
                                                     <rect key="frame" x="16" y="5" width="50" height="51"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ow-ch-hut">
-                                                    <rect key="frame" x="74" y="12" width="226" height="35"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="9ow-ch-hut">
+                                                    <rect key="frame" x="74" y="12" width="190" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HbF-JE-CVb">
+                                                    <rect key="frame" x="260" y="0.0" width="60" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="user chat black button">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected" image="user chat black button pressed"/>
+                                                    <state key="highlighted" image="user chat black button pressed"/>
+                                                    <connections>
+                                                        <action selector="onChatWithUser:" destination="rjr-9q-v12" eventType="touchUpInside" id="I9h-Gr-Eat"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="chatButton" destination="HbF-JE-CVb" id="AZw-1r-WdB"/>
                                             <outlet property="selectedBackgroundView" destination="rsY-7Q-av8" id="d1F-4B-1kj"/>
                                             <outlet property="userName" destination="9ow-ch-hut" id="2qP-uX-um7"/>
                                             <outlet property="userPhoto" destination="GFg-ST-zP0" id="7OO-5T-Gfb"/>
@@ -1406,6 +1460,8 @@
         <image name="invite your friend button pressed" width="202" height="40"/>
         <image name="invited button" width="202" height="40"/>
         <image name="invited button pressed" width="202" height="40"/>
+        <image name="main chat button" width="36" height="32"/>
+        <image name="main chat button pressed" width="36" height="32"/>
         <image name="megaphone" width="169" height="169"/>
         <image name="megaphone pressed" width="169" height="169"/>
         <image name="notification yellow circle" width="15" height="15"/>
@@ -1421,6 +1477,10 @@
         <image name="share button" width="319" height="48"/>
         <image name="share button pressed" width="319" height="48"/>
         <image name="status logo" width="197" height="28"/>
+        <image name="user chat black button" width="36" height="36"/>
+        <image name="user chat black button pressed" width="36" height="36"/>
+        <image name="user chat button" width="50" height="50"/>
+        <image name="user chat button pressed" width="50" height="50"/>
         <image name="x menu STAUS" width="15" height="15"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

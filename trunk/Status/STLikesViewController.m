@@ -12,6 +12,8 @@
 #import "STImageCacheController.h"
 #import "STFlowTemplateViewController.h"
 #import "STFacebookController.h"
+#import "STChatRoomViewController.h"
+#import "STChatController.h"
 
 @interface STLikesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -53,6 +55,18 @@
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)onChatWithUser:(id)sender {
+    //TODO: check for you, you cannot send messages to yourself
+    if (![[STChatController sharedInstance] canChat]) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        //TODO - remove this mockup
+        //return;
+    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    viewController.userInfo = _likesDataSource[((UIButton *)sender).tag];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
 
 #pragma mark - UITableView Delegate
 
@@ -64,6 +78,9 @@
                                                      cell.userPhoto.image = img;
                                                  }];
     cell.userName.text = dict[@"user_name"];
+    cell.chatButton.tag = indexPath.row;
+    //TODO - check for version number and activate/deactivate chatButton]
+    
     return cell;
 }
 

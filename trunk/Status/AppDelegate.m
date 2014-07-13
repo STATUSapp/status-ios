@@ -20,6 +20,7 @@
 #import <AdSupport/AdSupport.h>
 
 #import "STInviteController.h"
+#import "STChatController.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
@@ -67,8 +68,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     [STWebServiceController sharedInstance].isPerformLoginOrRegistration=FALSE;
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [[STChatController sharedInstance] close];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -96,6 +96,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     // MAT will not function without the measureSession call included
     [MobileAppTracker measureSession];
+    [[STChatController sharedInstance] reconnect];
+    [[STChatController sharedInstance] startReachabilityService];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

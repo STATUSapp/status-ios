@@ -9,6 +9,9 @@
 #import "STConversationsListViewController.h"
 #import "STConversationCell.h"
 #import "STWebServiceController.h"
+#import "STChatRoomViewController.h"
+#import "STFacebookController.h"
+#import "STChatController.h"
 
 @interface STConversationsListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 {
@@ -71,10 +74,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     STConversationCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([STConversationCell class])];
     NSDictionary *dict = _usersArray[indexPath.row];
-    //TODO: add last message and if it's read. 
+    //TODO: chat add last message and if it's read.
     [cell setupWithProfileImageUrl:dict[@"small_photo_link"] profileName:dict[@"user_name"] lastMessage:@"Simona Halep makes Romania proud" dateOfLastMessage:nil showsYouLabel:(indexPath.row % 4 == 0) andIsUnread:(indexPath.row % 2 == 0)];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *selectedUserInfo = _usersArray[indexPath.row];
+    if ([selectedUserInfo[@"user_id"] isEqualToString:[STFacebookController sharedInstance].currentUserId]) {
+        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        return;
+    }
+    if (![[STChatController sharedInstance] canChat]) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        //TODO - remove this mockup
+        //return;
+    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    viewController.userInfo = selectedUserInfo;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark - UISearchBar delegate method

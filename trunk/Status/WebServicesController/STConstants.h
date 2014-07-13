@@ -44,6 +44,11 @@ typedef NS_ENUM(NSUInteger,STWebSockerStatus){
     STWebSockerStatusConnected
 };
 
+typedef NS_ENUM(NSUInteger,STConnectionStatus){
+    STConnectionStatusOff =0,
+    STConnectionStatusOn
+};
+
 
 #pragma mark - Constant Strings
 
@@ -80,7 +85,7 @@ extern NSString *const IAPHelperProductPurchasedNotification;
 #pragma mark - Local Notifications
 
 extern NSString *const STNotificationBadgeValueDidChanged;
-
+extern NSString *const STUnreadMessagesValueDidChanged;
 #pragma mark - Invite Friends
 
 extern NSString *const STInviteText;

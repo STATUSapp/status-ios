@@ -12,11 +12,11 @@
 //NSString *const kBaseURL = @"http://dev.simplebig.ro/status/api/";
 //NSString *const kBasePhotoDownload = @"http://dev.simplebig.ro/status/media/";
 #pragma mark - Production Server
-NSString *const kBaseURL = @"http://status.glazeon.com/api/";
-NSString *const kBasePhotoDownload = @"http://status.glazeon.com/media/";
+//NSString *const kBaseURL = @"http://status.glazeon.com/api/";
+//NSString *const kBasePhotoDownload = @"http://status.glazeon.com/media/";
 #pragma mark - Denis Dev
-//NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
-//NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
+NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
+NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
 
 NSString *const kSTAdUnitID = @"ca-app-pub-2971682460090432/5255730305";
 
@@ -50,6 +50,7 @@ NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurcha
 #pragma mark - Local Notifications
 
 NSString *const STNotificationBadgeValueDidChanged = @"STNotificationBadgeValueDidChanged";
+NSString *const STUnreadMessagesValueDidChanged = @"STUnreadMessagesValueDidChanged";
 
 #pragma mark - Invite Friends
 

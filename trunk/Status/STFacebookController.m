@@ -15,6 +15,7 @@
 #import "STImageCacheController.h"
 #import "AppDelegate.h"
 #import "STLocationManager.h"
+#import "STChatController.h"
 
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
@@ -133,7 +134,7 @@
     if (self.logoutDelegate&&[self.logoutDelegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
         [self.logoutDelegate performSelector:@selector(facebookControllerDidLoggedOut)];
     }
-    [self deleteAccessToken];
+    //[self deleteAccessToken];
     [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
     [[STLocationManager sharedInstance] stopLocationUpdates];
     [[STLocationManager sharedInstance] setLatestLocation:nil];
@@ -182,7 +183,7 @@
             if (self.delegate&&[self.delegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
                 [self.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
             }
-            [self deleteAccessToken];
+            //[self deleteAccessToken];
             [[STImageCacheController sharedInstance] cleanTemporaryFolder];
             [STWebServiceController sharedInstance].isPerformLoginOrRegistration = false;
             return ;
@@ -204,6 +205,7 @@
                     
                     if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                         [STWebServiceController sharedInstance].accessToken = response[@"token"];
+                        [[STChatController sharedInstance] reconnect];
                         [[STLocationManager sharedInstance] startLocationUpdates];
                         [weakSelf saveAccessToken:response[@"token"]];
                         [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
@@ -227,6 +229,7 @@
             else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
                 [weakSelf setTrackerAsExistingUser];
                 [STWebServiceController sharedInstance].accessToken = response[@"token"];
+                [[STChatController sharedInstance] reconnect];
                 [[STLocationManager sharedInstance] startLocationUpdates];
                 [weakSelf saveAccessToken:response[@"token"]];
                 weakSelf.currentUserId = response[@"user_id"];

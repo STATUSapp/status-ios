@@ -35,6 +35,7 @@
 #import "STInviteController.h"
 
 #import "STIAPHelper.h"
+#import "STChatController.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
@@ -63,6 +64,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
 @property (weak, nonatomic) IBOutlet UILabel *notifNumberLabel;
 @property (strong, nonatomic) UIButton * refreshBt;
+@property (weak, nonatomic) IBOutlet UILabel *unreadMessagesLbl;
 
 @property (strong, nonatomic) NSMutableArray *postsDataSource;
 @property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *leftSwipe;
@@ -106,6 +108,12 @@ GADInterstitialDelegate, STTutorialDelegate>
                                              selector:@selector(updateNotificationsNumber)
                                                  name:STNotificationBadgeValueDidChanged
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUnreadMessagesNumber)
+                                                 name:STUnreadMessagesValueDidChanged
+                                               object:nil];
+    
+    
     
     // setup interstitial ad
 
@@ -202,7 +210,8 @@ GADInterstitialDelegate, STTutorialDelegate>
 #pragma mark - Setup Visuals for Flow Type
 
 - (void)setupVisuals{
-    self.notifNumberLabel.layer.cornerRadius = 7;
+    self.notifNumberLabel.layer.cornerRadius = 7.f;
+    self.unreadMessagesLbl.layer.cornerRadius = 7.f;
 }
 
 - (void)setNotificationsNumber: (NSInteger) notifNumber{
@@ -216,9 +225,24 @@ GADInterstitialDelegate, STTutorialDelegate>
     
 }
 
+- (void)setUnreadMessagesNumber: (NSInteger) notifNumber{
+    if (notifNumber > 0) {
+        self.unreadMessagesLbl.text = [NSString stringWithFormat:@" %zd ", notifNumber];
+        self.unreadMessagesLbl.hidden = NO;
+    }
+    else{
+        self.unreadMessagesLbl.hidden = YES;
+    }
+    
+}
+
 - (void)updateNotificationsNumber{
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:app.badgeNumber];
+}
+
+-(void) updateUnreadMessagesNumber{
+    [self setUnreadMessagesNumber:[STChatController sharedInstance].unreadMessages];
 }
 
 #pragma mark - AdMob delegate methods
@@ -341,8 +365,10 @@ GADInterstitialDelegate, STTutorialDelegate>
         [self.navigationController popToRootViewControllerAnimated:YES];
         [self presentLoginScene];
         [[STWebServiceController sharedInstance] setAPNToken:@"" withCompletion:^(NSDictionary *response) {
-            if ([response[@"status_code"] integerValue]==200)
+            if ([response[@"status_code"] integerValue]==200){
                 NSLog(@"APN Token deleted.");
+                [[STFacebookController sharedInstance] deleteAccessToken];
+            }
             else  NSLog(@"APN token NOT deleted.");
         } orError:nil];
     }
@@ -479,14 +505,20 @@ GADInterstitialDelegate, STTutorialDelegate>
             break;
     }
 }
+- (IBAction)onChatWithUser:(id)sender {
+    //TODO: check for you, you cannot send messages to yourself
+    if (![[STChatController sharedInstance] canChat]) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        //TODO - remove this mockup
+        //return;
+    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    viewController.userInfo = [self getCurrentDictionary];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
 
 - (IBAction)onChat:(id)sender {
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-//    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-//    viewController.userInfo = [self getCurrentDictionary];
-//    [self.navigationController pushViewController:viewController animated:YES];
-//    [self onCloseMenu:nil];
-    
 #ifdef DEBUG
     STConversationsListViewController * vc = [[UIStoryboard storyboardWithName:@"ChatScene" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([STConversationsListViewController class])];
     [self.navigationController pushViewController:vc animated:YES];
