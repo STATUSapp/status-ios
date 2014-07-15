@@ -11,7 +11,7 @@
 #import "STInviteController.h"
 
 static NSString * const kSTTutorialImagePrefix = @"tutorial_";
-static NSInteger const  kSTNumberOfTutorialImages = 5;
+static NSInteger const  kSTNumberOfTutorialImages = 6;
 
 @interface STTutorialViewController ()
 
