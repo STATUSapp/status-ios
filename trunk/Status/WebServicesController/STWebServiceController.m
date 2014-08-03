@@ -261,7 +261,10 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
+        
     }];
 }
 
@@ -301,7 +304,10 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
+        
     }];
 }
 
@@ -344,9 +350,43 @@
     }];
 }
 
--(void) getAllUsersWithOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
+-(void) getUsersForScope:(STSearchScopeControl)scope withSearchText:(NSString *)searchText withOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
     long limit = 100;
-    [self.sessionManager GET:kGetAllUsers parameters:@{@"limit": @(limit), @"offset":@(offset), @"token":self.accessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"limit": @(limit), @"offset":@(offset), @"token":self.accessToken}];
+    if (searchText && searchText.length) {
+        params[@"search"] = searchText;
+    }
+    NSString *apiCall = @"";
+    switch (scope) {
+        case STSearchControlAll:
+            apiCall = kGetAllUsers;
+            break;
+        case STSearchControlNearby:
+            apiCall = kGetNearby;
+            break;
+        case STSearchControlRecent:
+            apiCall = kGetRecent;
+            break;
+            
+        default:
+            break;
+    }
+    if (apiCall.length == 0) {
+        errorCompletion([NSError errorWithDomain:@"No API call" code:101 userInfo:nil]);
+        return;
+    }
+    [self.sessionManager GET:apiCall parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error: %@", error.debugDescription);
+        errorCompletion(error);
+    }];
+}
+
+-(void) getUserInfo:(NSString*)userId wirhCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
+    NSDictionary *params = @{@"user_id":userId, @"token":self.accessToken};
+    [self.sessionManager GET:kGetUserInfo parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         completion(responseObject);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

@@ -74,6 +74,11 @@
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
 		17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
+		17E44B9919821FB2000E9116 /* STCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9419821FB2000E9116 /* STCoreDataManager.m */; };
+		17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9619821FB2000E9116 /* STCoreDataRequestManager.m */; };
+		17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9819821FB2000E9116 /* STDAOEngine.m */; };
+		17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
+		17E44BA119822B67000E9116 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44BA019822B67000E9116 /* Message.m */; };
 		17EEE58719351BB700D02C1B /* STChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58619351BB700D02C1B /* STChatRoomViewController.m */; };
 		17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58919351C9100D02C1B /* STMessageSendCell.m */; };
 		17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */; };
@@ -226,6 +231,15 @@
 		17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomShareView.h; sourceTree = "<group>"; };
 		17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomShareView.m; sourceTree = "<group>"; };
 		17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
+		17E44B9319821FB2000E9116 /* STCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCoreDataManager.h; sourceTree = "<group>"; };
+		17E44B9419821FB2000E9116 /* STCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCoreDataManager.m; sourceTree = "<group>"; };
+		17E44B9519821FB2000E9116 /* STCoreDataRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCoreDataRequestManager.h; sourceTree = "<group>"; };
+		17E44B9619821FB2000E9116 /* STCoreDataRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCoreDataRequestManager.m; sourceTree = "<group>"; };
+		17E44B9719821FB2000E9116 /* STDAOEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDAOEngine.h; sourceTree = "<group>"; };
+		17E44B9819821FB2000E9116 /* STDAOEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDAOEngine.m; sourceTree = "<group>"; };
+		17E44B9D19822032000E9116 /* StatusDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StatusDM.xcdatamodel; sourceTree = "<group>"; };
+		17E44B9F19822B67000E9116 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		17E44BA019822B67000E9116 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		17EEE58519351BB700D02C1B /* STChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatRoomViewController.h; sourceTree = "<group>"; };
 		17EEE58619351BB700D02C1B /* STChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatRoomViewController.m; sourceTree = "<group>"; };
 		17EEE58819351C9100D02C1B /* STMessageSendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMessageSendCell.h; sourceTree = "<group>"; };
@@ -335,6 +349,7 @@
 		172EAE5A18B0B12D00C5637B = {
 			isa = PBXGroup;
 			children = (
+				17E44B9219821FB2000E9116 /* CoreData */,
 				1DE2D586194FA55E00A29A86 /* GoogleMobileAdsSdkiOS-6.9.3 */,
 				17AB89E3193B0DC400A6E7FD /* ChatController */,
 				1DFBB388192E9FCC003B7A53 /* Custom Controls */,
@@ -570,6 +585,23 @@
 			path = Status/ChatController;
 			sourceTree = "<group>";
 		};
+		17E44B9219821FB2000E9116 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */,
+				17E44B9F19822B67000E9116 /* Message.h */,
+				17E44BA019822B67000E9116 /* Message.m */,
+				17E44B9319821FB2000E9116 /* STCoreDataManager.h */,
+				17E44B9419821FB2000E9116 /* STCoreDataManager.m */,
+				17E44B9519821FB2000E9116 /* STCoreDataRequestManager.h */,
+				17E44B9619821FB2000E9116 /* STCoreDataRequestManager.m */,
+				17E44B9719821FB2000E9116 /* STDAOEngine.h */,
+				17E44B9819821FB2000E9116 /* STDAOEngine.m */,
+			);
+			name = CoreData;
+			path = Status/CoreData;
+			sourceTree = "<group>";
+		};
 		17F6BB7A190ED8BD00B41E3A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -793,8 +825,10 @@
 				17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */,
 				1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */,
 				172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */,
+				17E44B9919821FB2000E9116 /* STCoreDataManager.m in Sources */,
 				1DE2D5B81950DB3100A29A86 /* STRemoveAdsViewController.m in Sources */,
 				1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */,
+				17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */,
 				CDEB0579196AA00F008089B2 /* STIAPHelper.m in Sources */,
 				0722C49D1935B6BD000B18F8 /* STBubbleCell.m in Sources */,
 				172EAEB018B0B46300C5637B /* AFHTTPRequestOperationManager.m in Sources */,
@@ -813,6 +847,7 @@
 				177458391928C41C005B994B /* STLocationManager.m in Sources */,
 				17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */,
 				172EAEB618B0B46300C5637B /* AFURLResponseSerialization.m in Sources */,
+				17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */,
 				17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */,
 				07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */,
 				172EAEB418B0B46300C5637B /* AFURLConnectionOperation.m in Sources */,
@@ -823,6 +858,8 @@
 				172EAEB318B0B46300C5637B /* AFSecurityPolicy.m in Sources */,
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
 				17AC07EE18B2A6800088E863 /* STImageCacheController.m in Sources */,
+				17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */,
+				17E44BA119822B67000E9116 /* Message.m in Sources */,
 				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
 				070058E618BF68680014E1D3 /* STFacebookController.m in Sources */,
 				172EAF0818B0BB4800C5637B /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -962,7 +999,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "226DCA74-7297-4722-BFEA-7D43F279CE60";
+				PROVISIONING_PROFILE = "84DD1C06-D58D-48AF-BE3F-910C1D294CAC";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -996,7 +1033,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1009,7 +1046,7 @@
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "226DCA74-7297-4722-BFEA-7D43F279CE60";
+				PROVISIONING_PROFILE = "84DD1C06-D58D-48AF-BE3F-910C1D294CAC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1093,8 +1130,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
@@ -1106,7 +1143,7 @@
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "84DD1C06-D58D-48AF-BE3F-910C1D294CAC";
+				PROVISIONING_PROFILE = "226DCA74-7297-4722-BFEA-7D43F279CE60";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;
@@ -1163,6 +1200,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				17E44B9D19822032000E9116 /* StatusDM.xcdatamodel */,
+			);
+			currentVersion = 17E44B9D19822032000E9116 /* StatusDM.xcdatamodel */;
+			path = StatusDM.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 172EAE5B18B0B12D00C5637B /* Project object */;
 }

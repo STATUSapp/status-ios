@@ -89,7 +89,6 @@
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
     activityViewController.excludedActivityTypes = excludedActivities;
     UIActivityViewControllerCompletionHandler completion = ^(NSString *activityType, BOOL completed){
-        //TODO: check if this works for all
         if (completed == YES) {
             [[STInviteController sharedInstance] setCurrentDateForSelectedItem];
         }

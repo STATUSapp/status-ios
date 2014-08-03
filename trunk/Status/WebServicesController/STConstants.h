@@ -49,11 +49,19 @@ typedef NS_ENUM(NSUInteger,STConnectionStatus){
     STConnectionStatusOn
 };
 
+typedef NS_ENUM(NSUInteger,STSearchScopeControl){
+    STSearchControlAll =0,
+    STSearchControlNearby,
+    STSearchControlRecent
+};
 
 #pragma mark - Constant Strings
 
 extern NSString *const kBaseURL;
 extern NSString *const kBasePhotoDownload;
+extern NSString *const kChatSocketURL;
+extern NSString *const kReachableURL;
+extern int const kChatPort;
 
 extern NSString *const kSTAdUnitID;
 
@@ -75,6 +83,9 @@ extern NSString *const kSetUserLocation;
 extern NSString *const kGetUnreadNotificationsCount;
 extern NSString *const kGetNearbyPosts;
 extern NSString *const kGetAllUsers;
+extern NSString *const kGetNearby ;
+extern NSString *const kGetRecent;
+extern NSString *const kGetUserInfo;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;
@@ -86,6 +97,7 @@ extern NSString *const IAPHelperProductPurchasedNotification;
 
 extern NSString *const STNotificationBadgeValueDidChanged;
 extern NSString *const STUnreadMessagesValueDidChanged;
+extern NSString *const STChatControllerAuthenticate;
 #pragma mark - Invite Friends
 
 extern NSString *const STInviteText;

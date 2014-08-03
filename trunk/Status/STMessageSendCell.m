@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *messageLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubleWidthContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageWidthContraint;
+@property (weak, nonatomic) IBOutlet UILabel *dateLbl;
 
 @end
 
@@ -39,7 +40,7 @@
     // Configure the view for the selected state
 }
 
--(void)configureCellWithMessage:(NSString *) message{
+-(void)configureCellWithMessage:(NSString *) message andDateStr:(NSString *) dateStr{
     
     CGSize labelSize = [STBubbleCell sizeForText:message];
     _messageWidthContraint.constant = labelSize.width + 1;
@@ -48,6 +49,28 @@
     rect.size = labelSize;
     _messageLbl.frame = rect;
     _messageLbl.text = message;
+    
+    if (dateStr!=nil) {
+        _dateLbl.text = dateStr;
+    }
+    else
+        _dateLbl.text = @"";
+}
+
+-(void)configureCellWithMessage:(Message *) message{
+    
+    CGSize labelSize = [STBubbleCell sizeForMessage:message];
+    _messageWidthContraint.constant = labelSize.width + 1;
+    _bubleWidthContraint.constant = labelSize.width + 30;
+    CGRect rect = _messageLbl.frame;
+    rect.size = labelSize;
+    _messageLbl.frame = rect;
+    _messageLbl.text = message.message;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm a"];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    _dateLbl.text = [dateFormatter stringFromDate:message.date];
 }
 
 @end

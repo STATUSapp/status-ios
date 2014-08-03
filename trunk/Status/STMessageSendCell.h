@@ -10,5 +10,6 @@
 #import "STBubbleCell.h"
 
 @interface STMessageSendCell : STBubbleCell
--(void)configureCellWithMessage:(NSString *) message;
+-(void)configureCellWithMessage:(NSString *) message andDateStr:(NSString *) dateStr;
+-(void)configureCellWithMessage:(Message *) message;
 @end

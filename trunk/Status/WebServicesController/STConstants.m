@@ -12,11 +12,21 @@
 //NSString *const kBaseURL = @"http://dev.simplebig.ro/status/api/";
 //NSString *const kBasePhotoDownload = @"http://dev.simplebig.ro/status/media/";
 #pragma mark - Production Server
-//NSString *const kBaseURL = @"http://status.glazeon.com/api/";
-//NSString *const kBasePhotoDownload = @"http://status.glazeon.com/media/";
+NSString *const kBaseURL = @"http://api.getstatusapp.co/api/";
+NSString *const kBasePhotoDownload = @"http://api.getstatusapp.co/media/";
+NSString *const kChatSocketURL = @"http://api.getstatusapp.co";
+NSString *const kReachableURL = @"api.getstatusapp.co";
+int const kChatPort = 9002;
 #pragma mark - Denis Dev
-NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
-NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
+//NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
+//NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
+//NSString *const kChatSocketURL = @"http://dev.getstatusapp.co";
+//NSString *const kReachableURL = @"dev.getstatusapp.co";
+//int const kChatPort = 9001;
+#pragma mark - Denis Dev1
+//NSString *const kBaseURL = @"http://status.nece.me/api/";
+//NSString *const kBasePhotoDownload = @"http://status.nece.me/media/";
+
 
 NSString *const kSTAdUnitID = @"ca-app-pub-2971682460090432/5255730305";
 
@@ -39,6 +49,9 @@ NSString *const kSetUserLocation = @"set_user_location";
 NSString *const kGetUnreadNotificationsCount = @"get_unread_notifications_count";
 NSString *const kGetNearbyPosts = @"get_nearby_post";
 NSString *const kGetAllUsers = @"get_all_users";
+NSString *const kGetNearby = @"get_nearby_users";
+NSString *const kGetRecent = @"get_recent_users";
+NSString *const kGetUserInfo = @"get_user_info";
 
 
 NSString *const kMATAdvertiserID = @"21414";
@@ -51,6 +64,8 @@ NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurcha
 
 NSString *const STNotificationBadgeValueDidChanged = @"STNotificationBadgeValueDidChanged";
 NSString *const STUnreadMessagesValueDidChanged = @"STUnreadMessagesValueDidChanged";
+NSString *const STChatControllerAuthenticate = @"STChatControllerAuthenticate";
+
 
 #pragma mark - Invite Friends
 

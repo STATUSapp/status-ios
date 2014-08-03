@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface STConversationsListViewController : UIViewController
-
+-(void)loadNewDataWithOffset:(BOOL)newOffset;
 @end

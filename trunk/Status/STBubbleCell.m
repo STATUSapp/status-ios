@@ -47,4 +47,20 @@
     return size.height + 30.f;
 }
 
++(CGSize)sizeForMessage:(Message *)message {
+    CGRect labelRect = [message.message
+                        boundingRectWithSize:CGSizeMake(185.f, CGFLOAT_MAX)
+                        options:NSStringDrawingUsesLineFragmentOrigin
+                        attributes:@{
+                                     NSFontAttributeName : [UIFont fontWithName:@"Helvetica Neue" size:16.f]
+                                     }
+                        context:nil];
+    return labelRect.size;
+}
+
++(float)cellHeightForMessage:(Message *)message{
+    CGSize size = [STBubbleCell sizeForMessage:message];
+    return size.height + 30.f;
+}
+
 @end

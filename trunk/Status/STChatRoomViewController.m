@@ -15,10 +15,16 @@
 #import "STChatController.h"
 #import "STFlowTemplateViewController.h"
 #import "STFacebookController.h"
+#import "AppDelegate.h"
+#import "STCoreDataRequestManager.h"
+#import "STDAOEngine.h"
+#import "STCoreDataManager.h"
+#import "Message.h"
+#import "STWebServiceController.h"
 
-int const kBlockUserTag = 100;
+static NSInteger const  kBlockUserAlertTag = 11;
 
-@interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIAlertViewDelegate>
+@interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SLCoreDataRequestManagerDelegate>
 {
     NSMutableArray *_messages;
     UIImage *userImage;
@@ -26,6 +32,12 @@ int const kBlockUserTag = 100;
     NSString *_roomId;
     
     UIAlertView *statusAlert;
+    BOOL deliberateDismiss;
+    STCoreDataRequestManager *_currentManager;
+    BOOL loadMorePressed;
+    NSInteger loadMoreIndex;
+    UIActionSheet *actionSheet;
+    UIAlertView *successBlockAlert;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -35,6 +47,7 @@ int const kBlockUserTag = 100;
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *userImg;
 @property (weak, nonatomic) IBOutlet UIButton *userNameLbl;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewWidth;
 
 
 @end
@@ -50,9 +63,26 @@ int const kBlockUserTag = 100;
     return self;
 }
 
+- (void)loadUserInfo
+{
+    [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateNormal];
+    [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateHighlighted];
+    NSString *photoLink = _userInfo[@"small_photo_link"];
+    if (photoLink == nil) {
+        photoLink = _userInfo[@"full_photo_link"];
+    }
+    [[STImageCacheController sharedInstance] loadImageWithName:photoLink andCompletion:^(UIImage *img) {
+        userImage = img;
+        [_tableView reloadData];
+        [_userImg maskImage:userImage];
+    }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _textView.userInteractionEnabled = NO;
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -63,38 +93,47 @@ int const kBlockUserTag = 100;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     _messages = [NSMutableArray new];
-    if (_roomId!=nil) {
-        _messages = [NSMutableArray arrayWithArray:[chatController conversationWithRoomId:_roomId]];
-        
-    }
-   
-    [self generateStringsWithNumber:@(20)];
-    //[_tableView reloadData];
+
     [self initiateCustomControls];
-    [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateNormal];
-    [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateHighlighted];
-    
-    [[STImageCacheController sharedInstance] loadImageWithName:_userInfo[@"small_photo_link"] andCompletion:^(UIImage *img) {
-        userImage = img;
-        [_tableView reloadData];
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        [_userImg maskImage:userImage];
-    }];
+    if (_userInfo[@"user_name"] == nil) {//notification, need fetch
+        [[STWebServiceController sharedInstance] getUserInfo:_userInfo[@"user_id"] wirhCompletion:^(NSDictionary *response) {
+            if([response[@"status_code"] integerValue] == 200){
+                [_userInfo addEntriesFromDictionary:response];
+                [self loadUserInfo];
+            }
+        } andErrorCompletion:^(NSError *error) {
+            NSLog(@"Error: %@", error.debugDescription);
+        }];
+    }
+    else
+        [self loadUserInfo];
     chatController = [STChatController sharedInstance];
     chatController.delegate = self;
     chatController.rechabilityDelegate = self;
-    //[chatController reconnect];
 }
 
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
+-(void)viewWillAppear:(BOOL)animated{
+    if (chatController.authenticated == YES) {
+        [chatController openChatRoomForUserId:_userInfo[@"user_id"]];
+    }
+    else
+        [chatController authenticate];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    if(_roomId){
+        [chatController leaveRoom:_roomId];
+    }
+}
+
 - (void)initiateCustomControls {
 	    
     _textView.isScrollable = YES;
     _textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     _textView.font = [UIFont fontWithName:@"Helvetica Neue" size:16.f];
 	_textView.minNumberOfLines = 1;
-	_textView.maxNumberOfLines = 4;
-	_textView.returnKeyType = UIReturnKeySend; //just as an example
+	_textView.maxNumberOfLines = 5;
+	_textView.returnKeyType = UIReturnKeyDefault; //just as an example
 	_textView.delegate = self;
     _textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 5, 0);
     _textView.backgroundColor = [UIColor clearColor];
@@ -136,7 +175,6 @@ int const kBlockUserTag = 100;
         [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
 
     }];
-    
     _bottomTextViewConstraint.constant = 216.f; //keyboardBounds.size.height;
 
 }
@@ -170,6 +208,7 @@ int const kBlockUserTag = 100;
         _heightConstraint.constant = height + 7;
         //_bottomTextViewConstraint.constant =
         //_containerView.frame = r;
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }];
 	 
 }
@@ -179,36 +218,39 @@ int const kBlockUserTag = 100;
 }
 
 -(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView{
-    if (growingTextView.text.length > 0) {
-        [self onSendButtonPressed:nil];
-    }
-    
+//    if (growingTextView.text.length > 0) {
+//        [self onSendButtonPressed:nil];
+//    }
+    //[self onSwipeRight:nil];
+}
+
+-(void)growingTextViewDidBeginEditing:(HPGrowingTextView *)growingTextView{
+    //[self onSwipeRight:nil];
 }
 
 -(BOOL)growingTextViewShouldReturn:(HPGrowingTextView *)growingTextView{
-    return [_textView resignFirstResponder];
-}
-
--(void)resignTextView
-{
-	[_textView resignFirstResponder];
+    _textView.text = [NSString stringWithFormat:@"%@\r", _textView.text];
+    return NO;
 }
 
 #pragma mark - IBActions
 - (IBAction)onLoadMore:(id)sender {
-    NSLog(@"Load More pressed");
-    //TODO - implement load more messages function
-    
+    if (_roomId) {
+        loadMorePressed = YES;
+        [chatController getRoomMessages:_roomId withOffset:_messages.count];
+    }
 }
 
 - (IBAction)onSendButtonPressed:(id)sender {
-    [_messages addObject:_textView.text];
-    [chatController sendMessage:_textView.text inRoom:_roomId];
+    if (!_roomId) {
+        return;
+    }
+    NSString *toSendMessage = _textView.text;
+    if (toSendMessage.length == 0) {
+        return;
+    }
+    [chatController sendMessage:toSendMessage inRoom:_roomId];
     [_textView setText:@""];
-    [_textView resignFirstResponder];
-    
-    [_tableView reloadData];
-    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -227,10 +269,49 @@ int const kBlockUserTag = 100;
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Block User" message:[NSString stringWithFormat:@"Are you sure you want to block %@? That means you will not be able to chat with %@.",_userInfo[@"user_name"],_userInfo[@"user_name"]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-    alertView.tag = kBlockUserTag;
-    [alertView show];
+   
+    actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Block User",@"Delete Conversation", nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+    [actionSheet showInView:self.view];
+    
+    UIColor *tintColor = [UIColor redColor];
+    
+    NSArray *actionSheetButtons = actionSheet.subviews;
+    for (int i = 0; [actionSheetButtons count] > i; i++) {
+        UIView *view = (UIView*)[actionSheetButtons objectAtIndex:i];
+        if([view isKindOfClass:[UIButton class]]){
+            UIButton *btn = (UIButton*)view;
+            if (((UIButton*)view).tag != 3)//Cancel button
+                [btn setTitleColor:tintColor forState:UIControlStateNormal];
+                
+        }
+    }
 }
+- (IBAction)onSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
+    _tableViewWidth.constant = 320.f;
+    [_tableView setNeedsUpdateConstraints];
+
+    [UIView animateWithDuration:0.0f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"TOUCH END");
+    
+}
+- (IBAction)onSwipeRight:(id)sender {
+    _tableViewWidth.constant = 390.f;
+    [_tableView setNeedsUpdateConstraints];
+
+    [UIView animateWithDuration:0.0f animations:^{
+        [_tableView layoutIfNeeded];
+    }];
+}
+- (IBAction)onTapBackgound:(id)sender {
+    [_textView resignFirstResponder];
+}
+
 
 #pragma mark - STChatControllerDelegate
 
@@ -238,21 +319,60 @@ int const kBlockUserTag = 100;
     NSLog(@"Chat did close");
     [self showStatusAlertWithMessage:@"Your chat connection appears to be offline. You can wait or you can Go Back"];
 }
--(void)chatDidReceivedMesasage:(NSString *)message{
+-(void)chatDidReceivedMesasage:(NSDictionary *)message{
     [_messages addObject:message];
+    [_messages sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSDate *date1FromServer = [self dateFromServerDate:obj1[@"date"]];
+        NSDate *date2FromServer = [self dateFromServerDate:obj2[@"date"]];
+        return [date1FromServer compare:date2FromServer];
+    }];
     [_tableView reloadData];
-    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    if (_messages.count > 0) {
+        
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 -(void)chatDidOpenRoom:(NSString *)roomId{
     _roomId = roomId;
+    _textView.userInteractionEnabled = YES;
+
+#if USE_CORE_DATA
+    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+    _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"roomID like %@", _roomId] sectionNameKeyPath:nil delegate:self andTableView:nil];
+    _messages = _currentManager.allObjects;
+    NSNumber *seen = [[_messages valueForKey:@"seen"] valueForKeyPath: @"@sum.self"];
+    NSInteger unseen = _messages.count - seen.integerValue;
+    [chatController setUnreadMessages:chatController.unreadMessages-unseen];
+    [_tableView reloadData];
+    
+#else
+    _messages = [NSMutableArray arrayWithArray:[chatController conversationWithRoomId:_roomId markAsSeen:YES]];
+    [_messages sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSDate *date1FromServer = [self dateFromServerDate:obj1[@"date"]];
+        NSDate *date2FromServer = [self dateFromServerDate:obj2[@"date"]];
+        return [date1FromServer compare:date2FromServer];
+    }];
+    [_tableView reloadData];
+#endif
+    if (_messages.count > 0) {
+        
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    
 }
 -(void)chatDidAuthenticate{
     [self hideStatusAlert];
-    //TODO: check if roomId exists
-    //TODO if yes, openRoom
-    //TODO: if no request room to be opened
-    //[chatController openChatRoomForUserId:userId];
+    [chatController openChatRoomForUserId:_userInfo[@"user_id"]];
+}
+
+-(void)userWasBlocked{
+    [self showStatusAlertWithMessage:@"This chat room was blocked."];
+}
+
+-(void)userBlockSuccess{
+    successBlockAlert = [[UIAlertView alloc] initWithTitle:@"Block User" message:@"This user was blocked. You will no longer receive messages from him." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [successBlockAlert show];
 }
 
 #pragma mark - STRechabilityDelegate
@@ -269,80 +389,169 @@ int const kBlockUserTag = 100;
 #pragma mark Helpers
 
 -(void)showStatusAlertWithMessage:(NSString *)message{
-    //TODO: remove this mockup
-    return;
-    if (statusAlert==nil) {
+    if (statusAlert==nil && [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
         statusAlert = [[UIAlertView alloc] initWithTitle:@"Chat" message:message delegate:self cancelButtonTitle:@"GO BACK" otherButtonTitles:nil, nil];
+        deliberateDismiss = NO;
         [statusAlert show];
     }
 }
 
 -(void)hideStatusAlert{
+    deliberateDismiss = YES;
     [statusAlert dismissWithClickedButtonIndex:0 animated:YES];
     statusAlert = nil;
     
 }
 
-#pragma mark UIAlertViewDelegate
-
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == kBlockUserTag) {
+    if (alertView.tag == kBlockUserAlertTag) {
         if (buttonIndex == 1) {
-            //TODO - implement block user function
+            [chatController blockUserWithId:_userInfo[@"user_id"]];
         }
+
     }
     else
-        [self.navigationController popViewControllerAnimated:YES];
+    {
+        if (deliberateDismiss == YES) {
+            deliberateDismiss = NO;
+            return;
+        }
+        if ([alertView isEqual:statusAlert]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+
+#pragma mark UIActionSheetDelegate
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {//Block User
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Block User" message:@"Are you sure do you want to block this user?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Block", nil];
+        alertView.tag = kBlockUserAlertTag;
+        [alertView show];
+    }
+    else if (buttonIndex == 1){//Delete conversation
+        if (_roomId){
+#if USE_CORE_DATA
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", _roomId];
+            [[STCoreDataManager sharedManager] deleteAllObjectsFromTable:@"Message" withPredicate:predicate];
+            [[STCoreDataManager sharedManager] save];
+#else
+            BOOL result = [chatController deleteConversationWithId:_roomId];
+            
+            if (result == YES) {
+                [_messages removeAllObjects];
+                [_tableView reloadData];
+            }
+#endif
+        }
+    }
 }
 
 #pragma mark - UITableViewDelegate
 -(NSString *)getIdentifierForIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row%2==0) {
+#if USE_CORE_DATA
+    Message *message = _messages[indexPath.row];
+    BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
+    if (received == YES) {
+        return @"MessageReceivedCell";
+    }
+    else
+        return @"MessageSendCell";
+#else
+    NSDictionary *dict = _messages[indexPath.row];
+    if ([dict[@"received"] boolValue]==YES) {
         return @"MessageReceivedCell";
     }
     return @"MessageSendCell";
-        
+#endif
+    
+    return @"";
+    
 }
 
--(void)generateStringsWithNumber:(NSNumber *)nr{
-    NSString *str = @"Message ";
-    
-    for (int i=0; i<nr.intValue; i++) {
-        str = [str stringByAppendingString:@"asafd "];
-        [_messages addObject:[str copy]];
-    }
+-(NSDate *) dateFromServerDate:(NSString *) serverDate{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    NSDate *resultDate = [dateFormatter dateFromString:serverDate];
+    return resultDate;
 }
+
+-(NSString *)shortDateFormat:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm a"];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    return [dateFormatter stringFromDate:date];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSString *identifier = [self getIdentifierForIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    NSString *message = [_messages objectAtIndex:indexPath.row];
-    if (indexPath.row%2==0) {
+#if USE_CORE_DATA
+    Message *message = _messages[indexPath.row];
+    BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
+    if (received == YES) {
         [(STMessageReceivedCell *)cell configureCellWithMessage:message andUserImage:userImage];
     }
     else
-    {
         [(STMessageSendCell *)cell configureCellWithMessage:message];
+#else
+    NSDictionary *dict = _messages[indexPath.row];
+    NSString *message = dict[@"message"];
+    NSString *dateStr = dict[@"date"];
+    if (dateStr!=nil) {
+        NSDate *dateFromServer = [self dateFromServerDate:dateStr];
+        dateStr = [self shortDateFormat:dateFromServer];
     }
+    if ([dict[@"received"] boolValue]==YES) {
+        [(STMessageReceivedCell *)cell configureCellWithMessage:message andUserImage:userImage andDate:dateStr];
+    }
+    else
+    {
+        [(STMessageSendCell *)cell configureCellWithMessage:message andDateStr:dateStr];
+
+    }
+#endif
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *message = [_messages objectAtIndex:indexPath.row];
-    if (indexPath.row%2 ==0 ) {
-        return [STMessageReceivedCell cellHeightForText:message];
+    float height = 50.f;
+
+#if USE_CORE_DATA
+    Message *message = _messages[indexPath.row];
+    BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
+    if (received == YES) {
+        height = [STMessageReceivedCell cellHeightForMessage:message];
     }
     else
-        return [STMessageSendCell cellHeightForText:message];
-    
-    return 50.f;
+        height = [STMessageSendCell cellHeightForMessage:message];
+#else
+    NSDictionary *dict = _messages[indexPath.row];
+    NSString *message = dict[@"message"];
+    BOOL received =[dict[@"received"] boolValue];
+    if (received==YES) {
+        height = [STMessageReceivedCell cellHeightForText:message];;
+    }
+    else
+    {
+        height = [STMessageSendCell cellHeightForText:message];
+    }
+#endif
+    return height;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return _messages.count;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [_textView resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -352,9 +561,33 @@ int const kBlockUserTag = 100;
 }
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [actionSheet dismissWithClickedButtonIndex:2 animated:NO];
+    [self hideStatusAlert];
+    [successBlockAlert dismissWithClickedButtonIndex:0 animated:NO];
+    if(_roomId){
+        [chatController leaveRoom:_roomId];
+        [[STCoreDataManager sharedManager] save];
+    }
     chatController.delegate = nil;
     chatController.rechabilityDelegate = nil;
-    //TODO: implement leave_room
+}
+
+-(void) controllerContentChanged:(NSArray *)objects forCDReqManager:(STCoreDataRequestManager *)cdReqManager{
+    //NSLog(@"Messages: %@", cdReqManager.allObjects);
+    _messages = cdReqManager.allObjects;
+    [_tableView reloadData];
+    if (_messages.count > 0) {
+        if(chatController.loadMore == YES)
+        {
+            NSLog(@"Load More");
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+        else{
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        
+        
+    }
 }
 
 @end

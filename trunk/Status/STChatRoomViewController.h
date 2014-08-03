@@ -10,6 +10,5 @@
 
 @interface STChatRoomViewController : UIViewController
 
-@property (nonatomic, strong) NSDictionary *userInfo;
-@property (nonatomic, strong) NSString *roomId;
+@property (nonatomic, strong) NSMutableDictionary *userInfo;
 @end

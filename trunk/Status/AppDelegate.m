@@ -15,12 +15,15 @@
 #import "STImageCacheController.h"
 #import "STLocationManager.h"
 #import "STIAPHelper.h"
+#import "STChatRoomViewController.h"
 
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
 
 #import "STInviteController.h"
 #import "STChatController.h"
+
+#import "STCoreDataManager.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
@@ -64,16 +67,25 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     return YES;
 }
-							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     [STWebServiceController sharedInstance].isPerformLoginOrRegistration=FALSE;
-    [[STChatController sharedInstance] close];
+    
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
+    
+    while (![[stackVCs lastObject] isKindOfClass:[STFlowTemplateViewController class]]) {
+        [stackVCs removeLastObject];
+    }
+    [navController setViewControllers:stackVCs];
+    [[STChatController sharedInstance] leaveCurrentRoom];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
+    [[STChatController sharedInstance] close];
+    [[STCoreDataManager sharedManager] save];
     //[[STLocationManager sharedInstance] startLocationUpdates];
 }
 
@@ -96,12 +108,15 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     // MAT will not function without the measureSession call included
     [MobileAppTracker measureSession];
+    
     [[STChatController sharedInstance] reconnect];
     [[STChatController sharedInstance] startReachabilityService];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [[STChatController sharedInstance] close];
+    [[STCoreDataManager sharedManager] save];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

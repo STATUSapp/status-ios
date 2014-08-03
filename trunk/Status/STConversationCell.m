@@ -11,11 +11,9 @@
 
 @interface STConversationCell()
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *dateLbl;
 @property (weak, nonatomic) IBOutlet UILabel *lastMessageLbl;
-@property (weak, nonatomic) IBOutlet UILabel *youLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *readStateImageView;
 
 
@@ -49,7 +47,6 @@
     _fullNameLbl.text = nil;
     _dateLbl.text = nil;
     _lastMessageLbl.text = nil;
-    _youLbl.hidden = YES;
     _readStateImageView.hidden = YES;
 }
 
@@ -61,19 +58,9 @@
                dateOfLastMessage:(NSDate *)date
                    showsYouLabel:(BOOL)showsYouLabel
                      andIsUnread:(BOOL)isUnread {
-    if (![imageUrl isEqual:[NSNull null]]) {
-        [_profileImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
-    }
     _fullNameLbl.text = profileName;
     _lastMessageLbl.text = lastMessage;
-    _youLbl.hidden = !showsYouLabel;
     _readStateImageView.hidden = !isUnread;
-    
-    // TODO: setup cell
-    // find a placeholder image
-    // set date
-    
-    
 }
 
 @end

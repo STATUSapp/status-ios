@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFHTTPSessionManager.h"
+#import "STConstants.h"
 
 typedef void (^successCompletion)(NSDictionary *response);
 typedef void (^errorCompletion) (NSError *error);
@@ -36,5 +37,6 @@ typedef void (^downloadImageCompletion) (NSURL *imageURL);
 -(void) inviteUserToUpload:(NSString *) userId withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
 -(void) setUserLocationWithCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
 -(void) getNearbyPostsWithOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
--(void) getAllUsersWithOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
+-(void) getUsersForScope:(STSearchScopeControl)scope withSearchText:(NSString *)searchText withOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
+-(void) getUserInfo:(NSString*)userId wirhCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 @end

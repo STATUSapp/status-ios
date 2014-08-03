@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Message.h"
 
 @interface STBubbleCell : UITableViewCell
 +(float)cellHeightForText:(NSString *)message;
 +(CGSize)sizeForText:(NSString *)message;
+
++(CGSize)sizeForMessage:(Message *)message;
++(float)cellHeightForMessage:(Message *)message;
 @end

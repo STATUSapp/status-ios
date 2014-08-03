@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Message" representedClassName="Message" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" defaultDateTimeInterval="-960559200" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="received" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="roomID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seen" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Message" positionX="187" positionY="-495" width="128" height="133"/>
+    </elements>
+</model>

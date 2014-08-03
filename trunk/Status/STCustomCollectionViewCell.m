@@ -46,13 +46,22 @@
 
 - (void)setUpWithDictionary:(NSDictionary *)setupDict forFlowType:(int)flowType{
     // if setupDict is nil, the cell will be setted as a placeholder
-    if (setupDict == nil) {
-        [self setupAsPlaceholderForFlowType:flowType];
-        return;
+    if ([setupDict[@"type"] isEqualToString:@"placeholder"]) {
+        if ([setupDict[@"content_loaded"] boolValue] == YES) {
+            [self setupAsPlaceholderForFlowType:flowType];
+            return;
+        }
+        else
+        {
+            [self.contentView bringSubviewToFront:_bigPictureImageView];
+            [self.contentView bringSubviewToFront:_activityIndicator];
+            [self.activityIndicator startAnimating];
+            return;
+        }
     }
-    //TODO: check for app version and enable/disable chatButton
-    
-    
+    [self.contentView sendSubviewToBack:_bigPictureImageView];
+    [_activityIndicator stopAnimating];
+
     [self setUpVisualsForFlowType:flowType];
     
     self.setUpDict = setupDict;
@@ -96,13 +105,25 @@
         default:
             break;
     }
+    NSString *appVersion = setupDict[@"app_version"];
+    if (appVersion == nil ||
+        [appVersion isKindOfClass:[NSNull class]] ||
+        [appVersion rangeOfString:@"1.0."].location == NSNotFound ||
+        flowType == STFlowTypeMyProfile ||
+        flowType == STFlowTypeSinglePost) {
+        _chatButton.hidden = YES;
+    }
+    else
+        _chatButton.hidden = NO;
     
     
 }
 
 - (void)setUpVisualsForFlowType: (STFlowType)flowType{
     
-    // TO DO : highlight buttons or images for marking the flow
+    self.profileNameBtn.layer.shadowOpacity = 1.0;
+    self.profileNameBtn.layer.shadowRadius = 2;
+    self.profileNameBtn.layer.shadowOffset = CGSizeMake(3.0f, 1.0f);
     
     switch (flowType) {
         case STFlowTypeSinglePost:
@@ -136,6 +157,7 @@
     self.likeBtn.hidden = YES;
     self.likesNumberBtn.hidden = YES;
     self.shareBtn.hidden = YES;
+    _chatButton.hidden = YES;
     self.noPhotosLabel.hidden = NO;
     [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", self.username] forState:UIControlStateNormal];
     
@@ -187,7 +209,6 @@
 - (void)prepareForReuse{
     [super prepareForReuse];
     self.bigPictureImageView.image = [UIImage imageNamed:@"placeholder"];
-    [self.activityIndicator startAnimating];
     self.smallPictureImageView.image = nil;
     self.setUpDict = nil;
     self.bigPictureImageView.hidden = NO;
@@ -200,9 +221,6 @@
     self.shareBtn.hidden = NO;
     self.noPhotosLabel.hidden = YES;
     
-    self.profileNameBtn.layer.shadowOpacity = 1.0;
-    self.profileNameBtn.layer.shadowRadius = 2;
-    self.profileNameBtn.layer.shadowOffset = CGSizeMake(3.0f, 1.0f);
 }
 
 - (NSString *)reuseIdentifier{

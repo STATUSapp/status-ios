@@ -16,5 +16,5 @@
                dateOfLastMessage:(NSDate *)date
                    showsYouLabel:(BOOL)showsYouLabel
                      andIsUnread:(BOOL)isUnread;
-
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @end

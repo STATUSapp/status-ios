@@ -104,6 +104,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     [self setupVisuals];
     [self initCustomShareView];
     [self updateNotificationsNumber];
+    [self setUnreadMessagesNumber:[STChatController sharedInstance].unreadMessages];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateNotificationsNumber)
                                                  name:STNotificationBadgeValueDidChanged
@@ -111,6 +112,10 @@ GADInterstitialDelegate, STTutorialDelegate>
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUnreadMessagesNumber)
                                                  name:STUnreadMessagesValueDidChanged
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(chatControllerAuthenticate)
+                                                 name:STChatControllerAuthenticate
                                                object:nil];
     
     
@@ -126,8 +131,6 @@ GADInterstitialDelegate, STTutorialDelegate>
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:appDelegate.badgeNumber];
 }
-
-//TODO: move this on a global level
 
 - (void)presentTutorialAutomatically{
     if ([[NSUserDefaults standardUserDefaults] valueForKey:kSTTutorialIsSeen] == nil) {
@@ -282,8 +285,6 @@ GADInterstitialDelegate, STTutorialDelegate>
         return;
     }
     
-    // TODO: calculate the booleans below properly
-    
     BOOL shouldPresentInviter = [[STInviteController sharedInstance] shouldInviteBeAvailable];
     BOOL shouldPresentAds = ![[STIAPHelper sharedInstance] productPurchased:kRemoveAdsInAppPurchaseProductID];
     
@@ -371,7 +372,13 @@ GADInterstitialDelegate, STTutorialDelegate>
             }
             else  NSLog(@"APN token NOT deleted.");
         } orError:nil];
+        
+        [[STChatController sharedInstance] close];
     }
+}
+
+-(void)chatControllerAuthenticate{
+    [self handleNotification:_lastNotif];
 }
 
 #pragma mark - STShareImageDelegate
@@ -409,11 +416,6 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 - (void)getDataSourceWithOffset:(long) offset{
     NSLog(@"Offset: %ld", offset);
-//#ifdef DEBUG
-//    if (_postsDataSource.count>=10) {
-//        return;
-//    }
-//#endif
     __weak STFlowTemplateViewController *weakSelf = self;
     switch (self.flowType) {
         case STFlowTypeAllPosts:{
@@ -465,9 +467,17 @@ GADInterstitialDelegate, STTutorialDelegate>
                     _isDataSourceLoaded = YES;
                     [weakSelf.collectionView reloadData];
                 }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.refreshBt setEnabled:YES];
+                    [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
+                });
                 
             } andErrorCompletion:^(NSError *error) {
                 NSLog(@"error with %@", error.description);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.refreshBt setEnabled:YES];
+                    [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
+                });
             }];
             break;
         }
@@ -483,10 +493,18 @@ GADInterstitialDelegate, STTutorialDelegate>
                 [weakSelf loadImages:newPosts];
                 _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.refreshBt setEnabled:YES];
+                    [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
+                });
                 
                 
             } andErrorCompletion:^(NSError *error) {
                 NSLog(@"error with %@", error.description);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.refreshBt setEnabled:YES];
+                    [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
+                });
             }];
             break;
         }
@@ -506,24 +524,27 @@ GADInterstitialDelegate, STTutorialDelegate>
     }
 }
 - (IBAction)onChatWithUser:(id)sender {
-    //TODO: check for you, you cannot send messages to yourself
+    NSDictionary *userInfo = [self getCurrentDictionary];
+    if ([userInfo[@"user_id"] isEqualToString:[STFacebookController sharedInstance].currentUserId]) {
+        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        return;
+    }
     if (![[STChatController sharedInstance] canChat]) {
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        //TODO - remove this mockup
-        //return;
+//#ifndef DEBUG
+        return;
+//#endif
     }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
     STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    viewController.userInfo = [self getCurrentDictionary];
+    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)onChat:(id)sender {
-#ifdef DEBUG
-    STConversationsListViewController * vc = [[UIStoryboard storyboardWithName:@"ChatScene" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([STConversationsListViewController class])];
-    [self.navigationController pushViewController:vc animated:YES];
-#endif
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    STConversationsListViewController *viewController = (STConversationsListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STConversationsListViewController"];
+    [self.navigationController pushViewController:viewController animated:YES];
     
 }
 #pragma mark - Actions
@@ -534,7 +555,10 @@ GADInterstitialDelegate, STTutorialDelegate>
         [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateNormal];
         [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateHighlighted];
     });
-   [self getDataSourceWithOffset:0];
+    if(_flowType == STFlowTypeAllPosts)
+        [self getDataSourceWithOffset:0];
+    else
+        [self getDataSourceWithOffset:_postsDataSource.count];
     
 }
 
@@ -579,6 +603,9 @@ GADInterstitialDelegate, STTutorialDelegate>
 -(IBAction)onTapMyProfile:(id)sender{
     [self onCloseMenu:nil];
     if (_flowType == STFlowTypeMyProfile) {
+        return;
+    }
+    if ([STFacebookController sharedInstance].currentUserId == nil) {
         return;
     }
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
@@ -960,7 +987,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     if (_isPlaceholderSinglePost && !_isDataSourceLoaded) {
         [cell setUpPlaceholderBeforeLoading];
     }
-    NSDictionary *cellDict = (_isPlaceholderSinglePost ? nil : self.postsDataSource[indexPath.row]); // the cell will know to setup as placeholder if setupDict is nil
+    NSDictionary *cellDict = (_isPlaceholderSinglePost ? @{@"type":@"placeholder", @"content_loaded":@(_isDataSourceLoaded)} : self.postsDataSource[indexPath.row]); // the cell will know to setup as placeholder if setupDict is nil
     cell.username = self.userName;
     [cell setUpWithDictionary:cellDict forFlowType:self.flowType];
     
@@ -1085,7 +1112,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    if (_flowType == STFlowTypeAllPosts) {
+    if (_flowType != STFlowTypeSinglePost) {
         return self.view.bounds.size;
     }
     
@@ -1252,16 +1279,28 @@ GADInterstitialDelegate, STTutorialDelegate>
     UIViewController *lastVC = [self.navigationController.viewControllers lastObject];
     if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
         
-        if ([STWebServiceController sharedInstance].accessToken == nil) {
-            //wait for the login to be performed and after handle the notification
-            _lastNotif = notif;
+        if ([notif[@"user_info"][@"notification_type"] integerValue] == 4) {
+            if (![[STChatController sharedInstance] canChat]) {
+                _lastNotif = notif;
+                return;
+            }
+            _lastNotif = nil;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+            STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+            viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:notif[@"user_info"]];
+            [self.navigationController pushViewController:viewController animated:YES];
         }
-        else if (_lastNotif !=nil || notif !=nil)
+        else
         {
+            if ([STWebServiceController sharedInstance].accessToken == nil) {
+                //wait for the login to be performed and after handle the notification
+                _lastNotif = notif;
+                return;
+            }
             _lastNotif = nil;
             [self performSegueWithIdentifier:@"notifSegue" sender:nil];
         }
-    }
+}
     else if ([lastVC isKindOfClass:[STNotificationsViewController class]]){
         [(STNotificationsViewController *)lastVC getNotificationsFromServer];
     }

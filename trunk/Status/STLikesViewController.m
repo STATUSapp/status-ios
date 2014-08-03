@@ -56,15 +56,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)onChatWithUser:(id)sender {
-    //TODO: check for you, you cannot send messages to yourself
     if (![[STChatController sharedInstance] canChat]) {
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        //TODO - remove this mockup
-        //return;
+//#ifndef DEBUG
+        return;
+//#endif
     }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
     STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    viewController.userInfo = _likesDataSource[((UIButton *)sender).tag];
+    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:_likesDataSource[((UIButton *)sender).tag]];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -79,7 +79,16 @@
                                                  }];
     cell.userName.text = dict[@"user_name"];
     cell.chatButton.tag = indexPath.row;
-    //TODO - check for version number and activate/deactivate chatButton]
+    
+    NSString *appVersion = dict[@"app_version"];
+    if (appVersion == nil ||
+        ![appVersion isKindOfClass:[NSString class]] ||
+        [appVersion rangeOfString:@"1.0."].location == NSNotFound ||
+        [[STFacebookController sharedInstance].currentUserId isEqualToString:dict[@"user_id"]]) {//not setted
+        cell.chatButton.hidden = YES;
+    }
+    else
+        cell.chatButton.hidden = NO;
     
     return cell;
 }

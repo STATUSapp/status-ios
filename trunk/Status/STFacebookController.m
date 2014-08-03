@@ -19,6 +19,7 @@
 
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
+#import "STCoreDataManager.h"
 
 @implementation STFacebookController
 +(STFacebookController *) sharedInstance{
@@ -34,7 +35,7 @@
     self = [super init];
     if (self) {
         
-        _loginButton2 = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email", @"user_likes"]];
+        _loginButton2 = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email"/*, @"user_likes"*/]];
         _loginButton2.loginBehavior = FBSessionLoginBehaviorForcingWebView;
         _loginButton2.defaultAudience = FBSessionDefaultAudienceEveryone;
 
@@ -44,7 +45,7 @@
         _loginButton2.delegate = self;
         [self customizeLoginButton:_loginButton2];
         
-        _loginButton = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email", @"user_likes"]];
+        _loginButton = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email"/*, @"user_likes"*/]];
         _loginButton.defaultAudience = FBSessionDefaultAudienceEveryone;
         [_loginButton setFrame:CGRectMake(50, 0, 218, 46)];
         [_loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -139,6 +140,13 @@
     [[STLocationManager sharedInstance] stopLocationUpdates];
     [[STLocationManager sharedInstance] setLatestLocation:nil];
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
+#if USE_CORE_DATA
+    
+    [[STCoreDataManager sharedManager] cleanLocalDataBase];
+    
+#else
+    [[STChatController sharedInstance] cleanLocalHistory];
+#endif
 }
 
 -(void) UDSetValue:(NSString *) value forKey:(NSString *) key{
@@ -197,7 +205,7 @@
         __block NSString *userName = user[@"name"];
         [weakSelf UDSetValue:photoLink forKey:PHOTO_LINK];
         [weakSelf UDSetValue:userName  forKey:USER_NAME];
-        
+
         [[STWebServiceController sharedInstance] loginUserWithInfo:@{@"email":user[@"email"],@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"facebook_image_link":photoLink,@"full_name":userName} withCompletion:^(NSDictionary *response) {
             if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
 
@@ -205,10 +213,10 @@
                     
                     if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                         [STWebServiceController sharedInstance].accessToken = response[@"token"];
-                        [[STChatController sharedInstance] reconnect];
+                        [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
+                        [[STChatController sharedInstance] forceReconnect];
                         [[STLocationManager sharedInstance] startLocationUpdates];
                         [weakSelf saveAccessToken:response[@"token"]];
-                        [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
                         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
                         weakSelf.currentUserId = response[@"user_id"];
                         [weakSelf announceDelegate];
@@ -229,11 +237,11 @@
             else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
                 [weakSelf setTrackerAsExistingUser];
                 [STWebServiceController sharedInstance].accessToken = response[@"token"];
-                [[STChatController sharedInstance] reconnect];
+                [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
+                [[STChatController sharedInstance] forceReconnect];
                 [[STLocationManager sharedInstance] startLocationUpdates];
                 [weakSelf saveAccessToken:response[@"token"]];
                 weakSelf.currentUserId = response[@"user_id"];
-                [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
                 [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
                 [weakSelf announceDelegate];
             }
