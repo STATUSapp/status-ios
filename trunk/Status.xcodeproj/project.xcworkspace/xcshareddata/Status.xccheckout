@@ -14,7 +14,7 @@
 		<string>svn://mobilep.ro/status/trunk</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Status.xcodeproj/project.xcworkspace</string>
+	<string>trunk/Status.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2C3FC9BD-3084-4AA9-953A-FB9945F1A5D3</key>
