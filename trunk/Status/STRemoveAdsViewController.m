@@ -78,9 +78,14 @@
         if (success) {
             _products = products;
             _removeAdsProduct = _products.count ? _products.firstObject : nil;
+            _removeAdsBtn.enabled = YES;
         }
+        
+        if (!success || _removeAdsProduct == nil) {
+            [[[UIAlertView alloc] initWithTitle:@"Something went wrong..." message:@"Tap to dismiss." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
+        
         [_activityIndicator stopAnimating];
-        _removeAdsBtn.enabled = YES;
     }];
 }
 

@@ -57,7 +57,7 @@ NSString *const kGetUserInfo = @"get_user_info";
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";
 
-NSString *const kRemoveAdsInAppPurchaseProductID = @"1";
+NSString *const kRemoveAdsInAppPurchaseProductID = @"2";
 NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurchasedNotification";
 
 #pragma mark - Local Notifications
