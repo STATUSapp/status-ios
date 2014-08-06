@@ -51,6 +51,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionFailed:) name:IAPHelperProductPurchasedFailedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restorePurchaseFailed:) name:IAPHelperRestorePurchaseFailedNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -77,6 +78,10 @@
     [_activityIndicator stopAnimating];
     _removeAdsBtn.enabled = YES;
     _restorePurchaseBtn.enabled = YES;
+}
+
+- (void)restorePurchaseFailed:(NSNotification *)notification{
+    [[[UIAlertView alloc] initWithTitle:@"Something went wrong..." message:notification.userInfo[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
 }
 
 - (void)loadProductsInfo {

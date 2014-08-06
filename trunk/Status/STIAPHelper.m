@@ -125,6 +125,17 @@
     };
 }
 
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
+    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : error.localizedDescription}];
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+    if (queue.transactions.count == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : @"No purchase to restore"}];
+    }
+}
+
+
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
     NSLog(@"completeTransaction...");
     

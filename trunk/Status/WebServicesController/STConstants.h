@@ -93,6 +93,7 @@ extern NSString *const kMATConversionKey;
 extern NSString *const kRemoveAdsInAppPurchaseProductID;
 extern NSString *const IAPHelperProductPurchasedNotification;
 extern NSString *const IAPHelperProductPurchasedFailedNotification;
+extern NSString *const IAPHelperRestorePurchaseFailedNotification;
 
 #pragma mark - Local Notifications
 

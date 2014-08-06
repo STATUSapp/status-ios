@@ -5,24 +5,24 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>3BC82654-1EBF-4F92-9D72-262B7C0E57C7</string>
+	<string>9671FBDE-E0A2-4AD9-B544-668F1CB3BE45</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Status</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5B763D68-504C-4FED-8BCC-523EC79DA492</key>
+		<key>A940E183-1E14-4892-94CC-0C99F50F5C51</key>
 		<string>svn://mobilep.ro/status</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>trunk/Status.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5B763D68-504C-4FED-8BCC-523EC79DA492</key>
+		<key>A940E183-1E14-4892-94CC-0C99F50F5C51</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectRepositoryRootDictionary</key>
 	<dict>
-		<key>5B763D68-504C-4FED-8BCC-523EC79DA492</key>
+		<key>A940E183-1E14-4892-94CC-0C99F50F5C51</key>
 		<string>svn://mobilep.ro/status</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -30,14 +30,20 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5B763D68-504C-4FED-8BCC-523EC79DA492</string>
+	<string>A940E183-1E14-4892-94CC-0C99F50F5C51</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
+			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
+			<string>branches</string>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
+			<string>tags</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>trunk</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5B763D68-504C-4FED-8BCC-523EC79DA492</string>
+			<string>A940E183-1E14-4892-94CC-0C99F50F5C51</string>
 			<key>IDESourceControlWCCName</key>
 			<string>status</string>
 		</dict>

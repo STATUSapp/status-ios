@@ -60,6 +60,7 @@ NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";
 NSString *const kRemoveAdsInAppPurchaseProductID = @"2";
 NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurchasedNotification";
 NSString *const IAPHelperProductPurchasedFailedNotification = @"IAPHelperProductPurchasedFailedNotification";
+NSString *const IAPHelperRestorePurchaseFailedNotification = @"IAPHelperRestorePurchaseFailedNotification";
 
 #pragma mark - Local Notifications
 

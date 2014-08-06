@@ -1117,8 +1117,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="disabled" title="Refreshing"/>
-                                <state key="selected" title="Refreshing"/>
+                                <state key="disabled" title="Restore purchase"/>
+                                <state key="selected" title="Restore purchase"/>
                                 <state key="highlighted" title="Restore purchase"/>
                                 <connections>
                                     <action selector="onTapRestoreAds:" destination="4Q1-kp-NX1" eventType="touchUpInside" id="Lui-3e-90n"/>
