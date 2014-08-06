@@ -17,6 +17,7 @@
 }
 @property (weak, nonatomic) IBOutlet UIButton *removeAdsBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *restorePurchaseBtn;
 
 
 @end
@@ -41,6 +42,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _removeAdsBtn.enabled = NO;
+    _restorePurchaseBtn.enabled = NO;
     [_activityIndicator startAnimating];
     [self loadProductsInfo];
     
@@ -48,6 +50,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionFailed:) name:IAPHelperProductPurchasedFailedNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -69,7 +72,12 @@
     }];
     
 }
-        
+
+- (void)transactionFailed:(NSNotification *)notification{
+    [_activityIndicator stopAnimating];
+    _removeAdsBtn.enabled = YES;
+    _restorePurchaseBtn.enabled = YES;
+}
 
 - (void)loadProductsInfo {
     _products = nil;
@@ -79,6 +87,7 @@
             _products = products;
             _removeAdsProduct = _products.count ? _products.firstObject : nil;
             _removeAdsBtn.enabled = YES;
+            _restorePurchaseBtn.enabled = YES;
         }
         
         if (!success || _removeAdsProduct == nil) {
@@ -101,7 +110,11 @@
 
     [[STIAPHelper sharedInstance] buyProduct:_removeAdsProduct];
     _removeAdsBtn.enabled = NO;
+    _restorePurchaseBtn.enabled = NO;
     [_activityIndicator startAnimating];
+}
+- (IBAction)onTapRestoreAds:(id)sender {
+    [[STIAPHelper sharedInstance] restoreCompletedTransactions];
 }
 
 - (IBAction)dismissController:(id)sender {

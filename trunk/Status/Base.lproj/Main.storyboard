@@ -1105,6 +1105,25 @@
                                     <action selector="dismissController:" destination="4Q1-kp-NX1" eventType="touchUpInside" id="bX1-FU-xtF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Da-P2-HSY">
+                                <rect key="frame" x="96" y="510" width="129" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="q5Y-pw-p8W"/>
+                                    <constraint firstAttribute="width" constant="129" id="qfl-lj-RpX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Restore purchase">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" title="Refreshing"/>
+                                <state key="selected" title="Refreshing"/>
+                                <state key="highlighted" title="Restore purchase"/>
+                                <connections>
+                                    <action selector="onTapRestoreAds:" destination="4Q1-kp-NX1" eventType="touchUpInside" id="Lui-3e-90n"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status logo" translatesAutoresizingMaskIntoConstraints="NO" id="EyG-kb-FNl">
                                 <rect key="frame" x="62" y="80" width="197" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1145,6 +1164,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="4Da-P2-HSY" firstAttribute="top" secondItem="Rpl-dR-Bqy" secondAttribute="bottom" constant="8" id="0Cy-HK-d3i"/>
                             <constraint firstItem="EyG-kb-FNl" firstAttribute="top" secondItem="2V2-Ym-L7J" secondAttribute="bottom" constant="60" id="4Wd-42-AMj"/>
                             <constraint firstItem="Aam-EK-QwC" firstAttribute="centerX" secondItem="pL0-e7-yGI" secondAttribute="centerX" constant="0.5" id="CpN-E5-iS2"/>
                             <constraint firstItem="2am-yf-tUJ" firstAttribute="leading" secondItem="Rpl-dR-Bqy" secondAttribute="trailing" constant="8" id="GCd-cj-mHI"/>
@@ -1158,6 +1178,7 @@
                             <constraint firstItem="Rpl-dR-Bqy" firstAttribute="centerY" secondItem="2am-yf-tUJ" secondAttribute="centerY" id="fBc-Ul-Tg7"/>
                             <constraint firstItem="pL0-e7-yGI" firstAttribute="centerX" secondItem="EyG-kb-FNl" secondAttribute="centerX" constant="-0.5" id="fTC-9k-F0o"/>
                             <constraint firstItem="pL0-e7-yGI" firstAttribute="top" secondItem="2V2-Ym-L7J" secondAttribute="bottom" id="gE2-kB-WCL"/>
+                            <constraint firstAttribute="centerX" secondItem="4Da-P2-HSY" secondAttribute="centerX" constant="-0.5" id="lcW-6E-Cdw"/>
                             <constraint firstItem="Rpl-dR-Bqy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Aam-EK-QwC" secondAttribute="bottom" constant="20" id="nq8-kd-pW5"/>
                             <constraint firstItem="pL0-e7-yGI" firstAttribute="leading" secondItem="ORg-p4-fQM" secondAttribute="leading" id="vBA-9c-Zjn"/>
                             <constraint firstItem="r4i-Cd-2ZV" firstAttribute="centerX" secondItem="pL0-e7-yGI" secondAttribute="centerX" constant="0.5" id="wgo-qN-4y9"/>
@@ -1166,6 +1187,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="2am-yf-tUJ" id="9vu-2F-Ggh"/>
                         <outlet property="removeAdsBtn" destination="Rpl-dR-Bqy" id="lnR-hY-Cqh"/>
+                        <outlet property="restorePurchaseBtn" destination="4Da-P2-HSY" id="2Gk-Dq-3g7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uqb-KS-opa" userLabel="First Responder" sceneMemberID="firstResponder"/>

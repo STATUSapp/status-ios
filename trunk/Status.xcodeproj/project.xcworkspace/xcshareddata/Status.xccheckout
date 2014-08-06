@@ -5,24 +5,24 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>793605CE-F090-48CA-8352-F4C742F0A8C4</string>
+	<string>3BC82654-1EBF-4F92-9D72-262B7C0E57C7</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Status</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2C3FC9BD-3084-4AA9-953A-FB9945F1A5D3</key>
-		<string>svn://mobilep.ro/status/trunk</string>
+		<key>5B763D68-504C-4FED-8BCC-523EC79DA492</key>
+		<string>svn://mobilep.ro/status</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>trunk/Status.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2C3FC9BD-3084-4AA9-953A-FB9945F1A5D3</key>
-		<string>../..</string>
+		<key>5B763D68-504C-4FED-8BCC-523EC79DA492</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectRepositoryRootDictionary</key>
 	<dict>
-		<key>2C3FC9BD-3084-4AA9-953A-FB9945F1A5D3</key>
+		<key>5B763D68-504C-4FED-8BCC-523EC79DA492</key>
 		<string>svn://mobilep.ro/status</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -30,20 +30,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2C3FC9BD-3084-4AA9-953A-FB9945F1A5D3</string>
+	<string>5B763D68-504C-4FED-8BCC-523EC79DA492</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
-			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
-			<string>branches</string>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.subversion</string>
-			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
-			<string>tags</string>
-			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
-			<string>trunk</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2C3FC9BD-3084-4AA9-953A-FB9945F1A5D3</string>
+			<string>5B763D68-504C-4FED-8BCC-523EC79DA492</string>
 			<key>IDESourceControlWCCName</key>
 			<string>status</string>
 		</dict>
