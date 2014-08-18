@@ -17,12 +17,12 @@
 		0722C49D1935B6BD000B18F8 /* STBubbleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722C49C1935B6BD000B18F8 /* STBubbleCell.m */; };
 		0765FC4718D0850D0044762E /* STZoomablePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765FC4618D0850D0044762E /* STZoomablePostViewController.m */; };
 		076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */; };
-		07903A6C192A1EBB002136F8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07903A6B192A1EBB002136F8 /* FacebookSDK.framework */; };
 		07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */; };
 		07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
 		172DF27419A2616D009CE4F3 /* FacebookPickerScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */; };
 		172DF27719A26679009CE4F3 /* STFacebookAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172DF27619A26679009CE4F3 /* STFacebookAlbumsViewController.m */; };
 		172DF27A19A266DC009CE4F3 /* STFacebookAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 172DF27919A266DC009CE4F3 /* STFacebookAlbumCell.m */; };
+		172DF27C19A29250009CE4F3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172DF27B19A29250009CE4F3 /* FacebookSDK.framework */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
 		172EAE7118B0B12E00C5637B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE6F18B0B12E00C5637B /* InfoPlist.strings */; };
@@ -137,7 +137,6 @@
 		0765FC4618D0850D0044762E /* STZoomablePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STZoomablePostViewController.m; sourceTree = "<group>"; };
 		076CF4EF1910F2F200C4096C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		07903A6B192A1EBB002136F8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		07FBDEE418C606EF007BDCE6 /* STLikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikesViewController.h; sourceTree = "<group>"; };
 		07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLikesViewController.m; sourceTree = "<group>"; };
 		07FBDEE718C60DDF007BDCE6 /* STLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikeCell.h; sourceTree = "<group>"; };
@@ -147,6 +146,7 @@
 		172DF27619A26679009CE4F3 /* STFacebookAlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookAlbumsViewController.m; sourceTree = "<group>"; };
 		172DF27819A266DC009CE4F3 /* STFacebookAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookAlbumCell.h; sourceTree = "<group>"; };
 		172DF27919A266DC009CE4F3 /* STFacebookAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookAlbumCell.m; sourceTree = "<group>"; };
+		172DF27B19A29250009CE4F3 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		172EAE6318B0B12E00C5637B /* STATUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE6618B0B12E00C5637B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		172EAE6818B0B12E00C5637B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -320,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */,
+				172DF27C19A29250009CE4F3 /* FacebookSDK.framework in Frameworks */,
 				172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */,
 				1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */,
 				1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */,
@@ -331,7 +332,6 @@
 				1DE2D5AD194FA5D600A29A86 /* AdSupport.framework in Frameworks */,
 				17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */,
 				1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */,
-				07903A6C192A1EBB002136F8 /* FacebookSDK.framework in Frameworks */,
 				070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */,
 				1DE2D5AB194FA59300A29A86 /* libGoogleAdMobAds.a in Frameworks */,
 				17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */,
@@ -384,6 +384,7 @@
 		172EAE6518B0B12E00C5637B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				172DF27B19A29250009CE4F3 /* FacebookSDK.framework */,
 				1D98A4C219603064007F4AB2 /* iAd.framework */,
 				1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */,
 				1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */,
@@ -392,7 +393,6 @@
 				1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */,
 				1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */,
 				17AB89EA193B182500A6E7FD /* libicucore.dylib */,
-				07903A6B192A1EBB002136F8 /* FacebookSDK.framework */,
 				1774583A1928C48E005B994B /* CoreLocation.framework */,
 				070F9F3718E2DB9D008556AB /* Security.framework */,
 				17B1B5B418BA49F30079661B /* MessageUI.framework */,

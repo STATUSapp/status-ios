@@ -124,23 +124,27 @@
 //                              /* handle the result */
 //                          }];
     
-    NSString *albumId = _dataSource[indexPath.row][@"id"];
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"thumbnail", @"type",
-                            nil
-                            ];
-    NSString *graph = [NSString stringWithFormat:@"/{%@}/picture",albumId];
-    /* make the API call */
-    [FBRequestConnection startWithGraphPath:graph
-                                 parameters:params
-                                 HTTPMethod:@"GET"
-                          completionHandler:^(
-                                              FBRequestConnection *connection,
-                                              id result,
-                                              NSError *error
-                                              ) {
-                              /* handle the result */
-                          }];
+    if ([[[FBSession activeSession] permissions] containsObject:@"user_photos"]) {
+        NSString *albumId = _dataSource[indexPath.row][@"id"];
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"thumbnail", @"type",
+                                nil
+                                ];
+        NSString *graph = [NSString stringWithFormat:@"/{%@}/picture",albumId];
+        /* make the API call */
+        [FBRequestConnection startWithGraphPath:graph
+                                     parameters:params
+                                     HTTPMethod:@"GET"
+                              completionHandler:^(
+                                                  FBRequestConnection *connection,
+                                                  id result,
+                                                  NSError *error
+                                                  ) {
+                                  /* handle the result */
+                              }];
+    }
+    
+   
 }
 
 @end
