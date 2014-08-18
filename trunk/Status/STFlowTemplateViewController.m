@@ -774,7 +774,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 - (IBAction)onTapCameraUpload:(id)sender {
     
-    UIActionSheet *actionChoose = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll", nil];
+    UIActionSheet *actionChoose = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll",@"Upload from Facebook", nil];
     [actionChoose showFromRect: ((UIButton *)sender).frame inView:self.view animated:YES];
 }
 
@@ -1142,19 +1142,30 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     
-    if(buttonIndex==2) return;
-    @try {
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        
-        [self presentViewController:imagePicker animated:YES completion:^{
+    if(buttonIndex==3) return;
+    if (buttonIndex<=1) {
+        @try {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
             
-        }];
+            [self presentViewController:imagePicker animated:YES completion:^{
+                
+            }];
+        }
+        @catch (NSException *exception) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device has no camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }
     }
-    @catch (NSException *exception) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device has no camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FacebookPickerScene" bundle:nil];
+        UINavigationController *noteNav = [storyboard instantiateViewControllerWithIdentifier:@"FacebookPicker"];
+        
+        [self presentViewController:noteNav animated:YES completion:^{
+            NSLog(@"Facebook Picker presented");
+        }];
     }
 }
 
