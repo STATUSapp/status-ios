@@ -117,6 +117,10 @@ GADInterstitialDelegate, STTutorialDelegate>
                                              selector:@selector(chatControllerAuthenticate)
                                                  name:STChatControllerAuthenticate
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(facebookPickerDidChooseImage:)
+                                                 name:STFacebookPickerNotification
+                                               object:nil];
     
     
     
@@ -955,7 +959,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     NSDictionary *dict = [self getCurrentDictionary];
     [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img) {
         completion(img);
-    }];
+    } isForFacebook:NO];
 }
 
 -(NSDictionary *) getCurrentDictionary{
@@ -1035,7 +1039,7 @@ GADInterstitialDelegate, STTutorialDelegate>
 -(void)loadImageAtIndex:(NSInteger)index{
     if (_postsDataSource.count>index+1) {
         NSDictionary *nextDict = [_postsDataSource objectAtIndex:index];
-        [[STImageCacheController sharedInstance] loadImageWithName:nextDict[@"full_photo_link"] andCompletion:nil];
+        [[STImageCacheController sharedInstance] loadImageWithName:nextDict[@"full_photo_link"] andCompletion:nil isForFacebook:NO];
     }
 }
 
@@ -1227,6 +1231,21 @@ GADInterstitialDelegate, STTutorialDelegate>
 }
 
 #pragma mark - UIImagePickerDelegate
+-(void)facebookPickerDidChooseImage:(NSNotification *)notif{
+    NSLog(@"self.navigationController.viewControllers =  %@", self.navigationController.presentedViewController);
+    [self.navigationController.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    [self startShareControllerForImage:(UIImage *)[notif object] shouldCompress:NO];
+}
+
+- (void)startShareControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing {
+    NSData *data = UIImageJPEGRepresentation(img, compressing==NO?1.f:0.25);
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+    viewController.imgData = data;
+    viewController.delegate = self;
+    [self.navigationController pushViewController:viewController animated:NO];
+}
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
@@ -1234,13 +1253,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-        NSData *data = UIImageJPEGRepresentation(img, 0.25);
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-        viewController.imgData = data;
-        viewController.delegate = self;
-        [self.navigationController pushViewController:viewController animated:NO];
+        [self startShareControllerForImage:img shouldCompress:YES];
     }];
     
 }

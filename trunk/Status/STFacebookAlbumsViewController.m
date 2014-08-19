@@ -9,6 +9,7 @@
 #import "STFacebookAlbumsViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "STFacebookAlbumCell.h"
+#import "STAlbumImagesViewController.h"
 
 @interface STFacebookAlbumsViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -73,16 +74,19 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    STFacebookAlbumCell *cell = (STFacebookAlbumCell *)sender;
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    STAlbumImagesViewController *destVC = (STAlbumImagesViewController *)[segue destinationViewController];
+     NSString *albumId = _dataSource[indexPath.row][@"id"];
+    destVC.albumId = albumId;
 }
-*/
+
 
 #pragma mark - UITableViewDelegate
 
@@ -99,50 +103,31 @@
     return _dataSource.count;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44.f;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSString *coverId = _dataSource[indexPath.row][@"cover_photo"];
-//    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/{%@}", coverId]
-//                                 parameters:nil
-//                                 HTTPMethod:@"GET"
-//                          completionHandler:^(
-//                                              FBRequestConnection *connection,
-//                                              id result,
-//                                              NSError *error
-//                                              ) {
-//                              NSLog(@"Photo link: %@", result);
-//                          }];
-//    NSString *albumId = _dataSource[indexPath.row][@"id"];
-//    NSString *graph = [NSString stringWithFormat:@"/{%@}/photos",albumId];
-//    [FBRequestConnection startWithGraphPath:graph
-//                                 parameters:nil
-//                                 HTTPMethod:@"GET"
-//                          completionHandler:^(
-//                                              FBRequestConnection *connection,
-//                                              id result,
-//                                              NSError *error
-//                                              ) {
-//                              /* handle the result */
-//                          }];
     
-    if ([[[FBSession activeSession] permissions] containsObject:@"user_photos"]) {
-        NSString *albumId = _dataSource[indexPath.row][@"id"];
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"thumbnail", @"type",
-                                nil
-                                ];
-        NSString *graph = [NSString stringWithFormat:@"/{%@}/picture",albumId];
-        /* make the API call */
-        [FBRequestConnection startWithGraphPath:graph
-                                     parameters:params
-                                     HTTPMethod:@"GET"
-                              completionHandler:^(
-                                                  FBRequestConnection *connection,
-                                                  id result,
-                                                  NSError *error
-                                                  ) {
-                                  /* handle the result */
-                              }];
-    }
+//    if ([[[FBSession activeSession] permissions] containsObject:@"user_photos"]) {
+//        NSString *albumId = _dataSource[indexPath.row][@"id"];
+//        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                @"thumbnail", @"type",
+//                                nil
+//                                ];
+//        NSString *graph = [NSString stringWithFormat:@"/%@/picture",albumId];
+//        /* make the API call */
+//        [FBRequestConnection startWithGraphPath:graph
+//                                     parameters:params
+//                                     HTTPMethod:@"GET"
+//                              completionHandler:^(
+//                                                  FBRequestConnection *connection,
+//                                                  id result,
+//                                                  NSError *error
+//                                                  ) {
+//                                  /* handle the result */
+//                              }];
+//    }
     
    
 }

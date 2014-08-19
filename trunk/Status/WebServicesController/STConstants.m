@@ -67,6 +67,7 @@ NSString *const IAPHelperRestorePurchaseFailedNotification = @"IAPHelperRestoreP
 NSString *const STNotificationBadgeValueDidChanged = @"STNotificationBadgeValueDidChanged";
 NSString *const STUnreadMessagesValueDidChanged = @"STUnreadMessagesValueDidChanged";
 NSString *const STChatControllerAuthenticate = @"STChatControllerAuthenticate";
+NSString *const STFacebookPickerNotification = @"STFacebookPickerNotification";
 
 
 #pragma mark - Invite Friends

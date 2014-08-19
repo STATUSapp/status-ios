@@ -8,6 +8,7 @@
 
 #import "STImageCacheController.h"
 #import "STWebServiceController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface STImageCacheController()
 {
@@ -26,18 +27,18 @@
     return _sharedManager;
 }
 
--(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion{
+-(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion isForFacebook:(BOOL)forFacebook{
     
     if ([imageFullLink isKindOfClass:[NSNull class]]) {
         imageFullLink = nil;
     }
     
     NSString *usedLastPath = [imageFullLink lastPathComponent];
-    NSString *imageCachePath = [self getImageCachePath];
+    NSString *imageCachePath = [self getImageCachePath:forFacebook];
     NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:usedLastPath];
     __block UIImage *img = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
-        [[STWebServiceController sharedInstance] downloadImage:imageFullLink withCompletion:^(NSURL *imageURL) {
+        [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:forFacebook==YES?[imageFullLink lastPathComponent]:nil withCompletion:^(NSURL *imageURL) {
             if (completion!=nil) {
                 img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
                 completion(img);
@@ -59,10 +60,10 @@
         imageFullLink = nil;
     }
     NSString *usedLastPath = [imageFullLink lastPathComponent];
-    NSString *imageCachePath = [self getImageCachePath];
+    NSString *imageCachePath = [self getImageCachePath:NO];
     NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:usedLastPath];
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
-        [[STWebServiceController sharedInstance] downloadImage:imageFullLink withCompletion:^(NSURL *imageURL) {
+        [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:nil withCompletion:^(NSURL *imageURL) {
             completion(imageFullLink);
         }];
     }
@@ -72,11 +73,42 @@
     }
 }
 
--(NSString *) getImageCachePath{
+-(void) loadFBCoverPictureWithId:(NSString *)coverId andCompletion:(loadImageCompletion)completion{
+    NSString *coverImagePath = [coverId stringByAppendingString:@".jpg"];
+    NSString *imageCachePath = [self getImageCachePath:YES];
+    NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:coverImagePath];
+    __block UIImage *img = nil;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
+        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", coverId]
+                                     parameters:nil
+                                     HTTPMethod:@"GET"
+                              completionHandler:^(
+                                                  FBRequestConnection *connection,
+                                                  id result,
+                                                  NSError *error
+                                                  ) {
+                                  [[STWebServiceController sharedInstance] downloadImage:result[@"picture"] storedName:coverImagePath withCompletion:^(NSURL *imageURL) {
+                                      if (completion!=nil) {
+                                          img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+                                          completion(img);
+                                      }
+                                  }];
+                              }];
+    }
+    else
+    {
+        if (completion!=nil) {
+            img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageFullPath]];
+            completion(img);
+        }
+    }
+}
+
+-(NSString *) getImageCachePath:(BOOL)forFacebook{
     
     //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = NSTemporaryDirectory();//[paths objectAtIndex:0];
-    NSString *imageCachePath = [documentsDirectory stringByAppendingPathComponent:@"/ImageCache"];
+    NSString *imageCachePath = [documentsDirectory stringByAppendingPathComponent:(forFacebook == YES)?@"/FacebookImageCache":@"/ImageCache"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageCachePath]){
         NSError *error = nil;
@@ -86,8 +118,9 @@
     return imageCachePath;
 }
 
+
 -(void) cleanTemporaryFolder{
-    NSString *tmpPath = [self getImageCachePath];
+    NSString *tmpPath = [self getImageCachePath:NO];
     NSError *error = nil;
     NSFileManager *fm = [NSFileManager defaultManager];
     for (NSString *file in [fm contentsOfDirectoryAtPath:tmpPath error:&error]) {

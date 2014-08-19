@@ -100,6 +100,7 @@ extern NSString *const IAPHelperRestorePurchaseFailedNotification;
 extern NSString *const STNotificationBadgeValueDidChanged;
 extern NSString *const STUnreadMessagesValueDidChanged;
 extern NSString *const STChatControllerAuthenticate;
+extern NSString *const STFacebookPickerNotification;
 #pragma mark - Invite Friends
 
 extern NSString *const STInviteText;

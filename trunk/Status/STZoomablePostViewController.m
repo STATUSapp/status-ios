@@ -40,7 +40,7 @@
         //_imageView.contentMode = UIViewContentModeScaleAspectFit;
         [weakSelf setUpTheContext];
         
-    }];
+    } isForFacebook:NO];
 }
 
 -(void) setUpTheContext{

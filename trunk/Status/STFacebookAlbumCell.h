@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface STFacebookAlbumCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIView *albumImage;
 @property (weak, nonatomic) IBOutlet UILabel *albumTitleLbl;
 @property (weak, nonatomic) IBOutlet UILabel *albumPhotoNumberLbl;
+@property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
+
 
 -(void)configureCellWithALbum:(NSDictionary *)album;
 @end

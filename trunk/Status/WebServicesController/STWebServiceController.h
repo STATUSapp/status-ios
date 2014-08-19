@@ -19,7 +19,7 @@ typedef void (^downloadImageCompletion) (NSURL *imageURL);
 +(STWebServiceController *) sharedInstance;
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 -(void) getPostsWithOffset:(long) offest withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
--(void) downloadImage:(NSString *) imageFullLink withCompletion:(downloadImageCompletion) completion;
+-(void) downloadImage:(NSString *) imageFullLink storedName:(NSString *)storedName withCompletion:(downloadImageCompletion) completion;
 -(void) loginUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) registerUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) getUserProfilePictureFromFacebook:(NSString *) userID WithCompletion:(successCompletion) completion;

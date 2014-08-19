@@ -68,7 +68,7 @@
     
 }
 
--(void) downloadImage:(NSString *) imageFullLink withCompletion:(downloadImageCompletion) completion{
+-(void) downloadImage:(NSString *) imageFullLink storedName:(NSString *)storedName withCompletion:(downloadImageCompletion) completion{
     
     if ([imageFullLink isKindOfClass:[NSNull class]]) {
         imageFullLink = nil;
@@ -82,10 +82,14 @@
 
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         NSError *error = nil;
-        NSURL *documentsDirectoryPath = [NSURL fileURLWithPath:[[STImageCacheController sharedInstance] getImageCachePath]];
+        NSURL *documentsDirectoryPath = [NSURL fileURLWithPath:[[STImageCacheController sharedInstance] getImageCachePath:storedName!=nil]];
         [documentsDirectoryPath setResourceValue:[NSNumber numberWithBool:YES]
                                           forKey:NSURLIsExcludedFromBackupKey error:&error];
-        return [documentsDirectoryPath URLByAppendingPathComponent:[imageFullLink lastPathComponent]];
+        NSString *lastPathName = storedName;
+        if (lastPathName == nil) {
+            lastPathName = [imageFullLink lastPathComponent];
+        }
+        return [documentsDirectoryPath URLByAppendingPathComponent:lastPathName];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         completion(filePath);
     }];

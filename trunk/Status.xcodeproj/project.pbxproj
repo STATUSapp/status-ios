@@ -23,6 +23,8 @@
 		172DF27719A26679009CE4F3 /* STFacebookAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172DF27619A26679009CE4F3 /* STFacebookAlbumsViewController.m */; };
 		172DF27A19A266DC009CE4F3 /* STFacebookAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 172DF27919A266DC009CE4F3 /* STFacebookAlbumCell.m */; };
 		172DF27C19A29250009CE4F3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172DF27B19A29250009CE4F3 /* FacebookSDK.framework */; };
+		172DF28619A3EF37009CE4F3 /* STAlbumImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 172DF28519A3EF37009CE4F3 /* STAlbumImageCell.m */; };
+		172DF28919A3F006009CE4F3 /* STAlbumImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172DF28819A3F006009CE4F3 /* STAlbumImagesViewController.m */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
 		172EAE7118B0B12E00C5637B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE6F18B0B12E00C5637B /* InfoPlist.strings */; };
@@ -147,6 +149,10 @@
 		172DF27819A266DC009CE4F3 /* STFacebookAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookAlbumCell.h; sourceTree = "<group>"; };
 		172DF27919A266DC009CE4F3 /* STFacebookAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookAlbumCell.m; sourceTree = "<group>"; };
 		172DF27B19A29250009CE4F3 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		172DF28419A3EF37009CE4F3 /* STAlbumImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlbumImageCell.h; sourceTree = "<group>"; };
+		172DF28519A3EF37009CE4F3 /* STAlbumImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlbumImageCell.m; sourceTree = "<group>"; };
+		172DF28719A3F006009CE4F3 /* STAlbumImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlbumImagesViewController.h; sourceTree = "<group>"; };
+		172DF28819A3F006009CE4F3 /* STAlbumImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlbumImagesViewController.m; sourceTree = "<group>"; };
 		172EAE6318B0B12E00C5637B /* STATUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE6618B0B12E00C5637B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		172EAE6818B0B12E00C5637B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -422,6 +428,10 @@
 				172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */,
 				172DF27519A26679009CE4F3 /* STFacebookAlbumsViewController.h */,
 				172DF27619A26679009CE4F3 /* STFacebookAlbumsViewController.m */,
+				172DF28719A3F006009CE4F3 /* STAlbumImagesViewController.h */,
+				172DF28819A3F006009CE4F3 /* STAlbumImagesViewController.m */,
+				172DF28419A3EF37009CE4F3 /* STAlbumImageCell.h */,
+				172DF28519A3EF37009CE4F3 /* STAlbumImageCell.m */,
 				172DF27819A266DC009CE4F3 /* STFacebookAlbumCell.h */,
 				172DF27919A266DC009CE4F3 /* STFacebookAlbumCell.m */,
 				17EEE58519351BB700D02C1B /* STChatRoomViewController.h */,
@@ -857,6 +867,7 @@
 				17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */,
 				1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */,
 				070F9F3618E2D8A7008556AB /* KeychainItemWrapper.m in Sources */,
+				172DF28919A3F006009CE4F3 /* STAlbumImagesViewController.m in Sources */,
 				0715651218FD890400F7B3BB /* STFooterView.m in Sources */,
 				177458391928C41C005B994B /* STLocationManager.m in Sources */,
 				17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */,
@@ -878,6 +889,7 @@
 				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
 				070058E618BF68680014E1D3 /* STFacebookController.m in Sources */,
 				172EAF0818B0BB4800C5637B /* UIRefreshControl+AFNetworking.m in Sources */,
+				172DF28619A3EF37009CE4F3 /* STAlbumImageCell.m in Sources */,
 				172EAF0918B0BB4800C5637B /* UIWebView+AFNetworking.m in Sources */,
 				172EAEB118B0B46300C5637B /* AFHTTPSessionManager.m in Sources */,
 				176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */,

@@ -207,11 +207,11 @@ const float kNoNotifHeight = 24.f;
     [[STImageCacheController sharedInstance] loadImageWithName:dict[@"post_photo_link"]
                                                  andCompletion:^(UIImage *img) {
                                                      cell.postImg.image = img;
-                                                 }];
+                                                 } isForFacebook:NO];
     [[STImageCacheController sharedInstance] loadImageWithName:dict[@"user_photo_link"]
                                                  andCompletion:^(UIImage *img) {
                                                      cell.userImg.image = img;
-                                                 }];
+                                                 } isForFacebook:NO];
     cell.seenCircle.hidden = [dict[@"seen"] boolValue];
     cell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];
     cell.timeLbl.text = [self notificationTimeIntervalSinceDate:[ self dateFromServerDate:dict[@"date"]]];

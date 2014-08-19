@@ -109,7 +109,7 @@
     if (![imageUrl isEqual:[NSNull null]]) {
         [[STImageCacheController sharedInstance] loadImageWithName:imageUrl andCompletion:^(UIImage *img) {
             [cell.profileImageView maskImage:img];
-        }];
+        } isForFacebook:NO];
     }
     BOOL isUnread = ![dict[@"message_read"] boolValue];
     NSString *lastMessage = dict[@"last_message"];

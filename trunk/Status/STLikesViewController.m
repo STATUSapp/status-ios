@@ -76,7 +76,7 @@
     [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"]
                                                  andCompletion:^(UIImage *img) {
                                                      cell.userPhoto.image = img;
-                                                 }];
+                                                 } isForFacebook:NO];
     cell.userName.text = dict[@"user_name"];
     cell.chatButton.tag = indexPath.row;
     

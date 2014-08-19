@@ -7,6 +7,7 @@
 //
 
 #import "STFacebookAlbumCell.h"
+#import "STImageCacheController.h"
 
 @implementation STFacebookAlbumCell
 
@@ -34,6 +35,17 @@
 -(void)configureCellWithALbum:(NSDictionary *)album{
     _albumTitleLbl.text = album[@"name"];
     _albumPhotoNumberLbl.text = [NSString stringWithFormat:@"%ld photos", (long)[album[@"count"] integerValue]];
+    
+    NSString *coverId = album[@"cover_photo"];
+    [[STImageCacheController sharedInstance] loadFBCoverPictureWithId:coverId andCompletion:^(UIImage *img) {
+        _albumImageView.image = img;
+    }];
+    
+}
+
+-(void)prepareForReuse{
+    _albumTitleLbl.text = _albumPhotoNumberLbl.text = @"";
+    _albumImageView.image = [UIImage imageNamed:@"placeholder imagine like screen"];
 }
 
 @end

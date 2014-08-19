@@ -75,7 +75,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
         userImage = img;
         [_tableView reloadData];
         [_userImg maskImage:userImage];
-    }];
+    } isForFacebook:NO];
 }
 
 - (void)viewDidLoad
