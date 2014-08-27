@@ -13,7 +13,7 @@
 
 @interface STFacebookAlbumsViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *_dataSource;
+    NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -58,10 +58,23 @@
                                               id result,
                                               NSError *error
                                               ) {
-                              _dataSource = [NSArray arrayWithArray:result[@"data"]];
+                              if (error!=nil) {
+                                  NSLog(@"Load error");
+                              }
+                              else
+                              {
+                                  _dataSource = [NSMutableArray new];
+                                  for (NSDictionary *dict in result[@"data"]) {
+                                      if ([dict[@"count"] integerValue] != 0) {
+                                          [_dataSource addObject:dict];
+                                      }
+                                  }
+                                  NSLog(@"Data source: %@", _dataSource);
+                                  [_tableView reloadData];
+                              }
                               
-                              NSLog(@"Data source: %@", _dataSource);
-                              [_tableView reloadData];
+//                              _dataSource = [NSArray arrayWithArray:result[@"data"]];
+                              
                           }];
 }
 
