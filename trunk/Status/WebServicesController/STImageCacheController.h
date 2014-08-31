@@ -17,5 +17,5 @@ typedef void (^downloadImageComp)(NSString *downloadedImage);
 -(NSString *) getImageCachePath:(BOOL)forFacebook;
 -(void) cleanTemporaryFolder;
 -(void)startImageDownloadForNewDataSource:(NSArray *)newPosts;
--(void) loadFBCoverPictureWithId:(NSString *)coverId andCompletion:(loadImageCompletion)completion;
+-(void) loadFBCoverPictureForAlbum:(NSDictionary *)album andCompletion:(loadImageCompletion)completion;
 @end

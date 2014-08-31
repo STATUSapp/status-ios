@@ -36,8 +36,7 @@
     _albumTitleLbl.text = album[@"name"];
     _albumPhotoNumberLbl.text = [NSString stringWithFormat:@"%ld photos", (long)[album[@"count"] integerValue]];
     
-    NSString *coverId = album[@"cover_photo"];
-    [[STImageCacheController sharedInstance] loadFBCoverPictureWithId:coverId andCompletion:^(UIImage *img) {
+    [[STImageCacheController sharedInstance] loadFBCoverPictureForAlbum:album andCompletion:^(UIImage *img) {
         _albumImageView.image = img;
     }];
     

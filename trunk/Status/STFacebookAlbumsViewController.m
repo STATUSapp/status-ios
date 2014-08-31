@@ -7,16 +7,18 @@
 //
 
 #import "STFacebookAlbumsViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "STFacebookAlbumCell.h"
 #import "STAlbumImagesViewController.h"
+#import "STImageCacheController.h"
+#import "STFacebookAlbumsLoader.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface STFacebookAlbumsViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (strong, nonatomic) STFacebookAlbumsLoader *fbLoader;
 @end
 
 @implementation STFacebookAlbumsViewController
@@ -34,9 +36,12 @@
 {
     [super viewDidLoad];
 
+    _dataSource = [NSMutableArray new];
+    _fbLoader = [STFacebookAlbumsLoader new];
+    
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
+    
     if (![[[FBSession activeSession] permissions] containsObject:@"user_photos"]) {
         [[FBSession activeSession] requestNewPublishPermissions:@[@"user_photos"]
                                                 defaultAudience:FBSessionDefaultAudienceFriends
@@ -49,33 +54,14 @@
         [self loadDataSource];
 }
 
--(void)loadDataSource{
-    [FBRequestConnection startWithGraphPath:@"/me/albums"
-                                 parameters:nil
-                                 HTTPMethod:@"GET"
-                          completionHandler:^(
-                                              FBRequestConnection *connection,
-                                              id result,
-                                              NSError *error
-                                              ) {
-                              if (error!=nil) {
-                                  NSLog(@"Load error");
-                              }
-                              else
-                              {
-                                  _dataSource = [NSMutableArray new];
-                                  for (NSDictionary *dict in result[@"data"]) {
-                                      if ([dict[@"count"] integerValue] != 0) {
-                                          [_dataSource addObject:dict];
-                                      }
-                                  }
-                                  NSLog(@"Data source: %@", _dataSource);
-                                  [_tableView reloadData];
-                              }
-                              
-//                              _dataSource = [NSArray arrayWithArray:result[@"data"]];
-                              
-                          }];
+- (void)loadDataSource
+{
+    [_fbLoader loadAlbumsWithRefreshBlock:^(NSArray *newObjects) {
+        if (newObjects.count > 0) {
+            [_dataSource addObjectsFromArray:newObjects];
+            [_tableView reloadData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning

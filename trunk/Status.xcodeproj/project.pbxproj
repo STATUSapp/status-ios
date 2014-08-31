@@ -88,6 +88,8 @@
 		17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58919351C9100D02C1B /* STMessageSendCell.m */; };
 		17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
+		17FE7CE119B30F9F0081F688 /* STFacebookAlbumsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FE7CE019B30F9F0081F688 /* STFacebookAlbumsLoader.m */; };
+		17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FE7CE319B321340081F688 /* NSString+MD5.m */; };
 		1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */; };
 		1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C1212193B777D003DB198 /* STConversationCell.m */; };
 		1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */; };
@@ -262,6 +264,10 @@
 		17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageReceivedCell.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
+		17FE7CDF19B30F9E0081F688 /* STFacebookAlbumsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookAlbumsLoader.h; sourceTree = "<group>"; };
+		17FE7CE019B30F9F0081F688 /* STFacebookAlbumsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookAlbumsLoader.m; sourceTree = "<group>"; };
+		17FE7CE219B321340081F688 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		17FE7CE319B321340081F688 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		1D5C120E193B74C5003DB198 /* STConversationsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationsListViewController.h; sourceTree = "<group>"; };
 		1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationsListViewController.m; sourceTree = "<group>"; };
 		1D5C1211193B777D003DB198 /* STConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationCell.h; sourceTree = "<group>"; };
@@ -428,6 +434,8 @@
 				172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */,
 				172DF27519A26679009CE4F3 /* STFacebookAlbumsViewController.h */,
 				172DF27619A26679009CE4F3 /* STFacebookAlbumsViewController.m */,
+				17FE7CDF19B30F9E0081F688 /* STFacebookAlbumsLoader.h */,
+				17FE7CE019B30F9F0081F688 /* STFacebookAlbumsLoader.m */,
 				172DF28719A3F006009CE4F3 /* STAlbumImagesViewController.h */,
 				172DF28819A3F006009CE4F3 /* STAlbumImagesViewController.m */,
 				172DF28419A3EF37009CE4F3 /* STAlbumImageCell.h */,
@@ -634,6 +642,8 @@
 				1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */,
 				17FA8DB01937B48800491CAA /* UIImageView+Mask.h */,
 				17FA8DB11937B48800491CAA /* UIImageView+Mask.m */,
+				17FE7CE219B321340081F688 /* NSString+MD5.h */,
+				17FE7CE319B321340081F688 /* NSString+MD5.m */,
 			);
 			name = Categories;
 			path = Status/Categories;
@@ -888,6 +898,7 @@
 				17E44BA119822B67000E9116 /* Message.m in Sources */,
 				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
 				070058E618BF68680014E1D3 /* STFacebookController.m in Sources */,
+				17FE7CE119B30F9F0081F688 /* STFacebookAlbumsLoader.m in Sources */,
 				172EAF0818B0BB4800C5637B /* UIRefreshControl+AFNetworking.m in Sources */,
 				172DF28619A3EF37009CE4F3 /* STAlbumImageCell.m in Sources */,
 				172EAF0918B0BB4800C5637B /* UIWebView+AFNetworking.m in Sources */,
@@ -903,6 +914,7 @@
 				1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */,
 				17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */,
 				172EAF0218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m in Sources */,
+				17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */,
 				172EAEB718B0B46300C5637B /* AFURLSessionManager.m in Sources */,
 				172DF27A19A266DC009CE4F3 /* STFacebookAlbumCell.m in Sources */,
 				070B31BD18C772EF00765189 /* STNotificationCell.m in Sources */,

@@ -10,5 +10,4 @@
 
 @interface STAlbumImageCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
-
 @end

@@ -9,6 +9,7 @@
 #import "STImageCacheController.h"
 #import "STWebServiceController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "NSString+MD5.h"
 
 @interface STImageCacheController()
 {
@@ -33,12 +34,12 @@
         imageFullLink = nil;
     }
     
-    NSString *usedLastPath = [imageFullLink lastPathComponent];
+    NSString *usedLastPath = forFacebook==YES?[imageFullLink md5]:[imageFullLink lastPathComponent];
     NSString *imageCachePath = [self getImageCachePath:forFacebook];
     NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:usedLastPath];
     __block UIImage *img = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
-        [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:forFacebook==YES?[imageFullLink lastPathComponent]:nil withCompletion:^(NSURL *imageURL) {
+        [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:forFacebook==YES?usedLastPath:nil withCompletion:^(NSURL *imageURL) {
             if (completion!=nil) {
                 img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
                 completion(img);
@@ -73,27 +74,23 @@
     }
 }
 
--(void) loadFBCoverPictureWithId:(NSString *)coverId andCompletion:(loadImageCompletion)completion{
-    NSString *coverImagePath = [coverId stringByAppendingString:@".jpg"];
+-(void) loadFBCoverPictureForAlbum:(NSDictionary *)album andCompletion:(loadImageCompletion)completion{
+    NSString *coverImagePath = [album[@"cover_photo"] stringByAppendingString:@".jpg"];
     NSString *imageCachePath = [self getImageCachePath:YES];
     NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:coverImagePath];
     __block UIImage *img = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
-        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", coverId]
-                                     parameters:nil
-                                     HTTPMethod:@"GET"
-                              completionHandler:^(
-                                                  FBRequestConnection *connection,
-                                                  id result,
-                                                  NSError *error
-                                                  ) {
-                                  [[STWebServiceController sharedInstance] downloadImage:result[@"picture"] storedName:coverImagePath withCompletion:^(NSURL *imageURL) {
-                                      if (completion!=nil) {
-                                          img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-                                          completion(img);
-                                      }
-                                  }];
-                              }];
+        if (album[@"picture"] == nil) {
+            NSLog(@"Error on loading album picture");
+            completion(nil);
+            return;
+        }
+        [[STWebServiceController sharedInstance] downloadImage:album[@"picture"] storedName:coverImagePath withCompletion:^(NSURL *imageURL) {
+            if (completion!=nil) {
+                img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+                completion(img);
+            }
+        }];
     }
     else
     {

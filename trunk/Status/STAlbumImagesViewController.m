@@ -11,12 +11,14 @@
 #import "STAlbumImageCell.h"
 #import "STImageCacheController.h"
 #import "STSharePhotoViewController.h"
+#import "STFacebookAlbumsLoader.h"
 
 @interface STAlbumImagesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 {
-    NSArray *_photosArray;
+    NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) STFacebookAlbumsLoader *fbLoader;
 @end
 
 @implementation STAlbumImagesViewController
@@ -34,24 +36,17 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-
-    //TODO: maybe handle pagging . 
-    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
-    [params setValue:@"150" forKey:@"limit"];
-        NSString *graph = [NSString stringWithFormat:@"/%@/photos",_albumId];
-        [FBRequestConnection startWithGraphPath:graph
-                                     parameters:params
-                                     HTTPMethod:@"GET"
-                              completionHandler:^(
-                                                  FBRequestConnection *connection,
-                                                  id result,
-                                                  NSError *error
-                                                  ) {
-                                  //TODO: shouls keep 2 versions of small and large photos? picture vs source
-                                  _photosArray = [result[@"data"] valueForKey:@"source"];
-                                  NSLog(@"Photos array: %@", _photosArray);
-                                  [_collectionView reloadData];
-                              }];
+    _dataSource = [NSMutableArray array];
+    _fbLoader = [STFacebookAlbumsLoader new];
+    
+    [_fbLoader loadPhotosForAlbum:_albumId
+                 withRefreshBlock:^(NSArray *newObjects) {
+                     if (newObjects.count>0) {
+                         [_dataSource addObjectsFromArray:newObjects];
+                         [_collectionView reloadData];
+                     }
+                 }];
+        
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,24 +70,29 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     STAlbumImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STAlbumImageCell" forIndexPath:indexPath];
-    
-    __weak STAlbumImageCell *weakCell = cell;
-    [[STImageCacheController sharedInstance] loadImageWithName:_photosArray[indexPath.row] andCompletion:^(UIImage *img) {
-        weakCell.albumImageView.image = img;
+    NSString *thumbImageLink = _dataSource[indexPath.row][@"picture"];
+    //__weak STAlbumImageCell *weakSelf = cell;
+    [[STImageCacheController sharedInstance] loadImageWithName:thumbImageLink andCompletion:^(UIImage *img) {
+        cell.albumImageView.image = img;
+//        if (img && [[collectionView indexPathsForVisibleItems] containsObject:indexPath]) {
+//            [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+//        }
     } isForFacebook:YES];
     
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [[STImageCacheController sharedInstance] loadImageWithName:_photosArray[indexPath.row] andCompletion:^(UIImage *img) {
+    NSLog(@"%@", _dataSource[indexPath.row]);
+    NSString *fullImageLink = _dataSource[indexPath.row][@"source"];
+    [[STImageCacheController sharedInstance] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
         [[NSNotificationCenter defaultCenter] postNotificationName:STFacebookPickerNotification object:img];
     } isForFacebook:YES];
     
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return _photosArray.count;
+    return _dataSource.count;
 }
 
 @end

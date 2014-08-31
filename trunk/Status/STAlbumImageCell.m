@@ -7,6 +7,7 @@
 //
 
 #import "STAlbumImageCell.h"
+#import "STImageCacheController.h"
 
 @implementation STAlbumImageCell
 
