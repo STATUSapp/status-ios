@@ -104,8 +104,8 @@
 
 - (UIImage *)applyLightEffect
 {
-    UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.3];
-    return [self applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    UIColor *tintColor = [UIColor colorWithWhite:.75 alpha:0.3];
+    return [self applyBlurWithRadius:7 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 
@@ -274,5 +274,95 @@
     return outputImage;
 }
 
+-(UIImage *)imageWithBlurBackground{
+    //TODO: do some memory manageent here
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    UIImage *fullImage = [UIImage imageWithCGImage:self.CGImage];
+    UIImage *fitImage = [UIImage imageWithCGImage:self.CGImage];
+    UIGraphicsBeginImageContextWithOptions(screenRect.size, NO, [[UIScreen mainScreen] scale]);
+    CGContextRef theContext = UIGraphicsGetCurrentContext();
+	CGContextSaveGState(theContext);
+    
+	CGImageRef imageRef = [self CGImage];
+	CGRect imageRect = CGRectZero;
+	imageRect.size.height = CGImageGetHeight(imageRef);
+	imageRect.size.width = CGImageGetWidth(imageRef);
+    
+	CGRect frameFullRect = [self aspectFillForRect:imageRect intoRect:screenRect];
+    //TODO: change blur parameters as Denis wants
+    fullImage = [fullImage applyLightEffect];
+	[fullImage drawInRect:frameFullRect];
+    
+    CGRect frameFitRect = [self aspectFitForRect:imageRect intoRect:screenRect];
+	[fitImage drawInRect:frameFitRect];
+    
+	CGContextRestoreGState(theContext);
+
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    fullImage = fitImage = nil;
+    
+    return outputImage;
+
+}
+
+-(CGRect)aspectFitForRect:(CGRect)inRect intoRect:(CGRect)intoRect{
+    float widthRatio = intoRect.size.width/inRect.size.width;
+    float heightRatio = intoRect.size.height/inRect.size.height;
+    CGRect newRect = intoRect;
+    
+    if (widthRatio == heightRatio) {
+        return newRect;
+    }
+    
+    if (widthRatio > heightRatio) {
+        newRect.size.width = inRect.size.width * (intoRect.size.height/inRect.size.height);
+        newRect.origin.x = (intoRect.size.width-newRect.size.width)/2;
+    }
+    else
+    {
+        newRect.size.height = inRect.size.height * (intoRect.size.width/inRect.size.width);
+        newRect.origin.y = (intoRect.size.height-newRect.size.height)/2;
+    }
+	return CGRectIntegral(newRect);
+}
+
+-(CGRect)aspectFillForRect:(CGRect)inRect intoRect:(CGRect)intoRect{
+    float widthRatio = intoRect.size.width/inRect.size.width;
+    float heightRatio = intoRect.size.height/inRect.size.height;
+    CGRect newRect = intoRect;
+    
+    if (widthRatio == heightRatio) {
+        return newRect;
+    }
+    
+    if (widthRatio > heightRatio) {
+        newRect.size.height = inRect.size.height * (intoRect.size.width/inRect.size.width);
+        newRect.origin.y = (intoRect.size.height-newRect.size.height)/2;
+    }
+    else
+    {
+        newRect.size.width = inRect.size.width * (intoRect.size.height/inRect.size.height);
+        newRect.origin.x = (intoRect.size.width-newRect.size.width)/2;
+    }
+	return CGRectIntegral(newRect);
+}
+
+//- (CGRect) aspectFittedRect:(CGRect)inRect max:(CGRect)maxRect
+//{
+//	float originalAspectRatio = inRect.size.width / inRect.size.height;
+//	float maxAspectRatio = maxRect.size.width / maxRect.size.height;
+//    
+//	CGRect newRect = maxRect;
+//	if (originalAspectRatio > maxAspectRatio) { // scale by width
+//		newRect.size.height = maxRect.size.height * inRect.size.height / inRect.size.width;
+//		newRect.origin.y += (maxRect.size.height - newRect.size.height)/2.0;
+//	} else {
+//		newRect.size.width = maxRect.size.height  * inRect.size.width / inRect.size.height;
+//		newRect.origin.x += (maxRect.size.width - newRect.size.width)/2.0;
+//	}
+//    
+//	return CGRectIntegral(newRect);
+//}
 
 @end

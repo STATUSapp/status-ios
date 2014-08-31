@@ -90,7 +90,6 @@
             break;
         }
         case STFlowTypeDiscoverNearby:{
-            NSLog(@"%@", setupDict);
             [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"], setupDict[@"small_photo_link"]]];
             [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@", setupDict[@"user_name"]] forState:UIControlStateNormal];
             break;
@@ -187,18 +186,18 @@
     __weak STCustomCollectionViewCell *weakSelf = self;
     
     if (urlArray.count == 1) {
-        [[STImageCacheController sharedInstance] loadImageWithName:urlArray[0] andCompletion:^(UIImage *img) {
-            weakSelf.bigPictureImageView.image=img;
+        [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
+            weakSelf.bigPictureImageView.image=bluredImg;
             [weakSelf.activityIndicator stopAnimating];
             weakSelf.smallPictureImageView.hidden = YES;
-        } isForFacebook:NO];
+        }];
     }
     else
     {
-        [[STImageCacheController sharedInstance] loadImageWithName:urlArray[0] andCompletion:^(UIImage *img) {
-            weakSelf.bigPictureImageView.image = img;
+        [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
+            weakSelf.bigPictureImageView.image = bluredImg;
             [weakSelf.activityIndicator stopAnimating];
-        } isForFacebook:NO];
+        }];
         [[STImageCacheController sharedInstance] loadImageWithName:urlArray[1] andCompletion:^(UIImage *img) {
             weakSelf.smallPictureImageView.hidden = FALSE;
             weakSelf.smallPictureImageView.image = img;

@@ -12,6 +12,7 @@
 #import "STImageCacheController.h"
 #import "STSharePhotoViewController.h"
 #import "STFacebookAlbumsLoader.h"
+#import "UIImage+ImageEffects.h"
 
 @interface STAlbumImagesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 {
@@ -71,12 +72,8 @@
     
     STAlbumImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STAlbumImageCell" forIndexPath:indexPath];
     NSString *thumbImageLink = _dataSource[indexPath.row][@"picture"];
-    //__weak STAlbumImageCell *weakSelf = cell;
     [[STImageCacheController sharedInstance] loadImageWithName:thumbImageLink andCompletion:^(UIImage *img) {
         cell.albumImageView.image = img;
-//        if (img && [[collectionView indexPathsForVisibleItems] containsObject:indexPath]) {
-//            [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-//        }
     } isForFacebook:YES];
     
     return cell;
@@ -86,7 +83,8 @@
     NSLog(@"%@", _dataSource[indexPath.row]);
     NSString *fullImageLink = _dataSource[indexPath.row][@"source"];
     [[STImageCacheController sharedInstance] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:STFacebookPickerNotification object:img];
+        UIImage *newImg = img;//[img imageWithBlurBackground];
+        [[NSNotificationCenter defaultCenter] postNotificationName:STFacebookPickerNotification object:newImg];
     } isForFacebook:YES];
     
 }

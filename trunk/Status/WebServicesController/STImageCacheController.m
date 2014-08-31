@@ -10,6 +10,7 @@
 #import "STWebServiceController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "NSString+MD5.h"
+#import "UIImage+ImageEffects.h"
 
 @interface STImageCacheController()
 {
@@ -55,16 +56,72 @@
     }
 }
 
+-(void) loadPostImageWithName:(NSString *) imageFullLink andCompletion:(loadPostImageCompletion) completion{
+    
+    if ([imageFullLink isKindOfClass:[NSNull class]]) {
+        imageFullLink = nil;
+    }
+    
+    NSString *usedLastPath = [imageFullLink lastPathComponent];
+    NSString *imageCachePath = [self getImageCachePath:NO];
+    NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:usedLastPath];
+    __block UIImage *img = nil;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
+        [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:nil withCompletion:^(NSURL *imageURL) {
+            if (completion!=nil) {
+                img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+                UIImage *bluredImage = [self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(img, bluredImage);
+                });
+            }
+        }];
+    }
+    else
+    {
+        if (completion!=nil) {
+            img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageFullPath]];
+            NSString *bluredLink = [self blurPostLinkWith:imageFullLink imageCachePath:imageCachePath];
+            UIImage *bluredImg= [UIImage imageWithData:[NSData dataWithContentsOfFile:bluredLink]];
+            completion(img, bluredImg);
+        }
+    }
+}
+
+- (NSString *)blurPostLinkWith:(NSString *)imageFullLink imageCachePath:(NSString *)imageCachePath {
+    NSString *extention = [imageFullLink pathExtension];
+    NSString *blurName = [[[[imageFullLink lastPathComponent] stringByDeletingPathExtension] stringByAppendingString:@"-blur."] stringByAppendingString:extention];
+    NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:blurName];
+    return imageFullPath;
+}
+
+- (UIImage *)saveImageForBlurPosts:(NSString *)imageCachePath imageFullLink:(NSString *)imageFullLink imageURL:(NSURL *)imageURL {
+    if ([imageFullLink rangeOfString:kBasePhotoDownload].location!=NSNotFound) {
+        UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        img = [img imageWithBlurBackground];
+        NSString *imageFullPath;
+        imageFullPath = [self blurPostLinkWith:imageFullLink imageCachePath:imageCachePath];
+        NSData *imagData = UIImageJPEGRepresentation(img, 1.f);
+        [imagData writeToFile:imageFullPath atomically:YES];
+        return img;
+    }
+    return nil;
+}
+
 -(void) downloadImageWithName:(NSString *) imageFullLink andCompletion:(downloadImageComp) completion{
     
     if ([imageFullLink isKindOfClass:[NSNull class]]) {
         imageFullLink = nil;
     }
-    NSString *usedLastPath = [imageFullLink lastPathComponent];
+    __block NSString *usedLastPath = [imageFullLink lastPathComponent];
     NSString *imageCachePath = [self getImageCachePath:NO];
     NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:usedLastPath];
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:nil withCompletion:^(NSURL *imageURL) {
+            //TODO: use background mode safe
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
+//            });
             completion(imageFullLink);
         }];
     }

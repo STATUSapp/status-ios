@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 typedef void (^loadImageCompletion)(UIImage *img);
+typedef void (^loadPostImageCompletion)(UIImage *origImg, UIImage *bluredImg);
 typedef void (^downloadImageComp)(NSString *downloadedImage);
 @interface STImageCacheController : NSObject
 
 +(STImageCacheController *) sharedInstance;
 
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion isForFacebook:(BOOL)forFacebook;
+-(void) loadPostImageWithName:(NSString *) imageFullLink andCompletion:(loadPostImageCompletion) completion;
 -(NSString *) getImageCachePath:(BOOL)forFacebook;
 -(void) cleanTemporaryFolder;
 -(void)startImageDownloadForNewDataSource:(NSArray *)newPosts;

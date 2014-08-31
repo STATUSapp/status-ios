@@ -12,6 +12,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import "STLocationManager.h"
+#import "STConstants.h"
 
 @implementation STWebServiceController
 +(STWebServiceController *) sharedInstance{
