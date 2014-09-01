@@ -10,6 +10,7 @@
 
 #define PAGGING_ENABLED 1
 #define  POSTS_PAGGING 10
+#define  START_LOAD_OFFSET 4
 #pragma mark - Enums
 
 typedef NS_ENUM(NSUInteger,STFlowType){
@@ -101,6 +102,8 @@ extern NSString *const STNotificationBadgeValueDidChanged;
 extern NSString *const STUnreadMessagesValueDidChanged;
 extern NSString *const STChatControllerAuthenticate;
 extern NSString *const STFacebookPickerNotification;
+extern NSString *const STLoadImageNotification;
+
 #pragma mark - Invite Friends
 
 extern NSString *const STInviteText;

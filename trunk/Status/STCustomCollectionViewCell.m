@@ -187,7 +187,9 @@
     
     if (urlArray.count == 1) {
         [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
-            weakSelf.bigPictureImageView.image=bluredImg;
+            if (bluredImg!=nil) {
+                weakSelf.bigPictureImageView.image=bluredImg;
+            }
             [weakSelf.activityIndicator stopAnimating];
             weakSelf.smallPictureImageView.hidden = YES;
         }];
@@ -195,7 +197,9 @@
     else
     {
         [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
-            weakSelf.bigPictureImageView.image = bluredImg;
+            if (bluredImg!=nil) {
+                weakSelf.bigPictureImageView.image=bluredImg;
+            }
             [weakSelf.activityIndicator stopAnimating];
         }];
         [[STImageCacheController sharedInstance] loadImageWithName:urlArray[1] andCompletion:^(UIImage *img) {

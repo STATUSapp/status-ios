@@ -67,15 +67,9 @@
     NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:usedLastPath];
     __block UIImage *img = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
-        [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:nil withCompletion:^(NSURL *imageURL) {
-            if (completion!=nil) {
-                img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-                UIImage *bluredImage = [self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completion(img, bluredImage);
-                });
-            }
-        }];
+        //start the downloading queue and the view will be notified;
+        currentPosts = [NSMutableArray arrayWithArray:@[imageFullLink]];
+        [self loadNextPhoto];
     }
     else
     {
@@ -98,10 +92,11 @@
 - (UIImage *)saveImageForBlurPosts:(NSString *)imageCachePath imageFullLink:(NSString *)imageFullLink imageURL:(NSURL *)imageURL {
     if ([imageFullLink rangeOfString:kBasePhotoDownload].location!=NSNotFound) {
         UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        img = [img imageWithBlurBackground];
-        NSString *imageFullPath;
-        imageFullPath = [self blurPostLinkWith:imageFullLink imageCachePath:imageCachePath];
-        NSData *imagData = UIImageJPEGRepresentation(img, 1.f);
+        img = [img imageCropedFullScreenSize];
+        img = [img applyLightEffect];
+        NSString *imageFullPath = [self blurPostLinkWith:imageFullLink imageCachePath:imageCachePath];
+        //TOOD: this is a right compresion?
+        NSData *imagData = UIImageJPEGRepresentation(img, 0.5f);
         [imagData writeToFile:imageFullPath atomically:YES];
         return img;
     }
@@ -113,16 +108,18 @@
     if ([imageFullLink isKindOfClass:[NSNull class]]) {
         imageFullLink = nil;
     }
-    __block NSString *usedLastPath = [imageFullLink lastPathComponent];
     NSString *imageCachePath = [self getImageCachePath:NO];
-    NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:usedLastPath];
+    NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:imageFullLink.lastPathComponent];
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:nil withCompletion:^(NSURL *imageURL) {
             //TODO: use background mode safe
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
-//            });
-            completion(imageFullLink);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage *img =[self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
+                img = nil;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(imageFullLink);
+                });
+            });
         }];
     }
     else
@@ -186,6 +183,8 @@
 }
 
 -(void)startImageDownloadForNewDataSource:(NSArray *)newPosts{
+
+    NSLog(@"Start Downloading images: %d", newPosts.count);
     currentPosts = [NSMutableArray arrayWithArray:[newPosts valueForKey:@"full_photo_link"]];
     [self loadNextPhoto];
 }
@@ -195,7 +194,9 @@
         return;
     }
     __weak STImageCacheController *weakSelf = self;
+    NSLog(@"Image: %d", 11-currentPosts.count);
     [self downloadImageWithName:[currentPosts firstObject] andCompletion:^(NSString *downloadedImage) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:downloadedImage];
         [currentPosts removeObject:downloadedImage];
         [weakSelf loadNextPhoto];
     }];

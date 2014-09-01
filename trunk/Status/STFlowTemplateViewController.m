@@ -121,6 +121,7 @@ GADInterstitialDelegate, STTutorialDelegate>
                                              selector:@selector(facebookPickerDidChooseImage:)
                                                  name:STFacebookPickerNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
     
     
     
@@ -416,6 +417,12 @@ GADInterstitialDelegate, STTutorialDelegate>
         }
     }
     return sheetArray;
+}
+-(void)imageWasSavedLocally:(NSNotification *)notif{
+    NSDictionary *currentDict = [self getCurrentDictionary];
+    if ([[currentDict valueForKey:@"full_photo_link"] isEqualToString:notif.object]) {
+        [self.collectionView reloadData];
+    }
 }
 
 - (void)getDataSourceWithOffset:(long) offset{
@@ -1044,12 +1051,6 @@ GADInterstitialDelegate, STTutorialDelegate>
 }
 
 -(void)loadImages:(NSArray *)array{
-//    NSLog(@"Start loading image link");
-//    for (NSString *imageLink in [_postsDataSource valueForKey:@"full_photo_link"]) {
-//        [[STImageCacheController sharedInstance] loadImageWithName:imageLink
-//                                                     andCompletion:nil];
-//    }
-    
     [[STImageCacheController sharedInstance] startImageDownloadForNewDataSource:array];
 }
 
@@ -1072,7 +1073,7 @@ GADInterstitialDelegate, STTutorialDelegate>
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                 [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
                 int indexOffset = usedIndx.row%POSTS_PAGGING;
-                if (indexOffset == POSTS_PAGGING-4) {
+                if (indexOffset == POSTS_PAGGING - START_LOAD_OFFSET) {
                     [weakSelf getDataSourceWithOffset:POSTS_PAGGING-indexOffset-1];
                 }
             }
@@ -1083,7 +1084,7 @@ GADInterstitialDelegate, STTutorialDelegate>
     }
     else if(self.flowType != STFlowTypeSinglePost)
     {
-        if (usedIndx.row%POSTS_PAGGING == POSTS_PAGGING-2) {
+        if (usedIndx.row%POSTS_PAGGING == POSTS_PAGGING-START_LOAD_OFFSET) {
             [self getDataSourceWithOffset:self.postsDataSource.count];
         }
     }

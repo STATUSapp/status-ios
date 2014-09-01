@@ -274,34 +274,20 @@
     return outputImage;
 }
 
--(UIImage *)imageWithBlurBackground{
-    //TODO: do some memory manageent here
+-(UIImage *)imageCropedFullScreenSize{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    UIImage *fullImage = [UIImage imageWithCGImage:self.CGImage];
-    UIImage *fitImage = [UIImage imageWithCGImage:self.CGImage];
     UIGraphicsBeginImageContextWithOptions(screenRect.size, NO, [[UIScreen mainScreen] scale]);
-    CGContextRef theContext = UIGraphicsGetCurrentContext();
-	CGContextSaveGState(theContext);
-    
+
 	CGImageRef imageRef = [self CGImage];
 	CGRect imageRect = CGRectZero;
 	imageRect.size.height = CGImageGetHeight(imageRef);
 	imageRect.size.width = CGImageGetWidth(imageRef);
-    
-	CGRect frameFullRect = [self aspectFillForRect:imageRect intoRect:screenRect];
-    //TODO: change blur parameters as Denis wants
-    fullImage = [fullImage applyLightEffect];
-	[fullImage drawInRect:frameFullRect];
-    
-    CGRect frameFitRect = [self aspectFitForRect:imageRect intoRect:screenRect];
-	[fitImage drawInRect:frameFitRect];
-    
-	CGContextRestoreGState(theContext);
 
+	CGRect frameFullRect = [self aspectFillForRect:imageRect intoRect:screenRect];
+    [self drawInRect:frameFullRect];
+    
     UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    fullImage = fitImage = nil;
-    
     return outputImage;
 
 }
