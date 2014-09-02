@@ -286,29 +286,15 @@ GADInterstitialDelegate, STTutorialDelegate>
 
 - (void)presentInterstitialControllerForIndex:(NSInteger)index {
     
-    if (index == 0 || index %10 != 0) {
+    if (index == 0 || index %15 != 0) {
         return;
     }
-    
-    BOOL shouldPresentInviter = [[STInviteController sharedInstance] shouldInviteBeAvailable];
     BOOL shouldPresentAds = ![[STIAPHelper sharedInstance] productPurchased:kRemoveAdsInAppPurchaseProductID];
     
-    
-    NSMutableArray * allowedIntestitials = [NSMutableArray array];
-    
     if (shouldPresentAds) {
-        [allowedIntestitials addObjectsFromArray:@[@(STInterstitialTypeAds), @(STInterstitialTypeRemoveAds)]];
+        [self presentInterstitialControllerWithType:STInterstitialTypeAds];
     }
     
-    if (shouldPresentInviter) {
-        [allowedIntestitials addObject:@(STInterstitialTypeInviter)];
-    }
-    
-    index = index / 10 - 1;
-    
-    STInterstitialType interstitialToPresent = [[allowedIntestitials objectAtIndex: (index % [allowedIntestitials count] )] integerValue];
-    
-    [self presentInterstitialControllerWithType:interstitialToPresent];
 }
 
 - (void) presentInterstitialControllerWithType:(STInterstitialType)interstitialType {
