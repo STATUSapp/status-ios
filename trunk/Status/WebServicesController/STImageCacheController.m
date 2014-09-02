@@ -68,8 +68,11 @@
     __block UIImage *img = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         //start the downloading queue and the view will be notified;
-        currentPosts = [NSMutableArray arrayWithArray:@[imageFullLink]];
-        [self loadNextPhoto];
+        if (currentPosts==nil || ![currentPosts containsObject:imageFullLink]) {
+            currentPosts = [NSMutableArray arrayWithArray:@[imageFullLink]];
+            [self loadNextPhoto];
+        }
+        
     }
     else
     {
@@ -184,7 +187,7 @@
 
 -(void)startImageDownloadForNewDataSource:(NSArray *)newPosts{
 
-    NSLog(@"Start Downloading images: %d", newPosts.count);
+    NSLog(@"Start Downloading images: %lu", (unsigned long)newPosts.count);
     currentPosts = [NSMutableArray arrayWithArray:[newPosts valueForKey:@"full_photo_link"]];
     [self loadNextPhoto];
 }
@@ -194,7 +197,7 @@
         return;
     }
     __weak STImageCacheController *weakSelf = self;
-    NSLog(@"Image: %d", 11-currentPosts.count);
+    NSLog(@"Image: %lu", 11-currentPosts.count);
     [self downloadImageWithName:[currentPosts firstObject] andCompletion:^(NSString *downloadedImage) {
         [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:downloadedImage];
         [currentPosts removeObject:downloadedImage];

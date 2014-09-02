@@ -15,9 +15,8 @@
 
 @interface STCustomCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIButton *profileNameBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *bigPictureImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *smallPictureImageView;
-//@property (weak, nonatomic) IBOutlet UILabel *profileNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *fullBlurImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *fitImageView;
 @property (weak, nonatomic) IBOutlet UIButton *likeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *shareBtn;
@@ -32,8 +31,6 @@
 @end
 
 @implementation STCustomCollectionViewCell
-@synthesize bigPictureImageView = _bigPictureImageView;
-@synthesize smallPictureImageView = _smallPictureImageView;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -53,13 +50,13 @@
         }
         else
         {
-            [self.contentView bringSubviewToFront:_bigPictureImageView];
+            [self.contentView bringSubviewToFront:_fullBlurImageView];
             [self.contentView bringSubviewToFront:_activityIndicator];
             [self.activityIndicator startAnimating];
             return;
         }
     }
-    [self.contentView sendSubviewToBack:_bigPictureImageView];
+    [self.contentView sendSubviewToBack:_fullBlurImageView];
     [_activityIndicator stopAnimating];
 
     [self setUpVisualsForFlowType:flowType];
@@ -147,11 +144,10 @@
 }
 
 - (void)setupAsPlaceholderForFlowType:(STFlowType)type{
-    [self.contentView sendSubviewToBack:_bigPictureImageView];
+    [self.contentView sendSubviewToBack:_fullBlurImageView];
     self.bigCameraProfileBtn.hidden = NO;
-    self.smallPictureImageView.hidden = YES;
-    self.bigPictureImageView.hidden = NO;
-    self.bigPictureImageView.image = [UIImage imageNamed:@"placeholder"];
+    self.fullBlurImageView.hidden = NO;
+    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder"];
     
     self.likeBtn.hidden = YES;
     self.likesNumberBtn.hidden = YES;
@@ -177,8 +173,8 @@
 }
 
 -(void)setUpPlaceholderBeforeLoading{
-    [self.contentView bringSubviewToFront:_bigPictureImageView];
-    self.bigPictureImageView.image = [UIImage imageNamed:@"placeholder"];
+    [self.contentView bringSubviewToFront:_fullBlurImageView];
+    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder"];
 }
 
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{
@@ -188,34 +184,35 @@
     if (urlArray.count == 1) {
         [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
             if (bluredImg!=nil) {
-                weakSelf.bigPictureImageView.image=bluredImg;
+                weakSelf.fullBlurImageView.image=bluredImg;
+                [weakSelf.activityIndicator stopAnimating];
             }
-            [weakSelf.activityIndicator stopAnimating];
-            weakSelf.smallPictureImageView.hidden = YES;
+            if (img!=nil) {
+                weakSelf.fitImageView.image = img;
+            }
         }];
     }
     else
     {
         [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
             if (bluredImg!=nil) {
-                weakSelf.bigPictureImageView.image=bluredImg;
+                weakSelf.fullBlurImageView.image=bluredImg;
+                [weakSelf.activityIndicator stopAnimating];
             }
-            [weakSelf.activityIndicator stopAnimating];
+            if (img!=nil) {
+                weakSelf.fitImageView.image = img;
+            }
         }];
-        [[STImageCacheController sharedInstance] loadImageWithName:urlArray[1] andCompletion:^(UIImage *img) {
-            weakSelf.smallPictureImageView.hidden = FALSE;
-            weakSelf.smallPictureImageView.image = img;
-        } isForFacebook:NO];
     }
 }
 
 - (void)prepareForReuse{
     [super prepareForReuse];
-    self.bigPictureImageView.image = [UIImage imageNamed:@"placeholder"];
-    self.smallPictureImageView.image = nil;
+    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder"];
+    self.fitImageView.image = nil;
     self.setUpDict = nil;
-    self.bigPictureImageView.hidden = NO;
-    self.smallPictureImageView.hidden = NO;
+    self.fullBlurImageView.hidden = NO;
+    self.fitImageView.hidden = NO;
     self.likesNumberBtn.selected = NO;
     
     self.bigCameraProfileBtn.hidden = YES;
