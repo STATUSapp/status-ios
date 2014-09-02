@@ -292,27 +292,6 @@
 
 }
 
--(CGRect)aspectFitForRect:(CGRect)inRect intoRect:(CGRect)intoRect{
-    float widthRatio = intoRect.size.width/inRect.size.width;
-    float heightRatio = intoRect.size.height/inRect.size.height;
-    CGRect newRect = intoRect;
-    
-    if (widthRatio == heightRatio) {
-        return newRect;
-    }
-    
-    if (widthRatio > heightRatio) {
-        newRect.size.width = inRect.size.width * (intoRect.size.height/inRect.size.height);
-        newRect.origin.x = (intoRect.size.width-newRect.size.width)/2;
-    }
-    else
-    {
-        newRect.size.height = inRect.size.height * (intoRect.size.width/inRect.size.width);
-        newRect.origin.y = (intoRect.size.height-newRect.size.height)/2;
-    }
-	return CGRectIntegral(newRect);
-}
-
 -(CGRect)aspectFillForRect:(CGRect)inRect intoRect:(CGRect)intoRect{
     float widthRatio = intoRect.size.width/inRect.size.width;
     float heightRatio = intoRect.size.height/inRect.size.height;
@@ -333,22 +312,5 @@
     }
 	return CGRectIntegral(newRect);
 }
-
-//- (CGRect) aspectFittedRect:(CGRect)inRect max:(CGRect)maxRect
-//{
-//	float originalAspectRatio = inRect.size.width / inRect.size.height;
-//	float maxAspectRatio = maxRect.size.width / maxRect.size.height;
-//    
-//	CGRect newRect = maxRect;
-//	if (originalAspectRatio > maxAspectRatio) { // scale by width
-//		newRect.size.height = maxRect.size.height * inRect.size.height / inRect.size.width;
-//		newRect.origin.y += (maxRect.size.height - newRect.size.height)/2.0;
-//	} else {
-//		newRect.size.width = maxRect.size.height  * inRect.size.width / inRect.size.height;
-//		newRect.origin.x += (maxRect.size.width - newRect.size.width)/2.0;
-//	}
-//    
-//	return CGRectIntegral(newRect);
-//}
 
 @end

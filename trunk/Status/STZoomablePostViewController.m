@@ -55,16 +55,39 @@
     CGFloat minScale = MIN(scaleWidth, scaleHeight);
     self.scrollView.minimumZoomScale = minScale;
     self.scrollView.maximumZoomScale = 1.0f;
-    CGSize boundsSize = scrollViewFrame.size;
+//    CGSize boundsSize = scrollViewFrame.size;
     self.scrollView.zoomScale = MAX(scaleHeight, scaleWidth);
     _zoomFill = self.scrollView.zoomScale;
     //center the image view on the
-    CGRect contentsFrame = _imageView.frame;
-    contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
-    contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+//    CGRect contentsFrame = _imageView.frame;
+//    contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+//    contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
 
+    CGRect contentsFrame = [self aspectFitForRect:CGRectMake(0, 0, imageSize.width, imageSize.height)
+                                         intoRect:_scrollView.frame];
     _imageView.frame = contentsFrame;
      
+}
+
+-(CGRect)aspectFitForRect:(CGRect)inRect intoRect:(CGRect)intoRect{
+    float widthRatio = intoRect.size.width/inRect.size.width;
+    float heightRatio = intoRect.size.height/inRect.size.height;
+    CGRect newRect = intoRect;
+    
+    if (widthRatio == heightRatio) {
+        return newRect;
+    }
+    
+    if (widthRatio > heightRatio) {
+        newRect.size.width = inRect.size.width * (intoRect.size.height/inRect.size.height);
+        newRect.origin.x = (intoRect.size.width-newRect.size.width)/2;
+    }
+    else
+    {
+        newRect.size.height = inRect.size.height * (intoRect.size.width/inRect.size.width);
+        newRect.origin.y = (intoRect.size.height-newRect.size.height)/2;
+    }
+	return CGRectIntegral(newRect);
 }
 
 - (void)didReceiveMemoryWarning
