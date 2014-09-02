@@ -57,7 +57,7 @@
         }
     }
     [self.contentView sendSubviewToBack:_fullBlurImageView];
-    [_activityIndicator stopAnimating];
+//    [_activityIndicator stopAnimating];
 
     [self setUpVisualsForFlowType:flowType];
     
@@ -156,7 +156,7 @@
     self.noPhotosLabel.hidden = NO;
     [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", self.username] forState:UIControlStateNormal];
     
-    [self.activityIndicator stopAnimating];
+//    [self.activityIndicator stopAnimating];
     
     switch (type) {
         case STFlowTypeMyProfile:{
@@ -220,6 +220,8 @@
     self.likesNumberBtn.hidden = NO;
     self.shareBtn.hidden = NO;
     self.noPhotosLabel.hidden = YES;
+    [self.activityIndicator startAnimating];
+
     
 }
 

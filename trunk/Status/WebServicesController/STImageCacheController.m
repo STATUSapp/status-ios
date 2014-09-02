@@ -68,8 +68,8 @@
     __block UIImage *img = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         //start the downloading queue and the view will be notified;
-        if (currentPosts==nil || ![currentPosts containsObject:imageFullLink]) {
-            currentPosts = [NSMutableArray arrayWithArray:@[imageFullLink]];
+        if (![currentPosts containsObject:imageFullLink]) {
+            [currentPosts insertObject:imageFullLink atIndex:0];
             [self loadNextPhoto];
         }
         
@@ -187,8 +187,16 @@
 
 -(void)startImageDownloadForNewDataSource:(NSArray *)newPosts{
 
-    NSLog(@"Start Downloading images: %lu", (unsigned long)newPosts.count);
-    currentPosts = [NSMutableArray arrayWithArray:[newPosts valueForKey:@"full_photo_link"]];
+    //TODO: we might need reorder this array when we change the flow
+    NSArray *imagesLinksArray = [newPosts valueForKey:@"full_photo_link"];
+    if(currentPosts!=nil && currentPosts.count > 0){
+        NSRange range = NSMakeRange(0, [imagesLinksArray count]);
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+        [currentPosts insertObjects:imagesLinksArray atIndexes:indexSet];
+    }
+    else
+        currentPosts = [NSMutableArray arrayWithArray:imagesLinksArray];
+    
     [self loadNextPhoto];
 }
 
@@ -197,7 +205,7 @@
         return;
     }
     __weak STImageCacheController *weakSelf = self;
-    NSLog(@"Image: %lu", 11-currentPosts.count);
+    NSLog(@"Image: %@", [currentPosts firstObject]);
     [self downloadImageWithName:[currentPosts firstObject] andCompletion:^(NSString *downloadedImage) {
         [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:downloadedImage];
         [currentPosts removeObject:downloadedImage];
