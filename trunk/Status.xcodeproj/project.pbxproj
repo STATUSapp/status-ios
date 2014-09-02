@@ -108,6 +108,9 @@
 		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
+		CDAC50AF19B602C900A45E85 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AB19B602C900A45E85 /* UIImage+RoundedCorner.m */; };
+		CDAC50B019B602C900A45E85 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AD19B602C900A45E85 /* UIImage+Alpha.m */; };
+		CDAC50B119B602C900A45E85 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AE19B602C900A45E85 /* UIImage+Resize.m */; };
 		CDEB0579196AA00F008089B2 /* STIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEB0578196AA00F008089B2 /* STIAPHelper.m */; };
 /* End PBXBuildFile section */
 
@@ -322,6 +325,12 @@
 		317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomCollectionViewCell.h; sourceTree = "<group>"; };
 		317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomCollectionViewCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CDAC50A919B602C900A45E85 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		CDAC50AA19B602C900A45E85 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		CDAC50AB19B602C900A45E85 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		CDAC50AC19B602C900A45E85 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		CDAC50AD19B602C900A45E85 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		CDAC50AE19B602C900A45E85 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		CDEB0577196AA00F008089B2 /* STIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIAPHelper.h; sourceTree = "<group>"; };
 		CDEB0578196AA00F008089B2 /* STIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIAPHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -636,6 +645,12 @@
 		17F6BB7A190ED8BD00B41E3A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				CDAC50A919B602C900A45E85 /* UIImage+Resize.h */,
+				CDAC50AE19B602C900A45E85 /* UIImage+Resize.m */,
+				CDAC50AA19B602C900A45E85 /* UIImage+RoundedCorner.h */,
+				CDAC50AB19B602C900A45E85 /* UIImage+RoundedCorner.m */,
+				CDAC50AC19B602C900A45E85 /* UIImage+Alpha.h */,
+				CDAC50AD19B602C900A45E85 /* UIImage+Alpha.m */,
 				076CF4EF1910F2F200C4096C /* UIImage+ImageEffects.h */,
 				076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */,
 				1DFBB385192E9C9F003B7A53 /* UIImageView+TouchesEffects.h */,
@@ -862,6 +877,7 @@
 				17E44B9919821FB2000E9116 /* STCoreDataManager.m in Sources */,
 				1DE2D5B81950DB3100A29A86 /* STRemoveAdsViewController.m in Sources */,
 				1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */,
+				CDAC50B119B602C900A45E85 /* UIImage+Resize.m in Sources */,
 				17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */,
 				CDEB0579196AA00F008089B2 /* STIAPHelper.m in Sources */,
 				0722C49D1935B6BD000B18F8 /* STBubbleCell.m in Sources */,
@@ -872,6 +888,7 @@
 				0765FC4718D0850D0044762E /* STZoomablePostViewController.m in Sources */,
 				172EAF0718B0BB4800C5637B /* UIProgressView+AFNetworking.m in Sources */,
 				172EAEB218B0B46300C5637B /* AFNetworkReachabilityManager.m in Sources */,
+				CDAC50B019B602C900A45E85 /* UIImage+Alpha.m in Sources */,
 				1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */,
 				178907BA18B295DD00AC4355 /* STLoginViewController.m in Sources */,
 				17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */,
@@ -913,6 +930,7 @@
 				172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */,
 				1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */,
 				17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */,
+				CDAC50AF19B602C900A45E85 /* UIImage+RoundedCorner.m in Sources */,
 				172EAF0218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */,
 				172EAEB718B0B46300C5637B /* AFURLSessionManager.m in Sources */,
