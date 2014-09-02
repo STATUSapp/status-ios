@@ -15,6 +15,7 @@
     float _zoomFill;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
 
 @end
 
@@ -33,14 +34,14 @@
 {
     [super viewDidLoad];
     __weak STZoomablePostViewController *weakSelf = self;
-    [[STImageCacheController sharedInstance] loadImageWithName:self.postPhotoLink andCompletion:^(UIImage *img) {
+    [[STImageCacheController sharedInstance] loadPostImageWithName:self.postPhotoLink andCompletion:^(UIImage *origImg, UIImage *bluredImg) {
         // Set up the image we want to scroll & zoom and add it to the scroll view
-        _imageView = [[UIImageView alloc] initWithImage:img];
-        _imageView.frame = (CGRect){.origin=CGPointMake(0.0f, 0.0f), .size=img.size};
-        //_imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView = [[UIImageView alloc] initWithImage:origImg];
+        _imageView.frame = (CGRect){.origin=CGPointMake(0.0f, 0.0f), .size=origImg.size};
+        _backgroundBlurImgView.image = bluredImg;
         [weakSelf setUpTheContext];
         
-    } isForFacebook:NO];
+    }];
 }
 
 -(void) setUpTheContext{
@@ -52,16 +53,10 @@
     CGRect scrollViewFrame = self.view.bounds;
     CGFloat scaleWidth = scrollViewFrame.size.width / self.scrollView.contentSize.width;
     CGFloat scaleHeight = scrollViewFrame.size.height / self.scrollView.contentSize.height;
-    CGFloat minScale = MIN(scaleWidth, scaleHeight);
-    self.scrollView.minimumZoomScale = minScale;
-    self.scrollView.maximumZoomScale = 1.0f;
-//    CGSize boundsSize = scrollViewFrame.size;
-    self.scrollView.zoomScale = MAX(scaleHeight, scaleWidth);
+    self.scrollView.minimumZoomScale = MIN(scaleWidth, scaleHeight);
+    self.scrollView.maximumZoomScale = MAX(imageSize.height/_scrollView.frame.size.height,imageSize.width/_scrollView.frame.size.width);
+    self.scrollView.zoomScale = MIN(scaleWidth, scaleHeight);
     _zoomFill = self.scrollView.zoomScale;
-    //center the image view on the
-//    CGRect contentsFrame = _imageView.frame;
-//    contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
-//    contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
 
     CGRect contentsFrame = [self aspectFitForRect:CGRectMake(0, 0, imageSize.width, imageSize.height)
                                          intoRect:_scrollView.frame];

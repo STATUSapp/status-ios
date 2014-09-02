@@ -16,11 +16,12 @@
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *facebookBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
+@property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @end
 
 @implementation STSharePhotoViewController
-@synthesize imgData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +35,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.sharedImageView.image = [UIImage imageWithData:imgData];
+    [_transparentNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    _transparentNavBar.shadowImage = [UIImage new];
+    _transparentNavBar.translucent = YES;
+
+	_sharedImageView.image = [UIImage imageWithData:_imgData];
+    _backgroundBlurImgView.image = [UIImage imageWithData:_bluredImgData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,7 +60,7 @@
     
     NSString *fileName = @"image_status";
     fileName = [fileName stringByAppendingPathExtension:@"jpeg"];
-    [emailShareController addAttachmentData:imgData mimeType:@"image/jpeg" fileName:fileName];
+    [emailShareController addAttachmentData:_imgData mimeType:@"image/jpeg" fileName:fileName];
 
     [self presentViewController:emailShareController animated:YES completion:nil];
 }
@@ -83,7 +89,7 @@
 - (IBAction)onClickShare:(id)sender {
     _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
-    [[STWebServiceController sharedInstance] uploadPictureWithData:imgData withCompletion:^(NSDictionary *response) {
+    [[STWebServiceController sharedInstance] uploadPictureWithData:_imgData withCompletion:^(NSDictionary *response) {
         
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             

@@ -33,6 +33,7 @@
 #import "STRemoveAdsViewController.h"
 #import "STInviteFriendsViewController.h"
 #import "STInviteController.h"
+#import "STMoveScaleViewController.h"
 
 #import "STIAPHelper.h"
 #import "STChatController.h"
@@ -45,8 +46,8 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, STSharePhotoDelegate, UIGestureRecognizerDelegate,
-GADInterstitialDelegate, STTutorialDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,
+GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 {
     GADInterstitial * _interstitial;
     
@@ -1228,10 +1229,16 @@ GADInterstitialDelegate, STTutorialDelegate>
     NSData *data = UIImageJPEGRepresentation(img, compressing==NO?1.f:0.25);
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
     viewController.imgData = data;
     viewController.delegate = self;
     [self.navigationController pushViewController:viewController animated:NO];
+    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+//    viewController.imgData = data;
+//    viewController.delegate = self;
+//    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{

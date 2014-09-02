@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol STSharePhotoDelegate <NSObject>
-
--(void)imageWasPosted;
-
-@end
+#import "STMoveScaleViewController.h"
 
 @interface STSharePhotoViewController : UIViewController
 @property (nonatomic, strong) NSData *imgData;
-@property (nonatomic, weak) id <STSharePhotoDelegate> delegate;
+@property (nonatomic, strong) NSData *bluredImgData;
+@property (nonatomic, weak) id <STSharePostDelegate> delegate;
 @end
