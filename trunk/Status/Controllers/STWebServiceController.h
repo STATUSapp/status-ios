@@ -23,7 +23,7 @@ typedef void (^downloadImageCompletion) (NSURL *imageURL);
 -(void) loginUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) registerUserWithInfo:(NSDictionary *) info withCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) getUserProfilePictureFromFacebook:(NSString *) userID WithCompletion:(successCompletion) completion;
--(void) uploadPictureWithData:(NSData *) imageData withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
+-(void) uploadPostForId:(NSString *) postId withData:(NSData *) imageData withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
 -(void) setPostLiked:(NSString *) postId withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
 -(void) setReportStatus:(NSString *) postId withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion;
 -(void) getUserPosts:(NSString *) userId withOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;

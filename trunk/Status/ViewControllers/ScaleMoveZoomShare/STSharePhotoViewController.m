@@ -82,12 +82,11 @@
 - (IBAction)onClickShare:(id)sender {
     _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
-    [[STWebServiceController sharedInstance] uploadPictureWithData:_imgData withCompletion:^(NSDictionary *response) {
+    [[STWebServiceController sharedInstance] uploadPostForId:_editPostId withData:_imgData withCompletion:^(NSDictionary *response) {
         
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             
             //TODO: add sharing to twitter
-            
             if (weakSelf.facebookBtn.selected==TRUE) {
                 //add publish stream permissions if does not exists
                 if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
@@ -104,7 +103,7 @@
             else
             {
                 [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-                [weakSelf.delegate performSelector:@selector(imageWasPosted)];
+                [weakSelf callTheDelegate];
             }
 
         }
@@ -139,13 +138,21 @@
         if(error==nil)
         {
             [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            [weakSelf.delegate performSelector:@selector(imageWasPosted)];
+            [weakSelf callTheDelegate];
         }
         else
         {
             [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            [weakSelf.delegate performSelector:@selector(imageWasPosted)];
+            [weakSelf callTheDelegate];
         }
     }];
+}
+
+-(void)callTheDelegate{
+    if (_editPostId!=nil) {
+        [_delegate imageWasEdited];
+    }
+    else
+        [_delegate imageWasPosted];
 }
 @end

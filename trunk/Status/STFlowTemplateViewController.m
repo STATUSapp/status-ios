@@ -383,11 +383,23 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
     NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
-//replace all the stack with the main flow and the user profile flow
+    //replace all the stack with the main flow and the user profile flow
     if ([[viewCtrl lastObject] isKindOfClass:[STSharePhotoViewController class]]) {
         NSArray *newFlow = @[[viewCtrl firstObject], flowCtrl];
         [navCtrl setViewControllers:newFlow animated:YES];
     }
+}
+
+-(void)imageWasEdited{
+    AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
+    NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
+    //TODO: check for a better motho to to this: dissmiss last two VC
+    [viewCtrl removeLastObject];
+    [viewCtrl removeLastObject];
+    [navCtrl setViewControllers:viewCtrl animated:YES];
+    //we are already on the user posts flow, so we did not need to go there
+    //TODO: remove / reload the photo from cache
 }
 
 #pragma mark - Get Data Source for Flow Type
@@ -909,7 +921,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     NSDictionary *dict = [self getCurrentDictionary];
     [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img, UIImage *bluredImg) {
         if (img!=nil) {
-            [self startMoveScaleShareControllerForImage:img shouldCompress:NO];
+            [self startMoveScaleShareControllerForImage:img shouldCompress:NO editedPostId:dict[@"post_id"]];
         }
     }];
 }
@@ -1239,10 +1251,14 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     NSLog(@"self.navigationController.viewControllers =  %@", self.navigationController.presentedViewController);
     [self.navigationController.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-    [self startMoveScaleShareControllerForImage:(UIImage *)[notif object] shouldCompress:NO];
+    [self startMoveScaleShareControllerForImage:(UIImage *)[notif object]
+                                 shouldCompress:NO
+                                      editedPostId:nil];
 }
 
-- (void)startMoveScaleShareControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing {
+- (void)startMoveScaleShareControllerForImage:(UIImage *)img
+                               shouldCompress:(BOOL)compressing
+                                    editedPostId:(NSString *)postId{
     //TODO: this compression must be changed (it's to big!!!)
     NSData *data = UIImageJPEGRepresentation(img, compressing==NO?1.f:0.25);
     
@@ -1250,6 +1266,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
     viewController.imgData = data;
     viewController.delegate = self;
+    viewController.editPostId = postId;
     [self.navigationController pushViewController:viewController animated:NO];
     
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -1265,7 +1282,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [self startMoveScaleShareControllerForImage:img shouldCompress:YES];
+        [self startMoveScaleShareControllerForImage:img shouldCompress:YES editedPostId:nil];
     }];
     
 }

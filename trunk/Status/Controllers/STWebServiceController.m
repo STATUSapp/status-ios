@@ -149,11 +149,14 @@
     
 }
 
--(void) uploadPictureWithData:(NSData *) imageData withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion{
+-(void) uploadPostForId:(NSString *) postId withData:(NSData *) imageData withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion{
 
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-
+    if (postId!=nil) {
+        //TODO: add post Id to upload
+        NSLog(@"Add post id to upload");
+    }
     AFHTTPRequestOperation *op = [manager POST:kPostPhoto parameters:@{@"token":self.accessToken} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.jpg" mimeType:@"image/jpg"];
         

@@ -64,17 +64,17 @@
     CGFloat scaleHeight = scrollViewFrame.size.height / self.scrollView.contentSize.height;
 
     self.scrollView.minimumZoomScale = MIN(scaleWidth, scaleHeight);
-    self.scrollView.maximumZoomScale = MAX(imageSize.height/_scrollView.frame.size.height,imageSize.width/_scrollView.frame.size.width);
+    self.scrollView.maximumZoomScale = MAX(imageSize.height/scrollViewFrame.size.height,imageSize.width/scrollViewFrame.size.width);
     self.scrollView.zoomScale = MIN(scaleWidth, scaleHeight);
     
-    CGRect contentsFrame = [self aspectFitForRect:CGRectMake(0, 0, imageSize.width, imageSize.height) intoRect:_scrollView.frame];
+    CGRect contentsFrame = [self aspectFitForRect:CGRectMake(0, 0, imageSize.width, imageSize.height) intoRect:scrollViewFrame];
     _imageView.frame = contentsFrame;
     
     [self centerScrollViewContents];
 }
 
 - (void)centerScrollViewContents {
-    CGSize boundsSize = self.scrollView.bounds.size;
+    CGSize boundsSize = self.view.bounds.size;
     CGRect contentsFrame = _imageView.frame;
     
     if (contentsFrame.size.width < boundsSize.width) {
@@ -123,6 +123,7 @@
     viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
     viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
     viewController.delegate = _delegate;
+    viewController.editPostId = _editPostId;
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
@@ -134,10 +135,11 @@
 -(UIImage *)croppedImage{
     CGRect visibleRect;
     float scale = 1.f/_scrollView.zoomScale;
+    CGSize boundsSize = self.view.bounds.size;
     visibleRect.origin.x = _scrollView.contentOffset.x * scale;
     visibleRect.origin.y = _scrollView.contentOffset.y * scale;
-    visibleRect.size.width = _scrollView.bounds.size.width * scale;
-    visibleRect.size.height = _scrollView.bounds.size.height * scale;
+    visibleRect.size.width = boundsSize.width * scale;
+    visibleRect.size.height = boundsSize.height * scale;
     
     UIImage *croppedImage = [_imageView.image croppedImage:visibleRect];
     

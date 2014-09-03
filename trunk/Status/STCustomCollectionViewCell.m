@@ -185,10 +185,11 @@
         [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
             if (bluredImg!=nil) {
                 weakSelf.fullBlurImageView.image=bluredImg;
-                [weakSelf.activityIndicator stopAnimating];
             }
             if (img!=nil) {
                 weakSelf.fitImageView.image = img;
+                [weakSelf.activityIndicator stopAnimating];
+
             }
         }];
     }
@@ -197,10 +198,11 @@
         [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
             if (bluredImg!=nil) {
                 weakSelf.fullBlurImageView.image=bluredImg;
-                [weakSelf.activityIndicator stopAnimating];
             }
             if (img!=nil) {
                 weakSelf.fitImageView.image = img;
+                [weakSelf.activityIndicator stopAnimating];
+
             }
         }];
     }

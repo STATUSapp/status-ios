@@ -13,4 +13,5 @@
 @property (nonatomic, strong) NSData *imgData;
 @property (nonatomic, strong) NSData *bluredImgData;
 @property (nonatomic, weak) id <STSharePostDelegate> delegate;
+@property (nonatomic, strong) NSString *editPostId;
 @end

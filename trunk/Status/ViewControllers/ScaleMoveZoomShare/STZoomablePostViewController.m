@@ -60,18 +60,18 @@
     CGFloat scaleWidth = scrollViewFrame.size.width / self.scrollView.contentSize.width;
     CGFloat scaleHeight = scrollViewFrame.size.height / self.scrollView.contentSize.height;
     self.scrollView.minimumZoomScale = MIN(scaleWidth, scaleHeight);
-    self.scrollView.maximumZoomScale = MAX(imageSize.height/_scrollView.frame.size.height,imageSize.width/_scrollView.frame.size.width);
+    self.scrollView.maximumZoomScale = MAX(imageSize.height/scrollViewFrame.size.height,imageSize.width/scrollViewFrame.size.width);
     self.scrollView.zoomScale = MIN(scaleWidth, scaleHeight);
     _zoomFill = self.scrollView.zoomScale;
 
     CGRect contentsFrame = [self aspectFitForRect:CGRectMake(0, 0, imageSize.width, imageSize.height)
-                                         intoRect:_scrollView.frame];
+                                         intoRect:scrollViewFrame];
     _imageView.frame = contentsFrame;
      
 }
 
 - (void)centerScrollViewContents {
-    CGSize boundsSize = self.scrollView.bounds.size;
+    CGSize boundsSize = self.view.bounds.size;
     CGRect contentsFrame = _imageView.frame;
     
     if (contentsFrame.size.width < boundsSize.width) {
