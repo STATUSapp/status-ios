@@ -1059,9 +1059,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         [[STWebServiceController sharedInstance] setPostSeen:dict[@"post_id"] withCompletion:^(NSDictionary *response) {
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                 [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
-                int indexOffset = usedIndx.row%POSTS_PAGGING;
-                if (indexOffset == POSTS_PAGGING - START_LOAD_OFFSET) {
-                    [weakSelf getDataSourceWithOffset:POSTS_PAGGING-indexOffset-1];
+//                int indexOffset = usedIndx.row%POSTS_PAGGING;
+//                if (indexOffset == POSTS_PAGGING - START_LOAD_OFFSET) {
+//                    [weakSelf getDataSourceWithOffset:POSTS_PAGGING-indexOffset-1];
+//                }
+                BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET;
+                if (shouldGetNextBatch) {
+                    [weakSelf getDataSourceWithOffset:_postsDataSource.count - usedIndx.row - 1];
                 }
             }
             
@@ -1071,8 +1075,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     }
     else if(self.flowType != STFlowTypeSinglePost)
     {
-        if (usedIndx.row%POSTS_PAGGING == POSTS_PAGGING-START_LOAD_OFFSET) {
-            [self getDataSourceWithOffset:self.postsDataSource.count];
+//        if (usedIndx.row%POSTS_PAGGING == POSTS_PAGGING-START_LOAD_OFFSET) {
+//            [self getDataSourceWithOffset:self.postsDataSource.count];
+//        }
+        BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET;
+        if (shouldGetNextBatch) {
+            [self getDataSourceWithOffset:_postsDataSource.count];
         }
     }
 }

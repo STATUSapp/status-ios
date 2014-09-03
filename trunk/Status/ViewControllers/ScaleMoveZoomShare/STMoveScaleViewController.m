@@ -9,6 +9,7 @@
 #import "STMoveScaleViewController.h"
 #import "UIImage+ImageEffects.h"
 #import "STSharePhotoViewController.h"
+#import "UIImage+Resize.h"
 
 @interface STMoveScaleViewController ()<UIScrollViewDelegate>
 {
@@ -138,17 +139,9 @@
     visibleRect.size.width = _scrollView.bounds.size.width * scale;
     visibleRect.size.height = _scrollView.bounds.size.height * scale;
     
-    UIImage *croppedImage = [self cropImage:_imageView.image withRect:visibleRect];
+    UIImage *croppedImage = [_imageView.image croppedImage:visibleRect];
     
     return croppedImage;
-}
-
--(UIImage*)cropImage:(UIImage*)srcImage withRect:(CGRect) rect
-{
-    CGImageRef cr = CGImageCreateWithImageInRect([srcImage CGImage], rect);
-    UIImage* cropped = [[UIImage alloc] initWithCGImage:cr];
-    CGImageRelease(cr);
-    return cropped;
 }
 
 -(CGRect)aspectFitForRect:(CGRect)inRect intoRect:(CGRect)intoRect{

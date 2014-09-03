@@ -205,7 +205,7 @@
         return;
     }
     __weak STImageCacheController *weakSelf = self;
-    NSLog(@"Image: %@", [currentPosts firstObject]);
+//    NSLog(@"Image: %@", [currentPosts firstObject]);
     [self downloadImageWithName:[currentPosts firstObject] andCompletion:^(NSString *downloadedImage) {
         [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:downloadedImage];
         [currentPosts removeObject:downloadedImage];

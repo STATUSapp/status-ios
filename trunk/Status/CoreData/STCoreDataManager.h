@@ -51,14 +51,6 @@ typedef void (^AddParameterBlock)(id returnObject, NSManagedObjectContext* manag
                            andCompletion:(CompletionBlock)completionBlock;
 
 /**
- * Adds async an object into the specified table 
- * @param dataArray ... the data to be added
- * @param tableName ... the name of the desired table in the db
- * @param updateBlock ...  custom code to fill the newly added object with info from dataArray
- */
-- (void)insertDataAsync:(NSArray*)dataArray forTableName:(NSString*)tableName withUpdateBlock:(UpdateBlock)updateBlock andCompletion:(CompletionBlock)completionBlock;
-
-/**
  * Adds an object into the specified table
  * @param tableName ... the name of the desired table in the db
  * @returns newly inserted object
@@ -94,25 +86,6 @@ typedef void (^AddParameterBlock)(id returnObject, NSManagedObjectContext* manag
 - (void)synchronizeAsyncCoreDataEntity:(NSString*)entityName
                               withData:(NSDictionary*)serverData
                          andCompletion:(CompletionBlock)completion;
-
-
-- (void)synchronizeCoreDataEntity:(NSString*)entityName
-                         withData:(NSArray*)serverData;
-
-/**
- * Get results from database that are not found in the passed results array object. Used to make DIFFs with server data
- * @param tableName ... the CoreData entity(table) that we wish to search
- * @param primaryKey ... unique identifier that we use to check if the data already exists in the entity
- * @param resulst ... the results array that is used for search
- */
-- (void)fetchAsyncNotFoundDataFromTable:(NSString *)tableName
-                             inResults:(NSArray *)results
-                        withPrimaryKey:(NSString *)primaryKey
-                     andCompletion:(CompletionBlock)completion;
-
-- (NSArray*)fetchNotFoundDataFromTable:(NSString *)tableName
-                         inResults:(NSArray *)results
-                    withPrimaryKey:(NSString *)primaryKey;
 
 
 @end
