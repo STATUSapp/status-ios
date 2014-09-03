@@ -1250,10 +1250,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 #pragma mark - UIImagePickerDelegate
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     NSLog(@"self.navigationController.viewControllers =  %@", self.navigationController.presentedViewController);
-    [self.navigationController.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-    [self startMoveScaleShareControllerForImage:(UIImage *)[notif object]
-                                 shouldCompress:NO
-                                      editedPostId:nil];
+    [self.navigationController.presentedViewController dismissViewControllerAnimated:YES completion:^{
+        [self startMoveScaleShareControllerForImage:(UIImage *)[notif object]
+                                     shouldCompress:NO
+                                       editedPostId:nil];
+    }];
+
 }
 
 - (void)startMoveScaleShareControllerForImage:(UIImage *)img
