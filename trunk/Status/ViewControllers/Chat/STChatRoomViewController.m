@@ -208,7 +208,9 @@ static NSInteger const  kBlockUserAlertTag = 11;
         _heightConstraint.constant = height + 7;
         //_bottomTextViewConstraint.constant =
         //_containerView.frame = r;
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        if (_messages.count>0) {
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
     }];
 	 
 }
@@ -583,7 +585,9 @@ static NSInteger const  kBlockUserAlertTag = 11;
             [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
         else{
-            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            if (_messages.count > 0) {
+                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
         }
         
         
