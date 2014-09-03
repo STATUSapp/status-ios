@@ -15,6 +15,7 @@
 
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *facebookBtn;
+@property (weak, nonatomic) IBOutlet UIButton *twitterBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
@@ -72,6 +73,12 @@
     btn.selected = !btn.selected;
 }
 
+- (IBAction)onClickTwitter:(id)sender {
+    
+    UIButton *btn = (UIButton *) sender;
+    btn.selected = !btn.selected;
+}
+
 - (IBAction)onClickShare:(id)sender {
     _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
@@ -79,18 +86,20 @@
         
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             
+            //TODO: add sharing to twitter
+            
             if (weakSelf.facebookBtn.selected==TRUE) {
                 //add publish stream permissions if does not exists
                 if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
                     [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
                                                             defaultAudience:FBSessionDefaultAudienceFriends
                                                           completionHandler:^(FBSession *session, NSError *error) {
-                                                              [self postCurrentPhoto];
+                                                              [self postCurrentPhotoToFacebook];
                                                           }];
                     
                 }
                 else
-                    [self postCurrentPhoto];
+                    [self postCurrentPhotoToFacebook];
             }
             else
             {
@@ -124,7 +133,7 @@
 }
 
 #pragma mark - Helper
-- (void)postCurrentPhoto {
+- (void)postCurrentPhotoToFacebook {
     __weak STSharePhotoViewController *weakSelf = self;
     [[STFacebookController sharedInstance] shareImageWithData:self.imgData andCompletion:^(id result, NSError *error) {
         if(error==nil)

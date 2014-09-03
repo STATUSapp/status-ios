@@ -905,6 +905,15 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
 }
 
+-(IBAction)onMoveAndScale:(id)sender{
+    NSDictionary *dict = [self getCurrentDictionary];
+    [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img, UIImage *bluredImg) {
+        if (img!=nil) {
+            [self startMoveScaleShareControllerForImage:img shouldCompress:NO];
+        }
+    }];
+}
+
 -(IBAction)onDeletePost:(id)sender{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
                                                         message:@"Are you sure you want to delete this post?"
@@ -1230,10 +1239,11 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     NSLog(@"self.navigationController.viewControllers =  %@", self.navigationController.presentedViewController);
     [self.navigationController.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-    [self startShareControllerForImage:(UIImage *)[notif object] shouldCompress:NO];
+    [self startMoveScaleShareControllerForImage:(UIImage *)[notif object] shouldCompress:NO];
 }
 
-- (void)startShareControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing {
+- (void)startMoveScaleShareControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing {
+    //TODO: this compression must be changed (it's to big!!!)
     NSData *data = UIImageJPEGRepresentation(img, compressing==NO?1.f:0.25);
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -1255,7 +1265,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [self startShareControllerForImage:img shouldCompress:YES];
+        [self startMoveScaleShareControllerForImage:img shouldCompress:YES];
     }];
     
 }

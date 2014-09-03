@@ -8,11 +8,11 @@
 
 #import "STCustomShareView.h"
 float const k3Btnheight = 170.f;
-float const k4Btnheight = 227.f;
+float const k5Btnheight = 299.f;
 float const k3BtnFbOffset = -3.f;
 float const k3BtnSaveOffset = -53.f;
-float const k4BtnFbOffset = -11.f;
-float const k4BtnSaveOffset = -61.f;
+float const k5BtnFbOffset = -31.f;
+float const k5BtnSaveOffset = -81.f;
 
 @implementation STCustomShareView
 
@@ -35,11 +35,12 @@ float const k4BtnSaveOffset = -61.f;
 */
 
 -(void) setUpForThreeButtons:(BOOL)isThree{
-    self.customHeightConstraint.constant = (isThree==TRUE)?k3Btnheight:k4Btnheight;
-    self.background.image = [UIImage imageNamed:(isThree==TRUE)?@"share background 3 buttons":@"share background 4 buttons"];
+    self.customHeightConstraint.constant = (isThree==TRUE)?k3Btnheight:k5Btnheight;
+    self.background.image = [UIImage imageNamed:(isThree==TRUE)?@"share background 3 buttons":@"share background 5 buttons good3"];
     self.deletaBtn.hidden = isThree;
-    self.fbTopConstraint.constant = isThree==TRUE?k3BtnFbOffset:k4BtnFbOffset;
-    self.saveTopConstraint.constant = isThree == TRUE?k3BtnSaveOffset:k4BtnSaveOffset;
+    self.moveScaleBtn.hidden = isThree;
+    self.fbTopConstraint.constant = isThree==TRUE?k3BtnFbOffset:k5BtnFbOffset;
+    self.saveTopConstraint.constant = isThree == TRUE?k3BtnSaveOffset:k5BtnSaveOffset;
 }
 
 -(void) setForDissmiss:(BOOL) isDissmissed{

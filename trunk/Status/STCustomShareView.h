@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *customHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UIButton *deletaBtn;
+@property (weak, nonatomic) IBOutlet UIButton *moveScaleBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fbTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImgContraint;

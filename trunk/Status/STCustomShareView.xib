@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -29,16 +29,16 @@
                         <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="7ra-Y6-v7y"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share background 4 buttons" translatesAutoresizingMaskIntoConstraints="NO" id="8OY-vz-EJc">
-                    <rect key="frame" x="0.0" y="303" width="320" height="227"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share background 5 buttons good3" translatesAutoresizingMaskIntoConstraints="NO" id="8OY-vz-EJc">
+                    <rect key="frame" x="0.0" y="230" width="320" height="299"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="lLO-a5-dZh"/>
-                        <constraint firstAttribute="height" constant="227" id="mtT-ht-hY1"/>
+                        <constraint firstAttribute="height" constant="299" id="mtT-ht-hY1"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b75-0M-y77">
-                    <rect key="frame" x="0.0" y="314" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="263" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="WdZ-ik-P5b"/>
@@ -57,7 +57,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a46-Fq-RUX">
-                    <rect key="frame" x="0.0" y="364" width="320" height="51"/>
+                    <rect key="frame" x="0.0" y="312" width="320" height="51"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="hI0-gB-Q8l"/>
@@ -73,6 +73,25 @@
                     <connections>
                         <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="xVp-Cg-kJE"/>
                         <action selector="onSavePostLocally:" destination="-2" eventType="touchUpInside" id="wNI-Vn-9ft"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNf-kU-Jer">
+                    <rect key="frame" x="0.0" y="363" width="320" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Wc3-VC-SeG"/>
+                        <constraint firstAttribute="width" constant="320" id="lO8-sh-8kR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="90" maxY="0.0"/>
+                    <state key="normal" backgroundImage="move and scale">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="move and scale pressed"/>
+                    <state key="highlighted" backgroundImage="move and scale pressed"/>
+                    <connections>
+                        <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="dWr-L4-H0W"/>
+                        <action selector="onMoveAndScale:" destination="-2" eventType="touchUpInside" id="n93-zv-fjo"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3To-xL-SWq">
@@ -114,7 +133,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="8OY-vz-EJc" secondAttribute="bottom" constant="38" id="4jj-7e-2NY"/>
+                <constraint firstAttribute="bottom" secondItem="8OY-vz-EJc" secondAttribute="bottom" constant="39" id="4jj-7e-2NY"/>
                 <constraint firstAttribute="trailing" secondItem="iWG-w3-KyS" secondAttribute="trailing" id="83V-uF-esQ"/>
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="9sY-As-N6C"/>
                 <constraint firstItem="iWG-w3-KyS" firstAttribute="top" secondItem="1" secondAttribute="top" id="BJE-J0-8Hf"/>
@@ -123,15 +142,17 @@
                 <constraint firstItem="h9b-m3-HbM" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Kgt-2O-17c"/>
                 <constraint firstItem="iWG-w3-KyS" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="L1h-oH-0du"/>
                 <constraint firstAttribute="trailing" secondItem="8OY-vz-EJc" secondAttribute="trailing" id="Mct-cV-Og7"/>
-                <constraint firstItem="8OY-vz-EJc" firstAttribute="top" secondItem="b75-0M-y77" secondAttribute="top" constant="-11" id="PRA-Fs-CUY"/>
+                <constraint firstItem="8OY-vz-EJc" firstAttribute="top" secondItem="b75-0M-y77" secondAttribute="top" constant="-33" id="PRA-Fs-CUY"/>
                 <constraint firstItem="h9b-m3-HbM" firstAttribute="top" secondItem="1" secondAttribute="top" id="Trc-rN-K3H"/>
+                <constraint firstItem="vNf-kU-Jer" firstAttribute="bottom" secondItem="8OY-vz-EJc" secondAttribute="bottom" constant="-116" id="aSe-wD-aUX"/>
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="leading" secondItem="3To-xL-SWq" secondAttribute="leading" id="kUP-xm-EfS"/>
-                <constraint firstItem="8OY-vz-EJc" firstAttribute="bottom" secondItem="3To-xL-SWq" secondAttribute="bottom" constant="64" id="nZ6-oZ-cob"/>
-                <constraint firstItem="8OY-vz-EJc" firstAttribute="top" secondItem="a46-Fq-RUX" secondAttribute="top" constant="-61" id="sIA-z6-eEw"/>
-                <constraint firstItem="8OY-vz-EJc" firstAttribute="bottom" secondItem="KOU-gd-BIt" secondAttribute="bottom" constant="7" id="uCS-3F-yCj"/>
+                <constraint firstItem="8OY-vz-EJc" firstAttribute="bottom" secondItem="3To-xL-SWq" secondAttribute="bottom" constant="63" id="nZ6-oZ-cob"/>
+                <constraint firstItem="8OY-vz-EJc" firstAttribute="top" secondItem="a46-Fq-RUX" secondAttribute="top" constant="-82" id="sIA-z6-eEw"/>
+                <constraint firstItem="8OY-vz-EJc" firstAttribute="bottom" secondItem="KOU-gd-BIt" secondAttribute="bottom" constant="6" id="uCS-3F-yCj"/>
                 <constraint firstAttribute="bottom" secondItem="h9b-m3-HbM" secondAttribute="bottom" constant="118" id="uQr-HK-oeb"/>
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="leading" secondItem="b75-0M-y77" secondAttribute="leading" id="uqk-Ia-jVo"/>
                 <constraint firstItem="8OY-vz-EJc" firstAttribute="leading" secondItem="a46-Fq-RUX" secondAttribute="leading" id="vEW-Mi-bwQ"/>
+                <constraint firstItem="vNf-kU-Jer" firstAttribute="leading" secondItem="8OY-vz-EJc" secondAttribute="leading" id="yJE-Aw-eC7"/>
                 <constraint firstAttribute="trailing" secondItem="h9b-m3-HbM" secondAttribute="trailing" id="yaF-xh-TJp"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -142,6 +163,7 @@
                 <outlet property="customHeightConstraint" destination="mtT-ht-hY1" id="LlW-cx-lCg"/>
                 <outlet property="deletaBtn" destination="3To-xL-SWq" id="gzk-s3-sHr"/>
                 <outlet property="fbTopConstraint" destination="PRA-Fs-CUY" id="kOW-sL-X0o"/>
+                <outlet property="moveScaleBtn" destination="vNf-kU-Jer" id="yYj-KW-vhg"/>
                 <outlet property="saveTopConstraint" destination="sIA-z6-eEw" id="ZYP-kk-Egd"/>
                 <outlet property="shadowView" destination="h9b-m3-HbM" id="h5b-F3-MPN"/>
             </connections>
@@ -150,11 +172,13 @@
     <resources>
         <image name="delete post button" width="320" height="51"/>
         <image name="delete post button pressed" width="320" height="51"/>
+        <image name="move and scale" width="320" height="51"/>
+        <image name="move and scale pressed" width="320" height="51"/>
         <image name="report post" width="320" height="57"/>
         <image name="report post pressed" width="320" height="57"/>
         <image name="save to camera roll" width="320" height="51"/>
         <image name="save to camera roll pressed" width="320" height="51"/>
-        <image name="share background 4 buttons" width="320" height="227"/>
+        <image name="share background 5 buttons good3" width="320" height="299"/>
         <image name="share on facebook button" width="320" height="50"/>
         <image name="share on facebook button pressed" width="320" height="50"/>
     </resources>

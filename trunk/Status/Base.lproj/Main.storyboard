@@ -702,9 +702,10 @@
                                     <constraint firstAttribute="width" constant="77" id="b3c-xk-8QU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="23"/>
-                                <state key="normal" title="Use" backgroundImage="circle button">
+                                <state key="normal" image="circle use button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" image="circle use button when pressed"/>
                                 <connections>
                                     <action selector="onUseBtnPressed:" destination="3ip-Jx-vLr" eventType="touchUpInside" id="CpD-Nb-VWb"/>
                                 </connections>
@@ -777,10 +778,11 @@
                                     <constraint firstAttribute="width" constant="77" id="sdW-Rq-bcu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="23"/>
-                                <state key="normal" title="Share" backgroundImage="circle button">
+                                <state key="normal" image="circle share button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="share button pressed"/>
+                                <state key="highlighted" image="circle share button when pressed"/>
                                 <connections>
                                     <action selector="onClickShare:" destination="gF0-LP-1T6" eventType="touchUpInside" id="NlE-Q8-1vQ"/>
                                 </connections>
@@ -793,13 +795,13 @@
                                     <constraint firstAttribute="height" constant="46" id="tgk-qH-0bG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="email button">
+                                <state key="normal" image="twitter share button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="email button"/>
-                                <state key="highlighted" image="email button"/>
+                                <state key="selected" image="twitter share button pressed"/>
+                                <state key="highlighted" image="twitter share button pressed"/>
                                 <connections>
-                                    <action selector="onClickEmail:" destination="gF0-LP-1T6" eventType="touchUpInside" id="yG7-xJ-k8m"/>
+                                    <action selector="onClickTwitter:" destination="gF0-LP-1T6" eventType="touchUpInside" id="Rmc-Fl-COW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwH-1Q-z14">
@@ -878,6 +880,7 @@
                         <outlet property="shareButton" destination="cmG-Rz-GiZ" id="Bwz-qO-Z2Y"/>
                         <outlet property="sharedImageView" destination="Q7a-gI-yrt" id="8o2-zB-v4s"/>
                         <outlet property="transparentNavBar" destination="IIz-3y-UvK" id="quc-yt-xeL"/>
+                        <outlet property="twitterBtn" destination="ElX-Yw-ze7" id="qg0-uV-ZYm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nYh-B2-ALW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1622,8 +1625,10 @@
         <image name="btn_share_pressed" width="47" height="47"/>
         <image name="chat button" width="212" height="45"/>
         <image name="chat button pressed" width="212" height="45"/>
-        <image name="circle button" width="77" height="77"/>
-        <image name="email button" width="160" height="46"/>
+        <image name="circle share button" width="77" height="77"/>
+        <image name="circle share button when pressed" width="77" height="77"/>
+        <image name="circle use button" width="77" height="77"/>
+        <image name="circle use button when pressed" width="77" height="77"/>
         <image name="facebook share button" width="160" height="46"/>
         <image name="facebook share button pressed" width="160" height="46"/>
         <image name="grey line" width="288" height="1"/>
@@ -1650,6 +1655,8 @@
         <image name="share button pressed" width="319" height="48"/>
         <image name="status logo" width="197" height="28"/>
         <image name="transparenta" width="320" height="568"/>
+        <image name="twitter share button" width="160" height="46"/>
+        <image name="twitter share button pressed" width="160" height="46"/>
         <image name="user chat black button" width="36" height="36"/>
         <image name="user chat black button pressed" width="36" height="36"/>
         <image name="user chat button" width="50" height="50"/>
