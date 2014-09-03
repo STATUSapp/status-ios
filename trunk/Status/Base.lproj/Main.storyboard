@@ -688,7 +688,7 @@
                                         <barButtonItem key="leftBarButtonItem" image="back button" id="4Fk-AY-mSk">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <action selector="onClickback:" destination="3ip-Jx-vLr" id="nXG-Dz-tQF"/>
+                                                <action selector="onClickBack:" destination="3ip-Jx-vLr" id="8Bt-Ux-M0o"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>

@@ -45,25 +45,11 @@
     [self setUpTheContext];
 }
 
--(UIImage *)croppedImage{
-    CGRect visibleRect;
-    float scale = 1.f/_scrollView.zoomScale;
-    visibleRect.origin.x = _scrollView.contentOffset.x * scale;
-    visibleRect.origin.y = _scrollView.contentOffset.y * scale;
-    visibleRect.size.width = _scrollView.bounds.size.width * scale;
-    visibleRect.size.height = _scrollView.bounds.size.height * scale;
 
-    UIImage *croppedImage = [self cropImage:_imageView.image withRect:visibleRect];
-    
-    return croppedImage;
-}
-
--(UIImage*)cropImage:(UIImage*)srcImage withRect:(CGRect) rect
+- (void)didReceiveMemoryWarning
 {
-    CGImageRef cr = CGImageCreateWithImageInRect([srcImage CGImage], rect);
-    UIImage* cropped = [[UIImage alloc] initWithCGImage:cr];
-    CGImageRelease(cr);
-    return cropped;
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 -(void) setUpTheContext{
@@ -84,8 +70,85 @@
     _imageView.frame = contentsFrame;
     
     [self centerScrollViewContents];
+}
 
+- (void)centerScrollViewContents {
+    CGSize boundsSize = self.scrollView.bounds.size;
+    CGRect contentsFrame = _imageView.frame;
     
+    if (contentsFrame.size.width < boundsSize.width) {
+        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+    } else {
+        contentsFrame.origin.x = 0.0f;
+    }
+    
+    if (contentsFrame.size.height < boundsSize.height) {
+        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+    } else {
+        contentsFrame.origin.y = 0.0f;
+    }
+    
+    _imageView.frame = contentsFrame;
+}
+
+#pragma mark UIScrollViewDelegate
+
+- (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return _imageView;
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    [self centerScrollViewContents];
+}
+
+-(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
+    [self refreshBacgroundBlur];
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self refreshBacgroundBlur];
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self refreshBacgroundBlur];
+}
+
+#pragma mark IBACTIONS
+- (IBAction)onUseBtnPressed:(id)sender {
+    UIImage *croppedImg = [self croppedImage];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+    viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
+    viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
+    viewController.delegate = _delegate;
+    [self.navigationController pushViewController:viewController animated:YES];
+
+}
+- (IBAction)onClickBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark Helpers
+-(UIImage *)croppedImage{
+    CGRect visibleRect;
+    float scale = 1.f/_scrollView.zoomScale;
+    visibleRect.origin.x = _scrollView.contentOffset.x * scale;
+    visibleRect.origin.y = _scrollView.contentOffset.y * scale;
+    visibleRect.size.width = _scrollView.bounds.size.width * scale;
+    visibleRect.size.height = _scrollView.bounds.size.height * scale;
+    
+    UIImage *croppedImage = [self cropImage:_imageView.image withRect:visibleRect];
+    
+    return croppedImage;
+}
+
+-(UIImage*)cropImage:(UIImage*)srcImage withRect:(CGRect) rect
+{
+    CGImageRef cr = CGImageCreateWithImageInRect([srcImage CGImage], rect);
+    UIImage* cropped = [[UIImage alloc] initWithCGImage:cr];
+    CGImageRelease(cr);
+    return cropped;
 }
 
 -(CGRect)aspectFitForRect:(CGRect)inRect intoRect:(CGRect)intoRect{
@@ -109,34 +172,7 @@
 	return CGRectIntegral(newRect);
 }
 
-- (void)centerScrollViewContents {
-    CGSize boundsSize = self.scrollView.bounds.size;
-    CGRect contentsFrame = _imageView.frame;
-    
-    if (contentsFrame.size.width < boundsSize.width) {
-        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
-    } else {
-        contentsFrame.origin.x = 0.0f;
-    }
-    
-    if (contentsFrame.size.height < boundsSize.height) {
-        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
-    } else {
-        contentsFrame.origin.y = 0.0f;
-    }
-    
-    _imageView.frame = contentsFrame;
-}
-
-- (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return _imageView;
-}
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    [self centerScrollViewContents];
-}
-
--(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
+- (void)refreshBacgroundBlur {
     if (_scrollView.zoomScale<1.f) {
         NSLog(@"Apply new background blur");
         UIImage *cropppedImage = [self croppedImage];
@@ -147,40 +183,6 @@
                             _backgroundBlurImgView.image= [cropppedImage applyLightEffect];
                         } completion:NULL];
     }
-}
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    if (_scrollView.zoomScale<1.f) {
-        NSLog(@"Apply new background blur");
-        UIImage *cropppedImage = [self croppedImage];
-        [UIView transitionWithView:_backgroundBlurImgView
-                          duration:0.2f
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            _backgroundBlurImgView.image= [cropppedImage applyLightEffect];
-                        } completion:NULL];
-    }
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-- (IBAction)onUseBtnPressed:(id)sender {
-    UIImage *croppedImg = [self croppedImage];
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-    viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
-    viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
-    viewController.delegate = _delegate;
-    [self.navigationController pushViewController:viewController animated:YES];
-
-}
-- (IBAction)onClickback:(id)sender {
-    [self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

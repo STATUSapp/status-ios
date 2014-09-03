@@ -44,6 +44,12 @@
     }];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 -(void) setUpTheContext{
     [self.scrollView addSubview:_imageView];
     
@@ -62,6 +68,25 @@
                                          intoRect:_scrollView.frame];
     _imageView.frame = contentsFrame;
      
+}
+
+- (void)centerScrollViewContents {
+    CGSize boundsSize = self.scrollView.bounds.size;
+    CGRect contentsFrame = _imageView.frame;
+    
+    if (contentsFrame.size.width < boundsSize.width) {
+        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+    } else {
+        contentsFrame.origin.x = 0.0f;
+    }
+    
+    if (contentsFrame.size.height < boundsSize.height) {
+        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+    } else {
+        contentsFrame.origin.y = 0.0f;
+    }
+    
+    _imageView.frame = contentsFrame;
 }
 
 -(CGRect)aspectFitForRect:(CGRect)inRect intoRect:(CGRect)intoRect{
@@ -85,30 +110,7 @@
 	return CGRectIntegral(newRect);
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)centerScrollViewContents {
-    CGSize boundsSize = self.scrollView.bounds.size;
-    CGRect contentsFrame = _imageView.frame;
-    
-    if (contentsFrame.size.width < boundsSize.width) {
-        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
-    } else {
-        contentsFrame.origin.x = 0.0f;
-    }
-    
-    if (contentsFrame.size.height < boundsSize.height) {
-        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
-    } else {
-        contentsFrame.origin.y = 0.0f;
-    }
-    
-    _imageView.frame = contentsFrame;
-}
+#pragma mark UIScrollViewDelegate
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     // Return the view that we want to zoom
@@ -120,6 +122,8 @@
     //NSLog(@"self.scrollView.zoomScale = %f", self.scrollView.zoomScale);
     [self centerScrollViewContents];
 }
+
+#pragma mark IBACTIONS
 
 - (IBAction)onDismissZoomable:(id)sender {
     [self.scrollView setZoomScale:_zoomFill animated:YES];

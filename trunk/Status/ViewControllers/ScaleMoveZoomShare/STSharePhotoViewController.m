@@ -48,6 +48,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark IBACTIONS
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -64,22 +66,6 @@
 
     [self presentViewController:emailShareController animated:YES completion:nil];
 }
-- (void)postCurrentPhoto {
-    __weak STSharePhotoViewController *weakSelf = self;
-    [[STFacebookController sharedInstance] shareImageWithData:self.imgData andCompletion:^(id result, NSError *error) {
-        if(error==nil)
-        {
-            [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            [weakSelf.delegate performSelector:@selector(imageWasPosted)];
-        }
-        else
-        {
-            [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            [weakSelf.delegate performSelector:@selector(imageWasPosted)];
-        }
-    }];
-}
-
 - (IBAction)onClickFacebook:(id)sender {
 
     UIButton *btn = (UIButton *) sender;
@@ -135,5 +121,22 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email sent" message:@"Your message was shared." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
+}
+
+#pragma mark - Helper
+- (void)postCurrentPhoto {
+    __weak STSharePhotoViewController *weakSelf = self;
+    [[STFacebookController sharedInstance] shareImageWithData:self.imgData andCompletion:^(id result, NSError *error) {
+        if(error==nil)
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            [weakSelf.delegate performSelector:@selector(imageWasPosted)];
+        }
+        else
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            [weakSelf.delegate performSelector:@selector(imageWasPosted)];
+        }
+    }];
 }
 @end
