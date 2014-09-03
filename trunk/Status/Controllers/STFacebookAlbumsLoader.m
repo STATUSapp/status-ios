@@ -31,7 +31,6 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                                                   id result,
                                                   NSError *error
                                                   ) {
-                                  //TODO: shouls keep 2 versions of small and large photos? picture vs source
                                   NSArray *photosArray = result[@"data"];
                                   NSLog(@"Photos array: %@", photosArray);
                                   refreshCompletion(photosArray);
