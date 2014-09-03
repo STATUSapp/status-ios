@@ -15,7 +15,6 @@
 
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *facebookBtn;
-@property (weak, nonatomic) IBOutlet UIButton *twitterBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
@@ -74,9 +73,7 @@
 }
 
 - (IBAction)onClickTwitter:(id)sender {
-    
-    UIButton *btn = (UIButton *) sender;
-    btn.selected = !btn.selected;
+    //TODO: add sharing to twitter
 }
 
 - (IBAction)onClickShare:(id)sender {
@@ -86,7 +83,6 @@
         
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             
-            //TODO: add sharing to twitter
             if (weakSelf.facebookBtn.selected==TRUE) {
                 //add publish stream permissions if does not exists
                 if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
