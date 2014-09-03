@@ -24,8 +24,13 @@
 		0717E2C519B71B51001DF132 /* STImageCacheController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2C019B71B51001DF132 /* STImageCacheController.m */; };
 		0717E2C619B71B51001DF132 /* STWebServiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2C219B71B51001DF132 /* STWebServiceController.m */; };
 		0717E2C919B71B78001DF132 /* STFacebookAlbumsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2C819B71B78001DF132 /* STFacebookAlbumsLoader.m */; };
+		0717E2D819B71C56001DF132 /* STBubbleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2CD19B71C56001DF132 /* STBubbleCell.m */; };
+		0717E2D919B71C56001DF132 /* STConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2CF19B71C56001DF132 /* STConversationCell.m */; };
+		0717E2DA19B71C56001DF132 /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2D119B71C56001DF132 /* STMessageReceivedCell.m */; };
+		0717E2DB19B71C56001DF132 /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2D319B71C56001DF132 /* STMessageSendCell.m */; };
+		0717E2DC19B71C56001DF132 /* STChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2D519B71C56001DF132 /* STChatRoomViewController.m */; };
+		0717E2DD19B71C56001DF132 /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2D719B71C56001DF132 /* STConversationsListViewController.m */; };
 		0719E5AE19619FE700F85382 /* STInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0719E5AD19619FE700F85382 /* STInviteController.m */; };
-		0722C49D1935B6BD000B18F8 /* STBubbleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722C49C1935B6BD000B18F8 /* STBubbleCell.m */; };
 		076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */; };
 		07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */; };
 		07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
@@ -86,13 +91,8 @@
 		17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9819821FB2000E9116 /* STDAOEngine.m */; };
 		17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
 		17E44BA119822B67000E9116 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44BA019822B67000E9116 /* Message.m */; };
-		17EEE58719351BB700D02C1B /* STChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58619351BB700D02C1B /* STChatRoomViewController.m */; };
-		17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58919351C9100D02C1B /* STMessageSendCell.m */; };
-		17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
 		17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FE7CE319B321340081F688 /* NSString+MD5.m */; };
-		1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */; };
-		1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C1212193B777D003DB198 /* STConversationCell.m */; };
 		1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */; };
 		1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
 		1DE2D5AB194FA59300A29A86 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AA194FA59300A29A86 /* libGoogleAdMobAds.a */; };
@@ -159,10 +159,20 @@
 		0717E2C219B71B51001DF132 /* STWebServiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWebServiceController.m; sourceTree = "<group>"; };
 		0717E2C719B71B78001DF132 /* STFacebookAlbumsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookAlbumsLoader.h; sourceTree = "<group>"; };
 		0717E2C819B71B78001DF132 /* STFacebookAlbumsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookAlbumsLoader.m; sourceTree = "<group>"; };
+		0717E2CC19B71C56001DF132 /* STBubbleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBubbleCell.h; sourceTree = "<group>"; };
+		0717E2CD19B71C56001DF132 /* STBubbleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBubbleCell.m; sourceTree = "<group>"; };
+		0717E2CE19B71C56001DF132 /* STConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationCell.h; sourceTree = "<group>"; };
+		0717E2CF19B71C56001DF132 /* STConversationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationCell.m; sourceTree = "<group>"; };
+		0717E2D019B71C56001DF132 /* STMessageReceivedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMessageReceivedCell.h; sourceTree = "<group>"; };
+		0717E2D119B71C56001DF132 /* STMessageReceivedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageReceivedCell.m; sourceTree = "<group>"; };
+		0717E2D219B71C56001DF132 /* STMessageSendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMessageSendCell.h; sourceTree = "<group>"; };
+		0717E2D319B71C56001DF132 /* STMessageSendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageSendCell.m; sourceTree = "<group>"; };
+		0717E2D419B71C56001DF132 /* STChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatRoomViewController.h; sourceTree = "<group>"; };
+		0717E2D519B71C56001DF132 /* STChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatRoomViewController.m; sourceTree = "<group>"; };
+		0717E2D619B71C56001DF132 /* STConversationsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationsListViewController.h; sourceTree = "<group>"; };
+		0717E2D719B71C56001DF132 /* STConversationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationsListViewController.m; sourceTree = "<group>"; };
 		0719E5AC19619FE700F85382 /* STInviteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInviteController.h; sourceTree = "<group>"; };
 		0719E5AD19619FE700F85382 /* STInviteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInviteController.m; sourceTree = "<group>"; };
-		0722C49B1935B6BD000B18F8 /* STBubbleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBubbleCell.h; sourceTree = "<group>"; };
-		0722C49C1935B6BD000B18F8 /* STBubbleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBubbleCell.m; sourceTree = "<group>"; };
 		076CF4EF1910F2F200C4096C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		07FBDEE418C606EF007BDCE6 /* STLikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikesViewController.h; sourceTree = "<group>"; };
@@ -264,20 +274,10 @@
 		17E44B9D19822032000E9116 /* StatusDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StatusDM.xcdatamodel; sourceTree = "<group>"; };
 		17E44B9F19822B67000E9116 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		17E44BA019822B67000E9116 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
-		17EEE58519351BB700D02C1B /* STChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatRoomViewController.h; sourceTree = "<group>"; };
-		17EEE58619351BB700D02C1B /* STChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatRoomViewController.m; sourceTree = "<group>"; };
-		17EEE58819351C9100D02C1B /* STMessageSendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMessageSendCell.h; sourceTree = "<group>"; };
-		17EEE58919351C9100D02C1B /* STMessageSendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageSendCell.m; sourceTree = "<group>"; };
-		17EEE58B19351CAF00D02C1B /* STMessageReceivedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMessageReceivedCell.h; sourceTree = "<group>"; };
-		17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMessageReceivedCell.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
 		17FE7CE219B321340081F688 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		17FE7CE319B321340081F688 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
-		1D5C120E193B74C5003DB198 /* STConversationsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationsListViewController.h; sourceTree = "<group>"; };
-		1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationsListViewController.m; sourceTree = "<group>"; };
-		1D5C1211193B777D003DB198 /* STConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationCell.h; sourceTree = "<group>"; };
-		1D5C1212193B777D003DB198 /* STConversationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationCell.m; sourceTree = "<group>"; };
 		1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 		1D98A4C219603064007F4AB2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1DE2D589194FA55E00A29A86 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
@@ -381,6 +381,7 @@
 		0717E2A119B717AF001DF132 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0717E2CA19B71C56001DF132 /* Chat */,
 				0717E2AC19B71A54001DF132 /* FacebookAlbumPicker */,
 				0717E2A219B717D8001DF132 /* ScaleMoveZoomShare */,
 			);
@@ -439,6 +440,33 @@
 			);
 			name = Controllers;
 			path = Status/Controllers;
+			sourceTree = "<group>";
+		};
+		0717E2CA19B71C56001DF132 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				0717E2CB19B71C56001DF132 /* cells */,
+				0717E2D419B71C56001DF132 /* STChatRoomViewController.h */,
+				0717E2D519B71C56001DF132 /* STChatRoomViewController.m */,
+				0717E2D619B71C56001DF132 /* STConversationsListViewController.h */,
+				0717E2D719B71C56001DF132 /* STConversationsListViewController.m */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		0717E2CB19B71C56001DF132 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				0717E2CC19B71C56001DF132 /* STBubbleCell.h */,
+				0717E2CD19B71C56001DF132 /* STBubbleCell.m */,
+				0717E2CE19B71C56001DF132 /* STConversationCell.h */,
+				0717E2CF19B71C56001DF132 /* STConversationCell.m */,
+				0717E2D019B71C56001DF132 /* STMessageReceivedCell.h */,
+				0717E2D119B71C56001DF132 /* STMessageReceivedCell.m */,
+				0717E2D219B71C56001DF132 /* STMessageSendCell.h */,
+				0717E2D319B71C56001DF132 /* STMessageSendCell.m */,
+			);
+			path = cells;
 			sourceTree = "<group>";
 		};
 		172EAE5A18B0B12D00C5637B = {
@@ -508,18 +536,6 @@
 				178907B618B294BA00AC4355 /* LoginScene.storyboard */,
 				17ACEB611933C4E600CFC909 /* ChatScene.storyboard */,
 				172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */,
-				17EEE58519351BB700D02C1B /* STChatRoomViewController.h */,
-				17EEE58619351BB700D02C1B /* STChatRoomViewController.m */,
-				1D5C120E193B74C5003DB198 /* STConversationsListViewController.h */,
-				1D5C120F193B74C5003DB198 /* STConversationsListViewController.m */,
-				1D5C1211193B777D003DB198 /* STConversationCell.h */,
-				1D5C1212193B777D003DB198 /* STConversationCell.m */,
-				17EEE58819351C9100D02C1B /* STMessageSendCell.h */,
-				17EEE58919351C9100D02C1B /* STMessageSendCell.m */,
-				17EEE58B19351CAF00D02C1B /* STMessageReceivedCell.h */,
-				17EEE58C19351CAF00D02C1B /* STMessageReceivedCell.m */,
-				0722C49B1935B6BD000B18F8 /* STBubbleCell.h */,
-				0722C49C1935B6BD000B18F8 /* STBubbleCell.m */,
 				178907B818B295DD00AC4355 /* STLoginViewController.h */,
 				178907B918B295DD00AC4355 /* STLoginViewController.m */,
 				1DFCCAC7191236AA00B9230E /* STTutorialViewController.h */,
@@ -907,17 +923,16 @@
 				172EAEAF18B0B46300C5637B /* AFHTTPRequestOperation.m in Sources */,
 				172EAF0618B0BB4800C5637B /* UIImageView+AFNetworking.m in Sources */,
 				076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */,
-				17EEE58A19351C9100D02C1B /* STMessageSendCell.m in Sources */,
 				0717E2C319B71B51001DF132 /* KeychainItemWrapper.m in Sources */,
 				1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */,
 				172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */,
 				17E44B9919821FB2000E9116 /* STCoreDataManager.m in Sources */,
 				1DE2D5B81950DB3100A29A86 /* STRemoveAdsViewController.m in Sources */,
 				1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */,
+				0717E2D919B71C56001DF132 /* STConversationCell.m in Sources */,
 				CDAC50B119B602C900A45E85 /* UIImage+Resize.m in Sources */,
 				17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */,
 				CDEB0579196AA00F008089B2 /* STIAPHelper.m in Sources */,
-				0722C49D1935B6BD000B18F8 /* STBubbleCell.m in Sources */,
 				172EAEB018B0B46300C5637B /* AFHTTPRequestOperationManager.m in Sources */,
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
 				07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */,
@@ -925,28 +940,29 @@
 				0717E2B719B71B09001DF132 /* STFacebookAlbumCell.m in Sources */,
 				172EAEB218B0B46300C5637B /* AFNetworkReachabilityManager.m in Sources */,
 				CDAC50B019B602C900A45E85 /* UIImage+Alpha.m in Sources */,
-				1D5C1210193B74C5003DB198 /* STConversationsListViewController.m in Sources */,
+				0717E2DB19B71C56001DF132 /* STMessageSendCell.m in Sources */,
 				0717E2C519B71B51001DF132 /* STImageCacheController.m in Sources */,
 				0717E2A519B71809001DF132 /* STMoveScaleViewController.m in Sources */,
 				178907BA18B295DD00AC4355 /* STLoginViewController.m in Sources */,
+				0717E2DA19B71C56001DF132 /* STMessageReceivedCell.m in Sources */,
 				0717E2C919B71B78001DF132 /* STFacebookAlbumsLoader.m in Sources */,
 				0717E2C619B71B51001DF132 /* STWebServiceController.m in Sources */,
 				17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */,
-				1D5C1213193B777D003DB198 /* STConversationCell.m in Sources */,
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
 				0715651218FD890400F7B3BB /* STFooterView.m in Sources */,
 				177458391928C41C005B994B /* STLocationManager.m in Sources */,
 				17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */,
 				0717E2B619B71B09001DF132 /* STAlbumImageCell.m in Sources */,
 				172EAEB618B0B46300C5637B /* AFURLResponseSerialization.m in Sources */,
+				0717E2D819B71C56001DF132 /* STBubbleCell.m in Sources */,
 				17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */,
 				17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */,
 				07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */,
 				172EAEB418B0B46300C5637B /* AFURLConnectionOperation.m in Sources */,
 				172EAF0518B0BB4800C5637B /* UIButton+AFNetworking.m in Sources */,
+				0717E2DC19B71C56001DF132 /* STChatRoomViewController.m in Sources */,
 				172EAF0318B0BB4800C5637B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */,
-				17EEE58719351BB700D02C1B /* STChatRoomViewController.m in Sources */,
 				172EAEB318B0B46300C5637B /* AFSecurityPolicy.m in Sources */,
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
 				17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */,
@@ -954,6 +970,7 @@
 				0717E2A819B7187F001DF132 /* STSharePhotoViewController.m in Sources */,
 				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
 				070058E618BF68680014E1D3 /* STFacebookController.m in Sources */,
+				0717E2DD19B71C56001DF132 /* STConversationsListViewController.m in Sources */,
 				172EAF0818B0BB4800C5637B /* UIRefreshControl+AFNetworking.m in Sources */,
 				172EAF0918B0BB4800C5637B /* UIWebView+AFNetworking.m in Sources */,
 				172EAEB118B0B46300C5637B /* AFHTTPSessionManager.m in Sources */,
@@ -966,7 +983,6 @@
 				172EAEB518B0B46300C5637B /* AFURLRequestSerialization.m in Sources */,
 				172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */,
 				1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */,
-				17EEE58D19351CAF00D02C1B /* STMessageReceivedCell.m in Sources */,
 				CDAC50AF19B602C900A45E85 /* UIImage+RoundedCorner.m in Sources */,
 				0717E2AB19B718B4001DF132 /* STZoomablePostViewController.m in Sources */,
 				172EAF0218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m in Sources */,
