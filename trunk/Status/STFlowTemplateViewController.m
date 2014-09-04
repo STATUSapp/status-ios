@@ -394,7 +394,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
     NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
-    //TODO: check for a better motho to to this: dissmiss last two VC
     [viewCtrl removeLastObject];
     [viewCtrl removeLastObject];
     [navCtrl setViewControllers:viewCtrl animated:YES];
@@ -1270,12 +1269,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     viewController.delegate = self;
     viewController.editPostId = postId;
     [self.navigationController pushViewController:viewController animated:NO];
-    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-//    viewController.imgData = data;
-//    viewController.delegate = self;
-//    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{

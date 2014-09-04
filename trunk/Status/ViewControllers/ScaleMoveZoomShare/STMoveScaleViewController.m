@@ -41,8 +41,9 @@
     self.transparentNavBar.translucent = YES;
     
     _currentImg = [UIImage imageWithData:_imgData];
-    _backgroundBlurImgView.image = [_currentImg applyLightEffect];
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
+    UIImage *cropppedImage = [[self croppedImage] imageCropedFullScreenSize];
+    _backgroundBlurImgView.image = [cropppedImage applyLightEffect];
     [self setUpTheContext];
 }
 
@@ -169,14 +170,18 @@
 
 - (void)refreshBacgroundBlur {
     if (_scrollView.zoomScale<1.f) {
-        NSLog(@"Apply new background blur");
-        UIImage *cropppedImage = [[self croppedImage] imageCropedFullScreenSize];
-        [UIView transitionWithView:_backgroundBlurImgView
-                          duration:0.2f
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            _backgroundBlurImgView.image= [cropppedImage applyLightEffect];
-                        } completion:NULL];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            UIImage *cropppedImage = [[self croppedImage] imageCropedFullScreenSize];
+            cropppedImage = [cropppedImage applyLightEffect];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView transitionWithView:_backgroundBlurImgView
+                                  duration:0.2f
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:^{
+                                    _backgroundBlurImgView.image= cropppedImage;
+                                } completion:NULL];
+            });
+        });
     }
 }
 

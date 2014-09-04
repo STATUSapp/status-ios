@@ -321,25 +321,10 @@ static NSInteger const  kBlockUserAlertTag = 11;
     NSLog(@"Chat did close");
     [self showStatusAlertWithMessage:@"Your chat connection appears to be offline. You can wait or you can Go Back"];
 }
--(void)chatDidReceivedMesasage:(NSDictionary *)message{
-    [_messages addObject:message];
-    [_messages sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSDate *date1FromServer = [self dateFromServerDate:obj1[@"date"]];
-        NSDate *date2FromServer = [self dateFromServerDate:obj2[@"date"]];
-        return [date1FromServer compare:date2FromServer];
-    }];
-    [_tableView reloadData];
-    if (_messages.count > 0) {
-        
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
-}
-
 -(void)chatDidOpenRoom:(NSString *)roomId{
     _roomId = roomId;
     _textView.userInteractionEnabled = YES;
 
-#if USE_CORE_DATA
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
     _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"roomID like %@", _roomId] sectionNameKeyPath:nil delegate:self andTableView:nil];
     _messages = _currentManager.allObjects;
@@ -348,15 +333,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
     [chatController setUnreadMessages:chatController.unreadMessages-unseen];
     [_tableView reloadData];
     
-#else
-    _messages = [NSMutableArray arrayWithArray:[chatController conversationWithRoomId:_roomId markAsSeen:YES]];
-    [_messages sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSDate *date1FromServer = [self dateFromServerDate:obj1[@"date"]];
-        NSDate *date2FromServer = [self dateFromServerDate:obj2[@"date"]];
-        return [date1FromServer compare:date2FromServer];
-    }];
-    [_tableView reloadData];
-#endif
     if (_messages.count > 0) {
         
         [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -434,25 +410,15 @@ static NSInteger const  kBlockUserAlertTag = 11;
     }
     else if (buttonIndex == 1){//Delete conversation
         if (_roomId){
-#if USE_CORE_DATA
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", _roomId];
             [[STCoreDataManager sharedManager] deleteAllObjectsFromTable:@"Message" withPredicate:predicate];
             [[STCoreDataManager sharedManager] save];
-#else
-            BOOL result = [chatController deleteConversationWithId:_roomId];
-            
-            if (result == YES) {
-                [_messages removeAllObjects];
-                [_tableView reloadData];
-            }
-#endif
         }
     }
 }
 
 #pragma mark - UITableViewDelegate
 -(NSString *)getIdentifierForIndexPath:(NSIndexPath *)indexPath{
-#if USE_CORE_DATA
     Message *message = _messages[indexPath.row];
     BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
     if (received == YES) {
@@ -460,14 +426,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
     }
     else
         return @"MessageSendCell";
-#else
-    NSDictionary *dict = _messages[indexPath.row];
-    if ([dict[@"received"] boolValue]==YES) {
-        return @"MessageReceivedCell";
-    }
-    return @"MessageSendCell";
-#endif
-    
     return @"";
     
 }
@@ -492,7 +450,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
     NSString *identifier = [self getIdentifierForIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-#if USE_CORE_DATA
     Message *message = _messages[indexPath.row];
     BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
     if (received == YES) {
@@ -500,31 +457,12 @@ static NSInteger const  kBlockUserAlertTag = 11;
     }
     else
         [(STMessageSendCell *)cell configureCellWithMessage:message];
-#else
-    NSDictionary *dict = _messages[indexPath.row];
-    NSString *message = dict[@"message"];
-    NSString *dateStr = dict[@"date"];
-    if (dateStr!=nil) {
-        NSDate *dateFromServer = [self dateFromServerDate:dateStr];
-        dateStr = [self shortDateFormat:dateFromServer];
-    }
-    if ([dict[@"received"] boolValue]==YES) {
-        [(STMessageReceivedCell *)cell configureCellWithMessage:message andUserImage:userImage andDate:dateStr];
-    }
-    else
-    {
-        [(STMessageSendCell *)cell configureCellWithMessage:message andDateStr:dateStr];
-
-    }
-#endif
-    
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     float height = 50.f;
 
-#if USE_CORE_DATA
     Message *message = _messages[indexPath.row];
     BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
     if (received == YES) {
@@ -532,18 +470,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
     }
     else
         height = [STMessageSendCell cellHeightForMessage:message];
-#else
-    NSDictionary *dict = _messages[indexPath.row];
-    NSString *message = dict[@"message"];
-    BOOL received =[dict[@"received"] boolValue];
-    if (received==YES) {
-        height = [STMessageReceivedCell cellHeightForText:message];;
-    }
-    else
-    {
-        height = [STMessageSendCell cellHeightForText:message];
-    }
-#endif
     return height;
 }
 
@@ -582,7 +508,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
         if(chatController.loadMore == YES)
         {
             NSLog(@"Load More");
-            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
         else{
             if (_messages.count > 0) {

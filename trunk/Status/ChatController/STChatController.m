@@ -118,12 +118,7 @@
             _authenticated = YES;
             _currentUserId = response[@"userID"];
             for (NSDictionary *message in response[@"notReceivedMessages"]) {
-#if USE_CORE_DATA
                 [self addMessage:message seen:NO];
-#else
-                [self addMessage:message isSeen:NO atBegginig:NO];
-#endif
-                
             }
             if (_delegate && [_delegate respondsToSelector:@selector(chatDidAuthenticate)]) {
                 [_delegate performSelector:@selector(chatDidAuthenticate)];
@@ -158,11 +153,7 @@
         else{
             BOOL seen = [_currentRoomId isEqualToString:response[@"roomID"]];
             _loadMore = NO;
-#if USE_CORE_DATA
             [self addMessage:response seen:seen];
-#else
-            [self addMessage:response isSeen:seen atBegginig:NO];
-#endif
         }
     }
     else if ([response[@"type"] isEqualToString:@"leaveRoom"]){
@@ -173,12 +164,7 @@
         for (NSDictionary *message in response[@"messages"]) {
             NSMutableDictionary *messageDict = [NSMutableDictionary dictionaryWithDictionary:message];
             messageDict[@"roomID"] = response[@"roomID"];
-#if USE_CORE_DATA
             [self addMessage:messageDict seen:YES];
-#else
-            [self addMessage:messageDict isSeen:YES atBegginig:YES];
-#endif
-            
         }
     }
     else if ([response[@"type"] isEqualToString:@"blockUser"]){
@@ -281,7 +267,6 @@
 }
 
 #pragma mark - Local Storage
-#if USE_CORE_DATA
 -(void)addMessage:(NSDictionary *)message seen:(BOOL) seen {
     NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithDictionary:message];
     NSString *stringMsg = resultDict[@"message"];
@@ -313,106 +298,6 @@
                                                         andCompletion:^(BOOL success, id returnObject) {
                                                         }];
 }
-#else
-
--(BOOL)deleteConversationWithId:(NSString *)roomId{
-    NSArray *history = [NSArray new];
-    NSString *storagePath = [self getStoragePath];
-    NSString *conversationFullPath = [storagePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", roomId]];
-    return [history writeToFile:conversationFullPath atomically:YES];
-    
-}
--(NSString *) getStoragePath{
-    
-    NSString *documentsDirectory = NSTemporaryDirectory();
-    NSString *storagePath = [documentsDirectory stringByAppendingPathComponent:@"/Conversations"];
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:storagePath]){
-        NSError *error = nil;
-        [[NSFileManager defaultManager] createDirectoryAtPath:storagePath withIntermediateDirectories:NO attributes:nil error:&error];
-    }
-    
-    return storagePath;
-}
-
--(NSArray *)conversationWithRoomId:(NSString *)roomId markAsSeen:(BOOL)mark{
-    NSString *storagePath = [self getStoragePath];
-    NSString *conversationFullPath = [storagePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", roomId]];
-    NSMutableArray *conversation = [NSMutableArray arrayWithContentsOfFile:conversationFullPath];
-    if (mark == YES) {
-        NSNumber *seen = [[conversation valueForKey:@"seen"] valueForKeyPath: @"@sum.self"];
-        NSInteger unseen = conversation.count - seen.integerValue;
-        [self setUnreadMessages:_unreadMessages-unseen];
-        [conversation setValue:@(YES) forKey:@"seen"];
-        NSString *conversationFullPath = [storagePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", roomId]];
-        [conversation writeToFile:conversationFullPath atomically:YES];
-        NSLog(@"Unseen %@", seen);
-    }
-    
-    return conversation;
-}
-
--(void)cleanLocalHistory{
-    NSString *tmpPath = [self getStoragePath];
-    NSError *error = nil;
-    NSFileManager *fm = [NSFileManager defaultManager];
-    for (NSString *file in [fm contentsOfDirectoryAtPath:tmpPath error:&error]) {
-        BOOL success = [fm removeItemAtPath:[tmpPath stringByAppendingPathComponent:file] error:&error];
-        if (!success || error) {
-            NSLog(@"Delete has failed");
-        }
-    }
-}
-
--(void)addMessage:(NSDictionary *)receivedDict isSeen:(BOOL)seen atBegginig:(BOOL)atStart{
-    
-    NSString *stringMsg = receivedDict[@"message"];
-    if (![stringMsg isKindOfClass:[NSString class]]) {
-        NSLog(@"Ignoring null messages");
-        return;
-    }
-    
-    NSString *roomId = receivedDict[@"roomID"];
-    if (roomId == nil) {
-        roomId = receivedDict[@"roomId"];
-        if (roomId == nil) {
-            NSLog(@"Not good check this out");
-            return;
-        }
-    }
-    
-    BOOL received = ![receivedDict[@"userId"] isEqualToString:[STFacebookController sharedInstance].currentUserId];
-    
-    NSMutableDictionary *messageDict = [NSMutableDictionary dictionaryWithDictionary: receivedDict];
-    
-    messageDict[@"received"] = @(received);
-    messageDict[@"seen"] = @(seen);
-    
-    NSMutableArray *history =[NSMutableArray arrayWithArray:[self conversationWithRoomId:roomId markAsSeen:NO]];
-    if (atStart == YES) {
-        [history insertObject:messageDict atIndex:0];
-    }
-    else
-        [history addObject:messageDict];
-    
-    NSString *storagePath = [self getStoragePath];
-    NSString *conversationFullPath = [storagePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", roomId]];
-    BOOL result = [history writeToFile:conversationFullPath atomically:YES];
-    if (result == YES) {
-        if (seen == NO) {
-            [self setUnreadMessages:_unreadMessages+1];
-        }
-        else
-        {
-            if (_delegate && [_delegate respondsToSelector:@selector(chatDidReceivedMesasage:)]) {
-                [_delegate chatDidReceivedMesasage:messageDict];
-            }
-        }
-
-    }
-}
-
-#endif
 
 #pragma mark -Helpers
 

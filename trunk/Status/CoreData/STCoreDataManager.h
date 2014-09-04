@@ -9,8 +9,6 @@
 
 #import <CoreData/CoreData.h>
 
-//TODO: clean for unused methods
-
 //Block Defines
 typedef void (^CompletionBlock)(BOOL success, id returnObject);
 typedef void (^UpdateBlock)(id dbObject,id updateData);

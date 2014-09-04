@@ -9,11 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "STConstants.h"
 
-#define USE_CORE_DATA 1
-
 @protocol STChatControllerDelegate <NSObject>
 
--(void)chatDidReceivedMesasage:(NSDictionary *)message;
 -(void)chatDidClose;
 -(void)chatDidOpenRoom:(NSString *)roomId;
 -(void)chatDidAuthenticate;
@@ -45,13 +42,6 @@
 - (void)close;
 -(void)authenticate;
 - (void)sendMessage:(NSString *)message inRoom:(NSString *)roomId;
-#if USE_CORE_DATA
-
-#else
--(NSArray *)conversationWithRoomId:(NSString *)roomId markAsSeen:(BOOL)mark;
--(BOOL)deleteConversationWithId:(NSString *)roomId;
--(void)cleanLocalHistory;
-#endif
 -(void)openChatRoomForUserId:(NSString *)userId;
 -(void)leaveCurrentRoom;
 -(void)getRoomMessages:(NSString *)roomId withOffset:(NSInteger)offset;

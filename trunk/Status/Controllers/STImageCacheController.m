@@ -115,8 +115,7 @@
     NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:imageFullLink.lastPathComponent];
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:nil withCompletion:^(NSURL *imageURL) {
-            //TODO: use background mode safe
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 UIImage *img =[self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
                 img = nil;
                 dispatch_async(dispatch_get_main_queue(), ^{

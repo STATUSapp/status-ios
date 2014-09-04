@@ -9,8 +9,6 @@
  *  SLCoreDataManager ... Handles basic database operations like : Add, Retrieve and Delete Data
  */
 
-//TODO: clean for unused methods
-
 #import "STCoreDataManager.h"
 #import "Message.h"
 
@@ -25,8 +23,6 @@ NSString* const kSqliteFileName = @"Status.sqlite";
     dispatch_queue_t _async_queries_queue;
     
     NSArray *_arrDateKeys;
-    
-    //table -> relationship -> toTable
 }
 
 static STCoreDataManager* _coreDataManager = nil;

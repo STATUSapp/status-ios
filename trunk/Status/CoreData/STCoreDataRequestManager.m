@@ -2,9 +2,6 @@
 //  SLCoreDataRequestManager.m
 //
 
-//TODO: clean for unused methods
-
-
 #import "STCoreDataRequestManager.h"
 #import "STCoreDataManager.h"
 
@@ -61,9 +58,7 @@ NSString *const kCDRChangeType = @"change_type";
     if (self.predicate)
         [fetchRequest setPredicate:self.predicate];
     
-    NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                                                  managedObjectContext:_managedObjContext//[[SLCoreDataManager sharedManager] managedObjectContext]
-                                                                                                    sectionNameKeyPath:sectionNameKeyPath cacheName:nil];
+    NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest                                                                                                  managedObjectContext:_managedObjContext                                                                                                    sectionNameKeyPath:sectionNameKeyPath                                                                                                             cacheName:nil];
     _fetchedResultsController = theFetchedResultsController;
     _tableView = tableView;
     
@@ -172,14 +167,10 @@ NSString *const kCDRChangeType = @"change_type";
     for (NSValue* delegatePointer in _delegatesArray) {
         id<SLCoreDataRequestManagerDelegate> delegate = (id<SLCoreDataRequestManagerDelegate>)[delegatePointer pointerValue];
         if ([delegate respondsToSelector:@selector(controllerContentChanged:)]) {
-            //dispatch_async(dispatch_get_main_queue(), ^{
-                [delegate controllerContentChanged:[self allObjects]];
-            //});
+            [delegate controllerContentChanged:[self allObjects]];
         }
         if ([delegate respondsToSelector:@selector(controllerContentChanged:forCDReqManager:)]) {
-            //dispatch_async(dispatch_get_main_queue(), ^{
-                [delegate controllerContentChanged:[self allObjects] forCDReqManager:self];
-            //});
+            [delegate controllerContentChanged:[self allObjects] forCDReqManager:self];
         }
     }
 }

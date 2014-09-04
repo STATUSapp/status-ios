@@ -140,13 +140,8 @@
     [[STLocationManager sharedInstance] stopLocationUpdates];
     [[STLocationManager sharedInstance] setLatestLocation:nil];
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
-#if USE_CORE_DATA
-    
     [[STCoreDataManager sharedManager] cleanLocalDataBase];
     
-#else
-    [[STChatController sharedInstance] cleanLocalHistory];
-#endif
 }
 
 -(void) UDSetValue:(NSString *) value forKey:(NSString *) key{

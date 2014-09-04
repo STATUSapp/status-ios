@@ -81,7 +81,6 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                                           }
                                       }
                                       [self loadFBCoverPicturesWithIds:coverIds withLoadFbCompletion:^(NSDictionary *resultAlbum) {
-                                          //TODO: could be a better way?
                                           for (NSString *coverId in [resultAlbum allKeys]) {
                                               NSMutableDictionary *dict = nil;
                                               for (NSDictionary *album in newObjects) {

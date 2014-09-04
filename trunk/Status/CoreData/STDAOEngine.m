@@ -6,16 +6,8 @@
 //  Copyright (c) 2013 Solum. All rights reserved.
 //
 
-//TODO: clean for unused methods
-
-
 #import "STDAOEngine.h"
 #import "STCoreDataManager.h"
-
-@interface STDAOEngine() {
-
-}
-@end
 
 @implementation STDAOEngine
 
@@ -55,10 +47,6 @@ static STDAOEngine *g_sharedManager = nil;
                                                  delegate:(id<SLCoreDataRequestManagerDelegate>)rmDelegate
                                              andTableView:(UITableView*)tableView{
     
-//    if (tableView) {
-//        NSLog(@"aici");
-//    }
-    
     STCoreDataRequestManager* resultsCDRequestManager = [[STCoreDataRequestManager alloc] init];
     if (rmDelegate) {
         [resultsCDRequestManager addToDelegatesArray:rmDelegate];        
@@ -77,24 +65,5 @@ static STDAOEngine *g_sharedManager = nil;
     return resultsCDRequestManager;
     
 }
-
-/*
-- (SLCoreDataRequestManager *)retrieveNotesForWorkOrderId:(NSString*)woId
-                                                   ofType:(int)type
-                                                tableView:(UITableView*)tableView
-                               withRequestManagerDelegate:(id<SLCoreDataRequestManagerDelegate>)rmDelegate {
-    
-    NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:kKeyCreateDate ascending:NO];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"work_order.uuid == %@ AND type == %d", woId, type];
-    
-    SLCoreDataRequestManager *woCDRequestManager = [self fetchRequestManagerForEntity:kTableMessages
-                                                                       sortDescritors:@[sortDescriptor]
-                                                                            predicate:predicate
-                                                                   sectionNameKeyPath:nil
-                                                                             delegate:rmDelegate
-                                                                         andTableView:tableView];
-    return woCDRequestManager;
-}
-*/
 
 @end
