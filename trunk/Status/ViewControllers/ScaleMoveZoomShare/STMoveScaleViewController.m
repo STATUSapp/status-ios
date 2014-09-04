@@ -170,7 +170,7 @@
 - (void)refreshBacgroundBlur {
     if (_scrollView.zoomScale<1.f) {
         NSLog(@"Apply new background blur");
-        UIImage *cropppedImage = [self croppedImage];
+        UIImage *cropppedImage = [[self croppedImage] imageCropedFullScreenSize];
         [UIView transitionWithView:_backgroundBlurImgView
                           duration:0.2f
                            options:UIViewAnimationOptionTransitionCrossDissolve
