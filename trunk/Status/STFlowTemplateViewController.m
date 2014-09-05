@@ -390,15 +390,20 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     }
 }
 
--(void)imageWasEdited{
+-(void)imageWasEdited:(NSDictionary *)result{
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
     NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
     [viewCtrl removeLastObject];
     [viewCtrl removeLastObject];
     [navCtrl setViewControllers:viewCtrl animated:YES];
-    //we are already on the user posts flow, so we did not need to go there
-    //TODO: remove / reload the photo from cache
+    NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:[self getCurrentDictionary]];
+    NSInteger index = [_postsDataSource indexOfObject:dict];
+    if ([dict[@"post_id"] isEqualToString:result[@"image_id"]]) {
+        dict[@"full_photo_link"] = result[@"image_link"];
+        [_postsDataSource replaceObjectAtIndex:index withObject:dict];
+        [self.collectionView reloadData];
+    }
 }
 
 #pragma mark - Get Data Source for Flow Type

@@ -11,7 +11,7 @@
 @protocol STSharePostDelegate <NSObject>
 
 -(void)imageWasPosted;
--(void)imageWasEdited;
+-(void)imageWasEdited:(NSDictionary *)dict;
 
 @end
 

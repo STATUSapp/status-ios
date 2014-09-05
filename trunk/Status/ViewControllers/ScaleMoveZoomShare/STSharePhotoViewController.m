@@ -13,7 +13,9 @@
 #import "STFacebookController.h"
 #import "STConstants.h"
 
-@interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
+@interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>{
+    NSDictionary *editResponseDict;
+}
 @property (weak, nonatomic) IBOutlet UIButton *facebookBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
@@ -82,7 +84,9 @@
     [[STWebServiceController sharedInstance] uploadPostForId:_editPostId withData:_imgData withCompletion:^(NSDictionary *response) {
         
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-            
+            if (_editPostId!=nil) {
+                editResponseDict = [NSDictionary dictionaryWithDictionary:response];
+            }
             if (weakSelf.facebookBtn.selected==TRUE) {
                 //add publish stream permissions if does not exists
                 if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
@@ -146,7 +150,7 @@
 
 -(void)callTheDelegate{
     if (_editPostId!=nil) {
-        [_delegate imageWasEdited];
+        [_delegate imageWasEdited:editResponseDict];
     }
     else
         [_delegate imageWasPosted];
