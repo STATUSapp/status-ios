@@ -1277,7 +1277,11 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [self startMoveScaleShareControllerForImage:img shouldCompress:YES editedPostId:nil];
+        UIImage *fixedOrientationImage = [UIImage imageWithCGImage:img.CGImage
+                                                             scale:img.scale
+                                                       orientation:img.imageOrientation];
+
+        [self startMoveScaleShareControllerForImage:fixedOrientationImage shouldCompress:YES editedPostId:nil];
     }];
     
 }
