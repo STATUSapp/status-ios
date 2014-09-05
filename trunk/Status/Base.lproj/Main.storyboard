@@ -880,6 +880,7 @@
                         <outlet property="shareButton" destination="cmG-Rz-GiZ" id="Bwz-qO-Z2Y"/>
                         <outlet property="sharedImageView" destination="Q7a-gI-yrt" id="8o2-zB-v4s"/>
                         <outlet property="transparentNavBar" destination="IIz-3y-UvK" id="quc-yt-xeL"/>
+                        <outlet property="twitterBtn" destination="ElX-Yw-ze7" id="OOa-DK-ult"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nYh-B2-ALW" userLabel="First Responder" sceneMemberID="firstResponder"/>

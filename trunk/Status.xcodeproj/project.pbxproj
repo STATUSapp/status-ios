@@ -110,6 +110,8 @@
 		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
+		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
+		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
 		CDAC50AF19B602C900A45E85 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AB19B602C900A45E85 /* UIImage+RoundedCorner.m */; };
 		CDAC50B019B602C900A45E85 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AD19B602C900A45E85 /* UIImage+Alpha.m */; };
 		CDAC50B119B602C900A45E85 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AE19B602C900A45E85 /* UIImage+Resize.m */; };
@@ -330,6 +332,8 @@
 		317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomCollectionViewCell.h; sourceTree = "<group>"; };
 		317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomCollectionViewCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		CD532FD219B9A451009B1445 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CDAC50A919B602C900A45E85 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		CDAC50AA19B602C900A45E85 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		CDAC50AB19B602C900A45E85 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
@@ -343,6 +347,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD532FD319B9A451009B1445 /* Social.framework in Frameworks */,
+				CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */,
 				1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */,
 				172DF27C19A29250009CE4F3 /* FacebookSDK.framework in Frameworks */,
 				172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */,
@@ -505,6 +511,8 @@
 		172EAE6518B0B12E00C5637B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD532FD219B9A451009B1445 /* Social.framework */,
+				CD532FD019B9A44B009B1445 /* Accounts.framework */,
 				172DF27B19A29250009CE4F3 /* FacebookSDK.framework */,
 				1D98A4C219603064007F4AB2 /* iAd.framework */,
 				1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */,

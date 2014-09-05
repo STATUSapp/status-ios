@@ -13,14 +13,24 @@
 #import "STFacebookController.h"
 #import "STConstants.h"
 
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>{
     NSDictionary *editResponseDict;
 }
 @property (weak, nonatomic) IBOutlet UIButton *facebookBtn;
+@property (weak, nonatomic) IBOutlet UIButton *twitterBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+
+@property (strong, nonatomic) ACAccountStore * accountStore;
+@property (strong, nonatomic) ACAccountType * accountType;
+
+@property (assign, nonatomic) BOOL isTwitterAvailable;
+
 @end
 
 @implementation STSharePhotoViewController
@@ -43,6 +53,26 @@
 
 	_sharedImageView.image = [UIImage imageWithData:_imgData];
     _backgroundBlurImgView.image = [UIImage imageWithData:_bluredImgData];
+    
+    
+    // setup twitter account
+    
+    _accountStore = [[ACAccountStore alloc] init];
+    _accountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    __weak STSharePhotoViewController * weakSelf = self;
+    
+    [_accountStore requestAccessToAccountsWithType:_accountType
+                                     options:nil
+                                  completion:^(BOOL granted, NSError *error)
+    {
+        if (granted == YES)
+        {
+            weakSelf.isTwitterAvailable = YES;
+        } else {
+            weakSelf.isTwitterAvailable = NO;
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,7 +105,15 @@
 }
 
 - (IBAction)onClickTwitter:(id)sender {
-    //TODO: add sharing to twitter
+    if (_isTwitterAvailable) {
+        UIButton *btn = (UIButton *) sender;
+        btn.selected = !btn.selected;
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Twitter issue"
+                                    message:@"In order to post to Twitter you have to setup an account in your device settings"
+                                   delegate:nil cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 - (IBAction)onClickShare:(id)sender {
@@ -147,6 +185,72 @@
         }
     }];
 }
+
+- (void)postCurrentPhotoToTwitter {
+    NSString * status = [NSString stringWithFormat:@"what's YOUR status? via %@",STInviteLink];
+    UIImage * imgToPost = [UIImage imageWithData:self.imgData];
+    
+    [self twitterAccountPostImage:imgToPost withStatus:status];
+    
+}
+
+
+- (void)twitterAccountPostImage:(UIImage *)image withStatus:(NSString *)status
+{
+    ACAccountType *twitterType =
+    [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    SLRequestHandler requestHandler =
+    ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (responseData) {
+            NSInteger statusCode = urlResponse.statusCode;
+            if (statusCode >= 200 && statusCode < 300) {
+                NSDictionary *postResponseData =
+                [NSJSONSerialization JSONObjectWithData:responseData
+                                                options:NSJSONReadingMutableContainers
+                                                  error:NULL];
+                NSLog(@"[SUCCESS!] Created Tweet with ID: %@", postResponseData[@"id_str"]);
+            }
+            else {
+                NSLog(@"[ERROR] Server responded: status code %d %@", statusCode,
+                      [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
+            }
+        }
+        else {
+            NSLog(@"[ERROR] An error occurred while posting: %@", [error localizedDescription]);
+        }
+    };
+    
+    ACAccountStoreRequestAccessCompletionHandler accountStoreHandler =
+    ^(BOOL granted, NSError *error) {
+        if (granted) {
+            NSArray *accounts = [self.accountStore accountsWithAccountType:twitterType];
+            NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"
+                          @"/1.1/statuses/update_with_media.json"];
+            NSDictionary *params = @{@"status" : status};
+            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                    requestMethod:SLRequestMethodPOST
+                                                              URL:url
+                                                       parameters:params];
+            NSData *imageData = UIImageJPEGRepresentation(image, 1.f);
+            [request addMultipartData:imageData
+                             withName:@"media[]"
+                                 type:@"image/jpeg"
+                             filename:@"image.jpg"];
+            [request setAccount:[accounts lastObject]];
+            [request performRequestWithHandler:requestHandler];
+        }
+        else {
+            NSLog(@"[ERROR] An error occurred while asking for user authorization: %@",
+                  [error localizedDescription]);
+        }
+    };
+    
+    [self.accountStore requestAccessToAccountsWithType:twitterType
+                                               options:NULL
+                                            completion:accountStoreHandler];
+}
+
 
 -(void)callTheDelegate{
     if (_editPostId!=nil) {
