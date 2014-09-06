@@ -125,6 +125,7 @@
         
         return;
     }
+
     if ([STWebServiceController sharedInstance].isPerformLoginOrRegistration==FALSE) {
         [STWebServiceController sharedInstance].isPerformLoginOrRegistration = TRUE;
         [self loginOrRegistrationWithUser:user];

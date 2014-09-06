@@ -116,6 +116,27 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     startBlock(kGetAlbumsGraph);
 }
 
++(void)loadPermissionsWithBlock:(refreshCompletion)refreshCompletion{
+    
+    [FBRequestConnection startWithGraphPath:@"me/permissions"
+                                 parameters:nil
+                                 HTTPMethod:@"GET"
+                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                              if (!error) {
+                                  NSMutableArray *permissions = [NSMutableArray new];
+                                  for(NSDictionary *perm in result[@"data"])
+                                  {
+                                      if ([perm[@"status"] isEqualToString:@"granted"]) {
+                                          [permissions addObject:perm[@"permission"]];
+                                      }
+                                  }
+                                  refreshCompletion([NSArray arrayWithArray:permissions]);
+                              }
+                              else
+                                  refreshCompletion(nil);
+                          }];
+}
+
 -(void) loadFBCoverPicturesWithIds:(NSArray *)coverIds withLoadFbCompletion:(loadFBPicturesCompletion)completion{
     if (coverIds.count == 0) {
         completion(nil);

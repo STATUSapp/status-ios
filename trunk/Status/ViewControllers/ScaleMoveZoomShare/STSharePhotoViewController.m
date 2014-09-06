@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "STFacebookController.h"
 #import "STConstants.h"
+#import "STFacebookAlbumsLoader.h"
 
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
@@ -127,16 +128,20 @@
             }
             if (weakSelf.facebookBtn.selected==TRUE) {
                 //add publish stream permissions if does not exists
-                if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
-                    [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
-                                                            defaultAudience:FBSessionDefaultAudienceFriends
-                                                          completionHandler:^(FBSession *session, NSError *error) {
-                                                              [self postCurrentPhotoToFacebook];
-                                                          }];
+                [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
+                    NSLog(@"Permissions: %@", newObjects);
+                    if (![newObjects containsObject:@"publish_actions"]) {
+                        [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
+                                                                defaultAudience:FBSessionDefaultAudienceFriends
+                                                              completionHandler:^(FBSession *session, NSError *error) {
+                                                                  [self postCurrentPhotoToFacebook];
+                                                              }];
+                        
+                    }
+                    else
+                        [self postCurrentPhotoToFacebook];
                     
-                }
-                else
-                    [self postCurrentPhotoToFacebook];
+                }];
             }
             else
             {

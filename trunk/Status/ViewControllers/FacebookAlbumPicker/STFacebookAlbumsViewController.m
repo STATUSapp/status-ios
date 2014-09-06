@@ -42,16 +42,8 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    if (![[[FBSession activeSession] permissions] containsObject:@"user_photos"]) {
-        [[FBSession activeSession] requestNewPublishPermissions:@[@"user_photos"]
-                                                defaultAudience:FBSessionDefaultAudienceFriends
-                                              completionHandler:^(FBSession *session, NSError *error) {
-                                                  [self loadDataSource];
-                                              }];
-        
-    }
-    else
-        [self loadDataSource];
+    [self loadDataSource];
+
 }
 
 - (void)loadDataSource
@@ -104,31 +96,6 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44.f;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    if ([[[FBSession activeSession] permissions] containsObject:@"user_photos"]) {
-//        NSString *albumId = _dataSource[indexPath.row][@"id"];
-//        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                @"thumbnail", @"type",
-//                                nil
-//                                ];
-//        NSString *graph = [NSString stringWithFormat:@"/%@/picture",albumId];
-//        /* make the API call */
-//        [FBRequestConnection startWithGraphPath:graph
-//                                     parameters:params
-//                                     HTTPMethod:@"GET"
-//                              completionHandler:^(
-//                                                  FBRequestConnection *connection,
-//                                                  id result,
-//                                                  NSError *error
-//                                                  ) {
-//                                  /* handle the result */
-//                              }];
-//    }
-    
-   
 }
 
 @end

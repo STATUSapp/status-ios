@@ -2,9 +2,6 @@
 //  SLCoreDataRequestManager.h
 //
 
-//TODO: clean for unused methods
-
-
 #import <CoreData/CoreData.h>
 
 extern NSString *const kCDRChangedObject;

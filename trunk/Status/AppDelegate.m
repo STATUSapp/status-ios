@@ -22,6 +22,7 @@
 
 #import "STInviteController.h"
 #import "STChatController.h"
+#import "STFacebookAlbumsViewController.h"
 
 #import "STCoreDataManager.h"
 
@@ -73,11 +74,14 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
-    
+    BOOL removed = NO;
     while (![[stackVCs lastObject] isKindOfClass:[STFlowTemplateViewController class]]) {
+        removed = YES;
         [stackVCs removeLastObject];
     }
-    [navController setViewControllers:stackVCs];
+    if (removed == YES) {
+        [navController setViewControllers:stackVCs];
+    }
     [[STChatController sharedInstance] leaveCurrentRoom];
 }
 

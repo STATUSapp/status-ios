@@ -15,4 +15,5 @@ typedef void (^loadFBPicturesCompletion) (NSDictionary *result);
 @interface STFacebookAlbumsLoader : NSObject
 -(void)loadAlbumsWithRefreshBlock:(refreshCompletion)refreshCompletion;
 -(void)loadPhotosForAlbum:(NSString *)albumId withRefreshBlock:(refreshCompletion)refreshCompletion;
++(void)loadPermissionsWithBlock:(refreshCompletion)refreshCompletion;
 @end

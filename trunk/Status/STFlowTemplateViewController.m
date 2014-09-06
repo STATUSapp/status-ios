@@ -37,6 +37,7 @@
 
 #import "STIAPHelper.h"
 #import "STChatController.h"
+#import "STFacebookAlbumsLoader.h"
 
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
@@ -339,7 +340,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         [weakSelf presentTutorialAutomatically];
     }];
     [self addTopOption];
-    self.postsDataSource = [NSMutableArray array];
     [self getDataSourceWithOffset:0];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate checkForNotificationNumber];
@@ -348,11 +348,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void)facebookControllerDidLoggedOut{
     [self onSwipeUp:nil];
+    self.postsDataSource = [NSMutableArray array];
     if (self.presentedViewController==nil) {
         [[STFacebookController sharedInstance] UDSetValue:nil forKey:PHOTO_LINK];
         [[STFacebookController sharedInstance] UDSetValue:nil forKey:USER_NAME];
-        [[FBSession activeSession] close];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [[FBSession activeSession] closeAndClearTokenInformation];
+        [[FBSession activeSession] close];
         [FBSession setActiveSession:nil];
         [[FBSessionTokenCachingStrategy defaultInstance] clearToken];
         [self.navigationController popToRootViewControllerAnimated:YES];
@@ -885,17 +887,19 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (IBAction)onSharePostToFacebook:(id)sender {
     [self getCurrentImageDataWithCompletion:^(UIImage *img) {
         NSData *imgData = UIImageJPEGRepresentation(img, 1.0);
-        
-        if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
-            [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
-                                                    defaultAudience:FBSessionDefaultAudienceFriends
-                                                  completionHandler:^(FBSession *session, NSError *error) {
-                                                      [self sharePhotoOnFacebookWithImgData:imgData];
-                                                  }];
-            
-        }
-        else
-            [self sharePhotoOnFacebookWithImgData:imgData];
+        [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
+            NSLog(@"Permissions: %@", newObjects);
+            if (![newObjects containsObject:@"publish_actions"]) {
+                [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
+                                                        defaultAudience:FBSessionDefaultAudienceFriends
+                                                      completionHandler:^(FBSession *session, NSError *error) {
+                                                          [self sharePhotoOnFacebookWithImgData:imgData];
+                                                      }];
+                
+            }
+            else
+                [self sharePhotoOnFacebookWithImgData:imgData];
+        }];
     }];
 }
 
@@ -1165,6 +1169,15 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 #pragma mark - UIActionSheetDelegate
 
+- (void)presentFacebookPickerScene {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FacebookPickerScene" bundle:nil];
+    UINavigationController *noteNav = [storyboard instantiateViewControllerWithIdentifier:@"FacebookPicker"];
+    
+    [self presentViewController:noteNav animated:YES completion:^{
+        NSLog(@"Facebook Picker presented");
+    }];
+}
+
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     
     if(buttonIndex==3) return;
@@ -1185,12 +1198,25 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     }
     else
     {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FacebookPickerScene" bundle:nil];
-        UINavigationController *noteNav = [storyboard instantiateViewControllerWithIdentifier:@"FacebookPicker"];
-        
-        [self presentViewController:noteNav animated:YES completion:^{
-            NSLog(@"Facebook Picker presented");
+        [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
+            NSLog(@"Permissions: %@", newObjects);
+            if (![newObjects containsObject:@"user_photos"]) {
+                [[FBSession activeSession] requestNewPublishPermissions:@[@"user_photos"]
+                                                        defaultAudience:FBSessionDefaultAudienceFriends
+                                                      completionHandler:^(FBSession *session, NSError *error) {
+                                                          if (!error) {
+                                                              [self presentFacebookPickerScene];
+                                                          }
+                                                          else
+                                                          {
+                                                              [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a problem with facebook at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+                                                          }
+                                                      }];
+            }
+            else
+                [self presentFacebookPickerScene];
         }];
+        
     }
 }
 
