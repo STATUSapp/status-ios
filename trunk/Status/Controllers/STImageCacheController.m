@@ -69,8 +69,10 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         //start the downloading queue and the view will be notified;
         if (![currentPosts containsObject:imageFullLink]) {
-            [currentPosts insertObject:imageFullLink atIndex:0];
-            [self loadNextPhoto];
+            if (imageFullLink!=nil) {
+                [currentPosts insertObject:imageFullLink atIndex:0];
+                [self loadNextPhoto];
+            }
         }
         
     }
@@ -116,8 +118,7 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:nil withCompletion:^(NSURL *imageURL) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                UIImage *img =[self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
-                img = nil;
+                [self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion(imageFullLink);
                 });

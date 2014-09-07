@@ -424,10 +424,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     return sheetArray;
 }
 -(void)imageWasSavedLocally:(NSNotification *)notif{
-    NSDictionary *currentDict = [self getCurrentDictionary];
-    if ([[currentDict valueForKey:@"full_photo_link"] isEqualToString:notif.object]) {
-        [self.collectionView reloadData];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary *currentDict = [self getCurrentDictionary];
+        if ([[currentDict valueForKey:@"full_photo_link"] isEqualToString:notif.object]) {
+            [self.collectionView reloadData];
+        }
+    });
+    
 }
 
 - (void)getDataSourceWithOffset:(long) offset{
@@ -990,11 +993,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         return [NSDictionary dictionary];
     }
     NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
-    NSDictionary *dict = [NSDictionary dictionary];
-    if (visibleInxPath.count == 0) {
-        dict = [_postsDataSource lastObject];
-    }
-    else
+    NSDictionary *dict = [_postsDataSource lastObject];
+    if (visibleInxPath.count != 0) 
         dict = [self.postsDataSource objectAtIndex:[[visibleInxPath objectAtIndex:0] row]];
     
     return dict;

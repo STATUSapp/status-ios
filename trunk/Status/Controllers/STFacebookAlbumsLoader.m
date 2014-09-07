@@ -92,8 +92,13 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                                               if (dict!=nil) {
                                                   
                                                   NSInteger index = [newObjects indexOfObject:dict];
-                                                  dict[@"picture"] = resultAlbum[coverId][@"picture"];
-                                                  [newObjects replaceObjectAtIndex:index withObject:dict];
+                                                  NSString *pictureId = resultAlbum[coverId][@"picture"];
+                                                  
+                                                  if (pictureId!=nil) {
+                                                      dict[@"picture"] = pictureId;
+                                                      [newObjects replaceObjectAtIndex:index withObject:dict];
+                                                  }
+                                                  
                                               }
                                           }
                                           if (refreshCompletion!=nil) {
