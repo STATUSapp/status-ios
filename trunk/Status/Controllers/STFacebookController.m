@@ -35,16 +35,6 @@
     self = [super init];
     if (self) {
         
-        _loginButton2 = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email"/*, @"user_likes"*/]];
-        _loginButton2.loginBehavior = FBSessionLoginBehaviorForcingWebView;
-        _loginButton2.defaultAudience = FBSessionDefaultAudienceEveryone;
-
-        
-        [_loginButton2 setFrame:CGRectMake(50, 0, 218, 46)];
-        [_loginButton2 setTranslatesAutoresizingMaskIntoConstraints:NO];
-        _loginButton2.delegate = self;
-        [self customizeLoginButton:_loginButton2];
-        
         _loginButton = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email"/*, @"user_likes"*/]];
         _loginButton.defaultAudience = FBSessionDefaultAudienceEveryone;
         [_loginButton setFrame:CGRectMake(50, 0, 218, 46)];

@@ -26,7 +26,6 @@ typedef void (^facebookCompletion)(id result, NSError *error);
 @property (nonatomic, strong) id <FacebookControllerDelegate> delegate;
 @property (nonatomic, strong) id <FacebookControllerDelegate> logoutDelegate;
 @property (nonatomic, strong) FBLoginView *loginButton;
-@property (nonatomic, strong) FBLoginView *loginButton2;
 //@property (nonatomic, strong) NSString *currentUserName;
 //@property (nonatomic, strong) NSString *currentUserPhotoLink;
 @property (nonatomic, strong) NSString *currentUserId;

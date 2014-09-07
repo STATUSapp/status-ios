@@ -75,7 +75,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
     BOOL removed = NO;
-    while (![[stackVCs lastObject] isKindOfClass:[STFlowTemplateViewController class]]) {
+    //TODO: add more clasess here, as needed
+    while ([[stackVCs lastObject] isKindOfClass:[STChatRoomViewController class]]) {
         removed = YES;
         [stackVCs removeLastObject];
     }

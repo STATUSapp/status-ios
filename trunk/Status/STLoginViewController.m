@@ -43,21 +43,6 @@
                                            constant:-102];
     
      [self.view addConstraints:@[bottomConstraint]];
-    
-    FBLoginView *loginBtn2 = [STFacebookController sharedInstance].loginButton2;
-    [self.view addSubview:loginBtn2];
-    NSLayoutConstraint *bottomConstraint2 =[NSLayoutConstraint
-                                           constraintWithItem:loginBtn2
-                                           attribute:NSLayoutAttributeBottom
-                                           relatedBy:NSLayoutRelationEqual
-                                           toItem:self.view
-                                           attribute:NSLayoutAttributeBottom
-                                           multiplier:1.f
-                                           constant:-55];
-    
-    [self.view addConstraints:@[bottomConstraint2]];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning

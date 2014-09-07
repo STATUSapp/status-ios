@@ -19,9 +19,17 @@
 
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>{
     NSDictionary *editResponseDict;
+    
+    BOOL _shouldPostToFacebook;
+    BOOL _shouldPostToTwitter;
+    
+    BOOL _donePostingToFacebook;
+    BOOL _donePostingToTwitter;
+    
+    NSError *_fbError;
+    NSError *_twitterError;
+    
 }
-@property (weak, nonatomic) IBOutlet UIButton *facebookBtn;
-@property (weak, nonatomic) IBOutlet UIButton *twitterBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
@@ -110,12 +118,14 @@
 
     UIButton *btn = (UIButton *) sender;
     btn.selected = !btn.selected;
+    _shouldPostToFacebook = btn.selected;
 }
 
 - (IBAction)onClickTwitter:(id)sender {
     if (_isTwitterAvailable) {
         UIButton *btn = (UIButton *) sender;
         btn.selected = !btn.selected;
+        _shouldPostToTwitter = btn.selected;
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Twitter issue"
                                     message:@"In order to post to Twitter you have to setup an account in your device's settings"
@@ -133,27 +143,12 @@
             if (_editPostId!=nil) {
                 editResponseDict = [NSDictionary dictionaryWithDictionary:response];
             }
-            if (weakSelf.facebookBtn.selected==TRUE) {
-                //add publish stream permissions if does not exists
-                [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
-                    NSLog(@"Permissions: %@", newObjects);
-                    if (![newObjects containsObject:@"publish_actions"]) {
-                        [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
-                                                                defaultAudience:FBSessionDefaultAudienceFriends
-                                                              completionHandler:^(FBSession *session, NSError *error) {
-                                                                  [self postCurrentPhotoToFacebook];
-                                                              }];
-                        
-                    }
-                    else
-                        [self postCurrentPhotoToFacebook];
-                    
-                }];
+            if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
+                [self startPosting];
             }
             else
             {
-                [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-                [weakSelf callTheDelegate];
+                [weakSelf callTheDelegateIfNeeded];
             }
 
         }
@@ -182,19 +177,43 @@
 }
 
 #pragma mark - Helper
+
+- (void)startPosting {
+    if (_shouldPostToFacebook) {
+        //add publish stream permissions if does not exists
+        [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
+            NSLog(@"Permissions: %@", newObjects);
+            if (![newObjects containsObject:@"publish_actions"]) {
+                [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
+                                                        defaultAudience:FBSessionDefaultAudienceFriends
+                                                      completionHandler:^(FBSession *session, NSError *error) {
+                                                          if (error!=nil) {
+                                                              _fbError = error;
+                                                          }
+                                                          else
+                                                              [self postCurrentPhotoToFacebook];
+                                                      }];
+                
+            }
+            else
+                [self postCurrentPhotoToFacebook];
+            
+        }];
+    }
+    
+    if (_shouldPostToTwitter) {
+        [self postCurrentPhotoToTwitter];
+    }
+
+}
 - (void)postCurrentPhotoToFacebook {
     __weak STSharePhotoViewController *weakSelf = self;
     [[STFacebookController sharedInstance] shareImageWithData:self.imgData andCompletion:^(id result, NSError *error) {
-        if(error==nil)
-        {
-            [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your photo was posted on STATUS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            [weakSelf callTheDelegate];
+        _donePostingToFacebook = YES;
+        if (error) {
+            _fbError = error;
         }
-        else
-        {
-            [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            [weakSelf callTheDelegate];
-        }
+        [weakSelf callTheDelegateIfNeeded];
     }];
 }
 
@@ -209,11 +228,13 @@
 
 - (void)twitterAccountPostImage:(UIImage *)image withStatus:(NSString *)status
 {
+    __weak STSharePhotoViewController *weakSelf = self;
     ACAccountType *twitterType =
     [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     SLRequestHandler requestHandler =
     ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        _donePostingToTwitter = YES;
         if (responseData) {
             NSInteger statusCode = urlResponse.statusCode;
             if (statusCode >= 200 && statusCode < 300) {
@@ -224,13 +245,16 @@
                 NSLog(@"[SUCCESS!] Created Tweet with ID: %@", postResponseData[@"id_str"]);
             }
             else {
+                _twitterError = [NSError errorWithDomain:@"com.twiter.post" code:statusCode userInfo:nil];
                 NSLog(@"[ERROR] Server responded: status code %ld %@", (long)statusCode,
                       [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
             }
         }
         else {
+            _twitterError = error;
             NSLog(@"[ERROR] An error occurred while posting: %@", [error localizedDescription]);
         }
+        [weakSelf callTheDelegateIfNeeded];
     };
     
     ACAccountStoreRequestAccessCompletionHandler accountStoreHandler =
@@ -253,6 +277,9 @@
             [request performRequestWithHandler:requestHandler];
         }
         else {
+            _donePostingToTwitter = YES;
+            _twitterError = error;
+            [weakSelf callTheDelegateIfNeeded];
             NSLog(@"[ERROR] An error occurred while asking for user authorization: %@",
                   [error localizedDescription]);
         }
@@ -264,11 +291,60 @@
 }
 
 
--(void)callTheDelegate{
-    if (_editPostId!=nil) {
-        [_delegate imageWasEdited:editResponseDict];
+- (void)showMessagesAndCallDelegates {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *alertTitle = nil;
+        NSString *alertMessage = nil;
+        if (_fbError !=nil || _twitterError !=nil) {
+            if (_fbError!=nil && _twitterError !=nil) {
+                alertTitle = @"Warning";
+                alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook and Twitter.";
+            }
+            else if (_fbError!=nil){
+                alertTitle = @"Warning";
+                alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
+            }
+            else if (_twitterError!=nil){
+                alertTitle = @"Warning";
+                alertMessage = @"Your photo was posted on STATUS, but not shared on Twitter.";
+            }
+        }
+        else
+        {
+            alertTitle = @"Success";
+            alertMessage = @"Your photo was posted on STATUS";
+        }
+        if (alertMessage!=nil) {
+            [[[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            
+        }
+        if (_editPostId!=nil) {
+            [_delegate imageWasEdited:editResponseDict];
+        }
+        else
+            [_delegate imageWasPosted];
+    });
+
+}
+
+-(void)callTheDelegateIfNeeded{
+    
+    if (_shouldPostToFacebook == YES && _donePostingToFacebook == YES) {
+        if (_shouldPostToTwitter == YES && _donePostingToTwitter == NO) {
+            return;
+        }
+        else
+            [self showMessagesAndCallDelegates];
+    }
+    else if (_shouldPostToTwitter == YES && _donePostingToTwitter == YES){
+        if (_shouldPostToFacebook == YES && _donePostingToFacebook == NO) {
+            return;
+        }
+        else
+            [self showMessagesAndCallDelegates];
     }
     else
-        [_delegate imageWasPosted];
+        [self showMessagesAndCallDelegates];
+    
 }
 @end

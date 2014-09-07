@@ -1092,7 +1092,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 //                if (indexOffset == POSTS_PAGGING - START_LOAD_OFFSET) {
 //                    [weakSelf getDataSourceWithOffset:POSTS_PAGGING-indexOffset-1];
 //                }
-                BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET;
+                BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET && usedIndx.row!=0;
                 if (shouldGetNextBatch) {
                     [weakSelf getDataSourceWithOffset:_postsDataSource.count - usedIndx.row - 1];
                 }
@@ -1107,7 +1107,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 //        if (usedIndx.row%POSTS_PAGGING == POSTS_PAGGING-START_LOAD_OFFSET) {
 //            [self getDataSourceWithOffset:self.postsDataSource.count];
 //        }
-        BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET;
+        BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET && usedIndx.row!=0;
         if (shouldGetNextBatch) {
             [self getDataSourceWithOffset:_postsDataSource.count];
         }
@@ -1280,7 +1280,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 #pragma mark - UIImagePickerDelegate
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     NSLog(@"self.navigationController.viewControllers =  %@", self.navigationController.presentedViewController);
-    [self.navigationController.presentedViewController dismissViewControllerAnimated:YES completion:^{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
         [self startMoveScaleShareControllerForImage:(UIImage *)[notif object]
                                      shouldCompress:NO
                                        editedPostId:nil];
