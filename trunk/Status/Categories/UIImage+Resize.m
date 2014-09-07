@@ -190,4 +190,9 @@
     return transform;
 }
 
+-(NSUInteger)calculatedSizeInBytes
+{
+    return CGImageGetHeight(self.CGImage) * CGImageGetBytesPerRow(self.CGImage);
+}
+
 @end

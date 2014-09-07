@@ -76,3 +76,8 @@ NSString *const STLoadImageNotification = @"STLoadImageNotification";
 
 NSString *const STInviteText = @"I'm sending you one of my 3 special friend invites on Get STATUS.\nYou can chat with happy and positive people around you, discover and share wonderful moments and receive hundreds of likes.";
 NSString *const STInviteLink = @"http://bit.ly/Njw1k4";
+
+
+#pragma mark - Numeric constants
+
+NSInteger const STMaximumSizeInBytesForUpload = 3145728;  // 3 MB

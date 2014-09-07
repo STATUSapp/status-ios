@@ -15,4 +15,8 @@
 - (UIImage *)resizedImageWithContentMode:(UIViewContentMode)contentMode
                                   bounds:(CGSize)bounds
                     interpolationQuality:(CGInterpolationQuality)quality;
+
+-(NSUInteger)calculatedSizeInBytes;
+
+
 @end

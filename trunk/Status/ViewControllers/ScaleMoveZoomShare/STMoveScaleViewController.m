@@ -13,7 +13,6 @@
 
 @interface STMoveScaleViewController ()<UIScrollViewDelegate>
 {
-    UIImage *_currentImg;
     UIImageView *_imageView;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
@@ -40,7 +39,6 @@
     self.transparentNavBar.shadowImage = [UIImage new];
     self.transparentNavBar.translucent = YES;
     
-    _currentImg = [UIImage imageWithData:_imgData];
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
     UIImage *cropppedImage = [[self croppedImage] imageCropedFullScreenSize];
     _backgroundBlurImgView.image = [cropppedImage applyLightEffect];
@@ -118,6 +116,22 @@
 #pragma mark IBACTIONS
 - (IBAction)onUseBtnPressed:(id)sender {
     UIImage *croppedImg = [self croppedImage];
+    
+    // after cropping, we should do optimization
+    
+    NSUInteger imgSizeInBytes = [croppedImg calculatedSizeInBytes];
+    if (imgSizeInBytes > STMaximumSizeInBytesForUpload) {
+        
+        
+        
+        CGFloat compressRatio = (CGFloat)STMaximumSizeInBytesForUpload / (CGFloat)imgSizeInBytes;
+        compressRatio = sqrtf(compressRatio);
+        CGSize newImgSize = CGSizeMake(compressRatio * croppedImg.size.width, compressRatio * croppedImg.size.height);
+                
+        croppedImg = [croppedImg resizedImage:newImgSize interpolationQuality:kCGInterpolationHigh];
+
+    }
+
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];

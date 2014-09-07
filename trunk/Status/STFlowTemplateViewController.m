@@ -1291,12 +1291,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (void)startMoveScaleShareControllerForImage:(UIImage *)img
                                shouldCompress:(BOOL)compressing
                                     editedPostId:(NSString *)postId{
-    //TODO: this compression must be changed (it's to big!!!)
-    NSData *data = UIImageJPEGRepresentation(img, compressing==NO?1.f:0.25);
+    
+    // here, no compressing should be done, because it might be a cropping after this
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
-    viewController.imgData = data;
+    viewController.currentImg = img;
     viewController.delegate = self;
     viewController.editPostId = postId;
     [self.navigationController pushViewController:viewController animated:NO];

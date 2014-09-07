@@ -16,7 +16,7 @@
 @end
 
 @interface STMoveScaleViewController : UIViewController
-@property (nonatomic, strong) NSData *imgData;
+@property (nonatomic, strong) UIImage *currentImg;
 @property (nonatomic, strong) id <STSharePostDelegate>delegate;
 @property (nonatomic, strong) NSString *editPostId;
 @end

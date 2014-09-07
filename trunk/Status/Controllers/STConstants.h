@@ -109,3 +109,7 @@ extern NSString *const STLoadImageNotification;
 
 extern NSString *const STInviteText;
 extern NSString *const STInviteLink;
+
+#pragma mark - Numeric constants
+
+extern NSInteger const STMaximumSizeInBytesForUpload;
