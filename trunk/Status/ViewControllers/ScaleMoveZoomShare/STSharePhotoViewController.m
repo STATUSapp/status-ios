@@ -56,6 +56,11 @@
     _backgroundBlurImgView.image = [UIImage imageWithData:_bluredImgData];
     
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     // setup twitter account
     
     _accountStore = [[ACAccountStore alloc] init];
@@ -63,17 +68,19 @@
     
     __weak STSharePhotoViewController * weakSelf = self;
     
+    
     [_accountStore requestAccessToAccountsWithType:_accountType
-                                     options:nil
-                                  completion:^(BOOL granted, NSError *error)
-    {
-        if (granted == YES)
-        {
-            weakSelf.isTwitterAvailable = YES;
-        } else {
-            weakSelf.isTwitterAvailable = NO;
-        }
-    }];
+                                           options:nil
+                                        completion:^(BOOL granted, NSError *error)
+     {
+         if (granted == YES)
+         {
+             weakSelf.isTwitterAvailable = ([weakSelf.accountStore accountsWithAccountType:weakSelf.accountType].count > 0);
+         } else {
+             weakSelf.isTwitterAvailable = NO;
+         }
+     }];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,7 +118,7 @@
         btn.selected = !btn.selected;
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Twitter issue"
-                                    message:@"In order to post to Twitter you have to setup an account in your device settings"
+                                    message:@"In order to post to Twitter you have to setup an account in your device's settings"
                                    delegate:nil cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
     }
@@ -217,7 +224,7 @@
                 NSLog(@"[SUCCESS!] Created Tweet with ID: %@", postResponseData[@"id_str"]);
             }
             else {
-                NSLog(@"[ERROR] Server responded: status code %d %@", statusCode,
+                NSLog(@"[ERROR] Server responded: status code %ld %@", (long)statusCode,
                       [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
             }
         }
