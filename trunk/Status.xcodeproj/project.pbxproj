@@ -1149,7 +1149,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.9.3",
 					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.11.1",
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
@@ -1173,12 +1172,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.9.3",
 					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.11.1",
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "065E5AE0-90F2-4F3A-89E0-3288F2D1DA02";
+				PROVISIONING_PROFILE = "84DD1C06-D58D-48AF-BE3F-910C1D294CAC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1271,7 +1269,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.9.3",
 					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.11.1",
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";

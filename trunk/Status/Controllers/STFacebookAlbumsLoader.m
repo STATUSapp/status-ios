@@ -77,7 +77,9 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                                       for (NSDictionary *dict in result[@"data"]) {
                                           if ([dict[@"count"] integerValue] != 0) {
                                               [newObjects addObject:dict];
-                                              [coverIds addObject:dict[@"cover_photo"]];
+                                              if (dict[@"cover_photo"]) {
+                                                  [coverIds addObject:dict[@"cover_photo"]];
+                                              }
                                           }
                                       }
                                       [self loadFBCoverPicturesWithIds:coverIds withLoadFbCompletion:^(NSDictionary *resultAlbum) {
