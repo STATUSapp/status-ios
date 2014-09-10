@@ -424,6 +424,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     return sheetArray;
 }
 -(void)imageWasSavedLocally:(NSNotification *)notif{
+//    NSLog(@"Notif: %@", notif);
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *currentDict = [self getCurrentDictionary];
         if ([[currentDict valueForKey:@"full_photo_link"] isEqualToString:notif.object]) {
@@ -1067,7 +1068,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 -(void)loadImages:(NSArray *)array{
-    [[STImageCacheController sharedInstance] startImageDownloadForNewDataSource:array];
+    [[STImageCacheController sharedInstance] startImageDownloadForNewFlowType:_flowType andDataSource:array];
 }
 
 - (void)processCurrentPost:(NSIndexPath *)indexPath {

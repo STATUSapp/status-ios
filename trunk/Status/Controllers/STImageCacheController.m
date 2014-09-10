@@ -11,11 +11,12 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "NSString+MD5.h"
 #import "UIImage+ImageEffects.h"
-
+NSInteger const STImageDownloadSpecialPriority = -1;
 @interface STImageCacheController()
-{
-    NSMutableArray *currentPosts;
-}
+
+@property (nonatomic, strong) NSMutableArray *currentPosts;
+@property (nonatomic, strong) NSMutableArray *sortedFlows;
+@property (nonatomic, assign) BOOL inProgress;
 @end
 
 @implementation STImageCacheController
@@ -68,10 +69,9 @@
     __block UIImage *img = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         //start the downloading queue and the view will be notified;
-        if (![currentPosts containsObject:imageFullLink]) {
+        if (![[_currentPosts valueForKey:@"link"] containsObject:imageFullLink]) {
             if (imageFullLink!=nil) {
-                [currentPosts insertObject:imageFullLink atIndex:0];
-                [self loadNextPhoto];
+                [self startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[@{@"full_photo_link":imageFullLink}]];
             }
         }
         
@@ -94,18 +94,16 @@
     return imageFullPath;
 }
 
-- (UIImage *)saveImageForBlurPosts:(NSString *)imageCachePath imageFullLink:(NSString *)imageFullLink imageURL:(NSURL *)imageURL {
+- (void)saveImageForBlurPosts:(NSString *)imageCachePath imageFullLink:(NSString *)imageFullLink imageURL:(NSURL *)imageURL {
     if ([imageFullLink rangeOfString:kBasePhotoDownload].location!=NSNotFound) {
         UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
         img = [img imageCropedFullScreenSize];
         img = [img applyLightEffect];
         NSString *imageFullPath = [self blurPostLinkWith:imageFullLink imageCachePath:imageCachePath];
         //TOOD: this is a right compresion?
-        NSData *imagData = UIImageJPEGRepresentation(img, 0.5f);
+        NSData *imagData = UIImageJPEGRepresentation(img, 0.25f);
         [imagData writeToFile:imageFullPath atomically:YES];
-        return img;
     }
-    return nil;
 }
 
 -(void) downloadImageWithName:(NSString *) imageFullLink andCompletion:(downloadImageComp) completion{
@@ -115,10 +113,11 @@
     }
     NSString *imageCachePath = [self getImageCachePath:NO];
     NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:imageFullLink.lastPathComponent];
+    __weak STImageCacheController *weakSelf = self;
     if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
         [[STWebServiceController sharedInstance] downloadImage:imageFullLink storedName:nil withCompletion:^(NSURL *imageURL) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                [self saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
+                [weakSelf saveImageForBlurPosts:imageCachePath imageFullLink:imageFullLink imageURL:imageURL];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion(imageFullLink);
                 });
@@ -185,30 +184,56 @@
     }
 }
 
--(void)startImageDownloadForNewDataSource:(NSArray *)newPosts{
+-(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts{
 
-    //TODO: we might need reorder this array when we change the flow
-    NSArray *imagesLinksArray = [newPosts valueForKey:@"full_photo_link"];
-    if(currentPosts!=nil && currentPosts.count > 0){
-        NSRange range = NSMakeRange(0, [imagesLinksArray count]);
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-        [currentPosts insertObjects:imagesLinksArray atIndexes:indexSet];
+    if (_sortedFlows == nil) {
+        //default sort
+        _sortedFlows = [NSMutableArray arrayWithArray:@[@(STImageDownloadSpecialPriority),@(STFlowTypeAllPosts), @(STFlowTypeDiscoverNearby), @(STFlowTypeMyProfile), @(STFlowTypeUserProfile), @(STFlowTypeSinglePost)]];
     }
-    else
-        currentPosts = [NSMutableArray arrayWithArray:imagesLinksArray];
     
+    if (_currentPosts == nil) {
+        _currentPosts = [NSMutableArray new];
+    }
+    //sort the flows - move the current to the top
+    if ([[_sortedFlows firstObject] integerValue]!=flowType) {
+        [_sortedFlows removeObject:@(flowType)];
+        [_sortedFlows insertObject:@(flowType) atIndex:0];
+    }
+    NSArray *imagesLinksArray = [newPosts valueForKey:@"full_photo_link"];
+
+    for (NSString *link in imagesLinksArray) {
+        NSString *imageCachePath = [self getImageCachePath:NO];
+        NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:link.lastPathComponent];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
+            [_currentPosts addObject:@{@"link":link, @"flowType":@(flowType)}];
+        }
+
+    }
+    
+    [_currentPosts sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+        return [@([_sortedFlows indexOfObject:@([obj1[@"flowType"] integerValue])]) compare:@([_sortedFlows indexOfObject:@([obj2[@"flowType"] integerValue])])];
+    }];
     [self loadNextPhoto];
 }
 
 -(void)loadNextPhoto{
-    while (currentPosts.count == 0) {
+    NSLog(@"Photo for download count: %lu", (unsigned long)_currentPosts.count);
+    while (_currentPosts.count == 0) {
+        _inProgress = NO;
         return;
     }
+    if (_inProgress == YES) {
+        return;
+    }
+    _inProgress = YES;
     __weak STImageCacheController *weakSelf = self;
-//    NSLog(@"Image: %@", [currentPosts firstObject]);
-    [self downloadImageWithName:[currentPosts firstObject] andCompletion:^(NSString *downloadedImage) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:downloadedImage];
-        [currentPosts removeObject:downloadedImage];
+    [self downloadImageWithName:[[_currentPosts firstObject] valueForKey:@"link"] andCompletion:^(NSString *downloadedImage) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:[NSString stringWithString:downloadedImage]];
+        NSUInteger index = [[_currentPosts valueForKey:@"link"] indexOfObject:downloadedImage];
+        if (index!=NSNotFound) {
+            [_currentPosts removeObjectAtIndex:index];
+        }
+        _inProgress = NO;
         [weakSelf loadNextPhoto];
     }];
     

@@ -10,7 +10,7 @@
 
 #define PAGGING_ENABLED 1
 #define  POSTS_PAGGING 10
-#define  START_LOAD_OFFSET 4
+#define  START_LOAD_OFFSET 5
 #pragma mark - Enums
 
 typedef NS_ENUM(NSUInteger,STFlowType){

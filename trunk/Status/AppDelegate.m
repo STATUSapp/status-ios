@@ -41,7 +41,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 {
     [STIAPHelper sharedInstance];
     [FBLoginView class];
-    [[STImageCacheController sharedInstance] cleanTemporaryFolder];
+//    [[STImageCacheController sharedInstance] cleanTemporaryFolder];
     [application setStatusBarHidden:YES];
     self.badgeNumber = application.applicationIconBadgeNumber;
     //[[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];

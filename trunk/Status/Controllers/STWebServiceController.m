@@ -92,6 +92,9 @@
         }
         return [documentsDirectoryPath URLByAppendingPathComponent:lastPathName];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        if (error!=nil) {
+            NSLog(@"Error downloading Image: %@", error.description);
+        }
         completion(filePath);
     }];
     [downloadTask resume];
