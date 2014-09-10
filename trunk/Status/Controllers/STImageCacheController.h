@@ -19,5 +19,6 @@ typedef void (^downloadImageComp)(NSString *downloadedImage);
 -(NSString *) getImageCachePath:(BOOL)forFacebook;
 -(void) cleanTemporaryFolder;
 -(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts;
+-(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort;
 -(void) loadFBCoverPictureForAlbum:(NSDictionary *)album andCompletion:(loadImageCompletion)completion;
 @end

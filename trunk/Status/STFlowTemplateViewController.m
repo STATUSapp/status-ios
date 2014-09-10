@@ -137,6 +137,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:appDelegate.badgeNumber];
+    [[STImageCacheController sharedInstance] changeFlowType:_flowType needsSort:YES];
 }
 
 - (void)presentTutorialAutomatically{
@@ -1115,11 +1116,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-   
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     _numberOfSeenPosts++;
-    
     [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
     
 #if PAGGING_ENABLED
     [self processCurrentPost:indexPath];

@@ -184,21 +184,38 @@ NSInteger const STImageDownloadSpecialPriority = -1;
     }
 }
 
--(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts{
-
+-(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort{
     if (_sortedFlows == nil) {
         //default sort
         _sortedFlows = [NSMutableArray arrayWithArray:@[@(STImageDownloadSpecialPriority),@(STFlowTypeAllPosts), @(STFlowTypeDiscoverNearby), @(STFlowTypeMyProfile), @(STFlowTypeUserProfile), @(STFlowTypeSinglePost)]];
     }
     
-    if (_currentPosts == nil) {
-        _currentPosts = [NSMutableArray new];
-    }
-    //sort the flows - move the current to the top
     if ([[_sortedFlows firstObject] integerValue]!=flowType) {
         [_sortedFlows removeObject:@(flowType)];
         [_sortedFlows insertObject:@(flowType) atIndex:0];
     }
+    
+    if (needsSort==YES) {
+        [self sortDownloadArray];
+    }
+}
+
+-(void)sortDownloadArray{
+    [_currentPosts sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+        return [@([_sortedFlows indexOfObject:@([obj1[@"flowType"] integerValue])]) compare:@([_sortedFlows indexOfObject:@([obj2[@"flowType"] integerValue])])];
+    }];
+
+}
+
+-(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts{
+
+    [self changeFlowType:flowType needsSort:NO];
+    
+    if (_currentPosts == nil) {
+        _currentPosts = [NSMutableArray new];
+    }
+    
+    //sort the flows - move the current to the top
     NSArray *imagesLinksArray = [newPosts valueForKey:@"full_photo_link"];
 
     for (NSString *link in imagesLinksArray) {
@@ -209,10 +226,7 @@ NSInteger const STImageDownloadSpecialPriority = -1;
         }
 
     }
-    
-    [_currentPosts sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-        return [@([_sortedFlows indexOfObject:@([obj1[@"flowType"] integerValue])]) compare:@([_sortedFlows indexOfObject:@([obj2[@"flowType"] integerValue])])];
-    }];
+    [self sortDownloadArray];
     [self loadNextPhoto];
 }
 
