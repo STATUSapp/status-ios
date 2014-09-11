@@ -78,6 +78,7 @@
     [_activityIndicator stopAnimating];
     _removeAdsBtn.enabled = YES;
     _restorePurchaseBtn.enabled = YES;
+    [[[UIAlertView alloc] initWithTitle:@"Something went wrong..." message:notification.userInfo[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
 }
 
 - (void)restorePurchaseFailed:(NSNotification *)notification{

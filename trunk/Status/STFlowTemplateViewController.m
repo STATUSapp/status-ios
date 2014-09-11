@@ -39,6 +39,8 @@
 #import "STChatController.h"
 #import "STFacebookAlbumsLoader.h"
 
+#import "STSettingsViewController.h"
+
 int const kDeletePostTag = 11;
 int const kTopOptionTag = 121;
 int const kNoPostsAlertTag = 13;
@@ -710,7 +712,17 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (IBAction)onClickHome:(id)sender {
     [self onCloseMenu:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
+    [self onClickSettings:sender];
 }
+
+- (IBAction)onClickSettings:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
+    UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
+    [self presentViewController: setttingsNav animated:YES completion:nil];
+}
+
 - (IBAction)onClickHowItWorks:(id)sender {
     [self onCloseMenu:nil];
     STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];

@@ -7,6 +7,7 @@
 //
 
 #import "STSettingsViewController.h"
+#import "STRemoveAdsViewController.h"
 
 @interface STSettingsViewController ()
 
@@ -27,11 +28,15 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Settings";
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapDone)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,20 +45,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)onTapDone {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 1;
 }
 
 /*
@@ -115,5 +122,17 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - IBActions
+
+- (IBAction)onTapRemoveAds:(id)sender {
+    STRemoveAdsViewController * removeAds = [STRemoveAdsViewController newInstance];
+    removeAds.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:removeAds animated:YES completion:nil];
+}
+
+- (IBAction)onTapLogout:(id)sender {
+
+}
 
 @end

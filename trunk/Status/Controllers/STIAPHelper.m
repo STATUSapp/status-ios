@@ -159,7 +159,7 @@
     }
     
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedFailedNotification object:nil userInfo:@{@"transaction" : transaction}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedFailedNotification object:nil userInfo:@{@"error" : transaction.error.localizedDescription}];
 }
 
 - (void)provideContentForProductIdentifier:(NSString *)productIdentifier {
