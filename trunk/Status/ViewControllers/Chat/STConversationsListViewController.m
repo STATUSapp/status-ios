@@ -50,6 +50,7 @@
     _allUsersArray = [NSMutableArray new];
     _nearbyUsers = [NSMutableArray new];
     _recentUsers = [NSMutableArray new];
+    [_segment setSelectedSegmentIndex:STSearchControlRecent];
    
 }
 

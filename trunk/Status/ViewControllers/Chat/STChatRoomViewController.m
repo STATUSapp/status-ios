@@ -343,7 +343,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     
     if (_messages.count > 0) {
         
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
     
 }
@@ -513,18 +513,8 @@ static NSInteger const  kBlockUserAlertTag = 11;
     _messages = cdReqManager.allObjects;
     [_tableView reloadData];
     if (_messages.count > 0) {
-        if(chatController.loadMore == YES)
-        {
-            NSLog(@"Load More");
-//            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        }
-        else{
-            if (_messages.count > 0) {
-                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-            }
-        }
-        
-        
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
