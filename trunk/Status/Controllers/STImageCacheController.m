@@ -307,6 +307,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     }
     else
     {
+        __weak STImageCacheController *weakSelf = self;
         [sdManager downloadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                   if (error!=nil) {
@@ -315,7 +316,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                   }
                                   else if (finished==YES){
                                       if (completion!=nil) {
-                                          NSString *bluredLink = [self blurPostLinkWithURL:imageURL.absoluteString];
+                                          NSString *bluredLink = [weakSelf blurPostLinkWithURL:imageURL.absoluteString];
                                           UIImage *bluredImg= [UIImage imageWithData:[NSData dataWithContentsOfFile:bluredLink]];
                                           completion(image, bluredImg);
                                       }
@@ -489,6 +490,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 -(void)loadNextPhoto{
     NSLog(@"Photo for download count: %lu", (unsigned long)_currentPosts.count);
     while (_currentPosts.count == 0) {
+        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
         _inProgress = NO;
         return;
     }
@@ -499,11 +501,11 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     __weak STImageCacheController *weakSelf = self;
     [self downloadImageWithName:[[_currentPosts firstObject] valueForKey:@"link"] andCompletion:^(NSString *downloadedImage) {
         [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:[NSString stringWithString:downloadedImage]];
-        NSUInteger index = [[_currentPosts valueForKey:@"link"] indexOfObject:downloadedImage];
+        NSUInteger index = [[weakSelf.currentPosts valueForKey:@"link"] indexOfObject:downloadedImage];
         if (index!=NSNotFound) {
-            [_currentPosts removeObjectAtIndex:index];
+            [weakSelf.currentPosts removeObjectAtIndex:index];
         }
-        _inProgress = NO;
+        weakSelf.inProgress = NO;
         [weakSelf loadNextPhoto];
     }];
     

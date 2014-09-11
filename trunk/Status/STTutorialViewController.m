@@ -60,9 +60,10 @@ static NSInteger const  kSTNumberOfTutorialImages = 6;
 
 - (void)dismissViewController{
     if ([(STTutorialCell*)[self.collectionView visibleCells].firstObject tag] == kSTNumberOfTutorialImages - 1) {
+        __weak STTutorialViewController *weakSelf = self;
         [self dismissViewControllerAnimated:YES completion:^{
-            if (_delegate && [_delegate respondsToSelector:@selector(tutorialDidDissmiss)]) {
-                [_delegate performSelector:@selector(tutorialDidDissmiss)];
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(tutorialDidDissmiss)]) {
+                [weakSelf.delegate performSelector:@selector(tutorialDidDissmiss)];
             }
         }];
         

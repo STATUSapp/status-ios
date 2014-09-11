@@ -78,10 +78,11 @@ static NSInteger const  kBlockUserAlertTag = 11;
         [_userImg maskImage:userImage];
     } isForFacebook:NO];
 #else
+    __weak STChatRoomViewController *weakSelf = self;
     [[STImageCacheController sharedInstance] loadImageWithName:photoLink andCompletion:^(UIImage *img) {
         userImage = img;
-        [_tableView reloadData];
-        [_userImg maskImage:userImage];
+        [weakSelf.tableView reloadData];
+        [weakSelf.userImg maskImage:userImage];
     }];
 #endif
 }
@@ -104,10 +105,11 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
     [self initiateCustomControls];
     if (_userInfo[@"user_name"] == nil) {//notification, need fetch
+        __weak STChatRoomViewController *weakSelf = self;
         [[STWebServiceController sharedInstance] getUserInfo:_userInfo[@"user_id"] wirhCompletion:^(NSDictionary *response) {
             if([response[@"status_code"] integerValue] == 200){
-                [_userInfo addEntriesFromDictionary:response];
-                [self loadUserInfo];
+                [weakSelf.userInfo addEntriesFromDictionary:response];
+                [weakSelf loadUserInfo];
             }
         } andErrorCompletion:^(NSError *error) {
             NSLog(@"Error: %@", error.debugDescription);

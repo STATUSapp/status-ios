@@ -57,14 +57,14 @@ const float kNoNotifHeight = 24.f;
 	[[STWebServiceController sharedInstance] getNotificationsWithCompletion:^(NSDictionary *response) {
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
             _notificationDataSource = [NSArray arrayWithArray:response[@"data"]];
-            _noNotifLabel.hidden = _notificationDataSource.count>0;
+            weakSelf.noNotifLabel.hidden = _notificationDataSource.count>0;
             
             [(AppDelegate *)[UIApplication sharedApplication].delegate setBadgeNumber:0];            
             [weakSelf.notificationTable reloadData];
         }
         
     } andErrorCompletion:^(NSError *error) {
-        _noNotifLabel.hidden = NO;
+        weakSelf.noNotifLabel.hidden = NO;
     }];
 }
 

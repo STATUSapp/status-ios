@@ -61,9 +61,10 @@
 - (void)productPurchased:(NSNotification *)notification {
     
     NSString * productIdentifier = notification.object;
+    __weak STRemoveAdsViewController *weakSelf = self;
     [_products enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
         if ([product.productIdentifier isEqualToString:productIdentifier]) {
-            [self dismissController:nil];
+            [weakSelf dismissController:nil];
             [[[UIAlertView alloc] initWithTitle:@"Congratulations"
                                         message:@"You have now an ads free STATUS app"
                                        delegate:nil cancelButtonTitle:@"OK"
@@ -87,20 +88,20 @@
 
 - (void)loadProductsInfo {
     _products = nil;
-    
+    __weak STRemoveAdsViewController *weakSelf = self;
     [[STIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         if (success) {
             _products = products;
             _removeAdsProduct = _products.count ? _products.firstObject : nil;
-            _removeAdsBtn.enabled = YES;
-            _restorePurchaseBtn.enabled = YES;
+            weakSelf.removeAdsBtn.enabled = YES;
+            weakSelf.restorePurchaseBtn.enabled = YES;
         }
         
         if (!success || _removeAdsProduct == nil) {
             [[[UIAlertView alloc] initWithTitle:@"Something went wrong..." message:@"Tap to dismiss." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
         
-        [_activityIndicator stopAnimating];
+        [weakSelf.activityIndicator stopAnimating];
     }];
 }
 

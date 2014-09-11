@@ -37,9 +37,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    __weak STLikesViewController *weakSelf = self;
 	[[STWebServiceController sharedInstance] getPostLikes:self.postId withCompletion:^(NSDictionary *response) {
         _likesDataSource = [NSArray arrayWithArray:response[@"data"]];
-        [self.likesTableView reloadData];
+        [weakSelf.likesTableView reloadData];
     } andErrorCompletion:^(NSError *error) {
         
     }];
@@ -79,6 +80,7 @@
                                                      cell.userPhoto.image = img;
                                                  } isForFacebook:NO];
 #else
+    //TODO: check a way to improve this behaviour
     [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"]
                                                  andCompletion:^(UIImage *img) {
                                                      cell.userPhoto.image = img;

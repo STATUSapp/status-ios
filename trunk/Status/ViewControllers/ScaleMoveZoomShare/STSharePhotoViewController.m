@@ -140,11 +140,11 @@
     [[STWebServiceController sharedInstance] uploadPostForId:_editPostId withData:_imgData withCompletion:^(NSDictionary *response) {
         
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-            if (_editPostId!=nil) {
+            if (weakSelf.editPostId!=nil) {
                 editResponseDict = [NSDictionary dictionaryWithDictionary:response];
             }
             if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
-                [self startPosting];
+                [weakSelf startPosting];
             }
             else
             {
@@ -181,6 +181,7 @@
 - (void)startPosting {
     if (_shouldPostToFacebook) {
         //add publish stream permissions if does not exists
+        __weak STSharePhotoViewController *weakSelf = self;
         [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
             NSLog(@"Permissions: %@", newObjects);
             if (![newObjects containsObject:@"publish_actions"]) {
@@ -191,12 +192,12 @@
                                                               _fbError = error;
                                                           }
                                                           else
-                                                              [self postCurrentPhotoToFacebook];
+                                                              [weakSelf postCurrentPhotoToFacebook];
                                                       }];
                 
             }
             else
-                [self postCurrentPhotoToFacebook];
+                [weakSelf postCurrentPhotoToFacebook];
             
         }];
     }

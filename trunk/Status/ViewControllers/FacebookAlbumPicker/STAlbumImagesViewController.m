@@ -39,12 +39,12 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     _dataSource = [NSMutableArray array];
     _fbLoader = [STFacebookAlbumsLoader new];
-    
+    __weak STAlbumImagesViewController *weakSelf = self;
     [_fbLoader loadPhotosForAlbum:_albumId
                  withRefreshBlock:^(NSArray *newObjects) {
                      if (newObjects.count>0) {
                          [_dataSource addObjectsFromArray:newObjects];
-                         [_collectionView reloadData];
+                         [weakSelf.collectionView reloadData];
                      }
                  }];
         

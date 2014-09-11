@@ -174,8 +174,8 @@
                                       id result,
                                       NSError *error) {
         if (error!=nil) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
-                [self.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
+            if (weakSelf.delegate&&[weakSelf.delegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
+                [weakSelf.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
             }
             //[self deleteAccessToken];
             [[STImageCacheController sharedInstance] cleanTemporaryFolder];

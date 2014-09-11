@@ -32,13 +32,14 @@
 
 - (void)viewDidLoad
 {
+    //TODO: continue search for strong refs in other own clases
     [super viewDidLoad];
     __weak STZoomablePostViewController *weakSelf = self;
     [[STImageCacheController sharedInstance] loadPostImageWithName:self.postPhotoLink andCompletion:^(UIImage *origImg, UIImage *bluredImg) {
         // Set up the image we want to scroll & zoom and add it to the scroll view
         _imageView = [[UIImageView alloc] initWithImage:origImg];
         _imageView.frame = (CGRect){.origin=CGPointMake(0.0f, 0.0f), .size=origImg.size};
-        _backgroundBlurImgView.image = bluredImg;
+        weakSelf.backgroundBlurImgView.image = bluredImg;
         [weakSelf setUpTheContext];
         
     }];

@@ -48,10 +48,11 @@
 
 - (void)loadDataSource
 {
+    __weak STFacebookAlbumsViewController *weakSelf = self;
     [_fbLoader loadAlbumsWithRefreshBlock:^(NSArray *newObjects) {
         if (newObjects.count > 0) {
             [_dataSource addObjectsFromArray:newObjects];
-            [_tableView reloadData];
+            [weakSelf.tableView reloadData];
         }
     }];
 }

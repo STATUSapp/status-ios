@@ -429,12 +429,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(void)imageWasSavedLocally:(NSNotification *)notif{
 //    NSLog(@"Notif: %@", notif);
     dispatch_async(dispatch_get_main_queue(), ^{
-//        NSDictionary *currentDict = [self getCurrentDictionary];
-//        if ([[currentDict valueForKey:@"full_photo_link"] isEqualToString:notif.object]) {
-//            [self.collectionView reloadData];
-//        }
+        NSDictionary *currentDict = [self getCurrentDictionary];
+        if ([[currentDict valueForKey:@"full_photo_link"] isEqualToString:notif.object]) {
+            [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
+        }
         
-        [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
+        
     });
     
 }
@@ -701,11 +701,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     }
 }
 - (IBAction)onCloseMenu:(id)sender {
+    __weak STFlowTemplateViewController *weakSelf =self;
     [UIView animateWithDuration:0.33 animations:^{
         _menuView.alpha = 0.f;
     } completion:^(BOOL finished) {
-        _menuImageView.image = nil;
-        [_menuView removeFromSuperview];
+        weakSelf.menuImageView.image = nil;
+        [weakSelf.menuView removeFromSuperview];
     }];
     
 }
@@ -875,10 +876,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 -(void) inviteUserToUpload{
+    //TODO: remove all completion blocks empty and check if nil supported
+    __weak STFlowTemplateViewController *weakSelf = self;
     [[STWebServiceController sharedInstance] inviteUserToUpload:_userID withCompletion:^(NSDictionary *response) {
         NSInteger statusCode = [response[@"status_code"] integerValue];
         if (statusCode == STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
-            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", _userName];
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", weakSelf.userName];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
                                                   cancelButtonTitle:@"OK" otherButtonTitles:@"Go Home", nil];
             alert.tag = kInviteUserToUpload;
@@ -904,6 +907,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     }];
 }
 - (IBAction)onSharePostToFacebook:(id)sender {
+    __weak STFlowTemplateViewController *weakSelf = self;
     [self getCurrentImageDataWithCompletion:^(UIImage *img) {
         NSData *imgData = UIImageJPEGRepresentation(img, 1.0);
         [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
@@ -912,7 +916,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                 [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
                                                         defaultAudience:FBSessionDefaultAudienceFriends
                                                       completionHandler:^(FBSession *session, NSError *error) {
-                                                          [self sharePhotoOnFacebookWithImgData:imgData];
+                                                          [weakSelf sharePhotoOnFacebookWithImgData:imgData];
                                                       }];
                 
             }
@@ -938,17 +942,19 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 - (IBAction)onSavePostLocally:(id)sender {
+    __weak STFlowTemplateViewController *weakSelf = self;
     [self getCurrentImageDataWithCompletion:^(UIImage *img) {
-        UIImageWriteToSavedPhotosAlbum(img, self, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
+        UIImageWriteToSavedPhotosAlbum(img, weakSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
     }];
     
 }
 
 -(IBAction)onMoveAndScale:(id)sender{
     NSDictionary *dict = [self getCurrentDictionary];
+    __weak STFlowTemplateViewController *weakSelf = self;
     [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img, UIImage *bluredImg) {
         if (img!=nil) {
-            [self startMoveScaleShareControllerForImage:img shouldCompress:NO editedPostId:dict[@"post_id"]];
+            [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:NO editedPostId:dict[@"post_id"]];
         }
     }];
 }
@@ -1084,13 +1090,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [[STImageCacheController sharedInstance] startImageDownloadForNewFlowType:_flowType andDataSource:array];
 }
 
-- (void)processCurrentPost:(NSIndexPath *)indexPath {
-    NSIndexPath *usedIndx = indexPath;
-    if (usedIndx == nil) {
-        usedIndx = [[_collectionView indexPathsForVisibleItems] firstObject];
-    }
+- (void)processLastPost {
+    NSIndexPath *usedIndx = [[_collectionView indexPathsForVisibleItems] firstObject];
     if (usedIndx == nil) {
         usedIndx = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    else if (usedIndx.row>0) {
+        usedIndx = [NSIndexPath indexPathForRow:usedIndx.row-1 inSection:usedIndx.section];
     }
     
     if (self.flowType == STFlowTypeAllPosts) {
@@ -1106,9 +1112,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 //                if (indexOffset == POSTS_PAGGING - START_LOAD_OFFSET) {
 //                    [weakSelf getDataSourceWithOffset:POSTS_PAGGING-indexOffset-1];
 //                }
-                BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET && usedIndx.row!=0;
+                BOOL shouldGetNextBatch = weakSelf.postsDataSource.count - usedIndx.row == START_LOAD_OFFSET && usedIndx.row!=0;
                 if (shouldGetNextBatch) {
-                    [weakSelf getDataSourceWithOffset:_postsDataSource.count - usedIndx.row - 1];
+                    [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count - usedIndx.row - 1];
                 }
             }
             
@@ -1131,12 +1137,14 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     _numberOfSeenPosts++;
     [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
+    //TODO: move this call elsewhere. 
+    [self processLastPost];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
     
 #if PAGGING_ENABLED
-    [self processCurrentPost:indexPath];
+    
 #endif    
 }
 
@@ -1210,6 +1218,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     }
     else
     {
+        __weak STFlowTemplateViewController *weakSelf = self;
         [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
             NSLog(@"Permissions: %@", newObjects);
             if (![newObjects containsObject:@"user_photos"]) {
@@ -1217,7 +1226,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                                                         defaultAudience:FBSessionDefaultAudienceFriends
                                                       completionHandler:^(FBSession *session, NSError *error) {
                                                           if (!error) {
-                                                              [self presentFacebookPickerScene];
+                                                              [weakSelf presentFacebookPickerScene];
                                                           }
                                                           else
                                                           {
@@ -1226,7 +1235,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                                                       }];
             }
             else
-                [self presentFacebookPickerScene];
+                [weakSelf presentFacebookPickerScene];
         }];
         
     }
@@ -1242,21 +1251,22 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     {
         if (buttonIndex==1) {
             NSDictionary *dict = [self getCurrentDictionary];
+            __weak STFlowTemplateViewController *weakSelf = self;
             [[STWebServiceController sharedInstance] deletePost:dict[@"post_id"] withCompletion:^(NSDictionary *response) {
                 
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                     //animate cell out
-                    [self.collectionView performBatchUpdates:^{
+                    [weakSelf.collectionView performBatchUpdates:^{
                         
                         NSArray *selectedItemsIndexPaths = [self.collectionView indexPathsForVisibleItems];
                         // Delete the items from the data source.
-                        [self deleteItemsFromDataSourceAtIndexPaths:selectedItemsIndexPaths];
+                        [weakSelf deleteItemsFromDataSourceAtIndexPaths:selectedItemsIndexPaths];
                         // Now delete the items from the collection view.
-                        if ([self.postsDataSource count]) {
-                            [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
+                        if ([weakSelf.postsDataSource count]) {
+                            [weakSelf.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
                         } else {
                             NSIndexPath *firstIndx = [NSIndexPath indexPathForRow:0 inSection:0];
-                            [self.collectionView reloadItemsAtIndexPaths:@[firstIndx]];
+                            [weakSelf.collectionView reloadItemsAtIndexPaths:@[firstIndx]];
                         }
                         
                         
@@ -1292,8 +1302,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 #pragma mark - UIImagePickerDelegate
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     NSLog(@"self.navigationController.viewControllers =  %@", self.navigationController.presentedViewController);
+    __weak STFlowTemplateViewController *weakSelf = self;
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [self startMoveScaleShareControllerForImage:(UIImage *)[notif object]
+        [weakSelf startMoveScaleShareControllerForImage:(UIImage *)[notif object]
                                      shouldCompress:NO
                                        editedPostId:nil];
     }];
@@ -1317,14 +1328,14 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-    
+    __weak STFlowTemplateViewController *weakSelf = self;
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
         UIImage *fixedOrientationImage = [UIImage imageWithCGImage:img.CGImage
                                                              scale:img.scale
                                                        orientation:img.imageOrientation];
 
-        [self startMoveScaleShareControllerForImage:fixedOrientationImage shouldCompress:YES editedPostId:nil];
+        [weakSelf startMoveScaleShareControllerForImage:fixedOrientationImage shouldCompress:YES editedPostId:nil];
     }];
     
 }

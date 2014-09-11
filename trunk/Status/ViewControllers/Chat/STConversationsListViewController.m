@@ -245,13 +245,13 @@
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
             [weakSelf saveNewDataAndReload:response[@"data"] isNewOffset:newOffset];
         }
-        _loadMoreButton.enabled = YES;
-        _loadMoreButton = nil;
+        weakSelf.loadMoreButton.enabled = YES;
+        weakSelf.loadMoreButton = nil;
         
     } andErrorCompletion:^(NSError *error) {
         NSLog(@"Error on getting users");
-        _loadMoreButton.enabled = YES;
-        _loadMoreButton = nil;
+        weakSelf.loadMoreButton.enabled = YES;
+        weakSelf.loadMoreButton = nil;
     }];
 }
 

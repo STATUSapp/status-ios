@@ -54,7 +54,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     
     loaderCompletion startBlock;
     loaderCompletion __block nextBlock;
-    
+    __weak STFacebookAlbumsLoader *weakSelf = self;
     nextBlock = [startBlock = ^(NSString *nextLink){
         
         NSLog(@"Next Link: %@", nextLink);
@@ -82,7 +82,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                                               }
                                           }
                                       }
-                                      [self loadFBCoverPicturesWithIds:coverIds withLoadFbCompletion:^(NSDictionary *resultAlbum) {
+                                      [weakSelf loadFBCoverPicturesWithIds:coverIds withLoadFbCompletion:^(NSDictionary *resultAlbum) {
                                           for (NSString *coverId in [resultAlbum allKeys]) {
                                               NSMutableDictionary *dict = nil;
                                               for (NSDictionary *album in newObjects) {
