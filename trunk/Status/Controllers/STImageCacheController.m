@@ -438,6 +438,8 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
             NSLog(@"Delete has failed");
         }
     }
+    
+    [[SDImageCache sharedImageCache] clearDisk];
 }
 
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort{
