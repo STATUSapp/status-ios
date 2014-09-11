@@ -107,9 +107,17 @@
     NSDictionary *dict = [self getDictionaryorIndex:indexPath.row];
     NSString *imageUrl = dict[@"small_photo_link"];
     if (![imageUrl isEqual:[NSNull null]]) {
+#if !USE_SD_WEB
         [[STImageCacheController sharedInstance] loadImageWithName:imageUrl andCompletion:^(UIImage *img) {
             [cell.profileImageView maskImage:img];
         } isForFacebook:NO];
+        
+#else
+        [[STImageCacheController sharedInstance] loadImageWithName:imageUrl andCompletion:^(UIImage *img) {
+            [cell.profileImageView maskImage:img];
+        }];
+        
+#endif
     }
     BOOL isUnread = ![dict[@"message_read"] boolValue];
     NSString *lastMessage = dict[@"last_message"];

@@ -72,20 +72,37 @@
     
     STAlbumImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STAlbumImageCell" forIndexPath:indexPath];
     NSString *thumbImageLink = _dataSource[indexPath.row][@"picture"];
+
+#if !USE_SD_WEB
     [[STImageCacheController sharedInstance] loadImageWithName:thumbImageLink andCompletion:^(UIImage *img) {
         cell.albumImageView.image = img;
     } isForFacebook:YES];
     
+#else
+    [[STImageCacheController sharedInstance] loadImageWithName:thumbImageLink andCompletion:^(UIImage *img) {
+        cell.albumImageView.image = img;
+    }];
+    
+#endif
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"%@", _dataSource[indexPath.row]);
     NSString *fullImageLink = _dataSource[indexPath.row][@"source"];
+    
+#if !USE_SD_WEB
     [[STImageCacheController sharedInstance] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
         UIImage *newImg = img;//[img imageWithBlurBackground];
         [[NSNotificationCenter defaultCenter] postNotificationName:STFacebookPickerNotification object:newImg];
     } isForFacebook:YES];
+    
+#else
+    [[STImageCacheController sharedInstance] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
+        UIImage *newImg = img;//[img imageWithBlurBackground];
+        [[NSNotificationCenter defaultCenter] postNotificationName:STFacebookPickerNotification object:newImg];
+    }];
+#endif
     
 }
 

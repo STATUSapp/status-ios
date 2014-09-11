@@ -427,10 +427,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(void)imageWasSavedLocally:(NSNotification *)notif{
 //    NSLog(@"Notif: %@", notif);
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *currentDict = [self getCurrentDictionary];
-        if ([[currentDict valueForKey:@"full_photo_link"] isEqualToString:notif.object]) {
-            [self.collectionView reloadData];
-        }
+//        NSDictionary *currentDict = [self getCurrentDictionary];
+//        if ([[currentDict valueForKey:@"full_photo_link"] isEqualToString:notif.object]) {
+//            [self.collectionView reloadData];
+//        }
+        
+        [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
     });
     
 }
@@ -985,9 +987,15 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void) getCurrentImageDataWithCompletion:(loadImageCompletion) completion{
     NSDictionary *dict = [self getCurrentDictionary];
+#if !USE_SD_WEB
     [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img) {
         completion(img);
     } isForFacebook:NO];
+#else
+    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img) {
+        completion(img);
+    }];
+#endif
 }
 
 -(NSDictionary *) getCurrentDictionary{
@@ -1060,14 +1068,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     return self.view.frame.size;
 }
-
--(void)loadImageAtIndex:(NSInteger)index{
-    if (_postsDataSource.count>index+1) {
-        NSDictionary *nextDict = [_postsDataSource objectAtIndex:index];
-        [[STImageCacheController sharedInstance] loadImageWithName:nextDict[@"full_photo_link"] andCompletion:nil isForFacebook:NO];
-    }
-}
-
 -(void)loadImages:(NSArray *)array{
     [[STImageCacheController sharedInstance] startImageDownloadForNewFlowType:_flowType andDataSource:array];
 }
@@ -1125,10 +1125,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
 #if PAGGING_ENABLED
     [self processCurrentPost:indexPath];
-#endif
-    //[self loadImageAtIndex:indexPath.row+1];
-    //[self loadImageAtIndex:indexPath.row+2];
-    
+#endif    
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath

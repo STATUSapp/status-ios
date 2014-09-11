@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define USE_SD_WEB 1
+
 #define PAGGING_ENABLED 1
 #define  POSTS_PAGGING 10
 #define  START_LOAD_OFFSET 5

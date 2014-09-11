@@ -71,11 +71,19 @@ static NSInteger const  kBlockUserAlertTag = 11;
     if (photoLink == nil) {
         photoLink = _userInfo[@"full_photo_link"];
     }
+#if !USE_SD_WEB
     [[STImageCacheController sharedInstance] loadImageWithName:photoLink andCompletion:^(UIImage *img) {
         userImage = img;
         [_tableView reloadData];
         [_userImg maskImage:userImage];
     } isForFacebook:NO];
+#else
+    [[STImageCacheController sharedInstance] loadImageWithName:photoLink andCompletion:^(UIImage *img) {
+        userImage = img;
+        [_tableView reloadData];
+        [_userImg maskImage:userImage];
+    }];
+#endif
 }
 
 - (void)viewDidLoad

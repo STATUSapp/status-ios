@@ -73,10 +73,18 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dict = [_likesDataSource objectAtIndex:indexPath.row];
     STLikeCell *cell = (STLikeCell *)[tableView dequeueReusableCellWithIdentifier:@"likeCell"];
+#if !USE_SD_WEB
     [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"]
                                                  andCompletion:^(UIImage *img) {
                                                      cell.userPhoto.image = img;
                                                  } isForFacebook:NO];
+#else
+    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"]
+                                                 andCompletion:^(UIImage *img) {
+                                                     cell.userPhoto.image = img;
+                                                 }];
+#endif
+   
     cell.userName.text = dict[@"user_name"];
     cell.chatButton.tag = indexPath.row;
     
