@@ -79,6 +79,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     } isForFacebook:NO];
 #else
     __weak STChatRoomViewController *weakSelf = self;
+    
     [[STImageCacheController sharedInstance] loadImageWithName:photoLink andCompletion:^(UIImage *img) {
         userImage = img;
         [weakSelf.tableView reloadData];

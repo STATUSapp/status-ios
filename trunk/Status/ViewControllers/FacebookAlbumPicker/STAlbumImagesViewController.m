@@ -13,6 +13,7 @@
 #import "STSharePhotoViewController.h"
 #import "STFacebookAlbumsLoader.h"
 #import "UIImage+ImageEffects.h"
+#import "UIImageView+WebCache.h"
 
 @interface STAlbumImagesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 {
@@ -43,8 +44,19 @@
     [_fbLoader loadPhotosForAlbum:_albumId
                  withRefreshBlock:^(NSArray *newObjects) {
                      if (newObjects.count>0) {
-                         [_dataSource addObjectsFromArray:newObjects];
-                         [weakSelf.collectionView reloadData];
+                         
+                         [weakSelf.collectionView performBatchUpdates:^{
+                             NSUInteger resultsSize = [_dataSource count];
+                             [_dataSource addObjectsFromArray:newObjects];
+
+                             NSMutableArray *arrayWithIndexPaths = [NSMutableArray array];
+                             
+                             for (NSUInteger i = resultsSize; i < resultsSize + newObjects.count; i++)
+                                 [arrayWithIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                             
+                             [self.collectionView insertItemsAtIndexPaths:arrayWithIndexPaths];
+
+                         } completion:nil];
                      }
                  }];
         
@@ -79,9 +91,12 @@
     } isForFacebook:YES];
     
 #else
-    [[STImageCacheController sharedInstance] loadImageWithName:thumbImageLink andCompletion:^(UIImage *img) {
-        cell.albumImageView.image = img;
-    }];
+    //TODO: change this way in all code. 
+    [cell.albumImageView sd_setImageWithURL:[NSURL URLWithString:thumbImageLink]
+                           placeholderImage:[UIImage imageNamed:@"placeholder imagine like screen"]];
+//    [[STImageCacheController sharedInstance] loadImageWithName:thumbImageLink andCompletion:^(UIImage *img) {
+//        cell.albumImageView.image = img;
+//    }];
     
 #endif
     return cell;
