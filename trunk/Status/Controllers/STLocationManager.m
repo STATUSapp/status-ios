@@ -91,9 +91,7 @@ static STLocationManager *_locationManager;
                 weakSelf.newLocationBlock = nil;
             }
         }
-    } orError:^(NSError *error) {
-        NSLog(@"Set User location error: %@", error);
-    }];
+    } orError:nil];
 }
 -(void)restartLocationManager{
     if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive)

@@ -64,7 +64,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
     
 }
@@ -114,7 +116,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -131,7 +135,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -167,7 +173,9 @@
         completion(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@ ", operation.responseString);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
     [op start];
     
@@ -183,7 +191,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -197,7 +207,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -215,7 +227,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -229,7 +243,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -244,7 +260,9 @@
         completion(responseObject);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -258,7 +276,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -289,7 +309,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 -(void) getNotificationsWithCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion{
@@ -302,7 +324,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -332,7 +356,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -346,7 +372,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -357,7 +385,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -391,7 +421,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 
@@ -402,7 +434,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.debugDescription);
-        errorCompletion(error);
+        if (errorCompletion) {
+            errorCompletion(error);
+        }
     }];
 }
 

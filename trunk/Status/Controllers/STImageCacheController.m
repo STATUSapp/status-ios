@@ -469,7 +469,6 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 -(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts{
     
     [self changeFlowType:flowType needsSort:NO];
-    
     if (_currentPosts == nil) {
         _currentPosts = [NSMutableArray new];
     }
@@ -490,6 +489,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 -(void)loadNextPhoto{
     NSLog(@"Photo for download count: %lu", (unsigned long)_currentPosts.count);
     while (_currentPosts.count == 0) {
+//        [[SDImageCache sharedImageCache] clearMemory];
         [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
         _inProgress = NO;
         return;

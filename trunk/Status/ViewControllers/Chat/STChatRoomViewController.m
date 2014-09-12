@@ -111,9 +111,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
                 [weakSelf.userInfo addEntriesFromDictionary:response];
                 [weakSelf loadUserInfo];
             }
-        } andErrorCompletion:^(NSError *error) {
-            NSLog(@"Error: %@", error.debugDescription);
-        }];
+        } andErrorCompletion:nil];
     }
     else
         [self loadUserInfo];

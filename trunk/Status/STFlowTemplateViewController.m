@@ -60,6 +60,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     BOOL _isDataSourceLoaded;
     BOOL _isInterstitialLoaded;
     NSInteger _numberOfSeenPosts;
+    
+    CGPoint _start;
+    CGPoint _end;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -320,6 +323,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void)facebookControllerDidLoggedOut{
     self.postsDataSource = [NSMutableArray array];
+    __weak STFlowTemplateViewController *weakSelf = self;
     UIViewController *presentedVC = self.presentedViewController;
     if (![presentedVC isKindOfClass:[STLoginViewController class]]) {
         [self dismissViewControllerAnimated:NO completion:^{
@@ -330,8 +334,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
             [[FBSession activeSession] close];
             [FBSession setActiveSession:nil];
             [[FBSessionTokenCachingStrategy defaultInstance] clearToken];
-            [self.navigationController popToRootViewControllerAnimated:NO];
-            [self presentLoginScene];
+            [weakSelf.navigationController popToRootViewControllerAnimated:NO];
+            [weakSelf presentLoginScene];
             [[STWebServiceController sharedInstance] setAPNToken:@"" withCompletion:^(NSDictionary *response) {
                 if ([response[@"status_code"] integerValue]==200){
                     NSLog(@"APN Token deleted.");
@@ -511,9 +515,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                 [weakSelf loadImages:@[response[@"data"]]];
                 _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
-            } andErrorCompletion:^(NSError *error) {
-                
-            }];
+            } andErrorCompletion:nil];
             break;
         }
         default:
@@ -805,9 +807,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                     }
 
                 }
-            } andErrorCompletion:^(NSError *error) {
-                
-            }];
+            } andErrorCompletion:nil];
         }
         
     } orError:^(NSError *error) {
@@ -832,7 +832,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 -(void) inviteUserToUpload{
-    //TODO: remove all completion blocks empty and check if nil supported
     __weak STFlowTemplateViewController *weakSelf = self;
     [[STWebServiceController sharedInstance] inviteUserToUpload:_userID withCompletion:^(NSDictionary *response) {
         NSInteger statusCode = [response[@"status_code"] integerValue];
@@ -848,9 +847,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         {
             NSLog(@"Error");
         }
-    } orError:^(NSError *error) {
-        
-    }];
+    } orError:nil];
 }
 
 - (IBAction)onDismissShareOptions:(id)sender {
@@ -937,9 +934,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                 [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
             }
             
-        } orError:^(NSError *error) {
-            
-        }];
+        } orError:nil];
     }
     else
     {
@@ -1046,62 +1041,61 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [[STImageCacheController sharedInstance] startImageDownloadForNewFlowType:_flowType andDataSource:array];
 }
 
-- (void)processLastPost {
-    NSIndexPath *usedIndx = [[_collectionView indexPathsForVisibleItems] firstObject];
+- (void)processLastPostWithIndex:(NSIndexPath *)indexPath {
+    NSIndexPath *usedIndx = indexPath;
     if (usedIndx == nil) {
         usedIndx = [NSIndexPath indexPathForRow:0 inSection:0];
     }
-    else if (usedIndx.row>0) {
-        usedIndx = [NSIndexPath indexPathForRow:usedIndx.row-1 inSection:usedIndx.section];
-    }
-    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self.postsDataSource objectAtIndex:usedIndx.row]];
+    __weak STFlowTemplateViewController *weakSelf = self;
     if (self.flowType == STFlowTypeAllPosts) {
-        NSDictionary *dict = [self.postsDataSource objectAtIndex:usedIndx.row];
         if ([dict[@"post_seen"] boolValue] == TRUE) {
             return;
         }
-        __weak STFlowTemplateViewController *weakSelf = self;
         [[STWebServiceController sharedInstance] setPostSeen:dict[@"post_id"] withCompletion:^(NSDictionary *response) {
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                 [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
-//                int indexOffset = usedIndx.row%POSTS_PAGGING;
-//                if (indexOffset == POSTS_PAGGING - START_LOAD_OFFSET) {
-//                    [weakSelf getDataSourceWithOffset:POSTS_PAGGING-indexOffset-1];
-//                }
                 BOOL shouldGetNextBatch = weakSelf.postsDataSource.count - usedIndx.row == START_LOAD_OFFSET && usedIndx.row!=0;
                 if (shouldGetNextBatch) {
                     [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count - usedIndx.row - 1];
                 }
             }
             
-        } orError:^(NSError *error) {
-            NSLog(@"Post NOT set seen with error.");
-        }];
+        } orError:nil];
     }
     else if(self.flowType != STFlowTypeSinglePost)
     {
-//        if (usedIndx.row%POSTS_PAGGING == POSTS_PAGGING-START_LOAD_OFFSET) {
-//            [self getDataSourceWithOffset:self.postsDataSource.count];
-//        }
         BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET && usedIndx.row!=0;
         if (shouldGetNextBatch) {
             [self getDataSourceWithOffset:_postsDataSource.count];
+            
         }
     }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     _numberOfSeenPosts++;
     [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
-    //TODO: move this call elsewhere. 
-    [self processLastPost];
+    
+    _end = scrollView.contentOffset;
+    if (_start.x < _end.x)
+    {//swipe to the right
+        CGPoint point = scrollView.contentOffset;
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        NSUInteger currentIndex = point.x/screenWidth;
+        NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
+        [self processLastPostWithIndex:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
+
+    }
+//    NSLog(@"Did end Drag %@", @(decelerate));
+    //TODO: get current index from content size and content Offset
+
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-#if PAGGING_ENABLED
-    
-#endif    
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    _start = scrollView.contentOffset;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -1149,9 +1143,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FacebookPickerScene" bundle:nil];
     UINavigationController *noteNav = [storyboard instantiateViewControllerWithIdentifier:@"FacebookPicker"];
     
-    [self presentViewController:noteNav animated:YES completion:^{
-        NSLog(@"Facebook Picker presented");
-    }];
+    [self presentViewController:noteNav animated:YES completion:nil];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
@@ -1163,9 +1155,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
             imagePicker.delegate = self;
             imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
             
-            [self presentViewController:imagePicker animated:YES completion:^{
-                
-            }];
+            [self presentViewController:imagePicker animated:YES completion:nil];
         }
         @catch (NSException *exception) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device has no camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -1229,9 +1219,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                     } completion:nil];
                 }
                 
-            } orError:^(NSError *error) {
-                NSLog(@"POST NOT DELETED: %@", error);
-            }];
+            } orError:nil];
             
         }
     }

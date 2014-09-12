@@ -32,7 +32,6 @@
 
 - (void)viewDidLoad
 {
-    //TODO: continue search for strong refs in other own clases
     [super viewDidLoad];
     __weak STZoomablePostViewController *weakSelf = self;
     [[STImageCacheController sharedInstance] loadPostImageWithName:self.postPhotoLink andCompletion:^(UIImage *origImg, UIImage *bluredImg) {

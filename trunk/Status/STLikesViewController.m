@@ -41,9 +41,7 @@
 	[[STWebServiceController sharedInstance] getPostLikes:self.postId withCompletion:^(NSDictionary *response) {
         _likesDataSource = [NSArray arrayWithArray:response[@"data"]];
         [weakSelf.likesTableView reloadData];
-    } andErrorCompletion:^(NSError *error) {
-        
-    }];
+    } andErrorCompletion:nil];
 }
 
 - (void)didReceiveMemoryWarning
