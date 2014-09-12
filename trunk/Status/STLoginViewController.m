@@ -32,6 +32,10 @@
     [super viewDidLoad];
     [STWebServiceController sharedInstance].isPerformLoginOrRegistration = FALSE;
     FBLoginView *loginBtn = [STFacebookController sharedInstance].loginButton;
+    loginBtn.hidden = NO;
+    CGRect frame = loginBtn.frame;
+    frame.origin.y = 0;
+    loginBtn.frame = frame;
     [self.view addSubview:loginBtn];
     NSLayoutConstraint *bottomConstraint =[NSLayoutConstraint
                                            constraintWithItem:loginBtn

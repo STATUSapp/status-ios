@@ -19,7 +19,6 @@
 #import "STLikesViewController.h"
 #import "STLoginViewController.h"
 #import "AppDelegate.h"
-#import "STTopOption.h"
 #import "STNotificationsViewController.h"
 #import "STZoomablePostViewController.h"
 #import "STFooterView.h"
@@ -42,7 +41,6 @@
 #import "STSettingsViewController.h"
 
 int const kDeletePostTag = 11;
-int const kTopOptionTag = 121;
 int const kNoPostsAlertTag = 13;
 int const kInviteUserToUpload = 14;
 static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
@@ -56,7 +54,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
-    NSLayoutConstraint *_topOptionConstraint;
     NSDictionary *_lastNotif;
     UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
@@ -85,10 +82,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 {
     [super viewDidLoad];
     self.postsDataSource = [NSMutableArray array];
-    if (self.flowType == STFlowTypeMyProfile) {
-        [[STFacebookController sharedInstance] setLogoutDelegate:self];
-    }
-    else if (self.flowType == STFlowTypeAllPosts)
+    [[STFacebookController sharedInstance] setLogoutDelegate:self];
+    
+    if (self.flowType == STFlowTypeAllPosts)
         [[STFacebookController sharedInstance] setDelegate:self];
     
     NSString *email = [[STFacebookController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
@@ -102,8 +98,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     else
     {
         [self getDataSourceWithOffset:0];
-        if (self.flowType == STFlowTypeMyProfile)
-            [self addTopOption];
     }
     [self setupVisuals];
     [self initCustomShareView];
@@ -158,30 +152,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     _interstitial.delegate = nil;
-}
-
--(void) addTopOption{
-    if (self.flowType == STFlowTypeMyProfile) {
-        if ([self.view viewWithTag:kTopOptionTag]==nil) {
-            NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"STTopOption" owner:self options:nil];
-            STTopOption *topOption = (STTopOption *)[array objectAtIndex:0];
-            [topOption initForLogout];
-            [topOption setTag:kTopOptionTag];
-            [topOption setTranslatesAutoresizingMaskIntoConstraints:NO];
-            [self.view addSubview:topOption];
-            _topOptionConstraint =[NSLayoutConstraint
-                                   constraintWithItem:topOption
-                                   attribute:NSLayoutAttributeTop
-                                   relatedBy:NSLayoutRelationEqual
-                                   toItem:self.topLayoutGuide
-                                   attribute:NSLayoutAttributeTop
-                                   multiplier:1.f
-                                   constant:-91.f];
-            
-            [self.view addConstraints:@[_topOptionConstraint]];
-        }
-
-    }
 }
 
 -(void) presentLoginScene{
@@ -342,7 +312,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
         [weakSelf presentTutorialAutomatically];
     }];
-    [self addTopOption];
     [self getDataSourceWithOffset:0];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate checkForNotificationNumber];
@@ -350,28 +319,31 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 -(void)facebookControllerDidLoggedOut{
-    [self onSwipeUp:nil];
     self.postsDataSource = [NSMutableArray array];
-    if (self.presentedViewController==nil) {
-        [[STFacebookController sharedInstance] UDSetValue:nil forKey:PHOTO_LINK];
-        [[STFacebookController sharedInstance] UDSetValue:nil forKey:USER_NAME];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [[FBSession activeSession] closeAndClearTokenInformation];
-        [[FBSession activeSession] close];
-        [FBSession setActiveSession:nil];
-        [[FBSessionTokenCachingStrategy defaultInstance] clearToken];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        [self presentLoginScene];
-        [[STWebServiceController sharedInstance] setAPNToken:@"" withCompletion:^(NSDictionary *response) {
-            if ([response[@"status_code"] integerValue]==200){
-                NSLog(@"APN Token deleted.");
-                [[STFacebookController sharedInstance] deleteAccessToken];
-            }
-            else  NSLog(@"APN token NOT deleted.");
-        } orError:nil];
-        
-        [[STChatController sharedInstance] close];
+    UIViewController *presentedVC = self.presentedViewController;
+    if (![presentedVC isKindOfClass:[STLoginViewController class]]) {
+        [self dismissViewControllerAnimated:NO completion:^{
+            [[STFacebookController sharedInstance] UDSetValue:nil forKey:PHOTO_LINK];
+            [[STFacebookController sharedInstance] UDSetValue:nil forKey:USER_NAME];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[FBSession activeSession] closeAndClearTokenInformation];
+            [[FBSession activeSession] close];
+            [FBSession setActiveSession:nil];
+            [[FBSessionTokenCachingStrategy defaultInstance] clearToken];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            [self presentLoginScene];
+            [[STWebServiceController sharedInstance] setAPNToken:@"" withCompletion:^(NSDictionary *response) {
+                if ([response[@"status_code"] integerValue]==200){
+                    NSLog(@"APN Token deleted.");
+                    [[STFacebookController sharedInstance] deleteAccessToken];
+                }
+                else  NSLog(@"APN token NOT deleted.");
+            } orError:nil];
+            
+            [[STChatController sharedInstance] close];
+        }];
     }
+    
 }
 
 -(void)chatControllerAuthenticate{
@@ -655,22 +627,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
 }
 
-- (IBAction)onSwipeDown:(id)sender {
-    [UIView animateWithDuration:0.33f animations:^{
-        //self.logOutButtonConstraint.constant = 7;
-        _topOptionConstraint.constant = 0;
-        [self.view layoutIfNeeded];
-        
-    }];
-}
-- (IBAction)onSwipeUp:(id)sender {
-    [UIView animateWithDuration:0.33f animations:^{
-        //self.logOutButtonConstraint.constant = -55;
-        _topOptionConstraint.constant = -91;
-        [self.view layoutIfNeeded];
-        
-    }];
-}
 - (IBAction)onSwipeLeftOnEdge:(id)sender {
     if (self.flowType == STFlowTypeAllPosts) {
         NSArray *indxPath = [self.collectionView indexPathsForVisibleItems];

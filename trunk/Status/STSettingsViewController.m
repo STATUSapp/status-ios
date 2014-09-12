@@ -8,9 +8,14 @@
 
 #import "STSettingsViewController.h"
 #import "STRemoveAdsViewController.h"
+#import "STFacebookController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface STSettingsViewController ()
-
+{
+    FBLoginView *loginView;
+}
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
 @end
 
 @implementation STSettingsViewController
@@ -35,7 +40,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    loginView = [STFacebookController sharedInstance].loginButton;
+    loginView.hidden = YES;
+    [_logoutCell.contentView addSubview:loginView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapDone)];
 }
 
@@ -132,7 +139,16 @@
 }
 
 - (IBAction)onTapLogout:(id)sender {
+    [self fireFbLoginView];
+}
 
+-(void)fireFbLoginView{
+    for(id object in [STFacebookController sharedInstance].loginButton.subviews){
+        if([[object class] isSubclassOfClass:[UIButton class]]){
+            UIButton* button = (UIButton*)object;
+            [button sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+    }
 }
 
 @end

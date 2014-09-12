@@ -85,8 +85,6 @@
 		172EAF0718B0BB4800C5637B /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAEFD18B0BB4800C5637B /* UIProgressView+AFNetworking.m */; };
 		172EAF0818B0BB4800C5637B /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAEFF18B0BB4800C5637B /* UIRefreshControl+AFNetworking.m */; };
 		172EAF0918B0BB4800C5637B /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAF0118B0BB4800C5637B /* UIWebView+AFNetworking.m */; };
-		172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 172F0D1C18CC8AEB00CD1493 /* STTopOption.m */; };
-		172F0D1F18CC8B0200CD1493 /* STTopOption.xib in Resources */ = {isa = PBXBuildFile; fileRef = 172F0D1E18CC8B0200CD1493 /* STTopOption.xib */; };
 		17491F8419BCCC3100E91EA7 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17491F8219BCCC3100E91EA7 /* libGoogleAdMobAds.a */; };
 		17491F8519BCCC3100E91EA7 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17491F8319BCCC3100E91EA7 /* README.txt */; };
 		176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2411936645500F5C4DA /* HPGrowingTextView.m */; };
@@ -295,9 +293,6 @@
 		172EAEFF18B0BB4800C5637B /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		172EAF0018B0BB4800C5637B /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		172EAF0118B0BB4800C5637B /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		172F0D1B18CC8AEB00CD1493 /* STTopOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTopOption.h; sourceTree = "<group>"; };
-		172F0D1C18CC8AEB00CD1493 /* STTopOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTopOption.m; sourceTree = "<group>"; };
-		172F0D1E18CC8B0200CD1493 /* STTopOption.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STTopOption.xib; sourceTree = "<group>"; };
 		17491F6519BCCC3100E91EA7 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
 		17491F6619BCCC3100E91EA7 /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
 		17491F6719BCCC3100E91EA7 /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
@@ -668,9 +663,6 @@
 				17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */,
 				17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */,
 				17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */,
-				172F0D1B18CC8AEB00CD1493 /* STTopOption.h */,
-				172F0D1C18CC8AEB00CD1493 /* STTopOption.m */,
-				172F0D1E18CC8B0200CD1493 /* STTopOption.xib */,
 				1DE2D5B91950DB4600A29A86 /* STInviteFriendsViewController.h */,
 				1DE2D5BA1950DB4600A29A86 /* STInviteFriendsViewController.m */,
 				0719E5AC19619FE700F85382 /* STInviteController.h */,
@@ -1005,7 +997,6 @@
 				172EAE7118B0B12E00C5637B /* InfoPlist.strings in Resources */,
 				172EAE7A18B0B12E00C5637B /* Main.storyboard in Resources */,
 				172DF27419A2616D009CE4F3 /* FacebookPickerScene.storyboard in Resources */,
-				172F0D1F18CC8B0200CD1493 /* STTopOption.xib in Resources */,
 				17ACEB621933C4E600CFC909 /* ChatScene.storyboard in Resources */,
 				178907B718B294BA00AC4355 /* LoginScene.storyboard in Resources */,
 				17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */,
@@ -1104,7 +1095,6 @@
 				0719E5AE19619FE700F85382 /* STInviteController.m in Sources */,
 				1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */,
 				172EAEB518B0B46300C5637B /* AFURLRequestSerialization.m in Sources */,
-				172F0D1D18CC8AEB00CD1493 /* STTopOption.m in Sources */,
 				1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */,
 				CDAC50AF19B602C900A45E85 /* UIImage+RoundedCorner.m in Sources */,
 				0717E2AB19B718B4001DF132 /* STZoomablePostViewController.m in Sources */,
