@@ -286,7 +286,9 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 
 }
 
--(void) loadPostImageWithName:(NSString *)imageFullLink andCompletion:(loadPostImageCompletion) completion{
+-(void) loadPostImageWithName:(NSString *) imageFullLink
+           withPostCompletion:(loadPostImageCompletion) completion
+            andBlurCompletion:(loadBlurPostCompletion)blurCompl{
     
     if ([imageFullLink isKindOfClass:[NSNull class]]) {
         imageFullLink = nil;
@@ -299,32 +301,47 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
             if (imageFullLink!=nil) {
                 
                 [self startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[@{@"full_photo_link":imageFullLink}]];
-                completion(nil, nil);
+                completion(nil);
+                if (blurCompl!=nil) {
+                    blurCompl(nil);
+                }
             }
         }
-        else
-            completion(nil, nil);
+        else{
+            completion(nil);
+            if (blurCompl!=nil) {
+                blurCompl(nil);
+            }
+        }
+        
     }
     else
     {
-        __weak STImageCacheController *weakSelf = self;
+        if (blurCompl!=nil) {
+            NSString *bluredLink = [self blurPostLinkWithURL:imageFullLink];
+            UIImage *bluredImg= [UIImage imageWithData:[NSData dataWithContentsOfFile:bluredLink]];
+            blurCompl(bluredImg);
+        }
         [sdManager downloadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                   if (error!=nil) {
                                       NSLog(@"Error loading image from disk: %@", error.debugDescription);
-                                      completion(nil, nil);
+                                      completion(nil);
+                                      if (blurCompl!=nil) {
+                                          blurCompl(nil);
+                                      }
                                   }
                                   else if (finished==YES){
-                                      if (completion!=nil) {
-                                          NSString *bluredLink = [weakSelf blurPostLinkWithURL:imageURL.absoluteString];
-                                          UIImage *bluredImg= [UIImage imageWithData:[NSData dataWithContentsOfFile:bluredLink]];
-                                          completion(image, bluredImg);
-                                      }
+                                      completion(image);
 
                                   }
-                                  else
-                                      completion(nil, nil);
-                                      
+                                  else{
+                                      completion(nil);
+                                      if (blurCompl!=nil) {
+                                          blurCompl(nil);
+                                      }
+                                  }
+                                  
                               }];
 
     }
@@ -352,7 +369,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     }
 }
 
--(void) downloadImageWithName:(NSString *) imageFullLink andCompletion:(downloadImageComp) completion{
+-(void) downloadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageComp) completion{
     
     if ([imageFullLink isKindOfClass:[NSNull class]]) {
         imageFullLink = nil;
@@ -364,7 +381,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                                       if (error!=nil) {
                                                           NSLog(@"Error downloading image: %@", error.debugDescription);
-                                                          completion(imageFullLink);
+                                                          completion(imageFullLink, @(NO));
                                                       }
                                                       else if(finished)
                                                       {
@@ -372,16 +389,16 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                                               dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                                                                   [weakSelf saveImageForBlur:image imageURL:imageURL];
                                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                                      completion(imageFullLink);
+                                                                      completion(imageFullLink, @(YES));
                                                                   });
                                                               });
                                                           }
                                                           else
-                                                              completion(imageFullLink);
+                                                              completion(imageFullLink,@(NO));
                                                           
                                                       }
                                                       else
-                                                          completion(imageFullLink);
+                                                          completion(imageFullLink,@(NO));
                                                   }];
 
 }
@@ -499,8 +516,11 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     }
     _inProgress = YES;
     __weak STImageCacheController *weakSelf = self;
-    [self downloadImageWithName:[[_currentPosts firstObject] valueForKey:@"link"] andCompletion:^(NSString *downloadedImage) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:[NSString stringWithString:downloadedImage]];
+    [self downloadImageWithName:[[_currentPosts firstObject] valueForKey:@"link"] andCompletion:^(NSString *downloadedImage, BOOL downloaded) {
+        
+        if (downloaded==YES) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:[NSString stringWithString:downloadedImage]];
+        }
         NSUInteger index = [[weakSelf.currentPosts valueForKey:@"link"] indexOfObject:downloadedImage];
         if (index!=NSNotFound) {
             [weakSelf.currentPosts removeObjectAtIndex:index];

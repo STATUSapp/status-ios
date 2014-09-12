@@ -905,11 +905,11 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(IBAction)onMoveAndScale:(id)sender{
     NSDictionary *dict = [self getCurrentDictionary];
     __weak STFlowTemplateViewController *weakSelf = self;
-    [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img, UIImage *bluredImg) {
+    [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
         if (img!=nil) {
             [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:NO editedPostId:dict[@"post_id"]];
         }
-    }];
+    } andBlurCompletion:nil];
 }
 
 -(IBAction)onDeletePost:(id)sender{

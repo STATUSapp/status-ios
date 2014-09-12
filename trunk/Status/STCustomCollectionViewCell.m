@@ -182,27 +182,31 @@
     __weak STCustomCollectionViewCell *weakSelf = self;
     
     if (urlArray.count == 1) {
-        [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
-            if (bluredImg!=nil) {
-                weakSelf.fullBlurImageView.image=bluredImg;
-            }
+        [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
+            
             if (img!=nil) {
                 weakSelf.fitImageView.image = img;
                 [weakSelf.activityIndicator stopAnimating];
 
+            }
+        } andBlurCompletion:^(UIImage *bluredImg) {
+            if (bluredImg!=nil) {
+                weakSelf.fullBlurImageView.image=bluredImg;
             }
         }];
     }
     else
     {
-        [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] andCompletion:^(UIImage *img, UIImage *bluredImg) {
-            if (bluredImg!=nil) {
-                weakSelf.fullBlurImageView.image=bluredImg;
-            }
+        [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
+            
             if (img!=nil) {
                 weakSelf.fitImageView.image = img;
                 [weakSelf.activityIndicator stopAnimating];
 
+            }
+        } andBlurCompletion:^(UIImage *bluredImg) {
+            if (bluredImg!=nil) {
+                weakSelf.fullBlurImageView.image=bluredImg;
             }
         }];
     }
