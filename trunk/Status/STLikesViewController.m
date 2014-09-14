@@ -14,6 +14,7 @@
 #import "STFacebookController.h"
 #import "STChatRoomViewController.h"
 #import "STChatController.h"
+#import "UIImageView+WebCache.h"
 
 @interface STLikesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -78,11 +79,7 @@
                                                      cell.userPhoto.image = img;
                                                  } isForFacebook:NO];
 #else
-    //TODO: check a way to improve this behaviour
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"]
-                                                 andCompletion:^(UIImage *img) {
-                                                     cell.userPhoto.image = img;
-                                                 }];
+    [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:dict[@"full_photo_link"]]];
 #endif
    
     cell.userName.text = dict[@"user_name"];

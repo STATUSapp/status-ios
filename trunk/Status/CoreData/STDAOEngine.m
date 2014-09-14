@@ -52,6 +52,7 @@ static STDAOEngine *g_sharedManager = nil;
         [resultsCDRequestManager addToDelegatesArray:rmDelegate];        
     }
 
+    resultsCDRequestManager.shouldNotifyInsertDelete = YES;
     resultsCDRequestManager.sortDescriptors = sortDescriptors;
     resultsCDRequestManager.predicate = predicate;
     

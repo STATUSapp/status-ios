@@ -21,6 +21,7 @@
 #import "STCoreDataManager.h"
 #import "Message.h"
 #import "STWebServiceController.h"
+#import "UIImageView+WebCache.h"
 
 static NSInteger const  kBlockUserAlertTag = 11;
 
@@ -34,10 +35,10 @@ static NSInteger const  kBlockUserAlertTag = 11;
     UIAlertView *statusAlert;
     BOOL deliberateDismiss;
     STCoreDataRequestManager *_currentManager;
-    BOOL loadMorePressed;
     NSInteger loadMoreIndex;
     UIActionSheet *actionSheet;
     UIAlertView *successBlockAlert;
+    CGPoint lastContentOffset;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -80,8 +81,8 @@ static NSInteger const  kBlockUserAlertTag = 11;
 #else
     __weak STChatRoomViewController *weakSelf = self;
     
-    [[STImageCacheController sharedInstance] loadImageWithName:photoLink andCompletion:^(UIImage *img) {
-        userImage = img;
+    [_userImg sd_setImageWithURL:[NSURL URLWithString:photoLink] placeholderImage:[UIImage imageNamed:@"btn_nrLIkes_normal"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        userImage = image;
         [weakSelf.tableView reloadData];
         [weakSelf.userImg maskImage:userImage];
     }];
@@ -247,7 +248,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 #pragma mark - IBActions
 - (IBAction)onLoadMore:(id)sender {
     if (_roomId) {
-        loadMorePressed = YES;
+        lastContentOffset = _tableView.contentOffset;
         [chatController getRoomMessages:_roomId withOffset:_messages.count];
     }
 }
@@ -336,7 +337,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
     _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"roomID like %@", _roomId] sectionNameKeyPath:nil delegate:self andTableView:nil];
-    _messages = _currentManager.allObjects;
+    _messages = [NSMutableArray arrayWithArray:_currentManager.allObjects];
     NSNumber *seen = [[_messages valueForKey:@"seen"] valueForKeyPath: @"@sum.self"];
     NSInteger unseen = _messages.count - seen.integerValue;
     [chatController setUnreadMessages:chatController.unreadMessages-unseen];
@@ -509,13 +510,25 @@ static NSInteger const  kBlockUserAlertTag = 11;
     chatController.rechabilityDelegate = nil;
 }
 
--(void) controllerContentChanged:(NSArray *)objects forCDReqManager:(STCoreDataRequestManager *)cdReqManager{
-    //NSLog(@"Messages: %@", cdReqManager.allObjects);
-    _messages = cdReqManager.allObjects;
-    [_tableView reloadData];
-    if (_messages.count > 0) {
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0]
-                          atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+-(void)controllerAddedObject:(id)object atIndexPath:(NSIndexPath *)indexPath{
+    [_messages insertObject:object atIndex:indexPath.row];
+    [_tableView beginUpdates];
+    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:chatController.loadMore==YES?UITableViewRowAnimationNone:UITableViewRowAnimationFade];
+    [_tableView endUpdates];
+    if (chatController.loadMore==NO) {
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
+-(void)controllerRemovedObject:(id)object atIndexPath:(NSIndexPath *)indexPath{
+    NSUInteger index = [_messages indexOfObject:object];
+    if (index!=NSNotFound) {
+        NSIndexPath *objIndex = [NSIndexPath indexPathForRow:index inSection:0];
+        [_messages removeObject:object];
+        [_tableView beginUpdates];
+        [_tableView  deleteRowsAtIndexPaths:@[objIndex] withRowAnimation:UITableViewRowAnimationFade];
+        [_tableView endUpdates];
+
     }
 }
 

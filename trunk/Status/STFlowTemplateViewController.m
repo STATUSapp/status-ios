@@ -1046,6 +1046,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     if (usedIndx == nil) {
         usedIndx = [NSIndexPath indexPathForRow:0 inSection:0];
     }
+    if (usedIndx.row >= _postsDataSource.count) {
+        return;
+    }
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self.postsDataSource objectAtIndex:usedIndx.row]];
     __weak STFlowTemplateViewController *weakSelf = self;
     if (self.flowType == STFlowTypeAllPosts) {
@@ -1086,11 +1089,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         NSUInteger currentIndex = point.x/screenWidth;
         NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
         [self processLastPostWithIndex:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
-
     }
-//    NSLog(@"Did end Drag %@", @(decelerate));
-    //TODO: get current index from content size and content Offset
-
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

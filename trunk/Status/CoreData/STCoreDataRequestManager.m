@@ -136,7 +136,7 @@ NSString *const kCDRChangeType = @"change_type";
                 for (NSValue* delegatePointer in _delegatesArray) {
                     id<SLCoreDataRequestManagerDelegate> delegate = (id<SLCoreDataRequestManagerDelegate>)[delegatePointer pointerValue];
                     if ([delegate respondsToSelector:@selector(controllerAddedObject:atIndexPath:)]) {
-                        [delegate controllerAddedObject:anObject atIndexPath:indexPath];
+                        [delegate controllerAddedObject:anObject atIndexPath:newIndexPath];
                     }
                 }
 

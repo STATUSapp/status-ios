@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "STFlowTemplateViewController.h"
 #import "STFacebookController.h"
+#import "UIImageView+WebCache.h"
 
 const float kNoNotifHeight = 24.f;
 
@@ -214,15 +215,10 @@ const float kNoNotifHeight = 24.f;
                                                      cell.userImg.image = img;
                                                  } isForFacebook:NO];
 
-#else
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"post_photo_link"]
-                                                 andCompletion:^(UIImage *img) {
-                                                     cell.postImg.image = img;
-                                                 }];
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"user_photo_link"]
-                                                 andCompletion:^(UIImage *img) {
-                                                     cell.userImg.image = img;
-                                                 }];
+#else    
+    [cell.postImg sd_setImageWithURL:[NSURL URLWithString:dict[@"post_photo_link"]]];
+    [cell.userImg sd_setImageWithURL:[NSURL URLWithString:dict[@"user_photo_link"]]];
+
 
 #endif
 

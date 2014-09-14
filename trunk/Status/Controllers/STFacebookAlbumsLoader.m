@@ -24,7 +24,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
         
         NSLog(@"Next Link: %@", nextLink);
         [FBRequestConnection startWithGraphPath:nextLink
-                                     parameters:nil
+                                     parameters:nil//@{@"limit": @"5"}
                                      HTTPMethod:@"GET"
                               completionHandler:^(
                                                   FBRequestConnection *connection,
@@ -59,7 +59,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
         
         NSLog(@"Next Link: %@", nextLink);
         [FBRequestConnection startWithGraphPath:nextLink
-                                     parameters:nil
+                                     parameters:nil//@{@"limit":@"1"}
                                      HTTPMethod:@"GET"
                               completionHandler:^(
                                                   FBRequestConnection *connection,

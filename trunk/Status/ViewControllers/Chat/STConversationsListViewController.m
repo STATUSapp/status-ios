@@ -14,6 +14,7 @@
 #import "STChatController.h"
 #import "STImageCacheController.h"
 #import "UIImageView+Mask.h"
+#import "UIImageView+WebCache.h"
 
 @interface STConversationsListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 {
@@ -114,8 +115,8 @@
         } isForFacebook:NO];
         
 #else
-        [[STImageCacheController sharedInstance] loadImageWithName:imageUrl andCompletion:^(UIImage *img) {
-            [cell.profileImageView maskImage:img];
+        [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [cell.profileImageView maskImage:image];
         }];
         
 #endif

@@ -50,9 +50,22 @@
 {
     __weak STFacebookAlbumsViewController *weakSelf = self;
     [_fbLoader loadAlbumsWithRefreshBlock:^(NSArray *newObjects) {
-        if (newObjects.count > 0) {
+//        if (newObjects.count > 0) {
+//            [_dataSource addObjectsFromArray:newObjects];
+//            [weakSelf.tableView reloadData];
+//        }
+        
+        if (newObjects.count>0) {
+            
+            NSUInteger resultsSize = [_dataSource count];
             [_dataSource addObjectsFromArray:newObjects];
-            [weakSelf.tableView reloadData];
+            
+            NSMutableArray *arrayWithIndexPaths = [NSMutableArray array];
+            
+            for (NSUInteger i = resultsSize; i < resultsSize + newObjects.count; i++)
+                [arrayWithIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+
+            [weakSelf.tableView insertRowsAtIndexPaths:arrayWithIndexPaths withRowAnimation:UITableViewRowAnimationFade];
         }
     }];
 }
