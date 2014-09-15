@@ -515,9 +515,9 @@ static NSInteger const  kBlockUserAlertTag = 11;
     [_tableView beginUpdates];
     [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:chatController.loadMore==YES?UITableViewRowAnimationAutomatic:UITableViewRowAnimationAutomatic];
     [_tableView endUpdates];
-//    if (chatController.loadMore==NO) {
-//        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-//    }
+    if (chatController.loadMore==NO) {
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 -(void)controllerRemovedObject:(id)object atIndexPath:(NSIndexPath *)indexPath{
