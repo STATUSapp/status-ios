@@ -512,9 +512,11 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 -(void)controllerAddedObject:(id)object atIndexPath:(NSIndexPath *)indexPath{
     [_messages insertObject:object atIndex:indexPath.row];
+    [UIView setAnimationsEnabled:NO];
     [_tableView beginUpdates];
-    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:chatController.loadMore==YES?UITableViewRowAnimationAutomatic:UITableViewRowAnimationAutomatic];
+    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [_tableView endUpdates];
+    [UIView setAnimationsEnabled:YES];
     if (chatController.loadMore==NO) {
         [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }

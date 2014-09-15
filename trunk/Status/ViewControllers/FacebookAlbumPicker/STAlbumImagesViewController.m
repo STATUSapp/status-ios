@@ -91,8 +91,13 @@
     } isForFacebook:YES];
     
 #else
+    //TODO: change this way in all code.
     [cell.albumImageView sd_setImageWithURL:[NSURL URLWithString:thumbImageLink]
                            placeholderImage:[UIImage imageNamed:@"placeholder imagine like screen"]];
+//    [[STImageCacheController sharedInstance] loadImageWithName:thumbImageLink andCompletion:^(UIImage *img) {
+//        cell.albumImageView.image = img;
+//    }];
+    
 #endif
     return cell;
 }
