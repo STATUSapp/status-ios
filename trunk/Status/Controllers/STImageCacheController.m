@@ -381,7 +381,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                                       if (error!=nil) {
                                                           NSLog(@"Error downloading image: %@", error.debugDescription);
-                                                          completion(imageFullLink, @(NO));
+                                                          completion(imageFullLink, NO);
                                                       }
                                                       else if(finished)
                                                       {
@@ -389,16 +389,16 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                                               dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                                                                   [weakSelf saveImageForBlur:image imageURL:imageURL];
                                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                                      completion(imageFullLink, @(YES));
+                                                                      completion(imageFullLink, YES);
                                                                   });
                                                               });
                                                           }
                                                           else
-                                                              completion(imageFullLink,@(NO));
+                                                              completion(imageFullLink,NO);
                                                           
                                                       }
                                                       else
-                                                          completion(imageFullLink,@(NO));
+                                                          completion(imageFullLink,NO);
                                                   }];
 
 }
