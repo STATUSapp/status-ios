@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Flow Template View Controller-->
@@ -157,7 +157,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any photo. Take a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="219" translatesAutoresizingMaskIntoConstraints="NO" id="26T-Jv-ckc">
-                                                    <rect key="frame" x="51" y="143" width="219" height="59"/>
+                                                    <rect key="frame" x="51" y="142" width="219" height="60"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -452,6 +452,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="tbL-Ub-pis" userLabel="Swipe Gesture Down">
+                    <connections>
+                        <action selector="onSwipeDown:" destination="vXZ-lx-hvc" id="b6f-xV-VKp"/>
+                    </connections>
+                </swipeGestureRecognizer>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gS4-jD-fvB" userLabel="menuView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
@@ -467,26 +472,9 @@
                                 <action selector="onCloseMenu:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZWy-Vo-fYO"/>
                             </connections>
                         </button>
-                        <view tag="107" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tcb-uj-c9Y">
-                            <rect key="frame" x="0.0" y="110" width="320" height="379"/>
+                        <view tag="107" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tcb-uj-c9Y">
+                            <rect key="frame" x="0.0" y="67" width="320" height="405"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eU-By-Ymg">
-                                    <rect key="frame" x="34" y="324" width="144" height="55"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                                    <state key="normal" title="Me">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onTapMyProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gTl-cR-t50"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ1-Vx-dAP">
                                     <rect key="frame" x="34" y="0.0" width="208" height="55"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
@@ -505,7 +493,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayI-W4-ZZ8">
-                                    <rect key="frame" x="34" y="81" width="203" height="55"/>
+                                    <rect key="frame" x="34" y="70" width="203" height="55"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                                     <state key="normal" title="Nearby">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -522,7 +510,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UG-bu-798">
-                                    <rect key="frame" x="34" y="162" width="203" height="55"/>
+                                    <rect key="frame" x="34" y="140" width="203" height="55"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                                     <state key="normal" title="Friends">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -539,7 +527,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Eh-Nk-tGn">
-                                    <rect key="frame" x="34" y="243" width="203" height="55"/>
+                                    <rect key="frame" x="34" y="210" width="203" height="55"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                                     <state key="normal" title="How it works">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -555,11 +543,25 @@
                                         <action selector="onClickHowItWorks:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Y9V-5L-SCt"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cls-eD-eSh">
-                                    <rect key="frame" x="186" y="324" width="126" height="55"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="55" id="IJi-np-eVT"/>
-                                    </constraints>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eU-By-Ymg">
+                                    <rect key="frame" x="34" y="280" width="144" height="55"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                                    <state key="normal" title="Me">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onTapMyProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gTl-cR-t50"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cls-eD-eSh">
+                                    <rect key="frame" x="34" y="350" width="126" height="55"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                                     <state key="normal" title="Settings">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -573,32 +575,23 @@
                                     </state>
                                     <connections>
                                         <action selector="onClickSettings:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="AWc-c7-iS9"/>
-                                        <action selector="onTapMyProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gSe-n3-HRi"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="379" id="OX6-dM-EcU"/>
-                                <constraint firstAttribute="trailing" secondItem="cls-eD-eSh" secondAttribute="trailing" constant="8" id="Urj-Fy-egH"/>
-                                <constraint firstItem="cls-eD-eSh" firstAttribute="centerY" secondItem="3eU-By-Ymg" secondAttribute="centerY" id="b0N-DY-gsg"/>
+                                <constraint firstAttribute="height" constant="405" id="OX6-dM-EcU"/>
                                 <constraint firstAttribute="width" constant="320" id="b0x-BF-oYx"/>
-                                <constraint firstItem="cls-eD-eSh" firstAttribute="leading" secondItem="3eU-By-Ymg" secondAttribute="trailing" constant="8" id="yVb-lU-Doe"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.57254901960000004" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="Tcb-uj-c9Y" secondAttribute="centerY" constant="-15" id="GiR-ue-5ZD"/>
                         <constraint firstAttribute="width" constant="320" id="cH6-e6-gjL"/>
                         <constraint firstAttribute="centerX" secondItem="Tcb-uj-c9Y" secondAttribute="centerX" id="fNX-YN-xG1"/>
                     </constraints>
                 </view>
-                <swipeGestureRecognizer direction="down" id="tbL-Ub-pis" userLabel="Swipe Gesture Down">
-                    <connections>
-                        <action selector="onSwipeDown:" destination="vXZ-lx-hvc" id="b6f-xV-VKp"/>
-                    </connections>
-                </swipeGestureRecognizer>
                 <swipeGestureRecognizer direction="up" id="Ile-DQ-Dkk" userLabel="Swipe Gesture Up">
                     <connections>
                         <action selector="onSwipeUp:" destination="vXZ-lx-hvc" id="AQ0-0t-4go"/>

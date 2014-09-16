@@ -675,6 +675,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 - (IBAction)onClickSettings:(id)sender {
     
+    [self onCloseMenu:nil];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
     UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
