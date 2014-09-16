@@ -444,8 +444,6 @@
                     <connections>
                         <outlet property="collectionView" destination="EXg-xB-dpW" id="9Di-MC-Elo"/>
                         <outlet property="leftSwipe" destination="ij2-2N-pep" id="MKQ-ye-c5z"/>
-                        <outlet property="menuImageView" destination="ZqF-Qy-Zqd" id="vQe-Gy-XbJ"/>
-                        <outlet property="menuView" destination="gS4-jD-fvB" id="meB-jJ-hg9"/>
                         <outlet property="notifBtn" destination="tIE-Kz-jAY" id="7Yz-ej-1nl"/>
                         <outlet property="notifNumberLabel" destination="DtM-Db-eT0" id="iIj-Nm-agt"/>
                         <outlet property="unreadMessagesLbl" destination="xdG-sE-lKe" id="VtR-Ua-FhY"/>
@@ -457,141 +455,6 @@
                         <action selector="onSwipeDown:" destination="vXZ-lx-hvc" id="b6f-xV-VKp"/>
                     </connections>
                 </swipeGestureRecognizer>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gS4-jD-fvB" userLabel="menuView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqF-Qy-Zqd">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5K-xt-HRj">
-                            <rect key="frame" x="24" y="15" width="40" height="40"/>
-                            <state key="normal" image="x menu STAUS">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onCloseMenu:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZWy-Vo-fYO"/>
-                            </connections>
-                        </button>
-                        <view tag="107" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tcb-uj-c9Y">
-                            <rect key="frame" x="0.0" y="67" width="320" height="405"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ1-Vx-dAP">
-                                    <rect key="frame" x="34" y="0.0" width="208" height="55"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                                    <state key="normal" title="Home">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onClickHome:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="b9A-Ru-zcp"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayI-W4-ZZ8">
-                                    <rect key="frame" x="34" y="70" width="203" height="55"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                                    <state key="normal" title="Nearby">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onClickNearby:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Vco-O8-bJz"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UG-bu-798">
-                                    <rect key="frame" x="34" y="140" width="203" height="55"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                                    <state key="normal" title="Friends">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <segue destination="OZV-os-N5E" kind="modal" identifier="inviteSegue" id="gEh-Sj-BQD"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Eh-Nk-tGn">
-                                    <rect key="frame" x="34" y="210" width="203" height="55"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                                    <state key="normal" title="How it works">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onClickHowItWorks:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Y9V-5L-SCt"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eU-By-Ymg">
-                                    <rect key="frame" x="34" y="280" width="144" height="55"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                                    <state key="normal" title="Me">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onTapMyProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gTl-cR-t50"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cls-eD-eSh">
-                                    <rect key="frame" x="34" y="350" width="126" height="55"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                                    <state key="normal" title="Settings">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onClickSettings:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="AWc-c7-iS9"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="405" id="OX6-dM-EcU"/>
-                                <constraint firstAttribute="width" constant="320" id="b0x-BF-oYx"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.57254901960000004" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="centerY" secondItem="Tcb-uj-c9Y" secondAttribute="centerY" constant="-15" id="GiR-ue-5ZD"/>
-                        <constraint firstAttribute="width" constant="320" id="cH6-e6-gjL"/>
-                        <constraint firstAttribute="centerX" secondItem="Tcb-uj-c9Y" secondAttribute="centerX" id="fNX-YN-xG1"/>
-                    </constraints>
-                </view>
                 <swipeGestureRecognizer direction="up" id="Ile-DQ-Dkk" userLabel="Swipe Gesture Up">
                     <connections>
                         <action selector="onSwipeUp:" destination="vXZ-lx-hvc" id="AQ0-0t-4go"/>
@@ -1693,7 +1556,6 @@
         <image name="user chat black button pressed" width="36" height="36"/>
         <image name="user chat button" width="50" height="50"/>
         <image name="user chat button pressed" width="50" height="50"/>
-        <image name="x menu STAUS" width="15" height="15"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -28,5 +28,4 @@ typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded);
 -(void) cleanTemporaryFolder;
 -(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts;
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort;
--(void) loadFBCoverPictureForAlbum:(NSDictionary *)album andCompletion:(loadImageCompletion)completion;
 @end

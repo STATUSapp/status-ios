@@ -156,7 +156,7 @@
     visibleRect.size.width = boundsSize.width * scale;
     visibleRect.size.height = boundsSize.height * scale;
     
-    UIImage *croppedImage = [_imageView.image croppedImage:visibleRect];
+    UIImage *croppedImage = [_currentImg croppedImage:visibleRect];
     
     return croppedImage;
 }

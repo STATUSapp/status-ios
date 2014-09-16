@@ -90,6 +90,9 @@
 		176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2411936645500F5C4DA /* HPGrowingTextView.m */; };
 		176CE2451936645500F5C4DA /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2431936645500F5C4DA /* HPTextViewInternal.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
+		1776F52B19C8A58500267DC8 /* STMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1776F52A19C8A58500267DC8 /* STMenuView.m */; };
+		1776F52D19C8A59B00267DC8 /* STMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1776F52C19C8A59B00267DC8 /* STMenuView.xib */; };
+		1776F53019C8CE0F00267DC8 /* UIImage+FixedOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1776F52F19C8CE0F00267DC8 /* UIImage+FixedOrientation.m */; };
 		178907B718B294BA00AC4355 /* LoginScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178907B618B294BA00AC4355 /* LoginScene.storyboard */; };
 		178907BA18B295DD00AC4355 /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178907B918B295DD00AC4355 /* STLoginViewController.m */; };
 		1794DD571960D2A40009066D /* STWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD561960D2A40009066D /* STWhatsAppActivity.m */; };
@@ -327,6 +330,11 @@
 		176CE2421936645500F5C4DA /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		176CE2431936645500F5C4DA /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1776F52919C8A58500267DC8 /* STMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMenuView.h; sourceTree = "<group>"; };
+		1776F52A19C8A58500267DC8 /* STMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMenuView.m; sourceTree = "<group>"; };
+		1776F52C19C8A59B00267DC8 /* STMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMenuView.xib; sourceTree = "<group>"; };
+		1776F52E19C8CE0F00267DC8 /* UIImage+FixedOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixedOrientation.h"; sourceTree = "<group>"; };
+		1776F52F19C8CE0F00267DC8 /* UIImage+FixedOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixedOrientation.m"; sourceTree = "<group>"; };
 		178907B618B294BA00AC4355 /* LoginScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginScene.storyboard; sourceTree = "<group>"; };
 		178907B818B295DD00AC4355 /* STLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoginViewController.h; sourceTree = "<group>"; };
 		178907B918B295DD00AC4355 /* STLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginViewController.m; sourceTree = "<group>"; };
@@ -669,6 +677,9 @@
 				0719E5AD19619FE700F85382 /* STInviteController.m */,
 				1DE2D5B61950DB3100A29A86 /* STRemoveAdsViewController.h */,
 				1DE2D5B71950DB3100A29A86 /* STRemoveAdsViewController.m */,
+				1776F52919C8A58500267DC8 /* STMenuView.h */,
+				1776F52A19C8A58500267DC8 /* STMenuView.m */,
+				1776F52C19C8A59B00267DC8 /* STMenuView.xib */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -877,6 +888,8 @@
 				17FA8DB11937B48800491CAA /* UIImageView+Mask.m */,
 				17FE7CE219B321340081F688 /* NSString+MD5.h */,
 				17FE7CE319B321340081F688 /* NSString+MD5.m */,
+				1776F52E19C8CE0F00267DC8 /* UIImage+FixedOrientation.h */,
+				1776F52F19C8CE0F00267DC8 /* UIImage+FixedOrientation.m */,
 			);
 			name = Categories;
 			path = Status/Categories;
@@ -997,6 +1010,7 @@
 				172EAE7118B0B12E00C5637B /* InfoPlist.strings in Resources */,
 				172EAE7A18B0B12E00C5637B /* Main.storyboard in Resources */,
 				172DF27419A2616D009CE4F3 /* FacebookPickerScene.storyboard in Resources */,
+				1776F52D19C8A59B00267DC8 /* STMenuView.xib in Resources */,
 				17ACEB621933C4E600CFC909 /* ChatScene.storyboard in Resources */,
 				178907B718B294BA00AC4355 /* LoginScene.storyboard in Resources */,
 				17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */,
@@ -1061,6 +1075,7 @@
 				0717E2D819B71C56001DF132 /* STBubbleCell.m in Sources */,
 				17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */,
 				17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */,
+				1776F52B19C8A58500267DC8 /* STMenuView.m in Sources */,
 				07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */,
 				172EAEB418B0B46300C5637B /* AFURLConnectionOperation.m in Sources */,
 				07FCFAA319C094250048F441 /* UIImage+WebP.m in Sources */,
@@ -1098,6 +1113,7 @@
 				1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */,
 				CDAC50AF19B602C900A45E85 /* UIImage+RoundedCorner.m in Sources */,
 				0717E2AB19B718B4001DF132 /* STZoomablePostViewController.m in Sources */,
+				1776F53019C8CE0F00267DC8 /* UIImage+FixedOrientation.m in Sources */,
 				172EAF0218B0BB4800C5637B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */,
 				172EAEB718B0B46300C5637B /* AFURLSessionManager.m in Sources */,

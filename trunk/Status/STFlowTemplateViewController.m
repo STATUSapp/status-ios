@@ -27,6 +27,8 @@
 #import "STLocationManager.h"
 #import "STChatRoomViewController.h"
 #import "STConversationsListViewController.h"
+#import "STMenuView.h"
+#import "UIImage+FixedOrientation.h"
 
 #import "GADInterstitial.h"
 #import "STRemoveAdsViewController.h"
@@ -63,6 +65,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     CGPoint _start;
     CGPoint _end;
+    
+    STMenuView *_menuView;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -72,8 +76,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postsDataSource;
 @property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *leftSwipe;
-@property (weak, nonatomic) IBOutlet UIView *menuView;
-@property (weak, nonatomic) IBOutlet UIImageView *menuImageView;
 
 @end
 
@@ -85,7 +87,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 {
     [super viewDidLoad];
     self.postsDataSource = [NSMutableArray array];
-    [[STFacebookController sharedInstance] setLogoutDelegate:self];
     
     if (self.flowType == STFlowTypeAllPosts)
         [[STFacebookController sharedInstance] setDelegate:self];
@@ -134,6 +135,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[STFacebookController sharedInstance] setLogoutDelegate:self];
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:appDelegate.badgeNumber];
     [[STImageCacheController sharedInstance] changeFlowType:_flowType needsSort:YES];
@@ -382,6 +384,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     NSInteger index = [_postsDataSource indexOfObject:dict];
     if ([dict[@"post_id"] isEqualToString:result[@"image_id"]]) {
         dict[@"full_photo_link"] = result[@"image_link"];
+        
         [_postsDataSource replaceObjectAtIndex:index withObject:dict];
         [self.collectionView reloadData];
     }
@@ -546,6 +549,61 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [self.navigationController pushViewController:viewController animated:YES];
     
 }
+#pragma mark - MenuView Actions
+- (IBAction)onCloseMenu:(id)sender {
+    [UIView animateWithDuration:0.33 animations:^{
+        _menuView.alpha = 0.f;
+    } completion:^(BOOL finished) {
+        _menuView.blurBackground.image = nil;
+        [_menuView removeFromSuperview];
+    }];
+    
+}
+- (IBAction)onClickHome:(id)sender {
+    [self onCloseMenu:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (IBAction)onClickSettings:(id)sender {
+    
+    [self onCloseMenu:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
+    UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
+    [self presentViewController: setttingsNav animated:YES completion:nil];
+}
+
+- (IBAction)onClickHowItWorks:(id)sender {
+    [self onCloseMenu:nil];
+    STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];
+    tutorialVC.delegate = self;
+    tutorialVC.backgroundImageForLastElement = [self snapshotOfCurrentScreen];
+    tutorialVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:tutorialVC animated:YES completion:nil];
+}
+- (IBAction)onTapMe:(id)sender {
+    [self onCloseMenu:nil];
+    [self onTapMyProfile:nil];
+}
+- (IBAction)onTapFriends:(id)sender {
+    [self presentInterstitialControllerWithType:STInterstitialTypeInviter];
+}
+- (IBAction)onClickNearby:(id)sender {
+    if (_flowType != STFlowTypeDiscoverNearby) {
+        if (![STLocationManager locationUpdateEnabled]) {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You need to allow STATUS to access your location in order to see nearby friends." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        }
+        else
+        {
+            [self onCloseMenu:nil];
+            [self pushFlowControllerWithType:STFlowTypeDiscoverNearby];
+        }
+    }
+    else
+    {
+        [self onCloseMenu:nil];
+    }
+}
 #pragma mark - Actions
 - (IBAction)onTapRefreshFromFooter:(id)sender {
     self.refreshBt = (UIButton *) sender;
@@ -600,7 +658,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 -(IBAction)onTapMyProfile:(id)sender{
-    [self onCloseMenu:nil];
     if (_flowType == STFlowTypeMyProfile) {
         return;
     }
@@ -658,54 +715,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
        
     }
 }
-- (IBAction)onCloseMenu:(id)sender {
-    __weak STFlowTemplateViewController *weakSelf =self;
-    [UIView animateWithDuration:0.33 animations:^{
-        _menuView.alpha = 0.f;
-    } completion:^(BOOL finished) {
-        weakSelf.menuImageView.image = nil;
-        [weakSelf.menuView removeFromSuperview];
-    }];
-    
-}
-- (IBAction)onClickHome:(id)sender {
-    [self onCloseMenu:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
 
-- (IBAction)onClickSettings:(id)sender {
-    
-    [self onCloseMenu:nil];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
-    UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
-    [self presentViewController: setttingsNav animated:YES completion:nil];
-}
-
-- (IBAction)onClickHowItWorks:(id)sender {
-    [self onCloseMenu:nil];
-    STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];
-    tutorialVC.delegate = self;
-    tutorialVC.backgroundImageForLastElement = [self snapshotOfCurrentScreen];
-    tutorialVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:tutorialVC animated:YES completion:nil];
-}
-- (IBAction)onClickNearby:(id)sender {
-    if (_flowType != STFlowTypeDiscoverNearby) {
-        if (![STLocationManager locationUpdateEnabled]) {
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You need to allow STATUS to access your location in order to see nearby friends." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        }
-        else
-        {
-            [self onCloseMenu:nil];
-            [self pushFlowControllerWithType:STFlowTypeDiscoverNearby];
-        }
-    }
-    else
-    {
-        [self onCloseMenu:nil];
-    }
-}
 - (IBAction)onClickNearbyFromYouSawAllThePhotos:(id)sender {
     [self onClickNearby:sender];
 }
@@ -719,8 +729,15 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 - (IBAction)onTapMenu:(id)sender {
 
+    if (_menuView==nil) {
+        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"STMenuView" owner:self options:nil];
+        _menuView = (STMenuView *)[views firstObject];
+        _menuView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    }
+    
     _menuView.alpha = 0.f;
-    _menuImageView.image = [self blurCurrentScreen];
+    _menuView.blurBackground.image = [self blurCurrentScreen];
     
     [self.view addSubview:_menuView];
 
@@ -764,6 +781,14 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                               attribute:NSLayoutAttributeLeading
                               multiplier:1.f
                               constant:0]];
+    _menuView.centerYConstraint = [NSLayoutConstraint
+                                   constraintWithItem:_menuView.itemsView
+                                   attribute:NSLayoutAttributeCenterY
+                                   relatedBy:NSLayoutRelationEqual
+                                   toItem:_menuView
+                                   attribute:NSLayoutAttributeCenterY
+                                   multiplier:1.0
+                                   constant:0.0];
 }
 
 - (IBAction)onTapCameraUpload:(id)sender {
@@ -795,7 +820,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                     }
                     [weakSelf.postsDataSource replaceObjectAtIndex:currentRow
                                                     withObject:[NSDictionary dictionaryWithDictionary:dict]];
-                    [weakSelf.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:currentRow inSection:0]]];
+                    
+                    [weakSelf.collectionView reloadData];
                     
                     BOOL isLiked = [cellDict[@"post_liked_by_current_user"] boolValue];
                     if (!isLiked && weakSelf.postsDataSource.count>currentRow+1) {
@@ -1274,9 +1300,11 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     __weak STFlowTemplateViewController *weakSelf = self;
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-        UIImage *fixedOrientationImage = [UIImage imageWithCGImage:img.CGImage
-                                                             scale:img.scale
-                                                       orientation:img.imageOrientation];
+        UIImage *fixedOrientationImage = [img fixOrientation];
+
+//        UIImage *fixedOrientationImage = [UIImage imageWithCGImage:img.CGImage
+//                                                             scale:img.scale
+//                                                       orientation:img.imageOrientation];
 
         [weakSelf startMoveScaleShareControllerForImage:fixedOrientationImage shouldCompress:YES editedPostId:nil];
     }];
