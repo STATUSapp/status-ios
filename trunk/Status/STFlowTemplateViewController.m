@@ -67,6 +67,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     CGPoint _end;
     
     STMenuView *_menuView;
+    BOOL _shouldForceSetSeen;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -1006,9 +1007,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 -(void) goToNextPostWithRow:(NSNumber *) currentRow{
+    [[_collectionView delegate] scrollViewWillBeginDragging:_collectionView];
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentRow.integerValue inSection:0]
                                     atScrollPosition:UICollectionViewScrollPositionNone
                                             animated:YES];
+    
+    _shouldForceSetSeen = YES;
+     [[_collectionView delegate] scrollViewDidEndDragging:_collectionView willDecelerate:YES];
 }
 
 #pragma mark - Collection View Data Source & Delegate
@@ -1107,8 +1112,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
     
     _end = scrollView.contentOffset;
-    if (_start.x < _end.x)
+    if (_start.x < _end.x || _shouldForceSetSeen == YES)
     {//swipe to the right
+        _shouldForceSetSeen = NO;
         CGPoint point = scrollView.contentOffset;
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;

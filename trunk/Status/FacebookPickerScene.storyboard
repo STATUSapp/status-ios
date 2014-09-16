@@ -16,10 +16,13 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="X8q-u1-3Fm">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="X8q-u1-3Fm">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="tzw-iJ-Fyk"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FBAlbumCell" rowHeight="44" id="Ksc-gH-hPC" customClass="STFacebookAlbumCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -62,6 +65,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="X8q-u1-3Fm" firstAttribute="leading" secondItem="aak-JQ-btt" secondAttribute="leading" id="Tll-f6-0w8"/>
+                            <constraint firstAttribute="trailing" secondItem="X8q-u1-3Fm" secondAttribute="trailing" id="d3J-78-eqy"/>
+                            <constraint firstItem="psJ-RG-3Io" firstAttribute="top" secondItem="X8q-u1-3Fm" secondAttribute="bottom" id="efD-lX-7H3"/>
+                            <constraint firstItem="X8q-u1-3Fm" firstAttribute="top" secondItem="VrU-RS-8JA" secondAttribute="bottom" id="w8n-eD-DhK"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Albums" id="LrW-V7-ZEm">
@@ -93,10 +102,13 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XdV-u7-jML">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XdV-u7-jML">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="ba0-rA-mjN"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="jva-nS-QrV">
                                     <size key="itemSize" width="78" height="78"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -131,6 +143,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xCF-q3-aky" firstAttribute="top" secondItem="XdV-u7-jML" secondAttribute="bottom" id="0Q9-uj-kf3"/>
+                            <constraint firstItem="XdV-u7-jML" firstAttribute="leading" secondItem="LQ9-EZ-vLY" secondAttribute="leading" id="JkH-MF-b6g"/>
+                            <constraint firstAttribute="trailing" secondItem="XdV-u7-jML" secondAttribute="trailing" id="Sbe-TP-rKL"/>
+                            <constraint firstItem="XdV-u7-jML" firstAttribute="top" secondItem="f0y-gw-Luf" secondAttribute="bottom" id="jhb-pp-nmB"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photos" id="h6G-y9-Bh5"/>
                     <connections>
