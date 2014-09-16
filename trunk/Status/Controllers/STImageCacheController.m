@@ -357,13 +357,11 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 }
 
 - (void)saveImageForBlur:(UIImage *)image imageURL:(NSURL *)imageURL {
-    //TODO: save into the same container
     if ([imageURL.absoluteString rangeOfString:kBasePhotoDownload].location!=NSNotFound) {
         UIImage *img = image;
         img = [img imageCropedFullScreenSize];
         img = [img applyLightEffect];
         NSString *imageFullPath = [self blurPostLinkWithURL:imageURL.absoluteString];
-        //TOOD: this is a right compresion?
         NSData *imagData = UIImageJPEGRepresentation(img, 0.25f);
         [imagData writeToFile:imageFullPath atomically:YES];
     }
@@ -403,37 +401,36 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 
 }
 
--(void) loadFBCoverPictureForAlbum:(NSDictionary *)album andCompletion:(loadImageCompletion)completion{
-    //TODO: change this to sdweb
-    NSString *coverImagePath = [album[@"cover_photo"] stringByAppendingString:@".jpg"];
-    NSString *imageCachePath = [self getImageCachePath:YES];
-    NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:coverImagePath];
-    __block UIImage *img = nil;
-    if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
-        if (album[@"picture"] == nil) {
-            NSLog(@"Error on loading album picture");
-            completion(nil);
-            return;
-        }
-        [[STWebServiceController sharedInstance] downloadImage:album[@"picture"] storedName:coverImagePath withCompletion:^(NSURL *imageURL) {
-            if (completion!=nil) {
-                img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-                completion(img);
-            }
-        }];
-    }
-    else
-    {
-        if (completion!=nil) {
-            img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageFullPath]];
-            completion(img);
-        }
-    }
-}
+//-(void) loadFBCoverPictureForAlbum:(NSDictionary *)album andCompletion:(loadImageCompletion)completion{
+//    //TODO: change this to sdweb
+//    NSString *coverImagePath = [album[@"cover_photo"] stringByAppendingString:@".jpg"];
+//    NSString *imageCachePath = [self getImageCachePath:YES];
+//    NSString *imageFullPath = [imageCachePath stringByAppendingPathComponent:coverImagePath];
+//    __block UIImage *img = nil;
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
+//        if (album[@"picture"] == nil) {
+//            NSLog(@"Error on loading album picture");
+//            completion(nil);
+//            return;
+//        }
+//        [[STWebServiceController sharedInstance] downloadImage:album[@"picture"] storedName:coverImagePath withCompletion:^(NSURL *imageURL) {
+//            if (completion!=nil) {
+//                img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+//                completion(img);
+//            }
+//        }];
+//    }
+//    else
+//    {
+//        if (completion!=nil) {
+//            img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageFullPath]];
+//            completion(img);
+//        }
+//    }
+//}
 
 -(NSString *) getImageCachePath:(BOOL)forFacebook{
     
-    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = NSTemporaryDirectory();//[paths objectAtIndex:0];
     NSString *imageCachePath = [documentsDirectory stringByAppendingPathComponent:(forFacebook == YES)?@"/FacebookImageCache":@"/ImageCache"];
     

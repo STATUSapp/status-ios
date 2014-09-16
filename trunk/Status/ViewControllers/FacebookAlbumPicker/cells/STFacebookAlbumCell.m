@@ -35,10 +35,6 @@
 -(void)configureCellWithALbum:(NSDictionary *)album{
     _albumTitleLbl.text = album[@"name"];
     _albumPhotoNumberLbl.text = [NSString stringWithFormat:@"%ld photos", (long)[album[@"count"] integerValue]];
-    __weak STFacebookAlbumCell *weakSelf = self;
-    [[STImageCacheController sharedInstance] loadFBCoverPictureForAlbum:album andCompletion:^(UIImage *img) {
-        weakSelf.albumImageView.image = img;
-    }];
     
 }
 

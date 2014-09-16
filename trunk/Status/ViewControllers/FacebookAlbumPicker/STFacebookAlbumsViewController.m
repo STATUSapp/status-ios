@@ -12,6 +12,7 @@
 #import "STImageCacheController.h"
 #import "STFacebookAlbumsLoader.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "UIImageView+WebCache.h"
 
 @interface STFacebookAlbumsViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -98,8 +99,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     STFacebookAlbumCell *cell = (STFacebookAlbumCell*)[tableView dequeueReusableCellWithIdentifier:@"FBAlbumCell"];
-    [cell configureCellWithALbum:_dataSource[indexPath.row]];
-    
+    NSDictionary *dict = _dataSource[indexPath.row];
+    [cell configureCellWithALbum:dict];
+    [cell.albumImageView sd_setImageWithURL:[NSURL URLWithString:dict[@"picture"]]
+                           placeholderImage:[UIImage imageNamed:@"placeholder imagine like screen"]];
     return cell;
     
 }
