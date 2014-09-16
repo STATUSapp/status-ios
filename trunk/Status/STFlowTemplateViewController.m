@@ -671,7 +671,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (IBAction)onClickHome:(id)sender {
     [self onCloseMenu:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [self onClickSettings:sender];
 }
 
 - (IBAction)onClickSettings:(id)sender {
