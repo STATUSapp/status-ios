@@ -61,7 +61,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -142,6 +142,15 @@
     [self fireFbLoginView];
 }
 
+- (IBAction)onTapLikeUsOnFacebook:(id)sender {
+    NSURL *facebookURL = [NSURL URLWithString:@"fb://profile/206383282888186"];
+    if ([[UIApplication sharedApplication] canOpenURL:facebookURL]) {
+        [[UIApplication sharedApplication] openURL:facebookURL];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/getSTATUSapp"]];
+    }
+}
+
 -(void)fireFbLoginView{
     for(id object in [STFacebookController sharedInstance].loginButton.subviews){
         if([[object class] isSubclassOfClass:[UIButton class]]){
@@ -149,6 +158,10 @@
             [button sendActionsForControlEvents:UIControlEventTouchUpInside];
         }
     }
+}
+
+- (void)openStatusFacebookPage {
+
 }
 
 @end
