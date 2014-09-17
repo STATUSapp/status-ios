@@ -587,6 +587,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [self onTapMyProfile:nil];
 }
 - (IBAction)onTapFriends:(id)sender {
+    [self onCloseMenu:nil];
     [self presentInterstitialControllerWithType:STInterstitialTypeInviter];
 }
 - (IBAction)onClickNearby:(id)sender {
@@ -821,17 +822,23 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                     }
                     [weakSelf.postsDataSource replaceObjectAtIndex:currentRow
                                                     withObject:[NSDictionary dictionaryWithDictionary:dict]];
-                    
-                    [weakSelf.collectionView reloadData];
-                    
-                    BOOL isLiked = [cellDict[@"post_liked_by_current_user"] boolValue];
-                    if (!isLiked && weakSelf.postsDataSource.count>currentRow+1) {
-                        
-                        [weakSelf performSelector:@selector(goToNextPostWithRow:)
-                                       withObject:@(currentRow+1)
-                                       afterDelay:0.33f];
-                        
-                    }
+                    [weakSelf.collectionView performBatchUpdates:^{
+                        STCustomCollectionViewCell *currentCell = [[weakSelf.collectionView visibleCells] firstObject];
+                        if (currentCell != nil) {
+                            [currentCell updateLikeBtnAndLblWithDict:dict];
+                        }
+//                        [weakSelf.collectionView reloadItemsAtIndexPaths:[weakSelf.collectionView indexPathsForVisibleItems]];
+                    } completion:^(BOOL finished) {
+                        BOOL isLiked = [cellDict[@"post_liked_by_current_user"] boolValue];
+                        if (!isLiked && weakSelf.postsDataSource.count>currentRow+1) {
+                            [weakSelf performSelector:@selector(goToNextPostWithRow:)
+                                           withObject:@(currentRow+1)
+                                           afterDelay:0.25f];
+                            
+                        }
+                    }];
+                
+                   
 
                 }
             } andErrorCompletion:nil];

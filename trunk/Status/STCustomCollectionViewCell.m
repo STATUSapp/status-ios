@@ -41,6 +41,23 @@
     return self;
 }
 
+- (void)updateLikeBtnAndLblWithDict:(NSDictionary *)setUpDict {
+    int numberOfLikes = [setUpDict[@"number_of_likes"] intValue];
+    [self.likesNumberBtn setTitle:[NSString stringWithFormat:@"%d", numberOfLikes] forState:UIControlStateNormal];
+    self.likesNumberBtn.titleLabel.numberOfLines = 2;
+    BOOL isLiked = [setUpDict[@"post_liked_by_current_user"] boolValue];
+    
+    if (isLiked) {
+        [self.likeBtn setImage:[UIImage imageNamed:@"btn_liked"] forState:UIControlStateNormal];
+        [self.likeBtn setImage:[UIImage imageNamed:@"btn_liked_pressed"] forState:UIControlStateHighlighted];
+    }else{
+        [self.likeBtn setImage:[UIImage imageNamed:@"btn_like_normal"] forState:UIControlStateNormal];
+        [self.likeBtn setImage:[UIImage imageNamed:@"btn_like_pressed"] forState:UIControlStateHighlighted];
+    }
+    
+    [self.likeBtn setNeedsDisplay];
+}
+
 - (void)setUpWithDictionary:(NSDictionary *)setupDict forFlowType:(int)flowType{
     // if setupDict is nil, the cell will be setted as a placeholder
     if ([setupDict[@"type"] isEqualToString:@"placeholder"]) {
@@ -63,22 +80,8 @@
     
     self.setUpDict = setupDict;
     
-    int numberOfLikes = [setupDict[@"number_of_likes"] intValue];
-    
     [self.profileNameBtn setTitle:setupDict[@"user_name"] forState:UIControlStateNormal];
-    [self.likesNumberBtn setTitle:[NSString stringWithFormat:@"%d", numberOfLikes] forState:UIControlStateNormal];
-    self.likesNumberBtn.titleLabel.numberOfLines = 2;
-    BOOL isLiked = [setupDict[@"post_liked_by_current_user"] boolValue];
-    
-    if (isLiked) {
-        [self.likeBtn setImage:[UIImage imageNamed:@"btn_liked"] forState:UIControlStateNormal];
-        [self.likeBtn setImage:[UIImage imageNamed:@"btn_liked_pressed"] forState:UIControlStateHighlighted];
-    }else{
-        [self.likeBtn setImage:[UIImage imageNamed:@"btn_like_normal"] forState:UIControlStateNormal];
-        [self.likeBtn setImage:[UIImage imageNamed:@"btn_like_pressed"] forState:UIControlStateHighlighted];
-    }
-    
-    [self.likeBtn setNeedsDisplay];
+    [self updateLikeBtnAndLblWithDict:setupDict];
     
     switch (flowType) {
         case STFlowTypeSinglePost:
@@ -178,55 +181,37 @@
 }
 
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{
-    
     __weak STCustomCollectionViewCell *weakSelf = self;
     
-    if (urlArray.count == 1) {
-        [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
+    [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
+        
+        if (img!=nil) {
+            weakSelf.fitImageView.image = img;
+            [weakSelf.activityIndicator stopAnimating];
             
-            if (img!=nil) {
-                weakSelf.fitImageView.image = img;
-                [weakSelf.activityIndicator stopAnimating];
-
-            }
-        } andBlurCompletion:^(UIImage *bluredImg) {
-            if (bluredImg!=nil) {
-                weakSelf.fullBlurImageView.image=bluredImg;
-            }
-        }];
-    }
-    else
-    {
-        [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
-            
-            if (img!=nil) {
-                weakSelf.fitImageView.image = img;
-                [weakSelf.activityIndicator stopAnimating];
-
-            }
-        } andBlurCompletion:^(UIImage *bluredImg) {
-            if (bluredImg!=nil) {
-                weakSelf.fullBlurImageView.image=bluredImg;
-            }
-        }];
-    }
+        }
+    } andBlurCompletion:^(UIImage *bluredImg) {
+        if (bluredImg!=nil) {
+            weakSelf.fullBlurImageView.image=bluredImg;
+        }
+    }];
 }
 
 - (void)prepareForReuse{
     [super prepareForReuse];
     self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder"];
     self.fitImageView.image = nil;
+    [self.activityIndicator startAnimating];
     self.setUpDict = nil;
+    self.likesNumberBtn.selected = NO;
     self.fullBlurImageView.hidden = NO;
     self.fitImageView.hidden = NO;
-    self.likesNumberBtn.selected = NO;
-    
+
     self.bigCameraProfileBtn.hidden = YES;
     self.likeBtn.hidden = NO;
     self.likesNumberBtn.hidden = NO;
     self.shareBtn.hidden = NO;
     self.noPhotosLabel.hidden = YES;
-    [self.activityIndicator startAnimating];
 
     
 }

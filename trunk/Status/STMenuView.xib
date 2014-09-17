@@ -26,10 +26,10 @@
                     </connections>
                 </button>
                 <view tag="107" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eH9-2g-Sxn">
-                    <rect key="frame" x="0.0" y="42" width="320" height="405"/>
+                    <rect key="frame" x="0.0" y="105" width="320" height="280"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6g-lv-gva">
-                            <rect key="frame" x="34" y="1" width="250" height="55"/>
+                            <rect key="frame" x="34" y="0.0" width="250" height="55"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                             <state key="normal" title="Home">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -46,7 +46,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PB9-3s-1YB">
-                            <rect key="frame" x="34" y="71" width="250" height="55"/>
+                            <rect key="frame" x="34" y="70" width="250" height="55"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                             <state key="normal" title="Nearby">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,7 +63,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TND-Bu-qwL">
-                            <rect key="frame" x="34" y="141" width="250" height="55"/>
+                            <rect key="frame" x="34" y="140" width="250" height="55"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                             <state key="normal" title="Friends">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,25 +79,8 @@
                                 <action selector="onTapFriends:" destination="-2" eventType="touchUpInside" id="FmQ-jc-Lex"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sP5-VC-CjX">
-                            <rect key="frame" x="34" y="211" width="250" height="55"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                            <state key="normal" title="How it works">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onClickHowItWorks:" destination="-2" eventType="touchUpInside" id="p8a-el-D3x"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Gf-Yn-6zx">
-                            <rect key="frame" x="34" y="281" width="250" height="55"/>
+                            <rect key="frame" x="34" y="210" width="250" height="55"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
                             <state key="normal" title="Me">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,38 +96,69 @@
                                 <action selector="onTapMe:" destination="-2" eventType="touchUpInside" id="hGI-pG-2XQ"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KQ-2n-c0d">
-                            <rect key="frame" x="34" y="351" width="250" height="55"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                            <state key="normal" title="Settings">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onClickSettings:" destination="-2" eventType="touchUpInside" id="bXf-uB-hwN"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="405" id="1Ko-Xc-AG3"/>
+                        <constraint firstAttribute="height" constant="280" id="1Ko-Xc-AG3"/>
                         <constraint firstAttribute="width" constant="320" id="76y-dZ-w8j"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sP5-VC-CjX">
+                    <rect key="frame" x="22" y="422" width="150" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="4cB-IY-l35"/>
+                        <constraint firstAttribute="width" constant="150" id="xVa-e2-kPm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                    <state key="normal" title="How it works">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickHowItWorks:" destination="-2" eventType="touchUpInside" id="p8a-el-D3x"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KQ-2n-c0d">
+                    <rect key="frame" x="180" y="422" width="120" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="N3M-dt-j9s"/>
+                        <constraint firstAttribute="width" constant="120" id="iyv-ol-CqC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                    <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Settings" image="settings_normal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="settings_pressed">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" image="settings_pressed">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickSettings:" destination="-2" eventType="touchUpInside" id="bXf-uB-hwN"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="1XZ-Pj-WzN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3zZ-OS-hOt"/>
                 <constraint firstAttribute="centerY" secondItem="eH9-2g-Sxn" secondAttribute="centerY" constant="-4.5" id="Irl-CQ-efF"/>
                 <constraint firstAttribute="bottom" secondItem="1XZ-Pj-WzN" secondAttribute="bottom" id="O6q-VL-CrG"/>
+                <constraint firstAttribute="trailing" secondItem="5KQ-2n-c0d" secondAttribute="trailing" constant="20" id="Rmw-QL-e8t"/>
                 <constraint firstAttribute="trailing" secondItem="1XZ-Pj-WzN" secondAttribute="trailing" id="TmB-NS-kef"/>
+                <constraint firstAttribute="bottom" secondItem="5KQ-2n-c0d" secondAttribute="bottom" constant="20" id="WrJ-gx-i72"/>
+                <constraint firstAttribute="bottom" secondItem="sP5-VC-CjX" secondAttribute="bottom" constant="20" id="bgw-NL-I2g"/>
                 <constraint firstItem="1XZ-Pj-WzN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="c7O-7f-gWw"/>
+                <constraint firstItem="5KQ-2n-c0d" firstAttribute="leading" secondItem="sP5-VC-CjX" secondAttribute="trailing" constant="8" id="eld-Gb-lDI"/>
+                <constraint firstItem="sP5-VC-CjX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="ldn-eJ-Obj"/>
                 <constraint firstAttribute="centerX" secondItem="eH9-2g-Sxn" secondAttribute="centerX" id="tzL-MY-lRZ"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -157,6 +171,8 @@
         </view>
     </objects>
     <resources>
+        <image name="settings_normal" width="20" height="20"/>
+        <image name="settings_pressed" width="20" height="20"/>
         <image name="x menu STAUS" width="15" height="15"/>
     </resources>
 </document>

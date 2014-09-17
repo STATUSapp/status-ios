@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString * username;
 
     // if setupDict is nil, the cell will be setted as a placeholder
-- (void)setUpWithDictionary: (NSDictionary *)setupDict forFlowType: (int) flowType;
+- (void)setUpWithDictionary:(NSDictionary *)setupDict forFlowType:(int)flowType;
 - (void)setUpPlaceholderBeforeLoading;
+- (void)updateLikeBtnAndLblWithDict:(NSDictionary *)setUpDict;
 @end
