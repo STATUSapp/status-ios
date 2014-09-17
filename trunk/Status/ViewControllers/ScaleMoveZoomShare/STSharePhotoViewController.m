@@ -63,12 +63,19 @@
 	_sharedImageView.image = [UIImage imageWithData:_imgData];
     _backgroundBlurImgView.image = [UIImage imageWithData:_bluredImgData];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appplicationIsActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
+- (void)appplicationIsActive:(NSNotification *)notification {
+    NSLog(@"Application Did Become Active");
+    [self twitterAccess];
+}
+
+
+- (void)twitterAccess {
     // setup twitter account
     
     _accountStore = [[ACAccountStore alloc] init];
@@ -88,6 +95,12 @@
              weakSelf.isTwitterAvailable = NO;
          }
      }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self twitterAccess];
 
 }
 
@@ -95,6 +108,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark IBACTIONS
@@ -128,7 +145,7 @@
         _shouldPostToTwitter = btn.selected;
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Twitter issue"
-                                    message:@"In order to post to Twitter you have to setup an account in your device's settings"
+                                    message:@"In order to post to Twitter you have to setup an account in your device's settings and grant acces to STATUS app."
                                    delegate:nil cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
     }

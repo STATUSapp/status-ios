@@ -68,6 +68,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     STMenuView *_menuView;
     BOOL _shouldForceSetSeen;
+    
+    BOOL _pinching;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -622,15 +624,38 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 - (IBAction)onPinchCurrentPost:(id)sender {
-    
     //avoid apple bug on receiving this event twice
-    if (self.navigationController.presentedViewController==nil) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        STZoomablePostViewController *viewController = (STZoomablePostViewController *) [storyboard instantiateViewControllerWithIdentifier:@"zoomableView"];
+    if (_pinching == NO) {
+        _pinching = YES;
         NSDictionary *dict = [self getCurrentDictionary];
-        viewController.postPhotoLink = dict[@"full_photo_link"];
-        [self presentViewController:viewController animated:NO completion:nil];
+        __block UIImage *fullImage = nil;
+        __block UIImage *bluredImage = nil;
+        __weak STFlowTemplateViewController *weakSelf = self;
+        [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *origImg) {
+            fullImage = origImg;
+            [weakSelf presentZoomablePostWithFullImage:fullImage andBluredImage:bluredImage];
+            
+        } andBlurCompletion:^(UIImage *bluredImg) {
+            if (bluredImg!=nil) {
+                bluredImage = bluredImg;
+                [weakSelf presentZoomablePostWithFullImage:fullImage andBluredImage:bluredImage];
+            }
+        }];
     }
+}
+
+-(void)presentZoomablePostWithFullImage:(UIImage *)fullImage andBluredImage:(UIImage *)bluredImage{
+    if (fullImage==nil || bluredImage == nil) {
+        NSLog(@"Skip for now!");
+        return;
+    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STZoomablePostViewController *viewController = (STZoomablePostViewController *) [storyboard instantiateViewControllerWithIdentifier:@"zoomableView"];
+    viewController.fullImage = fullImage;
+    viewController.bluredImage = bluredImage;
+    [self presentViewController:viewController animated:NO completion:^{
+        _pinching = NO;
+    }];
 }
 - (IBAction)onDoubleTap:(id)sender {
     
@@ -790,7 +815,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                                    toItem:_menuView
                                    attribute:NSLayoutAttributeCenterY
                                    multiplier:1.0
-                                   constant:0.0];
+                                   constant:0.f];
 }
 
 - (IBAction)onTapCameraUpload:(id)sender {

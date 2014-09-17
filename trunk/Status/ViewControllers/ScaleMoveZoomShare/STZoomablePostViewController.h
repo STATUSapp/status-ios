@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface STZoomablePostViewController : UIViewController
-@property (nonatomic, strong) NSString *postPhotoLink;
+@property (nonatomic, strong) UIImage *fullImage;
+@property (nonatomic, strong) UIImage *bluredImage;
 @end

@@ -26,7 +26,7 @@
                     </connections>
                 </button>
                 <view tag="107" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eH9-2g-Sxn">
-                    <rect key="frame" x="0.0" y="105" width="320" height="280"/>
+                    <rect key="frame" x="0.0" y="60" width="320" height="280"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6g-lv-gva">
                             <rect key="frame" x="34" y="0.0" width="250" height="55"/>
@@ -104,12 +104,12 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sP5-VC-CjX">
-                    <rect key="frame" x="22" y="422" width="150" height="38"/>
+                    <rect key="frame" x="34" y="422" width="136" height="38"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="4cB-IY-l35"/>
-                        <constraint firstAttribute="width" constant="150" id="xVa-e2-kPm"/>
+                        <constraint firstAttribute="width" constant="136" id="xVa-e2-kPm"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
                     <state key="normal" title="How it works">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -125,13 +125,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KQ-2n-c0d">
-                    <rect key="frame" x="180" y="422" width="120" height="38"/>
+                    <rect key="frame" x="183" y="422" width="120" height="38"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="38" id="N3M-dt-j9s"/>
-                        <constraint firstAttribute="width" constant="120" id="iyv-ol-CqC"/>
+                        <constraint firstAttribute="height" constant="38" id="wfS-YY-rP7"/>
+                        <constraint firstAttribute="width" constant="120" id="xT7-kW-lIO"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
-                    <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Settings" image="settings_normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -150,16 +150,16 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="1XZ-Pj-WzN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3zZ-OS-hOt"/>
-                <constraint firstAttribute="centerY" secondItem="eH9-2g-Sxn" secondAttribute="centerY" constant="-4.5" id="Irl-CQ-efF"/>
+                <constraint firstItem="5KQ-2n-c0d" firstAttribute="leading" secondItem="sP5-VC-CjX" secondAttribute="trailing" constant="13" id="4eY-gL-eVd"/>
+                <constraint firstAttribute="bottom" secondItem="5KQ-2n-c0d" secondAttribute="bottom" constant="20" id="7af-Zx-etS"/>
+                <constraint firstAttribute="centerY" secondItem="eH9-2g-Sxn" secondAttribute="centerY" constant="40" id="Irl-CQ-efF"/>
                 <constraint firstAttribute="bottom" secondItem="1XZ-Pj-WzN" secondAttribute="bottom" id="O6q-VL-CrG"/>
-                <constraint firstAttribute="trailing" secondItem="5KQ-2n-c0d" secondAttribute="trailing" constant="20" id="Rmw-QL-e8t"/>
                 <constraint firstAttribute="trailing" secondItem="1XZ-Pj-WzN" secondAttribute="trailing" id="TmB-NS-kef"/>
-                <constraint firstAttribute="bottom" secondItem="5KQ-2n-c0d" secondAttribute="bottom" constant="20" id="WrJ-gx-i72"/>
                 <constraint firstAttribute="bottom" secondItem="sP5-VC-CjX" secondAttribute="bottom" constant="20" id="bgw-NL-I2g"/>
                 <constraint firstItem="1XZ-Pj-WzN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="c7O-7f-gWw"/>
-                <constraint firstItem="5KQ-2n-c0d" firstAttribute="leading" secondItem="sP5-VC-CjX" secondAttribute="trailing" constant="8" id="eld-Gb-lDI"/>
-                <constraint firstItem="sP5-VC-CjX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="ldn-eJ-Obj"/>
+                <constraint firstItem="sP5-VC-CjX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="34" id="ldn-eJ-Obj"/>
                 <constraint firstAttribute="centerX" secondItem="eH9-2g-Sxn" secondAttribute="centerX" id="tzL-MY-lRZ"/>
+                <constraint firstAttribute="trailing" secondItem="5KQ-2n-c0d" secondAttribute="trailing" constant="17" id="vY5-ux-2sq"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
