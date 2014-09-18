@@ -318,9 +318,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void)facebookControllerDidLoggedIn{
     __weak STFlowTemplateViewController * weakSelf = self;
-    [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
-        [weakSelf presentTutorialAutomatically];
-    }];
+    
+    if (![self.presentedViewController isBeingDismissed])
+    {
+        [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
+            [weakSelf presentTutorialAutomatically];
+        }];
+    }
     [self getDataSourceWithOffset:0];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate checkForNotificationNumber];
@@ -1315,11 +1319,15 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     NSLog(@"self.navigationController.viewControllers =  %@", self.navigationController.presentedViewController);
     __weak STFlowTemplateViewController *weakSelf = self;
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [weakSelf startMoveScaleShareControllerForImage:(UIImage *)[notif object]
-                                     shouldCompress:NO
-                                       editedPostId:nil];
-    }];
+    if (![self.presentedViewController isBeingDismissed])
+        [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
+            [weakSelf startMoveScaleShareControllerForImage:(UIImage *)[notif object]
+                                             shouldCompress:NO
+                                               editedPostId:nil];
+        }];
+    {
+    }
+    
 
 }
 
