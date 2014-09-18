@@ -25,7 +25,7 @@
 #import "STFacebookAlbumsViewController.h"
 
 #import "STCoreDataManager.h"
-
+#import <Crashlytics/Crashlytics.h>
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @implementation AppDelegate
@@ -65,7 +65,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
         [MobileAppTracker measureAction:@"install"];
         [[NSUserDefaults standardUserDefaults] setObject:kSTNewInstallKey forKey:kSTNewInstallKey];
     }
-    
+    [Crashlytics startWithAPIKey:@"b4369a0a1dca4a6745a3905bf41aa6964c863da1"];
     return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application

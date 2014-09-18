@@ -145,7 +145,7 @@
         _shouldPostToTwitter = btn.selected;
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Twitter issue"
-                                    message:@"In order to post to Twitter you have to setup an account in your device's settings and grant acces to STATUS app."
+                                    message:@"In order to post to Twitter you have to setup an account in your device's settings and grant access to STATUS app."
                                    delegate:nil cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
     }
