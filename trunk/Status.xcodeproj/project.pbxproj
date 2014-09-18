@@ -1044,7 +1044,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run b4369a0a1dca4a6745a3905bf41aa6964c863da1 07050e909a55c31f5f286014a9cb4b8dea58229bb0e0115f71cbfa34bbe71c04";
+			shellScript = "./Crashlytics.framework/run 93e0064668657d3332278aaa1ed765b8f48c6ad6 ffd19d43716170c5828194f662ccf2fa5472d06c00cc6ae64125bf57997d05c9";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1286,7 +1286,7 @@
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "E52A7D9C-EB3B-4C89-99DC-C3AD2F9D526F";
+				PROVISIONING_PROFILE = "2EF8953C-52FC-4523-BD6F-0C50070B9D43";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1406,7 +1406,7 @@
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "FB35A621-08C1-412A-8402-F23741726424";
+				PROVISIONING_PROFILE = "84DD1C06-D58D-48AF-BE3F-910C1D294CAC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;

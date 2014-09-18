@@ -20,6 +20,7 @@
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
 #import "STCoreDataManager.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation STFacebookController
 +(STFacebookController *) sharedInstance{
@@ -164,6 +165,12 @@
     [keychainWrapperAccessToken setObject:accessToken forKey:(__bridge id)(kSecValueData)];
 }
 
+- (void)setUpCrashlyticsForUserId:(NSString *)userId andEmail:(NSString *)email andUserName:(NSString *)userName{
+    [[Crashlytics sharedInstance] setUserIdentifier:userId];
+    [[Crashlytics sharedInstance] setUserEmail:email];
+    [[Crashlytics sharedInstance] setUserName:userName];
+}
+
 -(void) loginOrRegistrationWithUser:(id<FBGraphUser>)user{
     
     [self UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
@@ -205,6 +212,7 @@
                         [weakSelf saveAccessToken:response[@"token"]];
                         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
                         weakSelf.currentUserId = response[@"user_id"];
+                        [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:user[@"email"] andUserName:userName];
                         [weakSelf announceDelegate];
                         [weakSelf measureRegister];
                     }
@@ -228,6 +236,7 @@
                 [[STLocationManager sharedInstance] startLocationUpdates];
                 [weakSelf saveAccessToken:response[@"token"]];
                 weakSelf.currentUserId = response[@"user_id"];
+                [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:user[@"email"] andUserName:response[@"user_name"]];
                 [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
                 [weakSelf announceDelegate];
             }

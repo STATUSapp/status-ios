@@ -65,7 +65,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
         [MobileAppTracker measureAction:@"install"];
         [[NSUserDefaults standardUserDefaults] setObject:kSTNewInstallKey forKey:kSTNewInstallKey];
     }
-    [Crashlytics startWithAPIKey:@"b4369a0a1dca4a6745a3905bf41aa6964c863da1"];
+//    [Crashlytics startWithAPIKey:@"b4369a0a1dca4a6745a3905bf41aa6964c863da1"];
+    [Crashlytics startWithAPIKey:@"93e0064668657d3332278aaa1ed765b8f48c6ad6"];
     return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application

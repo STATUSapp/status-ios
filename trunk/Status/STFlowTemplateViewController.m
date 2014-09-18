@@ -41,6 +41,7 @@
 #import "STFacebookAlbumsLoader.h"
 
 #import "STSettingsViewController.h"
+#import <Crashlytics/Crashlytics.h>
 
 int const kDeletePostTag = 11;
 int const kNoPostsAlertTag = 13;
@@ -593,6 +594,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [self presentInterstitialControllerWithType:STInterstitialTypeInviter];
 }
 - (IBAction)onClickNearby:(id)sender {
+    
     if (_flowType != STFlowTypeDiscoverNearby) {
         if (![STLocationManager locationUpdateEnabled]) {
             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You need to allow STATUS to access your location in order to see nearby friends." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
@@ -825,6 +827,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 - (IBAction)onTapLike:(id)sender {
+//#ifdef DEBUG
+//    [[Crashlytics sharedInstance] crash];
+//#endif
     [(UIButton *)sender setUserInteractionEnabled:NO];
     NSArray *indxPats = [self.collectionView indexPathsForVisibleItems];
     if (indxPats.count ==0) {
