@@ -826,7 +826,18 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 - (IBAction)onTapCameraUpload:(id)sender {
     
-    UIActionSheet *actionChoose = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll",@"Upload from Facebook", nil];
+    NSDictionary * presentedPostDict = [self getCurrentDictionary];
+    BOOL isOwner = [presentedPostDict[@"is_owner"] boolValue];
+    
+    UIActionSheet *actionChoose;
+    
+    if (isOwner) {
+        actionChoose = [[UIActionSheet alloc] initWithTitle:@"Photos" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll",@"Upload from Facebook", nil];
+    } else {
+        actionChoose = [[UIActionSheet alloc] initWithTitle:@"Photos" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll",@"Upload from Facebook", @"Ask user to take a photo", nil];
+    }
+    
+    
     [actionChoose showFromRect: ((UIButton *)sender).frame inView:self.view animated:YES];
 }
 
@@ -907,6 +918,30 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
             NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", weakSelf.userName];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
                                                   cancelButtonTitle:@"OK" otherButtonTitles:@"Go Home", nil];
+            alert.tag = kInviteUserToUpload;
+            [alert show];
+            
+        }
+        else
+        {
+            NSLog(@"Error");
+        }
+    } orError:nil];
+}
+
+- (void)inviteCurrentPostOwnerUserToUpload {
+    
+    NSDictionary * currentPostDict = [self getCurrentDictionary];
+    
+    NSString * userID = currentPostDict[@"user_id"];
+    NSString * userName = currentPostDict[@"user_name"];
+
+    [[STWebServiceController sharedInstance] inviteUserToUpload:userID withCompletion:^(NSDictionary *response) {
+        NSInteger statusCode = [response[@"status_code"] integerValue];
+        if (statusCode == STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", userName];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
+                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
             alert.tag = kInviteUserToUpload;
             [alert show];
             
@@ -1220,7 +1255,20 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     
-    if(buttonIndex==3) return;
+    NSDictionary * presentedPostDict = [self getCurrentDictionary];
+    BOOL isOwner = [presentedPostDict[@"is_owner"] boolValue];
+    
+    if(buttonIndex == 3 && isOwner) return;
+    
+    if (buttonIndex == 4) {
+        return;
+    }
+    
+    if (buttonIndex == 3) {
+        [self inviteCurrentPostOwnerUserToUpload];
+        return;
+    }
+    
     if (buttonIndex<=1) {
         @try {
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
