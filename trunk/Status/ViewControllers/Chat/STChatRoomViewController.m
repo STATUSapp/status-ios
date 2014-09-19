@@ -39,6 +39,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     UIActionSheet *actionSheet;
     UIAlertView *successBlockAlert;
     CGPoint lastContentOffset;
+    CGRect keyboardBounds;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -155,7 +156,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 -(void) keyboardWillShow:(NSNotification *)note{
     // get keyboard size and loctaion
-	CGRect keyboardBounds;
     [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
     
     // Need to translate the bounds to account for rotation.
@@ -185,7 +185,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
         [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
 
     }];
-    _bottomTextViewConstraint.constant = 216.f; //keyboardBounds.size.height;
+    _bottomTextViewConstraint.constant = keyboardBounds.size.height;
 
 }
 
