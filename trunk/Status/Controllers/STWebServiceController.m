@@ -23,18 +23,24 @@
         _sharedManager = [[self alloc] init];
         _sharedManager.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL] sessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         _sharedManager.sessionManager.operationQueue.maxConcurrentOperationCount = 1;
-        NSArray *responseSerializers = @[[AFJSONResponseSerializer serializer], [AFHTTPResponseSerializer serializer]];
-        [_sharedManager.sessionManager setResponseSerializer:[AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:responseSerializers]];
-        //_sharedManager.sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        AFJSONResponseSerializer *jsonReponseSerializer;
+        jsonReponseSerializer = [STWebServiceController customResponseSerializer];
+        _sharedManager.sessionManager.responseSerializer = jsonReponseSerializer;
+
         _sharedManager.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        [_sharedManager.sessionManager.requestSerializer setValue:@"Accept" forHTTPHeaderField:@"application/json"];
-        [_sharedManager.sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         _sharedManager.isPerformLoginOrRegistration=FALSE;
         
         });
     
     return _sharedManager;
+}
+
++ (AFJSONResponseSerializer *)customResponseSerializer {
+    AFJSONResponseSerializer *jsonReponseSerializer = [AFJSONResponseSerializer serializer];
+    // This will make the AFJSONResponseSerializer accept any content type
+    jsonReponseSerializer.acceptableContentTypes = nil;
+    return jsonReponseSerializer;
 }
 
 - (NSError*)translateToHTTPError:(NSURLSessionDataTask *)task error:(NSError *)error
@@ -161,7 +167,9 @@
 -(void) uploadPostForId:(NSString *) postId withData:(NSData *) imageData withCompletion:(successCompletion) completion orError:(errorCompletion) errorCompletion{
 
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    AFJSONResponseSerializer *jsonReponseSerializer;
+    jsonReponseSerializer = [STWebServiceController customResponseSerializer];
+    manager.responseSerializer = jsonReponseSerializer;
     NSMutableDictionary *postDict = [NSMutableDictionary dictionaryWithDictionary:@{@"token":self.accessToken}];
     if (postId!=nil) {
         postDict[@"post_id"] = postId;
