@@ -45,8 +45,15 @@
                                            attribute:NSLayoutAttributeBottom
                                            multiplier:1.f
                                            constant:-102];
+    NSLayoutConstraint *centerConstraint = [NSLayoutConstraint constraintWithItem:loginBtn
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.f
+                                                                         constant:1.f];
     
-     [self.view addConstraints:@[bottomConstraint]];
+     [self.view addConstraints:@[bottomConstraint, centerConstraint]];
 }
 
 - (void)didReceiveMemoryWarning
