@@ -44,7 +44,8 @@ float const k5BtnSaveOffset = -81.f;
 }
 
 -(void) setForDissmiss:(BOOL) isDissmissed{
-    self.bubbleImgContraint.constant = isDissmissed==TRUE?-200:80;
+    //TODO: remove this magic numbers
+    self.bubbleImgContraint.constant = isDissmissed==TRUE?-290:80;
 }
 
 @end
