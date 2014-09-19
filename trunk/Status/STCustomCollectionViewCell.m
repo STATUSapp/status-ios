@@ -8,7 +8,6 @@
 
 
 #import "STCustomCollectionViewCell.h"
-#import "UIImageView+AFNetworking.h"
 #import "STConstants.h"
 #import "STImageCacheController.h"
 #import "STWebServiceController.h"

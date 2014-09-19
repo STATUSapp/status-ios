@@ -7,7 +7,6 @@
 //
 
 #import "STConversationCell.h"
-#import "UIImageView+AFNetworking.h"
 
 @interface STConversationCell()
 
