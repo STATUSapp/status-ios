@@ -199,4 +199,9 @@
     }
 }
 
+-(void)dealloc{
+    //remove the delegate will prevent scroll to call functions after the view did not exists
+    [self.scrollView setDelegate:nil];
+}
+
 @end

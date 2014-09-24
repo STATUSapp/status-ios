@@ -159,6 +159,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 - (void)dealloc{
+    //remove the delegate will prevent scroll to call functions after the view did not exists
+    [self.collectionView setDelegate:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     _interstitial.delegate = nil;
 }
