@@ -210,7 +210,7 @@
                         [[STChatController sharedInstance] forceReconnect];
                         [[STLocationManager sharedInstance] startLocationUpdates];
                         [weakSelf saveAccessToken:response[@"token"]];
-                        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
+                        [self requestRemoteNotificationAccess];
                         weakSelf.currentUserId = response[@"user_id"];
                         [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:user[@"email"] andUserName:userName];
                         [weakSelf announceDelegate];
@@ -237,7 +237,7 @@
                 [weakSelf saveAccessToken:response[@"token"]];
                 weakSelf.currentUserId = response[@"user_id"];
                 [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:user[@"email"] andUserName:response[@"user_name"]];
-                [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
+                [self requestRemoteNotificationAccess];
                 [weakSelf announceDelegate];
             }
             else
@@ -308,6 +308,22 @@
 
 - (void)measureRegister {
     [MobileAppTracker measureAction:@"registration"];
+}
+
+static const UIRemoteNotificationType REMOTE_NOTIFICATION_TYPES_REQUIRED = UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge;
+static const UIUserNotificationType USER_NOTIFICATION_TYPES_REQUIRED = UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge;
+
+- (void)requestRemoteNotificationAccess;
+{
+    bool isIOS8OrGreater = [[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)];
+    if (!isIOS8OrGreater)
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:REMOTE_NOTIFICATION_TYPES_REQUIRED];
+        return;
+    }
+    
+    UIUserNotificationSettings* requestedSettings = [UIUserNotificationSettings settingsForTypes:USER_NOTIFICATION_TYPES_REQUIRED categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:requestedSettings];
 }
 
 @end

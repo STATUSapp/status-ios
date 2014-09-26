@@ -30,11 +30,24 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @implementation AppDelegate
 
-- (void)setBadgeNumber:(NSInteger)badgeNumber{
-    _badgeNumber = badgeNumber;
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
-    [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
+- (BOOL)checkNotificationType:(UIUserNotificationType)type
+{
+    UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
     
+    return (currentSettings.types & type);
+}
+
+- (void)setBadgeNumber:(NSInteger)badgeNumber{
+    if (![self checkNotificationType:UIUserNotificationTypeBadge]) {
+        [[STFacebookController sharedInstance] requestRemoteNotificationAccess];
+    }
+    else
+    {
+        _badgeNumber = badgeNumber;
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
+        [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
+
+    }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

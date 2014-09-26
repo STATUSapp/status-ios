@@ -34,4 +34,5 @@ typedef void (^facebookCompletion)(id result, NSError *error);
 -(void) UDSetValue:(NSString *) value forKey:(NSString *) key;
 -(void)loadTokenFromKeyChain;
 -(void)deleteAccessToken;
+- (void)requestRemoteNotificationAccess;
 @end

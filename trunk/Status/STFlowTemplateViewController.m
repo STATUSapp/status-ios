@@ -94,19 +94,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     if (self.flowType == STFlowTypeAllPosts)
         [[STFacebookController sharedInstance] setDelegate:self];
-    
-    NSString *email = [[STFacebookController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
-    
-    if (self.flowType == STFlowTypeAllPosts)
-    {
-        if ([[[FBSession activeSession] accessTokenData] accessToken]==nil||email==nil) {
-            [self presentLoginScene];
-        }
-    }
     else
-    {
         [self getDataSourceWithOffset:0];
-    }
+    
     [self setupVisuals];
     [self initCustomShareView];
     [self updateNotificationsNumber];
@@ -135,6 +125,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
     [self setupInterstitialAds];
     _numberOfSeenPosts = 0;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    NSString *email = [[STFacebookController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
+    if ([[[FBSession activeSession] accessTokenData] accessToken]==nil||email==nil) {
+        [self presentLoginScene];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -168,7 +165,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(void) presentLoginScene{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
     STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
-    [self presentViewController:viewController animated:NO completion:nil];
+
+    AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
+
+    [navCtrl presentViewController:viewController animated:NO completion:^{
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }];
 }
 
 -(void) initCustomShareView{
@@ -335,8 +338,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void)facebookControllerDidLoggedOut{
     self.postsDataSource = [NSMutableArray array];
-    __weak STFlowTemplateViewController *weakSelf = self;
+//    __weak STFlowTemplateViewController *weakSelf = self;
     UIViewController *presentedVC = self.presentedViewController;
+
     if (![presentedVC isKindOfClass:[STLoginViewController class]]) {
         [self dismissViewControllerAnimated:NO completion:^{
             [[STFacebookController sharedInstance] UDSetValue:nil forKey:PHOTO_LINK];
@@ -346,8 +350,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
             [[FBSession activeSession] close];
             [FBSession setActiveSession:nil];
             [[FBSessionTokenCachingStrategy defaultInstance] clearToken];
-            [weakSelf.navigationController popToRootViewControllerAnimated:NO];
-            [weakSelf presentLoginScene];
+//            [weakSelf presentLoginScene];
             [[STWebServiceController sharedInstance] setAPNToken:@"" withCompletion:^(NSDictionary *response) {
                 if ([response[@"status_code"] integerValue]==200){
                     NSLog(@"APN Token deleted.");
