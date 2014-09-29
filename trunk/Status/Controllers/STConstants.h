@@ -115,3 +115,7 @@ extern NSString *const STInviteLink;
 #pragma mark - Numeric constants
 
 extern NSInteger const STMaximumSizeInBytesForUpload;
+
+#pragma mark - Settings
+
+extern NSString *const STSettingsDictKey;

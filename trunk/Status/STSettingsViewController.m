@@ -11,6 +11,10 @@
 #import "STFacebookController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
+const NSInteger kSectionNumberNotifications = 0;
+const NSInteger kSectionNumberContactLikeAds = 1;
+const NSInteger kSectionNumberLogout = 2;
+
 @interface STSettingsViewController ()
 {
     FBLoginView *loginView;
@@ -34,6 +38,8 @@
     [super viewDidLoad];
     
     self.title = @"Settings";
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -67,7 +73,21 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    switch (section) {
+        case kSectionNumberNotifications:
+            return 6;
+            break;
+        case kSectionNumberContactLikeAds:
+            return 2;
+            break;
+        case kSectionNumberLogout:
+            return 1;
+            break;
+            
+        default:
+            return 0;
+            break;
+    }
 }
 
 /*

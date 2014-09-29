@@ -81,3 +81,8 @@ NSString *const STInviteLink = @"http://bit.ly/Njw1k4";
 #pragma mark - Numeric constants
 
 NSInteger const STMaximumSizeInBytesForUpload = 3145728;  // 3 MB
+
+
+#pragma mark - Settings
+
+NSString *const STSettingsDictKey = @"STSettingsDictKey";
