@@ -19,6 +19,10 @@
       "idiom" : "universal",
       "filename" : "message_text.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

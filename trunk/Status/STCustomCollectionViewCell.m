@@ -149,7 +149,7 @@
     [self.contentView sendSubviewToBack:_fullBlurImageView];
     self.bigCameraProfileBtn.hidden = NO;
     self.fullBlurImageView.hidden = NO;
-    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder"];
+    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder STATUS loading"];
     
     self.likeBtn.hidden = YES;
     self.likesNumberBtn.hidden = YES;
@@ -176,7 +176,7 @@
 
 -(void)setUpPlaceholderBeforeLoading{
     [self.contentView bringSubviewToFront:_fullBlurImageView];
-    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder"];
+    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder STATUS loading"];
 }
 
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{
@@ -198,7 +198,7 @@
 
 - (void)prepareForReuse{
     [super prepareForReuse];
-    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder"];
+    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder STATUS loading"];
     self.fitImageView.image = nil;
     [self.activityIndicator startAnimating];
     self.setUpDict = nil;

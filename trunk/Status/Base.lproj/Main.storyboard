@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -37,7 +38,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Rin-Xs-XdC">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="Rin-Xs-XdC">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <gestureRecognizers/>
@@ -229,7 +230,7 @@
                                     <rect key="frame" x="320" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-vH-cAm">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-vH-cAm">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="320" id="v5d-qi-cLD"/>
@@ -1698,9 +1699,10 @@
         <image name="main chat button" width="36" height="32"/>
         <image name="main chat button pressed" width="36" height="32"/>
         <image name="megaphone" width="169" height="169"/>
-        <image name="megaphone pressed" width="169" height="169"/>
+        <image name="megaphone pressed" width="338" height="338"/>
         <image name="notification yellow circle" width="15" height="15"/>
-        <image name="placeholder" width="320" height="568"/>
+        <image name="placeholder" width="320" height="482"/>
+        <image name="placeholder STATUS loading" width="320" height="568"/>
         <image name="placeholder imagine like screen" width="41" height="41"/>
         <image name="placeholder notifications screen" width="60" height="60"/>
         <image name="remove ads button" width="202" height="40"/>

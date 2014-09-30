@@ -61,7 +61,6 @@
 		172EAE7718B0B12E00C5637B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAE7618B0B12E00C5637B /* AppDelegate.m */; };
 		172EAE7A18B0B12E00C5637B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE7818B0B12E00C5637B /* Main.storyboard */; };
 		172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAE7C18B0B12E00C5637B /* STFlowTemplateViewController.m */; };
-		172EAE7F18B0B12E00C5637B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE7E18B0B12E00C5637B /* Images.xcassets */; };
 		172EAE8618B0B12E00C5637B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE8518B0B12E00C5637B /* XCTest.framework */; };
 		172EAE8718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE8818B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
@@ -94,6 +93,7 @@
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
+		17AB991F19DB3257004B3C91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17AB991E19DB3257004B3C91 /* Images.xcassets */; };
 		17ACEB621933C4E600CFC909 /* ChatScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17ACEB611933C4E600CFC909 /* ChatScene.storyboard */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17B9234619CAB62500E38FB5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B9234519CAB62500E38FB5 /* Crashlytics.framework */; };
@@ -245,7 +245,6 @@
 		172EAE7918B0B12E00C5637B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		172EAE7B18B0B12E00C5637B /* STFlowTemplateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFlowTemplateViewController.h; sourceTree = "<group>"; };
 		172EAE7C18B0B12E00C5637B /* STFlowTemplateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFlowTemplateViewController.m; sourceTree = "<group>"; };
-		172EAE7E18B0B12E00C5637B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		172EAE8418B0B12E00C5637B /* StatusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE8518B0B12E00C5637B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		172EAE8D18B0B12E00C5637B /* StatusTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StatusTests-Info.plist"; sourceTree = "<group>"; };
@@ -323,6 +322,7 @@
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		17AB991E19DB3257004B3C91 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		17ACEB611933C4E600CFC909 /* ChatScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatScene.storyboard; sourceTree = "<group>"; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		17B9234519CAB62500E38FB5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -615,6 +615,7 @@
 		172EAE6C18B0B12E00C5637B /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				17AB991E19DB3257004B3C91 /* Images.xcassets */,
 				0717E2A119B717AF001DF132 /* ViewControllers */,
 				317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */,
 				317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */,
@@ -644,7 +645,6 @@
 				070B31B918C772B700765189 /* STNotificationsViewController.m */,
 				070B31BB18C772EF00765189 /* STNotificationCell.h */,
 				070B31BC18C772EF00765189 /* STNotificationCell.m */,
-				172EAE7E18B0B12E00C5637B /* Images.xcassets */,
 				172EAE6D18B0B12E00C5637B /* Supporting Files */,
 				17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */,
 				17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */,
@@ -960,7 +960,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172EAE7F18B0B12E00C5637B /* Images.xcassets in Resources */,
+				17AB991F19DB3257004B3C91 /* Images.xcassets in Resources */,
 				17491F8519BCCC3100E91EA7 /* README.txt in Resources */,
 				172EAE7118B0B12E00C5637B /* InfoPlist.strings in Resources */,
 				172EAE7A18B0B12E00C5637B /* Main.storyboard in Resources */,

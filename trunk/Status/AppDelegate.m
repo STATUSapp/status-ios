@@ -38,7 +38,9 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 }
 
 - (void)setBadgeNumber:(NSInteger)badgeNumber{
-    if (![self checkNotificationType:UIUserNotificationTypeBadge]) {
+    bool isIOS8OrGreater = [[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)];
+
+    if (isIOS8OrGreater && ![self checkNotificationType:UIUserNotificationTypeBadge]) {
         [[STFacebookController sharedInstance] requestRemoteNotificationAccess];
     }
     else

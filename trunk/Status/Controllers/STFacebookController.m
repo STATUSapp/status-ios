@@ -46,29 +46,6 @@
     return self;
 }
 
--(void)customizeLoginButton:(FBLoginView *) loginBtn{
-    
-    for (UIView *item in loginBtn.subviews) {
-        if (![item isKindOfClass:[UIButton class]]) {
-            [item removeFromSuperview];
-        }
-        else
-        {
-            UIButton *bt = (UIButton *) item;
-            [bt setBackgroundImage:[UIImage imageNamed:@"differentUser"] forState:UIControlStateNormal];
-            [bt setBackgroundImage:[UIImage imageNamed:@"differentUser"] forState:UIControlStateHighlighted];
-            [bt setBackgroundImage:[UIImage imageNamed:@"differentUser"] forState:UIControlStateSelected];
-            /*
-            [bt.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-LightItalic" size:15.f]];
-            [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [bt setTitle:@"Log in as different user" forState:UIControlStateNormal];
-            [bt setTitle:@"Log in as different user" forState:UIControlStateHighlighted];
-            [bt setTitle:@"Log in as different user" forState:UIControlStateSelected];
-            */
-        }
-    }
-}
-
 -(NSString *) stringFromDict:(NSDictionary *) dict{
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
