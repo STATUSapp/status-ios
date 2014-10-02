@@ -30,6 +30,14 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @implementation AppDelegate
 
+- (void)setSettingsDict:(NSDictionary *)settingsDict{
+    [[NSUserDefaults standardUserDefaults] setObject:settingsDict forKey:STSettingsDictKey];
+}
+
+- (NSDictionary *)settingsDict{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:STSettingsDictKey];
+}
+
 - (BOOL)checkNotificationType:(UIUserNotificationType)type
 {
     UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];

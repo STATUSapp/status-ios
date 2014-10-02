@@ -10,6 +10,7 @@
 #import "STRemoveAdsViewController.h"
 #import "STFacebookController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "AppDelegate.h"
 
 const NSInteger kSectionNumberNotifications = 0;
 const NSInteger kSectionNumberContactLikeAds = 1;
@@ -20,6 +21,16 @@ const NSInteger kSectionNumberLogout = 2;
     FBLoginView *loginView;
 }
 @property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
+
+
+@property (weak, nonatomic) IBOutlet UISwitch *switchLikes;
+@property (weak, nonatomic) IBOutlet UISwitch *switchMessages;
+@property (weak, nonatomic) IBOutlet UISwitch *switchUploadPhoto;
+@property (weak, nonatomic) IBOutlet UISwitch *switchFriendJoinsStatus;
+@property (weak, nonatomic) IBOutlet UISwitch *switchPhotosWaiting;
+@property (weak, nonatomic) IBOutlet UISwitch *switchExtraLikes;
+
+@property (strong, nonatomic) NSDictionary * settingsDict;
 @end
 
 @implementation STSettingsViewController
@@ -50,6 +61,36 @@ const NSInteger kSectionNumberLogout = 2;
     loginView.hidden = YES;
     [_logoutCell.contentView addSubview:loginView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapDone)];
+    
+    _settingsDict = [(AppDelegate *)([UIApplication sharedApplication].delegate) settingsDict];
+    
+    [self configureSwitches];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    _settingsDict = [self getNewSettingsDict];
+    [(AppDelegate *)([UIApplication sharedApplication].delegate) setSettingsDict:_settingsDict];
+
+}
+
+- (void)configureSwitches {
+    [_switchLikes setOn:[[_settingsDict valueForKey:STNotificationsLikesKey] boolValue]];
+    [_switchMessages setOn:[[_settingsDict valueForKey:STNotificationsMessagesKey] boolValue]];
+    [_switchUploadPhoto setOn:[[_settingsDict valueForKey:STNotificationsUploadNewPhotoKey] boolValue]];
+    [_switchFriendJoinsStatus setOn:[[_settingsDict valueForKey:STNotificationsFriendJoinStatusKey] boolValue]];
+    [_switchPhotosWaiting setOn:[[_settingsDict valueForKey:STNotificationsPhotosWaitingKey] boolValue]];
+    [_switchExtraLikes setOn:[[_settingsDict valueForKey:STNotificationsExtraLikesKey] boolValue]];
+}
+
+- (NSDictionary *)getNewSettingsDict {
+    return @{STNotificationsLikesKey : [NSNumber numberWithBool:_switchLikes.isOn],
+             STNotificationsMessagesKey : [NSNumber numberWithBool:_switchMessages.isOn],
+             STNotificationsUploadNewPhotoKey : [NSNumber numberWithBool:_switchUploadPhoto.isOn],
+             STNotificationsFriendJoinStatusKey : [NSNumber numberWithBool:_switchFriendJoinsStatus.isOn],
+             STNotificationsPhotosWaitingKey : [NSNumber numberWithBool:_switchPhotosWaiting.isOn],
+             STNotificationsExtraLikesKey : [NSNumber numberWithBool:_switchExtraLikes.isOn]};
 }
 
 - (void)didReceiveMemoryWarning

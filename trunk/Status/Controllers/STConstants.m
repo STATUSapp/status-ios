@@ -86,3 +86,10 @@ NSInteger const STMaximumSizeInBytesForUpload = 3145728;  // 3 MB
 #pragma mark - Settings
 
 NSString *const STSettingsDictKey = @"STSettingsDictKey";
+NSString *const STNotificationsLikesKey = @"STNotificationsLikesKey";
+NSString *const STNotificationsMessagesKey = @"STNotificationsMessagesKey";
+NSString *const STNotificationsUploadNewPhotoKey = @"STNotificationsUploadNewPhotoKey";
+NSString *const STNotificationsFriendJoinStatusKey = @"STNotificationsFriendJoinStatusKey";
+NSString *const STNotificationsPhotosWaitingKey = @"STNotificationsPhotosWaitingKey";
+NSString *const STNotificationsExtraLikesKey = @"STNotificationsExtraLikesKey";
+

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1657,6 +1656,12 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="logoutCell" destination="JqV-bS-cfJ" id="hwq-f0-tre"/>
+                        <outlet property="switchExtraLikes" destination="gVf-rr-b8Y" id="yUD-LU-LKd"/>
+                        <outlet property="switchFriendJoinsStatus" destination="Mda-H8-yJ5" id="saB-gV-x5u"/>
+                        <outlet property="switchLikes" destination="s4i-OF-9rh" id="H5X-Al-jQt"/>
+                        <outlet property="switchMessages" destination="nhX-Be-boj" id="Hfm-Td-fpf"/>
+                        <outlet property="switchPhotosWaiting" destination="lXw-if-eAv" id="as2-Yl-XPA"/>
+                        <outlet property="switchUploadPhoto" destination="XMm-Kz-AFf" id="3bz-N7-TCm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zam-Lq-m4z" userLabel="First Responder" sceneMemberID="firstResponder"/>

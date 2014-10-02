@@ -119,3 +119,9 @@ extern NSInteger const STMaximumSizeInBytesForUpload;
 #pragma mark - Settings
 
 extern NSString *const STSettingsDictKey;
+extern NSString *const STNotificationsLikesKey;
+extern NSString *const STNotificationsMessagesKey;
+extern NSString *const STNotificationsUploadNewPhotoKey;
+extern NSString *const STNotificationsFriendJoinStatusKey;
+extern NSString *const STNotificationsPhotosWaitingKey;
+extern NSString *const STNotificationsExtraLikesKey;

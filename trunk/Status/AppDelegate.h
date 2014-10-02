@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic) NSInteger badgeNumber;
+@property (nonatomic, strong) NSDictionary * settingsDict;
 
 -(void)checkForNotificationNumber;
+
 @end
