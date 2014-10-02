@@ -39,4 +39,8 @@ typedef void (^downloadImageCompletion) (NSURL *imageURL);
 -(void) getNearbyPostsWithOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) getUsersForScope:(STSearchScopeControl)scope withSearchText:(NSString *)searchText withOffset:(long) offset completion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 -(void) getUserInfo:(NSString*)userId wirhCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
+
+- (void)getUserSettingsWithCompletion:(successCompletion)completion andErrorCompletion:(errorCompletion)errorCompletion;
+- (void)setUserSettings:(NSDictionary *)settingsDict withCompletion:(successCompletion)completion andErrorCompletion:(errorCompletion)errorCompletion;
+
 @end
