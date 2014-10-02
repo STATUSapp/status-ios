@@ -480,7 +480,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="kgw-dF-TXV">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="kgw-dF-TXV">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="ZFn-zw-1i3"/>
@@ -580,7 +580,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="IzQ-Hf-vj1">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="IzQ-Hf-vj1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparenta" translatesAutoresizingMaskIntoConstraints="NO" id="7TM-d9-vEp">
@@ -1020,8 +1020,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pL0-e7-yGI">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <state key="normal" image="placeholder">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <state key="normal" image="placeholder STATUS loading">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="placeholder"/>
@@ -1095,7 +1095,7 @@
                             <constraint firstItem="Rpl-dR-Bqy" firstAttribute="centerX" secondItem="pL0-e7-yGI" secondAttribute="centerX" id="az6-Xy-R7l"/>
                             <constraint firstItem="Rpl-dR-Bqy" firstAttribute="centerY" secondItem="2am-yf-tUJ" secondAttribute="centerY" id="fBc-Ul-Tg7"/>
                             <constraint firstItem="pL0-e7-yGI" firstAttribute="centerX" secondItem="EyG-kb-FNl" secondAttribute="centerX" constant="-0.5" id="fTC-9k-F0o"/>
-                            <constraint firstItem="pL0-e7-yGI" firstAttribute="top" secondItem="2V2-Ym-L7J" secondAttribute="bottom" id="gE2-kB-WCL"/>
+                            <constraint firstItem="pL0-e7-yGI" firstAttribute="top" secondItem="2V2-Ym-L7J" secondAttribute="bottom" constant="-20" id="gE2-kB-WCL"/>
                             <constraint firstAttribute="centerX" secondItem="4Da-P2-HSY" secondAttribute="centerX" constant="-0.5" id="lcW-6E-Cdw"/>
                             <constraint firstItem="Rpl-dR-Bqy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Aam-EK-QwC" secondAttribute="bottom" constant="20" id="nq8-kd-pW5"/>
                             <constraint firstItem="pL0-e7-yGI" firstAttribute="leading" secondItem="ORg-p4-fQM" secondAttribute="leading" id="vBA-9c-Zjn"/>
@@ -1124,7 +1124,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="7AX-Q0-ZnK">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="7AX-Q0-ZnK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -1244,8 +1244,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r66-Ru-p8k">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <state key="normal" image="placeholder">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <state key="normal" image="placeholder STATUS loading">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="placeholder"/>
@@ -1364,7 +1364,7 @@
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="leading" secondItem="iPY-y5-31R" secondAttribute="leading" constant="2" id="mgZ-Vc-FID"/>
                             <constraint firstItem="aXA-Mz-F6B" firstAttribute="centerX" secondItem="r66-Ru-p8k" secondAttribute="centerX" id="nAo-5G-btV"/>
                             <constraint firstItem="qWu-0u-uc1" firstAttribute="top" secondItem="8wM-Ex-g3W" secondAttribute="bottom" constant="3" id="nc5-DV-vu6"/>
-                            <constraint firstItem="r66-Ru-p8k" firstAttribute="top" secondItem="2i2-9t-Q49" secondAttribute="bottom" id="sz4-k4-O4p"/>
+                            <constraint firstItem="r66-Ru-p8k" firstAttribute="top" secondItem="2i2-9t-Q49" secondAttribute="bottom" constant="-20" id="sz4-k4-O4p"/>
                             <constraint firstItem="8wM-Ex-g3W" firstAttribute="leading" secondItem="ZUF-St-TST" secondAttribute="leading" id="xJH-EX-Drs"/>
                         </constraints>
                     </view>
