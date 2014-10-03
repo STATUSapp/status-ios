@@ -1387,6 +1387,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Ho4-zF-Q6t">
+                            <rect key="frame" x="0.0" y="496" width="320" height="105"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoSettings" translatesAutoresizingMaskIntoConstraints="NO" id="efJ-n9-2Qg">
+                                    <rect key="frame" x="132" y="8" width="57" height="62"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="62" id="JSj-bp-JxP"/>
+                                        <constraint firstAttribute="width" constant="57" id="KDy-n6-KHh"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0.7" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvK-XN-D3f">
+                                    <rect key="frame" x="111" y="78" width="99" height="20"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.95039999999999991" green="0.95039999999999991" blue="0.95999999999999996" alpha="1" colorSpace="deviceRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="centerX" secondItem="efJ-n9-2Qg" secondAttribute="centerX" constant="-0.5" id="3Za-mu-QZ3"/>
+                                <constraint firstItem="efJ-n9-2Qg" firstAttribute="top" secondItem="Ho4-zF-Q6t" secondAttribute="top" constant="8" id="EgY-dH-coD"/>
+                                <constraint firstItem="cvK-XN-D3f" firstAttribute="top" secondItem="efJ-n9-2Qg" secondAttribute="bottom" constant="8" id="cnK-GJ-9oS"/>
+                                <constraint firstItem="cvK-XN-D3f" firstAttribute="centerX" secondItem="efJ-n9-2Qg" secondAttribute="centerX" constant="-0.5" id="gvV-pz-OLS"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection headerTitle="Notifications" id="BQZ-uG-DFc">
                                 <cells>
@@ -1666,7 +1692,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zam-Lq-m4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1477" y="1442"/>
+            <point key="canvasLocation" x="1477" y="1422"/>
         </scene>
     </scenes>
     <resources>
@@ -1703,6 +1729,7 @@
         <image name="invite your friend button pressed" width="202" height="40"/>
         <image name="invited button" width="202" height="40"/>
         <image name="invited button pressed" width="202" height="40"/>
+        <image name="logoSettings" width="57" height="62"/>
         <image name="main chat button" width="36" height="32"/>
         <image name="main chat button pressed" width="36" height="32"/>
         <image name="megaphone" width="169" height="169"/>
