@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Flow Template View Controller-->
@@ -1408,9 +1408,9 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="f65-RT-iOJ" firstAttribute="leading" secondItem="ekk-ka-WP8" secondAttribute="leadingMargin" constant="27" id="Gqw-Zq-MFJ"/>
                                                 <constraint firstAttribute="centerY" secondItem="f65-RT-iOJ" secondAttribute="centerY" id="J5e-Jq-Ez3"/>
-                                                <constraint firstItem="s4i-OF-9rh" firstAttribute="trailing" secondItem="ekk-ka-WP8" secondAttribute="trailingMargin" id="p6g-Yn-4Bk"/>
+                                                <constraint firstAttribute="trailing" secondItem="s4i-OF-9rh" secondAttribute="trailing" constant="8" id="Sfw-Jm-gi3"/>
+                                                <constraint firstItem="f65-RT-iOJ" firstAttribute="leading" secondItem="ekk-ka-WP8" secondAttribute="leading" constant="35" id="gW4-RS-yPk"/>
                                                 <constraint firstAttribute="centerY" secondItem="s4i-OF-9rh" secondAttribute="centerY" id="x0i-he-92f"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1433,10 +1433,10 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="nhX-Be-boj" firstAttribute="trailing" secondItem="tR4-Og-ewR" secondAttribute="trailingMargin" id="8wZ-je-D8q"/>
+                                                <constraint firstItem="h32-Rq-oUV" firstAttribute="leading" secondItem="tR4-Og-ewR" secondAttribute="leading" constant="35" id="0Ja-Gx-Ftc"/>
                                                 <constraint firstAttribute="centerY" secondItem="h32-Rq-oUV" secondAttribute="centerY" id="Fvb-HS-1kP"/>
+                                                <constraint firstAttribute="trailing" secondItem="nhX-Be-boj" secondAttribute="trailing" constant="8" id="UWI-uh-zUD"/>
                                                 <constraint firstAttribute="centerY" secondItem="nhX-Be-boj" secondAttribute="centerY" id="xM9-Pc-9uK"/>
-                                                <constraint firstItem="h32-Rq-oUV" firstAttribute="leading" secondItem="tR4-Og-ewR" secondAttribute="leadingMargin" constant="27" id="xj2-O8-KmF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1458,9 +1458,9 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="XMm-Kz-AFf" firstAttribute="trailing" secondItem="qSe-qY-x6G" secondAttribute="trailingMargin" id="Mny-sD-1eg"/>
+                                                <constraint firstItem="uHg-g3-fmT" firstAttribute="leading" secondItem="qSe-qY-x6G" secondAttribute="leading" constant="35" id="147-0c-DHT"/>
+                                                <constraint firstAttribute="trailing" secondItem="XMm-Kz-AFf" secondAttribute="trailing" constant="8" id="FI6-he-7zZ"/>
                                                 <constraint firstAttribute="centerY" secondItem="XMm-Kz-AFf" secondAttribute="centerY" id="SZe-oB-CFa"/>
-                                                <constraint firstItem="uHg-g3-fmT" firstAttribute="leading" secondItem="qSe-qY-x6G" secondAttribute="leadingMargin" constant="27" id="lvX-TO-MM6"/>
                                                 <constraint firstAttribute="centerY" secondItem="uHg-g3-fmT" secondAttribute="centerY" id="unQ-GD-MSH"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1483,9 +1483,9 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Mda-H8-yJ5" firstAttribute="trailing" secondItem="IGF-WE-IV8" secondAttribute="trailingMargin" id="Dh3-2E-ikW"/>
                                                 <constraint firstAttribute="centerY" secondItem="Mda-H8-yJ5" secondAttribute="centerY" id="Fcz-R8-AaG"/>
-                                                <constraint firstItem="1Eh-tM-1tk" firstAttribute="leading" secondItem="IGF-WE-IV8" secondAttribute="leadingMargin" constant="27" id="i5r-0s-ylT"/>
+                                                <constraint firstItem="1Eh-tM-1tk" firstAttribute="leading" secondItem="IGF-WE-IV8" secondAttribute="leading" constant="35" id="Yml-yr-Jkg"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mda-H8-yJ5" secondAttribute="trailing" constant="8" id="iM3-8H-F3d"/>
                                                 <constraint firstAttribute="centerY" secondItem="1Eh-tM-1tk" secondAttribute="centerY" id="ooT-FW-Ozu"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1508,10 +1508,10 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="LnN-TI-Obx" firstAttribute="leading" secondItem="0C7-1G-IJj" secondAttribute="leadingMargin" constant="27" id="2xs-YT-pHM"/>
+                                                <constraint firstAttribute="trailing" secondItem="lXw-if-eAv" secondAttribute="trailing" constant="8" id="5bj-4D-eJe"/>
                                                 <constraint firstAttribute="centerY" secondItem="LnN-TI-Obx" secondAttribute="centerY" id="DjB-0H-6rt"/>
+                                                <constraint firstItem="LnN-TI-Obx" firstAttribute="leading" secondItem="0C7-1G-IJj" secondAttribute="leading" constant="35" id="M8e-Tv-M1L"/>
                                                 <constraint firstAttribute="centerY" secondItem="lXw-if-eAv" secondAttribute="centerY" id="giF-jN-ugJ"/>
-                                                <constraint firstItem="lXw-if-eAv" firstAttribute="trailing" secondItem="0C7-1G-IJj" secondAttribute="trailingMargin" id="qR5-cj-T23"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1533,9 +1533,9 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Pjd-Kn-GId" firstAttribute="leading" secondItem="ofL-ut-2S5" secondAttribute="leadingMargin" constant="27" id="3o6-0L-ars"/>
-                                                <constraint firstItem="gVf-rr-b8Y" firstAttribute="trailing" secondItem="ofL-ut-2S5" secondAttribute="trailingMargin" id="jr9-LS-aK9"/>
+                                                <constraint firstItem="Pjd-Kn-GId" firstAttribute="leading" secondItem="ofL-ut-2S5" secondAttribute="leading" constant="35" id="PuT-LC-slZ"/>
                                                 <constraint firstAttribute="centerY" secondItem="gVf-rr-b8Y" secondAttribute="centerY" id="oA5-9l-VXf"/>
+                                                <constraint firstAttribute="trailing" secondItem="gVf-rr-b8Y" secondAttribute="trailing" constant="8" id="oRl-IL-ZGc"/>
                                                 <constraint firstAttribute="centerY" secondItem="Pjd-Kn-GId" secondAttribute="centerY" id="qca-9P-FEu"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1567,12 +1567,12 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="5Mk-9v-39d" firstAttribute="leading" secondItem="4bX-HD-7gl" secondAttribute="leadingMargin" constant="27" id="7SA-om-FYi"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="hWP-Mn-8Z1" secondAttribute="trailing" constant="-8" id="9OV-pO-xAD"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="hWP-Mn-8Z1" secondAttribute="bottom" constant="-8" id="Ixg-Ti-y6e"/>
+                                                <constraint firstItem="5Mk-9v-39d" firstAttribute="leading" secondItem="4bX-HD-7gl" secondAttribute="leading" constant="35" id="6Cf-uM-Cn1"/>
+                                                <constraint firstItem="hWP-Mn-8Z1" firstAttribute="top" secondItem="4bX-HD-7gl" secondAttribute="top" id="KdK-Lr-8c0"/>
                                                 <constraint firstAttribute="centerY" secondItem="5Mk-9v-39d" secondAttribute="centerY" constant="-1" id="fLE-Mg-pCP"/>
-                                                <constraint firstItem="hWP-Mn-8Z1" firstAttribute="leading" secondItem="4bX-HD-7gl" secondAttribute="leadingMargin" constant="-8" id="lnz-3J-XAG"/>
-                                                <constraint firstItem="hWP-Mn-8Z1" firstAttribute="top" secondItem="4bX-HD-7gl" secondAttribute="topMargin" constant="-8" id="wMA-c7-fXs"/>
+                                                <constraint firstAttribute="bottom" secondItem="hWP-Mn-8Z1" secondAttribute="bottom" id="gNn-Uk-Pky"/>
+                                                <constraint firstAttribute="trailing" secondItem="hWP-Mn-8Z1" secondAttribute="trailing" id="kRh-Bu-iOF"/>
+                                                <constraint firstItem="hWP-Mn-8Z1" firstAttribute="leading" secondItem="4bX-HD-7gl" secondAttribute="leading" id="zKk-hl-sk0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1599,12 +1599,12 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ZOv-ld-4Jw" secondAttribute="bottom" constant="-8" id="0dL-Se-n0t"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ZOv-ld-4Jw" secondAttribute="trailing" constant="-8" id="4yA-aU-1ao"/>
-                                                <constraint firstItem="ZOv-ld-4Jw" firstAttribute="top" secondItem="GdI-lp-22k" secondAttribute="topMargin" constant="-8" id="H7L-Ka-1C6"/>
+                                                <constraint firstItem="ZOv-ld-4Jw" firstAttribute="top" secondItem="GdI-lp-22k" secondAttribute="top" id="2dG-mK-Bv9"/>
+                                                <constraint firstItem="ZOv-ld-4Jw" firstAttribute="leading" secondItem="GdI-lp-22k" secondAttribute="leading" id="GMn-Pk-CZE"/>
                                                 <constraint firstAttribute="centerY" secondItem="PEv-gG-lD0" secondAttribute="centerY" constant="-1" id="HjK-hM-4DM"/>
-                                                <constraint firstItem="ZOv-ld-4Jw" firstAttribute="leading" secondItem="GdI-lp-22k" secondAttribute="leadingMargin" constant="-8" id="Pkx-hM-cu9"/>
-                                                <constraint firstItem="PEv-gG-lD0" firstAttribute="leading" secondItem="GdI-lp-22k" secondAttribute="leadingMargin" constant="27" id="Xae-Fg-1yY"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZOv-ld-4Jw" secondAttribute="trailing" id="QDr-3m-WjX"/>
+                                                <constraint firstItem="PEv-gG-lD0" firstAttribute="leading" secondItem="GdI-lp-22k" secondAttribute="leading" constant="35" id="jPF-iO-ULU"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZOv-ld-4Jw" secondAttribute="bottom" id="jiB-VW-toz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1638,10 +1638,10 @@
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="bxl-py-w5F" secondAttribute="centerY" id="1i3-uG-rgv"/>
                                                 <constraint firstAttribute="centerX" secondItem="bxl-py-w5F" secondAttribute="centerX" id="4bh-FP-3uX"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="11m-I0-s56" secondAttribute="trailing" constant="-8" id="DUY-cf-DRP"/>
-                                                <constraint firstItem="11m-I0-s56" firstAttribute="top" secondItem="jXP-cH-QRq" secondAttribute="topMargin" constant="-8" id="Q9a-42-dCO"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="11m-I0-s56" secondAttribute="bottom" constant="-8" id="VeX-uX-aP7"/>
-                                                <constraint firstItem="11m-I0-s56" firstAttribute="leading" secondItem="jXP-cH-QRq" secondAttribute="leadingMargin" constant="-8" id="qON-p3-icq"/>
+                                                <constraint firstItem="11m-I0-s56" firstAttribute="top" secondItem="jXP-cH-QRq" secondAttribute="top" id="dUQ-Ct-byP"/>
+                                                <constraint firstAttribute="trailing" secondItem="11m-I0-s56" secondAttribute="trailing" id="giT-Ar-FPP"/>
+                                                <constraint firstItem="11m-I0-s56" firstAttribute="leading" secondItem="jXP-cH-QRq" secondAttribute="leading" id="pOl-lJ-o6U"/>
+                                                <constraint firstAttribute="bottom" secondItem="11m-I0-s56" secondAttribute="bottom" id="sb4-S4-em8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
