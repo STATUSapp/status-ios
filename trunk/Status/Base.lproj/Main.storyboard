@@ -1025,7 +1025,7 @@
                                 <state key="normal" image="placeholder STATUS loading">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="placeholder"/>
+                                <state key="highlighted" image="placeholder STATUS loading"/>
                                 <connections>
                                     <action selector="dismissController:" destination="4Q1-kp-NX1" eventType="touchUpInside" id="bX1-FU-xtF"/>
                                 </connections>
@@ -1249,7 +1249,7 @@
                                 <state key="normal" image="placeholder STATUS loading">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="placeholder"/>
+                                <state key="highlighted" image="placeholder STATUS loading"/>
                                 <connections>
                                     <action selector="dismissController:" destination="OZV-os-N5E" eventType="touchUpInside" id="NaY-Va-ni2"/>
                                 </connections>
@@ -1735,7 +1735,6 @@
         <image name="megaphone" width="169" height="169"/>
         <image name="megaphone pressed" width="338" height="338"/>
         <image name="notification yellow circle" width="15" height="15"/>
-        <image name="placeholder" width="320" height="482"/>
         <image name="placeholder STATUS loading" width="320" height="568"/>
         <image name="placeholder imagine like screen" width="41" height="41"/>
         <image name="placeholder notifications screen" width="60" height="60"/>
