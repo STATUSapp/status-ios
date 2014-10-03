@@ -93,6 +93,10 @@ static NSInteger const  kSTNumberOfTutorialImages = 6;
         cell.backgroundView.backgroundColor = [UIColor clearColor];
     }
     cell.tag = indexPath.row;
+    
+    cell.contentView.frame = cell.bounds;
+    cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    
     return cell;
 }
 

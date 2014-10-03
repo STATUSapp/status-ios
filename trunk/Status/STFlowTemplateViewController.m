@@ -1102,6 +1102,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     STCustomCollectionViewCell *cell = (STCustomCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"FlowCollectionCellIdentifier" forIndexPath:indexPath];
    
+    cell.contentView.frame = cell.bounds;
+    cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    
     if (_isPlaceholderSinglePost && !_isDataSourceLoaded) {
         [cell setUpPlaceholderBeforeLoading];
     }
