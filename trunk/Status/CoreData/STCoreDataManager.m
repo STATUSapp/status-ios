@@ -217,39 +217,39 @@ static STCoreDataManager* _coreDataManager = nil;
                               withData:(NSDictionary*)serverData
                          andCompletion:(CompletionBlock)completion{
     //We create a new managed object context from our main, we update it async, then we merge the changes into our main M.O.C
-    dispatch_async(_async_queries_queue, ^{
-        
         // Create a new managed object context
         // Set its persistent store coordinator
         NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
 
-        Message *insertedValue = [self insertDataForTableName:entityName inObjectContext:newMoc];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-        NSDate* date = [dateFormatter dateFromString:serverData[@"date"]];
-        insertedValue.date = date;
-        insertedValue.message = serverData[@"message"];
-        insertedValue.received = serverData[@"received"];
-        insertedValue.roomID = serverData[@"roomID"];
-        insertedValue.seen = serverData[@"seen"];
-        insertedValue.userId = serverData[@"userId"];
-        
-        NSError *error = nil;
-        [newMoc save:&error];
-
-        if (error) {
-            NSLog(@"synchronizeAsyncCoreDataEntity error: %@",error);
-            if (completion) {
-                completion(NO,error);
+        [newMoc performBlock:^{
+            Message *insertedValue = [self insertDataForTableName:entityName inObjectContext:newMoc];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+            NSDate* date = [dateFormatter dateFromString:serverData[@"date"]];
+            insertedValue.date = date;
+            insertedValue.message = serverData[@"message"];
+            insertedValue.received = serverData[@"received"];
+            insertedValue.roomID = serverData[@"roomID"];
+            insertedValue.seen = serverData[@"seen"];
+            insertedValue.userId = serverData[@"userId"];
+            
+            NSError *error = nil;
+            [newMoc save:&error];
+            
+            if (error) {
+                NSLog(@"synchronizeAsyncCoreDataEntity error: %@",error);
+                if (completion) {
+                    completion(NO,error);
+                }
             }
-        }
-        else {
-            if (completion) {
-                completion(YES,newMoc);
+            else {
+                if (completion) {
+                    completion(YES,newMoc);
+                }
             }
-        }
-    });
+            
+        }];
 }
 
 #pragma mark -  Update data helpers
@@ -266,7 +266,7 @@ static STCoreDataManager* _coreDataManager = nil;
 - (NSManagedObjectContext*)getNewManagedObjectContext{
     // Create a new managed object context
     // Set its persistent store coordinator
-    NSManagedObjectContext *newMoc = [[NSManagedObjectContext alloc] init];
+    NSManagedObjectContext *newMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [newMoc setParentContext:self.managedObjectContext];
     
     return newMoc;
