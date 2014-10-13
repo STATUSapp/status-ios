@@ -47,6 +47,10 @@
 
 }
 
+-(void)dealloc{
+    _tableView.delegate = nil;
+}
+
 - (void)loadDataSource
 {
     __weak STFacebookAlbumsViewController *weakSelf = self;

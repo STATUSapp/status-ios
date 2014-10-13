@@ -51,6 +51,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    _likesTableView.delegate = nil;
+}
+
 #pragma mark - IBActions
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

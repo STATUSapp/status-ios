@@ -68,6 +68,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    _collectionView.delegate = nil;
+}
+
 /*
 #pragma mark - Navigation
 

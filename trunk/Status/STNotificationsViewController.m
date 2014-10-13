@@ -74,6 +74,10 @@ const float kNoNotifHeight = 24.f;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)dealloc{
+    _notificationTable.delegate = nil;
+}
 - (IBAction)onClickback:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

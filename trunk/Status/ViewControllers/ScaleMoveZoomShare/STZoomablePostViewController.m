@@ -45,6 +45,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    _scrollView.delegate = nil;
+}
+
 -(void) setUpTheContext{
     [self.scrollView addSubview:_imageView];
     

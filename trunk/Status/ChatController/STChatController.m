@@ -295,8 +295,7 @@
     }
     [[STCoreDataManager sharedManager] synchronizeAsyncCoreDataEntity:@"Message"
                                                              withData:resultDict
-                                                        andCompletion:^(BOOL success, id returnObject) {
-                                                        }];
+                                                        andCompletion:nil];
 }
 
 #pragma mark -Helpers

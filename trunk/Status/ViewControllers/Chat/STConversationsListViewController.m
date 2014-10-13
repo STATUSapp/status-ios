@@ -65,6 +65,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    _tableView.delegate = nil;
+}
+
 #pragma mark - UITableView datasource and delegate methods
 
 -(NSDictionary *)getDictionaryorIndex:(NSInteger)index{

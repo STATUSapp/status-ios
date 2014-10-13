@@ -937,10 +937,23 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 - (void)inviteCurrentPostOwnerUserToUpload {
     
     NSDictionary * currentPostDict = [self getCurrentDictionary];
-    
-    NSString * userID = currentPostDict[@"user_id"];
-    NSString * userName = currentPostDict[@"user_name"];
+    NSString * userID = nil;
+    NSString * userName = nil;
+    if (currentPostDict == nil || currentPostDict[@"user_id"] == nil) {
+        if (self.flowType == STFlowTypeUserProfile) {
+            userID = _userID;
+            userName = _userName;
+        }
+    }
+    else{
+        userID = currentPostDict[@"user_id"];
+        userName = currentPostDict[@"user_name"];
+    }
 
+    if (userID == nil) {
+        //TODO: should deactivate that option
+        return;
+    }
     [[STWebServiceController sharedInstance] inviteUserToUpload:userID withCompletion:^(NSDictionary *response) {
         NSInteger statusCode = [response[@"status_code"] integerValue];
         if (statusCode == STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
@@ -1469,6 +1482,11 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                 return;
             }
             _lastNotif = nil;
+            NSDictionary *userInfo = notif[@"user_info"];
+            if (userInfo[@"user_id"] == nil) {
+                NSLog(@"Error from notification: user_id = nil");
+                return;
+            }
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
             STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
             viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:notif[@"user_info"]];

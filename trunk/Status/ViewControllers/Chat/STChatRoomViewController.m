@@ -269,6 +269,10 @@ static NSInteger const  kBlockUserAlertTag = 11;
 }
 - (IBAction)onClickUserName:(id)sender {
     
+    if (_userInfo[@"user_id"] == nil) {
+        NSLog(@"Error from server. No user id.");
+        return;
+    }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
@@ -498,6 +502,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     // Dispose of any resources that can be recreated.
 }
 -(void)dealloc{
+    _tableView.delegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [actionSheet dismissWithClickedButtonIndex:2 animated:NO];
     [self hideStatusAlert];

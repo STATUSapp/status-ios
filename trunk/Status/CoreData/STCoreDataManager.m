@@ -222,7 +222,7 @@ static STCoreDataManager* _coreDataManager = nil;
         // Create a new managed object context
         // Set its persistent store coordinator
         NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
-        
+
         Message *insertedValue = [self insertDataForTableName:entityName inObjectContext:newMoc];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -240,9 +240,15 @@ static STCoreDataManager* _coreDataManager = nil;
 
         if (error) {
             NSLog(@"synchronizeAsyncCoreDataEntity error: %@",error);
-            completion(NO,error);
+            if (completion) {
+                completion(NO,error);
+            }
         }
-        else completion(YES,newMoc);
+        else {
+            if (completion) {
+                completion(YES,newMoc);
+            }
+        }
     });
 }
 

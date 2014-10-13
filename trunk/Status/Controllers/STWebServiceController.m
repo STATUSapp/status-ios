@@ -226,6 +226,10 @@
 #if PAGGING_ENABLED
     limit = POSTS_PAGGING;
 #endif
+    if (userId == nil) {
+        completion(nil);
+        return;
+    }
     [self.sessionManager GET:kGetUserPosts parameters:@{@"limit": @(limit), @"offset":@(offset), @"token":self.accessToken,@"user_id":userId} success:^(NSURLSessionDataTask *task, id responseObject) {
         /*NSDictionary *responseDict = [NSJSONSerialization
                                       JSONObjectWithData:responseObject
