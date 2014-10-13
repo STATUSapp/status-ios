@@ -85,7 +85,7 @@
     [connection start];
 }
 
-#pragma mark - Facebook Delegates
+#pragma mark - Facebook DelegatesFyou
 
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
     if (user[@"email"]==nil) {
@@ -246,6 +246,7 @@
     } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
         alertTitle = @"Session Error";
         alertMessage = @"Your current session is no longer valid. Please log in again.";
+        [_delegate facebookControllerSessionExpired];
         // If the user has cancelled a login, we will do nothing.
         // You can also choose to show the user a message if cancelling login will result in
         // the user not being able to complete a task they had initiated in your app

@@ -17,6 +17,7 @@
 
 -(void) facebookControllerDidLoggedIn;
 -(void) facebookControllerDidLoggedOut;
+-(void) facebookControllerSessionExpired;
 
 @end
 

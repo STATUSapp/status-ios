@@ -365,6 +365,10 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
 }
 
+-(void)facebookControllerSessionExpired{
+    [self presentLoginScene];
+}
+
 -(void)chatControllerAuthenticate{
     [self handleNotification:_lastNotif];
 }
