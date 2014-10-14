@@ -286,7 +286,7 @@ const float kNoNotifHeight = 24.f;
 
 #pragma mark - Helper
 
--(NSString *) getNotificationTypeStringForType:(STNotificationType) type{
+-(NSString *) getNotificationTypeStringForType:(STNotificationType)type{
     NSString *str = @"";
     switch (type) {
         case STNotificationTypeLike:
@@ -298,6 +298,7 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeUploaded:
             str = @"uploaded a photo.";
             break;
+            case STNotificationType5DaysUploadNewPhoto:
             
         default:
             str = @"likes your photo.";

@@ -41,6 +41,6 @@ typedef void (^downloadImageCompletion) (NSURL *imageURL);
 -(void) getUserInfo:(NSString*)userId wirhCompletion:(successCompletion) completion andErrorCompletion:(errorCompletion) errorCompletion;
 
 - (void)getUserSettingsWithCompletion:(successCompletion)completion andErrorCompletion:(errorCompletion)errorCompletion;
-- (void)setUserSettings:(NSDictionary *)settingsDict withCompletion:(successCompletion)completion andErrorCompletion:(errorCompletion)errorCompletion;
+- (void)setUserSetting:(NSString *)setting enabled:(BOOL)isEnabled withCompletion:(successCompletion)completion andErrorCompletion:(errorCompletion)errorCompletion;
 
 @end

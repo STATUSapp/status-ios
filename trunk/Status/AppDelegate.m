@@ -31,24 +31,6 @@ static NSInteger const kSTWaitingIntervalForANewRequest = 15;
 
 @implementation AppDelegate
 
-- (void)setSettingsDict:(NSDictionary *)settingsDict{
-    
-    __weak AppDelegate * weakSelf = self;
-    
-    [[NSUserDefaults standardUserDefaults] setObject:settingsDict forKey:STSettingsDictKey];
-    
-//    [[STWebServiceController sharedInstance] setUserSettings:settingsDict withCompletion:^(NSDictionary *response) {
-//        // succes ?
-//    } andErrorCompletion:^(NSError *error) {
-//        [weakSelf performSelector:@selector(setSettingsDict:) withObject:settingsDict afterDelay:kSTWaitingIntervalForANewRequest];
-//    }];
-    
-}
-
-- (NSDictionary *)settingsDict{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:STSettingsDictKey];
-}
-
 - (BOOL)checkNotificationType:(UIUserNotificationType)type
 {
     UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];

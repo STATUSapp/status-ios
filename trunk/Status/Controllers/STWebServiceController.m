@@ -452,6 +452,28 @@
     }];
 }
 
+- (void)getUserSettingsWithCompletion:(successCompletion)completion andErrorCompletion:(errorCompletion)errorCompletion {
+    NSDictionary *params = @{@"token":self.accessToken};
+    
+    [self.sessionManager GET:kGetUserSettings parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        errorCompletion(error);
+    }];
+}
+
+- (void)setUserSetting:(NSString *)setting enabled:(BOOL)isEnabled withCompletion:(successCompletion)completion andErrorCompletion:(errorCompletion)errorCompletion {
+    NSDictionary *params = @{@"key":setting,
+                             @"value":[NSNumber numberWithBool:isEnabled],
+                             @"token":self.accessToken};
+    [self.sessionManager POST:kSetUserSetting parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        errorCompletion(error);
+    }];
+    
+}
+
 #pragma mark - Helpers
 
 -(NSNumber *) getTimeZoneOffsetFromGMT{

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define USE_SD_WEB 1
+#define USE_PRODUCTION_SERVER 0
 
 #define PAGGING_ENABLED 1
 #define  POSTS_PAGGING 10
@@ -37,8 +38,12 @@ typedef NS_ENUM(NSUInteger,STWebservicesCodes){
 
 typedef NS_ENUM(NSUInteger,STNotificationType){
     STNotificationTypeLike = 1,
-    STNotificationTypeInvite,
-    STNotificationTypeUploaded
+    STNotificationTypeInvite = 2,
+    STNotificationTypeUploaded = 3,
+    STNotificationTypePhotosWaiting = 5,
+    STNotificationTypeNewUserJoinsStatus = 6,
+    STNotificationTypeGuaranteedViewsForNextPhoto = 7,
+    STNotificationType5DaysUploadNewPhoto = 8
 };
 
 typedef NS_ENUM(NSUInteger,STWebSockerStatus){
@@ -90,6 +95,8 @@ extern NSString *const kGetAllUsers;
 extern NSString *const kGetNearby ;
 extern NSString *const kGetRecent;
 extern NSString *const kGetUserInfo;
+extern NSString *const kGetUserSettings;
+extern NSString *const kSetUserSetting;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

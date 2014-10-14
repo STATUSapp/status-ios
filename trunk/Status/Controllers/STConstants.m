@@ -11,18 +11,27 @@
 # pragma mark - Ammadeuss Dev
 //NSString *const kBaseURL = @"http://dev.simplebig.ro/status/api/";
 //NSString *const kBasePhotoDownload = @"http://dev.simplebig.ro/status/media/";
+
+#if USE_PRODUCTION_SERVER
+
 #pragma mark - Production Server
 NSString *const kBaseURL = @"http://api.getstatusapp.co/api/";
 NSString *const kBasePhotoDownload = @"http://api.getstatusapp.co/media/";
 NSString *const kChatSocketURL = @"http://api.getstatusapp.co";
 NSString *const kReachableURL = @"api.getstatusapp.co";
 int const kChatPort = 9002;
+
+#else
+
 #pragma mark - Denis Dev
-//NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
-//NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
-//NSString *const kChatSocketURL = @"http://dev.getstatusapp.co";
-//NSString *const kReachableURL = @"dev.getstatusapp.co";
-//int const kChatPort = 9001;
+NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
+NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
+NSString *const kChatSocketURL = @"http://dev.getstatusapp.co";
+NSString *const kReachableURL = @"dev.getstatusapp.co";
+int const kChatPort = 9001;
+
+#endif
+
 #pragma mark - Denis Dev1
 //NSString *const kBaseURL = @"http://status.nece.me/api/";
 //NSString *const kBasePhotoDownload = @"http://status.nece.me/media/";
@@ -53,6 +62,8 @@ NSString *const kGetAllUsers = @"get_all_users";
 NSString *const kGetNearby = @"get_nearby_users";
 NSString *const kGetRecent = @"get_recent_users";
 NSString *const kGetUserInfo = @"get_user_info";
+NSString *const kGetUserSettings = @"get_user_settings";
+NSString *const kSetUserSetting = @"set_user_setting";
 
 
 NSString *const kMATAdvertiserID = @"21414";
@@ -86,10 +97,10 @@ NSInteger const STMaximumSizeInBytesForUpload = 3145728;  // 3 MB
 #pragma mark - Settings
 
 NSString *const STSettingsDictKey = @"STSettingsDictKey";
-NSString *const STNotificationsLikesKey = @"STNotificationsLikesKey";
-NSString *const STNotificationsMessagesKey = @"STNotificationsMessagesKey";
-NSString *const STNotificationsUploadNewPhotoKey = @"STNotificationsUploadNewPhotoKey";
-NSString *const STNotificationsFriendJoinStatusKey = @"STNotificationsFriendJoinStatusKey";
-NSString *const STNotificationsPhotosWaitingKey = @"STNotificationsPhotosWaitingKey";
-NSString *const STNotificationsExtraLikesKey = @"STNotificationsExtraLikesKey";
+NSString *const STNotificationsLikesKey = @"notifications_likes";
+NSString *const STNotificationsMessagesKey = @"notifications_messages";
+NSString *const STNotificationsUploadNewPhotoKey = @"notifications_upload_a_new_photo";
+NSString *const STNotificationsFriendJoinStatusKey = @"notifications_a_friend_joins_status";
+NSString *const STNotificationsPhotosWaitingKey = @"notifications_photos_waiting_for_you";
+NSString *const STNotificationsExtraLikesKey = @"notifications_earn_extra_likes";
 

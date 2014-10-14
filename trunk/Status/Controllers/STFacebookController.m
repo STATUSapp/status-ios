@@ -302,6 +302,20 @@ static const UIUserNotificationType USER_NOTIFICATION_TYPES_REQUIRED = UIRemoteN
     
     UIUserNotificationSettings* requestedSettings = [UIUserNotificationSettings settingsForTypes:USER_NOTIFICATION_TYPES_REQUIRED categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:requestedSettings];
+    
+    
+    //get settings from server
+    [self getUserSettingsFromServer];
+}
+
+- (void)getUserSettingsFromServer {
+    [[STWebServiceController sharedInstance] getUserSettingsWithCompletion:^(NSDictionary *response) {
+        NSDictionary * settingsDict = response[@"data"];
+        [[NSUserDefaults standardUserDefaults] setObject:settingsDict forKey:STSettingsDictKey];
+
+    } andErrorCompletion:^(NSError *error) {
+        NSLog(@"settings error: %@", error.localizedDescription);
+    }];
 }
 
 @end

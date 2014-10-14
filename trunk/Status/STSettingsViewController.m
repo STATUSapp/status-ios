@@ -11,6 +11,7 @@
 #import "STFacebookController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
+#import "STWebServiceController.h"
 
 const NSInteger kSectionNumberNotifications = 0;
 const NSInteger kSectionNumberContactLikeAds = 1;
@@ -44,6 +45,12 @@ const NSInteger kSectionNumberLogout = 2;
     return self;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -62,18 +69,20 @@ const NSInteger kSectionNumberLogout = 2;
     [_logoutCell.contentView addSubview:loginView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapDone)];
     
-    _settingsDict = [(AppDelegate *)([UIApplication sharedApplication].delegate) settingsDict];
+    _settingsDict = [[NSUserDefaults standardUserDefaults] objectForKey:STSettingsDictKey];
+    __weak STSettingsViewController * weakSelf = self;
+    [[STWebServiceController sharedInstance] getUserSettingsWithCompletion:^(NSDictionary *response) {
+        weakSelf.settingsDict = response[@"data"];
+        [[NSUserDefaults standardUserDefaults] setObject:weakSelf.settingsDict forKey:STSettingsDictKey];
+        [weakSelf configureSwitches];
+        
+    } andErrorCompletion:^(NSError *error) {
+
+    }];
     
     [self configureSwitches];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    _settingsDict = [self getNewSettingsDict];
-    [(AppDelegate *)([UIApplication sharedApplication].delegate) setSettingsDict:_settingsDict];
-
-}
 
 - (void)configureSwitches {
     [_switchLikes setOn:[[_settingsDict valueForKey:STNotificationsLikesKey] boolValue]];
@@ -221,8 +230,35 @@ const NSInteger kSectionNumberLogout = 2;
     }
 }
 
-- (void)openStatusFacebookPage {
 
+- (IBAction)onTapLikeSwitch:(UISwitch *)sender {
+    [self setSetting:STNotificationsLikesKey fromSwitch:sender];
+}
+
+- (IBAction)onTapMessagesSwitch:(UISwitch *)sender {
+    [self setSetting:STNotificationsMessagesKey fromSwitch:sender];
+}
+- (IBAction)onTapUploadNewPhotoSwitch:(UISwitch *)sender {
+    [self setSetting:STNotificationsUploadNewPhotoKey fromSwitch:sender];
+}
+- (IBAction)onTapFriendJoinsStatusSwitch:(UISwitch *)sender {
+    [self setSetting:STNotificationsFriendJoinStatusKey fromSwitch:sender];
+}
+- (IBAction)onTapPhotosWaitingSwitch:(UISwitch *)sender {
+    [self setSetting:STNotificationsPhotosWaitingKey fromSwitch:sender];
+}
+- (IBAction)onTapExtraLikesSwitch:(UISwitch *)sender {
+    [self setSetting:STNotificationsExtraLikesKey fromSwitch:sender];
+}
+
+- (void)setSetting:(NSString *)setting fromSwitch:(UISwitch *)sender {
+    __weak UISwitch * weakSender = sender;
+    __weak STSettingsViewController * weakSelf = self;
+    [[STWebServiceController sharedInstance] setUserSetting:setting enabled:weakSender.isOn withCompletion:^(NSDictionary *response) {
+        [[NSUserDefaults standardUserDefaults] setObject:[weakSelf getNewSettingsDict] forKey:STSettingsDictKey];
+    } andErrorCompletion:^(NSError *error) {
+        [weakSender setOn:!sender.isOn];
+    }];
 }
 
 @end
