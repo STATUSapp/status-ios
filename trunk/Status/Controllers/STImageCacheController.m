@@ -383,7 +383,8 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                                       }
                                                       else if(finished)
                                                       {
-                                                          if (cacheType == SDImageCacheTypeNone) {
+                                                          NSString *imageFullPath = [self blurPostLinkWithURL:imageURL.absoluteString];
+                                                          if (cacheType == SDImageCacheTypeNone || ![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
                                                               dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                                                                   [weakSelf saveImageForBlur:image imageURL:imageURL];
                                                                   dispatch_async(dispatch_get_main_queue(), ^{
@@ -503,8 +504,8 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 -(void)loadNextPhoto{
     NSLog(@"Photo for download count: %lu", (unsigned long)_currentPosts.count);
     while (_currentPosts.count == 0) {
-//        [[SDImageCache sharedImageCache] clearMemory];
-        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+        [[SDImageCache sharedImageCache] clearMemory];
+//        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
         _inProgress = NO;
         return;
     }

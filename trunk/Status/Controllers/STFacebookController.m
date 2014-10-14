@@ -149,8 +149,8 @@
 }
 
 -(void) loginOrRegistrationWithUser:(id<FBGraphUser>)user{
-    
-    [self UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
+    NSString *userIdentifier = user[@"email"]; //user[@"id"];
+    [self UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
     
     __weak STFacebookController *weakSelf = self;
     FBRequest *pic = [FBRequest requestForGraphPath:@"me/?fields=picture.type(large)"];
@@ -176,20 +176,20 @@
         [weakSelf UDSetValue:photoLink forKey:PHOTO_LINK];
         [weakSelf UDSetValue:userName  forKey:USER_NAME];
 
-        [[STWebServiceController sharedInstance] loginUserWithInfo:@{@"email":user[@"email"],@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"facebook_image_link":photoLink,@"full_name":userName} withCompletion:^(NSDictionary *response) {
+        [[STWebServiceController sharedInstance] loginUserWithInfo:@{@"email":userIdentifier,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"facebook_image_link":photoLink,@"full_name":userName} withCompletion:^(NSDictionary *response) {
             if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
 
-                [[STWebServiceController sharedInstance] registerUserWithInfo:@{@"full_name":userName, @"email":user[@"email"],@"facebook_image_link":photoLink,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"phone_number":@""} withCompletion:^(NSDictionary *response) {
+                [[STWebServiceController sharedInstance] registerUserWithInfo:@{@"full_name":userName, @"email":userIdentifier,@"facebook_image_link":photoLink,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"phone_number":@""} withCompletion:^(NSDictionary *response) {
                     
                     if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                         [STWebServiceController sharedInstance].accessToken = response[@"token"];
-                        [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
+                        [weakSelf UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
                         [[STChatController sharedInstance] forceReconnect];
                         [[STLocationManager sharedInstance] startLocationUpdates];
                         [weakSelf saveAccessToken:response[@"token"]];
                         [self requestRemoteNotificationAccess];
                         weakSelf.currentUserId = response[@"user_id"];
-                        [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:user[@"email"] andUserName:userName];
+                        [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userIdentifier andUserName:userName];
                         [weakSelf announceDelegate];
                         [weakSelf measureRegister];
                     }
@@ -208,12 +208,12 @@
             else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
                 [weakSelf setTrackerAsExistingUser];
                 [STWebServiceController sharedInstance].accessToken = response[@"token"];
-                [weakSelf UDSetValue:user[@"email"] forKey:LOGGED_EMAIL];
+                [weakSelf UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
                 [[STChatController sharedInstance] forceReconnect];
                 [[STLocationManager sharedInstance] startLocationUpdates];
                 [weakSelf saveAccessToken:response[@"token"]];
                 weakSelf.currentUserId = response[@"user_id"];
-                [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:user[@"email"] andUserName:response[@"user_name"]];
+                [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userIdentifier andUserName:response[@"user_name"]];
                 [self requestRemoteNotificationAccess];
                 [weakSelf announceDelegate];
             }

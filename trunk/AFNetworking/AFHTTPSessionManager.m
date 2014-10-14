@@ -109,6 +109,9 @@
                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
+#ifdef DEBUG
+    NSLog(@"Test Params: %@", parameters);
+#endif
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
 
     [dataTask resume];
@@ -137,6 +140,9 @@
                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
+#ifdef DEBUG
+    NSLog(@"Test Params: %@", parameters);
+#endif
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"POST" URLString:URLString parameters:parameters success:success failure:failure];
 
     [dataTask resume];
