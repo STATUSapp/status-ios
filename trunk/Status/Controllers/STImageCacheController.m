@@ -320,7 +320,9 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
         if (blurCompl!=nil) {
             NSString *bluredLink = [self blurPostLinkWithURL:imageFullLink];
             UIImage *bluredImg= [UIImage imageWithData:[NSData dataWithContentsOfFile:bluredLink]];
-            blurCompl(bluredImg);
+            if (bluredImg!=nil) {
+                blurCompl(bluredImg);
+            }
         }
         [sdManager downloadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
@@ -333,7 +335,18 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                   }
                                   else if (finished==YES){
                                       completion(image);
-
+                                      NSString *imageFullPath = [self blurPostLinkWithURL:imageFullLink];
+                                      if (![[NSFileManager defaultManager] fileExistsAtPath:imageFullPath]) {
+                                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                                              [[STImageCacheController sharedInstance] saveImageForBlur:image imageURL:[NSURL URLWithString:imageFullLink]];
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if (blurCompl!=nil) {
+                                                      UIImage *bluredImage = [UIImage imageWithContentsOfFile:imageFullPath];
+                                                      blurCompl(bluredImage);
+                                                  }
+                                              });
+                                          });
+                                      }
                                   }
                                   else{
                                       completion(nil);
