@@ -209,22 +209,8 @@ const float kNoNotifHeight = 24.f;
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     STNotificationCell *cell = (STNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
     NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
-#if !USE_SD_WEB
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"post_photo_link"]
-                                                 andCompletion:^(UIImage *img) {
-                                                     cell.postImg.image = img;
-                                                 } isForFacebook:NO];
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"user_photo_link"]
-                                                 andCompletion:^(UIImage *img) {
-                                                     cell.userImg.image = img;
-                                                 } isForFacebook:NO];
-
-#else    
     [cell.postImg sd_setImageWithURL:[NSURL URLWithString:dict[@"post_photo_link"]]];
     [cell.userImg sd_setImageWithURL:[NSURL URLWithString:dict[@"user_photo_link"]]];
-
-
-#endif
 
     cell.seenCircle.hidden = [dict[@"seen"] boolValue];
     cell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];

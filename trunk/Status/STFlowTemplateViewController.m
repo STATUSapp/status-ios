@@ -326,9 +326,11 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     if (![self.presentedViewController isBeingDismissed])
     {
-        [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
-            [weakSelf presentTutorialAutomatically];
-        }];
+        if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
+            [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
+                [weakSelf presentTutorialAutomatically];
+            }];
+        }
     }
     [self getDataSourceWithOffset:0];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -1081,15 +1083,10 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void) getCurrentImageDataWithCompletion:(loadImageCompletion) completion{
     NSDictionary *dict = [self getCurrentDictionary];
-#if !USE_SD_WEB
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img) {
-        completion(img);
-    } isForFacebook:NO];
-#else
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"full_photo_link"] andCompletion:^(UIImage *img) {
-        completion(img);
-    }];
-#endif
+    [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *origImg) {
+        completion(origImg);
+        
+    } andBlurCompletion:nil];
 }
 
 -(NSDictionary *) getCurrentDictionary{

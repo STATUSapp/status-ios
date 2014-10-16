@@ -18,15 +18,10 @@ typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded);
 
 +(STImageCacheController *) sharedInstance;
 
-#if !USE_SD_WEB
--(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion isForFacebook:(BOOL)forFacebook;
-#else
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion;
-#endif
 -(void) loadPostImageWithName:(NSString *) imageFullLink withPostCompletion:(loadPostImageCompletion) completion andBlurCompletion:(loadBlurPostCompletion)blurCompl;
 -(NSString *) getImageCachePath:(BOOL)forFacebook;
 -(void) cleanTemporaryFolder;
 -(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts;
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort;
-- (void)saveImageForBlur:(UIImage *)image imageURL:(NSURL *)imageURL;
 @end

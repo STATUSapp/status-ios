@@ -73,13 +73,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
     if (photoLink == nil) {
         photoLink = _userInfo[@"full_photo_link"];
     }
-#if !USE_SD_WEB
-    [[STImageCacheController sharedInstance] loadImageWithName:photoLink andCompletion:^(UIImage *img) {
-        userImage = img;
-        [_tableView reloadData];
-        [_userImg maskImage:userImage];
-    } isForFacebook:NO];
-#else
     __weak STChatRoomViewController *weakSelf = self;
     
     [_userImg sd_setImageWithURL:[NSURL URLWithString:photoLink] placeholderImage:[UIImage imageNamed:@"btn_nrLIkes_normal"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -87,7 +80,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
         [weakSelf.tableView reloadData];
         [weakSelf.userImg maskImage:userImage];
     }];
-#endif
 }
 
 - (void)viewDidLoad
