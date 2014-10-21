@@ -148,9 +148,22 @@
     [[Crashlytics sharedInstance] setUserName:userName];
 }
 
+- (void)setUpEnvironment:(NSDictionary *)response userIdentifier:(NSString *)userIdentifier userName:(NSString *)userName {
+    [STWebServiceController sharedInstance].accessToken = response[@"token"];
+    [self UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
+    [[STChatController sharedInstance] forceReconnect];
+    [[STLocationManager sharedInstance] startLocationUpdates];
+    [self saveAccessToken:response[@"token"]];
+    self.currentUserId = response[@"user_id"];
+    [self setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userIdentifier andUserName:userName];
+    [self requestRemoteNotificationAccess];
+    [self announceDelegate];
+    //get settings from server
+    [self getUserSettingsFromServer];
+}
+
 -(void) loginOrRegistrationWithUser:(id<FBGraphUser>)user{
     NSString *userIdentifier = user[@"email"]; //user[@"id"];
-    [self UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
     
     __weak STFacebookController *weakSelf = self;
     FBRequest *pic = [FBRequest requestForGraphPath:@"me/?fields=picture.type(large)"];
@@ -182,16 +195,9 @@
                 [[STWebServiceController sharedInstance] registerUserWithInfo:@{@"full_name":userName, @"email":userIdentifier,@"facebook_image_link":photoLink,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"phone_number":@""} withCompletion:^(NSDictionary *response) {
                     
                     if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-                        [STWebServiceController sharedInstance].accessToken = response[@"token"];
-                        [weakSelf UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
-                        [[STChatController sharedInstance] forceReconnect];
-                        [[STLocationManager sharedInstance] startLocationUpdates];
-                        [weakSelf saveAccessToken:response[@"token"]];
-                        [self requestRemoteNotificationAccess];
-                        weakSelf.currentUserId = response[@"user_id"];
-                        [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userIdentifier andUserName:userName];
-                        [weakSelf announceDelegate];
                         [weakSelf measureRegister];
+                        [weakSelf setUpEnvironment:response userIdentifier:userIdentifier userName:userName];
+
                     }
                     else
                     {
@@ -207,15 +213,7 @@
             }
             else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
                 [weakSelf setTrackerAsExistingUser];
-                [STWebServiceController sharedInstance].accessToken = response[@"token"];
-                [weakSelf UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
-                [[STChatController sharedInstance] forceReconnect];
-                [[STLocationManager sharedInstance] startLocationUpdates];
-                [weakSelf saveAccessToken:response[@"token"]];
-                weakSelf.currentUserId = response[@"user_id"];
-                [weakSelf setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userIdentifier andUserName:response[@"user_name"]];
-                [self requestRemoteNotificationAccess];
-                [weakSelf announceDelegate];
+                [weakSelf setUpEnvironment:response userIdentifier:userIdentifier userName:userName];
             }
             else
             {
@@ -303,9 +301,6 @@ static const UIUserNotificationType USER_NOTIFICATION_TYPES_REQUIRED = UIRemoteN
     UIUserNotificationSettings* requestedSettings = [UIUserNotificationSettings settingsForTypes:USER_NOTIFICATION_TYPES_REQUIRED categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:requestedSettings];
     
-    
-    //get settings from server
-    [self getUserSettingsFromServer];
 }
 
 - (void)getUserSettingsFromServer {

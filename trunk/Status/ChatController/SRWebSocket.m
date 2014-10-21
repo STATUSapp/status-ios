@@ -704,6 +704,10 @@ static __strong NSData *CRLFCRLF;
 }
 - (void)send:(id)data;
 {
+#ifdef DEBUG
+    NSLog(@"Send To socket: %@", data);
+#endif
+    
     NSAssert(self.readyState != SR_CONNECTING, @"Invalid State: Cannot call send: until connection is open");
     // TODO: maybe not copy this for performance
     data = [data copy];
