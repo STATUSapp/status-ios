@@ -38,7 +38,10 @@ static STLocationManager *_locationManager;
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         _locationManager.delegate = self;
-
+        // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+        if ([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [_locationManager requestWhenInUseAuthorization];
+        }
     }
     
     return self;
