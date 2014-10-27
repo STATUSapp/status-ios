@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -156,7 +157,7 @@
                                                         <action selector="onTapBigCameraProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5vz-vR-7cK"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any photo. Take a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="219" translatesAutoresizingMaskIntoConstraints="NO" id="26T-Jv-ckc">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any photo. Take a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="219" translatesAutoresizingMaskIntoConstraints="NO" id="26T-Jv-ckc">
                                                     <rect key="frame" x="51" y="143" width="219" height="59"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -976,8 +977,8 @@
                                                         <constraint firstAttribute="height" constant="60" id="XG7-PS-PRS"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="sdgfsdfg sdfgldf sdfkg sdfg sdfg  sdfkg sdfg sdfg" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="132" translatesAutoresizingMaskIntoConstraints="NO" id="r3q-di-0JL">
-                                                    <rect key="frame" x="84" y="11" width="198" height="45"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="sdgfsdfg sdfgldf sdfkg sdfg sdfg  sdfkg sdfg sdfg sdgfsdfg sdfgldf sdfkg sdfg sdfg  sdfkg sdfg sdfg" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="132" translatesAutoresizingMaskIntoConstraints="NO" id="r3q-di-0JL">
+                                                    <rect key="frame" x="84" y="11" width="205" height="49"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1006,13 +1007,13 @@
                                             <constraints>
                                                 <constraint firstItem="r3q-di-0JL" firstAttribute="leading" secondItem="fUT-Wl-qke" secondAttribute="trailing" constant="8" id="2tb-b4-5EI"/>
                                                 <constraint firstAttribute="trailing" secondItem="H6i-Yz-x1x" secondAttribute="trailing" constant="15" id="2yX-kT-qRU"/>
-                                                <constraint firstAttribute="trailing" secondItem="r3q-di-0JL" secondAttribute="trailing" constant="38" id="Ekl-Nt-u8c"/>
+                                                <constraint firstAttribute="trailing" secondItem="r3q-di-0JL" secondAttribute="trailing" constant="31" id="Ekl-Nt-u8c"/>
                                                 <constraint firstItem="fru-ey-TF6" firstAttribute="leading" secondItem="fUT-Wl-qke" secondAttribute="trailing" constant="8" id="FSb-eq-fh2"/>
                                                 <constraint firstAttribute="bottom" secondItem="Adv-ib-8aw" secondAttribute="bottom" id="HrZ-WN-bvg"/>
                                                 <constraint firstItem="3ev-cH-2MZ" firstAttribute="leading" secondItem="7QV-7r-OkL" secondAttribute="leading" constant="16" id="JZz-Co-HlC"/>
                                                 <constraint firstItem="r3q-di-0JL" firstAttribute="top" secondItem="7QV-7r-OkL" secondAttribute="topMargin" constant="3" id="L8b-rn-c21"/>
                                                 <constraint firstAttribute="bottom" secondItem="fru-ey-TF6" secondAttribute="bottom" constant="11" id="Uh6-KX-gyR"/>
-                                                <constraint firstItem="fru-ey-TF6" firstAttribute="top" secondItem="r3q-di-0JL" secondAttribute="bottom" constant="3" id="ZQo-If-yjm"/>
+                                                <constraint firstItem="fru-ey-TF6" firstAttribute="top" secondItem="r3q-di-0JL" secondAttribute="bottom" constant="-1" id="ZQo-If-yjm"/>
                                                 <constraint firstAttribute="trailing" secondItem="Adv-ib-8aw" secondAttribute="trailing" id="aGZ-mZ-dFa"/>
                                                 <constraint firstItem="Adv-ib-8aw" firstAttribute="top" secondItem="7QV-7r-OkL" secondAttribute="top" id="beu-Y8-1XX"/>
                                                 <constraint firstItem="fUT-Wl-qke" firstAttribute="top" secondItem="7QV-7r-OkL" secondAttribute="top" constant="11" id="cQY-H4-EXs"/>
@@ -1023,7 +1024,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="notificationTextTrailingConstraint" destination="Ekl-Nt-u8c" id="Pr9-a8-9ek"/>
                                             <outlet property="notificationTypeMessage" destination="r3q-di-0JL" id="FPu-q5-i8n"/>
                                             <outlet property="seenCircle" destination="H6i-Yz-x1x" id="MVy-tj-ugv"/>
                                             <outlet property="selectedBackgroundView" destination="Adv-ib-8aw" id="BC6-qY-gcN"/>
