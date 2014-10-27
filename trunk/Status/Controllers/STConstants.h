@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define USE_PRODUCTION_SERVER 1
+#define USE_PRODUCTION_SERVER 0
 
 #define PAGGING_ENABLED 1
 #define  POSTS_PAGGING 10
@@ -39,6 +39,7 @@ typedef NS_ENUM(NSUInteger,STNotificationType){
     STNotificationTypeLike = 1,
     STNotificationTypeInvite = 2,
     STNotificationTypeUploaded = 3,
+    STNotificationTypeChatMessage = 4, //not used , but to be consistent with the web
     STNotificationTypePhotosWaiting = 5,
     STNotificationTypeNewUserJoinsStatus = 6,
     STNotificationTypeGuaranteedViewsForNextPhoto = 7,

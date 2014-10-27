@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Flow Template View Controller-->
@@ -859,6 +859,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="grey line" translatesAutoresizingMaskIntoConstraints="NO" id="APE-Sr-yyx">
                                 <rect key="frame" x="16" y="42" width="289" height="2"/>
                             </imageView>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no notifications yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="201" translatesAutoresizingMaskIntoConstraints="NO" id="3cD-tE-Yqr">
+                                <rect key="frame" x="60" y="249" width="201" height="71"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="82" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fEo-fq-kyk">
                                 <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -953,18 +959,84 @@
                                             <outlet property="userImg" destination="zLu-PD-Bhw" id="wFM-sP-5yA"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="smartNotificationCell" rowHeight="82" id="svM-eL-cmg" customClass="STSmartNotificationCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="82"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="svM-eL-cmg" id="7QV-7r-OkL">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected grey area notifications screen" translatesAutoresizingMaskIntoConstraints="NO" id="Adv-ib-8aw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder notifications screen" translatesAutoresizingMaskIntoConstraints="NO" id="fUT-Wl-qke">
+                                                    <rect key="frame" x="16" y="11" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="ICz-9Q-ETn"/>
+                                                        <constraint firstAttribute="height" constant="60" id="XG7-PS-PRS"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="sdgfsdfg sdfgldf sdfkg sdfg sdfg  sdfkg sdfg sdfg" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="132" translatesAutoresizingMaskIntoConstraints="NO" id="r3q-di-0JL">
+                                                    <rect key="frame" x="84" y="11" width="198" height="45"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 hours ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fru-ey-TF6">
+                                                    <rect key="frame" x="84" y="59" width="55" height="12"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grey line" translatesAutoresizingMaskIntoConstraints="NO" id="3ev-cH-2MZ">
+                                                    <rect key="frame" x="16" y="80" width="289" height="2"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="289" id="0rC-sT-sql"/>
+                                                        <constraint firstAttribute="height" constant="2" id="Rce-29-E1Q"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification yellow circle" translatesAutoresizingMaskIntoConstraints="NO" id="H6i-Yz-x1x">
+                                                    <rect key="frame" x="290" y="33" width="15" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="gmk-TE-Zwd"/>
+                                                        <constraint firstAttribute="width" constant="15" id="loG-zh-30U"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="r3q-di-0JL" firstAttribute="leading" secondItem="fUT-Wl-qke" secondAttribute="trailing" constant="8" id="2tb-b4-5EI"/>
+                                                <constraint firstAttribute="trailing" secondItem="H6i-Yz-x1x" secondAttribute="trailing" constant="15" id="2yX-kT-qRU"/>
+                                                <constraint firstAttribute="trailing" secondItem="r3q-di-0JL" secondAttribute="trailing" constant="38" id="Ekl-Nt-u8c"/>
+                                                <constraint firstItem="fru-ey-TF6" firstAttribute="leading" secondItem="fUT-Wl-qke" secondAttribute="trailing" constant="8" id="FSb-eq-fh2"/>
+                                                <constraint firstAttribute="bottom" secondItem="Adv-ib-8aw" secondAttribute="bottom" id="HrZ-WN-bvg"/>
+                                                <constraint firstItem="3ev-cH-2MZ" firstAttribute="leading" secondItem="7QV-7r-OkL" secondAttribute="leading" constant="16" id="JZz-Co-HlC"/>
+                                                <constraint firstItem="r3q-di-0JL" firstAttribute="top" secondItem="7QV-7r-OkL" secondAttribute="topMargin" constant="3" id="L8b-rn-c21"/>
+                                                <constraint firstAttribute="bottom" secondItem="fru-ey-TF6" secondAttribute="bottom" constant="11" id="Uh6-KX-gyR"/>
+                                                <constraint firstItem="fru-ey-TF6" firstAttribute="top" secondItem="r3q-di-0JL" secondAttribute="bottom" constant="3" id="ZQo-If-yjm"/>
+                                                <constraint firstAttribute="trailing" secondItem="Adv-ib-8aw" secondAttribute="trailing" id="aGZ-mZ-dFa"/>
+                                                <constraint firstItem="Adv-ib-8aw" firstAttribute="top" secondItem="7QV-7r-OkL" secondAttribute="top" id="beu-Y8-1XX"/>
+                                                <constraint firstItem="fUT-Wl-qke" firstAttribute="top" secondItem="7QV-7r-OkL" secondAttribute="top" constant="11" id="cQY-H4-EXs"/>
+                                                <constraint firstItem="fUT-Wl-qke" firstAttribute="leading" secondItem="7QV-7r-OkL" secondAttribute="leading" constant="16" id="k5z-Fo-03G"/>
+                                                <constraint firstAttribute="bottom" secondItem="3ev-cH-2MZ" secondAttribute="bottom" id="sVX-u3-96n"/>
+                                                <constraint firstItem="Adv-ib-8aw" firstAttribute="leading" secondItem="7QV-7r-OkL" secondAttribute="leading" id="wTK-6q-GeP"/>
+                                                <constraint firstItem="H6i-Yz-x1x" firstAttribute="top" secondItem="7QV-7r-OkL" secondAttribute="top" constant="33" id="xWT-Wj-UTE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="notificationTextTrailingConstraint" destination="Ekl-Nt-u8c" id="Pr9-a8-9ek"/>
+                                            <outlet property="notificationTypeMessage" destination="r3q-di-0JL" id="FPu-q5-i8n"/>
+                                            <outlet property="seenCircle" destination="H6i-Yz-x1x" id="MVy-tj-ugv"/>
+                                            <outlet property="selectedBackgroundView" destination="Adv-ib-8aw" id="BC6-qY-gcN"/>
+                                            <outlet property="timeLbl" destination="fru-ey-TF6" id="blk-US-Wta"/>
+                                            <outlet property="userImg" destination="fUT-Wl-qke" id="v0t-ap-sdv"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Cjw-FQ-u8S" id="Ksa-8m-Udx"/>
                                     <outlet property="delegate" destination="Cjw-FQ-u8S" id="cHk-9w-MCt"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no notifications yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="201" translatesAutoresizingMaskIntoConstraints="NO" id="3cD-tE-Yqr">
-                                <rect key="frame" x="60" y="249" width="201" height="71"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>

@@ -33,6 +33,8 @@
 		0717E2E319B71D3E001DF132 /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2E119B71D3E001DF132 /* STLocationManager.m */; };
 		0717E2E619B71D88001DF132 /* STIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2E519B71D88001DF132 /* STIAPHelper.m */; };
 		0719E5AE19619FE700F85382 /* STInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0719E5AD19619FE700F85382 /* STInviteController.m */; };
+		07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DAF19FE693100DFA43B /* STSmartNotificationCell.m */; };
+		07361DB319FE71BF00DFA43B /* STNotificationBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DB219FE71BF00DFA43B /* STNotificationBaseCell.m */; };
 		076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */; };
 		07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */; };
 		07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
@@ -191,6 +193,10 @@
 		0717E2E519B71D88001DF132 /* STIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIAPHelper.m; sourceTree = "<group>"; };
 		0719E5AC19619FE700F85382 /* STInviteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInviteController.h; sourceTree = "<group>"; };
 		0719E5AD19619FE700F85382 /* STInviteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInviteController.m; sourceTree = "<group>"; };
+		07361DAE19FE693100DFA43B /* STSmartNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSmartNotificationCell.h; sourceTree = "<group>"; };
+		07361DAF19FE693100DFA43B /* STSmartNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSmartNotificationCell.m; sourceTree = "<group>"; };
+		07361DB119FE71BF00DFA43B /* STNotificationBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationBaseCell.h; sourceTree = "<group>"; };
+		07361DB219FE71BF00DFA43B /* STNotificationBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationBaseCell.m; sourceTree = "<group>"; };
 		076CF4EF1910F2F200C4096C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		07FBDEE418C606EF007BDCE6 /* STLikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikesViewController.h; sourceTree = "<group>"; };
@@ -645,6 +651,10 @@
 				070B31B918C772B700765189 /* STNotificationsViewController.m */,
 				070B31BB18C772EF00765189 /* STNotificationCell.h */,
 				070B31BC18C772EF00765189 /* STNotificationCell.m */,
+				07361DAE19FE693100DFA43B /* STSmartNotificationCell.h */,
+				07361DAF19FE693100DFA43B /* STSmartNotificationCell.m */,
+				07361DB119FE71BF00DFA43B /* STNotificationBaseCell.h */,
+				07361DB219FE71BF00DFA43B /* STNotificationBaseCell.m */,
 				172EAE6D18B0B12E00C5637B /* Supporting Files */,
 				17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */,
 				17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */,
@@ -1034,6 +1044,7 @@
 				0717E2C619B71B51001DF132 /* STWebServiceController.m in Sources */,
 				17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */,
 				07FCFAA519C094250048F441 /* UIImageView+WebCache.m in Sources */,
+				07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */,
 				07FCFAA419C094250048F441 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
 				07FCFA9819C094250048F441 /* NSData+ImageContentType.m in Sources */,
@@ -1052,6 +1063,7 @@
 				17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */,
 				172EAEB318B0B46300C5637B /* AFSecurityPolicy.m in Sources */,
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
+				07361DB319FE71BF00DFA43B /* STNotificationBaseCell.m in Sources */,
 				17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */,
 				07FCFA9919C094250048F441 /* SDImageCache.m in Sources */,
 				17E44BA119822B67000E9116 /* Message.m in Sources */,
