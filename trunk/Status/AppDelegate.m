@@ -178,7 +178,6 @@ static NSInteger const kSTWaitingIntervalForANewRequest = 15;
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
         [self handleNotification:userInfo];
     }
-    
 }
 
 #pragma mark - Helper
