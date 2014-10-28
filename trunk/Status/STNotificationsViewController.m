@@ -265,7 +265,18 @@ const float kNoNotifHeight = 24.f;
             [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:postPhotoLink]];
         actualCell.seenCircle.hidden = [dict[@"seen"] boolValue];
         actualCell.timeLbl.text = [self notificationTimeIntervalSinceDate:[ self dateFromServerDate:dict[@"date"]]];
-        actualCell.notificationTypeMessage.text = dict[@"message"];
+        if (notificationType == STNotificationTypeNewUserJoinsStatus) {
+            NSString *string = [NSString stringWithFormat:@"%@ is on STATUS. Say hello :)", dict[@"user_name"]];
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+            UIFont *boldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.f];
+            NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   boldFont, NSFontAttributeName,nil];
+
+            [attributedString setAttributes:attrs range:NSMakeRange(0, [dict[@"user_name"] length])];
+            actualCell.notificationTypeMessage.attributedText = attributedString;
+        }
+        else
+            actualCell.notificationTypeMessage.text = dict[@"message"];
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         
