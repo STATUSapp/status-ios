@@ -121,7 +121,9 @@ static STLocationManager *_locationManager;
 }
 
 +(BOOL)locationUpdateEnabled{
-    return [CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized;
+    return [CLLocationManager locationServicesEnabled] &&
+    ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized ||
+     [CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse);
 }
 
 @end
