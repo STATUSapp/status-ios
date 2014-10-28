@@ -132,6 +132,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     if ([[[FBSession activeSession] accessTokenData] accessToken]==nil||email==nil) {
         [self presentLoginScene];
     }
+    else
+    {
+        if (_shouldActionCameraBtn) {
+            _shouldActionCameraBtn = NO;
+            [self onTapCameraUpload:nil];
+        }
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -1477,7 +1484,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     UIViewController *lastVC = [self.navigationController.viewControllers lastObject];
     if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
         
-        if ([notif[@"user_info"][@"notification_type"] integerValue] == 4) {
+        if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
             if (![[STChatController sharedInstance] canChat]) {
                 _lastNotif = notif;
                 return;

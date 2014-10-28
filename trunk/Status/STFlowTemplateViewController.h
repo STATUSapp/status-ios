@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSString *userName;   // on profile flow type, this will be used as user's name;
 @property (nonatomic, strong) NSString *postID;
+@property (nonatomic, assign) BOOL shouldActionCameraBtn;
 -(void) handleNotification:(NSDictionary *) notif;
 - (void)updateNotificationsNumber;
 @end

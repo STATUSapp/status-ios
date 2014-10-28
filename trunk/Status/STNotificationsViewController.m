@@ -127,20 +127,46 @@ const float kNoNotifHeight = 24.f;
     NSIndexPath * indexPathOfSelectedRow = [self.notificationTable indexPathForRowAtPoint:pointOfTapInTableView];
     STNotificationCell * cell = (STNotificationCell *)[self.notificationTable cellForRowAtIndexPath:indexPathOfSelectedRow];
     CGPoint pointOfTapInCell = [_tapOnRow locationInView:cell.contentView];
-    if (![cell respondsToSelector:@selector(regionForPointOfTap:)]) {
-        return;
-        //TODO: configure what happens here
+    if ([cell isKindOfClass:[STNotificationCell class]]) {
+        switch ([cell regionForPointOfTap:pointOfTapInCell]) {
+            case STNotificationRegionTypeUserRelated:
+                [self onTapUserNameOrUserProfilePictureAtIndexPath:indexPathOfSelectedRow];
+                break;
+            case STNotificationRegionTypePostRelated:
+                [self onTapPostPictureAtIndexPath:indexPathOfSelectedRow];
+                break;
+                
+            default:
+                break;
+        }
     }
-    switch ([cell regionForPointOfTap:pointOfTapInCell]) {
-        case STNotificationRegionTypeUserRelated:
-            [self onTapUserNameOrUserProfilePictureAtIndexPath:indexPathOfSelectedRow];
-            break;
-        case STNotificationRegionTypePostRelated:
-            [self onTapPostPictureAtIndexPath:indexPathOfSelectedRow];
-            break;
-            
-        default:
-            break;
+    else if ([cell isKindOfClass:[STSmartNotificationCell class]]){
+        NSDictionary *dict = _notificationDataSource[indexPathOfSelectedRow.row];
+        NSInteger notificationType = [dict[@"type"] integerValue];
+        
+        switch (notificationType) {
+            case STNotificationTypePhotosWaiting:
+                //go to main feed
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                break;
+            case STNotificationTypeNewUserJoinsStatus:
+                //go to user profile
+                [self onTapUserNameOrUserProfilePictureAtIndexPath:indexPathOfSelectedRow];
+                break;
+            case STNotificationTypeGuaranteedViewsForNextPhoto:
+            case STNotificationType5DaysUploadNewPhoto:
+            {
+                //go to main feed with camera button pressed
+                UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+                UINavigationController *navController = (UINavigationController *)window.rootViewController;
+                STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers firstObject];
+                viewController.shouldActionCameraBtn = YES;
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+                break;
+            default:
+                break;
+        }
     }
 }
 
