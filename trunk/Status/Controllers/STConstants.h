@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define USE_PRODUCTION_SERVER 0
+#define USE_PRODUCTION_SERVER 1
 
 #define PAGGING_ENABLED 1
 #define  POSTS_PAGGING 10
