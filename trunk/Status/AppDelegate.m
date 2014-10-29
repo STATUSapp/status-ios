@@ -22,6 +22,7 @@
 
 #import "STInviteController.h"
 #import "STChatController.h"
+#import "STConversationsListViewController.h"
 #import "STFacebookAlbumsViewController.h"
 
 #import "STCoreDataManager.h"
@@ -93,7 +94,8 @@ static NSInteger const kSTWaitingIntervalForANewRequest = 15;
     NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
     BOOL removed = NO;
     //TODO: add more clasess here, as needed
-    while ([[stackVCs lastObject] isKindOfClass:[STChatRoomViewController class]]) {
+    while ([[stackVCs lastObject] isKindOfClass:[STChatRoomViewController class]] ||
+           [[stackVCs lastObject] isKindOfClass:[STConversationsListViewController class]]) {
         removed = YES;
         [stackVCs removeLastObject];
     }
