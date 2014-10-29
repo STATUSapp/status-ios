@@ -425,6 +425,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     for (NSDictionary *dict in array) {
         if ([idsArray containsObject:dict[@"full_photo_link"]]) {
+            //TODO: add this number to the offset sent to server for main flow to avoid repetable situations
             NSLog(@"Duplicate found");
             [sheetArray removeObject:dict];
         }
