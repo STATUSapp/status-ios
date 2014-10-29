@@ -55,6 +55,10 @@ const float kNoNotifHeight = 24.f;
 }
 
 -(void) getNotificationsFromServer{
+    if ([STWebServiceController sharedInstance].accessToken == nil) {
+        return;
+        //TODO: we should find a solution for this case
+    }
     __weak STNotificationsViewController *weakSelf = self;
 	[[STWebServiceController sharedInstance] getNotificationsWithCompletion:^(NSDictionary *response) {
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
