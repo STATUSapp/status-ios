@@ -14,11 +14,11 @@
 		<string>svn://mobilep.ro/status/trunk</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>trunk/Status.xcodeproj/project.xcworkspace</string>
+	<string>Status.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>99022451-f8c5-4652-be14-efb92feb6bba++505</key>
-		<string>../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectRepositoryRootDictionary</key>
 	<dict>
@@ -26,7 +26,7 @@
 		<string>svn://mobilep.ro/status</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>svn://mobilep.ro/status/trunk/trunk/Status.xcodeproj/project.xcworkspace</string>
+	<string>svn://mobilep.ro/status/trunk/Status.xcodeproj</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -34,14 +34,8 @@
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
-			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
-			<string>branches</string>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.subversion</string>
-			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
-			<string>tags</string>
-			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
-			<string>trunk</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>99022451-f8c5-4652-be14-efb92feb6bba++505</string>
 			<key>IDESourceControlWCCName</key>

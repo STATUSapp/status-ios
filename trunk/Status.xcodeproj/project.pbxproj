@@ -33,7 +33,6 @@
 		0717E2E319B71D3E001DF132 /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2E119B71D3E001DF132 /* STLocationManager.m */; };
 		0717E2E619B71D88001DF132 /* STIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2E519B71D88001DF132 /* STIAPHelper.m */; };
 		0719E5AE19619FE700F85382 /* STInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0719E5AD19619FE700F85382 /* STInviteController.m */; };
-		0720828019FFDEE200B4AB7D /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720827E19FFDEE200B4AB7D /* libGoogleAdMobAds.a */; };
 		0720828119FFDEE200B4AB7D /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0720827F19FFDEE200B4AB7D /* README.txt */; };
 		07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DAF19FE693100DFA43B /* STSmartNotificationCell.m */; };
 		07361DB319FE71BF00DFA43B /* STNotificationBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DB219FE71BF00DFA43B /* STNotificationBaseCell.m */; };
@@ -123,6 +122,7 @@
 		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
+		99206B041A082CAE008EAEE9 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99206B031A082CAE008EAEE9 /* libGoogleAdMobAds.a */; };
 		99671D0B19BC8FBB00FB8A7A /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
 		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
@@ -220,7 +220,6 @@
 		0720827B19FFDEE100B4AB7D /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
 		0720827C19FFDEE100B4AB7D /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
 		0720827D19FFDEE200B4AB7D /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		0720827E19FFDEE200B4AB7D /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		0720827F19FFDEE200B4AB7D /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		07361DAE19FE693100DFA43B /* STSmartNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSmartNotificationCell.h; sourceTree = "<group>"; };
 		07361DAF19FE693100DFA43B /* STSmartNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSmartNotificationCell.m; sourceTree = "<group>"; };
@@ -370,6 +369,7 @@
 		317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomCollectionViewCell.h; sourceTree = "<group>"; };
 		317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomCollectionViewCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		99206B031A082CAE008EAEE9 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		99671D0919BC8FBB00FB8A7A /* STSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSettingsViewController.h; sourceTree = "<group>"; };
 		99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSettingsViewController.m; sourceTree = "<group>"; };
 		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -402,7 +402,7 @@
 				1DE2D5AF194FA5DF00A29A86 /* AudioToolbox.framework in Frameworks */,
 				1DE2D5AD194FA5D600A29A86 /* AdSupport.framework in Frameworks */,
 				17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */,
-				0720828019FFDEE200B4AB7D /* libGoogleAdMobAds.a in Frameworks */,
+				99206B041A082CAE008EAEE9 /* libGoogleAdMobAds.a in Frameworks */,
 				1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */,
 				070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */,
 				17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */,
@@ -525,6 +525,7 @@
 		0720825E19FFDEE100B4AB7D /* GoogleMobileAdsSdkiOS-6.12.0 */ = {
 			isa = PBXGroup;
 			children = (
+				99206B031A082CAE008EAEE9 /* libGoogleAdMobAds.a */,
 				0720825F19FFDEE100B4AB7D /* Add-ons */,
 				0720827219FFDEE100B4AB7D /* GADAdMobExtras.h */,
 				0720827319FFDEE100B4AB7D /* GADAdNetworkExtras.h */,
@@ -538,7 +539,6 @@
 				0720827B19FFDEE100B4AB7D /* GADModules.h */,
 				0720827C19FFDEE100B4AB7D /* GADRequest.h */,
 				0720827D19FFDEE200B4AB7D /* GADRequestError.h */,
-				0720827E19FFDEE200B4AB7D /* libGoogleAdMobAds.a */,
 				0720827F19FFDEE200B4AB7D /* README.txt */,
 			);
 			path = "GoogleMobileAdsSdkiOS-6.12.0";
