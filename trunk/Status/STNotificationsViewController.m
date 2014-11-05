@@ -129,6 +129,11 @@ const float kNoNotifHeight = 24.f;
     
     CGPoint pointOfTapInTableView = [_tapOnRow locationInView:self.notificationTable];
     NSIndexPath * indexPathOfSelectedRow = [self.notificationTable indexPathForRowAtPoint:pointOfTapInTableView];
+    
+    if (_notificationDataSource == nil || _notificationDataSource.count == 0) {
+        return;
+    }
+    
     STNotificationCell * cell = (STNotificationCell *)[self.notificationTable cellForRowAtIndexPath:indexPathOfSelectedRow];
     CGPoint pointOfTapInCell = [_tapOnRow locationInView:cell.contentView];
     if ([cell isKindOfClass:[STNotificationCell class]]) {

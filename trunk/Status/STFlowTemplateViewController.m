@@ -1192,6 +1192,9 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         if ([dict[@"post_seen"] boolValue] == TRUE) {
             return;
         }
+        if (dict[@"post_id"] == nil) {
+            return;
+        }
         [[STWebServiceController sharedInstance] setPostSeen:dict[@"post_id"] withCompletion:^(NSDictionary *response) {
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                 [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
