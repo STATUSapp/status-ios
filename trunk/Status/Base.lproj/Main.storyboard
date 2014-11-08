@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -600,11 +600,11 @@
                                     <constraint firstAttribute="width" constant="77" id="sdW-Rq-bcu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="23"/>
-                                <state key="normal" image="circle share button">
+                                <state key="normal" image="post_button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="share button pressed"/>
-                                <state key="highlighted" image="circle share button when pressed"/>
+                                <state key="selected" image="post_button_pressed"/>
+                                <state key="highlighted" image="post_button"/>
                                 <connections>
                                     <action selector="onClickShare:" destination="gF0-LP-1T6" eventType="touchUpInside" id="NlE-Q8-1vQ"/>
                                 </connections>
@@ -1806,8 +1806,6 @@
         <image name="btn_share_pressed" width="47" height="47"/>
         <image name="chat button" width="212" height="45"/>
         <image name="chat button pressed" width="212" height="45"/>
-        <image name="circle share button" width="77" height="77"/>
-        <image name="circle share button when pressed" width="77" height="77"/>
         <image name="circle use button" width="77" height="77"/>
         <image name="circle use button when pressed" width="77" height="77"/>
         <image name="facebook share button" width="160" height="46"/>
@@ -1828,13 +1826,14 @@
         <image name="placeholder STATUS loading" width="320" height="568"/>
         <image name="placeholder imagine like screen" width="41" height="41"/>
         <image name="placeholder notifications screen" width="60" height="60"/>
+        <image name="post_button" width="77" height="77"/>
+        <image name="post_button_pressed" width="77" height="77"/>
         <image name="remove ads button" width="202" height="40"/>
         <image name="remove ads button pressed" width="202" height="40"/>
         <image name="see people nearby button" width="212" height="45"/>
         <image name="see people nearby button pressed" width="212" height="45"/>
         <image name="selected grey area notifications screen" width="320" height="82"/>
         <image name="selected state" width="320" height="60"/>
-        <image name="share button pressed" width="319" height="48"/>
         <image name="status logo" width="197" height="28"/>
         <image name="transparenta" width="320" height="568"/>
         <image name="twitter share button" width="160" height="46"/>
