@@ -28,7 +28,6 @@
 #import "STCoreDataManager.h"
 #import <Crashlytics/Crashlytics.h>
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
-static NSInteger const kSTWaitingIntervalForANewRequest = 15;
 
 @implementation AppDelegate
 

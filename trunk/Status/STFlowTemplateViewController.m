@@ -128,6 +128,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     NSString *email = [[STFacebookController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
     if ([[[FBSession activeSession] accessTokenData] accessToken]==nil||email==nil) {
         [self presentLoginScene];

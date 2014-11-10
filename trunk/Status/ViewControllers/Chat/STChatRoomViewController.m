@@ -116,6 +116,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     if (chatController.authenticated == YES) {
         [chatController openChatRoomForUserId:_userInfo[@"user_id"]];
     }
@@ -124,6 +125,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
     if(_roomId){
         [chatController leaveRoom:_roomId];
     }

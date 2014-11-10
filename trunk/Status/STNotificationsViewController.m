@@ -51,6 +51,7 @@ const float kNoNotifHeight = 24.f;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self getNotificationsFromServer];
 }
 
