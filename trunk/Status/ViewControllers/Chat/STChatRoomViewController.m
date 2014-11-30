@@ -14,14 +14,16 @@
 #import "STImageCacheController.h"
 #import "STChatController.h"
 #import "STFlowTemplateViewController.h"
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import "AppDelegate.h"
 #import "STCoreDataRequestManager.h"
 #import "STDAOEngine.h"
 #import "STCoreDataManager.h"
 #import "Message.h"
-#import "STWebServiceController.h"
+#import "STNetworkQueueManager.h"
 #import "UIImageView+WebCache.h"
+
+#import "STGetUserInfoRequest.h"
 
 static NSInteger const  kBlockUserAlertTag = 11;
 
@@ -101,12 +103,13 @@ static NSInteger const  kBlockUserAlertTag = 11;
     [self initiateCustomControls];
     if (_userInfo[@"user_name"] == nil) {//notification, need fetch
         __weak STChatRoomViewController *weakSelf = self;
-        [[STWebServiceController sharedInstance] getUserInfo:_userInfo[@"user_id"] wirhCompletion:^(NSDictionary *response) {
-            if([response[@"status_code"] integerValue] == 200){
+        STRequestCompletionBlock completion = ^(id response, NSError *error){
+            if([response[@"status_code"] integerValue] == STWebservicesSuccesCod){
                 [weakSelf.userInfo addEntriesFromDictionary:response];
                 [weakSelf loadUserInfo];
             }
-        } andErrorCompletion:nil];
+        };
+        [STGetUserInfoRequest getInfoForUser:_userInfo[@"user_id"] completion:completion failure:nil];
     }
     else
         [self loadUserInfo];
@@ -273,7 +276,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     flowCtrl.flowType = STFlowTypeUserProfile;
     flowCtrl.userID = _userInfo[@"user_id"];
     flowCtrl.userName = _userInfo[@"user_name"];
-    if ([flowCtrl.userID isEqualToString:[STFacebookController sharedInstance].currentUserId ]) {
+    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
         flowCtrl.flowType = STFlowTypeMyProfile;
     }
     [self.navigationController pushViewController:flowCtrl animated:YES];

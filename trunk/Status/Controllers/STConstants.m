@@ -32,6 +32,9 @@ int const kChatPort = 9001;
 
 #endif
 
+NSInteger const kHTTPErrorNoConnection = 447;
+NSInteger const kPostsLimit = 10;
+NSInteger const kStartLoadOffset = 5;
 #pragma mark - Denis Dev1
 //NSString *const kBaseURL = @"http://status.nece.me/api/";
 //NSString *const kBasePhotoDownload = @"http://status.nece.me/media/";

@@ -118,7 +118,7 @@
     UIImage *croppedImg = [self croppedImage];
     
     // after cropping, we should do optimization
-    
+    //TODO: we shoud perform a compression only for local photos, not for the facebook
     NSUInteger imgSizeInBytes = [croppedImg calculatedSizeInBytes];
     if (imgSizeInBytes > STMaximumSizeInBytesForUpload) {
         

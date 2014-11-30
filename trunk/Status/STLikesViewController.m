@@ -7,14 +7,16 @@
 //
 
 #import "STLikesViewController.h"
-#import "STWebServiceController.h"
+#import "STNetworkQueueManager.h"
 #import "STLikeCell.h"
 #import "STImageCacheController.h"
 #import "STFlowTemplateViewController.h"
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import "STChatRoomViewController.h"
 #import "STChatController.h"
 #import "UIImageView+WebCache.h"
+
+#import "STGetPostLikesRequest.h"
 
 @interface STLikesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -39,10 +41,15 @@
 {
     [super viewDidLoad];
     __weak STLikesViewController *weakSelf = self;
-	[[STWebServiceController sharedInstance] getPostLikes:self.postId withCompletion:^(NSDictionary *response) {
-        _likesDataSource = [NSArray arrayWithArray:response[@"data"]];
-        [weakSelf.likesTableView reloadData];
-    } andErrorCompletion:nil];
+    
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            _likesDataSource = [NSArray arrayWithArray:response[@"data"]];
+            [weakSelf.likesTableView reloadData];
+        }
+    };
+
+    [STGetPostLikesRequest getPostLikes:_postId withCompletion:completion failure:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,7 +93,7 @@
     if (appVersion == nil ||
         ![appVersion isKindOfClass:[NSString class]] ||
         [appVersion rangeOfString:@"1.0."].location == NSNotFound ||
-        [[STFacebookController sharedInstance].currentUserId isEqualToString:dict[@"user_id"]]) {//not setted
+        [[STFacebookLoginController sharedInstance].currentUserId isEqualToString:dict[@"user_id"]]) {//not setted
         cell.chatButton.hidden = YES;
     }
     else
@@ -102,7 +109,7 @@
     flowCtrl.flowType = STFlowTypeUserProfile;
     flowCtrl.userID = dict[@"user_id"];
     flowCtrl.userName = dict[@"user_name"];
-    if ([flowCtrl.userID isEqualToString:[STFacebookController sharedInstance].currentUserId ]) {
+    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
         flowCtrl.flowType = STFlowTypeMyProfile;
     }
     [self.navigationController pushViewController:flowCtrl animated:YES];

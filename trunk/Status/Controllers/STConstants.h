@@ -10,9 +10,6 @@
 
 #define USE_PRODUCTION_SERVER 1
 
-#define PAGGING_ENABLED 1
-#define  POSTS_PAGGING 10
-#define  START_LOAD_OFFSET 5
 #pragma mark - Enums
 
 typedef NS_ENUM(NSUInteger,STFlowType){
@@ -72,6 +69,10 @@ extern NSString *const kReachableURL;
 extern int const kChatPort;
 
 extern NSString *const kSTAdUnitID;
+
+extern NSInteger const kHTTPErrorNoConnection;
+extern NSInteger const kPostsLimit;
+extern NSInteger const kStartLoadOffset;
 
 extern NSString *const kGetPosts;
 extern NSString *const kLoginUser;

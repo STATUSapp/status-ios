@@ -1,13 +1,10 @@
 //
-//  SLCoreDataManager.m
-//  Solum
+//  STCoreDataManager.m
+//  Status
 //
-//  Created by Cosmin Andrus on 10/25/13.
-//  Copyright (c) 2013
+//  Created by Andrus Cosmin on 25/07/14.
+//  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
-/**
- *  SLCoreDataManager ... Handles basic database operations like : Add, Retrieve and Delete Data
- */
 
 #import "STCoreDataManager.h"
 #import "Message.h"

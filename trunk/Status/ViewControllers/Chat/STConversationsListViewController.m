@@ -8,13 +8,15 @@
 
 #import "STConversationsListViewController.h"
 #import "STConversationCell.h"
-#import "STWebServiceController.h"
+#import "STNetworkQueueManager.h"
 #import "STChatRoomViewController.h"
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import "STChatController.h"
 #import "STImageCacheController.h"
 #import "UIImageView+Mask.h"
 #import "UIImageView+WebCache.h"
+
+#import "STGetUsersRequest.h"
 
 @interface STConversationsListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 {
@@ -134,7 +136,7 @@
     if (selectedUserInfo == nil) {
         return;
     }
-    if ([selectedUserInfo[@"user_id"] isEqualToString:[STFacebookController sharedInstance].currentUserId]) {
+    if ([selectedUserInfo[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
     }
@@ -239,18 +241,21 @@
         }
             break;
     }
-    [[STWebServiceController sharedInstance] getUsersForScope:_segment.selectedSegmentIndex  withSearchText:searchtext withOffset:newOffset == YES?offset:0 completion:^(NSDictionary *response) {
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
             [weakSelf saveNewDataAndReload:response[@"data"] isNewOffset:newOffset];
         }
         weakSelf.loadMoreButton.enabled = YES;
         weakSelf.loadMoreButton = nil;
-        
-    } andErrorCompletion:^(NSError *error) {
+    };
+
+    STRequestFailureBlock failBlock = ^(NSError *error){
         NSLog(@"Error on getting users");
         weakSelf.loadMoreButton.enabled = YES;
         weakSelf.loadMoreButton = nil;
-    }];
+    };
+
+    [STGetUsersRequest getUsersForScope:_segment.selectedSegmentIndex withSearchText:searchtext andOffset:newOffset == YES?offset:0 completion:completion failure:failBlock];
 }
 
 -(void)saveNewDataAndReload:(NSArray *)newData isNewOffset:(BOOL)newOffset{

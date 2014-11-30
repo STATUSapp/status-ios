@@ -7,7 +7,6 @@
 //
 
 #import "STImageCacheController.h"
-#import "STWebServiceController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "NSString+MD5.h"
 #import "UIImage+ImageEffects.h"

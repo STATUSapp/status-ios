@@ -7,15 +7,17 @@
 //
 
 #import "STNotificationsViewController.h"
-#import "STWebServiceController.h"
+#import "STNetworkQueueManager.h"
 #import "STConstants.h"
 #import "STNotificationCell.h"
 #import "STSmartNotificationCell.h"
 #import "STImageCacheController.h"
 #import "AppDelegate.h"
 #import "STFlowTemplateViewController.h"
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import "UIImageView+WebCache.h"
+
+#import "STGetNotificationsRequest.h"
 
 const float kNoNotifHeight = 24.f;
 
@@ -56,23 +58,28 @@ const float kNoNotifHeight = 24.f;
 }
 
 -(void) getNotificationsFromServer{
-    if ([STWebServiceController sharedInstance].accessToken == nil) {
+    if ([STNetworkQueueManager sharedManager].accessToken == nil) {
         return;
         //TODO: we should find a solution for this case
     }
     __weak STNotificationsViewController *weakSelf = self;
-	[[STWebServiceController sharedInstance] getNotificationsWithCompletion:^(NSDictionary *response) {
-        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             _notificationDataSource = [NSArray arrayWithArray:response[@"data"]];
-            weakSelf.noNotifLabel.hidden = _notificationDataSource.count>0;
+            BOOL shouldShowPlaceholder = _notificationDataSource.count > 0;
+            weakSelf.noNotifLabel.hidden = shouldShowPlaceholder;
             
-            [(AppDelegate *)[UIApplication sharedApplication].delegate setBadgeNumber:0];            
+            [(AppDelegate *)[UIApplication sharedApplication].delegate setBadgeNumber:0];
             [weakSelf.notificationTable reloadData];
         }
-        
-    } andErrorCompletion:^(NSError *error) {
+        else
+            weakSelf.noNotifLabel.hidden = NO;
+    };
+    STRequestFailureBlock failBlock = ^(NSError *error){
         weakSelf.noNotifLabel.hidden = NO;
-    }];
+    };
+
+    [STGetNotificationsRequest getNotificationsWithCompletion:completion failure:failBlock];
 }
 
 - (void)didReceiveMemoryWarning
@@ -217,8 +224,8 @@ const float kNoNotifHeight = 24.f;
         {
             STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeMyProfile;
-            flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
-            flowCtrl.userName = [[STFacebookController sharedInstance] getUDValueForKey:USER_NAME];
+            flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
+            flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
             [self.navigationController pushViewController:flowCtrl animated:YES];
         }
             break;

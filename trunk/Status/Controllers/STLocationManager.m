@@ -7,8 +7,9 @@
 //
 
 #import "STLocationManager.h"
-#import "STWebServiceController.h"
 #import "STConstants.h"
+
+#import "STSetUserLocationRequest.h"
 
 static const double kGPSRecordTime = 1800;//seconds, half an hour
 static const double kGPSAccuracyMetters = 150;
@@ -86,7 +87,7 @@ static STLocationManager *_locationManager;
 
 -(void)sendLocationToServer{
     STLocationManager *weakSelf = self;
-    [[STWebServiceController sharedInstance] setUserLocationWithCompletion:^(NSDictionary *response) {
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
             NSLog(@"Set User Location: %@", _latestLocation);
             if (weakSelf.newLocationBlock != nil) {
@@ -94,7 +95,8 @@ static STLocationManager *_locationManager;
                 weakSelf.newLocationBlock = nil;
             }
         }
-    } orError:nil];
+    };
+    [STSetUserLocationRequest setCurrentUserLocationWithCompletion:completion failure:nil];
 }
 -(void)restartLocationManager{
     if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive)
@@ -105,8 +107,8 @@ static STLocationManager *_locationManager;
 }
 
 - (void)startLocationUpdates{
-    if ([STWebServiceController sharedInstance].accessToken!=nil &&
-        [STWebServiceController sharedInstance].accessToken.length > 0) {
+    if ([STNetworkQueueManager sharedManager].accessToken!=nil &&
+        [STNetworkQueueManager sharedManager].accessToken.length > 0) {
         [_locationManager startUpdatingLocation];
     }
 }

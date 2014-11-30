@@ -10,7 +10,7 @@
 #import "STCustomCollectionViewCell.h"
 #import "STConstants.h"
 #import "STImageCacheController.h"
-#import "STWebServiceController.h"
+#import "STNetworkQueueManager.h"
 
 @interface STCustomCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIButton *profileNameBtn;

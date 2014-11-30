@@ -9,9 +9,9 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "STFlowTemplateViewController.h"
-#import "STWebServiceController.h"
+#import "STNetworkQueueManager.h"
 #import "STConstants.h"
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import "STImageCacheController.h"
 #import "STLocationManager.h"
 #import "STIAPHelper.h"
@@ -27,6 +27,10 @@
 
 #import "STCoreDataManager.h"
 #import <Crashlytics/Crashlytics.h>
+
+#import "STSetAPNTokenRequest.h"
+#import "STGetNotificationsCountRequest.h"
+
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @implementation AppDelegate
@@ -42,7 +46,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     bool isIOS8OrGreater = [[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)];
 
     if (isIOS8OrGreater && ![self checkNotificationType:UIUserNotificationTypeBadge]) {
-        [[STFacebookController sharedInstance] requestRemoteNotificationAccess];
+        [[STFacebookLoginController sharedInstance] requestRemoteNotificationAccess];
     }
     else
     {
@@ -87,7 +91,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    [STWebServiceController sharedInstance].isPerformLoginOrRegistration=FALSE;
+    [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
     
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
@@ -127,7 +131,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
     [viewController updateNotificationsNumber];
-    [[STFacebookController sharedInstance] loadTokenFromKeyChain];
+    [[STFacebookLoginController sharedInstance] loadTokenFromKeyChain];
     
     // MAT will not function without the measureSession call included
     [MobileAppTracker measureSession];
@@ -157,11 +161,12 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     //NSLog(@"APN Token --- %@", token);
-    if ([STWebServiceController sharedInstance].accessToken!=nil) {
-        [[STWebServiceController sharedInstance] setAPNToken:token withCompletion:^(NSDictionary *response) {
+    if ([STNetworkQueueManager sharedManager].accessToken!=nil) {
+        STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod)  NSLog(@"APN Token set.");
             else  NSLog(@"APN token NOT set.");
-        } orError:nil];
+        };
+        [STSetAPNTokenRequest setAPNToken:token withCompletion:completion failure:nil];
     }
 }
 
@@ -194,13 +199,16 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 -(void)checkForNotificationNumber{
     __weak AppDelegate *weakSelf = self;
-    if ([STWebServiceController sharedInstance].accessToken != nil &&
-        [STWebServiceController sharedInstance].accessToken.length > 0) {
-        [[STWebServiceController sharedInstance] getUnreadNotificationsCountWithCompletion:^(NSDictionary *response) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.badgeNumber = [response[@"count"] integerValue];
-            });
-        } andErrorCompletion:nil];
+    if ([STNetworkQueueManager sharedManager].accessToken != nil &&
+        [STNetworkQueueManager sharedManager].accessToken.length > 0) {
+        STRequestCompletionBlock completion = ^(id response, NSError *error){
+            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakSelf.badgeNumber = [response[@"count"] integerValue];
+                });
+            }
+        };
+        [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
     }
 }
 

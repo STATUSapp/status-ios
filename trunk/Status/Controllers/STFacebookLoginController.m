@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "STWebServiceController.h"
 #import "STConstants.h"
 #import "STFlowTemplateViewController.h"
 #import "KeychainItemWrapper.h"
@@ -20,11 +19,15 @@
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
 #import "STCoreDataManager.h"
-#import <Crashlytics/Crashlytics.h>
+#import <Crashlytics/Crashlytics.h>\
 
-@implementation STFacebookController
-+(STFacebookController *) sharedInstance{
-    static STFacebookController *_sharedManager = nil;
+#import "STLoginRequest.h"
+#import "STRegisterRequest.h"
+#import "STGetUserSettingsRequest.h"
+
+@implementation STFacebookLoginController
++(STFacebookLoginController *) sharedInstance{
+    static STFacebookLoginController *_sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedManager = [[self alloc] init];
@@ -94,8 +97,8 @@
         return;
     }
 
-    if ([STWebServiceController sharedInstance].isPerformLoginOrRegistration==FALSE) {
-        [STWebServiceController sharedInstance].isPerformLoginOrRegistration = TRUE;
+    if ([STNetworkQueueManager sharedManager].isPerformLoginOrRegistration==FALSE) {
+        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = TRUE;
         [self loginOrRegistrationWithUser:user];
     }
 }
@@ -126,15 +129,15 @@
 }
 -(void)loadTokenFromKeyChain {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
-    [STWebServiceController sharedInstance].accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
+    [STNetworkQueueManager sharedManager].accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
     //[[STLocationManager sharedInstance] startLocationUpdates];
-    NSLog(@"Loaded Access Token: %@",[STWebServiceController sharedInstance].accessToken);
+    NSLog(@"Loaded Access Token: %@",[STNetworkQueueManager sharedManager].accessToken);
 }
 
 -(void)deleteAccessToken {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
     [keychainWrapperAccessToken resetKeychainItem];
-    [STWebServiceController sharedInstance].accessToken = nil;
+    [STNetworkQueueManager sharedManager].accessToken = nil;
 }
 
 -(void) saveAccessToken:(NSString *) accessToken{
@@ -149,7 +152,7 @@
 }
 
 - (void)setUpEnvironment:(NSDictionary *)response userIdentifier:(NSString *)userIdentifier userName:(NSString *)userName {
-    [STWebServiceController sharedInstance].accessToken = response[@"token"];
+    [STNetworkQueueManager sharedManager].accessToken = response[@"token"];
     [self UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
     [[STChatController sharedInstance] forceReconnect];
     [[STLocationManager sharedInstance] startLocationUpdates];
@@ -165,7 +168,7 @@
 -(void) loginOrRegistrationWithUser:(id<FBGraphUser>)user{
     NSString *userIdentifier = user[@"email"]; //user[@"id"];
     
-    __weak STFacebookController *weakSelf = self;
+    __weak STFacebookLoginController *weakSelf = self;
     FBRequest *pic = [FBRequest requestForGraphPath:@"me/?fields=picture.type(large)"];
     [pic startWithCompletionHandler:^(FBRequestConnection *connection,
                                       id result,
@@ -176,7 +179,7 @@
             }
             //[self deleteAccessToken];
             [[STImageCacheController sharedInstance] cleanTemporaryFolder];
-            [STWebServiceController sharedInstance].isPerformLoginOrRegistration = false;
+            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
             return ;
         }
         NSDictionary *resultDic = (NSDictionary<FBGraphUser> *) result;
@@ -188,27 +191,32 @@
         __block NSString *userName = user[@"name"];
         [weakSelf UDSetValue:photoLink forKey:PHOTO_LINK];
         [weakSelf UDSetValue:userName  forKey:USER_NAME];
-
-        [[STWebServiceController sharedInstance] loginUserWithInfo:@{@"email":userIdentifier,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"facebook_image_link":photoLink,@"full_name":userName} withCompletion:^(NSDictionary *response) {
+        
+        STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
+            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+                [weakSelf measureRegister];
+                [weakSelf setUpEnvironment:response userIdentifier:userIdentifier userName:userName];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong with the registration." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+                [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
+            }
+        };
+        
+        STRequestFailureBlock failBlock = ^(NSError *error){
+            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
+        };
+        
+        STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
-
-                [[STWebServiceController sharedInstance] registerUserWithInfo:@{@"full_name":userName, @"email":userIdentifier,@"facebook_image_link":photoLink,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"phone_number":@""} withCompletion:^(NSDictionary *response) {
-                    
-                    if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-                        [weakSelf measureRegister];
-                        [weakSelf setUpEnvironment:response userIdentifier:userIdentifier userName:userName];
-
-                    }
-                    else
-                    {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong with the registration." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                        [alert show];
-                        [STWebServiceController sharedInstance].isPerformLoginOrRegistration=FALSE;
-                    }
-                    
-                } andErrorCompletion:^(NSError *error) {
-                    [STWebServiceController sharedInstance].isPerformLoginOrRegistration=FALSE;
-                }];
+                
+                NSDictionary *userInfo = @{@"full_name":userName, @"email":userIdentifier,@"facebook_image_link":photoLink,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"phone_number":@""};
+                
+                [STRegisterRequest registerWithUserInfo:userInfo
+                                         withCompletion:registerCompletion
+                                                failure:failBlock];
                 
             }
             else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
@@ -219,12 +227,15 @@
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong on login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
-                [STWebServiceController sharedInstance].isPerformLoginOrRegistration=FALSE;
+                [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
             }
-        } andErrorCompletion:^(NSError *error) {
-            [STWebServiceController sharedInstance].isPerformLoginOrRegistration=FALSE;
-        }];
+        };
         
+        NSDictionary *userInfo = @{@"email":userIdentifier,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"facebook_image_link":photoLink,@"full_name":userName};
+        
+        [STLoginRequest loginWithUserInfo:userInfo
+                           withCompletion:loginCompletion
+                                  failure:failBlock];
     }];
 }
 
@@ -304,13 +315,15 @@ static const UIUserNotificationType USER_NOTIFICATION_TYPES_REQUIRED = UIRemoteN
 }
 
 - (void)getUserSettingsFromServer {
-    [[STWebServiceController sharedInstance] getUserSettingsWithCompletion:^(NSDictionary *response) {
-        NSDictionary * settingsDict = response[@"data"];
-        [[NSUserDefaults standardUserDefaults] setObject:settingsDict forKey:STSettingsDictKey];
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+            NSDictionary * settingsDict = response[@"data"];
+            [[NSUserDefaults standardUserDefaults] setObject:settingsDict forKey:STSettingsDictKey];
+        }
+    };
+    
+    [STGetUserSettingsRequest getUserSettingsWithCompletion:completion failure:nil];
 
-    } andErrorCompletion:^(NSError *error) {
-        NSLog(@"settings error: %@", error.localizedDescription);
-    }];
 }
 
 @end

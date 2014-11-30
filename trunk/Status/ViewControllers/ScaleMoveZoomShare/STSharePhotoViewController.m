@@ -7,12 +7,14 @@
 //
 
 #import "STSharePhotoViewController.h"
-#import "STWebServiceController.h"
+#import "STNetworkQueueManager.h"
 #import <MessageUI/MessageUI.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import "STConstants.h"
 #import "STFacebookAlbumsLoader.h"
+
+#import "STUploadPostRequest.h"
 
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
@@ -154,8 +156,8 @@
 - (IBAction)onClickShare:(id)sender {
     _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
-    [[STWebServiceController sharedInstance] uploadPostForId:_editPostId withData:_imgData withCompletion:^(NSDictionary *response) {
-        
+    
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             if (weakSelf.editPostId!=nil) {
                 editResponseDict = [NSDictionary dictionaryWithDictionary:response];
@@ -167,7 +169,7 @@
             {
                 [weakSelf callTheDelegateIfNeeded];
             }
-
+            
         }
         else
         {
@@ -175,11 +177,17 @@
             weakSelf.shareButton.enabled = TRUE;
             
         }
- 
-    } orError:^(NSError *error) {
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         weakSelf.shareButton.enabled = TRUE;
-    }];
+    };
+    
+    [STUploadPostRequest uploadPostForId:_editPostId
+                                withData:_imgData
+                          withCompletion:completion
+                                 failure:failBlock];
 }
 
 #pragma mark - MFMailControllerDelegate
@@ -226,7 +234,7 @@
 }
 - (void)postCurrentPhotoToFacebook {
     __weak STSharePhotoViewController *weakSelf = self;
-    [[STFacebookController sharedInstance] shareImageWithData:self.imgData andCompletion:^(id result, NSError *error) {
+    [[STFacebookLoginController sharedInstance] shareImageWithData:self.imgData andCompletion:^(id result, NSError *error) {
         _donePostingToFacebook = YES;
         if (error) {
             _fbError = error;

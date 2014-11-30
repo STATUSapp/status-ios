@@ -8,12 +8,12 @@
 
 #import "STFlowTemplateViewController.h"
 #import "STCustomCollectionViewCell.h"
-#import "STWebServiceController.h"
+#import "STNetworkQueueManager.h"
 #import <QuartzCore/QuartzCore.h>
 #import "STSharePhotoViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "STImageCacheController.h"
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import "STConstants.h"
 #import "STCustomShareView.h"
 #import "STLikesViewController.h"
@@ -42,6 +42,17 @@
 
 #import "STSettingsViewController.h"
 #import <Crashlytics/Crashlytics.h>
+
+#import "STGetPostsRequest.h"
+#import "STSetPostLikeRequest.h"
+#import "STRepostPostRequest.h"
+#import "STGetUserPostsRequest.h"
+#import "STGetNearbyPostsRequest.h"
+#import "STSetPostSeenRequest.h"
+#import "STSetAPNTokenRequest.h"
+#import "STGetPostDetailsRequest.h"
+#import "STDeletePostRequest.h"
+#import "STInviteUserToUploadRequest.h"
 
 int const kDeletePostTag = 11;
 int const kNoPostsAlertTag = 13;
@@ -93,7 +104,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     self.postsDataSource = [NSMutableArray array];
     
     if (self.flowType == STFlowTypeAllPosts)
-        [[STFacebookController sharedInstance] setDelegate:self];
+        [[STFacebookLoginController sharedInstance] setDelegate:self];
     else
         [self getDataSourceWithOffset:0];
     
@@ -129,7 +140,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    NSString *email = [[STFacebookController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
+    NSString *email = [[STFacebookLoginController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
     if ([[[FBSession activeSession] accessTokenData] accessToken]==nil||email==nil) {
         [self presentLoginScene];
     }
@@ -144,7 +155,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[STFacebookController sharedInstance] setLogoutDelegate:self];
+    [[STFacebookLoginController sharedInstance] setLogoutDelegate:self];
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:appDelegate.badgeNumber];
     [[STImageCacheController sharedInstance] changeFlowType:_flowType needsSort:YES];
@@ -353,21 +364,22 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
     if (![presentedVC isKindOfClass:[STLoginViewController class]]) {
         [self dismissViewControllerAnimated:NO completion:^{
-            [[STFacebookController sharedInstance] UDSetValue:nil forKey:PHOTO_LINK];
-            [[STFacebookController sharedInstance] UDSetValue:nil forKey:USER_NAME];
+            [[STFacebookLoginController sharedInstance] UDSetValue:nil forKey:PHOTO_LINK];
+            [[STFacebookLoginController sharedInstance] UDSetValue:nil forKey:USER_NAME];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[FBSession activeSession] closeAndClearTokenInformation];
             [[FBSession activeSession] close];
             [FBSession setActiveSession:nil];
             [[FBSessionTokenCachingStrategy defaultInstance] clearToken];
 //            [weakSelf presentLoginScene];
-            [[STWebServiceController sharedInstance] setAPNToken:@"" withCompletion:^(NSDictionary *response) {
+            STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue]==200){
                     NSLog(@"APN Token deleted.");
-                    [[STFacebookController sharedInstance] deleteAccessToken];
+                    [[STFacebookLoginController sharedInstance] deleteAccessToken];
                 }
                 else  NSLog(@"APN token NOT deleted.");
-            } orError:nil];
+            };
+            [STSetAPNTokenRequest setAPNToken:@"" withCompletion:completion failure:nil];
             
             [[STChatController sharedInstance] close];
         }];
@@ -388,8 +400,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 -(void)imageWasPosted{
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = STFlowTypeMyProfile;
-    flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
-    flowCtrl.userName = [[STFacebookController sharedInstance] getUDValueForKey:USER_NAME];
+    flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
+    flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
     NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
@@ -451,15 +463,11 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     __weak STFlowTemplateViewController *weakSelf = self;
     switch (self.flowType) {
         case STFlowTypeAllPosts:{
-            [[STWebServiceController sharedInstance] getPostsWithOffset:offset withCompletion:^(NSDictionary *response) {
-                
+            
+            STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-#if PAGGING_ENABLED
                     NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
                     [weakSelf.postsDataSource addObjectsFromArray:newPosts];
-#else
-                    weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
-#endif
                     _isDataSourceLoaded = YES;
                     [weakSelf loadImages:newPosts];
                     [weakSelf.collectionView reloadData];
@@ -468,18 +476,26 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                         [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
                     });
                 }
-            } andErrorCompletion:^(NSError *error) {
+            };
+            STRequestFailureBlock failBlock = ^(NSError *error){
                 NSLog(@"error with %@", error.description);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [weakSelf.refreshBt setEnabled:YES];
                     [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
                 });
-            }];
+            };
+            [STGetPostsRequest getPostsWithOffset:offset withCompletion:completion failure:failBlock];
+//            [[STNetworkManager sharedManager] getPostsWithOffset:offset withCompletion:^(NSDictionary *response) {
+//                
+//                
+//            } andErrorCompletion:^(NSError *error) {
+//               
+//            }];
             break;
         }
         case STFlowTypeDiscoverNearby: {
-            [[STWebServiceController sharedInstance] getNearbyPostsWithOffset:offset completion:^(NSDictionary *response) {
-                
+            
+            STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] == 404) {
                     //user has no location force an update
                     
@@ -489,12 +505,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                 }
                 else
                 {
-#if PAGGING_ENABLED
                     NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
                     [weakSelf.postsDataSource addObjectsFromArray:newPosts];
-#else
-                    weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
-#endif
                     [weakSelf loadImages:newPosts];
                     _isDataSourceLoaded = YES;
                     [weakSelf.collectionView reloadData];
@@ -503,25 +515,29 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                     [weakSelf.refreshBt setEnabled:YES];
                     [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
                 });
-                
-            } andErrorCompletion:^(NSError *error) {
+            };
+            
+            STRequestFailureBlock failBlock = ^(NSError *error){
                 NSLog(@"error with %@", error.description);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [weakSelf.refreshBt setEnabled:YES];
                     [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
                 });
-            }];
+            };
+            
+            [STGetNearbyPostsRequest getNearbyPostsWithOffset:offset
+                                               withCompletion:completion
+                                                      failure:failBlock];
+            
             break;
         }
         case STFlowTypeMyProfile:
         case STFlowTypeUserProfile:{
-            [[STWebServiceController sharedInstance] getUserPosts:self.userID withOffset:offset completion:^(NSDictionary *response) {
-#if PAGGING_ENABLED
+            
+            STRequestCompletionBlock completion = ^(id response, NSError *error){
+                //TODO: verify received status code
                 NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
                 [weakSelf.postsDataSource addObjectsFromArray:newPosts];
-#else
-                weakSelf.postsDataSource = [NSMutableArray arrayWithArray:response[@"data"]];
-#endif
                 [weakSelf loadImages:newPosts];
                 _isDataSourceLoaded = YES;
                 [weakSelf.collectionView reloadData];
@@ -529,24 +545,30 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                     [weakSelf.refreshBt setEnabled:YES];
                     [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
                 });
-                
-                
-            } andErrorCompletion:^(NSError *error) {
+            };
+            
+            STRequestFailureBlock failBlock = ^(NSError *error){
                 NSLog(@"error with %@", error.description);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [weakSelf.refreshBt setEnabled:YES];
                     [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
                 });
-            }];
+            };
+            
+            [STGetUserPostsRequest getPostsForUser:_userID withOffset:offset withCompletion:completion failure:failBlock];
+            
             break;
         }
         case STFlowTypeSinglePost:{
-            [[STWebServiceController sharedInstance] getPostDetails:self.postID withCompletion:^(NSDictionary *response) {
-                weakSelf.postsDataSource = [NSMutableArray arrayWithObject:response[@"data"]];
-                [weakSelf loadImages:@[response[@"data"]]];
-                _isDataSourceLoaded = YES;
-                [weakSelf.collectionView reloadData];
-            } andErrorCompletion:nil];
+            STRequestCompletionBlock completion = ^(id response, NSError *error){
+                if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+                    weakSelf.postsDataSource = [NSMutableArray arrayWithObject:response[@"data"]];
+                    [weakSelf loadImages:@[response[@"data"]]];
+                    _isDataSourceLoaded = YES;
+                    [weakSelf.collectionView reloadData];
+                }
+            };
+            [STGetPostDetailsRequest getPostDetails:_postID withCompletion:completion failure:nil];
             break;
         }
         default:
@@ -555,7 +577,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 - (IBAction)onChatWithUser:(id)sender {
     NSDictionary *userInfo = [self getCurrentDictionary];
-    if ([userInfo[@"user_id"] isEqualToString:[STFacebookController sharedInstance].currentUserId]) {
+    if ([userInfo[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
     }
@@ -714,13 +736,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     if (_flowType == STFlowTypeMyProfile) {
         return;
     }
-    if ([STFacebookController sharedInstance].currentUserId == nil) {
+    if ([STFacebookLoginController sharedInstance].currentUserId == nil) {
         return;
     }
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = STFlowTypeMyProfile;
-    flowCtrl.userID = [STFacebookController sharedInstance].currentUserId;
-    flowCtrl.userName = [[STFacebookController sharedInstance] getUDValueForKey:USER_NAME];
+    flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
+    flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 
@@ -874,25 +896,26 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     __block NSMutableDictionary *cellDict = [NSMutableDictionary dictionaryWithDictionary:self.postsDataSource[currentRow]];
 
     __weak STFlowTemplateViewController *weakSelf = self;
-    [[STWebServiceController sharedInstance] setPostLiked:cellDict[@"post_id"] withCompletion:^(NSDictionary *response) {
+    
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
         [(UIButton *)sender setUserInteractionEnabled:YES];
+        
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-
-            [[STWebServiceController sharedInstance] getPostDetails:cellDict[@"post_id"] withCompletion:^(NSDictionary *response) {
-                if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                    
+            
+            STRequestCompletionBlock completion = ^(id response, NSError *error){
+                if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:response[@"data"]];
                     if (cellDict[@"post_seen"]!=nil) {
                         dict[@"post_seen"] = cellDict[@"post_seen"];
                     }
                     [weakSelf.postsDataSource replaceObjectAtIndex:currentRow
-                                                    withObject:[NSDictionary dictionaryWithDictionary:dict]];
+                                                        withObject:[NSDictionary dictionaryWithDictionary:dict]];
                     [weakSelf.collectionView performBatchUpdates:^{
                         STCustomCollectionViewCell *currentCell = [[weakSelf.collectionView visibleCells] firstObject];
                         if (currentCell != nil) {
                             [currentCell updateLikeBtnAndLblWithDict:dict];
                         }
-//                        [weakSelf.collectionView reloadItemsAtIndexPaths:[weakSelf.collectionView indexPathsForVisibleItems]];
+                        //                        [weakSelf.collectionView reloadItemsAtIndexPaths:[weakSelf.collectionView indexPathsForVisibleItems]];
                     } completion:^(BOOL finished) {
                         BOOL isLiked = [cellDict[@"post_liked_by_current_user"] boolValue];
                         if (!isLiked && weakSelf.postsDataSource.count>currentRow+1) {
@@ -902,16 +925,20 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                             
                         }
                     }];
-                
-                   
-
                 }
-            } andErrorCompletion:nil];
+            };
+            [STGetPostDetailsRequest getPostDetails:cellDict[@"post_id"] withCompletion:completion failure:nil];
+
         }
-        
-    } orError:^(NSError *error) {
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
         [(UIButton *)sender setUserInteractionEnabled:YES];
-    }];
+    };
+    
+    [STSetPostLikeRequest setPostLikeForPostId:cellDict[@"post_id"]
+                                withCompletion:completion
+                                       failure:failBlock];
 }
 - (IBAction)onTapBigCameraProfile:(id)sender {
     switch (self.flowType) {
@@ -920,7 +947,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
             break;
         }
         case STFlowTypeUserProfile:{
-            [self inviteUserToUpload];
+            [self inviteUserToUpload:_userID withUserName:_userName];
             break;
         }
             
@@ -930,23 +957,18 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     }
 }
 
--(void) inviteUserToUpload{
-    __weak STFlowTemplateViewController *weakSelf = self;
-    [[STWebServiceController sharedInstance] inviteUserToUpload:_userID withCompletion:^(NSDictionary *response) {
+- (void)inviteUserToUpload:(NSString *)userID withUserName:(NSString *)userName{
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
         NSInteger statusCode = [response[@"status_code"] integerValue];
-        if (statusCode == STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
-            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", weakSelf.userName];
+        if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", userName];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
-                                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Go Home", nil];
+                                                  cancelButtonTitle:@"OK" otherButtonTitles: nil];
             alert.tag = kInviteUserToUpload;
             [alert show];
-            
         }
-        else
-        {
-            NSLog(@"Error");
-        }
-    } orError:nil];
+    };
+    [STInviteUserToUploadRequest inviteUserToUpload:userID withCompletion:completion failure:nil];
 }
 
 - (void)inviteCurrentPostOwnerUserToUpload {
@@ -969,21 +991,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         //TODO: should deactivate that option
         return;
     }
-    [[STWebServiceController sharedInstance] inviteUserToUpload:userID withCompletion:^(NSDictionary *response) {
-        NSInteger statusCode = [response[@"status_code"] integerValue];
-        if (statusCode == STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
-            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", userName];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
-                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            alert.tag = kInviteUserToUpload;
-            [alert show];
-            
-        }
-        else
-        {
-            NSLog(@"Error");
-        }
-    } orError:nil];
+    [self inviteUserToUpload:userID withUserName:userName];
 }
 
 - (IBAction)onDismissShareOptions:(id)sender {
@@ -1016,7 +1024,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 }
 
 - (void)sharePhotoOnFacebookWithImgData:(NSData *)imgData{
-    [[STFacebookController sharedInstance] shareImageWithData:imgData andCompletion:^(id result, NSError *error) {
+    [[STFacebookLoginController sharedInstance] shareImageWithData:imgData andCompletion:^(id result, NSError *error) {
         if(error==nil)
             [[[UIAlertView alloc] initWithTitle:@"Success"
                                         message:@"Your photo was posted."
@@ -1061,7 +1069,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     NSDictionary *dict = [self getCurrentDictionary];
 
     if ([dict[@"report_status"] integerValue]==1) {
-        [[STWebServiceController sharedInstance] setReportStatus:dict[@"post_id"] withCompletion:^(NSDictionary *response) {
+        STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                 [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"A message was sent to the admin." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
             }
@@ -1069,8 +1077,12 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
             {
                 [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
             }
-            
-        } orError:nil];
+        };
+        
+        [STRepostPostRequest reportPostWithId:dict[@"post_id"]
+                               withCompletion:completion
+                                      failure:nil];
+
     }
     else
     {
@@ -1196,20 +1208,24 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         if (dict[@"post_id"] == nil) {
             return;
         }
-        [[STWebServiceController sharedInstance] setPostSeen:dict[@"post_id"] withCompletion:^(NSDictionary *response) {
+        
+        STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                 [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
-                BOOL shouldGetNextBatch = weakSelf.postsDataSource.count - usedIndx.row == START_LOAD_OFFSET && usedIndx.row!=0;
+                BOOL shouldGetNextBatch = weakSelf.postsDataSource.count - usedIndx.row == kStartLoadOffset && usedIndx.row!=0;
                 if (shouldGetNextBatch) {
                     [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count - usedIndx.row - 1];
                 }
             }
-            
-        } orError:nil];
+        };
+        
+        [STSetPostSeenRequest setPostSeen:dict[@"post_id"]
+                           withCompletion:completion
+                                  failure:nil];
     }
     else if(self.flowType != STFlowTypeSinglePost)
     {
-        BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == START_LOAD_OFFSET && usedIndx.row!=0;
+        BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == kStartLoadOffset && usedIndx.row!=0;
         if (shouldGetNextBatch) {
             [self getDataSourceWithOffset:_postsDataSource.count];
             
@@ -1352,9 +1368,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         if (buttonIndex==1) {
             NSDictionary *dict = [self getCurrentDictionary];
             __weak STFlowTemplateViewController *weakSelf = self;
-            [[STWebServiceController sharedInstance] deletePost:dict[@"post_id"] withCompletion:^(NSDictionary *response) {
-                
-                if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            STRequestCompletionBlock completion = ^(id response, NSError *error){
+                if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                     //animate cell out
                     [weakSelf.collectionView performBatchUpdates:^{
                         
@@ -1372,14 +1387,13 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
                         
                     } completion:nil];
                 }
-                
-            } orError:nil];
-            
+            };
+            [STDeletePostRequest deletePost:dict[@"post_id"] withCompletion:completion failure:nil];
         }
     }
     else if (alertView.tag == kInviteUserToUpload){
         if (buttonIndex ==1) {
-            [self onTapMenu:nil];
+            [self onClickHome:nil];
         }
     }
     
@@ -1507,7 +1521,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
         }
         else
         {
-            if ([STWebServiceController sharedInstance].accessToken == nil) {
+            if ([STNetworkQueueManager sharedManager].accessToken == nil) {
                 //wait for the login to be performed and after handle the notification
                 _lastNotif = notif;
                 return;

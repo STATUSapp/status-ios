@@ -22,8 +22,8 @@
 @end
 
 typedef void (^facebookCompletion)(id result, NSError *error);
-@interface STFacebookController : NSObject<FBLoginViewDelegate>
-+(STFacebookController *) sharedInstance;
+@interface STFacebookLoginController : NSObject<FBLoginViewDelegate>
++(STFacebookLoginController *) sharedInstance;
 @property (nonatomic, strong) id <FacebookControllerDelegate> delegate;
 @property (nonatomic, strong) id <FacebookControllerDelegate> logoutDelegate;
 @property (nonatomic, strong) FBLoginView *loginButton;

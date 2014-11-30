@@ -1,9 +1,9 @@
 //
-//  SLDataManager.m
-//  Solum
+//  STDAOEngine.m
+//  Status
 //
-//  Created by Cosmin Andrus on 10/16/13.
-//  Copyright (c) 2013 Solum. All rights reserved.
+//  Created by Andrus Cosmin on 25/07/14.
+//  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
 #import "STDAOEngine.h"

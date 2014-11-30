@@ -9,8 +9,8 @@
 #import "STChatController.h"
 #import "SRWebSocket.h"
 #import "STConstants.h"
-#import "STWebServiceController.h"
-#import "STFacebookController.h"
+#import "STNetworkQueueManager.h"
+#import "STFacebookLoginController.h"
 #import "STCoreDataManager.h"
 
 @interface STChatController()<SRWebSocketDelegate>{
@@ -50,10 +50,10 @@
     if (_status != STWebSockerStatusClosed) {
         return;
     }
-    NSString *email = [[STFacebookController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
+    NSString *email = [[STFacebookLoginController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
     
-    if ([STWebServiceController sharedInstance].accessToken==nil &&
-        [STWebServiceController sharedInstance].accessToken.length==0 &&
+    if ([STNetworkQueueManager sharedManager].accessToken==nil &&
+        [STNetworkQueueManager sharedManager].accessToken.length==0 &&
         [[[FBSession activeSession] accessTokenData] accessToken]==nil&&
         email==nil)
     {
@@ -202,13 +202,13 @@
 
 -(void)authenticate{
     
-    NSString *email = [[STFacebookController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
+    NSString *email = [[STFacebookLoginController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
 
-    if ([STWebServiceController sharedInstance].accessToken!=nil &&
-        [STWebServiceController sharedInstance].accessToken.length!=0 &&
+    if ([STNetworkQueueManager sharedManager].accessToken!=nil &&
+        [STNetworkQueueManager sharedManager].accessToken.length!=0 &&
         [[[FBSession activeSession] accessTokenData] accessToken]!=nil&&
         email!=nil) {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"login", @"token": [STWebServiceController sharedInstance].accessToken} options:NSJSONWritingPrettyPrinted error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"login", @"token": [STNetworkQueueManager sharedManager].accessToken} options:NSJSONWritingPrettyPrinted error:nil];
         NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         [_webSocket send:jsonString];
     }

@@ -1,9 +1,9 @@
 //
-//  SLCoreDataManager.h
-//  Solum
+//  STCoreDataManager.h
+//  Status
 //
-//  Created by Cosmin Andrus on 10/25/13.
-//  Copyright (c) 2013
+//  Created by Andrus Cosmin on 25/07/14.
+//  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
 
@@ -19,8 +19,6 @@ typedef void (^AddParameterBlock)(id returnObject, NSManagedObjectContext* manag
 
 @interface STCoreDataManager : NSObject{
     
-//    NSDictionary *_dbRelationEntityNameDictionary;
-//    NSDictionary *_dbRelationBackwardRelationDictionary;
     SLTableRelationshipManager* _tableRelationshipsManager;
 }
 

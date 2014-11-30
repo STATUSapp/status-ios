@@ -8,10 +8,12 @@
 
 #import "STSettingsViewController.h"
 #import "STRemoveAdsViewController.h"
-#import "STFacebookController.h"
+#import "STFacebookLoginController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
-#import "STWebServiceController.h"
+
+#import "STGetUserSettingsRequest.h"
+#import "STSetUserSettingsRequest.h"
 
 const NSInteger kSectionNumberNotifications = 0;
 const NSInteger kSectionNumberContactLikeAds = 1;
@@ -64,22 +66,23 @@ const NSInteger kSectionNumberLogout = 2;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    loginView = [STFacebookController sharedInstance].loginButton;
+    loginView = [STFacebookLoginController sharedInstance].loginButton;
     loginView.hidden = YES;
     [_logoutCell.contentView addSubview:loginView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapDone)];
     
     _settingsDict = [[NSUserDefaults standardUserDefaults] objectForKey:STSettingsDictKey];
     __weak STSettingsViewController * weakSelf = self;
-    [[STWebServiceController sharedInstance] getUserSettingsWithCompletion:^(NSDictionary *response) {
-        weakSelf.settingsDict = response[@"data"];
-        [[NSUserDefaults standardUserDefaults] setObject:weakSelf.settingsDict forKey:STSettingsDictKey];
-        [weakSelf configureSwitches];
-        
-    } andErrorCompletion:^(NSError *error) {
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+            weakSelf.settingsDict = response[@"data"];
+            [[NSUserDefaults standardUserDefaults] setObject:weakSelf.settingsDict forKey:STSettingsDictKey];
+            [weakSelf configureSwitches];
 
-    }];
-    
+        }
+    };
+
+    [STGetUserSettingsRequest getUserSettingsWithCompletion:completion failure:nil];
     [self configureSwitches];
 }
 
@@ -140,66 +143,6 @@ const NSInteger kSectionNumberLogout = 2;
     }
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - IBActions
 
 - (IBAction)onTapRemoveAds:(id)sender {
@@ -222,7 +165,7 @@ const NSInteger kSectionNumberLogout = 2;
 }
 
 -(void)fireFbLoginView{
-    for(id object in [STFacebookController sharedInstance].loginButton.subviews){
+    for(id object in [STFacebookLoginController sharedInstance].loginButton.subviews){
         if([[object class] isSubclassOfClass:[UIButton class]]){
             UIButton* button = (UIButton*)object;
             [button sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -254,11 +197,16 @@ const NSInteger kSectionNumberLogout = 2;
 - (void)setSetting:(NSString *)setting fromSwitch:(UISwitch *)sender {
     __weak UISwitch * weakSender = sender;
     __weak STSettingsViewController * weakSelf = self;
-    [[STWebServiceController sharedInstance] setUserSetting:setting enabled:weakSender.isOn withCompletion:^(NSDictionary *response) {
-        [[NSUserDefaults standardUserDefaults] setObject:[weakSelf getNewSettingsDict] forKey:STSettingsDictKey];
-    } andErrorCompletion:^(NSError *error) {
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+            [[NSUserDefaults standardUserDefaults] setObject:[weakSelf getNewSettingsDict] forKey:STSettingsDictKey];
+            
+        }
+    };
+    STRequestFailureBlock failBlock = ^(NSError *error){
         [weakSender setOn:!sender.isOn];
-    }];
+    };
+    [STSetUserSettingsRequest setSettingsValue:weakSender.isOn forKey:setting withCompletion:completion failure:failBlock];
 }
 
 @end
