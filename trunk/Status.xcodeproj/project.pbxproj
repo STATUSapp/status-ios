@@ -145,6 +145,10 @@
 		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
+		9904DD3D1A2FB48D0072134F /* STUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */; };
+		9904DD401A2FB4C40072134F /* STEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */; };
+		9904DD431A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD421A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m */; };
+		9904DD451A2FB55D0072134F /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9904DD441A2FB55D0072134F /* UserProfile.storyboard */; };
 		99206B041A082CAE008EAEE9 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99206B031A082CAE008EAEE9 /* libGoogleAdMobAds.a */; };
 		99671D0B19BC8FBB00FB8A7A /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
@@ -438,6 +442,13 @@
 		317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomCollectionViewCell.h; sourceTree = "<group>"; };
 		317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomCollectionViewCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9904DD3B1A2FB48D0072134F /* STUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserProfileViewController.h; sourceTree = "<group>"; };
+		9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserProfileViewController.m; sourceTree = "<group>"; };
+		9904DD3E1A2FB4C40072134F /* STEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditProfileViewController.h; sourceTree = "<group>"; };
+		9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEditProfileViewController.m; sourceTree = "<group>"; };
+		9904DD411A2FB50E0072134F /* STChangeUserProfilePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChangeUserProfilePhotoViewController.h; sourceTree = "<group>"; };
+		9904DD421A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChangeUserProfilePhotoViewController.m; sourceTree = "<group>"; };
+		9904DD441A2FB55D0072134F /* UserProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
 		99206B031A082CAE008EAEE9 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		99671D0919BC8FBB00FB8A7A /* STSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSettingsViewController.h; sourceTree = "<group>"; };
 		99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSettingsViewController.m; sourceTree = "<group>"; };
@@ -769,6 +780,7 @@
 				178907B618B294BA00AC4355 /* LoginScene.storyboard */,
 				17ACEB611933C4E600CFC909 /* ChatScene.storyboard */,
 				172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */,
+				9904DD441A2FB55D0072134F /* UserProfile.storyboard */,
 				178907B818B295DD00AC4355 /* STLoginViewController.h */,
 				99671D0919BC8FBB00FB8A7A /* STSettingsViewController.h */,
 				99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */,
@@ -779,6 +791,12 @@
 				1DFCCACB191238A000B9230E /* STTutorialCell.m */,
 				172EAE7B18B0B12E00C5637B /* STFlowTemplateViewController.h */,
 				172EAE7C18B0B12E00C5637B /* STFlowTemplateViewController.m */,
+				9904DD3B1A2FB48D0072134F /* STUserProfileViewController.h */,
+				9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */,
+				9904DD3E1A2FB4C40072134F /* STEditProfileViewController.h */,
+				9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */,
+				9904DD411A2FB50E0072134F /* STChangeUserProfilePhotoViewController.h */,
+				9904DD421A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m */,
 				07FBDEE418C606EF007BDCE6 /* STLikesViewController.h */,
 				07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */,
 				07FBDEE718C60DDF007BDCE6 /* STLikeCell.h */,
@@ -1111,6 +1129,7 @@
 				17ACEB621933C4E600CFC909 /* ChatScene.storyboard in Resources */,
 				178907B718B294BA00AC4355 /* LoginScene.storyboard in Resources */,
 				17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */,
+				9904DD451A2FB55D0072134F /* UserProfile.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1153,6 +1172,7 @@
 				1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */,
 				172EAE7D18B0B12E00C5637B /* STFlowTemplateViewController.m in Sources */,
 				17E44B9919821FB2000E9116 /* STCoreDataManager.m in Sources */,
+				9904DD3D1A2FB48D0072134F /* STUserProfileViewController.m in Sources */,
 				1DE2D5B81950DB3100A29A86 /* STRemoveAdsViewController.m in Sources */,
 				176CC3011A2B076E00E9C3D0 /* STSetAPNTokenRequest.m in Sources */,
 				1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */,
@@ -1169,6 +1189,7 @@
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
 				07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */,
 				0717E2B719B71B09001DF132 /* STFacebookAlbumCell.m in Sources */,
+				9904DD401A2FB4C40072134F /* STEditProfileViewController.m in Sources */,
 				0717E2E219B71D3E001DF132 /* STFacebookLoginController.m in Sources */,
 				0717E2E319B71D3E001DF132 /* STLocationManager.m in Sources */,
 				172EAEB218B0B46300C5637B /* AFNetworkReachabilityManager.m in Sources */,
@@ -1184,6 +1205,7 @@
 				17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */,
 				07FCFAA519C094250048F441 /* UIImageView+WebCache.m in Sources */,
 				07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */,
+				9904DD431A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m in Sources */,
 				07FCFAA419C094250048F441 /* UIImageView+HighlightedWebCache.m in Sources */,
 				176CC3071A2B0BFA00E9C3D0 /* STGetNotificationsRequest.m in Sources */,
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
