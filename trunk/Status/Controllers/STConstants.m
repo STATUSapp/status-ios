@@ -28,13 +28,13 @@ NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
 NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
 NSString *const kChatSocketURL = @"http://dev.getstatusapp.co";
 NSString *const kReachableURL = @"dev.getstatusapp.co";
-int const kChatPort = 9001;
+int const kChatPort = 9003;
 
 #endif
 
 NSInteger const kHTTPErrorNoConnection = 447;
-NSInteger const kPostsLimit = 10;
-NSInteger const kStartLoadOffset = 5;
+NSInteger const kPostsLimit = 20;
+NSInteger const kStartLoadOffset = 10;
 #pragma mark - Denis Dev1
 //NSString *const kBaseURL = @"http://status.nece.me/api/";
 //NSString *const kBasePhotoDownload = @"http://status.nece.me/media/";

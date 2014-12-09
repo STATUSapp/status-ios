@@ -39,7 +39,7 @@
     self = [super init];
     if (self) {
         
-        _loginButton = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email"/*, @"user_likes"*/]];
+        _loginButton = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email"]];
         _loginButton.defaultAudience = FBSessionDefaultAudienceEveryone;
         [_loginButton setFrame:CGRectMake(50, 0, 218, 46)];
         [_loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -91,12 +91,6 @@
 #pragma mark - Facebook DelegatesFyou
 
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
-    if (user[@"email"]==nil) {
-        [[[UIAlertView alloc] initWithTitle:@"Permission Error" message:@"You need to grant access to email address" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        
-        return;
-    }
-
     if ([STNetworkQueueManager sharedManager].isPerformLoginOrRegistration==FALSE) {
         [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = TRUE;
         [self loginOrRegistrationWithUser:user];
@@ -130,7 +124,6 @@
 -(void)loadTokenFromKeyChain {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
     [STNetworkQueueManager sharedManager].accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
-    //[[STLocationManager sharedInstance] startLocationUpdates];
     NSLog(@"Loaded Access Token: %@",[STNetworkQueueManager sharedManager].accessToken);
 }
 
@@ -153,7 +146,6 @@
 
 - (void)setUpEnvironment:(NSDictionary *)response userIdentifier:(NSString *)userIdentifier userName:(NSString *)userName {
     [STNetworkQueueManager sharedManager].accessToken = response[@"token"];
-    [self UDSetValue:userIdentifier forKey:LOGGED_EMAIL];
     [[STChatController sharedInstance] forceReconnect];
     [[STLocationManager sharedInstance] startLocationUpdates];
     [self saveAccessToken:response[@"token"]];
@@ -166,7 +158,8 @@
 }
 
 -(void) loginOrRegistrationWithUser:(id<FBGraphUser>)user{
-    NSString *userIdentifier = user[@"email"]; //user[@"id"];
+    NSString *userEmail = user[@"email"];
+    NSString *userFbId = user[@"id"];
     
     __weak STFacebookLoginController *weakSelf = self;
     FBRequest *pic = [FBRequest requestForGraphPath:@"me/?fields=picture.type(large)"];
@@ -177,25 +170,31 @@
             if (weakSelf.delegate&&[weakSelf.delegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
                 [weakSelf.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
             }
-            //[self deleteAccessToken];
             [[STImageCacheController sharedInstance] cleanTemporaryFolder];
             [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
             return ;
         }
         NSDictionary *resultDic = (NSDictionary<FBGraphUser> *) result;
         
-        //weakSelf.currentUserPhotoLink = resultDic[@"picture"][@"data"][@"url"];
-        //weakSelf.currentUserName = user[@"name"];
-        
         __block NSString *photoLink = resultDic[@"picture"][@"data"][@"url"];
         __block NSString *userName = user[@"name"];
-        [weakSelf UDSetValue:photoLink forKey:PHOTO_LINK];
         [weakSelf UDSetValue:userName  forKey:USER_NAME];
         
+        NSMutableDictionary *userInfo = [NSMutableDictionary new];
+        if (userEmail!=nil)
+            userInfo[@"email"] = userEmail;
+        if (userName!=nil)
+            userInfo[@"full_name"] = userName;
+
+        userInfo[@"facebook_image_link"] = photoLink;
+        userInfo[@"fb_token"] = [[[FBSession activeSession] accessTokenData] accessToken];
+        userInfo[@"facebook_id"] = userFbId;
+        userInfo[@"phone_number"] = @"";
+
         STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 [weakSelf measureRegister];
-                [weakSelf setUpEnvironment:response userIdentifier:userIdentifier userName:userName];
+                [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
             }
             else
             {
@@ -211,9 +210,6 @@
         
         STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
-                
-                NSDictionary *userInfo = @{@"full_name":userName, @"email":userIdentifier,@"facebook_image_link":photoLink,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"phone_number":@""};
-                
                 [STRegisterRequest registerWithUserInfo:userInfo
                                          withCompletion:registerCompletion
                                                 failure:failBlock];
@@ -221,7 +217,7 @@
             }
             else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
                 [weakSelf setTrackerAsExistingUser];
-                [weakSelf setUpEnvironment:response userIdentifier:userIdentifier userName:userName];
+                [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
             }
             else
             {
@@ -230,8 +226,6 @@
                 [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
             }
         };
-        
-        NSDictionary *userInfo = @{@"email":userIdentifier,@"fb_token":[[[FBSession activeSession] accessTokenData] accessToken],@"facebook_image_link":photoLink,@"full_name":userName};
         
         [STLoginRequest loginWithUserInfo:userInfo
                            withCompletion:loginCompletion
@@ -279,7 +273,7 @@
                           otherButtonTitles:nil] show];
     }
     
-    [self UDSetValue:nil forKey:LOGGED_EMAIL];
+    [STFacebookLoginController sharedInstance].currentUserId = nil;
 }
 
 -(void) announceDelegate{

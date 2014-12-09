@@ -12,6 +12,7 @@
 #import "STNetworkQueueManager.h"
 #import "STFacebookLoginController.h"
 #import "STCoreDataManager.h"
+#import "STDAOEngine.h"
 
 @interface STChatController()<SRWebSocketDelegate>{
     SRWebSocket *_webSocket;
@@ -50,12 +51,11 @@
     if (_status != STWebSockerStatusClosed) {
         return;
     }
-    NSString *email = [[STFacebookLoginController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
     
     if ([STNetworkQueueManager sharedManager].accessToken==nil &&
         [STNetworkQueueManager sharedManager].accessToken.length==0 &&
         [[[FBSession activeSession] accessTokenData] accessToken]==nil&&
-        email==nil)
+        [STFacebookLoginController sharedInstance].currentUserId==nil)
     {
         NSLog(@"Missing Acces token. Connect when available");
         return;
@@ -180,6 +180,13 @@
         }
         
     }
+    else if([response[@"type"] isEqualToString:@"syncRoomMessages"]){
+        for (NSDictionary *message in response[@"messages"]) {
+            NSMutableDictionary *messageDict = [NSMutableDictionary dictionaryWithDictionary:message];
+            messageDict[@"roomID"] = response[@"roomID"];
+            [self addMessage:messageDict seen:YES];
+        }
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
@@ -202,12 +209,10 @@
 
 -(void)authenticate{
     
-    NSString *email = [[STFacebookLoginController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
-
     if ([STNetworkQueueManager sharedManager].accessToken!=nil &&
         [STNetworkQueueManager sharedManager].accessToken.length!=0 &&
         [[[FBSession activeSession] accessTokenData] accessToken]!=nil&&
-        email!=nil) {
+        [STFacebookLoginController sharedInstance].currentUserId!=nil) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"login", @"token": [STNetworkQueueManager sharedManager].accessToken} options:NSJSONWritingPrettyPrinted error:nil];
         NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         [_webSocket send:jsonString];
@@ -266,6 +271,15 @@
     [_webSocket send:jsonString];
 }
 
+-(void)syncRoomMessages:(NSString *)roomId withMessagesIds:(NSArray *)messagesUuids{
+    if (roomId==nil || messagesUuids.count == 0) {
+        return;
+    }
+    NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type":@"syncRoomMessages", @"roomId":roomId,@"messageIDs":messagesUuids} options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [_webSocket send:jsonString];
+}
+
 #pragma mark - Local Storage
 -(void)addMessage:(NSDictionary *)message seen:(BOOL) seen {
     NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithDictionary:message];
@@ -282,6 +296,12 @@
             NSLog(@"Not good check this out");
             return;
         }
+    }
+    
+    NSString *uuid = resultDict[@"id"];
+    if (uuid == nil || [uuid isEqual:[NSNull null]]) {
+        NSLog(@"wrong id returned. Debug this");
+        return;
     }
     
 //    BOOL received = ![resultDict[@"userId"] isEqualToString:[STFacebookController sharedInstance].currentUserId];

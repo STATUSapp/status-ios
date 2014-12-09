@@ -2,7 +2,7 @@
 //  Message.h
 //  Status
 //
-//  Created by Andrus Cosmin on 25/07/14.
+//  Created by Cosmin Andrus on 07/12/14.
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSString * roomID;
 @property (nonatomic, retain) NSNumber * seen;
 @property (nonatomic, retain) NSString * userId;
+@property (nonatomic, retain) NSString * uuid;
 
 @end

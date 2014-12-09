@@ -8,6 +8,7 @@
 
 #import "STCoreDataManager.h"
 #import "Message.h"
+#import "STDAOEngine.h"
 
 //Set the name of your xcdatamodeld file
 NSString* const kCoreDataModelFileName = @"StatusDM";
@@ -214,10 +215,15 @@ static STCoreDataManager* _coreDataManager = nil;
                               withData:(NSDictionary*)serverData
                          andCompletion:(CompletionBlock)completion{
     //We create a new managed object context from our main, we update it async, then we merge the changes into our main M.O.C
-        // Create a new managed object context
-        // Set its persistent store coordinator
-        NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
-
+    // Create a new managed object context
+    // Set its persistent store coordinator
+    NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
+    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+    
+    STCoreDataRequestManager *messageManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"uuid like %@", serverData[@"id"]] sectionNameKeyPath:nil delegate:nil andTableView:nil];
+    
+    Message *message = [[messageManager allObjects] lastObject];
+    if (message==nil) {
         [newMoc performBlock:^{
             Message *insertedValue = [self insertDataForTableName:entityName inObjectContext:newMoc];
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -230,6 +236,7 @@ static STCoreDataManager* _coreDataManager = nil;
             insertedValue.roomID = serverData[@"roomID"];
             insertedValue.seen = serverData[@"seen"];
             insertedValue.userId = serverData[@"userId"];
+            insertedValue.uuid = serverData[@"id"];
             
             NSError *error = nil;
             [newMoc save:&error];
@@ -247,6 +254,7 @@ static STCoreDataManager* _coreDataManager = nil;
             }
             
         }];
+    }
 }
 
 #pragma mark -  Update data helpers

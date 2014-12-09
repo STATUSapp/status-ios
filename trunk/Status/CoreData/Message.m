@@ -2,7 +2,7 @@
 //  Message.m
 //  Status
 //
-//  Created by Andrus Cosmin on 25/07/14.
+//  Created by Cosmin Andrus on 07/12/14.
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
@@ -17,5 +17,6 @@
 @dynamic roomID;
 @dynamic seen;
 @dynamic userId;
+@dynamic uuid;
 
 @end

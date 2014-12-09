@@ -45,7 +45,7 @@
 -(void)openChatRoomForUserId:(NSString *)userId;
 -(void)leaveCurrentRoom;
 -(void)getRoomMessages:(NSString *)roomId withOffset:(NSInteger)offset;
-
+-(void)syncRoomMessages:(NSString *)roomId withMessagesIds:(NSArray *)messagesUuids;
 +(STChatController *)sharedInstance;
 - (void)startReachabilityService;
 -(void)leaveRoom:(NSString *)roomId;

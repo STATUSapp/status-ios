@@ -87,7 +87,19 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     }
 //    [Crashlytics startWithAPIKey:@"b4369a0a1dca4a6745a3905bf41aa6964c863da1"];
     [Crashlytics startWithAPIKey:@"93e0064668657d3332278aaa1ed765b8f48c6ad6"];
+    [self cleanLocalDBIfNeeded];
     return YES;
+}
+
+-(void)cleanLocalDBIfNeeded{
+    //we need this clenup from 1.0.7 to future versions because of the uuid parameter from messages
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *upgraded = [ud valueForKey:@"upgradeDBV1.0.7"];
+    if (upgraded == nil) {
+        [[STCoreDataManager sharedManager] cleanLocalDataBase];
+        [ud setValue:@"YES" forKey:@"upgradeDBV1.0.7"];
+        [ud synchronize];
+    }
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {

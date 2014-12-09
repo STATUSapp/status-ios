@@ -42,6 +42,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     UIAlertView *successBlockAlert;
     CGPoint lastContentOffset;
     CGRect keyboardBounds;
+    BOOL justEnteredRoom;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -335,10 +336,12 @@ static NSInteger const  kBlockUserAlertTag = 11;
 -(void)chatDidOpenRoom:(NSString *)roomId{
     _roomId = roomId;
     _textView.userInteractionEnabled = YES;
+    justEnteredRoom  =YES;
 
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
     _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"roomID like %@", _roomId] sectionNameKeyPath:nil delegate:self andTableView:nil];
     _messages = [NSMutableArray arrayWithArray:_currentManager.allObjects];
+
     NSNumber *seen = [[_messages valueForKey:@"seen"] valueForKeyPath: @"@sum.self"];
     NSInteger unseen = _messages.count - seen.integerValue;
     [chatController setUnreadMessages:chatController.unreadMessages-unseen];
@@ -348,7 +351,15 @@ static NSInteger const  kBlockUserAlertTag = 11;
         
         [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
-    
+    else
+    {
+        if (justEnteredRoom == YES) {
+            justEnteredRoom = NO;
+            [self onLoadMore:nil];
+        }
+    }
+    [chatController syncRoomMessages:_roomId withMessagesIds:[_currentManager.allObjects valueForKey:@"uuid"]];
+
 }
 -(void)chatDidAuthenticate{
     [self hideStatusAlert];

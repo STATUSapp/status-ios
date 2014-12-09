@@ -108,6 +108,7 @@
 		1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD5C1960D3020009066D /* STFacebookActivity.m */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
+		17A032491A34557E00E08BEA /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A032481A34557E00E08BEA /* Message.m */; };
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
@@ -118,6 +119,7 @@
 		17CA0E8E1A2130AF00D0B081 /* STUploadPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E8D1A2130AF00D0B081 /* STUploadPostRequest.m */; };
 		17CA0E911A2136F800D0B081 /* STSetPostLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E901A2136F800D0B081 /* STSetPostLikeRequest.m */; };
 		17CA0E941A21C59900D0B081 /* STRepostPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E931A21C59900D0B081 /* STRepostPostRequest.m */; };
+		17D4231D1A2C6CA900F5B880 /* STGADelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D4231C1A2C6CA900F5B880 /* STGADelegate.m */; };
 		17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
 		17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
 		17E0FCA21A27AB3200FC3FEE /* STGetUserPostsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA11A27AB3200FC3FEE /* STGetUserPostsRequest.m */; };
@@ -127,7 +129,6 @@
 		17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9619821FB2000E9116 /* STCoreDataRequestManager.m */; };
 		17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9819821FB2000E9116 /* STDAOEngine.m */; };
 		17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
-		17E44BA119822B67000E9116 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44BA019822B67000E9116 /* Message.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
 		17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FE7CE319B321340081F688 /* NSString+MD5.m */; };
 		1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */; };
@@ -383,6 +384,8 @@
 		1794DD561960D2A40009066D /* STWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhatsAppActivity.m; sourceTree = "<group>"; };
 		1794DD5B1960D3020009066D /* STFacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookActivity.h; sourceTree = "<group>"; };
 		1794DD5C1960D3020009066D /* STFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookActivity.m; sourceTree = "<group>"; };
+		17A032471A34557E00E08BEA /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		17A032481A34557E00E08BEA /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		17AB89E4193B0DF600A6E7FD /* STChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatController.h; sourceTree = "<group>"; };
 		17AB89E5193B0DF600A6E7FD /* STChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatController.m; sourceTree = "<group>"; };
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
@@ -398,6 +401,8 @@
 		17CA0E901A2136F800D0B081 /* STSetPostLikeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetPostLikeRequest.m; sourceTree = "<group>"; };
 		17CA0E921A21C59900D0B081 /* STRepostPostRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STRepostPostRequest.h; sourceTree = "<group>"; };
 		17CA0E931A21C59900D0B081 /* STRepostPostRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STRepostPostRequest.m; sourceTree = "<group>"; };
+		17D4231B1A2C6CA900F5B880 /* STGADelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGADelegate.h; sourceTree = "<group>"; };
+		17D4231C1A2C6CA900F5B880 /* STGADelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGADelegate.m; sourceTree = "<group>"; };
 		17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomShareView.h; sourceTree = "<group>"; };
 		17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomShareView.m; sourceTree = "<group>"; };
 		17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
@@ -414,8 +419,6 @@
 		17E44B9719821FB2000E9116 /* STDAOEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDAOEngine.h; sourceTree = "<group>"; };
 		17E44B9819821FB2000E9116 /* STDAOEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDAOEngine.m; sourceTree = "<group>"; };
 		17E44B9D19822032000E9116 /* StatusDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StatusDM.xcdatamodel; sourceTree = "<group>"; };
-		17E44B9F19822B67000E9116 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		17E44BA019822B67000E9116 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
 		17FE7CE219B321340081F688 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
@@ -797,6 +800,8 @@
 				9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */,
 				9904DD411A2FB50E0072134F /* STChangeUserProfilePhotoViewController.h */,
 				9904DD421A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m */,
+				17D4231B1A2C6CA900F5B880 /* STGADelegate.h */,
+				17D4231C1A2C6CA900F5B880 /* STGADelegate.m */,
 				07FBDEE418C606EF007BDCE6 /* STLikesViewController.h */,
 				07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */,
 				07FBDEE718C60DDF007BDCE6 /* STLikeCell.h */,
@@ -972,8 +977,8 @@
 			isa = PBXGroup;
 			children = (
 				17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */,
-				17E44B9F19822B67000E9116 /* Message.h */,
-				17E44BA019822B67000E9116 /* Message.m */,
+				17A032471A34557E00E08BEA /* Message.h */,
+				17A032481A34557E00E08BEA /* Message.m */,
 				17E44B9319821FB2000E9116 /* STCoreDataManager.h */,
 				17E44B9419821FB2000E9116 /* STCoreDataManager.m */,
 				17E44B9519821FB2000E9116 /* STCoreDataRequestManager.h */,
@@ -1234,7 +1239,6 @@
 				17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */,
 				176CC2FE1A2B052600E9C3D0 /* STGetPostLikesRequest.m in Sources */,
 				07FCFA9919C094250048F441 /* SDImageCache.m in Sources */,
-				17E44BA119822B67000E9116 /* Message.m in Sources */,
 				07FCFAA019C094250048F441 /* UIButton+WebCache.m in Sources */,
 				0717E2A819B7187F001DF132 /* STSharePhotoViewController.m in Sources */,
 				17CA0E941A21C59900D0B081 /* STRepostPostRequest.m in Sources */,
@@ -1242,6 +1246,7 @@
 				176CC3131A2B18A400E9C3D0 /* STSetUserLocationRequest.m in Sources */,
 				178379191A1D1C22002AEE02 /* STRegisterRequest.m in Sources */,
 				07FCFAA119C094250048F441 /* UIImage+GIF.m in Sources */,
+				17D4231D1A2C6CA900F5B880 /* STGADelegate.m in Sources */,
 				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
 				176CC30D1A2B0ED000E9C3D0 /* STDeletePostRequest.m in Sources */,
 				0717E2DD19B71C56001DF132 /* STConversationsListViewController.m in Sources */,
@@ -1264,6 +1269,7 @@
 				1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */,
 				176CC31C1A2B202900E9C3D0 /* STGetUserSettingsRequest.m in Sources */,
 				CDAC50AF19B602C900A45E85 /* UIImage+RoundedCorner.m in Sources */,
+				17A032491A34557E00E08BEA /* Message.m in Sources */,
 				0717E2AB19B718B4001DF132 /* STZoomablePostViewController.m in Sources */,
 				1776F53019C8CE0F00267DC8 /* UIImage+FixedOrientation.m in Sources */,
 				17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */,

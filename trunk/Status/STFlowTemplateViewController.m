@@ -30,7 +30,6 @@
 #import "STMenuView.h"
 #import "UIImage+FixedOrientation.h"
 
-#import "GADInterstitial.h"
 #import "STRemoveAdsViewController.h"
 #import "STInviteFriendsViewController.h"
 #import "STInviteController.h"
@@ -54,6 +53,8 @@
 #import "STDeletePostRequest.h"
 #import "STInviteUserToUploadRequest.h"
 
+#import "STGADelegate.h"
+
 int const kDeletePostTag = 11;
 int const kNoPostsAlertTag = 13;
 int const kInviteUserToUpload = 14;
@@ -62,17 +63,14 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,
-GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
-{
-    GADInterstitial * _interstitial;
-    
+STTutorialDelegate, STSharePostDelegate>
+{    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
     NSDictionary *_lastNotif;
     UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
     BOOL _isDataSourceLoaded;
-    BOOL _isInterstitialLoaded;
     NSInteger _numberOfSeenPosts;
     
     CGPoint _start;
@@ -82,6 +80,8 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     BOOL _shouldForceSetSeen;
     
     BOOL _pinching;
+    
+    STGADelegate *_GADelegate;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -133,15 +133,16 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     
     // setup interstitial ad
-
-    [self setupInterstitialAds];
+    _GADelegate = [STGADelegate new];
+    [_GADelegate setupInterstitialAds];
+//    [self setupInterstitialAds];
     _numberOfSeenPosts = 0;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    NSString *email = [[STFacebookLoginController sharedInstance] getUDValueForKey:LOGGED_EMAIL];
-    if ([[[FBSession activeSession] accessTokenData] accessToken]==nil||email==nil) {
+    if ([[[FBSession activeSession] accessTokenData] accessToken]==nil||
+        [STFacebookLoginController sharedInstance].currentUserId==nil) {
         [self presentLoginScene];
     }
     else
@@ -178,7 +179,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     //remove the delegate will prevent scroll to call functions after the view did not exists
     [self.collectionView setDelegate:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    _interstitial.delegate = nil;
+    _GADelegate.interstitial.delegate = nil;
 }
 
 -(void) presentLoginScene{
@@ -261,35 +262,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     [self setUnreadMessagesNumber:[STChatController sharedInstance].unreadMessages];
 }
 
-#pragma mark - AdMob delegate methods
-
-- (void)setupInterstitialAds {
-    _interstitial.delegate = nil;
-    _interstitial = nil;
-    
-    _interstitial = [[GADInterstitial alloc] init];
-    _interstitial.adUnitID = kSTAdUnitID;
-    
-//    request.testDevices = @[GAD_SIMULATOR_ID];
-    
-    [_interstitial loadRequest:[GADRequest request]];
-    _interstitial.delegate = self;
-    _isInterstitialLoaded = NO;
-}
-
-- (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error {
-    _isInterstitialLoaded = NO;
-    NSLog(@"error %@", error.localizedDescription);
-}
-
-- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
-    _isInterstitialLoaded = YES;
-}
-
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    [self setupInterstitialAds];
-}
-
 #pragma mark - Interstitial Controllers method
 
 - (void)presentInterstitialControllerForIndex:(NSInteger)index {
@@ -309,7 +281,7 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
     
     switch (interstitialType) {
         case STInterstitialTypeAds: {
-            [_interstitial presentFromRootViewController:self];
+            [_GADelegate.interstitial presentFromRootViewController:self];
             break;
         }
         case STInterstitialTypeRemoveAds: {
@@ -364,7 +336,6 @@ GADInterstitialDelegate, STTutorialDelegate, STSharePostDelegate>
 
     if (![presentedVC isKindOfClass:[STLoginViewController class]]) {
         [self dismissViewControllerAnimated:NO completion:^{
-            [[STFacebookLoginController sharedInstance] UDSetValue:nil forKey:PHOTO_LINK];
             [[STFacebookLoginController sharedInstance] UDSetValue:nil forKey:USER_NAME];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[FBSession activeSession] closeAndClearTokenInformation];
