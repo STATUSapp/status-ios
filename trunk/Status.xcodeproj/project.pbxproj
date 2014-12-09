@@ -116,6 +116,9 @@
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17B9234619CAB62500E38FB5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B9234519CAB62500E38FB5 /* Crashlytics.framework */; };
 		17C0BE091A36F0F3007F64C0 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0BE081A36F0F3007F64C0 /* Message.m */; };
+		17C0BE0F1A370E99007F64C0 /* STNotificationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0BE0E1A370E99007F64C0 /* STNotificationsManager.m */; };
+		17C0BE121A374636007F64C0 /* STNotificationBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0BE111A374636007F64C0 /* STNotificationBanner.m */; };
+		17C0BE141A374650007F64C0 /* STNotificationBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C0BE131A374650007F64C0 /* STNotificationBanner.xib */; };
 		17CA0E8E1A2130AF00D0B081 /* STUploadPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E8D1A2130AF00D0B081 /* STUploadPostRequest.m */; };
 		17CA0E911A2136F800D0B081 /* STSetPostLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E901A2136F800D0B081 /* STSetPostLikeRequest.m */; };
 		17CA0E941A21C59900D0B081 /* STRepostPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E931A21C59900D0B081 /* STRepostPostRequest.m */; };
@@ -395,6 +398,11 @@
 		17B9234519CAB62500E38FB5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		17C0BE071A36F0F3007F64C0 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		17C0BE081A36F0F3007F64C0 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		17C0BE0D1A370E99007F64C0 /* STNotificationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationsManager.h; sourceTree = "<group>"; };
+		17C0BE0E1A370E99007F64C0 /* STNotificationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationsManager.m; sourceTree = "<group>"; };
+		17C0BE101A374636007F64C0 /* STNotificationBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationBanner.h; sourceTree = "<group>"; };
+		17C0BE111A374636007F64C0 /* STNotificationBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationBanner.m; sourceTree = "<group>"; };
+		17C0BE131A374650007F64C0 /* STNotificationBanner.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STNotificationBanner.xib; sourceTree = "<group>"; };
 		17CA0E8C1A2130AF00D0B081 /* STUploadPostRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUploadPostRequest.h; sourceTree = "<group>"; };
 		17CA0E8D1A2130AF00D0B081 /* STUploadPostRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUploadPostRequest.m; sourceTree = "<group>"; };
 		17CA0E8F1A2136F800D0B081 /* STSetPostLikeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetPostLikeRequest.h; sourceTree = "<group>"; };
@@ -794,6 +802,11 @@
 				1DFCCACB191238A000B9230E /* STTutorialCell.m */,
 				172EAE7B18B0B12E00C5637B /* STFlowTemplateViewController.h */,
 				172EAE7C18B0B12E00C5637B /* STFlowTemplateViewController.m */,
+				17C0BE0D1A370E99007F64C0 /* STNotificationsManager.h */,
+				17C0BE0E1A370E99007F64C0 /* STNotificationsManager.m */,
+				17C0BE101A374636007F64C0 /* STNotificationBanner.h */,
+				17C0BE111A374636007F64C0 /* STNotificationBanner.m */,
+				17C0BE131A374650007F64C0 /* STNotificationBanner.xib */,
 				9904DD3B1A2FB48D0072134F /* STUserProfileViewController.h */,
 				9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */,
 				9904DD3E1A2FB4C40072134F /* STEditProfileViewController.h */,
@@ -1133,6 +1146,7 @@
 				1776F52D19C8A59B00267DC8 /* STMenuView.xib in Resources */,
 				17ACEB621933C4E600CFC909 /* ChatScene.storyboard in Resources */,
 				178907B718B294BA00AC4355 /* LoginScene.storyboard in Resources */,
+				17C0BE141A374650007F64C0 /* STNotificationBanner.xib in Resources */,
 				17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */,
 				9904DD451A2FB55D0072134F /* UserProfile.storyboard in Resources */,
 			);
@@ -1242,11 +1256,13 @@
 				07FCFA9919C094250048F441 /* SDImageCache.m in Sources */,
 				07FCFAA019C094250048F441 /* UIButton+WebCache.m in Sources */,
 				0717E2A819B7187F001DF132 /* STSharePhotoViewController.m in Sources */,
+				17C0BE0F1A370E99007F64C0 /* STNotificationsManager.m in Sources */,
 				17CA0E941A21C59900D0B081 /* STRepostPostRequest.m in Sources */,
 				17E0FCA51A27B92100FC3FEE /* STGetNearbyPostsRequest.m in Sources */,
 				176CC3131A2B18A400E9C3D0 /* STSetUserLocationRequest.m in Sources */,
 				178379191A1D1C22002AEE02 /* STRegisterRequest.m in Sources */,
 				07FCFAA119C094250048F441 /* UIImage+GIF.m in Sources */,
+				17C0BE121A374636007F64C0 /* STNotificationBanner.m in Sources */,
 				17D4231D1A2C6CA900F5B880 /* STGADelegate.m in Sources */,
 				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
 				176CC30D1A2B0ED000E9C3D0 /* STDeletePostRequest.m in Sources */,

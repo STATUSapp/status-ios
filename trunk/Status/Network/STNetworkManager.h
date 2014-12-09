@@ -13,4 +13,5 @@
 + (STNetworkManager *)sharedManager;
 - (void)clearQueue;
 + (AFJSONResponseSerializer *)customResponseSerializer;
+
 @end

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="STNotificationBanner">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YNw-VT-cYS">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder notifications screen" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-LI-Lq3">
+                    <rect key="frame" x="8" y="8" width="54" height="54"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="Es8-1U-jyJ"/>
+                        <constraint firstAttribute="width" constant="54" id="GEk-Yp-ZJW"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fi-uT-Tac">
+                    <rect key="frame" x="76" y="8" width="207" height="54"/>
+                    <attributedString key="attributedText">
+                        <fragment content="Amanda Robertson">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                <font key="NSOriginalFont" size="16" name="Helvetica-Bold"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=" likes your photo.">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="16" name="Helvetica"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJs-Q2-UXs">
+                    <rect key="frame" x="273" y="0.0" width="47" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="MQh-ww-Fww"/>
+                        <constraint firstAttribute="width" constant="47" id="fco-Sc-0if"/>
+                    </constraints>
+                    <state key="normal" image="x menu STAUS">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onClosePressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="a3n-Vy-4uf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hga-tc-VQQ">
+                    <rect key="frame" x="0.0" y="0.0" width="273" height="70"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onBannerTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="SNk-Kf-X3Z"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="YNw-VT-cYS" secondAttribute="trailing" id="2Mm-XS-pHQ"/>
+                <constraint firstItem="ZAs-LI-Lq3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="3aD-yq-HfL"/>
+                <constraint firstItem="YNw-VT-cYS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="41B-4c-bsE"/>
+                <constraint firstItem="8fi-uT-Tac" firstAttribute="leading" secondItem="ZAs-LI-Lq3" secondAttribute="trailing" constant="14" id="JI3-xZ-ZfQ"/>
+                <constraint firstItem="Hga-tc-VQQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LhC-f2-fI2"/>
+                <constraint firstItem="YNw-VT-cYS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QZN-PP-XXL"/>
+                <constraint firstAttribute="bottom" secondItem="Hga-tc-VQQ" secondAttribute="bottom" id="T28-cs-r7a"/>
+                <constraint firstAttribute="trailing" secondItem="pJs-Q2-UXs" secondAttribute="trailing" id="Wib-be-03K"/>
+                <constraint firstAttribute="bottom" secondItem="8fi-uT-Tac" secondAttribute="bottom" constant="8" id="dqt-oz-0Qf"/>
+                <constraint firstItem="8fi-uT-Tac" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="eDE-kw-zh3"/>
+                <constraint firstItem="pJs-Q2-UXs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eKZ-Yr-4qu"/>
+                <constraint firstAttribute="trailing" secondItem="8fi-uT-Tac" secondAttribute="trailing" constant="37" id="fjp-08-Tym"/>
+                <constraint firstItem="Hga-tc-VQQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ge9-x3-9uL"/>
+                <constraint firstAttribute="bottom" secondItem="YNw-VT-cYS" secondAttribute="bottom" id="iaT-Cr-iLz"/>
+                <constraint firstItem="pJs-Q2-UXs" firstAttribute="leading" secondItem="Hga-tc-VQQ" secondAttribute="trailing" id="miu-Vb-y7e"/>
+                <constraint firstItem="ZAs-LI-Lq3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ySE-fF-4BU"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="messageText" destination="8fi-uT-Tac" id="6OF-0L-SoO"/>
+                <outlet property="profileImage" destination="ZAs-LI-Lq3" id="wJb-m7-NCH"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="placeholder notifications screen" width="60" height="60"/>
+        <image name="x menu STAUS" width="15" height="15"/>
+    </resources>
+</document>

@@ -30,8 +30,14 @@
 
 #import "STSetAPNTokenRequest.h"
 #import "STGetNotificationsCountRequest.h"
+#import "STBaseRequest.h"
+#import "STNotificationsManager.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
+static NSInteger kNewVersionAlert = 101;
+@interface AppDelegate()<UIAlertViewDelegate>
+
+@end
 
 @implementation AppDelegate
 
@@ -61,12 +67,9 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 {
     [STIAPHelper sharedInstance];
     [FBLoginView class];
-//    [[STImageCacheController sharedInstance] cleanTemporaryFolder];
     [application setStatusBarHidden:YES];
     self.badgeNumber = application.applicationIconBadgeNumber;
-    //[[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
-    [self handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
-    
+    [[STNotificationsManager sharedManager] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     // setup Mobile App Tracker
     
@@ -190,23 +193,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"Notif: %@", userInfo);
     self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
-    
-    //[[NSNotificationCenter defaultCenter] postNotificationName: STNotificationBadgeValueDidChanged object:nil];
-   
-    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
-        [self handleNotification:userInfo];
-    }
-}
-
-#pragma mark - Helper
-
--(void) handleNotification:(NSDictionary *) notif{
-    
-    if (notif!=nil) {
-        UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-        STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers firstObject];
-        [viewController handleNotification:notif];
-    }
+    [[STNotificationsManager sharedManager] handleInAppNotification:userInfo];
 }
 
 -(void)checkForNotificationNumber{
@@ -221,6 +208,42 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
             }
         };
         [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
+    }
+}
+
+-(void)checkForAppInfo{
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSURL * url = [NSURL URLWithString:@"https://itunes.apple.com/lookup?id=841855995"];
+    
+    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                        if(error == nil)
+                                                        {
+                                                            NSError *errorJson = nil;
+                                                            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &errorJson];
+                                                            NSString *appVersion = [[STBaseRequest new] getAppVersion];
+                                                            NSString *appStoreVersion = [responseDict[@"results"] firstObject][@"version"];
+                                                            if (![appStoreVersion isEqualToString:appVersion]) {
+                                                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"A new version of Get STATUS is available on Appstore!\n\nWhat's new:" message:[responseDict[@"results"] firstObject][@"releaseNotes"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Download", nil];
+                                                                alert.tag = kNewVersionAlert;
+                                                                [alert show];
+                                                            }
+                                                        }
+                                                        
+                                                    }];
+    
+    [dataTask resume];
+}
+
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == kNewVersionAlert) {
+        if (buttonIndex == 1) {
+            NSString *iTunesLink = @"https://itunes.apple.com/us/app/apple-store/id841855995?mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        }
     }
 }
 

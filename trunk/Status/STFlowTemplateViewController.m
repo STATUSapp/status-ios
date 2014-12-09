@@ -54,6 +54,7 @@
 #import "STInviteUserToUploadRequest.h"
 
 #import "STGADelegate.h"
+#import "STNotificationsManager.h"
 
 int const kDeletePostTag = 11;
 int const kNoPostsAlertTag = 13;
@@ -67,7 +68,6 @@ STTutorialDelegate, STSharePostDelegate>
 {    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
-    NSDictionary *_lastNotif;
     UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
     BOOL _isDataSourceLoaded;
@@ -326,7 +326,8 @@ STTutorialDelegate, STSharePostDelegate>
     [self getDataSourceWithOffset:0];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate checkForNotificationNumber];
-    [self handleNotification:_lastNotif];
+    [appDelegate checkForAppInfo];
+    [[STNotificationsManager sharedManager] handleLastNotification];
 }
 
 -(void)facebookControllerDidLoggedOut{
@@ -363,7 +364,7 @@ STTutorialDelegate, STSharePostDelegate>
 }
 
 -(void)chatControllerAuthenticate{
-    [self handleNotification:_lastNotif];
+    [[STNotificationsManager sharedManager] handleLastNotification];
 }
 
 #pragma mark - STShareImageDelegate
@@ -855,9 +856,10 @@ STTutorialDelegate, STSharePostDelegate>
 }
 
 - (IBAction)onTapLike:(id)sender {
-//#ifdef DEBUG
-//    [[Crashlytics sharedInstance] crash];
-//#endif
+#ifdef DEBUG
+    [[STNotificationsManager sharedManager] handleInAppNotification:@{}];
+#endif
+    
     [(UIButton *)sender setUserInteractionEnabled:NO];
     NSArray *indxPats = [self.collectionView indexPathsForVisibleItems];
     if (indxPats.count ==0) {
@@ -1466,45 +1468,6 @@ STTutorialDelegate, STSharePostDelegate>
 }
 
 #pragma mark - Helper
-
--(void) handleNotification:(NSDictionary *) notif{
-    if (notif == nil) {
-        return;
-    }
-    UIViewController *lastVC = [self.navigationController.viewControllers lastObject];
-    if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
-        
-        if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
-            if (![[STChatController sharedInstance] canChat]) {
-                _lastNotif = notif;
-                return;
-            }
-            _lastNotif = nil;
-            NSDictionary *userInfo = notif[@"user_info"];
-            if (userInfo[@"user_id"] == nil) {
-                NSLog(@"Error from notification: user_id = nil");
-                return;
-            }
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-            STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-            viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:notif[@"user_info"]];
-            [self.navigationController pushViewController:viewController animated:YES];
-        }
-        else
-        {
-            if ([STNetworkQueueManager sharedManager].accessToken == nil) {
-                //wait for the login to be performed and after handle the notification
-                _lastNotif = notif;
-                return;
-            }
-            _lastNotif = nil;
-            [self performSegueWithIdentifier:@"notifSegue" sender:nil];
-        }
-}
-    else if ([lastVC isKindOfClass:[STNotificationsViewController class]]){
-        [(STNotificationsViewController *)lastVC getNotificationsFromServer];
-    }
-}
 
 -(UIImage *)blurCurrentScreen{
     UIImage * imageFromCurrentView = [self snapshotOfCurrentScreen];

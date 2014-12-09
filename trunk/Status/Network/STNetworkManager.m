@@ -64,5 +64,4 @@ static STNetworkManager *_sharedManager = nil;
     }
 }
 
-
 @end
