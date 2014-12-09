@@ -2,7 +2,7 @@
 //  Message.h
 //  Status
 //
-//  Created by Cosmin Andrus on 07/12/14.
+//  Created by Cosmin Andrus on 09/12/14.
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
@@ -19,5 +19,6 @@
 @property (nonatomic, retain) NSNumber * seen;
 @property (nonatomic, retain) NSString * userId;
 @property (nonatomic, retain) NSString * uuid;
+@property (nonatomic, retain) NSString * sectionDate;
 
 @end

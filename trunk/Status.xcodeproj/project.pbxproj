@@ -108,7 +108,6 @@
 		1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD5C1960D3020009066D /* STFacebookActivity.m */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
-		17A032491A34557E00E08BEA /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A032481A34557E00E08BEA /* Message.m */; };
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
@@ -116,6 +115,7 @@
 		17ACEB621933C4E600CFC909 /* ChatScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17ACEB611933C4E600CFC909 /* ChatScene.storyboard */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17B9234619CAB62500E38FB5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B9234519CAB62500E38FB5 /* Crashlytics.framework */; };
+		17C0BE091A36F0F3007F64C0 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0BE081A36F0F3007F64C0 /* Message.m */; };
 		17CA0E8E1A2130AF00D0B081 /* STUploadPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E8D1A2130AF00D0B081 /* STUploadPostRequest.m */; };
 		17CA0E911A2136F800D0B081 /* STSetPostLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E901A2136F800D0B081 /* STSetPostLikeRequest.m */; };
 		17CA0E941A21C59900D0B081 /* STRepostPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E931A21C59900D0B081 /* STRepostPostRequest.m */; };
@@ -384,8 +384,6 @@
 		1794DD561960D2A40009066D /* STWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhatsAppActivity.m; sourceTree = "<group>"; };
 		1794DD5B1960D3020009066D /* STFacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookActivity.h; sourceTree = "<group>"; };
 		1794DD5C1960D3020009066D /* STFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookActivity.m; sourceTree = "<group>"; };
-		17A032471A34557E00E08BEA /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		17A032481A34557E00E08BEA /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		17AB89E4193B0DF600A6E7FD /* STChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatController.h; sourceTree = "<group>"; };
 		17AB89E5193B0DF600A6E7FD /* STChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatController.m; sourceTree = "<group>"; };
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
@@ -395,6 +393,8 @@
 		17ACEB611933C4E600CFC909 /* ChatScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatScene.storyboard; sourceTree = "<group>"; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		17B9234519CAB62500E38FB5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		17C0BE071A36F0F3007F64C0 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		17C0BE081A36F0F3007F64C0 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		17CA0E8C1A2130AF00D0B081 /* STUploadPostRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUploadPostRequest.h; sourceTree = "<group>"; };
 		17CA0E8D1A2130AF00D0B081 /* STUploadPostRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUploadPostRequest.m; sourceTree = "<group>"; };
 		17CA0E8F1A2136F800D0B081 /* STSetPostLikeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetPostLikeRequest.h; sourceTree = "<group>"; };
@@ -977,8 +977,8 @@
 			isa = PBXGroup;
 			children = (
 				17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */,
-				17A032471A34557E00E08BEA /* Message.h */,
-				17A032481A34557E00E08BEA /* Message.m */,
+				17C0BE071A36F0F3007F64C0 /* Message.h */,
+				17C0BE081A36F0F3007F64C0 /* Message.m */,
 				17E44B9319821FB2000E9116 /* STCoreDataManager.h */,
 				17E44B9419821FB2000E9116 /* STCoreDataManager.m */,
 				17E44B9519821FB2000E9116 /* STCoreDataRequestManager.h */,
@@ -1188,6 +1188,7 @@
 				CDAC50B119B602C900A45E85 /* UIImage+Resize.m in Sources */,
 				07FCFA9B19C094250048F441 /* SDWebImageDecoder.m in Sources */,
 				17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */,
+				17C0BE091A36F0F3007F64C0 /* Message.m in Sources */,
 				178379161A1D11D0002AEE02 /* STLoginRequest.m in Sources */,
 				172EAEB018B0B46300C5637B /* AFHTTPRequestOperationManager.m in Sources */,
 				0717E2E619B71D88001DF132 /* STIAPHelper.m in Sources */,
@@ -1269,7 +1270,6 @@
 				1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */,
 				176CC31C1A2B202900E9C3D0 /* STGetUserSettingsRequest.m in Sources */,
 				CDAC50AF19B602C900A45E85 /* UIImage+RoundedCorner.m in Sources */,
-				17A032491A34557E00E08BEA /* Message.m in Sources */,
 				0717E2AB19B718B4001DF132 /* STZoomablePostViewController.m in Sources */,
 				1776F53019C8CE0F00267DC8 /* UIImage+FixedOrientation.m in Sources */,
 				17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */,

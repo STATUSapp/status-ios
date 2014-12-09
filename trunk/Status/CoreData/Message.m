@@ -2,7 +2,7 @@
 //  Message.m
 //  Status
 //
-//  Created by Cosmin Andrus on 07/12/14.
+//  Created by Cosmin Andrus on 09/12/14.
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
@@ -18,5 +18,16 @@
 @dynamic seen;
 @dynamic userId;
 @dynamic uuid;
+@dynamic sectionDate;
 
+-(NSString *)sectionDate{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateStyle:NSDateFormatterLongStyle];
+    
+    NSString *dateString = [formatter stringFromDate:self.date];
+    
+    return dateString;
+
+}
 @end

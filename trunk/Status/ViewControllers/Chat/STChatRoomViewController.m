@@ -29,7 +29,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 @interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SLCoreDataRequestManagerDelegate>
 {
-    NSMutableArray *_messages;
     UIImage *userImage;
     STChatController *chatController;
     NSString *_roomId;
@@ -99,8 +98,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    _messages = [NSMutableArray new];
-
     [self initiateCustomControls];
     if (_userInfo[@"user_name"] == nil) {//notification, need fetch
         __weak STChatRoomViewController *weakSelf = self;
@@ -216,8 +213,8 @@ static NSInteger const  kBlockUserAlertTag = 11;
         _heightConstraint.constant = height + 7;
         //_bottomTextViewConstraint.constant =
         //_containerView.frame = r;
-        if (_messages.count>0) {
-            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        if ([[_currentManager allObjects] count]>0) {
+            [_tableView scrollToRowAtIndexPath:[_currentManager indexPathForObject:[[_currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
     }];
 	 
@@ -247,7 +244,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 - (IBAction)onLoadMore:(id)sender {
     if (_roomId) {
         lastContentOffset = _tableView.contentOffset;
-        [chatController getRoomMessages:_roomId withOffset:_messages.count];
+        [chatController getRoomMessages:_roomId withOffset:[[_currentManager allObjects] count]];
     }
 }
 
@@ -339,17 +336,15 @@ static NSInteger const  kBlockUserAlertTag = 11;
     justEnteredRoom  =YES;
 
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
-    _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"roomID like %@", _roomId] sectionNameKeyPath:nil delegate:self andTableView:nil];
-    _messages = [NSMutableArray arrayWithArray:_currentManager.allObjects];
+    _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"roomID like %@", _roomId] sectionNameKeyPath:@"sectionDate" delegate:self andTableView:nil];
 
-    NSNumber *seen = [[_messages valueForKey:@"seen"] valueForKeyPath: @"@sum.self"];
-    NSInteger unseen = _messages.count - seen.integerValue;
+    NSNumber *seen = [[[_currentManager allObjects] valueForKey:@"seen"] valueForKeyPath: @"@sum.self"];
+    NSInteger unseen = [[_currentManager allObjects] count] - seen.integerValue;
     [chatController setUnreadMessages:chatController.unreadMessages-unseen];
     [_tableView reloadData];
     
-    if (_messages.count > 0) {
-        
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    if ([[_currentManager allObjects] count]>0) {
+        [_tableView scrollToRowAtIndexPath:[_currentManager indexPathForObject:[[_currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     else
     {
@@ -441,7 +436,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 #pragma mark - UITableViewDelegate
 -(NSString *)getIdentifierForIndexPath:(NSIndexPath *)indexPath{
-    Message *message = _messages[indexPath.row];
+    Message *message = [_currentManager objectAtIndexPath:indexPath];
     BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
     if (received == YES) {
         return @"MessageReceivedCell";
@@ -472,7 +467,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     NSString *identifier = [self getIdentifierForIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    Message *message = _messages[indexPath.row];
+    Message *message = [_currentManager objectAtIndexPath:indexPath];
     BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
     if (received == YES) {
         [(STMessageReceivedCell *)cell configureCellWithMessage:message andUserImage:userImage];
@@ -485,7 +480,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     float height = 50.f;
 
-    Message *message = _messages[indexPath.row];
+    Message *message = [_currentManager objectAtIndexPath:indexPath];
     BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
     if (received == YES) {
         height = [STMessageReceivedCell cellHeightForMessage:message];
@@ -497,11 +492,20 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return _messages.count;
+    return [_currentManager numberOfObjectsInSection:section];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [_textView resignFirstResponder];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return [_currentManager numberOfSections];
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    Message *msg = [_currentManager objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    return msg.sectionDate;
 }
 
 - (void)didReceiveMemoryWarning
@@ -523,28 +527,12 @@ static NSInteger const  kBlockUserAlertTag = 11;
     chatController.rechabilityDelegate = nil;
 }
 
--(void)controllerAddedObject:(id)object atIndexPath:(NSIndexPath *)indexPath{
-    [_messages insertObject:object atIndex:indexPath.row];
-    [UIView setAnimationsEnabled:NO];
-    [_tableView beginUpdates];
-    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [_tableView endUpdates];
-    [UIView setAnimationsEnabled:YES];
-    if (chatController.loadMore==NO) {
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
-}
+-(void)controllerContentChanged:(NSArray *)objects{
+    [self.tableView reloadData];
+        if (chatController.loadMore==NO) {
+            [_tableView scrollToRowAtIndexPath:[_currentManager indexPathForObject:[[_currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
 
--(void)controllerRemovedObject:(id)object atIndexPath:(NSIndexPath *)indexPath{
-    NSUInteger index = [_messages indexOfObject:object];
-    if (index!=NSNotFound) {
-        NSIndexPath *objIndex = [NSIndexPath indexPathForRow:index inSection:0];
-        [_messages removeObject:object];
-        [_tableView beginUpdates];
-        [_tableView  deleteRowsAtIndexPaths:@[objIndex] withRowAnimation:UITableViewRowAnimationFade];
-        [_tableView endUpdates];
-
-    }
 }
 
 @end
