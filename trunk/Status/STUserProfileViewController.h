@@ -10,4 +10,6 @@
 
 @interface STUserProfileViewController : UIViewController
 
++(STUserProfileViewController *)newControllerWithUserId:(NSString *)userId;
+
 @end

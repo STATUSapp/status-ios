@@ -24,4 +24,7 @@ typedef void (^RequestProductsCompletionHandler)(BOOL success, NSArray * product
 
 - (void)restoreCompletedTransactions;
 
+#warning Move this to another place. Maybe a class called UtilityMethods
+- (void)showRateAppAlert;
+
 @end

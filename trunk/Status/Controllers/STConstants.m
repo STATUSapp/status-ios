@@ -67,6 +67,7 @@ NSString *const kGetRecent = @"get_recent_users";
 NSString *const kGetUserInfo = @"get_user_info";
 NSString *const kGetUserSettings = @"get_user_settings";
 NSString *const kSetUserSetting = @"set_user_setting";
+NSString *const kGetUserProfile = @"get_user_profile";
 
 
 NSString *const kMATAdvertiserID = @"21414";

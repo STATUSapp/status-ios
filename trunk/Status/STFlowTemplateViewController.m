@@ -52,6 +52,8 @@
 #import "STGetPostDetailsRequest.h"
 #import "STDeletePostRequest.h"
 #import "STInviteUserToUploadRequest.h"
+// temporary - needs refactoring for menu
+#import "STUserProfileViewController.h"
 
 #import "STGADelegate.h"
 #import "STNotificationsManager.h"
@@ -705,17 +707,23 @@ STTutorialDelegate, STSharePostDelegate>
 }
 
 -(IBAction)onTapMyProfile:(id)sender{
-    if (_flowType == STFlowTypeMyProfile) {
-        return;
-    }
-    if ([STFacebookLoginController sharedInstance].currentUserId == nil) {
-        return;
-    }
-    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = STFlowTypeMyProfile;
-    flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
-    flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
-    [self.navigationController pushViewController:flowCtrl animated:YES];
+    
+    // temporary tests
+    
+    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
+    [self.navigationController pushViewController:userProfileVC animated:YES];
+    
+//    if (_flowType == STFlowTypeMyProfile) {
+//        return;
+//    }
+//    if ([STFacebookLoginController sharedInstance].currentUserId == nil) {
+//        return;
+//    }
+//    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//    flowCtrl.flowType = STFlowTypeMyProfile;
+//    flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
+//    flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
+//    [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 
 - (IBAction)onTapShare:(id)sender {

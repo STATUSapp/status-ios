@@ -16,7 +16,7 @@
 #import "STFlowTemplateViewController.h"
 #import "STFacebookLoginController.h"
 #import "UIImageView+WebCache.h"
-
+#import "NSDate+Additions.h"
 #import "STGetNotificationsRequest.h"
 
 const float kNoNotifHeight = 24.f;
@@ -93,39 +93,6 @@ const float kNoNotifHeight = 24.f;
 }
 - (IBAction)onClickback:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark - Date Helper
-
-- (NSString *)notificationTimeIntervalSinceDate: (NSDate *)dateOfNotification{
-    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:dateOfNotification];
-    
-    if (0 <= timeInterval && timeInterval <= 60) {
-        return @"JUST NOW";
-    }
-    int mins = timeInterval / 60;
-    if (mins <= 60) {
-        return [NSString stringWithFormat:@" %d MIN%@", mins, (mins==1)?@"":@"S"];
-    }
-    int hours = timeInterval / 3600;
-    if (hours <= 24) {
-        return [NSString stringWithFormat:@" %d HR%@", hours, (hours==1)?@"":@"S"];
-    }
-    
-    if (timeInterval / 3600 <= 48) {
-        return @"YESTERDAY";
-    }
-    
-    return [NSString stringWithFormat:@"%d DAYS", (int)(timeInterval / 86400)];
-}
-
--(NSDate *) dateFromServerDate:(NSString *) serverDate{
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    NSDate *resultDate = [dateFormatter dateFromString:serverDate];
-    return resultDate;
 }
 
 #pragma mark - DidSelectedNotification
@@ -266,7 +233,7 @@ const float kNoNotifHeight = 24.f;
         [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:dict[@"user_photo_link"]]];
         actualCell.seenCircle.hidden = [dict[@"seen"] boolValue];
         actualCell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];
-        actualCell.timeLbl.text = [self notificationTimeIntervalSinceDate:[ self dateFromServerDate:dict[@"date"]]];
+        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDate:dict[@"date"]]];
         actualCell.notificationTypeMessage.text = [self getNotificationTypeStringForType:notificationType];
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -281,7 +248,7 @@ const float kNoNotifHeight = 24.f;
         else
             [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:postPhotoLink]];
         actualCell.seenCircle.hidden = [dict[@"seen"] boolValue];
-        actualCell.timeLbl.text = [self notificationTimeIntervalSinceDate:[ self dateFromServerDate:dict[@"date"]]];
+        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDate:dict[@"date"]]];
         if (notificationType == STNotificationTypeNewUserJoinsStatus) {
             NSString *string = [NSString stringWithFormat:@"%@ is on STATUS. Say hello :)", dict[@"user_name"]];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
@@ -299,6 +266,7 @@ const float kNoNotifHeight = 24.f;
         
     }
     return cell;
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

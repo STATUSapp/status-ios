@@ -8,7 +8,7 @@
 
 #import "STIAPHelper.h"
 
-@interface STIAPHelper()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
+@interface STIAPHelper()<SKProductsRequestDelegate, SKPaymentTransactionObserver, UIAlertViewDelegate>
 
 @end
 
@@ -173,6 +173,25 @@
 
 - (void)restoreCompletedTransactions {
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+#pragma mark - RATE APP - SHOULD BE MOVED
+
+#warning Move this to another place. Maybe a class called UtilityMethods
+- (void)showRateAppAlert {
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Like Status ?"
+                                                         message:@"Please rate our app"
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:@"Of course. Take me to the app's page", nil];
+    [alertView show];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_REVIEW_URL_STRING]];
+    }
 }
 
 @end

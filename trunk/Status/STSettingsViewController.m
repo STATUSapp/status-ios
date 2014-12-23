@@ -15,6 +15,10 @@
 #import "STGetUserSettingsRequest.h"
 #import "STSetUserSettingsRequest.h"
 
+// test
+
+#import "STIAPHelper.h"
+
 const NSInteger kSectionNumberNotifications = 0;
 const NSInteger kSectionNumberContactLikeAds = 1;
 const NSInteger kSectionNumberLogout = 2;
@@ -84,6 +88,11 @@ const NSInteger kSectionNumberLogout = 2;
 
     [STGetUserSettingsRequest getUserSettingsWithCompletion:completion failure:nil];
     [self configureSwitches];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[STIAPHelper sharedInstance] showRateAppAlert];
 }
 
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--User Profile View Controller-->
         <scene sceneID="6xV-kk-Ow1">
             <objects>
-                <viewController id="AU9-ws-jB7" customClass="STUserProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="STUserProfileViewController" id="AU9-ws-jB7" customClass="STUserProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mPw-kP-ggI"/>
                         <viewControllerLayoutGuide type="bottom" id="En9-l3-8Et"/>
@@ -16,9 +16,124 @@
                     <view key="view" contentMode="scaleToFill" id="Jn8-KM-v51">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3nA-Cz-4Si" userLabel="Profile Picture">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="271"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DpI-c0-H0H" userLabel="blurry picture">
+                                <rect key="frame" x="0.0" y="353" width="320" height="220"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCL-pa-P8X" userLabel="messages btn">
+                                <rect key="frame" x="258" y="20" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapMessages:" destination="AU9-ws-jB7" eventType="touchUpInside" id="ni7-YE-4D6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6B-n6-hfW" userLabel="gallery btn">
+                                <rect key="frame" x="258" y="213" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapGallery:" destination="AU9-ws-jB7" eventType="touchUpInside" id="3q6-UG-0Zu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drt-N9-twb" userLabel="menu btn">
+                                <rect key="frame" x="16" y="20" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapMenu:" destination="AU9-ws-jB7" eventType="touchUpInside" id="dPZ-bs-peB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCt-OH-ynU" userLabel="camera btn">
+                                <rect key="frame" x="16" y="518" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapCamera:" destination="AU9-ws-jB7" eventType="touchUpInside" id="6Wd-4a-9ov"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nje-IF-zzR" userLabel="settings btn">
+                                <rect key="frame" x="128" y="518" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapSettings:" destination="AU9-ws-jB7" eventType="touchUpInside" id="k2j-2g-w4N"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3Y-4t-VOm" userLabel="edit user profile">
+                                <rect key="frame" x="258" y="518" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapEditUserProfile:" destination="AU9-ws-jB7" eventType="touchUpInside" id="C9P-Cc-sHd"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZ0-fu-Urj" userLabel="name and age">
+                                <rect key="frame" x="65" y="279" width="105" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gye-A6-8WD" userLabel="distance">
+                                <rect key="frame" x="42" y="314" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nOp-AZ-Grk" userLabel="location icon">
+                                <rect key="frame" x="49" y="450" width="65" height="50"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwS-ph-s0L" userLabel="location">
+                                <rect key="frame" x="160" y="464" width="67" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-qe-w3x" userLabel="description">
+                                <rect key="frame" x="128" y="387" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uu4-Vf-jut" userLabel="status icon">
+                                <rect key="frame" x="270" y="307" width="34" height="36"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9w-V0-cfJ">
+                                <rect key="frame" x="199" y="314" width="47" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="btnCamera" destination="XCt-OH-ynU" id="JSZ-jK-vtC"/>
+                        <outlet property="btnEditUserProfile" destination="d3Y-4t-VOm" id="6IW-O9-bFW"/>
+                        <outlet property="btnGallery" destination="e6B-n6-hfW" id="tuC-E3-oyf"/>
+                        <outlet property="btnMenu" destination="Drt-N9-twb" id="eO3-aA-wL6"/>
+                        <outlet property="btnMessages" destination="KCL-pa-P8X" id="gGc-f4-BWI"/>
+                        <outlet property="btnSettings" destination="Nje-IF-zzR" id="EBl-Gm-0LU"/>
+                        <outlet property="imageViewBlurryPicture" destination="DpI-c0-H0H" id="kFP-5O-aEQ"/>
+                        <outlet property="imageViewLocationIcon" destination="nOp-AZ-Grk" id="yDO-Ls-j7D"/>
+                        <outlet property="imageViewProfilePicture" destination="3nA-Cz-4Si" id="tyW-8I-FYN"/>
+                        <outlet property="imageViewStatusIcon" destination="Uu4-Vf-jut" id="I33-gk-9P6"/>
+                        <outlet property="lblDistance" destination="gye-A6-8WD" id="qhz-Nu-bLZ"/>
+                        <outlet property="lblLocation" destination="JwS-ph-s0L" id="wRO-Zl-zKI"/>
+                        <outlet property="lblNameAndAge" destination="cZ0-fu-Urj" id="2y9-le-Bjn"/>
+                        <outlet property="lblStatus" destination="u9w-V0-cfJ" id="PB2-if-FfH"/>
+                        <outlet property="lblUserDescription" destination="1Mz-qe-w3x" id="mTO-Pj-6T2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rZU-j1-4ri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -27,7 +142,7 @@
         <!--Edit Profile View Controller-->
         <scene sceneID="ijb-dA-ZEL">
             <objects>
-                <viewController id="DwW-bD-kyz" customClass="STEditProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="STEditProfileViewController" id="DwW-bD-kyz" customClass="STEditProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sdm-aS-uBG"/>
                         <viewControllerLayoutGuide type="bottom" id="hq4-CT-KrM"/>
@@ -46,7 +161,7 @@
         <!--Change User Profile Photo View Controller-->
         <scene sceneID="YPc-vu-fd7">
             <objects>
-                <viewController id="wxc-xQ-wW1" customClass="STChangeUserProfilePhotoViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="STChangeUserProfilePhotoViewController" id="wxc-xQ-wW1" customClass="STChangeUserProfilePhotoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h8u-dG-7yg"/>
                         <viewControllerLayoutGuide type="bottom" id="Pv9-13-mnB"/>
