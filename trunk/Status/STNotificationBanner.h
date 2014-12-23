@@ -20,4 +20,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *messageText;
 @property (assign, nonatomic) STNotificationType notificationType;
+@property (nonatomic, strong) NSDictionary *userInfo;
 @end

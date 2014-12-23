@@ -24,6 +24,7 @@
 #import "STLoginRequest.h"
 #import "STRegisterRequest.h"
 #import "STGetUserSettingsRequest.h"
+#import "STFacebookAlbumsLoader.h"
 
 @implementation STFacebookLoginController
 +(STFacebookLoginController *) sharedInstance{
@@ -39,7 +40,7 @@
     self = [super init];
     if (self) {
         
-        _loginButton = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email"]];
+        _loginButton = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email",@"user_birthday"]];
         _loginButton.defaultAudience = FBSessionDefaultAudienceEveryone;
         [_loginButton setFrame:CGRectMake(50, 0, 218, 46)];
         [_loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -157,11 +158,46 @@
     [self getUserSettingsFromServer];
 }
 
+- (void)requestForBirthdayWithCompletion:(void (^)(NSString *))completion {
+    [FBRequestConnection startWithGraphPath:@"me?fields=birthday"
+                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                              if (!error) {
+                                  completion(result[@"birthday"]);
+                              }
+                              else
+                                  completion(nil);
+                          }];
+}
+
+- (void)getUserBirthdayWithCompletion:(void (^)(NSString *birthday))completion {
+    [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
+        NSLog(@"Permissions: %@", newObjects);
+        if (![newObjects containsObject:@"user_birthday"]) {
+            [[FBSession activeSession] requestNewPublishPermissions:@[@"user_birthday"]
+                                                    defaultAudience:FBSessionDefaultAudienceFriends
+                                                  completionHandler:^(FBSession *session, NSError *error) {
+                                                      if (error!=nil)
+                                                          [self requestForBirthdayWithCompletion:completion];
+                                                      else
+                                                          completion(nil);
+                                                  }];
+            
+        }
+        else
+            [self requestForBirthdayWithCompletion:completion];
+    }];
+}
+
 -(void) loginOrRegistrationWithUser:(id<FBGraphUser>)user{
     NSString *userEmail = user[@"email"];
     NSString *userFbId = user[@"id"];
-    
+    [self getUserBirthdayWithCompletion:^(NSString *birthday) {
+        NSLog(@"User birthday: %@", birthday);
+        //TODO: use this param on login/register
+    }];
     __weak STFacebookLoginController *weakSelf = self;
+    
+    //TODO: remove this photo update from login but not on register
     FBRequest *pic = [FBRequest requestForGraphPath:@"me/?fields=picture.type(large)"];
     [pic startWithCompletionHandler:^(FBRequestConnection *connection,
                                       id result,

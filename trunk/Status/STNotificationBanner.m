@@ -24,4 +24,8 @@
     [_delegate bannerTapped];
 }
 
+-(void)setUpWithUserInfo:(NSDictionary *)info{
+    //TODO: continue from here. 
+}
+
 @end

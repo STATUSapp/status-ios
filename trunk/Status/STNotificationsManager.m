@@ -92,6 +92,9 @@ static STNotificationsManager *_sharedManager = nil;
     }
     
     STNotificationType notifType = [notification[@"user_info"][@"notification_type"] integerValue];
+    if (!(notifType == STNotificationTypeLike)) {
+        return;
+    }
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"STNotificationBanner" owner:self options:nil];
     STNotificationBanner *banner = (STNotificationBanner*)[views firstObject];
     banner.notificationType = notifType;
@@ -115,25 +118,47 @@ static STNotificationsManager *_sharedManager = nil;
 }
 
 -(void)showBanner:(STNotificationBanner *)banner{
-    [self dismissCurrentBanner];
+    [self removeBanner];
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     
     //set the right width
     CGRect rect = banner.frame;
     rect.size.width = mainWindow.frame.size.width;
+    rect.origin.y = -1 * rect.size.height;
     banner.frame = rect;
     
     [mainWindow addSubview:banner];
+    
+    rect.origin.y = 0;
     _currentBanner = banner;
-    _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:2.f target:self selector:@selector(dismissCurrentBanner) userInfo:nil repeats:NO];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        _currentBanner.frame = rect;
+        
+    } completion:^(BOOL finished) {
+        _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:2.f target:self selector:@selector(dismissCurrentBanner) userInfo:nil repeats:NO];
+
+    }];
 
 }
 
--(void)dismissCurrentBanner{
+- (void)removeBanner {
     [_currentBanner removeFromSuperview];
     _currentBanner = nil;
     [_dismissTimer invalidate];
     _dismissTimer = nil;
+}
+
+-(void)dismissCurrentBanner{
+    CGRect rect = _currentBanner.frame;
+    rect.origin.y = -rect.size.height;
+    [UIView animateWithDuration:0.25 animations:^{
+        _currentBanner.frame = rect;
+        
+    } completion:^(BOOL finished) {
+        [self removeBanner];
+    }];
+    
 }
 
 #pragma mark STNotificationBannerDelegate

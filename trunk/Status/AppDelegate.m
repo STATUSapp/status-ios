@@ -192,8 +192,15 @@ static NSInteger kNewVersionAlert = 101;
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"Notif: %@", userInfo);
+    NSLog(@"App state: %d", application.applicationState);
+    
     self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
-    [[STNotificationsManager sharedManager] handleInAppNotification:userInfo];
+    if (application.applicationState!=UIApplicationStateActive) {
+        [[STNotificationsManager sharedManager] handleNotification:userInfo];
+
+    }
+    else
+        [[STNotificationsManager sharedManager] handleInAppNotification:userInfo];
 }
 
 -(void)checkForNotificationNumber{
