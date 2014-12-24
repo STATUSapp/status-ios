@@ -92,7 +92,9 @@ static STNotificationsManager *_sharedManager = nil;
     }
     
     STNotificationType notifType = [notification[@"user_info"][@"notification_type"] integerValue];
-    if (!(notifType == STNotificationTypeLike)) {
+    if (!(notifType == STNotificationTypeLike ||
+          notifType == STNotificationTypeUploaded ||
+          notifType == STNotificationTypeChatMessage)) {
         return;
     }
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"STNotificationBanner" owner:self options:nil];

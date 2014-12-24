@@ -529,6 +529,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 -(void)controllerContentChanged:(NSArray *)objects{
     [self.tableView reloadData];
+    [chatController addSectionFromMessagesTimestamps:[[_currentManager allObjects] valueForKey:@"date"]];
         if (chatController.loadMore==NO) {
             [_tableView scrollToRowAtIndexPath:[_currentManager indexPathForObject:[[_currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }

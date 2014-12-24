@@ -37,6 +37,9 @@
 @property (nonatomic, strong) NSString *currentUserId;
 @property (nonatomic, assign) BOOL authenticated;
 @property (nonatomic, assign) BOOL loadMore;
+
+@property (nonatomic, strong) NSMutableArray *roomSections;
+
 - (void)reconnect;
 -(void)forceReconnect;
 - (void)close;
@@ -52,5 +55,7 @@
 - (void)blockUserWithId:(NSString *)userId;
 #pragma mark -Helpers
 -(BOOL)canChat;
+
+-(void)addSectionFromMessagesTimestamps:(NSArray *)timestamps;
 
 @end

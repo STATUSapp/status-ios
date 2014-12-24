@@ -13,6 +13,7 @@
 #import "STFacebookLoginController.h"
 #import "STCoreDataManager.h"
 #import "STDAOEngine.h"
+#import "STNotificationsManager.h"
 
 @interface STChatController()<SRWebSocketDelegate>{
     SRWebSocket *_webSocket;
@@ -315,7 +316,11 @@
     }
     [[STCoreDataManager sharedManager] synchronizeAsyncCoreDataEntity:@"Message"
                                                              withData:resultDict
-                                                        andCompletion:nil];
+                                                        andCompletion:^(BOOL success, id returnObject) {
+                                                            //TODO: change this mockup to the real data
+                                                            [[STNotificationsManager sharedManager] handleInAppNotification:@{}];
+
+                                                        }];
 }
 
 #pragma mark -Helpers
@@ -368,4 +373,26 @@
     [_reachabilityManager startMonitoring];
 }
 
+
+#pragma mark - RoomSections
+
+-(void)addSectionFromMessagesTimestamps:(NSArray *)timestamps{
+    //reset last sections
+    _roomSections = [NSMutableArray new];
+    if (timestamps.count == 0) {
+        return;
+    }
+    [_roomSections addObject:[timestamps firstObject]];
+    
+    for (int i=1; i<timestamps.count-1; i++) {
+        NSDate *firstDate = timestamps[i];
+        NSDate *secondDate = timestamps[i+1];
+        
+        if ([secondDate timeIntervalSinceDate:firstDate] > 10 * 60) {
+            [_roomSections addObject:secondDate];
+        }
+    }
+    
+    NSLog(@"Sections: %@", _roomSections);
+}
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "Message.h"
-
+#import "STChatController.h"
 
 @implementation Message
 
@@ -25,9 +25,21 @@
     
     [formatter setDateStyle:NSDateFormatterLongStyle];
     
-    NSString *dateString = [formatter stringFromDate:self.date];
+//    NSString *dateString = [formatter stringFromDate:self.date];
+//    
+//    return dateString;
     
-    return dateString;
+    float minInterval = -MAXFLOAT;
+    
+    for (int i=0;i<[STChatController sharedInstance].roomSections.count;i++) {
+        if ([self.date timeIntervalSinceDate:[STChatController sharedInstance].roomSections[i]] < minInterval) {
+            minInterval = minInterval;
+        }
+    }
 
+    //TODO: test this when chat on
+    NSDate *sectionDate = [self.date dateByAddingTimeInterval:minInterval];
+    return [formatter stringFromDate:sectionDate];
+    
 }
 @end
