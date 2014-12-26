@@ -191,82 +191,87 @@
 -(void) loginOrRegistrationWithUser:(id<FBGraphUser>)user{
     NSString *userEmail = user[@"email"];
     NSString *userFbId = user[@"id"];
-    [self getUserBirthdayWithCompletion:^(NSString *birthday) {
-        NSLog(@"User birthday: %@", birthday);
-        //TODO: use this param on login/register
-    }];
     __weak STFacebookLoginController *weakSelf = self;
     
-    //TODO: remove this photo update from login but not on register
-    FBRequest *pic = [FBRequest requestForGraphPath:@"me/?fields=picture.type(large)"];
-    [pic startWithCompletionHandler:^(FBRequestConnection *connection,
-                                      id result,
-                                      NSError *error) {
-        if (error!=nil) {
-            if (weakSelf.delegate&&[weakSelf.delegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
-                [weakSelf.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
-            }
-            [[STImageCacheController sharedInstance] cleanTemporaryFolder];
-            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
-            return ;
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    if (userEmail!=nil)
+        userInfo[@"email"] = userEmail;
+    
+    userInfo[@"fb_token"] = [[[FBSession activeSession] accessTokenData] accessToken];
+    userInfo[@"facebook_id"] = userFbId;
+    
+    __block NSString *userName = user[@"name"];
+    
+    STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+            [weakSelf measureRegister];
+            [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
         }
-        NSDictionary *resultDic = (NSDictionary<FBGraphUser> *) result;
-        
-        __block NSString *photoLink = resultDic[@"picture"][@"data"][@"url"];
-        __block NSString *userName = user[@"name"];
-        [weakSelf UDSetValue:userName  forKey:USER_NAME];
-        
-        NSMutableDictionary *userInfo = [NSMutableDictionary new];
-        if (userEmail!=nil)
-            userInfo[@"email"] = userEmail;
-        if (userName!=nil)
-            userInfo[@"full_name"] = userName;
-
-        userInfo[@"facebook_image_link"] = photoLink;
-        userInfo[@"fb_token"] = [[[FBSession activeSession] accessTokenData] accessToken];
-        userInfo[@"facebook_id"] = userFbId;
-        userInfo[@"phone_number"] = @"";
-
-        STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
-            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-                [weakSelf measureRegister];
-                [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
-            }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong with the registration." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alert show];
-                [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
-            }
-        };
-        
-        STRequestFailureBlock failBlock = ^(NSError *error){
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong with the registration." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
             [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
-        };
-        
-        STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
-            if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
-                [STRegisterRequest registerWithUserInfo:userInfo
-                                         withCompletion:registerCompletion
-                                                failure:failBlock];
+        }
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
+    };
+    
+    STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
+            //get picture of user then register to server
+            FBRequest *pic = [FBRequest requestForGraphPath:@"me/?fields=picture.type(large)"];
+            [pic startWithCompletionHandler:^(FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+                if (error!=nil) {
+                    if (weakSelf.delegate&&[weakSelf.delegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
+                        [weakSelf.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
+                    }
+                    [[STImageCacheController sharedInstance] cleanTemporaryFolder];
+                    [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
+                    return ;
+                }
+                NSDictionary *resultDic = (NSDictionary<FBGraphUser> *) result;
                 
-            }
-            else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
-                [weakSelf setTrackerAsExistingUser];
-                [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
-            }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong on login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alert show];
-                [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
-            }
-        };
-        
-        [STLoginRequest loginWithUserInfo:userInfo
-                           withCompletion:loginCompletion
-                                  failure:failBlock];
-    }];
+                NSString *photoLink = resultDic[@"picture"][@"data"][@"url"];
+                [weakSelf UDSetValue:userName  forKey:USER_NAME];
+                
+                userInfo[@"facebook_image_link"] = photoLink;
+                if (userName!=nil)
+                    userInfo[@"full_name"] = userName;
+                
+                [self getUserBirthdayWithCompletion:^(NSString *birthday) {
+                    //TODO: check if the format match with the server
+                    if (!birthday) {
+                        userInfo[@"birthday"] = birthday;
+                    }
+                    [STRegisterRequest registerWithUserInfo:userInfo
+                                             withCompletion:registerCompletion
+                                                    failure:failBlock];
+
+                }];
+                
+            }];
+            
+        }
+        else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
+            [weakSelf setTrackerAsExistingUser];
+            [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong on login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
+        }
+    };
+    
+    [STLoginRequest loginWithUserInfo:userInfo
+                       withCompletion:loginCompletion
+                              failure:failBlock];
 }
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
