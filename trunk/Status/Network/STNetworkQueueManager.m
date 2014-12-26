@@ -144,6 +144,6 @@
 }
 
 - (BOOL)isConnectionWorking {
-    return [STChatController sharedInstance].connectionStatus == STConnectionStatusOn;
+    return [STChatController sharedInstance].connectionStatus != STConnectionStatusOff;
 }
 @end

@@ -242,7 +242,7 @@
                 userInfo[@"facebook_image_link"] = photoLink;
                 if (userName!=nil)
                     userInfo[@"full_name"] = userName;
-                
+                //get the bithday of the user
                 [self getUserBirthdayWithCompletion:^(NSString *birthday) {
                     //TODO: check if the format match with the server
                     if (!birthday) {

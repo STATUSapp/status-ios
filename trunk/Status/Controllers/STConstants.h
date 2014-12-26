@@ -52,8 +52,9 @@ typedef NS_ENUM(NSUInteger,STWebSockerStatus){
 };
 
 typedef NS_ENUM(NSUInteger,STConnectionStatus){
-    STConnectionStatusOff =0,
-    STConnectionStatusOn
+    STConnectionStatusNotSet = 0,
+    STConnectionStatusOff = -1,
+    STConnectionStatusOn = 1
 };
 
 typedef NS_ENUM(NSUInteger,STSearchScopeControl){
