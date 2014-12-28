@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -22,7 +23,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onCloseMenu:" destination="-2" eventType="touchUpInside" id="pK1-n5-uj3"/>
+                        <action selector="onCloseMenu:" destination="iN0-l3-epB" eventType="touchUpInside" id="dVr-XJ-3CS"/>
                     </connections>
                 </button>
                 <view tag="107" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eH9-2g-Sxn">
@@ -42,7 +43,7 @@
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onClickHome:" destination="-2" eventType="touchUpInside" id="t21-A5-lOs"/>
+                                <action selector="onHomePressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="pZb-50-BYI"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PB9-3s-1YB">
@@ -59,7 +60,7 @@
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onClickNearby:" destination="-2" eventType="touchUpInside" id="Bei-rK-lvd"/>
+                                <action selector="onNearbyPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="LdN-Zz-LqI"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TND-Bu-qwL">
@@ -76,7 +77,7 @@
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onTapFriends:" destination="-2" eventType="touchUpInside" id="FmQ-jc-Lex"/>
+                                <action selector="onFriendsInviterPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Pda-1w-PSu"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Gf-Yn-6zx">
@@ -93,7 +94,7 @@
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onTapMe:" destination="-2" eventType="touchUpInside" id="hGI-pG-2XQ"/>
+                                <action selector="onMePressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="gfe-Tn-Aq6"/>
                             </connections>
                         </button>
                     </subviews>
@@ -121,7 +122,7 @@
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onClickHowItWorks:" destination="-2" eventType="touchUpInside" id="p8a-el-D3x"/>
+                        <action selector="onToturialPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="f4K-UV-y77"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KQ-2n-c0d">
@@ -143,7 +144,7 @@
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onClickSettings:" destination="-2" eventType="touchUpInside" id="bXf-uB-hwN"/>
+                        <action selector="onSettingsPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="O55-4Y-z9R"/>
                     </connections>
                 </button>
             </subviews>
@@ -161,7 +162,6 @@
                 <constraint firstAttribute="centerX" secondItem="eH9-2g-Sxn" secondAttribute="centerX" id="tzL-MY-lRZ"/>
                 <constraint firstAttribute="trailing" secondItem="5KQ-2n-c0d" secondAttribute="trailing" constant="17" id="vY5-ux-2sq"/>
             </constraints>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="blurBackground" destination="1XZ-Pj-WzN" id="TXI-XI-wpr"/>
@@ -175,4 +175,9 @@
         <image name="settings_pressed" width="20" height="20"/>
         <image name="x menu STAUS" width="15" height="15"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

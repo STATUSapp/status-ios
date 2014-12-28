@@ -7,6 +7,7 @@
 //
 
 #import "STMenuView.h"
+#import "STMenuController.h"
 
 @implementation STMenuView
 
@@ -27,5 +28,26 @@
     // Drawing code
 }
 */
+- (IBAction)onCloseMenu:(id)sender {
+    [[STMenuController sharedInstance] hideMenu];
+}
+- (IBAction)onHomePressed:(id)sender {
+    [[STMenuController sharedInstance] goHome];
+}
+- (IBAction)onNearbyPressed:(id)sender {
+    [[STMenuController sharedInstance] goNearby];
+}
+- (IBAction)onFriendsInviterPressed:(id)sender {
+    [[STMenuController sharedInstance] goFriendsInviter];
+}
+- (IBAction)onMePressed:(id)sender {
+    [[STMenuController sharedInstance] goMyProfile];
+}
+- (IBAction)onToturialPressed:(id)sender {
+    [[STMenuController sharedInstance] goTutorial];
+}
+- (IBAction)onSettingsPressed:(id)sender {
+    [[STMenuController sharedInstance] goSettings];
+}
 
 @end
