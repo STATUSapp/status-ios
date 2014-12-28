@@ -503,9 +503,26 @@ static NSInteger const  kBlockUserAlertTag = 11;
     return [_currentManager numberOfSections];
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    Message *msg = [_currentManager objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+//    return msg.sectionDate;
+//}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     Message *msg = [_currentManager objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-    return msg.sectionDate;
+
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    CGRect rect = CGRectMake(0, 0, 320, 40);
+    rect.size.width = mainWindow.frame.size.width;
+
+    UIView *sectionView = [[UIView alloc] initWithFrame:rect];
+    UILabel *lb = [[UILabel alloc] initWithFrame:rect];
+    lb.text = msg.sectionDate;
+    lb.font = [UIFont fontWithName:@"HelveticaNeue" size:14.f];
+    lb.textAlignment = NSTextAlignmentCenter;
+    [sectionView addSubview:lb];
+    
+    return sectionView;
 }
 
 - (void)didReceiveMemoryWarning
@@ -529,10 +546,9 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 -(void)controllerContentChanged:(NSArray *)objects{
     [self.tableView reloadData];
-    [chatController addSectionFromMessagesTimestamps:[[_currentManager allObjects] valueForKey:@"date"]];
-        if (chatController.loadMore==NO) {
-            [_tableView scrollToRowAtIndexPath:[_currentManager indexPathForObject:[[_currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        }
+    if (chatController.loadMore==NO) {
+        [_tableView scrollToRowAtIndexPath:[_currentManager indexPathForObject:[[_currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 
 }
 

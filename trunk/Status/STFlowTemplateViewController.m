@@ -58,6 +58,7 @@
 #import "STGADelegate.h"
 #import "STNotificationsManager.h"
 #import "STMenuController.h"
+#import "STUpdateToNewerVersionController.h"
 
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
@@ -318,7 +319,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [self getDataSourceWithOffset:0];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate checkForNotificationNumber];
-    [appDelegate checkForAppInfo];
+    [[STUpdateToNewerVersionController sharedManager] checkForAppInfo];
     [[STNotificationsManager sharedManager] handleLastNotification];
 }
 

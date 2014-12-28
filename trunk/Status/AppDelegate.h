@@ -14,5 +14,4 @@
 @property (nonatomic) NSInteger badgeNumber;
 
 -(void)checkForNotificationNumber;
--(void)checkForAppInfo;
 @end

@@ -55,7 +55,7 @@
 //    NSInteger months = [components month];
 //    NSInteger days = [components day];
     
-    return [NSString stringWithFormat:@"%li", years];
+    return [NSString stringWithFormat:@"%li", (long)years];
 }
 
 @end

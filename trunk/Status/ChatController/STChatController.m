@@ -372,27 +372,4 @@
     }];
     [_reachabilityManager startMonitoring];
 }
-
-
-#pragma mark - RoomSections
-
--(void)addSectionFromMessagesTimestamps:(NSArray *)timestamps{
-    //reset last sections
-    _roomSections = [NSMutableArray new];
-    if (timestamps.count == 0) {
-        return;
-    }
-    [_roomSections addObject:[timestamps firstObject]];
-    
-    for (int i=1; i<timestamps.count-1; i++) {
-        NSDate *firstDate = timestamps[i];
-        NSDate *secondDate = timestamps[i+1];
-        
-        if ([secondDate timeIntervalSinceDate:firstDate] > 10 * 60) {
-            [_roomSections addObject:secondDate];
-        }
-    }
-    
-    NSLog(@"Sections: %@", _roomSections);
-}
 @end
