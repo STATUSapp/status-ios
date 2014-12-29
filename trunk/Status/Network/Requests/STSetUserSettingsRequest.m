@@ -28,8 +28,8 @@
 {
     __weak STSetUserSettingsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSString *url = [weakSelf urlString];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"value"] = @(weakSelf.value);
         params[@"key"] = weakSelf.key;
         

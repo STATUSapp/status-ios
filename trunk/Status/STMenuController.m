@@ -87,6 +87,7 @@
 - (void)goSettings{
     
     [self hideMenu];
+    [_currentVC.navigationController popToRootViewControllerAnimated:NO];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
     UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
@@ -95,6 +96,7 @@
 
 - (void)goTutorial{
     [self hideMenu];
+    [_currentVC.navigationController popToRootViewControllerAnimated:NO];
     STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];
     tutorialVC.delegate = self;
     tutorialVC.backgroundImageForLastElement = [STMenuController snapshotForViewController:_currentVC];
@@ -103,12 +105,14 @@
 }
 - (void)goMyProfile{
     [self hideMenu];
+    [_currentVC.navigationController popToRootViewControllerAnimated:NO];
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
     [_currentVC.navigationController pushViewController:userProfileVC animated:YES];
 
 }
 - (void)goFriendsInviter {
     [self hideMenu];
+    [_currentVC.navigationController popToRootViewControllerAnimated:NO];
     STInviteFriendsViewController * inviteFriendsVC = [STInviteFriendsViewController newInstance];
     inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [_currentVC presentViewController:inviteFriendsVC animated:YES completion:nil];
@@ -121,6 +125,7 @@
     else
     {
         [self hideMenu];
+        [_currentVC.navigationController popToRootViewControllerAnimated:NO];
         STFlowTemplateViewController *flowCtrl = [_currentVC.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
         flowCtrl.flowType = STFlowTypeDiscoverNearby;
         [_currentVC.navigationController pushViewController:flowCtrl animated:YES];

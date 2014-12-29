@@ -27,8 +27,8 @@
     __weak STGetUserProfileRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSString *url = [weakSelf urlString];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"user_id"] = weakSelf.userId;
         
         [[STNetworkManager sharedManager] GET:url

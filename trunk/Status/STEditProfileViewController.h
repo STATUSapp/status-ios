@@ -10,4 +10,6 @@
 
 @interface STEditProfileViewController : UIViewController
 
++ (STEditProfileViewController *)newControllerWithUserId:(NSString *)userId;
+
 @end

@@ -155,6 +155,8 @@
 		9904DD401A2FB4C40072134F /* STEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */; };
 		9904DD431A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD421A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m */; };
 		9904DD451A2FB55D0072134F /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9904DD441A2FB55D0072134F /* UserProfile.storyboard */; };
+		990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */; };
+		991BD4231A506E04008EAEA6 /* STMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991BD4221A506E04008EAEA6 /* STMenuController.m */; };
 		99206B041A082CAE008EAEE9 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99206B031A082CAE008EAEE9 /* libGoogleAdMobAds.a */; };
 		993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 993A5BFF1A490F1100021D1D /* NSDate+Additions.m */; };
 		99671D0B19BC8FBB00FB8A7A /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */; };
@@ -468,6 +470,10 @@
 		9904DD411A2FB50E0072134F /* STChangeUserProfilePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChangeUserProfilePhotoViewController.h; sourceTree = "<group>"; };
 		9904DD421A2FB50E0072134F /* STChangeUserProfilePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChangeUserProfilePhotoViewController.m; sourceTree = "<group>"; };
 		9904DD441A2FB55D0072134F /* UserProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
+		990B467C1A50626F003D4CDE /* STUpdateUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateUserProfileRequest.h; sourceTree = "<group>"; };
+		990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateUserProfileRequest.m; sourceTree = "<group>"; };
+		991BD4211A506E04008EAEA6 /* STMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMenuController.h; sourceTree = "<group>"; };
+		991BD4221A506E04008EAEA6 /* STMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMenuController.m; sourceTree = "<group>"; };
 		99206B031A082CAE008EAEE9 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		993A5BFE1A490F1100021D1D /* NSDate+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Additions.h"; sourceTree = "<group>"; };
 		993A5BFF1A490F1100021D1D /* NSDate+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Additions.m"; sourceTree = "<group>"; };
@@ -988,6 +994,8 @@
 				176CC31E1A2B226100E9C3D0 /* STSetUserSettingsRequest.m */,
 				99F77F691A373BB300E46B22 /* STGetUserProfileRequest.h */,
 				99F77F6A1A373BB300E46B22 /* STGetUserProfileRequest.m */,
+				990B467C1A50626F003D4CDE /* STUpdateUserProfileRequest.h */,
+				990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1230,6 +1238,7 @@
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
 				07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */,
 				0717E2B719B71B09001DF132 /* STFacebookAlbumCell.m in Sources */,
+				991BD4231A506E04008EAEA6 /* STMenuController.m in Sources */,
 				9904DD401A2FB4C40072134F /* STEditProfileViewController.m in Sources */,
 				0717E2E219B71D3E001DF132 /* STFacebookLoginController.m in Sources */,
 				0717E2E319B71D3E001DF132 /* STLocationManager.m in Sources */,
@@ -1269,6 +1278,7 @@
 				172EAEB418B0B46300C5637B /* AFURLConnectionOperation.m in Sources */,
 				07FCFAA319C094250048F441 /* UIImage+WebP.m in Sources */,
 				993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */,
+				990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */,
 				0717E2DC19B71C56001DF132 /* STChatRoomViewController.m in Sources */,
 				17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */,
 				172EAEB318B0B46300C5637B /* AFSecurityPolicy.m in Sources */,

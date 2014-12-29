@@ -24,8 +24,8 @@
 {
     __weak STGetUserSettingsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSString *url = [weakSelf urlString];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         [[STNetworkManager sharedManager] GET:url
                                    parameters:params
                                       success:weakSelf.standardSuccessBlock

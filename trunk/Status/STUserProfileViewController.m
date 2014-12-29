@@ -9,6 +9,8 @@
 #import "STUserProfileViewController.h"
 #import "STGetUserProfileRequest.h"
 #import "NSDate+Additions.h"
+#import "STEditProfileViewController.h"
+#import "STMenuController.h"
 
 static NSString * const kBirthdayKey = @"birthday";
 static NSString * const kFirstNameKey = @"firstname";
@@ -20,6 +22,7 @@ static NSString * const kLocationLatitudeKey = @"location_lat";
 static NSString * const kLocationLongitudeKey = @"location_lng";
 static NSString * const kNumberOfPostsKey = @"number_of_posts";
 static NSString * const kProfilePhotoLinkKey = @"user_photo";
+static NSString * const kBioKey = @"bio";
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
@@ -74,19 +77,22 @@ static NSString * const kProfilePhotoLinkKey = @"user_photo";
     
 #warning solve NSNull case another way. Talk to server guy
     
-    if (![[dict valueForKey:kFirstNameKey]  isEqual:[NSNull null]]) {
+    if ([dict valueForKey:kFirstNameKey]  != [NSNull null]) {
         _lblNameAndAge.text = [dict valueForKey:kFirstNameKey];
     } else {
         _lblNameAndAge.text = [dict valueForKey:kFulNameKey];
     }
     
-    if (![[dict objectForKey:kBirthdayKey] isEqual:[NSNull null]]) {
+    if ([dict objectForKey:kBirthdayKey] != [NSNull null]) {
         NSString * age = [NSDate yearsFromDate:[NSDate dateFromServerDate:[dict objectForKey:kBirthdayKey]]];
         _lblNameAndAge.text = [NSString stringWithFormat:@"%@, %@", _lblNameAndAge.text, age];
     }
     
-    
-
+    if ([dict objectForKey:kBioKey] != [NSNull null]) {
+        _lblUserDescription.text = [dict objectForKey:kBioKey];
+    } else {
+        _lblUserDescription.text = @"";
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,6 +119,7 @@ static NSString * const kProfilePhotoLinkKey = @"user_photo";
 }
 
 - (IBAction)onTapMenu:(id)sender {
+    [[STMenuController sharedInstance] showMenuForController:self];
 }
 
 - (IBAction)onTapCamera:(id)sender {
@@ -122,6 +129,8 @@ static NSString * const kProfilePhotoLinkKey = @"user_photo";
 }
 
 - (IBAction)onTapEditUserProfile:(id)sender {
+    STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:_userId];
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 

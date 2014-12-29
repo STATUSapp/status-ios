@@ -102,6 +102,7 @@ extern NSString *const kGetUserInfo;
 extern NSString *const kGetUserSettings;
 extern NSString *const kSetUserSetting;
 extern NSString *const kGetUserProfile;
+extern NSString *const kUpdateUserProfile;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

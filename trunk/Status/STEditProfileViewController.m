@@ -9,10 +9,17 @@
 #import "STEditProfileViewController.h"
 
 @interface STEditProfileViewController ()
-
+@property (nonatomic, strong) NSString * userId;
 @end
 
 @implementation STEditProfileViewController
+
++ (STEditProfileViewController *)newControllerWithUserId:(NSString *)userId {
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:[NSBundle mainBundle]];
+    STEditProfileViewController * newController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STEditProfileViewController class])];
+    newController.userId = userId;
+    return newController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +29,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)onTapClose:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)onTapSave:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
