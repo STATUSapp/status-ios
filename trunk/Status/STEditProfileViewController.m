@@ -7,8 +7,13 @@
 //
 
 #import "STEditProfileViewController.h"
+#import "STUpdateUserProfileRequest.h"
+#import "STUserProfileViewController.h"
 
-@interface STEditProfileViewController ()
+@interface STEditProfileViewController () <UITextFieldDelegate, UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *txtFieldName;
+@property (weak, nonatomic) IBOutlet UITextField *txtFieldLocation;
+@property (weak, nonatomic) IBOutlet UITextView *txtViewBio;
 @property (nonatomic, strong) NSString * userId;
 @end
 
@@ -24,6 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    [self setupVisualsWithDictionary:_userProfileDict];
+    
+}
+
+- (void)setupVisualsWithDictionary:(NSDictionary *)dict {
+    _txtFieldLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
+    _txtViewBio.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
+    _txtFieldName.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kFulNameKey];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,7 +48,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)onTapSave:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    __weak STEditProfileViewController * weakSelf = self;
+    [STUpdateUserProfileRequest updateUserProfileWithFirstName:nil
+                                                      lastName:nil
+                                                      fullName:_txtFieldName.text
+                                                  homeLocation: _txtFieldLocation.text
+                                                           bio:_txtViewBio.text
+                                                withCompletion:^(id response, NSError *error) {
+                                                    
+                                                    [[[UIAlertView alloc] initWithTitle:@"Update Profile" message:@"Succes!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                                                    
+                                                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                                                }
+                                                       failure:^(NSError *error) {
+                                                           NSLog(@"%@", error.debugDescription);
+        
+                                                }];
 }
 
 /*
@@ -46,5 +75,27 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == _txtFieldLocation) {
+        [_txtViewBio becomeFirstResponder];
+    }
+    if (textField == _txtFieldName) {
+        [_txtFieldLocation becomeFirstResponder];
+    }
+    return YES;
+}
+
+#pragma mark - UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text  isEqualToString: @"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
 
 @end

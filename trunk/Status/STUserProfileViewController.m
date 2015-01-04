@@ -11,18 +11,9 @@
 #import "NSDate+Additions.h"
 #import "STEditProfileViewController.h"
 #import "STMenuController.h"
+#import "UIImage+ImageEffects.h"
+#import "UIImageView+WebCache.h"
 
-static NSString * const kBirthdayKey = @"birthday";
-static NSString * const kFirstNameKey = @"firstname";
-static NSString * const kFulNameKey = @"fullname";
-static NSString * const kLastActiveKey = @"last_seen";
-static NSString * const kLastNameKey = @"lastname";
-static NSString * const kLocationKey = @"location";
-static NSString * const kLocationLatitudeKey = @"location_lat";
-static NSString * const kLocationLongitudeKey = @"location_lng";
-static NSString * const kNumberOfPostsKey = @"number_of_posts";
-static NSString * const kProfilePhotoLinkKey = @"user_photo";
-static NSString * const kBioKey = @"bio";
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
@@ -43,6 +34,7 @@ static NSString * const kBioKey = @"bio";
 @property (weak, nonatomic) IBOutlet UIButton *btnEditUserProfile;
 
 @property (nonatomic, strong) NSString * userId;
+@property (nonatomic, strong) NSDictionary * userProfileDict;
 
 @end
 
@@ -58,24 +50,28 @@ static NSString * const kBioKey = @"bio";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self getAndDisplayProfile];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getAndDisplayProfile];
+}
+
+- (void)getAndDisplayProfile {
     __weak STUserProfileViewController * weakSelf = self;
-    
     [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
         NSLog(@"%@", response);
         [weakSelf setupVisualsWithDictionary:response];
-
+        weakSelf.userProfileDict = response;
         
     } failure:^(NSError *error) {
         // empty all fields
         NSLog(@"%@", error.debugDescription);
     }];
-    
 }
 
 - (void)setupVisualsWithDictionary:(NSDictionary *)dict {
-    
-#warning solve NSNull case another way. Talk to server guy
     
     if ([dict valueForKey:kFirstNameKey]  != [NSNull null]) {
         _lblNameAndAge.text = [dict valueForKey:kFirstNameKey];
@@ -88,11 +84,18 @@ static NSString * const kBioKey = @"bio";
         _lblNameAndAge.text = [NSString stringWithFormat:@"%@, %@", _lblNameAndAge.text, age];
     }
     
-    if ([dict objectForKey:kBioKey] != [NSNull null]) {
-        _lblUserDescription.text = [dict objectForKey:kBioKey];
-    } else {
-        _lblUserDescription.text = @"";
+    _lblUserDescription.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
+    _lblLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
+    
+    NSString * photoStringURL = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kProfilePhotoLinkKey];
+    [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:photoStringURL]];
+}
+
++(id)getObjectFromUserProfileDict:(NSDictionary *)dict forKey:(NSString *)key {
+    if ([dict objectForKey:key] != [NSNull null]) {
+        return [dict objectForKey:key];
     }
+    return nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -130,6 +133,7 @@ static NSString * const kBioKey = @"bio";
 
 - (IBAction)onTapEditUserProfile:(id)sender {
     STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:_userId];
+    editVC.userProfileDict = _userProfileDict;
     [self.navigationController pushViewController:editVC animated:YES];
 }
 

@@ -12,4 +12,6 @@
 
 +(STUserProfileViewController *)newControllerWithUserId:(NSString *)userId;
 
++(id)getObjectFromUserProfileDict:(NSDictionary *)dict forKey:(NSString *)key;
+
 @end

@@ -10,6 +10,9 @@
 
 @interface STEditProfileViewController : UIViewController
 
+@property (nonatomic, strong) NSDictionary * userProfileDict;
+
 + (STEditProfileViewController *)newControllerWithUserId:(NSString *)userId;
+
 
 @end

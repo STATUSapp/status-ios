@@ -138,3 +138,17 @@ extern NSString *const STNotificationsUploadNewPhotoKey;
 extern NSString *const STNotificationsFriendJoinStatusKey;
 extern NSString *const STNotificationsPhotosWaitingKey;
 extern NSString *const STNotificationsExtraLikesKey;
+
+#pragma mark - UserProfile
+
+extern NSString * const kBirthdayKey;
+extern NSString * const kFirstNameKey;
+extern NSString * const kFulNameKey;
+extern NSString * const kLastActiveKey;
+extern NSString * const kLastNameKey;
+extern NSString * const kLocationKey;
+extern NSString * const kLocationLatitudeKey;
+extern NSString * const kLocationLongitudeKey;
+extern NSString * const kNumberOfPostsKey;
+extern NSString * const kProfilePhotoLinkKey;
+extern NSString * const kBioKey;

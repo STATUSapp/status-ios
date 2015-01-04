@@ -85,9 +85,8 @@
 }
 
 - (void)goSettings{
-    
+    [self resetNavigationControllerStack];
     [self hideMenu];
-    [_currentVC.navigationController popToRootViewControllerAnimated:NO];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
     UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
@@ -95,8 +94,8 @@
 }
 
 - (void)goTutorial{
+    [self resetNavigationControllerStack];
     [self hideMenu];
-    [_currentVC.navigationController popToRootViewControllerAnimated:NO];
     STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];
     tutorialVC.delegate = self;
     tutorialVC.backgroundImageForLastElement = [STMenuController snapshotForViewController:_currentVC];
@@ -104,15 +103,15 @@
     [_currentVC presentViewController:tutorialVC animated:YES completion:nil];
 }
 - (void)goMyProfile{
+    [self resetNavigationControllerStack];
     [self hideMenu];
-    [_currentVC.navigationController popToRootViewControllerAnimated:NO];
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
     [_currentVC.navigationController pushViewController:userProfileVC animated:YES];
 
 }
 - (void)goFriendsInviter {
+    [self resetNavigationControllerStack];
     [self hideMenu];
-    [_currentVC.navigationController popToRootViewControllerAnimated:NO];
     STInviteFriendsViewController * inviteFriendsVC = [STInviteFriendsViewController newInstance];
     inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [_currentVC presentViewController:inviteFriendsVC animated:YES completion:nil];
@@ -131,6 +130,12 @@
         [_currentVC.navigationController pushViewController:flowCtrl animated:YES];
     }
 
+}
+
+- (void)resetNavigationControllerStack {
+    UINavigationController * navController = _currentVC.navigationController;
+    _currentVC = [_currentVC.navigationController.viewControllers objectAtIndex:0];
+    [navController popToRootViewControllerAnimated:NO];
 }
 
 #pragma mark - STTutorialDelegate
