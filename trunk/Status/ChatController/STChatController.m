@@ -14,6 +14,7 @@
 #import "STCoreDataManager.h"
 #import "STDAOEngine.h"
 #import "STNotificationsManager.h"
+#import "STNotificationsManager.h"
 
 @interface STChatController()<SRWebSocketDelegate>{
     SRWebSocket *_webSocket;
@@ -317,8 +318,11 @@
     [[STCoreDataManager sharedManager] synchronizeAsyncCoreDataEntity:@"Message"
                                                              withData:resultDict
                                                         andCompletion:^(BOOL success, id returnObject) {
-                                                            //TODO: change this mockup to the real data
-                                                            [[STNotificationsManager sharedManager] handleInAppNotification:@{}];
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                if (seen == NO) {
+                                                                    [[STNotificationsManager sharedManager] handleInAppMessageNotification:message];
+                                                                }
+                                                            });
 
                                                         }];
 }

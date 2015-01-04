@@ -14,4 +14,5 @@
 -(void)handleLastNotification;
 -(void) handleNotification:(NSDictionary *) notif;
 -(void)handleInAppNotification:(NSDictionary *)notification;
+-(void)handleInAppMessageNotification:(NSDictionary *)notification;
 @end

@@ -191,15 +191,30 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"Notif: %@", userInfo);
-    NSLog(@"App state: %d", application.applicationState);
-    
+    NSLog(@"App state: %lu", (unsigned long)application.applicationState);
+
     self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
     if (application.applicationState!=UIApplicationStateActive) {
         [[STNotificationsManager sharedManager] handleNotification:userInfo];
 
     }
     else
+    {
+//#warning remove this mockup
+//        NSMutableDictionary *debugUserInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
+//        NSMutableDictionary *payloadUserInfo = [NSMutableDictionary dictionaryWithDictionary: debugUserInfo[@"user_info"]];
+//        payloadUserInfo[@"name"] = @"Einstein";
+//        payloadUserInfo[@"photo"] = @"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/s200x200/10354686_10150004552801856_220367501106153455_n.jpg?oh=9dc41c83e9eea8ba96538c6b8ea6d16d&oe=550DCA50&__gda__=1426728006_926067ef0f35eed4118319b475d142bd";
+//        payloadUserInfo[@"post_id"] = @(71);
+//        payloadUserInfo[@"user_id"] = @(35);
+//        debugUserInfo[@"user_info"] = payloadUserInfo;
+//#ifdef DEBUG
+//        [[STNotificationsManager sharedManager] handleInAppNotification:debugUserInfo];
+//
+//#else
         [[STNotificationsManager sharedManager] handleInAppNotification:userInfo];
+//#endif
+    }
 }
 
 -(void)checkForNotificationNumber{

@@ -13,6 +13,7 @@
 #import "STNetworkQueueManager.h"
 #import "STNotificationsViewController.h"
 #import "STNotificationBanner.h"
+#import "STFacebookLoginController.h"
 
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
@@ -37,7 +38,7 @@ static STNotificationsManager *_sharedManager = nil;
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     
     UINavigationController *navController = (UINavigationController *)mainWindow.rootViewController;
-    UIViewController *lastVC = [navController.viewControllers firstObject];
+    UIViewController *lastVC = [navController.viewControllers lastObject];
     return lastVC;
 }
 
@@ -85,37 +86,61 @@ static STNotificationsManager *_sharedManager = nil;
     [self handleNotification:_lastNotification];
 }
 
+- (STNotificationBanner *)createBannerWithNotificationInfo:(NSMutableDictionary *)notificationDict {
+    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"STNotificationBanner" owner:self options:nil];
+    STNotificationBanner *banner = (STNotificationBanner*)[views firstObject];
+    banner.delegate = self;
+    [banner setUpWithNotificationInfo:notificationDict];
+    return banner;
+}
+
 -(void)handleInAppNotification:(NSDictionary *)notification{
     UIViewController *lastVC = [self getCurrentViewController];
     if ([lastVC isKindOfClass:[STNotificationsViewController class]]){
         [(STNotificationsViewController *)lastVC getNotificationsFromServer];
     }
-    
-    STNotificationType notifType = [notification[@"user_info"][@"notification_type"] integerValue];
+    NSMutableDictionary *notificationDict = [[NSMutableDictionary alloc] initWithDictionary:notification[@"user_info"]];
+    STNotificationType notifType = [notificationDict[@"notification_type"] integerValue];
     if (!(notifType == STNotificationTypeLike ||
           notifType == STNotificationTypeUploaded ||
           notifType == STNotificationTypeChatMessage)) {
         return;
     }
-    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"STNotificationBanner" owner:self options:nil];
-    STNotificationBanner *banner = (STNotificationBanner*)[views firstObject];
-    banner.notificationType = notifType;
-    banner.delegate = self;
+    NSString *alertMesage = notification[@"aps"][@"alert"];
     
-    switch (notifType) {
-        case STNotificationTypeLike:
-            //TODO: modify banner for likes
-            break;
-        case STNotificationTypeChatMessage:
-            //TODO: modify banner for messages
-            break;
-        case STNotificationTypeUploaded:
-            //TODO: modify banner for uploaded photos
-            break;
-        default:
-            break;
+    if (alertMesage!=nil)
+        notificationDict[@"alert_message"] = alertMesage;
+    else
+    {
+        if (notifType == STNotificationTypeLike) {
+            alertMesage = [NSString stringWithFormat:@"%@ likes your photo.", notificationDict[@"name"]];
+        }
+        else if (notifType == STNotificationTypeUploaded)
+            alertMesage = [NSString stringWithFormat:@"%@ uploaded a new photo.", notificationDict[@"name"]];
+        
+        notificationDict[@"alert_message"] = alertMesage;
+
     }
     
+    STNotificationBanner *banner;
+    banner = [self createBannerWithNotificationInfo:notificationDict];
+    [self showBanner:banner];
+}
+
+-(void)handleInAppMessageNotification:(NSDictionary *)notification{
+    NSMutableDictionary *notificationDict = [[NSMutableDictionary alloc] initWithDictionary:notification[@"notification_info"]];
+
+    NSString *alertMesage = [NSString stringWithFormat:@"%@\n%@",notificationDict[@"name"],notification[@"message"]];
+
+    if (alertMesage == nil) {
+        return;
+    }
+    notificationDict[@"alert_message"] = alertMesage;
+    notificationDict[@"notification_type"] = @(STNotificationTypeChatMessage);
+    notificationDict[@"user_id"] = notification[@"userId"];
+    
+    STNotificationBanner *banner;
+    banner = [self createBannerWithNotificationInfo:notificationDict];
     [self showBanner:banner];
 }
 
@@ -165,23 +190,89 @@ static STNotificationsManager *_sharedManager = nil;
 
 #pragma mark STNotificationBannerDelegate
 
+- (void)dissmissPresentedVCs:(UIViewController *)lastVC {
+    while (lastVC.presentedViewController != nil) {
+        [lastVC.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
 -(void)bannerTapped{
     NSLog(@"Banner pressed");
     STNotificationType notifType = _currentBanner.notificationType;
-    
+    UIViewController *lastVC = [self getCurrentViewController];
+    [self dissmissPresentedVCs:lastVC];
     switch (notifType) {
         case STNotificationTypeLike:
-            //TODO: add handler for likes
+        {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+            flowCtrl.flowType = STFlowTypeSinglePost;
+            flowCtrl.postID = _currentBanner.notificationInfo[@"post_id"];
+            flowCtrl.userID = _currentBanner.notificationInfo[@"user_id"];
+            flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
+            [lastVC.navigationController pushViewController:flowCtrl animated:YES];
+
+        }
             break;
         case STNotificationTypeChatMessage:
-            //TODO: add handler for messages
+        {
+            NSMutableDictionary *selectedUserInfo = [NSMutableDictionary new];
+            selectedUserInfo[@"user_id"] = _currentBanner.notificationInfo[@"user_id"];
+            selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
+            selectedUserInfo[@"small_photo_link"] = _currentBanner.notificationInfo[@"photo"];
+
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+            STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+            viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:selectedUserInfo];
+
+            
+            if ([lastVC isKindOfClass:[STChatRoomViewController class]]) {
+                //replace this last room with the new one
+                UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+                
+                UINavigationController *navController = (UINavigationController *)mainWindow.rootViewController;
+
+                NSMutableArray *vcs = [NSMutableArray arrayWithArray:navController.viewControllers];
+                [vcs removeLastObject];
+                [vcs addObject:viewController];
+                
+                [lastVC.navigationController setViewControllers:vcs];
+                
+            }
+            else
+                [lastVC.navigationController pushViewController:viewController animated:YES];
+
+        }
             break;
         case STNotificationTypeUploaded:
-            //TODO: add handler for uploaded photos
+            [self bannerProfileImageTapped];
             break;
         default:
             break;
     }
+    
+    [self dismissCurrentBanner];
+}
+
+-(void)bannerProfileImageTapped{
+    UIViewController *lastVC = [self getCurrentViewController];
+    [self dissmissPresentedVCs:lastVC];
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+    flowCtrl.flowType = STFlowTypeUserProfile;
+    id userId = [_currentBanner.notificationInfo valueForKey:@"user_id"];
+    if ([userId respondsToSelector:@selector(stringValue)]) {
+        flowCtrl.userID = [userId stringValue];
+    }
+    else
+        flowCtrl.userID = userId;
+    flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
+    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
+        flowCtrl.flowType = STFlowTypeMyProfile;
+    }
+    [lastVC.navigationController pushViewController:flowCtrl animated:YES];
     
     [self dismissCurrentBanner];
 }

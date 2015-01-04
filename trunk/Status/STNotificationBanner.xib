@@ -15,7 +15,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder notifications screen" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-LI-Lq3">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder notifications screen" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-LI-Lq3">
                     <rect key="frame" x="8" y="8" width="54" height="54"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="Es8-1U-jyJ"/>
@@ -25,18 +25,9 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fi-uT-Tac">
                     <rect key="frame" x="76" y="8" width="207" height="54"/>
                     <attributedString key="attributedText">
-                        <fragment content="Amanda Robertson">
+                        <fragment content="Einstein likes your photo">
                             <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="16" name="Helvetica-Bold"/>
-                                <font key="NSOriginalFont" size="16" name="Helvetica-Bold"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" likes your photo.">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="16" name="Helvetica"/>
+                                <font key="NSFont" size="16" name="HelveticaNeue"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                             </attributes>
                         </fragment>
@@ -57,12 +48,21 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hga-tc-VQQ">
-                    <rect key="frame" x="0.0" y="0.0" width="273" height="70"/>
+                    <rect key="frame" x="70" y="0.0" width="203" height="70"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onBannerTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="SNk-Kf-X3Z"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXV-PV-j2P">
+                    <rect key="frame" x="0.0" y="0.0" width="68" height="70"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onProfileImageTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="BNn-20-TFg"/>
                     </connections>
                 </button>
             </subviews>
@@ -72,7 +72,7 @@
                 <constraint firstItem="ZAs-LI-Lq3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="3aD-yq-HfL"/>
                 <constraint firstItem="YNw-VT-cYS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="41B-4c-bsE"/>
                 <constraint firstItem="8fi-uT-Tac" firstAttribute="leading" secondItem="ZAs-LI-Lq3" secondAttribute="trailing" constant="14" id="JI3-xZ-ZfQ"/>
-                <constraint firstItem="Hga-tc-VQQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LhC-f2-fI2"/>
+                <constraint firstItem="Hga-tc-VQQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="70" id="LhC-f2-fI2"/>
                 <constraint firstItem="YNw-VT-cYS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QZN-PP-XXL"/>
                 <constraint firstAttribute="bottom" secondItem="Hga-tc-VQQ" secondAttribute="bottom" id="T28-cs-r7a"/>
                 <constraint firstAttribute="trailing" secondItem="pJs-Q2-UXs" secondAttribute="trailing" id="Wib-be-03K"/>
