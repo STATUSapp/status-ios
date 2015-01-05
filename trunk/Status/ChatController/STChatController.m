@@ -319,7 +319,7 @@
                                                              withData:resultDict
                                                         andCompletion:^(BOOL success, id returnObject) {
                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                if (seen == NO) {
+                                                                if (seen == NO && message[@"notification_info"]!=nil) {
                                                                     [[STNotificationsManager sharedManager] handleInAppMessageNotification:message];
                                                                 }
                                                             });

@@ -66,6 +66,7 @@ static STNotificationsManager *_sharedManager = nil;
             }
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
             STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+            //TODO: add user_name and small_photo_link as handle in app notification
             viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:notif[@"user_info"]];
             [lastVC.navigationController pushViewController:viewController animated:YES];
         }
