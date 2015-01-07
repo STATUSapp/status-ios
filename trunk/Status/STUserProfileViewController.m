@@ -50,7 +50,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getAndDisplayProfile];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,6 +67,10 @@
     } failure:^(NSError *error) {
         // empty all fields
         NSLog(@"%@", error.debugDescription);
+        
+        [[[UIAlertView alloc] initWithTitle:@"Server Error" message:@"Something went wrong. Please try again later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        
     }];
 }
 

@@ -90,12 +90,6 @@ const NSInteger kSectionNumberLogout = 2;
     [self configureSwitches];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[STIAPHelper sharedInstance] showRateAppAlert];
-}
-
-
 - (void)configureSwitches {
     [_switchLikes setOn:[[_settingsDict valueForKey:STNotificationsLikesKey] boolValue]];
     [_switchMessages setOn:[[_settingsDict valueForKey:STNotificationsMessagesKey] boolValue]];
@@ -140,7 +134,7 @@ const NSInteger kSectionNumberLogout = 2;
             return 6;
             break;
         case kSectionNumberContactLikeAds:
-            return 2;
+            return 3;
             break;
         case kSectionNumberLogout:
             return 1;
@@ -162,6 +156,9 @@ const NSInteger kSectionNumberLogout = 2;
 
 - (IBAction)onTapLogout:(id)sender {
     [self fireFbLoginView];
+}
+- (IBAction)onTapRateUsInAppstore:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_REVIEW_URL_STRING]];
 }
 
 - (IBAction)onTapLikeUsOnFacebook:(id)sender {

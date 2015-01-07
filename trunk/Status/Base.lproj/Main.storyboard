@@ -1660,6 +1660,38 @@
                             </tableViewSection>
                             <tableViewSection id="dEN-Ig-pq2">
                                 <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="98R-EM-o6h">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="98R-EM-o6h" id="hLh-QD-swd">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate Us in Appstore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdg-Lx-wRZ">
+                                                    <rect key="frame" x="35" y="12" width="155" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGb-Ps-Ydo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapRateUsInAppstore:" destination="4Qz-Wc-cbo" eventType="touchUpInside" id="CSI-Ll-34U"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="fdg-Lx-wRZ" secondAttribute="centerY" constant="-1" id="IZi-gP-Iu5"/>
+                                                <constraint firstItem="EGb-Ps-Ydo" firstAttribute="top" secondItem="hLh-QD-swd" secondAttribute="top" id="Tcy-n5-IPl"/>
+                                                <constraint firstItem="fdg-Lx-wRZ" firstAttribute="leading" secondItem="hLh-QD-swd" secondAttribute="leading" constant="35" id="e1L-te-yHL"/>
+                                                <constraint firstAttribute="trailing" secondItem="EGb-Ps-Ydo" secondAttribute="trailing" id="kdm-4i-t9e"/>
+                                                <constraint firstItem="EGb-Ps-Ydo" firstAttribute="leading" secondItem="hLh-QD-swd" secondAttribute="leading" id="rA2-BX-yZz"/>
+                                                <constraint firstAttribute="bottom" secondItem="EGb-Ps-Ydo" secondAttribute="bottom" id="rnz-0l-kYs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2h8-TR-hmx">
                                         <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
