@@ -18,5 +18,7 @@ typedef void (^STNewLocationBlock)();
 -(void)startLocationUpdates;
 - (void)stopLocationUpdates;
 - (void)startLocationUpdatesWithCompletion:(STNewLocationBlock) completion;
+- (NSString *)distanceStringToLocationWithLatitudeString:(NSString *)latitude andLongitudeString:(NSString *)longitudeString;
+
 +(BOOL)locationUpdateEnabled;
 @end

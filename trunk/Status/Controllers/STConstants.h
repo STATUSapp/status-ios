@@ -64,6 +64,12 @@ typedef NS_ENUM(NSUInteger,STSearchScopeControl){
     STSearchControlRecent
 };
 
+typedef NS_ENUM(NSUInteger, STUserStatus){
+    STUserStatusActive,
+    STUserStatusAway,
+    STUserStatusOffline
+};
+
 #pragma mark - Constant Strings
 
 extern NSString *const kBaseURL;

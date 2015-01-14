@@ -106,6 +106,7 @@
     [self resetNavigationControllerStack];
     [self hideMenu];
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
+    userProfileVC.isMyProfile = YES;
     [_currentVC.navigationController pushViewController:userProfileVC animated:YES];
 
 }

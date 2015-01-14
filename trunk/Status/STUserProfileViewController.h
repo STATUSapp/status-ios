@@ -10,6 +10,8 @@
 
 @interface STUserProfileViewController : UIViewController
 
+@property (nonatomic, assign) BOOL isMyProfile;
+
 +(STUserProfileViewController *)newControllerWithUserId:(NSString *)userId;
 
 +(id)getObjectFromUserProfileDict:(NSDictionary *)dict forKey:(NSString *)key;

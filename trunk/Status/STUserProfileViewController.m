@@ -13,6 +13,7 @@
 #import "STMenuController.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
+#import "STLocationManager.h"
 
 
 @interface STUserProfileViewController ()
@@ -32,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera;
 @property (weak, nonatomic) IBOutlet UIButton *btnSettings;
 @property (weak, nonatomic) IBOutlet UIButton *btnEditUserProfile;
+@property (weak, nonatomic) IBOutlet UIButton *btnNextProfile;
+@property (weak, nonatomic) IBOutlet UIButton *btnSendMessageToUser;
 
 @property (nonatomic, strong) NSString * userId;
 @property (nonatomic, strong) NSDictionary * userProfileDict;
@@ -55,6 +58,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getAndDisplayProfile];
+    
+    if (_isMyProfile) {
+        _btnNextProfile.hidden = YES;
+        _btnSettings.hidden = NO;
+        _btnSendMessageToUser.hidden = YES;
+        _btnEditUserProfile.hidden = NO;
+    } else {
+        _btnNextProfile.hidden = NO;
+        _btnSettings.hidden = YES;
+        _btnSendMessageToUser.hidden = NO;
+        _btnEditUserProfile.hidden = YES;
+    }
 }
 
 - (void)getAndDisplayProfile {
@@ -91,7 +106,36 @@
     _lblLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
     
     NSString * photoStringURL = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kProfilePhotoLinkKey];
-    [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:photoStringURL]];
+    [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:photoStringURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        _imageViewBlurryPicture.image = [image applyDarkEffect];
+    }];
+    
+    NSDate * lastSeenDate = [NSDate dateFromServerDate:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLastActiveKey]];
+    _lblStatus.text = lastSeenDate ? [NSDate statusForLastTimeSeen:lastSeenDate] : @"";
+    _imageViewStatusIcon.hidden = lastSeenDate ? NO : YES;
+    [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:lastSeenDate]];
+    
+    _lblDistance.text = [[STLocationManager sharedInstance] distanceStringToLocationWithLatitudeString:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationLatitudeKey]
+                                                                                    andLongitudeString:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationLongitudeKey]];
+}
+
+- (void)setStatusIconForStatus:(STUserStatus)userStatus {
+    switch (userStatus) {
+        case STUserStatusAway:
+            _imageViewStatusIcon.image = [UIImage imageNamed:@"status_away"];
+            break;
+        case STUserStatusOffline:
+            _imageViewStatusIcon.image = [UIImage imageNamed:@"status_offline"];
+            break;
+            
+        case STUserStatusActive:
+            _imageViewStatusIcon.image = [UIImage imageNamed:@"status_online"];
+            break;
+            
+        default:
+            _imageViewStatusIcon.image = nil;
+            break;
+    }
 }
 
 +(id)getObjectFromUserProfileDict:(NSDictionary *)dict forKey:(NSString *)key {
@@ -101,20 +145,6 @@
     return nil;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - IBActions
 
@@ -128,10 +158,16 @@
     [[STMenuController sharedInstance] showMenuForController:self];
 }
 
+- (IBAction)onTapNextProfile:(id)sender {
+}
+
 - (IBAction)onTapCamera:(id)sender {
 }
 
 - (IBAction)onTapSettings:(id)sender {
+    [[STMenuController sharedInstance] goSettings];
+}
+- (IBAction)onTapSendMessageToUser:(id)sender {
 }
 
 - (IBAction)onTapEditUserProfile:(id)sender {

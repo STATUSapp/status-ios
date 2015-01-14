@@ -97,8 +97,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [Appirater setDaysUntilPrompt:7];
     [Appirater setUsesUntilPrompt:10];
     [Appirater setTimeBeforeReminding:2];
-    BOOL isProduction = USE_PRODUCTION_SERVER;
-    [Appirater setDebug:!isProduction];
     
     [Appirater setCustomAlertTitle:@"Do you love Get STATUS?"];
     [Appirater setCustomAlertMessage:@"Please share the love by rating us 5 stars in the store."];

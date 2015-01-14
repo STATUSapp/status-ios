@@ -122,6 +122,16 @@ static STLocationManager *_locationManager;
     [_locationManager stopUpdatingLocation];
 }
 
+- (NSString *)distanceStringToLocationWithLatitudeString:(NSString *)latitude andLongitudeString:(NSString *)longitudeString {
+    CLLocation * newLocation = [[CLLocation alloc] initWithLatitude:[latitude doubleValue] longitude:[longitudeString doubleValue]];
+    CLLocationDistance distance = [newLocation distanceFromLocation:self.latestLocation];
+    
+    if (distance < 1000) { // 1000 meters = 1 km
+        return @"Less than 1 km away";
+    }
+    return [NSString stringWithFormat:@"%i km away", (int)distance];
+}
+
 +(BOOL)locationUpdateEnabled{
     return [CLLocationManager locationServicesEnabled] &&
     ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized ||

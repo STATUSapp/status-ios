@@ -70,4 +70,56 @@
     
 }
 
++ (NSString *)statusForLastTimeSeen:(NSDate *)lastSeenDate {
+    NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:lastSeenDate];
+    
+    if (0 <= timeInterval && timeInterval <= 60) {
+        return @"Active";
+    }
+    int mins = timeInterval / 60;
+    if (mins <= 60) {
+        return [NSString stringWithFormat:@"Active %d minute%@ ago", mins, (mins==1)?@"":@"s"];
+    }
+    int hours = timeInterval / 3600;
+    if (hours <= 24) {
+        return [NSString stringWithFormat:@"Active %d hour%@ ago", hours, (hours==1)?@"":@"s"];
+    }
+    
+    if (timeInterval / 3600 <= 48) {
+        return @"Active yesterday";
+    }
+    
+    if (timeInterval <= 86400 * 7) {
+        return [NSString stringWithFormat:@"Active %d days ago", (int)(timeInterval / 86400)];
+    }
+    
+    
+    int weeks = timeInterval / ( 86400 * 7 );
+    if (timeInterval <= 4 * weeks) {
+        return [NSString stringWithFormat:@"Active %d week%@ ago", weeks, (weeks == 1) ? @"" : @"s"];
+    }
+    
+    int months = timeInterval / (86400 * 30);
+    if (timeInterval < 12 * months) {
+        return [NSString stringWithFormat:@"Active %d month%@ ago", months, (months == 1) ? @"" : @"s"];
+    }
+    
+    int years = [[NSDate yearsFromDate:lastSeenDate] intValue];
+    return [NSString stringWithFormat:@"Active %d year%@ ago", years, (years == 1) ? @"" : @"s"];
+}
+
++ (STUserStatus)statusTypeForLastTimeSeen:(NSDate *)lastSeenDate {
+    NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:lastSeenDate];
+    
+    if (timeInterval <= 3600 ) {
+        return STUserStatusActive;
+    }
+    
+    if (timeInterval <= 86400 * 30) {
+        return STUserStatusAway;
+    }
+    
+    return STUserStatusOffline;
+}
+
 @end

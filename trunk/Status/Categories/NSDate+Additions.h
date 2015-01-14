@@ -14,5 +14,7 @@
 + (NSString *)notificationTimeIntervalSinceDate: (NSDate *)dateOfNotification;
 + (NSString *)yearsFromDate:(NSDate *)referenceDate;
 + (NSString *)birthdayStringFromFacebookBirthday:(NSString *)birthday;
++ (NSString *)statusForLastTimeSeen:(NSDate *)lastSeenDate;
++ (STUserStatus)statusTypeForLastTimeSeen:(NSDate *)lastSeenDate;
 
 @end
