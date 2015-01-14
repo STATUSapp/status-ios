@@ -211,7 +211,7 @@
     self.likesNumberBtn.hidden = NO;
     self.shareBtn.hidden = NO;
     self.noPhotosLabel.hidden = YES;
-
+    _heightConstraint.constant = 75.f;
     
 }
 

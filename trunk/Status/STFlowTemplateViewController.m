@@ -812,6 +812,16 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             break;
     }
 }
+- (IBAction)onTapSeeMore:(id)sender {
+    STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
+    if (currentCell!=nil&& currentCell.heightConstraint.constant == 75.f) {
+        [self.collectionView performBatchUpdates:^{
+            [UIView animateWithDuration:0.3 animations:^{
+                currentCell.heightConstraint.constant = 90.f;
+            }];
+        } completion:nil];
+    }
+}
 
 - (void)inviteUserToUpload:(NSString *)userID withUserName:(NSString *)userName{
     STRequestCompletionBlock completion = ^(id response, NSError *error){
