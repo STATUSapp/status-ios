@@ -28,7 +28,7 @@ const NSInteger kSectionNumberLogout = 2;
     FBLoginView *loginView;
 }
 @property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
-
+@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 @property (weak, nonatomic) IBOutlet UISwitch *switchLikes;
 @property (weak, nonatomic) IBOutlet UISwitch *switchMessages;
@@ -63,7 +63,8 @@ const NSInteger kSectionNumberLogout = 2;
     
     self.title = @"Settings";
     
-    
+    NSString *versionString = [[STBaseRequest new] getAppVersion];
+    _versionLabel.text = [NSString stringWithFormat:@"Version %@", versionString];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

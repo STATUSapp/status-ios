@@ -1810,6 +1810,7 @@
                         <outlet property="switchMessages" destination="nhX-Be-boj" id="Hfm-Td-fpf"/>
                         <outlet property="switchPhotosWaiting" destination="lXw-if-eAv" id="as2-Yl-XPA"/>
                         <outlet property="switchUploadPhoto" destination="XMm-Kz-AFf" id="3bz-N7-TCm"/>
+                        <outlet property="versionLabel" destination="cvK-XN-D3f" id="a57-fB-lYn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zam-Lq-m4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
