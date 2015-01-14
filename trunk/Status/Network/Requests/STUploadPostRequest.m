@@ -11,6 +11,7 @@
 @implementation STUploadPostRequest
 + (void)uploadPostForId:(NSString *)postId
                withData:(NSData*)postData
+             andCaption:(NSString *)caption
          withCompletion:(STRequestCompletionBlock)completion
                 failure:(STRequestFailureBlock)failure{
     
@@ -20,6 +21,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.postId = postId;
+    request.caption = caption;
     request.postData = postData;
     [[STNetworkQueueManager sharedManager] addToQueueTop:request];
 }
@@ -32,6 +34,9 @@
         NSMutableDictionary *params = [self getDictParamsWithToken];
         if (weakSelf.postId) {
             params[@"post_id"] = weakSelf.postId;
+        }
+        else if (weakSelf.caption) {
+            params[@"caption"] = weakSelf.caption;
         }
         AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
         AFJSONResponseSerializer *jsonReponseSerializer;

@@ -84,6 +84,7 @@ extern NSString *const kRegisterUser;
 extern NSString *const kPostPhoto;
 extern NSString *const kSetPostLiked;
 extern NSString *const kUpdatePost;
+extern NSString *const kUpdatePhotoCaption;
 extern NSString *const kReport_Post;
 extern NSString *const kGetUserPosts;
 extern NSString *const kSetPostSeen;

@@ -36,6 +36,7 @@
 		07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DAF19FE693100DFA43B /* STSmartNotificationCell.m */; };
 		07361DB319FE71BF00DFA43B /* STNotificationBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DB219FE71BF00DFA43B /* STNotificationBaseCell.m */; };
 		076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */; };
+		07C69D531A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C69D521A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m */; };
 		07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */; };
 		07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
 		07FCFA9719C094250048F441 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FCFA7719C094250048F441 /* MKAnnotationView+WebCache.m */; };
@@ -262,6 +263,8 @@
 		07361DB219FE71BF00DFA43B /* STNotificationBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationBaseCell.m; sourceTree = "<group>"; };
 		076CF4EF1910F2F200C4096C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		07C69D511A66BB85005FD8B0 /* STUpdatePostCaptionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdatePostCaptionRequest.h; sourceTree = "<group>"; };
+		07C69D521A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdatePostCaptionRequest.m; sourceTree = "<group>"; };
 		07FBDEE418C606EF007BDCE6 /* STLikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikesViewController.h; sourceTree = "<group>"; };
 		07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLikesViewController.m; sourceTree = "<group>"; };
 		07FBDEE718C60DDF007BDCE6 /* STLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikeCell.h; sourceTree = "<group>"; };
@@ -960,6 +963,8 @@
 				1783791B1A1D4853002AEE02 /* STGetPostsRequest.m */,
 				17CA0E8C1A2130AF00D0B081 /* STUploadPostRequest.h */,
 				17CA0E8D1A2130AF00D0B081 /* STUploadPostRequest.m */,
+				07C69D511A66BB85005FD8B0 /* STUpdatePostCaptionRequest.h */,
+				07C69D521A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m */,
 				17CA0E8F1A2136F800D0B081 /* STSetPostLikeRequest.h */,
 				17CA0E901A2136F800D0B081 /* STSetPostLikeRequest.m */,
 				17CA0E921A21C59900D0B081 /* STRepostPostRequest.h */,
@@ -1290,6 +1295,7 @@
 				172EAEB418B0B46300C5637B /* AFURLConnectionOperation.m in Sources */,
 				07FCFAA319C094250048F441 /* UIImage+WebP.m in Sources */,
 				993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */,
+				07C69D531A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m in Sources */,
 				990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */,
 				0717E2DC19B71C56001DF132 /* STChatRoomViewController.m in Sources */,
 				17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */,

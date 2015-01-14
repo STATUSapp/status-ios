@@ -48,6 +48,7 @@ NSString *const kLoginUser = @"login_user";
 NSString *const kRegisterUser = @"register_user";
 NSString *const kPostPhoto = @"post_photo";
 NSString *const kUpdatePost = @"update_photo";
+NSString *const kUpdatePhotoCaption = @"set_post_caption";
 NSString *const kSetPostLiked = @"set_post_like_unlike";
 NSString *const kReport_Post = @"report_post";
 NSString *const kGetUserPosts = @"get_user_posts";
