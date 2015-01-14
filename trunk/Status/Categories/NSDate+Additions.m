@@ -58,4 +58,16 @@
     return [NSString stringWithFormat:@"%li", (long)years];
 }
 
++(NSString *)birthdayStringFromFacebookBirthday:(NSString *)birthday{
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.dateFormat = @"MM/dd/yyyy";
+    NSDate *birthdayDate = [df dateFromString:birthday];
+    
+    df.dateFormat = @"yyyy-MM-dd";
+    
+    return [df stringFromDate:birthdayDate];
+    
+}
+
 @end

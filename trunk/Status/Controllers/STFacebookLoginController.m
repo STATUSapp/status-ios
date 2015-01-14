@@ -25,6 +25,7 @@
 #import "STRegisterRequest.h"
 #import "STGetUserSettingsRequest.h"
 #import "STFacebookAlbumsLoader.h"
+#import "NSDate+Additions.h"
 
 @implementation STFacebookLoginController
 +(STFacebookLoginController *) sharedInstance{
@@ -245,8 +246,11 @@
                 //get the bithday of the user
                 [self getUserBirthdayWithCompletion:^(NSString *birthday) {
                     //TODO: check if the format match with the server
-                    if (!birthday) {
-                        userInfo[@"birthday"] = birthday;
+                    if (birthday!=nil) {
+                        NSString *serverBithday = [NSDate birthdayStringFromFacebookBirthday:birthday];
+                        if (serverBithday!=nil) {
+                            userInfo[@"birthday"] = birthday;
+                        }
                     }
                     [STRegisterRequest registerWithUserInfo:userInfo
                                              withCompletion:registerCompletion

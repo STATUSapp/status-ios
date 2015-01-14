@@ -13,5 +13,6 @@
 + (NSDate *) dateFromServerDate:(NSString *) serverDate;
 + (NSString *)notificationTimeIntervalSinceDate: (NSDate *)dateOfNotification;
 + (NSString *)yearsFromDate:(NSDate *)referenceDate;
++ (NSString *)birthdayStringFromFacebookBirthday:(NSString *)birthday;
 
 @end
