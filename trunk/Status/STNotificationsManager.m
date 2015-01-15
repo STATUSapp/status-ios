@@ -53,11 +53,11 @@ static STNotificationsManager *_sharedManager = nil;
     if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
         
         if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
-            if (![[STChatController sharedInstance] canChat]) {
-                //wait for the chat authentication to be performed and after handle the notification
-                _lastNotification = notif;
-                return;
-            }
+//            if (![[STChatController sharedInstance] canChat]) {
+//                //wait for the chat authentication to be performed and after handle the notification
+//                _lastNotification = notif;
+//                return;
+//            }
             _lastNotification = nil;
             NSDictionary *userInfo = notif[@"user_info"];
             if (userInfo[@"user_id"] == nil) {

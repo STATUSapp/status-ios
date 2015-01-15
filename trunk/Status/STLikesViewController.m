@@ -67,12 +67,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)onChatWithUser:(id)sender {
-    if (![[STChatController sharedInstance] canChat]) {
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-//#ifndef DEBUG
-        return;
-//#endif
-    }
+//    if (![[STChatController sharedInstance] canChat]) {
+//        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+////#ifndef DEBUG
+//        return;
+////#endif
+//    }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
     STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
     viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:_likesDataSource[((UIButton *)sender).tag]];

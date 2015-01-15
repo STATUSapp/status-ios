@@ -118,11 +118,30 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (chatController.authenticated == YES) {
-        [chatController openChatRoomForUserId:_userInfo[@"user_id"]];
+    if (chatController.canChat == NO) {
+        NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+        STCoreDataRequestManager *messages = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message"
+                                                                                        sortDescritors:@[sd1]
+                                                                                             predicate:[NSPredicate predicateWithFormat:@"userId like %@", _userInfo[@"user_id"]]
+                                                                                    sectionNameKeyPath:@"sectionDate"
+                                                                                              delegate:nil
+                                                                                          andTableView:nil];
+        NSString *roomId = [[[messages allObjects] firstObject] objectForKey:@"roomID"];
+        NSLog(@"RoomID: %@", roomId);
+        if (roomId!=nil) {
+            [self chatDidOpenRoom:roomId];
+        }
+
     }
     else
-        [chatController authenticate];
+    {
+        if (chatController.authenticated == YES) {
+            [chatController openChatRoomForUserId:_userInfo[@"user_id"]];
+        }
+        else
+            [chatController authenticate];
+
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -221,7 +240,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 }
 
 -(void)growingTextViewDidChange:(HPGrowingTextView *)growingTextView{
-    _sendBtn.enabled = _textView.text.length>0;
+    _sendBtn.enabled = [chatController canChat] && _textView.text.length>0;
 }
 
 -(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView{
@@ -328,7 +347,8 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 -(void)chatDidClose{
     NSLog(@"Chat did close");
-    [self showStatusAlertWithMessage:@"Your chat connection appears to be offline. You can wait or you can Go Back"];
+    _sendBtn.enabled = NO;
+//    [self showStatusAlertWithMessage:@"Your chat connection appears to be offline. You can wait or you can Go Back"];
 }
 -(void)chatDidOpenRoom:(NSString *)roomId{
     _roomId = roomId;
