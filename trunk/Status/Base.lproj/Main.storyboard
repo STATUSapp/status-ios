@@ -152,7 +152,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00m-fJ-Ikr">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00m-fJ-Ikr">
                                                     <rect key="frame" x="8" y="378" width="304" height="75"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6w-uM-H3b">
@@ -206,7 +206,7 @@
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="2KV-mx-T4N" firstAttribute="top" secondItem="e6w-uM-H3b" secondAttribute="bottom" constant="1" id="22g-md-UeQ"/>
                                                         <constraint firstItem="bX0-p4-tYa" firstAttribute="top" secondItem="XcX-uQ-GoJ" secondAttribute="bottom" constant="10" id="9eK-dp-Ncy"/>
@@ -256,6 +256,9 @@
                                         <connections>
                                             <outlet property="activityIndicator" destination="TdE-nO-7e0" id="xU4-iU-DyD"/>
                                             <outlet property="bigCameraProfileBtn" destination="vsn-2p-BXN" id="BMy-q4-gBU"/>
+                                            <outlet property="captionButton" destination="2KV-mx-T4N" id="UgD-Wh-NsX"/>
+                                            <outlet property="captionLabel" destination="bX0-p4-tYa" id="0Ly-yy-vSN"/>
+                                            <outlet property="captionView" destination="00m-fJ-Ikr" id="K9T-eh-fQi"/>
                                             <outlet property="chatButton" destination="e6w-uM-H3b" id="O1x-Wg-dai"/>
                                             <outlet property="fitImageView" destination="kzm-Vb-2Ux" id="bbS-Cn-2Cd"/>
                                             <outlet property="fullBlurImageView" destination="Rin-Xs-XdC" id="QQg-aq-jzK"/>

@@ -819,7 +819,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             [UIView animateWithDuration:0.3 animations:^{
                 currentCell.heightConstraint.constant = 90.f;
             }];
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            [currentCell addCaptionShadow];
+        }];
     }
 }
 

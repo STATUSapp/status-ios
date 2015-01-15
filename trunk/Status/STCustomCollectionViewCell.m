@@ -11,6 +11,9 @@
 #import "STConstants.h"
 #import "STImageCacheController.h"
 #import "STNetworkQueueManager.h"
+#import "STFlowTemplateViewController.h"
+
+static const NSInteger kCaptionShadowTag = 101;
 
 @interface STCustomCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIButton *profileNameBtn;
@@ -24,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *bigCameraProfileBtn;
 @property (weak, nonatomic) IBOutlet UILabel *noPhotosLabel;
 @property (weak, nonatomic) IBOutlet UIButton *chatButton;
+@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *captionButton;
+@property (weak, nonatomic) IBOutlet UIView *captionView;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -152,6 +158,7 @@
     self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder STATUS loading"];
     
     self.likeBtn.hidden = YES;
+    self.captionButton.hidden = YES;
     self.likesNumberBtn.hidden = YES;
     self.shareBtn.hidden = YES;
     _chatButton.hidden = YES;
@@ -196,6 +203,28 @@
     }];
 }
 
+-(void)addCaptionShadow{
+    
+    CGSize bounds = self.bounds.size;
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
+    button.tag = kCaptionShadowTag;
+    [button addTarget:self action:@selector(captionShadowPressed:) forControlEvents:UIControlEventTouchUpInside];
+    button.backgroundColor = [UIColor blackColor];
+    button.alpha = 0.5;
+    [self.contentView addSubview:button];
+    [self.contentView bringSubviewToFront:_captionView];
+    
+}
+
+-(void)captionShadowPressed:(id)sender{
+    UIButton *captionBt = (UIButton *)[self.contentView viewWithTag:kCaptionShadowTag];
+    [captionBt removeFromSuperview];
+    [UIView animateWithDuration:0.3 animations:^{
+        _heightConstraint.constant = 75.f;
+    }];
+
+}
+
 - (void)prepareForReuse{
     [super prepareForReuse];
     self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder STATUS loading"];
@@ -208,11 +237,14 @@
 
     self.bigCameraProfileBtn.hidden = YES;
     self.likeBtn.hidden = NO;
+    self.captionButton.hidden = NO;
     self.likesNumberBtn.hidden = NO;
     self.shareBtn.hidden = NO;
     self.noPhotosLabel.hidden = YES;
     _heightConstraint.constant = 75.f;
-    
+    UIButton *captionBt = (UIButton *)[self.contentView viewWithTag:kCaptionShadowTag];
+    [captionBt removeFromSuperview];
+
 }
 
 - (NSString *)reuseIdentifier{

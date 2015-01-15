@@ -17,4 +17,5 @@
 - (void)setUpWithDictionary:(NSDictionary *)setupDict forFlowType:(int)flowType;
 - (void)setUpPlaceholderBeforeLoading;
 - (void)updateLikeBtnAndLblWithDict:(NSDictionary *)setUpDict;
+- (void)addCaptionShadow;
 @end
