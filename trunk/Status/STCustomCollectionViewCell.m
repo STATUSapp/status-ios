@@ -12,6 +12,7 @@
 #import "STImageCacheController.h"
 #import "STNetworkQueueManager.h"
 #import "STFlowTemplateViewController.h"
+#import "STFacebookLoginController.h"
 
 static const NSInteger kCaptionShadowTag = 101;
 
@@ -84,7 +85,7 @@ static const NSInteger kCaptionShadowTag = 101;
     [self setUpVisualsForFlowType:flowType];
     
     self.setUpDict = setupDict;
-    
+    [self setUpCaptionForEdit:NO];
     [self.profileNameBtn setTitle:setupDict[@"user_name"] forState:UIControlStateNormal];
     [self updateLikeBtnAndLblWithDict:setupDict];
     
@@ -203,6 +204,37 @@ static const NSInteger kCaptionShadowTag = 101;
     }];
 }
 
+-(void)setUpCaptionForEdit:(BOOL)editFlag{
+    NSString *caption = self.setUpDict[@"caption"];
+    if (caption == nil || ![caption isKindOfClass:[NSString class]]) {
+        caption = @"";
+    }
+    _captionLabel.text = caption;
+    if (editFlag == NO) {//SeeMore
+        [_captionButton setTitle:@"See more" forState:UIControlStateNormal];
+        _captionButton.tag = 110;
+        _captionButton.hidden = NO;
+        
+        if ([self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+            if (caption.length == 0) {
+                [_captionButton setTitle:@"Edit" forState:UIControlStateNormal];
+                _captionButton.tag = 111;
+            }
+        }
+        else
+            _captionButton.hidden = caption.length == 0;
+    }
+    else
+    {
+        [_captionButton setTitle:@"Edit" forState:UIControlStateNormal];
+        _captionButton.tag = 111;
+        if (![self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
+            _captionButton.hidden = YES;
+
+
+    }
+}
+
 -(void)addCaptionShadow{
     
     CGSize bounds = self.bounds.size;
@@ -213,16 +245,16 @@ static const NSInteger kCaptionShadowTag = 101;
     button.alpha = 0.5;
     [self.contentView addSubview:button];
     [self.contentView bringSubviewToFront:_captionView];
-    
+    [self setUpCaptionForEdit:YES];
 }
 
 -(void)captionShadowPressed:(id)sender{
     UIButton *captionBt = (UIButton *)[self.contentView viewWithTag:kCaptionShadowTag];
     [captionBt removeFromSuperview];
+    [self setUpCaptionForEdit:NO];
     [UIView animateWithDuration:0.3 animations:^{
         _heightConstraint.constant = 75.f;
-    }];
-
+    } completion:nil];
 }
 
 - (void)prepareForReuse{
@@ -237,7 +269,7 @@ static const NSInteger kCaptionShadowTag = 101;
 
     self.bigCameraProfileBtn.hidden = YES;
     self.likeBtn.hidden = NO;
-    self.captionButton.hidden = NO;
+    [self setUpCaptionForEdit:NO];
     self.likesNumberBtn.hidden = NO;
     self.shareBtn.hidden = NO;
     self.noPhotosLabel.hidden = YES;

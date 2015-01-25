@@ -18,4 +18,5 @@
 - (void)setUpPlaceholderBeforeLoading;
 - (void)updateLikeBtnAndLblWithDict:(NSDictionary *)setUpDict;
 - (void)addCaptionShadow;
+- (void)captionShadowPressed:(id)sender;
 @end

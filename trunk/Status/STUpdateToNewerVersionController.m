@@ -45,7 +45,7 @@ static STUpdateToNewerVersionController *_sharedManager = nil;
                                                             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &errorJson];
                                                             NSString *appVersion = [[STBaseRequest new] getAppVersion];
                                                             NSString *appStoreVersion = [responseDict[@"results"] firstObject][@"version"];
-                                                            if (![appStoreVersion isEqualToString:appVersion]) {
+                                                            if (![appStoreVersion isEqualToString:appVersion] && _newerVersionAlert==nil) {
                                                                 _newerVersionAlert = [[UIAlertView alloc] initWithTitle:@"A new version of Get STATUS is available on Appstore!\n\nWhat's new:" message:[responseDict[@"results"] firstObject][@"releaseNotes"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Download", nil];
                                                                 [_newerVersionAlert show];
                                                             }
@@ -59,8 +59,8 @@ static STUpdateToNewerVersionController *_sharedManager = nil;
 #pragma mark - UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if ([alertView isEqual:_newerVersionAlert]) {
+        _newerVersionAlert = nil;
         if (buttonIndex == 1) {
-            _newerVersionAlert = nil;
             NSString *iTunesLink = @"https://itunes.apple.com/us/app/apple-store/id841855995?mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
         }

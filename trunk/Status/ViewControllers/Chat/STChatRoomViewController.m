@@ -126,7 +126,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
                                                                                     sectionNameKeyPath:@"sectionDate"
                                                                                               delegate:nil
                                                                                           andTableView:nil];
-        NSString *roomId = [[[messages allObjects] firstObject] objectForKey:@"roomID"];
+        NSString *roomId = [[[messages allObjects] firstObject] valueForKey:@"roomID"];
         NSLog(@"RoomID: %@", roomId);
         if (roomId!=nil) {
             [self chatDidOpenRoom:roomId];

@@ -186,7 +186,7 @@
     //TODO: send the caption here
     [STUploadPostRequest uploadPostForId:_editPostId
                                 withData:_imgData
-                              andCaption:nil
+                              andCaption:_captionString
                           withCompletion:completion
                                  failure:failBlock];
 }

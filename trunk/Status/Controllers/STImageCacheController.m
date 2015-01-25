@@ -93,7 +93,9 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 
                                   }
                                   else if (finished==YES){
-                                      completion(image);
+                                      if (completion!=nil) {
+                                          completion(image);
+                                      }
                                       NSString *bluredLink = [self blurPostLinkWithURL:imageFullLink];
                                       if (![[NSFileManager defaultManager] fileExistsAtPath:bluredLink]) {
                                           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{

@@ -59,6 +59,7 @@
 #import "STNotificationsManager.h"
 #import "STMenuController.h"
 #import "STUpdateToNewerVersionController.h"
+#import "STEditCaptionViewController.h"
 
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
@@ -66,7 +67,7 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,STSharePostDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,STSharePostDelegate, STEditCaptionDelegate>
 {    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
@@ -392,6 +393,16 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         [_postsDataSource replaceObjectAtIndex:index withObject:dict];
         [self.collectionView reloadData];
     }
+}
+
+#pragma mark - STEditCaptionDelegate
+-(void)captionWasEditedForPost:(NSDictionary *)postDict withNewCaption:(NSString *)newCaption{
+    NSInteger editedPostRow = [_postsDataSource indexOfObject:postDict];
+    NSMutableDictionary *newPostDict = [NSMutableDictionary dictionaryWithDictionary:postDict];
+    newPostDict[@"caption"] = newCaption;
+    
+    [_postsDataSource replaceObjectAtIndex:editedPostRow withObject:newPostDict];
+    [_collectionView reloadData];
 }
 
 #pragma mark - Get Data Source for Flow Type
@@ -814,14 +825,32 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 - (IBAction)onTapSeeMore:(id)sender {
     STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
-    if (currentCell!=nil&& currentCell.heightConstraint.constant == 75.f) {
+    UIButton *captionAction = (UIButton *)sender;
+    if (captionAction.tag == 110) {
+        NSString *captionString = [[self getCurrentDictionary] valueForKey:@"caption"];
+        if (captionString == nil || ![captionString isKindOfClass:[NSString class]]) {
+            captionString = @"";
+        }
+        UIFont *font = [UIFont fontWithName:@"helveticaNeue" size:14.f];
+        CGRect rect = [captionString boundingRectWithSize:CGSizeMake(235.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
         [self.collectionView performBatchUpdates:^{
             [UIView animateWithDuration:0.3 animations:^{
-                currentCell.heightConstraint.constant = 90.f;
+                currentCell.heightConstraint.constant = 64.f + rect.size.height;
             }];
         } completion:^(BOOL finished) {
             [currentCell addCaptionShadow];
         }];
+    }
+    else if(captionAction.tag == 111)//edit pressed
+    {
+        [currentCell captionShadowPressed:nil];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        STEditCaptionViewController *viewController = (STEditCaptionViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ediCaptionScene"];
+        viewController.postDict = [self getCurrentDictionary];
+        viewController.delegate = self;
+        [self.navigationController pushViewController:viewController animated:NO];
+
     }
 }
 

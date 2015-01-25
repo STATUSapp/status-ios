@@ -10,6 +10,7 @@
 #import "UIImage+ImageEffects.h"
 #import "STSharePhotoViewController.h"
 #import "UIImage+Resize.h"
+#import "STEditCaptionViewController.h"
 
 @interface STMoveScaleViewController ()<UIScrollViewDelegate>
 {
@@ -132,14 +133,26 @@
 
     }
 
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-    viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
-    viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
-    viewController.delegate = _delegate;
-    viewController.editPostId = _editPostId;
-    [self.navigationController pushViewController:viewController animated:YES];
+    if (_editPostId!=nil) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+        viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
+        viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
+        viewController.delegate = _delegate;
+        viewController.editPostId = _editPostId;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        STEditCaptionViewController *viewController = (STEditCaptionViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ediCaptionScene"];
+        viewController.imageData = UIImageJPEGRepresentation(croppedImg, 1.f);
+        UIImage *bkImage = _backgroundBlurImgView.image;
+        viewController.blurredImageData = UIImageJPEGRepresentation(bkImage, 1.f);
+        viewController.postDelegate = _delegate;
+        [self.navigationController pushViewController:viewController animated:NO];
+
+    }
 
 }
 - (IBAction)onClickBack:(id)sender {

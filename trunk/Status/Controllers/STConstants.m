@@ -70,6 +70,7 @@ NSString *const kGetUserSettings = @"get_user_settings";
 NSString *const kSetUserSetting = @"set_user_setting";
 NSString *const kGetUserProfile = @"get_user_profile";
 NSString *const kUpdateUserProfile = @"set_user_profile";
+NSString *const kEditCaption = @"set_post_caption";
 
 
 NSString *const kMATAdvertiserID = @"21414";

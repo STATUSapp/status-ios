@@ -245,7 +245,6 @@
                     userInfo[@"full_name"] = userName;
                 //get the bithday of the user
                 [self getUserBirthdayWithCompletion:^(NSString *birthday) {
-                    //TODO: check if the format match with the server
                     if (birthday!=nil) {
                         NSString *serverBithday = [NSDate birthdayStringFromFacebookBirthday:birthday];
                         if (serverBithday!=nil) {
