@@ -100,8 +100,8 @@ static const NSInteger kCaptionShadowTag = 101;
             [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@", setupDict[@"user_name"]] forState:UIControlStateNormal];
             break;
         }
-        case STFlowTypeMyProfile:
-        case STFlowTypeUserProfile:{
+        case STFlowTypeMyGallery:
+        case STFlowTypeUserGallery:{
             [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"], setupDict[@"small_photo_link"]]];
             [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", setupDict[@"user_name"]] forState:UIControlStateNormal];
             break;
@@ -114,7 +114,7 @@ static const NSInteger kCaptionShadowTag = 101;
     if (appVersion == nil ||
         [appVersion isKindOfClass:[NSNull class]] ||
         [appVersion rangeOfString:@"1.0."].location == NSNotFound ||
-        flowType == STFlowTypeMyProfile ||
+        flowType == STFlowTypeMyGallery ||
         flowType == STFlowTypeSinglePost) {
         _chatButton.hidden = YES;
     }
@@ -138,8 +138,8 @@ static const NSInteger kCaptionShadowTag = 101;
             break;
         }
         case STFlowTypeDiscoverNearby:
-        case STFlowTypeMyProfile:
-        case STFlowTypeUserProfile:{
+        case STFlowTypeMyGallery:
+        case STFlowTypeUserGallery:{
             self.profileNameBtn.hidden = NO;
             self.likesNumberBtn.hidden = NO;
             break;
@@ -169,11 +169,11 @@ static const NSInteger kCaptionShadowTag = 101;
     [self.activityIndicator stopAnimating];
     
     switch (type) {
-        case STFlowTypeMyProfile:{
+        case STFlowTypeMyGallery:{
             self.noPhotosLabel.text = @"You don't have any photo. Take a photo";
             break;
         }
-        case STFlowTypeUserProfile:{
+        case STFlowTypeUserGallery:{
             self.noPhotosLabel.text = [NSString stringWithFormat:@"Ask %@ to take a photo", self.username];
             break;
         }

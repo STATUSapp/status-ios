@@ -18,8 +18,8 @@
 typedef NS_ENUM(NSUInteger,STFlowType){
     STFlowTypeAllPosts = 0,
     STFlowTypeDiscoverNearby,
-    STFlowTypeUserProfile,
-    STFlowTypeMyProfile,
+    STFlowTypeUserGallery,
+    STFlowTypeMyGallery,
     STFlowTypeSinglePost
 };
 
@@ -102,7 +102,7 @@ extern NSString *const kDeletePost;
 extern NSString *const kInviteToUpload;
 extern NSString *const kSetUserLocation;
 extern NSString *const kGetUnreadNotificationsCount;
-extern NSString *const kGetNearbyPosts;
+extern NSString *const kGetNearbyProfiles;
 extern NSString *const kGetAllUsers;
 extern NSString *const kGetNearby ;
 extern NSString *const kGetRecent;

@@ -12,8 +12,12 @@
 
 @property (nonatomic, assign) BOOL isMyProfile;
 
+
 +(STUserProfileViewController *)newControllerWithUserId:(NSString *)userId;
++(STUserProfileViewController *)newControllerWithUserInfoDict:(NSDictionary *)userInfo;
 
 +(id)getObjectFromUserProfileDict:(NSDictionary *)dict forKey:(NSString *)key;
+
+- (NSDictionary *)userProfileDict;
 
 @end

@@ -24,6 +24,7 @@
 #import "UIImageView+WebCache.h"
 
 #import "STGetUserInfoRequest.h"
+#import "STUserProfileViewController.h"
 
 static NSInteger const  kBlockUserAlertTag = 11;
 
@@ -287,16 +288,22 @@ static NSInteger const  kBlockUserAlertTag = 11;
         NSLog(@"Error from server. No user id.");
         return;
     }
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = STFlowTypeUserProfile;
-    flowCtrl.userID = _userInfo[@"user_id"];
-    flowCtrl.userName = _userInfo[@"user_name"];
-    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
-        flowCtrl.flowType = STFlowTypeMyProfile;
-    }
-    [self.navigationController pushViewController:flowCtrl animated:YES];
+    //TODO: TEST THIS
+    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    
+//    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//    flowCtrl.flowType = STFlowTypeUserGallery;
+//    flowCtrl.userID = _userInfo[@"user_id"];
+//    flowCtrl.userName = _userInfo[@"user_name"];
+//    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
+//        flowCtrl.flowType = STFlowTypeMyGallery;
+//    }
+//    [self.navigationController pushViewController:flowCtrl animated:YES];
+    
+    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:_userInfo[@"user_id"]];
+    [self.navigationController pushViewController:profileVC animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {
    

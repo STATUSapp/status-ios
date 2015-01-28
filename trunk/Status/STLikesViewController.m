@@ -17,6 +17,7 @@
 #import "UIImageView+WebCache.h"
 
 #import "STGetPostLikesRequest.h"
+#import "STUserProfileViewController.h"
 
 @interface STLikesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -104,15 +105,20 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    //TODO: TEST THIS
+    
     NSDictionary *dict = [_likesDataSource objectAtIndex:indexPath.row];
-    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = STFlowTypeUserProfile;
-    flowCtrl.userID = dict[@"user_id"];
-    flowCtrl.userName = dict[@"user_name"];
-    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
-        flowCtrl.flowType = STFlowTypeMyProfile;
-    }
-    [self.navigationController pushViewController:flowCtrl animated:YES];
+//    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//    flowCtrl.flowType = STFlowTypeUserGallery;
+//    flowCtrl.userID = dict[@"user_id"];
+//    flowCtrl.userName = dict[@"user_name"];
+//    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
+//        flowCtrl.flowType = STFlowTypeMyGallery;
+//    }
+//    [self.navigationController pushViewController:flowCtrl animated:YES];
+    
+    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
+    [self.navigationController pushViewController:profileVC animated:YES];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

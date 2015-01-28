@@ -19,6 +19,8 @@
 #import "NSDate+Additions.h"
 #import "STGetNotificationsRequest.h"
 
+#import "STUserProfileViewController.h"
+
 const float kNoNotifHeight = 24.f;
 
 @interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
@@ -158,15 +160,19 @@ const float kNoNotifHeight = 24.f;
     NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
     STNotificationType notifType = [dict[@"type"] integerValue];
     
+    
     switch (notifType) {
             
         default:
         {
-            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-            flowCtrl.flowType = STFlowTypeUserProfile;
-            flowCtrl.userID = dict[@"user_id"];
-            flowCtrl.userName = dict[@"user_name"];
-            [self.navigationController pushViewController:flowCtrl animated:YES];
+            //TODO: TEST THIS
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeUserGallery;
+//            flowCtrl.userID = dict[@"user_id"];
+//            flowCtrl.userName = dict[@"user_name"];
+//            [self.navigationController pushViewController:flowCtrl animated:YES];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
+            [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;
     }
@@ -189,19 +195,29 @@ const float kNoNotifHeight = 24.f;
             break;
         case STNotificationTypeInvite:
         {
-            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-            flowCtrl.flowType = STFlowTypeMyProfile;
-            flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
-            flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
-            [self.navigationController pushViewController:flowCtrl animated:YES];
+            //TODO: TEST THIS
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeMyGallery;
+//            flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
+//            flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
+//            [self.navigationController pushViewController:flowCtrl animated:YES];
+            
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
+            [self.navigationController pushViewController:profileVC animated:YES];
+            
         }
             break;
         case STNotificationTypeUploaded:
         {
-            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-            flowCtrl.flowType = STFlowTypeUserProfile;
-            flowCtrl.userID = dict[@"user_id"];
-            [self.navigationController pushViewController:flowCtrl animated:YES];
+            
+            //TODO: TEST THIS
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeUserGallery;
+//            flowCtrl.userID = dict[@"user_id"];
+//            [self.navigationController pushViewController:flowCtrl animated:YES];
+            
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
+            [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;
             

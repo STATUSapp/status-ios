@@ -46,7 +46,7 @@
 #import "STSetPostLikeRequest.h"
 #import "STRepostPostRequest.h"
 #import "STGetUserPostsRequest.h"
-#import "STGetNearbyPostsRequest.h"
+#import "STGetNearbyProfilesRequest.h"
 #import "STSetPostSeenRequest.h"
 #import "STSetAPNTokenRequest.h"
 #import "STGetPostDetailsRequest.h"
@@ -364,8 +364,12 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #pragma mark - STShareImageDelegate
 
 -(void)imageWasPosted{
+    
+#warning - Re-design taking in consideration new profile flow
+    //TODO: TEST THIS
+    
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = STFlowTypeMyProfile;
+    flowCtrl.flowType = STFlowTypeMyGallery;
     flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
     flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -501,14 +505,14 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 });
             };
             
-            [STGetNearbyPostsRequest getNearbyPostsWithOffset:offset
+            [STGetNearbyProfilesRequest getNearbyProfilesWithOffset:offset
                                                withCompletion:completion
                                                       failure:failBlock];
             
             break;
         }
-        case STFlowTypeMyProfile:
-        case STFlowTypeUserProfile:{
+        case STFlowTypeMyGallery:
+        case STFlowTypeUserGallery:{
             
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 //TODO: verify received status code
@@ -639,26 +643,34 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (void)pushFlowControllerWithType: (STFlowType)flowType{
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = flowType;
-    if (flowType==STFlowTypeUserProfile) {
-        NSDictionary *dict = [self getCurrentDictionary];
-        flowCtrl.userID = dict[@"user_id"];
-        flowCtrl.userName = dict[@"user_name"];
-    }
     
+    //TODO: TEST THIS
+    
+//    if (flowType==STFlowTypeUserGallery) {
+//        NSDictionary *dict = [self getCurrentDictionary];
+//        flowCtrl.userID = dict[@"user_id"];
+//        flowCtrl.userName = dict[@"user_name"];
+//    }
+//    
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 
 - (IBAction)onTapProfileName:(id)sender {
-    if (self.flowType == STFlowTypeUserProfile || self.flowType == STFlowTypeMyProfile) {
+    if (self.flowType == STFlowTypeUserGallery || self.flowType == STFlowTypeMyGallery) {
         //is already in user profile
         return;
     }
-    [self pushFlowControllerWithType:STFlowTypeUserProfile];
+    
+    NSDictionary *dict = [self getCurrentDictionary];
+    
+//    [self pushFlowControllerWithType:STFlowTypeUserGallery];
+    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
+    [self.navigationController pushViewController:userProfileVC animated:YES];
 }
 
 -(IBAction)onTapMyProfile:(id)sender{
     
-    // temporary tests
+    //TODO: TEST THIS
     
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
     [self.navigationController pushViewController:userProfileVC animated:YES];
@@ -809,11 +821,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 - (IBAction)onTapBigCameraProfile:(id)sender {
     switch (self.flowType) {
-        case STFlowTypeMyProfile:{
+        case STFlowTypeMyGallery:{
             [self onTapCameraUpload:sender];
             break;
         }
-        case STFlowTypeUserProfile:{
+        case STFlowTypeUserGallery:{
             [self inviteUserToUpload:_userID withUserName:_userName];
             break;
         }
@@ -874,7 +886,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSString * userID = nil;
     NSString * userName = nil;
     if (currentPostDict == nil || currentPostDict[@"user_id"] == nil) {
-        if (self.flowType == STFlowTypeUserProfile) {
+        if (self.flowType == STFlowTypeUserGallery) {
             userID = _userID;
             userName = _userName;
         }
@@ -1056,7 +1068,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         case STFlowTypeDiscoverNearby:
             return numberOfItems;
             break;
-        case STFlowTypeUserProfile:{
+        case STFlowTypeUserGallery:{
             if (numberOfItems > 0) {
                 return numberOfItems;
             } else {
@@ -1065,7 +1077,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             }
             break;
         }
-        case STFlowTypeMyProfile:{
+        case STFlowTypeMyGallery:{
             if (numberOfItems > 0) {
                 return numberOfItems;
             } else {

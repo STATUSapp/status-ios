@@ -17,6 +17,7 @@
 #import "STInviteFriendsViewController.h"
 #import "STFlowTemplateViewController.h"
 #import "STLocationManager.h"
+#import "STNearbyController.h"
 
 @interface STMenuController()<STTutorialDelegate>
 
@@ -126,9 +127,11 @@
     {
         [self hideMenu];
         [_currentVC.navigationController popToRootViewControllerAnimated:NO];
-        STFlowTemplateViewController *flowCtrl = [_currentVC.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-        flowCtrl.flowType = STFlowTypeDiscoverNearby;
-        [_currentVC.navigationController pushViewController:flowCtrl animated:YES];
+//        STFlowTemplateViewController *flowCtrl = [_currentVC.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//        flowCtrl.flowType = STFlowTypeDiscoverNearby;
+//        [_currentVC.navigationController pushViewController:flowCtrl animated:YES];
+        STNearbyController * nearbyCtrl = [[STNearbyController alloc] init];
+        [nearbyCtrl pushNearbyFlowFromController:_currentVC];
     }
 
 }

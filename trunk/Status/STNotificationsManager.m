@@ -14,6 +14,7 @@
 #import "STNotificationsViewController.h"
 #import "STNotificationBanner.h"
 #import "STFacebookLoginController.h"
+#import "STUserProfileViewController.h"
 
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
@@ -258,22 +259,33 @@ static STNotificationsManager *_sharedManager = nil;
 -(void)bannerProfileImageTapped{
     UIViewController *lastVC = [self getCurrentViewController];
     [self dissmissPresentedVCs:lastVC];
+    //TODO: TEST THIS
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    
+//    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//    flowCtrl.flowType = STFlowTypeUserGallery;
+//    id userId = [_currentBanner.notificationInfo valueForKey:@"user_id"];
+//    if ([userId respondsToSelector:@selector(stringValue)]) {
+//        flowCtrl.userID = [userId stringValue];
+//    }
+//    else
+//        flowCtrl.userID = userId;
+//    flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
+//    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
+//        flowCtrl.flowType = STFlowTypeMyGallery;
+//    }
+//    [lastVC.navigationController pushViewController:flowCtrl animated:YES];
     
-    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = STFlowTypeUserProfile;
-    id userId = [_currentBanner.notificationInfo valueForKey:@"user_id"];
-    if ([userId respondsToSelector:@selector(stringValue)]) {
-        flowCtrl.userID = [userId stringValue];
+    NSString * userId = nil;
+    id userIdentifier = [_currentBanner.notificationInfo valueForKey:@"user_id"];
+    if ([userIdentifier respondsToSelector:@selector(stringValue)]) {
+        userId = [userIdentifier stringValue];
     }
     else
-        flowCtrl.userID = userId;
-    flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
-    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
-        flowCtrl.flowType = STFlowTypeMyProfile;
-    }
-    [lastVC.navigationController pushViewController:flowCtrl animated:YES];
+        userId = userIdentifier;
+    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:userId];
+    [lastVC.navigationController pushViewController:profileVC animated:YES];
     
     [self dismissCurrentBanner];
 }

@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
-#import "STGetNearbyPostsRequest.h"
+#import "STGetNearbyProfilesRequest.h"
 
-@implementation STGetNearbyPostsRequest
-+ (void)getNearbyPostsWithOffset:(NSInteger)offset
+@implementation STGetNearbyProfilesRequest
++ (void)getNearbyProfilesWithOffset:(NSInteger)offset
                   withCompletion:(STRequestCompletionBlock)completion
                          failure:(STRequestFailureBlock)failure{
     
-    STGetNearbyPostsRequest *request = [STGetNearbyPostsRequest new];
+    STGetNearbyProfilesRequest *request = [STGetNearbyProfilesRequest new];
     request.completionBlock = completion;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
@@ -24,7 +24,7 @@
 
 - (STRequestExecutionBlock) _getExecutionBlock
 {
-    __weak STGetNearbyPostsRequest *weakSelf = self;
+    __weak STGetNearbyProfilesRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
         NSString *url = [self urlString];
@@ -42,6 +42,6 @@
 }
 
 -(NSString *)urlString{
-    return kGetNearbyPosts;
+    return kGetNearbyProfiles;
 }
 @end

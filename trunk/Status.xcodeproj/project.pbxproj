@@ -129,7 +129,7 @@
 		17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
 		17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
 		17E0FCA21A27AB3200FC3FEE /* STGetUserPostsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA11A27AB3200FC3FEE /* STGetUserPostsRequest.m */; };
-		17E0FCA51A27B92100FC3FEE /* STGetNearbyPostsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA41A27B92100FC3FEE /* STGetNearbyPostsRequest.m */; };
+		17E0FCA51A27B92100FC3FEE /* STGetNearbyProfilesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA41A27B92100FC3FEE /* STGetNearbyProfilesRequest.m */; };
 		17E0FCA81A27BAD400FC3FEE /* STSetPostSeenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA71A27BAD400FC3FEE /* STSetPostSeenRequest.m */; };
 		17E44B9919821FB2000E9116 /* STCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9419821FB2000E9116 /* STCoreDataManager.m */; };
 		17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9619821FB2000E9116 /* STCoreDataRequestManager.m */; };
@@ -162,6 +162,7 @@
 		99671D0B19BC8FBB00FB8A7A /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */; };
 		99CEC4971A5977580014B759 /* STMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99CEC4961A5977580014B759 /* STMenuController.m */; };
 		99CEC49D1A5DE9D80014B759 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 99CEC49B1A5DE9D80014B759 /* Appirater.m */; };
+		99E5B8251A754A0900A59F13 /* STNearbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E5B8241A754A0900A59F13 /* STNearbyController.m */; };
 		99F77F6B1A373BB300E46B22 /* STGetUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F77F6A1A373BB300E46B22 /* STGetUserProfileRequest.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
 		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
@@ -430,8 +431,8 @@
 		17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
 		17E0FCA01A27AB3200FC3FEE /* STGetUserPostsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetUserPostsRequest.h; sourceTree = "<group>"; };
 		17E0FCA11A27AB3200FC3FEE /* STGetUserPostsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUserPostsRequest.m; sourceTree = "<group>"; };
-		17E0FCA31A27B92100FC3FEE /* STGetNearbyPostsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetNearbyPostsRequest.h; sourceTree = "<group>"; };
-		17E0FCA41A27B92100FC3FEE /* STGetNearbyPostsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetNearbyPostsRequest.m; sourceTree = "<group>"; };
+		17E0FCA31A27B92100FC3FEE /* STGetNearbyProfilesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetNearbyProfilesRequest.h; sourceTree = "<group>"; };
+		17E0FCA41A27B92100FC3FEE /* STGetNearbyProfilesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetNearbyProfilesRequest.m; sourceTree = "<group>"; };
 		17E0FCA61A27BAD400FC3FEE /* STSetPostSeenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetPostSeenRequest.h; sourceTree = "<group>"; };
 		17E0FCA71A27BAD400FC3FEE /* STSetPostSeenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetPostSeenRequest.m; sourceTree = "<group>"; };
 		17E44B9319821FB2000E9116 /* STCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCoreDataManager.h; sourceTree = "<group>"; };
@@ -486,6 +487,8 @@
 		99CEC49A1A5DE9D80014B759 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		99CEC49B1A5DE9D80014B759 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		99CEC49C1A5DE9D80014B759 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
+		99E5B8231A754A0900A59F13 /* STNearbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNearbyController.h; sourceTree = "<group>"; };
+		99E5B8241A754A0900A59F13 /* STNearbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNearbyController.m; sourceTree = "<group>"; };
 		99F77F691A373BB300E46B22 /* STGetUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetUserProfileRequest.h; sourceTree = "<group>"; };
 		99F77F6A1A373BB300E46B22 /* STGetUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUserProfileRequest.m; sourceTree = "<group>"; };
 		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -832,6 +835,8 @@
 				1DFCCACB191238A000B9230E /* STTutorialCell.m */,
 				172EAE7B18B0B12E00C5637B /* STFlowTemplateViewController.h */,
 				172EAE7C18B0B12E00C5637B /* STFlowTemplateViewController.m */,
+				99E5B8231A754A0900A59F13 /* STNearbyController.h */,
+				99E5B8241A754A0900A59F13 /* STNearbyController.m */,
 				17C0BE0D1A370E99007F64C0 /* STNotificationsManager.h */,
 				17C0BE0E1A370E99007F64C0 /* STNotificationsManager.m */,
 				17C0BE101A374636007F64C0 /* STNotificationBanner.h */,
@@ -976,8 +981,8 @@
 				17CA0E931A21C59900D0B081 /* STRepostPostRequest.m */,
 				17E0FCA01A27AB3200FC3FEE /* STGetUserPostsRequest.h */,
 				17E0FCA11A27AB3200FC3FEE /* STGetUserPostsRequest.m */,
-				17E0FCA31A27B92100FC3FEE /* STGetNearbyPostsRequest.h */,
-				17E0FCA41A27B92100FC3FEE /* STGetNearbyPostsRequest.m */,
+				17E0FCA31A27B92100FC3FEE /* STGetNearbyProfilesRequest.h */,
+				17E0FCA41A27B92100FC3FEE /* STGetNearbyProfilesRequest.m */,
 				17E0FCA61A27BAD400FC3FEE /* STSetPostSeenRequest.h */,
 				17E0FCA71A27BAD400FC3FEE /* STSetPostSeenRequest.m */,
 				176CC2FC1A2B052600E9C3D0 /* STGetPostLikesRequest.h */,
@@ -1302,6 +1307,7 @@
 				993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */,
 				07C69D531A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m in Sources */,
 				990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */,
+				99E5B8251A754A0900A59F13 /* STNearbyController.m in Sources */,
 				0717E2DC19B71C56001DF132 /* STChatRoomViewController.m in Sources */,
 				17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */,
 				172EAEB318B0B46300C5637B /* AFSecurityPolicy.m in Sources */,
@@ -1314,7 +1320,7 @@
 				0717E2A819B7187F001DF132 /* STSharePhotoViewController.m in Sources */,
 				17C0BE0F1A370E99007F64C0 /* STNotificationsManager.m in Sources */,
 				17CA0E941A21C59900D0B081 /* STRepostPostRequest.m in Sources */,
-				17E0FCA51A27B92100FC3FEE /* STGetNearbyPostsRequest.m in Sources */,
+				17E0FCA51A27B92100FC3FEE /* STGetNearbyProfilesRequest.m in Sources */,
 				176CC3131A2B18A400E9C3D0 /* STSetUserLocationRequest.m in Sources */,
 				178379191A1D1C22002AEE02 /* STRegisterRequest.m in Sources */,
 				07FCFAA119C094250048F441 /* UIImage+GIF.m in Sources */,

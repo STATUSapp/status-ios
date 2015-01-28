@@ -187,6 +187,7 @@
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="leading" secondItem="nOp-AZ-Grk" secondAttribute="trailing" constant="8" id="EoN-U0-fg0"/>
                             <constraint firstItem="Drt-N9-twb" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" constant="20" id="Fpi-X7-svG"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="centerX" secondItem="JwS-ph-s0L" secondAttribute="centerX" constant="0.5" id="Hbl-ti-73e"/>
+                            <constraint firstItem="zof-zo-rAp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JwS-ph-s0L" secondAttribute="bottom" constant="10" id="K4D-zb-NDK"/>
                             <constraint firstItem="XCt-OH-ynU" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" constant="5" id="MCo-cw-Z9K"/>
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="top" secondItem="1Mz-qe-w3x" secondAttribute="bottom" constant="20" id="Mh4-5L-Fvm"/>
                             <constraint firstAttribute="centerY" secondItem="ykj-hN-llS" secondAttribute="centerY" constant="0.5" id="OdH-oI-DyO"/>
@@ -302,6 +303,13 @@
                                     <outlet property="delegate" destination="DwW-bD-kyz" id="4uZ-cV-T0F"/>
                                 </connections>
                             </textView>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y6I-n0-RQR">
+                                <rect key="frame" x="227" y="61" width="77" height="60"/>
+                                <state key="normal" title="Change">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

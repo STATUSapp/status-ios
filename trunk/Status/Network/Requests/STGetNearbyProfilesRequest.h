@@ -8,9 +8,9 @@
 
 #import "STBaseRequest.h"
 
-@interface STGetNearbyPostsRequest : STBaseRequest
+@interface STGetNearbyProfilesRequest : STBaseRequest
 @property(nonatomic, assign)NSInteger offset;
-+ (void)getNearbyPostsWithOffset:(NSInteger)offset
++ (void)getNearbyProfilesWithOffset:(NSInteger)offset
                   withCompletion:(STRequestCompletionBlock)completion
                          failure:(STRequestFailureBlock)failure;
 @end

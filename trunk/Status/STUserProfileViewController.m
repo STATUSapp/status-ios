@@ -14,6 +14,8 @@
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
 #import "STLocationManager.h"
+#import "STFlowTemplateViewController.h"
+#import "STConstants.h"
 
 
 @interface STUserProfileViewController ()
@@ -49,6 +51,19 @@
     newController.userId = userId;
     
     return newController;
+}
+
++ (STUserProfileViewController *)newControllerWithUserInfoDict:(NSDictionary *)userInfo {
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:[NSBundle mainBundle]];
+    STUserProfileViewController * newController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STUserProfileViewController class])];
+    newController.userProfileDict = userInfo;
+    newController.userId = userInfo[@"user_id"];
+    
+    return newController;
+}
+
+- (NSDictionary *)userProfileDict {
+    return _userProfileDict;
 }
 
 - (void)viewDidLoad {
@@ -152,6 +167,14 @@
 }
 
 - (IBAction)onTapGallery:(id)sender {
+    
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+    flowCtrl.flowType = _isMyProfile ? STFlowTypeMyGallery : STFlowTypeUserGallery;
+    flowCtrl.userID = _userId;
+    flowCtrl.userName = [_userProfileDict valueForKey:kFulNameKey];
+    
+    [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 
 - (IBAction)onTapMenu:(id)sender {
