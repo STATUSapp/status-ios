@@ -1233,7 +1233,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
             imagePicker.delegate = self;
             imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-            
             [self presentViewController:imagePicker animated:YES completion:nil];
         }
         @catch (NSException *exception) {

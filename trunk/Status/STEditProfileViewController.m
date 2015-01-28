@@ -9,12 +9,15 @@
 #import "STEditProfileViewController.h"
 #import "STUpdateUserProfileRequest.h"
 #import "STUserProfileViewController.h"
+#import "STImageCacheController.h"
+#import "STUploadNewProfilePictureRequest.h"
 
-@interface STEditProfileViewController () <UITextFieldDelegate, UITextViewDelegate>
+@interface STEditProfileViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldLocation;
 @property (weak, nonatomic) IBOutlet UITextView *txtViewBio;
 @property (nonatomic, strong) NSString * userId;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @end
 
 @implementation STEditProfileViewController
@@ -38,6 +41,10 @@
     _txtFieldLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
     _txtViewBio.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
     _txtFieldName.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kFulNameKey];
+    __weak STEditProfileViewController *weakSelf = self;
+    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"user_photo"] andCompletion:^(UIImage *img) {
+        weakSelf.profileImage.image = img;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,6 +103,65 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - IBAction
+
+- (IBAction)onChangeProfileImagePressed:(id)sender {
+    UIActionSheet *actionChoose = [[UIActionSheet alloc] initWithTitle:@"Photos" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll", nil];
+    
+    
+    [actionChoose showFromRect: ((UIButton *)sender).frame inView:self.view animated:YES];
+}
+
+#pragma \mark - UIActionSheetDelegate
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    @try {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        [imagePicker setAllowsEditing:YES];
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    @catch (NSException *exception) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device has no camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)showErrorAlert {
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Your photo could not be updated at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    __weak STEditProfileViewController *weakSelf = self;
+    [picker dismissViewControllerAnimated:YES completion:^{
+        UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+        
+        //TODO: move this on save button pressed?
+        NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
+        [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
+            if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                [[STImageCacheController sharedInstance] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
+                    weakSelf.profileImage.image = img;
+                }];
+            }
+            else
+            {
+                NSLog(@"Response: %@", response);
+                [self showErrorAlert];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"Error uploading new profile photo: %@", error.description);
+            [self showErrorAlert];
+
+        }];
+    }];
+
 }
 
 @end

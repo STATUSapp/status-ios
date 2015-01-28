@@ -104,6 +104,7 @@
 		178379161A1D11D0002AEE02 /* STLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 178379151A1D11D0002AEE02 /* STLoginRequest.m */; };
 		178379191A1D1C22002AEE02 /* STRegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 178379181A1D1C22002AEE02 /* STRegisterRequest.m */; };
 		1783791C1A1D4853002AEE02 /* STGetPostsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1783791B1A1D4853002AEE02 /* STGetPostsRequest.m */; };
+		178882D61A7977F600719798 /* STUploadNewProfilePictureRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 178882D51A7977F600719798 /* STUploadNewProfilePictureRequest.m */; };
 		178907B718B294BA00AC4355 /* LoginScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178907B618B294BA00AC4355 /* LoginScene.storyboard */; };
 		178907BA18B295DD00AC4355 /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178907B918B295DD00AC4355 /* STLoginViewController.m */; };
 		1794DD571960D2A40009066D /* STWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD561960D2A40009066D /* STWhatsAppActivity.m */; };
@@ -393,6 +394,8 @@
 		178379181A1D1C22002AEE02 /* STRegisterRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STRegisterRequest.m; sourceTree = "<group>"; };
 		1783791A1A1D4853002AEE02 /* STGetPostsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetPostsRequest.h; sourceTree = "<group>"; };
 		1783791B1A1D4853002AEE02 /* STGetPostsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetPostsRequest.m; sourceTree = "<group>"; };
+		178882D41A7977F600719798 /* STUploadNewProfilePictureRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUploadNewProfilePictureRequest.h; sourceTree = "<group>"; };
+		178882D51A7977F600719798 /* STUploadNewProfilePictureRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUploadNewProfilePictureRequest.m; sourceTree = "<group>"; };
 		178907B618B294BA00AC4355 /* LoginScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginScene.storyboard; sourceTree = "<group>"; };
 		178907B818B295DD00AC4355 /* STLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoginViewController.h; sourceTree = "<group>"; };
 		178907B918B295DD00AC4355 /* STLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginViewController.m; sourceTree = "<group>"; };
@@ -1013,6 +1016,8 @@
 				99F77F6A1A373BB300E46B22 /* STGetUserProfileRequest.m */,
 				990B467C1A50626F003D4CDE /* STUpdateUserProfileRequest.h */,
 				990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */,
+				178882D41A7977F600719798 /* STUploadNewProfilePictureRequest.h */,
+				178882D51A7977F600719798 /* STUploadNewProfilePictureRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1328,6 +1333,7 @@
 				99F77F6B1A373BB300E46B22 /* STGetUserProfileRequest.m in Sources */,
 				17D4231D1A2C6CA900F5B880 /* STGADelegate.m in Sources */,
 				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
+				178882D61A7977F600719798 /* STUploadNewProfilePictureRequest.m in Sources */,
 				176CC30D1A2B0ED000E9C3D0 /* STDeletePostRequest.m in Sources */,
 				0717E2DD19B71C56001DF132 /* STConversationsListViewController.m in Sources */,
 				99CEC49D1A5DE9D80014B759 /* Appirater.m in Sources */,
