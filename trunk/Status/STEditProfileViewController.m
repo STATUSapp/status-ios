@@ -12,12 +12,15 @@
 #import "STImageCacheController.h"
 #import "STUploadNewProfilePictureRequest.h"
 
-@interface STEditProfileViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate>
+const NSInteger kMaxNumberOfCharacters = 150;
+
+@interface STEditProfileViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldLocation;
 @property (weak, nonatomic) IBOutlet UITextView *txtViewBio;
 @property (nonatomic, strong) NSString * userId;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UILabel *counterLabel;
 @end
 
 @implementation STEditProfileViewController
@@ -41,6 +44,7 @@
     _txtFieldLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
     _txtViewBio.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
     _txtFieldName.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kFulNameKey];
+    _counterLabel.text = [NSString stringWithFormat:@"%lu/%ld characters", (unsigned long)[_txtViewBio.text length], (long)kMaxNumberOfCharacters];
     __weak STEditProfileViewController *weakSelf = self;
     [[STImageCacheController sharedInstance] loadImageWithName:dict[@"user_photo"] andCompletion:^(UIImage *img) {
         weakSelf.profileImage.image = img;
@@ -102,9 +106,16 @@
         [textView resignFirstResponder];
         return NO;
     }
+    if (textView.text.length + text.length > kMaxNumberOfCharacters) {
+        return NO;
+    }
+
     return YES;
 }
 
+-(void)textViewDidChange:(UITextView *)textView{
+    _counterLabel.text = [NSString stringWithFormat:@"%lu/%ld characters", (unsigned long)[_txtViewBio.text length], (long)kMaxNumberOfCharacters];
+}
 #pragma mark - IBAction
 
 - (IBAction)onChangeProfileImagePressed:(id)sender {
