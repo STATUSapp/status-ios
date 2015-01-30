@@ -119,18 +119,14 @@
     UIImage *croppedImg = [self croppedImage];
     
     // after cropping, we should do optimization
-    //TODO: we shoud perform a compression only for local photos, not for the facebook
-    NSUInteger imgSizeInBytes = [croppedImg calculatedSizeInBytes];
-    if (imgSizeInBytes > STMaximumSizeInBytesForUpload) {
-        
-        
-        
-        CGFloat compressRatio = (CGFloat)STMaximumSizeInBytesForUpload / (CGFloat)imgSizeInBytes;
-        compressRatio = sqrtf(compressRatio);
-        CGSize newImgSize = CGSizeMake(compressRatio * croppedImg.size.width, compressRatio * croppedImg.size.height);
-                
-        croppedImg = [croppedImg resizedImage:newImgSize interpolationQuality:kCGInterpolationHigh];
-
+    if (_shouldCompress == YES) {
+        NSUInteger imgSizeInBytes = [croppedImg calculatedSizeInBytes];
+        if (imgSizeInBytes > STMaximumSizeInBytesForUpload) {
+            CGFloat compressRatio = (CGFloat)STMaximumSizeInBytesForUpload / (CGFloat)imgSizeInBytes;
+            compressRatio = sqrtf(compressRatio);
+            CGSize newImgSize = CGSizeMake(compressRatio * croppedImg.size.width, compressRatio * croppedImg.size.height);
+            croppedImg = [croppedImg resizedImage:newImgSize interpolationQuality:kCGInterpolationHigh];
+        }
     }
 
     if (_editPostId!=nil) {

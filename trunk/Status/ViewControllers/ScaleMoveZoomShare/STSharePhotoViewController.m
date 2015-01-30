@@ -183,7 +183,6 @@
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         weakSelf.shareButton.enabled = TRUE;
     };
-    //TODO: send the caption here
     [STUploadPostRequest uploadPostForId:_editPostId
                                 withData:_imgData
                               andCaption:_captionString

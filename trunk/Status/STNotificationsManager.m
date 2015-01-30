@@ -43,8 +43,6 @@ static STNotificationsManager *_sharedManager = nil;
     return lastVC;
 }
 
-//TODO: test all those scenarios
-
 -(void) handleNotification:(NSDictionary *) notif{
     if (notif == nil) {
         return;
@@ -54,11 +52,6 @@ static STNotificationsManager *_sharedManager = nil;
     if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
         
         if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
-//            if (![[STChatController sharedInstance] canChat]) {
-//                //wait for the chat authentication to be performed and after handle the notification
-//                _lastNotification = notif;
-//                return;
-//            }
             _lastNotification = nil;
             NSDictionary *userInfo = notif[@"user_info"];
             if (userInfo[@"user_id"] == nil) {
@@ -67,7 +60,6 @@ static STNotificationsManager *_sharedManager = nil;
             }
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
             STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-            //TODO: add user_name and small_photo_link as handle in app notification
             viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:notif[@"user_info"]];
             [lastVC.navigationController pushViewController:viewController animated:YES];
         }

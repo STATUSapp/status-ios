@@ -19,4 +19,5 @@
 @property (nonatomic, strong) UIImage *currentImg;
 @property (nonatomic, strong) id <STSharePostDelegate>delegate;
 @property (nonatomic, strong) NSString *editPostId;
+@property (nonatomic, assign) BOOL shouldCompress;
 @end

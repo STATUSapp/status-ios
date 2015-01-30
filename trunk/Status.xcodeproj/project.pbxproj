@@ -83,6 +83,7 @@
 		175A28C71A13FD960057EDEE /* STBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28C61A13FD960057EDEE /* STBaseRequest.m */; };
 		175A28CC1A13FDDC0057EDEE /* STNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28C91A13FDDC0057EDEE /* STNetworkManager.m */; };
 		175A28CD1A13FDDC0057EDEE /* STNetworkQueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28CB1A13FDDC0057EDEE /* STNetworkQueueManager.m */; };
+		175F8B571A7B7F7000360C3E /* STImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175F8B561A7B7F7000360C3E /* STImagePickerController.m */; };
 		176CC2FE1A2B052600E9C3D0 /* STGetPostLikesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC2FD1A2B052600E9C3D0 /* STGetPostLikesRequest.m */; };
 		176CC3011A2B076E00E9C3D0 /* STSetAPNTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3001A2B076E00E9C3D0 /* STSetAPNTokenRequest.m */; };
 		176CC3041A2B09A100E9C3D0 /* STGetPostDetailsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3031A2B09A100E9C3D0 /* STGetPostDetailsRequest.m */; };
@@ -354,6 +355,8 @@
 		175A28C91A13FDDC0057EDEE /* STNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetworkManager.m; sourceTree = "<group>"; };
 		175A28CA1A13FDDC0057EDEE /* STNetworkQueueManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetworkQueueManager.h; sourceTree = "<group>"; };
 		175A28CB1A13FDDC0057EDEE /* STNetworkQueueManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetworkQueueManager.m; sourceTree = "<group>"; };
+		175F8B551A7B7F7000360C3E /* STImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImagePickerController.h; sourceTree = "<group>"; };
+		175F8B561A7B7F7000360C3E /* STImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImagePickerController.m; sourceTree = "<group>"; };
 		176CC2FC1A2B052600E9C3D0 /* STGetPostLikesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetPostLikesRequest.h; sourceTree = "<group>"; };
 		176CC2FD1A2B052600E9C3D0 /* STGetPostLikesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetPostLikesRequest.m; sourceTree = "<group>"; };
 		176CC2FF1A2B076E00E9C3D0 /* STSetAPNTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetAPNTokenRequest.h; sourceTree = "<group>"; };
@@ -612,6 +615,8 @@
 				0717E2BE19B71B51001DF132 /* STConstants.m */,
 				0717E2BF19B71B51001DF132 /* STImageCacheController.h */,
 				0717E2C019B71B51001DF132 /* STImageCacheController.m */,
+				175F8B551A7B7F7000360C3E /* STImagePickerController.h */,
+				175F8B561A7B7F7000360C3E /* STImagePickerController.m */,
 			);
 			name = Controllers;
 			path = Status/Controllers;
@@ -1368,6 +1373,7 @@
 				1DE2D5BB1950DB4600A29A86 /* STInviteFriendsViewController.m in Sources */,
 				172EAE7318B0B12E00C5637B /* main.m in Sources */,
 				1794DD571960D2A40009066D /* STWhatsAppActivity.m in Sources */,
+				175F8B571A7B7F7000360C3E /* STImagePickerController.m in Sources */,
 				07FCFA9E19C094250048F441 /* SDWebImageManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

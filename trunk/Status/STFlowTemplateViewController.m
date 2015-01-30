@@ -60,6 +60,7 @@
 #import "STMenuController.h"
 #import "STUpdateToNewerVersionController.h"
 #import "STEditCaptionViewController.h"
+#import "STImagePickerController.h"
 
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
@@ -84,6 +85,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     BOOL _pinching;
     
     STGADelegate *_GADelegate;
+    
+    NSInteger _numberOfDuplicates;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *notifBtn;
@@ -104,7 +107,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 {
     [super viewDidLoad];
     self.postsDataSource = [NSMutableArray array];
-    
+    _numberOfDuplicates = 0;
     if (self.flowType == STFlowTypeAllPosts)
         [[STFacebookLoginController sharedInstance] setDelegate:self];
     else
@@ -126,10 +129,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                                              selector:@selector(chatControllerAuthenticate)
                                                  name:STChatControllerAuthenticate
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(facebookPickerDidChooseImage:)
-                                                 name:STFacebookPickerNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(facebookPickerDidChooseImage:)
+//                                                 name:STFacebookPickerNotification
+//                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
     
     
@@ -418,9 +421,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     for (NSDictionary *dict in array) {
         if ([idsArray containsObject:dict[@"full_photo_link"]]) {
-            //TODO: add this number to the offset sent to server for main flow to avoid repetable situations
             NSLog(@"Duplicate found");
             [sheetArray removeObject:dict];
+            _numberOfDuplicates++;
         }
     }
     return sheetArray;
@@ -465,12 +468,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 });
             };
             [STGetPostsRequest getPostsWithOffset:offset withCompletion:completion failure:failBlock];
-//            [[STNetworkManager sharedManager] getPostsWithOffset:offset withCompletion:^(NSDictionary *response) {
-//                
-//                
-//            } andErrorCompletion:^(NSError *error) {
-//               
-//            }];
             break;
         }
         case STFlowTypeDiscoverNearby: {
@@ -515,16 +512,17 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         case STFlowTypeUserGallery:{
             
             STRequestCompletionBlock completion = ^(id response, NSError *error){
-                //TODO: verify received status code
-                NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
-                [weakSelf.postsDataSource addObjectsFromArray:newPosts];
-                [weakSelf loadImages:newPosts];
-                _isDataSourceLoaded = YES;
-                [weakSelf.collectionView reloadData];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf.refreshBt setEnabled:YES];
-                    [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
-                });
+                if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                    NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
+                    [weakSelf.postsDataSource addObjectsFromArray:newPosts];
+                    [weakSelf loadImages:newPosts];
+                    _isDataSourceLoaded = YES;
+                    [weakSelf.collectionView reloadData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.refreshBt setEnabled:YES];
+                        [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
+                    });
+                }
             };
             
             STRequestFailureBlock failBlock = ^(NSError *error){
@@ -595,7 +593,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if(_flowType == STFlowTypeAllPosts)
         [self getDataSourceWithOffset:0];
     else
-        [self getDataSourceWithOffset:_postsDataSource.count];
+        [self getDataSourceWithOffset:_postsDataSource.count+_numberOfDuplicates];
     
 }
 
@@ -748,17 +746,18 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     NSDictionary * presentedPostDict = [self getCurrentDictionary];
     BOOL isOwner = [presentedPostDict[@"is_owner"] boolValue];
-    
-    UIActionSheet *actionChoose;
-    
+    __weak STFlowTemplateViewController *weakSelf = self;
+    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
+        [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil];
+
+    };
     if (isOwner) {
-        actionChoose = [[UIActionSheet alloc] initWithTitle:@"Photos" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll",@"Upload from Facebook", nil];
+        [[STImagePickerController sharedInstance] startImagePickerForOwnerInViewController:self withCompletion:completion];
     } else {
-        actionChoose = [[UIActionSheet alloc] initWithTitle:@"Photos" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll",@"Upload from Facebook", @"Ask user to take a photo", nil];
+        [[STImagePickerController sharedInstance] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
+            [weakSelf inviteCurrentPostOwnerUserToUpload];
+        }];
     }
-    
-    
-    [actionChoose showFromRect: ((UIButton *)sender).frame inView:self.view animated:YES];
 }
 
 - (IBAction)onTapLike:(id)sender {
@@ -897,9 +896,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
 
     if (userID == nil) {
-        //TODO: should deactivate that option
         return;
     }
+    
     [self inviteUserToUpload:userID withUserName:userName];
 }
 
@@ -1123,7 +1122,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
                 BOOL shouldGetNextBatch = weakSelf.postsDataSource.count - usedIndx.row == kStartLoadOffset && usedIndx.row!=0;
                 if (shouldGetNextBatch) {
-                    [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count - usedIndx.row - 1];
+                    [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count - usedIndx.row - 1 + _numberOfDuplicates];
                 }
             }
         };
@@ -1136,7 +1135,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     {
         BOOL shouldGetNextBatch = _postsDataSource.count - usedIndx.row == kStartLoadOffset && usedIndx.row!=0;
         if (shouldGetNextBatch) {
-            [self getDataSourceWithOffset:_postsDataSource.count];
+            [self getDataSourceWithOffset:_postsDataSource.count+_numberOfDuplicates];
             
         }
     }
@@ -1203,68 +1202,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
    
 }
 
-#pragma mark - UIActionSheetDelegate
-
-- (void)presentFacebookPickerScene {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FacebookPickerScene" bundle:nil];
-    UINavigationController *noteNav = [storyboard instantiateViewControllerWithIdentifier:@"FacebookPicker"];
-    
-    [self presentViewController:noteNav animated:YES completion:nil];
-}
-
--(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    
-    NSDictionary * presentedPostDict = [self getCurrentDictionary];
-    BOOL isOwner = [presentedPostDict[@"is_owner"] boolValue];
-    
-    if(buttonIndex == 3 && isOwner) return;
-    
-    if (buttonIndex == 4) {
-        return;
-    }
-    
-    if (buttonIndex == 3) {
-        [self inviteCurrentPostOwnerUserToUpload];
-        return;
-    }
-    
-    if (buttonIndex<=1) {
-        @try {
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.delegate = self;
-            imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-            [self presentViewController:imagePicker animated:YES completion:nil];
-        }
-        @catch (NSException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device has no camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-    }
-    else
-    {
-        __weak STFlowTemplateViewController *weakSelf = self;
-        [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
-            NSLog(@"Permissions: %@", newObjects);
-            if (![newObjects containsObject:@"user_photos"]) {
-                [[FBSession activeSession] requestNewPublishPermissions:@[@"user_photos"]
-                                                        defaultAudience:FBSessionDefaultAudienceFriends
-                                                      completionHandler:^(FBSession *session, NSError *error) {
-                                                          if (!error) {
-                                                              [weakSelf presentFacebookPickerScene];
-                                                          }
-                                                          else
-                                                          {
-                                                              [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a problem with facebook at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-                                                          }
-                                                      }];
-            }
-            else
-                [weakSelf presentFacebookPickerScene];
-        }];
-        
-    }
-}
-
 #pragma mark - UIAlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -1316,22 +1253,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
 }
 
-#pragma mark - UIImagePickerDelegate
--(void)facebookPickerDidChooseImage:(NSNotification *)notif{
-    NSLog(@"self.navigationController.viewControllers =  %@", self.navigationController.presentedViewController);
-    __weak STFlowTemplateViewController *weakSelf = self;
-    if (![self.presentedViewController isBeingDismissed])
-        [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
-            [weakSelf startMoveScaleShareControllerForImage:(UIImage *)[notif object]
-                                             shouldCompress:NO
-                                               editedPostId:nil];
-        }];
-    {
-    }
-    
-
-}
-
 - (void)startMoveScaleShareControllerForImage:(UIImage *)img
                                shouldCompress:(BOOL)compressing
                                     editedPostId:(NSString *)postId{
@@ -1343,24 +1264,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     viewController.currentImg = img;
     viewController.delegate = self;
     viewController.editPostId = postId;
+    viewController.shouldCompress = compressing;
     [self.navigationController pushViewController:viewController animated:NO];
-}
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-    __weak STFlowTemplateViewController *weakSelf = self;
-    [picker dismissViewControllerAnimated:YES completion:^{
-        UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-        UIImage *fixedOrientationImage = [img fixOrientation];
-
-//        UIImage *fixedOrientationImage = [UIImage imageWithCGImage:img.CGImage
-//                                                             scale:img.scale
-//                                                       orientation:img.imageOrientation];
-
-        [weakSelf startMoveScaleShareControllerForImage:fixedOrientationImage shouldCompress:YES editedPostId:nil];
-    }];
-    
 }
 
 -(BOOL)prefersStatusBarHidden{
