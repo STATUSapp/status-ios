@@ -25,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewStatusIcon;
 @property (weak, nonatomic) IBOutlet UILabel *lblNameAndAge;
 @property (weak, nonatomic) IBOutlet UILabel *lblDistance;
-@property (weak, nonatomic) IBOutlet UILabel *lblStatus;
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserDescription;
 
@@ -58,6 +57,7 @@
     STUserProfileViewController * newController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STUserProfileViewController class])];
     newController.userProfileDict = userInfo;
     newController.userId = userInfo[@"user_id"];
+    [newController setupVisualsWithDictionary:userInfo];
     
     return newController;
 }
@@ -79,8 +79,13 @@
         _btnSettings.hidden = NO;
         _btnSendMessageToUser.hidden = YES;
         _btnEditUserProfile.hidden = NO;
-    } else {
+    } else if(_isLaunchedFromNearbyController){
         _btnNextProfile.hidden = NO;
+        _btnSettings.hidden = YES;
+        _btnSendMessageToUser.hidden = NO;
+        _btnEditUserProfile.hidden = YES;
+    } else {
+        _btnNextProfile.hidden = YES;
         _btnSettings.hidden = YES;
         _btnSendMessageToUser.hidden = NO;
         _btnEditUserProfile.hidden = YES;
@@ -88,6 +93,15 @@
 }
 
 - (void)getAndDisplayProfile {
+    
+    if (_userProfileDict) {
+        [self setupVisualsWithDictionary:_userProfileDict];
+    }
+    
+    if (_userId == nil) {
+        return;
+    }
+    
     __weak STUserProfileViewController * weakSelf = self;
     [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
         NSLog(@"%@", response);
@@ -119,6 +133,7 @@
     
     _lblUserDescription.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
     _lblLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
+    _imageViewLocationIcon.hidden = (_lblLocation.text.length == 0);
     
     NSString * photoStringURL = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kProfilePhotoLinkKey];
     [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:photoStringURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -126,12 +141,24 @@
     }];
     
     NSDate * lastSeenDate = [NSDate dateFromServerDate:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLastActiveKey]];
-    _lblStatus.text = lastSeenDate ? [NSDate statusForLastTimeSeen:lastSeenDate] : @"";
+    NSString * statusText = lastSeenDate ? [NSString stringWithFormat:@" - %@", [NSDate statusForLastTimeSeen:lastSeenDate]] : @"";
     _imageViewStatusIcon.hidden = lastSeenDate ? NO : YES;
     [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:lastSeenDate]];
     
-    _lblDistance.text = [[STLocationManager sharedInstance] distanceStringToLocationWithLatitudeString:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationLatitudeKey]
-                                                                                    andLongitudeString:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationLongitudeKey]];
+    NSString * distanceText = [[STLocationManager sharedInstance] distanceStringToLocationWithLatitudeString:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationLatitudeKey]
+                                                                                          andLongitudeString:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationLongitudeKey]];
+
+    CGFloat fontSize = _lblDistance.font.pointSize;
+    UIFont * statusFont = [UIFont fontWithName:@"ProximaNova-Regular" size:fontSize];
+    UIFont * distanceFont = [UIFont fontWithName:@"ProximaNova-Semibold" size:fontSize];
+    
+    NSDictionary * statusDict = @{NSFontAttributeName : statusFont};
+    NSDictionary * distanceDict = @{NSFontAttributeName : distanceFont};
+    
+    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:distanceText attributes:distanceDict];
+    [text appendAttributedString:[[NSAttributedString alloc] initWithString:statusText attributes:statusDict]];
+    _lblDistance.attributedText = text;
+    
 }
 
 - (void)setStatusIconForStatus:(STUserStatus)userStatus {
@@ -182,6 +209,11 @@
 }
 
 - (IBAction)onTapNextProfile:(id)sender {
+    if (_delegate) {
+        if ([_delegate respondsToSelector:@selector(advanceToNextProfile)]) {
+            [_delegate advanceToNextProfile];
+        }
+    }
 }
 
 - (IBAction)onTapCamera:(id)sender {
@@ -199,5 +231,8 @@
     [self.navigationController pushViewController:editVC animated:YES];
 }
 
+- (void)dealloc{
+    self.delegate = nil;
+}
 
 @end

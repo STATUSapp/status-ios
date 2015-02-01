@@ -12,7 +12,7 @@
 #import "STLocationManager.h"
 #import "STGetNearbyProfilesRequest.h"
 
-@interface STNearbyController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface STNearbyController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STUserProfileControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController * pageViewController;
 @property (strong, nonatomic) NSMutableArray * profiles;
@@ -22,7 +22,7 @@
 @implementation STNearbyController
 
 
-- (void)getProfilesFromServerWithOffset:(NSInteger)offset {
+- (void)getProfilesFromServerWithOffset:(NSInteger)offset withCompletion:(STCompletionBlock)completionBlock {
     
     if (_profiles == nil) {
         _profiles = [NSMutableArray array];
@@ -35,56 +35,90 @@
             //user has no location force an update
             
             [[STLocationManager sharedInstance] startLocationUpdatesWithCompletion:^{
-                [weakSelf getProfilesFromServerWithOffset:offset];
+                [weakSelf getProfilesFromServerWithOffset:offset withCompletion:completionBlock];
             }];
         }
         else
         {
-//            NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
-//            [weakSelf.profiles addObjectsFromArray:newPosts];
-//            _isDataSourceLoaded = YES;
+            NSArray *newPosts = response[@"data"];
+            [weakSelf.profiles addObjectsFromArray:newPosts];
+            completionBlock(nil);
         }
     };
     
     STRequestFailureBlock failBlock = ^(NSError *error){
         NSLog(@"error with %@", error.description);
-        dispatch_async(dispatch_get_main_queue(), ^{
-//            [weakSelf.refreshBt setEnabled:YES];
-//            [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
-        });
+        completionBlock(error);
     };
     
     [STGetNearbyProfilesRequest getNearbyProfilesWithOffset:offset withCompletion:completion failure:failBlock ];
 }
 
-- (void)pushNearbyFlowFromController:(UIViewController *)viewController {
-    
-    [self getProfilesFromServerWithOffset:0];
-    
+- (void)pushNearbyFlowFromController:(UIViewController *)viewController withCompletionBlock:(STCompletionBlock)completionBlock{
+#warning check for memory leak with self and weakSelf
     if (_pageViewController == nil) {
         _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
         _pageViewController.delegate = self;
+        _pageViewController.dataSource = self;
     }
     
-    [viewController.navigationController pushViewController:_pageViewController animated:YES];
+    [self getProfilesFromServerWithOffset:_profiles.count withCompletion:^(NSError *error) {
+        if (error == nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserInfoDict:_profiles.firstObject];
+                userVC.isLaunchedFromNearbyController = YES;
+                userVC.delegate = self;
+                [self.pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+                [viewController.navigationController pushViewController:self.pageViewController animated:YES];
+            });
+        }
+        completionBlock(error);
+
+    }];
 }
 
 #pragma mark UIPageViewController delegate and data source methods
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(STUserProfileViewController *)viewController {
     NSInteger actualVCIndex = [_profiles indexOfObject:[viewController userProfileDict]];
-    NSString * profileId = nil;
-//    if (actualVCIndex > ) {
-//        <#statements#>
-//    }
-//    
+    if (actualVCIndex > ( _profiles.count - 5 )) {
+        [self getProfilesFromServerWithOffset:_profiles.count withCompletion:^(NSError *error) {
+            NSLog(@"updated nearby profiles");
+        }];
+    }
     
-    return [STUserProfileViewController newControllerWithUserId:profileId];
+    if (actualVCIndex == _profiles.count - 1) {
+        return nil;
+    }
+    
+    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserInfoDict:[_profiles objectAtIndex:actualVCIndex + 1]];
+    userVC.isLaunchedFromNearbyController = YES;
+    userVC.delegate = self;
+    return userVC;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(STUserProfileViewController *)viewController {
-    NSString * profileId = nil;
-    return [STUserProfileViewController newControllerWithUserId:profileId];
+    NSInteger actualVCIndex = [_profiles indexOfObject:[viewController userProfileDict]];
+
+    
+    if (actualVCIndex == 0) {
+        return nil;
+    }
+    
+    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserInfoDict:[_profiles objectAtIndex:actualVCIndex - 1]];
+    userVC.isLaunchedFromNearbyController = YES;
+    userVC.delegate = self;
+    return userVC;
+}
+
+#pragma mark - STUserProfileDelegate
+
+- (void)advanceToNextProfile {
+    STUserProfileViewController * currentVC = (STUserProfileViewController *)(_pageViewController.viewControllers.firstObject);
+    STUserProfileViewController * userVC = (STUserProfileViewController *)[self pageViewController:_pageViewController viewControllerAfterViewController:currentVC];
+    if (userVC != nil) {
+        [_pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    }
 }
 
 @end

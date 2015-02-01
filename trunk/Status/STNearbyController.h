@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^STCompletionBlock)(NSError *error);
+
 @interface STNearbyController : NSObject
 
-- (void)pushNearbyFlowFromController:(UIViewController *)viewController;
+- (void)pushNearbyFlowFromController:(UIViewController *)viewController withCompletionBlock:(STCompletionBlock)completionBlock;
 
 @end

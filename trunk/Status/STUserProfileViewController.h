@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol STUserProfileControllerDelegate <NSObject>
+- (void)advanceToNextProfile;
+@end
+
 @interface STUserProfileViewController : UIViewController
 
 @property (nonatomic, assign) BOOL isMyProfile;
-
+@property (nonatomic, assign) BOOL isLaunchedFromNearbyController;
+@property (nonatomic, weak) id<STUserProfileControllerDelegate> delegate;
 
 +(STUserProfileViewController *)newControllerWithUserId:(NSString *)userId;
 +(STUserProfileViewController *)newControllerWithUserInfoDict:(NSDictionary *)userInfo;

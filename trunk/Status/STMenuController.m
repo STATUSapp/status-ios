@@ -23,6 +23,7 @@
 
 @property(nonatomic, strong)STMenuView *menuView;
 @property(nonatomic, strong)UIViewController *currentVC;
+@property(nonatomic, strong)STNearbyController *nearbyCtrl;
 
 @end
 
@@ -125,13 +126,18 @@
     }
     else
     {
+        [self resetNavigationControllerStack];
         [self hideMenu];
         [_currentVC.navigationController popToRootViewControllerAnimated:NO];
 //        STFlowTemplateViewController *flowCtrl = [_currentVC.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
 //        flowCtrl.flowType = STFlowTypeDiscoverNearby;
 //        [_currentVC.navigationController pushViewController:flowCtrl animated:YES];
-        STNearbyController * nearbyCtrl = [[STNearbyController alloc] init];
-        [nearbyCtrl pushNearbyFlowFromController:_currentVC];
+        _nearbyCtrl = [[STNearbyController alloc] init];
+        [_nearbyCtrl pushNearbyFlowFromController:_currentVC withCompletionBlock:^(NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:@"Something went wrong..." message:@"Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            }
+        }];
     }
 
 }
