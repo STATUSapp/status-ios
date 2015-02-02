@@ -61,6 +61,7 @@
 #import "STUpdateToNewerVersionController.h"
 #import "STEditCaptionViewController.h"
 #import "STImagePickerController.h"
+#import "STNoPhotosCell.h"
 
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
@@ -89,7 +90,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSInteger _numberOfDuplicates;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UIButton *notifBtn;
 @property (weak, nonatomic) IBOutlet UILabel *notifNumberLabel;
 @property (strong, nonatomic) UIButton * refreshBt;
 @property (weak, nonatomic) IBOutlet UILabel *unreadMessagesLbl;
@@ -554,17 +554,21 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
 }
 - (IBAction)onChatWithUser:(id)sender {
-    NSDictionary *userInfo = [self getCurrentDictionary];
-    if ([userInfo[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        return;
-    }
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:[self getCurrentDictionary]];
 //    if (![[STChatController sharedInstance] canChat]) {
 //        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 ////#ifndef DEBUG
 //        return;
 ////#endif
 //    }
+    
+    if (userInfo[@"user_id"]==nil && _userID!=nil) {
+        userInfo[@"user_id"]=_userID;
+    }
+    if ([userInfo[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        return;
+    }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
     STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
     viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
@@ -685,6 +689,13 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 //    flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
 //    [self.navigationController pushViewController:flowCtrl animated:YES];
 }
+- (IBAction)onTapUserProfilePicture:(id)sender {
+    //TODO: test this
+    NSString *userId = [[self getCurrentDictionary] valueForKey:@"user_id"];
+    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:userId];
+    [self.navigationController pushViewController:userProfileVC animated:YES];
+
+}
 
 - (IBAction)onTapShare:(id)sender {
     NSDictionary *dict = [self getCurrentDictionary];
@@ -748,7 +759,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     BOOL isOwner = [presentedPostDict[@"is_owner"] boolValue];
     __weak STFlowTemplateViewController *weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
-        [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil];
+        [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:presentedPostDict[@"caption"]];
 
     };
     if (isOwner) {
@@ -959,7 +970,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     __weak STFlowTemplateViewController *weakSelf = self;
     [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
         if (img!=nil) {
-            [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:NO editedPostId:dict[@"post_id"]];
+            [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:NO editedPostId:dict[@"post_id"] captionString:dict[@"caption"]];
         }
     } andBlurCompletion:nil];
 }
@@ -1042,19 +1053,32 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - Collection View Data Source & Delegate
 
+-(NSString *)identifierForCollectionView{
+    if (_isDataSourceLoaded==YES&&_isPlaceholderSinglePost==YES) {
+        return @"STNoPhotosCellIdentifier";
+    }
+    else
+        return @"FlowCollectionCellIdentifier";
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    STCustomCollectionViewCell *cell = (STCustomCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"FlowCollectionCellIdentifier" forIndexPath:indexPath];
+    NSString *identifier = [self identifierForCollectionView];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
    
     cell.contentView.frame = cell.bounds;
     cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     
-    if (_isPlaceholderSinglePost && !_isDataSourceLoaded) {
-        [cell setUpPlaceholderBeforeLoading];
+
+    if ([cell isKindOfClass:[STCustomCollectionViewCell class]]) {
+        if (self.postsDataSource.count>indexPath.row) {
+            NSDictionary *cellDict = self.postsDataSource[indexPath.row];
+            [(STCustomCollectionViewCell *)cell setUpWithDictionary:cellDict forFlowType:_flowType];
+        }
     }
-    NSDictionary *cellDict = (_isPlaceholderSinglePost ? @{@"type":@"placeholder", @"content_loaded":@(_isDataSourceLoaded)} : self.postsDataSource[indexPath.row]); // the cell will know to setup as placeholder if setupDict is nil
-    cell.username = self.userName;
-    [cell setUpWithDictionary:cellDict forFlowType:self.flowType];
-    
+    else if ([cell isKindOfClass:[STNoPhotosCell class]])
+    {
+        [(STNoPhotosCell *)cell setUpCellWithUserName:self.userName andFlow:_flowType];
+    }
     return cell;
 }
 
@@ -1255,7 +1279,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 - (void)startMoveScaleShareControllerForImage:(UIImage *)img
                                shouldCompress:(BOOL)compressing
-                                    editedPostId:(NSString *)postId{
+                                    editedPostId:(NSString *)postId
+                                captionString:(NSString *)captionString{
     
     // here, no compressing should be done, because it might be a cropping after this
     
@@ -1265,6 +1290,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     viewController.delegate = self;
     viewController.editPostId = postId;
     viewController.shouldCompress = compressing;
+    viewController.captionString = captionString;
     [self.navigationController pushViewController:viewController animated:NO];
 }
 
@@ -1279,11 +1305,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             return NO;
         }
     }
-//    else if ([identifier isEqualToString:@"notifSegue"]){
-//        if (self.flowType == STFlowTypeSinglePost) {
-//            return NO;
-//        }
-//    }
     return YES;
 }
 
@@ -1298,11 +1319,5 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         [[STMenuController sharedInstance] hideMenu];
     }
 }
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-}
-
 
 @end

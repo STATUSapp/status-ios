@@ -40,6 +40,9 @@
 - (IBAction)onFriendsInviterPressed:(id)sender {
     [[STMenuController sharedInstance] goFriendsInviter];
 }
+- (IBAction)onNotificationPressed:(id)sender {
+    [[STMenuController sharedInstance] goNotification];
+}
 - (IBAction)onMePressed:(id)sender {
     [[STMenuController sharedInstance] goMyProfile];
 }

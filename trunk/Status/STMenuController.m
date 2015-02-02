@@ -18,6 +18,9 @@
 #import "STFlowTemplateViewController.h"
 #import "STLocationManager.h"
 #import "STNearbyController.h"
+#import "STNotificationsViewController.h"
+
+#import "AppDelegate.h"
 
 @interface STMenuController()<STTutorialDelegate>
 
@@ -46,6 +49,7 @@
             NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"STMenuView" owner:self options:nil];
             _menuView = (STMenuView *)[views firstObject];
             _menuView.translatesAutoresizingMaskIntoConstraints = NO;
+            _menuView.notificationBadge.layer.cornerRadius = 7.f;
             
         }
 
@@ -60,7 +64,16 @@
     
     _menuView.alpha = 0.f;
     _menuView.blurBackground.image = [self blurCurrentScreen];
-    
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSInteger notifNumber = app.badgeNumber;
+    if (notifNumber > 0) {
+        _menuView.notificationBadge.text = [NSString stringWithFormat:@" %zd ", notifNumber];
+        _menuView.notificationBadge.hidden = NO;
+    }
+    else{
+        _menuView.notificationBadge.hidden = YES;
+    }
+
     [parrentVC.view addSubview:_menuView];
     
     [self addContraintForMenu];
@@ -118,6 +131,14 @@
     STInviteFriendsViewController * inviteFriendsVC = [STInviteFriendsViewController newInstance];
     inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [_currentVC presentViewController:inviteFriendsVC animated:YES completion:nil];
+}
+- (void)goNotification{
+    [self resetNavigationControllerStack];
+    [self hideMenu];
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    STNotificationsViewController *notifController = [storyboard instantiateViewControllerWithIdentifier: @"notificationScene"];
+    [_currentVC.navigationController pushViewController:notifController animated:YES];
+
 }
 - (void)goNearby {
     

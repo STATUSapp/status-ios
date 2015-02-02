@@ -39,7 +39,7 @@
     [self.transparentNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.transparentNavBar.shadowImage = [UIImage new];
     self.transparentNavBar.translucent = YES;
-    
+    [self.view bringSubviewToFront:_transparentNavBar];
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
     UIImage *cropppedImage = [[self croppedImage] imageCropedFullScreenSize];
     _backgroundBlurImgView.image = [cropppedImage applyLightEffect];
@@ -136,6 +136,7 @@
         viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
         viewController.delegate = _delegate;
         viewController.editPostId = _editPostId;
+        viewController.captionString = _captionString;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else

@@ -13,8 +13,15 @@
 #import "STNetworkQueueManager.h"
 #import "STFlowTemplateViewController.h"
 #import "STFacebookLoginController.h"
+#import "UIImageView+Mask.h"
+#import "UIImageView+WebCache.h"
 
 static const NSInteger kCaptionShadowTag = 101;
+static NSString *kLikeButtonName = @"like button";
+static NSString *kLikeButtonPressedName = @"like button pressed";
+static NSString *kLikedButtonName = @"liked";
+static NSString *kLikedButtonPressedName = @"liked pressed";
+
 
 @interface STCustomCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIButton *profileNameBtn;
@@ -25,12 +32,11 @@ static const NSInteger kCaptionShadowTag = 101;
 @property (weak, nonatomic) IBOutlet UIButton *shareBtn;
 @property (weak, nonatomic) IBOutlet UIButton *likesNumberBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIButton *bigCameraProfileBtn;
-@property (weak, nonatomic) IBOutlet UILabel *noPhotosLabel;
 @property (weak, nonatomic) IBOutlet UIButton *chatButton;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *captionButton;
 @property (weak, nonatomic) IBOutlet UIView *captionView;
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImg;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -47,6 +53,11 @@ static const NSInteger kCaptionShadowTag = 101;
     return self;
 }
 
+-(void)awakeFromNib{
+    [self.contentView bringSubviewToFront:_fullBlurImageView];
+    [self.contentView bringSubviewToFront:_activityIndicator];
+}
+
 - (void)updateLikeBtnAndLblWithDict:(NSDictionary *)setUpDict {
     int numberOfLikes = [setUpDict[@"number_of_likes"] intValue];
     [self.likesNumberBtn setTitle:[NSString stringWithFormat:@"%d", numberOfLikes] forState:UIControlStateNormal];
@@ -54,33 +65,18 @@ static const NSInteger kCaptionShadowTag = 101;
     BOOL isLiked = [setUpDict[@"post_liked_by_current_user"] boolValue];
     
     if (isLiked) {
-        [self.likeBtn setImage:[UIImage imageNamed:@"btn_liked"] forState:UIControlStateNormal];
-        [self.likeBtn setImage:[UIImage imageNamed:@"btn_liked_pressed"] forState:UIControlStateHighlighted];
+        [self.likeBtn setImage:[UIImage imageNamed:kLikedButtonName] forState:UIControlStateNormal];
+        [self.likeBtn setImage:[UIImage imageNamed:kLikedButtonPressedName] forState:UIControlStateHighlighted];
     }else{
-        [self.likeBtn setImage:[UIImage imageNamed:@"btn_like_normal"] forState:UIControlStateNormal];
-        [self.likeBtn setImage:[UIImage imageNamed:@"btn_like_pressed"] forState:UIControlStateHighlighted];
+        [self.likeBtn setImage:[UIImage imageNamed:kLikeButtonName] forState:UIControlStateNormal];
+        [self.likeBtn setImage:[UIImage imageNamed:kLikeButtonPressedName] forState:UIControlStateHighlighted];
     }
     
     [self.likeBtn setNeedsDisplay];
 }
 
 - (void)setUpWithDictionary:(NSDictionary *)setupDict forFlowType:(int)flowType{
-    // if setupDict is nil, the cell will be setted as a placeholder
-    if ([setupDict[@"type"] isEqualToString:@"placeholder"]) {
-        if ([setupDict[@"content_loaded"] boolValue] == YES) {
-            [self setupAsPlaceholderForFlowType:flowType];
-            return;
-        }
-        else
-        {
-            [self.contentView bringSubviewToFront:_fullBlurImageView];
-            [self.contentView bringSubviewToFront:_activityIndicator];
-            [self.activityIndicator startAnimating];
-            return;
-        }
-    }
     [self.contentView sendSubviewToBack:_fullBlurImageView];
-//    [_activityIndicator stopAnimating];
 
     [self setUpVisualsForFlowType:flowType];
     
@@ -92,7 +88,7 @@ static const NSInteger kCaptionShadowTag = 101;
     switch (flowType) {
         case STFlowTypeSinglePost:
         case STFlowTypeAllPosts:{
-            [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"]]];
+            [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"],setupDict[@"small_photo_link"]]];
             break;
         }
         case STFlowTypeDiscoverNearby:{
@@ -147,44 +143,6 @@ static const NSInteger kCaptionShadowTag = 101;
         default:
             break;
     }
-    
-    self.bigCameraProfileBtn.hidden = YES;
-    self.noPhotosLabel.hidden = YES;
-}
-
-- (void)setupAsPlaceholderForFlowType:(STFlowType)type{
-    [self.contentView sendSubviewToBack:_fullBlurImageView];
-    self.bigCameraProfileBtn.hidden = NO;
-    self.fullBlurImageView.hidden = NO;
-    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder STATUS loading"];
-    
-    self.likeBtn.hidden = YES;
-    self.captionButton.hidden = YES;
-    self.likesNumberBtn.hidden = YES;
-    self.shareBtn.hidden = YES;
-    _chatButton.hidden = YES;
-    self.noPhotosLabel.hidden = NO;
-    [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", self.username] forState:UIControlStateNormal];
-    
-    [self.activityIndicator stopAnimating];
-    
-    switch (type) {
-        case STFlowTypeMyGallery:{
-            self.noPhotosLabel.text = @"You don't have any photo. Take a photo";
-            break;
-        }
-        case STFlowTypeUserGallery:{
-            self.noPhotosLabel.text = [NSString stringWithFormat:@"Ask %@ to take a photo", self.username];
-            break;
-        }
-        default:
-            break;
-    }
-}
-
--(void)setUpPlaceholderBeforeLoading{
-    [self.contentView bringSubviewToFront:_fullBlurImageView];
-    self.fullBlurImageView.image = [UIImage imageNamed:@"placeholder STATUS loading"];
 }
 
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{
@@ -202,6 +160,13 @@ static const NSInteger kCaptionShadowTag = 101;
             weakSelf.fullBlurImageView.image=bluredImg;
         }
     }];
+    
+    [_userProfileImg sd_setImageWithURL:[NSURL URLWithString:urlArray[1]] placeholderImage:[UIImage imageNamed:@"btn_nrLIkes_normal"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [weakSelf.userProfileImg maskImage:weakSelf.userProfileImg.image];
+        [weakSelf.contentView bringSubviewToFront:_captionView];
+
+    }];
+
 }
 
 -(void)setUpCaptionForEdit:(BOOL)editFlag{
@@ -230,8 +195,6 @@ static const NSInteger kCaptionShadowTag = 101;
         _captionButton.tag = 111;
         if (![self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
             _captionButton.hidden = YES;
-
-
     }
 }
 
@@ -267,15 +230,16 @@ static const NSInteger kCaptionShadowTag = 101;
     self.fullBlurImageView.hidden = NO;
     self.fitImageView.hidden = NO;
 
-    self.bigCameraProfileBtn.hidden = YES;
     self.likeBtn.hidden = NO;
     [self setUpCaptionForEdit:NO];
     self.likesNumberBtn.hidden = NO;
     self.shareBtn.hidden = NO;
-    self.noPhotosLabel.hidden = YES;
     _heightConstraint.constant = 75.f;
     UIButton *captionBt = (UIButton *)[self.contentView viewWithTag:kCaptionShadowTag];
     [captionBt removeFromSuperview];
+    //this is for the cell to show loading
+    [self.contentView bringSubviewToFront:_fullBlurImageView];
+    [self.contentView bringSubviewToFront:_activityIndicator];
 
 }
 

@@ -15,6 +15,7 @@
 + (NSString *)yearsFromDate:(NSDate *)referenceDate;
 + (NSString *)birthdayStringFromFacebookBirthday:(NSString *)birthday;
 + (NSString *)statusForLastTimeSeen:(NSDate *)lastSeenDate;
++ (NSString *)timeStringForLastMessageDate:(NSDate *)messageDate;
 + (STUserStatus)statusTypeForLastTimeSeen:(NSDate *)lastSeenDate;
 
 @end

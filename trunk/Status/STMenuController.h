@@ -16,6 +16,7 @@
 - (void)goMyProfile;
 - (void)goFriendsInviter;
 - (void)goNearby;
+- (void)goNotification;
 
 - (void)hideMenu;
 - (void)showMenuForController:(UIViewController *)parrentVC;

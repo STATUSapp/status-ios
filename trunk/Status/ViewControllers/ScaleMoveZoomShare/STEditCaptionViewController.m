@@ -17,19 +17,26 @@
 }
 @property (weak, nonatomic) IBOutlet UITextView *textViewCaption;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurrImage;
+@property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 @end
 
 @implementation STEditCaptionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.transparentNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.transparentNavBar.shadowImage = [UIImage new];
+    self.transparentNavBar.translucent = YES;
+    [self.view bringSubviewToFront:_transparentNavBar];
+
     _captionString = _postDict[@"caption"];
     
     if (_captionString ==nil || [_captionString isEqual:[NSNull null]])
         _captionString = @"";
     
     _textViewCaption.text = _captionString;
-
+    [_textViewCaption becomeFirstResponder];
+    
     if (_postDict!=nil) {
         __weak STEditCaptionViewController *weakSelf = self;
         [[STImageCacheController sharedInstance] loadPostImageWithName:_postDict[@"full_photo_link"] withPostCompletion:nil andBlurCompletion:^(UIImage *bluredImg) {

@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *blurBackground;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerYConstraint;
 @property (weak, nonatomic) IBOutlet UIView *itemsView;
+@property (weak, nonatomic) IBOutlet UILabel *notificationBadge;
 
 @end

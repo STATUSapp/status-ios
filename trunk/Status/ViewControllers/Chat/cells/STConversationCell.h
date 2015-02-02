@@ -17,4 +17,5 @@
                    showsYouLabel:(BOOL)showsYouLabel
                      andIsUnread:(BOOL)isUnread;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+-(void)configureCellWithInfo:(NSDictionary *)info;
 @end

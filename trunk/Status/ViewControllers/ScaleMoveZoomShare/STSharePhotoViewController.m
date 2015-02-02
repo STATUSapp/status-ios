@@ -36,6 +36,8 @@
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UITextView *captiontextView;
+
 
 @property (strong, nonatomic) ACAccountStore * accountStore;
 @property (strong, nonatomic) ACAccountType * accountType;
@@ -69,6 +71,12 @@
                                              selector:@selector(appplicationIsActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+    
+    if (_captionString!=nil && _captionString.length > 0) {
+        _captiontextView.text = _captionString;
+    }
+    else
+        _captiontextView.text = @"Write a caption ... ";
 }
 
 - (void)appplicationIsActive:(NSNotification *)notification {

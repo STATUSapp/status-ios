@@ -10,12 +10,10 @@
 
 @interface STCustomCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) NSString * username;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 
     // if setupDict is nil, the cell will be setted as a placeholder
 - (void)setUpWithDictionary:(NSDictionary *)setupDict forFlowType:(int)flowType;
-- (void)setUpPlaceholderBeforeLoading;
 - (void)updateLikeBtnAndLblWithDict:(NSDictionary *)setUpDict;
 - (void)addCaptionShadow;
 - (void)captionShadowPressed:(id)sender;

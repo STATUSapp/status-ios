@@ -108,6 +108,24 @@
     return [NSString stringWithFormat:@"Active %d year%@ ago", years, (years == 1) ? @"" : @"s"];
 }
 
++ (NSString *)timeStringForLastMessageDate:(NSDate *)messageDate{
+    NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:messageDate];
+    NSString *returnTimeString=@"";
+    if (timeInterval<3600) {
+        returnTimeString = [NSString stringWithFormat:@"%ldm",(NSInteger)timeInterval/60 + 1];
+    }
+    else if (timeInterval<3600*24){
+        returnTimeString = [NSString stringWithFormat:@"%ldh",(NSInteger)timeInterval/3600];
+    }
+    else if (timeInterval < 3600*24*7*52){
+        returnTimeString = [NSString stringWithFormat:@"%ldw",(NSInteger)timeInterval/(3600*24*7)+1];
+    }
+    else
+        returnTimeString = [NSString stringWithFormat:@"%ldy",(NSInteger)timeInterval/(3600*24*7*52)];
+    
+    return returnTimeString;
+}
+
 + (STUserStatus)statusTypeForLastTimeSeen:(NSDate *)lastSeenDate {
     NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:lastSeenDate];
     

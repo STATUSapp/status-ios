@@ -20,19 +20,17 @@
 
 @interface STConversationsListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 {
-    NSString *_allUsersSearchText;
+    NSString *_searchTextString;
+    
     NSMutableArray *_allUsersArray;
-    
-    NSString *_nearbySearchText;
     NSMutableArray *_nearbyUsers;
-    
-    NSString *_recentSearchtext;
     NSMutableArray *_recentUsers;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (weak, nonatomic) IBOutlet UIButton *loadMoreButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarHeightContraint;
 
 @end
 
@@ -50,10 +48,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _searchTextString = @"";
     _allUsersArray = [NSMutableArray new];
     _nearbyUsers = [NSMutableArray new];
     _recentUsers = [NSMutableArray new];
     [_segment setSelectedSegmentIndex:STSearchControlRecent];
+    _searchBarHeightContraint.constant = 0;
    
 }
 
@@ -113,21 +113,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     STConversationCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([STConversationCell class])];
-    NSDictionary *dict = [self getDictionaryorIndex:indexPath.row];
-    NSString *imageUrl = dict[@"small_photo_link"];
-    if (![imageUrl isEqual:[NSNull null]]) {
-        [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [cell.profileImageView maskImage:image];
-        }];
-    }
-    BOOL isUnread = ![dict[@"message_read"] boolValue];
-    NSString *lastMessage = dict[@"last_message"];
-    if (![lastMessage isKindOfClass:[NSString class]]) {
-        lastMessage = @"";
-        isUnread = NO;
-    }
-    [cell setupWithProfileImageUrl:dict[@"small_photo_link"] profileName:dict[@"user_name"] lastMessage:lastMessage dateOfLastMessage:nil showsYouLabel:NO andIsUnread:isUnread];
-    
+    [cell configureCellWithInfo:[self getDictionaryorIndex:indexPath.row]];
     return cell;
 }
 
@@ -150,6 +136,15 @@
     STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
     viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:selectedUserInfo];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y < 0) {
+        if (_searchBarHeightContraint.constant == 0) {
+            [self onSwipeDown:nil];
+        }
+    }
+//    NSLog(@"Offset: %@", NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 #pragma mark - UISearchBar delegate method
@@ -189,54 +184,28 @@
 
 #pragma mark - Helpers
 -(void)searchForText:(NSString *)text{
-    switch (_segment.selectedSegmentIndex) {
-        case STSearchControlAll:
-            _allUsersSearchText = text;
-            break;
-        case STSearchControlNearby:
-            _nearbySearchText = text;
-            break;
-            
-        case STSearchControlRecent:
-            _recentSearchtext = text;
-            break;
-    }
+    _searchTextString = text;
     [self loadNewDataWithOffset:NO];
 }
 - (IBAction)segmentValueChanged:(id)sender {
-    switch (_segment.selectedSegmentIndex) {
-        case STSearchControlAll:
-            _searchBar.text = _allUsersSearchText ;
-            break;
-        case STSearchControlNearby:
-            _searchBar.text = _nearbySearchText ;
-            break;
-            
-        case STSearchControlRecent:
-            _searchBar.text = _recentSearchtext ;
-            break;
-    }
+    _searchBar.text = _searchTextString;
     [self loadNewDataWithOffset:NO];
 }
 
 -(void)loadNewDataWithOffset:(BOOL)newOffset{
     __weak STConversationsListViewController *weakSelf = self;
-    NSString *searchtext = @"";
     NSInteger offset = 0;
     switch (_segment.selectedSegmentIndex) {
         case STSearchControlAll:{
-            searchtext = _allUsersSearchText;
             offset = _allUsersArray.count;
         }
             break;
         case STSearchControlNearby:{
-            searchtext = _nearbySearchText;
             offset = _nearbyUsers.count;
         }
             break;
             
         case STSearchControlRecent:{
-            searchtext = _recentSearchtext;
             offset = _recentUsers.count;
         }
             break;
@@ -255,7 +224,10 @@
         weakSelf.loadMoreButton = nil;
     };
 
-    [STGetUsersRequest getUsersForScope:_segment.selectedSegmentIndex withSearchText:searchtext andOffset:newOffset == YES?offset:0 completion:completion failure:failBlock];
+    [STGetUsersRequest getUsersForScope:_segment.selectedSegmentIndex
+                         withSearchText:_searchTextString andOffset:newOffset == YES?offset:0
+                             completion:completion
+                                failure:failBlock];
 }
 
 -(void)saveNewDataAndReload:(NSArray *)newData isNewOffset:(BOOL)newOffset{
@@ -313,6 +285,18 @@
     _loadMoreButton.enabled  = NO;
     [self loadNewDataWithOffset:YES];
     
+}
+- (IBAction)onSwipeUp:(id)sender {
+    _searchBarHeightContraint.constant = 0;
+    [UIView animateWithDuration:0.33f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+- (IBAction)onSwipeDown:(id)sender {
+    _searchBarHeightContraint.constant = 44.f;
+    [UIView animateWithDuration:0.33f animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 @end
