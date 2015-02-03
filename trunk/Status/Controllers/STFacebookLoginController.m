@@ -171,21 +171,22 @@
 }
 
 - (void)getUserBirthdayWithCompletion:(void (^)(NSString *birthday))completion {
+    __weak STFacebookLoginController *weakSelf = self;
     [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
         NSLog(@"Permissions: %@", newObjects);
         if (![newObjects containsObject:@"user_birthday"]) {
             [[FBSession activeSession] requestNewPublishPermissions:@[@"user_birthday"]
                                                     defaultAudience:FBSessionDefaultAudienceFriends
                                                   completionHandler:^(FBSession *session, NSError *error) {
-                                                      if (error!=nil)
-                                                          [self requestForBirthdayWithCompletion:completion];
+                                                      if (error==nil)
+                                                          [weakSelf requestForBirthdayWithCompletion:completion];
                                                       else
                                                           completion(nil);
                                                   }];
             
         }
         else
-            [self requestForBirthdayWithCompletion:completion];
+            [weakSelf requestForBirthdayWithCompletion:completion];
     }];
 }
 
@@ -202,17 +203,21 @@
     userInfo[@"facebook_id"] = userFbId;
     
     __block NSString *userName = user[@"name"];
-    
+    __block NSString *serverBithday = nil;
+
     STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
+        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
         if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
             [weakSelf measureRegister];
             [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
+            if (_delegate && [_delegate respondsToSelector:@selector(facebookControllerDidRegister)]) {
+                [_delegate facebookControllerDidRegister];
+            }
         }
         else
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong with the registration." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
         }
     };
     
@@ -221,6 +226,7 @@
     };
     
     STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
+        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
         if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
             //get picture of user then register to server
             FBRequest *pic = [FBRequest requestForGraphPath:@"me/?fields=picture.type(large)"];
@@ -232,7 +238,6 @@
                         [weakSelf.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
                     }
                     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
-                    [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
                     return ;
                 }
                 NSDictionary *resultDic = (NSDictionary<FBGraphUser> *) result;
@@ -243,19 +248,12 @@
                 userInfo[@"facebook_image_link"] = photoLink;
                 if (userName!=nil)
                     userInfo[@"full_name"] = userName;
-                //get the bithday of the user
-                [self getUserBirthdayWithCompletion:^(NSString *birthday) {
-                    if (birthday!=nil) {
-                        NSString *serverBithday = [NSDate birthdayStringFromFacebookBirthday:birthday];
-                        if (serverBithday!=nil) {
-                            userInfo[@"birthday"] = birthday;
-                        }
-                    }
-                    [STRegisterRequest registerWithUserInfo:userInfo
-                                             withCompletion:registerCompletion
-                                                    failure:failBlock];
-
-                }];
+                if (serverBithday!=nil) {
+                    userInfo[@"birthday"] = serverBithday;
+                }
+                [STRegisterRequest registerWithUserInfo:userInfo
+                                         withCompletion:registerCompletion
+                                                failure:failBlock];
                 
             }];
             
@@ -263,18 +261,29 @@
         else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
             [weakSelf setTrackerAsExistingUser];
             [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
+//            if (_delegate && [_delegate respondsToSelector:@selector(facebookControllerDidRegister)]) {
+//                [_delegate facebookControllerDidRegister];
+//            }
         }
         else
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong on login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
         }
     };
-    
-    [STLoginRequest loginWithUserInfo:userInfo
-                       withCompletion:loginCompletion
-                              failure:failBlock];
+    //get the bithday of the user
+    [self getUserBirthdayWithCompletion:^(NSString *birthday) {
+        if (birthday!=nil) {
+            serverBithday = [NSDate birthdayStringFromFacebookBirthday:birthday];
+            if (serverBithday!=nil) {
+                userInfo[@"birthday"] = serverBithday;
+            }
+        }
+        [STLoginRequest loginWithUserInfo:userInfo
+                           withCompletion:loginCompletion
+                                  failure:failBlock];
+        
+    }];
 }
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {

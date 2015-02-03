@@ -96,7 +96,7 @@ static NSString *kOnlineImageName = @"online chat";
     
     NSInteger numberOfUnreadMessages = [info[@"unread_messages_count"] integerValue];
     if (numberOfUnreadMessages > 0) {
-        [_numberOfUnreadMessages setTitle:[NSString stringWithFormat:@"%ld", numberOfUnreadMessages] forState:UIControlStateNormal];
+        [_numberOfUnreadMessages setTitle:[NSString stringWithFormat:@"%ld", (long)numberOfUnreadMessages] forState:UIControlStateNormal];
         _numberOfUnreadMessages.hidden = NO;
     }
     else

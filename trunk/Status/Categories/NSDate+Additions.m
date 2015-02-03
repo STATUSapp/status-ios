@@ -59,7 +59,9 @@
 }
 
 +(NSString *)birthdayStringFromFacebookBirthday:(NSString *)birthday{
-    
+    if (birthday==nil||[birthday isKindOfClass:[NSNull class]]) {
+        return nil;
+    }
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateFormat = @"MM/dd/yyyy";
     NSDate *birthdayDate = [df dateFromString:birthday];
@@ -112,16 +114,16 @@
     NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:messageDate];
     NSString *returnTimeString=@"";
     if (timeInterval<3600) {
-        returnTimeString = [NSString stringWithFormat:@"%ldm",(NSInteger)timeInterval/60 + 1];
+        returnTimeString = [NSString stringWithFormat:@"%ldm",(long)timeInterval/60 + 1];
     }
     else if (timeInterval<3600*24){
-        returnTimeString = [NSString stringWithFormat:@"%ldh",(NSInteger)timeInterval/3600];
+        returnTimeString = [NSString stringWithFormat:@"%ldh",(long)timeInterval/3600];
     }
     else if (timeInterval < 3600*24*7*52){
-        returnTimeString = [NSString stringWithFormat:@"%ldw",(NSInteger)timeInterval/(3600*24*7)+1];
+        returnTimeString = [NSString stringWithFormat:@"%ldw",(long)timeInterval/(3600*24*7)+1];
     }
     else
-        returnTimeString = [NSString stringWithFormat:@"%ldy",(NSInteger)timeInterval/(3600*24*7*52)];
+        returnTimeString = [NSString stringWithFormat:@"%ldy",(long)timeInterval/(3600*24*7*52)];
     
     return returnTimeString;
 }

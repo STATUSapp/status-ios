@@ -63,6 +63,9 @@
 #import "STImagePickerController.h"
 #import "STNoPhotosCell.h"
 
+#import "STGetUserProfileRequest.h"
+#import "STEditProfileViewController.h"
+
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
 static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
@@ -308,7 +311,21 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 #pragma mark - FacebookController Delegate
+-(void)facebookControllerDidRegister{
+    NSString *userId = [STFacebookLoginController sharedInstance].currentUserId;
+    [STGetUserProfileRequest getProfileForUserID:userId withCompletion:^(id response, NSError *error) {
+        NSLog(@"%@", response);
+        STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:userId];
+        editVC.userProfileDict = response;
+        [self.navigationController pushViewController:editVC animated:YES];
+        
+        
+    } failure:^(NSError *error) {
+        // empty all fields
+        NSLog(@"%@", error.debugDescription);
+    }];
 
+}
 -(void)facebookControllerDidLoggedIn{
     __weak STFlowTemplateViewController * weakSelf = self;
     

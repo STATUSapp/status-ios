@@ -120,7 +120,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
+//    [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
     
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];

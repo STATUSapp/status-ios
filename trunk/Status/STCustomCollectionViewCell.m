@@ -191,10 +191,11 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     }
     else
     {
-        [_captionButton setTitle:@"Edit" forState:UIControlStateNormal];
         _captionButton.tag = 111;
         if (![self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
             _captionButton.hidden = YES;
+        else
+            [_captionButton setTitle:@"Edit" forState:UIControlStateNormal];
     }
 }
 

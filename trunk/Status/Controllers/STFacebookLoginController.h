@@ -14,6 +14,7 @@
 @protocol FacebookControllerDelegate <NSObject>
 
 -(void) facebookControllerDidLoggedIn;
+-(void) facebookControllerDidRegister;
 -(void) facebookControllerDidLoggedOut;
 -(void) facebookControllerSessionExpired;
 
