@@ -79,7 +79,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     UIButton *_refreshBt;
     BOOL _isPlaceholderSinglePost; // there is no dataSource and will be displayed a placeholder Post
     BOOL _isDataSourceLoaded;
-    NSInteger _numberOfSeenPosts;
+//    NSInteger _numberOfSeenPosts;
     
     CGPoint _start;
     CGPoint _end;
@@ -139,12 +139,12 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
     
     
-    
+//deactivate ads as Denis requested
     // setup interstitial ad
-    _GADelegate = [STGADelegate new];
-    [_GADelegate setupInterstitialAds];
+//    _GADelegate = [STGADelegate new];
+//    [_GADelegate setupInterstitialAds];
 //    [self setupInterstitialAds];
-    _numberOfSeenPosts = 0;
+//    _numberOfSeenPosts = 0;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -277,6 +277,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (index == 0 || index %15 != 0) {
         return;
     }
+    //disable this as Denis requested
     BOOL shouldPresentAds = ![[STIAPHelper sharedInstance] productPurchased:kRemoveAdsInAppPurchaseProductID];
     
     if (shouldPresentAds) {
@@ -707,7 +708,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 //    [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 - (IBAction)onTapUserProfilePicture:(id)sender {
-    //TODO: test this
     NSString *userId = [[self getCurrentDictionary] valueForKey:@"user_id"];
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:userId];
     [self.navigationController pushViewController:userProfileVC animated:YES];
@@ -773,7 +773,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (IBAction)onTapCameraUpload:(id)sender {
     
     NSDictionary * presentedPostDict = [self getCurrentDictionary];
-    BOOL isOwner = [presentedPostDict[@"is_owner"] boolValue];
+    BOOL isOwner = YES;
+    if (presentedPostDict[@"is_owner"]!=nil) {
+        isOwner = [presentedPostDict[@"is_owner"] boolValue];
+    }
     __weak STFlowTemplateViewController *weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
         [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:presentedPostDict[@"caption"]];
@@ -1183,8 +1186,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    _numberOfSeenPosts++;
-    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
+//    _numberOfSeenPosts++;
+//    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
     
     _end = scrollView.contentOffset;
     if (_start.x < _end.x || _shouldForceSetSeen == YES)

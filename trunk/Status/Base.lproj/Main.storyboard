@@ -2176,7 +2176,7 @@
         <image name="chat button pressed" width="212" height="45"/>
         <image name="chat unread message" width="24" height="24"/>
         <image name="facebook share button pressed" width="160" height="46"/>
-        <image name="grey line" width="288" height="1"/>
+        <image name="grey line" width="227" height="3"/>
         <image name="invite friends button" width="212" height="45"/>
         <image name="invite friends button pressed" width="212" height="45"/>
         <image name="invite your friend button" width="202" height="40"/>
