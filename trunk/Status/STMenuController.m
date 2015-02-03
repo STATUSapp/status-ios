@@ -164,8 +164,18 @@
 }
 
 - (void)resetNavigationControllerStack {
+    
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    
+    if (_currentVC == nil) {
+        _currentVC = appDelegate.window.rootViewController;
+        if ([_currentVC isKindOfClass:[UINavigationController class]]) {
+            _currentVC = [(UINavigationController *)_currentVC viewControllers].firstObject;
+        }
+    }
+    
     UINavigationController * navController = _currentVC.navigationController;
-    _currentVC = [_currentVC.navigationController.viewControllers objectAtIndex:0];
+    _currentVC = _currentVC.navigationController.viewControllers.firstObject;
     [navController popToRootViewControllerAnimated:NO];
 }
 

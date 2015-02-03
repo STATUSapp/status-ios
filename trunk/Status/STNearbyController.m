@@ -42,13 +42,17 @@
         {
             NSArray *newPosts = response[@"data"];
             [weakSelf.profiles addObjectsFromArray:newPosts];
-            completionBlock(nil);
+            if (completionBlock) {
+                completionBlock(nil);
+            }
         }
     };
     
     STRequestFailureBlock failBlock = ^(NSError *error){
         NSLog(@"error with %@", error.description);
-        completionBlock(error);
+        if (completionBlock) {
+            completionBlock(nil);
+        }
     };
     
     [STGetNearbyProfilesRequest getNearbyProfilesWithOffset:offset withCompletion:completion failure:failBlock ];
@@ -82,9 +86,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(STUserProfileViewController *)viewController {
     NSInteger actualVCIndex = [_profiles indexOfObject:[viewController userProfileDict]];
     if (actualVCIndex > ( _profiles.count - 5 )) {
-        [self getProfilesFromServerWithOffset:_profiles.count withCompletion:^(NSError *error) {
-            NSLog(@"updated nearby profiles");
-        }];
+        [self getProfilesFromServerWithOffset:_profiles.count withCompletion:nil];
     }
     
     if (actualVCIndex == _profiles.count - 1) {

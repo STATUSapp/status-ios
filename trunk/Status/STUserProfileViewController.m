@@ -104,7 +104,6 @@
     
     __weak STUserProfileViewController * weakSelf = self;
     [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
-        NSLog(@"%@", response);
         [weakSelf setupVisualsWithDictionary:response];
         weakSelf.userProfileDict = response;
         
@@ -121,15 +120,18 @@
 - (void)setupVisualsWithDictionary:(NSDictionary *)dict {
     
     if ([dict valueForKey:kFirstNameKey]  != [NSNull null]) {
-        _lblNameAndAge.text = [dict valueForKey:kFirstNameKey];
+        _lblNameAndAge.text = dict[kFirstNameKey];
     } else {
-        _lblNameAndAge.text = [dict valueForKey:kFulNameKey];
+        _lblNameAndAge.text = dict[kFulNameKey];
     }
     
     if ([dict objectForKey:kBirthdayKey] != [NSNull null]) {
-        NSString * age = [NSDate yearsFromDate:[NSDate dateFromServerDate:[dict objectForKey:kBirthdayKey]]];
+        NSString * age = [NSDate yearsFromDate:[NSDate dateFromServerDate:dict[kBirthdayKey]]];
         _lblNameAndAge.text = [NSString stringWithFormat:@"%@, %@", _lblNameAndAge.text, age];
     }
+    
+    NSString * numberOfPost = [NSString stringWithFormat:@"%@", dict[kNumberOfPostsKey]];
+    [_btnGallery setTitle:numberOfPost forState:UIControlStateNormal];
     
     _lblUserDescription.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
     _lblLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
@@ -182,7 +184,7 @@
 
 +(id)getObjectFromUserProfileDict:(NSDictionary *)dict forKey:(NSString *)key {
     if ([dict objectForKey:key] != [NSNull null]) {
-        return [dict objectForKey:key];
+        return dict[key];
     }
     return nil;
 }
