@@ -182,16 +182,19 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 #pragma \mark - UIActionSheetDelegate
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    @try {
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        [imagePicker setAllowsEditing:YES];
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    }
-    @catch (NSException *exception) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device has no camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+    
+    if (buttonIndex<2) {
+        @try {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            [imagePicker setAllowsEditing:YES];
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }
+        @catch (NSException *exception) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device has no camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }
     }
 }
 
@@ -228,5 +231,11 @@ const NSInteger kDefaultValueForTopConstraint = 26;
     }];
 
 }
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
 
 @end
