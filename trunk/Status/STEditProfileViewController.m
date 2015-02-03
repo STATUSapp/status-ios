@@ -13,6 +13,7 @@
 #import "STUploadNewProfilePictureRequest.h"
 
 const NSInteger kMaxNumberOfCharacters = 150;
+const NSInteger kDefaultValueForTopConstraint = 26;
 
 @interface STEditProfileViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldName;
@@ -20,6 +21,7 @@ const NSInteger kMaxNumberOfCharacters = 150;
 @property (weak, nonatomic) IBOutlet UITextView *txtViewBio;
 @property (nonatomic, strong) NSString * userId;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrProfileTop;
 @property (weak, nonatomic) IBOutlet UILabel *counterLabel;
 @end
 
@@ -37,6 +39,9 @@ const NSInteger kMaxNumberOfCharacters = 150;
     // Do any additional setup after loading the view.
 
     [self setupVisualsWithDictionary:_userProfileDict];
+    
+    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
 }
 
@@ -87,7 +92,48 @@ const NSInteger kMaxNumberOfCharacters = 150;
 }
 */
 
+#pragma mark - iPhone 4 or less handle texts and keyboards
+
+- (void)handleKeyboardForTextInputObject:(id)textInputObject {
+    if (IS_IPHONE_4_OR_LESS) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            if(textInputObject == _txtFieldLocation) {
+                _constrProfileTop.constant = - 24;
+            } else if(textInputObject == _txtFieldName) {
+                _constrProfileTop.constant = - 24;
+            } else if(textInputObject == _txtViewBio) {
+                _constrProfileTop.constant = - 65;
+            }
+            
+            [self.view setNeedsLayout];
+            [self.view layoutIfNeeded];
+            
+        }];
+    }
+}
+
+- (void)resetViewAfterKeyboardDidHide {
+    
+    if (IS_IPHONE_4_OR_LESS) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            _constrProfileTop.constant = kDefaultValueForTopConstraint;
+            [self.view setNeedsLayout];
+            [self.view layoutIfNeeded];
+        }];
+    }
+}
+
 #pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self handleKeyboardForTextInputObject:textField];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self resetViewAfterKeyboardDidHide];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == _txtFieldLocation) {
@@ -100,6 +146,14 @@ const NSInteger kMaxNumberOfCharacters = 150;
 }
 
 #pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [self handleKeyboardForTextInputObject:textView];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self resetViewAfterKeyboardDidHide];
+}
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text  isEqualToString: @"\n"]) {

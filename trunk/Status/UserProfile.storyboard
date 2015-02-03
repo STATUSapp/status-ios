@@ -266,26 +266,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3qN-6o-ku1">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="K5n-6A-nDa"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="Profile Settings" id="Rei-8J-jKA">
-                                        <barButtonItem key="leftBarButtonItem" title="Close" id="QFp-p1-o13">
-                                            <connections>
-                                                <action selector="onTapClose:" destination="DwW-bD-kyz" id="lQ1-Ll-kup"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Save" id="rO8-db-hDF">
-                                            <connections>
-                                                <action selector="onTapSave:" destination="DwW-bD-kyz" id="9fJ-nS-9eX"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROFILE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGD-Lf-hMr">
                                 <rect key="frame" x="16" y="70" width="65" height="17"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
@@ -448,6 +428,26 @@
                                     <constraint firstAttribute="trailing" secondItem="jRc-NH-6kK" secondAttribute="trailing" id="zdI-Hz-ott"/>
                                 </constraints>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3qN-6o-ku1">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="K5n-6A-nDa"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Profile Settings" id="Rei-8J-jKA">
+                                        <barButtonItem key="leftBarButtonItem" title="Close" id="QFp-p1-o13">
+                                            <connections>
+                                                <action selector="onTapClose:" destination="DwW-bD-kyz" id="lQ1-Ll-kup"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="rO8-db-hDF">
+                                            <connections>
+                                                <action selector="onTapSave:" destination="DwW-bD-kyz" id="9fJ-nS-9eX"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -463,6 +463,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="constrProfileTop" destination="1Vo-yj-RLM" id="E83-hO-15g"/>
                         <outlet property="counterLabel" destination="JvD-DD-zCV" id="cyX-rm-h2n"/>
                         <outlet property="profileImage" destination="hNW-w6-43f" id="SrS-ae-zLR"/>
                         <outlet property="txtFieldLocation" destination="Vg4-hj-owh" id="dvq-Ud-eid"/>
