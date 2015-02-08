@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GADInterstitial.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @interface STGADelegate : NSObject
 @property(nonatomic, strong) GADInterstitial * interstitial;
