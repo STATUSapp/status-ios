@@ -7,11 +7,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "share button pressed.png"
+      "filename" : "share button 2x pressed.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "share button pressed 3x.png"
     }
   ],
   "info" : {

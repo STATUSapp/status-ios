@@ -24,7 +24,22 @@
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "bottom" : 58,
+          "top" : 57,
+          "right" : 60,
+          "left" : 59
+        }
+      },
       "idiom" : "universal",
+      "filename" : "bubble_send 3x.png",
       "scale" : "3x"
     }
   ],

@@ -5,20 +5,9 @@
       "scale" : "1x"
     },
     {
-      "resizing" : {
-        "mode" : "3-part-vertical",
-        "center" : {
-          "mode" : "fill",
-          "height" : 1
-        },
-        "capInsets" : {
-          "top" : 1135,
-          "bottom" : 0
-        }
-      },
       "idiom" : "universal",
-      "filename" : "splash4in.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "splash4.7in.png"
     },
     {
       "idiom" : "universal",

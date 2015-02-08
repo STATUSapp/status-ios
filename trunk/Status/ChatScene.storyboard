@@ -32,9 +32,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message_text" translatesAutoresizingMaskIntoConstraints="NO" id="bpn-5i-4tr">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                                         <color key="tintColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="320" id="Ihc-Ar-TuQ"/>
-                                        </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7U-We-10K">
                                         <rect key="frame" x="265" y="6" width="53" height="33"/>
@@ -68,7 +65,6 @@
                                     <constraint firstAttribute="centerY" secondItem="M7U-We-10K" secondAttribute="centerY" id="5uJ-Sj-u2A"/>
                                     <constraint firstItem="6YD-fH-Eec" firstAttribute="leading" secondItem="Qqe-VQ-XrA" secondAttribute="leading" constant="10" id="6Ya-4n-R4Q"/>
                                     <constraint firstItem="bpn-5i-4tr" firstAttribute="top" secondItem="Qqe-VQ-XrA" secondAttribute="top" id="B3x-80-7zb"/>
-                                    <constraint firstAttribute="width" constant="320" id="BMd-Xg-r9Y"/>
                                     <constraint firstItem="6YD-fH-Eec" firstAttribute="top" secondItem="Qqe-VQ-XrA" secondAttribute="top" constant="5" id="IjY-e2-PAX"/>
                                     <constraint firstItem="M7U-We-10K" firstAttribute="leading" secondItem="6YD-fH-Eec" secondAttribute="trailing" constant="8" id="KiV-7u-6OR"/>
                                     <constraint firstItem="bpn-5i-4tr" firstAttribute="leading" secondItem="Qqe-VQ-XrA" secondAttribute="leading" id="dg4-Lw-5Ak"/>
@@ -81,9 +77,6 @@
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RcE-XE-4Xy">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="V2a-dL-7qD"/>
-                                </constraints>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -405,7 +398,6 @@
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Eoz-ik-vdn">
                                 <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="HSD-qz-amh"/>
                                     <constraint firstAttribute="height" constant="44" id="aU7-2a-KtM"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -435,9 +427,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eOQ-eT-FbH">
                                 <rect key="frame" x="0.0" y="133" width="320" height="435"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="q3Q-a8-cSO"/>
-                                </constraints>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5rz-IY-ctH">
                                     <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -558,7 +547,6 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="POq-gm-6Eb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="nf8-d1-Ant"/>
                                     <constraint firstAttribute="height" constant="44" id="rO4-ka-8gG"/>
                                 </constraints>
                                 <items>
@@ -659,7 +647,7 @@
         <image name="chat time icon" width="19" height="19"/>
         <image name="chat unread message" width="24" height="24"/>
         <image name="message_text" width="320" height="40"/>
-        <image name="offline chat" width="13" height="13"/>
+        <image name="offline chat" width="13" height="14"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

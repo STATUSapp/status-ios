@@ -7,11 +7,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "invited button pressed.png"
+      "filename" : "invited button pressed-1.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "invited button pressed.png"
     }
   ],
   "info" : {

@@ -7,11 +7,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "invite friends button pressed.png"
+      "filename" : "invite friends button pressed-1.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "invite friends button pressed.png"
     }
   ],
   "info" : {
