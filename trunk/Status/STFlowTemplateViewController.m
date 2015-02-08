@@ -207,29 +207,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     _shareOptionsView = (STCustomShareView*)[array objectAtIndex:0];
     _shareOptionsView.hidden = TRUE;
-    _shareOptionsView.translatesAutoresizingMaskIntoConstraints = NO;
      [self.view addSubview:_shareOptionsView];
-
-    _shareOptionsViewContraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
-                                                              attribute:NSLayoutAttributeTop
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.view
-                                                              attribute:NSLayoutAttributeTop
-                                                             multiplier:1.f
-                                                               constant:0];
-    
-    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
-                                                              attribute:NSLayoutAttributeBottom
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.view
-                                                              attribute:NSLayoutAttributeBottom
-                                                             multiplier:1.f
-                                                               constant:0];
-    
-    
-    [self.view addConstraints:@[_shareOptionsViewContraint, bottomConstraint]];
-    [_shareOptionsView setForDissmiss:YES];
-    
 }
 
 #pragma mark - Setup Visuals for Flow Type
@@ -717,13 +695,15 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (IBAction)onTapShare:(id)sender {
     NSDictionary *dict = [self getCurrentDictionary];
     BOOL isOwner = [dict[@"is_owner"] boolValue];
-    _shareOptionsView.shadowView.alpha = 0.0;
-    [UIView animateWithDuration:0.33f animations:^{
-        [_shareOptionsView setUpForThreeButtons:isOwner?NO:YES];
+    [_shareOptionsView setUpForThreeButtons:!isOwner];
+    [self.view layoutIfNeeded];
+    
+    [UIView animateWithDuration:0.35f animations:^{
+        _shareOptionsView.shadowView.alpha = 0.0;
         _shareOptionsView.hidden=FALSE;
-        _shareOptionsView.shadowView.alpha = 0.5;
         [_shareOptionsView setForDissmiss:NO];
-        [self.view layoutIfNeeded];
+        _shareOptionsView.shadowView.alpha = 0.5;
+
         
     }];
     
@@ -934,10 +914,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (IBAction)onDismissShareOptions:(id)sender {
-    [UIView animateWithDuration:0.33f animations:^{
+    [UIView animateWithDuration:0.35f animations:^{
         [_shareOptionsView setForDissmiss:YES];
         _shareOptionsView.shadowView.alpha = 0.0;
-        [self.view layoutIfNeeded];
     }  completion:^(BOOL finished) {
         _shareOptionsView.hidden = TRUE;
     }];

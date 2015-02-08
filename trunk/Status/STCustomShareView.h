@@ -9,13 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface STCustomShareView : UIView
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *customHeightConstraint;
-@property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UIButton *deletaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *moveScaleBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fbTopConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveTopConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImgContraint;
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
 
 -(void) setUpForThreeButtons:(BOOL)isThree;

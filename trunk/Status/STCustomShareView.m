@@ -7,12 +7,16 @@
 //
 
 #import "STCustomShareView.h"
-float const k3Btnheight = 170.f;
-float const k5Btnheight = 299.f;
-float const k3BtnFbOffset = -3.f;
-float const k3BtnSaveOffset = -53.f;
-float const k5BtnFbOffset = -31.f;
-float const k5BtnSaveOffset = -81.f;
+
+CGFloat const kDefaultButtonHeight = 50;
+
+@interface STCustomShareView()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrMoveScaleHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrDeleteHeight;
+@property (weak, nonatomic) IBOutlet UIImageView *lineDelete;
+@property (weak, nonatomic) IBOutlet UIImageView *lineMoveAndScale;
+
+@end
 
 @implementation STCustomShareView
 
@@ -35,17 +39,22 @@ float const k5BtnSaveOffset = -81.f;
 */
 
 -(void) setUpForThreeButtons:(BOOL)isThree{
-    self.customHeightConstraint.constant = (isThree==TRUE)?k3Btnheight:k5Btnheight;
-    self.background.image = [UIImage imageNamed:(isThree==TRUE)?@"share background 3 buttons":@"share background 5 buttons good3"];
-    self.deletaBtn.hidden = isThree;
-    self.moveScaleBtn.hidden = isThree;
-    self.fbTopConstraint.constant = isThree==TRUE?k3BtnFbOffset:k5BtnFbOffset;
-    self.saveTopConstraint.constant = isThree == TRUE?k3BtnSaveOffset:k5BtnSaveOffset;
+
+    _constrDeleteHeight.constant = isThree ? 0 : kDefaultButtonHeight;
+    _constrMoveScaleHeight.constant = isThree ? 0 : kDefaultButtonHeight;
+    _deletaBtn.hidden = isThree;
+    _moveScaleBtn.hidden = isThree;
+    _lineDelete.hidden = isThree;
+    _lineMoveAndScale.hidden = isThree;
+
 }
 
 -(void) setForDissmiss:(BOOL) isDissmissed{
-    //TODO: remove this magic numbers
-    self.bubbleImgContraint.constant = isDissmissed==TRUE?-290:80;
+
+    for (UIView * view in self.subviews) {
+        view.alpha = isDissmissed ? 1 : 0;
+        view.alpha = isDissmissed ? 0 : 1;
+    }
 }
 
 @end
