@@ -17,6 +17,8 @@
 #import "STFlowTemplateViewController.h"
 #import "STConstants.h"
 #import "STImagePickerController.h"
+#import "STConversationsListViewController.h"
+#import "STChatRoomViewController.h"
 
 
 @interface STUserProfileViewController ()
@@ -189,6 +191,12 @@
 #pragma mark - IBActions
 
 - (IBAction)onTapMessages:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    STConversationsListViewController *viewController = (STConversationsListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STConversationsListViewController"];
+    [self.navigationController pushViewController:viewController animated:YES];
+    
+    
 }
 
 - (IBAction)onTapGallery:(id)sender {
@@ -222,6 +230,11 @@
     [[STMenuController sharedInstance] goSettings];
 }
 - (IBAction)onTapSendMessageToUser:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    
+    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:@{@"user_id":_userId}];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)onTapEditUserProfile:(id)sender {
