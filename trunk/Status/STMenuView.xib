@@ -13,9 +13,6 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1XZ-Pj-WzN">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="320" id="nET-2r-KI8"/>
-                    </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-a5-VPN">
                     <rect key="frame" x="22" y="6" width="40" height="40"/>
@@ -47,26 +44,6 @@
                             </state>
                             <connections>
                                 <action selector="onHomePressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="pZb-50-BYI"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PB9-3s-1YB">
-                            <rect key="frame" x="34" y="70" width="250" height="55"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="55" id="ZKe-MM-Iiv"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
-                            <state key="normal" title="Nearby">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onNearbyPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="LdN-Zz-LqI"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Gf-Yn-6zx">
@@ -142,6 +119,26 @@
                                 <action selector="onFriendsInviterPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Pda-1w-PSu"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PB9-3s-1YB">
+                            <rect key="frame" x="34" y="70" width="250" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="ZKe-MM-Iiv"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="36"/>
+                            <state key="normal" title="Nearby">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onNearbyPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="LdN-Zz-LqI"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -150,7 +147,6 @@
                         <constraint firstItem="oRT-11-EgD" firstAttribute="leading" secondItem="eH9-2g-Sxn" secondAttribute="leading" constant="34" id="2MP-KP-f7E"/>
                         <constraint firstItem="CCd-Z3-eLW" firstAttribute="top" secondItem="TND-Bu-qwL" secondAttribute="bottom" constant="42" id="6Ki-od-in9"/>
                         <constraint firstItem="0Gf-Yn-6zx" firstAttribute="leading" secondItem="eH9-2g-Sxn" secondAttribute="leading" constant="34" id="6xs-Io-LGJ"/>
-                        <constraint firstAttribute="width" constant="320" id="76y-dZ-w8j"/>
                         <constraint firstItem="E6g-lv-gva" firstAttribute="top" secondItem="eH9-2g-Sxn" secondAttribute="top" id="GQf-Rt-4yd"/>
                         <constraint firstAttribute="trailing" secondItem="CCd-Z3-eLW" secondAttribute="trailing" constant="65" id="MBW-kz-IsX"/>
                         <constraint firstItem="oRT-11-EgD" firstAttribute="top" secondItem="0Gf-Yn-6zx" secondAttribute="bottom" constant="15" id="RQ4-fY-gnr"/>
@@ -213,13 +209,14 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="1XZ-Pj-WzN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3zZ-OS-hOt"/>
-                <constraint firstItem="5KQ-2n-c0d" firstAttribute="leading" secondItem="sP5-VC-CjX" secondAttribute="trailing" constant="13" id="4eY-gL-eVd"/>
                 <constraint firstAttribute="bottom" secondItem="5KQ-2n-c0d" secondAttribute="bottom" constant="20" id="7af-Zx-etS"/>
                 <constraint firstAttribute="centerY" secondItem="eH9-2g-Sxn" secondAttribute="centerY" constant="5" id="Irl-CQ-efF"/>
                 <constraint firstAttribute="bottom" secondItem="1XZ-Pj-WzN" secondAttribute="bottom" id="O6q-VL-CrG"/>
+                <constraint firstItem="eH9-2g-Sxn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RNy-DU-f7l"/>
                 <constraint firstAttribute="trailing" secondItem="1XZ-Pj-WzN" secondAttribute="trailing" id="TmB-NS-kef"/>
                 <constraint firstAttribute="bottom" secondItem="sP5-VC-CjX" secondAttribute="bottom" constant="20" id="bgw-NL-I2g"/>
                 <constraint firstItem="1XZ-Pj-WzN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="c7O-7f-gWw"/>
+                <constraint firstAttribute="trailing" secondItem="eH9-2g-Sxn" secondAttribute="trailing" id="dte-Sn-3qZ"/>
                 <constraint firstItem="sP5-VC-CjX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="34" id="ldn-eJ-Obj"/>
                 <constraint firstAttribute="centerX" secondItem="eH9-2g-Sxn" secondAttribute="centerX" id="tzL-MY-lRZ"/>
                 <constraint firstAttribute="trailing" secondItem="5KQ-2n-c0d" secondAttribute="trailing" constant="17" id="vY5-ux-2sq"/>
@@ -236,7 +233,7 @@
     <resources>
         <image name="settings_normal" width="20" height="20"/>
         <image name="settings_pressed" width="20" height="20"/>
-        <image name="x menu STAUS" width="15" height="15"/>
+        <image name="x menu STAUS" width="20" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
