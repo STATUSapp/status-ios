@@ -26,4 +26,6 @@
 + (STMenuController *) sharedInstance;
 + (UIImage *)snapshotForViewController:(UIViewController *)vc;
 
+- (STFlowTemplateViewController *)appMainController;
+
 @end

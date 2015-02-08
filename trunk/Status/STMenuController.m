@@ -179,12 +179,12 @@
 
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     
-    STFlowTemplateViewController * appMainController = (STFlowTemplateViewController *)appDelegate.window.rootViewController;;
+    UIViewController * appMainController = appDelegate.window.rootViewController;
     if ([appMainController isKindOfClass:[UINavigationController class]]) {
-        appMainController = [(UINavigationController *)_currentVC viewControllers].firstObject;
+        appMainController = [(UINavigationController *)appMainController viewControllers].firstObject;
     }
     
-    return appMainController;
+    return (STFlowTemplateViewController *)appMainController;
 }
 
 #pragma mark - STTutorialDelegate

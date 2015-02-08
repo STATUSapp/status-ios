@@ -19,6 +19,8 @@
 #import "STImagePickerController.h"
 #import "STConversationsListViewController.h"
 #import "STChatRoomViewController.h"
+#import "STMoveScaleViewController.h"
+#import "STInviteUserToUploadRequest.h"
 
 
 @interface STUserProfileViewController ()
@@ -223,8 +225,19 @@
 }
 
 - (IBAction)onTapCamera:(id)sender {
+    __weak STUserProfileViewController *weakSelf = self;
+    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
+        [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil];
+        
+    };
     
-}
+    if (_isMyProfile) {
+        [[STImagePickerController sharedInstance] startImagePickerForOwnerInViewController:self withCompletion:completion];
+    } else {
+        [[STImagePickerController sharedInstance] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
+            [weakSelf inviteUserToUpload];
+        }];
+    }}
 
 - (IBAction)onTapSettings:(id)sender {
     [[STMenuController sharedInstance] goSettings];
@@ -241,6 +254,42 @@
     STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:_userId];
     editVC.userProfileDict = _userProfileDict;
     [self.navigationController pushViewController:editVC animated:YES];
+}
+
+- (void)startMoveScaleShareControllerForImage:(UIImage *)img
+                               shouldCompress:(BOOL)compressing
+                                 editedPostId:(NSString *)postId
+                                captionString:(NSString *)captionString{
+    
+    // here, no compressing should be done, because it might be a cropping after this
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
+    viewController.currentImg = img;
+    
+    
+    viewController.delegate = (id<STSharePostDelegate>)[STMenuController sharedInstance].appMainController;
+    viewController.editPostId = postId;
+    viewController.shouldCompress = compressing;
+    viewController.captionString = captionString;
+    [self.navigationController pushViewController:viewController animated:NO];
+}
+
+- (void)inviteUserToUpload{
+    
+    NSString * name = [NSString stringWithFormat:@"%@", _userProfileDict[kFulNameKey]];
+    NSString * userId = [NSString stringWithFormat:@"%@", _userId];
+    
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        NSInteger statusCode = [response[@"status_code"] integerValue];
+        if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", name];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
+                                                  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+    };
+    [STInviteUserToUploadRequest inviteUserToUpload:userId withCompletion:completion failure:nil];
 }
 
 - (void)dealloc{

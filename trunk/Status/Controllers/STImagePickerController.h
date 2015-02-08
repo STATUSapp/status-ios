@@ -14,7 +14,6 @@ typedef void (^askUserToUploadCompletion)();
 
 @property (nonatomic, copy) imagePickerCompletion completion;
 @property (nonatomic, copy) askUserToUploadCompletion askUploadCompletion;
-@property (nonatomic, assign) BOOL forOwner;
 @property (nonatomic ,strong) UIViewController *viewController;
 +(STImagePickerController *) sharedInstance;
 -(void)startImagePickerInViewController:(UIViewController *)viewController

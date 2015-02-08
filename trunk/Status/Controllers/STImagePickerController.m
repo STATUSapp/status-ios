@@ -12,7 +12,7 @@
 #import "UIImage+FixedOrientation.h"
 
 @interface STImagePickerController()<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
+@property (nonatomic, assign) BOOL forOwner;
 @end
 
 @implementation STImagePickerController
@@ -68,9 +68,12 @@
 #pragma mark - UIActionSheetDelegate
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     
-    if(buttonIndex == 3 && _forOwner) return;
-    
+    if(buttonIndex == 3 && _forOwner){
+        _forOwner = NO;
+        return;
+    }
     if (buttonIndex == 4) {
+        _forOwner = NO;
         return;
     }
     
