@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class STFlowTemplateViewController;
+
 @interface STMenuController : NSObject
 
 - (void)goHome;
@@ -23,4 +25,5 @@
 
 + (STMenuController *) sharedInstance;
 + (UIImage *)snapshotForViewController:(UIViewController *)vc;
+
 @end

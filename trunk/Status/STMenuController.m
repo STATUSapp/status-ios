@@ -164,19 +164,27 @@
 }
 
 - (void)resetNavigationControllerStack {
-    
-    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
-    
     if (_currentVC == nil) {
-        _currentVC = appDelegate.window.rootViewController;
-        if ([_currentVC isKindOfClass:[UINavigationController class]]) {
-            _currentVC = [(UINavigationController *)_currentVC viewControllers].firstObject;
-        }
+        _currentVC = [self appMainController];
     }
     
     UINavigationController * navController = _currentVC.navigationController;
     _currentVC = _currentVC.navigationController.viewControllers.firstObject;
     [navController popToRootViewControllerAnimated:NO];
+}
+
+
+- (STFlowTemplateViewController *)appMainController {
+    //TODO: remove this by refactoring image posting - NEEDS TO BE DONE ASAP
+
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    
+    STFlowTemplateViewController * appMainController = (STFlowTemplateViewController *)appDelegate.window.rootViewController;;
+    if ([appMainController isKindOfClass:[UINavigationController class]]) {
+        appMainController = [(UINavigationController *)_currentVC viewControllers].firstObject;
+    }
+    
+    return appMainController;
 }
 
 #pragma mark - STTutorialDelegate

@@ -6,12 +6,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "photo gallery button pressed 2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "gallery pressed.png"
+      "filename" : "photo gallery button pressed.png"
     }
   ],
   "info" : {

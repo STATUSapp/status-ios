@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -90,14 +90,15 @@
                                     <action selector="onTapMessages:" destination="AU9-ws-jB7" eventType="touchUpInside" id="ni7-YE-4D6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6B-n6-hfW" userLabel="gallery btn">
-                                <rect key="frame" x="229" y="206" width="84" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6B-n6-hfW" userLabel="gallery btn">
+                                <rect key="frame" x="230" y="206" width="83" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="13" maxY="0.0"/>
-                                <state key="normal" title="217" backgroundImage="gallery">
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-11" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="0" image="gallery icon" backgroundImage="gallery">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" backgroundImage="gallery pressed"/>
+                                <state key="highlighted" image="gallery icon pressed" backgroundImage="gallery pressed"/>
                                 <connections>
                                     <action selector="onTapGallery:" destination="AU9-ws-jB7" eventType="touchUpInside" id="3q6-UG-0Zu"/>
                                 </connections>
@@ -483,13 +484,15 @@
         <image name="Message icon pressed" width="33" height="33"/>
         <image name="camera button" width="66" height="66"/>
         <image name="camera button pressed" width="66" height="66"/>
-        <image name="description" width="39" height="39"/>
+        <image name="description" width="39" height="38"/>
         <image name="down shaddow" width="414" height="96"/>
         <image name="edit profile button" width="66" height="66"/>
         <image name="edit profile button pressed" width="66" height="66"/>
-        <image name="gallery" width="84" height="39"/>
-        <image name="gallery pressed" width="84" height="39"/>
-        <image name="location" width="39" height="39"/>
+        <image name="gallery" width="83" height="38"/>
+        <image name="gallery icon" width="28" height="21"/>
+        <image name="gallery icon pressed" width="28" height="21"/>
+        <image name="gallery pressed" width="83" height="38"/>
+        <image name="location" width="39" height="38"/>
         <image name="location icon" width="12" height="16"/>
         <image name="message button" width="66" height="66"/>
         <image name="message button pressed" width="66" height="66"/>
@@ -499,6 +502,6 @@
         <image name="settings button pressed" width="100" height="100"/>
         <image name="status_online" width="10" height="10"/>
         <image name="upper shaddow 4" width="414" height="96"/>
-        <image name="user name" width="39" height="39"/>
+        <image name="user name" width="39" height="38"/>
     </resources>
 </document>

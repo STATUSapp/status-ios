@@ -16,6 +16,7 @@
 #import "STLocationManager.h"
 #import "STFlowTemplateViewController.h"
 #import "STConstants.h"
+#import "STImagePickerController.h"
 
 
 @interface STUserProfileViewController ()
@@ -96,12 +97,7 @@
     
     if (_userProfileDict) {
         [self setupVisualsWithDictionary:_userProfileDict];
-    }
-    
-    if (_userId == nil) {
-        return;
-    }
-    
+    }    
     __weak STUserProfileViewController * weakSelf = self;
     [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
         [weakSelf setupVisualsWithDictionary:response];
@@ -130,7 +126,7 @@
         _lblNameAndAge.text = [NSString stringWithFormat:@"%@, %@", _lblNameAndAge.text, age];
     }
     
-    NSString * numberOfPost = [NSString stringWithFormat:@"%@", dict[kNumberOfPostsKey]];
+    NSString * numberOfPost = [NSString stringWithFormat:@" %@", dict[kNumberOfPostsKey]];
     [_btnGallery setTitle:numberOfPost forState:UIControlStateNormal];
     
     _lblUserDescription.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
@@ -219,6 +215,7 @@
 }
 
 - (IBAction)onTapCamera:(id)sender {
+    
 }
 
 - (IBAction)onTapSettings:(id)sender {

@@ -84,7 +84,7 @@
 #pragma mark UIPageViewController delegate and data source methods
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(STUserProfileViewController *)viewController {
-    NSInteger actualVCIndex = [_profiles indexOfObject:[viewController userProfileDict]];
+    NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfileDict]];
     if (actualVCIndex > ( _profiles.count - 5 )) {
         [self getProfilesFromServerWithOffset:_profiles.count withCompletion:nil];
     }
@@ -100,7 +100,7 @@
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(STUserProfileViewController *)viewController {
-    NSInteger actualVCIndex = [_profiles indexOfObject:[viewController userProfileDict]];
+    NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfileDict]];
 
     
     if (actualVCIndex == 0) {
@@ -121,6 +121,16 @@
     if (userVC != nil) {
         [_pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
+}
+
+
+- (NSUInteger)indexOfProfile:(NSDictionary *)dict {
+    for (NSDictionary * profileDict in _profiles) {
+        if ([dict[@"user_id"] integerValue] == [profileDict[@"user_id"] integerValue]) {
+            return [_profiles indexOfObject:profileDict];
+        }
+    }
+    return NSNotFound;
 }
 
 @end
