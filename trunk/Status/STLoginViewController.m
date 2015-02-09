@@ -90,9 +90,19 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 5;
 }
-#pragma mark - UIScrollViewDelegate
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSInteger currentpage = scrollView.contentSize.width/scrollView.contentOffset.x;
-    [_pageController setCurrentPage:currentpage];
+
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    [_pageController setCurrentPage:indexPath.row];
+
 }
+
+#pragma mark - UIScrollViewDelegate
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//}
+//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    CGFloat screenWidth = screenRect.size.width;
+//    NSInteger currentpage = scrollView.contentOffset.x/screenWidth + 1;
+//}
+
 @end

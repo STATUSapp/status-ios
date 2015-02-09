@@ -38,31 +38,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status logo big" translatesAutoresizingMaskIntoConstraints="NO" id="sHO-NS-TB8">
-                                                    <rect key="frame" x="103" y="80" width="115" height="125"/>
+                                                    <rect key="frame" x="69" y="80" width="182" height="195"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="115" id="JDq-28-kAA"/>
-                                                        <constraint firstAttribute="height" constant="125" id="zGj-mA-Zut"/>
+                                                        <constraint firstAttribute="width" constant="182" id="JDq-28-kAA"/>
+                                                        <constraint firstAttribute="height" constant="195" id="zGj-mA-Zut"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATUS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yJ-nR-o4H">
-                                                    <rect key="frame" x="0.0" y="234" width="320" height="41"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="41" id="ShR-kE-Byq"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="37"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="0yJ-nR-o4H" firstAttribute="leading" secondItem="DWG-eL-l2U" secondAttribute="leading" id="2Db-lg-eV2"/>
-                                            <constraint firstItem="0yJ-nR-o4H" firstAttribute="top" secondItem="sHO-NS-TB8" secondAttribute="bottom" constant="29" id="4AW-tV-pn9"/>
                                             <constraint firstAttribute="centerX" secondItem="sHO-NS-TB8" secondAttribute="centerX" id="ABT-Qo-7Xm"/>
                                             <constraint firstItem="sHO-NS-TB8" firstAttribute="top" secondItem="DWG-eL-l2U" secondAttribute="top" constant="80" id="UrQ-hh-mIg"/>
-                                            <constraint firstAttribute="trailing" secondItem="0yJ-nR-o4H" secondAttribute="trailing" id="ZVz-dL-yoT"/>
                                         </constraints>
                                         <size key="customSize" width="320" height="410"/>
                                     </collectionViewCell>
@@ -313,7 +301,7 @@
         <image name="Tutorial 2" width="231" height="231"/>
         <image name="Tutorial 3" width="231" height="231"/>
         <image name="Tutorial 4" width="231" height="231"/>
-        <image name="status logo big" width="57" height="62"/>
+        <image name="status logo big" width="182" height="195"/>
         <image name="status_splash_r4_login" width="375" height="667"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

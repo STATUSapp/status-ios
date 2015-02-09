@@ -183,33 +183,10 @@
                         <action selector="onToturialPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="f4K-UV-y77"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KQ-2n-c0d">
-                    <rect key="frame" x="183" y="422" width="120" height="38"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="38" id="wfS-YY-rP7"/>
-                        <constraint firstAttribute="width" constant="120" id="xT7-kW-lIO"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
-                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Settings" image="settings_normal">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="settings_pressed">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted" image="settings_pressed">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onSettingsPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="O55-4Y-z9R"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="1XZ-Pj-WzN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3zZ-OS-hOt"/>
-                <constraint firstAttribute="bottom" secondItem="5KQ-2n-c0d" secondAttribute="bottom" constant="20" id="7af-Zx-etS"/>
                 <constraint firstAttribute="centerY" secondItem="eH9-2g-Sxn" secondAttribute="centerY" constant="5" id="Irl-CQ-efF"/>
                 <constraint firstAttribute="bottom" secondItem="1XZ-Pj-WzN" secondAttribute="bottom" id="O6q-VL-CrG"/>
                 <constraint firstItem="eH9-2g-Sxn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RNy-DU-f7l"/>
@@ -219,7 +196,6 @@
                 <constraint firstAttribute="trailing" secondItem="eH9-2g-Sxn" secondAttribute="trailing" id="dte-Sn-3qZ"/>
                 <constraint firstItem="sP5-VC-CjX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="34" id="ldn-eJ-Obj"/>
                 <constraint firstAttribute="centerX" secondItem="eH9-2g-Sxn" secondAttribute="centerX" id="tzL-MY-lRZ"/>
-                <constraint firstAttribute="trailing" secondItem="5KQ-2n-c0d" secondAttribute="trailing" constant="17" id="vY5-ux-2sq"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -231,8 +207,6 @@
         </view>
     </objects>
     <resources>
-        <image name="settings_normal" width="20" height="20"/>
-        <image name="settings_pressed" width="20" height="20"/>
         <image name="x menu STAUS" width="20" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
