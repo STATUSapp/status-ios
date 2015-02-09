@@ -683,13 +683,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     flowCtrl.flowType = flowType;
     
     //TODO: TEST THIS
-    
-//    if (flowType==STFlowTypeUserGallery) {
-//        NSDictionary *dict = [self getCurrentDictionary];
-//        flowCtrl.userID = dict[@"user_id"];
-//        flowCtrl.userName = dict[@"user_name"];
-//    }
-//    
+
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 
@@ -700,8 +694,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
     
     NSDictionary *dict = [self getCurrentDictionary];
-    
-//    [self pushFlowControllerWithType:STFlowTypeUserGallery];
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
     [self.navigationController pushViewController:userProfileVC animated:YES];
 }
@@ -712,18 +704,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
     [self.navigationController pushViewController:userProfileVC animated:YES];
-    
-//    if (_flowType == STFlowTypeMyProfile) {
-//        return;
-//    }
-//    if ([STFacebookLoginController sharedInstance].currentUserId == nil) {
-//        return;
-//    }
-//    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//    flowCtrl.flowType = STFlowTypeMyProfile;
-//    flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
-//    flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
-//    [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 - (IBAction)onTapUserProfilePicture:(id)sender {
     NSString *userId = [[self getCurrentDictionary] valueForKey:@"user_id"];

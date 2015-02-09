@@ -166,11 +166,6 @@ const float kNoNotifHeight = 24.f;
         default:
         {
             //TODO: TEST THIS
-//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//            flowCtrl.flowType = STFlowTypeUserGallery;
-//            flowCtrl.userID = dict[@"user_id"];
-//            flowCtrl.userName = dict[@"user_name"];
-//            [self.navigationController pushViewController:flowCtrl animated:YES];
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
         }
@@ -196,12 +191,6 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeInvite:
         {
             //TODO: TEST THIS
-//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//            flowCtrl.flowType = STFlowTypeMyGallery;
-//            flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
-//            flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
-//            [self.navigationController pushViewController:flowCtrl animated:YES];
-            
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
             
@@ -211,11 +200,6 @@ const float kNoNotifHeight = 24.f;
         {
             
             //TODO: TEST THIS
-//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//            flowCtrl.flowType = STFlowTypeUserGallery;
-//            flowCtrl.userID = dict[@"user_id"];
-//            [self.navigationController pushViewController:flowCtrl animated:YES];
-            
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
         }

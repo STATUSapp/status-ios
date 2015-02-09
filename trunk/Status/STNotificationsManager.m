@@ -252,23 +252,6 @@ static STNotificationsManager *_sharedManager = nil;
     UIViewController *lastVC = [self getCurrentViewController];
     [self dissmissPresentedVCs:lastVC];
     //TODO: TEST THIS
-
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    
-//    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//    flowCtrl.flowType = STFlowTypeUserGallery;
-//    id userId = [_currentBanner.notificationInfo valueForKey:@"user_id"];
-//    if ([userId respondsToSelector:@selector(stringValue)]) {
-//        flowCtrl.userID = [userId stringValue];
-//    }
-//    else
-//        flowCtrl.userID = userId;
-//    flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
-//    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
-//        flowCtrl.flowType = STFlowTypeMyGallery;
-//    }
-//    [lastVC.navigationController pushViewController:flowCtrl animated:YES];
-    
     NSString * userId = nil;
     id userIdentifier = [_currentBanner.notificationInfo valueForKey:@"user_id"];
     if ([userIdentifier respondsToSelector:@selector(stringValue)]) {

@@ -107,16 +107,7 @@
     
     //TODO: TEST THIS
     
-    NSDictionary *dict = [_likesDataSource objectAtIndex:indexPath.row];
-//    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//    flowCtrl.flowType = STFlowTypeUserGallery;
-//    flowCtrl.userID = dict[@"user_id"];
-//    flowCtrl.userName = dict[@"user_name"];
-//    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
-//        flowCtrl.flowType = STFlowTypeMyGallery;
-//    }
-//    [self.navigationController pushViewController:flowCtrl animated:YES];
-    
+    NSDictionary *dict = [_likesDataSource objectAtIndex:indexPath.row];   
     STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
