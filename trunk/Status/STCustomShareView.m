@@ -52,7 +52,6 @@ CGFloat const kDefaultButtonHeight = 50;
 -(void) setForDissmiss:(BOOL) isDissmissed{
 
     for (UIView * view in self.subviews) {
-        view.alpha = isDissmissed ? 1 : 0;
         view.alpha = isDissmissed ? 0 : 1;
     }
 }
