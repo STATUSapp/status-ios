@@ -252,7 +252,7 @@ const float kNoNotifHeight = 24.f;
         if (notificationType == STNotificationTypeNewUserJoinsStatus) {
             NSString *string = [NSString stringWithFormat:@"%@ is on STATUS. Say hello :)", dict[@"user_name"]];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-            UIFont *boldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.f];
+            UIFont *boldFont = [UIFont fontWithName:@"ProximaNova-Semibold" size:13.f];
             NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                    boldFont, NSFontAttributeName,nil];
 

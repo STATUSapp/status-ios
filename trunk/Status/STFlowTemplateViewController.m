@@ -870,7 +870,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         if (captionString == nil || ![captionString isKindOfClass:[NSString class]]) {
             captionString = @"";
         }
-        UIFont *font = [UIFont fontWithName:@"helveticaNeue" size:14.f];
+        UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
         CGRect rect = [captionString boundingRectWithSize:CGSizeMake(235.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
         [self.collectionView performBatchUpdates:^{
             [UIView animateWithDuration:0.3 animations:^{

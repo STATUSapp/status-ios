@@ -33,7 +33,7 @@
     _messageText.attributedText = [[NSAttributedString alloc]initWithString:@""];
     _messageText.text = @"";
     NSMutableAttributedString *messageStr = [[NSMutableAttributedString alloc] initWithString:_notificationInfo[@"alert_message"]];
-    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:16.f];
+    UIFont *font = [UIFont fontWithName:@"ProximaNova-Semibold" size:16.f];
 //    NSUInteger nameLenght = [_notificationInfo[@"name"] length];
     NSRange nameRange = [_notificationInfo[@"alert_message"] rangeOfString:_notificationInfo[@"name"]];
 //    [messageStr setAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} range:NSMakeRange(0, messageStr.length)];

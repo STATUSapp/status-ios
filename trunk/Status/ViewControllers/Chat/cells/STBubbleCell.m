@@ -36,7 +36,7 @@
                         boundingRectWithSize:CGSizeMake(185.f, CGFLOAT_MAX)
                         options:NSStringDrawingUsesLineFragmentOrigin
                         attributes:@{
-                                     NSFontAttributeName : [UIFont fontWithName:@"Helvetica Neue" size:16.f]
+                                     NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:16.f]
                                      }
                         context:nil];
     return labelRect.size;
@@ -52,7 +52,7 @@
                         boundingRectWithSize:CGSizeMake(185.f, CGFLOAT_MAX)
                         options:NSStringDrawingUsesLineFragmentOrigin
                         attributes:@{
-                                     NSFontAttributeName : [UIFont fontWithName:@"Helvetica Neue" size:16.f]
+                                     NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:16.f]
                                      }
                         context:nil];
     return labelRect.size;

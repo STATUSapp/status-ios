@@ -156,7 +156,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 	    
     _textView.isScrollable = YES;
     _textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
-    _textView.font = [UIFont fontWithName:@"Helvetica Neue" size:16.f];
+    _textView.font = [UIFont fontWithName:@"ProximaNova-Regular" size:16.f];
 	_textView.minNumberOfLines = 1;
 	_textView.maxNumberOfLines = 5;
 	_textView.returnKeyType = UIReturnKeyDefault; //just as an example
@@ -545,7 +545,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     UIView *sectionView = [[UIView alloc] initWithFrame:rect];
     UILabel *lb = [[UILabel alloc] initWithFrame:rect];
     lb.text = msg.sectionDate;
-    lb.font = [UIFont fontWithName:@"HelveticaNeue" size:14.f];
+    lb.font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
     lb.textAlignment = NSTextAlignmentCenter;
     [sectionView addSubview:lb];
     
