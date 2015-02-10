@@ -42,6 +42,10 @@
 }
 
 + (NSString *)yearsFromDate:(NSDate *)referenceDate {
+    if (referenceDate == nil) {
+        return nil;
+    }
+    
     NSDate *today = [NSDate date];
     
     NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -75,6 +79,10 @@
 + (NSString *)statusForLastTimeSeen:(NSDate *)lastSeenDate {
     NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:lastSeenDate];
     
+    if (timeInterval < 0) {
+        timeInterval = - timeInterval;
+    }
+    
     if (0 <= timeInterval && timeInterval <= 60) {
         return @"Active";
     }
@@ -97,12 +105,12 @@
     
     
     int weeks = timeInterval / ( 86400 * 7 );
-    if (timeInterval <= 4 * weeks) {
+    if (timeInterval <= (4 * 86400 * 7)) {
         return [NSString stringWithFormat:@"Active %d week%@ ago", weeks, (weeks == 1) ? @"" : @"s"];
     }
     
     int months = timeInterval / (86400 * 30);
-    if (timeInterval < 12 * months) {
+    if (timeInterval < 12 * 86400 * 30) {
         return [NSString stringWithFormat:@"Active %d month%@ ago", months, (months == 1) ? @"" : @"s"];
     }
     

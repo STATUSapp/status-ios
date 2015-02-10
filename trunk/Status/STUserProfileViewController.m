@@ -84,13 +84,8 @@
         _btnSettings.hidden = NO;
         _btnSendMessageToUser.hidden = YES;
         _btnEditUserProfile.hidden = NO;
-    } else if(_isLaunchedFromNearbyController){
-        _btnNextProfile.hidden = NO;
-        _btnSettings.hidden = YES;
-        _btnSendMessageToUser.hidden = NO;
-        _btnEditUserProfile.hidden = YES;
     } else {
-        _btnNextProfile.hidden = YES;
+        _btnNextProfile.hidden = NO;
         _btnSettings.hidden = YES;
         _btnSendMessageToUser.hidden = NO;
         _btnEditUserProfile.hidden = YES;
@@ -127,7 +122,9 @@
     
     if ([dict objectForKey:kBirthdayKey] != [NSNull null]) {
         NSString * age = [NSDate yearsFromDate:[NSDate dateFromServerDate:dict[kBirthdayKey]]];
-        _lblNameAndAge.text = [NSString stringWithFormat:@"%@, %@", _lblNameAndAge.text, age];
+        if (age) {
+            _lblNameAndAge.text = [NSString stringWithFormat:@"%@, %@", _lblNameAndAge.text, age];
+        }
     }
     
     NSString * numberOfPost = [NSString stringWithFormat:@" %@", dict[kNumberOfPostsKey]];
@@ -217,6 +214,12 @@
 }
 
 - (IBAction)onTapNextProfile:(id)sender {
+    
+    if (!_isLaunchedFromNearbyController) {
+        [self onTapGallery:nil];
+        return;
+    }
+    
     if (_delegate) {
         if ([_delegate respondsToSelector:@selector(advanceToNextProfile)]) {
             [_delegate advanceToNextProfile];

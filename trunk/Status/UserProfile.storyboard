@@ -5,8 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="ProximaNova-Bold.otf">
+            <string>ProximaNova-Bold</string>
+        </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
-            <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -31,39 +33,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykj-hN-llS" userLabel="nameAgeStatusContainer">
-                                <rect key="frame" x="0.0" y="254" width="320" height="60"/>
+                                <rect key="frame" x="0.0" y="289" width="320" height="73"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="distance and status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25000000000000006" translatesAutoresizingMaskIntoConstraints="NO" id="gye-A6-8WD" userLabel="distance and status">
-                                        <rect key="frame" x="88" y="37" width="144" height="17"/>
-                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="distance and status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25000000000000006" translatesAutoresizingMaskIntoConstraints="NO" id="gye-A6-8WD" userLabel="distance and status">
+                                        <rect key="frame" x="101" y="46" width="119" height="14"/>
+                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="name and age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZ0-fu-Urj" userLabel="name and age">
-                                        <rect key="frame" x="94" y="8" width="133" height="21"/>
-                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="21"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="status_online" translatesAutoresizingMaskIntoConstraints="NO" id="Uu4-Vf-jut" userLabel="status icon">
-                                        <rect key="frame" x="240" y="41" width="10" height="10"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status_online" translatesAutoresizingMaskIntoConstraints="NO" id="Uu4-Vf-jut" userLabel="status icon">
+                                        <rect key="frame" x="228" y="48" width="10" height="10"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name and age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="cZ0-fu-Urj" userLabel="name and age">
+                                        <rect key="frame" x="63" y="11" width="194" height="30"/>
+                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="30"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="gye-A6-8WD" firstAttribute="top" secondItem="cZ0-fu-Urj" secondAttribute="bottom" constant="8" id="H79-Pa-Wvf"/>
+                                    <constraint firstItem="gye-A6-8WD" firstAttribute="top" secondItem="cZ0-fu-Urj" secondAttribute="bottom" constant="5" id="H79-Pa-Wvf"/>
                                     <constraint firstItem="gye-A6-8WD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ykj-hN-llS" secondAttribute="leading" constant="10" id="Kg6-uU-tKx"/>
                                     <constraint firstItem="Uu4-Vf-jut" firstAttribute="leading" secondItem="gye-A6-8WD" secondAttribute="trailing" constant="8" id="QCG-gC-MFJ"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gye-A6-8WD" secondAttribute="trailing" constant="20" id="THT-NA-S7Z"/>
-                                    <constraint firstItem="cZ0-fu-Urj" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="top" constant="8" id="d3F-2i-pTp"/>
+                                    <constraint firstItem="cZ0-fu-Urj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ykj-hN-llS" secondAttribute="leading" constant="10" id="XdS-WG-m7X"/>
+                                    <constraint firstItem="cZ0-fu-Urj" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="top" constant="11" id="d3F-2i-pTp"/>
                                     <constraint firstAttribute="centerX" secondItem="cZ0-fu-Urj" secondAttribute="centerX" constant="-0.5" id="ecK-9g-kj9"/>
                                     <constraint firstAttribute="centerX" secondItem="gye-A6-8WD" secondAttribute="centerX" id="efC-mb-tLg"/>
-                                    <constraint firstItem="Uu4-Vf-jut" firstAttribute="centerY" secondItem="gye-A6-8WD" secondAttribute="centerY" constant="0.5" id="kDR-Te-4wN"/>
-                                    <constraint firstAttribute="height" constant="60" id="tBS-SN-ChE"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cZ0-fu-Urj" secondAttribute="trailing" constant="10" id="hqK-xZ-XLO"/>
+                                    <constraint firstItem="Uu4-Vf-jut" firstAttribute="centerY" secondItem="gye-A6-8WD" secondAttribute="centerY" id="kDR-Te-4wN"/>
+                                    <constraint firstAttribute="height" constant="73" id="tBS-SN-ChE"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="3nA-Cz-4Si" userLabel="Profile Picture">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="289"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="400" id="8Sk-mR-jeL"/>
+                                </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upper shaddow 4" translatesAutoresizingMaskIntoConstraints="NO" id="UHe-3U-SnI">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
@@ -72,7 +79,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DpI-c0-H0H" userLabel="blurry picture">
-                                <rect key="frame" x="0.0" y="315" width="320" height="253"/>
+                                <rect key="frame" x="0.0" y="362" width="320" height="206"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down shaddow" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-IZ-BJl">
                                 <rect key="frame" x="0.0" y="472" width="320" height="96"/>
@@ -91,7 +98,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6B-n6-hfW" userLabel="gallery btn">
-                                <rect key="frame" x="230" y="206" width="83" height="38"/>
+                                <rect key="frame" x="230" y="241" width="83" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-11" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -153,17 +160,8 @@
                                     <action selector="onTapEditUserProfile:" destination="AU9-ws-jB7" eventType="touchUpInside" id="C9P-Cc-sHd"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="bio " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.35000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-qe-w3x" userLabel="bio description">
-                                <rect key="frame" x="145" y="334" width="30" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="65" id="zah-yx-LcH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="location icon" translatesAutoresizingMaskIntoConstraints="NO" id="nOp-AZ-Grk" userLabel="location icon">
-                                <rect key="frame" x="112" y="371" width="12" height="16"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location icon" translatesAutoresizingMaskIntoConstraints="NO" id="nOp-AZ-Grk" userLabel="location icon">
+                                <rect key="frame" x="116" y="400" width="12" height="16"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWQ-93-hQl" userLabel="send user message btn">
                                 <rect key="frame" x="238" y="482" width="66" height="66"/>
@@ -175,49 +173,56 @@
                                     <action selector="onTapSendMessageToUser:" destination="AU9-ws-jB7" eventType="touchUpInside" id="Exf-b1-dF8"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwS-ph-s0L" userLabel="location">
-                                <rect key="frame" x="132" y="372" width="54" height="14"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwS-ph-s0L" userLabel="location">
+                                <rect key="frame" x="136" y="402" width="47" height="12"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bio " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.35000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-qe-w3x" userLabel="bio description">
+                                <rect key="frame" x="149" y="379" width="22" height="13"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1Mz-qe-w3x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="20" id="0jL-SH-PN4"/>
+                            <constraint firstItem="JwS-ph-s0L" firstAttribute="leading" secondItem="nOp-AZ-Grk" secondAttribute="trailing" constant="8" id="15z-4z-zGq"/>
                             <constraint firstAttribute="centerX" secondItem="zof-zo-rAp" secondAttribute="centerX" id="1KL-jP-CCH"/>
+                            <constraint firstItem="zof-zo-rAp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JwS-ph-s0L" secondAttribute="bottom" constant="5" id="1U7-s7-Rc8"/>
                             <constraint firstItem="ykj-hN-llS" firstAttribute="top" secondItem="3nA-Cz-4Si" secondAttribute="bottom" id="471-Eu-BDK"/>
                             <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="Wf5-IZ-BJl" secondAttribute="bottom" id="4AP-Cc-izB"/>
                             <constraint firstItem="XCt-OH-ynU" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="16" id="5rx-kh-QhQ"/>
                             <constraint firstItem="d3Y-4t-VOm" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" constant="5" id="AgE-1t-aUo"/>
                             <constraint firstItem="zof-zo-rAp" firstAttribute="centerY" secondItem="yWQ-93-hQl" secondAttribute="centerY" constant="-5" id="DRi-qc-1Ne"/>
                             <constraint firstAttribute="trailing" secondItem="ykj-hN-llS" secondAttribute="trailing" id="EWQ-k8-i7T"/>
-                            <constraint firstItem="JwS-ph-s0L" firstAttribute="leading" secondItem="nOp-AZ-Grk" secondAttribute="trailing" constant="8" id="EoN-U0-fg0"/>
                             <constraint firstItem="Drt-N9-twb" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" constant="20" id="Fpi-X7-svG"/>
-                            <constraint firstItem="1Mz-qe-w3x" firstAttribute="centerX" secondItem="JwS-ph-s0L" secondAttribute="centerX" constant="0.5" id="Hbl-ti-73e"/>
-                            <constraint firstItem="zof-zo-rAp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JwS-ph-s0L" secondAttribute="bottom" constant="10" id="K4D-zb-NDK"/>
+                            <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="zof-zo-rAp" secondAttribute="centerX" id="G09-Fo-ip2"/>
+                            <constraint firstItem="1Mz-qe-w3x" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" constant="17" id="IIJ-tJ-Yen"/>
+                            <constraint firstItem="1Mz-qe-w3x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="15" id="Jdd-me-RUK"/>
                             <constraint firstItem="XCt-OH-ynU" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" constant="5" id="MCo-cw-Z9K"/>
-                            <constraint firstItem="JwS-ph-s0L" firstAttribute="top" secondItem="1Mz-qe-w3x" secondAttribute="bottom" constant="20" id="Mh4-5L-Fvm"/>
-                            <constraint firstAttribute="centerY" secondItem="ykj-hN-llS" secondAttribute="centerY" constant="0.5" id="OdH-oI-DyO"/>
                             <constraint firstAttribute="trailing" secondItem="e6B-n6-hfW" secondAttribute="trailing" constant="7" id="Oks-07-apo"/>
-                            <constraint firstItem="1Mz-qe-w3x" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" constant="20" id="P2W-ci-8uv"/>
                             <constraint firstItem="UHe-3U-SnI" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="SPm-G5-Pxv"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Mz-qe-w3x" secondAttribute="trailing" constant="20" id="T2G-YJ-CJr"/>
                             <constraint firstItem="3nA-Cz-4Si" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="TQG-Hq-dol"/>
+                            <constraint firstItem="JwS-ph-s0L" firstAttribute="top" secondItem="1Mz-qe-w3x" secondAttribute="bottom" constant="10" id="XxZ-TB-HGP"/>
                             <constraint firstAttribute="trailing" secondItem="Wf5-IZ-BJl" secondAttribute="trailing" id="YKU-Q1-PiY"/>
                             <constraint firstItem="Wf5-IZ-BJl" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="a1q-Xc-QRY"/>
                             <constraint firstAttribute="trailing" secondItem="yWQ-93-hQl" secondAttribute="trailing" constant="16" id="aRC-L8-gQF"/>
+                            <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" priority="999" constant="206" id="cI4-4V-YEP"/>
                             <constraint firstAttribute="trailing" secondItem="UHe-3U-SnI" secondAttribute="trailing" id="eJS-I8-ho8"/>
+                            <constraint firstItem="nOp-AZ-Grk" firstAttribute="centerY" secondItem="JwS-ph-s0L" secondAttribute="centerY" id="gcO-MJ-jh5"/>
                             <constraint firstItem="UHe-3U-SnI" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" id="hmo-oZ-eaS"/>
                             <constraint firstAttribute="trailing" secondItem="d3Y-4t-VOm" secondAttribute="trailing" constant="16" id="iQ4-hG-jRL"/>
                             <constraint firstItem="Drt-N9-twb" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="16" id="ibf-xn-vIQ"/>
                             <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="zof-zo-rAp" secondAttribute="bottom" constant="8" id="ijk-r4-h89"/>
-                            <constraint firstItem="DpI-c0-H0H" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" constant="1" id="jyG-tu-lIV"/>
+                            <constraint firstItem="zof-zo-rAp" firstAttribute="centerX" secondItem="1Mz-qe-w3x" secondAttribute="centerX" id="jea-VD-Sf4"/>
+                            <constraint firstItem="DpI-c0-H0H" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" id="jyG-tu-lIV"/>
                             <constraint firstAttribute="centerX" secondItem="Nje-IF-zzR" secondAttribute="centerX" id="l7r-AH-rVL"/>
-                            <constraint firstAttribute="centerX" secondItem="1Mz-qe-w3x" secondAttribute="centerX" id="mPL-ft-9qC"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Mz-qe-w3x" secondAttribute="trailing" constant="15" id="l8k-PR-dfh"/>
+                            <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="1Mz-qe-w3x" secondAttribute="centerX" constant="-0.5" id="mZy-Ub-ThT"/>
                             <constraint firstItem="3nA-Cz-4Si" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" id="oH6-8m-WYF"/>
                             <constraint firstItem="e6B-n6-hfW" firstAttribute="top" secondItem="3nA-Cz-4Si" secondAttribute="bottom" constant="-48" id="p5j-HA-Ws4"/>
-                            <constraint firstItem="nOp-AZ-Grk" firstAttribute="centerY" secondItem="JwS-ph-s0L" secondAttribute="centerY" id="qVv-v6-hgf"/>
                             <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="Nje-IF-zzR" secondAttribute="bottom" constant="8" id="rOU-e6-OzE"/>
                             <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="DpI-c0-H0H" secondAttribute="bottom" id="rRq-Qf-0oS"/>
                             <constraint firstAttribute="trailing" secondItem="DpI-c0-H0H" secondAttribute="trailing" id="s1Z-e4-ZDh"/>
@@ -267,13 +272,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PROFILE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGD-Lf-hMr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROFILE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGD-Lf-hMr">
                                 <rect key="frame" x="16" y="70" width="65" height="17"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                 <color key="textColor" red="0.49803921568627452" green="0.49411764705882355" blue="0.51764705882352946" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8da-Bp-2z1" userLabel="sectionbackground">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8da-Bp-2z1" userLabel="sectionbackground">
                                 <rect key="frame" x="0.0" y="99" width="320" height="239"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nQ8-ho-Fco" userLabel="name text field">
@@ -356,7 +361,7 @@
                                             <outlet property="delegate" destination="DwW-bD-kyz" id="4uZ-cV-T0F"/>
                                         </connections>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="140/150 characters" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvD-DD-zCV">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140/150 characters" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvD-DD-zCV">
                                         <rect key="frame" x="205" y="204" width="107" height="13"/>
                                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
