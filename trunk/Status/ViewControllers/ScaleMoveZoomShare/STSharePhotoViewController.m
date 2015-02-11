@@ -171,11 +171,11 @@
                 editResponseDict = [NSDictionary dictionaryWithDictionary:response];
             }
             if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
-                [weakSelf startPosting];
+                [weakSelf startPostingWithPostId:response[@"post_id"]];
             }
             else
             {
-                [weakSelf callTheDelegateIfNeeded];
+                [weakSelf callTheDelegateIfNeededForPostId:response[@"post_id"]];
             }
             
         }
@@ -211,7 +211,7 @@
 
 #pragma mark - Helper
 
-- (void)startPosting {
+- (void)startPostingWithPostId:(NSString *)postId {
     if (_shouldPostToFacebook) {
         //add publish stream permissions if does not exists
         __weak STSharePhotoViewController *weakSelf = self;
@@ -225,42 +225,42 @@
                                                               _fbError = error;
                                                           }
                                                           else
-                                                              [weakSelf postCurrentPhotoToFacebook];
+                                                              [weakSelf postCurrentPhotoToFacebookWithPostId:postId];
                                                       }];
                 
             }
             else
-                [weakSelf postCurrentPhotoToFacebook];
+                [weakSelf postCurrentPhotoToFacebookWithPostId:postId];
             
         }];
     }
     
     if (_shouldPostToTwitter) {
-        [self postCurrentPhotoToTwitter];
+        [self postCurrentPhotoToTwitterWithPostId:postId];
     }
 
 }
-- (void)postCurrentPhotoToFacebook {
+- (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId {
     __weak STSharePhotoViewController *weakSelf = self;
     [[STFacebookLoginController sharedInstance] shareImageWithData:self.imgData andCompletion:^(id result, NSError *error) {
         _donePostingToFacebook = YES;
         if (error) {
             _fbError = error;
         }
-        [weakSelf callTheDelegateIfNeeded];
+        [weakSelf callTheDelegateIfNeededForPostId:postId];
     }];
 }
 
-- (void)postCurrentPhotoToTwitter {
+- (void)postCurrentPhotoToTwitterWithPostId:(NSString *)postId {
     NSString * status = [NSString stringWithFormat:@"what's YOUR status? via %@",STInviteLink];
     UIImage * imgToPost = [UIImage imageWithData:self.imgData];
     
-    [self twitterAccountPostImage:imgToPost withStatus:status];
+    [self twitterAccountPostImage:imgToPost withStatus:status andPostId:postId];
     
 }
 
 
-- (void)twitterAccountPostImage:(UIImage *)image withStatus:(NSString *)status
+- (void)twitterAccountPostImage:(UIImage *)image withStatus:(NSString *)status andPostId:(NSString *)postId
 {
     __weak STSharePhotoViewController *weakSelf = self;
     ACAccountType *twitterType =
@@ -288,7 +288,7 @@
             _twitterError = error;
             NSLog(@"[ERROR] An error occurred while posting: %@", [error localizedDescription]);
         }
-        [weakSelf callTheDelegateIfNeeded];
+        [weakSelf callTheDelegateIfNeededForPostId:postId];
     };
     
     ACAccountStoreRequestAccessCompletionHandler accountStoreHandler =
@@ -313,7 +313,7 @@
         else {
             _donePostingToTwitter = YES;
             _twitterError = error;
-            [weakSelf callTheDelegateIfNeeded];
+            [weakSelf callTheDelegateIfNeededForPostId:postId];
             NSLog(@"[ERROR] An error occurred while asking for user authorization: %@",
                   [error localizedDescription]);
         }
@@ -325,7 +325,7 @@
 }
 
 
-- (void)showMessagesAndCallDelegates {
+- (void)showMessagesAndCallDelegatesForPostId:(NSString *)postId {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *alertTitle = nil;
         NSString *alertMessage = nil;
@@ -356,29 +356,29 @@
             [_delegate imageWasEdited:editResponseDict];
         }
         else
-            [_delegate imageWasPosted];
+            [_delegate imageWasPostedWithPostId:postId];
     });
 
 }
 
--(void)callTheDelegateIfNeeded{
+-(void)callTheDelegateIfNeededForPostId:(NSString *)postId{
     
     if (_shouldPostToFacebook == YES && _donePostingToFacebook == YES) {
         if (_shouldPostToTwitter == YES && _donePostingToTwitter == NO) {
             return;
         }
         else
-            [self showMessagesAndCallDelegates];
+            [self showMessagesAndCallDelegatesForPostId:postId];
     }
     else if (_shouldPostToTwitter == YES && _donePostingToTwitter == YES){
         if (_shouldPostToFacebook == YES && _donePostingToFacebook == NO) {
             return;
         }
         else
-            [self showMessagesAndCallDelegates];
+            [self showMessagesAndCallDelegatesForPostId:postId];
     }
     else
-        [self showMessagesAndCallDelegates];
+        [self showMessagesAndCallDelegatesForPostId:postId];
     
 }
 @end

@@ -10,7 +10,7 @@
 
 @protocol STSharePostDelegate <NSObject>
 
--(void)imageWasPosted;
+-(void)imageWasPostedWithPostId:(NSString *)postId;
 -(void)imageWasEdited:(NSDictionary *)dict;
 
 @end

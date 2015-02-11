@@ -402,15 +402,16 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - STShareImageDelegate
 
--(void)imageWasPosted{
+-(void)imageWasPostedWithPostId:(NSString *)postId{
     
 #warning - Re-design taking in consideration new profile flow
     //TODO: TEST THIS
     
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = STFlowTypeMyGallery;
+    flowCtrl.flowType = STFlowTypeSinglePost;
     flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
     flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
+    flowCtrl.postID = postId;
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
     NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
