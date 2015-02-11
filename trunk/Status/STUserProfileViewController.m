@@ -130,7 +130,21 @@
     NSString * numberOfPost = [NSString stringWithFormat:@" %@", dict[kNumberOfPostsKey]];
     [_btnGallery setTitle:numberOfPost forState:UIControlStateNormal];
     
-    _lblUserDescription.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
+    NSString * bio = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
+    if (bio == nil) {
+        bio = @"";
+    }
+    
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 3;
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    
+    NSAttributedString * bioString = [[NSAttributedString alloc] initWithString:bio attributes:@{NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:14.0f],
+                                                                                                 NSParagraphStyleAttributeName : paragraphStyle}];
+    _lblUserDescription.attributedText = bioString;
+    
+    
+    
     _lblLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
     _imageViewLocationIcon.hidden = (_lblLocation.text.length == 0);
     

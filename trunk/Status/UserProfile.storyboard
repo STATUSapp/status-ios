@@ -18,9 +18,6 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
         </mutableArray>
-        <mutableArray key="ProximaNova-Semibold.otf">
-            <string>ProximaNova-Semibold</string>
-        </mutableArray>
     </customFonts>
     <scenes>
         <!--User Profile View Controller-->
@@ -45,7 +42,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status_online" translatesAutoresizingMaskIntoConstraints="NO" id="Uu4-Vf-jut" userLabel="status icon">
-                                        <rect key="frame" x="228" y="48" width="10" height="10"/>
+                                        <rect key="frame" x="221" y="48" width="10" height="10"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name and age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="cZ0-fu-Urj" userLabel="name and age">
                                         <rect key="frame" x="63" y="11" width="194" height="30"/>
@@ -58,7 +55,7 @@
                                 <constraints>
                                     <constraint firstItem="gye-A6-8WD" firstAttribute="top" secondItem="cZ0-fu-Urj" secondAttribute="bottom" constant="5" id="H79-Pa-Wvf"/>
                                     <constraint firstItem="gye-A6-8WD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ykj-hN-llS" secondAttribute="leading" constant="10" id="Kg6-uU-tKx"/>
-                                    <constraint firstItem="Uu4-Vf-jut" firstAttribute="leading" secondItem="gye-A6-8WD" secondAttribute="trailing" constant="8" id="QCG-gC-MFJ"/>
+                                    <constraint firstItem="Uu4-Vf-jut" firstAttribute="leading" secondItem="gye-A6-8WD" secondAttribute="trailing" constant="1" id="QCG-gC-MFJ"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gye-A6-8WD" secondAttribute="trailing" constant="20" id="THT-NA-S7Z"/>
                                     <constraint firstItem="cZ0-fu-Urj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ykj-hN-llS" secondAttribute="leading" constant="10" id="XdS-WG-m7X"/>
                                     <constraint firstItem="cZ0-fu-Urj" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="top" constant="11" id="d3F-2i-pTp"/>
@@ -164,7 +161,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location icon" translatesAutoresizingMaskIntoConstraints="NO" id="nOp-AZ-Grk" userLabel="location icon">
-                                <rect key="frame" x="116" y="400" width="12" height="16"/>
+                                <rect key="frame" x="116" y="413" width="12" height="16"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWQ-93-hQl" userLabel="send user message btn">
                                 <rect key="frame" x="238" y="482" width="66" height="66"/>
@@ -177,15 +174,22 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwS-ph-s0L" userLabel="location">
-                                <rect key="frame" x="136" y="402" width="47" height="12"/>
+                                <rect key="frame" x="136" y="415" width="47" height="12"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bio " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.35000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-qe-w3x" userLabel="bio description">
-                                <rect key="frame" x="149" y="379" width="22" height="13"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-qe-w3x" userLabel="bio description">
+                                <rect key="frame" x="146" y="379" width="29" height="20"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="bio ">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -208,7 +212,7 @@
                             <constraint firstAttribute="trailing" secondItem="e6B-n6-hfW" secondAttribute="trailing" constant="7" id="Oks-07-apo"/>
                             <constraint firstItem="UHe-3U-SnI" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="SPm-G5-Pxv"/>
                             <constraint firstItem="3nA-Cz-4Si" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="TQG-Hq-dol"/>
-                            <constraint firstItem="JwS-ph-s0L" firstAttribute="top" secondItem="1Mz-qe-w3x" secondAttribute="bottom" constant="10" id="XxZ-TB-HGP"/>
+                            <constraint firstItem="JwS-ph-s0L" firstAttribute="top" secondItem="1Mz-qe-w3x" secondAttribute="bottom" constant="16" id="XxZ-TB-HGP"/>
                             <constraint firstAttribute="trailing" secondItem="Wf5-IZ-BJl" secondAttribute="trailing" id="YKU-Q1-PiY"/>
                             <constraint firstItem="Wf5-IZ-BJl" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="a1q-Xc-QRY"/>
                             <constraint firstAttribute="trailing" secondItem="yWQ-93-hQl" secondAttribute="trailing" constant="16" id="aRC-L8-gQF"/>
