@@ -12,6 +12,7 @@
 
 -(void)imageWasPostedWithPostId:(NSString *)postId;
 -(void)imageWasEdited:(NSDictionary *)dict;
+-(void)captionWasEditedForPost:(NSDictionary *)postDict withNewCaption:(NSString *)newCaption;
 
 @end
 

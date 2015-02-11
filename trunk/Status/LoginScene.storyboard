@@ -67,10 +67,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial 1" translatesAutoresizingMaskIntoConstraints="NO" id="4NE-IH-PbY">
-                                                    <rect key="frame" x="83" y="63" width="154" height="154"/>
+                                                    <rect key="frame" x="45" y="23" width="231" height="231"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="154" id="v8d-7s-kl7"/>
-                                                        <constraint firstAttribute="height" constant="154" id="yzL-ty-ImO"/>
+                                                        <constraint firstAttribute="width" constant="231" id="v8d-7s-kl7"/>
+                                                        <constraint firstAttribute="height" constant="231" id="yzL-ty-ImO"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See and be seen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33j-kV-vHp">
@@ -82,7 +82,10 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check out photos of people nearby. Decide whether you like them and find out who likes you back." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8F-DH-pTP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check out photos of people
+nearby. Decide whether you
+like them and find out
+who likes you back." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8F-DH-pTP">
                                                     <rect key="frame" x="0.0" y="305" width="320" height="97"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="97" id="f6e-7w-Vex"/>
@@ -95,7 +98,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="4NE-IH-PbY" firstAttribute="top" secondItem="WOg-ks-sQ2" secondAttribute="top" constant="63" id="KcC-Wa-mGL"/>
+                                            <constraint firstItem="4NE-IH-PbY" firstAttribute="top" secondItem="WOg-ks-sQ2" secondAttribute="top" constant="23" id="KcC-Wa-mGL"/>
                                             <constraint firstItem="h8F-DH-pTP" firstAttribute="leading" secondItem="WOg-ks-sQ2" secondAttribute="leading" id="Nyk-RE-zEe"/>
                                             <constraint firstAttribute="bottom" secondItem="h8F-DH-pTP" secondAttribute="bottom" constant="8" id="QXA-Wm-4ad"/>
                                             <constraint firstItem="h8F-DH-pTP" firstAttribute="top" secondItem="33j-kV-vHp" secondAttribute="bottom" constant="8" id="U3C-3e-d55"/>
@@ -114,10 +117,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial 2" translatesAutoresizingMaskIntoConstraints="NO" id="6QM-dW-Aic">
-                                                    <rect key="frame" x="83" y="63" width="154" height="154"/>
+                                                    <rect key="frame" x="45" y="15" width="231" height="231"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="154" id="eOY-83-c2x"/>
-                                                        <constraint firstAttribute="width" constant="154" id="mX2-Et-8Pe"/>
+                                                        <constraint firstAttribute="height" constant="231" id="eOY-83-c2x"/>
+                                                        <constraint firstAttribute="width" constant="231" id="mX2-Et-8Pe"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat with new friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knq-p7-wuv">
@@ -129,7 +132,9 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instantly chat with extraordinary people around you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctX-S2-FQq">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instantly chat
+with extraordinary
+people around you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctX-S2-FQq">
                                                     <rect key="frame" x="0.0" y="305" width="320" height="97"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="97" id="ZzB-B3-lke"/>
@@ -142,14 +147,14 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="6QM-dW-Aic" firstAttribute="top" secondItem="kvG-MH-mxb" secondAttribute="top" constant="63" id="Cg5-2r-hrd"/>
+                                            <constraint firstItem="6QM-dW-Aic" firstAttribute="top" secondItem="kvG-MH-mxb" secondAttribute="top" constant="15" id="Cg5-2r-hrd"/>
                                             <constraint firstItem="ctX-S2-FQq" firstAttribute="top" secondItem="knq-p7-wuv" secondAttribute="bottom" constant="8" id="DtW-uI-g3q"/>
                                             <constraint firstAttribute="trailing" secondItem="ctX-S2-FQq" secondAttribute="trailing" id="J4U-iT-4Mh"/>
                                             <constraint firstAttribute="bottom" secondItem="ctX-S2-FQq" secondAttribute="bottom" constant="8" id="Ko1-Wz-G3h"/>
                                             <constraint firstItem="knq-p7-wuv" firstAttribute="leading" secondItem="kvG-MH-mxb" secondAttribute="leading" id="OYd-vs-Bgq"/>
                                             <constraint firstItem="ctX-S2-FQq" firstAttribute="leading" secondItem="kvG-MH-mxb" secondAttribute="leading" id="THN-2v-Cta"/>
                                             <constraint firstAttribute="trailing" secondItem="knq-p7-wuv" secondAttribute="trailing" id="hP7-yF-MzN"/>
-                                            <constraint firstAttribute="centerX" secondItem="6QM-dW-Aic" secondAttribute="centerX" id="xju-aS-f8Z"/>
+                                            <constraint firstAttribute="centerX" secondItem="6QM-dW-Aic" secondAttribute="centerX" constant="-0.5" id="xju-aS-f8Z"/>
                                         </constraints>
                                         <size key="customSize" width="320" height="410"/>
                                     </collectionViewCell>
@@ -160,8 +165,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="410"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial 3" translatesAutoresizingMaskIntoConstraints="NO" id="SYi-8I-mez">
-                                                    <rect key="frame" x="83" y="63" width="154" height="154"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Tutorial 3" translatesAutoresizingMaskIntoConstraints="NO" id="SYi-8I-mez">
+                                                    <rect key="frame" x="45" y="18" width="231" height="231"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="154" id="0EC-gt-NH9"/>
                                                         <constraint firstAttribute="width" constant="154" id="Cp5-0V-k3z"/>
@@ -176,7 +181,10 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many likes do you think you'll get? Find out how popular you are!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prn-hz-RhM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many likes
+do you think you'll get?
+Find out how popular
+you are!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prn-hz-RhM">
                                                     <rect key="frame" x="0.0" y="305" width="320" height="97"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="97" id="lrB-8N-Ask"/>
@@ -208,10 +216,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial 4" translatesAutoresizingMaskIntoConstraints="NO" id="FxM-jp-lsR">
-                                                    <rect key="frame" x="83" y="63" width="154" height="154"/>
+                                                    <rect key="frame" x="45" y="23" width="231" height="231"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="154" id="315-qg-ZWa"/>
-                                                        <constraint firstAttribute="width" constant="154" id="jgG-Ph-IFV"/>
+                                                        <constraint firstAttribute="height" constant="231" id="315-qg-ZWa"/>
+                                                        <constraint firstAttribute="width" constant="231" id="jgG-Ph-IFV"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hint" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhl-nH-9Qh">
@@ -223,7 +231,9 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like 10 photos and you will receive 10 guaranteed views to your next uploaded photo." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjh-Dr-X0I">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like 10 photos and you will
+receive 10 guaranteed views
+to your next uploaded photo." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjh-Dr-X0I">
                                                     <rect key="frame" x="0.0" y="305" width="320" height="97"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="97" id="tsi-zw-TfO"/>
@@ -240,7 +250,7 @@
                                             <constraint firstAttribute="bottom" secondItem="Sjh-Dr-X0I" secondAttribute="bottom" constant="8" id="abB-t6-qug"/>
                                             <constraint firstAttribute="centerX" secondItem="FxM-jp-lsR" secondAttribute="centerX" id="ef6-U7-1Es"/>
                                             <constraint firstAttribute="trailing" secondItem="zhl-nH-9Qh" secondAttribute="trailing" id="fiL-Ev-71J"/>
-                                            <constraint firstItem="FxM-jp-lsR" firstAttribute="top" secondItem="pNN-hO-gxk" secondAttribute="top" constant="63" id="i5k-Qg-uRd"/>
+                                            <constraint firstItem="FxM-jp-lsR" firstAttribute="top" secondItem="pNN-hO-gxk" secondAttribute="top" constant="23" id="i5k-Qg-uRd"/>
                                             <constraint firstItem="Sjh-Dr-X0I" firstAttribute="top" secondItem="zhl-nH-9Qh" secondAttribute="bottom" constant="8" id="uEA-QH-DLR"/>
                                             <constraint firstAttribute="trailing" secondItem="Sjh-Dr-X0I" secondAttribute="trailing" id="w7a-DV-py6"/>
                                             <constraint firstItem="zhl-nH-9Qh" firstAttribute="leading" secondItem="pNN-hO-gxk" secondAttribute="leading" id="yuQ-FB-cdK"/>

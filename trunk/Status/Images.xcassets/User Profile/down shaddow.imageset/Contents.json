@@ -5,14 +5,36 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "fill",
+          "width" : 9
+        },
+        "capInsets" : {
+          "right" : 64,
+          "left" : 176
+        }
+      },
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "down shaddow 2x.png"
+      "filename" : "down shaddow 2x.png",
+      "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "fill",
+          "width" : 30
+        },
+        "capInsets" : {
+          "right" : 253,
+          "left" : 322
+        }
+      },
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "down shaddow.png"
+      "filename" : "down shaddow.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

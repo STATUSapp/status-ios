@@ -59,7 +59,6 @@
 #import "STNotificationsManager.h"
 #import "STMenuController.h"
 #import "STUpdateToNewerVersionController.h"
-#import "STEditCaptionViewController.h"
 #import "STImagePickerController.h"
 #import "STNoPhotosCell.h"
 
@@ -72,7 +71,7 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,STSharePostDelegate, STEditCaptionDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,STSharePostDelegate>
 {    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
@@ -441,8 +440,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - STEditCaptionDelegate
 -(void)captionWasEditedForPost:(NSDictionary *)postDict withNewCaption:(NSString *)newCaption{
-    NSInteger editedPostRow = [_postsDataSource indexOfObject:postDict];
-    NSMutableDictionary *newPostDict = [NSMutableDictionary dictionaryWithDictionary:postDict];
+    NSInteger editedPostRow = [[_postsDataSource valueForKey:@"post_id"] indexOfObject:postDict[@"post_id"]];
+    NSMutableDictionary *newPostDict = [NSMutableDictionary dictionaryWithDictionary:[_postsDataSource objectAtIndex:editedPostRow]];
     newPostDict[@"caption"] = newCaption;
     
     [_postsDataSource replaceObjectAtIndex:editedPostRow withObject:newPostDict];
@@ -777,7 +776,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
     __weak STFlowTemplateViewController *weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
-        [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:presentedPostDict[@"caption"]];
+        [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil];
 
     };
     if (isOwner) {
@@ -885,11 +884,25 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     {
         [currentCell captionShadowPressed:nil];
         
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        STEditCaptionViewController *viewController = (STEditCaptionViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ediCaptionScene"];
-        viewController.postDict = [self getCurrentDictionary];
-        viewController.delegate = self;
-        [self.navigationController pushViewController:viewController animated:NO];
+//        viewController.postDict = [self getCurrentDictionary];
+//        viewController.delegate = self;
+//        [self.navigationController pushViewController:viewController animated:NO];
+        __block NSDictionary *currentDict = [self getCurrentDictionary];
+
+        [[STImageCacheController sharedInstance] loadPostImageWithName:currentDict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+            viewController.imgData =UIImageJPEGRepresentation(img, 1.f);
+            viewController.bluredImgData = UIImageJPEGRepresentation([img applyLightEffect], 1.f);
+            viewController.delegate = self;
+            viewController.captionString = currentDict[@"caption"];
+            viewController.editPostId = currentDict[@"post_id"];
+            viewController.controllerType = STShareControllerEditCaption;
+            [self.navigationController pushViewController:viewController animated:YES];
+
+            
+        } andBlurCompletion:nil];
+
 
     }
 }

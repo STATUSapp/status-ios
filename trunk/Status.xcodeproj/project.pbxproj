@@ -112,7 +112,6 @@
 		1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD5C1960D3020009066D /* STFacebookActivity.m */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
-		17975FC01A74F08800F667C4 /* STEditCaptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17975FBF1A74F08800F667C4 /* STEditCaptionViewController.m */; };
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
@@ -397,8 +396,6 @@
 		1794DD561960D2A40009066D /* STWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhatsAppActivity.m; sourceTree = "<group>"; };
 		1794DD5B1960D3020009066D /* STFacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookActivity.h; sourceTree = "<group>"; };
 		1794DD5C1960D3020009066D /* STFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookActivity.m; sourceTree = "<group>"; };
-		17975FBE1A74F08800F667C4 /* STEditCaptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditCaptionViewController.h; sourceTree = "<group>"; };
-		17975FBF1A74F08800F667C4 /* STEditCaptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEditCaptionViewController.m; sourceTree = "<group>"; };
 		17AB89E4193B0DF600A6E7FD /* STChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatController.h; sourceTree = "<group>"; };
 		17AB89E5193B0DF600A6E7FD /* STChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatController.m; sourceTree = "<group>"; };
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
@@ -576,8 +573,6 @@
 				0717E2A719B7187F001DF132 /* STSharePhotoViewController.m */,
 				0717E2A919B718B4001DF132 /* STZoomablePostViewController.h */,
 				0717E2AA19B718B4001DF132 /* STZoomablePostViewController.m */,
-				17975FBE1A74F08800F667C4 /* STEditCaptionViewController.h */,
-				17975FBF1A74F08800F667C4 /* STEditCaptionViewController.m */,
 			);
 			path = ScaleMoveZoomShare;
 			sourceTree = "<group>";
@@ -1342,7 +1337,6 @@
 				176CC31F1A2B226100E9C3D0 /* STSetUserSettingsRequest.m in Sources */,
 				0717E2B819B71B09001DF132 /* STAlbumImagesViewController.m in Sources */,
 				07FCFA9D19C094250048F441 /* SDWebImageDownloaderOperation.m in Sources */,
-				17975FC01A74F08800F667C4 /* STEditCaptionViewController.m in Sources */,
 				176CE2451936645500F5C4DA /* HPTextViewInternal.m in Sources */,
 				07FCFA9C19C094250048F441 /* SDWebImageDownloader.m in Sources */,
 				0719E5AE19619FE700F85382 /* STInviteController.m in Sources */,

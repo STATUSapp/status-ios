@@ -13,13 +13,14 @@
 #import "STFacebookLoginController.h"
 #import "STConstants.h"
 #import "STFacebookAlbumsLoader.h"
+#import "STUpdatePostCaptionRequest.h"
 
 #import "STUploadPostRequest.h"
 
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 
-@interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>{
+@interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
     NSDictionary *editResponseDict;
     
     BOOL _shouldPostToFacebook;
@@ -38,11 +39,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UITextView *captiontextView;
 
-
 @property (strong, nonatomic) ACAccountStore * accountStore;
 @property (strong, nonatomic) ACAccountType * accountType;
 
 @property (assign, nonatomic) BOOL isTwitterAvailable;
+@property (weak, nonatomic) IBOutlet UILabel *writeCaptionPlaceholder;
+@property (weak, nonatomic) IBOutlet UIView *shareView;
 
 @end
 
@@ -65,6 +67,8 @@
     _transparentNavBar.translucent = YES;
 
 	_sharedImageView.image = [UIImage imageWithData:_imgData];
+//    _sharedImageView.layer.contentsRect = CGRectMake(0, 0, 1, 0.25);
+
     _backgroundBlurImgView.image = [UIImage imageWithData:_bluredImgData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -75,8 +79,12 @@
     if (_captionString!=nil && _captionString.length > 0) {
         _captiontextView.text = _captionString;
     }
-    else
-        _captiontextView.text = @"Write a caption ... ";
+    else{
+        _captiontextView.text = @"";
+    }
+    _captiontextView.delegate = self;
+    _writeCaptionPlaceholder.hidden = _captiontextView.text.length>0;
+    _shareView.hidden = (_controllerType == STShareControllerEditCaption) ;
 }
 
 - (void)appplicationIsActive:(NSNotification *)notification {
@@ -164,38 +172,67 @@
 - (IBAction)onClickShare:(id)sender {
     _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
-    
-    STRequestCompletionBlock completion = ^(id response, NSError *error){
-        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-            if (weakSelf.editPostId!=nil) {
-                editResponseDict = [NSDictionary dictionaryWithDictionary:response];
+    if (_controllerType == STShareControllerAddPost ||
+        _controllerType == STShareControllerEditPost) {
+        STRequestCompletionBlock completion = ^(id response, NSError *error){
+            if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+                if (weakSelf.editPostId!=nil) {
+                    editResponseDict = [NSDictionary dictionaryWithDictionary:response];
+                }
+                if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
+                    [weakSelf startPostingWithPostId:_editPostId];
+                }
+                else
+                {
+                    [weakSelf callTheDelegateIfNeededForPostId:_editPostId];
+                }
+                
             }
             if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
                 [weakSelf startPostingWithPostId:response[@"post_id"]];
             }
             else
             {
-                [weakSelf callTheDelegateIfNeededForPostId:response[@"post_id"]];
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+                weakSelf.shareButton.enabled = TRUE;
+                
             }
-            
-        }
-        else
-        {
+        };
+        
+        STRequestFailureBlock failBlock = ^(NSError *error){
             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
             weakSelf.shareButton.enabled = TRUE;
+        };
+        [STUploadPostRequest uploadPostForId:_editPostId
+                                    withData:_imgData
+                                  andCaption:_captionString
+                              withCompletion:completion
+                                     failure:failBlock];
+    }
+    else
+    {
+        [_captiontextView resignFirstResponder];
+        
+        __weak STSharePhotoViewController *weakSelf = self;
+        if (_editPostId!=nil) {
+            [STUpdatePostCaptionRequest setPostCaption:_captionString
+                                             forPostId:_editPostId
+                                        withCompletion:^(id response, NSError *error) {
+                                            if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                                                [weakSelf.delegate captionWasEditedForPost:@{@"post_id":_editPostId} withNewCaption:_captionString];
+                                                [weakSelf onClickBack:nil];
+                                            }
+                                            else{
+                                                [self showErrorAlert];
+                                            }
+                                        } failure:^(NSError *error) {
+                                            NSLog(@"Error: %@", error.debugDescription);
+                                            [self showErrorAlert];
+                                        }];
+            
             
         }
-    };
-    
-    STRequestFailureBlock failBlock = ^(NSError *error){
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        weakSelf.shareButton.enabled = TRUE;
-    };
-    [STUploadPostRequest uploadPostForId:_editPostId
-                                withData:_imgData
-                              andCaption:_captionString
-                          withCompletion:completion
-                                 failure:failBlock];
+    }
 }
 
 #pragma mark - MFMailControllerDelegate
@@ -380,5 +417,31 @@
     else
         [self showMessagesAndCallDelegatesForPostId:postId];
     
+}
+
+-(void)showErrorAlert{
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+}
+
+
+#pragma mark - UITextViewDelegate
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    _captionString = textView.text;
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    NSInteger textLenght = textView.text.length;
+    if (text.length > 0) {
+        textLenght = textLenght + text.length;
+    }
+    else
+        textLenght--;//delete pressed
+    _writeCaptionPlaceholder.hidden = (textLenght>0);
+    
+    return YES;
 }
 @end
