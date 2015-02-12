@@ -745,8 +745,19 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Move and Scale" id="CCP-P1-xyM">
-                                        <barButtonItem key="leftBarButtonItem" image="back button" id="rGA-jh-0GU">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="IRC-m6-QTr">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sT6-X8-ybw">
+                                                <rect key="frame" x="16" y="2" width="37" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="back button white">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected" image="back button white pressed"/>
+                                                <state key="highlighted" image="back button white pressed"/>
+                                                <connections>
+                                                    <action selector="onClickBack:" destination="3ip-Jx-vLr" eventType="touchUpInside" id="Lem-G8-hkR"/>
+                                                </connections>
+                                            </button>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -830,11 +841,19 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Share to" id="MlT-fm-JsA">
-                                        <barButtonItem key="leftBarButtonItem" image="back button" id="uBg-7m-4dE">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="onClickBack:" destination="gF0-LP-1T6" id="2NE-UF-C1q"/>
-                                            </connections>
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="a00-Jt-hZL">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="t4p-qe-bD6">
+                                                <rect key="frame" x="16" y="2" width="37" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="back button white">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected" image="back button white pressed"/>
+                                                <state key="highlighted" image="back button white pressed"/>
+                                                <connections>
+                                                    <action selector="onClickBack:" destination="gF0-LP-1T6" eventType="touchUpInside" id="Zk1-pu-B4J"/>
+                                                </connections>
+                                            </button>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -934,7 +953,7 @@
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparenta" translatesAutoresizingMaskIntoConstraints="NO" id="7TM-d9-vEp">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="56" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparenta" translatesAutoresizingMaskIntoConstraints="NO" id="7TM-d9-vEp">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -1155,21 +1174,25 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem id="x1z-TJ-1bJ">
-                                        <barButtonItem key="leftBarButtonItem" image="back button" id="VlR-zr-m4B">
-                                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="8Sv-oE-XBs">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="25c-PY-Flz">
+                                                <rect key="frame" x="16" y="7" width="92" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <inset key="contentEdgeInsets" minX="-54" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" image="back button">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onClickBack:" destination="rjr-9q-v12" eventType="touchUpInside" id="Dc9-Wz-EUk"/>
+                                                </connections>
+                                            </button>
                                             <connections>
-                                                <action selector="onClickback:" destination="Cjw-FQ-u8S" id="D2c-G7-ANU"/>
+                                                <action selector="onClickBack:" destination="rjr-9q-v12" id="zUz-ig-hY5"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyu-SN-YRp">
-                                <rect key="frame" x="84" y="11" width="215" height="24"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="grey line" translatesAutoresizingMaskIntoConstraints="NO" id="APE-Sr-yyx">
                                 <rect key="frame" x="16" y="42" width="289" height="2"/>
                             </imageView>
@@ -1347,6 +1370,12 @@
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no notifications yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="201" translatesAutoresizingMaskIntoConstraints="NO" id="3cD-tE-Yqr">
                                 <rect key="frame" x="60" y="249" width="201" height="71"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyu-SN-YRp">
+                                <rect key="frame" x="81" y="10" width="215" height="24"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -2151,6 +2180,8 @@
         <image name="Use button" width="82" height="82"/>
         <image name="Use button pressed" width="82" height="82"/>
         <image name="back button" width="37" height="19"/>
+        <image name="back button white" width="320" height="40"/>
+        <image name="back button white pressed" width="37" height="19"/>
         <image name="btn_big_camera_normal" width="142" height="108"/>
         <image name="btn_big_camera_pressed" width="142" height="108"/>
         <image name="btn_nrLIkes_normal" width="34" height="33"/>
