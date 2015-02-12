@@ -8,7 +8,7 @@
 
 #import "STTutorialViewController.h"
 
-@interface STTutorialViewController ()
+@interface STTutorialViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -51,10 +51,12 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 5;
 }
-
--(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-    [_pageControl setCurrentPage:indexPath.row];
-    
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGPoint point = scrollView.contentOffset;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    NSUInteger currentIndex = point.x/screenWidth;
+    [_pageControl setCurrentPage:currentIndex];
 }
 
 
