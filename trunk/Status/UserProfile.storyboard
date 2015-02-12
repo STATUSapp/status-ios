@@ -180,7 +180,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-qe-w3x" userLabel="bio description">
-                                <rect key="frame" x="146" y="379" width="29" height="20"/>
+                                <rect key="frame" x="145" y="379" width="29" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="bio ">
                                         <attributes>
@@ -227,7 +227,7 @@
                             <constraint firstItem="DpI-c0-H0H" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" id="jyG-tu-lIV"/>
                             <constraint firstAttribute="centerX" secondItem="Nje-IF-zzR" secondAttribute="centerX" id="l7r-AH-rVL"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Mz-qe-w3x" secondAttribute="trailing" constant="15" id="l8k-PR-dfh"/>
-                            <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="1Mz-qe-w3x" secondAttribute="centerX" constant="-0.5" id="mZy-Ub-ThT"/>
+                            <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="1Mz-qe-w3x" secondAttribute="centerX" id="mZy-Ub-ThT"/>
                             <constraint firstItem="3nA-Cz-4Si" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" id="oH6-8m-WYF"/>
                             <constraint firstItem="e6B-n6-hfW" firstAttribute="top" secondItem="3nA-Cz-4Si" secondAttribute="bottom" constant="-48" id="p5j-HA-Ws4"/>
                             <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="Nje-IF-zzR" secondAttribute="bottom" constant="8" id="rOU-e6-OzE"/>
