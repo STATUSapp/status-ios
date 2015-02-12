@@ -10,7 +10,7 @@
 #import "STMenuView.h"
 #import "UIImage+ImageEffects.h"
 #import "STSettingsViewController.h"
-#import "STTutorialViewController.h"
+#import "STTutorialPresenterViewController.h"
 #import "STInviteController.h"
 #import "STUserProfileViewController.h"
 #import "STFacebookLoginController.h"
@@ -22,7 +22,7 @@
 
 #import "AppDelegate.h"
 
-@interface STMenuController()<STTutorialDelegate>
+@interface STMenuController()
 
 @property(nonatomic, strong)STMenuView *menuView;
 @property(nonatomic, strong)UIViewController *currentVC;
@@ -111,9 +111,7 @@
 - (void)goTutorial{
     [self resetNavigationControllerStack];
     [self hideMenu];
-    STTutorialViewController * tutorialVC = [STTutorialViewController newInstance];
-    tutorialVC.delegate = self;
-    tutorialVC.backgroundImageForLastElement = [STMenuController snapshotForViewController:_currentVC];
+    STTutorialPresenterViewController * tutorialVC = [STTutorialPresenterViewController newInstance];
     tutorialVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [_currentVC presentViewController:tutorialVC animated:YES completion:nil];
 }
@@ -187,13 +185,13 @@
     return (STFlowTemplateViewController *)appMainController;
 }
 
-#pragma mark - STTutorialDelegate
-
--(void)tutorialDidDissmiss{
-    if ([[STInviteController sharedInstance] shouldInviteBeAvailable]) {
-        [self goFriendsInviter];
-    }
-}
+//#pragma mark - STTutorialDelegate
+//
+//-(void)tutorialDidDissmiss{
+//    if ([[STInviteController sharedInstance] shouldInviteBeAvailable]) {
+//        [self goFriendsInviter];
+//    }
+//}
 
 -(void)addContraintForMenu{
     [_currentVC.view addConstraint:[NSLayoutConstraint

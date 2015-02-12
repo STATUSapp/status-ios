@@ -45,7 +45,7 @@
                                         <rect key="frame" x="221" y="48" width="10" height="10"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name and age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="cZ0-fu-Urj" userLabel="name and age">
-                                        <rect key="frame" x="63" y="11" width="194" height="30"/>
+                                        <rect key="frame" x="64" y="11" width="194" height="30"/>
                                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="30"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -497,7 +497,7 @@
         <image name="camera button" width="66" height="66"/>
         <image name="camera button pressed" width="66" height="66"/>
         <image name="description" width="39" height="38"/>
-        <image name="down shaddow" width="414" height="96"/>
+        <image name="down shaddow" width="124" height="96"/>
         <image name="edit profile button" width="66" height="66"/>
         <image name="edit profile button pressed" width="66" height="66"/>
         <image name="gallery" width="83" height="38"/>

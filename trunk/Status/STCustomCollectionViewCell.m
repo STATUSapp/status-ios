@@ -122,9 +122,9 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
 
 - (void)setUpVisualsForFlowType: (STFlowType)flowType{
     
-    self.profileNameBtn.layer.shadowOpacity = 1.0;
-    self.profileNameBtn.layer.shadowRadius = 2;
-    self.profileNameBtn.layer.shadowOffset = CGSizeMake(3.0f, 1.0f);
+//    self.profileNameBtn.layer.shadowOpacity = 1.0;
+//    self.profileNameBtn.layer.shadowRadius = 2;
+//    self.profileNameBtn.layer.shadowOffset = CGSizeMake(3.0f, 1.0f);
     
     switch (flowType) {
         case STFlowTypeSinglePost:
@@ -162,7 +162,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     }];
     
     [_userProfileImg sd_setImageWithURL:[NSURL URLWithString:urlArray[1]] placeholderImage:[UIImage imageNamed:@"btn_nrLIkes_normal"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [weakSelf.userProfileImg maskImage:weakSelf.userProfileImg.image];
+        [weakSelf.userProfileImg maskImage:image];
         [weakSelf.contentView bringSubviewToFront:_captionView];
 
     }];

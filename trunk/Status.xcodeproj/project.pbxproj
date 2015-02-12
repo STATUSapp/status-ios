@@ -112,6 +112,8 @@
 		1794DD5D1960D3020009066D /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD5C1960D3020009066D /* STFacebookActivity.m */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
+		17950BAA1A8C0467006BD973 /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BA91A8C0467006BD973 /* STTutorialViewController.m */; };
+		17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */; };
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
@@ -149,7 +151,6 @@
 		1DE2D5BB1950DB4600A29A86 /* STInviteFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE2D5BA1950DB4600A29A86 /* STInviteFriendsViewController.m */; };
 		1DFBB387192E9C9F003B7A53 /* UIImageView+TouchesEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */; };
 		1DFBB38B192EA003003B7A53 /* STTapAnimationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */; };
-		1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */; };
 		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
@@ -396,6 +397,10 @@
 		1794DD561960D2A40009066D /* STWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhatsAppActivity.m; sourceTree = "<group>"; };
 		1794DD5B1960D3020009066D /* STFacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookActivity.h; sourceTree = "<group>"; };
 		1794DD5C1960D3020009066D /* STFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookActivity.m; sourceTree = "<group>"; };
+		17950BA81A8C0467006BD973 /* STTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialViewController.h; sourceTree = "<group>"; };
+		17950BA91A8C0467006BD973 /* STTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialViewController.m; sourceTree = "<group>"; };
+		17950BAB1A8C10F6006BD973 /* STTutorialPresenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialPresenterViewController.h; sourceTree = "<group>"; };
+		17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialPresenterViewController.m; sourceTree = "<group>"; };
 		17AB89E4193B0DF600A6E7FD /* STChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatController.h; sourceTree = "<group>"; };
 		17AB89E5193B0DF600A6E7FD /* STChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatController.m; sourceTree = "<group>"; };
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
@@ -455,8 +460,6 @@
 		1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TouchesEffects.m"; sourceTree = "<group>"; };
 		1DFBB389192EA003003B7A53 /* STTapAnimationLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTapAnimationLabel.h; sourceTree = "<group>"; };
 		1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTapAnimationLabel.m; sourceTree = "<group>"; };
-		1DFCCAC7191236AA00B9230E /* STTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialViewController.h; sourceTree = "<group>"; };
-		1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialViewController.m; sourceTree = "<group>"; };
 		1DFCCACA191238A000B9230E /* STTutorialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialCell.h; sourceTree = "<group>"; };
 		1DFCCACB191238A000B9230E /* STTutorialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialCell.m; sourceTree = "<group>"; };
 		317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomCollectionViewCell.h; sourceTree = "<group>"; };
@@ -771,10 +774,12 @@
 				9904DD441A2FB55D0072134F /* UserProfile.storyboard */,
 				178907B818B295DD00AC4355 /* STLoginViewController.h */,
 				178907B918B295DD00AC4355 /* STLoginViewController.m */,
+				17950BA81A8C0467006BD973 /* STTutorialViewController.h */,
+				17950BA91A8C0467006BD973 /* STTutorialViewController.m */,
+				17950BAB1A8C10F6006BD973 /* STTutorialPresenterViewController.h */,
+				17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */,
 				99671D0919BC8FBB00FB8A7A /* STSettingsViewController.h */,
 				99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */,
-				1DFCCAC7191236AA00B9230E /* STTutorialViewController.h */,
-				1DFCCAC8191236AA00B9230E /* STTutorialViewController.m */,
 				1DFCCACA191238A000B9230E /* STTutorialCell.h */,
 				1DFCCACB191238A000B9230E /* STTutorialCell.m */,
 				172EAE7B18B0B12E00C5637B /* STFlowTemplateViewController.h */,
@@ -1282,12 +1287,14 @@
 				176CC3071A2B0BFA00E9C3D0 /* STGetNotificationsRequest.m in Sources */,
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
 				07FCFA9819C094250048F441 /* NSData+ImageContentType.m in Sources */,
+				17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */,
 				0715651218FD890400F7B3BB /* STFooterView.m in Sources */,
 				175A28C71A13FD960057EDEE /* STBaseRequest.m in Sources */,
 				176CC3161A2B1AFD00E9C3D0 /* STGetUsersRequest.m in Sources */,
 				176CC30A1A2B0DC400E9C3D0 /* STGetNotificationsCountRequest.m in Sources */,
 				17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */,
 				0717E2B619B71B09001DF132 /* STAlbumImageCell.m in Sources */,
+				17950BAA1A8C0467006BD973 /* STTutorialViewController.m in Sources */,
 				172EAEB618B0B46300C5637B /* AFURLResponseSerialization.m in Sources */,
 				0717E2D819B71C56001DF132 /* STBubbleCell.m in Sources */,
 				176CC3041A2B09A100E9C3D0 /* STGetPostDetailsRequest.m in Sources */,
@@ -1321,7 +1328,6 @@
 				17C0BE121A374636007F64C0 /* STNotificationBanner.m in Sources */,
 				99F77F6B1A373BB300E46B22 /* STGetUserProfileRequest.m in Sources */,
 				17D4231D1A2C6CA900F5B880 /* STGADelegate.m in Sources */,
-				1DFCCAC9191236AA00B9230E /* STTutorialViewController.m in Sources */,
 				178882D61A7977F600719798 /* STUploadNewProfilePictureRequest.m in Sources */,
 				176CC30D1A2B0ED000E9C3D0 /* STDeletePostRequest.m in Sources */,
 				0717E2DD19B71C56001DF132 /* STConversationsListViewController.m in Sources */,

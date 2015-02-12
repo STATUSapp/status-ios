@@ -13,9 +13,7 @@
 #import "STFacebookLoginController.h"
 #import "STNetworkQueueManager.h"
 
-@interface STLoginViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
-@property (weak, nonatomic) IBOutlet UIPageControl *pageController;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@interface STLoginViewController ()
 @end
 
 @implementation STLoginViewController
@@ -56,18 +54,6 @@
                                                                          constant:1.f];
     
      [self.view addConstraints:@[bottomConstraint, centerConstraint]];
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGSize size =  CGSizeMake(screenWidth, screenRect.size.height-158);
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    [flowLayout setMinimumInteritemSpacing:0.0f];
-    [flowLayout setMinimumLineSpacing:0.0f];
-    [flowLayout setItemSize:size];
-    [self.collectionView setPagingEnabled:YES];
-    [self.collectionView setCollectionViewLayout:flowLayout];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,34 +61,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - UICollectionViewDataSource
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
-}
-
-#pragma mark - UICollectionViewDelegate
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *identifier = [NSString stringWithFormat:@"Tutorial%ld", (long)indexPath.row];
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    return cell;
-}
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 5;
-}
-
--(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-    [_pageController setCurrentPage:indexPath.row];
-
-}
-
-#pragma mark - UIScrollViewDelegate
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//}
-//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-//    CGRect screenRect = [[UIScreen mainScreen] bounds];
-//    CGFloat screenWidth = screenRect.size.width;
-//    NSInteger currentpage = scrollView.contentOffset.x/screenWidth + 1;
-//}
 
 @end

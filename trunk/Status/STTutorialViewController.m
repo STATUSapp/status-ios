@@ -1,115 +1,61 @@
 //
-//  STTutorial.m
+//  STTutorialViewController.m
 //  Status
 //
-//  Created by Silviu on 01/05/14.
-//  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
+//  Created by Cosmin Andrus on 11/02/15.
+//  Copyright (c) 2015 Andrus Cosmin. All rights reserved.
 //
 
 #import "STTutorialViewController.h"
-#import "STTutorialCell.h"
-#import "STInviteController.h"
-
-static NSString * const kSTTutorialImagePrefix = @"tutorial_";
-static NSInteger const  kSTNumberOfTutorialImages = 6;
 
 @interface STTutorialViewController ()
-
-@property (strong, nonatomic) UIPageControl * pageControl;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
 @implementation STTutorialViewController
 
-+ (STTutorialViewController *)newInstance{
-    return [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
-            instantiateViewControllerWithIdentifier:NSStringFromClass([STTutorialViewController class])];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    UITapGestureRecognizer * dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissViewController)];
-    dismissTap.cancelsTouchesInView = NO;
-    dismissTap.numberOfTapsRequired = 1;
-    [self.view addGestureRecognizer:dismissTap];
-    
-    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(10, 50, 300, 50)];
-    self.pageControl.numberOfPages = kSTNumberOfTutorialImages;
-    self.pageControl.userInteractionEnabled = NO;
-    [self.view addSubview:self.pageControl];
 }
+-(void)viewWillLayoutSubviews{
+    CGRect screenRect = self.view.bounds;
+    CGFloat screenWidth = screenRect.size.width;
+    CGSize size =  CGSizeMake(screenWidth, screenRect.size.height-55);
+    NSLog(@"Test frame: %@",NSStringFromCGRect(self.view.bounds));
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    [flowLayout setMinimumInteritemSpacing:0.0f];
+    [flowLayout setMinimumLineSpacing:0.0f];
+    [flowLayout setItemSize:size];
+    [self.collectionView setPagingEnabled:YES];
+    [self.collectionView setCollectionViewLayout:flowLayout];
 
-- (void)didReceiveMemoryWarning
-{
+}
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - Actions
-
-- (void)dismissViewController{
-    if ([(STTutorialCell*)[self.collectionView visibleCells].firstObject tag] == kSTNumberOfTutorialImages - 1) {
-        __weak STTutorialViewController *weakSelf = self;
-        [self dismissViewControllerAnimated:YES completion:^{
-            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(tutorialDidDissmiss)]) {
-                [weakSelf.delegate performSelector:@selector(tutorialDidDissmiss)];
-            }
-        }];
-        
-        
-    }
+#pragma mark - UICollectionViewDataSource
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark UICollectionView methods
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    STTutorialCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([STTutorialCell class]) forIndexPath:indexPath];
-    cell.tutorialImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%ld", kSTTutorialImagePrefix, (long)indexPath.row]];
-    
-    if (indexPath.row == kSTNumberOfTutorialImages - 1) {
-        cell.backgroundView = [[UIImageView alloc] initWithImage:self.backgroundImageForLastElement];
-        cell.backgroundView.backgroundColor = [UIColor clearColor];
-    }
-    cell.tag = indexPath.row;
-    
-    cell.contentView.frame = cell.bounds;
-    cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
-    
+#pragma mark - UICollectionViewDelegate
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *identifier = [NSString stringWithFormat:@"Tutorial%ld", (long)indexPath.row];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     return cell;
 }
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return kSTNumberOfTutorialImages;
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 5;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-    self.pageControl.currentPage = [(STTutorialCell*)[self.collectionView visibleCells].firstObject tag];
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    [_pageControl setCurrentPage:indexPath.row];
+    
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return self.view.frame.size;
-}
 
 @end

@@ -85,6 +85,7 @@
     _captiontextView.delegate = self;
     _writeCaptionPlaceholder.hidden = _captiontextView.text.length>0;
     _shareView.hidden = (_controllerType == STShareControllerEditCaption) ;
+    _captiontextView.userInteractionEnabled = (_controllerType != STShareControllerEditPost);
 }
 
 - (void)appplicationIsActive:(NSNotification *)notification {
