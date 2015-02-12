@@ -15,6 +15,9 @@
         <mutableArray key="ProximaNova-Light.otf">
             <string>ProximaNova-Light</string>
         </mutableArray>
+        <mutableArray key="ProximaNova-RegItalic.otf">
+            <string>ProximaNova-RegularIt</string>
+        </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -49,9 +52,6 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
-        </mutableArray>
-        <mutableArray key="ProximaNova-RegularItalic.otf">
-            <string>ProximaNova-RegularIt</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
@@ -829,6 +829,10 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="174"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="56" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparenta" translatesAutoresizingMaskIntoConstraints="NO" id="7TM-d9-vEp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIz-3y-UvK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -905,7 +909,6 @@
                                         <state key="normal" image="Facebook share button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="disabled" image="facebook share button pressed"/>
                                         <state key="selected" image="Facebook share button pressed"/>
                                         <state key="highlighted" image="Facebook share button pressed"/>
                                         <connections>
@@ -953,10 +956,6 @@
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="56" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparenta" translatesAutoresizingMaskIntoConstraints="NO" id="7TM-d9-vEp">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
@@ -2180,7 +2179,7 @@
         <image name="Use button" width="82" height="82"/>
         <image name="Use button pressed" width="82" height="82"/>
         <image name="back button" width="37" height="19"/>
-        <image name="back button white" width="320" height="40"/>
+        <image name="back button white" width="37" height="19"/>
         <image name="back button white pressed" width="37" height="19"/>
         <image name="btn_big_camera_normal" width="142" height="108"/>
         <image name="btn_big_camera_pressed" width="142" height="108"/>
@@ -2191,7 +2190,6 @@
         <image name="chat button pressed" width="212" height="45"/>
         <image name="chat unread message" width="24" height="24"/>
         <image name="down shaddow" width="60" height="96"/>
-        <image name="facebook share button pressed" width="160" height="46"/>
         <image name="grey line" width="227" height="3"/>
         <image name="invite friends button" width="212" height="45"/>
         <image name="invite friends button pressed" width="212" height="45"/>
