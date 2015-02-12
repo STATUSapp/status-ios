@@ -115,7 +115,12 @@
 - (void)setupVisualsWithDictionary:(NSDictionary *)dict {
     
     if ([dict valueForKey:kFirstNameKey]  != [NSNull null]) {
-        _lblNameAndAge.text = dict[kFirstNameKey];
+        NSString * firstName = dict[kFirstNameKey];
+        if (firstName.length) {
+            _lblNameAndAge.text = dict[kFirstNameKey];
+        } else {
+            _lblNameAndAge.text = dict[kFulNameKey];
+        }
     } else {
         _lblNameAndAge.text = dict[kFulNameKey];
     }
