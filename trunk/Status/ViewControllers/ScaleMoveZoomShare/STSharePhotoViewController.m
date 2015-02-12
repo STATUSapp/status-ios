@@ -177,20 +177,25 @@
         _controllerType == STShareControllerEditPost) {
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+                
+                NSString * postId;
+                
+                if (weakSelf.editPostId != nil) {
+                    postId = weakSelf.editPostId;
+                } else {
+                    postId = response[@"post_id"];
+                }
                 if (weakSelf.editPostId!=nil) {
                     editResponseDict = [NSDictionary dictionaryWithDictionary:response];
                 }
                 if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
-                    [weakSelf startPostingWithPostId:_editPostId];
+                    [weakSelf startPostingWithPostId:postId];
                 }
                 else
                 {
-                    [weakSelf callTheDelegateIfNeededForPostId:_editPostId];
+                    [weakSelf callTheDelegateIfNeededForPostId:postId];
                 }
                 
-            }
-            if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
-                [weakSelf startPostingWithPostId:response[@"post_id"]];
             }
             else
             {

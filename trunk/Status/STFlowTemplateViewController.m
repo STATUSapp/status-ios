@@ -406,17 +406,24 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #warning - Re-design taking in consideration new profile flow
     //TODO: TEST THIS
     
-    STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = STFlowTypeSinglePost;
-    flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
-    flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
-    flowCtrl.postID = postId;
+    
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
     NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
     //replace all the stack with the main flow and the user profile flow
+    
+    STFlowTemplateViewController *flowCtrl;
+    
+    if (postId) {
+        flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+        flowCtrl.flowType = STFlowTypeSinglePost;
+        flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
+        flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
+        flowCtrl.postID = postId;
+    }
+    
     if ([[viewCtrl lastObject] isKindOfClass:[STSharePhotoViewController class]]) {
-        NSArray *newFlow = @[[viewCtrl firstObject], flowCtrl];
+        NSArray *newFlow = postId ? @[viewCtrl.firstObject, flowCtrl] : @[viewCtrl.firstObject];
         [navCtrl setViewControllers:newFlow animated:YES];
     }
 }
