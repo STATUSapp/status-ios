@@ -98,14 +98,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6B-n6-hfW" userLabel="gallery btn">
-                                <rect key="frame" x="230" y="241" width="83" height="38"/>
+                                <rect key="frame" x="248" y="241" width="65" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-11" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="0" image="gallery icon" backgroundImage="gallery">
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-29" maxY="0.0"/>
+                                <state key="normal" title="217" backgroundImage="gallery">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="gallery icon pressed" backgroundImage="gallery pressed"/>
+                                <state key="highlighted" backgroundImage="gallery pressed"/>
                                 <connections>
                                     <action selector="onTapGallery:" destination="AU9-ws-jB7" eventType="touchUpInside" id="3q6-UG-0Zu"/>
                                 </connections>
@@ -289,7 +288,7 @@
                                 <rect key="frame" x="0.0" y="99" width="320" height="239"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nQ8-ho-Fco" userLabel="name text field">
-                                        <rect key="frame" x="55" y="13" width="158" height="30"/>
+                                        <rect key="frame" x="52" y="13" width="161" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="kGr-JD-2bh"/>
                                         </constraints>
@@ -300,28 +299,28 @@
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user name" translatesAutoresizingMaskIntoConstraints="NO" id="hlp-aU-zOX">
-                                        <rect key="frame" x="8" y="8" width="39" height="39"/>
+                                        <rect key="frame" x="8" y="8" width="36" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="39" id="gLA-hb-grw"/>
-                                            <constraint firstAttribute="width" constant="39" id="uFF-0G-c0w"/>
+                                            <constraint firstAttribute="height" constant="36" id="gLA-hb-grw"/>
+                                            <constraint firstAttribute="width" constant="36" id="uFF-0G-c0w"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="OJc-n0-HiF">
-                                        <rect key="frame" x="8" y="61" width="39" height="39"/>
+                                        <rect key="frame" x="8" y="58" width="36" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="39" id="7Ln-qS-G7N"/>
-                                            <constraint firstAttribute="height" constant="39" id="lIU-6k-Li6"/>
+                                            <constraint firstAttribute="width" constant="36" id="7Ln-qS-G7N"/>
+                                            <constraint firstAttribute="height" constant="36" id="lIU-6k-Li6"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="description" translatesAutoresizingMaskIntoConstraints="NO" id="vcp-Yo-T2M">
-                                        <rect key="frame" x="8" y="116" width="39" height="39"/>
+                                        <rect key="frame" x="8" y="110" width="36" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="39" id="Odo-9s-yHg"/>
-                                            <constraint firstAttribute="height" constant="39" id="ZyX-UC-XsU"/>
+                                            <constraint firstAttribute="width" constant="36" id="Odo-9s-yHg"/>
+                                            <constraint firstAttribute="height" constant="36" id="ZyX-UC-XsU"/>
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vg4-hj-owh" userLabel="location textField">
-                                        <rect key="frame" x="55" y="66" width="158" height="30"/>
+                                        <rect key="frame" x="52" y="66" width="161" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="kxA-qC-ULP"/>
                                         </constraints>
@@ -356,7 +355,7 @@
                                         </constraints>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZCi-xK-7vU">
-                                        <rect key="frame" x="55" y="116" width="257" height="80"/>
+                                        <rect key="frame" x="52" y="110" width="260" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="3bx-av-a32"/>
@@ -369,20 +368,20 @@
                                         </connections>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140/150 characters" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvD-DD-zCV">
-                                        <rect key="frame" x="205" y="204" width="107" height="13"/>
+                                        <rect key="frame" x="205" y="198" width="107" height="13"/>
                                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IID-pR-q2W" userLabel="bottom line">
-                                        <rect key="frame" x="55" y="106" width="265" height="1"/>
+                                        <rect key="frame" x="52" y="106" width="268" height="1"/>
                                         <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="QHJ-yv-9De"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="747" verticalCompressionResistancePriority="747" translatesAutoresizingMaskIntoConstraints="NO" id="ffP-cf-gOX" userLabel="middle line">
-                                        <rect key="frame" x="55" y="54" width="166" height="1"/>
+                                        <rect key="frame" x="52" y="54" width="169" height="1"/>
                                         <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="7tH-mm-wXf"/>
@@ -496,15 +495,13 @@
         <image name="Message icon pressed" width="33" height="33"/>
         <image name="camera button" width="66" height="66"/>
         <image name="camera button pressed" width="66" height="66"/>
-        <image name="description" width="39" height="38"/>
-        <image name="down shaddow" width="124" height="96"/>
+        <image name="description" width="36" height="36"/>
+        <image name="down shaddow" width="60" height="96"/>
         <image name="edit profile button" width="66" height="66"/>
         <image name="edit profile button pressed" width="66" height="66"/>
-        <image name="gallery" width="83" height="38"/>
-        <image name="gallery icon" width="28" height="21"/>
-        <image name="gallery icon pressed" width="28" height="21"/>
-        <image name="gallery pressed" width="83" height="38"/>
-        <image name="location" width="39" height="38"/>
+        <image name="gallery" width="65" height="30"/>
+        <image name="gallery pressed" width="65" height="30"/>
+        <image name="location" width="36" height="36"/>
         <image name="location icon" width="12" height="16"/>
         <image name="message button" width="66" height="66"/>
         <image name="message button pressed" width="66" height="66"/>
@@ -513,7 +510,7 @@
         <image name="settings button" width="100" height="100"/>
         <image name="settings button pressed" width="100" height="100"/>
         <image name="status_online" width="10" height="10"/>
-        <image name="upper shaddow 4" width="414" height="96"/>
-        <image name="user name" width="39" height="38"/>
+        <image name="upper shaddow 4" width="59" height="96"/>
+        <image name="user name" width="36" height="36"/>
     </resources>
 </document>

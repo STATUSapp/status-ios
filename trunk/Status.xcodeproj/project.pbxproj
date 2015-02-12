@@ -117,7 +117,6 @@
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
-		17AB991F19DB3257004B3C91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17AB991E19DB3257004B3C91 /* Images.xcassets */; };
 		17ACEB621933C4E600CFC909 /* ChatScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17ACEB611933C4E600CFC909 /* ChatScene.storyboard */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17B9234619CAB62500E38FB5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B9234519CAB62500E38FB5 /* Crashlytics.framework */; };
@@ -181,6 +180,7 @@
 		99851E2D1A7E777C004B4FA4 /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E1B1A7E777C004B4FA4 /* ProximaNovaCond-SemiboldIt.otf */; };
 		99CEC4971A5977580014B759 /* STMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99CEC4961A5977580014B759 /* STMenuController.m */; };
 		99CEC49D1A5DE9D80014B759 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 99CEC49B1A5DE9D80014B759 /* Appirater.m */; };
+		99DCD4D81A8D2BF30023EE51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99DCD4D71A8D2BF30023EE51 /* Images.xcassets */; };
 		99E5B8251A754A0900A59F13 /* STNearbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E5B8241A754A0900A59F13 /* STNearbyController.m */; };
 		99F77F6B1A373BB300E46B22 /* STGetUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F77F6A1A373BB300E46B22 /* STGetUserProfileRequest.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
@@ -406,7 +406,6 @@
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		17AB991E19DB3257004B3C91 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		17ACEB611933C4E600CFC909 /* ChatScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatScene.storyboard; sourceTree = "<group>"; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		17B9234519CAB62500E38FB5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -500,6 +499,7 @@
 		99CEC49A1A5DE9D80014B759 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		99CEC49B1A5DE9D80014B759 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		99CEC49C1A5DE9D80014B759 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
+		99DCD4D71A8D2BF30023EE51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		99E5B8231A754A0900A59F13 /* STNearbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNearbyController.h; sourceTree = "<group>"; };
 		99E5B8241A754A0900A59F13 /* STNearbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNearbyController.m; sourceTree = "<group>"; };
 		99F77F691A373BB300E46B22 /* STGetUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetUserProfileRequest.h; sourceTree = "<group>"; };
@@ -755,7 +755,6 @@
 		172EAE6C18B0B12E00C5637B /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				17AB991E19DB3257004B3C91 /* Images.xcassets */,
 				0717E2A119B717AF001DF132 /* ViewControllers */,
 				317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */,
 				317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */,
@@ -831,6 +830,7 @@
 		172EAE6D18B0B12E00C5637B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				99DCD4D71A8D2BF30023EE51 /* Images.xcassets */,
 				99851E081A7E777C004B4FA4 /* Custom Fonts */,
 				172EAE6E18B0B12E00C5637B /* Status-Info.plist */,
 				172EAE6F18B0B12E00C5637B /* InfoPlist.strings */,
@@ -1180,13 +1180,13 @@
 				99851E211A7E777C004B4FA4 /* ProximaNova-Light.otf in Resources */,
 				99851E2A1A7E777C004B4FA4 /* ProximaNovaCond-Regular.otf in Resources */,
 				99851E241A7E777C004B4FA4 /* ProximaNova-Regular.otf in Resources */,
-				17AB991F19DB3257004B3C91 /* Images.xcassets in Resources */,
 				99851E271A7E777C004B4FA4 /* ProximaNova-SemiboldItalic.otf in Resources */,
 				99851E2B1A7E777C004B4FA4 /* ProximaNovaCond-RegularIt.otf in Resources */,
 				99851E281A7E777C004B4FA4 /* ProximaNovaCond-Light.otf in Resources */,
 				99851E1F1A7E777C004B4FA4 /* ProximaNova-BoldIt.otf in Resources */,
 				99851E261A7E777C004B4FA4 /* ProximaNova-Semibold.otf in Resources */,
 				99851E1C1A7E777C004B4FA4 /* Proxima Nova Fonts Collection.jpg in Resources */,
+				99DCD4D81A8D2BF30023EE51 /* Images.xcassets in Resources */,
 				172EAE7118B0B12E00C5637B /* InfoPlist.strings in Resources */,
 				172EAE7A18B0B12E00C5637B /* Main.storyboard in Resources */,
 				99851E201A7E777C004B4FA4 /* ProximaNova-Extrabold.otf in Resources */,
