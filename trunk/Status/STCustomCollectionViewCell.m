@@ -90,7 +90,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     
     NSString *postTimeString = setupDict[@"post_date"];
     if (postTimeString!=nil && ![postTimeString isKindOfClass:[NSNull class]]) {
-        NSDate *postDate = [NSDate dateFromServerDate:postTimeString];
+        NSDate *postDate = [NSDate dateFromServerDateTime:postTimeString];
         _postDateLabel.text = [NSDate timeStringForLastMessageDate:postDate];
     }
     else

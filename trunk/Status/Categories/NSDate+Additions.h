@@ -10,7 +10,8 @@
 
 @interface NSDate (Additions)
 
-+ (NSDate *) dateFromServerDate:(NSString *) serverDate;
++ (NSDate *) dateFromServerDateTime:(NSString *) serverDate;
++ (NSDate *)dateFromServerDate:(NSString *)serverDate;
 + (NSString *)notificationTimeIntervalSinceDate: (NSDate *)dateOfNotification;
 + (NSString *)yearsFromDate:(NSDate *)referenceDate;
 + (NSString *)birthdayStringFromFacebookBirthday:(NSString *)birthday;

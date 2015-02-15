@@ -88,7 +88,7 @@ static NSString *kOnlineImageName = @"online chat";
     _userChatStatus.image = [UIImage imageNamed:isOnline==YES?kOnlineImageName:kOfflineImageName];
     NSString *lastMessageTimeString = info[@"last_message_date"];
     if (lastMessageTimeString!=nil && ![lastMessageTimeString isKindOfClass:[NSNull class]]) {
-        NSDate *lastMessageDate = [NSDate dateFromServerDate:lastMessageTimeString];
+        NSDate *lastMessageDate = [NSDate dateFromServerDateTime:lastMessageTimeString];
         _dateLbl.text = [NSDate timeStringForLastMessageDate:lastMessageDate];
     }
     else

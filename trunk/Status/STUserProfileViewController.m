@@ -165,7 +165,7 @@
         _imageViewBlurryPicture.image = [image applyDarkEffect];
     }];
     
-    NSDate * lastSeenDate = [NSDate dateFromServerDate:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLastActiveKey]];
+    NSDate * lastSeenDate = [NSDate dateFromServerDateTime:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLastActiveKey]];
     NSString * statusText = lastSeenDate ? [NSString stringWithFormat:@" - %@", [NSDate statusForLastTimeSeen:lastSeenDate]] : @"";
     _imageViewStatusIcon.hidden = lastSeenDate ? NO : YES;
     [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:lastSeenDate]];

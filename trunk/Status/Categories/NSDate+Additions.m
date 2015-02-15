@@ -10,7 +10,7 @@
 
 @implementation NSDate (Additions)
 
-+ (NSDate *) dateFromServerDate:(NSString *) serverDate{
++ (NSDate *) dateFromServerDateTime:(NSString *) serverDate{
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -18,6 +18,15 @@
     NSDate *resultDate = [dateFormatter dateFromString:serverDate];
     return resultDate;
 }
+
++ (NSDate *)dateFromServerDate:(NSString *)serverDate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    NSDate *resultDate = [dateFormatter dateFromString:serverDate];
+    return resultDate;
+}
+
 
 + (NSString *)notificationTimeIntervalSinceDate: (NSDate *)dateOfNotification{
     NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:dateOfNotification];

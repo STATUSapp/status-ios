@@ -233,7 +233,7 @@ const float kNoNotifHeight = 24.f;
         [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:dict[@"user_photo_link"]]];
         actualCell.isSeen = [dict[@"seen"] boolValue];
         actualCell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];
-        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDate:dict[@"date"]]];
+        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDateTime:dict[@"date"]]];
         actualCell.notificationTypeMessage.text = [self getNotificationTypeStringForType:notificationType];
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -248,7 +248,7 @@ const float kNoNotifHeight = 24.f;
         else
             [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:postPhotoLink]];
         actualCell.seenCircle.hidden = [dict[@"seen"] boolValue];
-        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDate:dict[@"date"]]];
+        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDateTime:dict[@"date"]]];
         if (notificationType == STNotificationTypeNewUserJoinsStatus) {
             NSString *string = [NSString stringWithFormat:@"%@ is on STATUS. Say hello :)", dict[@"user_name"]];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
