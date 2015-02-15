@@ -8,8 +8,12 @@
 
 #import "STNotificationCell.h"
 #import "UIImageView+TouchesEffects.h"
+
+CGFloat const seenCircleWidth = 15;
+
 @interface STNotificationCell()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationTextTrailingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *seenCircleWidthConstraint;
 @end
 
 @implementation STNotificationCell
@@ -25,6 +29,12 @@
     }
     
     return STNotificationRegionTypePostRelated;
+}
+
+- (void)setIsSeen:(BOOL)isSeen {
+    _isSeen = isSeen;
+    _seenCircleWidthConstraint.constant = isSeen ? 0 : seenCircleWidth;
+    self.seenCircle.hidden = isSeen;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, STNotificationRegionType){
 @interface STNotificationCell : STNotificationBaseCell
 @property (weak, nonatomic) IBOutlet STTapAnimationLabel *messageLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *postImg;
+@property (assign, nonatomic) BOOL isSeen;
 
 - (STNotificationRegionType)regionForPointOfTap:(CGPoint)pointOfTap;
 

@@ -231,7 +231,7 @@ const float kNoNotifHeight = 24.f;
         STNotificationCell *actualCell = (STNotificationCell *)cell;
         [actualCell.postImg sd_setImageWithURL:[NSURL URLWithString:dict[@"post_photo_link"]]];
         [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:dict[@"user_photo_link"]]];
-        actualCell.seenCircle.hidden = [dict[@"seen"] boolValue];
+        actualCell.isSeen = [dict[@"seen"] boolValue];
         actualCell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];
         actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDate:dict[@"date"]]];
         actualCell.notificationTypeMessage.text = [self getNotificationTypeStringForType:notificationType];
