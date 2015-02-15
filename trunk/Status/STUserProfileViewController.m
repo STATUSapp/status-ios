@@ -21,6 +21,7 @@
 #import "STChatRoomViewController.h"
 #import "STMoveScaleViewController.h"
 #import "STInviteUserToUploadRequest.h"
+#import "STSettingsViewController.h"
 
 
 @interface STUserProfileViewController ()
@@ -89,6 +90,12 @@
         _btnSettings.hidden = YES;
         _btnSendMessageToUser.hidden = NO;
         _btnEditUserProfile.hidden = YES;
+    }
+    
+    if (!_isLaunchedFromNearbyController) {
+        UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
+        swipe.direction = UISwipeGestureRecognizerDirectionLeft;
+        [self.view addGestureRecognizer:swipe];
     }
 }
 
@@ -262,7 +269,10 @@
     }}
 
 - (IBAction)onTapSettings:(id)sender {
-    [[STMenuController sharedInstance] goSettings];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
+    UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
+    [self presentViewController: setttingsNav animated:YES completion:nil];
 }
 - (IBAction)onTapSendMessageToUser:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];

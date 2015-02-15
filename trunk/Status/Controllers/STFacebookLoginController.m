@@ -65,14 +65,17 @@
     }
 }
 
--(void) shareImageWithData:(NSData *) imgData andCompletion:(facebookCompletion) completion{
+-(void) shareImageWithData:(NSData *) imgData description:(NSString *)description andCompletion:(facebookCompletion) completion{
+    
+    NSString * descriptionString = description.length ? description : @"what's YOUR status?";
+    
      NSDictionary *dictPrivacy = [NSDictionary dictionaryWithObjectsAndKeys:@"CUSTOM",@"value", @"ALL_FRIENDS", @"friends", nil];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"what's YOUR status? via %@",STInviteLink] ,@"message",
+                                   [NSString stringWithFormat:@"%@ via %@", descriptionString, STInviteLink] ,@"message",
                                    [self stringFromDict:dictPrivacy],@"privacy",
                                    @"STATUS", @"title",
-                                   @"what's YOUR status?", @"description",
+                                   descriptionString, @"description",
                                    @"http://getstatusapp.co/",@"link",
                                    nil];
     

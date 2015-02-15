@@ -211,7 +211,7 @@
         };
         [STUploadPostRequest uploadPostForId:_editPostId
                                     withData:_imgData
-                                  andCaption:_captionString
+                                  andCaption:_captiontextView.text
                               withCompletion:completion
                                      failure:failBlock];
     }
@@ -221,11 +221,11 @@
         
         __weak STSharePhotoViewController *weakSelf = self;
         if (_editPostId!=nil) {
-            [STUpdatePostCaptionRequest setPostCaption:_captionString
+            [STUpdatePostCaptionRequest setPostCaption:_captiontextView.text
                                              forPostId:_editPostId
                                         withCompletion:^(id response, NSError *error) {
                                             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                                                [weakSelf.delegate captionWasEditedForPost:@{@"post_id":_editPostId} withNewCaption:_captionString];
+                                                [weakSelf.delegate captionWasEditedForPost:@{@"post_id":_editPostId} withNewCaption:_captiontextView.text];
                                                 [weakSelf onClickBack:nil];
                                             }
                                             else{
@@ -285,7 +285,7 @@
 }
 - (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId {
     __weak STSharePhotoViewController *weakSelf = self;
-    [[STFacebookLoginController sharedInstance] shareImageWithData:self.imgData andCompletion:^(id result, NSError *error) {
+    [[STFacebookLoginController sharedInstance] shareImageWithData:self.imgData description:_captiontextView.text andCompletion:^(id result, NSError *error) {
         _donePostingToFacebook = YES;
         if (error) {
             _fbError = error;
@@ -295,7 +295,14 @@
 }
 
 - (void)postCurrentPhotoToTwitterWithPostId:(NSString *)postId {
-    NSString * status = [NSString stringWithFormat:@"what's YOUR status? via %@",STInviteLink];
+    NSString * status;
+    
+    if (_captiontextView.text.length) {
+        status = _captiontextView.text;
+    } else {
+        status = [NSString stringWithFormat:@"what's YOUR status? via %@",STInviteLink];
+    }
+    
     UIImage * imgToPost = [UIImage imageWithData:self.imgData];
     
     [self twitterAccountPostImage:imgToPost withStatus:status andPostId:postId];
@@ -447,7 +454,6 @@
     else
         textLenght--;//delete pressed
     _writeCaptionPlaceholder.hidden = (textLenght>0);
-    
     return YES;
 }
 @end

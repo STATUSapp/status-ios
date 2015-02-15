@@ -135,7 +135,7 @@ const NSInteger kSectionNumberLogout = 2;
             return 6;
             break;
         case kSectionNumberContactLikeAds:
-            return 3;
+            return 2;
             break;
         case kSectionNumberLogout:
             return 1;

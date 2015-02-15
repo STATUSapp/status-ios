@@ -27,7 +27,7 @@ typedef void (^facebookCompletion)(id result, NSError *error);
 @property (nonatomic, strong) id <FacebookControllerDelegate> logoutDelegate;
 @property (nonatomic, strong) FBLoginView *loginButton;
 @property (nonatomic, strong) NSString *currentUserId;
--(void) shareImageWithData:(NSData *) imgData andCompletion:(facebookCompletion) completion;
+-(void) shareImageWithData:(NSData *) imgData description:(NSString *)description andCompletion:(facebookCompletion) completion;
 -(NSString *) getUDValueForKey:(NSString *) key;
 -(void) UDSetValue:(NSString *) value forKey:(NSString *) key;
 -(void)loadTokenFromKeyChain;

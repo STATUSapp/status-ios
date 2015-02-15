@@ -78,7 +78,7 @@
                                     <constraint firstAttribute="height" constant="96" id="7Y3-Yp-hD2"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DpI-c0-H0H" userLabel="blurry picture">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DpI-c0-H0H" userLabel="blurry picture">
                                 <rect key="frame" x="0.0" y="362" width="320" height="206"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down shaddow" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-IZ-BJl">
@@ -120,7 +120,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCt-OH-ynU" userLabel="camera btn">
-                                <rect key="frame" x="16" y="482" width="66" height="66"/>
+                                <rect key="frame" x="16" y="477" width="66" height="66"/>
                                 <state key="normal" image="camera button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -150,7 +150,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3Y-4t-VOm" userLabel="edit user profile btn">
-                                <rect key="frame" x="238" y="482" width="66" height="66"/>
+                                <rect key="frame" x="238" y="477" width="66" height="66"/>
                                 <state key="normal" image="edit profile button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -163,7 +163,7 @@
                                 <rect key="frame" x="116" y="413" width="12" height="16"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWQ-93-hQl" userLabel="send user message btn">
-                                <rect key="frame" x="238" y="482" width="66" height="66"/>
+                                <rect key="frame" x="238" y="477" width="66" height="66"/>
                                 <state key="normal" image="message button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -200,14 +200,14 @@
                             <constraint firstItem="ykj-hN-llS" firstAttribute="top" secondItem="3nA-Cz-4Si" secondAttribute="bottom" id="471-Eu-BDK"/>
                             <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="Wf5-IZ-BJl" secondAttribute="bottom" id="4AP-Cc-izB"/>
                             <constraint firstItem="XCt-OH-ynU" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="16" id="5rx-kh-QhQ"/>
-                            <constraint firstItem="d3Y-4t-VOm" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" constant="5" id="AgE-1t-aUo"/>
-                            <constraint firstItem="zof-zo-rAp" firstAttribute="centerY" secondItem="yWQ-93-hQl" secondAttribute="centerY" constant="-5" id="DRi-qc-1Ne"/>
+                            <constraint firstItem="d3Y-4t-VOm" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" id="AgE-1t-aUo"/>
+                            <constraint firstItem="zof-zo-rAp" firstAttribute="centerY" secondItem="yWQ-93-hQl" secondAttribute="centerY" id="DRi-qc-1Ne"/>
                             <constraint firstAttribute="trailing" secondItem="ykj-hN-llS" secondAttribute="trailing" id="EWQ-k8-i7T"/>
                             <constraint firstItem="Drt-N9-twb" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" constant="20" id="Fpi-X7-svG"/>
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="zof-zo-rAp" secondAttribute="centerX" id="G09-Fo-ip2"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" constant="17" id="IIJ-tJ-Yen"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="15" id="Jdd-me-RUK"/>
-                            <constraint firstItem="XCt-OH-ynU" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" constant="5" id="MCo-cw-Z9K"/>
+                            <constraint firstItem="XCt-OH-ynU" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" id="MCo-cw-Z9K"/>
                             <constraint firstAttribute="trailing" secondItem="e6B-n6-hfW" secondAttribute="trailing" constant="7" id="Oks-07-apo"/>
                             <constraint firstItem="UHe-3U-SnI" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="SPm-G5-Pxv"/>
                             <constraint firstItem="3nA-Cz-4Si" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="TQG-Hq-dol"/>

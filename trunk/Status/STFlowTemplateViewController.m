@@ -970,18 +970,18 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
                                                         defaultAudience:FBSessionDefaultAudienceFriends
                                                       completionHandler:^(FBSession *session, NSError *error) {
-                                                          [weakSelf sharePhotoOnFacebookWithImgData:imgData];
+                                                          [weakSelf sharePhotoOnFacebookWithImgData:imgData andDescription:nil];
                                                       }];
                 
             }
             else
-                [self sharePhotoOnFacebookWithImgData:imgData];
+                [self sharePhotoOnFacebookWithImgData:imgData andDescription:nil];
         }];
     }];
 }
 
-- (void)sharePhotoOnFacebookWithImgData:(NSData *)imgData{
-    [[STFacebookLoginController sharedInstance] shareImageWithData:imgData andCompletion:^(id result, NSError *error) {
+- (void)sharePhotoOnFacebookWithImgData:(NSData *)imgData andDescription:(NSString *)description{
+    [[STFacebookLoginController sharedInstance] shareImageWithData:imgData description:description andCompletion:^(id result, NSError *error) {
         if(error==nil)
             [[[UIAlertView alloc] initWithTitle:@"Success"
                                         message:@"Your photo was posted."
