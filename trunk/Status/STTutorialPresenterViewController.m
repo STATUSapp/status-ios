@@ -7,6 +7,7 @@
 //
 
 #import "STTutorialPresenterViewController.h"
+#import "STTutorialViewController.h"
 
 @interface STTutorialPresenterViewController ()
 
@@ -31,6 +32,11 @@
 }
 - (IBAction)onClosePressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    NSLog(@"Segue.identifier: %@", segue.identifier);
+    [(STTutorialViewController *)segue.destinationViewController setSkipFirstItem:YES];
 }
 
 @end

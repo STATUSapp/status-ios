@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface STTutorialCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView * tutorialImageView;
-
+@property (weak, nonatomic) IBOutlet UILabel *titleLable;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *tutorialImageView;
 @end

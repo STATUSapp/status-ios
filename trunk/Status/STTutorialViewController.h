@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface STTutorialViewController : UIViewController
-
+@property (nonatomic) BOOL skipFirstItem;
 @end

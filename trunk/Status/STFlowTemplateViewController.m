@@ -169,13 +169,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [[STImageCacheController sharedInstance] changeFlowType:_flowType needsSort:YES];
 }
 
-- (void)presentTutorialAutomatically{
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:kSTTutorialIsSeen] == nil) {
-        [[STMenuController sharedInstance] goTutorial];
-        [[NSUserDefaults standardUserDefaults] setObject:kSTTutorialIsSeen forKey:kSTTutorialIsSeen];
-    }
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -345,13 +338,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 }
 -(void)facebookControllerDidLoggedIn{
-    __weak STFlowTemplateViewController * weakSelf = self;
     
     if (![self.presentedViewController isBeingDismissed])
     {
         if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
             [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
-                [weakSelf presentTutorialAutomatically];
             }];
         }
     }
