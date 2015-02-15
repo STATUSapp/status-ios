@@ -496,7 +496,7 @@
         <image name="camera button" width="66" height="66"/>
         <image name="camera button pressed" width="66" height="66"/>
         <image name="description" width="36" height="36"/>
-        <image name="down shaddow" width="60" height="96"/>
+        <image name="down shaddow" width="414" height="97"/>
         <image name="edit profile button" width="66" height="66"/>
         <image name="edit profile button pressed" width="66" height="66"/>
         <image name="gallery" width="65" height="30"/>
@@ -510,7 +510,7 @@
         <image name="settings button" width="100" height="100"/>
         <image name="settings button pressed" width="100" height="100"/>
         <image name="status_online" width="10" height="10"/>
-        <image name="upper shaddow 4" width="59" height="96"/>
+        <image name="upper shaddow 4" width="414" height="96"/>
         <image name="user name" width="36" height="36"/>
     </resources>
 </document>

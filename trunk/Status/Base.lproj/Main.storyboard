@@ -15,9 +15,6 @@
         <mutableArray key="ProximaNova-Light.otf">
             <string>ProximaNova-Light</string>
         </mutableArray>
-        <mutableArray key="ProximaNova-RegItalic.otf">
-            <string>ProximaNova-RegularIt</string>
-        </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -53,6 +50,9 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+        </mutableArray>
+        <mutableArray key="ProximaNova-RegularItalic.otf">
+            <string>ProximaNova-RegularIt</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
@@ -100,17 +100,8 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kzm-Vb-2Ux">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down shaddow" translatesAutoresizingMaskIntoConstraints="NO" id="xfX-m0-Lzh">
-                                                    <rect key="frame" x="0.0" y="472" width="320" height="96"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="96" id="Kgu-bV-VE1"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upper shaddow 4" translatesAutoresizingMaskIntoConstraints="NO" id="6Fj-gO-x6Y">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="96" id="xhy-v1-v6P"/>
-                                                    </constraints>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downShaddow" translatesAutoresizingMaskIntoConstraints="NO" id="xfX-m0-Lzh">
+                                                    <rect key="frame" x="-47" y="365" width="414" height="203"/>
                                                 </imageView>
                                                 <view tag="32" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrb-Mu-BG1" userLabel="BottomOptions">
                                                     <rect key="frame" x="20" y="467" width="280" height="92"/>
@@ -315,36 +306,37 @@
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-nO-7e0">
                                                     <rect key="frame" x="142" y="265" width="37" height="37"/>
                                                 </activityIndicatorView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upShaddow" translatesAutoresizingMaskIntoConstraints="NO" id="6Fj-gO-x6Y">
+                                                    <rect key="frame" x="-47" y="0.0" width="414" height="204"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="6Fj-gO-x6Y" secondAttribute="centerX" id="4HT-vw-Hvc"/>
                                             <constraint firstItem="kzm-Vb-2Ux" firstAttribute="centerY" secondItem="Rin-Xs-XdC" secondAttribute="centerY" id="5cq-ib-bPD"/>
                                             <constraint firstItem="Rin-Xs-XdC" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" id="5ph-mf-YbG"/>
                                             <constraint firstAttribute="trailing" secondItem="xrb-Mu-BG1" secondAttribute="trailing" constant="20" id="8Vj-l5-Nqp"/>
-                                            <constraint firstItem="6Fj-gO-x6Y" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" id="BXL-K8-q6G"/>
                                             <constraint firstAttribute="centerX" secondItem="TdE-nO-7e0" secondAttribute="centerX" id="E6r-Qa-HZu"/>
-                                            <constraint firstItem="6Fj-gO-x6Y" firstAttribute="top" secondItem="B45-j8-lL1" secondAttribute="top" id="GaH-BX-Lfa"/>
                                             <constraint firstItem="FyR-DQ-ApI" firstAttribute="width" secondItem="Rin-Xs-XdC" secondAttribute="width" id="Gsz-sQ-Fth"/>
                                             <constraint firstItem="FyR-DQ-ApI" firstAttribute="centerX" secondItem="Rin-Xs-XdC" secondAttribute="centerX" id="HH6-hS-Pph"/>
                                             <constraint firstItem="xrb-Mu-BG1" firstAttribute="top" secondItem="00m-fJ-Ikr" secondAttribute="bottom" constant="14" id="Ip7-EL-tor"/>
                                             <constraint firstItem="FyR-DQ-ApI" firstAttribute="height" secondItem="Rin-Xs-XdC" secondAttribute="height" id="KnP-qL-0Nc"/>
-                                            <constraint firstAttribute="bottom" secondItem="xfX-m0-Lzh" secondAttribute="bottom" id="N12-80-7al"/>
                                             <constraint firstAttribute="bottom" secondItem="xrb-Mu-BG1" secondAttribute="bottom" constant="9" id="Q6s-Ex-pSW"/>
+                                            <constraint firstAttribute="centerX" secondItem="xfX-m0-Lzh" secondAttribute="centerX" id="Sfu-6d-qYf"/>
                                             <constraint firstItem="kzm-Vb-2Ux" firstAttribute="height" secondItem="Rin-Xs-XdC" secondAttribute="height" id="Si3-RK-J6K"/>
                                             <constraint firstItem="xrb-Mu-BG1" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" constant="20" id="Tsg-N8-YXV"/>
+                                            <constraint firstItem="6Fj-gO-x6Y" firstAttribute="top" secondItem="B45-j8-lL1" secondAttribute="top" id="WYG-fE-lQb"/>
                                             <constraint firstItem="FyR-DQ-ApI" firstAttribute="centerY" secondItem="Rin-Xs-XdC" secondAttribute="centerY" id="ZQQ-ze-NyB"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="00m-fJ-Ikr" secondAttribute="trailing" id="aak-6J-U83"/>
-                                            <constraint firstAttribute="trailing" secondItem="6Fj-gO-x6Y" secondAttribute="trailing" id="bYc-09-CNW"/>
                                             <constraint firstAttribute="centerX" secondItem="Rin-Xs-XdC" secondAttribute="centerX" id="fUG-N3-Flu"/>
                                             <constraint firstItem="Rin-Xs-XdC" firstAttribute="top" secondItem="B45-j8-lL1" secondAttribute="top" id="fZc-nQ-SvX"/>
                                             <constraint firstAttribute="centerY" secondItem="TdE-nO-7e0" secondAttribute="centerY" id="h5u-F8-Q2g"/>
                                             <constraint firstItem="kzm-Vb-2Ux" firstAttribute="width" secondItem="Rin-Xs-XdC" secondAttribute="width" id="nqG-Ns-3TU"/>
                                             <constraint firstAttribute="bottom" secondItem="Rin-Xs-XdC" secondAttribute="bottom" id="oIe-5L-TuG"/>
-                                            <constraint firstAttribute="trailing" secondItem="xfX-m0-Lzh" secondAttribute="trailing" id="qRf-TK-jkU"/>
                                             <constraint firstAttribute="centerY" secondItem="Rin-Xs-XdC" secondAttribute="centerY" id="qmd-9C-0ai"/>
                                             <constraint firstItem="kzm-Vb-2Ux" firstAttribute="centerX" secondItem="Rin-Xs-XdC" secondAttribute="centerX" id="vwV-v3-pHc"/>
-                                            <constraint firstItem="xfX-m0-Lzh" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leading" id="xbe-su-Kch"/>
+                                            <constraint firstAttribute="bottom" secondItem="xfX-m0-Lzh" secondAttribute="bottom" id="zXs-Cr-FhE"/>
                                             <constraint firstItem="00m-fJ-Ikr" firstAttribute="leading" secondItem="B45-j8-lL1" secondAttribute="leadingMargin" id="zz9-MR-vX3"/>
                                         </constraints>
                                         <size key="customSize" width="320" height="568"/>
@@ -2171,7 +2163,7 @@
         <image name="chat button pressed" width="212" height="45"/>
         <image name="chat time icon" width="19" height="19"/>
         <image name="chat unread message" width="24" height="24"/>
-        <image name="down shaddow" width="60" height="96"/>
+        <image name="downShaddow" width="414" height="203"/>
         <image name="grey line" width="227" height="3"/>
         <image name="invite friends button" width="212" height="45"/>
         <image name="invite friends button pressed" width="212" height="45"/>
@@ -2198,7 +2190,7 @@
         <image name="share button pressed" width="66" height="66"/>
         <image name="status logo" width="282" height="53"/>
         <image name="transparenta" width="320" height="568"/>
-        <image name="upper shaddow 4" width="59" height="96"/>
+        <image name="upShaddow" width="414" height="204"/>
         <image name="user chat black button" width="36" height="36"/>
         <image name="user chat black button pressed" width="36" height="36"/>
     </resources>
