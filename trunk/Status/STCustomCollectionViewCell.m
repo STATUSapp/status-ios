@@ -182,12 +182,12 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
 
 -(void)setUpCaptionForEdit:(BOOL)editFlag{
     NSString *caption = self.setUpDict[@"caption"];
-    UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
-    CGRect rect = [caption boundingRectWithSize:CGSizeMake(235.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
-
     if (caption == nil || ![caption isKindOfClass:[NSString class]]) {
         caption = @"";
     }
+    UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
+    CGRect rect = [caption boundingRectWithSize:CGSizeMake(235.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+
     _captionLabel.text = caption;
     if (editFlag == NO) {//SeeMore
         [_captionButton setTitle:@"See more" forState:UIControlStateNormal];

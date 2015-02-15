@@ -359,6 +359,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
     if (![presentedVC isKindOfClass:[STLoginViewController class]]) {
         [self dismissViewControllerAnimated:NO completion:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
             [[STFacebookLoginController sharedInstance] UDSetValue:nil forKey:USER_NAME];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[FBSession activeSession] closeAndClearTokenInformation];
