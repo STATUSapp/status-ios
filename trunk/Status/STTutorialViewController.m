@@ -81,7 +81,7 @@ NSString *const kTutorialSubtitleKey = @"tutorial_subtitle";
     if ([cell isKindOfClass:[STTutorialCell class]]) {
         STTutorialCell *theCell = (STTutorialCell *)cell;
         NSDictionary *tutorialItem = dataSource[indexPath.row];
-        theCell.tutorialImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Tutorial %d", _skipFirstItem==YES?indexPath.row+1:indexPath.row]];
+        theCell.tutorialImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Tutorial %ld", _skipFirstItem==YES?indexPath.row+1:indexPath.row]];
         theCell.titleLable.text = [tutorialItem valueForKey:kTutorialTitleKey];
         theCell.subtitleLabel.text = [tutorialItem valueForKey:kTutorialSubtitleKey];
     }

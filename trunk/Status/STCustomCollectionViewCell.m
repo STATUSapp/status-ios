@@ -15,6 +15,7 @@
 #import "STFacebookLoginController.h"
 #import "UIImageView+Mask.h"
 #import "UIImageView+WebCache.h"
+#import "NSDate+Additions.h"
 
 static const NSInteger kCaptionShadowTag = 101;
 static NSString *kLikeButtonName = @"like button";
@@ -37,6 +38,8 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
 @property (weak, nonatomic) IBOutlet UIButton *captionButton;
 @property (weak, nonatomic) IBOutlet UIView *captionView;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImg;
+@property (weak, nonatomic) IBOutlet UIView *postDateView;
+@property (weak, nonatomic) IBOutlet UILabel *postDateLabel;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -84,6 +87,14 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     [self setUpCaptionForEdit:NO];
     [self.profileNameBtn setTitle:setupDict[@"user_name"] forState:UIControlStateNormal];
     [self updateLikeBtnAndLblWithDict:setupDict];
+    
+    NSString *postTimeString = setupDict[@"post_date"];
+    if (postTimeString!=nil && ![postTimeString isKindOfClass:[NSNull class]]) {
+        NSDate *postDate = [NSDate dateFromServerDate:postTimeString];
+        _postDateLabel.text = [NSDate timeStringForLastMessageDate:postDate];
+    }
+    else
+        _postDateLabel.text = @"NA";
     
     switch (flowType) {
         case STFlowTypeSinglePost:
@@ -171,6 +182,9 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
 
 -(void)setUpCaptionForEdit:(BOOL)editFlag{
     NSString *caption = self.setUpDict[@"caption"];
+    UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
+    CGRect rect = [caption boundingRectWithSize:CGSizeMake(235.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+
     if (caption == nil || ![caption isKindOfClass:[NSString class]]) {
         caption = @"";
     }
@@ -181,7 +195,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
         _captionButton.hidden = NO;
         
         if ([self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
-            if (caption.length == 0) {
+            if (caption.length == 0 || rect.size.height <= 15.f) {
                 [_captionButton setTitle:@"Edit" forState:UIControlStateNormal];
                 _captionButton.tag = 111;
             }
@@ -199,26 +213,36 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     }
 }
 
--(void)addCaptionShadow{
+-(void)addCaptionShadowWithExtraSpace:(CGFloat)extrHeight{
     
     CGSize bounds = self.bounds.size;
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
     button.tag = kCaptionShadowTag;
     [button addTarget:self action:@selector(captionShadowPressed:) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor blackColor];
-    button.alpha = 0.5;
+    button.alpha = 0.0;
     [self.contentView addSubview:button];
     [self.contentView bringSubviewToFront:_captionView];
     [self setUpCaptionForEdit:YES];
+    _heightConstraint.constant = 64.f + extrHeight;
+    [UIView animateWithDuration:0.33 animations:^{
+        button.alpha = 0.5f;
+        [self layoutIfNeeded];
+    } completion:nil];
+    
+
 }
 
 -(void)captionShadowPressed:(id)sender{
     UIButton *captionBt = (UIButton *)[self.contentView viewWithTag:kCaptionShadowTag];
-    [captionBt removeFromSuperview];
     [self setUpCaptionForEdit:NO];
-    [UIView animateWithDuration:0.3 animations:^{
-        _heightConstraint.constant = 75.f;
-    } completion:nil];
+    _heightConstraint.constant = 75.f;
+    [UIView animateWithDuration:0.33 animations:^{
+        captionBt.alpha = 0.f;
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [captionBt removeFromSuperview];
+    }];
 }
 
 - (void)prepareForReuse{

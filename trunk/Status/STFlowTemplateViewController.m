@@ -98,7 +98,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 @property (strong, nonatomic) NSMutableArray *postsDataSource;
 @property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *leftSwipe;
-
 @end
 
 @implementation STFlowTemplateViewController
@@ -871,12 +870,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
         CGRect rect = [captionString boundingRectWithSize:CGSizeMake(235.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
         [self.collectionView performBatchUpdates:^{
-            [UIView animateWithDuration:0.3 animations:^{
-                currentCell.heightConstraint.constant = 64.f + rect.size.height;
-            }];
-        } completion:^(BOOL finished) {
-            [currentCell addCaptionShadow];
-        }];
+            [currentCell addCaptionShadowWithExtraSpace:rect.size.height];
+        } completion:nil];
     }
     else if(captionAction.tag == 111)//edit pressed
     {

@@ -15,6 +15,6 @@
     // if setupDict is nil, the cell will be setted as a placeholder
 - (void)setUpWithDictionary:(NSDictionary *)setupDict forFlowType:(int)flowType;
 - (void)updateLikeBtnAndLblWithDict:(NSDictionary *)setUpDict;
-- (void)addCaptionShadow;
+-(void)addCaptionShadowWithExtraSpace:(CGFloat)extrHeight;
 - (void)captionShadowPressed:(id)sender;
 @end

@@ -96,7 +96,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem id="g2f-F3-Fuk">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="kn6-fe-uG3">
+                                        <barButtonItem key="leftBarButtonItem" id="kn6-fe-uG3">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XGo-HF-h5c">
                                                 <rect key="frame" x="16" y="7" width="92" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -576,7 +576,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Chats" id="Noq-wo-mJI">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="XAi-r8-mY0">
+                                        <barButtonItem key="leftBarButtonItem" id="XAi-r8-mY0">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XcX-t2-wGS">
                                                 <rect key="frame" x="16" y="7" width="92" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
