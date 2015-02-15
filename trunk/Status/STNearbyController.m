@@ -85,7 +85,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(STUserProfileViewController *)viewController {
     NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfileDict]];
-    if (actualVCIndex > ( _profiles.count - 5 )) {
+    if (actualVCIndex == ( _profiles.count - 5 )) {
         [self getProfilesFromServerWithOffset:_profiles.count withCompletion:nil];
     }
     

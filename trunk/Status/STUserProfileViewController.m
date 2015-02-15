@@ -45,6 +45,7 @@
 
 @property (nonatomic, strong) NSString * userId;
 @property (nonatomic, strong) NSDictionary * userProfileDict;
+@property (nonatomic, assign) BOOL skipRefreshReqeust;
 
 @end
 
@@ -63,7 +64,7 @@
     STUserProfileViewController * newController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STUserProfileViewController class])];
     newController.userProfileDict = userInfo;
     newController.userId = userInfo[@"user_id"];
-    [newController setupVisualsWithDictionary:userInfo];
+    newController.skipRefreshReqeust = YES;
     
     return newController;
 }
@@ -78,7 +79,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self getAndDisplayProfile];
+    
+    if (_skipRefreshReqeust) {
+        _skipRefreshReqeust = NO;
+        [self setupVisualsWithDictionary:_userProfileDict];
+    } else {
+        [self getAndDisplayProfile];
+    }
     
     if (_isMyProfile) {
         _btnNextProfile.hidden = YES;
@@ -316,7 +323,7 @@
         NSInteger statusCode = [response[@"status_code"] integerValue];
         if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
             NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", name];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:nil
                                                   cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
         }
