@@ -118,6 +118,9 @@ static NSInteger const  kBlockUserAlertTag = 11;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    
+    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
+    
     [super viewWillAppear:animated];
     if (chatController.canChat == NO) {
         NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
@@ -289,19 +292,6 @@ static NSInteger const  kBlockUserAlertTag = 11;
         return;
     }
     
-    //TODO: TEST THIS
-    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    
-//    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//    flowCtrl.flowType = STFlowTypeUserGallery;
-//    flowCtrl.userID = _userInfo[@"user_id"];
-//    flowCtrl.userName = _userInfo[@"user_name"];
-//    if ([flowCtrl.userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId ]) {
-//        flowCtrl.flowType = STFlowTypeMyGallery;
-//    }
-//    [self.navigationController pushViewController:flowCtrl animated:YES];
-    
     STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:_userInfo[@"user_id"]];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
@@ -325,7 +315,8 @@ static NSInteger const  kBlockUserAlertTag = 11;
     }
 }
 - (IBAction)onSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
-    _tableViewWidth.constant = 320.f;
+//    _tableViewWidth.constant = 320.f;
+    _tableViewWidth.constant = self.view.frame.size.width;  // shrink tableViewWidth in order to show the time of the message
     [_tableView setNeedsUpdateConstraints];
 
     [UIView animateWithDuration:0.0f animations:^{
@@ -338,7 +329,8 @@ static NSInteger const  kBlockUserAlertTag = 11;
     
 }
 - (IBAction)onSwipeRight:(id)sender {
-    _tableViewWidth.constant = 390.f;
+//    _tableViewWidth.constant = 390.f;
+    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
     [_tableView setNeedsUpdateConstraints];
 
     [UIView animateWithDuration:0.0f animations:^{
