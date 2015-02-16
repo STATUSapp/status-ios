@@ -136,6 +136,9 @@
     else if (timeInterval<3600*24){
         returnTimeString = [NSString stringWithFormat:@"%ldh",(long)timeInterval/3600];
     }
+    else if (timeInterval<3600*24*7){
+        returnTimeString = [NSString stringWithFormat:@"%ldd",(long)timeInterval/(3600*24)];
+    }
     else if (timeInterval < 3600*24*7*52){
         returnTimeString = [NSString stringWithFormat:@"%ldw",(long)timeInterval/(3600*24*7)+1];
     }
