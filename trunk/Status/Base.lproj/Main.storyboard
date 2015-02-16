@@ -11,6 +11,7 @@
             <string>ProximaNova-Bold</string>
             <string>ProximaNova-Bold</string>
             <string>ProximaNova-Bold</string>
+            <string>ProximaNova-Bold</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Light.otf">
             <string>ProximaNova-Light</string>
@@ -187,8 +188,14 @@
                                                         <constraint firstAttribute="bottom" secondItem="YxA-3M-tHB" secondAttribute="bottom" constant="3" id="w3f-aj-OSI"/>
                                                     </constraints>
                                                 </view>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-nO-7e0">
+                                                    <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                                </activityIndicatorView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upShaddow" translatesAutoresizingMaskIntoConstraints="NO" id="6Fj-gO-x6Y">
+                                                    <rect key="frame" x="-47" y="0.0" width="414" height="204"/>
+                                                </imageView>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00m-fJ-Ikr" userLabel="CaptionView">
-                                                    <rect key="frame" x="8" y="378" width="304" height="75"/>
+                                                    <rect key="frame" x="8" y="363" width="304" height="90"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6w-uM-H3b">
                                                             <rect key="frame" x="130" y="0.0" width="44" height="44"/>
@@ -237,23 +244,20 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I can believe this photo has almost one year" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bX0-p4-tYa">
-                                                            <rect key="frame" x="12" y="47" width="235" height="21"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="235" id="T3h-2n-PYg"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="12" y="47" width="225" height="24"/>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoy-yw-bce">
-                                                            <rect key="frame" x="243" y="58" width="60" height="15"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoy-yw-bce" userLabel="PostTimeView">
+                                                            <rect key="frame" x="102" y="72" width="60" height="15"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chat time icon" translatesAutoresizingMaskIntoConstraints="NO" id="cEM-cg-YSd">
-                                                                    <rect key="frame" x="1" y="1" width="13" height="13"/>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="time icon caption" translatesAutoresizingMaskIntoConstraints="NO" id="cEM-cg-YSd">
+                                                                    <rect key="frame" x="0.0" y="2" width="11" height="11"/>
                                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1h" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffh-49-QkZ">
-                                                                    <rect key="frame" x="17" y="0.0" width="40" height="15"/>
+                                                                    <rect key="frame" x="16" y="1" width="28" height="15"/>
                                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -262,11 +266,25 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="60" id="WgB-ij-qf0"/>
-                                                                <constraint firstAttribute="height" constant="15" id="vvS-tu-I1J"/>
+                                                                <constraint firstAttribute="height" constant="15" id="xJJ-nX-eh3"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" alpha="0.49999999999999961" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2KV-mx-T4N">
-                                                            <rect key="frame" x="238" y="37" width="66" height="26"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jh1-FB-cdd">
+                                                            <rect key="frame" x="12" y="69" width="90" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="90" id="0Fv-PX-hH4"/>
+                                                                <constraint firstAttribute="height" constant="21" id="4lW-VI-Vpi"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="15"/>
+                                                            <state key="normal" title="Edit post" image="edit post icon">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="onTapEditPost:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="y4W-zS-4MH"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" alpha="0.49999999999999961" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2KV-mx-T4N">
+                                                            <rect key="frame" x="238" y="46" width="66" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="66" id="PpK-te-MgK"/>
                                                                 <constraint firstAttribute="height" constant="26" id="QWH-Z6-GGq"/>
@@ -285,30 +303,27 @@
                                                     <constraints>
                                                         <constraint firstItem="MMH-7W-42q" firstAttribute="height" secondItem="hC1-Zm-j39" secondAttribute="height" id="87w-Uj-a9T"/>
                                                         <constraint firstItem="bX0-p4-tYa" firstAttribute="top" secondItem="XcX-uQ-GoJ" secondAttribute="bottom" constant="10" id="9eK-dp-Ncy"/>
-                                                        <constraint firstItem="2KV-mx-T4N" firstAttribute="leading" secondItem="aoy-yw-bce" secondAttribute="leading" constant="-5" id="DGS-Ib-f0l"/>
                                                         <constraint firstItem="e6w-uM-H3b" firstAttribute="leading" secondItem="XcX-uQ-GoJ" secondAttribute="trailing" constant="7" id="GBP-HH-zbH"/>
-                                                        <constraint firstItem="2KV-mx-T4N" firstAttribute="top" secondItem="aoy-yw-bce" secondAttribute="top" constant="-21" id="KuR-tQ-5YV"/>
                                                         <constraint firstAttribute="trailing" secondItem="2KV-mx-T4N" secondAttribute="trailing" id="LVf-O4-Kg1"/>
                                                         <constraint firstItem="MMH-7W-42q" firstAttribute="width" secondItem="hC1-Zm-j39" secondAttribute="width" id="M75-gU-OG9"/>
+                                                        <constraint firstItem="2KV-mx-T4N" firstAttribute="leading" secondItem="bX0-p4-tYa" secondAttribute="trailing" constant="1" id="MuC-eK-VnM"/>
                                                         <constraint firstItem="MMH-7W-42q" firstAttribute="leading" secondItem="00m-fJ-Ikr" secondAttribute="leading" constant="6" id="Q9Q-UI-iwc"/>
                                                         <constraint firstItem="XcX-uQ-GoJ" firstAttribute="top" secondItem="00m-fJ-Ikr" secondAttribute="top" constant="7" id="RIM-il-pZp"/>
-                                                        <constraint firstAttribute="bottom" secondItem="bX0-p4-tYa" secondAttribute="bottom" constant="7" id="UGp-d1-pIC"/>
                                                         <constraint firstItem="MMH-7W-42q" firstAttribute="top" secondItem="00m-fJ-Ikr" secondAttribute="top" id="UZ5-Q6-hvw"/>
-                                                        <constraint firstAttribute="bottom" secondItem="2KV-mx-T4N" secondAttribute="bottom" constant="12" id="a8l-gz-52r"/>
+                                                        <constraint firstItem="aoy-yw-bce" firstAttribute="top" secondItem="bX0-p4-tYa" secondAttribute="bottom" constant="1" id="Y3R-n9-59P"/>
+                                                        <constraint firstItem="aoy-yw-bce" firstAttribute="leading" secondItem="jh1-FB-cdd" secondAttribute="trailing" id="Y75-bf-Wm1"/>
                                                         <constraint firstItem="MMH-7W-42q" firstAttribute="centerY" secondItem="hC1-Zm-j39" secondAttribute="centerY" id="ceD-hn-Cv1"/>
+                                                        <constraint firstAttribute="bottom" secondItem="aoy-yw-bce" secondAttribute="bottom" constant="3" id="dN9-IY-1aI"/>
                                                         <constraint firstItem="bX0-p4-tYa" firstAttribute="leading" secondItem="00m-fJ-Ikr" secondAttribute="leading" constant="12" id="e9Y-iW-Of9"/>
+                                                        <constraint firstItem="jh1-FB-cdd" firstAttribute="leading" secondItem="00m-fJ-Ikr" secondAttribute="leading" constant="12" id="hNL-BX-gHn"/>
                                                         <constraint firstItem="e6w-uM-H3b" firstAttribute="top" secondItem="00m-fJ-Ikr" secondAttribute="top" id="mCt-BK-1dx"/>
+                                                        <constraint firstItem="2KV-mx-T4N" firstAttribute="centerY" secondItem="bX0-p4-tYa" secondAttribute="centerY" id="mxZ-uh-trs"/>
+                                                        <constraint firstAttribute="bottom" secondItem="jh1-FB-cdd" secondAttribute="bottom" id="pjr-LL-ct3"/>
                                                         <constraint firstItem="MMH-7W-42q" firstAttribute="centerX" secondItem="hC1-Zm-j39" secondAttribute="centerX" id="q2S-Qe-7ZA"/>
                                                         <constraint firstItem="XcX-uQ-GoJ" firstAttribute="leading" secondItem="MMH-7W-42q" secondAttribute="trailing" constant="4" id="u7K-da-ifn"/>
-                                                        <constraint firstAttribute="height" constant="75" id="vy1-2L-t96"/>
+                                                        <constraint firstAttribute="height" constant="90" id="vy1-2L-t96"/>
                                                     </constraints>
                                                 </view>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-nO-7e0">
-                                                    <rect key="frame" x="142" y="265" width="37" height="37"/>
-                                                </activityIndicatorView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upShaddow" translatesAutoresizingMaskIntoConstraints="NO" id="6Fj-gO-x6Y">
-                                                    <rect key="frame" x="-47" y="0.0" width="414" height="204"/>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -346,6 +361,7 @@
                                             <outlet property="captionLabel" destination="bX0-p4-tYa" id="0Ly-yy-vSN"/>
                                             <outlet property="captionView" destination="00m-fJ-Ikr" id="K9T-eh-fQi"/>
                                             <outlet property="chatButton" destination="e6w-uM-H3b" id="O1x-Wg-dai"/>
+                                            <outlet property="editPostWidthContraint" destination="0Fv-PX-hH4" id="kMB-wK-ujf"/>
                                             <outlet property="fitImageView" destination="kzm-Vb-2Ux" id="bbS-Cn-2Cd"/>
                                             <outlet property="fullBlurImageView" destination="Rin-Xs-XdC" id="QQg-aq-jzK"/>
                                             <outlet property="heightConstraint" destination="vy1-2L-t96" id="VxJ-zM-Pgm"/>
@@ -2167,9 +2183,9 @@
         <image name="camera button pressed" width="66" height="66"/>
         <image name="chat button" width="212" height="45"/>
         <image name="chat button pressed" width="212" height="45"/>
-        <image name="chat time icon" width="19" height="19"/>
         <image name="chat unread message" width="24" height="24"/>
         <image name="downShaddow" width="414" height="203"/>
+        <image name="edit post icon" width="17" height="17"/>
         <image name="grey line" width="227" height="3"/>
         <image name="invite friends button" width="212" height="45"/>
         <image name="invite friends button pressed" width="212" height="45"/>
@@ -2196,6 +2212,7 @@
         <image name="share button" width="66" height="66"/>
         <image name="share button pressed" width="66" height="66"/>
         <image name="status logo" width="282" height="53"/>
+        <image name="time icon caption" width="11" height="11"/>
         <image name="transparenta" width="320" height="568"/>
         <image name="upShaddow" width="414" height="204"/>
         <image name="user chat black button" width="36" height="36"/>

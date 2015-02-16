@@ -86,7 +86,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0no-l7-3Ou">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="52" width="320" height="377"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="0no-l7-3Ou" secondAttribute="height" multiplier="320:377" id="JJo-S1-HV3"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="91j-x6-xGm" kind="embed" identifier="tutorialPresenter" id="XN1-aR-jDG"/>
                                 </connections>
@@ -109,13 +112,12 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="0no-l7-3Ou" secondAttribute="trailing" id="BkU-7C-kES"/>
                             <constraint firstItem="QL9-KE-cM7" firstAttribute="top" secondItem="EbR-UD-m5s" secondAttribute="bottom" id="DXh-t0-UGd"/>
-                            <constraint firstItem="QL9-KE-cM7" firstAttribute="top" secondItem="0no-l7-3Ou" secondAttribute="bottom" id="JdC-qV-guS"/>
-                            <constraint firstItem="0no-l7-3Ou" firstAttribute="top" secondItem="jOy-aB-kAb" secondAttribute="top" id="LCC-rB-KoR"/>
                             <constraint firstItem="EbR-UD-m5s" firstAttribute="leading" secondItem="jOy-aB-kAb" secondAttribute="leading" id="Ofn-4G-et8"/>
                             <constraint firstItem="EbR-UD-m5s" firstAttribute="top" secondItem="jOy-aB-kAb" secondAttribute="top" id="QLZ-sC-qoK"/>
                             <constraint firstAttribute="trailing" secondItem="xk7-KW-QWA" secondAttribute="trailing" id="QyE-jD-QwG"/>
                             <constraint firstItem="xk7-KW-QWA" firstAttribute="top" secondItem="jOy-aB-kAb" secondAttribute="top" id="V2x-hy-cy6"/>
                             <constraint firstAttribute="trailing" secondItem="EbR-UD-m5s" secondAttribute="trailing" id="anm-XY-wRK"/>
+                            <constraint firstAttribute="centerY" secondItem="0no-l7-3Ou" secondAttribute="centerY" id="lA8-gk-Cjs"/>
                             <constraint firstItem="0no-l7-3Ou" firstAttribute="leading" secondItem="jOy-aB-kAb" secondAttribute="leading" id="scj-1n-DKY"/>
                         </constraints>
                     </view>

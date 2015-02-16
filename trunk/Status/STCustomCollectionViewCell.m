@@ -40,6 +40,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImg;
 @property (weak, nonatomic) IBOutlet UIView *postDateView;
 @property (weak, nonatomic) IBOutlet UILabel *postDateLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *editPostWidthContraint;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -186,30 +187,43 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
         caption = @"";
     }
     UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
-    CGRect rect = [caption boundingRectWithSize:CGSizeMake(235.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    
+    //modify this according with the layout changes
+    CGFloat marginsOffset = 85.f;
+    CGFloat textWidth = mainWindow.frame.size.width-marginsOffset;
+    CGRect rect = [caption boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
 
     _captionLabel.text = caption;
     if (editFlag == NO) {//SeeMore
-        [_captionButton setTitle:@"See more" forState:UIControlStateNormal];
-        _captionButton.tag = 110;
         _captionButton.hidden = NO;
-        
+        _editPostWidthContraint.constant = 0.f;
+        BOOL wrapped = NO;
+        if (rect.size.height > _captionLabel.bounds.size.height){
+            wrapped = YES;
+            NSLog(@"Wrapped Size: %@", NSStringFromCGSize(rect.size));
+        }
+
         if ([self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
-            if (caption.length == 0 || rect.size.height <= 15.f) {
-                [_captionButton setTitle:@"Edit" forState:UIControlStateNormal];
-                _captionButton.tag = 111;
+            if (caption.length == 0 || wrapped == NO) {
+                _captionButton.hidden = YES;
+                _editPostWidthContraint.constant = 90.f;
             }
         }
-        else
-            _captionButton.hidden = caption.length == 0;
+        _captionButton.hidden = !wrapped;
     }
     else
     {
-        _captionButton.tag = 111;
         if (![self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
+        {
+            _captionButton.hidden = NO;
+            _editPostWidthContraint.constant = 0.f;
+        }
+        else{
             _captionButton.hidden = YES;
-        else
-            [_captionButton setTitle:@"Edit" forState:UIControlStateNormal];
+            _editPostWidthContraint.constant = 90.f;
+
+        }
     }
 }
 
@@ -224,7 +238,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     [self.contentView addSubview:button];
     [self.contentView bringSubviewToFront:_captionView];
     [self setUpCaptionForEdit:YES];
-    _heightConstraint.constant = 64.f + extrHeight;
+    _heightConstraint.constant = 70.f + extrHeight;
     [UIView animateWithDuration:0.33 animations:^{
         button.alpha = 0.5f;
         [self layoutIfNeeded];
@@ -235,8 +249,9 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
 
 -(void)captionShadowPressed:(id)sender{
     UIButton *captionBt = (UIButton *)[self.contentView viewWithTag:kCaptionShadowTag];
+    _heightConstraint.constant = 90.f;
+    [self layoutIfNeeded];
     [self setUpCaptionForEdit:NO];
-    _heightConstraint.constant = 75.f;
     [UIView animateWithDuration:0.33 animations:^{
         captionBt.alpha = 0.f;
         [self layoutIfNeeded];
@@ -259,7 +274,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     [self setUpCaptionForEdit:NO];
     self.likesNumberBtn.hidden = NO;
     self.shareBtn.hidden = NO;
-    _heightConstraint.constant = 75.f;
+    _heightConstraint.constant = 90.f;
     UIButton *captionBt = (UIButton *)[self.contentView viewWithTag:kCaptionShadowTag];
     [captionBt removeFromSuperview];
     //this is for the cell to show loading

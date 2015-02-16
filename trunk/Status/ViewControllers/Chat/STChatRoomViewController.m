@@ -539,8 +539,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     Message *msg = [_currentManager objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
 
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
-    CGRect rect = CGRectMake(0, 0, 320, 40);
-    rect.size.width = mainWindow.frame.size.width;
+    CGRect rect = CGRectMake(0, 0, mainWindow.frame.size.width, 40);
 
     UIView *sectionView = [[UIView alloc] initWithFrame:rect];
     UILabel *lb = [[UILabel alloc] initWithFrame:rect];

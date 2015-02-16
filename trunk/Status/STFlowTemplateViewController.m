@@ -860,45 +860,42 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             break;
     }
 }
+- (IBAction)onTapEditPost:(id)sender {
+    STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
+    [currentCell captionShadowPressed:nil];
+    __block NSDictionary *currentDict = [self getCurrentDictionary];
+    
+    [[STImageCacheController sharedInstance] loadPostImageWithName:currentDict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+        viewController.imgData =UIImageJPEGRepresentation(img, 1.f);
+        viewController.bluredImgData = UIImageJPEGRepresentation([img applyLightEffect], 1.f);
+        viewController.delegate = self;
+        viewController.captionString = currentDict[@"caption"];
+        viewController.editPostId = currentDict[@"post_id"];
+        viewController.controllerType = STShareControllerEditCaption;
+        [self.navigationController pushViewController:viewController animated:YES];
+        
+        
+    } andBlurCompletion:nil];
+
+}
 - (IBAction)onTapSeeMore:(id)sender {
     STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
-    UIButton *captionAction = (UIButton *)sender;
-    if (captionAction.tag == 110) {
-        NSString *captionString = [[self getCurrentDictionary] valueForKey:@"caption"];
-        if (captionString == nil || ![captionString isKindOfClass:[NSString class]]) {
-            captionString = @"";
-        }
-        UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
-        CGRect rect = [captionString boundingRectWithSize:CGSizeMake(235.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
-        [self.collectionView performBatchUpdates:^{
-            [currentCell addCaptionShadowWithExtraSpace:rect.size.height];
-        } completion:nil];
+    NSString *captionString = [[self getCurrentDictionary] valueForKey:@"caption"];
+    if (captionString == nil || ![captionString isKindOfClass:[NSString class]]) {
+        captionString = @"";
     }
-    else if(captionAction.tag == 111)//edit pressed
-    {
-        [currentCell captionShadowPressed:nil];
-        
-//        viewController.postDict = [self getCurrentDictionary];
-//        viewController.delegate = self;
-//        [self.navigationController pushViewController:viewController animated:NO];
-        __block NSDictionary *currentDict = [self getCurrentDictionary];
+    UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
 
-        [[STImageCacheController sharedInstance] loadPostImageWithName:currentDict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-            viewController.imgData =UIImageJPEGRepresentation(img, 1.f);
-            viewController.bluredImgData = UIImageJPEGRepresentation([img applyLightEffect], 1.f);
-            viewController.delegate = self;
-            viewController.captionString = currentDict[@"caption"];
-            viewController.editPostId = currentDict[@"post_id"];
-            viewController.controllerType = STShareControllerEditCaption;
-            [self.navigationController pushViewController:viewController animated:YES];
-
-            
-        } andBlurCompletion:nil];
-
-
-    }
+    //modify this according with the layout changes
+    CGFloat marginsOffset = 85.f;
+    CGFloat textWidth = mainWindow.frame.size.width-marginsOffset;
+    CGRect rect = [captionString boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+    [self.collectionView performBatchUpdates:^{
+        [currentCell addCaptionShadowWithExtraSpace:rect.size.height];
+    } completion:nil];
 }
 
 - (void)inviteUserToUpload:(NSString *)userID withUserName:(NSString *)userName{

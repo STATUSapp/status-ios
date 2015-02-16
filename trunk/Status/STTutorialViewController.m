@@ -30,7 +30,6 @@ NSString *const kTutorialSubtitleKey = @"tutorial_subtitle";
     CGRect screenRect = self.view.bounds;
     CGFloat screenWidth = screenRect.size.width;
     CGSize size =  CGSizeMake(screenWidth, screenRect.size.height-55);
-    NSLog(@"Test frame: %@",NSStringFromCGRect(self.view.bounds));
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [flowLayout setMinimumInteritemSpacing:0.0f];
