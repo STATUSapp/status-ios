@@ -315,6 +315,9 @@
                             <constraint firstAttribute="trailing" secondItem="RcE-XE-4Xy" secondAttribute="trailing" id="tad-uX-qYe"/>
                             <constraint firstItem="Psi-1d-7gO" firstAttribute="top" secondItem="BMk-t1-dFo" secondAttribute="bottom" id="tiz-Sv-D8f"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="HJg-7q-YtB" appends="YES" id="WNy-sC-p9O"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -332,9 +335,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsT-0o-hg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="SHm-53-XUf"/>
-                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="left" id="F56-Zg-Rkt"/>
-                <tapGestureRecognizer id="HJg-7q-YtB"/>
+                <tapGestureRecognizer id="HJg-7q-YtB">
+                    <connections>
+                        <action selector="onTapBackgound:" destination="jBq-zi-zpJ" id="PKJ-fa-dVb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1502" y="19"/>
         </scene>

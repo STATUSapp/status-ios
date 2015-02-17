@@ -216,7 +216,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     {
         if (![self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
         {
-            _captionButton.hidden = NO;
+            _captionButton.hidden = YES;
             _editPostWidthContraint.constant = 0.f;
         }
         else{
