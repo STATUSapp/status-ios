@@ -68,7 +68,7 @@
     _transparentNavBar.translucent = YES;
     
     UIImage * sharedImage = [UIImage imageWithData:_imgData];
-    CGFloat resizeRatio = sharedImage.size.width / _sharedImageView.frame.size.width;
+    CGFloat resizeRatio = sharedImage.size.width / self.view.frame.size.width;
     CGSize newSize = CGSizeMake(sharedImage.size.width / resizeRatio, sharedImage.size.height / resizeRatio);
     
     sharedImage = [sharedImage resizedImage:newSize interpolationQuality:kCGInterpolationDefault];
