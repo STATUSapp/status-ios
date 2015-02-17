@@ -276,6 +276,8 @@
                                                                 <constraint firstAttribute="height" constant="21" id="4lW-VI-Vpi"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="15"/>
+                                                            <inset key="contentEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Edit post" image="edit post icon">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
@@ -370,6 +372,7 @@
                                             <outlet property="postDateLabel" destination="ffh-49-QkZ" id="wwq-Ay-iqO"/>
                                             <outlet property="postDateView" destination="aoy-yw-bce" id="U6f-ha-Dlo"/>
                                             <outlet property="profileNameBtn" destination="XcX-uQ-GoJ" id="eld-su-rDd"/>
+                                            <outlet property="seeMoreWidthContraint" destination="PpK-te-MgK" id="YNq-HO-l19"/>
                                             <outlet property="shareBtn" destination="G6Z-ve-JeS" id="4eW-7u-QZj"/>
                                             <outlet property="takePhotoBtn" destination="NVs-pJ-agK" id="t1A-XK-CaC"/>
                                             <outlet property="userProfileImg" destination="MMH-7W-42q" id="NPa-25-hIF"/>
@@ -855,7 +858,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="IzQ-Hf-vj1">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="IzQ-Hf-vj1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="56" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparenta" translatesAutoresizingMaskIntoConstraints="NO" id="7TM-d9-vEp">

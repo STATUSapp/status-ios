@@ -56,7 +56,7 @@
                         <action selector="onBannerTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="SNk-Kf-X3Z"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXV-PV-j2P">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXV-PV-j2P">
                     <rect key="frame" x="0.0" y="0.0" width="68" height="70"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,6 +73,8 @@
                 <constraint firstItem="YNw-VT-cYS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="41B-4c-bsE"/>
                 <constraint firstItem="8fi-uT-Tac" firstAttribute="leading" secondItem="ZAs-LI-Lq3" secondAttribute="trailing" constant="14" id="JI3-xZ-ZfQ"/>
                 <constraint firstItem="Hga-tc-VQQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="70" id="LhC-f2-fI2"/>
+                <constraint firstItem="Hga-tc-VQQ" firstAttribute="leading" secondItem="iXV-PV-j2P" secondAttribute="trailing" constant="2" id="NJZ-fB-ncn"/>
+                <constraint firstItem="iXV-PV-j2P" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Pwc-LH-js6"/>
                 <constraint firstItem="YNw-VT-cYS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QZN-PP-XXL"/>
                 <constraint firstAttribute="bottom" secondItem="Hga-tc-VQQ" secondAttribute="bottom" id="T28-cs-r7a"/>
                 <constraint firstAttribute="trailing" secondItem="pJs-Q2-UXs" secondAttribute="trailing" id="Wib-be-03K"/>
@@ -80,8 +82,10 @@
                 <constraint firstItem="8fi-uT-Tac" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="eDE-kw-zh3"/>
                 <constraint firstItem="pJs-Q2-UXs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eKZ-Yr-4qu"/>
                 <constraint firstAttribute="trailing" secondItem="8fi-uT-Tac" secondAttribute="trailing" constant="37" id="fjp-08-Tym"/>
+                <constraint firstAttribute="bottom" secondItem="iXV-PV-j2P" secondAttribute="bottom" id="gFR-Ac-esQ"/>
                 <constraint firstItem="Hga-tc-VQQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ge9-x3-9uL"/>
                 <constraint firstAttribute="bottom" secondItem="YNw-VT-cYS" secondAttribute="bottom" id="iaT-Cr-iLz"/>
+                <constraint firstItem="iXV-PV-j2P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jhd-eQ-NSY"/>
                 <constraint firstItem="pJs-Q2-UXs" firstAttribute="leading" secondItem="Hga-tc-VQQ" secondAttribute="trailing" id="miu-Vb-y7e"/>
                 <constraint firstItem="ZAs-LI-Lq3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ySE-fF-4BU"/>
             </constraints>

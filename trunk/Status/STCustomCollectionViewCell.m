@@ -41,6 +41,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
 @property (weak, nonatomic) IBOutlet UIView *postDateView;
 @property (weak, nonatomic) IBOutlet UILabel *postDateLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editPostWidthContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *seeMoreWidthContraint;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -190,23 +191,24 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     
     //modify this according with the layout changes
-    CGFloat marginsOffset = 85.f;
+    CGFloat marginsOffset = 24.f;
     CGFloat textWidth = mainWindow.frame.size.width-marginsOffset;
     CGRect rect = [caption boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
 
     _captionLabel.text = caption;
     if (editFlag == NO) {//SeeMore
         _captionButton.hidden = NO;
+        _seeMoreWidthContraint.constant = 66.f;
         _editPostWidthContraint.constant = 0.f;
         BOOL wrapped = NO;
         if (rect.size.height > _captionLabel.bounds.size.height){
             wrapped = YES;
-            NSLog(@"Wrapped Size: %@", NSStringFromCGSize(rect.size));
         }
 
         if ([self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
             if (caption.length == 0 || wrapped == NO) {
                 _captionButton.hidden = YES;
+                _seeMoreWidthContraint.constant = 12.f;
                 _editPostWidthContraint.constant = 90.f;
             }
         }
@@ -217,10 +219,12 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
         if (![self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
         {
             _captionButton.hidden = YES;
+            _seeMoreWidthContraint.constant = 12.f;
             _editPostWidthContraint.constant = 0.f;
         }
         else{
             _captionButton.hidden = YES;
+            _seeMoreWidthContraint.constant = 12.f;
             _editPostWidthContraint.constant = 90.f;
 
         }
@@ -239,10 +243,10 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     [self.contentView bringSubviewToFront:_captionView];
     [self setUpCaptionForEdit:YES];
     _heightConstraint.constant = 70.f + extrHeight;
-    [UIView animateWithDuration:0.33 animations:^{
+//    [UIView animateWithDuration:0.33 animations:^{
         button.alpha = 0.5f;
         [self layoutIfNeeded];
-    } completion:nil];
+//    } completion:nil];
     
 
 }
@@ -252,12 +256,12 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     _heightConstraint.constant = 90.f;
     [self layoutIfNeeded];
     [self setUpCaptionForEdit:NO];
-    [UIView animateWithDuration:0.33 animations:^{
+//    [UIView animateWithDuration:0.33 animations:^{
         captionBt.alpha = 0.f;
         [self layoutIfNeeded];
-    } completion:^(BOOL finished) {
+//    } completion:^(BOOL finished) {
         [captionBt removeFromSuperview];
-    }];
+//    }];
 }
 
 - (void)prepareForReuse{

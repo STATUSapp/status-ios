@@ -157,7 +157,7 @@ static STNotificationsManager *_sharedManager = nil;
         _currentBanner.frame = rect;
         
     } completion:^(BOOL finished) {
-        _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:2.f target:self selector:@selector(dismissCurrentBanner) userInfo:nil repeats:NO];
+        _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(dismissCurrentBanner) userInfo:nil repeats:NO];
 
     }];
 

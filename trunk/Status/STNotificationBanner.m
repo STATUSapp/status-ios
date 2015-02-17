@@ -25,11 +25,19 @@
     [_delegate bannerTapped];
 }
 - (IBAction)onProfileImageTapped:(id)sender {
-    [_delegate bannerProfileImageTapped];
+    if (_notificationType == STNotificationTypeChatMessage) {
+        [_delegate bannerTapped];
+    }
+    else
+        [_delegate bannerProfileImageTapped];
 }
 
 - (void)configureBanner {
-    [_profileImage sd_setImageWithURL:[NSURL URLWithString:_notificationInfo[@"photo"]] placeholderImage:[UIImage imageNamed:@"placeholder notifications screen"]];
+    NSString *urlString = _notificationInfo[@"photo"];
+    if ([urlString rangeOfString:@"http"].location==NSNotFound) {
+        urlString = [NSString stringWithFormat:@"%@%@",kBasePhotoDownload, _notificationInfo[@"photo"]];
+    }
+    [_profileImage sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"placeholder notifications screen"]];
     _messageText.attributedText = [[NSAttributedString alloc]initWithString:@""];
     _messageText.text = @"";
     NSMutableAttributedString *messageStr = [[NSMutableAttributedString alloc] initWithString:_notificationInfo[@"alert_message"]];

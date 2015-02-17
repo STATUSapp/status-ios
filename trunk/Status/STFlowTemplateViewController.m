@@ -143,6 +143,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 //    [_GADelegate setupInterstitialAds];
 //    [self setupInterstitialAds];
 //    _numberOfSeenPosts = 0;
+  
+    //fall back foe cases where this is not properly setted.
+    if (_flowType == STFlowTypeUserGallery && [_userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+        _flowType = STFlowTypeMyGallery;
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -890,7 +895,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
 
     //modify this according with the layout changes
-    CGFloat marginsOffset = 85.f;
+    CGFloat marginsOffset = 24.f;
     CGFloat textWidth = mainWindow.frame.size.width-marginsOffset;
     CGRect rect = [captionString boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
     [self.collectionView performBatchUpdates:^{
