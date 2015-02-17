@@ -42,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnEditUserProfile;
 @property (weak, nonatomic) IBOutlet UIButton *btnNextProfile;
 @property (weak, nonatomic) IBOutlet UIButton *btnSendMessageToUser;
+@property (weak, nonatomic) IBOutlet UIView *loadingPlaceholder;
 
 @property (nonatomic, strong) NSString * userId;
 @property (nonatomic, strong) NSDictionary * userProfileDict;
@@ -75,6 +76,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _loadingPlaceholder.hidden = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,6 +109,8 @@
 }
 
 - (void)getAndDisplayProfile {
+    
+    _loadingPlaceholder.hidden = NO;
     
     if (_userProfileDict) {
         [self setupVisualsWithDictionary:_userProfileDict];
@@ -190,6 +194,8 @@
     NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:distanceText attributes:distanceDict];
     [text appendAttributedString:[[NSAttributedString alloc] initWithString:statusText attributes:statusDict]];
     _lblDistance.attributedText = text;
+    
+    _loadingPlaceholder.hidden = YES;
     
 }
 
