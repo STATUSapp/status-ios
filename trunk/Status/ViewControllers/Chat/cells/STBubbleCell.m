@@ -21,7 +21,15 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    //fix a strange bug where the width is not right loaded
+    CGRect rect = self.bounds;
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    rect.size.width = mainWindow.bounds.size.width;
+    self.bounds = rect;
+    self.contentView.frame = rect;
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"TimestampView" owner:self options:nil] firstObject];
+    self.revealableView = view;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -39,7 +39,7 @@ static NSString *kOnlineImageName = @"online chat";
 
 - (void)awakeFromNib
 {
-    // Initialization code
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -56,7 +56,6 @@ static NSString *kOnlineImageName = @"online chat";
     _lastMessageLbl.text = nil;
     _userChatStatus.image = nil;
     _numberOfUnreadMessages.hidden = YES;
-    
 }
 
 #pragma mark - Setup cell

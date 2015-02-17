@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="ProximaNova-Bold.otf">
@@ -11,8 +12,6 @@
             <string>ProximaNova-Bold</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
-            <string>ProximaNova-Regular</string>
-            <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -168,14 +167,12 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NUE-W8-a2V">
-                                <rect key="frame" x="0.0" y="45" width="390" height="478"/>
+                                <rect key="frame" x="0.0" y="45" width="320" height="478"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.76492154199999995" green="0.8667399106" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="390" id="Xxz-fE-s6z"/>
-                                </constraints>
                                 <button key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DAm-br-6WT">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="16"/>
                                     <inset key="contentEdgeInsets" minX="120" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -188,7 +185,7 @@
                                     </connections>
                                 </button>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageReceivedCell" rowHeight="50" id="Kex-UK-Z8K" customClass="STMessageReceivedCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageReceivedCell" rowHeight="50" id="Kex-UK-Z8K" customClass="STMessageReceivedCell">
                                         <rect key="frame" x="0.0" y="66" width="390" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kex-UK-Z8K" id="rre-qj-L3I">
@@ -208,16 +205,6 @@
                                                         <constraint firstAttribute="width" constant="164" id="CRj-dP-Jdz"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:31 am" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQk-MR-fe6">
-                                                    <rect key="frame" x="331" y="14" width="55" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="55" id="6Nu-aV-DUe"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="izn-Yi-tzT"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="12"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message received" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="135" translatesAutoresizingMaskIntoConstraints="NO" id="T7P-7c-HAc">
                                                     <rect key="frame" x="62" y="14" width="135" height="21"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -244,7 +231,6 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Wxe-HF-wk2" firstAttribute="top" secondItem="rre-qj-L3I" secondAttribute="top" constant="4" id="0JP-lv-gaj"/>
-                                                <constraint firstItem="OQk-MR-fe6" firstAttribute="top" secondItem="rre-qj-L3I" secondAttribute="top" constant="14" id="0bE-9d-7Oa"/>
                                                 <constraint firstItem="Wxe-HF-wk2" firstAttribute="leading" secondItem="mb9-ic-zho" secondAttribute="trailing" constant="2" id="8f0-G9-kzJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="T7P-7c-HAc" secondAttribute="bottom" constant="15" id="QR1-Aw-gLV"/>
                                                 <constraint firstItem="eoY-ug-bCK" firstAttribute="top" secondItem="rre-qj-L3I" secondAttribute="top" constant="4" id="Sgl-e2-o3L"/>
@@ -253,21 +239,18 @@
                                                 <constraint firstItem="T7P-7c-HAc" firstAttribute="leading" secondItem="mb9-ic-zho" secondAttribute="trailing" constant="17" id="XbR-Sp-2yd"/>
                                                 <constraint firstItem="T7P-7c-HAc" firstAttribute="top" secondItem="rre-qj-L3I" secondAttribute="top" constant="14" id="YfM-Nm-QAi"/>
                                                 <constraint firstItem="mb9-ic-zho" firstAttribute="leading" secondItem="rre-qj-L3I" secondAttribute="leading" constant="5" id="bjH-zk-cIf"/>
-                                                <constraint firstAttribute="bottom" secondItem="OQk-MR-fe6" secondAttribute="bottom" constant="15" id="ccL-Zz-lTs"/>
                                                 <constraint firstItem="mb9-ic-zho" firstAttribute="bottom" secondItem="rre-qj-L3I" secondAttribute="bottom" constant="-5" id="iFm-4y-WWw"/>
-                                                <constraint firstAttribute="trailing" secondItem="OQk-MR-fe6" secondAttribute="trailing" constant="4" id="pzA-tf-xzV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bubleImg" destination="Wxe-HF-wk2" id="1rT-hb-MwL"/>
                                             <outlet property="bubleWidthConstraint" destination="CRj-dP-Jdz" id="ICV-XB-yjf"/>
-                                            <outlet property="dateLbl" destination="OQk-MR-fe6" id="bfV-KD-3zy"/>
                                             <outlet property="messageLbl" destination="T7P-7c-HAc" id="eAR-dq-Xbb"/>
                                             <outlet property="messageWidthConstraint" destination="xSf-xX-VGX" id="ajx-BP-R5C"/>
                                             <outlet property="userPicture" destination="mb9-ic-zho" id="dDv-mZ-rsU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageSendCell" rowHeight="50" id="dfR-KH-Aig" customClass="STMessageSendCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageSendCell" rowHeight="50" id="dfR-KH-Aig" customClass="STMessageSendCell">
                                         <rect key="frame" x="0.0" y="116" width="390" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dfR-KH-Aig" id="b5o-fu-F19">
@@ -288,32 +271,21 @@
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:31 am" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QY1-oD-EaS">
-                                                    <rect key="frame" x="331" y="13" width="55" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="55" id="wZv-sk-U7x"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="12"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="QY1-oD-EaS" secondAttribute="bottom" constant="16" id="0II-8J-r0o"/>
                                                 <constraint firstItem="8BZ-Tx-KnT" firstAttribute="top" secondItem="b5o-fu-F19" secondAttribute="top" constant="4" id="2Zb-QM-3IB"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Lar-S1-XwJ" secondAttribute="trailing" constant="8" id="6cm-XU-zax"/>
                                                 <constraint firstAttribute="bottom" secondItem="Lar-S1-XwJ" secondAttribute="bottom" constant="15" id="N23-Pt-5Lg"/>
-                                                <constraint firstItem="QY1-oD-EaS" firstAttribute="top" secondItem="b5o-fu-F19" secondAttribute="top" constant="13" id="Q6x-mK-UnR"/>
                                                 <constraint firstAttribute="bottom" secondItem="8BZ-Tx-KnT" secondAttribute="bottom" constant="5" id="Tcw-ZO-d3O"/>
                                                 <constraint firstItem="Lar-S1-XwJ" firstAttribute="top" secondItem="b5o-fu-F19" secondAttribute="top" constant="14" id="VCG-xV-mAT"/>
-                                                <constraint firstItem="QY1-oD-EaS" firstAttribute="leading" secondItem="Lar-S1-XwJ" secondAttribute="trailing" constant="27" id="VUC-pL-fOQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="QY1-oD-EaS" secondAttribute="trailing" constant="4" id="ZOK-LZ-WsJ"/>
-                                                <constraint firstAttribute="trailing" secondItem="8BZ-Tx-KnT" secondAttribute="trailing" constant="70" id="tFT-rR-pDI"/>
+                                                <constraint firstAttribute="trailing" secondItem="8BZ-Tx-KnT" secondAttribute="trailing" id="tFT-rR-pDI"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="bubleImg" destination="8BZ-Tx-KnT" id="6Ky-sx-YX4"/>
                                             <outlet property="bubleWidthContraint" destination="VtR-TV-42r" id="d8W-6V-vdd"/>
-                                            <outlet property="dateLbl" destination="QY1-oD-EaS" id="9I6-Oc-LsY"/>
                                             <outlet property="messageLbl" destination="Lar-S1-XwJ" id="tgs-iC-KHY"/>
                                             <outlet property="messageWidthContraint" destination="55x-jD-hYf" id="YjI-oZ-fLr"/>
                                         </connections>
@@ -322,9 +294,6 @@
                                 <connections>
                                     <outlet property="dataSource" destination="jBq-zi-zpJ" id="7Rt-LW-521"/>
                                     <outlet property="delegate" destination="jBq-zi-zpJ" id="F5V-si-tAc"/>
-                                    <outletCollection property="gestureRecognizers" destination="SHm-53-XUf" appends="YES" id="ZMt-1p-rKz"/>
-                                    <outletCollection property="gestureRecognizers" destination="F56-Zg-Rkt" appends="YES" id="Y5I-ET-GWM"/>
-                                    <outletCollection property="gestureRecognizers" destination="HJg-7q-YtB" appends="YES" id="G59-BF-2K5"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -332,6 +301,7 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4P2-qf-8L3" firstAttribute="top" secondItem="BMk-t1-dFo" secondAttribute="bottom" id="228-Ls-TN8"/>
+                            <constraint firstAttribute="trailing" secondItem="NUE-W8-a2V" secondAttribute="trailing" id="5GF-h1-W60"/>
                             <constraint firstAttribute="trailing" secondItem="Psi-1d-7gO" secondAttribute="trailing" id="GTC-TU-ktz"/>
                             <constraint firstAttribute="trailing" secondItem="Qqe-VQ-XrA" secondAttribute="trailing" id="HG3-eD-tfv"/>
                             <constraint firstItem="Qqe-VQ-XrA" firstAttribute="top" secondItem="NUE-W8-a2V" secondAttribute="bottom" id="KLY-t9-1Nh"/>
@@ -356,29 +326,15 @@
                         <outlet property="heightConstraint" destination="lVr-di-e1z" id="FZ9-TI-LHZ"/>
                         <outlet property="sendBtn" destination="M7U-We-10K" id="3WK-Uv-YZb"/>
                         <outlet property="tableView" destination="NUE-W8-a2V" id="6CS-jH-Wec"/>
-                        <outlet property="tableViewWidth" destination="Xxz-fE-s6z" id="ZfM-zJ-IDk"/>
                         <outlet property="textView" destination="6YD-fH-Eec" id="N0W-5p-D4K"/>
                         <outlet property="userImg" destination="6Tb-cj-tkw" id="cDL-I7-bch"/>
                         <outlet property="userNameLbl" destination="fpd-Fm-9PF" id="NZP-6L-ILf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsT-0o-hg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="SHm-53-XUf">
-                    <connections>
-                        <action selector="onSwipeRight:" destination="jBq-zi-zpJ" id="809-7Y-6dI"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="left" id="F56-Zg-Rkt">
-                    <connections>
-                        <action selector="onSwipeLeft:" destination="jBq-zi-zpJ" id="roG-Jq-5Yq"/>
-                        <outlet property="delegate" destination="jBq-zi-zpJ" id="fPD-gO-JKY"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <tapGestureRecognizer id="HJg-7q-YtB">
-                    <connections>
-                        <action selector="onTapBackgound:" destination="jBq-zi-zpJ" id="9ky-BO-kLP"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="SHm-53-XUf"/>
+                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="left" id="F56-Zg-Rkt"/>
+                <tapGestureRecognizer id="HJg-7q-YtB"/>
             </objects>
             <point key="canvasLocation" x="1502" y="19"/>
         </scene>

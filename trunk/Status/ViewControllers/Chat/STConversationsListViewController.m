@@ -53,8 +53,7 @@
     _nearbyUsers = [NSMutableArray new];
     _recentUsers = [NSMutableArray new];
     [_segment setSelectedSegmentIndex:STSearchControlRecent];
-    _searchBarHeightContraint.constant = 0;
-   
+    _searchBarHeightContraint.constant = 0;   
 }
 
 -(void)viewWillAppear:(BOOL)animated{

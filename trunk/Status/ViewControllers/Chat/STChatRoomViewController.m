@@ -25,6 +25,7 @@
 
 #import "STGetUserInfoRequest.h"
 #import "STUserProfileViewController.h"
+#import "UITableView+SPXRevealAdditions.h"
 
 static NSInteger const  kBlockUserAlertTag = 11;
 
@@ -89,6 +90,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 {
     [super viewDidLoad];
     _textView.userInteractionEnabled = NO;
+    [self.tableView enableRevealableViewForDirection:SPXRevealableViewGestureDirectionLeft];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -119,7 +121,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
 
 -(void)viewWillAppear:(BOOL)animated{
     
-    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
+//    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
     
     [super viewWillAppear:animated];
     if (chatController.canChat == NO) {
@@ -314,29 +316,29 @@ static NSInteger const  kBlockUserAlertTag = 11;
         }
     }
 }
-- (IBAction)onSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
-//    _tableViewWidth.constant = 320.f;
-    _tableViewWidth.constant = self.view.frame.size.width;  // shrink tableViewWidth in order to show the time of the message
-    [_tableView setNeedsUpdateConstraints];
+//- (IBAction)onSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
+////    _tableViewWidth.constant = 320.f;
+//    _tableViewWidth.constant = self.view.frame.size.width;  // shrink tableViewWidth in order to show the time of the message
+//    [_tableView setNeedsUpdateConstraints];
+//
+//    [UIView animateWithDuration:0.0f animations:^{
+//        [self.view layoutIfNeeded];
+//    }];
+//}
 
-    [UIView animateWithDuration:0.0f animations:^{
-        [self.view layoutIfNeeded];
-    }];
-}
-
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"TOUCH END");
-    
-}
-- (IBAction)onSwipeRight:(id)sender {
-//    _tableViewWidth.constant = 390.f;
-    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
-    [_tableView setNeedsUpdateConstraints];
-
-    [UIView animateWithDuration:0.0f animations:^{
-        [_tableView layoutIfNeeded];
-    }];
-}
+//-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+//    NSLog(@"TOUCH END");
+//    
+//}
+//- (IBAction)onSwipeRight:(id)sender {
+////    _tableViewWidth.constant = 390.f;
+//    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
+//    [_tableView setNeedsUpdateConstraints];
+//
+//    [UIView animateWithDuration:0.0f animations:^{
+//        [_tableView layoutIfNeeded];
+//    }];
+//}
 - (IBAction)onTapBackgound:(id)sender {
     [_textView resignFirstResponder];
 }

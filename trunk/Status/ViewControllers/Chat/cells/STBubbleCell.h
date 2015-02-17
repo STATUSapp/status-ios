@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
+#import "UITableView+SPXRevealAdditions.h"
 
 @interface STBubbleCell : UITableViewCell
 +(float)cellHeightForText:(NSString *)message;

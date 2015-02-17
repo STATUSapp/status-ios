@@ -33,7 +33,7 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -73,7 +73,8 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm a"];
     [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    _dateLbl.text = [dateFormatter stringFromDate:message.date];
+    UILabel *datelabel = (UILabel *)[self.revealableView viewWithTag:101];
+    datelabel.text = [dateFormatter stringFromDate:message.date];
 
 }
 
