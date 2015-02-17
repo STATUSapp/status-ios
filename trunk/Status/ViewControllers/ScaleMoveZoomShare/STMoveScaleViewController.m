@@ -126,16 +126,17 @@
             croppedImg = [croppedImg resizedImage:newImgSize interpolationQuality:kCGInterpolationHigh];
         }
     }
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+    viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
+    viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
+    viewController.delegate = _delegate;
+    viewController.editPostId = _editPostId;
+    viewController.captionString = _captionString;
+    viewController.controllerType = _editPostId==nil?STShareControllerAddPost:STShareControllerEditPost;
+    [self.navigationController pushViewController:viewController animated:YES];
 
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-        viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
-        viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
-        viewController.delegate = _delegate;
-        viewController.editPostId = _editPostId;
-        viewController.captionString = _captionString;
-        viewController.controllerType = _editPostId==nil?STShareControllerAddPost:STShareControllerEditPost;
-        [self.navigationController pushViewController:viewController animated:YES];
    }
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

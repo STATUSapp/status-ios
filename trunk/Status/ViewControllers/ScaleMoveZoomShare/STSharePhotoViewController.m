@@ -16,6 +16,7 @@
 #import "STUpdatePostCaptionRequest.h"
 
 #import "STUploadPostRequest.h"
+#import "UIImage+Resize.h"
 
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
@@ -65,8 +66,13 @@
     [_transparentNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     _transparentNavBar.shadowImage = [UIImage new];
     _transparentNavBar.translucent = YES;
-
-	_sharedImageView.image = [UIImage imageWithData:_imgData];
+    
+    UIImage * sharedImage = [UIImage imageWithData:_imgData];
+    CGFloat resizeRatio = sharedImage.size.width / _sharedImageView.frame.size.width;
+    CGSize newSize = CGSizeMake(sharedImage.size.width / resizeRatio, sharedImage.size.height / resizeRatio);
+    
+    sharedImage = [sharedImage resizedImage:newSize interpolationQuality:kCGInterpolationDefault];
+    _sharedImageView.image = sharedImage;
 //    _sharedImageView.layer.contentsRect = CGRectMake(0, 0, 1, 0.25);
 
     _backgroundBlurImgView.image = [UIImage imageWithData:_bluredImgData];

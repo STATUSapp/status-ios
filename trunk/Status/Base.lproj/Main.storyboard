@@ -855,7 +855,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="IzQ-Hf-vj1">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="IzQ-Hf-vj1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="56" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparenta" translatesAutoresizingMaskIntoConstraints="NO" id="7TM-d9-vEp">
