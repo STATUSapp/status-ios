@@ -601,7 +601,7 @@
                         <outlet property="searchResultsDelegate" destination="RDg-gZ-zNL" id="rh6-jo-bvz"/>
                     </connections>
                 </searchDisplayController>
-                <swipeGestureRecognizer direction="up" id="N3v-59-GUV" userLabel="UpSwipe">
+                <swipeGestureRecognizer enabled="NO" direction="up" id="N3v-59-GUV" userLabel="UpSwipe">
                     <connections>
                         <action selector="onSwipeUp:" destination="RDg-gZ-zNL" id="MQs-ed-fhO"/>
                     </connections>

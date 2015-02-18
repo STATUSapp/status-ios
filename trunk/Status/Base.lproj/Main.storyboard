@@ -16,9 +16,6 @@
         <mutableArray key="ProximaNova-Light.otf">
             <string>ProximaNova-Light</string>
         </mutableArray>
-        <mutableArray key="ProximaNova-RegItalic.otf">
-            <string>ProximaNova-RegularIt</string>
-        </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -54,6 +51,9 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+        </mutableArray>
+        <mutableArray key="ProximaNova-RegularItalic.otf">
+            <string>ProximaNova-RegularIt</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
@@ -363,6 +363,7 @@
                                             <outlet property="captionLabel" destination="bX0-p4-tYa" id="0Ly-yy-vSN"/>
                                             <outlet property="captionView" destination="00m-fJ-Ikr" id="K9T-eh-fQi"/>
                                             <outlet property="chatButton" destination="e6w-uM-H3b" id="O1x-Wg-dai"/>
+                                            <outlet property="editPostButton" destination="jh1-FB-cdd" id="BVg-bf-Gqi"/>
                                             <outlet property="editPostWidthContraint" destination="0Fv-PX-hH4" id="kMB-wK-ujf"/>
                                             <outlet property="fitImageView" destination="kzm-Vb-2Ux" id="bbS-Cn-2Cd"/>
                                             <outlet property="fullBlurImageView" destination="Rin-Xs-XdC" id="QQg-aq-jzK"/>

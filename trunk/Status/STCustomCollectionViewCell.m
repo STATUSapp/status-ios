@@ -42,6 +42,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
 @property (weak, nonatomic) IBOutlet UILabel *postDateLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editPostWidthContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *seeMoreWidthContraint;
+@property (weak, nonatomic) IBOutlet UIButton *editPostButton;
 
 @property (strong, nonatomic) NSDictionary *setUpDict;
 
@@ -199,6 +200,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     if (editFlag == NO) {//SeeMore
         _captionButton.hidden = NO;
         _seeMoreWidthContraint.constant = 66.f;
+        _editPostButton.hidden = YES;
         _editPostWidthContraint.constant = 0.f;
         BOOL wrapped = NO;
         if (rect.size.height > _captionLabel.bounds.size.height){
@@ -209,6 +211,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
             if (caption.length == 0 || wrapped == NO) {
                 _captionButton.hidden = YES;
                 _seeMoreWidthContraint.constant = 12.f;
+                _editPostButton.hidden = NO;
                 _editPostWidthContraint.constant = 90.f;
             }
         }
@@ -220,11 +223,13 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
         {
             _captionButton.hidden = YES;
             _seeMoreWidthContraint.constant = 12.f;
+            _editPostButton.hidden = YES;
             _editPostWidthContraint.constant = 0.f;
         }
         else{
             _captionButton.hidden = YES;
             _seeMoreWidthContraint.constant = 12.f;
+            _editPostButton.hidden = NO;
             _editPostWidthContraint.constant = 90.f;
 
         }
@@ -243,10 +248,10 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     [self.contentView bringSubviewToFront:_captionView];
     [self setUpCaptionForEdit:YES];
     _heightConstraint.constant = 70.f + extrHeight;
-//    [UIView animateWithDuration:0.33 animations:^{
+    [UIView animateWithDuration:0.33 animations:^{
         button.alpha = 0.5f;
         [self layoutIfNeeded];
-//    } completion:nil];
+    } completion:nil];
     
 
 }
@@ -256,12 +261,12 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     _heightConstraint.constant = 90.f;
     [self layoutIfNeeded];
     [self setUpCaptionForEdit:NO];
-//    [UIView animateWithDuration:0.33 animations:^{
+    [UIView animateWithDuration:0.33 animations:^{
         captionBt.alpha = 0.f;
         [self layoutIfNeeded];
-//    } completion:^(BOOL finished) {
+    } completion:^(BOOL finished) {
         [captionBt removeFromSuperview];
-//    }];
+    }];
 }
 
 - (void)prepareForReuse{
