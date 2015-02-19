@@ -61,7 +61,8 @@ static void * SPXContext = &SPXContext;
   if (!gesture) {
     gesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     gesture.delegate = self;
-    self.panGestureRecognizer.enabled = NO;
+// fix the bug where on iOS 7.x all tableviews are not scrolling.
+//    self.panGestureRecognizer.enabled = NO;
     objc_setAssociatedObject(self, SPXPanGestureRecognizer, gesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
   }
   
