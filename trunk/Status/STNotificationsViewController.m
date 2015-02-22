@@ -166,7 +166,7 @@ const float kNoNotifHeight = 24.f;
         default:
         {
             //TODO: TEST THIS
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;
@@ -191,7 +191,7 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeInvite:
         {
             //TODO: TEST THIS
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
             
         }
@@ -200,7 +200,7 @@ const float kNoNotifHeight = 24.f;
         {
             
             //TODO: TEST THIS
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"post_id"]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;
