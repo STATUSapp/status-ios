@@ -12,6 +12,7 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -77,18 +78,6 @@
                                 <action selector="onNotificationPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="m3n-ff-xle"/>
                             </connections>
                         </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCd-Z3-eLW">
-                            <rect key="frame" x="245" y="237" width="10" height="18"/>
-                            <color key="backgroundColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="tintColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="18" id="Evu-V6-AOl"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="beo-mf-gPa"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRT-11-EgD">
                             <rect key="frame" x="14" y="280" width="270" height="55"/>
                             <constraints>
@@ -149,14 +138,27 @@
                                 <action selector="onNearbyPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="LdN-Zz-LqI"/>
                             </connections>
                         </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCd-Z3-eLW">
+                            <rect key="frame" x="219" y="230" width="12" height="16"/>
+                            <color key="backgroundColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="12" id="HP2-8t-c8X"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="PB9-3s-1YB" secondAttribute="trailing" constant="36" id="0YO-7H-7m1"/>
                         <constraint firstAttribute="height" constant="350" id="1Ko-Xc-AG3"/>
                         <constraint firstItem="oRT-11-EgD" firstAttribute="leading" secondItem="eH9-2g-Sxn" secondAttribute="leading" constant="14" id="2MP-KP-f7E"/>
+                        <constraint firstItem="0Gf-Yn-6zx" firstAttribute="centerY" secondItem="CCd-Z3-eLW" secondAttribute="centerY" id="2ly-oT-nd4"/>
                         <constraint firstItem="0Gf-Yn-6zx" firstAttribute="leading" secondItem="eH9-2g-Sxn" secondAttribute="leading" constant="14" id="6xs-Io-LGJ"/>
                         <constraint firstItem="E6g-lv-gva" firstAttribute="top" secondItem="eH9-2g-Sxn" secondAttribute="top" id="GQf-Rt-4yd"/>
+                        <constraint firstItem="CCd-Z3-eLW" firstAttribute="leading" secondItem="0Gf-Yn-6zx" secondAttribute="trailing" constant="8" id="Pte-X7-7zi"/>
                         <constraint firstItem="oRT-11-EgD" firstAttribute="top" secondItem="0Gf-Yn-6zx" secondAttribute="bottom" constant="15" id="RQ4-fY-gnr"/>
                         <constraint firstItem="PB9-3s-1YB" firstAttribute="leading" secondItem="eH9-2g-Sxn" secondAttribute="leading" constant="14" id="RlT-Nd-l3r"/>
                         <constraint firstItem="E6g-lv-gva" firstAttribute="leading" secondItem="eH9-2g-Sxn" secondAttribute="leading" constant="14" id="U3u-Vd-4Rp"/>
@@ -164,11 +166,9 @@
                         <constraint firstItem="TND-Bu-qwL" firstAttribute="top" secondItem="PB9-3s-1YB" secondAttribute="bottom" constant="15" id="UdK-55-z5d"/>
                         <constraint firstItem="0Gf-Yn-6zx" firstAttribute="top" secondItem="TND-Bu-qwL" secondAttribute="bottom" constant="15" id="Z3b-hL-jKt"/>
                         <constraint firstAttribute="trailing" secondItem="TND-Bu-qwL" secondAttribute="trailing" constant="36" id="cxh-GA-j2V"/>
-                        <constraint firstItem="oRT-11-EgD" firstAttribute="top" secondItem="CCd-Z3-eLW" secondAttribute="bottom" constant="25" id="fcq-mD-plq"/>
                         <constraint firstAttribute="trailing" secondItem="E6g-lv-gva" secondAttribute="trailing" constant="36" id="gyF-cX-wcF"/>
                         <constraint firstItem="TND-Bu-qwL" firstAttribute="leading" secondItem="eH9-2g-Sxn" secondAttribute="leading" constant="14" id="mAY-o2-qaA"/>
                         <constraint firstItem="PB9-3s-1YB" firstAttribute="top" secondItem="E6g-lv-gva" secondAttribute="bottom" constant="15" id="nGK-ay-eJl"/>
-                        <constraint firstItem="CCd-Z3-eLW" firstAttribute="leading" secondItem="0Gf-Yn-6zx" secondAttribute="trailing" constant="34" id="yWF-n4-3CJ"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sP5-VC-CjX">
