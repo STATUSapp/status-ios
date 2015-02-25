@@ -210,7 +210,6 @@ const NSInteger kDefaultValueForTopConstraint = 26;
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         
-        //TODO: move this on save button pressed?
         NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
         [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {

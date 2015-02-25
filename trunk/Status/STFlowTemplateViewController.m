@@ -399,10 +399,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(void)imageWasPostedWithPostId:(NSString *)postId{
     
-#warning - Re-design taking in consideration new profile flow
-    //TODO: TEST THIS
-    
-    
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
     NSMutableArray *viewCtrl = [NSMutableArray arrayWithArray:navCtrl.viewControllers];
@@ -685,8 +681,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = flowType;
     
-    //TODO: TEST THIS
-
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
 
@@ -702,9 +696,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 -(IBAction)onTapMyProfile:(id)sender{
-    
-    //TODO: TEST THIS
-    
+        
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
     [self.navigationController pushViewController:userProfileVC animated:YES];
 }

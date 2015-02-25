@@ -104,9 +104,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    //TODO: TEST THIS
-    
+        
     NSDictionary *dict = [_likesDataSource objectAtIndex:indexPath.row];   
     STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
     [self.navigationController pushViewController:profileVC animated:YES];

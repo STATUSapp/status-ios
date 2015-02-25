@@ -62,7 +62,6 @@ const float kNoNotifHeight = 24.f;
 -(void) getNotificationsFromServer{
     if ([STNetworkQueueManager sharedManager].accessToken == nil) {
         return;
-        //TODO: we should find a solution for this case
     }
     __weak STNotificationsViewController *weakSelf = self;
     STRequestCompletionBlock completion = ^(id response, NSError *error){
@@ -165,7 +164,6 @@ const float kNoNotifHeight = 24.f;
             
         default:
         {
-            //TODO: TEST THIS
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
         }
@@ -190,7 +188,6 @@ const float kNoNotifHeight = 24.f;
             break;
         case STNotificationTypeInvite:
         {
-            //TODO: TEST THIS
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
             
@@ -199,7 +196,6 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeUploaded:
         {
             
-            //TODO: TEST THIS
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
             [self.navigationController pushViewController:profileVC animated:YES];
         }

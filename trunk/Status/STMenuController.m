@@ -173,8 +173,6 @@
 
 
 - (STFlowTemplateViewController *)appMainController {
-    //TODO: remove this by refactoring image posting - NEEDS TO BE DONE ASAP
-
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     
     UIViewController * appMainController = appDelegate.window.rootViewController;

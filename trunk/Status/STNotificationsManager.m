@@ -15,6 +15,7 @@
 #import "STNotificationBanner.h"
 #import "STFacebookLoginController.h"
 #import "STUserProfileViewController.h"
+#import "STNotificationsViewController.h"
 
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
@@ -51,6 +52,11 @@ static STNotificationsManager *_sharedManager = nil;
 
     if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
         
+        if ([STNetworkQueueManager sharedManager].accessToken == nil) {
+            //wait for the login to be performed and after handle the notification
+            _lastNotification = notif;
+            return;
+        }
         if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
             _lastNotification = nil;
             NSDictionary *userInfo = notif[@"user_info"];
@@ -64,14 +70,11 @@ static STNotificationsManager *_sharedManager = nil;
             [lastVC.navigationController pushViewController:viewController animated:YES];
         }
         else
-        {
-            if ([STNetworkQueueManager sharedManager].accessToken == nil) {
-                //wait for the login to be performed and after handle the notification
-                _lastNotification = notif;
-                return;
-            }
-            _lastNotification = nil;
-            [lastVC performSegueWithIdentifier:@"notifSegue" sender:nil];
+        {   _lastNotification = nil;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            STNotificationsViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"notificationScene"];
+            [lastVC.navigationController pushViewController:vc animated:YES];
+//            [lastVC performSegueWithIdentifier:@"notifSegue" sender:nil];
         }
     }
 }
@@ -251,7 +254,6 @@ static STNotificationsManager *_sharedManager = nil;
 -(void)bannerProfileImageTapped{
     UIViewController *lastVC = [self getCurrentViewController];
     [self dissmissPresentedVCs:lastVC];
-    //TODO: TEST THIS
     NSString * userId = nil;
     id userIdentifier = [_currentBanner.notificationInfo valueForKey:@"user_id"];
     if ([userIdentifier respondsToSelector:@selector(stringValue)]) {

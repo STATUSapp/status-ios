@@ -189,7 +189,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    //NSLog(@"APN Token --- %@", token);
+//    NSLog(@"APN Token --- %@", token);
     if ([STNetworkQueueManager sharedManager].accessToken!=nil) {
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod)  NSLog(@"APN Token set.");
