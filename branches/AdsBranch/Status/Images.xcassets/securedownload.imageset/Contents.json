@@ -1,0 +1,28 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "resizing" : {
+        "mode" : "3-part-vertical",
+        "center" : {
+          "mode" : "fill",
+          "height" : 114
+        },
+        "capInsets" : {
+          "top" : 40,
+          "bottom" : 28
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "securedownload.png",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9671FBDE-E0A2-4AD9-B544-668F1CB3BE45</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Status</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>99022451-f8c5-4652-be14-efb92feb6bba</key>
+		<string>svn://mobilep.ro/status</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>trunk/Status.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>99022451-f8c5-4652-be14-efb92feb6bba</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>99022451-f8c5-4652-be14-efb92feb6bba</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>99022451-f8c5-4652-be14-efb92feb6bba</string>
+			<key>IDESourceControlWCCName</key>
+			<string>status</string>
+		</dict>
+	</array>
+</dict>
+</plist>
