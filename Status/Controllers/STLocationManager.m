@@ -22,15 +22,15 @@ static const double kGPSTimestampSeconds = 15.0;
 @end
 
 @implementation STLocationManager
-static STLocationManager *_locationManager;
+static STLocationManager *_myLocationManager;
 + (STLocationManager*)sharedInstance
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _locationManager = [[STLocationManager alloc] init];
+        _myLocationManager = [[STLocationManager alloc] init];
     });
     
-    return _locationManager;
+    return _myLocationManager;
 }
 - (id)init
 {
