@@ -102,10 +102,18 @@
     }
     
     if (!_isLaunchedFromNearbyController) {
-        UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
-        swipe.direction = UISwipeGestureRecognizerDirectionLeft;
-        [self.view addGestureRecognizer:swipe];
+        UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
+        swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+        [self.view addGestureRecognizer:swipeLeft];
+        
+        UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onBack)];
+        swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+        [self.view addGestureRecognizer:swipeRight];
     }
+}
+
+- (void)onBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)getAndDisplayProfile {
