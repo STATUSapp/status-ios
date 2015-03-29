@@ -42,26 +42,11 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @implementation AppDelegate
 
-- (BOOL)checkNotificationType:(UIUserNotificationType)type
-{
-    UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-    
-    return (currentSettings.types & type);
-}
-
 - (void)setBadgeNumber:(NSInteger)badgeNumber{
-    bool isIOS8OrGreater = [[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)];
-
-    if (isIOS8OrGreater && ![self checkNotificationType:UIUserNotificationTypeBadge]) {
-        [[STFacebookLoginController sharedInstance] requestRemoteNotificationAccess];
-    }
-    else
-    {
-        _badgeNumber = badgeNumber;
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
-        [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
-
-    }
+    
+    _badgeNumber = badgeNumber;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
+    [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -184,12 +169,29 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     return wasHandled;
 }
 
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    //the best fail of Apple ever, why calling this extra delegate method?
+    if (notificationSettings.types) {
+        NSLog(@"User allowed notifications");
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }else{
+        NSLog(@"User did not allow notifications");
+        //TODO: show alert here?
+    }
+}
+
+#endif
+
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
+//#warning remove this
 //    NSLog(@"APN Token --- %@", token);
+//    [[[UIAlertView alloc] initWithTitle:@"Test" message:[NSString stringWithFormat:@"%@", token] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
     if ([STNetworkQueueManager sharedManager].accessToken!=nil) {
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod)  NSLog(@"APN Token set.");

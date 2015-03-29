@@ -216,7 +216,12 @@ static STNotificationsManager *_sharedManager = nil;
             NSMutableDictionary *selectedUserInfo = [NSMutableDictionary new];
             selectedUserInfo[@"user_id"] = _currentBanner.notificationInfo[@"user_id"];
             selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
-            selectedUserInfo[@"small_photo_link"] = _currentBanner.notificationInfo[@"photo"];
+            NSString *urlString = _currentBanner.notificationInfo[@"photo"];
+            if ([urlString rangeOfString:@"http"].location==NSNotFound) {
+                urlString = [NSString stringWithFormat:@"%@%@",kBasePhotoDownload, _currentBanner.notificationInfo[@"photo"]];
+            }
+
+            selectedUserInfo[@"small_photo_link"] = urlString;
 
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
             STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];

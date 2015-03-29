@@ -195,7 +195,8 @@
 
 -(void) loginOrRegistrationWithUser:(id<FBGraphUser>)user{
     NSString *userEmail = user[@"email"];
-    NSString *userFbId = user[@"id"];
+    NSString *userFbId = [user objectID];
+    
     __weak STFacebookLoginController *weakSelf = self;
     
     NSMutableDictionary *userInfo = [NSMutableDictionary new];
@@ -347,8 +348,7 @@
     [MobileAppTracker measureAction:@"registration"];
 }
 
-static const UIRemoteNotificationType REMOTE_NOTIFICATION_TYPES_REQUIRED = UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge;
-static const UIUserNotificationType USER_NOTIFICATION_TYPES_REQUIRED = UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge;
+static const UIRemoteNotificationType REMOTE_NOTIFICATION_TYPES_REQUIRED = (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound);
 
 - (void)requestRemoteNotificationAccess;
 {
@@ -358,9 +358,14 @@ static const UIUserNotificationType USER_NOTIFICATION_TYPES_REQUIRED = UIRemoteN
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:REMOTE_NOTIFICATION_TYPES_REQUIRED];
         return;
     }
-    
-    UIUserNotificationSettings* requestedSettings = [UIUserNotificationSettings settingsForTypes:USER_NOTIFICATION_TYPES_REQUIRED categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:requestedSettings];
+
+    UIUserNotificationSettings *settings =
+    [UIUserNotificationSettings
+     settingsForTypes: (UIUserNotificationTypeBadge |
+                        UIUserNotificationTypeSound |
+                        UIUserNotificationTypeAlert)
+     categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     
 }
 
