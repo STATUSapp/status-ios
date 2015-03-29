@@ -82,7 +82,7 @@
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     
-    if (_captionString!=nil && _captionString.length > 0) {
+    if (_captionString!=nil && ![_captionString isKindOfClass:[NSNull class]] && _captionString.length > 0) {
         _captiontextView.text = _captionString;
     }
     else{

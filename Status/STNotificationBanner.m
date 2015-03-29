@@ -34,20 +34,23 @@
 
 - (void)configureBanner {
     NSString *urlString = _notificationInfo[@"photo"];
-    if ([urlString rangeOfString:@"http"].location==NSNotFound) {
+    if (urlString!=nil && [urlString rangeOfString:@"http"].location==NSNotFound) {
         urlString = [NSString stringWithFormat:@"%@%@",kBasePhotoDownload, _notificationInfo[@"photo"]];
     }
     [_profileImage sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"placeholder notifications screen"]];
     _messageText.attributedText = [[NSAttributedString alloc]initWithString:@""];
     _messageText.text = @"";
-    NSMutableAttributedString *messageStr = [[NSMutableAttributedString alloc] initWithString:_notificationInfo[@"alert_message"]];
-    UIFont *font = [UIFont fontWithName:@"ProximaNova-Semibold" size:16.f];
-//    NSUInteger nameLenght = [_notificationInfo[@"name"] length];
-    NSRange nameRange = [_notificationInfo[@"alert_message"] rangeOfString:_notificationInfo[@"name"]];
-//    [messageStr setAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} range:NSMakeRange(0, messageStr.length)];
     _messageText.textColor = [UIColor whiteColor];
-    [messageStr setAttributes:@{NSFontAttributeName:font} range:nameRange];
-    _messageText.attributedText = messageStr;
+    
+    NSString *alertMessage = _notificationInfo[@"alert_message"];
+    NSString *name = _notificationInfo[@"name"];
+    NSMutableAttributedString *messageStr = [[NSMutableAttributedString alloc] initWithString:alertMessage];
+    UIFont *font = [UIFont fontWithName:@"ProximaNova-Semibold" size:16.f];
+    if (alertMessage && alertMessage.length > 0 && name && name.length > 0) {
+        NSRange nameRange = [alertMessage rangeOfString:name];
+        [messageStr setAttributes:@{NSFontAttributeName:font} range:nameRange];
+        _messageText.attributedText = messageStr;
+    }
 }
 
 -(void)setUpWithNotificationInfo:(NSDictionary *)info{

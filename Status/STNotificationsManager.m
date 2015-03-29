@@ -98,30 +98,29 @@ static STNotificationsManager *_sharedManager = nil;
     }
     NSMutableDictionary *notificationDict = [[NSMutableDictionary alloc] initWithDictionary:notification[@"user_info"]];
     STNotificationType notifType = [notificationDict[@"notification_type"] integerValue];
-    if (!(notifType == STNotificationTypeLike ||
+    if (notifType == STNotificationTypeLike ||
           notifType == STNotificationTypeUploaded ||
-          notifType == STNotificationTypeChatMessage)) {
-        return;
-    }
-    NSString *alertMesage = notification[@"aps"][@"alert"];
-    
-    if (alertMesage!=nil)
-        notificationDict[@"alert_message"] = alertMesage;
-    else
-    {
-        if (notifType == STNotificationTypeLike) {
-            alertMesage = [NSString stringWithFormat:@"%@ likes your photo.", notificationDict[@"name"]];
-        }
-        else if (notifType == STNotificationTypeUploaded)
-            alertMesage = [NSString stringWithFormat:@"%@ uploaded a new photo.", notificationDict[@"name"]];
+          notifType == STNotificationTypeChatMessage) {
+        NSString *alertMesage = notification[@"aps"][@"alert"];
         
-        notificationDict[@"alert_message"] = alertMesage;
-
+        if (alertMesage!=nil)
+            notificationDict[@"alert_message"] = alertMesage;
+        else
+        {
+            if (notifType == STNotificationTypeLike) {
+                alertMesage = [NSString stringWithFormat:@"%@ likes your photo.", notificationDict[@"name"]];
+            }
+            else if (notifType == STNotificationTypeUploaded)
+                alertMesage = [NSString stringWithFormat:@"%@ uploaded a new photo.", notificationDict[@"name"]];
+            
+            notificationDict[@"alert_message"] = alertMesage;
+            
+        }
+        
+        STNotificationBanner *banner;
+        banner = [self createBannerWithNotificationInfo:notificationDict];
+        [self showBanner:banner];
     }
-    
-    STNotificationBanner *banner;
-    banner = [self createBannerWithNotificationInfo:notificationDict];
-    [self showBanner:banner];
 }
 
 -(void)handleInAppMessageNotification:(NSDictionary *)notification{
