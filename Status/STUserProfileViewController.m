@@ -184,8 +184,20 @@
         _imageViewBlurryPicture.image = [image applyDarkEffect];
     }];
     
+    
+    BOOL hasLastSeenStatus = YES;
     NSDate * lastSeenDate = [NSDate dateFromServerDateTime:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLastActiveKey]];
-    NSString * statusText = lastSeenDate ? [NSString stringWithFormat:@" - %@", [NSDate statusForLastTimeSeen:lastSeenDate]] : @"";
+    NSString * statusText = [NSDate statusForLastTimeSeen:lastSeenDate];
+    if (lastSeenDate == nil) {
+        NSString * lastSeenString = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLastActiveKey];
+        if ([lastSeenString integerValue] == 1) {
+            statusText = @"Active Now";
+        } else {
+            hasLastSeenStatus = NO;
+        }
+    }
+    
+   statusText = hasLastSeenStatus ? [NSString stringWithFormat:@" - %@", statusText] : @"";
     _imageViewStatusIcon.hidden = lastSeenDate ? NO : YES;
     [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:lastSeenDate]];
     
