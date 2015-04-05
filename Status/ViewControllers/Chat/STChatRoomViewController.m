@@ -533,12 +533,13 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     Message *msg = [_currentManager objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
 
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
-    CGRect rect = CGRectMake(0, 0, mainWindow.frame.size.width, 40);
+    CGRect rect = CGRectMake(0, 0, mainWindow.frame.size.width, 20);
 
     UIView *sectionView = [[UIView alloc] initWithFrame:rect];
     UILabel *lb = [[UILabel alloc] initWithFrame:rect];
     lb.text = msg.sectionDate;
     lb.font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
+    [lb setBackgroundColor:[UIColor colorWithRed:100/255.f green:100/255.f blue:100/255.f alpha:0.5]];
     lb.textAlignment = NSTextAlignmentCenter;
     [sectionView addSubview:lb];
     
