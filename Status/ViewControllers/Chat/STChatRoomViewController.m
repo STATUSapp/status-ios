@@ -28,7 +28,7 @@
 #import "UITableView+SPXRevealAdditions.h"
 
 static NSInteger const  kBlockUserAlertTag = 11;
-
+static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 @interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SLCoreDataRequestManagerDelegate>
 {
     UIImage *userImage;
@@ -235,7 +235,7 @@ static NSInteger const  kBlockUserAlertTag = 11;
     r.size.height -= diff;
     r.origin.y += diff;
     [UIView animateWithDuration:0.25 animations:^{
-        _heightConstraint.constant = height + 7;
+        _heightConstraint.constant = height + TEXT_VIEW_OFFSET;
         //_bottomTextViewConstraint.constant =
         //_containerView.frame = r;
         if ([[_currentManager allObjects] count]>0) {

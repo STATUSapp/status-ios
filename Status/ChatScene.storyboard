@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OGj-r7-V9E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OGj-r7-V9E">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -66,8 +66,8 @@
                                             <action selector="onSendButtonPressed:" destination="jBq-zi-zpJ" eventType="touchUpInside" id="h9j-Jy-Myh"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6YD-fH-Eec" customClass="HPGrowingTextView">
-                                        <rect key="frame" x="10" y="5" width="247" height="36"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6YD-fH-Eec" customClass="HPGrowingTextView">
+                                        <rect key="frame" x="10" y="9" width="247" height="27"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -77,13 +77,13 @@
                                     <constraint firstAttribute="centerY" secondItem="M7U-We-10K" secondAttribute="centerY" id="5uJ-Sj-u2A"/>
                                     <constraint firstItem="6YD-fH-Eec" firstAttribute="leading" secondItem="Qqe-VQ-XrA" secondAttribute="leading" constant="10" id="6Ya-4n-R4Q"/>
                                     <constraint firstItem="bpn-5i-4tr" firstAttribute="top" secondItem="Qqe-VQ-XrA" secondAttribute="top" id="B3x-80-7zb"/>
-                                    <constraint firstItem="6YD-fH-Eec" firstAttribute="top" secondItem="Qqe-VQ-XrA" secondAttribute="top" constant="5" id="IjY-e2-PAX"/>
+                                    <constraint firstItem="6YD-fH-Eec" firstAttribute="top" secondItem="Qqe-VQ-XrA" secondAttribute="top" constant="9" id="IjY-e2-PAX"/>
                                     <constraint firstItem="M7U-We-10K" firstAttribute="leading" secondItem="6YD-fH-Eec" secondAttribute="trailing" constant="8" id="KiV-7u-6OR"/>
                                     <constraint firstItem="bpn-5i-4tr" firstAttribute="leading" secondItem="Qqe-VQ-XrA" secondAttribute="leading" id="dg4-Lw-5Ak"/>
                                     <constraint firstAttribute="height" constant="45" id="lVr-di-e1z"/>
                                     <constraint firstAttribute="trailing" secondItem="bpn-5i-4tr" secondAttribute="trailing" id="oHL-hz-3jS"/>
                                     <constraint firstAttribute="trailing" secondItem="M7U-We-10K" secondAttribute="trailing" constant="2" id="rZR-S7-Tbn"/>
-                                    <constraint firstAttribute="bottom" secondItem="6YD-fH-Eec" secondAttribute="bottom" constant="4" id="yZf-tk-XHM"/>
+                                    <constraint firstAttribute="bottom" secondItem="6YD-fH-Eec" secondAttribute="bottom" constant="9" id="yZf-tk-XHM"/>
                                     <constraint firstAttribute="bottom" secondItem="bpn-5i-4tr" secondAttribute="bottom" id="zXq-ah-t6e"/>
                                 </constraints>
                             </view>
