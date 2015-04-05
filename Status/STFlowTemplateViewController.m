@@ -450,15 +450,15 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(NSMutableArray *)removeDuplicatesFromArray:(NSArray *)array{
     
-#ifdef DEBUG
-    NSMutableArray *sheetArray = [NSMutableArray new];
-    for (NSDictionary *dict in array) {
-        NSMutableDictionary *dict1 = [NSMutableDictionary dictionaryWithDictionary:dict];
-        [sheetArray addObject:dict1];
-    }
-#else
+//#ifdef DEBUG
+//    NSMutableArray *sheetArray = [NSMutableArray new];
+//    for (NSDictionary *dict in array) {
+//        NSMutableDictionary *dict1 = [NSMutableDictionary dictionaryWithDictionary:dict];
+//        [sheetArray addObject:dict1];
+//    }
+//#else
     NSMutableArray *sheetArray = [NSMutableArray arrayWithArray:array];
-#endif
+//#endif
     NSArray *idsArray = [_postsDataSource valueForKey:@"full_photo_link"];
     
     for (NSDictionary *dict in array) {
@@ -492,9 +492,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                     NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
-#ifdef DEBUG
-                    [newPosts setValue:@"Tra la la la la la la ll llalalalal lal lalalal lalalal lalala" forKey:@"caption"];
-#endif
+//#ifdef DEBUG
+//                    [newPosts setValue:@"Tra la la la la la la ll llalalalal lal lalalal lalalal lalala" forKey:@"caption"];
+//#endif
                     [weakSelf.postsDataSource addObjectsFromArray:newPosts];
                     _isDataSourceLoaded = YES;
                     [weakSelf loadImages:newPosts];

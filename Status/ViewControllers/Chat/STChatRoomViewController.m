@@ -539,11 +539,15 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     UILabel *lb = [[UILabel alloc] initWithFrame:rect];
     lb.text = msg.sectionDate;
     lb.font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
-    [lb setBackgroundColor:[UIColor colorWithRed:100/255.f green:100/255.f blue:100/255.f alpha:0.5]];
+    [lb setBackgroundColor:[UIColor colorWithRed:100/255.f green:100/255.f blue:100/255.f alpha:0.2]];
     lb.textAlignment = NSTextAlignmentCenter;
     [sectionView addSubview:lb];
     
     return sectionView;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 20.f;
 }
 
 - (void)didReceiveMemoryWarning
