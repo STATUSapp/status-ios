@@ -1518,11 +1518,7 @@
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
 				INFOPLIST_FILE = "Status/Status-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.12.0",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.12.2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "141d4c98-ffda-4d2c-816e-d78c5e96f15a";
@@ -1543,11 +1539,7 @@
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
 				INFOPLIST_FILE = "Status/Status-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.12.0",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.12.2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "e2501c41-4b4b-4cf1-a158-2247a658ac62";
@@ -1642,11 +1634,7 @@
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
 				INFOPLIST_FILE = "Status/Status-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.12.0",
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.12.2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "e2501c41-4b4b-4cf1-a158-2247a658ac62";

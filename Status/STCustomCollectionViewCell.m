@@ -22,6 +22,7 @@ static NSString *kLikeButtonName = @"like button";
 static NSString *kLikeButtonPressedName = @"like button pressed";
 static NSString *kLikedButtonName = @"liked";
 static NSString *kLikedButtonPressedName = @"liked pressed";
+NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the layout changes
 
 
 @interface STCustomCollectionViewCell()
@@ -191,9 +192,7 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
     UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     
-    //modify this according with the layout changes
-    CGFloat marginsOffset = 24.f;
-    CGFloat textWidth = mainWindow.frame.size.width-marginsOffset;
+    CGFloat textWidth = mainWindow.frame.size.width-kCaptionMarginOffset;
     CGRect rect = [caption boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
 
     _captionLabel.text = caption;
@@ -216,6 +215,8 @@ static NSString *kLikedButtonPressedName = @"liked pressed";
             }
         }
         _captionButton.hidden = !wrapped;
+        if(wrapped==NO)
+            _seeMoreWidthContraint.constant = 0.f;
     }
     else
     {

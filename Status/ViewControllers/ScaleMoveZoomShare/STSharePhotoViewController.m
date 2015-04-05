@@ -20,6 +20,7 @@
 
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
+static NSInteger const  kMaxCaptionLenght = 250;
 
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
     NSDictionary *editResponseDict;
@@ -460,6 +461,9 @@
     else
         textLenght--;//delete pressed
     _writeCaptionPlaceholder.hidden = (textLenght>0);
+    if (textLenght>kMaxCaptionLenght) {
+        return NO;
+    }
     return YES;
 }
 @end

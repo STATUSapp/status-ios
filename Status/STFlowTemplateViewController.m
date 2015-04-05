@@ -346,8 +346,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (![self.presentedViewController isBeingDismissed])
     {
         if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
-            [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
-            }];
+            [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }
     [self getDataSourceWithOffset:0];
@@ -451,7 +450,15 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(NSMutableArray *)removeDuplicatesFromArray:(NSArray *)array{
     
+#ifdef DEBUG
+    NSMutableArray *sheetArray = [NSMutableArray new];
+    for (NSDictionary *dict in array) {
+        NSMutableDictionary *dict1 = [NSMutableDictionary dictionaryWithDictionary:dict];
+        [sheetArray addObject:dict1];
+    }
+#else
     NSMutableArray *sheetArray = [NSMutableArray arrayWithArray:array];
+#endif
     NSArray *idsArray = [_postsDataSource valueForKey:@"full_photo_link"];
     
     for (NSDictionary *dict in array) {
@@ -485,6 +492,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                     NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
+#ifdef DEBUG
+                    [newPosts setValue:@"Tra la la la la la la ll llalalalal lal lalalal lalalal lalala" forKey:@"caption"];
+#endif
                     [weakSelf.postsDataSource addObjectsFromArray:newPosts];
                     _isDataSourceLoaded = YES;
                     [weakSelf loadImages:newPosts];
@@ -886,9 +896,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
 
-    //modify this according with the layout changes
-    CGFloat marginsOffset = 24.f;
-    CGFloat textWidth = mainWindow.frame.size.width-marginsOffset;
+    CGFloat textWidth = mainWindow.frame.size.width-kCaptionMarginOffset;
     CGRect rect = [captionString boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
     [self.collectionView performBatchUpdates:^{
         [currentCell addCaptionShadowWithExtraSpace:rect.size.height];

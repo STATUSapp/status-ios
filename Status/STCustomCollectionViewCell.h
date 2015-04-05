@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+extern NSInteger const kCaptionMarginOffset;
 @interface STCustomCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
