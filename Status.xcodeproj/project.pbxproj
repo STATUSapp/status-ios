@@ -141,6 +141,7 @@
 		17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
 		17FD599C1B08703A00AFDFF8 /* STBaseObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD599B1B08703A00AFDFF8 /* STBaseObj.m */; };
+		17FD599F1B0871FC00AFDFF8 /* SuggestionsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17FD599E1B0871FC00AFDFF8 /* SuggestionsScene.storyboard */; };
 		17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FE7CE319B321340081F688 /* NSString+MD5.m */; };
 		1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */; };
 		1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
@@ -450,6 +451,7 @@
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
 		17FD599A1B08703A00AFDFF8 /* STBaseObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBaseObj.h; sourceTree = "<group>"; };
 		17FD599B1B08703A00AFDFF8 /* STBaseObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBaseObj.m; sourceTree = "<group>"; };
+		17FD599E1B0871FC00AFDFF8 /* SuggestionsScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SuggestionsScene.storyboard; sourceTree = "<group>"; };
 		17FE7CE219B321340081F688 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		17FE7CE319B321340081F688 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 		0717E2A119B717AF001DF132 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				17FD599D1B0871C800AFDFF8 /* Follow */,
 				0717E2CA19B71C56001DF132 /* Chat */,
 				0717E2AC19B71A54001DF132 /* FacebookAlbumPicker */,
 				0717E2A219B717D8001DF132 /* ScaleMoveZoomShare */,
@@ -1052,6 +1055,14 @@
 			path = Status/DataModel;
 			sourceTree = "<group>";
 		};
+		17FD599D1B0871C800AFDFF8 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				17FD599E1B0871FC00AFDFF8 /* SuggestionsScene.storyboard */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
 		1D022D701960AB4800CA30E3 /* WhatsappActivity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1234,6 +1245,7 @@
 				17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */,
 				99851E291A7E777C004B4FA4 /* ProximaNovaCond-LightIt.otf in Resources */,
 				9904DD451A2FB55D0072134F /* UserProfile.storyboard in Resources */,
+				17FD599F1B0871FC00AFDFF8 /* SuggestionsScene.storyboard in Resources */,
 				99851E1D1A7E777C004B4FA4 /* ProximaNova-Black.otf in Resources */,
 				175EDC641A92B1FF00FB96BD /* TimestampView.xib in Resources */,
 			);
