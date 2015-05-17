@@ -140,6 +140,7 @@
 		17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9819821FB2000E9116 /* STDAOEngine.m */; };
 		17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
+		17FD599C1B08703A00AFDFF8 /* STBaseObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD599B1B08703A00AFDFF8 /* STBaseObj.m */; };
 		17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FE7CE319B321340081F688 /* NSString+MD5.m */; };
 		1D98A4C119603005007F4AB2 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */; };
 		1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
@@ -447,6 +448,8 @@
 		17E44B9D19822032000E9116 /* StatusDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StatusDM.xcdatamodel; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
+		17FD599A1B08703A00AFDFF8 /* STBaseObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBaseObj.h; sourceTree = "<group>"; };
+		17FD599B1B08703A00AFDFF8 /* STBaseObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBaseObj.m; sourceTree = "<group>"; };
 		17FE7CE219B321340081F688 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		17FE7CE319B321340081F688 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		1D98A4C019603005007F4AB2 /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
@@ -703,20 +706,21 @@
 		172EAE5A18B0B12D00C5637B = {
 			isa = PBXGroup;
 			children = (
-				175EDC5F1A92ADF700FB96BD /* SPXRevealableView */,
+				172EAE9B18B0B46300C5637B /* AFNetworking */,
 				99CEC4991A5DE9D80014B759 /* Appirater */,
-				175A28C41A13FD960057EDEE /* Network */,
-				07FCFA7519C094250048F441 /* SDWebImage */,
+				17F6BB7A190ED8BD00B41E3A /* Categories */,
+				17AB89E3193B0DC400A6E7FD /* ChatController */,
 				0717E2BA19B71B51001DF132 /* Controllers */,
 				17E44B9219821FB2000E9116 /* CoreData */,
-				17AB89E3193B0DC400A6E7FD /* ChatController */,
 				1DFBB388192E9FCC003B7A53 /* Custom Controls */,
-				17F6BB7A190ED8BD00B41E3A /* Categories */,
-				172EAE9B18B0B46300C5637B /* AFNetworking */,
+				17FD59991B08700300AFDFF8 /* DataModel */,
+				172EAE6518B0B12E00C5637B /* Frameworks */,
+				175A28C41A13FD960057EDEE /* Network */,
+				172EAE6418B0B12E00C5637B /* Products */,
+				07FCFA7519C094250048F441 /* SDWebImage */,
+				175EDC5F1A92ADF700FB96BD /* SPXRevealableView */,
 				172EAE6C18B0B12E00C5637B /* Status */,
 				172EAE8B18B0B12E00C5637B /* StatusTests */,
-				172EAE6518B0B12E00C5637B /* Frameworks */,
-				172EAE6418B0B12E00C5637B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1038,6 +1042,16 @@
 			path = Status/Categories;
 			sourceTree = "<group>";
 		};
+		17FD59991B08700300AFDFF8 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				17FD599A1B08703A00AFDFF8 /* STBaseObj.h */,
+				17FD599B1B08703A00AFDFF8 /* STBaseObj.m */,
+			);
+			name = DataModel;
+			path = Status/DataModel;
+			sourceTree = "<group>";
+		};
 		1D022D701960AB4800CA30E3 /* WhatsappActivity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1355,6 +1369,7 @@
 				172EAEB118B0B46300C5637B /* AFHTTPSessionManager.m in Sources */,
 				07FCFAA619C094250048F441 /* UIView+WebCacheOperation.m in Sources */,
 				176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */,
+				17FD599C1B08703A00AFDFF8 /* STBaseObj.m in Sources */,
 				07FCFAA219C094250048F441 /* UIImage+MultiFormat.m in Sources */,
 				1783791C1A1D4853002AEE02 /* STGetPostsRequest.m in Sources */,
 				176CC31F1A2B226100E9C3D0 /* STSetUserSettingsRequest.m in Sources */,
