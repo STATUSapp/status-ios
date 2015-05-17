@@ -349,10 +349,12 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }
+    
     [self getDataSourceWithOffset:0];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate checkForNotificationNumber];
-    [[STUpdateToNewerVersionController sharedManager] checkForAppInfo];
+    //deativate this feature until 
+//    [[STUpdateToNewerVersionController sharedManager] checkForAppInfo];
     [[STNotificationsManager sharedManager] handleLastNotification];
 }
 
