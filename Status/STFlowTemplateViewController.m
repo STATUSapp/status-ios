@@ -11,7 +11,6 @@
 #import "STNetworkQueueManager.h"
 #import <QuartzCore/QuartzCore.h>
 #import "STSharePhotoViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "STImageCacheController.h"
 #import "STFacebookLoginController.h"
 #import "STConstants.h"
@@ -55,7 +54,6 @@
 // temporary - needs refactoring for menu
 #import "STUserProfileViewController.h"
 
-#import "STGADelegate.h"
 #import "STNotificationsManager.h"
 #import "STMenuController.h"
 #import "STUpdateToNewerVersionController.h"
@@ -64,6 +62,9 @@
 
 #import "STGetUserProfileRequest.h"
 #import "STEditProfileViewController.h"
+#import "STSuggestionsViewController.h"
+
+#import <FBSDKCoreKit.h>
 
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
@@ -86,8 +87,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     BOOL _shouldForceSetSeen;
     
     BOOL _pinching;
-    
-    STGADelegate *_GADelegate;
     
     NSInteger _numberOfDuplicates;
 }
@@ -152,7 +151,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if ([[[FBSession activeSession] accessTokenData] accessToken]==nil||
+    if ([FBSDKAccessToken currentAccessToken]==nil||
         [STFacebookLoginController sharedInstance].currentUserId==nil) {
         [self presentLoginScene];
     }
@@ -183,7 +182,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     //remove the delegate will prevent scroll to call functions after the view did not exists
     [self.collectionView setDelegate:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    _GADelegate.interstitial.delegate = nil;
 }
 
 -(void) presentLoginScene{
@@ -304,7 +302,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     switch (interstitialType) {
         case STInterstitialTypeAds: {
-            [_GADelegate.interstitial presentFromRootViewController:self];
             break;
         }
         case STInterstitialTypeRemoveAds: {
@@ -346,7 +343,12 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (![self.presentedViewController isBeingDismissed])
     {
         if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
-            [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+            [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+            //TODO: add this call only first time ?
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
+            STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
+            [self.navigationController presentViewController:vc animated:NO completion:nil];
+
         }
     }
     
@@ -368,10 +370,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             [self.navigationController popToRootViewControllerAnimated:YES];
             [[STFacebookLoginController sharedInstance] UDSetValue:nil forKey:USER_NAME];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [[FBSession activeSession] closeAndClearTokenInformation];
-            [[FBSession activeSession] close];
-            [FBSession setActiveSession:nil];
-            [[FBSessionTokenCachingStrategy defaultInstance] clearToken];
+            [FBSDKAccessToken setCurrentAccessToken:nil];
+            [FBSDKProfile setCurrentProfile:nil];
 //            [weakSelf presentLoginScene];
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue]==200){
@@ -958,12 +958,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
             NSLog(@"Permissions: %@", newObjects);
             if (![newObjects containsObject:@"publish_actions"]) {
-                [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
-                                                        defaultAudience:FBSessionDefaultAudienceFriends
-                                                      completionHandler:^(FBSession *session, NSError *error) {
-                                                          [weakSelf sharePhotoOnFacebookWithImgData:imgData andDescription:nil];
-                                                      }];
-                
+                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                    [weakSelf sharePhotoOnFacebookWithImgData:imgData andDescription:nil];
+
+                }];
             }
             else
                 [self sharePhotoOnFacebookWithImgData:imgData andDescription:nil];

@@ -53,10 +53,10 @@ static STLocationManager *_myLocationManager;
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *currentLocation = [locations lastObject];
-    
+    //TODO: reduce this sanitizer
     if(currentLocation.horizontalAccuracy > kGPSAccuracyMetters)
     {
-        NSLog(@"Ignoring GPS location more than %0.2f meters inaccurate :%0.2f",kGPSAccuracyMetters,currentLocation.horizontalAccuracy);
+//        NSLog(@"Ignoring GPS location more than %0.2f meters inaccurate :%0.2f",kGPSAccuracyMetters,currentLocation.horizontalAccuracy);
         return;
     }
     
@@ -64,7 +64,7 @@ static STLocationManager *_myLocationManager;
     NSTimeInterval howRecent = [locationDate timeIntervalSinceNow];
     if (fabs(howRecent) > kGPSTimestampSeconds)
     {
-        NSLog(@"Ignoring GPS location more than %0.2f seconds old(cached) :%0.2f",kGPSTimestampSeconds, fabs(howRecent));
+//        NSLog(@"Ignoring GPS location more than %0.2f seconds old(cached) :%0.2f",kGPSTimestampSeconds, fabs(howRecent));
         return;
     }
     
@@ -72,7 +72,7 @@ static STLocationManager *_myLocationManager;
         howRecent = [locationDate timeIntervalSinceDate:_latestLocation.timestamp];
         
         if (fabs(howRecent) < kGPSRecordTime) {
-            NSLog(@"Ignoring GPS location more than %0.2f seconds recent from latest location update", kGPSRecordTime);
+//            NSLog(@"Ignoring GPS location more than %0.2f seconds recent from latest location update", kGPSRecordTime);
             return;
         }
     }

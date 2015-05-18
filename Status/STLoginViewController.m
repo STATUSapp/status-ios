@@ -7,11 +7,11 @@
 //
 
 #import "STLoginViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "STImageCacheController.h"
 #import "STConstants.h"
 #import "STFacebookLoginController.h"
 #import "STNetworkQueueManager.h"
+#import <FBSDKLoginKit.h>
 
 @interface STLoginViewController ()
 @end
@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
     [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
-    FBLoginView *loginBtn = [STFacebookLoginController sharedInstance].loginButton;
+    FBSDKLoginButton *loginBtn = [STFacebookLoginController sharedInstance].loginButton;
     loginBtn.hidden = NO;
     CGRect frame = loginBtn.frame;
     frame.origin.y = 0;

@@ -11,7 +11,6 @@
 #import "STAlbumImagesViewController.h"
 #import "STImageCacheController.h"
 #import "STFacebookAlbumsLoader.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "UIImageView+WebCache.h"
 
 @interface STFacebookAlbumsViewController ()<UITableViewDataSource, UITableViewDelegate>

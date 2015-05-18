@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "STFlowTemplateViewController.h"
 #import "STNetworkQueueManager.h"
 #import "STConstants.h"
@@ -34,8 +33,11 @@
 #import "STNotificationsManager.h"
 
 #import "Appirater.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
+
+
 @interface AppDelegate()<UIAlertViewDelegate>
 
 @end
@@ -49,10 +51,12 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
 }
 
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [STIAPHelper sharedInstance];
-    [FBLoginView class];
     [application setStatusBarHidden:YES];
     self.badgeNumber = application.applicationIconBadgeNumber;
     [[STNotificationsManager sharedManager] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
@@ -90,7 +94,9 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [Appirater setCustomAlertCancelButtonTitle:@"No, thanks"];
     
     [Appirater appLaunched:YES];
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
+
 }
 
 -(void)cleanLocalDBIfNeeded{
@@ -141,7 +147,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
         [[STInviteController sharedInstance] callTheDelegate];
     }
     
-    [FBAppCall handleDidBecomeActive];
+    [FBSDKAppEvents activateApp];
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
     [viewController updateNotificationsNumber];
@@ -165,8 +171,11 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     [MobileAppTracker applicationDidOpenURL:[url absoluteString] sourceApplication:sourceApplication];
 
-    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-    return wasHandled;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
+
 }
 
 #ifdef __IPHONE_8_0

@@ -7,7 +7,6 @@
 //
 
 #import "STAlbumImagesViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "STAlbumImageCell.h"
 #import "STImageCacheController.h"
 #import "STSharePhotoViewController.h"

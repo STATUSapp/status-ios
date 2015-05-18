@@ -9,7 +9,6 @@
 #import "STSharePhotoViewController.h"
 #import "STNetworkQueueManager.h"
 #import <MessageUI/MessageUI.h>
-#import <FacebookSDK/FacebookSDK.h>
 #import "STFacebookLoginController.h"
 #import "STConstants.h"
 #import "STFacebookAlbumsLoader.h"
@@ -268,15 +267,16 @@ static NSInteger const  kMaxCaptionLenght = 250;
         [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
             NSLog(@"Permissions: %@", newObjects);
             if (![newObjects containsObject:@"publish_actions"]) {
-                [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
-                                                        defaultAudience:FBSessionDefaultAudienceFriends
-                                                      completionHandler:^(FBSession *session, NSError *error) {
-                                                          if (error!=nil) {
-                                                              _fbError = error;
-                                                          }
-                                                          else
-                                                              [weakSelf postCurrentPhotoToFacebookWithPostId:postId];
-                                                      }];
+                
+                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                    if (error!=nil) {
+                        _fbError = error;
+                    }
+                    else
+                        [weakSelf postCurrentPhotoToFacebookWithPostId:postId];
+
+                }];
                 
             }
             else

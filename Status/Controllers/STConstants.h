@@ -127,6 +127,7 @@ extern NSString *const kGetUserProfile;
 extern NSString *const kUpdateUserProfile;
 extern NSString *const kEditCaption;
 extern NSString *const kSetProfilePicture;
+extern NSString *const kGetSuggestUsers;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

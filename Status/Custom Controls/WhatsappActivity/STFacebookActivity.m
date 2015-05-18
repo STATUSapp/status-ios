@@ -7,8 +7,15 @@
 //
 
 #import "STFacebookActivity.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "STInviteController.h"
+#import <FBSDKLoginKit.h>
+#import <FBSDKCoreKit.h>
+#import <FBSDKMessageDialog.h>
+#import <FBSDKShareLinkContent.h>
+
+@interface STFacebookActivity()<FBSDKSharingDelegate>
+
+@end
 
 @implementation STFacebookActivity
 - (NSString *)activityType {
@@ -25,48 +32,37 @@
     return @"Facebook Messenger";
 }
 
--(FBLinkShareParams *)paramsForActivities:(NSArray *)activityItems{
-    FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
-    params.link =
-    [NSURL URLWithString:activityItems[1]];
-    params.name = @"STATUS";
-    params.caption = activityItems[0];
-    params.picture = [NSURL URLWithString:@"http://status.glazeon.com/logo120p.png"];
-    params.linkDescription = activityItems[0];
+-(FBSDKShareLinkContent *)paramsForActivities:(NSArray *)activityItems{
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.imageURL = [NSURL URLWithString:@"http://status.glazeon.com/logo120p.png"];
+    content.contentURL = [NSURL URLWithString:activityItems[1]];
+    content.contentDescription = activityItems[0];
+    content.contentTitle =  @"STATUS";
 
-    return params;
+    return content;
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems
 {
-//    [FBSettings setLoggingBehavior:[NSSet setWithObjects:
-//                                    FBLoggingBehaviorFBRequests,
-//                                    FBLoggingBehaviorFBURLConnections,
-//                                    FBLoggingBehaviorAccessTokens,
-//                                    FBLoggingBehaviorPerformanceCharacteristics,
-//                                    FBLoggingBehaviorSessionStateTransitions,
-//                                    nil]];
-    
-    // If the Facebook app is installed and we can present the share dialog
-    if ([FBDialogs canPresentMessageDialogWithParams:nil]) {
-        return YES;
-    }
-    return NO;
+    return YES;
 }
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems
 {
-    [FBDialogs presentMessageDialogWithParams:[self paramsForActivities:activityItems] clientState:@{} handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-        if(error) {
-            // An error occurred, we need to handle the error
-            // See: https://developers.facebook.com/docs/ios/errors
-            NSLog(@"%@",[NSString stringWithFormat:@"Error messaging link: %@", error.description]);
-        } else {
-            // Success
-            NSLog(@"result %@", results);
-            [[STInviteController sharedInstance] setCurrentDateForSelectedItem];
-        }
-    }];
+    [FBSDKMessageDialog showWithContent:[self paramsForActivities:activityItems] delegate:self];
+}
+
+#pragma mark - FBSDKSharingDelegate
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results{
+    [[STInviteController sharedInstance] setCurrentDateForSelectedItem];
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error{
+    NSLog(@"%@",[NSString stringWithFormat:@"Error messaging link: %@", error.description]);
+}
+
+-(void)sharerDidCancel:(id<FBSDKSharing>)sharer{
+    NSLog(@"Sharing cancel");
 }
 
 @end

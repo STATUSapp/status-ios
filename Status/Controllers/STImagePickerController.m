@@ -8,8 +8,8 @@
 
 #import "STImagePickerController.h"
 #import "STFacebookAlbumsLoader.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "UIImage+FixedOrientation.h"
+#import <FBSDKLoginKit.h>
 
 @interface STImagePickerController()<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, assign) BOOL forOwner;
@@ -102,17 +102,19 @@
         [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
             NSLog(@"Permissions: %@", newObjects);
             if (![newObjects containsObject:@"user_photos"]) {
-                [[FBSession activeSession] requestNewPublishPermissions:@[@"user_photos"]
-                                                        defaultAudience:FBSessionDefaultAudienceFriends
-                                                      completionHandler:^(FBSession *session, NSError *error) {
-                                                          if (!error) {
-                                                              [weakSelf presentFacebookPickerScene];
-                                                          }
-                                                          else
-                                                          {
-                                                              [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a problem with facebook at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-                                                          }
-                                                      }];
+                
+                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                [loginManager logInWithReadPermissions:@[@"user_photos"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                    if (!error) {
+                        [weakSelf presentFacebookPickerScene];
+                    }
+                    else
+                    {
+                        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a problem with facebook at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+                    }
+
+                }];
+
             }
             else
                 [weakSelf presentFacebookPickerScene];

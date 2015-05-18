@@ -9,7 +9,7 @@
 #import "STSettingsViewController.h"
 #import "STRemoveAdsViewController.h"
 #import "STFacebookLoginController.h"
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKLoginKit.h>
 #import "AppDelegate.h"
 
 #import "STGetUserSettingsRequest.h"
@@ -25,7 +25,7 @@ const NSInteger kSectionNumberLogout = 2;
 
 @interface STSettingsViewController ()
 {
-    FBLoginView *loginView;
+    FBSDKLoginButton *loginView;
 }
 @property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;

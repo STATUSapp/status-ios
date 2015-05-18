@@ -15,6 +15,7 @@
 #import "STDAOEngine.h"
 #import "STNotificationsManager.h"
 #import "STNotificationsManager.h"
+#import <FBSDKCoreKit.h>
 
 @interface STChatController()<SRWebSocketDelegate>{
     SRWebSocket *_webSocket;
@@ -56,7 +57,7 @@
     
     if ([STNetworkQueueManager sharedManager].accessToken==nil &&
         [STNetworkQueueManager sharedManager].accessToken.length==0 &&
-        [[[FBSession activeSession] accessTokenData] accessToken]==nil&&
+        [FBSDKAccessToken currentAccessToken]==nil&&
         [STFacebookLoginController sharedInstance].currentUserId==nil)
     {
         NSLog(@"Missing Acces token. Connect when available");
@@ -213,7 +214,7 @@
     
     if ([STNetworkQueueManager sharedManager].accessToken!=nil &&
         [STNetworkQueueManager sharedManager].accessToken.length!=0 &&
-        [[[FBSession activeSession] accessTokenData] accessToken]!=nil&&
+        [FBSDKAccessToken currentAccessToken]!=nil&&
         [STFacebookLoginController sharedInstance].currentUserId!=nil) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"login", @"token": [STNetworkQueueManager sharedManager].accessToken} options:NSJSONWritingPrettyPrinted error:nil];
         NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

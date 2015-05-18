@@ -11,5 +11,4 @@
 @interface STBaseObj : NSObject
 //TODO: add here all common properties or methods
 @property(nonatomic, strong) NSString *uuid;
-
 @end

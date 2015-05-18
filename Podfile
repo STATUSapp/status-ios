@@ -1,0 +1,8 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '7.0'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
+pod 'AFNetworking', '~> 2.5'
+pod 'Appirater'
+pod 'SDWebImage', '~>3.7'

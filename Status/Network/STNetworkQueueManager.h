@@ -14,7 +14,7 @@
 
 @property(nonatomic, strong) NSMutableArray* requestQueue;
 @property (nonatomic, strong) NSString *accessToken;
-@property (nonatomic, assign) BOOL isPerformLoginOrRegistration;
+@property (atomic, assign) BOOL isPerformLoginOrRegistration;
 
 + (STNetworkQueueManager *)sharedManager;
 

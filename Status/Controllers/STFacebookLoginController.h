@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #define USER_NAME       @"logged_user_name"
 
@@ -21,11 +22,11 @@
 @end
 
 typedef void (^facebookCompletion)(id result, NSError *error);
-@interface STFacebookLoginController : NSObject<FBLoginViewDelegate>
+@interface STFacebookLoginController : NSObject<FBSDKLoginButtonDelegate>
 +(STFacebookLoginController *) sharedInstance;
 @property (nonatomic, strong) id <FacebookControllerDelegate> delegate;
 @property (nonatomic, strong) id <FacebookControllerDelegate> logoutDelegate;
-@property (nonatomic, strong) FBLoginView *loginButton;
+@property (nonatomic, strong) FBSDKLoginButton *loginButton;
 @property (nonatomic, strong) NSString *currentUserId;
 -(void) shareImageWithData:(NSData *) imgData description:(NSString *)description andCompletion:(facebookCompletion) completion;
 -(NSString *) getUDValueForKey:(NSString *) key;
