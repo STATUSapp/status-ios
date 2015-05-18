@@ -24,9 +24,7 @@ const NSInteger kSectionNumberContactLikeAds = 1;
 const NSInteger kSectionNumberLogout = 2;
 
 @interface STSettingsViewController ()
-{
-    FBSDKLoginButton *loginView;
-}
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
@@ -66,14 +64,6 @@ const NSInteger kSectionNumberLogout = 2;
     NSString *versionString = [[STBaseRequest new] getAppVersion];
     _versionLabel.text = [NSString stringWithFormat:@"Version %@", versionString];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    loginView = [STFacebookLoginController sharedInstance].loginButton;
-    loginView.hidden = YES;
-    [_logoutCell.contentView addSubview:loginView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapDone)];
     
     _settingsDict = [[NSUserDefaults standardUserDefaults] objectForKey:STSettingsDictKey];
@@ -172,12 +162,7 @@ const NSInteger kSectionNumberLogout = 2;
 }
 
 -(void)fireFbLoginView{
-    for(id object in [STFacebookLoginController sharedInstance].loginButton.subviews){
-        if([[object class] isSubclassOfClass:[UIButton class]]){
-            UIButton* button = (UIButton*)object;
-            [button sendActionsForControlEvents:UIControlEventTouchUpInside];
-        }
-    }
+    [[STFacebookLoginController sharedInstance].loginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 
