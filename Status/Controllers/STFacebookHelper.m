@@ -210,19 +210,26 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 }
 
 -(void) shareImageWithImageUrl:(NSString *)imgUrl description:(NSString *)description andCompletion:(facebookCompletion) completion{
-    __weak STFacebookHelper *weakSelf = self;
-    if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"publish_actions"]) {
-        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-        [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-            if (error!=nil) {
-                completion(nil, error);
+    [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error!=nil) {
+            completion(nil, error);
+        }
+        else
+        {
+            if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"publish_actions"]) {
+                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                    if (error!=nil) {
+                        completion(nil, error);
+                    }
+                    else
+                        [self postImageWithDescription:description imgUrl:imgUrl completion:completion];
+                }];
             }
             else
-                [weakSelf postImageWithDescription:description imgUrl:imgUrl completion:completion];
-        }];
-    }
-    else
-        [self postImageWithDescription:description imgUrl:imgUrl completion:completion];
+                [self postImageWithDescription:description imgUrl:imgUrl completion:completion];
+        }
+    }];
 }
 
 -(NSString *) stringFromDict:(NSDictionary *) dict{

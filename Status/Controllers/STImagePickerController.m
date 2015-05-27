@@ -98,24 +98,31 @@
     }
     else
     {
-        __weak STImagePickerController *weakSelf = self;
-        if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"user_photos"]) {
-            
-                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-                [loginManager logInWithReadPermissions:@[@"user_photos"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                    if (!error) {
-                        [weakSelf presentFacebookPickerScene];
-                    }
-                    else
-                    {
-                        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a problem with facebook at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-                    }
-
-                }];
-
+        [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+            if (error!=nil) {
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a problem with facebook at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
             }
             else
-                [weakSelf presentFacebookPickerScene];
+            {
+                if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"user_photos"]) {
+                    
+                    FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                    [loginManager logInWithReadPermissions:@[@"user_photos"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                        if (!error) {
+                            [self presentFacebookPickerScene];
+                        }
+                        else
+                        {
+                            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a problem with facebook at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+                        }
+                        
+                    }];
+                    
+                }
+                else
+                    [self presentFacebookPickerScene];
+            }
+        }];
     }
 }
 
