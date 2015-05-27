@@ -7,7 +7,7 @@
 //
 
 #import "STImagePickerController.h"
-#import "STFacebookAlbumsLoader.h"
+#import "STFacebookHelper.h"
 #import "UIImage+FixedOrientation.h"
 #import <FBSDKLoginKit.h>
 
@@ -99,10 +99,8 @@
     else
     {
         __weak STImagePickerController *weakSelf = self;
-        [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
-            NSLog(@"Permissions: %@", newObjects);
-            if (![newObjects containsObject:@"user_photos"]) {
-                
+        if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"user_photos"]) {
+            
                 FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
                 [loginManager logInWithReadPermissions:@[@"user_photos"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                     if (!error) {
@@ -118,8 +116,6 @@
             }
             else
                 [weakSelf presentFacebookPickerScene];
-        }];
-        
     }
 }
 

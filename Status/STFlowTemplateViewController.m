@@ -36,7 +36,7 @@
 
 #import "STIAPHelper.h"
 #import "STChatController.h"
-#import "STFacebookAlbumsLoader.h"
+#import "STFacebookHelper.h"
 
 #import "STSettingsViewController.h"
 #import <Crashlytics/Crashlytics.h>
@@ -345,9 +345,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
             [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
             //TODO: add this call only first time ?
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
-            STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
-            [self.navigationController presentViewController:vc animated:NO completion:nil];
+//            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
+//            STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
+//            [self.navigationController presentViewController:vc animated:NO completion:nil];
 
         }
     }
@@ -368,7 +368,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (![presentedVC isKindOfClass:[STLoginViewController class]]) {
         [self dismissViewControllerAnimated:NO completion:^{
             [self.navigationController popToRootViewControllerAnimated:YES];
-            [[STFacebookLoginController sharedInstance] UDSetValue:nil forKey:USER_NAME];
+            [STFacebookLoginController sharedInstance].fetchedUserData = nil;
             [[NSUserDefaults standardUserDefaults] synchronize];
             [FBSDKAccessToken setCurrentAccessToken:nil];
             [FBSDKProfile setCurrentProfile:nil];
@@ -411,7 +411,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
         flowCtrl.flowType = STFlowTypeSinglePost;
         flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
-        flowCtrl.userName = [[STFacebookLoginController sharedInstance] getUDValueForKey:USER_NAME];
+        flowCtrl.userName = [STFacebookLoginController sharedInstance].fetchedUserData[@"full_name"];
         flowCtrl.postID = postId;
     }
     
@@ -952,26 +952,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }];
 }
 - (IBAction)onSharePostToFacebook:(id)sender {
-    __weak STFlowTemplateViewController *weakSelf = self;
-    [self getCurrentImageDataWithCompletion:^(UIImage *img) {
-        NSData *imgData = UIImageJPEGRepresentation(img, 1.0);
-        [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
-            NSLog(@"Permissions: %@", newObjects);
-            if (![newObjects containsObject:@"publish_actions"]) {
-                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-                [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                    [weakSelf sharePhotoOnFacebookWithImgData:imgData andDescription:nil];
-
-                }];
-            }
-            else
-                [self sharePhotoOnFacebookWithImgData:imgData andDescription:nil];
-        }];
-    }];
+    [self sharePhotoOnFacebookWithImgUrl:[self getCurrentDictionary][@"full_photo_link"] andDescription:nil];
 }
 
-- (void)sharePhotoOnFacebookWithImgData:(NSData *)imgData andDescription:(NSString *)description{
-    [[STFacebookLoginController sharedInstance] shareImageWithData:imgData description:description andCompletion:^(id result, NSError *error) {
+- (void)sharePhotoOnFacebookWithImgUrl:(NSString *)imgUrl andDescription:(NSString *)description{
+    [[STFacebookHelper new] shareImageWithImageUrl:imgUrl description:description andCompletion:^(id result, NSError *error) {
         if(error==nil)
             [[[UIAlertView alloc] initWithTitle:@"Success"
                                         message:@"Your photo was posted."

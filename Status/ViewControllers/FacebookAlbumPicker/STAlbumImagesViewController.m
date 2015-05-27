@@ -10,7 +10,7 @@
 #import "STAlbumImageCell.h"
 #import "STImageCacheController.h"
 #import "STSharePhotoViewController.h"
-#import "STFacebookAlbumsLoader.h"
+#import "STFacebookHelper.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
 
@@ -19,7 +19,7 @@
     NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) STFacebookAlbumsLoader *fbLoader;
+@property (strong, nonatomic) STFacebookHelper *fbLoader;
 @end
 
 @implementation STAlbumImagesViewController
@@ -38,7 +38,7 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     _dataSource = [NSMutableArray array];
-    _fbLoader = [STFacebookAlbumsLoader new];
+    _fbLoader = [STFacebookHelper new];
     __weak STAlbumImagesViewController *weakSelf = self;
     [_fbLoader loadPhotosForAlbum:_albumId
                  withRefreshBlock:^(NSArray *newObjects) {

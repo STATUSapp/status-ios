@@ -11,7 +11,7 @@
 #import <MessageUI/MessageUI.h>
 #import "STFacebookLoginController.h"
 #import "STConstants.h"
-#import "STFacebookAlbumsLoader.h"
+#import "STFacebookHelper.h"
 #import "STUpdatePostCaptionRequest.h"
 
 #import "STUploadPostRequest.h"
@@ -195,7 +195,7 @@ static NSInteger const  kMaxCaptionLenght = 250;
                     editResponseDict = [NSDictionary dictionaryWithDictionary:response];
                 }
                 if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
-                    [weakSelf startPostingWithPostId:postId];
+                    [weakSelf startPostingWithPostId:postId andImageUrl:response[@"image_link"]];
                 }
                 else
                 {
@@ -260,29 +260,9 @@ static NSInteger const  kMaxCaptionLenght = 250;
 
 #pragma mark - Helper
 
-- (void)startPostingWithPostId:(NSString *)postId {
+- (void)startPostingWithPostId:(NSString *)postId andImageUrl:(NSString *)imageUrl{
     if (_shouldPostToFacebook) {
-        //add publish stream permissions if does not exists
-        __weak STSharePhotoViewController *weakSelf = self;
-        [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
-            NSLog(@"Permissions: %@", newObjects);
-            if (![newObjects containsObject:@"publish_actions"]) {
-                
-                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-                [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                    if (error!=nil) {
-                        _fbError = error;
-                    }
-                    else
-                        [weakSelf postCurrentPhotoToFacebookWithPostId:postId];
-
-                }];
-                
-            }
-            else
-                [weakSelf postCurrentPhotoToFacebookWithPostId:postId];
-            
-        }];
+        [self postCurrentPhotoToFacebookWithPostId:postId andImageUrl:imageUrl];
     }
     
     if (_shouldPostToTwitter) {
@@ -290,9 +270,9 @@ static NSInteger const  kMaxCaptionLenght = 250;
     }
 
 }
-- (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId {
+- (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId andImageUrl:(NSString *)imageUrl {
     __weak STSharePhotoViewController *weakSelf = self;
-    [[STFacebookLoginController sharedInstance] shareImageWithData:self.imgData description:_captiontextView.text andCompletion:^(id result, NSError *error) {
+    [[STFacebookHelper new] shareImageWithImageUrl:imageUrl description:_captiontextView.text andCompletion:^(id result, NSError *error) {
         _donePostingToFacebook = YES;
         if (error) {
             _fbError = error;

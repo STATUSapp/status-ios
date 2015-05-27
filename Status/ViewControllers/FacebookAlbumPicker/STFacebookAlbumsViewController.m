@@ -10,7 +10,7 @@
 #import "STFacebookAlbumCell.h"
 #import "STAlbumImagesViewController.h"
 #import "STImageCacheController.h"
-#import "STFacebookAlbumsLoader.h"
+#import "STFacebookHelper.h"
 #import "UIImageView+WebCache.h"
 
 @interface STFacebookAlbumsViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -18,7 +18,7 @@
     NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) STFacebookAlbumsLoader *fbLoader;
+@property (strong, nonatomic) STFacebookHelper *fbLoader;
 @end
 
 @implementation STFacebookAlbumsViewController
@@ -37,7 +37,7 @@
     [super viewDidLoad];
 
     _dataSource = [NSMutableArray new];
-    _fbLoader = [STFacebookAlbumsLoader new];
+    _fbLoader = [STFacebookHelper new];
     
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

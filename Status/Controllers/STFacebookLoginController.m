@@ -23,7 +23,7 @@
 #import "STLoginRequest.h"
 #import "STRegisterRequest.h"
 #import "STGetUserSettingsRequest.h"
-#import "STFacebookAlbumsLoader.h"
+#import "STFacebookHelper.h"
 #import "NSDate+Additions.h"
 
 #import <FBSDKLoginKit.h>
@@ -45,7 +45,8 @@
         
         _loginButton = [FBSDKLoginButton new];
         _loginButton.defaultAudience = FBSDKDefaultAudienceEveryone;
-        _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday"];
+        _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday",@"user_about_me", @"user_location",@"user_photos"];
+        _loginButton.publishPermissions = @[@"publish_actions"];
         [_loginButton setFrame:CGRectMake(50, 0, 218, 46)];
         [_loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
         _loginButton.delegate = self;
@@ -55,43 +56,6 @@
          
     }
     return self;
-}
-
--(NSString *) stringFromDict:(NSDictionary *) dict{
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
-                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    if (! jsonData) {
-        NSLog(@"Got an error: %@", error);
-        return @"";
-    } else {
-        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    }
-}
-
--(void) shareImageWithData:(NSData *) imgData description:(NSString *)description andCompletion:(facebookCompletion) completion{
-    
-    NSString * descriptionString = description.length ? description : @"what's YOUR status?";
-    
-     NSDictionary *dictPrivacy = [NSDictionary dictionaryWithObjectsAndKeys:@"CUSTOM",@"value", @"ALL_FRIENDS", @"friends", nil];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"%@ via %@", descriptionString, STInviteLink] ,@"message",
-                                   [self stringFromDict:dictPrivacy],@"privacy",
-                                   @"STATUS", @"title",
-                                   descriptionString, @"description",
-                                   @"http://getstatusapp.co/",@"link",
-                                   nil];
-    
-    [params setValue:[UIImage imageWithData:imgData] forKey:@"source"];
-    
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me/photos"
-                                                                   parameters:params];
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        completion(result, error);
-    }];
 }
 
 #pragma mark - Facebook DelegatesFyou
@@ -117,17 +81,6 @@
         [self loginOrRegister];
 }
 
--(void) UDSetValue:(NSString *) value forKey:(NSString *) key{
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setValue:value forKey:key];
-    [ud synchronize];
-}
-
--(NSString *) getUDValueForKey:(NSString *) key{
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    return [ud valueForKey:key];
-    
-}
 -(void)loadTokenFromKeyChain {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
     [STNetworkQueueManager sharedManager].accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
@@ -151,50 +104,17 @@
     [[Crashlytics sharedInstance] setUserName:userName];
 }
 
-- (void)setUpEnvironment:(NSDictionary *)response userIdentifier:(NSString *)userIdentifier userName:(NSString *)userName {
+- (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
     [STNetworkQueueManager sharedManager].accessToken = response[@"token"];
     [[STChatController sharedInstance] forceReconnect];
     [[STLocationManager sharedInstance] startLocationUpdates];
     [self saveAccessToken:response[@"token"]];
     self.currentUserId = response[@"user_id"];
-    [self setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userIdentifier andUserName:userName];
+    [self setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     [self requestRemoteNotificationAccess];
     [self announceDelegate];
     //get settings from server
     [self getUserSettingsFromServer];
-}
-
-- (void)requestForBirthdayWithCompletion:(void (^)(NSString *))completion {
-    
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me?fields=birthday"
-                                                                   parameters:nil];
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            completion(result[@"birthday"]);
-        }
-        else
-            completion(nil);
-
-    }];
-}
-
-- (void)getUserBirthdayWithCompletion:(void (^)(NSString *birthday))completion {
-    __weak STFacebookLoginController *weakSelf = self;
-    [STFacebookAlbumsLoader loadPermissionsWithBlock:^(NSArray *newObjects) {
-        NSLog(@"Permissions1: %@", newObjects);
-        if (![newObjects containsObject:@"user_birthday"]) {
-            FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-            [loginManager logInWithReadPermissions:@[@"user_birthday"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                if (error==nil)
-                    [weakSelf requestForBirthdayWithCompletion:completion];
-                else
-                    completion(nil);
-
-            }];
-        }
-        else
-            [weakSelf requestForBirthdayWithCompletion:completion];
-    }];
 }
 
 -(void) loginOrRegister{
@@ -204,97 +124,79 @@
     else
         return;
     
-    //TODO: fetch about email, name
-    NSString *userEmail = nil;
-    NSString *userFbId = [[FBSDKAccessToken currentAccessToken] userID];
-    
-    __weak STFacebookLoginController *weakSelf = self;
-    
-    NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    if (userEmail!=nil)
-        userInfo[@"email"] = userEmail;
-    
-    userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
-    userInfo[@"facebook_id"] = userFbId;
-    
-    __block NSString *userName = nil;
-    __block NSString *serverBithday = nil;
-
-    STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
-        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
-        if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-            [weakSelf measureRegister];
-            [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
-            if (_delegate && [_delegate respondsToSelector:@selector(facebookControllerDidRegister)]) {
-                [_delegate facebookControllerDidRegister];
-            }
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong with the registration." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-    };
-    
-    STRequestFailureBlock failBlock = ^(NSError *error){
-        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
-    };
-    
-    STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
-        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
-        if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
-            //get picture of user then register to server
-            [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/?fields=picture.type(large)" parameters:nil]
-             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                 if (error!=nil) {
-                     if (weakSelf.delegate&&[weakSelf.delegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
-                         [weakSelf.delegate performSelector:@selector(facebookControllerDidLoggedOut)];
-                     }
-                     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
-                     return ;
-                 }
-                 NSDictionary *resultDic = result;
-                 
-                 NSString *photoLink = resultDic[@"picture"][@"data"][@"url"];
-                 [weakSelf UDSetValue:userName  forKey:USER_NAME];
-                 
-                 userInfo[@"facebook_image_link"] = photoLink;
-                 if (userName!=nil)
-                     userInfo[@"full_name"] = userName;
-                 if (serverBithday!=nil) {
-                     userInfo[@"birthday"] = serverBithday;
-                 }
-                 [STRegisterRequest registerWithUserInfo:userInfo
-                                          withCompletion:registerCompletion
-                                                 failure:failBlock];
-             }];
-        }
-        else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
-            [weakSelf setTrackerAsExistingUser];
-            [weakSelf setUpEnvironment:response userIdentifier:userEmail userName:userName];
-//            if (_delegate && [_delegate respondsToSelector:@selector(facebookControllerDidRegister)]) {
-//                [_delegate facebookControllerDidRegister];
-//            }
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong on login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-    };
-    //get the bithday of the user
-    [self getUserBirthdayWithCompletion:^(NSString *birthday) {
-        if (birthday!=nil) {
-            serverBithday = [NSDate birthdayStringFromFacebookBirthday:birthday];
-            if (serverBithday!=nil) {
-                userInfo[@"birthday"] = serverBithday;
-            }
-        }
-        [STLoginRequest loginWithUserInfo:userInfo
-                           withCompletion:loginCompletion
-                                  failure:failBlock];
+    if([[FBSDKAccessToken currentAccessToken] tokenString]==nil){
+        return;
+    }
+    [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         
+        __weak STFacebookLoginController *weakSelf = self;
+        __block NSMutableDictionary *userInfo = [NSMutableDictionary new];
+
+        STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
+            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
+            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+                [weakSelf measureRegister];
+                [weakSelf setUpEnvironment:response andUserInfo:userInfo];
+                if (_delegate && [_delegate respondsToSelector:@selector(facebookControllerDidRegister)]) {
+                    [_delegate facebookControllerDidRegister];
+                }
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong with the registration." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+        };
+        
+        STRequestFailureBlock failBlock = ^(NSError *error){
+            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
+        };
+        
+        STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
+            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
+            if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
+               
+                [STRegisterRequest registerWithUserInfo:userInfo
+                                         withCompletion:registerCompletion
+                                                failure:failBlock];
+            }
+            else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
+                [weakSelf setTrackerAsExistingUser];
+                [weakSelf setUpEnvironment:response andUserInfo:userInfo];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong on login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+        };
+        NSString *userFbId = [[FBSDKAccessToken currentAccessToken] userID];
+        
+        userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
+        userInfo[@"facebook_id"] = userFbId;
+
+        [[STFacebookHelper new] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
+            if (info[@"birthday"]) {
+                userInfo[@"birthday"] = [NSDate birthdayStringFromFacebookBirthday:info[@"birthday"]];
+            }
+            if (info[@"email"]) {
+                userInfo[@"email"] = info[@"email"];
+            }
+            if (info[@"picture"][@"data"][@"url"]) {
+                userInfo[@"facebook_image_link"] = info[@"picture"][@"data"][@"url"];
+            }
+            if (info[@"name"]!=nil){
+                userInfo[@"full_name"] = info[@"name"];
+            }
+            _fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
+            [STLoginRequest loginWithUserInfo:userInfo
+                               withCompletion:loginCompletion
+                                      failure:failBlock];
+            
+        }];
     }];
+
+    
 }
 
 -(void) announceDelegate{
