@@ -106,163 +106,6 @@
 		17CA0E941A21C59900D0B081 /* STRepostPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E931A21C59900D0B081 /* STRepostPostRequest.m */; };
 		17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
 		17D699FC18C5A6C900AB0F85 /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
-		17D7C2951B13AA7400B00D0E /* STNetworkQueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28CB1A13FDDC0057EDEE /* STNetworkQueueManager.m */; };
-		17D7C2961B13AA7400B00D0E /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */; };
-		17D7C2971B13AA7400B00D0E /* STUploadPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E8D1A2130AF00D0B081 /* STUploadPostRequest.m */; };
-		17D7C2981B13AA7400B00D0E /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2BC19B71B51001DF132 /* KeychainItemWrapper.m */; };
-		17D7C2991B13AA7400B00D0E /* STSuggestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD59AC1B08B3F000AFDFF8 /* STSuggestionsViewController.m */; };
-		17D7C29A1B13AA7400B00D0E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
-		17D7C29B1B13AA7400B00D0E /* STFlowTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAE7C18B0B12E00C5637B /* STFlowTemplateViewController.m */; };
-		17D7C29C1B13AA7400B00D0E /* STCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9419821FB2000E9116 /* STCoreDataManager.m */; };
-		17D7C29D1B13AA7400B00D0E /* STUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */; };
-		17D7C29E1B13AA7400B00D0E /* STRemoveAdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE2D5B71950DB3100A29A86 /* STRemoveAdsViewController.m */; };
-		17D7C29F1B13AA7400B00D0E /* STSetAPNTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3001A2B076E00E9C3D0 /* STSetAPNTokenRequest.m */; };
-		17D7C2A01B13AA7400B00D0E /* STTapAnimationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB38A192EA003003B7A53 /* STTapAnimationLabel.m */; };
-		17D7C2A11B13AA7400B00D0E /* STSetPostSeenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA71A27BAD400FC3FEE /* STSetPostSeenRequest.m */; };
-		17D7C2A21B13AA7400B00D0E /* STConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2CF19B71C56001DF132 /* STConversationCell.m */; };
-		17D7C2A31B13AA7400B00D0E /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */; };
-		17D7C2A41B13AA7400B00D0E /* STSetPostLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E901A2136F800D0B081 /* STSetPostLikeRequest.m */; };
-		17D7C2A51B13AA7400B00D0E /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AE19B602C900A45E85 /* UIImage+Resize.m */; };
-		17D7C2A61B13AA7400B00D0E /* STCoreDataRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9619821FB2000E9116 /* STCoreDataRequestManager.m */; };
-		17D7C2A71B13AA7400B00D0E /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0BE081A36F0F3007F64C0 /* Message.m */; };
-		17D7C2A81B13AA7400B00D0E /* STLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 178379151A1D11D0002AEE02 /* STLoginRequest.m */; };
-		17D7C2A91B13AA7400B00D0E /* STGetSuggestUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD59A51B08971900AFDFF8 /* STGetSuggestUsersRequest.m */; };
-		17D7C2AA1B13AA7400B00D0E /* STIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2E519B71D88001DF132 /* STIAPHelper.m */; };
-		17D7C2AB1B13AA7400B00D0E /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
-		17D7C2AC1B13AA7400B00D0E /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
-		17D7C2AD1B13AA7400B00D0E /* STFacebookAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2B119B71B09001DF132 /* STFacebookAlbumCell.m */; };
-		17D7C2AE1B13AA7400B00D0E /* STEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */; };
-		17D7C2AF1B13AA7400B00D0E /* STFacebookLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2DF19B71D3E001DF132 /* STFacebookLoginController.m */; };
-		17D7C2B01B13AA7400B00D0E /* STDataAccessUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD59A81B08B10200AFDFF8 /* STDataAccessUtils.m */; };
-		17D7C2B11B13AA7400B00D0E /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2E119B71D3E001DF132 /* STLocationManager.m */; };
-		17D7C2B21B13AA7400B00D0E /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AD19B602C900A45E85 /* UIImage+Alpha.m */; };
-		17D7C2B31B13AA7400B00D0E /* STMessageSendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2D319B71C56001DF132 /* STMessageSendCell.m */; };
-		17D7C2B41B13AA7400B00D0E /* STNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28C91A13FDDC0057EDEE /* STNetworkManager.m */; };
-		17D7C2B51B13AA7400B00D0E /* STImageCacheController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2C019B71B51001DF132 /* STImageCacheController.m */; };
-		17D7C2B61B13AA7400B00D0E /* STMoveScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2A419B71809001DF132 /* STMoveScaleViewController.m */; };
-		17D7C2B71B13AA7400B00D0E /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178907B918B295DD00AC4355 /* STLoginViewController.m */; };
-		17D7C2B81B13AA7400B00D0E /* STMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2D119B71C56001DF132 /* STMessageReceivedCell.m */; };
-		17D7C2B91B13AA7400B00D0E /* STFacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2C819B71B78001DF132 /* STFacebookHelper.m */; };
-		17D7C2BA1B13AA7400B00D0E /* STGetUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3181A2B1E3F00E9C3D0 /* STGetUserInfoRequest.m */; };
-		17D7C2BB1B13AA7400B00D0E /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */; };
-		17D7C2BC1B13AA7400B00D0E /* STMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99CEC4961A5977580014B759 /* STMenuController.m */; };
-		17D7C2BD1B13AA7400B00D0E /* STSmartNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DAF19FE693100DFA43B /* STSmartNotificationCell.m */; };
-		17D7C2BE1B13AA7400B00D0E /* STUpdateToNewerVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */; };
-		17D7C2BF1B13AA7400B00D0E /* STGetNotificationsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3061A2B0BFA00E9C3D0 /* STGetNotificationsRequest.m */; };
-		17D7C2C01B13AA7400B00D0E /* STFacebookAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2B519B71B09001DF132 /* STFacebookAlbumsViewController.m */; };
-		17D7C2C11B13AA7400B00D0E /* STTutorialPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */; };
-		17D7C2C21B13AA7400B00D0E /* STFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0715651118FD890400F7B3BB /* STFooterView.m */; };
-		17D7C2C31B13AA7400B00D0E /* STBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28C61A13FD960057EDEE /* STBaseRequest.m */; };
-		17D7C2C41B13AA7400B00D0E /* STGetUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3151A2B1AFD00E9C3D0 /* STGetUsersRequest.m */; };
-		17D7C2C51B13AA7400B00D0E /* STGetNotificationsCountRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3091A2B0DC400E9C3D0 /* STGetNotificationsCountRequest.m */; };
-		17D7C2C61B13AA7400B00D0E /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
-		17D7C2C71B13AA7400B00D0E /* STAlbumImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2AF19B71B09001DF132 /* STAlbumImageCell.m */; };
-		17D7C2C81B13AA7400B00D0E /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BA91A8C0467006BD973 /* STTutorialViewController.m */; };
-		17D7C2C91B13AA7400B00D0E /* STBubbleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2CD19B71C56001DF132 /* STBubbleCell.m */; };
-		17D7C2CA1B13AA7400B00D0E /* STGetPostDetailsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3031A2B09A100E9C3D0 /* STGetPostDetailsRequest.m */; };
-		17D7C2CB1B13AA7400B00D0E /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
-		17D7C2CC1B13AA7400B00D0E /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
-		17D7C2CD1B13AA7400B00D0E /* STMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1776F52A19C8A58500267DC8 /* STMenuView.m */; };
-		17D7C2CE1B13AA7400B00D0E /* STLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */; };
-		17D7C2CF1B13AA7400B00D0E /* STInviteUserToUploadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC30F1A2B10D300E9C3D0 /* STInviteUserToUploadRequest.m */; };
-		17D7C2D01B13AA7400B00D0E /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 993A5BFF1A490F1100021D1D /* NSDate+Additions.m */; };
-		17D7C2D11B13AA7400B00D0E /* STUpdatePostCaptionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C69D521A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m */; };
-		17D7C2D21B13AA7400B00D0E /* STUpdateUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */; };
-		17D7C2D31B13AA7400B00D0E /* STNearbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E5B8241A754A0900A59F13 /* STNearbyController.m */; };
-		17D7C2D41B13AA7400B00D0E /* STChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2D519B71C56001DF132 /* STChatRoomViewController.m */; };
-		17D7C2D51B13AA7400B00D0E /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
-		17D7C2D61B13AA7400B00D0E /* STNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B31B918C772B700765189 /* STNotificationsViewController.m */; };
-		17D7C2D71B13AA7400B00D0E /* STSuggestedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD59AF1B08D0E400AFDFF8 /* STSuggestedUser.m */; };
-		17D7C2D81B13AA7400B00D0E /* STNotificationBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DB219FE71BF00DFA43B /* STNotificationBaseCell.m */; };
-		17D7C2D91B13AA7400B00D0E /* STDAOEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9819821FB2000E9116 /* STDAOEngine.m */; };
-		17D7C2DA1B13AA7400B00D0E /* STGetPostLikesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC2FD1A2B052600E9C3D0 /* STGetPostLikesRequest.m */; };
-		17D7C2DB1B13AA7400B00D0E /* STSharePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2A719B7187F001DF132 /* STSharePhotoViewController.m */; };
-		17D7C2DC1B13AA7400B00D0E /* STNotificationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0BE0E1A370E99007F64C0 /* STNotificationsManager.m */; };
-		17D7C2DD1B13AA7400B00D0E /* STRepostPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0E931A21C59900D0B081 /* STRepostPostRequest.m */; };
-		17D7C2DE1B13AA7400B00D0E /* STGetNearbyProfilesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA41A27B92100FC3FEE /* STGetNearbyProfilesRequest.m */; };
-		17D7C2DF1B13AA7400B00D0E /* STSetUserLocationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3121A2B18A400E9C3D0 /* STSetUserLocationRequest.m */; };
-		17D7C2E01B13AA7400B00D0E /* STRegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 178379181A1D1C22002AEE02 /* STRegisterRequest.m */; };
-		17D7C2E11B13AA7400B00D0E /* STNotificationBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0BE111A374636007F64C0 /* STNotificationBanner.m */; };
-		17D7C2E21B13AA7400B00D0E /* STGetUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F77F6A1A373BB300E46B22 /* STGetUserProfileRequest.m */; };
-		17D7C2E31B13AA7400B00D0E /* STUploadNewProfilePictureRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 178882D51A7977F600719798 /* STUploadNewProfilePictureRequest.m */; };
-		17D7C2E41B13AA7400B00D0E /* STDeletePostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC30C1A2B0ED000E9C3D0 /* STDeletePostRequest.m */; };
-		17D7C2E51B13AA7400B00D0E /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2D719B71C56001DF132 /* STConversationsListViewController.m */; };
-		17D7C2E61B13AA7400B00D0E /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2411936645500F5C4DA /* HPGrowingTextView.m */; };
-		17D7C2E71B13AA7400B00D0E /* STBaseObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD599B1B08703A00AFDFF8 /* STBaseObj.m */; };
-		17D7C2E81B13AA7400B00D0E /* STGetPostsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1783791B1A1D4853002AEE02 /* STGetPostsRequest.m */; };
-		17D7C2E91B13AA7400B00D0E /* STSetUserSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC31E1A2B226100E9C3D0 /* STSetUserSettingsRequest.m */; };
-		17D7C2EA1B13AA7400B00D0E /* STAlbumImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2B319B71B09001DF132 /* STAlbumImagesViewController.m */; };
-		17D7C2EB1B13AA7400B00D0E /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CE2431936645500F5C4DA /* HPTextViewInternal.m */; };
-		17D7C2EC1B13AA7400B00D0E /* STInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0719E5AD19619FE700F85382 /* STInviteController.m */; };
-		17D7C2ED1B13AA7400B00D0E /* UIImageView+TouchesEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBB386192E9C9F003B7A53 /* UIImageView+TouchesEffects.m */; };
-		17D7C2EE1B13AA7400B00D0E /* UITableView+SPXRevealAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 175EDC611A92ADF700FB96BD /* UITableView+SPXRevealAdditions.m */; };
-		17D7C2EF1B13AA7400B00D0E /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD5C1960D3020009066D /* STFacebookActivity.m */; };
-		17D7C2F01B13AA7400B00D0E /* STGetUserSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC31B1A2B202900E9C3D0 /* STGetUserSettingsRequest.m */; };
-		17D7C2F11B13AA7400B00D0E /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAC50AB19B602C900A45E85 /* UIImage+RoundedCorner.m */; };
-		17D7C2F21B13AA7400B00D0E /* STZoomablePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2AA19B718B4001DF132 /* STZoomablePostViewController.m */; };
-		17D7C2F31B13AA7400B00D0E /* UIImage+FixedOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1776F52F19C8CE0F00267DC8 /* UIImage+FixedOrientation.m */; };
-		17D7C2F41B13AA7400B00D0E /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FE7CE319B321340081F688 /* NSString+MD5.m */; };
-		17D7C2F51B13AA7400B00D0E /* STSuggestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD59A21B0895EA00AFDFF8 /* STSuggestionCell.m */; };
-		17D7C2F61B13AA7400B00D0E /* STNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B31BC18C772EF00765189 /* STNotificationCell.m */; };
-		17D7C2F71B13AA7400B00D0E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAE7618B0B12E00C5637B /* AppDelegate.m */; };
-		17D7C2F81B13AA7400B00D0E /* STGetUserPostsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA11A27AB3200FC3FEE /* STGetUserPostsRequest.m */; };
-		17D7C2F91B13AA7400B00D0E /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717E2BE19B71B51001DF132 /* STConstants.m */; };
-		17D7C2FA1B13AA7400B00D0E /* STInviteFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE2D5BA1950DB4600A29A86 /* STInviteFriendsViewController.m */; };
-		17D7C2FB1B13AA7400B00D0E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAE7218B0B12E00C5637B /* main.m */; };
-		17D7C2FC1B13AA7400B00D0E /* STNoPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1780E3E11A7FCD140001A209 /* STNoPhotosCell.m */; };
-		17D7C2FD1B13AA7400B00D0E /* STWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1794DD561960D2A40009066D /* STWhatsAppActivity.m */; };
-		17D7C2FE1B13AA7400B00D0E /* STImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175F8B561A7B7F7000360C3E /* STImagePickerController.m */; };
-		17D7C3001B13AA7400B00D0E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
-		17D7C3011B13AA7400B00D0E /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
-		17D7C3021B13AA7400B00D0E /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
-		17D7C3031B13AA7400B00D0E /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */; };
-		17D7C3041B13AA7400B00D0E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
-		17D7C3051B13AA7400B00D0E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
-		17D7C3061B13AA7400B00D0E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */; };
-		17D7C3071B13AA7400B00D0E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170812D51B0A7C1C00228E4C /* Crashlytics.framework */; };
-		17D7C3081B13AA7400B00D0E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */; };
-		17D7C3091B13AA7400B00D0E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
-		17D7C30A1B13AA7400B00D0E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B0194FA5E800A29A86 /* AVFoundation.framework */; };
-		17D7C30B1B13AA7400B00D0E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */; };
-		17D7C30C1B13AA7400B00D0E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */; };
-		17D7C30D1B13AA7400B00D0E /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
-		17D7C30E1B13AA7400B00D0E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
-		17D7C30F1B13AA7400B00D0E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
-		17D7C3101B13AA7400B00D0E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
-		17D7C3111B13AA7400B00D0E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
-		17D7C3121B13AA7400B00D0E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
-		17D7C3131B13AA7400B00D0E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
-		17D7C3141B13AA7400B00D0E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D422D9C06AC39526914FFF /* libPods.a */; };
-		17D7C3161B13AA7400B00D0E /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0F1A7E777C004B4FA4 /* ProximaNova-Light.otf */; };
-		17D7C3171B13AA7400B00D0E /* ProximaNovaCond-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E181A7E777C004B4FA4 /* ProximaNovaCond-Regular.otf */; };
-		17D7C3181B13AA7400B00D0E /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E121A7E777C004B4FA4 /* ProximaNova-Regular.otf */; };
-		17D7C3191B13AA7400B00D0E /* ProximaNova-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E151A7E777C004B4FA4 /* ProximaNova-SemiboldItalic.otf */; };
-		17D7C31A1B13AA7400B00D0E /* ProximaNovaCond-RegularIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E191A7E777C004B4FA4 /* ProximaNovaCond-RegularIt.otf */; };
-		17D7C31B1B13AA7400B00D0E /* ProximaNovaCond-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E161A7E777C004B4FA4 /* ProximaNovaCond-Light.otf */; };
-		17D7C31C1B13AA7400B00D0E /* ProximaNova-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0D1A7E777C004B4FA4 /* ProximaNova-BoldIt.otf */; };
-		17D7C31D1B13AA7400B00D0E /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E141A7E777C004B4FA4 /* ProximaNova-Semibold.otf */; };
-		17D7C31E1B13AA7400B00D0E /* Proxima Nova Fonts Collection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0A1A7E777C004B4FA4 /* Proxima Nova Fonts Collection.jpg */; };
-		17D7C31F1B13AA7400B00D0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99DCD4D71A8D2BF30023EE51 /* Images.xcassets */; };
-		17D7C3201B13AA7400B00D0E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE6F18B0B12E00C5637B /* InfoPlist.strings */; };
-		17D7C3211B13AA7400B00D0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE7818B0B12E00C5637B /* Main.storyboard */; };
-		17D7C3221B13AA7400B00D0E /* ProximaNova-Extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0E1A7E777C004B4FA4 /* ProximaNova-Extrabold.otf */; };
-		17D7C3231B13AA7400B00D0E /* FacebookPickerScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */; };
-		17D7C3241B13AA7400B00D0E /* ProximaNovaCond-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E1A1A7E777C004B4FA4 /* ProximaNovaCond-Semibold.otf */; };
-		17D7C3251B13AA7400B00D0E /* STMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1776F52C19C8A59B00267DC8 /* STMenuView.xib */; };
-		17D7C3261B13AA7400B00D0E /* ChatScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17ACEB611933C4E600CFC909 /* ChatScene.storyboard */; };
-		17D7C3271B13AA7400B00D0E /* ProximaNova-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E131A7E777C004B4FA4 /* ProximaNova-RegularItalic.otf */; };
-		17D7C3281B13AA7400B00D0E /* ProximaNova-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E101A7E777C004B4FA4 /* ProximaNova-LightItalic.otf */; };
-		17D7C3291B13AA7400B00D0E /* LoginScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178907B618B294BA00AC4355 /* LoginScene.storyboard */; };
-		17D7C32A1B13AA7400B00D0E /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E1B1A7E777C004B4FA4 /* ProximaNovaCond-SemiboldIt.otf */; };
-		17D7C32B1B13AA7400B00D0E /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0C1A7E777C004B4FA4 /* ProximaNova-Bold.otf */; };
-		17D7C32C1B13AA7400B00D0E /* STNotificationBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C0BE131A374650007F64C0 /* STNotificationBanner.xib */; };
-		17D7C32D1B13AA7400B00D0E /* ProximaNova-RegItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E111A7E777C004B4FA4 /* ProximaNova-RegItalic.otf */; };
-		17D7C32E1B13AA7400B00D0E /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */; };
-		17D7C32F1B13AA7400B00D0E /* ProximaNovaCond-LightIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E171A7E777C004B4FA4 /* ProximaNovaCond-LightIt.otf */; };
-		17D7C3301B13AA7400B00D0E /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9904DD441A2FB55D0072134F /* UserProfile.storyboard */; };
-		17D7C3311B13AA7400B00D0E /* SuggestionsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17FD599E1B0871FC00AFDFF8 /* SuggestionsScene.storyboard */; };
-		17D7C3321B13AA7400B00D0E /* ProximaNova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0B1A7E777C004B4FA4 /* ProximaNova-Black.otf */; };
-		17D7C3331B13AA7400B00D0E /* TimestampView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 175EDC631A92B1FF00FB96BD /* TimestampView.xib */; };
 		17E0FCA21A27AB3200FC3FEE /* STGetUserPostsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA11A27AB3200FC3FEE /* STGetUserPostsRequest.m */; };
 		17E0FCA51A27B92100FC3FEE /* STGetNearbyProfilesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA41A27B92100FC3FEE /* STGetNearbyProfilesRequest.m */; };
 		17E0FCA81A27BAD400FC3FEE /* STSetPostSeenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E0FCA71A27BAD400FC3FEE /* STSetPostSeenRequest.m */; };
@@ -512,7 +355,6 @@
 		17D699F818C5A6AE00AB0F85 /* STCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomShareView.h; sourceTree = "<group>"; };
 		17D699F918C5A6AE00AB0F85 /* STCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomShareView.m; sourceTree = "<group>"; };
 		17D699FB18C5A6C900AB0F85 /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
-		17D7C33A1B13AA7500B00D0E /* Status-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Status-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17E0FCA01A27AB3200FC3FEE /* STGetUserPostsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetUserPostsRequest.h; sourceTree = "<group>"; };
 		17E0FCA11A27AB3200FC3FEE /* STGetUserPostsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUserPostsRequest.m; sourceTree = "<group>"; };
 		17E0FCA31A27B92100FC3FEE /* STGetNearbyProfilesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetNearbyProfilesRequest.h; sourceTree = "<group>"; };
@@ -652,34 +494,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		17D7C2FF1B13AA7400B00D0E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				17D7C3001B13AA7400B00D0E /* Social.framework in Frameworks */,
-				17D7C3011B13AA7400B00D0E /* Accounts.framework in Frameworks */,
-				17D7C3021B13AA7400B00D0E /* iAd.framework in Frameworks */,
-				17D7C3031B13AA7400B00D0E /* MobileAppTracker.framework in Frameworks */,
-				17D7C3041B13AA7400B00D0E /* MobileCoreServices.framework in Frameworks */,
-				17D7C3051B13AA7400B00D0E /* SystemConfiguration.framework in Frameworks */,
-				17D7C3061B13AA7400B00D0E /* CoreTelephony.framework in Frameworks */,
-				17D7C3071B13AA7400B00D0E /* Crashlytics.framework in Frameworks */,
-				17D7C3081B13AA7400B00D0E /* StoreKit.framework in Frameworks */,
-				17D7C3091B13AA7400B00D0E /* CoreGraphics.framework in Frameworks */,
-				17D7C30A1B13AA7400B00D0E /* AVFoundation.framework in Frameworks */,
-				17D7C30B1B13AA7400B00D0E /* AudioToolbox.framework in Frameworks */,
-				17D7C30C1B13AA7400B00D0E /* AdSupport.framework in Frameworks */,
-				17D7C30D1B13AA7400B00D0E /* libicucore.dylib in Frameworks */,
-				17D7C30E1B13AA7400B00D0E /* CoreLocation.framework in Frameworks */,
-				17D7C30F1B13AA7400B00D0E /* Security.framework in Frameworks */,
-				17D7C3101B13AA7400B00D0E /* MessageUI.framework in Frameworks */,
-				17D7C3111B13AA7400B00D0E /* QuartzCore.framework in Frameworks */,
-				17D7C3121B13AA7400B00D0E /* UIKit.framework in Frameworks */,
-				17D7C3131B13AA7400B00D0E /* Foundation.framework in Frameworks */,
-				17D7C3141B13AA7400B00D0E /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -806,7 +620,6 @@
 			children = (
 				172EAE6318B0B12E00C5637B /* STATUS.app */,
 				172EAE8418B0B12E00C5637B /* StatusTests.xctest */,
-				17D7C33A1B13AA7500B00D0E /* Status-Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1235,26 +1048,6 @@
 			productReference = 172EAE8418B0B12E00C5637B /* StatusTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		17D7C2921B13AA7400B00D0E /* Status-Dev */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 17D7C3361B13AA7400B00D0E /* Build configuration list for PBXNativeTarget "Status-Dev" */;
-			buildPhases = (
-				17D7C2931B13AA7400B00D0E /* Check Pods Manifest.lock */,
-				17D7C2941B13AA7400B00D0E /* Sources */,
-				17D7C2FF1B13AA7400B00D0E /* Frameworks */,
-				17D7C3151B13AA7400B00D0E /* Resources */,
-				17D7C3341B13AA7400B00D0E /* ShellScript */,
-				17D7C3351B13AA7400B00D0E /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Status-Dev";
-			productName = Status;
-			productReference = 17D7C33A1B13AA7500B00D0E /* Status-Dev.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1295,7 +1088,6 @@
 			targets = (
 				172EAE6218B0B12D00C5637B /* Status */,
 				172EAE8318B0B12E00C5637B /* StatusTests */,
-				17D7C2921B13AA7400B00D0E /* Status-Dev */,
 			);
 		};
 /* End PBXProject section */
@@ -1346,43 +1138,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		17D7C3151B13AA7400B00D0E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				17D7C3161B13AA7400B00D0E /* ProximaNova-Light.otf in Resources */,
-				17D7C3171B13AA7400B00D0E /* ProximaNovaCond-Regular.otf in Resources */,
-				17D7C3181B13AA7400B00D0E /* ProximaNova-Regular.otf in Resources */,
-				17D7C3191B13AA7400B00D0E /* ProximaNova-SemiboldItalic.otf in Resources */,
-				17D7C31A1B13AA7400B00D0E /* ProximaNovaCond-RegularIt.otf in Resources */,
-				17D7C31B1B13AA7400B00D0E /* ProximaNovaCond-Light.otf in Resources */,
-				17D7C31C1B13AA7400B00D0E /* ProximaNova-BoldIt.otf in Resources */,
-				17D7C31D1B13AA7400B00D0E /* ProximaNova-Semibold.otf in Resources */,
-				17D7C31E1B13AA7400B00D0E /* Proxima Nova Fonts Collection.jpg in Resources */,
-				17D7C31F1B13AA7400B00D0E /* Images.xcassets in Resources */,
-				17D7C3201B13AA7400B00D0E /* InfoPlist.strings in Resources */,
-				17D7C3211B13AA7400B00D0E /* Main.storyboard in Resources */,
-				17D7C3221B13AA7400B00D0E /* ProximaNova-Extrabold.otf in Resources */,
-				17D7C3231B13AA7400B00D0E /* FacebookPickerScene.storyboard in Resources */,
-				17D7C3241B13AA7400B00D0E /* ProximaNovaCond-Semibold.otf in Resources */,
-				17D7C3251B13AA7400B00D0E /* STMenuView.xib in Resources */,
-				17D7C3261B13AA7400B00D0E /* ChatScene.storyboard in Resources */,
-				17D7C3271B13AA7400B00D0E /* ProximaNova-RegularItalic.otf in Resources */,
-				17D7C3281B13AA7400B00D0E /* ProximaNova-LightItalic.otf in Resources */,
-				17D7C3291B13AA7400B00D0E /* LoginScene.storyboard in Resources */,
-				17D7C32A1B13AA7400B00D0E /* ProximaNovaCond-SemiboldIt.otf in Resources */,
-				17D7C32B1B13AA7400B00D0E /* ProximaNova-Bold.otf in Resources */,
-				17D7C32C1B13AA7400B00D0E /* STNotificationBanner.xib in Resources */,
-				17D7C32D1B13AA7400B00D0E /* ProximaNova-RegItalic.otf in Resources */,
-				17D7C32E1B13AA7400B00D0E /* STCustomShareView.xib in Resources */,
-				17D7C32F1B13AA7400B00D0E /* ProximaNovaCond-LightIt.otf in Resources */,
-				17D7C3301B13AA7400B00D0E /* UserProfile.storyboard in Resources */,
-				17D7C3311B13AA7400B00D0E /* SuggestionsScene.storyboard in Resources */,
-				17D7C3321B13AA7400B00D0E /* ProximaNova-Black.otf in Resources */,
-				17D7C3331B13AA7400B00D0E /* TimestampView.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1398,49 +1153,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Crashlytics.framework/run 93e0064668657d3332278aaa1ed765b8f48c6ad6 ffd19d43716170c5828194f662ccf2fa5472d06c00cc6ae64125bf57997d05c9";
-		};
-		17D7C2931B13AA7400B00D0E /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		17D7C3341B13AA7400B00D0E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 93e0064668657d3332278aaa1ed765b8f48c6ad6 ffd19d43716170c5828194f662ccf2fa5472d06c00cc6ae64125bf57997d05c9";
-		};
-		17D7C3351B13AA7400B00D0E /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		6657909E4EB07A6D103FEE67 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1593,119 +1305,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				172EAE9218B0B12E00C5637B /* StatusTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		17D7C2941B13AA7400B00D0E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				17D7C2951B13AA7400B00D0E /* STNetworkQueueManager.m in Sources */,
-				17D7C2961B13AA7400B00D0E /* UIImage+ImageEffects.m in Sources */,
-				17D7C2971B13AA7400B00D0E /* STUploadPostRequest.m in Sources */,
-				17D7C2981B13AA7400B00D0E /* KeychainItemWrapper.m in Sources */,
-				17D7C2991B13AA7400B00D0E /* STSuggestionsViewController.m in Sources */,
-				17D7C29A1B13AA7400B00D0E /* STTutorialCell.m in Sources */,
-				17D7C29B1B13AA7400B00D0E /* STFlowTemplateViewController.m in Sources */,
-				17D7C29C1B13AA7400B00D0E /* STCoreDataManager.m in Sources */,
-				17D7C29D1B13AA7400B00D0E /* STUserProfileViewController.m in Sources */,
-				17D7C29E1B13AA7400B00D0E /* STRemoveAdsViewController.m in Sources */,
-				17D7C29F1B13AA7400B00D0E /* STSetAPNTokenRequest.m in Sources */,
-				17D7C2A01B13AA7400B00D0E /* STTapAnimationLabel.m in Sources */,
-				17D7C2A11B13AA7400B00D0E /* STSetPostSeenRequest.m in Sources */,
-				17D7C2A21B13AA7400B00D0E /* STConversationCell.m in Sources */,
-				17D7C2A31B13AA7400B00D0E /* STSettingsViewController.m in Sources */,
-				17D7C2A41B13AA7400B00D0E /* STSetPostLikeRequest.m in Sources */,
-				17D7C2A51B13AA7400B00D0E /* UIImage+Resize.m in Sources */,
-				17D7C2A61B13AA7400B00D0E /* STCoreDataRequestManager.m in Sources */,
-				17D7C2A71B13AA7400B00D0E /* Message.m in Sources */,
-				17D7C2A81B13AA7400B00D0E /* STLoginRequest.m in Sources */,
-				17D7C2A91B13AA7400B00D0E /* STGetSuggestUsersRequest.m in Sources */,
-				17D7C2AA1B13AA7400B00D0E /* STIAPHelper.m in Sources */,
-				17D7C2AB1B13AA7400B00D0E /* STCustomCollectionViewCell.m in Sources */,
-				17D7C2AC1B13AA7400B00D0E /* STLikeCell.m in Sources */,
-				17D7C2AD1B13AA7400B00D0E /* STFacebookAlbumCell.m in Sources */,
-				17D7C2AE1B13AA7400B00D0E /* STEditProfileViewController.m in Sources */,
-				17D7C2AF1B13AA7400B00D0E /* STFacebookLoginController.m in Sources */,
-				17D7C2B01B13AA7400B00D0E /* STDataAccessUtils.m in Sources */,
-				17D7C2B11B13AA7400B00D0E /* STLocationManager.m in Sources */,
-				17D7C2B21B13AA7400B00D0E /* UIImage+Alpha.m in Sources */,
-				17D7C2B31B13AA7400B00D0E /* STMessageSendCell.m in Sources */,
-				17D7C2B41B13AA7400B00D0E /* STNetworkManager.m in Sources */,
-				17D7C2B51B13AA7400B00D0E /* STImageCacheController.m in Sources */,
-				17D7C2B61B13AA7400B00D0E /* STMoveScaleViewController.m in Sources */,
-				17D7C2B71B13AA7400B00D0E /* STLoginViewController.m in Sources */,
-				17D7C2B81B13AA7400B00D0E /* STMessageReceivedCell.m in Sources */,
-				17D7C2B91B13AA7400B00D0E /* STFacebookHelper.m in Sources */,
-				17D7C2BA1B13AA7400B00D0E /* STGetUserInfoRequest.m in Sources */,
-				17D7C2BB1B13AA7400B00D0E /* STCustomShareView.m in Sources */,
-				17D7C2BC1B13AA7400B00D0E /* STMenuController.m in Sources */,
-				17D7C2BD1B13AA7400B00D0E /* STSmartNotificationCell.m in Sources */,
-				17D7C2BE1B13AA7400B00D0E /* STUpdateToNewerVersionController.m in Sources */,
-				17D7C2BF1B13AA7400B00D0E /* STGetNotificationsRequest.m in Sources */,
-				17D7C2C01B13AA7400B00D0E /* STFacebookAlbumsViewController.m in Sources */,
-				17D7C2C11B13AA7400B00D0E /* STTutorialPresenterViewController.m in Sources */,
-				17D7C2C21B13AA7400B00D0E /* STFooterView.m in Sources */,
-				17D7C2C31B13AA7400B00D0E /* STBaseRequest.m in Sources */,
-				17D7C2C41B13AA7400B00D0E /* STGetUsersRequest.m in Sources */,
-				17D7C2C51B13AA7400B00D0E /* STGetNotificationsCountRequest.m in Sources */,
-				17D7C2C61B13AA7400B00D0E /* SRWebSocket.m in Sources */,
-				17D7C2C71B13AA7400B00D0E /* STAlbumImageCell.m in Sources */,
-				17D7C2C81B13AA7400B00D0E /* STTutorialViewController.m in Sources */,
-				17D7C2C91B13AA7400B00D0E /* STBubbleCell.m in Sources */,
-				17D7C2CA1B13AA7400B00D0E /* STGetPostDetailsRequest.m in Sources */,
-				17D7C2CB1B13AA7400B00D0E /* StatusDM.xcdatamodeld in Sources */,
-				17D7C2CC1B13AA7400B00D0E /* STChatController.m in Sources */,
-				17D7C2CD1B13AA7400B00D0E /* STMenuView.m in Sources */,
-				17D7C2CE1B13AA7400B00D0E /* STLikesViewController.m in Sources */,
-				17D7C2CF1B13AA7400B00D0E /* STInviteUserToUploadRequest.m in Sources */,
-				17D7C2D01B13AA7400B00D0E /* NSDate+Additions.m in Sources */,
-				17D7C2D11B13AA7400B00D0E /* STUpdatePostCaptionRequest.m in Sources */,
-				17D7C2D21B13AA7400B00D0E /* STUpdateUserProfileRequest.m in Sources */,
-				17D7C2D31B13AA7400B00D0E /* STNearbyController.m in Sources */,
-				17D7C2D41B13AA7400B00D0E /* STChatRoomViewController.m in Sources */,
-				17D7C2D51B13AA7400B00D0E /* UIImageView+Mask.m in Sources */,
-				17D7C2D61B13AA7400B00D0E /* STNotificationsViewController.m in Sources */,
-				17D7C2D71B13AA7400B00D0E /* STSuggestedUser.m in Sources */,
-				17D7C2D81B13AA7400B00D0E /* STNotificationBaseCell.m in Sources */,
-				17D7C2D91B13AA7400B00D0E /* STDAOEngine.m in Sources */,
-				17D7C2DA1B13AA7400B00D0E /* STGetPostLikesRequest.m in Sources */,
-				17D7C2DB1B13AA7400B00D0E /* STSharePhotoViewController.m in Sources */,
-				17D7C2DC1B13AA7400B00D0E /* STNotificationsManager.m in Sources */,
-				17D7C2DD1B13AA7400B00D0E /* STRepostPostRequest.m in Sources */,
-				17D7C2DE1B13AA7400B00D0E /* STGetNearbyProfilesRequest.m in Sources */,
-				17D7C2DF1B13AA7400B00D0E /* STSetUserLocationRequest.m in Sources */,
-				17D7C2E01B13AA7400B00D0E /* STRegisterRequest.m in Sources */,
-				17D7C2E11B13AA7400B00D0E /* STNotificationBanner.m in Sources */,
-				17D7C2E21B13AA7400B00D0E /* STGetUserProfileRequest.m in Sources */,
-				17D7C2E31B13AA7400B00D0E /* STUploadNewProfilePictureRequest.m in Sources */,
-				17D7C2E41B13AA7400B00D0E /* STDeletePostRequest.m in Sources */,
-				17D7C2E51B13AA7400B00D0E /* STConversationsListViewController.m in Sources */,
-				17D7C2E61B13AA7400B00D0E /* HPGrowingTextView.m in Sources */,
-				17D7C2E71B13AA7400B00D0E /* STBaseObj.m in Sources */,
-				17D7C2E81B13AA7400B00D0E /* STGetPostsRequest.m in Sources */,
-				17D7C2E91B13AA7400B00D0E /* STSetUserSettingsRequest.m in Sources */,
-				17D7C2EA1B13AA7400B00D0E /* STAlbumImagesViewController.m in Sources */,
-				17D7C2EB1B13AA7400B00D0E /* HPTextViewInternal.m in Sources */,
-				17D7C2EC1B13AA7400B00D0E /* STInviteController.m in Sources */,
-				17D7C2ED1B13AA7400B00D0E /* UIImageView+TouchesEffects.m in Sources */,
-				17D7C2EE1B13AA7400B00D0E /* UITableView+SPXRevealAdditions.m in Sources */,
-				17D7C2EF1B13AA7400B00D0E /* STFacebookActivity.m in Sources */,
-				17D7C2F01B13AA7400B00D0E /* STGetUserSettingsRequest.m in Sources */,
-				17D7C2F11B13AA7400B00D0E /* UIImage+RoundedCorner.m in Sources */,
-				17D7C2F21B13AA7400B00D0E /* STZoomablePostViewController.m in Sources */,
-				17D7C2F31B13AA7400B00D0E /* UIImage+FixedOrientation.m in Sources */,
-				17D7C2F41B13AA7400B00D0E /* NSString+MD5.m in Sources */,
-				17D7C2F51B13AA7400B00D0E /* STSuggestionCell.m in Sources */,
-				17D7C2F61B13AA7400B00D0E /* STNotificationCell.m in Sources */,
-				17D7C2F71B13AA7400B00D0E /* AppDelegate.m in Sources */,
-				17D7C2F81B13AA7400B00D0E /* STGetUserPostsRequest.m in Sources */,
-				17D7C2F91B13AA7400B00D0E /* STConstants.m in Sources */,
-				17D7C2FA1B13AA7400B00D0E /* STInviteFriendsViewController.m in Sources */,
-				17D7C2FB1B13AA7400B00D0E /* main.m in Sources */,
-				17D7C2FC1B13AA7400B00D0E /* STNoPhotosCell.m in Sources */,
-				17D7C2FD1B13AA7400B00D0E /* STWhatsAppActivity.m in Sources */,
-				17D7C2FE1B13AA7400B00D0E /* STImagePickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1925,97 +1524,6 @@
 			};
 			name = Release;
 		};
-		17D7C3371B13AA7400B00D0E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKShareKit\"",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Status/StatusDev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "Status-Dev";
-				PROVISIONING_PROFILE = "141d4c98-ffda-4d2c-816e-d78c5e96f15a";
-				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		17D7C3381B13AA7400B00D0E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9FCFE236622BF1EAA4BC917 /* Pods.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKShareKit\"",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Status/StatusDev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "Status-Dev";
-				PROVISIONING_PROFILE = "e2501c41-4b4b-4cf1-a158-2247a658ac62";
-				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		17D7C3391B13AA7400B00D0E /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 228B2C727ABFBB875FD4D193 /* Pods.distribution.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKShareKit\"",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Status/StatusDev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "Status-Dev";
-				PROVISIONING_PROFILE = "e2501c41-4b4b-4cf1-a158-2247a658ac62";
-				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Distribution;
-		};
 		17DD2F4918D8D0F9000A3779 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2129,16 +1637,6 @@
 				172EAE9918B0B12E00C5637B /* Debug */,
 				172EAE9A18B0B12E00C5637B /* Release */,
 				17DD2F4B18D8D0F9000A3779 /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		17D7C3361B13AA7400B00D0E /* Build configuration list for PBXNativeTarget "Status-Dev" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				17D7C3371B13AA7400B00D0E /* Debug */,
-				17D7C3381B13AA7400B00D0E /* Release */,
-				17D7C3391B13AA7400B00D0E /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

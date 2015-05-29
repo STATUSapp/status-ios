@@ -53,7 +53,26 @@
                                                                        multiplier:1.f
                                                                          constant:1.f];
     
-     [self.view addConstraints:@[bottomConstraint, centerConstraint]];
+    NSLayoutConstraint *widthContraint = [NSLayoutConstraint constraintWithItem:loginBtn
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.f
+                                                                         constant:SCREEN_WIDTH - 100.f];
+    
+    NSLayoutConstraint *heightContraint = [NSLayoutConstraint constraintWithItem:loginBtn
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1.f
+                                                                       constant:44.f];
+
+
+    
+    
+     [self.view addConstraints:@[bottomConstraint, centerConstraint, widthContraint, heightContraint]];
 }
 
 - (void)didReceiveMemoryWarning

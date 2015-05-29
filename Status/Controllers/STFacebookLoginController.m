@@ -47,7 +47,7 @@
         _loginButton.defaultAudience = FBSDKDefaultAudienceEveryone;
         _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday",@"user_about_me", @"user_location",@"user_photos"];
         _loginButton.publishPermissions = @[@"publish_actions"];
-        [_loginButton setFrame:CGRectMake(50, 0, 218, 46)];
+        
         [_loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
         _loginButton.delegate = self;
         if ([FBSDKAccessToken currentAccessToken]) {
