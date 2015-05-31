@@ -10,10 +10,16 @@
 #import "STRequests.h"
 
 typedef void (^STDataAccessCompletionBlock)(NSArray *objects, NSError *error);
-
+typedef void (^STDataUploadCompletionBlock)(NSError *error);
 @interface STDataAccessUtils : NSObject
 
 +(void)getSuggestUsersWithOffset:(NSNumber *)offset
                    andCompletion:(STDataAccessCompletionBlock)completion;
 
+
+//upload stuff to server
++(void)followUsers:(NSArray *)users
+    withCompletion:(STDataUploadCompletionBlock)completion;
++(void)unfollowUsers:(NSArray *)users
+      withCompletion:(STDataUploadCompletionBlock)completion;
 @end

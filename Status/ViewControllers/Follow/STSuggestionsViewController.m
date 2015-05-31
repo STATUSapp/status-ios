@@ -15,6 +15,8 @@
 @interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *_suggestedUsers;
+    NSSet *_followedUsers;
+    NSSet *_unfollowedUsers;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *followAllBtn;
@@ -29,6 +31,9 @@
     [STDataAccessUtils getSuggestUsersWithOffset:@(0) andCompletion:^(NSArray *objects, NSError *error) {
         if (error==nil) {
             [_suggestedUsers addObjectsFromArray:objects];
+            _followedUsers = [NSSet setWithArray:[_suggestedUsers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 1"]]];
+            _unfollowedUsers = [NSSet setWithArray:[_suggestedUsers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 0"]]];
+
             [_tableView reloadData];
         }
     }];
@@ -70,7 +75,22 @@
     
 }
 - (IBAction)onArrowPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSSet *suggestedUsersSet = [NSSet setWithArray:_suggestedUsers];
+    NSMutableSet *checkedUsersToFollow = [NSMutableSet setWithSet:[suggestedUsersSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 1"]]];
+    [checkedUsersToFollow minusSet:_followedUsers];
+    NSArray *unfollowUsersShouldFollow = [checkedUsersToFollow allObjects];
+    [STDataAccessUtils followUsers:unfollowUsersShouldFollow
+                    withCompletion:^(NSError *error) {
+                        NSLog(@"Error follow: %@", error.debugDescription);
+                        NSMutableSet *uncheckedUsersToUnfollow = [NSMutableSet setWithSet:[suggestedUsersSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 0"]]];
+                        [uncheckedUsersToUnfollow minusSet:_unfollowedUsers];
+                        NSArray *followUsersShouldUnfollow = [uncheckedUsersToUnfollow allObjects];
+                        
+                        [STDataAccessUtils unfollowUsers:followUsersShouldUnfollow withCompletion:^(NSError *error) {
+                            NSLog(@"Error unfollow: %@", error.debugDescription);
+                            [self dismissViewControllerAnimated:YES completion:nil];
+                        }];
+        }];
 }
 - (IBAction)onFollowAllButtonPressed:(id)sender {
     //update the model then make the reuest at the end

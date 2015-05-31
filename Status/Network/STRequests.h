@@ -10,6 +10,8 @@
 #define Status_STRequests_h
 
 #import "STGetSuggestUsersRequest.h"
+#import "STFollowUsersRequest.h"
+#import "STUnfollowUsersRequest.h"
 
 #endif
 

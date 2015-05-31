@@ -31,4 +31,34 @@
         completion(nil, error);
     }];
 }
+
+#pragma mark - upload Stuff to server
++(void)followUsers:(NSArray *)users
+    withCompletion:(STDataUploadCompletionBlock)completion{
+    if (users && users.count == 0) {
+        completion(nil);
+        return;
+    }
+    [STFollowUsersRequest followUsers:users
+                       withCompletion:^(id response, NSError *error) {
+                           completion(error);
+                           
+                       } failure:^(NSError *error) {
+                           completion(error);
+                       }];
+}
++(void)unfollowUsers:(NSArray *)users
+    withCompletion:(STDataUploadCompletionBlock)completion{
+    if (users && users.count == 0) {
+        completion(nil);
+        return;
+    }
+    [STUnfollowUsersRequest unfollowUsers:users
+                       withCompletion:^(id response, NSError *error) {
+                           completion(error);
+                           
+                       } failure:^(NSError *error) {
+                           completion(error);
+                       }];
+}
 @end

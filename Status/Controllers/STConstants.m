@@ -73,6 +73,8 @@ NSString *const kUpdateUserProfile = @"set_user_profile";
 NSString *const kEditCaption = @"set_post_caption";
 NSString *const kSetProfilePicture =  @"upload_user_photo";
 NSString *const kGetSuggestUsers = @"Get_Suggest_Users";
+NSString *const kFollowUsers = @"Follow";
+NSString *const kUnfollowUsers = @"Unfollow";
 
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";

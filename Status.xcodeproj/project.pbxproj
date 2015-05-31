@@ -42,6 +42,8 @@
 		170812D71B0A7C1C00228E4C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170812D51B0A7C1C00228E4C /* Crashlytics.framework */; };
 		170812D81B0A7C1C00228E4C /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */; };
 		171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */; };
+		172062E41B1B042100A8B2B0 /* STFollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */; };
+		172062E71B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */; };
 		172DF27419A2616D009CE4F3 /* FacebookPickerScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
@@ -246,6 +248,10 @@
 		170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 		171925F71A507598003C19D7 /* STUpdateToNewerVersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateToNewerVersionController.h; sourceTree = "<group>"; };
 		171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateToNewerVersionController.m; sourceTree = "<group>"; };
+		172062E21B1B042100A8B2B0 /* STFollowUsersRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFollowUsersRequest.h; sourceTree = "<group>"; };
+		172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFollowUsersRequest.m; sourceTree = "<group>"; };
+		172062E51B1B0B0000A8B2B0 /* STUnfollowUsersRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUnfollowUsersRequest.h; sourceTree = "<group>"; };
+		172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUnfollowUsersRequest.m; sourceTree = "<group>"; };
 		172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FacebookPickerScene.storyboard; sourceTree = "<group>"; };
 		172EAE6318B0B12E00C5637B /* STATUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE6618B0B12E00C5637B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -849,6 +855,10 @@
 				178882D51A7977F600719798 /* STUploadNewProfilePictureRequest.m */,
 				17FD59A41B08971900AFDFF8 /* STGetSuggestUsersRequest.h */,
 				17FD59A51B08971900AFDFF8 /* STGetSuggestUsersRequest.m */,
+				172062E21B1B042100A8B2B0 /* STFollowUsersRequest.h */,
+				172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */,
+				172062E51B1B0B0000A8B2B0 /* STUnfollowUsersRequest.h */,
+				172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1226,6 +1236,7 @@
 				0717E2C519B71B51001DF132 /* STImageCacheController.m in Sources */,
 				0717E2A519B71809001DF132 /* STMoveScaleViewController.m in Sources */,
 				178907BA18B295DD00AC4355 /* STLoginViewController.m in Sources */,
+				172062E71B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m in Sources */,
 				0717E2DA19B71C56001DF132 /* STMessageReceivedCell.m in Sources */,
 				0717E2C919B71B78001DF132 /* STFacebookHelper.m in Sources */,
 				176CC3191A2B1E3F00E9C3D0 /* STGetUserInfoRequest.m in Sources */,
@@ -1259,6 +1270,7 @@
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
 				17FD59B01B08D0E500AFDFF8 /* STSuggestedUser.m in Sources */,
 				07361DB319FE71BF00DFA43B /* STNotificationBaseCell.m in Sources */,
+				172062E41B1B042100A8B2B0 /* STFollowUsersRequest.m in Sources */,
 				17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */,
 				176CC2FE1A2B052600E9C3D0 /* STGetPostLikesRequest.m in Sources */,
 				0717E2A819B7187F001DF132 /* STSharePhotoViewController.m in Sources */,
