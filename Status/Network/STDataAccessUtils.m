@@ -32,6 +32,23 @@
     }];
 }
 
++(void)getLikesForPostId:(NSString *)postId
+          withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock completionBlock = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            NSMutableArray *objects = [NSMutableArray new];
+            for (NSDictionary *dict in response[@"data"]) {
+                STLikeUser *lu = [STLikeUser likeUserWithDict:dict];
+                [objects addObject:lu];
+            }
+            completion([NSArray arrayWithArray:objects], nil);
+        }
+    };
+    
+    [STGetPostLikesRequest getPostLikes:postId withCompletion:completionBlock failure:nil];
+
+}
+
 #pragma mark - upload Stuff to server
 +(void)followUsers:(NSArray *)users
     withCompletion:(STDataUploadCompletionBlock)completion{

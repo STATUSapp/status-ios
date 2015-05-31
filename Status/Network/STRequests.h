@@ -12,6 +12,7 @@
 #import "STGetSuggestUsersRequest.h"
 #import "STFollowUsersRequest.h"
 #import "STUnfollowUsersRequest.h"
+#import "STGetPostLikesRequest.h"
 
 #endif
 

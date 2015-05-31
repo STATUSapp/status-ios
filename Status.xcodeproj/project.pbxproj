@@ -44,6 +44,7 @@
 		171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */; };
 		172062E41B1B042100A8B2B0 /* STFollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */; };
 		172062E71B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */; };
+		172062ED1B1B1A2900A8B2B0 /* STLikeUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062EC1B1B1A2900A8B2B0 /* STLikeUser.m */; };
 		172DF27419A2616D009CE4F3 /* FacebookPickerScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
@@ -252,6 +253,8 @@
 		172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFollowUsersRequest.m; sourceTree = "<group>"; };
 		172062E51B1B0B0000A8B2B0 /* STUnfollowUsersRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUnfollowUsersRequest.h; sourceTree = "<group>"; };
 		172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUnfollowUsersRequest.m; sourceTree = "<group>"; };
+		172062EB1B1B1A2900A8B2B0 /* STLikeUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikeUser.h; sourceTree = "<group>"; };
+		172062EC1B1B1A2900A8B2B0 /* STLikeUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLikeUser.m; sourceTree = "<group>"; };
 		172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FacebookPickerScene.storyboard; sourceTree = "<group>"; };
 		172EAE6318B0B12E00C5637B /* STATUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE6618B0B12E00C5637B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -925,6 +928,8 @@
 				17FD599B1B08703A00AFDFF8 /* STBaseObj.m */,
 				17FD59AE1B08D0E400AFDFF8 /* STSuggestedUser.h */,
 				17FD59AF1B08D0E400AFDFF8 /* STSuggestedUser.m */,
+				172062EB1B1B1A2900A8B2B0 /* STLikeUser.h */,
+				172062EC1B1B1A2900A8B2B0 /* STLikeUser.m */,
 				17FD59B11B08D2F500AFDFF8 /* STDataModelObjects.h */,
 			);
 			name = DataModel;
@@ -1244,6 +1249,7 @@
 				99CEC4971A5977580014B759 /* STMenuController.m in Sources */,
 				07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */,
 				171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */,
+				172062ED1B1B1A2900A8B2B0 /* STLikeUser.m in Sources */,
 				176CC3071A2B0BFA00E9C3D0 /* STGetNotificationsRequest.m in Sources */,
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
 				17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */,

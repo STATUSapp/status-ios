@@ -15,7 +15,8 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 
 +(void)getSuggestUsersWithOffset:(NSNumber *)offset
                    andCompletion:(STDataAccessCompletionBlock)completion;
-
++(void)getLikesForPostId:(NSString *)postId
+          withCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload stuff to server
 +(void)followUsers:(NSArray *)users

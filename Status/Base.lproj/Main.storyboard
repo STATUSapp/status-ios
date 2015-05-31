@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -1113,9 +1113,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HbF-JE-CVb">
-                                                    <rect key="frame" x="260" y="0.0" width="60" height="60"/>
+                                                    <rect key="frame" x="276" y="0.0" width="44" height="60"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="7Ci-xb-5qA"/>
+                                                        <constraint firstAttribute="width" constant="44" id="7Ci-xb-5qA"/>
                                                         <constraint firstAttribute="height" constant="60" id="wRD-pA-JsA"/>
                                                     </constraints>
                                                     <state key="normal" image="user chat black button">
@@ -1127,6 +1127,22 @@
                                                         <action selector="onChatWithUser:" destination="rjr-9q-v12" eventType="touchUpInside" id="I9h-Gr-Eat"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="789-WJ-vH8">
+                                                    <rect key="frame" x="232" y="0.0" width="44" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="5jf-d9-luK"/>
+                                                        <constraint firstAttribute="width" constant="44" id="D6z-GE-XQN"/>
+                                                        <constraint firstAttribute="height" constant="60" id="c59-ld-ODY"/>
+                                                    </constraints>
+                                                    <state key="normal" image="follow square ">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected" image="following square "/>
+                                                    <state key="highlighted" image="following square "/>
+                                                    <connections>
+                                                        <action selector="onFollowUnfollowButtonPressed:" destination="rjr-9q-v12" eventType="touchUpInside" id="pxg-Ke-L4S"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="HbF-JE-CVb" secondAttribute="bottom" id="0Ru-iO-1xg"/>
@@ -1134,8 +1150,11 @@
                                                 <constraint firstItem="9ow-ch-hut" firstAttribute="leading" secondItem="GFg-ST-zP0" secondAttribute="trailing" constant="8" id="4OE-dd-IdM"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="9ow-ch-hut" secondAttribute="bottom" constant="5" id="9Rb-MH-eEe"/>
                                                 <constraint firstItem="HbF-JE-CVb" firstAttribute="top" secondItem="BJD-jg-wUS" secondAttribute="top" id="BaQ-ir-rMv"/>
+                                                <constraint firstItem="HbF-JE-CVb" firstAttribute="leading" secondItem="789-WJ-vH8" secondAttribute="trailing" id="Khl-Yk-lgx"/>
                                                 <constraint firstAttribute="bottom" secondItem="GFg-ST-zP0" secondAttribute="bottom" constant="4" id="RQf-Bj-Emk"/>
+                                                <constraint firstItem="789-WJ-vH8" firstAttribute="top" secondItem="BJD-jg-wUS" secondAttribute="top" id="ULh-MM-rSM"/>
                                                 <constraint firstItem="GFg-ST-zP0" firstAttribute="top" secondItem="BJD-jg-wUS" secondAttribute="top" constant="5" id="WC1-Kh-tqU"/>
+                                                <constraint firstAttribute="bottom" secondItem="789-WJ-vH8" secondAttribute="bottom" id="eoi-m4-5H4"/>
                                                 <constraint firstItem="9ow-ch-hut" firstAttribute="top" secondItem="BJD-jg-wUS" secondAttribute="topMargin" constant="4" id="sg3-H7-LxJ"/>
                                                 <constraint firstItem="GFg-ST-zP0" firstAttribute="leading" secondItem="BJD-jg-wUS" secondAttribute="leading" constant="16" id="tBd-i7-ZYK"/>
                                                 <constraint firstAttribute="trailing" secondItem="HbF-JE-CVb" secondAttribute="trailing" id="vLC-ja-zYu"/>
@@ -1143,6 +1162,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="chatButton" destination="HbF-JE-CVb" id="AZw-1r-WdB"/>
+                                            <outlet property="followBtn" destination="789-WJ-vH8" id="Qzv-cO-WXr"/>
                                             <outlet property="selectedBackgroundView" destination="rsY-7Q-av8" id="d1F-4B-1kj"/>
                                             <outlet property="userName" destination="9ow-ch-hut" id="2qP-uX-um7"/>
                                             <outlet property="userPhoto" destination="GFg-ST-zP0" id="7OO-5T-Gfb"/>
@@ -2191,6 +2211,8 @@
         <image name="chat unread message" width="24" height="24"/>
         <image name="downShaddow" width="414" height="203"/>
         <image name="edit post icon" width="17" height="17"/>
+        <image name="follow square " width="38" height="38"/>
+        <image name="following square " width="38" height="38"/>
         <image name="grey line" width="227" height="3"/>
         <image name="invite friends button" width="212" height="45"/>
         <image name="invite friends button pressed" width="212" height="45"/>

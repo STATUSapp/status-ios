@@ -10,5 +10,7 @@
 
 @interface STBaseObj : NSObject
 //TODO: add here all common properties or methods
+@property(nonatomic, strong) NSDictionary *infoDict;
 @property(nonatomic, strong) NSString *uuid;
+@property(nonatomic, strong) NSString *appVersion;
 @end
