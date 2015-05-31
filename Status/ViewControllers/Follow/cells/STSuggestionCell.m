@@ -22,7 +22,7 @@
 }
 
 -(void)configureCellWithSuggestedUser:(STSuggestedUser *)su{
-    _followButton.selected = su.followedByCurrentUser;
+    _followButton.selected = [su.followedByCurrentUser boolValue];
     _userNameLabel.text = su.userName;
 }
 

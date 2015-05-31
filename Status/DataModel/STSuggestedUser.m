@@ -12,7 +12,7 @@
 +(STSuggestedUser *)suggestedUserWithDict:(NSDictionary *)dict{
     STSuggestedUser *sUser = [STSuggestedUser new];
     sUser.uuid = dict[@"user_id"];
-    sUser.followedByCurrentUser = [dict[@"followed_by_current_user"] boolValue];
+    sUser.followedByCurrentUser = dict[@"followed_by_current_user"];
     sUser.userName = dict[@"user_name"];
     sUser.thumbnail = dict[@"user_photo"];
     
