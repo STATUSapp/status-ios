@@ -75,6 +75,7 @@ NSString *const kSetProfilePicture =  @"upload_user_photo";
 NSString *const kGetSuggestUsers = @"Get_Suggest_Users";
 NSString *const kFollowUsers = @"Follow";
 NSString *const kUnfollowUsers = @"Unfollow";
+NSString *const kUnseenPostsCount = @"Get_Unseen_Posts_Count";
 
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";
@@ -113,6 +114,7 @@ NSString *const STNotificationsUploadNewPhotoKey = @"notifications_upload_a_new_
 NSString *const STNotificationsFriendJoinStatusKey = @"notifications_a_friend_joins_status";
 NSString *const STNotificationsPhotosWaitingKey = @"notifications_photos_waiting_for_you";
 NSString *const STNotificationsExtraLikesKey = @"notifications_earn_extra_likes";
+NSString *const STNotificationsFollowersKey = @"notifications_new_follower";
 
 #pragma mark - UserProfile
 

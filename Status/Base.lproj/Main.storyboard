@@ -54,6 +54,7 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
@@ -2003,7 +2004,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gVf-rr-b8Y">
                                                     <rect key="frame" x="263" y="6" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="onTapExtraLikesSwitch:" destination="4Qz-Wc-cbo" eventType="valueChanged" id="6fC-jD-7qb"/>
+                                                        <action selector="onTapExtraLikesSwitch:" destination="4Qz-Wc-cbo" eventType="valueChanged" id="tsW-pw-Nt7"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -2012,6 +2013,34 @@
                                                 <constraint firstAttribute="centerY" secondItem="gVf-rr-b8Y" secondAttribute="centerY" id="oA5-9l-VXf"/>
                                                 <constraint firstAttribute="trailing" secondItem="gVf-rr-b8Y" secondAttribute="trailing" constant="8" id="oRl-IL-ZGc"/>
                                                 <constraint firstAttribute="centerY" secondItem="Pjd-Kn-GId" secondAttribute="centerY" id="qca-9P-FEu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1M5-h8-vYd">
+                                        <rect key="frame" x="0.0" y="163" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1M5-h8-vYd" id="7zB-eY-nYd">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apk-j8-acE">
+                                                    <rect key="frame" x="35" y="13" width="77" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBD-wT-aTl">
+                                                    <rect key="frame" x="263" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onTapFollowersSwitch:" destination="4Qz-Wc-cbo" eventType="valueChanged" id="rZi-sY-sde"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="dBD-wT-aTl" secondAttribute="trailing" constant="8" id="ONq-K4-2LE"/>
+                                                <constraint firstAttribute="centerY" secondItem="apk-j8-acE" secondAttribute="centerY" id="bxF-Ed-OTz"/>
+                                                <constraint firstItem="apk-j8-acE" firstAttribute="leading" secondItem="7zB-eY-nYd" secondAttribute="leading" constant="35" id="lqv-03-cGF"/>
+                                                <constraint firstAttribute="centerY" secondItem="dBD-wT-aTl" secondAttribute="centerY" id="yjV-Ia-Fyj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2167,6 +2196,7 @@
                     <connections>
                         <outlet property="logoutCell" destination="JqV-bS-cfJ" id="hwq-f0-tre"/>
                         <outlet property="switchExtraLikes" destination="gVf-rr-b8Y" id="yUD-LU-LKd"/>
+                        <outlet property="switchFollowers" destination="dBD-wT-aTl" id="S4P-ga-5YR"/>
                         <outlet property="switchFriendJoinsStatus" destination="Mda-H8-yJ5" id="saB-gV-x5u"/>
                         <outlet property="switchLikes" destination="s4i-OF-9rh" id="H5X-Al-jQt"/>
                         <outlet property="switchMessages" destination="nhX-Be-boj" id="Hfm-Td-fpf"/>

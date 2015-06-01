@@ -130,6 +130,7 @@ extern NSString *const kSetProfilePicture;
 extern NSString *const kGetSuggestUsers;
 extern NSString *const kFollowUsers;
 extern NSString *const kUnfollowUsers;
+extern NSString *const kUnseenPostsCount;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;
@@ -165,6 +166,7 @@ extern NSString *const STNotificationsUploadNewPhotoKey;
 extern NSString *const STNotificationsFriendJoinStatusKey;
 extern NSString *const STNotificationsPhotosWaitingKey;
 extern NSString *const STNotificationsExtraLikesKey;
+extern NSString *const STNotificationsFollowersKey;
 
 #pragma mark - UserProfile
 

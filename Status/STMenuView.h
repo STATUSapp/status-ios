@@ -13,5 +13,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerYConstraint;
 @property (weak, nonatomic) IBOutlet UIView *itemsView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationBadge;
+@property (weak, nonatomic) IBOutlet UILabel *homeNotifBadge;
+@property (weak, nonatomic) IBOutlet UILabel *populatNotifBadge;
+@property (weak, nonatomic) IBOutlet UILabel *recentNotifBadge;
 
 @end

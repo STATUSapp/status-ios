@@ -34,6 +34,7 @@ const NSInteger kSectionNumberLogout = 2;
 @property (weak, nonatomic) IBOutlet UISwitch *switchFriendJoinsStatus;
 @property (weak, nonatomic) IBOutlet UISwitch *switchPhotosWaiting;
 @property (weak, nonatomic) IBOutlet UISwitch *switchExtraLikes;
+@property (weak, nonatomic) IBOutlet UISwitch *switchFollowers;
 
 @property (strong, nonatomic) NSDictionary * settingsDict;
 @end
@@ -88,6 +89,7 @@ const NSInteger kSectionNumberLogout = 2;
     [_switchFriendJoinsStatus setOn:[[_settingsDict valueForKey:STNotificationsFriendJoinStatusKey] boolValue]];
     [_switchPhotosWaiting setOn:[[_settingsDict valueForKey:STNotificationsPhotosWaitingKey] boolValue]];
     [_switchExtraLikes setOn:[[_settingsDict valueForKey:STNotificationsExtraLikesKey] boolValue]];
+    [_switchFollowers setOn:[[_settingsDict valueForKey:STNotificationsFollowersKey] boolValue]];
 }
 
 - (NSDictionary *)getNewSettingsDict {
@@ -96,7 +98,8 @@ const NSInteger kSectionNumberLogout = 2;
              STNotificationsUploadNewPhotoKey : [NSNumber numberWithBool:_switchUploadPhoto.isOn],
              STNotificationsFriendJoinStatusKey : [NSNumber numberWithBool:_switchFriendJoinsStatus.isOn],
              STNotificationsPhotosWaitingKey : [NSNumber numberWithBool:_switchPhotosWaiting.isOn],
-             STNotificationsExtraLikesKey : [NSNumber numberWithBool:_switchExtraLikes.isOn]};
+             STNotificationsExtraLikesKey : [NSNumber numberWithBool:_switchExtraLikes.isOn],
+             STNotificationsFollowersKey : @(_switchFollowers.isOn)};
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,7 +125,7 @@ const NSInteger kSectionNumberLogout = 2;
     // Return the number of rows in the section.
     switch (section) {
         case kSectionNumberNotifications:
-            return 6;
+            return 7;
             break;
         case kSectionNumberContactLikeAds:
             return 2;
@@ -184,6 +187,9 @@ const NSInteger kSectionNumberLogout = 2;
 }
 - (IBAction)onTapExtraLikesSwitch:(UISwitch *)sender {
     [self setSetting:STNotificationsExtraLikesKey fromSwitch:sender];
+}
+- (IBAction)onTapFollowersSwitch:(id)sender {
+    [self setSetting:STNotificationsFollowersKey fromSwitch:sender];
 }
 
 - (void)setSetting:(NSString *)setting fromSwitch:(UISwitch *)sender {

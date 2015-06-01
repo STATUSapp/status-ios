@@ -21,6 +21,7 @@
 #import "STNotificationsViewController.h"
 
 #import "AppDelegate.h"
+#import "STUnseenPostsCountRequest.h"
 
 @interface STMenuController()
 
@@ -49,7 +50,10 @@
             NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"STMenuView" owner:self options:nil];
             _menuView = (STMenuView *)[views firstObject];
             _menuView.translatesAutoresizingMaskIntoConstraints = NO;
-            _menuView.notificationBadge.layer.cornerRadius = 7.f;
+            _menuView.notificationBadge.layer.cornerRadius =
+            _menuView.homeNotifBadge.layer.cornerRadius =
+            _menuView.populatNotifBadge.layer.cornerRadius =
+            _menuView.recentNotifBadge.layer.cornerRadius = 7.f;
             
         }
 
@@ -73,6 +77,9 @@
     else{
         _menuView.notificationBadge.hidden = YES;
     }
+    _menuView.homeNotifBadge.hidden =
+    _menuView.recentNotifBadge.hidden =
+    _menuView.populatNotifBadge.hidden = YES;
 
     [parrentVC.view addSubview:_menuView];
     
@@ -80,6 +87,40 @@
     
     [UIView animateWithDuration:0.33 animations:^{
         _menuView.alpha = 1.f;
+    }];
+    
+    [STUnseenPostsCountRequest getUnseenCountersWithCompletion:^(id response, NSError *error) {
+        if ([response[@"status_code"] integerValue] == 200) {
+            NSInteger unseenHomePosts = [response[@"unseenHomePosts"] integerValue];
+            NSInteger unseenPopularPosts = [response[@"unseenPopularPosts"] integerValue];
+            NSInteger unseenRecentPosts = [response[@"unseenRecentPosts"] integerValue];
+            if (unseenHomePosts > 0) {
+                _menuView.homeNotifBadge.text = [NSString stringWithFormat:@" %zd ", unseenHomePosts];
+                _menuView.homeNotifBadge.hidden = NO;
+            }
+            else{
+                _menuView.homeNotifBadge.hidden = YES;
+            }
+            
+            if (unseenPopularPosts > 0) {
+                _menuView.populatNotifBadge.text = [NSString stringWithFormat:@" %zd ", unseenPopularPosts];
+                _menuView.populatNotifBadge.hidden = NO;
+            }
+            else{
+                _menuView.populatNotifBadge.hidden = YES;
+            }
+
+            if (unseenRecentPosts > 0) {
+                _menuView.recentNotifBadge.text = [NSString stringWithFormat:@" %zd ", unseenRecentPosts];
+                _menuView.recentNotifBadge.hidden = NO;
+            }
+            else{
+                _menuView.recentNotifBadge.hidden = YES;
+            }
+
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"Load counters error: %@", error);
     }];
 }
 
@@ -96,7 +137,19 @@
 #pragma mark - MenuView Actions
 - (void)goHome{
     [self hideMenu];
+    //TODO: add home feed
+//    [_currentVC.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)goPopular{
+    [self hideMenu];
     [_currentVC.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)goRecent{
+    [self hideMenu];
+    //TODO: add recent feed
+    //    [_currentVC.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)goSettings{

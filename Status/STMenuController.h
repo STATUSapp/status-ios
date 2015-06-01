@@ -13,6 +13,8 @@
 @interface STMenuController : NSObject
 
 - (void)goHome;
+- (void)goPopular;
+- (void)goRecent;
 - (void)goSettings;
 - (void)goTutorial;
 - (void)goMyProfile;

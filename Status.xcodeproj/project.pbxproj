@@ -117,6 +117,7 @@
 		17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9819821FB2000E9116 /* STDAOEngine.m */; };
 		17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
 		17EB380C1B1C3FA200EFDAAD /* STFollowDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EB380B1B1C3FA200EFDAAD /* STFollowDataProcessor.m */; };
+		17EB38101B1C50C700EFDAAD /* STUnseenPostsCountRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EB380F1B1C50C700EFDAAD /* STUnseenPostsCountRequest.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
 		17FD599C1B08703A00AFDFF8 /* STBaseObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD599B1B08703A00AFDFF8 /* STBaseObj.m */; };
 		17FD599F1B0871FC00AFDFF8 /* SuggestionsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17FD599E1B0871FC00AFDFF8 /* SuggestionsScene.storyboard */; };
@@ -380,6 +381,8 @@
 		17E44B9D19822032000E9116 /* StatusDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StatusDM.xcdatamodel; sourceTree = "<group>"; };
 		17EB380A1B1C3FA200EFDAAD /* STFollowDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFollowDataProcessor.h; sourceTree = "<group>"; };
 		17EB380B1B1C3FA200EFDAAD /* STFollowDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFollowDataProcessor.m; sourceTree = "<group>"; };
+		17EB380E1B1C50C700EFDAAD /* STUnseenPostsCountRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUnseenPostsCountRequest.h; sourceTree = "<group>"; };
+		17EB380F1B1C50C700EFDAAD /* STUnseenPostsCountRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUnseenPostsCountRequest.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
 		17FD599A1B08703A00AFDFF8 /* STBaseObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBaseObj.h; sourceTree = "<group>"; };
@@ -865,6 +868,8 @@
 				172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */,
 				172062E51B1B0B0000A8B2B0 /* STUnfollowUsersRequest.h */,
 				172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */,
+				17EB380E1B1C50C700EFDAAD /* STUnseenPostsCountRequest.h */,
+				17EB380F1B1C50C700EFDAAD /* STUnseenPostsCountRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1242,6 +1247,7 @@
 				17FD59A61B08971900AFDFF8 /* STGetSuggestUsersRequest.m in Sources */,
 				0717E2E619B71D88001DF132 /* STIAPHelper.m in Sources */,
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
+				17EB38101B1C50C700EFDAAD /* STUnseenPostsCountRequest.m in Sources */,
 				07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */,
 				0717E2B719B71B09001DF132 /* STFacebookAlbumCell.m in Sources */,
 				9904DD401A2FB4C40072134F /* STEditProfileViewController.m in Sources */,

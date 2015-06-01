@@ -52,5 +52,11 @@
 - (IBAction)onSettingsPressed:(id)sender {
     [[STMenuController sharedInstance] goSettings];
 }
+- (IBAction)onPopularPressed:(id)sender {
+    [[STMenuController sharedInstance] goPopular];
+}
+- (IBAction)onRecentPressed:(id)sender {
+    [[STMenuController sharedInstance] goRecent];
+}
 
 @end
