@@ -116,6 +116,7 @@
 		17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9619821FB2000E9116 /* STCoreDataRequestManager.m */; };
 		17E44B9B19821FB2000E9116 /* STDAOEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9819821FB2000E9116 /* STDAOEngine.m */; };
 		17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
+		17EB380C1B1C3FA200EFDAAD /* STFollowDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EB380B1B1C3FA200EFDAAD /* STFollowDataProcessor.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
 		17FD599C1B08703A00AFDFF8 /* STBaseObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD599B1B08703A00AFDFF8 /* STBaseObj.m */; };
 		17FD599F1B0871FC00AFDFF8 /* SuggestionsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17FD599E1B0871FC00AFDFF8 /* SuggestionsScene.storyboard */; };
@@ -377,6 +378,8 @@
 		17E44B9719821FB2000E9116 /* STDAOEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDAOEngine.h; sourceTree = "<group>"; };
 		17E44B9819821FB2000E9116 /* STDAOEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDAOEngine.m; sourceTree = "<group>"; };
 		17E44B9D19822032000E9116 /* StatusDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StatusDM.xcdatamodel; sourceTree = "<group>"; };
+		17EB380A1B1C3FA200EFDAAD /* STFollowDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFollowDataProcessor.h; sourceTree = "<group>"; };
+		17EB380B1B1C3FA200EFDAAD /* STFollowDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFollowDataProcessor.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
 		17FD599A1B08703A00AFDFF8 /* STBaseObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBaseObj.h; sourceTree = "<group>"; };
@@ -895,6 +898,15 @@
 			path = Status/CoreData;
 			sourceTree = "<group>";
 		};
+		17EB380D1B1C482600EFDAAD /* DataProcessors */ = {
+			isa = PBXGroup;
+			children = (
+				17EB380A1B1C3FA200EFDAAD /* STFollowDataProcessor.h */,
+				17EB380B1B1C3FA200EFDAAD /* STFollowDataProcessor.m */,
+			);
+			name = DataProcessors;
+			sourceTree = "<group>";
+		};
 		17F6BB7A190ED8BD00B41E3A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -924,6 +936,7 @@
 		17FD59991B08700300AFDFF8 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				17EB380D1B1C482600EFDAAD /* DataProcessors */,
 				17FD599A1B08703A00AFDFF8 /* STBaseObj.h */,
 				17FD599B1B08703A00AFDFF8 /* STBaseObj.m */,
 				17FD59AE1B08D0E400AFDFF8 /* STSuggestedUser.h */,
@@ -1274,6 +1287,7 @@
 				0717E2DC19B71C56001DF132 /* STChatRoomViewController.m in Sources */,
 				17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */,
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
+				17EB380C1B1C3FA200EFDAAD /* STFollowDataProcessor.m in Sources */,
 				17FD59B01B08D0E500AFDFF8 /* STSuggestedUser.m in Sources */,
 				07361DB319FE71BF00DFA43B /* STNotificationBaseCell.m in Sources */,
 				172062E41B1B042100A8B2B0 /* STFollowUsersRequest.m in Sources */,

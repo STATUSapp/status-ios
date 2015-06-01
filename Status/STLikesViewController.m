@@ -19,10 +19,12 @@
 #import "STUserProfileViewController.h"
 #import "STDataAccessUtils.h"
 #import "STDataModelObjects.h"
+#import "STFollowDataProcessor.h"
 
 @interface STLikesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *_likesDataSource;
+    STFollowDataProcessor *_dataProcessor;
 }
 @property (weak, nonatomic) IBOutlet UITableView *likesTableView;
 
@@ -46,10 +48,16 @@
     
     [STDataAccessUtils getLikesForPostId:_postId withCompletion:^(NSArray *objects, NSError *error) {
         _likesDataSource = [NSMutableArray arrayWithArray:objects];
+        _dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
         [weakSelf.likesTableView reloadData];
     }];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    [_dataProcessor uploadDataToServer:_likesDataSource
+                        withCompletion:nil];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -67,22 +75,8 @@
 - (IBAction)onFollowUnfollowButtonPressed:(id)sender {
     NSInteger index = [(UIButton *)sender tag];
     STLikeUser *lu = [_likesDataSource objectAtIndex:index];
-    if ([lu.followedByCurrentUser boolValue]) {
-        [STDataAccessUtils unfollowUsers:@[lu] withCompletion:^(NSError *error) {
-            if (error==nil) {
-                lu.followedByCurrentUser = @(NO);
-                [_likesTableView reloadData];
-            }
-        }];
-    }
-    else{
-        [STDataAccessUtils followUsers:@[lu] withCompletion:^(NSError *error) {
-            if (error==nil) {
-                lu.followedByCurrentUser = @(YES);
-                [_likesTableView reloadData];
-            }
-        }];
-    }
+    lu.followedByCurrentUser = @(!lu.followedByCurrentUser.boolValue);
+    [_likesTableView reloadData];
 }
 - (IBAction)onChatWithUser:(id)sender {
 //    if (![[STChatController sharedInstance] canChat]) {
@@ -93,7 +87,6 @@
 //    }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
     STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    //TODO: send user to the Chat room
     STLikeUser *lu = _likesDataSource[((UIButton *)sender).tag];
     viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:lu.infoDict];
     [self.navigationController pushViewController:viewController animated:YES];
