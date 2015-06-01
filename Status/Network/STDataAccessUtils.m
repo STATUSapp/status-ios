@@ -52,7 +52,7 @@
 #pragma mark - upload Stuff to server
 +(void)followUsers:(NSArray *)users
     withCompletion:(STDataUploadCompletionBlock)completion{
-    if (users && users.count == 0) {
+    if (!users || users.count == 0) {
         completion(nil);
         return;
     }
@@ -66,7 +66,7 @@
 }
 +(void)unfollowUsers:(NSArray *)users
     withCompletion:(STDataUploadCompletionBlock)completion{
-    if (users && users.count == 0) {
+    if (!users || users.count == 0) {
         completion(nil);
         return;
     }

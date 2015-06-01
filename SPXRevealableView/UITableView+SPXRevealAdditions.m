@@ -91,7 +91,7 @@ static void * SPXContext = &SPXContext;
   }
   
   CGPoint translation = [gesture translationInView:gesture.view];
-  BOOL horizontalScrollingWithSPXGesture = (fabsf(translation.x) > fabsf(translation.y)) && (gesture == self.spx_panGestureRecognizer);
+  BOOL horizontalScrollingWithSPXGesture = (fabs(translation.x) > fabs(translation.y)) && (gesture == self.spx_panGestureRecognizer);
   
   return horizontalScrollingWithSPXGesture;
 }

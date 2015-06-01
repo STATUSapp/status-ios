@@ -561,12 +561,12 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     [actionSheet dismissWithClickedButtonIndex:2 animated:NO];
     [self hideStatusAlert];
     [successBlockAlert dismissWithClickedButtonIndex:0 animated:NO];
+    chatController.delegate = nil;
+    chatController.rechabilityDelegate = nil;
     if(_roomId){
         [chatController leaveRoom:_roomId];
         [[STCoreDataManager sharedManager] save];
     }
-    chatController.delegate = nil;
-    chatController.rechabilityDelegate = nil;
 }
 
 -(void)controllerContentChanged:(NSArray *)objects{

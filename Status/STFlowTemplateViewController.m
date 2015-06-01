@@ -116,7 +116,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [super viewDidLoad];
     self.postsDataSource = [NSMutableArray array];
     _numberOfDuplicates = 0;
-    if (self.flowType == STFlowTypePopular)
+    if (self.flowType == STFlowTypeHome)
         [[STFacebookLoginController sharedInstance] setDelegate:self];
     else
         [self getDataSourceWithOffset:0];
@@ -748,7 +748,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (IBAction)onSwipeLeftOnEdge:(id)sender {
-    if (self.flowType == STFlowTypePopular) {
+    if (self.flowType == STFlowTypeHome) {
         NSArray *indxPath = [self.collectionView indexPathsForVisibleItems];
         if (indxPath.count == 0) {
             return;
@@ -1268,21 +1268,27 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                     //animate cell out
-                    [weakSelf.collectionView performBatchUpdates:^{
-                        
-                        NSArray *selectedItemsIndexPaths = [self.collectionView indexPathsForVisibleItems];
-                        // Delete the items from the data source.
-                        [weakSelf deleteItemsFromDataSourceAtIndexPaths:selectedItemsIndexPaths];
-                        // Now delete the items from the collection view.
-                        if ([weakSelf.postsDataSource count]) {
-                            [weakSelf.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
-                        } else {
-                            NSIndexPath *firstIndx = [NSIndexPath indexPathForRow:0 inSection:0];
-                            [weakSelf.collectionView reloadItemsAtIndexPaths:@[firstIndx]];
-                        }
-                        
-                        
-                    } completion:nil];
+                    if (_flowType == STFlowTypeSinglePost) {
+                        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                    }
+                    else
+                    {
+                        [weakSelf.collectionView performBatchUpdates:^{
+                            
+                            NSArray *selectedItemsIndexPaths = [self.collectionView indexPathsForVisibleItems];
+                            // Delete the items from the data source.
+                            [weakSelf deleteItemsFromDataSourceAtIndexPaths:selectedItemsIndexPaths];
+                            // Now delete the items from the collection view.
+                            if ([weakSelf.postsDataSource count]) {
+                                [weakSelf.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
+                            } else {
+                                NSIndexPath *firstIndx = [NSIndexPath indexPathForRow:0 inSection:0];
+                                [weakSelf.collectionView reloadItemsAtIndexPaths:@[firstIndx]];
+                            }
+                            
+                            
+                        } completion:nil];
+                    }
                 }
             };
             [STDeletePostRequest deletePost:dict[@"post_id"] withCompletion:completion failure:nil];

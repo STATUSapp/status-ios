@@ -30,12 +30,12 @@
 #pragma mark - Enums
 
 typedef NS_ENUM(NSUInteger,STFlowType){
-    STFlowTypePopular = 0,
+    STFlowTypeHome = 0,
     STFlowTypeDiscoverNearby,
     STFlowTypeUserGallery,
     STFlowTypeMyGallery,
     STFlowTypeSinglePost,
-    STFlowTypeHome,
+    STFlowTypePopular,
     STFlowTypeRecent,
 };
 

@@ -28,11 +28,15 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     _suggestedUsers = [NSMutableArray new];
+    _tableView.hidden = YES;
     [STDataAccessUtils getSuggestUsersWithOffset:@(0) andCompletion:^(NSArray *objects, NSError *error) {
         if (error==nil) {
             [_suggestedUsers addObjectsFromArray:objects];
             _followProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
-            [_tableView reloadData];
+            if (_suggestedUsers.count > 0 ) {
+                [_tableView reloadData];
+                _tableView.hidden = NO;
+            }
         }
     }];
 }
@@ -73,9 +77,15 @@
     
 }
 - (IBAction)onArrowPressed:(id)sender {
-    [_followProcessor uploadDataToServer:_suggestedUsers withCompletion:^(NSError *error) {
+    if (_suggestedUsers.count == 0) {
         [self dismissViewControllerAnimated:YES completion:nil];
-    }];
+
+    }
+    else{
+        [_followProcessor uploadDataToServer:_suggestedUsers withCompletion:^(NSError *error) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+    }
 }
 - (IBAction)onFollowAllButtonPressed:(id)sender {
     //update the model then make the reuest at the end

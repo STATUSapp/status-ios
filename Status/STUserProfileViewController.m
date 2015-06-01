@@ -296,7 +296,7 @@
     if (_isMyProfile) {
         [[STImagePickerController sharedInstance] startImagePickerForOwnerInViewController:self withCompletion:completion];
     } else {
-        [[STImagePickerController sharedInstance] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
+        [[STImagePickerController sharedInstance] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
             [weakSelf inviteUserToUpload];
         }];
     }}
