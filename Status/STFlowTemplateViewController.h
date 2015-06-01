@@ -17,4 +17,5 @@
 @property (nonatomic, strong) NSString *postID;
 @property (nonatomic, assign) BOOL shouldActionCameraBtn;
 - (void)updateNotificationsNumber;
++(STFlowTemplateViewController *)getFlowControllerWithFlowType:(STFlowType)flowType;
 @end

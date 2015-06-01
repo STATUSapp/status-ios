@@ -10,7 +10,9 @@
 
 @interface STGetPostsRequest : STBaseRequest
 @property(nonatomic, assign) NSInteger offset;
+@property(nonatomic, assign) NSInteger flowType;
 + (void)getPostsWithOffset:(NSInteger)offset
+                  flowType:(NSInteger)flowType
             withCompletion:(STRequestCompletionBlock)completion
                    failure:(STRequestFailureBlock)failure;
 @end

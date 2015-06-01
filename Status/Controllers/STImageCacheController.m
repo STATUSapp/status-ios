@@ -202,7 +202,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort{
     if (_sortedFlows == nil) {
         //default sort
-        _sortedFlows = [NSMutableArray arrayWithArray:@[@(STImageDownloadSpecialPriority),@(STFlowTypeAllPosts), @(STFlowTypeDiscoverNearby), @(STFlowTypeMyGallery), @(STFlowTypeUserGallery), @(STFlowTypeSinglePost)]];
+        _sortedFlows = [NSMutableArray arrayWithArray:@[@(STImageDownloadSpecialPriority),@(STFlowTypePopular),@(STFlowTypeHome),@(STFlowTypeRecent), @(STFlowTypeDiscoverNearby), @(STFlowTypeMyGallery), @(STFlowTypeUserGallery), @(STFlowTypeSinglePost)]];
     }
     
     if ([[_sortedFlows firstObject] integerValue]!=flowType) {

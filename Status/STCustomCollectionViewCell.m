@@ -102,7 +102,10 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
     
     switch (flowType) {
         case STFlowTypeSinglePost:
-        case STFlowTypeAllPosts:{
+        case STFlowTypePopular:
+        case STFlowTypeHome:
+        case STFlowTypeRecent:
+        {
             [self setUpWithPicturesURLs:@[setupDict[@"full_photo_link"],setupDict[@"small_photo_link"]]];
             break;
         }
@@ -143,7 +146,10 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
     
     switch (flowType) {
         case STFlowTypeSinglePost:
-        case STFlowTypeAllPosts:{
+        case STFlowTypePopular:
+        case STFlowTypeRecent:
+        case STFlowTypeHome:
+        {
             self.profileNameBtn.hidden = NO;
             self.likesNumberBtn.hidden = NO;
             break;

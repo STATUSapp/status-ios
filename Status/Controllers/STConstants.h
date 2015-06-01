@@ -30,11 +30,13 @@
 #pragma mark - Enums
 
 typedef NS_ENUM(NSUInteger,STFlowType){
-    STFlowTypeAllPosts = 0,
+    STFlowTypePopular = 0,
     STFlowTypeDiscoverNearby,
     STFlowTypeUserGallery,
     STFlowTypeMyGallery,
-    STFlowTypeSinglePost
+    STFlowTypeSinglePost,
+    STFlowTypeHome,
+    STFlowTypeRecent,
 };
 
 typedef NS_ENUM(NSUInteger, STInterstitialType){
@@ -99,6 +101,8 @@ extern NSInteger const kPostsLimit;
 extern NSInteger const kStartLoadOffset;
 
 extern NSString *const kGetPosts;
+extern NSString *const kGetHomePosts;
+extern NSString *const kGetRecentPosts;
 extern NSString *const kLoginUser;
 extern NSString *const kRegisterUser;
 extern NSString *const kPostPhoto;

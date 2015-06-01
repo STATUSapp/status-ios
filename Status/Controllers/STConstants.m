@@ -44,6 +44,8 @@ NSString *const kSTAdUnitID = @"ca-app-pub-2971682460090432/5255730305";
 
 //NSString *const kGetPosts = @"get_posts2";
 NSString *const kGetPosts = @"get_posts";
+NSString *const kGetHomePosts = @"Get_Home_Posts";
+NSString *const kGetRecentPosts = @"Get_Recent_Posts";
 NSString *const kLoginUser = @"login_user";
 NSString *const kRegisterUser = @"register_user";
 NSString *const kPostPhoto = @"post_photo";

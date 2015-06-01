@@ -743,7 +743,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="639" y="126"/>
+            <point key="canvasLocation" x="599" y="165"/>
         </scene>
         <!--Move Scale View Controller-->
         <scene sceneID="dZe-F4-Tlh">

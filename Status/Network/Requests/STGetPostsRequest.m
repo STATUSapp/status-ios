@@ -9,6 +9,7 @@
 #import "STGetPostsRequest.h"
 @implementation STGetPostsRequest
 + (void)getPostsWithOffset:(NSInteger)offset
+                  flowType:(NSInteger)flowType
               withCompletion:(STRequestCompletionBlock)completion
                      failure:(STRequestFailureBlock)failure{
     
@@ -18,6 +19,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.offset = offset;
+    request.flowType = flowType;
     [[STNetworkQueueManager sharedManager] addToQueueTop:request];
 }
 
@@ -42,6 +44,12 @@
 }
 
 -(NSString *)urlString{
-    return kGetPosts;
+    NSString *url = kGetPosts;
+    if (self.flowType == STFlowTypeRecent) {
+        url = kGetRecentPosts;
+    }
+    else if (self.flowType == STFlowTypeHome)
+        url = kGetHomePosts;
+    return url;
 }
 @end

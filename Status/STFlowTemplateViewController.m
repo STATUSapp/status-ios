@@ -103,12 +103,20 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - Lifecycle
 
++(STFlowTemplateViewController *)getFlowControllerWithFlowType:(STFlowType)flowType{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *nvc = [storyboard instantiateInitialViewController];
+    STFlowTemplateViewController *vc = (STFlowTemplateViewController *)[[nvc viewControllers] firstObject];
+    vc.flowType = flowType;
+    return vc;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.postsDataSource = [NSMutableArray array];
     _numberOfDuplicates = 0;
-    if (self.flowType == STFlowTypeAllPosts)
+    if (self.flowType == STFlowTypePopular)
         [[STFacebookLoginController sharedInstance] setDelegate:self];
     else
         [self getDataSourceWithOffset:0];
@@ -489,7 +497,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSLog(@"Offset: %ld", offset);
     __weak STFlowTemplateViewController *weakSelf = self;
     switch (self.flowType) {
-        case STFlowTypeAllPosts:{
+        case STFlowTypePopular:
+        case STFlowTypeHome:
+        case STFlowTypeRecent:
+        {
             
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
@@ -514,7 +525,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                     [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];
                 });
             };
-            [STGetPostsRequest getPostsWithOffset:offset withCompletion:completion failure:failBlock];
+            [STGetPostsRequest getPostsWithOffset:offset flowType:_flowType
+                                   withCompletion:completion failure:failBlock];
             break;
         }
         case STFlowTypeDiscoverNearby: {
@@ -641,7 +653,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateNormal];
         [self.refreshBt setTitle:@"Refreshing..." forState:UIControlStateHighlighted];
     });
-    if(_flowType == STFlowTypeAllPosts)
+    if(_flowType == STFlowTypePopular ||
+       _flowType == STFlowTypeHome ||
+       _flowType == STFlowTypeRecent)
         [self getDataSourceWithOffset:0];
     else
         [self getDataSourceWithOffset:_postsDataSource.count+_numberOfDuplicates];
@@ -734,7 +748,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 - (IBAction)onSwipeLeftOnEdge:(id)sender {
-    if (self.flowType == STFlowTypeAllPosts) {
+    if (self.flowType == STFlowTypePopular) {
         NSArray *indxPath = [self.collectionView indexPathsForVisibleItems];
         if (indxPath.count == 0) {
             return;
@@ -1100,7 +1114,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSInteger numberOfItems = [self.postsDataSource count];
     
     switch (self.flowType) {
-        case STFlowTypeAllPosts:
+        case STFlowTypePopular:
+        case STFlowTypeHome:
+        case STFlowTypeRecent:
         case STFlowTypeDiscoverNearby:
             return numberOfItems;
             break;
@@ -1146,7 +1162,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self.postsDataSource objectAtIndex:usedIndx.row]];
     __weak STFlowTemplateViewController *weakSelf = self;
-    if (self.flowType == STFlowTypeAllPosts) {
+    if (self.flowType == STFlowTypePopular ||
+        self.flowType == STFlowTypeRecent ||
+        self.flowType == STFlowTypeHome) {
         if ([dict[@"post_seen"] boolValue] == TRUE) {
             return;
         }

@@ -137,8 +137,22 @@
 #pragma mark - MenuView Actions
 - (void)goHome{
     [self hideMenu];
-    //TODO: add home feed
-//    [_currentVC.navigationController popToRootViewControllerAnimated:YES];
+    STFlowTemplateViewController *vc = nil;
+    for (UIViewController *viewCtrl in _currentVC.navigationController.viewControllers) {
+        if ([viewCtrl isKindOfClass:[STFlowTemplateViewController class]]) {
+            if ([(STFlowTemplateViewController*)viewCtrl flowType] == STFlowTypeHome) {
+                vc = (STFlowTemplateViewController *)viewCtrl;
+                break;
+            }
+        }
+    }
+    if (vc!=nil) {
+        [_currentVC.navigationController popToViewController:vc animated:YES];
+    }
+    else{
+        vc = [STFlowTemplateViewController getFlowControllerWithFlowType:STFlowTypeHome];
+        [_currentVC.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)goPopular{
@@ -148,8 +162,22 @@
 
 - (void)goRecent{
     [self hideMenu];
-    //TODO: add recent feed
-    //    [_currentVC.navigationController popToRootViewControllerAnimated:YES];
+    STFlowTemplateViewController *vc = nil;
+    for (UIViewController *viewCtrl in _currentVC.navigationController.viewControllers) {
+        if ([viewCtrl isKindOfClass:[STFlowTemplateViewController class]]) {
+            if ([(STFlowTemplateViewController*)viewCtrl flowType] == STFlowTypeRecent) {
+                vc = (STFlowTemplateViewController *)viewCtrl;
+                break;
+            }
+        }
+    }
+    if (vc!=nil) {
+        [_currentVC.navigationController popToViewController:vc animated:YES];
+    }
+    else{
+        vc = [STFlowTemplateViewController getFlowControllerWithFlowType:STFlowTypeRecent];
+        [_currentVC.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)goSettings{
