@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>9671FBDE-E0A2-4AD9-B544-668F1CB3BE45</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Status</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B2CAD0145A9AFA02B3E99E213FDFE6CB0D1FD74E</key>
 		<string>http://git.mobilep.ro/status/status.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Status.xcodeproj/project.xcworkspace</string>
+	<string>Status.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B2CAD0145A9AFA02B3E99E213FDFE6CB0D1FD74E</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>B2CAD0145A9AFA02B3E99E213FDFE6CB0D1FD74E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>GIT</string>
+			<string>status</string>
 		</dict>
 	</array>
 </dict>

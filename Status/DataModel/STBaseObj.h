@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CreateDataModelHelper.h"
 
 @interface STBaseObj : NSObject
 //TODO: add here all common properties or methods

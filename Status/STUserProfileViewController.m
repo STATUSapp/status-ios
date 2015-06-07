@@ -45,7 +45,7 @@
 @property (weak, nonatomic) IBOutlet UIView *loadingPlaceholder;
 
 @property (nonatomic, strong) NSString * userId;
-@property (nonatomic, strong) NSDictionary * userProfileDict;
+@property (nonatomic, strong) STUserProfile * userProfile;
 @property (nonatomic, assign) BOOL skipRefreshReqeust;
 
 @end
@@ -60,18 +60,15 @@
     return newController;
 }
 
-+ (STUserProfileViewController *)newControllerWithUserInfoDict:(NSDictionary *)userInfo {
+
++ (STUserProfileViewController *)newControllerWithUserUserDataModel:(STUserProfile *)userProfile {
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:[NSBundle mainBundle]];
     STUserProfileViewController * newController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STUserProfileViewController class])];
-    newController.userProfileDict = userInfo;
-    newController.userId = userInfo[@"user_id"];
+    newController.userProfile = userProfile;
+    newController.userId = userProfile.uuid;
     newController.skipRefreshReqeust = YES;
     
     return newController;
-}
-
-- (NSDictionary *)userProfileDict {
-    return _userProfileDict;
 }
 
 - (void)viewDidLoad {
@@ -84,7 +81,7 @@
     
     if (_skipRefreshReqeust) {
         _skipRefreshReqeust = NO;
-        [self setupVisualsWithDictionary:_userProfileDict];
+        [self setupVisualsWithProfile:_userProfile];
     } else {
         [self getAndDisplayProfile];
     }
@@ -116,17 +113,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (STUserProfile *)userProfile {
+    return _userProfile;
+}
+
 - (void)getAndDisplayProfile {
     
     _loadingPlaceholder.hidden = NO;
     
-    if (_userProfileDict) {
-        [self setupVisualsWithDictionary:_userProfileDict];
+    if (_userProfile) {
+        [self setupVisualsWithProfile:_userProfile];
     }    
     __weak STUserProfileViewController * weakSelf = self;
     [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
-        [weakSelf setupVisualsWithDictionary:response];
-        weakSelf.userProfileDict = response;
+        
+        weakSelf.userProfile = [STUserProfile userProfileWithDict:response];
+        [weakSelf setupVisualsWithProfile:weakSelf.userProfile];
         
     } failure:^(NSError *error) {
         // empty all fields
@@ -138,71 +140,70 @@
     }];
 }
 
-- (void)setupVisualsWithDictionary:(NSDictionary *)dict {
+- (void)setupVisualsWithProfile:(STUserProfile *)profile {
     
-    if ([dict valueForKey:kFirstNameKey]  != [NSNull null]) {
-        NSString * firstName = dict[kFirstNameKey];
-        if (firstName.length) {
-            _lblNameAndAge.text = dict[kFirstNameKey];
-        } else {
-            _lblNameAndAge.text = dict[kFulNameKey];
-        }
+    if (profile.firstname.length) {
+        _lblNameAndAge.text = profile.firstname;
     } else {
-        _lblNameAndAge.text = dict[kFulNameKey];
+        _lblNameAndAge.text = profile.fullName;
     }
     
-    if ([dict objectForKey:kBirthdayKey] != [NSNull null]) {
-        NSString * age = [NSDate yearsFromDate:[NSDate dateFromServerDate:dict[kBirthdayKey]]];
+    if (profile.birthday) {
+        NSString * age = [NSDate yearsFromDate:profile.birthday];
         if (age) {
             _lblNameAndAge.text = [NSString stringWithFormat:@"%@, %@", _lblNameAndAge.text, age];
         }
     }
+
+    [_btnGallery setTitle:[NSString stringWithFormat:@"%li", profile.numberOfPosts] forState:UIControlStateNormal];
     
-    NSString * numberOfPost = [NSString stringWithFormat:@" %@", dict[kNumberOfPostsKey]];
-    [_btnGallery setTitle:numberOfPost forState:UIControlStateNormal];
-    
-    NSString * bio = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
-    if (bio == nil) {
-        bio = @"";
+    if (profile.bio == nil) {
+        profile.bio = @"";
     }
     
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 3;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString * bioString = [[NSAttributedString alloc] initWithString:bio attributes:@{NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:14.0f],
+    NSAttributedString * bioString = [[NSAttributedString alloc] initWithString:profile.bio attributes:@{NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:14.0f],
                                                                                                  NSParagraphStyleAttributeName : paragraphStyle}];
     _lblUserDescription.attributedText = bioString;
     
     
+    if (profile.homeLocation == nil) {
+        _imageViewLocationIcon.hidden = YES;
+        _lblLocation.text = @"";
+    }else {
+        _imageViewLocationIcon.hidden = YES;
+        _lblLocation.text = profile.homeLocation;
+    }
     
-    _lblLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
-    _imageViewLocationIcon.hidden = (_lblLocation.text.length == 0);
-    
-    NSString * photoStringURL = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kProfilePhotoLinkKey];
-    [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:photoStringURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:profile.profilePhotoURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         _imageViewBlurryPicture.image = [image applyDarkEffect];
     }];
     
     
     BOOL hasLastSeenStatus = YES;
-    NSDate * lastSeenDate = [NSDate dateFromServerDateTime:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLastActiveKey]];
-    NSString * statusText = [NSDate statusForLastTimeSeen:lastSeenDate];
-    if (lastSeenDate == nil) {
-        NSString * lastSeenString = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLastActiveKey];
-        if ([lastSeenString integerValue] == 1) {
-            statusText = @"Active Now";
-        } else {
-            hasLastSeenStatus = NO;
-        }
+    NSString * statusText;
+    if (profile.isActive) {
+        statusText = @"Active Now";
+        [self setStatusIconForStatus:STUserStatusActive];
+    } else if (profile.wasNeverActive) {
+        statusText = @"Not Active";
+        [self setStatusIconForStatus:STUserStatusOffline];
+    } else if (profile.lastActive != nil) {
+        statusText = [NSDate statusForLastTimeSeen:profile.lastActive];
+        [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:profile.lastActive]];
+    } else {
+        hasLastSeenStatus = NO;
     }
     
    statusText = hasLastSeenStatus ? [NSString stringWithFormat:@" - %@", statusText] : @"";
-    _imageViewStatusIcon.hidden = lastSeenDate ? NO : YES;
-    [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:lastSeenDate]];
+    _imageViewStatusIcon.hidden = !hasLastSeenStatus;
     
-    NSString * distanceText = [[STLocationManager sharedInstance] distanceStringToLocationWithLatitudeString:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationLatitudeKey]
-                                                                                          andLongitudeString:[STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationLongitudeKey]];
+    
+    NSString * distanceText = [[STLocationManager sharedInstance] distanceStringToLocationWithLatitudeString:profile.latitude
+                                                                                          andLongitudeString:profile.longitude];
 
     CGFloat fontSize = _lblDistance.font.pointSize;
     UIFont * statusFont = [UIFont fontWithName:@"ProximaNova-Regular" size:fontSize];
@@ -263,7 +264,7 @@
     STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = _isMyProfile ? STFlowTypeMyGallery : STFlowTypeUserGallery;
     flowCtrl.userID = _userId;
-    flowCtrl.userName = [_userProfileDict valueForKey:kFulNameKey];
+    flowCtrl.userName = _userProfile.fullName;
     
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
@@ -317,7 +318,7 @@
 
 - (IBAction)onTapEditUserProfile:(id)sender {
     STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:_userId];
-    editVC.userProfileDict = _userProfileDict;
+    editVC.userProfile = _userProfile;
     [self.navigationController pushViewController:editVC animated:YES];
 }
 
@@ -342,7 +343,7 @@
 
 - (void)inviteUserToUpload{
     
-    NSString * name = [NSString stringWithFormat:@"%@", _userProfileDict[kFulNameKey]];
+    NSString * name = [NSString stringWithFormat:@"%@", _userProfile.fullName];
     NSString * userId = [NSString stringWithFormat:@"%@", _userId];
     
     STRequestCompletionBlock completion = ^(id response, NSError *error){

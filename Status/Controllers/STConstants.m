@@ -118,17 +118,4 @@ NSString *const STNotificationsPhotosWaitingKey = @"notifications_photos_waiting
 NSString *const STNotificationsExtraLikesKey = @"notifications_earn_extra_likes";
 NSString *const STNotificationsFollowersKey = @"notifications_new_follower";
 
-#pragma mark - UserProfile
-
-NSString * const kBirthdayKey = @"birthday";
-NSString * const kFirstNameKey = @"firstname";
-NSString * const kFulNameKey = @"fullname";
-NSString * const kLastActiveKey = @"last_seen";
-NSString * const kLastNameKey = @"lastname";
-NSString * const kLocationKey = @"location";
-NSString * const kLocationLatitudeKey = @"location_lat";
-NSString * const kLocationLongitudeKey = @"location_lng";
-NSString * const kNumberOfPostsKey = @"number_of_posts";
-NSString * const kProfilePhotoLinkKey = @"user_photo";
-NSString * const kBioKey = @"bio";
 

@@ -41,7 +41,11 @@
         else
         {
             NSArray *newPosts = response[@"data"];
-            [weakSelf.profiles addObjectsFromArray:newPosts];
+            
+            for (NSDictionary * userProfileDict in newPosts) {
+                STUserProfile * userProfile = [STUserProfile userProfileWithDict:userProfileDict];
+                [weakSelf.profiles addObject:userProfile];
+            }
             if (completionBlock) {
                 completionBlock(nil);
             }
@@ -68,7 +72,7 @@
     [self getProfilesFromServerWithOffset:_profiles.count withCompletion:^(NSError *error) {
         if (error == nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserInfoDict:_profiles.firstObject];
+                STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:_profiles.firstObject];
                 userVC.isLaunchedFromNearbyController = YES;
                 userVC.delegate = self;
                 [self.pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
@@ -83,7 +87,7 @@
 #pragma mark UIPageViewController delegate and data source methods
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(STUserProfileViewController *)viewController {
-    NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfileDict]];
+    NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfile]];
     if (actualVCIndex == ( _profiles.count - 5 )) {
         [self getProfilesFromServerWithOffset:_profiles.count withCompletion:nil];
     }
@@ -92,21 +96,21 @@
         return nil;
     }
     
-    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserInfoDict:[_profiles objectAtIndex:actualVCIndex + 1]];
+    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:[_profiles objectAtIndex:actualVCIndex + 1]];
     userVC.isLaunchedFromNearbyController = YES;
     userVC.delegate = self;
     return userVC;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(STUserProfileViewController *)viewController {
-    NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfileDict]];
+    NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfile]];
 
     
     if (actualVCIndex == 0) {
         return nil;
     }
     
-    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserInfoDict:[_profiles objectAtIndex:actualVCIndex - 1]];
+    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:[_profiles objectAtIndex:actualVCIndex - 1]];
     userVC.isLaunchedFromNearbyController = YES;
     userVC.delegate = self;
     return userVC;
@@ -123,10 +127,10 @@
 }
 
 
-- (NSUInteger)indexOfProfile:(NSDictionary *)dict {
-    for (NSDictionary * profileDict in _profiles) {
-        if ([dict[@"user_id"] integerValue] == [profileDict[@"user_id"] integerValue]) {
-            return [_profiles indexOfObject:profileDict];
+- (NSUInteger)indexOfProfile:(STUserProfile *)userProfile {
+    for (STUserProfile * profile in _profiles) {
+        if (userProfile.uuid == profile.uuid) {
+            return [_profiles indexOfObject:userProfile];
         }
     }
     return NSNotFound;

@@ -143,6 +143,8 @@
 		9904DD3D1A2FB48D0072134F /* STUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */; };
 		9904DD401A2FB4C40072134F /* STEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */; };
 		9904DD451A2FB55D0072134F /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9904DD441A2FB55D0072134F /* UserProfile.storyboard */; };
+		990785961B2463BB006311E4 /* STUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 990785951B2463BB006311E4 /* STUserProfile.m */; };
+		990785991B246680006311E4 /* CreateDataModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 990785981B246680006311E4 /* CreateDataModelHelper.m */; };
 		990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */; };
 		993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 993A5BFF1A490F1100021D1D /* NSDate+Additions.m */; };
 		99671D0B19BC8FBB00FB8A7A /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */; };
@@ -429,6 +431,10 @@
 		9904DD3E1A2FB4C40072134F /* STEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditProfileViewController.h; sourceTree = "<group>"; };
 		9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEditProfileViewController.m; sourceTree = "<group>"; };
 		9904DD441A2FB55D0072134F /* UserProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
+		990785941B2463BB006311E4 /* STUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserProfile.h; sourceTree = "<group>"; };
+		990785951B2463BB006311E4 /* STUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserProfile.m; sourceTree = "<group>"; };
+		990785971B246680006311E4 /* CreateDataModelHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateDataModelHelper.h; sourceTree = "<group>"; };
+		990785981B246680006311E4 /* CreateDataModelHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateDataModelHelper.m; sourceTree = "<group>"; };
 		990B467C1A50626F003D4CDE /* STUpdateUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateUserProfileRequest.h; sourceTree = "<group>"; };
 		990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateUserProfileRequest.m; sourceTree = "<group>"; };
 		993A5BFE1A490F1100021D1D /* NSDate+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Additions.h"; sourceTree = "<group>"; };
@@ -944,11 +950,15 @@
 				17EB380D1B1C482600EFDAAD /* DataProcessors */,
 				17FD599A1B08703A00AFDFF8 /* STBaseObj.h */,
 				17FD599B1B08703A00AFDFF8 /* STBaseObj.m */,
+				990785941B2463BB006311E4 /* STUserProfile.h */,
+				990785951B2463BB006311E4 /* STUserProfile.m */,
 				17FD59AE1B08D0E400AFDFF8 /* STSuggestedUser.h */,
 				17FD59AF1B08D0E400AFDFF8 /* STSuggestedUser.m */,
 				172062EB1B1B1A2900A8B2B0 /* STLikeUser.h */,
 				172062EC1B1B1A2900A8B2B0 /* STLikeUser.m */,
 				17FD59B11B08D2F500AFDFF8 /* STDataModelObjects.h */,
+				990785971B246680006311E4 /* CreateDataModelHelper.h */,
+				990785981B246680006311E4 /* CreateDataModelHelper.m */,
 			);
 			name = DataModel;
 			path = Status/DataModel;
@@ -1263,6 +1273,7 @@
 				172062E71B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m in Sources */,
 				0717E2DA19B71C56001DF132 /* STMessageReceivedCell.m in Sources */,
 				0717E2C919B71B78001DF132 /* STFacebookHelper.m in Sources */,
+				990785991B246680006311E4 /* CreateDataModelHelper.m in Sources */,
 				176CC3191A2B1E3F00E9C3D0 /* STGetUserInfoRequest.m in Sources */,
 				17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */,
 				99CEC4971A5977580014B759 /* STMenuController.m in Sources */,
@@ -1273,6 +1284,7 @@
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
 				17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */,
 				0715651218FD890400F7B3BB /* STFooterView.m in Sources */,
+				990785961B2463BB006311E4 /* STUserProfile.m in Sources */,
 				175A28C71A13FD960057EDEE /* STBaseRequest.m in Sources */,
 				176CC3161A2B1AFD00E9C3D0 /* STGetUsersRequest.m in Sources */,
 				176CC30A1A2B0DC400E9C3D0 /* STGetNotificationsCountRequest.m in Sources */,
@@ -1632,6 +1644,7 @@
 		};
 		17DD2F4B18D8D0F9000A3779 /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 228B2C727ABFBB875FD4D193 /* Pods.distribution.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Status.app/Status";
 				FRAMEWORK_SEARCH_PATHS = (
