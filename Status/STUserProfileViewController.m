@@ -22,6 +22,7 @@
 #import "STMoveScaleViewController.h"
 #import "STInviteUserToUploadRequest.h"
 #import "STSettingsViewController.h"
+#import "STUsersListController.h"
 
 #import "STFollowUsersRequest.h"
 #import "STUnfollowUsersRequest.h"
@@ -262,8 +263,12 @@
 
 #pragma mark - IBActions
 - (IBAction)onTapFollowing:(id)sender {
+    STUsersListController * newVC = [STUsersListController newControllerWithUserId:_userId postID:nil andType:UsersListControllerTypeFollowing];
+    [self.navigationController pushViewController:newVC animated:YES];
 }
 - (IBAction)onTapFollowers:(id)sender {
+    STUsersListController * newVC = [STUsersListController newControllerWithUserId:_userId postID:nil andType:UsersListControllerTypeFollowers];
+    [self.navigationController pushViewController:newVC animated:YES];
 }
 
 - (IBAction)onTapMessages:(id)sender {

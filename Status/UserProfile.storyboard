@@ -228,7 +228,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onTapFollowers:" destination="AU9-ws-jB7" eventType="touchUpInside" id="x3e-ra-ehX"/>
+                                    <action selector="onTapFollowers:" destination="AU9-ws-jB7" eventType="touchUpInside" id="WWV-S4-1on"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1h-Ll-f34">
@@ -239,7 +239,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onTapFollowing:" destination="AU9-ws-jB7" eventType="touchUpInside" id="nlG-vp-zbl"/>
+                                    <action selector="onTapFollowing:" destination="AU9-ws-jB7" eventType="touchUpInside" id="68n-o5-8kd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -301,6 +301,8 @@
                     <connections>
                         <outlet property="btnCamera" destination="XCt-OH-ynU" id="JSZ-jK-vtC"/>
                         <outlet property="btnEditUserProfile" destination="d3Y-4t-VOm" id="6IW-O9-bFW"/>
+                        <outlet property="btnFollowers" destination="vng-F0-JPs" id="zCj-XH-VoL"/>
+                        <outlet property="btnFollowing" destination="j1h-Ll-f34" id="KXe-Ki-62z"/>
                         <outlet property="btnGallery" destination="e6B-n6-hfW" id="tuC-E3-oyf"/>
                         <outlet property="btnMenu" destination="Drt-N9-twb" id="eO3-aA-wL6"/>
                         <outlet property="btnMessages" destination="KCL-pa-P8X" id="gGc-f4-BWI"/>

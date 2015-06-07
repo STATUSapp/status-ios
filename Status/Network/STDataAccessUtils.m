@@ -8,6 +8,8 @@
 
 #import "STDataAccessUtils.h"
 #import "STDataModelObjects.h"
+#import "STGetFollowersRequest.h"
+#import "STGetFollowingRequest.h"
 
 @implementation STDataAccessUtils
 +(void)getSuggestUsersWithOffset:(NSNumber *)offset
@@ -46,7 +48,48 @@
     };
     
     [STGetPostLikesRequest getPostLikes:postId withCompletion:completionBlock failure:nil];
+}
 
++ (void)getFollowingForUserId:(NSString *)userId offset:(NSNumber *)offset withCompletion:(STDataAccessCompletionBlock)completion {
+    STRequestCompletionBlock completionBlock = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            NSMutableArray *objects = [NSMutableArray new];
+            for (NSDictionary *dict in response[@"data"]) {
+                STListUser *lu = [STListUser likeUserWithDict:dict];
+                [objects addObject:lu];
+            }
+            completion([NSArray arrayWithArray:objects], nil);
+        }
+    };
+    
+    [STGetFollowingRequest getFollowingForUser:userId withOffset:offset withCompletion:completionBlock failure:^(NSError *error) {
+        
+        NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+        NSDictionary * response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"%@", response);
+        completion(nil, error);
+    }];
+}
+
++ (void)getFollowersForUserId:(NSString *)userId offset:(NSNumber *)offset withCompletion:(STDataAccessCompletionBlock)completion {
+    STRequestCompletionBlock completionBlock = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            NSMutableArray *objects = [NSMutableArray new];
+            for (NSDictionary *dict in response[@"data"]) {
+                STListUser *lu = [STListUser likeUserWithDict:dict];
+                [objects addObject:lu];
+            }
+            completion([NSArray arrayWithArray:objects], nil);
+        }
+    };
+    
+    [STGetFollowersRequest getFollowersForUser:userId withOffset:offset withCompletion:completionBlock failure:^(NSError *error) {
+        
+        NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+        NSDictionary * response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"%@", response);
+        completion(nil, error);
+    }];
 }
 
 #pragma mark - upload Stuff to server

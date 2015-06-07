@@ -17,6 +17,13 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
                    andCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getLikesForPostId:(NSString *)postId
           withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getFollowersForUserId:(NSString *)userId
+                      offset:(NSNumber *)offset
+          withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getFollowingForUserId:(NSString *)userId
+                      offset:(NSNumber *)offset
+          withCompletion:(STDataAccessCompletionBlock)completion;
+
 
 //upload stuff to server
 +(void)followUsers:(NSArray *)users

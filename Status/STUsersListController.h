@@ -21,4 +21,6 @@ typedef NS_ENUM(NSUInteger, UsersListControllerType) {
 
 @property (nonatomic, assign) UsersListControllerType controllerType;
 
++(instancetype)newControllerWithUserId:(NSString *)userID postID:(NSString *)postID andType:(UsersListControllerType)type;
+
 @end
