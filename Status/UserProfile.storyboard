@@ -7,6 +7,8 @@
     <customFonts key="customFonts">
         <mutableArray key="ProximaNova-Bold.otf">
             <string>ProximaNova-Bold</string>
+            <string>ProximaNova-Bold</string>
+            <string>ProximaNova-Bold</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
@@ -32,6 +34,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfA-AY-ajk" userLabel="placeholder">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="hJD-Rm-YPd">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Z6f-ya-x17">
+                                        <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="hJD-Rm-YPd" secondAttribute="bottom" id="75c-tF-fxu"/>
+                                    <constraint firstItem="hJD-Rm-YPd" firstAttribute="leading" secondItem="cfA-AY-ajk" secondAttribute="leading" id="9I5-fv-GvR"/>
+                                    <constraint firstItem="hJD-Rm-YPd" firstAttribute="top" secondItem="cfA-AY-ajk" secondAttribute="top" id="V3N-Y6-Nl4"/>
+                                    <constraint firstAttribute="trailing" secondItem="hJD-Rm-YPd" secondAttribute="trailing" id="VgN-zl-ZpE"/>
+                                    <constraint firstAttribute="centerY" secondItem="Z6f-ya-x17" secondAttribute="centerY" constant="0.5" id="d7v-AR-7tG"/>
+                                    <constraint firstAttribute="centerX" secondItem="Z6f-ya-x17" secondAttribute="centerX" constant="-0.5" id="gNv-FT-ATS"/>
+                                </constraints>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykj-hN-llS" userLabel="nameAgeStatusContainer">
                                 <rect key="frame" x="0.0" y="289" width="320" height="73"/>
                                 <subviews>
@@ -141,6 +163,10 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zof-zo-rAp" userLabel="next profile btn">
                                 <rect key="frame" x="110" y="460" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="lb0-S6-DeV"/>
+                                    <constraint firstAttribute="height" constant="100" id="zlo-W4-zBb"/>
+                                </constraints>
                                 <state key="normal" image="next button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -194,26 +220,28 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfA-AY-ajk" userLabel="placeholder">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="hJD-Rm-YPd">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                    </imageView>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Z6f-ya-x17">
-                                        <rect key="frame" x="142" y="265" width="37" height="37"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="hJD-Rm-YPd" secondAttribute="bottom" id="75c-tF-fxu"/>
-                                    <constraint firstItem="hJD-Rm-YPd" firstAttribute="leading" secondItem="cfA-AY-ajk" secondAttribute="leading" id="9I5-fv-GvR"/>
-                                    <constraint firstItem="hJD-Rm-YPd" firstAttribute="top" secondItem="cfA-AY-ajk" secondAttribute="top" id="V3N-Y6-Nl4"/>
-                                    <constraint firstAttribute="trailing" secondItem="hJD-Rm-YPd" secondAttribute="trailing" id="VgN-zl-ZpE"/>
-                                    <constraint firstAttribute="centerY" secondItem="Z6f-ya-x17" secondAttribute="centerY" constant="0.5" id="d7v-AR-7tG"/>
-                                    <constraint firstAttribute="centerX" secondItem="Z6f-ya-x17" secondAttribute="centerX" constant="-0.5" id="gNv-FT-ATS"/>
-                                </constraints>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vng-F0-JPs">
+                                <rect key="frame" x="16" y="241" width="83" height="30"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="10"/>
+                                <state key="normal" title="Followers 531" backgroundImage="unfollow background ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapFollowers:" destination="AU9-ws-jB7" eventType="touchUpInside" id="x3e-ra-ehX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1h-Ll-f34">
+                                <rect key="frame" x="136" y="241" width="81" height="30"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="11"/>
+                                <state key="normal" title="Following 531" backgroundImage="unfollow background ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapFollowing:" destination="AU9-ws-jB7" eventType="touchUpInside" id="nlG-vp-zbl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -539,6 +567,7 @@
         <image name="settings button" width="100" height="100"/>
         <image name="settings button pressed" width="100" height="100"/>
         <image name="status_online" width="10" height="10"/>
+        <image name="unfollow background " width="414" height="222"/>
         <image name="upper shaddow 4" width="414" height="96"/>
         <image name="user name" width="36" height="36"/>
     </resources>

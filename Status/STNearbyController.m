@@ -129,7 +129,7 @@
 
 - (NSUInteger)indexOfProfile:(STUserProfile *)userProfile {
     for (STUserProfile * profile in _profiles) {
-        if (userProfile.uuid == profile.uuid) {
+        if ([userProfile.uuid isEqualToString: profile.uuid]) {
             return [_profiles indexOfObject:userProfile];
         }
     }
