@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
-#import "STLikesViewController.h"
+#import "STUsersListController.h"
 #import "STNetworkQueueManager.h"
 #import "STLikeCell.h"
 #import "STImageCacheController.h"
@@ -21,16 +21,17 @@
 #import "STDataModelObjects.h"
 #import "STFollowDataProcessor.h"
 
-@interface STLikesViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface STUsersListController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    NSMutableArray *_likesDataSource;
+    NSMutableArray *_dataSource;
     STFollowDataProcessor *_dataProcessor;
 }
-@property (weak, nonatomic) IBOutlet UITableView *likesTableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 
 @end
 
-@implementation STLikesViewController
+@implementation STUsersListController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,21 +42,62 @@
     return self;
 }
 
+- (void)setTitleLabel {
+    switch (self.controllerType) {
+        case UsersListControllerTypeFollowers:
+            self.lblTitle.text = @"Followers";
+            break;
+        case UsersListControllerTypeFollowing:
+            self.lblTitle.text = @"Following";
+            break;
+        case UsersListControllerTypeLikes:
+            self.lblTitle.text = @"Likes";
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)getDataSource {
+    __weak STUsersListController *weakSelf = self;
+    switch (self.controllerType) {
+        case UsersListControllerTypeFollowers:{
+            
+        }
+            break;
+        case UsersListControllerTypeFollowing:{
+            
+        }
+            break;
+        case UsersListControllerTypeLikes:{
+            [STDataAccessUtils getLikesForPostId:_postId withCompletion:^(NSArray *objects, NSError *error) {
+                _dataSource = [NSMutableArray arrayWithArray:objects];
+                _dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
+                [weakSelf.tableView reloadData];
+            }];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    __weak STLikesViewController *weakSelf = self;
     
-    [STDataAccessUtils getLikesForPostId:_postId withCompletion:^(NSArray *objects, NSError *error) {
-        _likesDataSource = [NSMutableArray arrayWithArray:objects];
-        _dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
-        [weakSelf.likesTableView reloadData];
-    }];
+    
+    [self setTitleLabel];
+    [self getDataSource];
+    
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    [_dataProcessor uploadDataToServer:_likesDataSource
+    [_dataProcessor uploadDataToServer:_dataSource
                         withCompletion:nil];
 }
 - (void)didReceiveMemoryWarning
@@ -65,7 +107,7 @@
 }
 
 -(void)dealloc{
-    _likesTableView.delegate = nil;
+    _tableView.delegate = nil;
 }
 
 #pragma mark - IBActions
@@ -74,9 +116,9 @@
 }
 - (IBAction)onFollowUnfollowButtonPressed:(id)sender {
     NSInteger index = [(UIButton *)sender tag];
-    STLikeUser *lu = [_likesDataSource objectAtIndex:index];
+    STListUser *lu = [_dataSource objectAtIndex:index];
     lu.followedByCurrentUser = @(!lu.followedByCurrentUser.boolValue);
-    [_likesTableView reloadData];
+    [_tableView reloadData];
 }
 - (IBAction)onChatWithUser:(id)sender {
 //    if (![[STChatController sharedInstance] canChat]) {
@@ -87,7 +129,7 @@
 //    }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
     STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    STLikeUser *lu = _likesDataSource[((UIButton *)sender).tag];
+    STListUser *lu = _dataSource[((UIButton *)sender).tag];
     viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:lu.infoDict];
     [self.navigationController pushViewController:viewController animated:YES];
 }
@@ -95,7 +137,7 @@
 #pragma mark - UITableView Delegate
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    STLikeUser *lu = [_likesDataSource objectAtIndex:indexPath.row];
+    STListUser *lu = [_dataSource objectAtIndex:indexPath.row];
     STLikeCell *cell = (STLikeCell *)[tableView dequeueReusableCellWithIdentifier:@"likeCell"];
     [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:lu.thumbnail]];
    
@@ -117,12 +159,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         
-    STLikeUser *lu = [_likesDataSource objectAtIndex:indexPath.row];
+    STListUser *lu = [_dataSource objectAtIndex:indexPath.row];
     STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:lu.uuid];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _likesDataSource.count;
+    return _dataSource.count;
 }
 @end

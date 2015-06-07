@@ -10,6 +10,6 @@
 #define Status_STDataModelObjects_h
 
 #import "STSuggestedUser.h"
-#import "STLikeUser.h"
+#import "STListUser.h"
 
 #endif

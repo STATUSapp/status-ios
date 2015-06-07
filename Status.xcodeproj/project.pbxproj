@@ -36,7 +36,7 @@
 		07361DB319FE71BF00DFA43B /* STNotificationBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07361DB219FE71BF00DFA43B /* STNotificationBaseCell.m */; };
 		076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */; };
 		07C69D531A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C69D521A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m */; };
-		07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */; };
+		07FBDEE618C606EF007BDCE6 /* STUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STUsersListController.m */; };
 		07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
 		16ACF5F582F40A0966AE8820 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D422D9C06AC39526914FFF /* libPods.a */; };
 		170812D71B0A7C1C00228E4C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170812D51B0A7C1C00228E4C /* Crashlytics.framework */; };
@@ -44,7 +44,7 @@
 		171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */; };
 		172062E41B1B042100A8B2B0 /* STFollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */; };
 		172062E71B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */; };
-		172062ED1B1B1A2900A8B2B0 /* STLikeUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062EC1B1B1A2900A8B2B0 /* STLikeUser.m */; };
+		172062ED1B1B1A2900A8B2B0 /* STListUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062EC1B1B1A2900A8B2B0 /* STListUser.m */; };
 		172DF27419A2616D009CE4F3 /* FacebookPickerScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
@@ -245,8 +245,8 @@
 		076CF4F01910F2F200C4096C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		07C69D511A66BB85005FD8B0 /* STUpdatePostCaptionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdatePostCaptionRequest.h; sourceTree = "<group>"; };
 		07C69D521A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdatePostCaptionRequest.m; sourceTree = "<group>"; };
-		07FBDEE418C606EF007BDCE6 /* STLikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikesViewController.h; sourceTree = "<group>"; };
-		07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLikesViewController.m; sourceTree = "<group>"; };
+		07FBDEE418C606EF007BDCE6 /* STUsersListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUsersListController.h; sourceTree = "<group>"; };
+		07FBDEE518C606EF007BDCE6 /* STUsersListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUsersListController.m; sourceTree = "<group>"; };
 		07FBDEE718C60DDF007BDCE6 /* STLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikeCell.h; sourceTree = "<group>"; };
 		07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLikeCell.m; sourceTree = "<group>"; };
 		170812D51B0A7C1C00228E4C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -257,8 +257,8 @@
 		172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFollowUsersRequest.m; sourceTree = "<group>"; };
 		172062E51B1B0B0000A8B2B0 /* STUnfollowUsersRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUnfollowUsersRequest.h; sourceTree = "<group>"; };
 		172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUnfollowUsersRequest.m; sourceTree = "<group>"; };
-		172062EB1B1B1A2900A8B2B0 /* STLikeUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikeUser.h; sourceTree = "<group>"; };
-		172062EC1B1B1A2900A8B2B0 /* STLikeUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLikeUser.m; sourceTree = "<group>"; };
+		172062EB1B1B1A2900A8B2B0 /* STListUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STListUser.h; sourceTree = "<group>"; };
+		172062EC1B1B1A2900A8B2B0 /* STListUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STListUser.m; sourceTree = "<group>"; };
 		172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FacebookPickerScene.storyboard; sourceTree = "<group>"; };
 		172EAE6318B0B12E00C5637B /* STATUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE6618B0B12E00C5637B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -715,8 +715,8 @@
 				9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */,
 				9904DD3E1A2FB4C40072134F /* STEditProfileViewController.h */,
 				9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */,
-				07FBDEE418C606EF007BDCE6 /* STLikesViewController.h */,
-				07FBDEE518C606EF007BDCE6 /* STLikesViewController.m */,
+				07FBDEE418C606EF007BDCE6 /* STUsersListController.h */,
+				07FBDEE518C606EF007BDCE6 /* STUsersListController.m */,
 				07FBDEE718C60DDF007BDCE6 /* STLikeCell.h */,
 				07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */,
 				070B31B818C772B700765189 /* STNotificationsViewController.h */,
@@ -954,8 +954,8 @@
 				990785951B2463BB006311E4 /* STUserProfile.m */,
 				17FD59AE1B08D0E400AFDFF8 /* STSuggestedUser.h */,
 				17FD59AF1B08D0E400AFDFF8 /* STSuggestedUser.m */,
-				172062EB1B1B1A2900A8B2B0 /* STLikeUser.h */,
-				172062EC1B1B1A2900A8B2B0 /* STLikeUser.m */,
+				172062EB1B1B1A2900A8B2B0 /* STListUser.h */,
+				172062EC1B1B1A2900A8B2B0 /* STListUser.m */,
 				17FD59B11B08D2F500AFDFF8 /* STDataModelObjects.h */,
 				990785971B246680006311E4 /* CreateDataModelHelper.h */,
 				990785981B246680006311E4 /* CreateDataModelHelper.m */,
@@ -1279,7 +1279,7 @@
 				99CEC4971A5977580014B759 /* STMenuController.m in Sources */,
 				07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */,
 				171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */,
-				172062ED1B1B1A2900A8B2B0 /* STLikeUser.m in Sources */,
+				172062ED1B1B1A2900A8B2B0 /* STListUser.m in Sources */,
 				176CC3071A2B0BFA00E9C3D0 /* STGetNotificationsRequest.m in Sources */,
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
 				17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */,
@@ -1296,7 +1296,7 @@
 				17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */,
 				17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */,
 				1776F52B19C8A58500267DC8 /* STMenuView.m in Sources */,
-				07FBDEE618C606EF007BDCE6 /* STLikesViewController.m in Sources */,
+				07FBDEE618C606EF007BDCE6 /* STUsersListController.m in Sources */,
 				176CC3101A2B10D300E9C3D0 /* STInviteUserToUploadRequest.m in Sources */,
 				993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */,
 				07C69D531A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m in Sources */,

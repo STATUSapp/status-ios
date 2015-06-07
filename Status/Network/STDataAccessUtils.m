@@ -38,7 +38,7 @@
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             NSMutableArray *objects = [NSMutableArray new];
             for (NSDictionary *dict in response[@"data"]) {
-                STLikeUser *lu = [STLikeUser likeUserWithDict:dict];
+                STListUser *lu = [STListUser likeUserWithDict:dict];
                 [objects addObject:lu];
             }
             completion([NSArray arrayWithArray:objects], nil);

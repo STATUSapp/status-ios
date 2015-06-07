@@ -15,7 +15,7 @@
 #import "STFacebookLoginController.h"
 #import "STConstants.h"
 #import "STCustomShareView.h"
-#import "STLikesViewController.h"
+#import "STUsersListController.h"
 #import "STLoginViewController.h"
 #import "AppDelegate.h"
 #import "STNotificationsViewController.h"
@@ -336,7 +336,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [STGetUserProfileRequest getProfileForUserID:userId withCompletion:^(id response, NSError *error) {
         NSLog(@"%@", response);
         STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:userId];
-        editVC.userProfileDict = response;
+        editVC.userProfile = [STUserProfile userProfileWithDict:response];
         [self.navigationController pushViewController:editVC animated:YES];
         
         
@@ -766,7 +766,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         NSArray *viewCtrl = self.navigationController.viewControllers;
         if (viewCtrl.count>=2) {
             UIViewController *preLastCtrl = [viewCtrl objectAtIndex:viewCtrl.count-2];
-            if ([preLastCtrl isKindOfClass:[STLikesViewController class]]||
+            if ([preLastCtrl isKindOfClass:[STUsersListController class]]||
                 [preLastCtrl isKindOfClass:[STNotificationsViewController class]]) {
                 [self.navigationController popToViewController:[viewCtrl objectAtIndex:viewCtrl.count-3] animated:YES];
             }
@@ -1349,8 +1349,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if ([segue.identifier isEqualToString:@"likesSegue"]) {
         
         NSDictionary *dict = [self getCurrentDictionary];
-        STLikesViewController *viewController = (STLikesViewController *)[segue destinationViewController];
+        STUsersListController *viewController = (STUsersListController *)[segue destinationViewController];
         viewController.postId = dict[@"post_id"];
+        viewController.controllerType = UsersListControllerTypeLikes;
     }
     else if ([segue.identifier isEqualToString:@"inviteSegue"]){
         [[STMenuController sharedInstance] hideMenu];
