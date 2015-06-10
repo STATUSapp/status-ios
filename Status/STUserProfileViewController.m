@@ -22,7 +22,7 @@
 #import "STMoveScaleViewController.h"
 #import "STInviteUserToUploadRequest.h"
 #import "STSettingsViewController.h"
-
+#import "STFacebookLoginController.h"
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
@@ -122,20 +122,22 @@
     
     if (_userProfileDict) {
         [self setupVisualsWithDictionary:_userProfileDict];
-    }    
-    __weak STUserProfileViewController * weakSelf = self;
-    [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
-        [weakSelf setupVisualsWithDictionary:response];
-        weakSelf.userProfileDict = response;
-        
-    } failure:^(NSError *error) {
-        // empty all fields
-        NSLog(@"%@", error.debugDescription);
-        
-        [[[UIAlertView alloc] initWithTitle:@"Server Error" message:@"Something went wrong. Please try again later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-        
-    }];
+    }
+    if ([STNetworkQueueManager sharedManager].accessToken != nil) {
+        __weak STUserProfileViewController * weakSelf = self;
+        [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
+            [weakSelf setupVisualsWithDictionary:response];
+            weakSelf.userProfileDict = response;
+            
+        } failure:^(NSError *error) {
+            // empty all fields
+            NSLog(@"%@", error.debugDescription);
+            
+            [[[UIAlertView alloc] initWithTitle:@"Server Error" message:@"Something went wrong. Please try again later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            
+        }];
+    }
 }
 
 - (void)setupVisualsWithDictionary:(NSDictionary *)dict {

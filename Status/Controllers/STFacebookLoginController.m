@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "STLocationManager.h"
 #import "STChatController.h"
+#import "STSetAPNTokenRequest.h"
 
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
@@ -61,16 +62,32 @@
 #pragma mark - Facebook DelegatesFyou
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
+    
     if (self.logoutDelegate&&[self.logoutDelegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
         [self.logoutDelegate performSelector:@selector(facebookControllerDidLoggedOut)];
     }
-    //[self deleteAccessToken];
+    [STFacebookLoginController sharedInstance].fetchedUserData = nil;
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [FBSDKAccessToken setCurrentAccessToken:nil];
+    [FBSDKProfile setCurrentProfile:nil];
+    //            [weakSelf presentLoginScene];
     [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
     [[STLocationManager sharedInstance] stopLocationUpdates];
     [[STLocationManager sharedInstance] setLatestLocation:nil];
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
     [[STCoreDataManager sharedManager] cleanLocalDataBase];
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==200){
+            NSLog(@"APN Token deleted.");
+            [[STFacebookLoginController sharedInstance] deleteAccessToken];
+        }
+        else  NSLog(@"APN token NOT deleted.");
+    };
+    [STSetAPNTokenRequest setAPNToken:@"" withCompletion:completion failure:nil];
+    
+    [[STChatController sharedInstance] close];
 
+    //[self deleteAccessToken];
 }
 
 -(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
@@ -90,6 +107,7 @@
 -(void)deleteAccessToken {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
     [keychainWrapperAccessToken resetKeychainItem];
+    [[STNetworkManager sharedManager] clearQueue];
     [STNetworkQueueManager sharedManager].accessToken = nil;
 }
 
