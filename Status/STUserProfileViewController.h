@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STUserProfile.h"
 
 @protocol STUserProfileControllerDelegate <NSObject>
 - (void)advanceToNextProfile;
@@ -19,10 +20,8 @@
 @property (nonatomic, weak) id<STUserProfileControllerDelegate> delegate;
 
 +(STUserProfileViewController *)newControllerWithUserId:(NSString *)userId;
-+(STUserProfileViewController *)newControllerWithUserInfoDict:(NSDictionary *)userInfo;
++(STUserProfileViewController *)newControllerWithUserUserDataModel:(STUserProfile *)userProfile;
 
-+(id)getObjectFromUserProfileDict:(NSDictionary *)dict forKey:(NSString *)key;
-
-- (NSDictionary *)userProfileDict;
+- (STUserProfile *)userProfile;
 
 @end

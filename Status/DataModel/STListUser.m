@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Andrus Cosmin. All rights reserved.
 //
 
-#import "STLikeUser.h"
+#import "STListUser.h"
 
-@implementation STLikeUser
-+(STLikeUser *)likeUserWithDict:(NSDictionary *)dict{
-    STLikeUser *lu = [STLikeUser new];
+@implementation STListUser
++(STListUser *)likeUserWithDict:(NSDictionary *)dict{
+    STListUser *lu = [STListUser new];
     lu.infoDict = dict;
     lu.appVersion = dict[@"app_version"];
     lu.followedByCurrentUser = dict[@"followed_by_current_user"];

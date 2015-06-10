@@ -26,6 +26,11 @@
     return self;
 }
 
+- (void)setUsers:(NSArray *)users {
+    _followedUsers = [NSSet setWithArray:[users filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 1"]]];
+    _unfollowedUsers = [NSSet setWithArray:[users filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 0"]]];
+}
+
 -(void)uploadDataToServer:(NSArray *)newData
            withCompletion:(STDataUploadCompletionBlock)completion{
     NSSet *suggestedUsersSet = [NSSet setWithArray:newData];

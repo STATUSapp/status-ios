@@ -38,20 +38,20 @@ const NSInteger kDefaultValueForTopConstraint = 26;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [self setupVisualsWithDictionary:_userProfileDict];
+    [self setupVisualsWithUserProfile:_userProfile];
     
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
 }
 
-- (void)setupVisualsWithDictionary:(NSDictionary *)dict {
-    _txtFieldLocation.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kLocationKey];
-    _txtViewBio.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kBioKey];
-    _txtFieldName.text = [STUserProfileViewController getObjectFromUserProfileDict:dict forKey:kFulNameKey];
+- (void)setupVisualsWithUserProfile:(STUserProfile *)profile {
+    _txtFieldLocation.text = profile.homeLocation;
+    _txtViewBio.text = profile.bio;
+    _txtFieldName.text = profile.fullName;
     _counterLabel.text = [NSString stringWithFormat:@"%lu/%ld characters", (unsigned long)[_txtViewBio.text length], (long)kMaxNumberOfCharacters];
     __weak STEditProfileViewController *weakSelf = self;
-    [[STImageCacheController sharedInstance] loadImageWithName:dict[@"user_photo"] andCompletion:^(UIImage *img) {
+    [[STImageCacheController sharedInstance] loadImageWithName:profile.profilePhotoURL andCompletion:^(UIImage *img) {
         weakSelf.profileImage.image = img;
     }];
 }

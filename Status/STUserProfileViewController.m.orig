@@ -22,11 +22,15 @@
 #import "STMoveScaleViewController.h"
 #import "STInviteUserToUploadRequest.h"
 #import "STSettingsViewController.h"
+<<<<<<< HEAD
+#import "STFacebookLoginController.h"
+=======
 #import "STUsersListController.h"
 
 #import "STFollowUsersRequest.h"
 #import "STUnfollowUsersRequest.h"
 
+>>>>>>> 2ef9a3b6b6d484a33973d728970950501cdbb4f8
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
@@ -137,6 +141,26 @@
     
     _loadingPlaceholder.hidden = NO;
     
+<<<<<<< HEAD
+    if (_userProfileDict) {
+        [self setupVisualsWithDictionary:_userProfileDict];
+    }
+    if ([STNetworkQueueManager sharedManager].accessToken != nil) {
+        __weak STUserProfileViewController * weakSelf = self;
+        [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
+            [weakSelf setupVisualsWithDictionary:response];
+            weakSelf.userProfileDict = response;
+            
+        } failure:^(NSError *error) {
+            // empty all fields
+            NSLog(@"%@", error.debugDescription);
+            
+            [[[UIAlertView alloc] initWithTitle:@"Server Error" message:@"Something went wrong. Please try again later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            
+        }];
+    }
+=======
     if (_userProfile) {
         [self setupVisualsWithProfile:_userProfile];
     }    
@@ -154,6 +178,7 @@
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         
     }];
+>>>>>>> 2ef9a3b6b6d484a33973d728970950501cdbb4f8
 }
 
 - (void)setupVisualsWithProfile:(STUserProfile *)profile {

@@ -12,6 +12,10 @@
 
 + (NSDate *) dateFromServerDateTime:(NSString *) serverDate{
     
+    if (serverDate == nil) {
+        return nil;
+    }
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
@@ -20,6 +24,11 @@
 }
 
 + (NSDate *)dateFromServerDate:(NSString *)serverDate {
+    
+    if (serverDate == nil) {
+        return nil;
+    }
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
@@ -86,6 +95,11 @@
 }
 
 + (NSString *)statusForLastTimeSeen:(NSDate *)lastSeenDate {
+    
+    if (lastSeenDate == nil) {
+        return nil;
+    }
+    
     NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:lastSeenDate];
     
     if (timeInterval < 0) {

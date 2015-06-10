@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STUserProfile.h"
 
 @interface STEditProfileViewController : UIViewController
 
-@property (nonatomic, strong) NSDictionary * userProfileDict;
+@property (nonatomic, strong) STUserProfile * userProfile;
 
 + (STEditProfileViewController *)newControllerWithUserId:(NSString *)userId;
 

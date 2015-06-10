@@ -8,6 +8,6 @@
 
 #import "STSuggestedUser.h"
 
-@interface STLikeUser : STSuggestedUser
-+(STLikeUser *)likeUserWithDict:(NSDictionary *)dict;
+@interface STListUser : STSuggestedUser
++(STListUser *)likeUserWithDict:(NSDictionary *)dict;
 @end

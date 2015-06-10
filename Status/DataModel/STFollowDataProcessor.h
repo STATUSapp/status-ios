@@ -11,6 +11,9 @@
 
 @interface STFollowDataProcessor : NSObject
 -(instancetype)initWithUsers:(NSArray *)users;
+
+- (void)setUsers:(NSArray *)users;
+
 -(void)uploadDataToServer:(NSArray *)newData
            withCompletion:(STDataUploadCompletionBlock)completion;
 @end
