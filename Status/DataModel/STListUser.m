@@ -15,6 +15,11 @@
     lu.appVersion = dict[@"app_version"];
     lu.followedByCurrentUser = dict[@"followed_by_current_user"];
     lu.thumbnail = dict[@"full_photo_link"];
+    
+    if (lu.thumbnail == nil) {
+        lu.thumbnail = dict[@"user_photo"];
+    }
+    
     lu.uuid = dict[@"user_id"];
     lu.userName = dict[@"user_name"];
     return lu;
