@@ -376,21 +376,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (![presentedVC isKindOfClass:[STLoginViewController class]]) {
         [self dismissViewControllerAnimated:NO completion:^{
             [self.navigationController popToRootViewControllerAnimated:YES];
-            [STFacebookLoginController sharedInstance].fetchedUserData = nil;
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [FBSDKAccessToken setCurrentAccessToken:nil];
-            [FBSDKProfile setCurrentProfile:nil];
-//            [weakSelf presentLoginScene];
-            STRequestCompletionBlock completion = ^(id response, NSError *error){
-                if ([response[@"status_code"] integerValue]==200){
-                    NSLog(@"APN Token deleted.");
-                    [[STFacebookLoginController sharedInstance] deleteAccessToken];
-                }
-                else  NSLog(@"APN token NOT deleted.");
-            };
-            [STSetAPNTokenRequest setAPNToken:@"" withCompletion:completion failure:nil];
-            
-            [[STChatController sharedInstance] close];
         }];
     }
     
