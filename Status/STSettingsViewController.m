@@ -78,6 +78,8 @@ const NSInteger kSectionNumberLogout = 2;
         }
     };
 
+    [STFacebookLoginController sharedInstance].loginButton.hidden = YES;
+    [_logoutCell addSubview:[STFacebookLoginController sharedInstance].loginButton];
     [STGetUserSettingsRequest getUserSettingsWithCompletion:completion failure:nil];
     [self configureSwitches];
 }

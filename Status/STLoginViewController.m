@@ -31,6 +31,7 @@
 {
     [super viewDidLoad];
     [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
+    [STFacebookLoginController sharedInstance].loginButton.hidden = NO;
     FBSDKLoginButton *loginBtn = [STFacebookLoginController sharedInstance].loginButton;
     loginBtn.hidden = NO;
     CGRect frame = loginBtn.frame;
