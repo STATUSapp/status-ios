@@ -19,6 +19,7 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -119,18 +120,6 @@
                                     <action selector="onTapMessages:" destination="AU9-ws-jB7" eventType="touchUpInside" id="ni7-YE-4D6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6B-n6-hfW" userLabel="gallery btn">
-                                <rect key="frame" x="248" y="241" width="65" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-29" maxY="0.0"/>
-                                <state key="normal" title="217" backgroundImage="gallery">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" backgroundImage="gallery pressed"/>
-                                <connections>
-                                    <action selector="onTapGallery:" destination="AU9-ws-jB7" eventType="touchUpInside" id="3q6-UG-0Zu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drt-N9-twb" userLabel="menu btn">
                                 <rect key="frame" x="16" y="20" width="21" height="22"/>
                                 <state key="normal" image="Menu">
@@ -174,6 +163,28 @@
                                 <state key="highlighted" image="next button pressed"/>
                                 <connections>
                                     <action selector="onTapFollowUser:" destination="AU9-ws-jB7" eventType="touchUpInside" id="Ygr-g9-bEp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6U-my-Zda" userLabel="BtnLikes - 100 likes">
+                                <rect key="frame" x="177" y="460" width="33" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="0gI-Im-vEa"/>
+                                    <constraint firstAttribute="height" constant="28" id="FOG-VO-XFt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" backgroundImage="Likes Counter background"/>
+                                <state key="disabled">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="Likes Counter background pressed">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="Likes Counter background pressed">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapFollowers:" destination="AU9-ws-jB7" eventType="touchUpInside" id="W4n-jy-VjH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3Y-4t-VOm" userLabel="edit user profile btn">
@@ -221,10 +232,14 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vng-F0-JPs">
-                                <rect key="frame" x="16" y="241" width="83" height="30"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="10"/>
-                                <state key="normal" title="Followers 531" backgroundImage="unfollow background ">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vng-F0-JPs">
+                                <rect key="frame" x="8" y="241" width="101" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="101" id="IRN-8l-1js"/>
+                                    <constraint firstAttribute="height" constant="28" id="aZV-mX-hfq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="12"/>
+                                <state key="normal" title="Followers 531" backgroundImage="btn_follow">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -232,10 +247,14 @@
                                     <action selector="onTapFollowers:" destination="AU9-ws-jB7" eventType="touchUpInside" id="WWV-S4-1on"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1h-Ll-f34">
-                                <rect key="frame" x="136" y="241" width="81" height="30"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="11"/>
-                                <state key="normal" title="Following 531" backgroundImage="unfollow background ">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1h-Ll-f34">
+                                <rect key="frame" x="130" y="241" width="101" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="101" id="DZY-ms-zPA"/>
+                                    <constraint firstAttribute="height" constant="28" id="GXL-lC-MTc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="12"/>
+                                <state key="normal" title="Following 531" backgroundImage="btn_follow">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -243,31 +262,22 @@
                                     <action selector="onTapFollowing:" destination="AU9-ws-jB7" eventType="touchUpInside" id="68n-o5-8kd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6U-my-Zda" userLabel="BtnLikes - 100 likes">
-                                <rect key="frame" x="177" y="460" width="33" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="33" id="0gI-Im-vEa"/>
-                                    <constraint firstAttribute="height" constant="28" id="FOG-VO-XFt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                                <size key="titleShadowOffset" width="1" height="1"/>
-                                <state key="normal" backgroundImage="Likes Counter background"/>
-                                <state key="disabled">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6B-n6-hfW" userLabel="gallery btn">
+                                <rect key="frame" x="251" y="241" width="61" height="27"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-29" maxY="0.0"/>
+                                <state key="normal" title="217" backgroundImage="gallery">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" backgroundImage="Likes Counter background pressed">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" backgroundImage="Likes Counter background pressed">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="highlighted" backgroundImage="gallery pressed"/>
                                 <connections>
-                                    <action selector="onTapFollowers:" destination="AU9-ws-jB7" eventType="touchUpInside" id="W4n-jy-VjH"/>
+                                    <action selector="onTapGallery:" destination="AU9-ws-jB7" eventType="touchUpInside" id="3q6-UG-0Zu"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vng-F0-JPs" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="8" id="0FN-Hb-Gxd"/>
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="leading" secondItem="nOp-AZ-Grk" secondAttribute="trailing" constant="8" id="15z-4z-zGq"/>
                             <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="cfA-AY-ajk" secondAttribute="bottom" id="16G-J4-b8Q"/>
                             <constraint firstAttribute="centerX" secondItem="zof-zo-rAp" secondAttribute="centerX" id="1KL-jP-CCH"/>
@@ -283,11 +293,14 @@
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="zof-zo-rAp" secondAttribute="centerX" id="G09-Fo-ip2"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" constant="17" id="IIJ-tJ-Yen"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="15" id="Jdd-me-RUK"/>
+                            <constraint firstItem="vng-F0-JPs" firstAttribute="centerY" secondItem="j1h-Ll-f34" secondAttribute="centerY" id="KdF-BZ-mIZ"/>
                             <constraint firstItem="XCt-OH-ynU" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" id="MCo-cw-Z9K"/>
                             <constraint firstItem="cfA-AY-ajk" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="NxW-a4-IGG"/>
-                            <constraint firstAttribute="trailing" secondItem="e6B-n6-hfW" secondAttribute="trailing" constant="7" id="Oks-07-apo"/>
+                            <constraint firstItem="j1h-Ll-f34" firstAttribute="centerY" secondItem="e6B-n6-hfW" secondAttribute="centerY" id="OPP-T5-r97"/>
+                            <constraint firstAttribute="trailing" secondItem="e6B-n6-hfW" secondAttribute="trailing" constant="8" id="Oks-07-apo"/>
                             <constraint firstItem="UHe-3U-SnI" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="SPm-G5-Pxv"/>
                             <constraint firstItem="3nA-Cz-4Si" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="TQG-Hq-dol"/>
+                            <constraint firstItem="j1h-Ll-f34" firstAttribute="centerX" secondItem="3nA-Cz-4Si" secondAttribute="centerX" constant="20" id="WpU-tI-GQ6"/>
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="top" secondItem="1Mz-qe-w3x" secondAttribute="bottom" constant="16" id="XxZ-TB-HGP"/>
                             <constraint firstAttribute="trailing" secondItem="Wf5-IZ-BJl" secondAttribute="trailing" id="YKU-Q1-PiY"/>
                             <constraint firstItem="Wf5-IZ-BJl" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="a1q-Xc-QRY"/>
@@ -579,6 +592,7 @@
         <image name="Menu pressed" width="21" height="21"/>
         <image name="Message icon" width="33" height="33"/>
         <image name="Message icon pressed" width="33" height="33"/>
+        <image name="btn_follow" width="101" height="28"/>
         <image name="camera button" width="66" height="66"/>
         <image name="camera button pressed" width="66" height="66"/>
         <image name="description" width="36" height="36"/>
@@ -587,8 +601,8 @@
         <image name="edit profile button pressed" width="66" height="66"/>
         <image name="follow_icon" width="100" height="100"/>
         <image name="following_button" width="100" height="100"/>
-        <image name="gallery" width="65" height="30"/>
-        <image name="gallery pressed" width="65" height="30"/>
+        <image name="gallery" width="61" height="27"/>
+        <image name="gallery pressed" width="61" height="27"/>
         <image name="location" width="36" height="36"/>
         <image name="location icon" width="12" height="16"/>
         <image name="message button" width="66" height="66"/>
@@ -598,7 +612,6 @@
         <image name="settings button" width="100" height="100"/>
         <image name="settings button pressed" width="100" height="100"/>
         <image name="status_online" width="10" height="10"/>
-        <image name="unfollow background " width="414" height="222"/>
         <image name="upper shaddow 4" width="414" height="96"/>
         <image name="user name" width="36" height="36"/>
     </resources>
