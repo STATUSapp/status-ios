@@ -92,7 +92,7 @@
         [self getProfilesFromServerWithOffset:_profiles.count withCompletion:nil];
     }
     
-    if (actualVCIndex == _profiles.count - 1) {
+    if (actualVCIndex == _profiles.count - 1 || actualVCIndex == NSNotFound) {
         return nil;
     }
     
@@ -106,7 +106,7 @@
     NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfile]];
 
     
-    if (actualVCIndex == 0) {
+    if (actualVCIndex == 0 || actualVCIndex == NSNotFound) {
         return nil;
     }
     
@@ -129,8 +129,9 @@
 
 - (NSUInteger)indexOfProfile:(STUserProfile *)userProfile {
     for (STUserProfile * profile in _profiles) {
+        
         if ([userProfile.uuid isEqualToString: profile.uuid]) {
-            return [_profiles indexOfObject:userProfile];
+            return [_profiles indexOfObject:profile];
         }
     }
     return NSNotFound;

@@ -37,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblDistance;
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserDescription;
-@property (weak, nonatomic) IBOutlet UILabel *lblFollowersCount;
+@property (weak, nonatomic) IBOutlet UIButton *btnFollowersCount;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnMessages;
 @property (weak, nonatomic) IBOutlet UIButton *btnGallery;
@@ -102,7 +102,7 @@
         _btnEditUserProfile.hidden = NO;
         _btnFollowers.hidden = NO;
         _btnFollowing.hidden = NO;
-        _lblFollowersCount.hidden = YES;
+        _btnFollowersCount.hidden = YES;
     } else {
         _btnNextProfile.hidden = NO;
         _btnFollow.hidden = NO;
@@ -111,7 +111,7 @@
         _btnEditUserProfile.hidden = YES;
         _btnFollowers.hidden = YES;
         _btnFollowing.hidden = YES;
-        _lblFollowersCount.hidden = NO;
+        _btnFollowersCount.hidden = NO;
     }
     
     if (!_isLaunchedFromNearbyController) {
@@ -237,9 +237,7 @@
     _btnFollow.selected = profile.isFollowedByCurrentUser;
     [_btnFollowers setTitle:[NSString stringWithFormat:@"Followers %li", profile.followersCount] forState:UIControlStateNormal];
     [_btnFollowing setTitle:[NSString stringWithFormat:@"Following %li", profile.followingCount] forState:UIControlStateNormal];
-    
-    _lblFollowersCount.layer.cornerRadius = 8.0f;
-    _lblFollowersCount.text = [NSString stringWithFormat:@"%li", profile.followersCount];
+    [_btnFollowersCount setTitle:[NSString stringWithFormat:@"%li", profile.followersCount] forState:UIControlStateNormal];
 }
 
 - (void)setStatusIconForStatus:(STUserStatus)userStatus {
@@ -315,7 +313,7 @@
     if (_userProfile.isFollowedByCurrentUser) {
         //unfollow user
         
-        [STUnfollowUsersRequest unfollowUsers:@[_userProfile.uuid] withCompletion:^(id response, NSError *error) {
+        [STUnfollowUsersRequest unfollowUsers:@[@{@"uuid" : _userProfile.uuid}] withCompletion:^(id response, NSError *error) {
             weakSelf.btnFollow.selected = NO;
             weakSelf.userProfile.followersCount --;
             weakSelf.userProfile.isFollowedByCurrentUser = NO;
@@ -327,7 +325,7 @@
     } else {
         //follow user
         
-        [STFollowUsersRequest followUsers:@[_userProfile.uuid] withCompletion:^(id response, NSError *error) {
+        [STFollowUsersRequest followUsers:@[@{@"uuid" : _userProfile.uuid}] withCompletion:^(id response, NSError *error) {
             weakSelf.btnFollow.selected = YES;
             weakSelf.userProfile.followersCount ++;
             weakSelf.userProfile.isFollowedByCurrentUser = YES;

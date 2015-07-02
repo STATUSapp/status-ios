@@ -21,6 +21,11 @@
 - (void)setupWithDict:(NSDictionary *)userDict {
     
     self.uuid = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_id"];
+    
+    if ([self.uuid isKindOfClass:[NSNumber class]]) {
+        self.uuid = [NSString stringWithFormat:@"%li", (long)[self.uuid integerValue]];
+    }
+    
     self.appVersion = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"app_version"];
     self.infoDict = userDict;
     _bio = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"bio"];
