@@ -59,7 +59,8 @@ typedef NS_ENUM(NSUInteger,STNotificationType){
     STNotificationTypePhotosWaiting = 5,
     STNotificationTypeNewUserJoinsStatus = 6,
     STNotificationTypeGuaranteedViewsForNextPhoto = 7,
-    STNotificationType5DaysUploadNewPhoto = 8
+    STNotificationType5DaysUploadNewPhoto = 8,
+    STNotificationTypeGotFollowed = 9
 };
 
 typedef NS_ENUM(NSUInteger,STWebSockerStatus){

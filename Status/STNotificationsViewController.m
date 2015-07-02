@@ -18,6 +18,8 @@
 #import "UIImageView+WebCache.h"
 #import "NSDate+Additions.h"
 #import "STGetNotificationsRequest.h"
+#import "STMenuController.h"
+#import "STUsersListController.h"
 
 #import "STUserProfileViewController.h"
 
@@ -200,6 +202,12 @@ const float kNoNotifHeight = 24.f;
             [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;
+        case STNotificationTypeGotFollowed:
+        {
+            STUsersListController * newVC = [STUsersListController newControllerWithUserId:dict[@"user_id"] postID:nil andType:UsersListControllerTypeFollowers];
+            [self.navigationController pushViewController:newVC animated:YES];
+        }
+            break;
             
         default:
         {
@@ -221,7 +229,7 @@ const float kNoNotifHeight = 24.f;
     NSInteger notificationType = [dict[@"type"] integerValue];
     STNotificationBaseCell *cell = nil;
 
-    if (notificationType < STNotificationTypeChatMessage) {
+    if (notificationType < STNotificationTypeChatMessage || notificationType == STNotificationTypeGotFollowed) {
         // normal notifications (user generated notifications)
         cell = (STNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
         STNotificationCell *actualCell = (STNotificationCell *)cell;
@@ -286,6 +294,9 @@ const float kNoNotifHeight = 24.f;
             break;
         case STNotificationTypeUploaded:
             str = @"uploaded a photo.";
+            break;
+        case STNotificationTypeGotFollowed:
+            str = @"is following you.";
             break;
         default:
 #ifdef DEBUG
