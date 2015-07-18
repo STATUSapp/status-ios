@@ -353,10 +353,17 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
             [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
             //TODO: add this call only first time ?
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
-            STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
-            [self.navigationController presentViewController:vc animated:NO completion:nil];
-
+            __block NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+            BOOL suggestionsShown = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
+            if(suggestionsShown == NO)
+            {
+                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
+                STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
+                [self.navigationController presentViewController:vc animated:NO completion:^{
+                    [ud setValue:@(YES) forKey:@"SUGGESTIONS_SHOWED"];
+                    [ud synchronize];
+                }];
+            }
         }
     }
     

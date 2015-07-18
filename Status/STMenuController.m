@@ -71,7 +71,7 @@
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSInteger notifNumber = app.badgeNumber;
     if (notifNumber > 0) {
-        _menuView.notificationBadge.text = [NSString stringWithFormat:@" %zd ", notifNumber];
+        _menuView.notificationBadge.text = [NSString stringWithFormat:@"%@ %zd %@",notifNumber>10?@"":@" ",notifNumber,notifNumber>10?@"":@" "];
         _menuView.notificationBadge.hidden = NO;
     }
     else{
@@ -95,7 +95,7 @@
             NSInteger unseenPopularPosts = [response[@"unseenPopularPosts"] integerValue];
             NSInteger unseenRecentPosts = [response[@"unseenRecentPosts"] integerValue];
             if (unseenHomePosts > 0) {
-                _menuView.homeNotifBadge.text = [NSString stringWithFormat:@" %zd ", unseenHomePosts];
+                _menuView.homeNotifBadge.text = [NSString stringWithFormat:@"%@ %zd %@",unseenHomePosts>10?@"":@" ", unseenHomePosts,unseenHomePosts>10?@"":@" "];
                 _menuView.homeNotifBadge.hidden = NO;
             }
             else{
@@ -103,7 +103,7 @@
             }
             
             if (unseenPopularPosts > 0) {
-                _menuView.populatNotifBadge.text = [NSString stringWithFormat:@" %zd ", unseenPopularPosts];
+                _menuView.populatNotifBadge.text = [NSString stringWithFormat:@"%@ %zd %@", unseenPopularPosts>10?@"":@" ", unseenPopularPosts,unseenPopularPosts>10?@"":@" "];
                 _menuView.populatNotifBadge.hidden = NO;
             }
             else{
@@ -111,7 +111,7 @@
             }
 
             if (unseenRecentPosts > 0) {
-                _menuView.recentNotifBadge.text = [NSString stringWithFormat:@" %zd ", unseenRecentPosts];
+                _menuView.recentNotifBadge.text = [NSString stringWithFormat:@"%@ %zd %@", unseenRecentPosts>10?@"":@" ", unseenRecentPosts,unseenRecentPosts>10?@"":@" "];
                 _menuView.recentNotifBadge.hidden = NO;
             }
             else{

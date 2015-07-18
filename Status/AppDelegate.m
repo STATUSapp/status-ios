@@ -130,7 +130,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
+//    [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
     [[STChatController sharedInstance] close];
     [[STCoreDataManager sharedManager] save];
     //[[STLocationManager sharedInstance] startLocationUpdates];
