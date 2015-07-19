@@ -16,9 +16,6 @@
         <mutableArray key="ProximaNova-Light.otf">
             <string>ProximaNova-Light</string>
         </mutableArray>
-        <mutableArray key="ProximaNova-RegItalic.otf">
-            <string>ProximaNova-RegularIt</string>
-        </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -55,6 +52,9 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+        </mutableArray>
+        <mutableArray key="ProximaNova-RegularItalic.otf">
+            <string>ProximaNova-RegularIt</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
@@ -2250,8 +2250,8 @@
         <image name="chat unread message" width="24" height="24"/>
         <image name="downShaddow" width="414" height="203"/>
         <image name="edit post icon" width="17" height="17"/>
-        <image name="follow square " width="38" height="38"/>
-        <image name="following square " width="38" height="38"/>
+        <image name="follow square " width="34" height="34"/>
+        <image name="following square " width="34" height="34"/>
         <image name="grey line" width="227" height="3"/>
         <image name="invite friends button" width="212" height="45"/>
         <image name="invite friends button pressed" width="212" height="45"/>

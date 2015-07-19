@@ -915,7 +915,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     STRequestCompletionBlock completion = ^(id response, NSError *error){
         NSInteger statusCode = [response[@"status_code"] integerValue];
         if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
-            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", userName];
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo. We'll announce you when the new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", userName];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
                                                   cancelButtonTitle:@"OK" otherButtonTitles: nil];
             alert.tag = kInviteUserToUpload;
