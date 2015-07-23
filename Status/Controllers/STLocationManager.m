@@ -53,6 +53,9 @@ static STLocationManager *_myLocationManager;
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *currentLocation = [locations lastObject];
+    if (_latestLocation == nil) {
+        _latestLocation = currentLocation;
+    }
     //TODO: reduce this sanitizer
     if(currentLocation.horizontalAccuracy > kGPSAccuracyMetters)
     {
