@@ -157,7 +157,23 @@
 
 - (void)goPopular{
     [self hideMenu];
-    [_currentVC.navigationController popToRootViewControllerAnimated:YES];
+    STFlowTemplateViewController *vc = nil;
+    for (UIViewController *viewCtrl in _currentVC.navigationController.viewControllers) {
+        if ([viewCtrl isKindOfClass:[STFlowTemplateViewController class]]) {
+            if ([(STFlowTemplateViewController*)viewCtrl flowType] == STFlowTypePopular) {
+                vc = (STFlowTemplateViewController *)viewCtrl;
+                break;
+            }
+        }
+    }
+    if (vc!=nil) {
+        [_currentVC.navigationController popToViewController:vc animated:YES];
+    }
+    else{
+        vc = [STFlowTemplateViewController getFlowControllerWithFlowType:STFlowTypePopular];
+        [_currentVC.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 - (void)goRecent{
