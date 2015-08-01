@@ -39,7 +39,6 @@
 		07FBDEE618C606EF007BDCE6 /* STUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STUsersListController.m */; };
 		07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
 		16ACF5F582F40A0966AE8820 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D422D9C06AC39526914FFF /* libPods.a */; };
-		170812D71B0A7C1C00228E4C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170812D51B0A7C1C00228E4C /* Crashlytics.framework */; };
 		170812D81B0A7C1C00228E4C /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */; };
 		171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */; };
 		172062E41B1B042100A8B2B0 /* STFollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */; };
@@ -118,6 +117,9 @@
 		17E44B9E19822032000E9116 /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17E44B9C19822032000E9116 /* StatusDM.xcdatamodeld */; };
 		17EB380C1B1C3FA200EFDAAD /* STFollowDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EB380B1B1C3FA200EFDAAD /* STFollowDataProcessor.m */; };
 		17EB38101B1C50C700EFDAAD /* STUnseenPostsCountRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EB380F1B1C50C700EFDAAD /* STUnseenPostsCountRequest.m */; };
+		17F51F881B66CA0500318683 /* STSmallFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F51F871B66CA0500318683 /* STSmallFlowCell.m */; };
+		17F51F8B1B66CA1700318683 /* STFBAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F51F8A1B66CA1700318683 /* STFBAdCell.m */; };
+		17F51F8E1B66CBE400318683 /* STFlowTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F51F8D1B66CBE400318683 /* STFlowTemplate.m */; };
 		17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FA8DB11937B48800491CAA /* UIImageView+Mask.m */; };
 		17FD599C1B08703A00AFDFF8 /* STBaseObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD599B1B08703A00AFDFF8 /* STBaseObj.m */; };
 		17FD599F1B0871FC00AFDFF8 /* SuggestionsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17FD599E1B0871FC00AFDFF8 /* SuggestionsScene.storyboard */; };
@@ -126,6 +128,7 @@
 		17FD59A91B08B10200AFDFF8 /* STDataAccessUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD59A81B08B10200AFDFF8 /* STDataAccessUtils.m */; };
 		17FD59AD1B08B3F000AFDFF8 /* STSuggestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD59AC1B08B3F000AFDFF8 /* STSuggestionsViewController.m */; };
 		17FD59B01B08D0E500AFDFF8 /* STSuggestedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FD59AF1B08D0E400AFDFF8 /* STSuggestedUser.m */; };
+		17FDC4E01B6D42AE00A02FF3 /* STFlowImagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FDC4DF1B6D42AE00A02FF3 /* STFlowImagesRequest.m */; };
 		17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FE7CE319B321340081F688 /* NSString+MD5.m */; };
 		1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
 		1DE2D5AD194FA5D600A29A86 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */; };
@@ -251,7 +254,6 @@
 		07FBDEE518C606EF007BDCE6 /* STUsersListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUsersListController.m; sourceTree = "<group>"; };
 		07FBDEE718C60DDF007BDCE6 /* STLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikeCell.h; sourceTree = "<group>"; };
 		07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLikeCell.m; sourceTree = "<group>"; };
-		170812D51B0A7C1C00228E4C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 		171925F71A507598003C19D7 /* STUpdateToNewerVersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateToNewerVersionController.h; sourceTree = "<group>"; };
 		171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateToNewerVersionController.m; sourceTree = "<group>"; };
@@ -387,6 +389,12 @@
 		17EB380B1B1C3FA200EFDAAD /* STFollowDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFollowDataProcessor.m; sourceTree = "<group>"; };
 		17EB380E1B1C50C700EFDAAD /* STUnseenPostsCountRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUnseenPostsCountRequest.h; sourceTree = "<group>"; };
 		17EB380F1B1C50C700EFDAAD /* STUnseenPostsCountRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUnseenPostsCountRequest.m; sourceTree = "<group>"; };
+		17F51F861B66CA0500318683 /* STSmallFlowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSmallFlowCell.h; sourceTree = "<group>"; };
+		17F51F871B66CA0500318683 /* STSmallFlowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSmallFlowCell.m; sourceTree = "<group>"; };
+		17F51F891B66CA1700318683 /* STFBAdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFBAdCell.h; sourceTree = "<group>"; };
+		17F51F8A1B66CA1700318683 /* STFBAdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFBAdCell.m; sourceTree = "<group>"; };
+		17F51F8C1B66CBE400318683 /* STFlowTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFlowTemplate.h; sourceTree = "<group>"; };
+		17F51F8D1B66CBE400318683 /* STFlowTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFlowTemplate.m; sourceTree = "<group>"; };
 		17FA8DB01937B48800491CAA /* UIImageView+Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Mask.h"; sourceTree = "<group>"; };
 		17FA8DB11937B48800491CAA /* UIImageView+Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Mask.m"; sourceTree = "<group>"; };
 		17FD599A1B08703A00AFDFF8 /* STBaseObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBaseObj.h; sourceTree = "<group>"; };
@@ -404,6 +412,8 @@
 		17FD59AE1B08D0E400AFDFF8 /* STSuggestedUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSuggestedUser.h; sourceTree = "<group>"; };
 		17FD59AF1B08D0E400AFDFF8 /* STSuggestedUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSuggestedUser.m; sourceTree = "<group>"; };
 		17FD59B11B08D2F500AFDFF8 /* STDataModelObjects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDataModelObjects.h; sourceTree = "<group>"; };
+		17FDC4DE1B6D42AE00A02FF3 /* STFlowImagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFlowImagesRequest.h; sourceTree = "<group>"; };
+		17FDC4DF1B6D42AE00A02FF3 /* STFlowImagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFlowImagesRequest.m; sourceTree = "<group>"; };
 		17FE7CE219B321340081F688 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		17FE7CE319B321340081F688 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		1D98A4C219603064007F4AB2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -495,7 +505,6 @@
 				172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */,
 				1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */,
 				1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */,
-				170812D71B0A7C1C00228E4C /* Crashlytics.framework in Frameworks */,
 				1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */,
 				1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */,
 				1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */,
@@ -654,7 +663,6 @@
 		172EAE6518B0B12E00C5637B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				170812D51B0A7C1C00228E4C /* Crashlytics.framework */,
 				170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */,
 				CD532FD219B9A451009B1445 /* Social.framework */,
 				CD532FD019B9A44B009B1445 /* Accounts.framework */,
@@ -685,6 +693,10 @@
 				0717E2A119B717AF001DF132 /* ViewControllers */,
 				317A269718B0D26F00291463 /* STCustomCollectionViewCell.h */,
 				317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */,
+				17F51F861B66CA0500318683 /* STSmallFlowCell.h */,
+				17F51F871B66CA0500318683 /* STSmallFlowCell.m */,
+				17F51F891B66CA1700318683 /* STFBAdCell.h */,
+				17F51F8A1B66CA1700318683 /* STFBAdCell.m */,
 				1780E3E01A7FCD140001A209 /* STNoPhotosCell.h */,
 				1780E3E11A7FCD140001A209 /* STNoPhotosCell.m */,
 				0715651018FD890400F7B3BB /* STFooterView.h */,
@@ -886,6 +898,8 @@
 				172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */,
 				17EB380E1B1C50C700EFDAAD /* STUnseenPostsCountRequest.h */,
 				17EB380F1B1C50C700EFDAAD /* STUnseenPostsCountRequest.m */,
+				17FDC4DE1B6D42AE00A02FF3 /* STFlowImagesRequest.h */,
+				17FDC4DF1B6D42AE00A02FF3 /* STFlowImagesRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -966,6 +980,8 @@
 				17FD59AF1B08D0E400AFDFF8 /* STSuggestedUser.m */,
 				172062EB1B1B1A2900A8B2B0 /* STListUser.h */,
 				172062EC1B1B1A2900A8B2B0 /* STListUser.m */,
+				17F51F8C1B66CBE400318683 /* STFlowTemplate.h */,
+				17F51F8D1B66CBE400318683 /* STFlowTemplate.m */,
 				17FD59B11B08D2F500AFDFF8 /* STDataModelObjects.h */,
 				990785971B246680006311E4 /* CreateDataModelHelper.h */,
 				990785981B246680006311E4 /* CreateDataModelHelper.m */,
@@ -1206,7 +1222,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 93e0064668657d3332278aaa1ed765b8f48c6ad6 ffd19d43716170c5828194f662ccf2fa5472d06c00cc6ae64125bf57997d05c9";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 93e0064668657d3332278aaa1ed765b8f48c6ad6 ffd19d43716170c5828194f662ccf2fa5472d06c00cc6ae64125bf57997d05c9";
 		};
 		6657909E4EB07A6D103FEE67 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1245,6 +1261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17F51F8E1B66CBE400318683 /* STFlowTemplate.m in Sources */,
 				175A28CD1A13FDDC0057EDEE /* STNetworkQueueManager.m in Sources */,
 				076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */,
 				17CA0E8E1A2130AF00D0B081 /* STUploadPostRequest.m in Sources */,
@@ -1288,6 +1305,7 @@
 				176CC3191A2B1E3F00E9C3D0 /* STGetUserInfoRequest.m in Sources */,
 				17D699FA18C5A6AE00AB0F85 /* STCustomShareView.m in Sources */,
 				99CEC4971A5977580014B759 /* STMenuController.m in Sources */,
+				17F51F8B1B66CA1700318683 /* STFBAdCell.m in Sources */,
 				07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */,
 				171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */,
 				172062ED1B1B1A2900A8B2B0 /* STListUser.m in Sources */,
@@ -1316,6 +1334,7 @@
 				99E5B8251A754A0900A59F13 /* STNearbyController.m in Sources */,
 				0717E2DC19B71C56001DF132 /* STChatRoomViewController.m in Sources */,
 				17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */,
+				17FDC4E01B6D42AE00A02FF3 /* STFlowImagesRequest.m in Sources */,
 				070B31BA18C772B700765189 /* STNotificationsViewController.m in Sources */,
 				17EB380C1B1C3FA200EFDAAD /* STFollowDataProcessor.m in Sources */,
 				17FD59B01B08D0E500AFDFF8 /* STSuggestedUser.m in Sources */,
@@ -1357,6 +1376,7 @@
 				0717E2C419B71B51001DF132 /* STConstants.m in Sources */,
 				1DE2D5BB1950DB4600A29A86 /* STInviteFriendsViewController.m in Sources */,
 				172EAE7318B0B12E00C5637B /* main.m in Sources */,
+				17F51F881B66CA0500318683 /* STSmallFlowCell.m in Sources */,
 				1780E3E21A7FCD140001A209 /* STNoPhotosCell.m in Sources */,
 				1794DD571960D2A40009066D /* STWhatsAppActivity.m in Sources */,
 				175F8B571A7B7F7000360C3E /* STImagePickerController.m in Sources */,
@@ -1494,21 +1514,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKShareKit\"",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "Status/Status-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
@@ -1525,21 +1542,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKShareKit\"",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "Status/Status-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1639,21 +1653,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FBSDKShareKit\"",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "Status/Status-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

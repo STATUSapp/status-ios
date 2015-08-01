@@ -24,6 +24,8 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
                       offset:(NSNumber *)offset
           withCompletion:(STDataAccessCompletionBlock)completion;
 
++(void)getFlowTemplatesWithCompletion:(STDataAccessCompletionBlock)completion;
+
 
 //upload stuff to server
 +(void)followUsers:(NSArray *)users

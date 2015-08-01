@@ -83,6 +83,9 @@
     }
     else{
         [_followProcessor uploadDataToServer:_suggestedUsers withCompletion:^(NSError *error) {
+            if (_delegate) {
+                [_delegate userDidEndApplyingSugegstions];
+            }
             [self dismissViewControllerAnimated:YES completion:nil];
         }];
     }

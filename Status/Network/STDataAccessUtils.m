@@ -92,6 +92,36 @@
     }];
 }
 
++(void)getFlowTemplatesWithCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock completionBlock = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            NSMutableArray *objects = [NSMutableArray new];
+            NSArray *responseArray = response[@"data"];
+            NSLog(@"Flows: %@", responseArray);
+            for (NSDictionary *dict in responseArray) {
+                STFlowTemplate *ft = [STFlowTemplate flowTemplateFromDict:dict];
+                [objects addObject:ft];
+            }
+            completion([NSArray arrayWithArray:objects], nil);
+        }
+    };
+    
+    [STFlowImagesRequest getFlowImagesWithCompletion:completionBlock failure:^(NSError *error) {
+        NSLog(@"Get flow images error: %@", error.debugDescription);
+        completion(@[], error);
+    }];
+    
+//    STFlowTemplate *ft = [STFlowTemplate flowTemplateFromDict:@{@"type":@"home", @"url":@"http://api.getstatusapp.co/media/image_55b653be33a6b_55b653be34371.jpg"}];
+//    STFlowTemplate *ft1 = [STFlowTemplate flowTemplateFromDict:@{@"type":@"popular", @"url":@"http://api.getstatusapp.co/media/image_55b653be33a6b_55b653be34371.jpg"}];
+//    STFlowTemplate *ft2 = [STFlowTemplate flowTemplateFromDict:@{@"type":@"nearby", @"url":@"http://api.getstatusapp.co/media/image_55b653be33a6b_55b653be34371.jpg"}];
+//    STFlowTemplate *ft3 = [STFlowTemplate flowTemplateFromDict:@{@"type":@"recent", @"url":@"http://api.getstatusapp.co/media/image_55b653be33a6b_55b653be34371.jpg"}];
+//    STFlowTemplate *ft4 = [STFlowTemplate flowTemplateFromDict:@{@"type":@"other", @"url":@"http://api.getstatusapp.co/media/image_55b653be33a6b_55b653be34371.jpg"}];
+//
+//    STFlowTemplate *ft5 = [STFlowTemplate flowTemplateFromDict:@{@"type":@"other", @"url":@"http://api.getstatusapp.co/media/image_55b653be33a6b_55b653be34371.jpg"}];
+//
+//    completion(@[ft, ft1, ft2, ft3, ft4, ft5], nil);
+}
+
 #pragma mark - upload Stuff to server
 +(void)followUsers:(NSArray *)users
     withCompletion:(STDataUploadCompletionBlock)completion{

@@ -11,5 +11,6 @@
 
 #import "STSuggestedUser.h"
 #import "STListUser.h"
+#import "STFlowTemplate.h"
 
 #endif

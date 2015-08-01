@@ -12,6 +12,7 @@
             <string>ProximaNova-Bold</string>
             <string>ProximaNova-Bold</string>
             <string>ProximaNova-Bold</string>
+            <string>ProximaNova-Bold</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Light.otf">
             <string>ProximaNova-Light</string>
@@ -50,13 +51,9 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
-            <string>ProximaNova-Regular</string>
-            <string>ProximaNova-Regular</string>
-        </mutableArray>
-        <mutableArray key="ProximaNova-RegularItalic.otf">
-            <string>ProximaNova-RegularIt</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
             <string>ProximaNova-Semibold</string>
             <string>ProximaNova-Semibold</string>
         </mutableArray>
@@ -524,95 +521,119 @@
                                     <rect key="frame" x="320" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You saw all the photos.  Please check out:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2Dn-9z-a20">
+                                            <rect key="frame" x="57" y="60" width="206" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="gNf-1Z-BTG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WR3-r4-zP3">
+                                            <rect key="frame" x="20" y="120" width="280" height="430"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="uq6-Fz-RP2">
+                                                <size key="itemSize" width="130" height="130"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STSmallFlowCell" id="jcM-3F-hhK" customClass="STSmallFlowCell">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="9hg-XL-4ug">
+                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ux-tm-jr8">
+                                                                <rect key="frame" x="0.0" y="34" width="130" height="61"/>
+                                                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="27"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                    <constraints>
+                                                        <constraint firstItem="0Ux-tm-jr8" firstAttribute="top" secondItem="jcM-3F-hhK" secondAttribute="top" constant="34" id="FaX-8y-Kf7"/>
+                                                        <constraint firstAttribute="bottom" secondItem="9hg-XL-4ug" secondAttribute="bottom" id="QKE-Oa-4Bk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="9hg-XL-4ug" secondAttribute="trailing" id="SDf-Qf-WjM"/>
+                                                        <constraint firstItem="0Ux-tm-jr8" firstAttribute="leading" secondItem="jcM-3F-hhK" secondAttribute="leading" id="WaI-Gl-uDu"/>
+                                                        <constraint firstAttribute="trailing" secondItem="0Ux-tm-jr8" secondAttribute="trailing" id="ZhY-UE-Wcl"/>
+                                                        <constraint firstAttribute="bottom" secondItem="0Ux-tm-jr8" secondAttribute="bottom" constant="35" id="erQ-D3-ieG"/>
+                                                        <constraint firstItem="9hg-XL-4ug" firstAttribute="leading" secondItem="jcM-3F-hhK" secondAttribute="leading" id="fDu-YE-hil"/>
+                                                        <constraint firstItem="9hg-XL-4ug" firstAttribute="top" secondItem="jcM-3F-hhK" secondAttribute="top" id="giZ-kb-t0J"/>
+                                                    </constraints>
+                                                    <size key="customSize" width="130" height="130"/>
+                                                    <connections>
+                                                        <outlet property="imageView" destination="9hg-XL-4ug" id="k7o-vw-0k4"/>
+                                                        <outlet property="nameLabel" destination="0Ux-tm-jr8" id="9mx-D8-v2R"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STFBAdCell" id="PgS-D7-0tI" customClass="STFBAdCell">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FROGIO - SHARE FUNNY &amp; COOL THINGS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RET-sn-pHf">
+                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="38"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="38" id="BgH-XB-NiV"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
+                                                                <color key="textColor" red="0.32549019607843138" green="0.396078431372549" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujf-9b-6a9">
+                                                                <rect key="frame" x="33" y="37" width="65" height="65"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="65" id="EiH-eZ-MNu"/>
+                                                                    <constraint firstAttribute="height" constant="65" id="WbX-34-MTu"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="RET-sn-pHf" firstAttribute="top" secondItem="PgS-D7-0tI" secondAttribute="top" id="AIG-Th-c1R"/>
+                                                        <constraint firstItem="RET-sn-pHf" firstAttribute="leading" secondItem="PgS-D7-0tI" secondAttribute="leading" id="PcH-WR-htf"/>
+                                                        <constraint firstItem="ujf-9b-6a9" firstAttribute="top" secondItem="PgS-D7-0tI" secondAttribute="top" constant="37" id="R4A-y9-3XX"/>
+                                                        <constraint firstAttribute="trailing" secondItem="RET-sn-pHf" secondAttribute="trailing" id="VvO-om-gOv"/>
+                                                        <constraint firstAttribute="centerX" secondItem="ujf-9b-6a9" secondAttribute="centerX" constant="-0.5" id="nil-Pb-hc1"/>
+                                                    </constraints>
+                                                    <size key="customSize" width="130" height="130"/>
+                                                </collectionViewCell>
+                                            </cells>
+                                        </collectionView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-vH-cAm">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvU-Bo-FXq">
-                                            <rect key="frame" x="35" y="84" width="250" height="400"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ip-Pi-iIK">
-                                                    <rect key="frame" x="54" y="342" width="142" height="38"/>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="25"/>
-                                                    <state key="normal" title="Refresh">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="disabled" title="Refreshing"/>
-                                                    <state key="selected" title="Refreshing"/>
-                                                    <state key="highlighted" title="Refreshing"/>
-                                                    <connections>
-                                                        <action selector="onTapRefreshFromFooter:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Iln-OC-rhi"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You saw all the photos. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-um-646">
-                                                    <rect key="frame" x="60" y="20" width="130" height="60"/>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="25"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBM-3v-gBq">
-                                                    <rect key="frame" x="19" y="96" width="212" height="45"/>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
-                                                    <state key="normal" image="Take a photo button">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted" image="Take a photo button pressed"/>
-                                                    <connections>
-                                                        <action selector="onTapCameraUpload:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="03u-Ol-UEJ"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APg-dy-xJ1">
-                                                    <rect key="frame" x="20" y="149" width="212" height="45"/>
-                                                    <state key="normal" image="see people nearby button">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted" image="see people nearby button pressed"/>
-                                                    <connections>
-                                                        <action selector="onClickNearbyFromYouSawAllThePhotos:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mUF-24-bY5"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBz-Mu-QRI">
-                                                    <rect key="frame" x="20" y="202" width="212" height="45"/>
-                                                    <state key="normal" image="invite friends button">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted" image="invite friends button pressed"/>
-                                                    <connections>
-                                                        <action selector="onCLickInviteFriendsFromYouSawAllThePhotos:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KbD-Fr-H3k"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="lR7-n3-ZAe">
-                                                    <rect key="frame" x="110" y="310" width="31" height="30"/>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-RegularIt" family="Proxima Nova" pointSize="25"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMv-J9-1VF">
-                                                    <rect key="frame" x="20" y="255" width="212" height="45"/>
-                                                    <state key="normal" image="chat button">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted" image="chat button pressed"/>
-                                                    <connections>
-                                                        <action selector="onClickChatFromYouSawAllThePhotos:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ILo-J3-mCj"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="400" id="RYM-sk-9Wu"/>
-                                                <constraint firstAttribute="width" constant="250" id="el8-ax-MYf"/>
-                                            </constraints>
-                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="P9B-vH-cAm" firstAttribute="leading" secondItem="BFS-2S-edS" secondAttribute="leading" id="5vN-Ag-s3c"/>
+                                        <constraint firstItem="WR3-r4-zP3" firstAttribute="top" secondItem="2Dn-9z-a20" secondAttribute="bottom" constant="20" id="6YP-Sv-kun"/>
+                                        <constraint firstAttribute="trailing" secondItem="WR3-r4-zP3" secondAttribute="trailing" constant="20" id="BRt-gi-9u3"/>
                                         <constraint firstItem="P9B-vH-cAm" firstAttribute="top" secondItem="BFS-2S-edS" secondAttribute="top" id="Fzu-0d-GqQ"/>
-                                        <constraint firstAttribute="centerY" secondItem="yvU-Bo-FXq" secondAttribute="centerY" id="eLK-ZJ-ZSK"/>
+                                        <constraint firstItem="WR3-r4-zP3" firstAttribute="leading" secondItem="BFS-2S-edS" secondAttribute="leading" constant="20" id="Lzf-n4-woM"/>
+                                        <constraint firstAttribute="bottom" secondItem="WR3-r4-zP3" secondAttribute="bottom" constant="18" id="TtZ-bu-aD9"/>
+                                        <constraint firstItem="2Dn-9z-a20" firstAttribute="leading" secondItem="BFS-2S-edS" secondAttribute="leading" constant="57" id="Vo7-3H-swV"/>
+                                        <constraint firstItem="2Dn-9z-a20" firstAttribute="top" secondItem="BFS-2S-edS" secondAttribute="top" constant="60" id="Zy8-FM-CFA"/>
+                                        <constraint firstAttribute="trailing" secondItem="2Dn-9z-a20" secondAttribute="trailing" constant="57" id="lDD-2t-bnU"/>
                                         <constraint firstAttribute="bottom" secondItem="P9B-vH-cAm" secondAttribute="bottom" id="n5E-jp-YIs"/>
-                                        <constraint firstAttribute="centerX" secondItem="yvU-Bo-FXq" secondAttribute="centerX" id="tAx-O9-DBy"/>
                                         <constraint firstAttribute="trailing" secondItem="P9B-vH-cAm" secondAttribute="trailing" id="tpd-BM-dX0"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="bkImageView" destination="P9B-vH-cAm" id="SN1-iN-8zZ"/>
+                                        <outlet property="collectionView" destination="WR3-r4-zP3" id="GK0-Iv-w0K"/>
+                                    </connections>
                                 </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="KpC-R9-MiX"/>
@@ -2231,8 +2252,6 @@
         <image name="Message icon" width="33" height="33"/>
         <image name="Message icon pressed" width="33" height="33"/>
         <image name="Post Button" width="82" height="82"/>
-        <image name="Take a photo button" width="212" height="45"/>
-        <image name="Take a photo button pressed" width="212" height="45"/>
         <image name="Twitter share button" width="109" height="109"/>
         <image name="Twitter share button pressed" width="109" height="109"/>
         <image name="Use button" width="82" height="82"/>
@@ -2245,22 +2264,19 @@
         <image name="btn_nrLIkes_normal" width="34" height="33"/>
         <image name="camera button" width="66" height="66"/>
         <image name="camera button pressed" width="66" height="66"/>
-        <image name="chat button" width="212" height="45"/>
-        <image name="chat button pressed" width="212" height="45"/>
         <image name="chat unread message" width="24" height="24"/>
         <image name="downShaddow" width="414" height="203"/>
         <image name="edit post icon" width="17" height="17"/>
         <image name="follow square " width="34" height="34"/>
         <image name="following square " width="34" height="34"/>
         <image name="grey line" width="227" height="3"/>
-        <image name="invite friends button" width="212" height="45"/>
-        <image name="invite friends button pressed" width="212" height="45"/>
         <image name="invite your friend button" width="202" height="40"/>
         <image name="invite your friend button pressed" width="202" height="40"/>
         <image name="invited button" width="202" height="40"/>
         <image name="invited button pressed" width="202" height="40"/>
         <image name="like button" width="83" height="82"/>
         <image name="like button pressed" width="83" height="82"/>
+        <image name="logo" width="60" height="60"/>
         <image name="logoSettings" width="57" height="62"/>
         <image name="megaphone" width="112" height="112"/>
         <image name="megaphone pressed" width="112" height="112"/>
@@ -2271,8 +2287,6 @@
         <image name="placeholder notifications screen" width="60" height="60"/>
         <image name="remove ads button" width="202" height="40"/>
         <image name="remove ads button pressed" width="202" height="40"/>
-        <image name="see people nearby button" width="212" height="45"/>
-        <image name="see people nearby button pressed" width="212" height="45"/>
         <image name="selected grey area notifications screen" width="320" height="82"/>
         <image name="selected state" width="320" height="60"/>
         <image name="share button" width="66" height="66"/>

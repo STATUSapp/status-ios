@@ -27,7 +27,7 @@
 
 + (STMenuController *) sharedInstance;
 + (UIImage *)snapshotForViewController:(UIViewController *)vc;
-
++(UIImage *)blurScreen:(UIViewController *)vc;
 - (STFlowTemplateViewController *)appMainController;
 
 @end

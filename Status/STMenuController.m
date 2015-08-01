@@ -67,7 +67,7 @@
     _currentVC = parrentVC;
     
     _menuView.alpha = 0.f;
-    _menuView.blurBackground.image = [self blurCurrentScreen];
+    _menuView.blurBackground.image = [STMenuController blurScreen:_currentVC];
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSInteger notifNumber = app.badgeNumber;
     if (notifNumber > 0) {
@@ -333,8 +333,8 @@
 
 #pragma mark - Helper
 
--(UIImage *)blurCurrentScreen{
-    UIImage * imageFromCurrentView = [STMenuController snapshotForViewController:_currentVC];
++(UIImage *)blurScreen:(UIViewController *)vc{
+    UIImage * imageFromCurrentView = [STMenuController snapshotForViewController:vc];
     return [imageFromCurrentView applyDarkEffect];
 }
 

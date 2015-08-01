@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface STFooterView : UICollectionReusableView
-
+@property (weak, nonatomic) IBOutlet UIImageView *bkImageView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+-(void)configureFooterWithBkImage:(UIImage *)image;
+-(void)showOnlyBackground;
 @end

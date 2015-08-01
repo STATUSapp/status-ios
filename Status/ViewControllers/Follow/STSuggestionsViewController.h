@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STSuggestionsViewController : UIViewController
+@protocol STSuggestionsDelegate <NSObject>
 
+-(void)userDidEndApplyingSugegstions;
+
+@end
+
+@interface STSuggestionsViewController : UIViewController
+@property (nonatomic, weak) id <STSuggestionsDelegate>delegate;
 @end

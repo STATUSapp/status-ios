@@ -64,6 +64,7 @@
 #import "STEditProfileViewController.h"
 #import "STSuggestionsViewController.h"
 
+#import "UIImage+ImageEffects.h"
 #import <FBSDKCoreKit.h>
 
 int const kDeletePostTag = 11;
@@ -72,7 +73,7 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,STSharePostDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,STSharePostDelegate, STSuggestionsDelegate>
 {    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
@@ -96,6 +97,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 @property (weak, nonatomic) IBOutlet UILabel *unreadMessagesLbl;
 
 @property (strong, nonatomic) NSMutableArray *postsDataSource;
+@property (weak, nonatomic) IBOutlet UICollectionView *footerCollectionView;
 @property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *leftSwipe;
 @end
 
@@ -352,13 +354,13 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     {
         if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
             [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-            //TODO: add this call only first time ?
             __block NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             BOOL suggestionsShown = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
             if(suggestionsShown == NO)
             {
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
                 STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
+                vc.delegate = self;
                 [self.navigationController presentViewController:vc animated:NO completion:^{
                     [ud setValue:@(YES) forKey:@"SUGGESTIONS_SHOWED"];
                     [ud synchronize];
@@ -396,6 +398,10 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [[STNotificationsManager sharedManager] handleLastNotification];
 }
 
+#pragma mark - STSuggestionsDelegate
+-(void)userDidEndApplyingSugegstions{
+    [self getDataSourceWithOffset:0];
+}
 #pragma mark - STShareImageDelegate
 
 -(void)imageWasPostedWithPostId:(NSString *)postId{
@@ -497,9 +503,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                     NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
-//#ifdef DEBUG
-//                    [newPosts setValue:@"Tra la la la la la la ll llalalalal lal lalalal lalalal lalala" forKey:@"caption"];
-//#endif
                     [weakSelf.postsDataSource addObjectsFromArray:newPosts];
                     _isDataSourceLoaded = YES;
                     [weakSelf loadImages:newPosts];
@@ -1213,9 +1216,23 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView *reusableview = nil;
-    
     if (kind == UICollectionElementKindSectionFooter) {
         STFooterView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footerView" forIndexPath:indexPath];
+        if(_isDataSourceLoaded){
+            UIImage *bluredImage = nil;
+            if ([_postsDataSource count]> 0) {
+                bluredImage = [STMenuController blurScreen:self];
+            }
+            else
+            {
+                bluredImage = [UIImage imageNamed:@"placeholder STATUS loading"];
+
+            }
+            [headerView configureFooterWithBkImage:bluredImage];
+        }
+        else
+            [headerView showOnlyBackground];
+            
         reusableview = headerView;
     }
     

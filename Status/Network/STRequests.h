@@ -13,6 +13,7 @@
 #import "STFollowUsersRequest.h"
 #import "STUnfollowUsersRequest.h"
 #import "STGetPostLikesRequest.h"
+#import "STFlowImagesRequest.h"
 
 #endif
 

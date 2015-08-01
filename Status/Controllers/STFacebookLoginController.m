@@ -19,7 +19,7 @@
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
 #import "STCoreDataManager.h"
-#import <Crashlytics/Crashlytics.h>\
+#import <Crashlytics/Crashlytics.h>
 
 #import "STLoginRequest.h"
 #import "STRegisterRequest.h"
