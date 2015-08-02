@@ -160,7 +160,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="following_button"/>
-                                <state key="highlighted" image="next button pressed"/>
                                 <connections>
                                     <action selector="onTapFollowUser:" destination="AU9-ws-jB7" eventType="touchUpInside" id="Ygr-g9-bEp"/>
                                 </connections>
@@ -607,7 +606,6 @@
         <image name="location icon" width="12" height="16"/>
         <image name="message button" width="66" height="66"/>
         <image name="message button pressed" width="66" height="66"/>
-        <image name="next button pressed" width="100" height="100"/>
         <image name="placeholder STATUS loading" width="375" height="667"/>
         <image name="settings button" width="100" height="100"/>
         <image name="settings button pressed" width="100" height="100"/>

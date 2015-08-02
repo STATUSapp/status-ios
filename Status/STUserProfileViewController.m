@@ -82,6 +82,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _loadingPlaceholder.hidden = NO;
+    
+    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [_imageViewProfilePicture addGestureRecognizer:tapGestureRecognizer];
+    _imageViewProfilePicture.userInteractionEnabled = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
