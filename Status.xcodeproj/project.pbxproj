@@ -143,6 +143,7 @@
 		1DFCCACC191238A000B9230E /* STTutorialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFCCACB191238A000B9230E /* STTutorialCell.m */; };
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
+		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
 		9904DD3D1A2FB48D0072134F /* STUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */; };
 		9904DD401A2FB4C40072134F /* STEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */; };
 		9904DD451A2FB55D0072134F /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9904DD441A2FB55D0072134F /* UserProfile.storyboard */; };
@@ -438,6 +439,7 @@
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		62D422D9C06AC39526914FFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9901E4961B6D99E50064223C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		9904DD3B1A2FB48D0072134F /* STUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserProfileViewController.h; sourceTree = "<group>"; };
 		9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserProfileViewController.m; sourceTree = "<group>"; };
 		9904DD3E1A2FB4C40072134F /* STEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditProfileViewController.h; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */,
 				CD532FD319B9A451009B1445 /* Social.framework in Frameworks */,
 				CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */,
 				1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */,
@@ -663,6 +666,7 @@
 		172EAE6518B0B12E00C5637B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9901E4961B6D99E50064223C /* CoreMotion.framework */,
 				170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */,
 				CD532FD219B9A451009B1445 /* Social.framework */,
 				CD532FD019B9A44B009B1445 /* Accounts.framework */,
