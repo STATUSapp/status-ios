@@ -29,5 +29,5 @@
 + (UIImage *)snapshotForViewController:(UIViewController *)vc;
 +(UIImage *)blurScreen:(UIViewController *)vc;
 - (STFlowTemplateViewController *)appMainController;
-
+-(void)resetCurrentVC:(UIViewController *)otherVC;
 @end

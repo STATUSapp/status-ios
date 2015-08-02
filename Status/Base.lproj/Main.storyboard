@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -53,6 +54,7 @@
             <string>ProximaNova-Regular</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
             <string>ProximaNova-Semibold</string>
             <string>ProximaNova-Semibold</string>
             <string>ProximaNova-Semibold</string>
@@ -521,6 +523,9 @@
                                     <rect key="frame" x="320" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-vH-cAm">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You saw all the photos.  Please check out:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2Dn-9z-a20">
                                             <rect key="frame" x="57" y="60" width="206" height="40"/>
                                             <constraints>
@@ -583,39 +588,53 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FROGIO - SHARE FUNNY &amp; COOL THINGS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RET-sn-pHf">
-                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="38"/>
+                                                                <rect key="frame" x="0.0" y="8" width="130" height="30"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="38" id="BgH-XB-NiV"/>
+                                                                    <constraint firstAttribute="height" constant="30" id="BgH-XB-NiV"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
                                                                 <color key="textColor" red="0.32549019607843138" green="0.396078431372549" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujf-9b-6a9">
-                                                                <rect key="frame" x="33" y="37" width="65" height="65"/>
+                                                                <rect key="frame" x="43" y="46" width="46" height="46"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="65" id="EiH-eZ-MNu"/>
-                                                                    <constraint firstAttribute="height" constant="65" id="WbX-34-MTu"/>
+                                                                    <constraint firstAttribute="width" secondItem="ujf-9b-6a9" secondAttribute="height" multiplier="1:1" id="IQz-Nd-YZd"/>
                                                                 </constraints>
                                                             </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSTALL NOW" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpO-lZ-7Jf">
+                                                                <rect key="frame" x="0.0" y="100" width="130" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="22" id="iCX-yn-ofc"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                                                <color key="textColor" red="0.0" green="0.28235294117647058" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="RET-sn-pHf" firstAttribute="top" secondItem="PgS-D7-0tI" secondAttribute="top" id="AIG-Th-c1R"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cpO-lZ-7Jf" secondAttribute="trailing" id="390-PT-wi1"/>
+                                                        <constraint firstAttribute="bottom" secondItem="cpO-lZ-7Jf" secondAttribute="bottom" constant="8" id="3vQ-Av-wZY"/>
+                                                        <constraint firstItem="RET-sn-pHf" firstAttribute="top" secondItem="PgS-D7-0tI" secondAttribute="top" constant="8" id="AIG-Th-c1R"/>
+                                                        <constraint firstItem="cpO-lZ-7Jf" firstAttribute="top" secondItem="ujf-9b-6a9" secondAttribute="bottom" constant="8" id="LVx-O3-fM9"/>
                                                         <constraint firstItem="RET-sn-pHf" firstAttribute="leading" secondItem="PgS-D7-0tI" secondAttribute="leading" id="PcH-WR-htf"/>
-                                                        <constraint firstItem="ujf-9b-6a9" firstAttribute="top" secondItem="PgS-D7-0tI" secondAttribute="top" constant="37" id="R4A-y9-3XX"/>
                                                         <constraint firstAttribute="trailing" secondItem="RET-sn-pHf" secondAttribute="trailing" id="VvO-om-gOv"/>
                                                         <constraint firstAttribute="centerX" secondItem="ujf-9b-6a9" secondAttribute="centerX" constant="-0.5" id="nil-Pb-hc1"/>
+                                                        <constraint firstItem="ujf-9b-6a9" firstAttribute="top" secondItem="RET-sn-pHf" secondAttribute="bottom" constant="8" id="sAa-YO-Fb0"/>
+                                                        <constraint firstItem="cpO-lZ-7Jf" firstAttribute="leading" secondItem="PgS-D7-0tI" secondAttribute="leading" id="yHQ-c2-GF5"/>
                                                     </constraints>
                                                     <size key="customSize" width="130" height="130"/>
+                                                    <connections>
+                                                        <outlet property="actionLabel" destination="cpO-lZ-7Jf" id="Yfe-P7-AVD"/>
+                                                        <outlet property="adImage" destination="ujf-9b-6a9" id="c1j-Ci-rJp"/>
+                                                        <outlet property="adTitle" destination="RET-sn-pHf" id="LLX-bU-5ii"/>
+                                                    </connections>
                                                 </collectionViewCell>
                                             </cells>
                                         </collectionView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-vH-cAm">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="P9B-vH-cAm" firstAttribute="leading" secondItem="BFS-2S-edS" secondAttribute="leading" id="5vN-Ag-s3c"/>

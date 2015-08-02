@@ -7,7 +7,7 @@
 //
 
 
-#define PLACEMENT_ID @"1341234sadflkjhasdlfkjhasdf"
+#define PLACEMENT_ID @"642056059181757_878074238913270"
 
 #import "STNativeAdsController.h"
 
@@ -49,6 +49,7 @@
 
 - (void)getAdsInBatchOf:(NSUInteger)numberOfAds withCompletion:(STAdsRequestCompletion)completion {
     _adsManager = [[FBNativeAdsManager alloc] initWithPlacementID:PLACEMENT_ID forNumAdsRequested:numberOfAds];
+    _numberOfRequestedAds = numberOfAds;
     _adsManager.delegate = self;
     [_adsManager loadAds];
     self.adsCompletion = completion;

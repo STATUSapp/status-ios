@@ -10,5 +10,8 @@
 #import <FBAudienceNetwork/FBAudienceNetwork.h>
 
 @interface STFBAdCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *adTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *adImage;
+@property (weak, nonatomic) IBOutlet UILabel *actionLabel;
 -(void)configureCellWithFBNativeAdd:(FBNativeAd *)nativeAd;
 @end

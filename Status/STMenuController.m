@@ -62,6 +62,10 @@
     return self;
 }
 
+-(void)resetCurrentVC:(UIViewController *)otherVC{
+    _currentVC = otherVC;
+}
+
 - (void)showMenuForController:(UIViewController *)parrentVC{
     
     _currentVC = parrentVC;
