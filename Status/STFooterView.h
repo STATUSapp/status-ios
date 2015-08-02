@@ -11,6 +11,7 @@
 @interface STFooterView : UICollectionReusableView
 @property (weak, nonatomic) IBOutlet UIImageView *bkImageView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
--(void)configureFooterWithBkImage:(UIImage *)image;
+-(void)configureFooterWithBkImage:(UIImage *)image
+            handlerViewController:(UIViewController *)vc;
 -(void)showOnlyBackground;
 @end

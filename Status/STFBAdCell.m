@@ -7,9 +7,18 @@
 //
 
 #import "STFBAdCell.h"
+#import "STSmallFlowCell.h"
 
 @implementation STFBAdCell
 -(void)configureCellWithFBNativeAdd:(FBNativeAd *)nativeAd{
-    //TODO: configure cell
+    CGRect rect = self.contentView.frame;
+    rect.size = [STSmallFlowCell cellSize];
+    self.contentView.frame = rect;
+
+    _adTitle.text = [nativeAd.title uppercaseString];
+    _actionLabel.text = [nativeAd.callToAction uppercaseString];
+    [nativeAd.coverImage loadImageAsyncWithBlock:^(UIImage *image) {
+        _adImage.image = image;
+    }];
 }
 @end

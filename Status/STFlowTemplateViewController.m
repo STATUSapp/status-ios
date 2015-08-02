@@ -1240,7 +1240,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 bluredImage = [UIImage imageNamed:@"placeholder STATUS loading"];
 
             }
-            [headerView configureFooterWithBkImage:bluredImage];
+            [headerView configureFooterWithBkImage:bluredImage handlerViewController:self];
         }
         else
             [headerView showOnlyBackground];
