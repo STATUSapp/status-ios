@@ -95,6 +95,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 @property (weak, nonatomic) IBOutlet UILabel *notifNumberLabel;
 @property (strong, nonatomic) UIButton * refreshBt;
 @property (weak, nonatomic) IBOutlet UILabel *unreadMessagesLbl;
+@property (weak, nonatomic) IBOutlet UIButton *btnMenu;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
 
 @property (strong, nonatomic) NSMutableArray *postsDataSource;
 @property (weak, nonatomic) IBOutlet UICollectionView *footerCollectionView;
@@ -180,6 +182,13 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:appDelegate.badgeNumber];
     [[STImageCacheController sharedInstance] changeFlowType:_flowType needsSort:YES];
+    
+    if (self.flowType == STFlowTypeMyGallery || self.flowType == STFlowTypeUserGallery) {
+        _notifNumberLabel.hidden = YES;
+        _btnMenu.hidden = YES;
+    } else {
+        _btnBack.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -637,6 +646,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 #pragma mark - Actions
+- (IBAction)onTapBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (IBAction)onTapMenu:(id)sender {
     [[STMenuController sharedInstance] showMenuForController:self];
