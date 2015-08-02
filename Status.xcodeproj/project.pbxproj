@@ -144,6 +144,7 @@
 		317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 317A269818B0D26F00291463 /* STCustomCollectionViewCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
 		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
+		9901E49A1B6DA2F10064223C /* STNativeAdsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9901E4991B6DA2F10064223C /* STNativeAdsController.m */; };
 		9904DD3D1A2FB48D0072134F /* STUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */; };
 		9904DD401A2FB4C40072134F /* STEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9904DD3F1A2FB4C40072134F /* STEditProfileViewController.m */; };
 		9904DD451A2FB55D0072134F /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9904DD441A2FB55D0072134F /* UserProfile.storyboard */; };
@@ -440,6 +441,8 @@
 		62D422D9C06AC39526914FFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9901E4961B6D99E50064223C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		9901E4981B6DA2F10064223C /* STNativeAdsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNativeAdsController.h; sourceTree = "<group>"; };
+		9901E4991B6DA2F10064223C /* STNativeAdsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNativeAdsController.m; sourceTree = "<group>"; };
 		9904DD3B1A2FB48D0072134F /* STUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserProfileViewController.h; sourceTree = "<group>"; };
 		9904DD3C1A2FB48D0072134F /* STUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserProfileViewController.m; sourceTree = "<group>"; };
 		9904DD3E1A2FB4C40072134F /* STEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditProfileViewController.h; sourceTree = "<group>"; };
@@ -602,6 +605,8 @@
 				0717E2C019B71B51001DF132 /* STImageCacheController.m */,
 				175F8B551A7B7F7000360C3E /* STImagePickerController.h */,
 				175F8B561A7B7F7000360C3E /* STImagePickerController.m */,
+				9901E4981B6DA2F10064223C /* STNativeAdsController.h */,
+				9901E4991B6DA2F10064223C /* STNativeAdsController.m */,
 			);
 			name = Controllers;
 			path = Status/Controllers;
@@ -1373,6 +1378,7 @@
 				0717E2AB19B718B4001DF132 /* STZoomablePostViewController.m in Sources */,
 				1776F53019C8CE0F00267DC8 /* UIImage+FixedOrientation.m in Sources */,
 				17FE7CE419B321340081F688 /* NSString+MD5.m in Sources */,
+				9901E49A1B6DA2F10064223C /* STNativeAdsController.m in Sources */,
 				17FD59A31B0895EA00AFDFF8 /* STSuggestionCell.m in Sources */,
 				070B31BD18C772EF00765189 /* STNotificationCell.m in Sources */,
 				172EAE7718B0B12E00C5637B /* AppDelegate.m in Sources */,

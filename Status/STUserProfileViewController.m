@@ -27,6 +27,8 @@
 #import "STFollowUsersRequest.h"
 #import "STUnfollowUsersRequest.h"
 
+#import "STNativeAdsController.h"
+
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
