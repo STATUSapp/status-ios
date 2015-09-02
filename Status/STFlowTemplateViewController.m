@@ -509,18 +509,20 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         case STFlowTypeHome:
         case STFlowTypeRecent:
         {
-            
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                     NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
-#ifndef DEBUG
                     [weakSelf.postsDataSource addObjectsFromArray:newPosts];
-#endif
-                    if (weakSelf.flowType == STFlowTypeHome && [weakSelf.postsDataSource count] == 0) {
+                    __block NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+                    BOOL suggestionsShown = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
+                    if (weakSelf.flowType == STFlowTypeHome && [weakSelf.postsDataSource count] == 0 && suggestionsShown == NO) {
                         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
                         STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
-                        vc.delegate = self;
-                        [self.navigationController presentViewController:vc animated:NO completion:nil];
+                        vc.delegate = weakSelf;
+                        [self.navigationController presentViewController:vc animated:NO completion:^{
+                            [ud setValue:@(YES) forKey:@"SUGGESTIONS_SHOWED"];
+                            [ud synchronize];
+                        }];
 
                     }
                     _isDataSourceLoaded = YES;
