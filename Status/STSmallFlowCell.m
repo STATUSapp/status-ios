@@ -17,11 +17,16 @@
     self.contentView.frame = rect;
     
     _nameLabel.text = [ft displayedName];
-    [[STImageCacheController sharedInstance] loadPostImageWithName:ft.url withPostCompletion:^(UIImage *img) {
-        
-        if (img!=nil)
-            _imageView.image = img;
-    } andBlurCompletion:nil];
+    if (![ft.url isKindOfClass:[NSNull class]]) {
+        [[STImageCacheController sharedInstance] loadPostImageWithName:ft.url withPostCompletion:^(UIImage *img) {
+            
+            if (img!=nil)
+                _imageView.image = img;
+        } andBlurCompletion:nil];
+    }
+    else
+        _imageView.image = [UIImage imageNamed:@"Nearby-placeholder"];
+
 }
 +(CGSize)cellSize{
     CGRect screenRect = [[UIScreen mainScreen] bounds];

@@ -12,7 +12,9 @@
 #import "STLocationManager.h"
 #import "STGetNearbyProfilesRequest.h"
 
-@interface STNearbyController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STUserProfileControllerDelegate>
+@interface STNearbyController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STUserProfileControllerDelegate>{
+    UIScrollView *_contentScrollView;
+}
 
 @property (strong, nonatomic) UIPageViewController * pageViewController;
 @property (strong, nonatomic) NSMutableArray * profiles;
@@ -66,7 +68,7 @@
     if (_pageViewController == nil) {
         _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
         _pageViewController.delegate = self;
-        _pageViewController.dataSource = self;
+        _pageViewController.dataSource = self;        
     }
     
     [self getProfilesFromServerWithOffset:_profiles.count withCompletion:^(NSError *error) {

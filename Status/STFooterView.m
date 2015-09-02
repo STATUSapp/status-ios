@@ -22,6 +22,7 @@ static const NSInteger kNumberOfTiles = 6;
 
 @interface STFooterView()<UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) NSMutableArray *itemsArray;
+@property (nonatomic, weak) UIViewController *currentVc;
 @end
 
 @implementation STFooterView
@@ -43,18 +44,17 @@ static const NSInteger kNumberOfTiles = 6;
             handlerViewController:(UIViewController *)vc{
     _itemsArray = [NSMutableArray new];
     [[STMenuController sharedInstance] resetCurrentVC:vc];
+    _currentVc = vc;
     [self sendSubviewToBack:_bkImageView];
-    _bkImageView.image = image;
+    _bkImageView.image = [UIImage imageNamed:@"you-saw-all-photos-background-"];
     [STDataAccessUtils getFlowTemplatesWithCompletion:^(NSArray *objects, NSError *error) {
         if (error==nil) {
+            [_itemsArray removeAllObjects];
             [_itemsArray addObjectsFromArray:objects];
             _collectionView.delegate = self;
             _collectionView.dataSource = self;
             [_collectionView reloadData];
             [[STNativeAdsController sharedInstance] getAdsInBatchOf:kNumberOfTiles - [_itemsArray count] withCompletion:^(NSArray *response, NSError *error) {
-//                for (FBNativeAd *nativeAd in response) {
-//                    [nativeAd registerViewForInteraction:_bkImageView withViewController:vc];
-//                }
                 if (error == nil) {
                     [_itemsArray addObjectsFromArray:response];
                     [_collectionView reloadData];
@@ -87,11 +87,23 @@ static const NSInteger kNumberOfTiles = 6;
     }
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    cell.layer.masksToBounds = YES;
+    cell.layer.borderColor = [UIColor colorWithRed:1.f green:1.f blue:1.f alpha:1.f].CGColor;
+    cell.layer.borderWidth = 1.0f;
+    cell.layer.contentsScale = [UIScreen mainScreen].scale;
+    cell.layer.shadowOpacity = 0.25f;
+    cell.layer.shadowRadius = 3.0f;
+    cell.layer.shadowOffset = CGSizeZero;
+    cell.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.bounds].CGPath;
+    cell.layer.shouldRasterize = YES;
+
     if ([cell isKindOfClass:[STSmallFlowCell class]]) {
         [(STSmallFlowCell *)cell configureCellWithFlorTemplate:object];
     }
     else if ([cell isKindOfClass:[STFBAdCell class]]){
         [(STFBAdCell *)cell configureCellWithFBNativeAdd:object];
+        [(FBNativeAd *)object registerViewForInteraction:cell withViewController:_currentVc];
+
     }
     
     return cell;

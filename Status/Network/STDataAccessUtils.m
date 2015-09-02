@@ -98,8 +98,18 @@
             NSMutableArray *objects = [NSMutableArray new];
             NSArray *responseArray = response[@"data"];
             NSLog(@"Flows: %@", responseArray);
+            NSMutableArray *flowsArray = [NSMutableArray arrayWithArray:@[@"nearby", @"home", @"popular", @"recent"]];
             for (NSDictionary *dict in responseArray) {
                 STFlowTemplate *ft = [STFlowTemplate flowTemplateFromDict:dict];
+                [objects addObject:ft];
+                NSString *type = ft.type;
+                if ([flowsArray containsObject:type]) {
+                    [flowsArray removeObject:type];
+                }
+            }
+            
+            for (NSString *type in flowsArray) {
+                STFlowTemplate *ft = [STFlowTemplate flowTemplateFromDict:@{@"type":type, @"url":[NSNull null]}];
                 [objects addObject:ft];
             }
             completion([NSArray arrayWithArray:objects], nil);

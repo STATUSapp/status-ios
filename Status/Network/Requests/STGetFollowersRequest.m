@@ -31,7 +31,7 @@
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"offset"] = weakSelf.offset;
-        params[@"limit"] = @(25);
+        params[@"limit"] = @(100);
         params[@"user_id"] = weakSelf.userID;
         
         [[STNetworkManager sharedManager] GET:url

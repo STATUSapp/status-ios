@@ -174,6 +174,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             [self onTapCameraUpload:nil];
         }
     }
+    [[STMenuController sharedInstance] resetCurrentVC:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -512,7 +513,16 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             STRequestCompletionBlock completion = ^(id response, NSError *error){
                 if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                     NSArray *newPosts = [self removeDuplicatesFromArray:response[@"data"]];
+#ifndef DEBUG
                     [weakSelf.postsDataSource addObjectsFromArray:newPosts];
+#endif
+                    if (weakSelf.flowType == STFlowTypeHome && [weakSelf.postsDataSource count] == 0) {
+                        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
+                        STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
+                        vc.delegate = self;
+                        [self.navigationController presentViewController:vc animated:NO completion:nil];
+
+                    }
                     _isDataSourceLoaded = YES;
                     [weakSelf loadImages:newPosts];
                     [weakSelf.collectionView reloadData];
