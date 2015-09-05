@@ -33,4 +33,20 @@
     CGFloat tileWidth = (screenRect.size.width - 60.f)/2;
     return CGSizeMake(tileWidth, tileWidth);
 }
+-(void)setHighlighted:(BOOL)highlighted{
+    if (highlighted == YES) {
+        _nameLabel.alpha = 0.8f;
+        if ([_imageView.image isEqual:[UIImage imageNamed:@"Nearby-placeholder"]]) {
+            _imageView.alpha = 0.8f;
+        }
+        else
+            _selectedImageView.hidden = NO;
+    }
+    else
+    {
+        _nameLabel.alpha = 1.f;
+        _selectedImageView.hidden = YES;
+        _imageView.alpha = 1.f;
+    }
+}
 @end

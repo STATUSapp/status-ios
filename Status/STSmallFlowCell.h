@@ -12,6 +12,7 @@
 @interface STSmallFlowCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *selectedImageView;
 -(void)configureCellWithFlorTemplate:(STFlowTemplate *)ft;
 +(CGSize)cellSize;
 @end
