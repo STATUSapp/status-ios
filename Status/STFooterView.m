@@ -96,7 +96,8 @@ static const NSInteger kNumberOfTiles = 6;
     cell.layer.shadowOffset = CGSizeZero;
     cell.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.bounds].CGPath;
     cell.layer.shouldRasterize = YES;
-
+    cell.layer.rasterizationScale=[[UIScreen mainScreen] scale];
+    
     if ([cell isKindOfClass:[STSmallFlowCell class]]) {
         [(STSmallFlowCell *)cell configureCellWithFlorTemplate:object];
     }
