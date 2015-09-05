@@ -607,7 +607,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujf-9b-6a9">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujf-9b-6a9">
                                                                 <rect key="frame" x="43" y="46" width="46" height="46"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="ujf-9b-6a9" secondAttribute="height" multiplier="1:1" id="IQz-Nd-YZd"/>
@@ -642,6 +642,9 @@
                                                                 <color key="textColor" cyan="0.64017701148986816" magenta="0.42168307304382324" yellow="0.31432056427001953" black="0.49304993529068797" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white layer " translatesAutoresizingMaskIntoConstraints="NO" id="Imu-Pj-3h8" userLabel="selected">
+                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
@@ -653,17 +656,22 @@
                                                         <constraint firstItem="Ujl-CA-0yD" firstAttribute="leading" secondItem="PgS-D7-0tI" secondAttribute="leading" id="I6f-XA-Tf0"/>
                                                         <constraint firstItem="cpO-lZ-7Jf" firstAttribute="top" secondItem="ujf-9b-6a9" secondAttribute="bottom" constant="8" id="LVx-O3-fM9"/>
                                                         <constraint firstItem="RET-sn-pHf" firstAttribute="leading" secondItem="PgS-D7-0tI" secondAttribute="leading" id="PcH-WR-htf"/>
+                                                        <constraint firstItem="Imu-Pj-3h8" firstAttribute="top" secondItem="PgS-D7-0tI" secondAttribute="top" id="Tls-Cf-YUG"/>
                                                         <constraint firstAttribute="trailing" secondItem="RET-sn-pHf" secondAttribute="trailing" id="VvO-om-gOv"/>
                                                         <constraint firstAttribute="bottom" secondItem="Ujl-CA-0yD" secondAttribute="bottom" id="d76-Mi-Ezg"/>
+                                                        <constraint firstItem="Imu-Pj-3h8" firstAttribute="leading" secondItem="PgS-D7-0tI" secondAttribute="leading" id="fnq-5c-KhN"/>
                                                         <constraint firstAttribute="centerX" secondItem="ujf-9b-6a9" secondAttribute="centerX" constant="-0.5" id="nil-Pb-hc1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Imu-Pj-3h8" secondAttribute="trailing" id="oUK-NS-tAU"/>
                                                         <constraint firstItem="ujf-9b-6a9" firstAttribute="top" secondItem="RET-sn-pHf" secondAttribute="bottom" constant="8" id="sAa-YO-Fb0"/>
                                                         <constraint firstItem="cpO-lZ-7Jf" firstAttribute="leading" secondItem="PgS-D7-0tI" secondAttribute="leading" id="yHQ-c2-GF5"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Imu-Pj-3h8" secondAttribute="bottom" id="zMu-NO-ajW"/>
                                                     </constraints>
                                                     <size key="customSize" width="130" height="130"/>
                                                     <connections>
                                                         <outlet property="actionLabel" destination="cpO-lZ-7Jf" id="Yfe-P7-AVD"/>
                                                         <outlet property="adImage" destination="ujf-9b-6a9" id="c1j-Ci-rJp"/>
                                                         <outlet property="adTitle" destination="RET-sn-pHf" id="LLX-bU-5ii"/>
+                                                        <outlet property="selectedImage" destination="Imu-Pj-3h8" id="UTI-JR-jkF"/>
                                                     </connections>
                                                 </collectionViewCell>
                                             </cells>

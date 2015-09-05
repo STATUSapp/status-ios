@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *adTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *adImage;
 @property (weak, nonatomic) IBOutlet UILabel *actionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *selectedImage;
 -(void)configureCellWithFBNativeAdd:(FBNativeAd *)nativeAd;
 @end

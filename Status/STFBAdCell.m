@@ -21,4 +21,14 @@
         _adImage.image = image;
     }];
 }
+
+-(void)setHighlighted:(BOOL)highlighted{
+    if (highlighted == YES) {
+        _selectedImage.hidden = NO;
+    }
+    else
+    {
+        _selectedImage.hidden = YES;
+    }
+}
 @end
