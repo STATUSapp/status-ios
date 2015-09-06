@@ -103,7 +103,7 @@ static STNotificationsManager *_sharedManager = nil;
           notifType == STNotificationTypeChatMessage) {
         NSString *alertMesage = notification[@"aps"][@"alert"];
         
-        if (alertMesage!=nil)
+        if (alertMesage !=nil )
             notificationDict[@"alert_message"] = alertMesage;
         else
         {
@@ -112,6 +112,8 @@ static STNotificationsManager *_sharedManager = nil;
             }
             else if (notifType == STNotificationTypeUploaded)
                 alertMesage = [NSString stringWithFormat:@"%@ uploaded a new photo.", notificationDict[@"name"]];
+            else
+                alertMesage = @"";
             
             notificationDict[@"alert_message"] = alertMesage;
             

@@ -178,7 +178,7 @@
         }
     }
 
-    [_btnGallery setTitle:[NSString stringWithFormat:@"%li", profile.numberOfPosts] forState:UIControlStateNormal];
+    [_btnGallery setTitle:[NSString stringWithFormat:@"%li", (long)profile.numberOfPosts] forState:UIControlStateNormal];
     
     if (profile.bio == nil) {
         profile.bio = @"";
@@ -242,9 +242,9 @@
     _loadingPlaceholder.hidden = YES;
     
     _btnFollow.selected = profile.isFollowedByCurrentUser;
-    [_btnFollowers setTitle:[NSString stringWithFormat:@"Followers %li", profile.followersCount] forState:UIControlStateNormal];
-    [_btnFollowing setTitle:[NSString stringWithFormat:@"Following %li", profile.followingCount] forState:UIControlStateNormal];
-    [_btnFollowersCount setTitle:[NSString stringWithFormat:@"%li", profile.followersCount] forState:UIControlStateNormal];
+    [_btnFollowers setTitle:[NSString stringWithFormat:@"Followers %li", (long)profile.followersCount] forState:UIControlStateNormal];
+    [_btnFollowing setTitle:[NSString stringWithFormat:@"Following %li", (long)profile.followingCount] forState:UIControlStateNormal];
+    [_btnFollowersCount setTitle:[NSString stringWithFormat:@"%li", (long)profile.followersCount] forState:UIControlStateNormal];
 }
 
 - (void)setStatusIconForStatus:(STUserStatus)userStatus {
