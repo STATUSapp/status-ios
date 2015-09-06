@@ -565,9 +565,6 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nearby-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="9hg-XL-4ug" userLabel="flow image">
                                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                                                             </imageView>
-                                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white layer " translatesAutoresizingMaskIntoConstraints="NO" id="7fD-QH-hen" userLabel="selected">
-                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
-                                                            </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="0Ux-tm-jr8">
                                                                 <rect key="frame" x="0.0" y="34" width="130" height="61"/>
                                                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="25"/>
@@ -576,6 +573,9 @@
                                                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                                 <size key="shadowOffset" width="1" height="1"/>
                                                             </label>
+                                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_layer" translatesAutoresizingMaskIntoConstraints="NO" id="7fD-QH-hen" userLabel="selected">
+                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
@@ -642,7 +642,7 @@
                                                                 <color key="textColor" cyan="0.64017701148986816" magenta="0.42168307304382324" yellow="0.31432056427001953" black="0.49304993529068797" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white layer " translatesAutoresizingMaskIntoConstraints="NO" id="Imu-Pj-3h8" userLabel="selected">
+                                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_layer" translatesAutoresizingMaskIntoConstraints="NO" id="Imu-Pj-3h8" userLabel="selected">
                                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                                                             </imageView>
                                                         </subviews>
@@ -2385,7 +2385,7 @@
         <image name="upShaddow" width="414" height="204"/>
         <image name="user chat black button" width="36" height="36"/>
         <image name="user chat black button pressed" width="36" height="36"/>
-        <image name="white layer " width="185" height="7"/>
+        <image name="white_layer" width="100" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

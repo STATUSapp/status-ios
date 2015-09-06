@@ -13,14 +13,14 @@
           "height" : 1
         },
         "capInsets" : {
-          "bottom" : 8,
-          "top" : 6,
-          "right" : 185,
-          "left" : 184
+          "bottom" : 100,
+          "top" : 99,
+          "right" : 100,
+          "left" : 99
         }
       },
       "idiom" : "universal",
-      "filename" : "white layer @2x.png",
+      "filename" : "white_layer@2x.png",
       "scale" : "2x"
     },
     {
@@ -32,14 +32,14 @@
           "height" : 1
         },
         "capInsets" : {
-          "bottom" : 277,
-          "top" : 277,
-          "right" : 277,
-          "left" : 277
+          "bottom" : 150,
+          "top" : 149,
+          "right" : 150,
+          "left" : 149
         }
       },
       "idiom" : "universal",
-      "filename" : "white layer @3x.png",
+      "filename" : "white_layer@3x.png",
       "scale" : "3x"
     }
   ],
