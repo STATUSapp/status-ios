@@ -749,16 +749,6 @@
                                     <constraint firstItem="VI0-aG-k1h" firstAttribute="leading" secondItem="NZ4-Ci-8ma" secondAttribute="leading" constant="7" id="smE-S6-7pN"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPf-6q-LRA" userLabel="btnBack">
-                                <rect key="frame" x="10" y="15" width="50" height="25"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="back button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onTapBack:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wKR-Mv-g9a"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7P-nF-88w" userLabel="chatsView">
                                 <rect key="frame" x="248" y="0.0" width="56" height="56"/>
                                 <subviews>
@@ -795,6 +785,16 @@
                                     <constraint firstAttribute="height" constant="56" id="lZP-LT-H6Q"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPf-6q-LRA" userLabel="btnBack">
+                                <rect key="frame" x="16" y="18" width="37" height="22"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="back button white 2">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapBack:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wKR-Mv-g9a"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -888,11 +888,9 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sT6-X8-ybw">
                                                 <rect key="frame" x="16" y="2" width="37" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="back button white">
+                                                <state key="normal" image="back button white 2">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <state key="selected" image="back button white pressed"/>
-                                                <state key="highlighted" image="back button white pressed"/>
                                                 <connections>
                                                     <action selector="onClickBack:" destination="3ip-Jx-vLr" eventType="touchUpInside" id="Lem-G8-hkR"/>
                                                 </connections>
@@ -988,11 +986,9 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="t4p-qe-bD6">
                                                 <rect key="frame" x="16" y="2" width="37" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="back button white">
+                                                <state key="normal" image="back button white 2">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <state key="selected" image="back button white pressed"/>
-                                                <state key="highlighted" image="back button white pressed"/>
                                                 <connections>
                                                     <action selector="onClickBack:" destination="gF0-LP-1T6" eventType="touchUpInside" id="Zk1-pu-B4J"/>
                                                 </connections>
@@ -1173,7 +1169,7 @@
                                                 <rect key="frame" x="16" y="7" width="92" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="contentEdgeInsets" minX="-54" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" image="back button">
+                                                <state key="normal" image="back button black 2">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -1346,7 +1342,7 @@
                                                 <rect key="frame" x="16" y="7" width="92" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="contentEdgeInsets" minX="-54" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" image="back button">
+                                                <state key="normal" image="back button black 2">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -2350,9 +2346,8 @@
         <image name="Twitter share button pressed" width="109" height="109"/>
         <image name="Use button" width="82" height="82"/>
         <image name="Use button pressed" width="82" height="82"/>
-        <image name="back button" width="37" height="19"/>
-        <image name="back button white" width="37" height="19"/>
-        <image name="back button white pressed" width="37" height="19"/>
+        <image name="back button black 2" width="39" height="20"/>
+        <image name="back button white 2" width="39" height="20"/>
         <image name="btn_big_camera_normal" width="142" height="108"/>
         <image name="btn_big_camera_pressed" width="142" height="108"/>
         <image name="btn_nrLIkes_normal" width="34" height="33"/>
