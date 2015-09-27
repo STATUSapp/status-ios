@@ -8,43 +8,23 @@
 
 #import "STConstants.h"
 
-# pragma mark - Ammadeuss Dev
-//NSString *const kBaseURL = @"http://dev.simplebig.ro/status/api/";
-//NSString *const kBasePhotoDownload = @"http://dev.simplebig.ro/status/media/";
-
 #if USE_PRODUCTION_SERVER
 
 #pragma mark - Production Server
+
 NSString *const kBaseURL = @"http://api.getstatusapp.co/api/";
-NSString *const kBasePhotoDownload = @"http://api.getstatusapp.co/media/";
-NSString *const kChatSocketURL = @"http://api.getstatusapp.co";
 NSString *const kReachableURL = @"api.getstatusapp.co";
-int const kChatPort = 9002;
 
 #else
 
-#pragma mark - Denis Dev
-//NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
-//NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
-//NSString *const kChatSocketURL = @"http://dev.getstatusapp.co";
-//NSString *const kReachableURL = @"dev.getstatusapp.co";
-//int const kChatPort = 9003;
-
 NSString *const kBaseURL = @"http://ec2-54-93-88-66.eu-central-1.compute.amazonaws.com/status/ws/api/";
-NSString *const kBasePhotoDownload = @"http://ec2-54-93-88-66.eu-central-1.compute.amazonaws.com/status/ws/media/";
-NSString *const kChatSocketURL = @"http://ec2-52-28-186-120.eu-central-1.compute.amazonaws.com";
 NSString *const kReachableURL = @"ec2-52-28-186-120.eu-central-1.compute.amazonaws.com";
-int const kChatPort = 80;
 
 #endif
 
 NSInteger const kHTTPErrorNoConnection = 447;
 NSInteger const kPostsLimit = 20;
 NSInteger const kStartLoadOffset = 10;
-#pragma mark - Denis Dev1
-//NSString *const kBaseURL = @"http://status.nece.me/api/";
-//NSString *const kBasePhotoDownload = @"http://status.nece.me/media/";
-
 
 NSString *const kSTAdUnitID = @"ca-app-pub-2971682460090432/5255730305";
 
@@ -85,6 +65,7 @@ NSString *const kFollowUsers = @"Follow";
 NSString *const kUnfollowUsers = @"Unfollow";
 NSString *const kUnseenPostsCount = @"Get_Unseen_Posts_Count";
 NSString *const kFlowImages = @"get_flow_image";
+NSString *const kGetHostnamePortChat = @"get_hostname_port_chat";
 
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";

@@ -28,6 +28,9 @@
 
 @interface STChatController : NSObject
 
+@property (nonatomic, strong) NSString *chatSocketUrl;
+@property (nonatomic) NSInteger chatPort;
+
 @property (nonatomic, assign) STWebSockerStatus status;
 @property (nonatomic, assign) STConnectionStatus connectionStatus;
 @property (nonatomic, weak) id <STChatControllerDelegate> delegate;

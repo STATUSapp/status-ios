@@ -16,6 +16,7 @@
 #import "STFacebookLoginController.h"
 #import "STUserProfileViewController.h"
 #import "STNotificationsViewController.h"
+#import "STImageCacheController.h"
 
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
@@ -219,7 +220,7 @@ static STNotificationsManager *_sharedManager = nil;
             selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
             NSString *urlString = _currentBanner.notificationInfo[@"photo"];
             if ([urlString rangeOfString:@"http"].location==NSNotFound) {
-                urlString = [NSString stringWithFormat:@"%@%@",kBasePhotoDownload, _currentBanner.notificationInfo[@"photo"]];
+                urlString = [NSString stringWithFormat:@"%@%@",[STImageCacheController sharedInstance].photoDownloadBaseUrl, _currentBanner.notificationInfo[@"photo"]];
             }
 
             selectedUserInfo[@"small_photo_link"] = urlString;

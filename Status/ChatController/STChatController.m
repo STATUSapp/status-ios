@@ -16,6 +16,7 @@
 #import "STNotificationsManager.h"
 #import "STNotificationsManager.h"
 #import <FBSDKCoreKit.h>
+#import "STGetChatUrlAndPortRequest.h"
 
 @interface STChatController()<SRWebSocketDelegate>{
     SRWebSocket *_webSocket;
@@ -33,6 +34,7 @@
     dispatch_once(&onceToken, ^{
         
         _sharedManager = [[self alloc] init];
+        _sharedManager.chatPort = -1;//not defined
     });
     
     return _sharedManager;
@@ -49,6 +51,21 @@
     [self close];
     [self reconnect];
 }
+- (void)connectChat
+{
+    if ([_chatSocketUrl rangeOfString:@"http"].location == NSNotFound) {
+        //we should add http to the socket string
+        _chatSocketUrl = [NSString stringWithFormat:@"http://%@", _chatSocketUrl];
+    }
+    _currentRoomId = nil;
+    [self close];
+    _webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@:%ld",_chatSocketUrl, (long)_chatPort]]]];
+    _webSocket.delegate = self;
+    _status = STWebSockerStatusConnecting;
+    
+    [_webSocket open];
+}
+
 - (void)reconnect
 {
     if (_status != STWebSockerStatusClosed) {
@@ -63,14 +80,21 @@
         NSLog(@"Missing Acces token. Connect when available");
         return;
     }
-        
-    _currentRoomId = nil;
-    [self close];
-    _webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@:%d",kChatSocketURL, kChatPort]]]];
-    _webSocket.delegate = self;
-    _status = STWebSockerStatusConnecting;
-
-    [_webSocket open];
+    if (_chatSocketUrl==nil ||_chatPort == -1) {
+        [STGetChatUrlAndPortRequest getReconnectInfoWithCompletion:^(id response, NSError *error) {
+            if ([response[@"status_code"] integerValue] == 200) {
+                _chatSocketUrl = response[@"hostname"];
+                _chatPort = [response[@"port"] integerValue];
+                [self connectChat];
+                             
+            }
+            
+        } failure:^(NSError *error) {
+            NSLog(@"Get chat reconnect params failed : %@", error);
+        }];
+    }
+    else
+        [self connectChat];
     
 }
 

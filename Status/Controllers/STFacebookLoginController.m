@@ -124,6 +124,9 @@
 
 - (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
     [STNetworkQueueManager sharedManager].accessToken = response[@"token"];
+    [STImageCacheController sharedInstance].photoDownloadBaseUrl = response[@"baseUrlStorage"];
+    [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
+    [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
     [[STLocationManager sharedInstance] startLocationUpdates];
     [self saveAccessToken:response[@"token"]];
     self.currentUserId = response[@"user_id"];

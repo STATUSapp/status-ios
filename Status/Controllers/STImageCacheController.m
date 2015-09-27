@@ -11,7 +11,6 @@
 #import "UIImage+ImageEffects.h"
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
-
 NSUInteger const STImageDownloadSpecialPriority = -1;
 @interface STImageCacheController()
 
@@ -126,7 +125,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 }
 
 - (void)saveImageForBlur:(UIImage *)image imageURL:(NSURL *)imageURL {
-    if ([imageURL.absoluteString rangeOfString:kBasePhotoDownload].location!=NSNotFound) {
+    if ([imageURL.absoluteString rangeOfString:_photoDownloadBaseUrl].location!=NSNotFound) {
         UIImage *img = image;
         img = [img imageCropedFullScreenSize];
         img = [img applyLightEffect];

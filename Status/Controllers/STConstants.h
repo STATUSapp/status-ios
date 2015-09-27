@@ -90,10 +90,7 @@ typedef NS_ENUM(NSUInteger, STUserStatus){
 #pragma mark - Constant Strings
 
 extern NSString *const kBaseURL;
-extern NSString *const kBasePhotoDownload;
-extern NSString *const kChatSocketURL;
 extern NSString *const kReachableURL;
-extern int const kChatPort;
 
 extern NSString *const kSTAdUnitID;
 
@@ -137,6 +134,7 @@ extern NSString *const kFollowUsers;
 extern NSString *const kUnfollowUsers;
 extern NSString *const kUnseenPostsCount;
 extern NSString *const kFlowImages;
+extern NSString *const kGetHostnamePortChat;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

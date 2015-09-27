@@ -94,6 +94,7 @@
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
 		17950BAA1A8C0467006BD973 /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BA91A8C0467006BD973 /* STTutorialViewController.m */; };
 		17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */; };
+		17A5C4111BB7D6A10057180E /* STGetChatUrlAndPortRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */; settings = {ASSET_TAGS = (); }; };
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
@@ -352,6 +353,8 @@
 		17950BA91A8C0467006BD973 /* STTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialViewController.m; sourceTree = "<group>"; };
 		17950BAB1A8C10F6006BD973 /* STTutorialPresenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialPresenterViewController.h; sourceTree = "<group>"; };
 		17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialPresenterViewController.m; sourceTree = "<group>"; };
+		17A5C40F1BB7D6A10057180E /* STGetChatUrlAndPortRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetChatUrlAndPortRequest.h; sourceTree = "<group>"; };
+		17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetChatUrlAndPortRequest.m; sourceTree = "<group>"; };
 		17AB89E4193B0DF600A6E7FD /* STChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatController.h; sourceTree = "<group>"; };
 		17AB89E5193B0DF600A6E7FD /* STChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatController.m; sourceTree = "<group>"; };
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
@@ -910,6 +913,8 @@
 				17EB380F1B1C50C700EFDAAD /* STUnseenPostsCountRequest.m */,
 				17FDC4DE1B6D42AE00A02FF3 /* STFlowImagesRequest.h */,
 				17FDC4DF1B6D42AE00A02FF3 /* STFlowImagesRequest.m */,
+				17A5C40F1BB7D6A10057180E /* STGetChatUrlAndPortRequest.h */,
+				17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1321,6 +1326,7 @@
 				171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */,
 				172062ED1B1B1A2900A8B2B0 /* STListUser.m in Sources */,
 				176CC3071A2B0BFA00E9C3D0 /* STGetNotificationsRequest.m in Sources */,
+				17A5C4111BB7D6A10057180E /* STGetChatUrlAndPortRequest.m in Sources */,
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
 				17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */,
 				0715651218FD890400F7B3BB /* STFooterView.m in Sources */,

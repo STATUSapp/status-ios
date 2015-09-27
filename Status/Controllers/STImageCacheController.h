@@ -18,6 +18,8 @@ typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded);
 
 +(STImageCacheController *) sharedInstance;
 
+@property(nonatomic, strong) NSString *photoDownloadBaseUrl;
+
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion;
 -(void) loadPostImageWithName:(NSString *) imageFullLink withPostCompletion:(loadPostImageCompletion) completion andBlurCompletion:(loadBlurPostCompletion)blurCompl;
 -(NSString *) getImageCachePath:(BOOL)forFacebook;
