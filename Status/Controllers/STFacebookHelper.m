@@ -9,9 +9,16 @@
 #import "STFacebookHelper.h"
 #import <FBSDKCoreKit.h>
 #import <FBSDKLoginKit.h>
+#import <FBSDKAppInviteContent.h>
+#import <FBSDKAppInviteDialog.h>
 
 NSString *const kGetAlbumsGraph = @"/me/albums?fields=name,count,cover_photo,id";
 NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
+
+@interface STFacebookHelper()<FBSDKAppInviteDialogDelegate>
+
+@end
+
 @implementation STFacebookHelper
 
 -(void)loadPhotosForAlbum:(NSString *)albumId withRefreshBlock:(refreshCompletion)refreshCompletion{
@@ -249,5 +256,20 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }
 }
 
+-(void)promoteTheApp{
+        FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+        content.appLinkURL = [NSURL URLWithString:@"https://fb.me/905201786200515"];    
+        [FBSDKAppInviteDialog showFromViewController:nil
+                                         withContent:content
+                                            delegate:self];
+
+}
+#pragma mark FBSDKAppInviteDialogDelegate
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results{
+    NSLog(@"Results: %@", results);
+}
+-(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error{
+    NSLog(@"Result error: %@", error);
+}
 
 @end

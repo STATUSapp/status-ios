@@ -146,6 +146,7 @@
         return;
     
     if([[FBSDKAccessToken currentAccessToken] tokenString]==nil){
+        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
         return;
     }
     [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {

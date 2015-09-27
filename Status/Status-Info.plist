@@ -26,6 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb642056059181757</string>
+				<string>statusapp</string>
 			</array>
 		</dict>
 	</array>
