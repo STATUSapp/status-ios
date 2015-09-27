@@ -135,6 +135,7 @@ extern NSString *const kUnfollowUsers;
 extern NSString *const kUnseenPostsCount;
 extern NSString *const kFlowImages;
 extern NSString *const kGetHostnamePortChat;
+extern NSString *const kInviteFriendsByEmail;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;
