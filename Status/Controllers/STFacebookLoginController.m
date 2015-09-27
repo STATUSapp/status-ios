@@ -237,12 +237,12 @@
 }
 
 - (void)setTrackerAsExistingUser {
-    [MobileAppTracker setExistingUser:YES];
-    [MobileAppTracker measureAction:@"login"];
+    [Tune setExistingUser:YES];
+    [Tune measureEventName:@"login"];
 }
 
 - (void)measureRegister {
-    [MobileAppTracker measureAction:@"registration"];
+    [Tune measureEventName:@"registration"];
 }
 
 static const UIRemoteNotificationType REMOTE_NOTIFICATION_TYPES_REQUIRED = (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound);

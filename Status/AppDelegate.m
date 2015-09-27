@@ -64,18 +64,18 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     // setup Mobile App Tracker
     
     // Account Configuration info - must be set
-    [MobileAppTracker initializeWithMATAdvertiserId:kMATAdvertiserID
-                                   MATConversionKey:kMATConversionKey];
+    [Tune  initializeWithTuneAdvertiserId:kMATAdvertiserID
+                        tuneConversionKey:kMATConversionKey];
     
     // Used to pass us the IFA, enables highly accurate 1-to-1 attribution.
     // Required for many advertising networks.
-    [MobileAppTracker setAppleAdvertisingIdentifier:[[ASIdentifierManager sharedManager] advertisingIdentifier]
+    [Tune setAppleAdvertisingIdentifier:[[ASIdentifierManager sharedManager] advertisingIdentifier]
                          advertisingTrackingEnabled:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
     
     NSString * newInstall = [[NSUserDefaults standardUserDefaults] objectForKey:kSTNewInstallKey];
     
     if (newInstall == nil) {
-        [MobileAppTracker measureAction:@"install"];
+        [Tune measureEventName:@"install"];
         [[NSUserDefaults standardUserDefaults] setObject:kSTNewInstallKey forKey:kSTNewInstallKey];
     }
 //    [Crashlytics startWithAPIKey:@"b4369a0a1dca4a6745a3905bf41aa6964c863da1"];
@@ -154,7 +154,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [[STFacebookLoginController sharedInstance] loadTokenFromKeyChain];
     
     // MAT will not function without the measureSession call included
-    [MobileAppTracker measureSession];
+    [Tune measureSession];
     
     [[STChatController sharedInstance] reconnect];
     [[STChatController sharedInstance] startReachabilityService];
@@ -169,7 +169,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     
-    [MobileAppTracker applicationDidOpenURL:[url absoluteString] sourceApplication:sourceApplication];
+    [Tune applicationDidOpenURL:[url absoluteString] sourceApplication:sourceApplication];
 
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url

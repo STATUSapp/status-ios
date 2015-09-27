@@ -1,0 +1,1 @@
+../../../../MobileAppTracker/MobileAppTracker.framework/Headers/MATEvent.h

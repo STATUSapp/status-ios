@@ -39,7 +39,6 @@
 		07FBDEE618C606EF007BDCE6 /* STUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE518C606EF007BDCE6 /* STUsersListController.m */; };
 		07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */; };
 		16ACF5F582F40A0966AE8820 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D422D9C06AC39526914FFF /* libPods.a */; };
-		170812D81B0A7C1C00228E4C /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */; };
 		171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */; };
 		172062E41B1B042100A8B2B0 /* STFollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E31B1B042100A8B2B0 /* STFollowUsersRequest.m */; };
 		172062E71B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 172062E61B1B0B0000A8B2B0 /* STUnfollowUsersRequest.m */; };
@@ -257,7 +256,6 @@
 		07FBDEE518C606EF007BDCE6 /* STUsersListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUsersListController.m; sourceTree = "<group>"; };
 		07FBDEE718C60DDF007BDCE6 /* STLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLikeCell.h; sourceTree = "<group>"; };
 		07FBDEE818C60DDF007BDCE6 /* STLikeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLikeCell.m; sourceTree = "<group>"; };
-		170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 		171925F71A507598003C19D7 /* STUpdateToNewerVersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateToNewerVersionController.h; sourceTree = "<group>"; };
 		171925F81A507598003C19D7 /* STUpdateToNewerVersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateToNewerVersionController.m; sourceTree = "<group>"; };
 		172062E21B1B042100A8B2B0 /* STFollowUsersRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFollowUsersRequest.h; sourceTree = "<group>"; };
@@ -511,7 +509,6 @@
 				CD532FD319B9A451009B1445 /* Social.framework in Frameworks */,
 				CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */,
 				1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */,
-				170812D81B0A7C1C00228E4C /* MobileAppTracker.framework in Frameworks */,
 				172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */,
 				1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */,
 				1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */,
@@ -676,7 +673,6 @@
 			isa = PBXGroup;
 			children = (
 				9901E4961B6D99E50064223C /* CoreMotion.framework */,
-				170812D61B0A7C1C00228E4C /* MobileAppTracker.framework */,
 				CD532FD219B9A451009B1445 /* Social.framework */,
 				CD532FD019B9A44B009B1445 /* Accounts.framework */,
 				1D98A4C219603064007F4AB2 /* iAd.framework */,
