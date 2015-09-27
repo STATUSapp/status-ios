@@ -13,8 +13,10 @@
 #import "UIImageView+WebCache.h"
 #import "STFollowDataProcessor.h"
 #import "STFacebookHelper.h"
+#import "STContactsDataProcessor.h"
+#import <MessageUI/MessageUI.h>
 
-@interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate>
+@interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate>
 {
     NSMutableArray *_suggestedUsers;
     STFollowDataProcessor *_followProcessor;
@@ -83,6 +85,14 @@
 //    _testHelper = [STFacebookHelper new];
 //    [_testHelper promoteTheApp];
 //    return;
+    
+    //TODO: use this in the emails/sms 
+//    STContactsDataProcessor *contactsProcessor = [[STContactsDataProcessor alloc] initWithType:STContactsProcessorTypeEmails];
+//    [contactsProcessor switchSelectionForObjectAtIndex:0];
+//    [contactsProcessor switchSelectionForObjectAtIndex:1];
+//    //make sure the self implements MFMessageComposeViewControllerDelegate protocol
+//    [contactsProcessor commitForViewController:self];
+//    return;
     if (_suggestedUsers.count == 0) {
         [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -123,6 +133,13 @@
         }
     }
     return count;
+}
+
+#pragma mark - MFMessageComposeViewControllerDelegate
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    NSLog(@"Result: %u", result);
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -94,6 +94,11 @@
 		17950BAA1A8C0467006BD973 /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BA91A8C0467006BD973 /* STTutorialViewController.m */; };
 		17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */; };
 		17A5C4111BB7D6A10057180E /* STGetChatUrlAndPortRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */; settings = {ASSET_TAGS = (); }; };
+		17A5C4171BB7EE070057180E /* STContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4161BB7EE070057180E /* STContactsManager.m */; settings = {ASSET_TAGS = (); }; };
+		17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5C41A1BB7EF240057180E /* AddressBook.framework */; };
+		17A5C41F1BB7EFF80057180E /* STAddressBookContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C41E1BB7EFF80057180E /* STAddressBookContact.m */; settings = {ASSET_TAGS = (); }; };
+		17A5C4221BB81B130057180E /* STContactsDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4211BB81B130057180E /* STContactsDataProcessor.m */; settings = {ASSET_TAGS = (); }; };
+		17A5C4251BB821150057180E /* STInviteFriendsByEmailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4241BB821150057180E /* STInviteFriendsByEmailRequest.m */; settings = {ASSET_TAGS = (); }; };
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
@@ -353,6 +358,15 @@
 		17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialPresenterViewController.m; sourceTree = "<group>"; };
 		17A5C40F1BB7D6A10057180E /* STGetChatUrlAndPortRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetChatUrlAndPortRequest.h; sourceTree = "<group>"; };
 		17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetChatUrlAndPortRequest.m; sourceTree = "<group>"; };
+		17A5C4151BB7EE070057180E /* STContactsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STContactsManager.h; sourceTree = "<group>"; };
+		17A5C4161BB7EE070057180E /* STContactsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STContactsManager.m; sourceTree = "<group>"; };
+		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		17A5C41D1BB7EFF80057180E /* STAddressBookContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAddressBookContact.h; sourceTree = "<group>"; };
+		17A5C41E1BB7EFF80057180E /* STAddressBookContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAddressBookContact.m; sourceTree = "<group>"; };
+		17A5C4201BB81B130057180E /* STContactsDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STContactsDataProcessor.h; sourceTree = "<group>"; };
+		17A5C4211BB81B130057180E /* STContactsDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STContactsDataProcessor.m; sourceTree = "<group>"; };
+		17A5C4231BB821150057180E /* STInviteFriendsByEmailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInviteFriendsByEmailRequest.h; sourceTree = "<group>"; };
+		17A5C4241BB821150057180E /* STInviteFriendsByEmailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInviteFriendsByEmailRequest.m; sourceTree = "<group>"; };
 		17AB89E4193B0DF600A6E7FD /* STChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChatController.h; sourceTree = "<group>"; };
 		17AB89E5193B0DF600A6E7FD /* STChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChatController.m; sourceTree = "<group>"; };
 		17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
@@ -505,6 +519,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */,
 				9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */,
 				CD532FD319B9A451009B1445 /* Social.framework in Frameworks */,
 				CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */,
@@ -608,6 +623,8 @@
 				175F8B561A7B7F7000360C3E /* STImagePickerController.m */,
 				9901E4981B6DA2F10064223C /* STNativeAdsController.h */,
 				9901E4991B6DA2F10064223C /* STNativeAdsController.m */,
+				17A5C4151BB7EE070057180E /* STContactsManager.h */,
+				17A5C4161BB7EE070057180E /* STContactsManager.m */,
 			);
 			name = Controllers;
 			path = Status/Controllers;
@@ -650,11 +667,11 @@
 				17E44B9219821FB2000E9116 /* CoreData */,
 				1DFBB388192E9FCC003B7A53 /* Custom Controls */,
 				17FD59991B08700300AFDFF8 /* DataModel */,
-				172EAE6518B0B12E00C5637B /* Frameworks */,
 				175A28C41A13FD960057EDEE /* Network */,
 				172EAE6418B0B12E00C5637B /* Products */,
 				175EDC5F1A92ADF700FB96BD /* SPXRevealableView */,
 				172EAE6C18B0B12E00C5637B /* Status */,
+				172EAE6518B0B12E00C5637B /* Frameworks */,
 				172EAE8B18B0B12E00C5637B /* StatusTests */,
 				CCDB922D4CEA119F06C7B473 /* Pods */,
 			);
@@ -672,6 +689,7 @@
 		172EAE6518B0B12E00C5637B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				17A5C41A1BB7EF240057180E /* AddressBook.framework */,
 				9901E4961B6D99E50064223C /* CoreMotion.framework */,
 				CD532FD219B9A451009B1445 /* Social.framework */,
 				CD532FD019B9A44B009B1445 /* Accounts.framework */,
@@ -911,6 +929,8 @@
 				17FDC4DF1B6D42AE00A02FF3 /* STFlowImagesRequest.m */,
 				17A5C40F1BB7D6A10057180E /* STGetChatUrlAndPortRequest.h */,
 				17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */,
+				17A5C4231BB821150057180E /* STInviteFriendsByEmailRequest.h */,
+				17A5C4241BB821150057180E /* STInviteFriendsByEmailRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -950,6 +970,8 @@
 			children = (
 				17EB380A1B1C3FA200EFDAAD /* STFollowDataProcessor.h */,
 				17EB380B1B1C3FA200EFDAAD /* STFollowDataProcessor.m */,
+				17A5C4201BB81B130057180E /* STContactsDataProcessor.h */,
+				17A5C4211BB81B130057180E /* STContactsDataProcessor.m */,
 			);
 			name = DataProcessors;
 			sourceTree = "<group>";
@@ -986,6 +1008,8 @@
 				17EB380D1B1C482600EFDAAD /* DataProcessors */,
 				17FD599A1B08703A00AFDFF8 /* STBaseObj.h */,
 				17FD599B1B08703A00AFDFF8 /* STBaseObj.m */,
+				17A5C41D1BB7EFF80057180E /* STAddressBookContact.h */,
+				17A5C41E1BB7EFF80057180E /* STAddressBookContact.m */,
 				990785941B2463BB006311E4 /* STUserProfile.h */,
 				990785951B2463BB006311E4 /* STUserProfile.m */,
 				17FD59AE1B08D0E400AFDFF8 /* STSuggestedUser.h */,
@@ -1320,6 +1344,7 @@
 				17F51F8B1B66CA1700318683 /* STFBAdCell.m in Sources */,
 				07361DB019FE693100DFA43B /* STSmartNotificationCell.m in Sources */,
 				171925F91A507598003C19D7 /* STUpdateToNewerVersionController.m in Sources */,
+				17A5C4171BB7EE070057180E /* STContactsManager.m in Sources */,
 				172062ED1B1B1A2900A8B2B0 /* STListUser.m in Sources */,
 				176CC3071A2B0BFA00E9C3D0 /* STGetNotificationsRequest.m in Sources */,
 				17A5C4111BB7D6A10057180E /* STGetChatUrlAndPortRequest.m in Sources */,
@@ -1345,6 +1370,7 @@
 				07C69D531A66BB85005FD8B0 /* STUpdatePostCaptionRequest.m in Sources */,
 				990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */,
 				99E5B8251A754A0900A59F13 /* STNearbyController.m in Sources */,
+				17A5C4251BB821150057180E /* STInviteFriendsByEmailRequest.m in Sources */,
 				0717E2DC19B71C56001DF132 /* STChatRoomViewController.m in Sources */,
 				17FA8DB21937B48800491CAA /* UIImageView+Mask.m in Sources */,
 				17FDC4E01B6D42AE00A02FF3 /* STFlowImagesRequest.m in Sources */,
@@ -1357,6 +1383,7 @@
 				176CC2FE1A2B052600E9C3D0 /* STGetPostLikesRequest.m in Sources */,
 				0717E2A819B7187F001DF132 /* STSharePhotoViewController.m in Sources */,
 				17C0BE0F1A370E99007F64C0 /* STNotificationsManager.m in Sources */,
+				17A5C41F1BB7EFF80057180E /* STAddressBookContact.m in Sources */,
 				17CA0E941A21C59900D0B081 /* STRepostPostRequest.m in Sources */,
 				17E0FCA51A27B92100FC3FEE /* STGetNearbyProfilesRequest.m in Sources */,
 				176CC3131A2B18A400E9C3D0 /* STSetUserLocationRequest.m in Sources */,
@@ -1367,6 +1394,7 @@
 				9907859F1B24B9FB006311E4 /* STGetFollowingRequest.m in Sources */,
 				176CC30D1A2B0ED000E9C3D0 /* STDeletePostRequest.m in Sources */,
 				0717E2DD19B71C56001DF132 /* STConversationsListViewController.m in Sources */,
+				17A5C4221BB81B130057180E /* STContactsDataProcessor.m in Sources */,
 				176CE2441936645500F5C4DA /* HPGrowingTextView.m in Sources */,
 				17FD599C1B08703A00AFDFF8 /* STBaseObj.m in Sources */,
 				1783791C1A1D4853002AEE02 /* STGetPostsRequest.m in Sources */,
