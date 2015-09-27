@@ -365,9 +365,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
             [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
             __block NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-            BOOL suggestionsShown = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
+            BOOL suggestionsShown;
 #ifdef DEBUG
             suggestionsShown = NO;
+#else
+            suggestionShown =  = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
 #endif
             if(suggestionsShown == NO)
             {
