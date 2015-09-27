@@ -24,11 +24,17 @@ int const kChatPort = 9002;
 #else
 
 #pragma mark - Denis Dev
-NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
-NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
-NSString *const kChatSocketURL = @"http://dev.getstatusapp.co";
-NSString *const kReachableURL = @"dev.getstatusapp.co";
-int const kChatPort = 9003;
+//NSString *const kBaseURL = @"http://dev.getstatusapp.co/api/";
+//NSString *const kBasePhotoDownload = @"http://dev.getstatusapp.co/media/";
+//NSString *const kChatSocketURL = @"http://dev.getstatusapp.co";
+//NSString *const kReachableURL = @"dev.getstatusapp.co";
+//int const kChatPort = 9003;
+
+NSString *const kBaseURL = @"http://ec2-54-93-88-66.eu-central-1.compute.amazonaws.com/status/ws/api/";
+NSString *const kBasePhotoDownload = @"http://ec2-54-93-88-66.eu-central-1.compute.amazonaws.com/status/ws/media/";
+NSString *const kChatSocketURL = @"http://ec2-52-28-186-120.eu-central-1.compute.amazonaws.com";
+NSString *const kReachableURL = @"ec2-52-28-186-120.eu-central-1.compute.amazonaws.com";
+int const kChatPort = 80;
 
 #endif
 

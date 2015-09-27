@@ -291,6 +291,7 @@
 		175A28C91A13FDDC0057EDEE /* STNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetworkManager.m; sourceTree = "<group>"; };
 		175A28CA1A13FDDC0057EDEE /* STNetworkQueueManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetworkQueueManager.h; sourceTree = "<group>"; };
 		175A28CB1A13FDDC0057EDEE /* STNetworkQueueManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetworkQueueManager.m; sourceTree = "<group>"; };
+		175E34F11BB7CD29004AA8B4 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
 		175EDC601A92ADF700FB96BD /* UITableView+SPXRevealAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+SPXRevealAdditions.h"; sourceTree = "<group>"; };
 		175EDC611A92ADF700FB96BD /* UITableView+SPXRevealAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SPXRevealAdditions.m"; sourceTree = "<group>"; };
 		175EDC631A92B1FF00FB96BD /* TimestampView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimestampView.xib; sourceTree = "<group>"; };
@@ -916,6 +917,7 @@
 		17AB89E3193B0DC400A6E7FD /* ChatController */ = {
 			isa = PBXGroup;
 			children = (
+				175E34F11BB7CD29004AA8B4 /* SocketRocket-Prefix.pch */,
 				17AB89E7193B0EE000A6E7FD /* SRWebSocket.h */,
 				17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */,
 				17AB89E4193B0DF600A6E7FD /* STChatController.h */,
@@ -1132,7 +1134,7 @@
 		172EAE5B18B0B12D00C5637B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Andrus Cosmin";
 				TargetAttributes = {
 					172EAE6218B0B12D00C5637B = {
@@ -1458,6 +1460,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1537,6 +1540,7 @@
 					"$(inherited)",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1564,6 +1568,7 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1590,6 +1595,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "StatusTests/StatusTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1612,6 +1618,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
 				INFOPLIST_FILE = "StatusTests/StatusTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1675,6 +1682,7 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1697,6 +1705,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
 				INFOPLIST_FILE = "StatusTests/StatusTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";

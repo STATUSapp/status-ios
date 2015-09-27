@@ -366,6 +366,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
             __block NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             BOOL suggestionsShown = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
+#ifdef DEBUG
+            suggestionsShown = NO;
+#endif
             if(suggestionsShown == NO)
             {
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
@@ -535,7 +538,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 }
             };
             STRequestFailureBlock failBlock = ^(NSError *error){
-                NSLog(@"error with %@", error.description);
+                NSLog(@"error with %@", error.debugDescription);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [weakSelf.refreshBt setEnabled:YES];
                     [weakSelf.refreshBt setTitle:@"Refresh" forState:UIControlStateNormal];

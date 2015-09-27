@@ -12,8 +12,11 @@
 #import "STDataModelObjects.h"
 #import "UIImageView+WebCache.h"
 #import "STFollowDataProcessor.h"
+#import <FBSDKAppInviteContent.h>
+#import <FBSDKAppInviteDialog.h>
+#import <FBSDKGraphRequest.h>
 
-@interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate>
+@interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate,FBSDKAppInviteDialogDelegate>
 {
     NSMutableArray *_suggestedUsers;
     STFollowDataProcessor *_followProcessor;
@@ -76,7 +79,24 @@
     [self.tableView reloadData];
     
 }
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results{
+    NSLog(@"Results: %@", results);
+}
+-(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error{
+    NSLog(@"Result error: %@", error);
+}
 - (IBAction)onArrowPressed:(id)sender {
+    
+//    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+//    content.appLinkURL = [NSURL URLWithString:@"https://www.mydomain.com/myapplink"];
+//    //optionally set previewImageURL
+//    content.appInvitePreviewImageURL = [NSURL URLWithString:@"https://www.mydomain.com/my_invite_image.jpg"];
+//    
+//    // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
+//    [FBSDKAppInviteDialog showFromViewController:nil
+//                                     withContent:content
+//                                        delegate:self];
+//    return;
     if (_suggestedUsers.count == 0) {
         [self dismissViewControllerAnimated:YES completion:nil];
 

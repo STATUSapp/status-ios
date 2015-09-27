@@ -124,10 +124,10 @@
 
 - (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
     [STNetworkQueueManager sharedManager].accessToken = response[@"token"];
-    [[STChatController sharedInstance] forceReconnect];
     [[STLocationManager sharedInstance] startLocationUpdates];
     [self saveAccessToken:response[@"token"]];
     self.currentUserId = response[@"user_id"];
+    [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     [self requestRemoteNotificationAccess];
     [self announceDelegate];

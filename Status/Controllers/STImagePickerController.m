@@ -107,7 +107,9 @@
                 if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"user_photos"]) {
                     
                     FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-                    [loginManager logInWithReadPermissions:@[@"user_photos"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                    [loginManager logInWithReadPermissions:@[@"user_photos"]
+                                        fromViewController:nil
+                                                   handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                         if (!error) {
                             [self presentFacebookPickerScene];
                         }

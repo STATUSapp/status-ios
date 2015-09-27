@@ -164,7 +164,9 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }
     if ([deniedPermissions count]>0) {
         FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-        [loginManager logInWithReadPermissions:deniedPermissions handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        [loginManager logInWithReadPermissions:deniedPermissions
+                            fromViewController:nil
+                                       handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
             [self requestForExtendedInfoWithCompletion:completion];
             
         }];
@@ -218,7 +220,8 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
         {
             if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"publish_actions"]) {
                 FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-                [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                [loginManager logInWithPublishPermissions:@[@"publish_actions"]
+                                       fromViewController:nil handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                     if (error!=nil) {
                         completion(nil, error);
                     }

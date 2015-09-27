@@ -76,9 +76,9 @@
 
 - (void)close{
     [_webSocket close];
-    _webSocket = nil;
+    _status = STWebSockerStatusClosed;
     _webSocket.delegate = nil;
-    
+    _webSocket = nil;
 }
 
 #pragma mark - SRWebSocketDelegate
@@ -94,7 +94,7 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
-//    NSLog(@":( Websocket Failed With Error %@", error);
+    NSLog(@":( Websocket Failed With Error %@", error);
     
     _status = STWebSockerStatusClosed;
     if (_delegate && [_delegate respondsToSelector:@selector(chatDidClose)])
