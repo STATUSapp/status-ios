@@ -9,6 +9,9 @@
 #import "STContactsManager.h"
 #import <AddressBook/AddressBook.h>
 #import "STAddressBookContact.h"
+#import "FBSDKCoreKit.h"
+#import "STFacebookHelper.h"
+#import "STSyncContactsRequest.h"
 
 @implementation STContactsManager
 +(instancetype) sharedInstance{
@@ -51,6 +54,7 @@
     CFRelease(source);
     
     _allContacts = [NSArray arrayWithArray:items];
+    [self syncContactsWithTheServer];
 }
 
 -(void)updateContactsList{
@@ -74,5 +78,35 @@
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"You should grant access to the contacts list for STATUS App" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 
     }
+}
+
+-(void) syncContactsWithTheServer{
+    [[STFacebookHelper new] loadUserFriendsWithCompletion:^(NSArray *newObjects) {
+        NSLog(@"Final array %@", newObjects);
+        NSArray *fbData = [NSArray arrayWithArray:newObjects];
+        NSMutableArray *facebookFriends = [NSMutableArray new];
+        for (NSDictionary *dict in fbData) {
+            NSDictionary *serverDict = @{@"facebook_id":dict[@"id"]};
+            [facebookFriends addObject:serverDict];
+        }
+        NSMutableArray *contactsEmails = [NSMutableArray new];
+        for (STAddressBookContact *adrContact in _allContacts) {
+            if ([[adrContact hasEmails] boolValue] == YES) {
+                for (NSString *email in adrContact.emails) {
+                    NSDictionary *dict = @{@"email": email};
+                    [contactsEmails addObject:dict];
+                }
+            }
+        }
+        
+        [STSyncContactsRequest syncLocalContacts:contactsEmails
+                              andfacebookFriends:facebookFriends
+                                  withCompletion:^(id response, NSError *error) {
+                                      NSLog(@"Sync contacts success: %@", response);
+            
+        } failure:^(NSError *error) {
+            NSLog(@"Error on sync the contacts: %@", error.debugDescription);
+        }];
+    }];
 }
 @end

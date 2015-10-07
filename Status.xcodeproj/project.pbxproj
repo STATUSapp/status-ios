@@ -62,6 +62,7 @@
 		175EDC621A92ADF700FB96BD /* UITableView+SPXRevealAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 175EDC611A92ADF700FB96BD /* UITableView+SPXRevealAdditions.m */; };
 		175EDC641A92B1FF00FB96BD /* TimestampView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 175EDC631A92B1FF00FB96BD /* TimestampView.xib */; };
 		175F8B571A7B7F7000360C3E /* STImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175F8B561A7B7F7000360C3E /* STImagePickerController.m */; };
+		176AF3F61BC5978400FC6D59 /* STSyncContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176AF3F51BC5978400FC6D59 /* STSyncContactsRequest.m */; settings = {ASSET_TAGS = (); }; };
 		176CC2FE1A2B052600E9C3D0 /* STGetPostLikesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC2FD1A2B052600E9C3D0 /* STGetPostLikesRequest.m */; };
 		176CC3011A2B076E00E9C3D0 /* STSetAPNTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3001A2B076E00E9C3D0 /* STSetAPNTokenRequest.m */; };
 		176CC3041A2B09A100E9C3D0 /* STGetPostDetailsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3031A2B09A100E9C3D0 /* STGetPostDetailsRequest.m */; };
@@ -301,6 +302,8 @@
 		175EDC631A92B1FF00FB96BD /* TimestampView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimestampView.xib; sourceTree = "<group>"; };
 		175F8B551A7B7F7000360C3E /* STImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImagePickerController.h; sourceTree = "<group>"; };
 		175F8B561A7B7F7000360C3E /* STImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImagePickerController.m; sourceTree = "<group>"; };
+		176AF3F41BC5978400FC6D59 /* STSyncContactsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSyncContactsRequest.h; sourceTree = "<group>"; };
+		176AF3F51BC5978400FC6D59 /* STSyncContactsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSyncContactsRequest.m; sourceTree = "<group>"; };
 		176CC2FC1A2B052600E9C3D0 /* STGetPostLikesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetPostLikesRequest.h; sourceTree = "<group>"; };
 		176CC2FD1A2B052600E9C3D0 /* STGetPostLikesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetPostLikesRequest.m; sourceTree = "<group>"; };
 		176CC2FF1A2B076E00E9C3D0 /* STSetAPNTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetAPNTokenRequest.h; sourceTree = "<group>"; };
@@ -931,6 +934,8 @@
 				17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */,
 				17A5C4231BB821150057180E /* STInviteFriendsByEmailRequest.h */,
 				17A5C4241BB821150057180E /* STInviteFriendsByEmailRequest.m */,
+				176AF3F41BC5978400FC6D59 /* STSyncContactsRequest.h */,
+				176AF3F51BC5978400FC6D59 /* STSyncContactsRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1299,6 +1304,7 @@
 			files = (
 				17F51F8E1B66CBE400318683 /* STFlowTemplate.m in Sources */,
 				175A28CD1A13FDDC0057EDEE /* STNetworkQueueManager.m in Sources */,
+				176AF3F61BC5978400FC6D59 /* STSyncContactsRequest.m in Sources */,
 				076CF4F11910F2F200C4096C /* UIImage+ImageEffects.m in Sources */,
 				17CA0E8E1A2130AF00D0B081 /* STUploadPostRequest.m in Sources */,
 				0717E2C319B71B51001DF132 /* KeychainItemWrapper.m in Sources */,

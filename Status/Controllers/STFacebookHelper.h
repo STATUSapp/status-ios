@@ -19,4 +19,5 @@ typedef void (^loadFBPicturesCompletion) (NSDictionary *result);
 -(void)getUserExtendedInfoWithCompletion:(void (^)(NSDictionary *info))completion;
 -(void) shareImageWithImageUrl:(NSString *)imgUrl description:(NSString *)description andCompletion:(facebookCompletion) completion;
 -(void)promoteTheApp;
+-(void)loadUserFriendsWithCompletion:(refreshCompletion)completion;
 @end

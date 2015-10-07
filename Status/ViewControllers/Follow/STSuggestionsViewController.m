@@ -29,11 +29,23 @@
 
 @implementation STSuggestionsViewController
 
++(STSuggestionsViewController *)instatiateWithDelegate:(id)delegate
+                                         andFollowTyep:(STFollowType)followType{
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
+    STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
+    vc.delegate = delegate;
+    vc.followType = followType;
+    return vc;
+
+}
+
 -(void)viewDidLoad{
     [super viewDidLoad];
     _suggestedUsers = [NSMutableArray new];
     _tableView.hidden = YES;
-    [STDataAccessUtils getSuggestUsersWithOffset:@(0) andCompletion:^(NSArray *objects, NSError *error) {
+    [STDataAccessUtils getSuggestUsersForFollowType:_followType
+                                         withOffset:@(0)
+                                      andCompletion:^(NSArray *objects, NSError *error) {
         if (error==nil) {
             [_suggestedUsers addObjectsFromArray:objects];
             _followProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
@@ -92,6 +104,9 @@
 //    [contactsProcessor switchSelectionForObjectAtIndex:1];
 //    //make sure the self implements MFMessageComposeViewControllerDelegate protocol
 //    [contactsProcessor commitForViewController:self];
+    //TODO: use this call to get an instace of friends you should follow view controller
+//    STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypeFriends];
+
 //    return;
     if (_suggestedUsers.count == 0) {
         [self dismissViewControllerAnimated:YES completion:nil];

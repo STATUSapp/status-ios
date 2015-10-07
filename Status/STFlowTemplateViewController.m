@@ -373,9 +373,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #endif
             if(suggestionsShown == NO)
             {
-                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
-                STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
-                vc.delegate = self;
+                STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypePeople];
                 [self.navigationController presentViewController:vc animated:NO completion:^{
                     [ud setValue:@(YES) forKey:@"SUGGESTIONS_SHOWED"];
                     [ud synchronize];
@@ -521,9 +519,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                     __block NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
                     BOOL suggestionsShown = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
                     if (weakSelf.flowType == STFlowTypeHome && [weakSelf.postsDataSource count] == 0 && suggestionsShown == NO) {
-                        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
-                        STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
-                        vc.delegate = weakSelf;
+                        STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:weakSelf andFollowTyep:STFollowTypePeople];
                         [self.navigationController presentViewController:vc animated:NO completion:^{
                             [ud setValue:@(YES) forKey:@"SUGGESTIONS_SHOWED"];
                             [ud synchronize];

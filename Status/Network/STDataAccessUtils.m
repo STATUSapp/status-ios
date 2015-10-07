@@ -12,9 +12,12 @@
 #import "STGetFollowingRequest.h"
 
 @implementation STDataAccessUtils
-+(void)getSuggestUsersWithOffset:(NSNumber *)offset
-                   andCompletion:(STDataAccessCompletionBlock)completion{
-    [STGetSuggestUsersRequest getSuggestUsersWithOffset:offset withCompletion:^(id response, NSError *error) {
++(void)getSuggestUsersForFollowType:(STFollowType)followType
+                         withOffset:(NSNumber *)offset
+                      andCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetSuggestUsersRequest getSuggestUsersForFollowType:followType
+                                                withOffset:offset
+                                            withCompletion:^(id response, NSError *error) {
         if (error!=nil) {
             completion(nil, error);
         }
