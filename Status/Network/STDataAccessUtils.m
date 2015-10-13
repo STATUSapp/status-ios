@@ -24,9 +24,22 @@
         else
         {
             NSMutableArray *objects = [NSMutableArray new];
-            for (NSDictionary *dict in response[@"data"]) {
-                STSuggestedUser *su = [STSuggestedUser suggestedUserWithDict:dict];
-                [objects addObject:su];
+            if (followType == STFollowTypePeople) {
+                for (NSDictionary *dict in response[@"data"]) {
+                    STSuggestedUser *su = [STSuggestedUser suggestedUserWithDict:dict];
+                    [objects addObject:su];
+                }
+            }
+            else
+            {
+                for (NSDictionary *dict in [response[@"data"] valueForKey:@"facebookFriends"]) {
+                    STSuggestedUser *su = [STSuggestedUser suggestedUserWithDict:dict];
+                    [objects addObject:su];
+                }
+                for (NSDictionary *dict in [response[@"data"] valueForKey:@"emails"]) {
+                    STSuggestedUser *su = [STSuggestedUser suggestedUserWithDict:dict];
+                    [objects addObject:su];
+                }
             }
             completion([NSArray arrayWithArray:objects], nil);
             

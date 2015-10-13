@@ -105,8 +105,9 @@
 //    //make sure the self implements MFMessageComposeViewControllerDelegate protocol
 //    [contactsProcessor commitForViewController:self];
     //TODO: use this call to get an instace of friends you should follow view controller
+    //TODO: check if the first time the proper data is displayed
 //    STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypeFriends];
-
+//    [self presentViewController:vc animated:YES completion:nil];
 //    return;
     if (_suggestedUsers.count == 0) {
         [self dismissViewControllerAnimated:YES completion:nil];
