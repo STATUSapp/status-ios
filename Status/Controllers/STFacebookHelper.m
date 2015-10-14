@@ -264,6 +264,53 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                                             delegate:self];
 
 }
+
+#pragma mark - User Friends
+- (void)getMyFriendsWithCompletion:(refreshCompletion)completion {
+    loaderCompletion startBlock;
+    loaderCompletion __block nextBlock;
+    __block NSMutableArray *friendsArray = [NSMutableArray new];
+    NSString *graph = @"/me/friends";
+    nextBlock = [startBlock = ^(NSString *nextLink){
+        
+//        NSLog(@"Next Link: %@", nextLink);
+        [[[FBSDKGraphRequest alloc]
+          initWithGraphPath:nextLink
+          parameters: nil
+          HTTPMethod:@"GET"]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             [friendsArray addObjectsFromArray:result[@"data"]];
+//             NSLog(@"Photos array: %@", friendsArray);
+             NSString *nextCursor = [[result[@"paging"][@"next"] componentsSeparatedByString:@"?"] lastObject];
+             if (nextCursor!=nil) {
+                 nextBlock([NSString stringWithFormat:@"%@?%@",graph, nextCursor]);
+             }
+             else
+             {
+                 nextBlock = nil;
+                 completion(friendsArray);
+             }
+         }];
+    } copy];
+    
+    startBlock([NSString stringWithFormat:@"%@?fields=name",graph]);
+}
+
+-(void)loadUserFriendsWithCompletion:(refreshCompletion)completion{
+    
+    if(![[[[FBSDKAccessToken currentAccessToken] permissions] allObjects] containsObject:@"user_friends"])
+    {
+        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+        [loginManager logInWithReadPermissions:@[@"user_friends"]
+                            fromViewController:nil
+                                       handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                           [self getMyFriendsWithCompletion:completion];
+                                       }];
+        
+    }
+    else
+        [self getMyFriendsWithCompletion:completion];
+}
 #pragma mark FBSDKAppInviteDialogDelegate
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results{
     NSLog(@"Results: %@", results);

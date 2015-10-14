@@ -13,8 +13,9 @@ typedef void (^STDataAccessCompletionBlock)(NSArray *objects, NSError *error);
 typedef void (^STDataUploadCompletionBlock)(NSError *error);
 @interface STDataAccessUtils : NSObject
 
-+(void)getSuggestUsersWithOffset:(NSNumber *)offset
-                   andCompletion:(STDataAccessCompletionBlock)completion;
++(void)getSuggestUsersForFollowType:(STFollowType)followType
+                         withOffset:(NSNumber *)offset
+                      andCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getLikesForPostId:(NSString *)postId
           withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getFollowersForUserId:(NSString *)userId

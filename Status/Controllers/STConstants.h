@@ -129,13 +129,15 @@ extern NSString *const kGetUserProfile;
 extern NSString *const kUpdateUserProfile;
 extern NSString *const kEditCaption;
 extern NSString *const kSetProfilePicture;
-extern NSString *const kGetSuggestUsers;
+extern NSString *const kGetPeopleYouShouldFollow;
 extern NSString *const kFollowUsers;
 extern NSString *const kUnfollowUsers;
 extern NSString *const kUnseenPostsCount;
 extern NSString *const kFlowImages;
 extern NSString *const kGetHostnamePortChat;
 extern NSString *const kInviteFriendsByEmail;
+extern NSString *const kSyncContacts;
+extern NSString *const kGetFriendsYouShouldFollow;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

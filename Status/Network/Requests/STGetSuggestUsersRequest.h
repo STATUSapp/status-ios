@@ -7,11 +7,17 @@
 //
 
 #import "STBaseRequest.h"
+typedef NS_ENUM(NSInteger, STFollowType) {
+    STFollowTypePeople = 0,
+    STFollowTypeFriends,
+};
 
 @interface STGetSuggestUsersRequest : STBaseRequest
 @property (nonatomic, strong) NSNumber *offset;
-+ (void)getSuggestUsersWithOffset:(NSNumber *)offset
-                   withCompletion:(STRequestCompletionBlock)completion
-                          failure:(STRequestFailureBlock)failure;
+@property (nonatomic) STFollowType followType;
++ (void)getSuggestUsersForFollowType:(STFollowType)followType
+                          withOffset:(NSNumber *)offset
+                      withCompletion:(STRequestCompletionBlock)completion
+                             failure:(STRequestFailureBlock)failure;
 
 @end

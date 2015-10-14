@@ -9,7 +9,8 @@
 #import "STGetSuggestUsersRequest.h"
 
 @implementation STGetSuggestUsersRequest
-+ (void)getSuggestUsersWithOffset:(NSNumber *)offset
++ (void)getSuggestUsersForFollowType:(STFollowType)followType
+                          withOffset:(NSNumber *)offset
                    withCompletion:(STRequestCompletionBlock)completion
                           failure:(STRequestFailureBlock)failure{
     
@@ -19,6 +20,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.offset = offset;
+    request.followType = followType;
     [[STNetworkQueueManager sharedManager] addToQueueTop:request];
 }
 
@@ -41,6 +43,6 @@
 }
 
 -(NSString *)urlString{
-    return kGetSuggestUsers;
+    return (_followType == STFollowTypePeople)?kGetPeopleYouShouldFollow:kGetFriendsYouShouldFollow;
 }
 @end

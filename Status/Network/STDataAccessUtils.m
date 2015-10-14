@@ -12,18 +12,34 @@
 #import "STGetFollowingRequest.h"
 
 @implementation STDataAccessUtils
-+(void)getSuggestUsersWithOffset:(NSNumber *)offset
-                   andCompletion:(STDataAccessCompletionBlock)completion{
-    [STGetSuggestUsersRequest getSuggestUsersWithOffset:offset withCompletion:^(id response, NSError *error) {
++(void)getSuggestUsersForFollowType:(STFollowType)followType
+                         withOffset:(NSNumber *)offset
+                      andCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetSuggestUsersRequest getSuggestUsersForFollowType:followType
+                                                withOffset:offset
+                                            withCompletion:^(id response, NSError *error) {
         if (error!=nil) {
             completion(nil, error);
         }
         else
         {
             NSMutableArray *objects = [NSMutableArray new];
-            for (NSDictionary *dict in response[@"data"]) {
-                STSuggestedUser *su = [STSuggestedUser suggestedUserWithDict:dict];
-                [objects addObject:su];
+            if (followType == STFollowTypePeople) {
+                for (NSDictionary *dict in response[@"data"]) {
+                    STSuggestedUser *su = [STSuggestedUser suggestedUserWithDict:dict];
+                    [objects addObject:su];
+                }
+            }
+            else
+            {
+                for (NSDictionary *dict in [response[@"data"] valueForKey:@"facebookFriends"]) {
+                    STSuggestedUser *su = [STSuggestedUser suggestedUserWithDict:dict];
+                    [objects addObject:su];
+                }
+                for (NSDictionary *dict in [response[@"data"] valueForKey:@"emails"]) {
+                    STSuggestedUser *su = [STSuggestedUser suggestedUserWithDict:dict];
+                    [objects addObject:su];
+                }
             }
             completion([NSArray arrayWithArray:objects], nil);
             

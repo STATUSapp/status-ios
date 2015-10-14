@@ -60,13 +60,15 @@ NSString *const kGetUserProfile = @"get_user_profile";
 NSString *const kUpdateUserProfile = @"set_user_profile";
 NSString *const kEditCaption = @"set_post_caption";
 NSString *const kSetProfilePicture =  @"upload_user_photo";
-NSString *const kGetSuggestUsers = @"Get_Suggest_Users";
+NSString *const kGetPeopleYouShouldFollow = @"people_you_should_follow";
 NSString *const kFollowUsers = @"Follow";
 NSString *const kUnfollowUsers = @"Unfollow";
 NSString *const kUnseenPostsCount = @"Get_Unseen_Posts_Count";
 NSString *const kFlowImages = @"get_flow_image";
 NSString *const kGetHostnamePortChat = @"get_hostname_port_chat";
 NSString *const kInviteFriendsByEmail = @"invite_friends_by_email";
+NSString *const kSyncContacts = @"sync_contacts";
+NSString *const kGetFriendsYouShouldFollow = @"friends_you_should_follow";
 
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";
