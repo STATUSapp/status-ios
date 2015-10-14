@@ -159,6 +159,9 @@
 		9907859F1B24B9FB006311E4 /* STGetFollowingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9907859E1B24B9FB006311E4 /* STGetFollowingRequest.m */; };
 		990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */; };
 		993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 993A5BFF1A490F1100021D1D /* NSDate+Additions.m */; };
+		994D622A1BC16C040005AEA7 /* Invite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994D62291BC16C040005AEA7 /* Invite.storyboard */; settings = {ASSET_TAGS = (); }; };
+		994D622D1BC468CB0005AEA7 /* STFriendsInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994D622C1BC468CB0005AEA7 /* STFriendsInviterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		994D62311BC46A550005AEA7 /* STSMSEmailInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994D62301BC46A550005AEA7 /* STSMSEmailInviterViewController.m */; settings = {ASSET_TAGS = (); }; };
 		99671D0B19BC8FBB00FB8A7A /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */; };
 		99851E1C1A7E777C004B4FA4 /* Proxima Nova Fonts Collection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0A1A7E777C004B4FA4 /* Proxima Nova Fonts Collection.jpg */; };
 		99851E1D1A7E777C004B4FA4 /* ProximaNova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0B1A7E777C004B4FA4 /* ProximaNova-Black.otf */; };
@@ -476,6 +479,11 @@
 		990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateUserProfileRequest.m; sourceTree = "<group>"; };
 		993A5BFE1A490F1100021D1D /* NSDate+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Additions.h"; sourceTree = "<group>"; };
 		993A5BFF1A490F1100021D1D /* NSDate+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Additions.m"; sourceTree = "<group>"; };
+		994D62291BC16C040005AEA7 /* Invite.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Invite.storyboard; sourceTree = "<group>"; };
+		994D622B1BC468CB0005AEA7 /* STFriendsInviterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFriendsInviterViewController.h; sourceTree = "<group>"; };
+		994D622C1BC468CB0005AEA7 /* STFriendsInviterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFriendsInviterViewController.m; sourceTree = "<group>"; };
+		994D622F1BC46A550005AEA7 /* STSMSEmailInviterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSMSEmailInviterViewController.h; sourceTree = "<group>"; };
+		994D62301BC46A550005AEA7 /* STSMSEmailInviterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSMSEmailInviterViewController.m; sourceTree = "<group>"; };
 		99671D0919BC8FBB00FB8A7A /* STSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSettingsViewController.h; sourceTree = "<group>"; };
 		99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSettingsViewController.m; sourceTree = "<group>"; };
 		99851E0A1A7E777C004B4FA4 /* Proxima Nova Fonts Collection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Proxima Nova Fonts Collection.jpg"; sourceTree = "<group>"; };
@@ -737,6 +745,8 @@
 				17ACEB611933C4E600CFC909 /* ChatScene.storyboard */,
 				172DF27319A2616D009CE4F3 /* FacebookPickerScene.storyboard */,
 				9904DD441A2FB55D0072134F /* UserProfile.storyboard */,
+				994D62291BC16C040005AEA7 /* Invite.storyboard */,
+				994D622E1BC46A0F0005AEA7 /* FriendsInviter */,
 				178907B818B295DD00AC4355 /* STLoginViewController.h */,
 				178907B918B295DD00AC4355 /* STLoginViewController.m */,
 				17950BA81A8C0467006BD973 /* STTutorialViewController.h */,
@@ -1069,6 +1079,17 @@
 			path = "Status/Custom Controls";
 			sourceTree = "<group>";
 		};
+		994D622E1BC46A0F0005AEA7 /* FriendsInviter */ = {
+			isa = PBXGroup;
+			children = (
+				994D622B1BC468CB0005AEA7 /* STFriendsInviterViewController.h */,
+				994D622C1BC468CB0005AEA7 /* STFriendsInviterViewController.m */,
+				994D622F1BC46A550005AEA7 /* STSMSEmailInviterViewController.h */,
+				994D62301BC46A550005AEA7 /* STSMSEmailInviterViewController.m */,
+			);
+			name = FriendsInviter;
+			sourceTree = "<group>";
+		};
 		99851E081A7E777C004B4FA4 /* Custom Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1211,6 +1232,7 @@
 				99851E281A7E777C004B4FA4 /* ProximaNovaCond-Light.otf in Resources */,
 				99851E1F1A7E777C004B4FA4 /* ProximaNova-BoldIt.otf in Resources */,
 				99851E261A7E777C004B4FA4 /* ProximaNova-Semibold.otf in Resources */,
+				994D622A1BC16C040005AEA7 /* Invite.storyboard in Resources */,
 				99851E1C1A7E777C004B4FA4 /* Proxima Nova Fonts Collection.jpg in Resources */,
 				99DCD4D81A8D2BF30023EE51 /* Images.xcassets in Resources */,
 				172EAE7118B0B12E00C5637B /* InfoPlist.strings in Resources */,
@@ -1315,10 +1337,12 @@
 				99671D0B19BC8FBB00FB8A7A /* STSettingsViewController.m in Sources */,
 				17CA0E911A2136F800D0B081 /* STSetPostLikeRequest.m in Sources */,
 				CDAC50B119B602C900A45E85 /* UIImage+Resize.m in Sources */,
+				994D622D1BC468CB0005AEA7 /* STFriendsInviterViewController.m in Sources */,
 				17E44B9A19821FB2000E9116 /* STCoreDataRequestManager.m in Sources */,
 				17C0BE091A36F0F3007F64C0 /* Message.m in Sources */,
 				178379161A1D11D0002AEE02 /* STLoginRequest.m in Sources */,
 				17FD59A61B08971900AFDFF8 /* STGetSuggestUsersRequest.m in Sources */,
+				994D62311BC46A550005AEA7 /* STSMSEmailInviterViewController.m in Sources */,
 				0717E2E619B71D88001DF132 /* STIAPHelper.m in Sources */,
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
 				17EB38101B1C50C700EFDAAD /* STUnseenPostsCountRequest.m in Sources */,

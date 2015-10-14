@@ -20,6 +20,8 @@
 #import "STNearbyController.h"
 #import "STNotificationsViewController.h"
 
+#import "STFriendsInviterViewController.h"
+
 #import "AppDelegate.h"
 #import "STUnseenPostsCountRequest.h"
 
@@ -219,9 +221,12 @@
 - (void)goMyProfile{
     [self resetNavigationControllerStack];
     [self hideMenu];
-    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
-    userProfileVC.isMyProfile = YES;
-    [_currentVC.navigationController pushViewController:userProfileVC animated:YES];
+//    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
+//    userProfileVC.isMyProfile = YES;
+//    [_currentVC.navigationController pushViewController:userProfileVC animated:YES];
+    
+    STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
+    [_currentVC.navigationController pushViewController:vc animated:YES];
 
 }
 - (void)goFriendsInviter {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Friends Inviter View Controller-->
+        <scene sceneID="y82-hZ-R2h">
+            <objects>
+                <viewController storyboardIdentifier="STFriendsInviterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uwS-Bg-oGg" customClass="STFriendsInviterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uj7-lD-Hlb"/>
+                        <viewControllerLayoutGuide type="bottom" id="GBU-8f-mXB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h3e-76-cBz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxJ-W2-AD9">
+                                <rect key="frame" x="0.0" y="48" width="600" height="552"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KxJ-W2-AD9" secondAttribute="trailing" id="4UU-aQ-KPR"/>
+                            <constraint firstItem="KxJ-W2-AD9" firstAttribute="leading" secondItem="h3e-76-cBz" secondAttribute="leading" id="Ff7-H3-lfP"/>
+                            <constraint firstItem="GBU-8f-mXB" firstAttribute="top" secondItem="KxJ-W2-AD9" secondAttribute="bottom" id="O6a-Sx-WqM"/>
+                            <constraint firstItem="KxJ-W2-AD9" firstAttribute="top" secondItem="uj7-lD-Hlb" secondAttribute="bottom" constant="28" id="XPo-2p-Rld"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="childContainer" destination="KxJ-W2-AD9" id="NhI-5i-web"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m5c-gD-P7o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="375" y="306"/>
+        </scene>
+    </scenes>
+</document>
