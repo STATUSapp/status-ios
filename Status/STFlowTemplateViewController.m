@@ -1185,6 +1185,13 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (self.flowType == STFlowTypePopular ||
         self.flowType == STFlowTypeRecent ||
         self.flowType == STFlowTypeHome) {
+        
+        NSInteger offsetRemaining = weakSelf.postsDataSource.count - usedIndx.row;
+        BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && usedIndx.row!=0;
+        if (shouldGetNextBatch) {
+            [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count - usedIndx.row - 1 + _numberOfDuplicates];
+        }
+        
         if ([dict[@"post_seen"] boolValue] == TRUE) {
             return;
         }
@@ -1195,10 +1202,6 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
                 [weakSelf markDataSourceSeenAtIndex:usedIndx.row];
-                BOOL shouldGetNextBatch = weakSelf.postsDataSource.count - usedIndx.row == kStartLoadOffset && usedIndx.row!=0;
-                if (shouldGetNextBatch) {
-                    [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count - usedIndx.row - 1 + _numberOfDuplicates];
-                }
             }
         };
         
