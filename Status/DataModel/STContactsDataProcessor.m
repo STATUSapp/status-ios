@@ -14,7 +14,6 @@
 
 @interface STContactsDataProcessor()
 @property (nonatomic) STContactsProcessorType processorType;
-@property (nonatomic, strong) NSArray *items;
 @end
 
 @implementation STContactsDataProcessor

@@ -16,6 +16,9 @@ typedef NS_ENUM(NSUInteger,STContactsProcessorType){
 };
 
 @interface STContactsDataProcessor : NSObject
+
+@property (nonatomic, strong) NSArray<STAddressBookContact *> *items;
+
 -(instancetype)initWithType:(STContactsProcessorType) processorType;
 -(void)switchSelectionForObjectAtIndex:(NSInteger)index;
 -(STAddressBookContact *)objectAtindex:(NSInteger)index;

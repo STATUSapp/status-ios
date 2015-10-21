@@ -136,5 +136,50 @@
             </objects>
             <point key="canvasLocation" x="375" y="306"/>
         </scene>
+        <!--Email Inviter View Controller-->
+        <scene sceneID="JOZ-zB-ofy">
+            <objects>
+                <tableViewController storyboardIdentifier="STSMSEmailInviterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yce-Sj-RXR" customClass="STSMSEmailInviterViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OUd-uX-eIu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="309-7b-6qY">
+                            <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58s-e4-vIQ">
+                                    <rect key="frame" x="271" y="7" width="58" height="30"/>
+                                    <state key="normal" title="Invite All"/>
+                                    <connections>
+                                        <action selector="inviteAll:" destination="yce-Sj-RXR" eventType="touchUpInside" id="hca-Je-Ts3"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" id="E4r-u8-y1l">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E4r-u8-y1l" id="wpP-ko-wz2">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="yce-Sj-RXR" id="5af-Xf-N2q"/>
+                            <outlet property="delegate" destination="yce-Sj-RXR" id="tU4-Ck-tTp"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="btnInviteAll" destination="58s-e4-vIQ" id="mPU-YE-wLd"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rAZ-iT-MyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1075" y="306"/>
+        </scene>
     </scenes>
 </document>

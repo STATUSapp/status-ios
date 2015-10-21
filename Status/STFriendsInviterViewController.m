@@ -9,6 +9,7 @@
 #import "STFriendsInviterViewController.h"
 #import "STSMSEmailInviterViewController.h"
 #import "STFacebookInviterViewController.h"
+#import "STContactsManager.h"
 
 @interface STFriendsInviterViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
@@ -133,23 +134,23 @@
 
     _viewControllers = [NSMutableArray array];
     
+    [STContactsManager sharedInstance];
+    
     [_viewControllers addObject:[STFacebookInviterViewController newController]];
     
     for (int i = 0; i < 2; i++) {
 
         
         
-        STSMSEmailInviterViewController * childController = [[STSMSEmailInviterViewController alloc] init];
+        
+        STSMSEmailInviterViewController * childController;
         
         switch (i) {
             case 0:
-                childController.view.backgroundColor = [UIColor blueColor];
+                childController = [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:nil];
                 break;
             case 1:
-                childController.view.backgroundColor = [UIColor yellowColor];
-                break;
-            case 2:
-                childController.view.backgroundColor = [UIColor redColor];
+                childController = [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeEmail delegate:nil];
                 break;
                 
             default:

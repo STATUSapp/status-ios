@@ -8,6 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STSMSEmailInviterViewController : UIViewController
+typedef NS_ENUM(NSInteger, STInviteType) {
+    STInviteTypeEmail = 0,
+    STInviteTypeSMS,
+    STInviteTypeFacebook
+};
+
+@protocol STInvitationsDelegate <NSObject>
+
+-(void)userDidEndSelectingInvitations;
+
+@end
+
+@interface STSMSEmailInviterViewController : UITableViewController
+
+@property (nonatomic, weak) id <STInvitationsDelegate> delegate;
+@property (nonatomic) STInviteType inviteType;
+
++ (STSMSEmailInviterViewController *)newControllerWithInviteType:(STInviteType)inviteType delegate:(id<STInvitationsDelegate>)delegate;
 
 @end
