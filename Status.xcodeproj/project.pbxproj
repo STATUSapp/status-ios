@@ -159,6 +159,7 @@
 		9907859C1B24B9E3006311E4 /* STGetFollowersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9907859B1B24B9E3006311E4 /* STGetFollowersRequest.m */; };
 		9907859F1B24B9FB006311E4 /* STGetFollowingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9907859E1B24B9FB006311E4 /* STGetFollowingRequest.m */; };
 		990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */; };
+		990B9C201BD77410000887E2 /* STFacebookInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B9C1F1BD77410000887E2 /* STFacebookInviterViewController.m */; settings = {ASSET_TAGS = (); }; };
 		993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 993A5BFF1A490F1100021D1D /* NSDate+Additions.m */; };
 		994D622A1BC16C040005AEA7 /* Invite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994D62291BC16C040005AEA7 /* Invite.storyboard */; settings = {ASSET_TAGS = (); }; };
 		994D622D1BC468CB0005AEA7 /* STFriendsInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994D622C1BC468CB0005AEA7 /* STFriendsInviterViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -480,6 +481,8 @@
 		9907859E1B24B9FB006311E4 /* STGetFollowingRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetFollowingRequest.m; sourceTree = "<group>"; };
 		990B467C1A50626F003D4CDE /* STUpdateUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateUserProfileRequest.h; sourceTree = "<group>"; };
 		990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateUserProfileRequest.m; sourceTree = "<group>"; };
+		990B9C1E1BD77410000887E2 /* STFacebookInviterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookInviterViewController.h; sourceTree = "<group>"; };
+		990B9C1F1BD77410000887E2 /* STFacebookInviterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookInviterViewController.m; sourceTree = "<group>"; };
 		993A5BFE1A490F1100021D1D /* NSDate+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Additions.h"; sourceTree = "<group>"; };
 		993A5BFF1A490F1100021D1D /* NSDate+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Additions.m"; sourceTree = "<group>"; };
 		994D62291BC16C040005AEA7 /* Invite.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Invite.storyboard; sourceTree = "<group>"; };
@@ -1091,6 +1094,8 @@
 				994D622C1BC468CB0005AEA7 /* STFriendsInviterViewController.m */,
 				994D622F1BC46A550005AEA7 /* STSMSEmailInviterViewController.h */,
 				994D62301BC46A550005AEA7 /* STSMSEmailInviterViewController.m */,
+				990B9C1E1BD77410000887E2 /* STFacebookInviterViewController.h */,
+				990B9C1F1BD77410000887E2 /* STFacebookInviterViewController.m */,
 			);
 			name = FriendsInviter;
 			sourceTree = "<group>";
@@ -1378,6 +1383,7 @@
 				172062ED1B1B1A2900A8B2B0 /* STListUser.m in Sources */,
 				176CC3071A2B0BFA00E9C3D0 /* STGetNotificationsRequest.m in Sources */,
 				17A5C4111BB7D6A10057180E /* STGetChatUrlAndPortRequest.m in Sources */,
+				990B9C201BD77410000887E2 /* STFacebookInviterViewController.m in Sources */,
 				0717E2B919B71B09001DF132 /* STFacebookAlbumsViewController.m in Sources */,
 				17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */,
 				0715651218FD890400F7B3BB /* STFooterView.m in Sources */,

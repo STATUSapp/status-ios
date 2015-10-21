@@ -8,11 +8,10 @@
 
 
 #import "STSMSEmailInviterViewController.h"
-#import "STFacebookHelper.h"
+
 
 @interface STSMSEmailInviterViewController ()
 
-@property (nonatomic, strong) STFacebookHelper * facebookHelper;
 
 @end
 
@@ -25,8 +24,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    _facebookHelper = [STFacebookHelper new];
-    [_facebookHelper promoteTheApp];
     
 }
 
