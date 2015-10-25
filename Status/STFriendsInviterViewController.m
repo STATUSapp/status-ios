@@ -10,8 +10,10 @@
 #import "STSMSEmailInviterViewController.h"
 #import "STFacebookInviterViewController.h"
 #import "STContactsManager.h"
+#import "STSuggestionsViewController.h"
+#import "STMenuController.h"
 
-@interface STFriendsInviterViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STInvitationsDelegate>
+@interface STFriendsInviterViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STInvitationsDelegate, STSuggestionsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *childContainer;
 @property (weak, nonatomic) IBOutlet UIView *pageIndicatorView;
@@ -78,6 +80,12 @@
     }];}
 
 
+#pragma mark - STSuggestionsDelegate
+
+- (void)userDidEndApplyingSugegstions {
+    [[STMenuController sharedInstance] goHome];
+}
+
 #pragma mark - STInvitationsDelegate
 
 - (void)userDidInviteSelectionsFromController:(STSMSEmailInviterViewController *)controller {
@@ -88,7 +96,8 @@
     }
     
     if (controllerIndex == _viewControllers.count - 1) {
-        //TODO: go to the next Step in flow
+        STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypeFriendsAndPeople];
+        [self.navigationController pushViewController:suggestionsVC animated:true];
     } else {
         [_pageController setViewControllers:@[[_viewControllers objectAtIndex:controllerIndex + 1]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         
@@ -156,6 +165,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationController setNavigationBarHidden:YES];
 
     _viewControllers = [NSMutableArray array];
     

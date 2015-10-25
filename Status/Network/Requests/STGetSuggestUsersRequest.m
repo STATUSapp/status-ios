@@ -43,6 +43,17 @@
 }
 
 -(NSString *)urlString{
-    return (_followType == STFollowTypePeople)?kGetPeopleYouShouldFollow:kGetFriendsYouShouldFollow;
+    
+    switch (_followType) {
+        case STFollowTypeFriends:
+            return kGetFriendsYouShouldFollow;
+        case STFollowTypePeople:
+            return kGetPeopleYouShouldFollow;
+        case STFollowTypeFriendsAndPeople:
+            return kGetFriendsPeopleYouShouldFollow;
+        default:
+            return nil;
+            break;
+    }
 }
 @end

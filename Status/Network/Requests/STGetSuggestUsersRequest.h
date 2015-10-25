@@ -10,6 +10,7 @@
 typedef NS_ENUM(NSInteger, STFollowType) {
     STFollowTypePeople = 0,
     STFollowTypeFriends,
+    STFollowTypeFriendsAndPeople
 };
 
 @interface STGetSuggestUsersRequest : STBaseRequest
