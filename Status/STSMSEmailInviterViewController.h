@@ -14,13 +14,15 @@ typedef NS_ENUM(NSInteger, STInviteType) {
     STInviteTypeFacebook
 };
 
+@class STSMSEmailInviterViewController;
+
 @protocol STInvitationsDelegate <NSObject>
 
--(void)userDidEndSelectingInvitations;
+-(void)userDidInviteSelectionsFromController:(STSMSEmailInviterViewController *)controller;
 
 @end
 
-@interface STSMSEmailInviterViewController : UITableViewController
+@interface STSMSEmailInviterViewController : UIViewController
 
 @property (nonatomic, weak) id <STInvitationsDelegate> delegate;
 @property (nonatomic) STInviteType inviteType;

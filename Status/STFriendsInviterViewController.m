@@ -11,7 +11,7 @@
 #import "STFacebookInviterViewController.h"
 #import "STContactsManager.h"
 
-@interface STFriendsInviterViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface STFriendsInviterViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STInvitationsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *childContainer;
 @property (weak, nonatomic) IBOutlet UIView *pageIndicatorView;
@@ -76,6 +76,31 @@
             }];
         });
     }];}
+
+
+#pragma mark - STInvitationsDelegate
+
+- (void)userDidInviteSelectionsFromController:(STSMSEmailInviterViewController *)controller {
+    NSInteger controllerIndex = [_viewControllers indexOfObject:controller];
+    
+    if (controllerIndex == NSNotFound) {
+        return;
+    }
+    
+    if (controllerIndex == _viewControllers.count - 1) {
+        //TODO: go to the next Step in flow
+    } else {
+        [_pageController setViewControllers:@[[_viewControllers objectAtIndex:controllerIndex + 1]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.pageIndicatorLeading.constant =  (controllerIndex + 1) * self.pageIndicatorView.frame.size.width;
+            [UIView animateWithDuration:0.35 animations:^{
+                [self.view layoutIfNeeded];
+            }];
+        });
+
+    }
+}
 
 #pragma mark - UIPageViewController Delegate and Datasource
 
@@ -147,14 +172,13 @@
         
         switch (i) {
             case 0:
-                childController = [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:nil];
+                childController = [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:self];
                 break;
             case 1:
-                childController = [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeEmail delegate:nil];
+                childController = [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeEmail delegate:self];
                 break;
                 
             default:
-                childController.view.backgroundColor = [UIColor grayColor];
                 break;
         }
         

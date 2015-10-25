@@ -137,49 +137,73 @@
             <point key="canvasLocation" x="375" y="306"/>
         </scene>
         <!--Email Inviter View Controller-->
-        <scene sceneID="JOZ-zB-ofy">
+        <scene sceneID="u5f-h7-2fK">
             <objects>
-                <tableViewController storyboardIdentifier="STSMSEmailInviterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yce-Sj-RXR" customClass="STSMSEmailInviterViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OUd-uX-eIu">
+                <viewController storyboardIdentifier="STSMSEmailInviterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SlR-dr-tKC" customClass="STSMSEmailInviterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4D4-54-uxA"/>
+                        <viewControllerLayoutGuide type="bottom" id="P3c-uL-oAy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E8e-be-jlT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JR1-eJ-pAs">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UITableViewCell" rowHeight="61" id="E4r-u8-y1l">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="61"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E4r-u8-y1l" id="wpP-ko-wz2">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="SlR-dr-tKC" id="DLG-Zo-wlu"/>
+                                    <outlet property="delegate" destination="SlR-dr-tKC" id="jHm-l1-OE5"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQ5-YQ-oPa">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="U7C-oy-cP2"/>
+                                </constraints>
+                                <state key="normal" title="Invite All"/>
+                                <connections>
+                                    <action selector="invitePeople:" destination="SlR-dr-tKC" eventType="touchUpInside" id="j1B-3J-QjI"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="309-7b-6qY">
-                            <rect key="frame" x="0.0" y="72" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58s-e4-vIQ">
-                                    <rect key="frame" x="271" y="7" width="58" height="30"/>
-                                    <state key="normal" title="Invite All"/>
-                                    <connections>
-                                        <action selector="inviteAll:" destination="yce-Sj-RXR" eventType="touchUpInside" id="hca-Je-Ts3"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" id="E4r-u8-y1l">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E4r-u8-y1l" id="wpP-ko-wz2">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="yce-Sj-RXR" id="5af-Xf-N2q"/>
-                            <outlet property="delegate" destination="yce-Sj-RXR" id="tU4-Ck-tTp"/>
-                        </connections>
-                    </tableView>
+                        <constraints>
+                            <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="iQ5-YQ-oPa" secondAttribute="bottom" id="CJA-zf-POw"/>
+                            <constraint firstItem="iQ5-YQ-oPa" firstAttribute="top" secondItem="JR1-eJ-pAs" secondAttribute="bottom" id="Esz-BA-2sB"/>
+                            <constraint firstItem="iQ5-YQ-oPa" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="Vsv-Xj-CY4"/>
+                            <constraint firstItem="JR1-eJ-pAs" firstAttribute="top" secondItem="E8e-be-jlT" secondAttribute="top" id="df8-hT-Noo"/>
+                            <constraint firstItem="iQ5-YQ-oPa" firstAttribute="top" secondItem="JR1-eJ-pAs" secondAttribute="bottom" id="lc8-gC-tf9"/>
+                            <constraint firstAttribute="trailing" secondItem="iQ5-YQ-oPa" secondAttribute="trailing" id="qpU-Js-cao"/>
+                            <constraint firstItem="JR1-eJ-pAs" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="ufk-NV-kL7"/>
+                            <constraint firstAttribute="trailing" secondItem="JR1-eJ-pAs" secondAttribute="trailing" id="y2R-PU-oci"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Esz-BA-2sB"/>
+                            </mask>
+                        </variation>
+                    </view>
                     <connections>
-                        <outlet property="btnInviteAll" destination="58s-e4-vIQ" id="mPU-YE-wLd"/>
+                        <outlet property="btnInviteAll" destination="iQ5-YQ-oPa" id="xYW-F2-OKG"/>
+                        <outlet property="tableView" destination="JR1-eJ-pAs" id="aAg-jM-bli"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rAZ-iT-MyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aFF-lf-mBn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1075" y="306"/>
+            <point key="canvasLocation" x="1067" y="306"/>
         </scene>
     </scenes>
 </document>
