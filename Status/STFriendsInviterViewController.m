@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pageIndicatorLeading;
 
 @property (strong, nonatomic) UIPageViewController * pageController;
-@property (strong, nonatomic) NSMutableArray<UIViewController *> * viewControllers;
+@property (strong, nonatomic) NSArray<UIViewController *> * viewControllers;
 
 @property (strong, nonatomic) UIViewController * lastReturnedViewController;
 
@@ -167,34 +167,12 @@
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES];
 
-    _viewControllers = [NSMutableArray array];
+    _viewControllers = @[[STFacebookInviterViewController newController],
+                         [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:self],
+                         [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeEmail delegate:self]];
     
     [STContactsManager sharedInstance];
     
-    [_viewControllers addObject:[STFacebookInviterViewController newController]];
-    
-    for (int i = 0; i < 2; i++) {
-
-        
-        
-        
-        STSMSEmailInviterViewController * childController;
-        
-        switch (i) {
-            case 0:
-                childController = [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:self];
-                break;
-            case 1:
-                childController = [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeEmail delegate:self];
-                break;
-                
-            default:
-                break;
-        }
-        
-        [_viewControllers addObject:childController];
-    }
-
     _pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     _pageController.delegate = self;
     _pageController.dataSource = self;
@@ -203,9 +181,7 @@
     _pageController.view.frame = self.childContainer.bounds;
     [self.childContainer addSubview:_pageController.view];
     [self addChildViewController:_pageController];
-    
-    _childContainer.layer.borderWidth = 5;
-    _childContainer.layer.borderColor = [UIColor purpleColor].CGColor;
+
 }
 
 - (void)didReceiveMemoryWarning {

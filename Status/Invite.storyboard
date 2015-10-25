@@ -4,6 +4,18 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
+        </mutableArray>
+        <mutableArray key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Facebook Inviter View Controller-->
         <scene sceneID="aRJ-Sv-4UB">
@@ -17,21 +29,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krO-M0-lsq">
-                                <rect key="frame" x="174" y="279" width="253" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Invite Facebook Friends">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krO-M0-lsq">
+                                <rect key="frame" x="0.0" y="528" width="600" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="ibj-ok-0d4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="24"/>
+                                <state key="normal" title="INVITE FACEBOOK FRIENDS" backgroundImage="orange-base-0">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="inviteFacebookFriends:" destination="GsO-SB-IaS" eventType="touchUpInside" id="ApF-P5-g3F"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-0" translatesAutoresizingMaskIntoConstraints="NO" id="gcI-oj-8BX">
+                                <rect key="frame" x="154" y="329" width="153" height="31"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="invite-friends-icon" translatesAutoresizingMaskIntoConstraints="NO" id="0Hk-Sz-LAT">
+                                <rect key="frame" x="219" y="160" width="163" height="141"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKO-8Y-OvO">
+                                <rect key="frame" x="323" y="324" width="126" height="42"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="42"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="krO-M0-lsq" firstAttribute="centerY" secondItem="uGc-go-18G" secondAttribute="centerY" id="AiH-hI-dxy"/>
-                            <constraint firstItem="krO-M0-lsq" firstAttribute="centerX" secondItem="uGc-go-18G" secondAttribute="centerX" id="nb0-dh-Kwl"/>
+                            <constraint firstItem="aKO-8Y-OvO" firstAttribute="leading" secondItem="gcI-oj-8BX" secondAttribute="trailing" constant="16" id="2Dj-w1-M9z"/>
+                            <constraint firstItem="gcI-oj-8BX" firstAttribute="top" secondItem="0Hk-Sz-LAT" secondAttribute="bottom" constant="28" id="3R3-5u-vIw"/>
+                            <constraint firstItem="0Hk-Sz-LAT" firstAttribute="centerY" secondItem="uGc-go-18G" secondAttribute="centerY" constant="-70" id="7Lu-Yu-gOp"/>
+                            <constraint firstAttribute="trailing" secondItem="krO-M0-lsq" secondAttribute="trailing" id="MZM-65-EqA"/>
+                            <constraint firstItem="aKO-8Y-OvO" firstAttribute="centerY" secondItem="gcI-oj-8BX" secondAttribute="centerY" id="Poi-al-Pgk"/>
+                            <constraint firstItem="krO-M0-lsq" firstAttribute="leading" secondItem="uGc-go-18G" secondAttribute="leading" id="WLq-A9-46N"/>
+                            <constraint firstItem="gcI-oj-8BX" firstAttribute="leading" secondItem="0Hk-Sz-LAT" secondAttribute="leading" constant="-65" id="Yfm-PU-qaf"/>
+                            <constraint firstItem="gec-w2-wyn" firstAttribute="top" secondItem="krO-M0-lsq" secondAttribute="bottom" id="ZQe-pW-0Pb"/>
+                            <constraint firstItem="0Hk-Sz-LAT" firstAttribute="centerX" secondItem="uGc-go-18G" secondAttribute="centerX" id="gNL-7U-94n"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -59,6 +93,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="jRR-e7-ilU"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                 <state key="normal" title="SMS">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -68,6 +103,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GiG-yK-caX">
                                 <rect key="frame" x="400" y="64" width="200" height="40"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                 <state key="normal" title="Email">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -77,6 +113,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZW-lr-K4w">
                                 <rect key="frame" x="0.0" y="64" width="200" height="40"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                 <state key="normal" title="Facebook">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -92,8 +129,8 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Mk-Jf-axf">
-                                <rect key="frame" x="232" y="27" width="137" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <rect key="frame" x="212" y="27" width="177" height="30"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -206,4 +243,9 @@
             <point key="canvasLocation" x="1067" y="306"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="facebook-0" width="153" height="31"/>
+        <image name="invite-friends-icon" width="163" height="141"/>
+        <image name="orange-base-0" width="481" height="72"/>
+    </resources>
 </document>
