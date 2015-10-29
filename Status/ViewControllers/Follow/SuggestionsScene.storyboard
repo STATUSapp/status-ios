@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9tD-K9-lvq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9tD-K9-lvq">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="ProximaNova-Bold.otf">
@@ -29,13 +29,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DlM-O0-VOt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="137"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="connect with great people around you background " translatesAutoresizingMaskIntoConstraints="NO" id="BN9-l9-Sch">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="137"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BN9-l9-Sch">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                        <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect with great people around you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qe8-ve-rIL">
-                                        <rect key="frame" x="20" y="41" width="280" height="56"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow people" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qe8-ve-rIL">
+                                        <rect key="frame" x="20" y="3" width="280" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="f8f-4z-icM"/>
                                             <constraint firstAttribute="width" constant="280" id="ypl-h1-4bc"/>
@@ -45,7 +46,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlE-vz-Bed">
-                                        <rect key="frame" x="275" y="8" width="37" height="22"/>
+                                        <rect key="frame" x="275" y="20" width="37" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="37" id="TTN-ma-a9Z"/>
                                             <constraint firstAttribute="height" constant="22" id="fV8-TQ-7xq"/>
@@ -64,30 +65,36 @@
                                     <constraint firstAttribute="trailing" secondItem="VlE-vz-Bed" secondAttribute="trailing" constant="8" id="RSs-q6-BkZ"/>
                                     <constraint firstAttribute="centerX" secondItem="qe8-ve-rIL" secondAttribute="centerX" id="RVB-h6-GRr"/>
                                     <constraint firstItem="BN9-l9-Sch" firstAttribute="top" secondItem="DlM-O0-VOt" secondAttribute="top" id="V6h-GU-3xQ"/>
-                                    <constraint firstAttribute="height" constant="137" id="eEW-Vg-X3m"/>
+                                    <constraint firstItem="VlE-vz-Bed" firstAttribute="centerY" secondItem="qe8-ve-rIL" secondAttribute="centerY" id="V7L-RG-WSD"/>
+                                    <constraint firstAttribute="height" constant="60" id="eEW-Vg-X3m"/>
                                     <constraint firstItem="VlE-vz-Bed" firstAttribute="top" secondItem="DlM-O0-VOt" secondAttribute="top" constant="8" id="eYD-Ry-S9w"/>
                                     <constraint firstAttribute="centerY" secondItem="qe8-ve-rIL" secondAttribute="centerY" constant="-0.5" id="sqk-W9-3lt"/>
                                     <constraint firstAttribute="bottom" secondItem="BN9-l9-Sch" secondAttribute="bottom" id="vTE-6A-hFw"/>
                                     <constraint firstItem="BN9-l9-Sch" firstAttribute="leading" secondItem="DlM-O0-VOt" secondAttribute="leading" id="yrd-Si-owT"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="eYD-Ry-S9w"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qc8-Bg-tGE">
-                                <rect key="frame" x="0.0" y="137" width="320" height="65"/>
+                                <rect key="frame" x="0.0" y="60" width="320" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People you should follow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cmA-Xv-PlS">
-                                        <rect key="frame" x="8" y="22" width="186" height="21"/>
+                                        <rect key="frame" x="8" y="22" width="186" height="16"/>
                                         <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="16"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWU-TS-7r3">
-                                        <rect key="frame" x="204" y="16" width="108" height="34"/>
+                                        <rect key="frame" x="204" y="16" width="108" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="108" id="UAy-lF-t1e"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="15"/>
                                         <state key="normal" title="+ Follow All" backgroundImage="follow frame ">
-                                            <color key="titleColor" red="0.33333333333333331" green="0.30196078431372547" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.9882352941176471" green="0.25490196078431371" blue="0.031372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="selected" backgroundImage="following grame ">
@@ -101,10 +108,10 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.90980392156862744" green="0.89803921568627454" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="cmA-Xv-PlS" secondAttribute="trailing" constant="126" id="9hA-ic-88x"/>
-                                    <constraint firstAttribute="height" constant="65" id="ILX-Ub-o8Y"/>
+                                    <constraint firstAttribute="height" constant="60" id="ILX-Ub-o8Y"/>
                                     <constraint firstAttribute="bottom" secondItem="hWU-TS-7r3" secondAttribute="bottom" constant="15" id="Qar-cg-wGc"/>
                                     <constraint firstItem="cmA-Xv-PlS" firstAttribute="leading" secondItem="Qc8-Bg-tGE" secondAttribute="leading" constant="8" id="XbC-9E-wBA"/>
                                     <constraint firstAttribute="trailing" secondItem="hWU-TS-7r3" secondAttribute="trailing" constant="8" id="Zow-BN-sPT"/>
@@ -114,9 +121,10 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vJn-4p-jYU">
-                                <rect key="frame" x="0.0" y="202" width="320" height="366"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="448"/>
+                                <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <color key="sectionIndexBackgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="STSuggestionCell" rowHeight="80" id="DF9-an-CDw" customClass="STSuggestionCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="80"/>
@@ -127,6 +135,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mon-fO-bGI">
                                                     <rect key="frame" x="20" y="7" width="66" height="66"/>
+                                                    <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="66" id="OGY-YP-Qva"/>
                                                         <constraint firstAttribute="height" constant="66" id="ula-LO-9Dz"/>
@@ -135,7 +144,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Isac Madalin" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="gXY-Hf-BKr">
                                                     <rect key="frame" x="94" y="7" width="102" height="66"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDI-cn-Rsk">
@@ -145,7 +154,6 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="15"/>
                                                     <state key="normal" title="+ Follow" backgroundImage="follow frame ">
-                                                        <color key="titleColor" red="0.33333333329999998" green="0.30196078430000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <state key="selected" backgroundImage="following grame ">
@@ -159,6 +167,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="WDI-cn-Rsk" secondAttribute="trailing" constant="8" id="4ft-6Y-occ"/>
                                                 <constraint firstItem="WDI-cn-Rsk" firstAttribute="top" secondItem="cAt-4x-7FO" secondAttribute="top" constant="23" id="EUg-iV-eUB"/>
@@ -171,6 +180,7 @@
                                                 <constraint firstItem="WDI-cn-Rsk" firstAttribute="leading" secondItem="gXY-Hf-BKr" secondAttribute="trailing" constant="8" id="sJb-k1-lyK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="followButton" destination="WDI-cn-Rsk" id="etV-eo-BWT"/>
                                             <outlet property="userImageView" destination="mon-fO-bGI" id="7uf-GH-4EA"/>
@@ -184,7 +194,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="vJn-4p-jYU" secondAttribute="trailing" id="1XO-EF-v8S"/>
                             <constraint firstItem="vJn-4p-jYU" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="7Wp-7m-WrO"/>
@@ -211,7 +221,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="connect with great people around you background " width="320" height="137"/>
         <image name="follow frame " width="14" height="38"/>
         <image name="following grame " width="14" height="38"/>
         <image name="next button white 2" width="39" height="20"/>

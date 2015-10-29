@@ -11,6 +11,7 @@
 #import "STSMSEmailInviterViewController.h"
 #import "STContactsDataProcessor.h"
 #import "STAddressBookContact.h"
+#import "STInviteFriendCell.h"
 
 
 @interface STSMSEmailInviterViewController ()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate>
@@ -92,21 +93,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.0f;
+    
+    
+    
+    return self.inviteType == STInviteTypeEmail ? 75.0f : 50.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    STInviteFriendCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
     STAddressBookContact * contact = _dataProcessor.items[indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", contact.firstName, contact.lastName];
-    
-    if (contact.selected.boolValue) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    [cell setupWithContact:contact showEmail:self.inviteType == STInviteTypeEmail];
     
     return cell;
 }
@@ -157,6 +155,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self updateInviteButtonTitle];
+    
+    for (STAddressBookContact * contact in _dataProcessor.items) {
+        contact.selected = @(NO);
+    }
+    [self.tableView reloadData];
     [self updateInviteButtonTitle];
 }
 

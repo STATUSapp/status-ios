@@ -62,7 +62,7 @@
 		175EDC621A92ADF700FB96BD /* UITableView+SPXRevealAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 175EDC611A92ADF700FB96BD /* UITableView+SPXRevealAdditions.m */; };
 		175EDC641A92B1FF00FB96BD /* TimestampView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 175EDC631A92B1FF00FB96BD /* TimestampView.xib */; };
 		175F8B571A7B7F7000360C3E /* STImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175F8B561A7B7F7000360C3E /* STImagePickerController.m */; };
-		176AF3F61BC5978400FC6D59 /* STSyncContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176AF3F51BC5978400FC6D59 /* STSyncContactsRequest.m */; settings = {ASSET_TAGS = (); }; };
+		176AF3F61BC5978400FC6D59 /* STSyncContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176AF3F51BC5978400FC6D59 /* STSyncContactsRequest.m */; };
 		176CC2FE1A2B052600E9C3D0 /* STGetPostLikesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC2FD1A2B052600E9C3D0 /* STGetPostLikesRequest.m */; };
 		176CC3011A2B076E00E9C3D0 /* STSetAPNTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3001A2B076E00E9C3D0 /* STSetAPNTokenRequest.m */; };
 		176CC3041A2B09A100E9C3D0 /* STGetPostDetailsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 176CC3031A2B09A100E9C3D0 /* STGetPostDetailsRequest.m */; };
@@ -94,12 +94,12 @@
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
 		17950BAA1A8C0467006BD973 /* STTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BA91A8C0467006BD973 /* STTutorialViewController.m */; };
 		17950BAD1A8C10F6006BD973 /* STTutorialPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17950BAC1A8C10F6006BD973 /* STTutorialPresenterViewController.m */; };
-		17A5C4111BB7D6A10057180E /* STGetChatUrlAndPortRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */; settings = {ASSET_TAGS = (); }; };
-		17A5C4171BB7EE070057180E /* STContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4161BB7EE070057180E /* STContactsManager.m */; settings = {ASSET_TAGS = (); }; };
+		17A5C4111BB7D6A10057180E /* STGetChatUrlAndPortRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4101BB7D6A10057180E /* STGetChatUrlAndPortRequest.m */; };
+		17A5C4171BB7EE070057180E /* STContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4161BB7EE070057180E /* STContactsManager.m */; };
 		17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5C41A1BB7EF240057180E /* AddressBook.framework */; };
-		17A5C41F1BB7EFF80057180E /* STAddressBookContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C41E1BB7EFF80057180E /* STAddressBookContact.m */; settings = {ASSET_TAGS = (); }; };
-		17A5C4221BB81B130057180E /* STContactsDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4211BB81B130057180E /* STContactsDataProcessor.m */; settings = {ASSET_TAGS = (); }; };
-		17A5C4251BB821150057180E /* STInviteFriendsByEmailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4241BB821150057180E /* STInviteFriendsByEmailRequest.m */; settings = {ASSET_TAGS = (); }; };
+		17A5C41F1BB7EFF80057180E /* STAddressBookContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C41E1BB7EFF80057180E /* STAddressBookContact.m */; };
+		17A5C4221BB81B130057180E /* STContactsDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4211BB81B130057180E /* STContactsDataProcessor.m */; };
+		17A5C4251BB821150057180E /* STInviteFriendsByEmailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5C4241BB821150057180E /* STInviteFriendsByEmailRequest.m */; };
 		17AB89E6193B0DF600A6E7FD /* STChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E5193B0DF600A6E7FD /* STChatController.m */; };
 		17AB89E9193B0EE000A6E7FD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AB89E8193B0EE000A6E7FD /* SRWebSocket.m */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
@@ -159,11 +159,11 @@
 		9907859C1B24B9E3006311E4 /* STGetFollowersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9907859B1B24B9E3006311E4 /* STGetFollowersRequest.m */; };
 		9907859F1B24B9FB006311E4 /* STGetFollowingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9907859E1B24B9FB006311E4 /* STGetFollowingRequest.m */; };
 		990B467E1A50626F003D4CDE /* STUpdateUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B467D1A50626F003D4CDE /* STUpdateUserProfileRequest.m */; };
-		990B9C201BD77410000887E2 /* STFacebookInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B9C1F1BD77410000887E2 /* STFacebookInviterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		990B9C201BD77410000887E2 /* STFacebookInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 990B9C1F1BD77410000887E2 /* STFacebookInviterViewController.m */; };
 		993A5C001A490F1100021D1D /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 993A5BFF1A490F1100021D1D /* NSDate+Additions.m */; };
-		994D622A1BC16C040005AEA7 /* Invite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994D62291BC16C040005AEA7 /* Invite.storyboard */; settings = {ASSET_TAGS = (); }; };
-		994D622D1BC468CB0005AEA7 /* STFriendsInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994D622C1BC468CB0005AEA7 /* STFriendsInviterViewController.m */; settings = {ASSET_TAGS = (); }; };
-		994D62311BC46A550005AEA7 /* STSMSEmailInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994D62301BC46A550005AEA7 /* STSMSEmailInviterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		994D622A1BC16C040005AEA7 /* Invite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994D62291BC16C040005AEA7 /* Invite.storyboard */; };
+		994D622D1BC468CB0005AEA7 /* STFriendsInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994D622C1BC468CB0005AEA7 /* STFriendsInviterViewController.m */; };
+		994D62311BC46A550005AEA7 /* STSMSEmailInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994D62301BC46A550005AEA7 /* STSMSEmailInviterViewController.m */; };
 		99671D0B19BC8FBB00FB8A7A /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99671D0A19BC8FBB00FB8A7A /* STSettingsViewController.m */; };
 		99851E1C1A7E777C004B4FA4 /* Proxima Nova Fonts Collection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0A1A7E777C004B4FA4 /* Proxima Nova Fonts Collection.jpg */; };
 		99851E1D1A7E777C004B4FA4 /* ProximaNova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E0B1A7E777C004B4FA4 /* ProximaNova-Black.otf */; };
@@ -183,6 +183,7 @@
 		99851E2B1A7E777C004B4FA4 /* ProximaNovaCond-RegularIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E191A7E777C004B4FA4 /* ProximaNovaCond-RegularIt.otf */; };
 		99851E2C1A7E777C004B4FA4 /* ProximaNovaCond-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E1A1A7E777C004B4FA4 /* ProximaNovaCond-Semibold.otf */; };
 		99851E2D1A7E777C004B4FA4 /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99851E1B1A7E777C004B4FA4 /* ProximaNovaCond-SemiboldIt.otf */; };
+		99A7DC3A1BE2C0CC00917E80 /* STInviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A7DC391BE2C0CC00917E80 /* STInviteFriendCell.m */; };
 		99CEC4971A5977580014B759 /* STMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99CEC4961A5977580014B759 /* STMenuController.m */; };
 		99DCD4D81A8D2BF30023EE51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99DCD4D71A8D2BF30023EE51 /* Images.xcassets */; };
 		99E5B8251A754A0900A59F13 /* STNearbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E5B8241A754A0900A59F13 /* STNearbyController.m */; };
@@ -510,6 +511,8 @@
 		99851E191A7E777C004B4FA4 /* ProximaNovaCond-RegularIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-RegularIt.otf"; sourceTree = "<group>"; };
 		99851E1A1A7E777C004B4FA4 /* ProximaNovaCond-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-Semibold.otf"; sourceTree = "<group>"; };
 		99851E1B1A7E777C004B4FA4 /* ProximaNovaCond-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-SemiboldIt.otf"; sourceTree = "<group>"; };
+		99A7DC381BE2C0CC00917E80 /* STInviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInviteFriendCell.h; sourceTree = "<group>"; };
+		99A7DC391BE2C0CC00917E80 /* STInviteFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInviteFriendCell.m; sourceTree = "<group>"; };
 		99CEC4951A5977580014B759 /* STMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMenuController.h; sourceTree = "<group>"; };
 		99CEC4961A5977580014B759 /* STMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMenuController.m; sourceTree = "<group>"; };
 		99DCD4D71A8D2BF30023EE51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -1096,6 +1099,8 @@
 				994D62301BC46A550005AEA7 /* STSMSEmailInviterViewController.m */,
 				990B9C1E1BD77410000887E2 /* STFacebookInviterViewController.h */,
 				990B9C1F1BD77410000887E2 /* STFacebookInviterViewController.m */,
+				99A7DC381BE2C0CC00917E80 /* STInviteFriendCell.h */,
+				99A7DC391BE2C0CC00917E80 /* STInviteFriendCell.m */,
 			);
 			name = FriendsInviter;
 			sourceTree = "<group>";
@@ -1435,6 +1440,7 @@
 				17FD599C1B08703A00AFDFF8 /* STBaseObj.m in Sources */,
 				1783791C1A1D4853002AEE02 /* STGetPostsRequest.m in Sources */,
 				176CC31F1A2B226100E9C3D0 /* STSetUserSettingsRequest.m in Sources */,
+				99A7DC3A1BE2C0CC00917E80 /* STInviteFriendCell.m in Sources */,
 				0717E2B819B71B09001DF132 /* STAlbumImagesViewController.m in Sources */,
 				176CE2451936645500F5C4DA /* HPTextViewInternal.m in Sources */,
 				0719E5AE19619FE700F85382 /* STInviteController.m in Sources */,
