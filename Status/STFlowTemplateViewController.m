@@ -370,7 +370,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #ifdef DEBUG
             suggestionsShown = NO;
 #else
-            suggestionShown =  = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
+            suggestionsShown =  [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
 #endif
             if(suggestionsShown == NO)
             {
