@@ -10,7 +10,6 @@
 #import "STContactsManager.h"
 #import "STAddressBookContact.h"
 #import "STInviteFriendsByEmailRequest.h"
-#import <MessageUI/MessageUI.h>
 
 @interface STContactsDataProcessor()
 @property (nonatomic) STContactsProcessorType processorType;
@@ -49,7 +48,7 @@
     return [_items objectAtIndex:index];
 }
 
--(void) commitForViewController:(UIViewController *)viewController{
+-(void) commitForViewController:(UIViewController <MFMessageComposeViewControllerDelegate> *)viewController{
     if (_processorType == STContactsProcessorTypeEmails) {
         //sent to the server
         [self inviteFriendsToJoinStatus];
@@ -60,7 +59,7 @@
     }
 }
 
--(void)inviteFriendsViaSmsForViewController:(UIViewController *) viewController{
+-(void)inviteFriendsViaSmsForViewController:(UIViewController <MFMessageComposeViewControllerDelegate> *) viewController{
     NSMutableArray *numbers = [NSMutableArray new];
     for (STAddressBookContact *contact in _items) {
         if ([contact.selected boolValue] == YES) {

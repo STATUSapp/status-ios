@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MessageUI/MessageUI.h>
+
 @class STAddressBookContact;
 
 typedef NS_ENUM(NSUInteger,STContactsProcessorType){
@@ -19,5 +21,5 @@ typedef NS_ENUM(NSUInteger,STContactsProcessorType){
 -(instancetype)initWithType:(STContactsProcessorType) processorType;
 -(void)switchSelectionForObjectAtIndex:(NSInteger)index;
 -(STAddressBookContact *)objectAtindex:(NSInteger)index;
--(void) commitForViewController:(UIViewController *)viewController;
+-(void) commitForViewController:(UIViewController <MFMessageComposeViewControllerDelegate> *)viewController;
 @end
