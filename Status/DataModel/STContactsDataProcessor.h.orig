@@ -24,5 +24,9 @@ typedef NS_ENUM(NSUInteger,STContactsProcessorType){
 -(instancetype)initWithType:(STContactsProcessorType) processorType;
 -(void)switchSelectionForObjectAtIndex:(NSInteger)index;
 -(STAddressBookContact *)objectAtindex:(NSInteger)index;
+<<<<<<< HEAD
 -(void) commitForViewController:(UIViewController <MFMessageComposeViewControllerDelegate> *)viewController;
+=======
+-(void) commitForViewController:(UIViewController<MFMessageComposeViewControllerDelegate> *)viewController;
+>>>>>>> fb71ac41cb6f80db70ff7bb49632c924250a30e7
 @end

@@ -63,6 +63,7 @@
 #import "STGetUserProfileRequest.h"
 #import "STEditProfileViewController.h"
 #import "STSuggestionsViewController.h"
+#import "STFriendsInviterViewController.h"
 
 #import "UIImage+ImageEffects.h"
 #import <FBSDKCoreKit.h>
@@ -369,12 +370,14 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 #ifdef DEBUG
             suggestionsShown = NO;
 #else
-            suggestionShown =  = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
+            suggestionsShown =  [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
 #endif
             if(suggestionsShown == NO)
             {
-                STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypePeople];
-                [self.navigationController presentViewController:vc animated:NO completion:^{
+//                STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypePeople];
+                
+                STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
+                [self.navigationController presentViewController:[[UINavigationController alloc ]initWithRootViewController:vc] animated:NO completion:^{
                     [ud setValue:@(YES) forKey:@"SUGGESTIONS_SHOWED"];
                     [ud synchronize];
                 }];
@@ -519,8 +522,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                     __block NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
                     BOOL suggestionsShown = [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
                     if (weakSelf.flowType == STFlowTypeHome && [weakSelf.postsDataSource count] == 0 && suggestionsShown == NO) {
-                        STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:weakSelf andFollowTyep:STFollowTypePeople];
-                        [self.navigationController presentViewController:vc animated:NO completion:^{
+//                        STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:weakSelf andFollowTyep:STFollowTypePeople];
+                        STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
+                        [self.navigationController presentViewController:[[UINavigationController alloc ]initWithRootViewController:vc] animated:NO completion:^{
                             [ud setValue:@(YES) forKey:@"SUGGESTIONS_SHOWED"];
                             [ud synchronize];
                         }];

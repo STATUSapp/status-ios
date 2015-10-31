@@ -47,7 +47,11 @@
     return [_items objectAtIndex:index];
 }
 
+<<<<<<< HEAD
 -(void) commitForViewController:(UIViewController <MFMessageComposeViewControllerDelegate> *)viewController{
+=======
+-(void) commitForViewController:(UIViewController<MFMessageComposeViewControllerDelegate> *)viewController{
+>>>>>>> fb71ac41cb6f80db70ff7bb49632c924250a30e7
     if (_processorType == STContactsProcessorTypeEmails) {
         //sent to the server
         [self inviteFriendsToJoinStatus];
@@ -58,7 +62,11 @@
     }
 }
 
+<<<<<<< HEAD
+-(void)inviteFriendsViaSmsForViewController:(UIViewController <MFMessageComposeViewControllerDelegate> *) viewController{
+=======
 -(void)inviteFriendsViaSmsForViewController:(UIViewController<MFMessageComposeViewControllerDelegate> *) viewController{
+>>>>>>> fb71ac41cb6f80db70ff7bb49632c924250a30e7
     NSMutableArray *numbers = [NSMutableArray new];
     for (STAddressBookContact *contact in _items) {
         if ([contact.selected boolValue] == YES) {

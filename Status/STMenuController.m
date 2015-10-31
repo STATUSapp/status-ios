@@ -20,6 +20,8 @@
 #import "STNearbyController.h"
 #import "STNotificationsViewController.h"
 
+#import "STFriendsInviterViewController.h"
+
 #import "AppDelegate.h"
 #import "STUnseenPostsCountRequest.h"
 
@@ -222,7 +224,6 @@
     STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
     userProfileVC.isMyProfile = YES;
     [_currentVC.navigationController pushViewController:userProfileVC animated:YES];
-
 }
 - (void)goFriendsInviter {
     [self resetNavigationControllerStack];
