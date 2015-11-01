@@ -373,9 +373,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             suggestionsShown =  [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
 #endif
             if(suggestionsShown == NO)
-            {
-//                STSuggestionsViewController *vc = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypePeople];
-                
+            {                
                 STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
                 [self.navigationController presentViewController:[[UINavigationController alloc ]initWithRootViewController:vc] animated:NO completion:^{
                     [ud setValue:@(YES) forKey:@"SUGGESTIONS_SHOWED"];

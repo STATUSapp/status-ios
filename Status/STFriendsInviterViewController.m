@@ -34,7 +34,7 @@
 
 #pragma mark - IBActions
 - (IBAction)closeInviteFriends:(UIButton *)sender {
-    STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypePeople];
+    STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypeFriendsAndPeople];
     [self.navigationController pushViewController:suggestionsVC animated:true];
 }
 
@@ -100,7 +100,7 @@
     }
     
     if (controllerIndex == _viewControllers.count - 1) {
-        STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypePeople];
+        STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithDelegate:self andFollowTyep:STFollowTypeFriendsAndPeople];
         [self.navigationController pushViewController:suggestionsVC animated:true];
     } else {
         [_pageController setViewControllers:@[[_viewControllers objectAtIndex:controllerIndex + 1]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];

@@ -56,6 +56,7 @@
 		172EAE9018B0B12E00C5637B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE8E18B0B12E00C5637B /* InfoPlist.strings */; };
 		172EAE9218B0B12E00C5637B /* StatusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAE9118B0B12E00C5637B /* StatusTests.m */; };
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
+		1757B5851BE60F820070256E /* NSIndexPath+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1757B5841BE60F820070256E /* NSIndexPath+Additions.m */; };
 		175A28C71A13FD960057EDEE /* STBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28C61A13FD960057EDEE /* STBaseRequest.m */; };
 		175A28CC1A13FDDC0057EDEE /* STNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28C91A13FDDC0057EDEE /* STNetworkManager.m */; };
 		175A28CD1A13FDDC0057EDEE /* STNetworkQueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A28CB1A13FDDC0057EDEE /* STNetworkQueueManager.m */; };
@@ -295,6 +296,8 @@
 		172EAE9118B0B12E00C5637B /* StatusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatusTests.m; sourceTree = "<group>"; };
 		172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		1757B5831BE60F820070256E /* NSIndexPath+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+Additions.h"; sourceTree = "<group>"; };
+		1757B5841BE60F820070256E /* NSIndexPath+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+Additions.m"; sourceTree = "<group>"; };
 		175A28C51A13FD960057EDEE /* STBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBaseRequest.h; sourceTree = "<group>"; };
 		175A28C61A13FD960057EDEE /* STBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBaseRequest.m; sourceTree = "<group>"; };
 		175A28C81A13FDDC0057EDEE /* STNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetworkManager.h; sourceTree = "<group>"; };
@@ -1018,6 +1021,8 @@
 				17FE7CE319B321340081F688 /* NSString+MD5.m */,
 				1776F52E19C8CE0F00267DC8 /* UIImage+FixedOrientation.h */,
 				1776F52F19C8CE0F00267DC8 /* UIImage+FixedOrientation.m */,
+				1757B5831BE60F820070256E /* NSIndexPath+Additions.h */,
+				1757B5841BE60F820070256E /* NSIndexPath+Additions.m */,
 			);
 			name = Categories;
 			path = Status/Categories;
@@ -1360,6 +1365,7 @@
 				17FD59A61B08971900AFDFF8 /* STGetSuggestUsersRequest.m in Sources */,
 				994D62311BC46A550005AEA7 /* STSMSEmailInviterViewController.m in Sources */,
 				0717E2E619B71D88001DF132 /* STIAPHelper.m in Sources */,
+				1757B5851BE60F820070256E /* NSIndexPath+Additions.m in Sources */,
 				317A269918B0D26F00291463 /* STCustomCollectionViewCell.m in Sources */,
 				17EB38101B1C50C700EFDAAD /* STUnseenPostsCountRequest.m in Sources */,
 				07FBDEE918C60DDF007BDCE6 /* STLikeCell.m in Sources */,
