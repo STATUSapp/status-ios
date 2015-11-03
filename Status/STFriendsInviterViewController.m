@@ -170,7 +170,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES];
-
+    
+    UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
+    self.view.backgroundColor = backgroundColor;
+    self.childContainer.backgroundColor = backgroundColor;
     _viewControllers = @[[STFacebookInviterViewController newController],
                          [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:self],
                          [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeEmail delegate:self]];
@@ -178,6 +181,9 @@
     [STContactsManager sharedInstance];
     
     _pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    _pageController.view.backgroundColor = backgroundColor;
+    _pageController.view.tintColor = backgroundColor;
+
     _pageController.delegate = self;
     _pageController.dataSource = self;
     [_pageController setViewControllers:@[_viewControllers.firstObject] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];

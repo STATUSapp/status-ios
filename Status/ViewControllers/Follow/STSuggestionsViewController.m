@@ -199,6 +199,11 @@ NSInteger const kSuggestedPeopleSection = 1;
     return view;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    STSuggestionCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    [self onFollowButtonPressed:cell.followButton];
+}
+
 #pragma mark - IBACTIONS
 - (IBAction)onFollowButtonPressed:(id)sender {
     //update the model then make the request at the end

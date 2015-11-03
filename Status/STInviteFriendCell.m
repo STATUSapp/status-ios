@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblDetails;
+@property (weak, nonatomic) IBOutlet UIImageView *selectedIndicator;
 
 @end
 
@@ -25,9 +26,9 @@
     _lblName.text = contact.fullName;
 
     if (contact.selected.boolValue) {
-        self.accessoryType = UITableViewCellAccessoryCheckmark;
+        self.selectedIndicator.image = [UIImage imageNamed:@"checked"];
     }else {
-        self.accessoryType = UITableViewCellAccessoryNone;
+        self.selectedIndicator.image = [UIImage imageNamed:@"unchecked"];
     }
     self.accessoryView.tintColor = [UIColor whiteColor];
 }
