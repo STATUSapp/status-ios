@@ -39,14 +39,17 @@
 }
 
 - (IBAction)goToSMSInviter:(id)sender {
-    
+    [self setControllerAndIndicatorViewForIndex:1];
+}
+
+- (void)setControllerAndIndicatorViewForIndex:(NSInteger)index {
     __weak STFriendsInviterViewController * weakSelf = self;
     
-    NSInteger index = 1;
+    NSInteger offset = [self offsetForIndex:index];
     
     [_pageController setViewControllers:@[_viewControllers[index]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.pageIndicatorLeading.constant =  index * weakSelf.pageIndicatorView.frame.size.width;
+            weakSelf.pageIndicatorLeading.constant =  offset;
             [UIView animateWithDuration:0.35 animations:^{
                 [weakSelf.view layoutIfNeeded];
             }];
@@ -54,34 +57,39 @@
     }];
 }
 
+- (NSInteger)offsetForIndex:(NSInteger)index {
+    NSInteger offset = 0;
+    
+    switch (index) {
+        case 0:
+            offset = 20;
+            break;
+            
+        case 1:
+            offset = (self.view.frame.size.width - self.pageIndicatorView.frame.size.width) / 2;
+            break;
+            
+        case 2:
+            offset = self.view.frame.size.width - 20 - self.pageIndicatorView.frame.size.width;
+            break;
+            
+        default:
+            offset = 0;
+            break;
+    }
+    
+    return offset;
+}
+
 - (IBAction)goToEmailInviter:(id)sender {
     
-    __weak STFriendsInviterViewController * weakSelf = self;
-    
-    NSInteger index = 2;
-    
-    [_pageController setViewControllers:@[_viewControllers[index]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.pageIndicatorLeading.constant =  index * weakSelf.pageIndicatorView.frame.size.width;
-            [UIView animateWithDuration:0.35 animations:^{
-                [weakSelf.view layoutIfNeeded];
-            }];
-        });
-    }];}
+    [self setControllerAndIndicatorViewForIndex:2];
+
+}
 - (IBAction)goToFacebookInviter:(id)sender {
     
-    __weak STFriendsInviterViewController * weakSelf = self;
-    
-    NSInteger index = 0;
-    
-    [_pageController setViewControllers:@[_viewControllers[index]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.pageIndicatorLeading.constant =  index * weakSelf.pageIndicatorView.frame.size.width;
-            [UIView animateWithDuration:0.35 animations:^{
-                [weakSelf.view layoutIfNeeded];
-            }];
-        });
-    }];}
+    [self setControllerAndIndicatorViewForIndex:0];
+}
 
 
 #pragma mark - STSuggestionsDelegate
@@ -149,7 +157,7 @@
 
         
         NSInteger currentVCIndex = [_viewControllers indexOfObject:pageViewController.viewControllers.lastObject];
-        _pageIndicatorLeading.constant = currentVCIndex * _pageIndicatorView.frame.size.width;
+        _pageIndicatorLeading.constant = [self offsetForIndex:currentVCIndex];
         
         [UIView animateWithDuration:0.35 animations:^{
             [self.view layoutIfNeeded];

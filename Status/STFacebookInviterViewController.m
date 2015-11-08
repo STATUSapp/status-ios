@@ -11,6 +11,9 @@
 
 @interface STFacebookInviterViewController ()
 @property (nonatomic, strong) STFacebookHelper * facebookHelper;
+
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *inviteCollection;
+
 @end
 
 @implementation STFacebookInviterViewController
@@ -24,6 +27,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inviteFacebookFriends:)];
+    UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inviteFacebookFriends:)];
+    UITapGestureRecognizer * tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inviteFacebookFriends:)];
+    
+    NSArray * taps = @[tap1, tap2, tap3];
+    
+    for (int i = 0; i < 3; i++) {
+        [[_inviteCollection objectAtIndex:i] addGestureRecognizer:[taps objectAtIndex:i]];
+    }
 }
 
 
