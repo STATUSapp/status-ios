@@ -18,8 +18,10 @@
 
 @property (nonatomic, strong) STContactsDataProcessor * dataProcessor;
 
-@property (weak, nonatomic) IBOutlet UIButton *btnInviteAll;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *lblInvitePeople;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrBottomTable;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrHeightInviter;
 
 @property (assign, nonatomic) NSInteger selectionsNumber;
 
@@ -31,16 +33,8 @@
 
 #pragma mark - IBActions
 
-- (IBAction)invitePeople:(id)sender {
-    
-    if (_selectionsNumber > 0) {
-        [self inviteSelectedPeople];
-    }else {
-        [self inviteAll];
-    }
-}
 
-- (void)inviteSelectedPeople {
+- (IBAction)inviteSelectedPeople:(id)sender {
     [_dataProcessor commitForViewController:self];
     
     if (self.inviteType == STInviteTypeEmail) {
@@ -51,13 +45,13 @@
 }
 
 
-- (void)inviteAll {
+- (IBAction)inviteAll:(id)sender {
     
     for (STAddressBookContact * contact in _dataProcessor.items) {
         contact.selected = @(YES);
     }
     [self.tableView reloadData];
-    [self inviteSelectedPeople];
+    [self inviteSelectedPeople:sender];
 }
 
 #pragma mark - MFMessageComposeViewControllerDelegate
@@ -94,9 +88,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-    
-    return self.inviteType == STInviteTypeEmail ? 75.0f : 50.0f;
+    return 75.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,11 +110,11 @@
         contact.selected = @(YES);
     }
     
-    [self updateInviteButtonTitle];
+    [self updateInviteButtonTitleAnimated:YES];
 
 }
 
-- (void)updateInviteButtonTitle {
+- (void)updateInviteButtonTitleAnimated:(BOOL)animated {
     _selectionsNumber = 0;
     for (STAddressBookContact * contact in _dataProcessor.items) {
         if (contact.selected.boolValue) {
@@ -131,7 +123,31 @@
     }
     [self.tableView reloadData];
     
-    [_btnInviteAll setTitle: _selectionsNumber == 0 ? @"Invite All" : [NSString stringWithFormat:@"Invite friends %li", (long)_selectionsNumber] forState:UIControlStateNormal];
+    _lblInvitePeople.text = [NSString stringWithFormat:@"%li friends selected. Invite them", (long)_selectionsNumber];
+    
+    if (_selectionsNumber == 0) {
+        _constrBottomTable.constant = 44;
+        _constrHeightInviter.constant = 0;
+    } else {
+        _constrBottomTable.constant = 88;
+        _constrHeightInviter.constant = 44;
+        
+    }
+    
+    [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
+        [self.view layoutIfNeeded];
+        _lblInvitePeople.hidden = _selectionsNumber == 0 ;
+    }];
+
+}
+
+- (void)resetSelections {
+    
+    for (STAddressBookContact * contact in _dataProcessor.items) {
+        contact.selected = @(NO);
+    }
+    [self.tableView reloadData];
+    [self updateInviteButtonTitleAnimated:NO];
 }
 
 #pragma mark - Lifecycle
@@ -155,17 +171,12 @@
     UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
     self.view.backgroundColor = backgroundColor;
     self.tableView.backgroundColor = backgroundColor;
+    
+    [self resetSelections];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self updateInviteButtonTitle];
-    
-    for (STAddressBookContact * contact in _dataProcessor.items) {
-        contact.selected = @(NO);
-    }
-    [self.tableView reloadData];
-    [self updateInviteButtonTitle];
 }
 
 - (void)viewDidAppear:(BOOL)animated{

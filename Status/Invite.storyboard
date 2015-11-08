@@ -13,6 +13,7 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
@@ -36,10 +37,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krO-M0-lsq">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="ibj-ok-0d4"/>
+                                    <constraint firstAttribute="height" constant="44" id="ibj-ok-0d4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                 <state key="normal" title="INVITE FACEBOOK FRIENDS" backgroundImage="orange-base-0">
@@ -242,7 +243,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JR1-eJ-pAs">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -254,25 +255,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzx-oU-woA">
-                                                    <rect key="frame" x="27" y="15" width="50" height="21"/>
+                                                    <rect key="frame" x="20" y="18" width="41" height="17"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="21"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAx-dz-DdC">
-                                                    <rect key="frame" x="27" y="41" width="36" height="15"/>
+                                                    <rect key="frame" x="20" y="40" width="36" height="15"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.34509803921568627" green="0.34509803921568627" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="divider-0" translatesAutoresizingMaskIntoConstraints="NO" id="ooj-u5-XVO">
-                                                    <rect key="frame" x="8" y="77" width="584" height="1"/>
+                                                    <rect key="frame" x="20" y="77" width="560" height="1"/>
                                                     <animations/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="7fS-Tc-9gz">
-                                                    <rect key="frame" x="550" y="24" width="32" height="32"/>
+                                                    <rect key="frame" x="548" y="24" width="32" height="32"/>
                                                     <animations/>
                                                 </imageView>
                                             </subviews>
@@ -280,19 +281,21 @@
                                             <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="OAx-dz-DdC" firstAttribute="top" secondItem="Qzx-oU-woA" secondAttribute="bottom" constant="5" id="73x-06-Fns"/>
-                                                <constraint firstItem="ooj-u5-XVO" firstAttribute="leading" secondItem="wpP-ko-wz2" secondAttribute="leading" constant="8" id="CHB-q6-N4e"/>
-                                                <constraint firstItem="Qzx-oU-woA" firstAttribute="top" secondItem="wpP-ko-wz2" secondAttribute="top" constant="15" id="D4a-u9-e80"/>
+                                                <constraint firstItem="ooj-u5-XVO" firstAttribute="leading" secondItem="wpP-ko-wz2" secondAttribute="leading" constant="20" id="CHB-q6-N4e"/>
+                                                <constraint firstItem="Qzx-oU-woA" firstAttribute="top" secondItem="wpP-ko-wz2" secondAttribute="top" constant="18" id="D4a-u9-e80"/>
                                                 <constraint firstItem="7fS-Tc-9gz" firstAttribute="centerY" secondItem="wpP-ko-wz2" secondAttribute="centerY" id="DPW-Ys-jig"/>
-                                                <constraint firstAttribute="trailing" secondItem="ooj-u5-XVO" secondAttribute="trailing" constant="8" id="Fof-gP-OHL"/>
+                                                <constraint firstAttribute="trailing" secondItem="ooj-u5-XVO" secondAttribute="trailing" constant="20" id="Fof-gP-OHL"/>
                                                 <constraint firstAttribute="bottom" secondItem="ooj-u5-XVO" secondAttribute="bottom" constant="2" id="Mct-X2-hxH"/>
-                                                <constraint firstItem="Qzx-oU-woA" firstAttribute="leading" secondItem="wpP-ko-wz2" secondAttribute="leading" constant="27" id="QY8-Nd-51i"/>
-                                                <constraint firstAttribute="trailing" secondItem="7fS-Tc-9gz" secondAttribute="trailing" constant="18" id="hfF-JK-SrG"/>
+                                                <constraint firstItem="Qzx-oU-woA" firstAttribute="leading" secondItem="wpP-ko-wz2" secondAttribute="leading" constant="20" id="QY8-Nd-51i"/>
+                                                <constraint firstAttribute="trailing" secondItem="7fS-Tc-9gz" secondAttribute="trailing" constant="20" id="hfF-JK-SrG"/>
+                                                <constraint firstItem="7fS-Tc-9gz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qzx-oU-woA" secondAttribute="trailing" constant="10" id="kFT-0p-7cZ"/>
                                                 <constraint firstItem="OAx-dz-DdC" firstAttribute="leading" secondItem="Qzx-oU-woA" secondAttribute="leading" id="xqy-CL-ezy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="constrTop" destination="D4a-u9-e80" id="MNu-as-btk"/>
                                             <outlet property="lblDetails" destination="OAx-dz-DdC" id="3bL-ck-Wh0"/>
                                             <outlet property="lblName" destination="Qzx-oU-woA" id="FZw-Yo-eGH"/>
                                             <outlet property="selectedIndicator" destination="7fS-Tc-9gz" id="2yo-Gi-ZpF"/>
@@ -305,35 +308,59 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBc-hf-Prr">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="xc6-au-8gV"/>
+                                    <constraint firstAttribute="height" constant="44" id="xc6-au-8gV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                 <state key="normal" title="INVITE ALL" backgroundImage="orange-base-0">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="inviteFacebookFriends:" destination="GsO-SB-IaS" eventType="touchUpInside" id="kKb-EY-KOS"/>
-                                    <action selector="invitePeople:" destination="SlR-dr-tKC" eventType="touchUpInside" id="Fiz-QC-cOo"/>
+                                    <action selector="inviteAll:" destination="SlR-dr-tKC" eventType="touchUpInside" id="7aW-5Z-Tdt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcK-YE-Luv">
+                                <rect key="frame" x="0.0" y="512" width="600" height="44"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="26f-mU-9q2"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="inviteSelectedPeople:" destination="SlR-dr-tKC" eventType="touchUpInside" id="31l-Kf-Pd1"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 friends selected. Invite them." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ga-S1-ZDq">
+                                <rect key="frame" x="206" y="527" width="188" height="14"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="JR1-eJ-pAs" secondAttribute="bottom" constant="50" id="2yy-2b-euB"/>
+                            <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="JR1-eJ-pAs" secondAttribute="bottom" constant="88" id="2yy-2b-euB"/>
                             <constraint firstAttribute="trailing" secondItem="EBc-hf-Prr" secondAttribute="trailing" id="Eeb-NA-mgO"/>
                             <constraint firstItem="EBc-hf-Prr" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="K7e-OC-8Vr"/>
+                            <constraint firstAttribute="trailing" secondItem="ZcK-YE-Luv" secondAttribute="trailing" id="PFe-3e-6Go"/>
+                            <constraint firstItem="ZcK-YE-Luv" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="T01-mB-DGj"/>
+                            <constraint firstItem="1Ga-S1-ZDq" firstAttribute="centerX" secondItem="ZcK-YE-Luv" secondAttribute="centerX" id="Uth-kB-110"/>
                             <constraint firstItem="JR1-eJ-pAs" firstAttribute="top" secondItem="E8e-be-jlT" secondAttribute="top" id="df8-hT-Noo"/>
                             <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="EBc-hf-Prr" secondAttribute="bottom" id="epi-iW-zA9"/>
+                            <constraint firstItem="1Ga-S1-ZDq" firstAttribute="centerY" secondItem="ZcK-YE-Luv" secondAttribute="centerY" id="m0a-t0-NO2"/>
+                            <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="ZcK-YE-Luv" secondAttribute="bottom" constant="44" id="mi1-tn-3iY"/>
                             <constraint firstItem="JR1-eJ-pAs" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="ufk-NV-kL7"/>
                             <constraint firstAttribute="trailing" secondItem="JR1-eJ-pAs" secondAttribute="trailing" id="y2R-PU-oci"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnInviteAll" destination="EBc-hf-Prr" id="Ow4-6P-tJD"/>
+                        <outlet property="constrBottomTable" destination="2yy-2b-euB" id="3Wy-NG-5dZ"/>
+                        <outlet property="constrHeightInviter" destination="26f-mU-9q2" id="Ior-Hm-zB6"/>
+                        <outlet property="lblInvitePeople" destination="1Ga-S1-ZDq" id="iK2-e8-pyC"/>
                         <outlet property="tableView" destination="JR1-eJ-pAs" id="aAg-jM-bli"/>
                     </connections>
                 </viewController>

@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblDetails;
 @property (weak, nonatomic) IBOutlet UIImageView *selectedIndicator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrTop;
 
 @end
 
@@ -24,6 +25,7 @@
     _lblDetails.hidden = !showEmail;
     _lblDetails.text = contact.emails.firstObject;
     _lblName.text = contact.fullName;
+    _constrTop.constant = showEmail ? 18.0f : 25.0f;
 
     if (contact.selected.boolValue) {
         self.selectedIndicator.image = [UIImage imageNamed:@"checked"];
