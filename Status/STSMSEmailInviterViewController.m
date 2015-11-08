@@ -40,7 +40,7 @@
     
     _results = [NSMutableArray array];
     for (STAddressBookContact * contact in _dataProcessor.items) {
-        if ([contact.fullName containsString:searchText]) {
+        if ([contact.fullName.lowercaseString containsString:searchText.lowercaseString]) {
             [_results addObject:contact];
         }
     }
