@@ -203,7 +203,11 @@
     [self resetSelections];
     
     _searchBar.delegate = self;
-    _searchBar.tintColor = [UIColor blackColor];
+    _searchBar.barTintColor = backgroundColor;
+    _searchBar.tintColor = backgroundColor;
+    _searchBar.backgroundColor = backgroundColor;
+    _searchBar.layer.borderColor = backgroundColor.CGColor;
+    _searchBar.layer.borderWidth = 3;
 }
 
 - (void)viewWillAppear:(BOOL)animated{

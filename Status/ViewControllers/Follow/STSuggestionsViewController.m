@@ -16,8 +16,6 @@
 #import "STContactsDataProcessor.h"
 #import <MessageUI/MessageUI.h>
 #import "NSIndexPath+Additions.h"
-NSInteger const kSuggestedFriendsSection = 0;
-NSInteger const kSuggestedPeopleSection = 1;
 
 @interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate>
 {
@@ -36,6 +34,8 @@ NSInteger const kSuggestedPeopleSection = 1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrBottomTable;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrHeightInviter;
 
+@property (assign, nonatomic) NSInteger kSuggestedFriendsSection;
+@property (assign, nonatomic) NSInteger kSuggestedPeopleSection;
 
 @end
 
@@ -102,7 +102,21 @@ NSInteger const kSuggestedPeopleSection = 1;
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     NSInteger numSections = 1;
     if (_followType == STFollowTypeFriendsAndPeople) {
-        numSections = 2;
+        numSections = 0;
+        
+        _kSuggestedFriendsSection = -1;
+        _kSuggestedPeopleSection = -1;
+        
+        if (_suggestedFriends.count) {
+            numSections ++;
+            _kSuggestedFriendsSection ++;
+        }
+        
+        if (_suggestedPeople.count) {
+            _kSuggestedPeopleSection = _kSuggestedFriendsSection + 1;
+            numSections ++;
+        }
+        
     }
     return numSections;
 }
@@ -117,9 +131,9 @@ NSInteger const kSuggestedPeopleSection = 1;
             break;
         case STFollowTypeFriendsAndPeople:
         {
-            if (section == kSuggestedFriendsSection)
+            if (section == _kSuggestedFriendsSection)
                 numRows = [_suggestedFriends count];
-            else if(section == kSuggestedPeopleSection)
+            else if(section == _kSuggestedPeopleSection)
                 numRows = [_suggestedPeople count];
         }
             break;
@@ -140,9 +154,9 @@ NSInteger const kSuggestedPeopleSection = 1;
             su = _suggestedFriends[indexPath.row];
             break;
         case STFollowTypeFriendsAndPeople:{
-            if (indexPath.section == kSuggestedPeopleSection)
+            if (indexPath.section == _kSuggestedPeopleSection)
                 su = _suggestedPeople[indexPath.row];
-            else if (indexPath.section == kSuggestedFriendsSection)
+            else if (indexPath.section == _kSuggestedFriendsSection)
                 su = _suggestedFriends[indexPath.row];
         }
         default:
@@ -170,11 +184,13 @@ NSInteger const kSuggestedPeopleSection = 1;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
     UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 27.f)];
     view.backgroundColor = [UIColor colorWithRed:71.f/255.f green:72.f/255.f blue:76.f/255.f alpha:1.f];
-    
+
     UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 27.f)];
     titlelable.textColor = [UIColor colorWithRed:160.f/255.f green:161.f/255.f blue:162.f/255.f alpha:1.f];
+    titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:10];
     NSString *titleString = @"";
     switch (_followType) {
         case STFollowTypePeople:
@@ -185,10 +201,10 @@ NSInteger const kSuggestedPeopleSection = 1;
             break;
         case STFollowTypeFriendsAndPeople:
         {
-            if (section == kSuggestedFriendsSection) {
+            if (section == _kSuggestedFriendsSection) {
                 titleString = @"FRIENDS";
             }
-            else if (section == kSuggestedPeopleSection)
+            else if (section == _kSuggestedPeopleSection)
                 titleString = @"INTERESTING PEOPLE";
         }
             break;
