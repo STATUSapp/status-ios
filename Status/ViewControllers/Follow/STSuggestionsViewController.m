@@ -32,6 +32,11 @@ NSInteger const kSuggestedPeopleSection = 1;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *followAllBtn;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblInvitePeople;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrBottomTable;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrHeightInviter;
+
+
 @end
 
 @implementation STSuggestionsViewController
@@ -89,6 +94,8 @@ NSInteger const kSuggestedPeopleSection = 1;
         [self loadSuggestedPeople];
         [self loadSuggestedFriends];
     }
+    
+    [self updateFollowControllsAnimated:NO];
 }
 
 #pragma mark - UITableViewDelegate
@@ -119,11 +126,6 @@ NSInteger const kSuggestedPeopleSection = 1;
 
         default:
             break;
-    }
-    NSArray *suggestions = [self allSuggestions];
-    if (suggestions && suggestions.count > 0) {
-        NSInteger sum = [self followingNumber];
-        _followAllBtn.selected = (sum == suggestions.count);
     }
     return numRows;
 }
@@ -202,6 +204,8 @@ NSInteger const kSuggestedPeopleSection = 1;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     STSuggestionCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     [self onFollowButtonPressed:cell.followButton];
+    
+    [self updateFollowControllsAnimated:YES];
 }
 
 #pragma mark - IBACTIONS
@@ -234,6 +238,30 @@ NSInteger const kSuggestedPeopleSection = 1;
 - (IBAction)onFollowAllButtonPressed:(id)sender {
     //update the model then make the reuest at the end
     [self actionFollowAll];
+    
+}
+
+- (void)updateFollowControllsAnimated:(BOOL)animated {
+    
+    NSInteger selectionsNumber = 0;
+
+    [self.tableView reloadData];
+    
+    _lblInvitePeople.text = [NSString stringWithFormat:@"%li people selected. Follow them", (long)selectionsNumber];
+    
+    if (selectionsNumber == 0) {
+        _constrBottomTable.constant = 44;
+        _constrHeightInviter.constant = 0;
+    } else {
+        _constrBottomTable.constant = 88;
+        _constrHeightInviter.constant = 44;
+        
+    }
+    
+    [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
+        [self.view layoutIfNeeded];
+        _lblInvitePeople.hidden = selectionsNumber == 0 ;
+    }];
     
 }
 
