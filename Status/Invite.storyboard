@@ -242,8 +242,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coQ-F6-84g">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <animations/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="SlR-dr-tKC" id="r1E-5z-VHX"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JR1-eJ-pAs">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="468"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -348,11 +362,14 @@
                             <constraint firstItem="EBc-hf-Prr" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="K7e-OC-8Vr"/>
                             <constraint firstAttribute="trailing" secondItem="ZcK-YE-Luv" secondAttribute="trailing" id="PFe-3e-6Go"/>
                             <constraint firstItem="ZcK-YE-Luv" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="T01-mB-DGj"/>
+                            <constraint firstItem="coQ-F6-84g" firstAttribute="top" secondItem="E8e-be-jlT" secondAttribute="top" id="UAe-4L-9pH"/>
                             <constraint firstItem="1Ga-S1-ZDq" firstAttribute="centerX" secondItem="ZcK-YE-Luv" secondAttribute="centerX" id="Uth-kB-110"/>
-                            <constraint firstItem="JR1-eJ-pAs" firstAttribute="top" secondItem="E8e-be-jlT" secondAttribute="top" id="df8-hT-Noo"/>
+                            <constraint firstItem="JR1-eJ-pAs" firstAttribute="top" secondItem="E8e-be-jlT" secondAttribute="top" constant="44" id="df8-hT-Noo"/>
                             <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="EBc-hf-Prr" secondAttribute="bottom" id="epi-iW-zA9"/>
+                            <constraint firstItem="coQ-F6-84g" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="jbx-yR-r7V"/>
                             <constraint firstItem="1Ga-S1-ZDq" firstAttribute="centerY" secondItem="ZcK-YE-Luv" secondAttribute="centerY" id="m0a-t0-NO2"/>
                             <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="ZcK-YE-Luv" secondAttribute="bottom" constant="44" id="mi1-tn-3iY"/>
+                            <constraint firstAttribute="trailing" secondItem="coQ-F6-84g" secondAttribute="trailing" id="sS2-uo-51m"/>
                             <constraint firstItem="JR1-eJ-pAs" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="ufk-NV-kL7"/>
                             <constraint firstAttribute="trailing" secondItem="JR1-eJ-pAs" secondAttribute="trailing" id="y2R-PU-oci"/>
                         </constraints>
@@ -361,6 +378,7 @@
                         <outlet property="constrBottomTable" destination="2yy-2b-euB" id="3Wy-NG-5dZ"/>
                         <outlet property="constrHeightInviter" destination="26f-mU-9q2" id="Ior-Hm-zB6"/>
                         <outlet property="lblInvitePeople" destination="1Ga-S1-ZDq" id="iK2-e8-pyC"/>
+                        <outlet property="searchBar" destination="coQ-F6-84g" id="F0A-zM-zso"/>
                         <outlet property="tableView" destination="JR1-eJ-pAs" id="aAg-jM-bli"/>
                     </connections>
                 </viewController>

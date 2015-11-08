@@ -14,7 +14,7 @@
 #import "STInviteFriendCell.h"
 
 
-@interface STSMSEmailInviterViewController ()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate>
+@interface STSMSEmailInviterViewController ()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) STContactsDataProcessor * dataProcessor;
 
@@ -22,6 +22,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblInvitePeople;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrBottomTable;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrHeightInviter;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (strong, nonatomic) NSMutableArray<STAddressBookContact *> * results;
+@property (assign, nonatomic) BOOL isSearching;
 
 @property (assign, nonatomic) NSInteger selectionsNumber;
 
@@ -30,6 +34,26 @@
 
 @implementation STSMSEmailInviterViewController
 
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    _results = [NSMutableArray array];
+    for (STAddressBookContact * contact in _dataProcessor.items) {
+        if ([contact.fullName containsString:searchText]) {
+            [_results addObject:contact];
+        }
+    }
+    _isSearching = [searchText isEqualToString:@""] ? NO : YES;
+    
+    [self.tableView reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    _isSearching = NO;
+    [self.view endEditing:YES];
+    [self.tableView reloadData];
+}
 
 #pragma mark - IBActions
 
@@ -83,7 +107,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataProcessor.items.count;
+    return _isSearching ? _results.count : _dataProcessor.items.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -94,7 +118,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     STInviteFriendCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
-    STAddressBookContact * contact = _dataProcessor.items[indexPath.row];
+    STAddressBookContact * contact = _isSearching? _results[indexPath.row] : _dataProcessor.items[indexPath.row];
     
     [cell setupWithContact:contact showEmail:self.inviteType == STInviteTypeEmail];
     
@@ -102,7 +126,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    STAddressBookContact * contact = [_dataProcessor.items objectAtIndex:indexPath.row];
+    STAddressBookContact * contact =  _isSearching ? [_results objectAtIndex:indexPath.row] : [_dataProcessor.items objectAtIndex:indexPath.row];
     
     if (contact.selected.boolValue == YES) {
         contact.selected = @(NO);
@@ -112,6 +136,10 @@
     
     [self updateInviteButtonTitleAnimated:YES];
 
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
 }
 
 - (void)updateInviteButtonTitleAnimated:(BOOL)animated {
@@ -173,6 +201,9 @@
     self.tableView.backgroundColor = backgroundColor;
     
     [self resetSelections];
+    
+    _searchBar.delegate = self;
+    _searchBar.tintColor = [UIColor blackColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
