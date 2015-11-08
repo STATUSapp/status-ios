@@ -12,6 +12,7 @@
 @interface STAddressBookContact : NSObject
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *fullName;
 @property (nonatomic, strong) NSArray *emails;
 @property (nonatomic, strong) NSArray *phones;
 @property (nonatomic, strong) NSData *thumbnail;
@@ -20,5 +21,5 @@
 
 -(NSNumber *)hasEmails;
 -(NSNumber *)hasPhones;
--(NSString *)fullName;
+
 @end

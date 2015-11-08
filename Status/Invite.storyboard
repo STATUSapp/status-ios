@@ -283,7 +283,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="divider-0" translatesAutoresizingMaskIntoConstraints="NO" id="ooj-u5-XVO">
-                                                    <rect key="frame" x="20" y="77" width="560" height="1"/>
+                                                    <rect key="frame" x="20" y="79" width="560" height="1"/>
                                                     <animations/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="7fS-Tc-9gz">
@@ -299,7 +299,7 @@
                                                 <constraint firstItem="Qzx-oU-woA" firstAttribute="top" secondItem="wpP-ko-wz2" secondAttribute="top" constant="18" id="D4a-u9-e80"/>
                                                 <constraint firstItem="7fS-Tc-9gz" firstAttribute="centerY" secondItem="wpP-ko-wz2" secondAttribute="centerY" id="DPW-Ys-jig"/>
                                                 <constraint firstAttribute="trailing" secondItem="ooj-u5-XVO" secondAttribute="trailing" constant="20" id="Fof-gP-OHL"/>
-                                                <constraint firstAttribute="bottom" secondItem="ooj-u5-XVO" secondAttribute="bottom" constant="2" id="Mct-X2-hxH"/>
+                                                <constraint firstAttribute="bottom" secondItem="ooj-u5-XVO" secondAttribute="bottom" id="Mct-X2-hxH"/>
                                                 <constraint firstItem="Qzx-oU-woA" firstAttribute="leading" secondItem="wpP-ko-wz2" secondAttribute="leading" constant="20" id="QY8-Nd-51i"/>
                                                 <constraint firstAttribute="trailing" secondItem="7fS-Tc-9gz" secondAttribute="trailing" constant="20" id="hfF-JK-SrG"/>
                                                 <constraint firstItem="7fS-Tc-9gz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qzx-oU-woA" secondAttribute="trailing" constant="10" id="kFT-0p-7cZ"/>

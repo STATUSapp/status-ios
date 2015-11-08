@@ -29,6 +29,8 @@
 
 @property (assign, nonatomic) NSInteger selectionsNumber;
 
+@property (strong, nonatomic) NSMutableDictionary * sections;
+
 
 @end
 
@@ -103,11 +105,44 @@
 #pragma mark - UITableViewDelegate DataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    
+    BOOL found;
+    
+    self.sections = [NSMutableDictionary dictionary];
+    
+    NSArray * dataSource = _isSearching ? _results : _dataProcessor.items;
+    
+    for (STAddressBookContact * contact in dataSource) {
+        NSString * firstLetter = [contact.fullName substringToIndex:1];
+        found = NO;
+        
+        for (NSString * str in self.sections.allKeys) {
+            if ([str isEqualToString:firstLetter]) {
+                found = YES;
+            }
+        }
+        
+        if (!found) {
+            [self.sections setValue:[NSMutableArray array] forKey:firstLetter];
+        }
+    }
+    
+    for (STAddressBookContact * contact in dataSource)
+    {
+        [[self.sections objectForKey:[contact.fullName substringToIndex:1]] addObject:contact];
+    }
+    
+    // Sort each section array
+    for (NSString *key in [self.sections allKeys])
+    {
+        [[self.sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]]];
+    }
+    
+    return self.sections.allKeys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _isSearching ? _results.count : _dataProcessor.items.count;
+    return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,7 +153,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     STInviteFriendCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
-    STAddressBookContact * contact = _isSearching? _results[indexPath.row] : _dataProcessor.items[indexPath.row];
+    STAddressBookContact * contact = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
     [cell setupWithContact:contact showEmail:self.inviteType == STInviteTypeEmail];
     
@@ -126,7 +161,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    STAddressBookContact * contact =  _isSearching ? [_results objectAtIndex:indexPath.row] : [_dataProcessor.items objectAtIndex:indexPath.row];
+    STAddressBookContact * contact =  [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
     if (contact.selected.boolValue == YES) {
         contact.selected = @(NO);
@@ -137,6 +172,25 @@
     [self updateInviteButtonTitleAnimated:YES];
 
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 22.f;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 22.f)];
+    view.backgroundColor = [UIColor colorWithRed:71.f/255.f green:72.f/255.f blue:76.f/255.f alpha:1.f];
+    
+    UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 22.f)];
+    titlelable.textColor = [UIColor colorWithRed:160.f/255.f green:161.f/255.f blue:162.f/255.f alpha:1.f];
+    titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:10];
+    NSString *titleString = [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+    titlelable.text = titleString;
+    [view addSubview:titlelable];
+    return view;
+}
+
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.view endEditing:YES];
