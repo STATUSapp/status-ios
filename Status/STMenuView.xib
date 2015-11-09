@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -28,9 +29,11 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1XZ-Pj-WzN">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <animations/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-a5-VPN">
                     <rect key="frame" x="7" y="8" width="40" height="46"/>
+                    <animations/>
                     <state key="normal" image="x menu STAUS">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -43,6 +46,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6g-lv-gva">
                             <rect key="frame" x="14" y="0.0" width="102" height="55"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="haU-q9-BzD"/>
                                 <constraint firstAttribute="width" constant="102" id="ue6-mX-57X"/>
@@ -64,6 +68,7 @@
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nG7-G3-i55">
                             <rect key="frame" x="124" y="18" width="15" height="20"/>
+                            <animations/>
                             <color key="backgroundColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="tintColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -76,6 +81,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Gf-Yn-6zx">
                             <rect key="frame" x="14" y="260" width="197" height="55"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="197" id="Ojf-GM-gpl"/>
                                 <constraint firstAttribute="height" constant="55" id="vPB-K3-DCf"/>
@@ -97,6 +103,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRT-11-EgD">
                             <rect key="frame" x="14" y="325" width="270" height="55"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="LrV-HM-5GJ"/>
                             </constraints>
@@ -117,6 +124,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TND-Bu-qwL">
                             <rect key="frame" x="14" y="130" width="127" height="55"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="16C-at-kYN"/>
                                 <constraint firstAttribute="width" constant="127" id="3zL-dW-Ow1"/>
@@ -138,6 +146,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhJ-5J-4tD">
                             <rect key="frame" x="14" y="195" width="119" height="55"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="aTb-hf-ij2"/>
                                 <constraint firstAttribute="width" constant="119" id="gYz-R1-BBq"/>
@@ -159,6 +168,7 @@
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0t-2M-KDd">
                             <rect key="frame" x="141" y="213" width="15" height="20"/>
+                            <animations/>
                             <color key="backgroundColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="tintColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -171,6 +181,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PB9-3s-1YB">
                             <rect key="frame" x="14" y="65" width="270" height="55"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="ZKe-MM-Iiv"/>
                             </constraints>
@@ -191,6 +202,7 @@
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCd-Z3-eLW">
                             <rect key="frame" x="219" y="278" width="15" height="20"/>
+                            <animations/>
                             <color key="backgroundColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="tintColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -203,6 +215,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="As0-7u-Jj7">
                             <rect key="frame" x="149" y="148" width="15" height="20"/>
+                            <animations/>
                             <color key="backgroundColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="tintColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -214,6 +227,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="PB9-3s-1YB" secondAttribute="trailing" constant="36" id="0YO-7H-7m1"/>
@@ -243,6 +257,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sP5-VC-CjX">
                     <rect key="frame" x="14" y="422" width="136" height="38"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="4cB-IY-l35"/>
                         <constraint firstAttribute="width" constant="136" id="xVa-e2-kPm"/>
@@ -262,10 +277,34 @@
                         <action selector="onToturialPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="f4K-UV-y77"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeC-q7-zdf">
+                    <rect key="frame" x="176" y="422" width="136" height="38"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="136" id="q4T-3U-aQx"/>
+                        <constraint firstAttribute="height" constant="38" id="v1G-GD-b1F"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="22"/>
+                    <state key="normal" title="Invite friends">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="inviteFriends:" destination="iN0-l3-epB" eventType="touchUpInside" id="Yic-y9-KTW"/>
+                    </connections>
+                </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="1XZ-Pj-WzN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3zZ-OS-hOt"/>
+                <constraint firstItem="GeC-q7-zdf" firstAttribute="centerY" secondItem="sP5-VC-CjX" secondAttribute="centerY" id="773-Pq-AVc"/>
                 <constraint firstAttribute="centerY" secondItem="eH9-2g-Sxn" secondAttribute="centerY" constant="5" id="Irl-CQ-efF"/>
                 <constraint firstAttribute="bottom" secondItem="1XZ-Pj-WzN" secondAttribute="bottom" id="O6q-VL-CrG"/>
                 <constraint firstItem="eH9-2g-Sxn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RNy-DU-f7l"/>
@@ -275,6 +314,7 @@
                 <constraint firstAttribute="trailing" secondItem="eH9-2g-Sxn" secondAttribute="trailing" id="dte-Sn-3qZ"/>
                 <constraint firstItem="sP5-VC-CjX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="ldn-eJ-Obj"/>
                 <constraint firstAttribute="centerX" secondItem="eH9-2g-Sxn" secondAttribute="centerX" id="tzL-MY-lRZ"/>
+                <constraint firstAttribute="trailing" secondItem="GeC-q7-zdf" secondAttribute="trailing" constant="8" id="ulK-NP-GcW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -291,9 +331,4 @@
     <resources>
         <image name="x menu STAUS" width="20" height="20"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

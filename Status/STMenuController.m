@@ -14,7 +14,6 @@
 #import "STInviteController.h"
 #import "STUserProfileViewController.h"
 #import "STFacebookLoginController.h"
-#import "STInviteFriendsViewController.h"
 #import "STFlowTemplateViewController.h"
 #import "STLocationManager.h"
 #import "STNearbyController.h"
@@ -228,9 +227,9 @@
 - (void)goFriendsInviter {
     [self resetNavigationControllerStack];
     [self hideMenu];
-    STInviteFriendsViewController * inviteFriendsVC = [STInviteFriendsViewController newInstance];
+    STFriendsInviterViewController * inviteFriendsVC = [STFriendsInviterViewController newController];
     inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [_currentVC presentViewController:inviteFriendsVC animated:YES completion:nil];
+    [_currentVC.navigationController pushViewController:inviteFriendsVC animated:YES];
 }
 - (void)goNotification{
     [self resetNavigationControllerStack];

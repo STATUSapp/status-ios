@@ -58,5 +58,8 @@
 - (IBAction)onRecentPressed:(id)sender {
     [[STMenuController sharedInstance] goRecent];
 }
+- (IBAction)inviteFriends:(id)sender {
+    [[STMenuController sharedInstance] goFriendsInviter];
+}
 
 @end
