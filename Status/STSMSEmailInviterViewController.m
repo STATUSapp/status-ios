@@ -205,7 +205,25 @@
     }
     [self.tableView reloadData];
     
-    _lblInvitePeople.text = [NSString stringWithFormat:@"%li friends selected. Invite them", (long)_selectionsNumber];
+    NSString * selectionNumberString = [NSString stringWithFormat:@"%li", (long)_selectionsNumber];
+    NSString * plainText = @" friends selected.";
+    NSString * boldText = @" Invite them";
+    
+    NSDictionary * lightAttr = @{NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Light" size:12]};
+    NSDictionary * boldAttr = @{NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Bold" size:12]};
+    
+    NSRange selRange = NSMakeRange(0, selectionNumberString.length);
+    NSRange plainRange = NSMakeRange(selRange.length, plainText.length);
+    NSRange boldRange = NSMakeRange(plainRange.length + plainRange.location, boldText.length);
+    
+    NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@%@", selectionNumberString, plainText, boldText]];
+    [attrString setAttributes:boldAttr range:selRange];
+    [attrString setAttributes:lightAttr range:plainRange];
+    [attrString setAttributes:boldAttr range:boldRange];
+    
+    _lblInvitePeople.attributedText = attrString;
+    
+//    _lblInvitePeople.text = [NSString stringWithFormat:@"%li friends selected. Invite them", (long)_selectionsNumber];
     
     if (_selectionsNumber == 0) {
         _constrBottomTable.constant = 44;

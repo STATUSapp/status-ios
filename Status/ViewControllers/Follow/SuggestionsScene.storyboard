@@ -184,13 +184,6 @@
                                     <action selector="onArrowPressed:" destination="9tD-K9-lvq" eventType="touchUpInside" id="dpk-BL-btW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 friends selected. Invite them." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqW-TE-qXz">
-                                <rect key="frame" x="66" y="495" width="188" height="14"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UU6-8t-06w">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <animations/>
@@ -211,6 +204,13 @@
                                     <action selector="onFollowAllButtonPressed:" destination="9tD-K9-lvq" eventType="touchUpInside" id="OBf-kL-uph"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 friends selected. Invite them." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqW-TE-qXz">
+                                <rect key="frame" x="0.0" y="480" width="320" height="44"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -220,15 +220,19 @@
                             <constraint firstItem="5KH-7I-Y7C" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="3q7-Xb-frQ"/>
                             <constraint firstItem="vJn-4p-jYU" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="7Wp-7m-WrO"/>
                             <constraint firstItem="vJn-4p-jYU" firstAttribute="top" secondItem="DlM-O0-VOt" secondAttribute="bottom" id="J0d-XK-NGp"/>
+                            <constraint firstAttribute="trailing" secondItem="oqW-TE-qXz" secondAttribute="trailing" id="MvO-Mo-JsH"/>
                             <constraint firstAttribute="trailing" secondItem="UU6-8t-06w" secondAttribute="trailing" id="OCt-ze-izB"/>
                             <constraint firstAttribute="trailing" secondItem="5KH-7I-Y7C" secondAttribute="trailing" id="WDb-8h-HfR"/>
                             <constraint firstAttribute="trailing" secondItem="DlM-O0-VOt" secondAttribute="trailing" id="aYN-vg-FHz"/>
                             <constraint firstItem="DlM-O0-VOt" firstAttribute="top" secondItem="wHB-He-kwl" secondAttribute="bottom" id="bZB-t9-wBG"/>
                             <constraint firstItem="lmE-nN-L72" firstAttribute="top" secondItem="vJn-4p-jYU" secondAttribute="bottom" constant="88" id="c1w-Gl-8Hk"/>
                             <constraint firstItem="oqW-TE-qXz" firstAttribute="centerX" secondItem="5KH-7I-Y7C" secondAttribute="centerX" id="hII-4P-7Hh"/>
+                            <constraint firstItem="oqW-TE-qXz" firstAttribute="top" secondItem="5KH-7I-Y7C" secondAttribute="top" id="ifa-Mt-Iiz"/>
+                            <constraint firstItem="oqW-TE-qXz" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="kCH-9F-eOR"/>
                             <constraint firstItem="UU6-8t-06w" firstAttribute="top" secondItem="5KH-7I-Y7C" secondAttribute="bottom" id="mtO-Rh-CyD"/>
                             <constraint firstItem="lmE-nN-L72" firstAttribute="top" secondItem="UU6-8t-06w" secondAttribute="bottom" id="nh0-k0-mHn"/>
                             <constraint firstItem="DlM-O0-VOt" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="o3j-3O-edn"/>
+                            <constraint firstItem="oqW-TE-qXz" firstAttribute="bottom" secondItem="5KH-7I-Y7C" secondAttribute="bottom" id="rIw-uR-T02"/>
                             <constraint firstItem="oqW-TE-qXz" firstAttribute="centerY" secondItem="5KH-7I-Y7C" secondAttribute="centerY" id="s5w-zZ-5GO"/>
                         </constraints>
                     </view>
