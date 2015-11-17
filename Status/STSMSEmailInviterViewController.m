@@ -206,8 +206,8 @@
     [self.tableView reloadData];
     
     NSString * selectionNumberString = [NSString stringWithFormat:@"%li", (long)_selectionsNumber];
-    NSString * plainText = @" friends selected.";
-    NSString * boldText = @" Invite them";
+    NSString * plainText = _selectionsNumber == 1 ? @" friend selected." : @" friends selected.";
+    NSString * boldText = _selectionsNumber == 1 ? @" Invite him/her" : @" Invite them";
     
     NSDictionary * lightAttr = @{NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Light" size:12]};
     NSDictionary * boldAttr = @{NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Bold" size:12]};

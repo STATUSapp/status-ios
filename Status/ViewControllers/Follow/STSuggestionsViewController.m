@@ -290,8 +290,8 @@
     }
     
     NSString * selectionNumberString = [NSString stringWithFormat:@"%li", (long)selectionsNumber];
-    NSString * plainText = @" people selected.";
-    NSString * boldText = @" Follow them";
+    NSString * plainText = selectionsNumber == 1 ? @" person selected." : @" people selected.";
+    NSString * boldText = selectionsNumber == 1 ? @" Follow him/her" : @" Follow them";
     
     NSDictionary * lightAttr = @{NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Light" size:12]};
     NSDictionary * boldAttr = @{NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Bold" size:12]};
