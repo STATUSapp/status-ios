@@ -29,7 +29,6 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *followAllBtn;
-
 @property (weak, nonatomic) IBOutlet UILabel *lblInvitePeople;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrBottomTable;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrHeightInviter;
@@ -121,6 +120,9 @@
     return numSections;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    [self updateFollowControllsAnimated:YES];
+    
     NSInteger numRows = 0;
     switch (_followType) {
         case STFollowTypePeople:
@@ -254,14 +256,38 @@
 - (IBAction)onFollowAllButtonPressed:(id)sender {
     //update the model then make the reuest at the end
     [self actionFollowAll];
+    [self onArrowPressed:sender];
     
 }
 
 - (void)updateFollowControllsAnimated:(BOOL)animated {
     
     NSInteger selectionsNumber = 0;
-
-    [self.tableView reloadData];
+    
+    NSMutableArray * dataSource = [NSMutableArray array];
+    
+    switch (self.followType) {
+        case STFollowTypeFriends:
+            [dataSource addObjectsFromArray:_suggestedFriends];
+            break;
+        case STFollowTypePeople:
+            [dataSource addObjectsFromArray:_suggestedPeople];
+            break;
+        case STFollowTypeFriendsAndPeople: {
+            [dataSource addObjectsFromArray:_suggestedFriends];
+            [dataSource addObjectsFromArray:_suggestedPeople];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    for (STSuggestedUser * user in dataSource) {
+        if ([user.followedByCurrentUser boolValue]) {
+            selectionsNumber++;
+        }
+    }
     
     _lblInvitePeople.text = [NSString stringWithFormat:@"%li people selected. Follow them", (long)selectionsNumber];
     
