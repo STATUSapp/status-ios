@@ -24,7 +24,18 @@
     if (_lastName!=nil) {
         lastName = _lastName;
     }
-    return [NSString stringWithFormat:@"%@%@%@", firstName, [firstName length]> 0?@" ":@"", lastName];
+    NSString * fullName = [NSString stringWithFormat:@"%@%@%@", firstName, [firstName length]> 0?@" ":@"", lastName];
+    
+    if (fullName.length == 0) {
+        
+        if (_phones.count > 0) {
+            return [NSString stringWithFormat:@"%@", _phones.firstObject];
+        }
+        
+        return @"No Name";
+    }
+    
+    return fullName;
 }
 +(STAddressBookContact *)contactWithPerson:(ABRecordRef) person{
     STAddressBookContact *returnObject = [STAddressBookContact new];
