@@ -9,6 +9,11 @@
 #import "STSuggestionCell.h"
 #import "STSuggestedUser.h"
 
+@interface STSuggestionCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *divider;
+@end
+
 @implementation STSuggestionCell
 
 - (void)awakeFromNib {
@@ -22,9 +27,10 @@
     // Configure the view for the selected state
 }
 
--(void)configureCellWithSuggestedUser:(STSuggestedUser *)su{
+-(void)configureCellWithSuggestedUser:(STSuggestedUser *)su isLastInSection:(BOOL)lastInSection{
     _followButton.selected = [su.followedByCurrentUser boolValue];
     _userNameLabel.text = su.userName;
+    _divider.hidden = lastInSection;
 }
 
 +(CGFloat)cellHeight{

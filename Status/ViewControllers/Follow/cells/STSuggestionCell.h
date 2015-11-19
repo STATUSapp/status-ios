@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 
--(void)configureCellWithSuggestedUser:(STSuggestedUser *)su;
+-(void)configureCellWithSuggestedUser:(STSuggestedUser *)su isLastInSection:(BOOL)lastInSection;
 +(CGFloat)cellHeight;
 
 @end

@@ -162,6 +162,7 @@
                                         <animations/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="divider" destination="xJz-NS-pMu" id="JWg-cO-0lN"/>
                                             <outlet property="followButton" destination="WDI-cn-Rsk" id="etV-eo-BWT"/>
                                             <outlet property="userImageView" destination="mon-fO-bGI" id="7uf-GH-4EA"/>
                                             <outlet property="userNameLabel" destination="gXY-Hf-BKr" id="DaH-Bp-saN"/>
