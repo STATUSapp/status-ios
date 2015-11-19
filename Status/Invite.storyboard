@@ -111,17 +111,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxJ-W2-AD9">
-                                <rect key="frame" x="0.0" y="94" width="600" height="506"/>
+                                <rect key="frame" x="0.0" y="116" width="600" height="484"/>
                                 <animations/>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DC1-cu-PcH">
-                                <rect key="frame" x="200" y="64" width="200" height="25"/>
+                                <rect key="frame" x="200" y="86" width="200" height="25"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="jRR-e7-ilU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="SMS">
+                                    <color key="titleColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -129,37 +133,45 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GiG-yK-caX">
-                                <rect key="frame" x="400" y="64" width="200" height="25"/>
+                                <rect key="frame" x="400" y="86" width="200" height="25"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="EMAIL">
+                                    <color key="titleColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="goToEmailInviter:" destination="uwS-Bg-oGg" eventType="touchUpInside" id="UGg-lk-lbe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZW-lr-K4w">
-                                <rect key="frame" x="0.0" y="64" width="200" height="25"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZW-lr-K4w">
+                                <rect key="frame" x="0.0" y="86" width="200" height="25"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="FACEBOOK">
+                                    <color key="titleColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="goToFacebookInviter:" destination="uwS-Bg-oGg" eventType="touchUpInside" id="atk-sd-fNm"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGT-iU-6kH">
-                                <rect key="frame" x="20" y="93" width="560" height="1"/>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGT-iU-6kH">
+                                <rect key="frame" x="20" y="115" width="560" height="1"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.35294117647058826" green="0.35686274509803922" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="dVj-1w-JzG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A9v-8h-k7x">
-                                <rect key="frame" x="20" y="92" width="160" height="2"/>
+                                <rect key="frame" x="20" y="114" width="160" height="2"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -167,14 +179,14 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Mk-Jf-axf">
-                                <rect key="frame" x="241" y="37" width="118" height="20"/>
+                                <rect key="frame" x="241" y="44" width="118" height="20"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zjd-U5-WLI">
-                                <rect key="frame" x="550" y="32" width="30" height="30"/>
+                                <rect key="frame" x="550" y="39" width="30" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="ci3-iN-pkz"/>
@@ -192,7 +204,7 @@
                             <constraint firstItem="A9v-8h-k7x" firstAttribute="leading" secondItem="h3e-76-cBz" secondAttribute="leading" constant="20" id="15d-Az-pxV"/>
                             <constraint firstItem="KxJ-W2-AD9" firstAttribute="leading" secondItem="h3e-76-cBz" secondAttribute="leading" id="1GE-PY-rZL"/>
                             <constraint firstItem="GiG-yK-caX" firstAttribute="leading" secondItem="DC1-cu-PcH" secondAttribute="trailing" id="3Rz-Fa-Yc4"/>
-                            <constraint firstItem="6Mk-Jf-axf" firstAttribute="top" secondItem="uj7-lD-Hlb" secondAttribute="bottom" constant="17" id="3ug-pu-eaj"/>
+                            <constraint firstItem="6Mk-Jf-axf" firstAttribute="top" secondItem="uj7-lD-Hlb" secondAttribute="bottom" constant="24" id="3ug-pu-eaj"/>
                             <constraint firstItem="9ZW-lr-K4w" firstAttribute="width" secondItem="DC1-cu-PcH" secondAttribute="width" id="8ie-RW-gVf"/>
                             <constraint firstAttribute="trailing" secondItem="GiG-yK-caX" secondAttribute="trailing" id="AVH-Df-yEq"/>
                             <constraint firstItem="KxJ-W2-AD9" firstAttribute="top" secondItem="DC1-cu-PcH" secondAttribute="bottom" constant="5" id="Cit-11-XZE"/>
@@ -203,6 +215,7 @@
                             <constraint firstItem="9ZW-lr-K4w" firstAttribute="bottom" secondItem="DC1-cu-PcH" secondAttribute="bottom" id="OAA-wy-L8X"/>
                             <constraint firstItem="DC1-cu-PcH" firstAttribute="top" secondItem="uj7-lD-Hlb" secondAttribute="bottom" constant="44" id="W2H-9B-RSn"/>
                             <constraint firstItem="Zjd-U5-WLI" firstAttribute="centerY" secondItem="6Mk-Jf-axf" secondAttribute="centerY" id="aEn-WC-02V"/>
+                            <constraint firstItem="DC1-cu-PcH" firstAttribute="top" secondItem="6Mk-Jf-axf" secondAttribute="bottom" constant="22" id="bp7-ZT-few"/>
                             <constraint firstItem="GiG-yK-caX" firstAttribute="bottom" secondItem="DC1-cu-PcH" secondAttribute="bottom" id="cSl-lK-aI4"/>
                             <constraint firstItem="9ZW-lr-K4w" firstAttribute="leading" secondItem="h3e-76-cBz" secondAttribute="leading" id="f8c-T4-NJU"/>
                             <constraint firstItem="GiG-yK-caX" firstAttribute="top" secondItem="DC1-cu-PcH" secondAttribute="top" id="fpA-Oq-IhO"/>
@@ -216,6 +229,11 @@
                             <constraint firstItem="LGT-iU-6kH" firstAttribute="leading" secondItem="h3e-76-cBz" secondAttribute="leading" constant="20" id="qZ1-bu-BUl"/>
                             <constraint firstItem="DC1-cu-PcH" firstAttribute="centerX" secondItem="h3e-76-cBz" secondAttribute="centerX" id="u1v-bR-a8I"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="W2H-9B-RSn"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="btnEmail" destination="GiG-yK-caX" id="vdd-RJ-Puc"/>
