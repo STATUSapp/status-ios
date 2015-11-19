@@ -14,7 +14,7 @@
 #import "STInviteFriendCell.h"
 
 
-@interface STSMSEmailInviterViewController ()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate, UISearchBarDelegate>
+@interface STSMSEmailInviterViewController ()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) STContactsDataProcessor * dataProcessor;
 
@@ -191,11 +191,6 @@
     return view;
 }
 
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
-}
-
 - (void)updateInviteButtonTitleAnimated:(BOOL)animated {
     _selectionsNumber = 0;
     for (STAddressBookContact * contact in _dataProcessor.items) {
@@ -248,6 +243,30 @@
     }
     [self.tableView reloadData];
     [self updateInviteButtonTitleAnimated:NO];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+    
+    if ([_delegate respondsToSelector:@selector(inviterStartedScrolling)]) {
+        [_delegate inviterStartedScrolling];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if ([_delegate respondsToSelector:@selector(inviterEndedScrolling)]) {
+        [_delegate inviterEndedScrolling];
+    }
+}
+
+- (void)parentEndedScrolling {
+    _tableView.scrollEnabled = YES;
+}
+
+- (void)parentStartedScrolling {
+    _tableView.scrollEnabled = NO;
 }
 
 #pragma mark - Lifecycle

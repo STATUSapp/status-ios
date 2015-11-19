@@ -123,6 +123,22 @@
     }
 }
 
+- (void)inviterEndedScrolling {
+    for (UIView * view in _pageController.view.subviews) {
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            [((UIScrollView *)view) setScrollEnabled:YES];
+        }
+    }
+}
+
+- (void)inviterStartedScrolling {
+    for (UIView * view in _pageController.view.subviews) {
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            [((UIScrollView *)view) setScrollEnabled:NO];
+        }
+    }
+}
+
 #pragma mark - UIPageViewController Delegate and Datasource
 
 
@@ -164,6 +180,20 @@
         }];
     }
     
+    for (UIViewController * controller in _viewControllers) {
+        if ([controller respondsToSelector:@selector(parentEndedScrolling)]) {
+            [controller performSelector:@selector(parentEndedScrolling) withObject:nil];
+        }
+    }
+    
+}
+
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
+    for (UIViewController * controller in _viewControllers) {
+        if ([controller respondsToSelector:@selector(parentStartedScrolling)]) {
+            [controller performSelector:@selector(parentStartedScrolling) withObject:nil];
+        }
+    }
 }
 
 
@@ -194,6 +224,7 @@
 
     _pageController.delegate = self;
     _pageController.dataSource = self;
+    
     [_pageController setViewControllers:@[_viewControllers.firstObject] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
     _pageController.view.frame = self.childContainer.bounds;
