@@ -15,13 +15,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblDetails;
 @property (weak, nonatomic) IBOutlet UIImageView *selectedIndicator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrTop;
+@property (weak, nonatomic) IBOutlet UIImageView *divider;
 
 @end
 
 @implementation STInviteFriendCell
 
 
-- (void)setupWithContact:(STAddressBookContact *)contact showEmail:(BOOL)showEmail{
+- (void)setupWithContact:(STAddressBookContact *)contact showEmail:(BOOL)showEmail isLastInSection:(BOOL)lastInSection{
     _lblDetails.hidden = !showEmail;
     _lblDetails.text = contact.emails.firstObject;
     _lblName.text = contact.fullName;
@@ -33,6 +34,8 @@
         self.selectedIndicator.image = [UIImage imageNamed:@"unchecked"];
     }
     self.accessoryView.tintColor = [UIColor whiteColor];
+    
+    _divider.hidden = lastInSection;
 }
 
 - (void)awakeFromNib {

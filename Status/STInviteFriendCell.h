@@ -12,6 +12,6 @@
 
 @interface STInviteFriendCell : UITableViewCell
 
-- (void)setupWithContact:(STAddressBookContact *)contact showEmail:(BOOL)showEmail;
+- (void)setupWithContact:(STAddressBookContact *)contact showEmail:(BOOL)showEmail isLastInSection:(BOOL)lastInSection;
 
 @end

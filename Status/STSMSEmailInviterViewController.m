@@ -155,7 +155,10 @@
     
     STAddressBookContact * contact = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
-    [cell setupWithContact:contact showEmail:self.inviteType == STInviteTypeEmail];
+    
+    NSInteger numberOfRowsInSection = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    
+    [cell setupWithContact:contact showEmail:(self.inviteType == STInviteTypeEmail) isLastInSection:(numberOfRowsInSection - 1 == indexPath.row)];
     
     return cell;
 }
@@ -174,17 +177,17 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 22.f;
+    return 25.f;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 22.f)];
+    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 25.f)];
     view.backgroundColor = [UIColor colorWithRed:71.f/255.f green:72.f/255.f blue:76.f/255.f alpha:1.f];
     
-    UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 22.f)];
+    UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 25.f)];
     titlelable.textColor = [UIColor colorWithRed:160.f/255.f green:161.f/255.f blue:162.f/255.f alpha:1.f];
-    titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:10];
+    titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:12];
     NSString *titleString = [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
     titlelable.text = titleString;
     [view addSubview:titlelable];

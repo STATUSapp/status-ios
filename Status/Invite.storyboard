@@ -260,9 +260,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="coQ-F6-84g">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="coQ-F6-84g">
+                                <rect key="frame" x="12" y="8" width="576" height="48"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="zLs-Hy-PqN"/>
+                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
@@ -275,7 +278,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JR1-eJ-pAs">
-                                <rect key="frame" x="0.0" y="44" width="600" height="468"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="440"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -328,6 +331,7 @@
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="constrTop" destination="D4a-u9-e80" id="MNu-as-btk"/>
+                                            <outlet property="divider" destination="ooj-u5-XVO" id="rY4-fZ-c2J"/>
                                             <outlet property="lblDetails" destination="OAx-dz-DdC" id="3bL-ck-Wh0"/>
                                             <outlet property="lblName" destination="Qzx-oU-woA" id="FZw-Yo-eGH"/>
                                             <outlet property="selectedIndicator" destination="7fS-Tc-9gz" id="2yo-Gi-ZpF"/>
@@ -373,24 +377,30 @@
                             </label>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="JR1-eJ-pAs" secondAttribute="bottom" constant="88" id="2yy-2b-euB"/>
                             <constraint firstAttribute="trailing" secondItem="EBc-hf-Prr" secondAttribute="trailing" id="Eeb-NA-mgO"/>
                             <constraint firstItem="EBc-hf-Prr" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="K7e-OC-8Vr"/>
                             <constraint firstAttribute="trailing" secondItem="ZcK-YE-Luv" secondAttribute="trailing" id="PFe-3e-6Go"/>
+                            <constraint firstItem="JR1-eJ-pAs" firstAttribute="top" secondItem="coQ-F6-84g" secondAttribute="bottom" constant="16" id="QTp-cA-YoW"/>
                             <constraint firstItem="ZcK-YE-Luv" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="T01-mB-DGj"/>
-                            <constraint firstItem="coQ-F6-84g" firstAttribute="top" secondItem="E8e-be-jlT" secondAttribute="top" id="UAe-4L-9pH"/>
+                            <constraint firstItem="coQ-F6-84g" firstAttribute="top" secondItem="E8e-be-jlT" secondAttribute="top" constant="8" id="UAe-4L-9pH"/>
                             <constraint firstItem="1Ga-S1-ZDq" firstAttribute="centerX" secondItem="ZcK-YE-Luv" secondAttribute="centerX" id="Uth-kB-110"/>
                             <constraint firstItem="JR1-eJ-pAs" firstAttribute="top" secondItem="E8e-be-jlT" secondAttribute="top" constant="44" id="df8-hT-Noo"/>
                             <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="EBc-hf-Prr" secondAttribute="bottom" id="epi-iW-zA9"/>
-                            <constraint firstItem="coQ-F6-84g" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="jbx-yR-r7V"/>
+                            <constraint firstItem="coQ-F6-84g" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" constant="12" id="jbx-yR-r7V"/>
                             <constraint firstItem="1Ga-S1-ZDq" firstAttribute="centerY" secondItem="ZcK-YE-Luv" secondAttribute="centerY" id="m0a-t0-NO2"/>
                             <constraint firstItem="P3c-uL-oAy" firstAttribute="top" secondItem="ZcK-YE-Luv" secondAttribute="bottom" constant="44" id="mi1-tn-3iY"/>
-                            <constraint firstAttribute="trailing" secondItem="coQ-F6-84g" secondAttribute="trailing" id="sS2-uo-51m"/>
+                            <constraint firstAttribute="trailing" secondItem="coQ-F6-84g" secondAttribute="trailing" constant="12" id="sS2-uo-51m"/>
                             <constraint firstItem="JR1-eJ-pAs" firstAttribute="leading" secondItem="E8e-be-jlT" secondAttribute="leading" id="ufk-NV-kL7"/>
                             <constraint firstAttribute="trailing" secondItem="JR1-eJ-pAs" secondAttribute="trailing" id="y2R-PU-oci"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="df8-hT-Noo"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="constrBottomTable" destination="2yy-2b-euB" id="3Wy-NG-5dZ"/>
