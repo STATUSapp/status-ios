@@ -10,7 +10,6 @@
 
 @interface STInviteFriendsByEmailRequest : STBaseRequest
 @property (nonatomic, strong) NSArray *friends;
-+ (void)inviteFriends:(NSArray *)friends
-       withCompletion:(STRequestCompletionBlock)completion
-              failure:(STRequestFailureBlock)failure;
+- (void)inviteFriends:(NSArray *)friends
+       withCompletion:(STRequestCompletionBlock)completion;
 @end

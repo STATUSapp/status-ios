@@ -1556,7 +1556,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "b0a4d846-65cb-4f74-8941-4913bef5a91d";
+				PROVISIONING_PROFILE = "141d4c98-ffda-4d2c-816e-d78c5e96f15a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;

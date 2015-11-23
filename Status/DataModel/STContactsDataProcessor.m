@@ -93,11 +93,9 @@
         }
     }
     if (friends.count > 0) {
-        [STInviteFriendsByEmailRequest inviteFriends:friends withCompletion:^(id response, NSError *error) {
+        [[STInviteFriendsByEmailRequest new] inviteFriends:friends withCompletion:^(id response, NSError *error) {
             NSLog(@"response: %@", response);
             
-        } failure:^(NSError *error) {
-            NSLog(@"Invite failed : %@", error);
         }];
     }
 }

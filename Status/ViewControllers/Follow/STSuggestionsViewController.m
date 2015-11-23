@@ -17,7 +17,7 @@
 #import <MessageUI/MessageUI.h>
 #import "NSIndexPath+Additions.h"
 
-@interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate>
+@interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *_suggestedPeople;
     NSMutableArray *_suggestedFriends;
