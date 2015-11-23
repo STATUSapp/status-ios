@@ -50,13 +50,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlE-vz-Bed">
-                                        <rect key="frame" x="275" y="20" width="37" height="22"/>
+                                        <rect key="frame" x="268" y="15" width="32" height="32"/>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="37" id="TTN-ma-a9Z"/>
-                                            <constraint firstAttribute="height" constant="22" id="fV8-TQ-7xq"/>
+                                            <constraint firstAttribute="width" constant="32" id="G7x-8G-QO5"/>
+                                            <constraint firstAttribute="height" constant="32" id="vg2-Xw-DsQ"/>
                                         </constraints>
-                                        <state key="normal" image="next button white 2">
+                                        <state key="normal" image="next-0">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -68,7 +68,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="BN9-l9-Sch" secondAttribute="trailing" id="9VQ-ea-IMN"/>
-                                    <constraint firstAttribute="trailing" secondItem="VlE-vz-Bed" secondAttribute="trailing" constant="8" id="RSs-q6-BkZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="VlE-vz-Bed" secondAttribute="trailing" constant="20" id="RSs-q6-BkZ"/>
                                     <constraint firstAttribute="centerX" secondItem="qe8-ve-rIL" secondAttribute="centerX" id="RVB-h6-GRr"/>
                                     <constraint firstItem="BN9-l9-Sch" firstAttribute="top" secondItem="DlM-O0-VOt" secondAttribute="top" id="V6h-GU-3xQ"/>
                                     <constraint firstItem="VlE-vz-Bed" firstAttribute="centerY" secondItem="qe8-ve-rIL" secondAttribute="centerY" id="V7L-RG-WSD"/>
@@ -162,6 +162,7 @@
                                         <animations/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="divider" destination="xJz-NS-pMu" id="JWg-cO-0lN"/>
                                             <outlet property="followButton" destination="WDI-cn-Rsk" id="etV-eo-BWT"/>
                                             <outlet property="userImageView" destination="mon-fO-bGI" id="7uf-GH-4EA"/>
                                             <outlet property="userNameLabel" destination="gXY-Hf-BKr" id="DaH-Bp-saN"/>
@@ -255,7 +256,7 @@
         <image name="checked" width="32" height="32"/>
         <image name="divider-0" width="432" height="1"/>
         <image name="following grame " width="14" height="38"/>
-        <image name="next button white 2" width="39" height="20"/>
+        <image name="next-0" width="48" height="48"/>
         <image name="orange-base-0" width="481" height="72"/>
         <image name="unchecked" width="32" height="32"/>
     </resources>

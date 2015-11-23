@@ -14,7 +14,7 @@
 #import "STInviteFriendCell.h"
 
 
-@interface STSMSEmailInviterViewController ()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate, UISearchBarDelegate>
+@interface STSMSEmailInviterViewController ()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) STContactsDataProcessor * dataProcessor;
 
@@ -155,7 +155,10 @@
     
     STAddressBookContact * contact = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
-    [cell setupWithContact:contact showEmail:self.inviteType == STInviteTypeEmail];
+    
+    NSInteger numberOfRowsInSection = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    
+    [cell setupWithContact:contact showEmail:(self.inviteType == STInviteTypeEmail) isLastInSection:(numberOfRowsInSection - 1 == indexPath.row)];
     
     return cell;
 }
@@ -174,26 +177,21 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 22.f;
+    return 25.f;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 22.f)];
+    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 25.f)];
     view.backgroundColor = [UIColor colorWithRed:71.f/255.f green:72.f/255.f blue:76.f/255.f alpha:1.f];
     
-    UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 22.f)];
+    UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 25.f)];
     titlelable.textColor = [UIColor colorWithRed:160.f/255.f green:161.f/255.f blue:162.f/255.f alpha:1.f];
-    titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:10];
+    titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:12];
     NSString *titleString = [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
     titlelable.text = titleString;
     [view addSubview:titlelable];
     return view;
-}
-
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
 }
 
 - (void)updateInviteButtonTitleAnimated:(BOOL)animated {
@@ -248,6 +246,30 @@
     }
     [self.tableView reloadData];
     [self updateInviteButtonTitleAnimated:NO];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+    
+    if ([_delegate respondsToSelector:@selector(inviterStartedScrolling)]) {
+        [_delegate inviterStartedScrolling];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if ([_delegate respondsToSelector:@selector(inviterEndedScrolling)]) {
+        [_delegate inviterEndedScrolling];
+    }
+}
+
+- (void)parentEndedScrolling {
+    _tableView.scrollEnabled = YES;
+}
+
+- (void)parentStartedScrolling {
+    _tableView.scrollEnabled = NO;
 }
 
 #pragma mark - Lifecycle

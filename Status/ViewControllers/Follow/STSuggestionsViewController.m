@@ -173,7 +173,9 @@
     STSuggestedUser *su = [self suggestedUserForIndexpath:indexPath];
     [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:su.thumbnail] placeholderImage:[UIImage imageNamed:@"photo placeholder "]];
     cell.followButton.tag = [NSIndexPath tagForIndexPath:indexPath];
-    [cell configureCellWithSuggestedUser:su];
+    
+    NSInteger numberOfRowsInSection = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    [cell configureCellWithSuggestedUser:su  isLastInSection:(numberOfRowsInSection - 1 == indexPath.row)];
     return cell;
 }
 

@@ -20,6 +20,11 @@ typedef NS_ENUM(NSInteger, STInviteType) {
 
 -(void)userDidInviteSelectionsFromController:(STSMSEmailInviterViewController *)controller;
 
+@optional
+
+- (void)inviterStartedScrolling;
+- (void)inviterEndedScrolling;
+
 @end
 
 @interface STSMSEmailInviterViewController : UIViewController
@@ -28,5 +33,8 @@ typedef NS_ENUM(NSInteger, STInviteType) {
 @property (nonatomic) STInviteType inviteType;
 
 + (STSMSEmailInviterViewController *)newControllerWithInviteType:(STInviteType)inviteType delegate:(id<STInvitationsDelegate>)delegate;
+
+- (void)parentStartedScrolling;
+- (void)parentEndedScrolling;
 
 @end
