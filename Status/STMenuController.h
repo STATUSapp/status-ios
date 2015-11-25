@@ -19,6 +19,7 @@
 - (void)goTutorial;
 - (void)goMyProfile;
 - (void)goFriendsInviter;
+- (void)goFollowPeople;
 - (void)goNearby;
 - (void)goNotification;
 

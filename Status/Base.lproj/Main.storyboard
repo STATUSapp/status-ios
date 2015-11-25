@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -18,6 +18,7 @@
             <string>ProximaNova-Light</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -2070,7 +2071,7 @@
                         <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Ho4-zF-Q6t">
-                            <rect key="frame" x="0.0" y="584" width="320" height="105"/>
+                            <rect key="frame" x="0.0" y="648" width="320" height="105"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0.8" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cvK-XN-D3f">
@@ -2323,10 +2324,87 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="dPK-TZ-Fan">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="aUP-2u-e1d">
+                                        <rect key="frame" x="0.0" y="378" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aUP-2u-e1d" id="dYo-Jf-jxZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="jcq-gr-g7f" userLabel="Invite Friends">
+                                                    <rect key="frame" x="35" y="14" width="106" height="18"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcE-yM-Oww">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                                    <animations/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapInviteFriends:" destination="4Qz-Wc-cbo" eventType="touchUpInside" id="9g6-Hd-236"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="jcq-gr-g7f" secondAttribute="centerY" constant="-1" id="DaV-tQ-a4a"/>
+                                                <constraint firstAttribute="trailing" secondItem="xcE-yM-Oww" secondAttribute="trailing" id="HNh-vJ-jIy"/>
+                                                <constraint firstAttribute="bottom" secondItem="xcE-yM-Oww" secondAttribute="bottom" id="KbY-wu-9CA"/>
+                                                <constraint firstItem="xcE-yM-Oww" firstAttribute="top" secondItem="dYo-Jf-jxZ" secondAttribute="top" id="NKo-jB-Dul"/>
+                                                <constraint firstItem="xcE-yM-Oww" firstAttribute="leading" secondItem="dYo-Jf-jxZ" secondAttribute="leading" id="P6C-yi-zOt"/>
+                                                <constraint firstItem="jcq-gr-g7f" firstAttribute="leading" secondItem="dYo-Jf-jxZ" secondAttribute="leading" constant="35" id="Q1G-DF-E8y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cYq-ge-6zf">
+                                        <rect key="frame" x="0.0" y="422" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cYq-ge-6zf" id="6eN-Ke-tfw">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People you should follow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2yk-td-KGX">
+                                                    <rect key="frame" x="35" y="14" width="199" height="18"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBw-Kf-qgL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapFollowPeople:" destination="4Qz-Wc-cbo" eventType="touchUpInside" id="za1-dB-3EO"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="2yk-td-KGX" firstAttribute="leading" secondItem="6eN-Ke-tfw" secondAttribute="leading" constant="35" id="01i-qS-aAg"/>
+                                                <constraint firstAttribute="trailing" secondItem="CBw-Kf-qgL" secondAttribute="trailing" id="B4I-yM-IHi"/>
+                                                <constraint firstAttribute="bottom" secondItem="CBw-Kf-qgL" secondAttribute="bottom" id="CZz-eu-4n9"/>
+                                                <constraint firstAttribute="centerY" secondItem="2yk-td-KGX" secondAttribute="centerY" constant="-1" id="FbZ-od-yeT"/>
+                                                <constraint firstItem="CBw-Kf-qgL" firstAttribute="top" secondItem="6eN-Ke-tfw" secondAttribute="top" id="Tcv-Sr-J8C"/>
+                                                <constraint firstItem="CBw-Kf-qgL" firstAttribute="leading" secondItem="6eN-Ke-tfw" secondAttribute="leading" id="a1A-VZ-ff2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="dEN-Ig-pq2">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="98R-EM-o6h">
-                                        <rect key="frame" x="0.0" y="378" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="486" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="98R-EM-o6h" id="hLh-QD-swd">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2362,7 +2440,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2h8-TR-hmx">
-                                        <rect key="frame" x="0.0" y="422" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="530" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2h8-TR-hmx" id="4bX-HD-7gl">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2398,49 +2476,12 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7hF-Oi-KKQ">
-                                        <rect key="frame" x="0.0" y="466" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7hF-Oi-KKQ" id="GdI-lp-22k">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Ads" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="PEv-gG-lD0">
-                                                    <rect key="frame" x="35" y="14" width="100" height="18"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOv-ld-4Jw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="onTapRemoveAds:" destination="4Qz-Wc-cbo" eventType="touchUpInside" id="fw4-Te-EkG"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstItem="ZOv-ld-4Jw" firstAttribute="top" secondItem="GdI-lp-22k" secondAttribute="top" id="2dG-mK-Bv9"/>
-                                                <constraint firstItem="ZOv-ld-4Jw" firstAttribute="leading" secondItem="GdI-lp-22k" secondAttribute="leading" id="GMn-Pk-CZE"/>
-                                                <constraint firstAttribute="centerY" secondItem="PEv-gG-lD0" secondAttribute="centerY" constant="-1" id="HjK-hM-4DM"/>
-                                                <constraint firstAttribute="trailing" secondItem="ZOv-ld-4Jw" secondAttribute="trailing" id="QDr-3m-WjX"/>
-                                                <constraint firstItem="PEv-gG-lD0" firstAttribute="leading" secondItem="GdI-lp-22k" secondAttribute="leading" constant="35" id="jPF-iO-ULU"/>
-                                                <constraint firstAttribute="bottom" secondItem="ZOv-ld-4Jw" secondAttribute="bottom" id="jiB-VW-toz"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <animations/>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="Eek-WT-gRI">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="JqV-bS-cfJ">
-                                        <rect key="frame" x="0.0" y="530" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="594" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JqV-bS-cfJ" id="jXP-cH-QRq">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>

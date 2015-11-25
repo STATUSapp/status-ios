@@ -11,6 +11,7 @@
 #import "STFacebookLoginController.h"
 #import <FBSDKLoginKit.h>
 #import "AppDelegate.h"
+#import "STMenuController.h"
 
 #import "STGetUserSettingsRequest.h"
 #import "STSetUserSettingsRequest.h"
@@ -20,8 +21,9 @@
 #import "STIAPHelper.h"
 
 const NSInteger kSectionNumberNotifications = 0;
-const NSInteger kSectionNumberContactLikeAds = 1;
-const NSInteger kSectionNumberLogout = 2;
+const NSInteger kSectionNumberInviteFollow = 1;
+const NSInteger kSectionNumberContactLikeAds = 2;
+const NSInteger kSectionNumberLogout = 3;
 
 @interface STSettingsViewController ()
 
@@ -119,7 +121,7 @@ const NSInteger kSectionNumberLogout = 2;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -128,13 +130,12 @@ const NSInteger kSectionNumberLogout = 2;
     switch (section) {
         case kSectionNumberNotifications:
             return 7;
-            break;
         case kSectionNumberContactLikeAds:
             return 2;
-            break;
+        case kSectionNumberInviteFollow:
+            return 2;
         case kSectionNumberLogout:
             return 1;
-            break;
             
         default:
             return 0;
@@ -155,6 +156,18 @@ const NSInteger kSectionNumberLogout = 2;
 }
 - (IBAction)onTapRateUsInAppstore:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_REVIEW_URL_STRING]];
+}
+
+- (IBAction)onTapInviteFriends:(id)sender {
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
+        [[STMenuController sharedInstance] goFriendsInviter];
+    }];
+}
+
+- (IBAction)onTapFollowPeople:(id)sender {
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
+        [[STMenuController sharedInstance] goFollowPeople];
+    }];
 }
 
 - (IBAction)onTapLikeUsOnFacebook:(id)sender {
@@ -193,6 +206,8 @@ const NSInteger kSectionNumberLogout = 2;
 - (IBAction)onTapFollowersSwitch:(id)sender {
     [self setSetting:STNotificationsFollowersKey fromSwitch:sender];
 }
+
+
 
 - (void)setSetting:(NSString *)setting fromSwitch:(UISwitch *)sender {
     __weak UISwitch * weakSender = sender;

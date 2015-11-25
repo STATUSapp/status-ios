@@ -18,6 +18,7 @@
 #import "STLocationManager.h"
 #import "STNearbyController.h"
 #import "STNotificationsViewController.h"
+#import "STSuggestionsViewController.h"
 
 #import "STFriendsInviterViewController.h"
 
@@ -228,8 +229,13 @@
     [self resetNavigationControllerStack];
     [self hideMenu];
     STFriendsInviterViewController * inviteFriendsVC = [STFriendsInviterViewController newController];
-    inviteFriendsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [_currentVC.navigationController pushViewController:inviteFriendsVC animated:YES];
+    [_currentVC.navigationController pushViewController:inviteFriendsVC animated:NO];
+}
+- (void)goFollowPeople {
+    [self resetNavigationControllerStack];
+    [self hideMenu];
+    STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithDelegate:nil andFollowTyep:STFollowTypeFriendsAndPeople];
+    [_currentVC.navigationController pushViewController:suggestionsVC animated:NO];
 }
 - (void)goNotification{
     [self resetNavigationControllerStack];

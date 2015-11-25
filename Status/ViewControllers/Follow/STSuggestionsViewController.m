@@ -240,8 +240,9 @@
 }
 - (IBAction)onArrowPressed:(id)sender {
     if ([[self allSuggestions] count] == 0) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-
+        if (_delegate) {
+            [_delegate userDidEndApplyingSugegstions];
+        }
     }
     else{
         [_followPeopleProcessor uploadDataToServer:_suggestedPeople withCompletion:^(NSError *error) {
@@ -249,10 +250,16 @@
                 if (_delegate) {
                     [_delegate userDidEndApplyingSugegstions];
                 }
-                [self dismissViewControllerAnimated:YES completion:nil];
-
             }];
         }];
+    }
+    
+    if (self.presentingViewController) {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if (self.navigationController) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 - (IBAction)onFollowAllButtonPressed:(id)sender {
