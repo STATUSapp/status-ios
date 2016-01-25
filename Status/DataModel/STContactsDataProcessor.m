@@ -10,6 +10,7 @@
 #import "STContactsManager.h"
 #import "STAddressBookContact.h"
 #import "STInviteFriendsByEmailRequest.h"
+#import "STFacebookLoginController.h"
 
 @interface STContactsDataProcessor()
 @property (nonatomic) STContactsProcessorType processorType;
@@ -66,11 +67,11 @@
         }
     }
     if (numbers.count > 0) {
-        MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
         if([MFMessageComposeViewController canSendText])
         {
-            //TODO: add another custom message
-            controller.body = @"SMS message here";
+            MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+            NSString *bodyString = [NSString stringWithFormat:@"Your friend %@ invites you on Get STATUS. Download the app from App Store: http://bit.ly/STATUSiOS  or Google Play: http://bit.ly/STATUSAndroid", [STFacebookLoginController sharedInstance].fetchedUserData[@"full_name"]];
+            controller.body = bodyString;
             controller.recipients = numbers;
             controller.messageComposeDelegate = viewController;
             [viewController presentViewController:controller animated:YES completion:nil];
