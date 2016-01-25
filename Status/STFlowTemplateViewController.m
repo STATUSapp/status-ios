@@ -66,7 +66,7 @@
 #import "STFriendsInviterViewController.h"
 
 #import "UIImage+ImageEffects.h"
-#import <FBSDKCoreKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;

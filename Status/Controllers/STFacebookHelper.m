@@ -7,10 +7,10 @@
 //
 
 #import "STFacebookHelper.h"
-#import <FBSDKCoreKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit.h>
-#import <FBSDKAppInviteContent.h>
-#import <FBSDKAppInviteDialog.h>
+#import <FBSDKShareKit/FBSDKAppInviteContent.h>
+#import <FBSDKShareKit/FBSDKAppInviteDialog.h>
 
 NSString *const kGetAlbumsGraph = @"/me/albums?fields=name,count,cover_photo,id";
 NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";

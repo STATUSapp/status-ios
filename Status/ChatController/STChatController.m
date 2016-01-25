@@ -15,7 +15,7 @@
 #import "STDAOEngine.h"
 #import "STNotificationsManager.h"
 #import "STNotificationsManager.h"
-#import <FBSDKCoreKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "STGetChatUrlAndPortRequest.h"
 
 @interface STChatController()<SRWebSocketDelegate>{

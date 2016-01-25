@@ -28,7 +28,7 @@
 #import "NSDate+Additions.h"
 
 #import <FBSDKLoginKit.h>
-#import <FBSDKCoreKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation STFacebookLoginController
 +(STFacebookLoginController *) sharedInstance{

@@ -169,6 +169,11 @@
   if (![FBSDKShareUtility validateShareContent:shareContent error:errorRef]) {
     return NO;
   }
+  if ([shareContent isKindOfClass:[FBSDKShareVideoContent class]]) {
+    if (![FBSDKShareUtility validateAssetLibraryURLWithShareVideoContent:(FBSDKShareVideoContent *)shareContent name:@"videoURL" error:errorRef]) {
+      return NO;
+    }
+  }
   switch (self.mode) {
     case FBSDKShareDialogModeAutomatic:{
       return (
@@ -325,8 +330,10 @@
   }
   NSString *scheme = FBSDK_SHARE_DIALOG_APP_SCHEME;
   NSString *minimumVersion = FBSDK_SHARE_METHOD_ATTRIBUTED_SHARE_SHEET_MIN_VERSION;
-  NSURL *URL = [[NSURL alloc] initWithScheme:[scheme stringByAppendingString:minimumVersion] host:nil path:@"/"];
-  return ([[UIApplication sharedApplication] canOpenURL:URL] ||
+  NSURLComponents *components = [[NSURLComponents alloc] init];
+  components.scheme = [scheme stringByAppendingString:minimumVersion];
+  components.path = @"/";
+  return ([[UIApplication sharedApplication] canOpenURL:components.URL] ||
           [self _canUseFBShareSheet]);
 }
 
@@ -336,8 +343,10 @@
   if (![FBSDKInternalUtility isOSRunTimeVersionAtLeast:iOS8Version]) {
     return NO;
   }
-  NSURL *URL = [[NSURL alloc] initWithScheme:FBSDK_SHARE_EXTENSION_APP_SCHEME host:nil path:@"/"];
-  return [[UIApplication sharedApplication] canOpenURL:URL];
+  NSURLComponents *components = [[NSURLComponents alloc] init];
+  components.scheme = FBSDK_SHARE_EXTENSION_APP_SCHEME;
+  components.path = @"/";
+  return [[UIApplication sharedApplication] canOpenURL:components.URL];
 }
 
 - (void)_cleanUpWebDialog

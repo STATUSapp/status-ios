@@ -274,7 +274,7 @@ setJSONStringForObject:(id)object
  @abstract Unregisters a transient object that was previously registered with registerTransientObject:
  @param object The transient object
  */
-+ (void)unregisterTransientObject:(id)object;
++ (void)unregisterTransientObject:(__weak id)object;
 
 /*!
  @abstract validates that the app ID is non-nil, throws an NSException if nil.
@@ -300,6 +300,21 @@ setJSONStringForObject:(id)object
  @abstract returns currently displayed top view controller.
  */
 + (UIViewController *)topMostViewController;
+
+/*
+ @abstract Checks if the permission is a publish permission.
+ */
++ (BOOL)isPublishPermission:(NSString *)permission;
+
+/*
+ @abstract Checks if the set of permissions are all read permissions.
+ */
++ (BOOL)areAllPermissionsReadPermissions:(NSSet *)permissions;
+
+/*
+ @abstract Checks if the set of permissions are all publish permissions.
+ */
++ (BOOL)areAllPermissionsPublishPermissions:(NSSet *)permissions;
 
 #pragma mark - FB Apps Installed
 

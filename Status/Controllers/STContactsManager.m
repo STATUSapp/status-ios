@@ -9,7 +9,7 @@
 #import "STContactsManager.h"
 #import <AddressBook/AddressBook.h>
 #import "STAddressBookContact.h"
-#import "FBSDKCoreKit.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "STFacebookHelper.h"
 #import "STSyncContactsRequest.h"
 

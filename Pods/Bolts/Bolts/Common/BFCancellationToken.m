@@ -13,7 +13,7 @@
 
 @interface BFCancellationToken ()
 
-@property (atomic, assign, getter=isCancellationRequested) BOOL cancellationRequested;
+@property (nonatomic, assign, getter=isCancellationRequested) BOOL cancellationRequested;
 @property (nonatomic, strong) NSMutableArray *registrations;
 @property (nonatomic, strong) NSObject *lock;
 @property (nonatomic) BOOL disposed;
@@ -33,10 +33,12 @@
 #pragma mark - Initializer
 
 - (instancetype)init {
-    if (self = [super init]) {
-        _registrations = [NSMutableArray array];
-        _lock = [NSObject new];
-    }
+    self = [super init];
+    if (!self) return nil;
+
+    _registrations = [NSMutableArray array];
+    _lock = [NSObject new];
+
     return self;
 }
 

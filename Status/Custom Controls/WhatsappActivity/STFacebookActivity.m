@@ -9,9 +9,9 @@
 #import "STFacebookActivity.h"
 #import "STInviteController.h"
 #import <FBSDKLoginKit.h>
-#import <FBSDKCoreKit.h>
-#import <FBSDKMessageDialog.h>
-#import <FBSDKShareLinkContent.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKMessageDialog.h>
+#import <FBSDKShareKit/FBSDKShareLinkContent.h>
 
 @interface STFacebookActivity()<FBSDKSharingDelegate>
 
