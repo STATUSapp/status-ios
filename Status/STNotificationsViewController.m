@@ -23,6 +23,8 @@
 
 #import "STUserProfileViewController.h"
 
+#import "NSString+MD5.h"
+
 const float kNoNotifHeight = 24.f;
 
 @interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
@@ -183,7 +185,7 @@ const float kNoNotifHeight = 24.f;
             STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeSinglePost;
             flowCtrl.postID = dict[@"post_id"];
-            flowCtrl.userID = dict[@"user_id"];
+            flowCtrl.flowUserID = [NSString stringFromDictValue:dict[@"user_id"]];
             flowCtrl.userName = dict[@"user_name"];
             [self.navigationController pushViewController:flowCtrl animated:YES];
         }
@@ -214,7 +216,7 @@ const float kNoNotifHeight = 24.f;
             STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeSinglePost;
             flowCtrl.postID = dict[@"post_id"];
-            flowCtrl.userID = dict[@"user_id"];
+            flowCtrl.flowUserID = [NSString stringFromDictValue:dict[@"user_id"]];
             flowCtrl.userName = dict[@"user_name"];
             [self.navigationController pushViewController:flowCtrl animated:YES];
         }

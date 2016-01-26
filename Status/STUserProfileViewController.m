@@ -188,8 +188,9 @@
     paragraphStyle.lineSpacing = 3;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString * bioString = [[NSAttributedString alloc] initWithString:profile.bio attributes:@{NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:14.0f],
-                                                                                                 NSParagraphStyleAttributeName : paragraphStyle}];
+    NSString *bioStr = profile.bio?:@"";
+    NSAttributedString * bioString = [[NSAttributedString alloc] initWithString:bioStr
+                                                                     attributes:@{NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:14.0f],NSParagraphStyleAttributeName : paragraphStyle}];
     _lblUserDescription.attributedText = bioString;
     
     
@@ -290,7 +291,7 @@
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = _isMyProfile ? STFlowTypeMyGallery : STFlowTypeUserGallery;
-    flowCtrl.userID = _userId;
+    flowCtrl.flowUserID = _userId;
     flowCtrl.userName = _userProfile.fullName;
     
     [self.navigationController pushViewController:flowCtrl animated:YES];

@@ -27,6 +27,8 @@
 #import "STUserProfileViewController.h"
 #import "UITableView+SPXRevealAdditions.h"
 
+#import "NSString+MD5.h"
+
 static NSInteger const  kBlockUserAlertTag = 11;
 static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 @interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SLCoreDataRequestManagerDelegate>
@@ -110,7 +112,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
                 [weakSelf loadUserInfo];
             }
         };
-        [STGetUserInfoRequest getInfoForUser:_userInfo[@"user_id"] completion:completion failure:nil];
+        [STGetUserInfoRequest getInfoForUser: [NSString stringFromDictValue:_userInfo[@"user_id"]] completion:completion failure:nil];
     }
     else
         [self loadUserInfo];
@@ -126,9 +128,10 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     [super viewWillAppear:animated];
     if (chatController.canChat == NO) {
         NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+        NSString *userId = [NSString stringFromDictValue:_userInfo[@"user_id"]];
         STCoreDataRequestManager *messages = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message"
                                                                                         sortDescritors:@[sd1]
-                                                                                             predicate:[NSPredicate predicateWithFormat:@"userId like %@", _userInfo[@"user_id"]]
+                                                                                             predicate:[NSPredicate predicateWithFormat:@"userId like %@", userId]
                                                                                     sectionNameKeyPath:@"sectionDate"
                                                                                               delegate:nil
                                                                                           andTableView:nil];
@@ -142,7 +145,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     else
     {
         if (chatController.authenticated == YES) {
-            [chatController openChatRoomForUserId:_userInfo[@"user_id"]];
+            [chatController openChatRoomForUserId: [NSString stringFromDictValue:_userInfo[@"user_id"]]];
         }
         else
             [chatController authenticate];
@@ -294,7 +297,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         return;
     }
     
-    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:_userInfo[@"user_id"]];
+    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [NSString stringFromDictValue:_userInfo[@"user_id"]]];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {
@@ -379,7 +382,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 }
 -(void)chatDidAuthenticate{
     [self hideStatusAlert];
-    [chatController openChatRoomForUserId:_userInfo[@"user_id"]];
+    [chatController openChatRoomForUserId: [NSString stringFromDictValue:_userInfo[@"user_id"]]];
 }
 
 -(void)userWasBlocked{
@@ -422,7 +425,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == kBlockUserAlertTag) {
         if (buttonIndex == 1) {
-            [chatController blockUserWithId:_userInfo[@"user_id"]];
+            [chatController blockUserWithId:[NSString stringFromDictValue:_userInfo[@"user_id"]]];
         }
 
     }

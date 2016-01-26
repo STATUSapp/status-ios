@@ -18,6 +18,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "STGetChatUrlAndPortRequest.h"
 
+#import "NSString+MD5.h"
+
 @interface STChatController()<SRWebSocketDelegate>{
     SRWebSocket *_webSocket;
     NSTimer *reconnectTimer;
@@ -143,7 +145,7 @@
     if ([response[@"type"] isEqualToString:@"login"]) {
         if ([response[@"status"] boolValue]==YES) {
             _authenticated = YES;
-            _currentUserId = response[@"userID"];
+            _currentUserId =  [ NSString stringFromDictValue:response[@"userID"]];
             for (NSDictionary *message in response[@"notReceivedMessages"]) {
                 [self addMessage:message seen:NO];
             }
@@ -332,8 +334,8 @@
     }
     
 //    BOOL received = ![resultDict[@"userId"] isEqualToString:[STFacebookController sharedInstance].currentUserId];
-    
-    BOOL received = ![resultDict[@"userId"] isEqualToString:_currentUserId];
+    NSString *userId = [NSString stringFromDictValue:resultDict[@"userId"]];
+    BOOL received = ![userId isEqualToString:_currentUserId];
     
     resultDict[@"received"] = @(received);
     resultDict[@"seen"] = @(seen);

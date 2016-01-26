@@ -9,6 +9,7 @@
 #import "STCoreDataManager.h"
 #import "Message.h"
 #import "STDAOEngine.h"
+#import "NSString+MD5.h"
 
 //Set the name of your xcdatamodeld file
 NSString* const kCoreDataModelFileName = @"StatusDM";
@@ -235,7 +236,7 @@ static STCoreDataManager* _coreDataManager = nil;
             insertedValue.received = serverData[@"received"];
             insertedValue.roomID = serverData[@"roomID"];
             insertedValue.seen = serverData[@"seen"];
-            insertedValue.userId = serverData[@"userId"];
+            insertedValue.userId = [NSString stringFromDictValue:serverData[@"userId"]];
             insertedValue.uuid = serverData[@"id"];
             
             NSError *error = nil;

@@ -157,7 +157,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 //    _numberOfSeenPosts = 0;
   
     //fall back foe cases where this is not properly setted.
-    if (_flowType == STFlowTypeUserGallery && [_userID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+    if (_flowType == STFlowTypeUserGallery && [_flowUserID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
         _flowType = STFlowTypeMyGallery;
     }
 }
@@ -430,7 +430,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (postId) {
         flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
         flowCtrl.flowType = STFlowTypeSinglePost;
-        flowCtrl.userID = [STFacebookLoginController sharedInstance].currentUserId;
+        flowCtrl.flowUserID = [STFacebookLoginController sharedInstance].currentUserId;
         flowCtrl.userName = [STFacebookLoginController sharedInstance].fetchedUserData[@"full_name"];
         flowCtrl.postID = postId;
     }
@@ -611,7 +611,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 });
             };
             
-            [STGetUserPostsRequest getPostsForUser:_userID withOffset:offset withCompletion:completion failure:failBlock];
+            [STGetUserPostsRequest getPostsForUser:_flowUserID withOffset:offset withCompletion:completion failure:failBlock];
             
             break;
         }
@@ -640,8 +640,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 ////#endif
 //    }
     
-    if (userInfo[@"user_id"]==nil && _userID!=nil) {
-        userInfo[@"user_id"]=_userID;
+    if (userInfo[@"user_id"]==nil && _flowUserID!=nil) {
+        userInfo[@"user_id"]=_flowUserID;
     }
     if ([userInfo[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
@@ -896,7 +896,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             break;
         }
         case STFlowTypeUserGallery:{
-            [self inviteUserToUpload:_userID withUserName:_userName];
+            [self inviteUserToUpload:_flowUserID withUserName:_userName];
             break;
         }
             
@@ -962,7 +962,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     NSString * userName = nil;
     if (currentPostDict == nil || currentPostDict[@"user_id"] == nil) {
         if (self.flowType == STFlowTypeUserGallery) {
-            userID = _userID;
+            userID = _flowUserID;
             userName = _userName;
         }
     }

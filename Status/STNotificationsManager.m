@@ -18,6 +18,8 @@
 #import "STNotificationsViewController.h"
 #import "STImageCacheController.h"
 
+#import "NSString+MD5.h"
+
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
     NSTimer *_dismissTimer;
@@ -207,7 +209,7 @@ static STNotificationsManager *_sharedManager = nil;
             STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeSinglePost;
             flowCtrl.postID = _currentBanner.notificationInfo[@"post_id"];
-            flowCtrl.userID = _currentBanner.notificationInfo[@"user_id"];
+            flowCtrl.flowUserID = [NSString stringFromDictValue:_currentBanner.notificationInfo[@"user_id"]];
             flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
             [lastVC.navigationController pushViewController:flowCtrl animated:YES];
 
