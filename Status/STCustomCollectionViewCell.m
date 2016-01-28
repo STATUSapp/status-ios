@@ -16,6 +16,7 @@
 #import "UIImageView+Mask.h"
 #import "UIImageView+WebCache.h"
 #import "NSDate+Additions.h"
+#import "NSString+MD5.h"
 
 static const NSInteger kCaptionShadowTag = 101;
 static NSString *kLikeButtonName = @"like button";
@@ -202,6 +203,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
     CGRect rect = [caption boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
 
     _captionLabel.text = caption;
+    NSString *userId = [NSString stringFromDictValue:self.setUpDict[@"user_id"]];
     if (editFlag == NO) {//SeeMore
         _captionButton.hidden = NO;
         _seeMoreWidthContraint.constant = 66.f;
@@ -211,8 +213,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
         if (rect.size.height > _captionLabel.bounds.size.height){
             wrapped = YES;
         }
-
-        if ([self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+        if ([userId isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
             if (caption.length == 0 || wrapped == NO) {
                 _captionButton.hidden = YES;
                 _seeMoreWidthContraint.constant = 0.f;
@@ -226,7 +227,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
     }
     else
     {
-        if (![self.setUpDict[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
+        if (![userId isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
         {
             _captionButton.hidden = YES;
             _seeMoreWidthContraint.constant = 12.f;

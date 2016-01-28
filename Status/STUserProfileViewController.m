@@ -54,7 +54,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSendMessageToUser;
 @property (weak, nonatomic) IBOutlet UIView *loadingPlaceholder;
 
-@property (nonatomic, strong) NSString * userId;
+@property (nonatomic, strong) NSString * profileUserId;
 @property (nonatomic, strong) STUserProfile * userProfile;
 @property (nonatomic, assign) BOOL skipRefreshReqeust;
 
@@ -65,7 +65,7 @@
 + (STUserProfileViewController *)newControllerWithUserId:(NSString *)userId {
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:[NSBundle mainBundle]];
     STUserProfileViewController * newController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STUserProfileViewController class])];
-    newController.userId = userId;
+    newController.profileUserId = userId;
     
     return newController;
 }
@@ -75,7 +75,7 @@
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:[NSBundle mainBundle]];
     STUserProfileViewController * newController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STUserProfileViewController class])];
     newController.userProfile = userProfile;
-    newController.userId = userProfile.uuid;
+    newController.profileUserId = userProfile.uuid;
     newController.skipRefreshReqeust = YES;
     
     return newController;
@@ -148,7 +148,8 @@
         [self setupVisualsWithProfile:_userProfile];
     }    
     __weak STUserProfileViewController * weakSelf = self;
-    [STGetUserProfileRequest getProfileForUserID:_userId withCompletion:^(id response, NSError *error) {
+    [STGetUserProfileRequest getProfileForUserID:_profileUserId
+                                  withCompletion:^(id response, NSError *error) {
         
         weakSelf.userProfile = [STUserProfile userProfileWithDict:response];
         [weakSelf setupVisualsWithProfile:weakSelf.userProfile];
@@ -269,11 +270,13 @@
 
 #pragma mark - IBActions
 - (IBAction)onTapFollowing:(id)sender {
-    STUsersListController * newVC = [STUsersListController newControllerWithUserId:_userId postID:nil andType:UsersListControllerTypeFollowing];
+    STUsersListController * newVC = [STUsersListController newControllerWithUserId:_profileUserId
+                                                                            postID:nil andType:UsersListControllerTypeFollowing];
     [self.navigationController pushViewController:newVC animated:YES];
 }
 - (IBAction)onTapFollowers:(id)sender {
-    STUsersListController * newVC = [STUsersListController newControllerWithUserId:_userId postID:nil andType:UsersListControllerTypeFollowers];
+    STUsersListController * newVC = [STUsersListController newControllerWithUserId:_profileUserId
+                                                                            postID:nil andType:UsersListControllerTypeFollowers];
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
@@ -291,7 +294,7 @@
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
     flowCtrl.flowType = _isMyProfile ? STFlowTypeMyGallery : STFlowTypeUserGallery;
-    flowCtrl.flowUserID = _userId;
+    flowCtrl.flowUserID = _profileUserId;
     flowCtrl.userName = _userProfile.fullName;
     
     [self.navigationController pushViewController:flowCtrl animated:YES];
@@ -370,12 +373,12 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
     STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
     
-    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:@{@"user_id":_userId}];
+    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:@{@"user_id":_profileUserId}];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)onTapEditUserProfile:(id)sender {
-    STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:_userId];
+    STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:_profileUserId];
     editVC.userProfile = _userProfile;
     [self.navigationController pushViewController:editVC animated:YES];
 }
@@ -402,7 +405,7 @@
 - (void)inviteUserToUpload{
     
     NSString * name = [NSString stringWithFormat:@"%@", _userProfile.fullName];
-    NSString * userId = [NSString stringWithFormat:@"%@", _userId];
+    NSString * userId = [NSString stringWithFormat:@"%@", _profileUserId];
     
     STRequestCompletionBlock completion = ^(id response, NSError *error){
         NSInteger statusCode = [response[@"status_code"] integerValue];

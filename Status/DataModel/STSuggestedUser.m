@@ -7,11 +7,12 @@
 //
 
 #import "STSuggestedUser.h"
+#import "NSString+MD5.h"
 
 @implementation STSuggestedUser
 +(STSuggestedUser *)suggestedUserWithDict:(NSDictionary *)dict{
     STSuggestedUser *sUser = [STSuggestedUser new];
-    sUser.uuid = dict[@"user_id"];
+    sUser.uuid = [NSString stringFromDictValue:dict[@"user_id"]];
     sUser.followedByCurrentUser = dict[@"followed_by_current_user"];
     sUser.userName = dict[@"user_name"];
     sUser.thumbnail = dict[@"user_photo"];

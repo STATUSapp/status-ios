@@ -67,6 +67,7 @@
 
 #import "UIImage+ImageEffects.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "NSString+MD5.h"
 
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
@@ -739,7 +740,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     }
     
     NSDictionary *dict = [self getCurrentDictionary];
-    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
+    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]]];
     [self.navigationController pushViewController:userProfileVC animated:YES];
 }
 

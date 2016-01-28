@@ -30,6 +30,8 @@
 #import <FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
+#import "NSString+MD5.h"
+
 @implementation STFacebookLoginController
 +(STFacebookLoginController *) sharedInstance{
     static STFacebookLoginController *_sharedManager = nil;
@@ -129,9 +131,10 @@
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
     [[STLocationManager sharedInstance] startLocationUpdates];
     [self saveAccessToken:response[@"token"]];
-    self.currentUserId = response[@"user_id"];
+    NSString *userId = [NSString stringFromDictValue:response[@"user_id"]];
+    self.currentUserId = userId;
     [[STChatController sharedInstance] forceReconnect];
-    [self setUpCrashlyticsForUserId:response[@"user_id"] andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
+    [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     [self requestRemoteNotificationAccess];
     [self announceDelegate];
     //get settings from server

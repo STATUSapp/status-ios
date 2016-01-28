@@ -7,6 +7,7 @@
 //
 
 #import "STListUser.h"
+#import "NSString+MD5.h"
 
 @implementation STListUser
 +(STListUser *)likeUserWithDict:(NSDictionary *)dict{
@@ -20,7 +21,7 @@
         lu.thumbnail = dict[@"user_photo"];
     }
     
-    lu.uuid = dict[@"user_id"];
+    lu.uuid = [NSString stringFromDictValue:dict[@"user_id"]];
     lu.userName = dict[@"user_name"];
     return lu;
 }

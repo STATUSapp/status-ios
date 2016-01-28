@@ -138,7 +138,7 @@ static STNotificationsManager *_sharedManager = nil;
     }
     notificationDict[@"alert_message"] = alertMesage;
     notificationDict[@"notification_type"] = @(STNotificationTypeChatMessage);
-    notificationDict[@"user_id"] = notification[@"userId"];
+    notificationDict[@"user_id"] = [NSString stringFromDictValue:notification[@"userId"]];
     
     STNotificationBanner *banner;
     banner = [self createBannerWithNotificationInfo:notificationDict];
@@ -218,7 +218,7 @@ static STNotificationsManager *_sharedManager = nil;
         case STNotificationTypeChatMessage:
         {
             NSMutableDictionary *selectedUserInfo = [NSMutableDictionary new];
-            selectedUserInfo[@"user_id"] = _currentBanner.notificationInfo[@"user_id"];
+            selectedUserInfo[@"user_id"] = [NSString stringFromDictValue:_currentBanner.notificationInfo[@"user_id"]];
             selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
             NSString *urlString = _currentBanner.notificationInfo[@"photo"];
             if ([urlString rangeOfString:@"http"].location==NSNotFound) {

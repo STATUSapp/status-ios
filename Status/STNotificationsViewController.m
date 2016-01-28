@@ -168,7 +168,7 @@ const float kNoNotifHeight = 24.f;
             
         default:
         {
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]]];
             [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;
@@ -192,7 +192,7 @@ const float kNoNotifHeight = 24.f;
             break;
         case STNotificationTypeInvite:
         {
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]]];
             [self.navigationController pushViewController:profileVC animated:YES];
             
         }
@@ -200,13 +200,13 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeUploaded:
         {
             
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:dict[@"user_id"]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [NSString stringFromDictValue:dict[@"user_id"]]];
             [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;
         case STNotificationTypeGotFollowed:
         {
-            STUsersListController * newVC = [STUsersListController newControllerWithUserId:dict[@"user_id"] postID:nil andType:UsersListControllerTypeFollowers];
+            STUsersListController * newVC = [STUsersListController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]] postID:nil andType:UsersListControllerTypeFollowers];
             [self.navigationController pushViewController:newVC animated:YES];
         }
             break;

@@ -12,8 +12,11 @@
 
 #pragma mark - Production Server
 
-NSString *const kBaseURL = @"http://api.getstatusapp.co/api/";
-NSString *const kReachableURL = @"api.getstatusapp.co";
+//NSString *const kBaseURL = @"http://api.getstatusapp.co/api/";
+//NSString *const kReachableURL = @"api.getstatusapp.co";
+
+NSString *const kBaseURL = @"http://api2.getstatusapp.co/api/";
+NSString *const kReachableURL = @"api2.getstatusapp.co";
 
 #else
 

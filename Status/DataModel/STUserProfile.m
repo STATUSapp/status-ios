@@ -19,7 +19,7 @@
 }
 
 - (void)setupWithDict:(NSDictionary *)userDict {
-    
+    //TODO: use this function instead of stringFromDictValue:
     self.uuid = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_id"];
     
     if ([self.uuid isKindOfClass:[NSNumber class]]) {

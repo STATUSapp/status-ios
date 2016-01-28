@@ -221,7 +221,7 @@ static STCoreDataManager* _coreDataManager = nil;
     NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
     
-    STCoreDataRequestManager *messageManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"uuid like %@", serverData[@"id"]] sectionNameKeyPath:nil delegate:nil andTableView:nil];
+    STCoreDataRequestManager *messageManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"uuid like %@", [NSString stringFromDictValue:serverData[@"id"]]] sectionNameKeyPath:nil delegate:nil andTableView:nil];
     
     Message *message = [[messageManager allObjects] lastObject];
     if (message==nil) {
@@ -237,7 +237,7 @@ static STCoreDataManager* _coreDataManager = nil;
             insertedValue.roomID = serverData[@"roomID"];
             insertedValue.seen = serverData[@"seen"];
             insertedValue.userId = [NSString stringFromDictValue:serverData[@"userId"]];
-            insertedValue.uuid = serverData[@"id"];
+            insertedValue.uuid = [NSString stringFromDictValue: serverData[@"id"]];
             
             NSError *error = nil;
             [newMoc save:&error];
