@@ -126,6 +126,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
             break;
     }
     NSString *appVersion = setupDict[@"app_version"];
+    //TODO: handle differently the comparison
     if (appVersion == nil ||
         [appVersion isKindOfClass:[NSNull class]] ||
         [appVersion rangeOfString:@"1.0."].location == NSNotFound ||
