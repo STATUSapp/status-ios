@@ -22,8 +22,8 @@
 
 @interface STChatController()<SRWebSocketDelegate>{
     SRWebSocket *_webSocket;
-    NSTimer *reconnectTimer;
     AFNetworkReachabilityManager* _reachabilityManager;
+    NSTimer *_pingTimer;
 }
 
 @end
@@ -116,6 +116,13 @@
     _currentUserId = nil;
      _authenticated = NO;
     [self authenticate];
+    
+    //add a ping timer since the iOS will disconect the socket after 60 seconds of idle.
+    _pingTimer = [NSTimer scheduledTimerWithTimeInterval:50.f
+                                                  target:self
+                                                selector:@selector(pingAction:)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
@@ -128,6 +135,8 @@
     _authenticated = NO;
     _currentUserId = nil;
     _webSocket = nil;
+    [_pingTimer invalidate];
+    _pingTimer = nil;
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.f];
        
@@ -233,6 +242,8 @@
         [_delegate chatDidClose];
 
     }
+    [_pingTimer invalidate];
+    _pingTimer = nil;
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.f];
     }
@@ -311,6 +322,12 @@
     NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type":@"syncRoomMessages", @"roomId":roomId,@"messageIDs":messagesUuids} options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     [_webSocket send:jsonString];
+}
+
+-(void)pingAction:(id)sender{
+    if (_webSocket.readyState == SR_OPEN) {
+        [_webSocket sendPing:nil];
+    }
 }
 
 #pragma mark - Local Storage
