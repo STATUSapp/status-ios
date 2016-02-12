@@ -123,7 +123,7 @@
 -(NSString *)getAppVersion{
     NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
     
-    NSString *buildVersion = infoDictionary[(NSString*)kCFBundleVersionKey];
+    NSString *buildVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];;
     
     NSLog(@"Version: %@", buildVersion);
     

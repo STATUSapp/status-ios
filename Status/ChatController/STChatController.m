@@ -19,6 +19,9 @@
 #import "STGetChatUrlAndPortRequest.h"
 
 #import "NSString+MD5.h"
+#import "NSString+VersionComparison.h"
+
+NSString *const kFirstChatVersion = @"1.0.4";
 
 @interface STChatController()<SRWebSocketDelegate>{
     SRWebSocket *_webSocket;
@@ -116,7 +119,7 @@
     _currentUserId = nil;
      _authenticated = NO;
     [self authenticate];
-    
+
     //add a ping timer since the iOS will disconect the socket after 60 seconds of idle.
     _pingTimer = [NSTimer scheduledTimerWithTimeInterval:50.f
                                                   target:self
@@ -384,6 +387,10 @@
         return YES;
     
     return NO;
+}
+
++(BOOL)allowChatWithVersion:(NSString *)version{
+    return [version isGreaterThanEqualWithVersion:kFirstChatVersion];
 }
 
 #pragma mark - Rechability Service

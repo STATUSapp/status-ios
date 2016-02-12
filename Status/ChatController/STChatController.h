@@ -56,5 +56,6 @@
 - (void)blockUserWithId:(NSString *)userId;
 #pragma mark -Helpers
 -(BOOL)canChat;
++(BOOL)allowChatWithVersion:(NSString *)version;
 
 @end
