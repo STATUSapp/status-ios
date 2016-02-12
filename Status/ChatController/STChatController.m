@@ -146,6 +146,10 @@
         if ([response[@"status"] boolValue]==YES) {
             _authenticated = YES;
             _currentUserId =  [ NSString stringFromDictValue:response[@"userID"]];
+            if (_currentUserId == nil) {
+                //fall back when the chat is not connected
+                _currentUserId = [STFacebookLoginController sharedInstance].currentUserId;
+            }
             for (NSDictionary *message in response[@"notReceivedMessages"]) {
                 [self addMessage:message seen:NO];
             }
