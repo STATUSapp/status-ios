@@ -36,7 +36,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
-
+static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 @interface AppDelegate()<UIAlertViewDelegate>
 
@@ -47,18 +47,29 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 - (void)setBadgeNumber:(NSInteger)badgeNumber{
     
     _badgeNumber = badgeNumber;
+    [[NSUserDefaults standardUserDefaults] setValue:@(badgeNumber) forKey:kSTLastBadgeNumber];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
     [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
 }
 
+-(void)loadBadgeNumber{
+    NSNumber *lastBadgeNumber = [[NSUserDefaults standardUserDefaults] valueForKey:kSTLastBadgeNumber];
+    if (lastBadgeNumber !=nil) {
+        self.badgeNumber = [lastBadgeNumber integerValue];
+    }
+    else
+        self.badgeNumber = 0;
+    
 
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [STIAPHelper sharedInstance];
     [application setStatusBarHidden:YES];
-    self.badgeNumber = application.applicationIconBadgeNumber;
+    [self loadBadgeNumber];
     [[STNotificationsManager sharedManager] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     // setup Mobile App Tracker
