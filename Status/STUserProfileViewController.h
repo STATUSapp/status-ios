@@ -17,6 +17,8 @@
 
 @property (nonatomic, assign) BOOL isMyProfile;
 @property (nonatomic, assign) BOOL isLaunchedFromNearbyController;
+@property (nonatomic, assign) BOOL shouldOpenCameraRoll;
+
 @property (nonatomic, weak) id<STUserProfileControllerDelegate> delegate;
 
 +(STUserProfileViewController *)newControllerWithUserId:(NSString *)userId;

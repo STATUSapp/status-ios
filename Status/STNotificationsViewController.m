@@ -165,10 +165,10 @@ const float kNoNotifHeight = 24.f;
     
     
     switch (notifType) {
-            
         default:
         {
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]]];
+            profileVC.shouldOpenCameraRoll = (notifType == STNotificationTypeInvite);
             [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;
@@ -181,7 +181,9 @@ const float kNoNotifHeight = 24.f;
     STNotificationType notifType = [dict[@"type"] integerValue];
     
     switch (notifType) {
-        case STNotificationTypeLike:{
+        case STNotificationTypeLike:
+        case STNotificationTypeUploaded:
+        {
             STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeSinglePost;
             flowCtrl.postID = dict[@"post_id"];
@@ -197,13 +199,13 @@ const float kNoNotifHeight = 24.f;
             
         }
             break;
-        case STNotificationTypeUploaded:
-        {
-            
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [NSString stringFromDictValue:dict[@"user_id"]]];
-            [self.navigationController pushViewController:profileVC animated:YES];
-        }
-            break;
+//        case STNotificationTypeUploaded:
+//        {
+//            
+//            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [NSString stringFromDictValue:dict[@"user_id"]]];
+//            [self.navigationController pushViewController:profileVC animated:YES];
+//        }
+//            break;
         case STNotificationTypeGotFollowed:
         {
             STUsersListController * newVC = [STUsersListController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]] postID:nil andType:UsersListControllerTypeFollowers];
