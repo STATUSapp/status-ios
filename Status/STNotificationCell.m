@@ -24,11 +24,11 @@ CGFloat const seenCircleWidth = 15;
         return STNotificationRegionTypeUserRelated;
     }
     
-    if (CGRectContainsPoint(self.messageLbl.frame, pointOfTap)) {
-        return STNotificationRegionTypeUserRelated;
+    if (CGRectContainsPoint(self.postImg.frame, pointOfTap)) {
+        return STNotificationRegionTypePostRelated;
     }
     
-    return STNotificationRegionTypePostRelated;
+    return STNotificationRegionTypeUserRelated;
 }
 
 - (void)setIsSeen:(BOOL)isSeen {

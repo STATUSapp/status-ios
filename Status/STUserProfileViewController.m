@@ -89,6 +89,10 @@
     tapGestureRecognizer.numberOfTapsRequired = 1;
     [_imageViewProfilePicture addGestureRecognizer:tapGestureRecognizer];
     _imageViewProfilePicture.userInteractionEnabled = YES;
+    
+    if (_shouldOpenCameraRoll) {
+        [self onTapCamera:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
