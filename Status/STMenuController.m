@@ -68,6 +68,14 @@
     _currentVC = otherVC;
 }
 
+- (NSString *)computedStringForBadge:(NSInteger)badge {
+    NSString *computedString = @" 99 + ";
+    if (badge <= 99) {
+        computedString = [NSString stringWithFormat:@"%@ %zd %@",badge>10?@"":@" ", badge,badge>10?@"":@" "];
+    }
+    return computedString;
+}
+
 - (void)showMenuForController:(UIViewController *)parrentVC{
     
     _currentVC = parrentVC;
@@ -100,8 +108,9 @@
             NSInteger unseenHomePosts = [response[@"unseenHomePosts"] integerValue];
             NSInteger unseenPopularPosts = [response[@"unseenPopularPosts"] integerValue];
             NSInteger unseenRecentPosts = [response[@"unseenRecentPosts"] integerValue];
+            
             if (unseenHomePosts > 0) {
-                _menuView.homeNotifBadge.text = [NSString stringWithFormat:@"%@ %zd %@",unseenHomePosts>10?@"":@" ", unseenHomePosts,unseenHomePosts>10?@"":@" "];
+                _menuView.homeNotifBadge.text = [self computedStringForBadge:unseenHomePosts];;
                 _menuView.homeNotifBadge.hidden = NO;
             }
             else{
@@ -109,7 +118,7 @@
             }
             
             if (unseenPopularPosts > 0) {
-                _menuView.populatNotifBadge.text = [NSString stringWithFormat:@"%@ %zd %@", unseenPopularPosts>10?@"":@" ", unseenPopularPosts,unseenPopularPosts>10?@"":@" "];
+                _menuView.populatNotifBadge.text = [self computedStringForBadge:unseenPopularPosts];
                 _menuView.populatNotifBadge.hidden = NO;
             }
             else{
@@ -117,7 +126,7 @@
             }
 
             if (unseenRecentPosts > 0) {
-                _menuView.recentNotifBadge.text = [NSString stringWithFormat:@"%@ %zd %@", unseenRecentPosts>10?@"":@" ", unseenRecentPosts,unseenRecentPosts>10?@"":@" "];
+                _menuView.recentNotifBadge.text = [self computedStringForBadge:unseenRecentPosts];
                 _menuView.recentNotifBadge.hidden = NO;
             }
             else{
