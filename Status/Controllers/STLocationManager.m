@@ -129,7 +129,7 @@ static STLocationManager *_myLocationManager;
     CLLocation * newLocation = [[CLLocation alloc] initWithLatitude:[latitude doubleValue] longitude:[longitudeString doubleValue]];
     CLLocationDistance distance = [newLocation distanceFromLocation:self.latestLocation];
     
-    if (distance < 0) {
+    if (distance < 0 || latitude == nil || longitudeString == nil) {
         return @"Unknown distance";
     }
     
