@@ -17,6 +17,9 @@
 #import <MessageUI/MessageUI.h>
 #import "NSIndexPath+Additions.h"
 
+static NSString * followAllTitle = @"FOLLOW ALL";
+static NSString * followThemTitle = @"FOLLOW THEM";
+
 @interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *_suggestedPeople;
@@ -32,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblInvitePeople;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrBottomTable;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrHeightInviter;
+@property (weak, nonatomic) IBOutlet UIButton *btnFollowAll;
 
 @property (assign, nonatomic) NSInteger kSuggestedFriendsSection;
 @property (assign, nonatomic) NSInteger kSuggestedPeopleSection;
@@ -120,6 +124,13 @@
     return numSections;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    if (_suggestedFriends.count + _suggestedPeople.count == 0) {
+        _btnFollowAll.enabled = NO;
+        [_btnFollowAll setTitle:followAllTitle forState:UIControlStateNormal];
+    }else {
+        _btnFollowAll.enabled = YES;
+    }
     
     [self updateFollowControllsAnimated:YES];
     
@@ -264,9 +275,12 @@
 }
 - (IBAction)onFollowAllButtonPressed:(id)sender {
     //update the model then make the reuest at the end
-    [self actionFollowAll];
-    [self onArrowPressed:sender];
     
+    if ([_btnFollowAll.titleLabel.text isEqualToString:followAllTitle]) {
+        [self actionFollowAll];
+    } else {
+        [self onArrowPressed:sender];
+    }
 }
 
 - (void)updateFollowControllsAnimated:(BOOL)animated {
@@ -324,6 +338,12 @@
         _constrBottomTable.constant = 88;
         _constrHeightInviter.constant = 44;
         
+    }
+    
+    if (selectionsNumber == dataSource.count) {
+        [_btnFollowAll setTitle:followThemTitle forState:UIControlStateNormal];
+    }else {
+        [_btnFollowAll setTitle:followAllTitle forState:UIControlStateNormal];
     }
     
     [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
