@@ -13,6 +13,8 @@
 #import "STAddressBookContact.h"
 #import "STInviteFriendCell.h"
 
+static NSString * inviteAllTitle = @"INVITE ALL";
+static NSString * inviteThemTitle = @"INVITE THEM";
 
 @interface STSMSEmailInviterViewController ()<UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 
@@ -23,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrBottomTable;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrHeightInviter;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *btnInviteAll;
 
 @property (strong, nonatomic) NSMutableArray<STAddressBookContact *> * results;
 @property (assign, nonatomic) BOOL isSearching;
@@ -73,11 +76,15 @@
 
 - (IBAction)inviteAll:(id)sender {
     
-    for (STAddressBookContact * contact in _dataProcessor.items) {
-        contact.selected = @(YES);
+    if ([_btnInviteAll.titleLabel.text isEqualToString:inviteAllTitle]) {
+        for (STAddressBookContact * contact in _dataProcessor.items) {
+            contact.selected = @(YES);
+        }
+        [self.tableView reloadData];
+        [self updateInviteButtonTitleAnimated:YES];
+    }else {
+        [self inviteSelectedPeople:sender];
     }
-    [self.tableView reloadData];
-    [self inviteSelectedPeople:sender];
 }
 
 #pragma mark - MFMessageComposeViewControllerDelegate
@@ -230,6 +237,12 @@
         _constrBottomTable.constant = 88;
         _constrHeightInviter.constant = 44;
         
+    }
+    
+    if (_selectionsNumber == _dataProcessor.items.count) {
+        [_btnInviteAll setTitle:inviteThemTitle forState:UIControlStateNormal];
+    }else {
+        [_btnInviteAll setTitle:inviteAllTitle forState:UIControlStateNormal];
     }
     
     [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
