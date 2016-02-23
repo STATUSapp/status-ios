@@ -1641,7 +1641,7 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
@@ -1672,7 +1672,7 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
@@ -1787,7 +1787,7 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
 				PROVISIONING_PROFILE = "";
