@@ -346,6 +346,12 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 #pragma mark - FacebookController Delegate
 -(void)facebookControllerDidRegister{
+    if (![self.presentedViewController isBeingDismissed])
+    {
+        if ([self.presentedViewController isKindOfClass:[STLoginViewController class]]) {
+            [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+        }
+    }
     NSString *userId = [STFacebookLoginController sharedInstance].currentUserId;
     [STGetUserProfileRequest getProfileForUserID:userId withCompletion:^(id response, NSError *error) {
         NSLog(@"%@", response);
@@ -368,11 +374,11 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
             __block NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             BOOL suggestionsShown;
-#ifdef DEBUG
-            suggestionsShown = NO;
-#else
+//#ifdef DEBUG
+//            suggestionsShown = NO;
+//#else
             suggestionsShown =  [[ud valueForKey:@"SUGGESTIONS_SHOWED"] boolValue];
-#endif
+//#endif
             if(suggestionsShown == NO)
             {                
                 STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
