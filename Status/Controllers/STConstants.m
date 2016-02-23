@@ -20,8 +20,8 @@ NSString *const kReachableURL = @"api2.getstatusapp.co";
 
 #else
 
-NSString *const kBaseURL = @"http://api2.getstatusapp.co/api/";
-NSString *const kReachableURL = @"api2.getstatusapp.co";
+NSString *const kBaseURL = @"http://ec2-52-86-4-15.compute-1.amazonaws.com/api/";
+NSString *const kReachableURL = @"ec2-52-86-4-15.compute-1.amazonaws.com";
 
 #endif
 
