@@ -390,6 +390,10 @@ NSString *const kFirstChatVersion = @"1.0.4";
 }
 
 +(BOOL)allowChatWithVersion:(NSString *)version{
+    if (version == nil ||
+        [version isKindOfClass:[NSNull class]]) {
+        return NO;
+    }
     return [version isGreaterThanEqualWithVersion:kFirstChatVersion];
 }
 

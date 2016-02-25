@@ -54,7 +54,8 @@
                 weakSelf.completionBlock(responseObject,nil);
             }
             
-            [[STNetworkQueueManager sharedManager] requestDidSucceed:weakSelf];        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [[STNetworkQueueManager sharedManager] requestDidSucceed:weakSelf];        }
+                                           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@ ", operation.responseString);
                 NSInteger statusCode = [operation.response statusCode];
                 if (error.code == NSURLErrorCancelled) { //cancelled
@@ -64,9 +65,11 @@
                 NSError *err = [NSError errorWithDomain:error.domain
                                                    code:statusCode
                                                userInfo:error.userInfo];
+                [[STNetworkQueueManager sharedManager] removeFromQueue:weakSelf];
                 if (weakSelf.failureBlock) {
                     weakSelf.failureBlock(err);
                 }
+                                               
         }];
         [op start];
     };

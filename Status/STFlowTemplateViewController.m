@@ -1198,7 +1198,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
         NSInteger offsetRemaining = weakSelf.postsDataSource.count - usedIndx.row;
         BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && usedIndx.row!=0;
         if (shouldGetNextBatch) {
-            [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count - usedIndx.row - 1 + _numberOfDuplicates];
+            [weakSelf getDataSourceWithOffset:weakSelf.postsDataSource.count+_numberOfDuplicates];
         }
         
         if ([dict[@"post_seen"] boolValue] == TRUE) {
