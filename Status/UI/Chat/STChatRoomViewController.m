@@ -112,7 +112,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
                 [weakSelf loadUserInfo];
             }
         };
-        [STGetUserInfoRequest getInfoForUser: [NSString stringFromDictValue:_userInfo[@"user_id"]] completion:completion failure:nil];
+        [STGetUserInfoRequest getInfoForUser: [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]] completion:completion failure:nil];
     }
     else
         [self loadUserInfo];
@@ -128,7 +128,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     [super viewWillAppear:animated];
     if (chatController.canChat == NO) {
         NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
-        NSString *userId = [NSString stringFromDictValue:_userInfo[@"user_id"]];
+        NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]];
         STCoreDataRequestManager *messages = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message"
                                                                                         sortDescritors:@[sd1]
                                                                                              predicate:[NSPredicate predicateWithFormat:@"userId like %@", userId]
@@ -145,7 +145,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     else
     {
         if (chatController.authenticated == YES) {
-            [chatController openChatRoomForUserId: [NSString stringFromDictValue:_userInfo[@"user_id"]]];
+            [chatController openChatRoomForUserId: [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]]];
         }
         else
             [chatController authenticate];
@@ -297,7 +297,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         return;
     }
     
-    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [NSString stringFromDictValue:_userInfo[@"user_id"]]];
+    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]]];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {
@@ -382,7 +382,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 }
 -(void)chatDidAuthenticate{
     [self hideStatusAlert];
-    [chatController openChatRoomForUserId: [NSString stringFromDictValue:_userInfo[@"user_id"]]];
+    [chatController openChatRoomForUserId: [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]]];
 }
 
 -(void)userWasBlocked{
@@ -425,7 +425,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == kBlockUserAlertTag) {
         if (buttonIndex == 1) {
-            [chatController blockUserWithId:[NSString stringFromDictValue:_userInfo[@"user_id"]]];
+            [chatController blockUserWithId:[CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]]];
         }
 
     }

@@ -7,16 +7,16 @@
 //
 
 #import "STSuggestedUser.h"
-#import "NSString+MD5.h"
+#import "CreateDataModelHelper.h"
 
 @implementation STSuggestedUser
 +(STSuggestedUser *)suggestedUserWithDict:(NSDictionary *)dict{
     STSuggestedUser *sUser = [STSuggestedUser new];
-    sUser.uuid = [NSString stringFromDictValue:dict[@"user_id"]];
+    sUser.infoDict = dict;
+    sUser.uuid = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
     sUser.followedByCurrentUser = dict[@"followed_by_current_user"];
-    sUser.userName = dict[@"user_name"];
-    sUser.thumbnail = dict[@"user_photo"];
-    
+    sUser.userName = [CreateDataModelHelper validObjectFromDict:dict forKey:@"user_name"];
+    sUser.thumbnail = [CreateDataModelHelper validObjectFromDict:dict forKey:@"user_photo"];
     return sUser;
 }
 @end

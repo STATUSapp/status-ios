@@ -18,8 +18,9 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "STGetChatUrlAndPortRequest.h"
 
-#import "NSString+MD5.h"
+#import "CreateDataModelHelper.h"
 #import "NSString+VersionComparison.h"
+#import "CreateDataModelHelper.h"
 
 NSString *const kFirstChatVersion = @"1.0.4";
 
@@ -157,7 +158,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
     if ([response[@"type"] isEqualToString:@"login"]) {
         if ([response[@"status"] boolValue]==YES) {
             _authenticated = YES;
-            _currentUserId =  [ NSString stringFromDictValue:response[@"userID"]];
+            _currentUserId =  [CreateDataModelHelper validStringIdentifierFromValue:response[@"userID"]];
             if (_currentUserId == nil) {
                 //fall back when the chat is not connected
                 _currentUserId = [STFacebookLoginController sharedInstance].currentUserId;
@@ -358,7 +359,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
     }
     
 //    BOOL received = ![resultDict[@"userId"] isEqualToString:[STFacebookController sharedInstance].currentUserId];
-    NSString *userId = [NSString stringFromDictValue:resultDict[@"userId"]];
+    NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:resultDict[@"userId"]];
     BOOL received = ![userId isEqualToString:_currentUserId];
     
     resultDict[@"received"] = @(received);

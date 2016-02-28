@@ -18,7 +18,7 @@
 
 #import "STGetUsersRequest.h"
 
-#import "NSString+MD5.h"
+#import "CreateDataModelHelper.h"
 
 @interface STConversationsListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 {
@@ -123,7 +123,7 @@
     if (selectedUserInfo == nil) {
         return;
     }
-    NSString *selectedUserId = [NSString stringFromDictValue:selectedUserInfo[@"user_id"]];
+    NSString *selectedUserId = [CreateDataModelHelper validStringIdentifierFromValue:selectedUserInfo[@"user_id"]];
     if ([selectedUserId isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;

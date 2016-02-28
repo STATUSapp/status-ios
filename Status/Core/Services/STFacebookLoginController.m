@@ -30,7 +30,7 @@
 #import <FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "NSString+MD5.h"
+#import "CreateDataModelHelper.h"
 
 @implementation STFacebookLoginController
 +(STFacebookLoginController *) sharedInstance{
@@ -131,7 +131,7 @@
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
     [[STLocationManager sharedInstance] startLocationUpdates];
     [self saveAccessToken:response[@"token"]];
-    NSString *userId = [NSString stringFromDictValue:response[@"user_id"]];
+    NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:response[@"user_id"]];
     self.currentUserId = userId;
     [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];

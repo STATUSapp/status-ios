@@ -16,7 +16,7 @@
 #import "UIImageView+Mask.h"
 #import "UIImageView+WebCache.h"
 #import "NSDate+Additions.h"
-#import "NSString+MD5.h"
+#import "CreateDataModelHelper.h"
 #import "STChatController.h"
 
 static const NSInteger kCaptionShadowTag = 101;
@@ -204,7 +204,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
     CGRect rect = [caption boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
 
     _captionLabel.text = caption;
-    NSString *userId = [NSString stringFromDictValue:self.setUpDict[@"user_id"]];
+    NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:self.setUpDict[@"user_id"]];
     if (editFlag == NO) {//SeeMore
         _captionButton.hidden = NO;
         _seeMoreWidthContraint.constant = 66.f;

@@ -14,18 +14,11 @@
 + (instancetype)userProfileWithDict:(NSDictionary *)userDict {
     STUserProfile * userProfile = [[STUserProfile alloc] init];
     [userProfile setupWithDict:userDict];
-    
     return userProfile;
 }
 
 - (void)setupWithDict:(NSDictionary *)userDict {
-    //TODO: use this function instead of stringFromDictValue:
-    self.uuid = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_id"];
-    
-    if ([self.uuid isKindOfClass:[NSNumber class]]) {
-        self.uuid = [NSString stringWithFormat:@"%li", (long)[self.uuid integerValue]];
-    }
-    
+    self.uuid = [CreateDataModelHelper validStringIdentifierFromValue:userDict[@"user_id"]];
     self.appVersion = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"app_version"];
     self.infoDict = userDict;
     _bio = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"bio"];

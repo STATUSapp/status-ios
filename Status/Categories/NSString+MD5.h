@@ -10,5 +10,4 @@
 
 @interface NSString (MD5)
 - (NSString *) md5;
-+ (NSString *)stringFromDictValue:(id)value;
 @end

@@ -167,7 +167,7 @@ const float kNoNotifHeight = 24.f;
     switch (notifType) {
         default:
         {
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]]];
             profileVC.shouldOpenCameraRoll = (notifType == STNotificationTypeInvite);
             [self.navigationController pushViewController:profileVC animated:YES];
         }
@@ -187,14 +187,14 @@ const float kNoNotifHeight = 24.f;
             STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeSinglePost;
             flowCtrl.postID = dict[@"post_id"];
-            flowCtrl.flowUserID = [NSString stringFromDictValue:dict[@"user_id"]];
+            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
             flowCtrl.userName = dict[@"user_name"];
             [self.navigationController pushViewController:flowCtrl animated:YES];
         }
             break;
         case STNotificationTypeInvite:
         {
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]]];
             [self.navigationController pushViewController:profileVC animated:YES];
             
         }
@@ -202,13 +202,13 @@ const float kNoNotifHeight = 24.f;
 //        case STNotificationTypeUploaded:
 //        {
 //            
-//            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [NSString stringFromDictValue:dict[@"user_id"]]];
+//            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [CreateDataModelHelper validStringFromValue:dict[@"user_id"]]];
 //            [self.navigationController pushViewController:profileVC animated:YES];
 //        }
 //            break;
         case STNotificationTypeGotFollowed:
         {
-            STUsersListController * newVC = [STUsersListController newControllerWithUserId:[NSString stringFromDictValue:dict[@"user_id"]] postID:nil andType:UsersListControllerTypeFollowers];
+            STUsersListController * newVC = [STUsersListController newControllerWithUserId:[CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]] postID:nil andType:UsersListControllerTypeFollowers];
             [self.navigationController pushViewController:newVC animated:YES];
         }
             break;
@@ -218,7 +218,7 @@ const float kNoNotifHeight = 24.f;
             STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeSinglePost;
             flowCtrl.postID = dict[@"post_id"];
-            flowCtrl.flowUserID = [NSString stringFromDictValue:dict[@"user_id"]];
+            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
             flowCtrl.userName = dict[@"user_name"];
             [self.navigationController pushViewController:flowCtrl animated:YES];
         }
