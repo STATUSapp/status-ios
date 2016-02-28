@@ -58,6 +58,27 @@
     
 }
 
+- (void)testPoolUpdate {
+    STPostsPool * pool = [[STPostsPool alloc] init];
+    
+    STPost * mock = [STPost new];
+    mock.uuid = @"abc67";
+    mock.caption = @"abd";
+    
+    [pool addPosts:@[mock]];
+    
+    mock.caption = @"abe";
+    [pool addPosts:@[mock]];
+    
+    XCTAssertEqual(1, [pool getAllPosts].count);
+    
+    
+    
+    STPost * updatedMock = [pool getPostWithId:@"abc67"];
+    XCTAssertTrue([updatedMock.caption isEqualToString:@"abe"]);
+    
+}
+
 - (void)testPoolRemoval {
     STPostsPool * pool = [[STPostsPool alloc] init];
     
@@ -77,6 +98,12 @@
     // This is an example of a performance test case.
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
+        STPostsPool * pool = [[STPostsPool alloc] init];
+        
+        [pool addPosts:[self mockPosts]];
+        [pool addPosts:[self mockPosts]];
+        [pool addPosts:[self mockPosts]];
+        [pool addPosts:[self mockPosts]];
     }];
 }
 
