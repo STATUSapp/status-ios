@@ -8,15 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+
 typedef void (^STNewLocationBlock)();
+
+extern NSString * const kNotificationNewLocationHasBeenUploaded;
 
 @interface STLocationManager : NSObject
 
 + (STLocationManager*)sharedInstance;
 @property (nonatomic, strong) CLLocation *latestLocation;
--(void)restartLocationManager;
--(void)startLocationUpdates;
+- (void)restartLocationManager;
+- (void)startLocationUpdates;
 - (void)stopLocationUpdates;
+- (void)forceLocationToUpdate;
 - (void)startLocationUpdatesWithCompletion:(STNewLocationBlock) completion;
 - (NSString *)distanceStringToLocationWithLatitudeString:(NSString *)latitude andLongitudeString:(NSString *)longitudeString;
 

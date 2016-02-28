@@ -8,8 +8,7 @@
 
 #import "STDataAccessUtils.h"
 #import "STDataModelObjects.h"
-#import "STGetFollowersRequest.h"
-#import "STGetFollowingRequest.h"
+#import "STRequests.h"
 
 @implementation STDataAccessUtils
 +(void)getSuggestUsersForFollowType:(STFollowType)followType
@@ -177,4 +176,109 @@
                            completion(error);
                        }];
 }
+
+#pragma mark - Get Posts
+
++ (STRequestCompletionBlock)postsDefaultHandlerWithCompletion:(STDataAccessCompletionBlock)completion
+{
+    STRequestCompletionBlock responseCompletion = ^(id response, NSError *error){
+        NSMutableArray *objects = [NSMutableArray new];
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            for (NSDictionary *dict in response[@"data"]) {
+                STPost *post = [STPost postWithDict:dict];
+                [objects addObject:post];
+            }
+        }
+        completion(objects, error);
+    };
+    return responseCompletion;
+}
+
++ (STRequestFailureBlock)postsDefaultErrorHandlerWithCompletion:(STDataAccessCompletionBlock)completion
+{
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        NSLog(@"error with %@", error.debugDescription);
+        completion(@[], error);
+    };
+    return failBlock;
+}
+
++(void)getPostsForFlow:(STFlowType)flowType
+                offset:(NSInteger)offset
+        withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock responseCompletion = [self postsDefaultHandlerWithCompletion:completion];
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STGetPostsRequest getPostsWithOffset:offset
+                                 flowType:flowType
+                           withCompletion:responseCompletion
+                                  failure:failBlock];
+
+}
+
++ (STRequestCompletionBlock)nearbyPostsHandlerWithCompletion:(STDataAccessCompletionBlock)completion
+{
+    STRequestCompletionBlock responseCompletion = ^(id response, NSError *error){
+        NSMutableArray *objects = [NSMutableArray new];
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            for (NSDictionary *dict in response[@"data"]) {
+                STPost *post = [STPost postWithDict:dict];
+                [objects addObject:post];
+            }
+            completion(objects, error);
+        }
+        else if ([response[@"status_code"] integerValue] == 404){
+            completion(objects, [NSError errorWithDomain:@"LOCATION_MISSING_ERROR" code:404 userInfo:nil]);
+        }
+        else
+            completion(objects, error);
+    };
+    return responseCompletion;
+}
+
++(void)getNearbyPostsWithOffset:(NSInteger)offset
+                 withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock responseCompletion = [self nearbyPostsHandlerWithCompletion:completion];
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STGetNearbyProfilesRequest getNearbyProfilesWithOffset:offset
+                                             withCompletion:responseCompletion
+                                                    failure:failBlock];
+    
+}
+
++(void)getPostsForUserId:(NSString *)userId
+                offset:(NSInteger)offset
+        withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock responseCompletion = [self postsDefaultHandlerWithCompletion:completion];
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STGetUserPostsRequest getPostsForUser:userId
+                                withOffset:offset
+                            withCompletion:responseCompletion
+                                   failure:failBlock];
+}
+
++(void)getPostWithPostId:(NSString *)postId
+                  offset:(NSInteger)offset
+          withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock responseCompletion = [self postsDefaultHandlerWithCompletion:completion];
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STGetPostDetailsRequest getPostDetails:postId
+                             withCompletion:responseCompletion
+                                    failure:failBlock];
+}
+
++(void)setPostSeenForPostId:(NSString *)postId
+      withCompletion:(STDataUploadCompletionBlock)completion{
+    [STSetPostSeenRequest setPostSeen:postId
+                       withCompletion:^(id response, NSError *error) {
+                           if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+                               completion(nil);
+                           }
+                           else
+                               completion([NSError errorWithDomain:@"INTERNAL_ERROR" code:110011 userInfo:nil]);
+                       } failure:^(NSError *error) {
+                           completion(error);
+                       }];
+}
+
+
 @end

@@ -33,4 +33,22 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
     withCompletion:(STDataUploadCompletionBlock)completion;
 +(void)unfollowUsers:(NSArray *)users
       withCompletion:(STDataUploadCompletionBlock)completion;
+
+
+//get posts
++(void)getPostsForFlow:(STFlowType)flowType
+                offset:(NSInteger)offset
+        withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getNearbyPostsWithOffset:(NSInteger)offset
+                 withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getPostsForUserId:(NSString *)userId
+                  offset:(NSInteger)offset
+          withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getPostWithPostId:(NSString *)postId
+                  offset:(NSInteger)offset
+          withCompletion:(STDataAccessCompletionBlock)completion;
+
+//upload post stuff
++(void)setPostSeenForPostId:(NSString *)postId
+             withCompletion:(STDataUploadCompletionBlock)completion;
 @end
