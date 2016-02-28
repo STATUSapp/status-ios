@@ -18,4 +18,16 @@
     }
 }
 
++ (id)validStringIdentifierFromValue:(id)value {
+    NSString *stringValue = nil;
+    if ([value isKindOfClass:[NSNumber class]]) {
+        stringValue = [value stringValue];
+    }
+    else if ([value isKindOfClass:[NSString class]])
+        stringValue = value;
+    return stringValue;
+
+}
+
+
 @end

@@ -9,7 +9,7 @@
 #import "STCoreDataManager.h"
 #import "Message.h"
 #import "STDAOEngine.h"
-#import "NSString+MD5.h"
+#import "CreateDataModelHelper.h"
 
 //Set the name of your xcdatamodeld file
 NSString* const kCoreDataModelFileName = @"StatusDM";
@@ -221,7 +221,7 @@ static STCoreDataManager* _coreDataManager = nil;
     NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
     
-    STCoreDataRequestManager *messageManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"uuid like %@", [NSString stringFromDictValue:serverData[@"id"]]] sectionNameKeyPath:nil delegate:nil andTableView:nil];
+    STCoreDataRequestManager *messageManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"uuid like %@", [CreateDataModelHelper validStringIdentifierFromValue:serverData[@"id"]]] sectionNameKeyPath:nil delegate:nil andTableView:nil];
     
     Message *message = [[messageManager allObjects] lastObject];
     if (message==nil) {
@@ -236,8 +236,8 @@ static STCoreDataManager* _coreDataManager = nil;
             insertedValue.received = serverData[@"received"];
             insertedValue.roomID = serverData[@"roomID"];
             insertedValue.seen = serverData[@"seen"];
-            insertedValue.userId = [NSString stringFromDictValue:serverData[@"userId"]];
-            insertedValue.uuid = [NSString stringFromDictValue: serverData[@"id"]];
+            insertedValue.userId = [CreateDataModelHelper validStringIdentifierFromValue:serverData[@"userId"]];
+            insertedValue.uuid = [CreateDataModelHelper validStringIdentifierFromValue: serverData[@"id"]];
             
             NSError *error = nil;
             [newMoc save:&error];

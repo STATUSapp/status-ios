@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class STPostsPool;
+
 @interface CoreManager : NSObject
 
 + (BOOL)shouldLogin;
++ (STPostsPool *)postsPool;
 
 @end

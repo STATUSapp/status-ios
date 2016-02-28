@@ -18,8 +18,6 @@
 #import "STNotificationsViewController.h"
 #import "STImageCacheController.h"
 
-#import "NSString+MD5.h"
-
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
     NSTimer *_dismissTimer;
@@ -138,7 +136,7 @@ static STNotificationsManager *_sharedManager = nil;
     }
     notificationDict[@"alert_message"] = alertMesage;
     notificationDict[@"notification_type"] = @(STNotificationTypeChatMessage);
-    notificationDict[@"user_id"] = [NSString stringFromDictValue:notification[@"userId"]];
+    notificationDict[@"user_id"] = [CreateDataModelHelper validStringIdentifierFromValue:notification[@"userId"]];
     
     STNotificationBanner *banner;
     banner = [self createBannerWithNotificationInfo:notificationDict];
@@ -209,7 +207,7 @@ static STNotificationsManager *_sharedManager = nil;
             STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
             flowCtrl.flowType = STFlowTypeSinglePost;
             flowCtrl.postID = _currentBanner.notificationInfo[@"post_id"];
-            flowCtrl.flowUserID = [NSString stringFromDictValue:_currentBanner.notificationInfo[@"user_id"]];
+            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
             flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
             [lastVC.navigationController pushViewController:flowCtrl animated:YES];
 
@@ -218,7 +216,7 @@ static STNotificationsManager *_sharedManager = nil;
         case STNotificationTypeChatMessage:
         {
             NSMutableDictionary *selectedUserInfo = [NSMutableDictionary new];
-            selectedUserInfo[@"user_id"] = [NSString stringFromDictValue:_currentBanner.notificationInfo[@"user_id"]];
+            selectedUserInfo[@"user_id"] = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
             selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
             NSString *urlString = _currentBanner.notificationInfo[@"photo"];
             if ([urlString rangeOfString:@"http"].location==NSNotFound) {

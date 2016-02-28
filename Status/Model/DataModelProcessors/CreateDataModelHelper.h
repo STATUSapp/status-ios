@@ -11,5 +11,5 @@
 @interface CreateDataModelHelper : NSObject
 
 + (id)validObjectFromDict:(NSDictionary *)dict forKey:(NSString *)key;
-
++ (id)validStringIdentifierFromValue:(id)value;
 @end

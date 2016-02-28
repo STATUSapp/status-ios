@@ -9,5 +9,7 @@
 #import "STBaseObj.h"
 
 @implementation STBaseObj
-
+-(NSString *)debugDescription{
+    return [NSString stringWithFormat:@"%@", self.infoDict];
+}
 @end

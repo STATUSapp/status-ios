@@ -28,6 +28,7 @@
 		1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B0194FA5E800A29A86 /* AVFoundation.framework */; };
 		1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */; };
 		1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */; };
+		2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D7EAF1C82FEDC00F65026 /* STPost.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
 		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
 		99B3873D1C82FAA2005B4D8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B385E91C82FAA2005B4D8C /* AppDelegate.m */; };
@@ -198,6 +199,7 @@
 		99B387E21C82FAA2005B4D8C /* STUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3873C1C82FAA2005B4D8C /* STUsersListController.m */; };
 		99B387E51C830082005B4D8C /* CoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E41C830082005B4D8C /* CoreManager.m */; };
 		99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E81C8302AD005B4D8C /* STTabBarViewController.m */; };
+		99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387EB1C8324E0005B4D8C /* STPostsPool.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
 		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
 /* End PBXBuildFile section */
@@ -235,6 +237,8 @@
 		1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		228B2C727ABFBB875FD4D193 /* Pods.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.distribution.xcconfig; path = "Pods/Target Support Files/Pods/Pods.distribution.xcconfig"; sourceTree = "<group>"; };
+		2A6D7EAE1C82FEDC00F65026 /* STPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPost.h; sourceTree = "<group>"; };
+		2A6D7EAF1C82FEDC00F65026 /* STPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPost.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		62D422D9C06AC39526914FFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -543,6 +547,8 @@
 		99B387E41C830082005B4D8C /* CoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreManager.m; sourceTree = "<group>"; };
 		99B387E71C8302AD005B4D8C /* STTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTabBarViewController.h; sourceTree = "<group>"; };
 		99B387E81C8302AD005B4D8C /* STTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTabBarViewController.m; sourceTree = "<group>"; };
+		99B387EA1C8324E0005B4D8C /* STPostsPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostsPool.h; sourceTree = "<group>"; };
+		99B387EB1C8324E0005B4D8C /* STPostsPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostsPool.m; sourceTree = "<group>"; };
 		A9FCFE236622BF1EAA4BC917 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CD532FD219B9A451009B1445 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -713,10 +719,10 @@
 		99B386041C82FAA2005B4D8C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				99B386051C82FAA2005B4D8C /* Network */,
-				99B386541C82FAA2005B4D8C /* Services */,
 				99B387E31C830082005B4D8C /* CoreManager.h */,
 				99B387E41C830082005B4D8C /* CoreManager.m */,
+				99B386051C82FAA2005B4D8C /* Network */,
+				99B386541C82FAA2005B4D8C /* Services */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -846,6 +852,8 @@
 				99B386701C82FAA2005B4D8C /* STNearbyController.m */,
 				99B386711C82FAA2005B4D8C /* STUpdateToNewerVersionController.h */,
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
+				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
+				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -892,6 +900,8 @@
 				99B3868A1C82FAA2005B4D8C /* STSuggestedUser.m */,
 				99B3868B1C82FAA2005B4D8C /* STUserProfile.h */,
 				99B3868C1C82FAA2005B4D8C /* STUserProfile.m */,
+				2A6D7EAE1C82FEDC00F65026 /* STPost.h */,
+				2A6D7EAF1C82FEDC00F65026 /* STPost.m */,
 			);
 			path = DataModelObjects;
 			sourceTree = "<group>";
@@ -1527,6 +1537,7 @@
 				99B387E21C82FAA2005B4D8C /* STUsersListController.m in Sources */,
 				99B387B41C82FAA2005B4D8C /* STMenuView.m in Sources */,
 				99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */,
+				99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */,
 				99B387DF1C82FAA2005B4D8C /* STEditProfileViewController.m in Sources */,
 				99B387851C82FAA2005B4D8C /* STBaseObj.m in Sources */,
 				99B387C51C82FAA2005B4D8C /* STInviteFriendsViewController.m in Sources */,
@@ -1562,6 +1573,7 @@
 				99B3876E1C82FAA2005B4D8C /* STNetworkManager.m in Sources */,
 				99B387541C82FAA2005B4D8C /* STGetPostLikesRequest.m in Sources */,
 				99B387601C82FAA2005B4D8C /* STRepostPostRequest.m in Sources */,
+				2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */,
 				99B387BE1C82FAA2005B4D8C /* STNoPhotosCell.m in Sources */,
 				99B387611C82FAA2005B4D8C /* STSetAPNTokenRequest.m in Sources */,
 				99B3873F1C82FAA2005B4D8C /* NSIndexPath+Additions.m in Sources */,
