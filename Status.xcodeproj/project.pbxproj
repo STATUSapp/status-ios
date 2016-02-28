@@ -196,6 +196,7 @@
 		99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E81C8302AD005B4D8C /* STTabBarViewController.m */; };
 		99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387EB1C8324E0005B4D8C /* STPostsPool.m */; };
 		99B387F41C833D20005B4D8C /* STATUSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387F31C833D20005B4D8C /* STATUSTests.m */; };
+		99B387FE1C838FA8005B4D8C /* STTakeAPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
 		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
 /* End PBXBuildFile section */
@@ -544,6 +545,8 @@
 		99B387F11C833D20005B4D8C /* STATUSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STATUSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99B387F31C833D20005B4D8C /* STATUSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STATUSTests.m; sourceTree = "<group>"; };
 		99B387F51C833D20005B4D8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99B387FC1C838FA8005B4D8C /* STTakeAPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTakeAPhotoViewController.h; sourceTree = "<group>"; };
+		99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTakeAPhotoViewController.m; sourceTree = "<group>"; };
 		A9FCFE236622BF1EAA4BC917 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CD532FD219B9A451009B1445 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -1194,6 +1197,8 @@
 			children = (
 				99B3871C1C82FAA2005B4D8C /* FacebookAlbumPicker */,
 				99B387261C82FAA2005B4D8C /* ScaleMoveZoomShare */,
+				99B387FC1C838FA8005B4D8C /* STTakeAPhotoViewController.h */,
+				99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */,
 			);
 			path = TakeAPhoto;
 			sourceTree = "<group>";
@@ -1495,6 +1500,7 @@
 				99B387D41C82FAA2005B4D8C /* STRemoveAdsViewController.m in Sources */,
 				99B387651C82FAA2005B4D8C /* STSetUserSettingsRequest.m in Sources */,
 				99B387881C82FAA2005B4D8C /* STSuggestedUser.m in Sources */,
+				99B387FE1C838FA8005B4D8C /* STTakeAPhotoViewController.m in Sources */,
 				99B387621C82FAA2005B4D8C /* STSetPostLikeRequest.m in Sources */,
 				99B3877D1C82FAA2005B4D8C /* STNearbyController.m in Sources */,
 				99B387AC1C82FAA2005B4D8C /* STMessageSendCell.m in Sources */,
@@ -1965,6 +1971,7 @@
 				99B387FB1C833D20005B4D8C /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
