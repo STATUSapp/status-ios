@@ -73,9 +73,9 @@
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [FBSDKProfile setCurrentProfile:nil];
     //            [weakSelf presentLoginScene];
-    [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
-    [[STLocationManager sharedInstance] stopLocationUpdates];
-    [[STLocationManager sharedInstance] setLatestLocation:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:[CoreManager locationManager] selector:@selector(restartLocationManager) object:nil];
+    [[CoreManager locationManager] stopLocationUpdates];
+    [[CoreManager locationManager] setLatestLocation:nil];
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
     [[STCoreDataManager sharedManager] cleanLocalDataBase];
     STRequestCompletionBlock completion = ^(id response, NSError *error){
@@ -129,7 +129,7 @@
     [STImageCacheController sharedInstance].photoDownloadBaseUrl = response[@"baseUrlStorage"];
     [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
-    [[STLocationManager sharedInstance] startLocationUpdates];
+    [[CoreManager locationManager] startLocationUpdates];
     [self saveAccessToken:response[@"token"]];
     NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:response[@"user_id"]];
     self.currentUserId = userId;

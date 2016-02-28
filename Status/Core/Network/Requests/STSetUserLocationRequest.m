@@ -27,7 +27,7 @@
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [self urlString];
         NSMutableDictionary *params = [self getDictParamsWithToken];
-        CLLocationCoordinate2D coord = [STLocationManager sharedInstance].latestLocation.coordinate;
+        CLLocationCoordinate2D coord = [CoreManager locationManager].latestLocation.coordinate;
         params[@"lat"] = @(coord.latitude);
         params[@"lng"] = @(coord.longitude);
         

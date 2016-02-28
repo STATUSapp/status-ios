@@ -15,7 +15,6 @@ extern NSString * const kNotificationNewLocationHasBeenUploaded;
 
 @interface STLocationManager : NSObject
 
-+ (STLocationManager*)sharedInstance;
 @property (nonatomic, strong) CLLocation *latestLocation;
 - (void)restartLocationManager;
 - (void)startLocationUpdates;

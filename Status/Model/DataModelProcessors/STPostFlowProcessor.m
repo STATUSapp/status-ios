@@ -10,6 +10,8 @@
 #import "STDataAccessUtils.h"
 #import "STLocationManager.h"
 #import "STPost.h"
+#import "CoreManager.h"
+#import "STPostsPool.h"
 
 NSString * const kNotificationPostDownloadFailed = @"NotificationPostDownloadFailed";
 NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSuccess";
@@ -70,10 +72,7 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
 
 -(STPost *)postAtIndex:(NSInteger)index{
     NSString *postId = [_postIds objectAtIndex:index];
-    
-    //TODO: get the data from the pool
-    STPost *postForId = [STPost new];
-    
+    STPost *postForId = [[CoreManager postsPool] getPostWithId:postId];
     return postForId;
 }
 
@@ -104,7 +103,7 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
         [STDataAccessUtils setPostSeenForPostId:post.uuid
                                  withCompletion:^(NSError *error) {
                                      if (error==nil) {
-                                         //TODO: dev_1_2 move this into the pool to update all listeners
+                                         STPost *post = [self postAtIndex:index];
                                          post.postSeen = YES;
                                      }
                                      else
@@ -117,9 +116,7 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
 
 -(void)deleteItemAtIndex:(NSInteger)index
 {
-    NSString *postId = [_postIds objectAtIndex:index];
     [_postIds removeObjectAtIndex:index];
-    //TODO: remove object from the pool?
 }
 
 
@@ -154,7 +151,7 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
                 //user has no location force an update
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLocationHasBeenUploaded) name:kNotificationNewLocationHasBeenUploaded object:nil];
                 //TODO: we should consider to add a notification to make this call for a better separation of the modules?
-                [[STLocationManager sharedInstance] forceLocationToUpdate];
+                [[CoreManager locationManager] forceLocationToUpdate];
             }
             else
             {

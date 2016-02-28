@@ -27,16 +27,6 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
 @end
 
 @implementation STLocationManager
-static STLocationManager *_myLocationManager;
-+ (STLocationManager*)sharedInstance
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _myLocationManager = [[STLocationManager alloc] init];
-    });
-    
-    return _myLocationManager;
-}
 - (id)init
 {
     self = [super init];
