@@ -8,9 +8,12 @@
 
 #import "CoreManager.h"
 #import "STPostsPool.h"
+#import "STLocationManager.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
+@property (nonatomic, strong) STLocationManager *locationManager;
+
 @end
 
 @implementation CoreManager
@@ -29,6 +32,7 @@
     self = [super init];
     if (self) {
         _postsPool = [[STPostsPool alloc] init];
+        _locationManager = [[STLocationManager alloc] init];
     }
     return self;
 }
@@ -41,6 +45,10 @@
 
 + (STPostsPool *)postsPool {
     return [[CoreManager sharedInstance] postsPool];
+}
+
++ (STLocationManager *)locationManager{
+    return [[CoreManager sharedInstance] locationManager];
 }
 
 

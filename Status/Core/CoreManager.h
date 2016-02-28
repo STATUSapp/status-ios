@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class STPostsPool;
+@class STLocationManager;
 
 @interface CoreManager : NSObject
 
 + (BOOL)shouldLogin;
 + (STPostsPool *)postsPool;
++ (STLocationManager *)locationManager;
 
 @end

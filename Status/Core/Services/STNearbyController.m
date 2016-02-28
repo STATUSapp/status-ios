@@ -36,7 +36,7 @@
         if ([response[@"status_code"] integerValue] == 404) {
             //user has no location force an update
             
-            [[STLocationManager sharedInstance] startLocationUpdatesWithCompletion:^{
+            [[CoreManager locationManager] startLocationUpdatesWithCompletion:^{
                 [weakSelf getProfilesFromServerWithOffset:offset withCompletion:completionBlock];
             }];
         }
