@@ -199,6 +199,7 @@
 		99B387E21C82FAA2005B4D8C /* STUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3873C1C82FAA2005B4D8C /* STUsersListController.m */; };
 		99B387E51C830082005B4D8C /* CoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E41C830082005B4D8C /* CoreManager.m */; };
 		99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E81C8302AD005B4D8C /* STTabBarViewController.m */; };
+		99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387EB1C8324E0005B4D8C /* STPostsPool.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
 		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
 /* End PBXBuildFile section */
@@ -546,6 +547,8 @@
 		99B387E41C830082005B4D8C /* CoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreManager.m; sourceTree = "<group>"; };
 		99B387E71C8302AD005B4D8C /* STTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTabBarViewController.h; sourceTree = "<group>"; };
 		99B387E81C8302AD005B4D8C /* STTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTabBarViewController.m; sourceTree = "<group>"; };
+		99B387EA1C8324E0005B4D8C /* STPostsPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostsPool.h; sourceTree = "<group>"; };
+		99B387EB1C8324E0005B4D8C /* STPostsPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostsPool.m; sourceTree = "<group>"; };
 		A9FCFE236622BF1EAA4BC917 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CD532FD219B9A451009B1445 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -716,10 +719,10 @@
 		99B386041C82FAA2005B4D8C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				99B386051C82FAA2005B4D8C /* Network */,
-				99B386541C82FAA2005B4D8C /* Services */,
 				99B387E31C830082005B4D8C /* CoreManager.h */,
 				99B387E41C830082005B4D8C /* CoreManager.m */,
+				99B386051C82FAA2005B4D8C /* Network */,
+				99B386541C82FAA2005B4D8C /* Services */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -849,6 +852,8 @@
 				99B386701C82FAA2005B4D8C /* STNearbyController.m */,
 				99B386711C82FAA2005B4D8C /* STUpdateToNewerVersionController.h */,
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
+				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
+				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1532,6 +1537,7 @@
 				99B387E21C82FAA2005B4D8C /* STUsersListController.m in Sources */,
 				99B387B41C82FAA2005B4D8C /* STMenuView.m in Sources */,
 				99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */,
+				99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */,
 				99B387DF1C82FAA2005B4D8C /* STEditProfileViewController.m in Sources */,
 				99B387851C82FAA2005B4D8C /* STBaseObj.m in Sources */,
 				99B387C51C82FAA2005B4D8C /* STInviteFriendsViewController.m in Sources */,

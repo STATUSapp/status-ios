@@ -7,9 +7,10 @@
 //
 
 #import "CoreManager.h"
+#import "STPostsPool.h"
 
 @interface CoreManager ()
-
+@property (nonatomic, strong) STPostsPool * postsPool;
 @end
 
 @implementation CoreManager
@@ -24,11 +25,24 @@
     return instance;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _postsPool = [[STPostsPool alloc] init];
+    }
+    return self;
+}
+
 #pragma mark - Public interface
 
 + (BOOL)shouldLogin {
     return [[CoreManager sharedInstance] shouldLogin];
 }
+
++ (STPostsPool *)postsPool {
+    return [[CoreManager sharedInstance] postsPool];
+}
+
 
 #pragma mark - Private implementation
 
