@@ -110,11 +110,11 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     [Appirater appLaunched:YES];
     
     
-    if ([CoreManager shouldLogin]) {
-    } else {
-        self.window.rootViewController = [STTabBarViewController newController];
-    }
-    
+//    if ([CoreManager shouldLogin]) {
+//    } else {
+//        self.window.rootViewController = [STTabBarViewController newController];
+//    }
+//    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 
@@ -172,10 +172,9 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     
     [FBSDKAppEvents activateApp];
     
-    //TODO: remove comments
-//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-//    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
-//    [viewController updateNotificationsNumber];
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
+    [viewController updateNotificationsNumber];
     [[STFacebookLoginController sharedInstance] loadTokenFromKeyChain];
     
     // MAT will not function without the measureSession call included
