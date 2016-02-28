@@ -14,6 +14,7 @@
 
 - (void)addPosts:(NSArray <STPost * > *)posts;
 - (STPost *)getPostWithId:(NSString *)postId;
+- (NSArray <STPost *> *)getAllPosts;
 - (void)clearAllPosts;
 - (void)removePosts:(NSArray <STPost * > *)posts;
 
