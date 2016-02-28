@@ -20,4 +20,5 @@
 @property (nonatomic, strong) NSString *smallPhotoUrl;
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;
+@property (nonatomic, assign) BOOL postSeen;
 @end

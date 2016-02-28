@@ -477,7 +477,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 }
 
 #pragma mark - Get Data Source for Flow Type
-
+//moved
 -(NSMutableArray *)removeDuplicatesFromArray:(NSArray *)array{
     
 //#ifdef DEBUG
@@ -512,7 +512,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     });
     
 }
-
+//moved
 - (void)getDataSourceWithOffset:(long) offset{
     NSLog(@"Offset: %ld", offset);
     __weak STFlowTemplateViewController *weakSelf = self;
@@ -1284,7 +1284,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
     return CGSizeZero;
 }
-
+//moved
 -(void) markDataSourceSeenAtIndex:(long) index{
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self.postsDataSource objectAtIndex:index]];
@@ -1349,6 +1349,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     
 }
 
+//moved
 // This method is for deleting the current dict from the data source array
 -(void)deleteItemsFromDataSourceAtIndexPaths:(NSArray  *)itemPaths
 {

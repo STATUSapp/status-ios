@@ -14,11 +14,16 @@
 static const double kGPSRecordTime = 1800;//seconds, half an hour
 static const double kGPSAccuracyMetters = 150;
 static const double kGPSTimestampSeconds = 15.0;
+
+NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLocationHasBeenUploaded";
+
 @interface STLocationManager()<CLLocationManagerDelegate>
 {
     CLLocationManager *_locationManager;
 }
 @property (copy) STNewLocationBlock newLocationBlock;
+@property (nonatomic, assign) BOOL updateForced;
+
 @end
 
 @implementation STLocationManager
@@ -97,6 +102,11 @@ static STLocationManager *_myLocationManager;
                 weakSelf.newLocationBlock();
                 weakSelf.newLocationBlock = nil;
             }
+            if (_updateForced) {
+                _updateForced = NO;
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewLocationHasBeenUploaded
+                                                                    object:nil];
+            }
         }
     };
     [STSetUserLocationRequest setCurrentUserLocationWithCompletion:completion failure:nil];
@@ -119,6 +129,12 @@ static STLocationManager *_myLocationManager;
 - (void)startLocationUpdatesWithCompletion:(STNewLocationBlock) completion{
     self.newLocationBlock = completion;
     [self startLocationUpdates];
+}
+
+- (void)forceLocationToUpdate{
+    _updateForced = YES;
+    [self startLocationUpdates];
+    
 }
 
 - (void)stopLocationUpdates{

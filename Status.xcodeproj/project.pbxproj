@@ -24,6 +24,7 @@
 		1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B0194FA5E800A29A86 /* AVFoundation.framework */; };
 		1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */; };
 		1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */; };
+		2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A119DF61C832182001C17DB /* STPostFlowProcessor.m */; };
 		2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D7EAF1C82FEDC00F65026 /* STPost.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
 		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
@@ -105,9 +106,7 @@
 		99B387881C82FAA2005B4D8C /* STSuggestedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3868A1C82FAA2005B4D8C /* STSuggestedUser.m */; };
 		99B387891C82FAA2005B4D8C /* STUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3868C1C82FAA2005B4D8C /* STUserProfile.m */; };
 		99B3878A1C82FAA2005B4D8C /* CreateDataModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3868F1C82FAA2005B4D8C /* CreateDataModelHelper.m */; };
-		99B3878B1C82FAA2005B4D8C /* STContactsDataProcessor.h.orig in Resources */ = {isa = PBXBuildFile; fileRef = 99B386911C82FAA2005B4D8C /* STContactsDataProcessor.h.orig */; };
 		99B3878C1C82FAA2005B4D8C /* STContactsDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386921C82FAA2005B4D8C /* STContactsDataProcessor.m */; };
-		99B3878D1C82FAA2005B4D8C /* STContactsDataProcessor.m.orig in Resources */ = {isa = PBXBuildFile; fileRef = 99B386931C82FAA2005B4D8C /* STContactsDataProcessor.m.orig */; };
 		99B3878E1C82FAA2005B4D8C /* STFollowDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386951C82FAA2005B4D8C /* STFollowDataProcessor.m */; };
 		99B3878F1C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 99B386991C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg */; };
 		99B387901C82FAA2005B4D8C /* ProximaNova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99B3869A1C82FAA2005B4D8C /* ProximaNova-Black.otf */; };
@@ -230,6 +229,8 @@
 		1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		228B2C727ABFBB875FD4D193 /* Pods.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.distribution.xcconfig; path = "Pods/Target Support Files/Pods/Pods.distribution.xcconfig"; sourceTree = "<group>"; };
+		2A119DF51C832182001C17DB /* STPostFlowProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostFlowProcessor.h; sourceTree = "<group>"; };
+		2A119DF61C832182001C17DB /* STPostFlowProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostFlowProcessor.m; sourceTree = "<group>"; };
 		2A6D7EAE1C82FEDC00F65026 /* STPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPost.h; sourceTree = "<group>"; };
 		2A6D7EAF1C82FEDC00F65026 /* STPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPost.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -394,9 +395,7 @@
 		99B3868E1C82FAA2005B4D8C /* CreateDataModelHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateDataModelHelper.h; sourceTree = "<group>"; };
 		99B3868F1C82FAA2005B4D8C /* CreateDataModelHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateDataModelHelper.m; sourceTree = "<group>"; };
 		99B386901C82FAA2005B4D8C /* STContactsDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STContactsDataProcessor.h; sourceTree = "<group>"; };
-		99B386911C82FAA2005B4D8C /* STContactsDataProcessor.h.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = STContactsDataProcessor.h.orig; sourceTree = "<group>"; };
 		99B386921C82FAA2005B4D8C /* STContactsDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STContactsDataProcessor.m; sourceTree = "<group>"; };
-		99B386931C82FAA2005B4D8C /* STContactsDataProcessor.m.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = STContactsDataProcessor.m.orig; sourceTree = "<group>"; };
 		99B386941C82FAA2005B4D8C /* STFollowDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFollowDataProcessor.h; sourceTree = "<group>"; };
 		99B386951C82FAA2005B4D8C /* STFollowDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFollowDataProcessor.m; sourceTree = "<group>"; };
 		99B386991C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Proxima Nova Fonts Collection.jpg"; sourceTree = "<group>"; };
@@ -888,9 +887,9 @@
 				99B3868E1C82FAA2005B4D8C /* CreateDataModelHelper.h */,
 				99B3868F1C82FAA2005B4D8C /* CreateDataModelHelper.m */,
 				99B386901C82FAA2005B4D8C /* STContactsDataProcessor.h */,
-				99B386911C82FAA2005B4D8C /* STContactsDataProcessor.h.orig */,
 				99B386921C82FAA2005B4D8C /* STContactsDataProcessor.m */,
-				99B386931C82FAA2005B4D8C /* STContactsDataProcessor.m.orig */,
+				2A119DF51C832182001C17DB /* STPostFlowProcessor.h */,
+				2A119DF61C832182001C17DB /* STPostFlowProcessor.m */,
 				99B386941C82FAA2005B4D8C /* STFollowDataProcessor.h */,
 				99B386951C82FAA2005B4D8C /* STFollowDataProcessor.m */,
 			);
@@ -1384,9 +1383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99B387B51C82FAA2005B4D8C /* STMenuView.xib in Resources */,
-				99B3878D1C82FAA2005B4D8C /* STContactsDataProcessor.m.orig in Resources */,
 				99B387AD1C82FAA2005B4D8C /* TimestampView.xib in Resources */,
-				99B3878B1C82FAA2005B4D8C /* STContactsDataProcessor.h.orig in Resources */,
 				99B3879D1C82FAA2005B4D8C /* ProximaNovaCond-Regular.otf in Resources */,
 				99B387B31C82FAA2005B4D8C /* STCustomShareView.xib in Resources */,
 				99B3879B1C82FAA2005B4D8C /* ProximaNovaCond-Light.otf in Resources */,
@@ -1589,6 +1586,7 @@
 				99B387B91C82FAA2005B4D8C /* STLikeCell.m in Sources */,
 				99B387BD1C82FAA2005B4D8C /* STFooterView.m in Sources */,
 				99B387481C82FAA2005B4D8C /* UIImageView+TouchesEffects.m in Sources */,
+				2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */,
 				99B387B01C82FAA2005B4D8C /* STFacebookActivity.m in Sources */,
 				99B387C11C82FAA2005B4D8C /* STSuggestionsViewController.m in Sources */,
 				99B387591C82FAA2005B4D8C /* STGetUserProfileRequest.m in Sources */,

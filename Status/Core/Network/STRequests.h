@@ -14,6 +14,13 @@
 #import "STUnfollowUsersRequest.h"
 #import "STGetPostLikesRequest.h"
 #import "STFlowImagesRequest.h"
+#import "STGetFollowersRequest.h"
+#import "STGetFollowingRequest.h"
+#import "STGetPostsRequest.h"
+#import "STGetNearbyProfilesRequest.h"
+#import "STGetUserPostsRequest.h"
+#import "STGetPostDetailsRequest.h"
+#import "STSetPostSeenRequest.h"
 
 #endif
 
