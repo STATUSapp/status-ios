@@ -196,6 +196,8 @@
 		99B387E01C82FAA2005B4D8C /* STSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387381C82FAA2005B4D8C /* STSettingsViewController.m */; };
 		99B387E11C82FAA2005B4D8C /* STUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3873A1C82FAA2005B4D8C /* STUserProfileViewController.m */; };
 		99B387E21C82FAA2005B4D8C /* STUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3873C1C82FAA2005B4D8C /* STUsersListController.m */; };
+		99B387E51C830082005B4D8C /* CoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E41C830082005B4D8C /* CoreManager.m */; };
+		99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E81C8302AD005B4D8C /* STTabBarViewController.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
 		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
 /* End PBXBuildFile section */
@@ -537,6 +539,10 @@
 		99B3873A1C82FAA2005B4D8C /* STUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserProfileViewController.m; sourceTree = "<group>"; };
 		99B3873B1C82FAA2005B4D8C /* STUsersListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUsersListController.h; sourceTree = "<group>"; };
 		99B3873C1C82FAA2005B4D8C /* STUsersListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUsersListController.m; sourceTree = "<group>"; };
+		99B387E31C830082005B4D8C /* CoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreManager.h; sourceTree = "<group>"; };
+		99B387E41C830082005B4D8C /* CoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreManager.m; sourceTree = "<group>"; };
+		99B387E71C8302AD005B4D8C /* STTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTabBarViewController.h; sourceTree = "<group>"; };
+		99B387E81C8302AD005B4D8C /* STTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTabBarViewController.m; sourceTree = "<group>"; };
 		A9FCFE236622BF1EAA4BC917 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CD532FD219B9A451009B1445 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -709,6 +715,8 @@
 			children = (
 				99B386051C82FAA2005B4D8C /* Network */,
 				99B386541C82FAA2005B4D8C /* Services */,
+				99B387E31C830082005B4D8C /* CoreManager.h */,
+				99B387E41C830082005B4D8C /* CoreManager.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -999,6 +1007,7 @@
 		99B386BF1C82FAA2005B4D8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				99B387E61C83027C005B4D8C /* TabBar */,
 				99B386C01C82FAA2005B4D8C /* Chat */,
 				99B386CF1C82FAA2005B4D8C /* CustomViews */,
 				99B386E01C82FAA2005B4D8C /* Home */,
@@ -1266,6 +1275,15 @@
 				99B3873C1C82FAA2005B4D8C /* STUsersListController.m */,
 			);
 			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		99B387E61C83027C005B4D8C /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				99B387E71C8302AD005B4D8C /* STTabBarViewController.h */,
+				99B387E81C8302AD005B4D8C /* STTabBarViewController.m */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		CCDB922D4CEA119F06C7B473 /* Pods */ = {
@@ -1538,6 +1556,7 @@
 				99B3874D1C82FAA2005B4D8C /* STGetChatUrlAndPortRequest.m in Sources */,
 				99B387AF1C82FAA2005B4D8C /* STConversationsListViewController.m in Sources */,
 				99B387521C82FAA2005B4D8C /* STGetNotificationsRequest.m in Sources */,
+				99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */,
 				99B3875A1C82FAA2005B4D8C /* STGetUserSettingsRequest.m in Sources */,
 				99B387571C82FAA2005B4D8C /* STGetUserInfoRequest.m in Sources */,
 				99B3876E1C82FAA2005B4D8C /* STNetworkManager.m in Sources */,
@@ -1603,6 +1622,7 @@
 				99B387A31C82FAA2005B4D8C /* main.m in Sources */,
 				99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */,
 				99B3877F1C82FAA2005B4D8C /* Message.m in Sources */,
+				99B387E51C830082005B4D8C /* CoreManager.m in Sources */,
 				99B387E11C82FAA2005B4D8C /* STUserProfileViewController.m in Sources */,
 				99B387551C82FAA2005B4D8C /* STGetPostsRequest.m in Sources */,
 				99B387431C82FAA2005B4D8C /* UIImage+FixedOrientation.m in Sources */,
