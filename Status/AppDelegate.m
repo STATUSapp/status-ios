@@ -118,6 +118,11 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 //
     self.window.rootViewController = [LaunchViewController launchVC];
     
+    if ([CoreManager shouldLogin]) {
+    } else {
+        self.window.rootViewController = [STTabBarViewController newController];
+    }
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 
@@ -173,6 +178,12 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     }
     
     [FBSDKAppEvents activateApp];
+//TODO: remove comments
+//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+//    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
+//    [viewController updateNotificationsNumber];
+    [[STFacebookLoginController sharedInstance] loadTokenFromKeyChain];
+    
     //TODO: dev_1_2 make this on a notification
 //    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
 //    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
