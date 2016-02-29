@@ -10,8 +10,6 @@
 #import "STLoginViewController.h"
 #import "AppDelegate.h"
 
-#import "TestViewController.h"
-
 @implementation STNavigationService
 -(instancetype)init{
     self = [super init];
@@ -52,10 +50,9 @@
     NSLog(@"Tabbar Controller presented");
     //TODO: dev_1_2 add tab bar here as root
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LaunchScene" bundle:nil];
-    TestViewController *viewController = (TestViewController *) [storyboard instantiateViewControllerWithIdentifier:@"TEST_VC"];
-    [appDel.window setRootViewController:viewController];
-
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    [appDel.window setRootViewController:navController];
 }
 
 @end

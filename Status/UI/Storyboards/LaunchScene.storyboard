@@ -41,22 +41,5 @@
             </objects>
             <point key="canvasLocation" x="137" y="307"/>
         </scene>
-        <!--Test View Controller-->
-        <scene sceneID="sxw-ev-KwT">
-            <objects>
-                <viewController storyboardIdentifier="TEST_VC" id="LFW-3Q-acs" customClass="TestViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y6Q-aT-Rp1"/>
-                        <viewControllerLayoutGuide type="bottom" id="aQh-BK-PmT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fY7-Kc-o1q">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="emz-6a-Vrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
 </document>

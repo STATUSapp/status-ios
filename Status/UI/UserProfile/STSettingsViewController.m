@@ -26,6 +26,9 @@ const NSInteger kSectionNumberContactLikeAds = 2;
 const NSInteger kSectionNumberLogout = 3;
 
 @interface STSettingsViewController ()
+{
+    FBSDKLoginButton *logoutButton;
+}
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
@@ -80,10 +83,10 @@ const NSInteger kSectionNumberLogout = 3;
         }
     };
 
-    FBSDKLoginButton *lgBtn = [[CoreManager loginService] facebookLoginButton];
-    [lgBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
-    lgBtn.hidden = YES;
-    [_logoutCell addSubview:lgBtn];
+    logoutButton = [[CoreManager loginService] facebookLoginButton];
+    [logoutButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    logoutButton.hidden = YES;
+    [_logoutCell addSubview:logoutButton];
     [STGetUserSettingsRequest getUserSettingsWithCompletion:completion failure:nil];
     [self configureSwitches];
 }
@@ -182,7 +185,7 @@ const NSInteger kSectionNumberLogout = 3;
 }
 
 -(void)fireFbLoginView{
-    [[[CoreManager loginService] facebookLoginButton] sendActionsForControlEvents:UIControlEventTouchUpInside];
+    [logoutButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 

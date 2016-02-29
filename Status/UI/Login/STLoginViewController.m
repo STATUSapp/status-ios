@@ -32,23 +32,23 @@
 {
     [super viewDidLoad];
     _splashBackground.image = [STUIHelper splashImageWithLogo:NO];
-    FBSDKLoginButton *lgBtn = [[CoreManager loginService] facebookLoginButton];
-    [lgBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
+    FBSDKLoginButton *loginButton = [[CoreManager loginService] facebookLoginButton];
+    [loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
 
-    lgBtn.hidden = NO;
-    CGRect frame = lgBtn.frame;
+    loginButton.hidden = NO;
+    CGRect frame = loginButton.frame;
     frame.origin.y = 0;
-    lgBtn.frame = frame;
-    [self.view addSubview:lgBtn];
+    loginButton.frame = frame;
+    [self.view addSubview:loginButton];
     NSLayoutConstraint *bottomConstraint =[NSLayoutConstraint
-                                           constraintWithItem:lgBtn
+                                           constraintWithItem:loginButton
                                            attribute:NSLayoutAttributeBottom
                                            relatedBy:NSLayoutRelationEqual
                                            toItem:self.view
                                            attribute:NSLayoutAttributeBottom
                                            multiplier:1.f
                                            constant:-65];
-    NSLayoutConstraint *centerConstraint = [NSLayoutConstraint constraintWithItem:lgBtn
+    NSLayoutConstraint *centerConstraint = [NSLayoutConstraint constraintWithItem:loginButton
                                                                         attribute:NSLayoutAttributeCenterX
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:self.view
@@ -56,7 +56,7 @@
                                                                        multiplier:1.f
                                                                          constant:1.f];
     
-    NSLayoutConstraint *widthContraint = [NSLayoutConstraint constraintWithItem:lgBtn
+    NSLayoutConstraint *widthContraint = [NSLayoutConstraint constraintWithItem:loginButton
                                                                         attribute:NSLayoutAttributeWidth
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:nil
@@ -64,7 +64,7 @@
                                                                        multiplier:1.f
                                                                          constant:SCREEN_WIDTH - 100.f];
     
-    NSLayoutConstraint *heightContraint = [NSLayoutConstraint constraintWithItem:lgBtn
+    NSLayoutConstraint *heightContraint = [NSLayoutConstraint constraintWithItem:loginButton
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:nil

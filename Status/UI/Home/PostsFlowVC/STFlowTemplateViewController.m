@@ -123,11 +123,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     [super viewDidLoad];
     self.postsDataSource = [NSMutableArray array];
     _numberOfDuplicates = 0;
-    if (self.flowType == STFlowTypeHome){
-//        [[STFacebookLoginController sharedInstance] setDelegate:self];
-    }
-    else
-        [self getDataSourceWithOffset:0];
+
+    [self getDataSourceWithOffset:0];
     
     [self setupVisuals];
     [self initCustomShareView];

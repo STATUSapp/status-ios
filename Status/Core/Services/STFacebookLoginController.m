@@ -153,7 +153,6 @@
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 [weakSelf measureRegister];
                 [weakSelf setUpEnvironment:response andUserInfo:userInfo];
-                //TODO: dev_1_2 handle listener
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidRegister object:nil];
             }
             else
