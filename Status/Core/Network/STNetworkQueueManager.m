@@ -11,25 +11,35 @@
 #import <netinet/in.h>
 #import <arpa/inet.h>
 #import "STChatController.h"
+#import "STRequests.h"
 
 @interface STNetworkQueueManager()<UIAlertViewDelegate> {
     AFNetworkReachabilityManager* _reachabilityManager;
 }
+
+@property(nonatomic, strong) NSMutableArray* requestQueue;
+@property (nonatomic, strong) NSString *accessToken;
+
 @end
 
 @implementation STNetworkQueueManager
 
-+ (STNetworkQueueManager *)sharedManager {
-    static STNetworkQueueManager *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[STNetworkQueueManager alloc] init];
-        _sharedManager.requestQueue = [NSMutableArray new];
-        _sharedManager.isPerformLoginOrRegistration=FALSE;
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        self.requestQueue = [NSMutableArray new];
+    }
+    return self;
+}
 
-    });
-    
-    return _sharedManager;
+#pragma mark - Access Token
+
+- (void)setAccessToken:(NSString *)accessToken{
+    _accessToken = accessToken;
+}
+
+- (NSString *)getAccessToken{
+    return _accessToken;
 }
 
 #pragma mark - utils methods
@@ -76,6 +86,10 @@
     [_requestQueue removeObject:request];
 }
 
+- (void)clearQueue{
+    [_requestQueue removeAllObjects];
+}
+
 - (BOOL)saveQueueToDisk{
     
     NSMutableArray *subQueue = [[_requestQueue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isPost = YES"]] mutableCopy];
@@ -104,15 +118,25 @@
     [[NSFileManager defaultManager] removeItemAtPath:fileName error:nil];
 }
 
-
+- (BOOL)canSendLoginOrRegisterRequest{
+    BOOL result = YES;
+    for (STBaseRequest *request in _requestQueue) {
+        if ([request isKindOfClass:[STLoginRequest class]] ||
+            [request isKindOfClass:[STRegisterRequest class]]) {
+            result = NO;
+            break;
+        }
+    }
+    return result;
+}
 
 
 - (void)addOrHideActivity{
     
-    if ([STNetworkQueueManager sharedManager].requestQueue.count > 0 && ![[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]){
+    if (_requestQueue.count > 0 && ![[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]){
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     }else{
-        if ([STNetworkQueueManager sharedManager].requestQueue.count == 0) {
+        if (_requestQueue.count == 0) {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         }
     }
@@ -121,24 +145,24 @@
 #pragma mark - Network handlers
 
 - (void)requestDidSucceed:(STBaseRequest*)request{
-    [[STNetworkQueueManager sharedManager].requestQueue removeObject:request];
-    [[STNetworkQueueManager sharedManager] startDownload];
+    [_requestQueue removeObject:request];
+    [self startDownload];
     [self addOrHideActivity];
 }
 
 - (void)request:(STBaseRequest*)request didFailWithError:(NSError*)error{
-    [[STNetworkQueueManager sharedManager].requestQueue removeObject:request];
+    [_requestQueue removeObject:request];
     
     if (request.shouldAddToQueue)
-        [[STNetworkQueueManager sharedManager].requestQueue addObject:request];
+        [_requestQueue addObject:request];
     
     [self addOrHideActivity];
     //First check reachability
     if ([self isConnectionWorking]) {
-        [[STNetworkQueueManager sharedManager] startDownload];
+        [self startDownload];
     } else
     {
-        [[STNetworkQueueManager sharedManager].requestQueue removeObject:request];
+        [_requestQueue removeObject:request];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }
 }

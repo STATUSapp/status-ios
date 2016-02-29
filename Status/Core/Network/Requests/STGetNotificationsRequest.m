@@ -17,7 +17,7 @@
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock

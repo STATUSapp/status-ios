@@ -231,7 +231,7 @@
     _imageViewStatusIcon.hidden = !hasLastSeenStatus;
     
     
-    NSString * distanceText = [[CoreManager locationManager] distanceStringToLocationWithLatitudeString:profile.latitude
+    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
                                                                                           andLongitudeString:profile.longitude];
 
     CGFloat fontSize = _lblDistance.font.pointSize;

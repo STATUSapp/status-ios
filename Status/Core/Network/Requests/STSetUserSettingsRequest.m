@@ -21,7 +21,7 @@
     request.retryCount = 0;
     request.value = value;
     request.key = key;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock

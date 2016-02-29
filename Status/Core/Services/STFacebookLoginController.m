@@ -73,9 +73,9 @@
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [FBSDKProfile setCurrentProfile:nil];
     //            [weakSelf presentLoginScene];
-    [NSObject cancelPreviousPerformRequestsWithTarget:[CoreManager locationManager] selector:@selector(restartLocationManager) object:nil];
-    [[CoreManager locationManager] stopLocationUpdates];
-    [[CoreManager locationManager] setLatestLocation:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:[CoreManager locationService] selector:@selector(restartLocationManager) object:nil];
+    [[CoreManager locationService] stopLocationUpdates];
+    [[CoreManager locationService] setLatestLocation:nil];
     [[STImageCacheController sharedInstance] cleanTemporaryFolder];
     [[STCoreDataManager sharedManager] cleanLocalDataBase];
     STRequestCompletionBlock completion = ^(id response, NSError *error){
@@ -102,15 +102,15 @@
 
 -(void)loadTokenFromKeyChain {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
-    [STNetworkQueueManager sharedManager].accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
-    NSLog(@"Loaded Access Token: %@",[STNetworkQueueManager sharedManager].accessToken);
+    [CoreManager networkService].accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
+    NSLog(@"Loaded Access Token: %@",[[CoreManager networkService] getAccessToken]);
 }
 
 -(void)deleteAccessToken {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
     [keychainWrapperAccessToken resetKeychainItem];
     [[STNetworkManager sharedManager] clearQueue];
-    [STNetworkQueueManager sharedManager].accessToken = nil;
+    [CoreManager networkService].accessToken = nil;
 }
 
 -(void) saveAccessToken:(NSString *) accessToken{
@@ -125,11 +125,11 @@
 }
 
 - (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
-    [STNetworkQueueManager sharedManager].accessToken = response[@"token"];
+    [CoreManager networkService].accessToken = response[@"token"];
     [STImageCacheController sharedInstance].photoDownloadBaseUrl = response[@"baseUrlStorage"];
     [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
-    [[CoreManager locationManager] startLocationUpdates];
+    [[CoreManager locationService] startLocationUpdates];
     [self saveAccessToken:response[@"token"]];
     NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:response[@"user_id"]];
     self.currentUserId = userId;
@@ -142,14 +142,10 @@
 }
 
 -(void) loginOrRegister{
-    if ([STNetworkQueueManager sharedManager].isPerformLoginOrRegistration==FALSE) {
-        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = TRUE;
-    }
-    else
+    if ([[CoreManager networkService] canSendLoginOrRegisterRequest]==FALSE)
         return;
     
     if([[FBSDKAccessToken currentAccessToken] tokenString]==nil){
-        [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
         return;
     }
     [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
@@ -158,7 +154,6 @@
         __block NSMutableDictionary *userInfo = [NSMutableDictionary new];
 
         STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
-            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 [weakSelf measureRegister];
                 [weakSelf setUpEnvironment:response andUserInfo:userInfo];
@@ -174,11 +169,9 @@
         };
         
         STRequestFailureBlock failBlock = ^(NSError *error){
-            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
         };
         
         STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
-            [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
             if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
                
                 [STRegisterRequest registerWithUserInfo:userInfo

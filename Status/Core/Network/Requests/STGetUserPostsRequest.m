@@ -21,7 +21,7 @@
     request.retryCount = 0;
     request.userId = userId;
     request.offset = offset;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock

@@ -21,7 +21,7 @@
     request.retryCount = 0;
     request.localContacts = localContacts;
     request.facebookFriends = facebookFriends;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock

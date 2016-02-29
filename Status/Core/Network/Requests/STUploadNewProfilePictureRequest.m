@@ -19,7 +19,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.pictureData = pictureData;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -45,7 +45,7 @@
                 weakSelf.completionBlock(responseObject,nil);
             }
             
-            [[STNetworkQueueManager sharedManager] requestDidSucceed:weakSelf];        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [[CoreManager networkService] requestDidSucceed:weakSelf];        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@ ", operation.responseString);
                 NSInteger statusCode = [operation.response statusCode];
                 if (error.code == NSURLErrorCancelled) { //cancelled

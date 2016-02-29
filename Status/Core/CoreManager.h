@@ -10,11 +10,14 @@
 
 @class STPostsPool;
 @class STLocationManager;
+@class STNetworkQueueManager;
 
 @interface CoreManager : NSObject
 
 + (BOOL)shouldLogin;
-+ (STPostsPool *)postsPool;
-+ (STLocationManager *)locationManager;
++ (BOOL)loggedIn;
 
++ (STPostsPool *)postsPool;
++ (STLocationManager *)locationService;
++(STNetworkQueueManager *)networkService;
 @end

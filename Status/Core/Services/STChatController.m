@@ -78,8 +78,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
         return;
     }
     
-    if ([STNetworkQueueManager sharedManager].accessToken==nil &&
-        [STNetworkQueueManager sharedManager].accessToken.length==0 &&
+    if (![CoreManager loggedIn] &&
         [FBSDKAccessToken currentAccessToken]==nil&&
         [STFacebookLoginController sharedInstance].currentUserId==nil)
     {
@@ -257,11 +256,10 @@ NSString *const kFirstChatVersion = @"1.0.4";
 
 -(void)authenticate{
     
-    if ([STNetworkQueueManager sharedManager].accessToken!=nil &&
-        [STNetworkQueueManager sharedManager].accessToken.length!=0 &&
+    if ([CoreManager loggedIn] &&
         [FBSDKAccessToken currentAccessToken]!=nil&&
         [STFacebookLoginController sharedInstance].currentUserId!=nil) {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"login", @"token": [STNetworkQueueManager sharedManager].accessToken} options:NSJSONWritingPrettyPrinted error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"login", @"token": [[CoreManager networkService] getAccessToken]} options:NSJSONWritingPrettyPrinted error:nil];
         NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         [_webSocket send:jsonString];
     }

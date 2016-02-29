@@ -45,7 +45,7 @@ static STNetworkManager *_sharedManager = nil;
 }
 
 - (void)clearQueue{
-    [[STNetworkQueueManager sharedManager].requestQueue removeAllObjects];
+    [[CoreManager networkService] clearQueue];
     [[self operationQueue] cancelAllOperations];
     [self invalidateSessionCancelingTasks:YES];
     _sharedManager = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];

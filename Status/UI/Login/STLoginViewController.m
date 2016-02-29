@@ -14,6 +14,7 @@
 #import <FBSDKLoginKit.h>
 
 @interface STLoginViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *splashBackground;
 @end
 
 @implementation STLoginViewController
@@ -30,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration = FALSE;
+    _splashBackground.image = [STUIHelper splashImageWithLogo:NO];
     [STFacebookLoginController sharedInstance].loginButton.hidden = NO;
     FBSDKLoginButton *loginBtn = [STFacebookLoginController sharedInstance].loginButton;
     loginBtn.hidden = NO;

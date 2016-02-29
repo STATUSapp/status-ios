@@ -110,8 +110,7 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
 }
 
 - (void)startLocationUpdates{
-    if ([STNetworkQueueManager sharedManager].accessToken!=nil &&
-        [STNetworkQueueManager sharedManager].accessToken.length > 0) {
+    if ([CoreManager loggedIn]) {
         [_locationManager startUpdatingLocation];
     }
 }

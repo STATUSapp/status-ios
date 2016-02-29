@@ -19,7 +19,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.userId = userId;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock

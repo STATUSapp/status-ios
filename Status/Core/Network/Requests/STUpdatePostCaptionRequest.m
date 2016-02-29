@@ -21,7 +21,7 @@
     request.retryCount = 0;
     request.postId = postId;
     request.caption = capion;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock

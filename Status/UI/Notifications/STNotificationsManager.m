@@ -53,7 +53,7 @@ static STNotificationsManager *_sharedManager = nil;
 
     if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
         
-        if ([STNetworkQueueManager sharedManager].accessToken == nil) {
+        if (![CoreManager loggedIn]) {
             //wait for the login to be performed and after handle the notification
             _lastNotification = notif;
             return;

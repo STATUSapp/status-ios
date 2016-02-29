@@ -64,7 +64,7 @@ const float kNoNotifHeight = 24.f;
 }
 
 -(void) getNotificationsFromServer{
-    if ([STNetworkQueueManager sharedManager].accessToken == nil) {
+    if (![CoreManager loggedIn]) {
         return;
     }
     __weak STNotificationsViewController *weakSelf = self;

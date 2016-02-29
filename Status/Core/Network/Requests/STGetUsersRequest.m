@@ -23,7 +23,7 @@
     request.scope = scope;
     request.searchText = searchText;
     request.offset = offset;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock

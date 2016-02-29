@@ -38,6 +38,8 @@
 #import "CoreManager.h"
 #import "STTabBarViewController.h"
 
+#import "LaunchViewController.h"
+
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
@@ -114,7 +116,9 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 //    } else {
 //        self.window.rootViewController = [STTabBarViewController newController];
 //    }
-//    
+//
+    self.window.rootViewController = [LaunchViewController launchVC];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 
@@ -132,20 +136,19 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-//    [STNetworkQueueManager sharedManager].isPerformLoginOrRegistration=FALSE;
-    
-    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-    NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
-    BOOL removed = NO;
-    //TODO: add more clasess here, as needed
-    while ([[stackVCs lastObject] isKindOfClass:[STChatRoomViewController class]] ||
-           [[stackVCs lastObject] isKindOfClass:[STConversationsListViewController class]]) {
-        removed = YES;
-        [stackVCs removeLastObject];
-    }
-    if (removed == YES) {
-        [navController setViewControllers:stackVCs];
-    }
+//TODO: dev_1_2 move this where it bellongs and make it not crashable
+//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+//    NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
+//    BOOL removed = NO;
+//    //TODO: add more clasess here, as needed
+//    while ([[stackVCs lastObject] isKindOfClass:[STChatRoomViewController class]] ||
+//           [[stackVCs lastObject] isKindOfClass:[STConversationsListViewController class]]) {
+//        removed = YES;
+//        [stackVCs removeLastObject];
+//    }
+//    if (removed == YES) {
+//        [navController setViewControllers:stackVCs];
+//    }
     [[STChatController sharedInstance] leaveCurrentRoom];
 }
 
@@ -171,10 +174,10 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     }
     
     [FBSDKAppEvents activateApp];
-    
-    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
-    [viewController updateNotificationsNumber];
+    //TODO: dev_1_2 make this on a notification
+//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+//    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
+//    [viewController updateNotificationsNumber];
     [[STFacebookLoginController sharedInstance] loadTokenFromKeyChain];
     
     // MAT will not function without the measureSession call included
@@ -225,7 +228,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 //#warning remove this
 //    NSLog(@"APN Token --- %@", token);
 //    [[[UIAlertView alloc] initWithTitle:@"Test" message:[NSString stringWithFormat:@"%@", token] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-    if ([STNetworkQueueManager sharedManager].accessToken!=nil) {
+    if ([CoreManager loggedIn]) {
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod)  NSLog(@"APN Token set.");
             else  NSLog(@"APN token NOT set.");
@@ -269,8 +272,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 -(void)checkForNotificationNumber{
     __weak AppDelegate *weakSelf = self;
-    if ([STNetworkQueueManager sharedManager].accessToken != nil &&
-        [STNetworkQueueManager sharedManager].accessToken.length > 0) {
+    if ([CoreManager loggedIn]) {
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 dispatch_async(dispatch_get_main_queue(), ^{

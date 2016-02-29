@@ -21,6 +21,8 @@
 #import "STGetUserPostsRequest.h"
 #import "STGetPostDetailsRequest.h"
 #import "STSetPostSeenRequest.h"
+#import "STLoginRequest.h"
+#import "STRegisterRequest.h"
 
 #endif
 

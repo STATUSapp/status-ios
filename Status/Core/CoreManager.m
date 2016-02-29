@@ -9,11 +9,12 @@
 #import "CoreManager.h"
 #import "STPostsPool.h"
 #import "STLocationManager.h"
+#import "STNetworkQueueManager.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
-@property (nonatomic, strong) STLocationManager *locationManager;
-
+@property (nonatomic, strong) STLocationManager *locationService;
+@property (nonatomic, strong) STNetworkQueueManager *networkService;
 @end
 
 @implementation CoreManager
@@ -32,7 +33,8 @@
     self = [super init];
     if (self) {
         _postsPool = [[STPostsPool alloc] init];
-        _locationManager = [[STLocationManager alloc] init];
+        _locationService = [[STLocationManager alloc] init];
+        _networkService = [[STNetworkQueueManager alloc] init];
     }
     return self;
 }
@@ -43,19 +45,33 @@
     return [[CoreManager sharedInstance] shouldLogin];
 }
 
++ (BOOL)loggedIn{
+    return [[CoreManager sharedInstance] loggedIn];
+}
+
 + (STPostsPool *)postsPool {
     return [[CoreManager sharedInstance] postsPool];
 }
 
-+ (STLocationManager *)locationManager{
-    return [[CoreManager sharedInstance] locationManager];
++ (STLocationManager *)locationService{
+    return [[CoreManager sharedInstance] locationService];
 }
+
++(STNetworkQueueManager *)networkService{
+    return [[CoreManager sharedInstance] networkService];
+}
+
 
 
 #pragma mark - Private implementation
 
 - (BOOL)shouldLogin {
-    return NO;
+    return ![self loggedIn];
+}
+
+- (BOOL)loggedIn{
+    NSString *accessToken = [_networkService getAccessToken];
+    return (accessToken!=nil && accessToken.length > 0);
 }
 
 @end

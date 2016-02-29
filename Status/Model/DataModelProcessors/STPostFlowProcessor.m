@@ -151,7 +151,7 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
                 //user has no location force an update
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLocationHasBeenUploaded) name:kNotificationNewLocationHasBeenUploaded object:nil];
                 //TODO: we should consider to add a notification to make this call for a better separation of the modules?
-                [[CoreManager locationManager] forceLocationToUpdate];
+                [[CoreManager locationService] forceLocationToUpdate];
             }
             else
             {

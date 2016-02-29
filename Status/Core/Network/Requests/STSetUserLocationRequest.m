@@ -18,7 +18,7 @@
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -27,7 +27,7 @@
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [self urlString];
         NSMutableDictionary *params = [self getDictParamsWithToken];
-        CLLocationCoordinate2D coord = [CoreManager locationManager].latestLocation.coordinate;
+        CLLocationCoordinate2D coord = [CoreManager locationService].latestLocation.coordinate;
         params[@"lat"] = @(coord.latitude);
         params[@"lng"] = @(coord.longitude);
         

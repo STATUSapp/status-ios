@@ -206,7 +206,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [self.collectionView setDelegate:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
+//moved
 -(void) presentLoginScene{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
     STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
@@ -562,7 +562,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
                 if ([response[@"status_code"] integerValue] == 404) {
                     //user has no location force an update
                     
-                    [[CoreManager locationManager] startLocationUpdatesWithCompletion:^{
+                    [[CoreManager locationService] startLocationUpdatesWithCompletion:^{
                         [weakSelf getDataSourceWithOffset:offset];
                     }];
                 }

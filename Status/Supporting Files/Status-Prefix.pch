@@ -17,4 +17,6 @@
     #import <MobileCoreServices/MobileCoreServices.h>
     #import "STConstants.h"
     #import "CoreManager.h"
+
+    #import "STUIHelper.h"
 #endif
