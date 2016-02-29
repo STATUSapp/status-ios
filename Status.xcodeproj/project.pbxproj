@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
 		16ACF5F582F40A0966AE8820 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D422D9C06AC39526914FFF /* libPods.a */; };
+		171936C31C848604002C0202 /* STNavigationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 171936C21C848604002C0202 /* STNavigationService.m */; };
+		171936C61C848F2D002C0202 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171936C51C848F2D002C0202 /* TestViewController.m */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
@@ -215,6 +217,10 @@
 
 /* Begin PBXFileReference section */
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		171936C11C848604002C0202 /* STNavigationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNavigationService.h; sourceTree = "<group>"; };
+		171936C21C848604002C0202 /* STNavigationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNavigationService.m; sourceTree = "<group>"; };
+		171936C41C848F2D002C0202 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		171936C51C848F2D002C0202 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		172EAE6318B0B12E00C5637B /* STATUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE6618B0B12E00C5637B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		172EAE6818B0B12E00C5637B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -658,6 +664,8 @@
 			children = (
 				2AC777771C83A5CC00DAA273 /* LaunchViewController.h */,
 				2AC777781C83A5CC00DAA273 /* LaunchViewController.m */,
+				171936C41C848F2D002C0202 /* TestViewController.h */,
+				171936C51C848F2D002C0202 /* TestViewController.m */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -855,6 +863,8 @@
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
 				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
 				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
+				171936C11C848604002C0202 /* STNavigationService.h */,
+				171936C21C848604002C0202 /* STNavigationService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1570,6 +1580,7 @@
 				99B387561C82FAA2005B4D8C /* STGetSuggestUsersRequest.m in Sources */,
 				99B387CC1C82FAA2005B4D8C /* STSmartNotificationCell.m in Sources */,
 				99B387DB1C82FAA2005B4D8C /* STZoomablePostViewController.m in Sources */,
+				171936C61C848F2D002C0202 /* TestViewController.m in Sources */,
 				99B3874A1C82FAA2005B4D8C /* STDeletePostRequest.m in Sources */,
 				99B387791C82FAA2005B4D8C /* STInviteController.m in Sources */,
 				99B387781C82FAA2005B4D8C /* STImagePickerController.m in Sources */,
@@ -1578,6 +1589,7 @@
 				99B3874D1C82FAA2005B4D8C /* STGetChatUrlAndPortRequest.m in Sources */,
 				99B387AF1C82FAA2005B4D8C /* STConversationsListViewController.m in Sources */,
 				99B387521C82FAA2005B4D8C /* STGetNotificationsRequest.m in Sources */,
+				171936C31C848604002C0202 /* STNavigationService.m in Sources */,
 				99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */,
 				99B3875A1C82FAA2005B4D8C /* STGetUserSettingsRequest.m in Sources */,
 				99B387571C82FAA2005B4D8C /* STGetUserInfoRequest.m in Sources */,

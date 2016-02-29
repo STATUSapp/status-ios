@@ -11,6 +11,8 @@
 @class STPostsPool;
 @class STLocationManager;
 @class STNetworkQueueManager;
+@class STNavigationService;
+@class STFacebookLoginController;
 
 @interface CoreManager : NSObject
 
@@ -19,5 +21,8 @@
 
 + (STPostsPool *)postsPool;
 + (STLocationManager *)locationService;
-+(STNetworkQueueManager *)networkService;
++ (STNetworkQueueManager *)networkService;
++ (STNavigationService *)navigationService;
++ (STFacebookLoginController *)loginService;
+
 @end

@@ -32,43 +32,54 @@
 
 #import "CreateDataModelHelper.h"
 
+@interface STFacebookLoginController ()<FBSDKLoginButtonDelegate>
+
+@property (nonatomic, strong) NSString *currentUserId;
+//TODO: should we use the STUser instead of the fetchedUserData
+@property (nonatomic, strong) NSDictionary *fetchedUserData;
+
+@end
+
 @implementation STFacebookLoginController
-+(STFacebookLoginController *) sharedInstance{
-    static STFacebookLoginController *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[self alloc] init];
-    });
-    return _sharedManager;
-}
 
 -(id)init{
     self = [super init];
     if (self) {
-        
-        _loginButton = [FBSDKLoginButton new];
-        _loginButton.defaultAudience = FBSDKDefaultAudienceEveryone;
-        _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday",@"user_about_me", @"user_location",@"user_photos"];
-        _loginButton.publishPermissions = @[@"publish_actions"];
-        
-        [_loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-        _loginButton.delegate = self;
-        if ([FBSDKAccessToken currentAccessToken]) {
-            [self loginOrRegister];
-        }
-         
     }
     return self;
+}
+
+- (FBSDKLoginButton *)facebookLoginButton{
+    FBSDKLoginButton *_loginButton = [FBSDKLoginButton new];
+    _loginButton.defaultAudience = FBSDKDefaultAudienceEveryone;
+    _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday",@"user_about_me", @"user_location",@"user_photos"];
+    _loginButton.publishPermissions = @[@"publish_actions"];
+    
+    _loginButton.delegate = self;
+    
+    return _loginButton;
+
+}
+
+- (NSString *)currentUserUuid{
+    return _currentUserId;
+}
+- (NSString *)currentUserFullName{
+    return _fetchedUserData[@"full_name"];
+}
+
+- (void)startLoginIfPossible {
+    if ([FBSDKAccessToken currentAccessToken]) {
+        [self loginOrRegister];
+    }
 }
 
 #pragma mark - Facebook DelegatesFyou
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
-    
-    if (self.logoutDelegate&&[self.logoutDelegate respondsToSelector:@selector(facebookControllerDidLoggedOut)]) {
-        [self.logoutDelegate performSelector:@selector(facebookControllerDidLoggedOut)];
-    }
-    [STFacebookLoginController sharedInstance].fetchedUserData = nil;
+   
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedOut object:nil];
+    _fetchedUserData = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [FBSDKProfile setCurrentProfile:nil];
@@ -81,36 +92,21 @@
     STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==200){
             NSLog(@"APN Token deleted.");
-            [[STFacebookLoginController sharedInstance] deleteAccessToken];
+            [[CoreManager networkService] deleteAccessToken];
         }
         else  NSLog(@"APN token NOT deleted.");
     };
     [STSetAPNTokenRequest setAPNToken:@"" withCompletion:completion failure:nil];
     
     [[STChatController sharedInstance] close];
-
-    //[self deleteAccessToken];
 }
 
 -(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
     if (error!=nil) {
-        [STFacebookLoginController sharedInstance].currentUserId = nil;
+        _currentUserId = nil;
     }
     else
         [self loginOrRegister];
-}
-
--(void)loadTokenFromKeyChain {
-    KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
-    [CoreManager networkService].accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
-    NSLog(@"Loaded Access Token: %@",[[CoreManager networkService] getAccessToken]);
-}
-
--(void)deleteAccessToken {
-    KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
-    [keychainWrapperAccessToken resetKeychainItem];
-    [[STNetworkManager sharedManager] clearQueue];
-    [CoreManager networkService].accessToken = nil;
 }
 
 -(void) saveAccessToken:(NSString *) accessToken{
@@ -136,7 +132,7 @@
     [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     [self requestRemoteNotificationAccess];
-    [self announceDelegate];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedIn object:nil];
     //get settings from server
     [self getUserSettingsFromServer];
 }
@@ -157,9 +153,8 @@
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 [weakSelf measureRegister];
                 [weakSelf setUpEnvironment:response andUserInfo:userInfo];
-                if (_delegate && [_delegate respondsToSelector:@selector(facebookControllerDidRegister)]) {
-                    [_delegate facebookControllerDidRegister];
-                }
+                //TODO: dev_1_2 handle listener
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidRegister object:nil];
             }
             else
             {
@@ -224,12 +219,6 @@
     }];
 
     
-}
-
--(void) announceDelegate{
-    if (self.delegate&&[self.delegate respondsToSelector:@selector(facebookControllerDidLoggedIn)]) {
-        [self.delegate performSelector:@selector(facebookControllerDidLoggedIn)];
-    }
 }
 
 - (void)setTrackerAsExistingUser {

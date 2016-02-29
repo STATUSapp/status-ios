@@ -80,8 +80,10 @@ const NSInteger kSectionNumberLogout = 3;
         }
     };
 
-    [STFacebookLoginController sharedInstance].loginButton.hidden = YES;
-    [_logoutCell addSubview:[STFacebookLoginController sharedInstance].loginButton];
+    FBSDKLoginButton *lgBtn = [[CoreManager loginService] facebookLoginButton];
+    [lgBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
+    lgBtn.hidden = YES;
+    [_logoutCell addSubview:lgBtn];
     [STGetUserSettingsRequest getUserSettingsWithCompletion:completion failure:nil];
     [self configureSwitches];
 }
@@ -180,7 +182,7 @@ const NSInteger kSectionNumberLogout = 3;
 }
 
 -(void)fireFbLoginView{
-    [[STFacebookLoginController sharedInstance].loginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    [[[CoreManager loginService] facebookLoginButton] sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 

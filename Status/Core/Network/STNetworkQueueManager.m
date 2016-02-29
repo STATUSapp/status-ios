@@ -12,6 +12,7 @@
 #import <arpa/inet.h>
 #import "STChatController.h"
 #import "STRequests.h"
+#import "KeychainItemWrapper.h"
 
 @interface STNetworkQueueManager()<UIAlertViewDelegate> {
     AFNetworkReachabilityManager* _reachabilityManager;
@@ -28,6 +29,7 @@
     self = [super init];
     if (self) {
         self.requestQueue = [NSMutableArray new];
+        [self loadTokenFromKeyChain];
     }
     return self;
 }
@@ -170,4 +172,18 @@
 - (BOOL)isConnectionWorking {
     return [STChatController sharedInstance].connectionStatus != STConnectionStatusOff;
 }
+
+-(void)loadTokenFromKeyChain {
+    KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
+    _accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
+    NSLog(@"Loaded Access Token: %@",_accessToken);
+}
+
+-(void)deleteAccessToken {
+    KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
+    [keychainWrapperAccessToken resetKeychainItem];
+    [[STNetworkManager sharedManager] clearQueue];
+    _accessToken = nil;
+}
+
 @end

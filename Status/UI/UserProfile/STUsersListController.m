@@ -179,7 +179,7 @@
     if (appVersion == nil ||
         ![appVersion isKindOfClass:[NSString class]] ||
         [appVersion rangeOfString:@"1.0."].location == NSNotFound ||
-        [[STFacebookLoginController sharedInstance].currentUserId isEqualToString:lu.uuid]) {//not setted
+        [[[CoreManager loginService] currentUserUuid] isEqualToString:lu.uuid]) {//not setted
         cell.chatButton.hidden = YES;
     }
     else

@@ -76,7 +76,7 @@ static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate, UIGestureRecognizerDelegate,STSharePostDelegate, STSuggestionsDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate,STSharePostDelegate, STSuggestionsDelegate>
 {    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
@@ -123,8 +123,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     [super viewDidLoad];
     self.postsDataSource = [NSMutableArray array];
     _numberOfDuplicates = 0;
-    if (self.flowType == STFlowTypeHome)
-        [[STFacebookLoginController sharedInstance] setDelegate:self];
+    if (self.flowType == STFlowTypeHome){
+//        [[STFacebookLoginController sharedInstance] setDelegate:self];
+    }
     else
         [self getDataSourceWithOffset:0];
     
@@ -159,7 +160,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 //    _numberOfSeenPosts = 0;
   
     //fall back foe cases where this is not properly setted.
-    if (_flowType == STFlowTypeUserGallery && [_flowUserID isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+    if (_flowType == STFlowTypeUserGallery && [_flowUserID isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
         _flowType = STFlowTypeMyGallery;
     }
 }
@@ -167,7 +168,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if ([FBSDKAccessToken currentAccessToken]==nil||
-        [STFacebookLoginController sharedInstance].currentUserId==nil) {
+        [[CoreManager loginService] currentUserUuid] == nil) {
         [self presentLoginScene];
     }
     else
@@ -182,7 +183,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[STFacebookLoginController sharedInstance] setLogoutDelegate:self];
+//    [[STFacebookLoginController sharedInstance] setLogoutDelegate:self];
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:appDelegate.badgeNumber];
     [[STImageCacheController sharedInstance] changeFlowType:_flowType needsSort:YES];
@@ -353,7 +354,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
             [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
         }
     }
-    NSString *userId = [STFacebookLoginController sharedInstance].currentUserId;
+    NSString *userId = [[CoreManager loginService] currentUserUuid];
     [STGetUserProfileRequest getProfileForUserID:userId withCompletion:^(id response, NSError *error) {
         NSLog(@"%@", response);
         STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:userId];
@@ -438,8 +439,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (postId) {
         flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
         flowCtrl.flowType = STFlowTypeSinglePost;
-        flowCtrl.flowUserID = [STFacebookLoginController sharedInstance].currentUserId;
-        flowCtrl.userName = [STFacebookLoginController sharedInstance].fetchedUserData[@"full_name"];
+        flowCtrl.flowUserID = [[CoreManager loginService] currentUserUuid];
+        flowCtrl.userName = [[CoreManager loginService] currentUserFullName];
         flowCtrl.postID = postId;
     }
     
@@ -651,7 +652,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
     if (userInfo[@"user_id"]==nil && _flowUserID!=nil) {
         userInfo[@"user_id"]=_flowUserID;
     }
-    if ([userInfo[@"user_id"] isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+    if ([userInfo[@"user_id"] isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
     }
@@ -753,7 +754,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, FacebookControllerDelegate,
 
 -(IBAction)onTapMyProfile:(id)sender{
         
-    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
+    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[[CoreManager loginService] currentUserUuid]];
     [self.navigationController pushViewController:userProfileVC animated:YES];
 }
 - (IBAction)onTapUserProfilePicture:(id)sender {

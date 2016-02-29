@@ -124,7 +124,7 @@
         return;
     }
     NSString *selectedUserId = [CreateDataModelHelper validStringIdentifierFromValue:selectedUserInfo[@"user_id"]];
-    if ([selectedUserId isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+    if ([selectedUserId isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
     }

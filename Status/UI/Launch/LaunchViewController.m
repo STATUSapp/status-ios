@@ -7,8 +7,8 @@
 //
 
 #import "LaunchViewController.h"
-#import "STLoginViewController.h"
-#import "AppDelegate.h"
+#import "STNavigationService.h"
+#import "STFacebookLoginController.h"
 
 @interface LaunchViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;
@@ -28,21 +28,12 @@
     UIImage *image = [STUIHelper splashImageWithLogo:YES];
     _launchImage.image = image;
     
-    if ([CoreManager shouldLogin]) {
-        [self presentLoginScene];
-    }
-    else
-    {
-        
-    }
+    if ([CoreManager shouldLogin])
+        [STNavigationService presentLoginScreen];
+    [[CoreManager loginService] startLoginIfPossible];
 }
 
 -(void) presentLoginScene{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
-    STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
-    
-    AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
-    [appDel.window setRootViewController:viewController];
 }
 
 

@@ -34,4 +34,7 @@
 
 - (BOOL)isConnectionWorking;
 
+- (void)deleteAccessToken;
+- (void)loadTokenFromKeyChain;
+
 @end

@@ -10,27 +10,13 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-#define USER_NAME       @"logged_user_name"
-
-@protocol FacebookControllerDelegate <NSObject>
-
--(void) facebookControllerDidLoggedIn;
--(void) facebookControllerDidRegister;
--(void) facebookControllerDidLoggedOut;
--(void) facebookControllerSessionExpired;
-
-@end
-
 typedef void (^facebookCompletion)(id result, NSError *error);
-@interface STFacebookLoginController : NSObject<FBSDKLoginButtonDelegate>
-+(STFacebookLoginController *) sharedInstance;
-@property (nonatomic, strong) id <FacebookControllerDelegate> delegate;
-@property (nonatomic, strong) id <FacebookControllerDelegate> logoutDelegate;
-@property (nonatomic, strong) FBSDKLoginButton *loginButton;
-@property (nonatomic, strong) NSString *currentUserId;
-@property (nonatomic, strong) NSDictionary *fetchedUserData;
+@interface STFacebookLoginController : NSObject
 
--(void)loadTokenFromKeyChain;
--(void)deleteAccessToken;
-- (void)requestRemoteNotificationAccess;
+- (FBSDKLoginButton *)facebookLoginButton;
+
+- (NSString *)currentUserUuid;
+- (NSString *)currentUserFullName;
+- (void)startLoginIfPossible;
+
 @end

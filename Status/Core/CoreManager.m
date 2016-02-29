@@ -10,11 +10,16 @@
 #import "STPostsPool.h"
 #import "STLocationManager.h"
 #import "STNetworkQueueManager.h"
+#import "STNavigationService.h"
+#import "STFacebookLoginController.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
 @property (nonatomic, strong) STLocationManager *locationService;
 @property (nonatomic, strong) STNetworkQueueManager *networkService;
+@property (nonatomic, strong) STNavigationService *navigationService;
+@property (nonatomic, strong) STFacebookLoginController *loginService;
+
 @end
 
 @implementation CoreManager
@@ -35,6 +40,8 @@
         _postsPool = [[STPostsPool alloc] init];
         _locationService = [[STLocationManager alloc] init];
         _networkService = [[STNetworkQueueManager alloc] init];
+        _navigationService = [STNavigationService new];
+        _loginService = [STFacebookLoginController new];
     }
     return self;
 }
@@ -57,11 +64,17 @@
     return [[CoreManager sharedInstance] locationService];
 }
 
-+(STNetworkQueueManager *)networkService{
++ (STNetworkQueueManager *)networkService{
     return [[CoreManager sharedInstance] networkService];
 }
 
++ (STNavigationService *)navigationService{
+    return [[CoreManager sharedInstance] navigationService];
+}
 
++ (STFacebookLoginController *)loginService{
+    return [[CoreManager sharedInstance] loginService];
+}
 
 #pragma mark - Private implementation
 

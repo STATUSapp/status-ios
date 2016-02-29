@@ -176,3 +176,10 @@ extern NSString *const STNotificationsPhotosWaitingKey;
 extern NSString *const STNotificationsExtraLikesKey;
 extern NSString *const STNotificationsFollowersKey;
 
+#pragma mark - Login Constants
+
+extern NSString *const kNotificationUserDidLoggedIn;
+extern NSString *const kNotificationUserDidRegister;
+extern NSString *const kNotificationUserDidLoggedOut;
+extern NSString *const kNotificationSessionExpired;
+
