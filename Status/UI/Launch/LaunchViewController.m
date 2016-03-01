@@ -33,10 +33,6 @@
     [[CoreManager loginService] startLoginIfPossible];
 }
 
--(void) presentLoginScene{
-}
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

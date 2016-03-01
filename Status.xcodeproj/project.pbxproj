@@ -25,6 +25,8 @@
 		1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B0194FA5E800A29A86 /* AVFoundation.framework */; };
 		1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */; };
 		1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */; };
+		2A0B22C91C84D1980077CFEF /* FeedScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A0B22C81C84D1980077CFEF /* FeedScene.storyboard */; };
+		2A0B22CD1C84D2CD0077CFEF /* STFeedCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B22CC1C84D2CD0077CFEF /* STFeedCVC.m */; };
 		2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A119DF61C832182001C17DB /* STPostFlowProcessor.m */; };
 		2A1D66831C8472D400633D87 /* STUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1D66821C8472D400633D87 /* STUIHelper.m */; };
 		2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D7EAF1C82FEDC00F65026 /* STPost.m */; };
@@ -236,6 +238,9 @@
 		1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		228B2C727ABFBB875FD4D193 /* Pods.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.distribution.xcconfig; path = "Pods/Target Support Files/Pods/Pods.distribution.xcconfig"; sourceTree = "<group>"; };
+		2A0B22C81C84D1980077CFEF /* FeedScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedScene.storyboard; sourceTree = "<group>"; };
+		2A0B22CB1C84D2CD0077CFEF /* STFeedCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFeedCVC.h; sourceTree = "<group>"; };
+		2A0B22CC1C84D2CD0077CFEF /* STFeedCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFeedCVC.m; sourceTree = "<group>"; };
 		2A119DF51C832182001C17DB /* STPostFlowProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostFlowProcessor.h; sourceTree = "<group>"; };
 		2A119DF61C832182001C17DB /* STPostFlowProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostFlowProcessor.m; sourceTree = "<group>"; };
 		2A1D66811C8472D400633D87 /* STUIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUIHelper.h; sourceTree = "<group>"; };
@@ -648,6 +653,15 @@
 				62D422D9C06AC39526914FFF /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2A0B22CA1C84D28E0077CFEF /* new design */ = {
+			isa = PBXGroup;
+			children = (
+				2A0B22CB1C84D2CD0077CFEF /* STFeedCVC.h */,
+				2A0B22CC1C84D2CD0077CFEF /* STFeedCVC.m */,
+			);
+			path = "new design";
 			sourceTree = "<group>";
 		};
 		2A1D66801C8472AC00633D87 /* Helpers */ = {
@@ -1124,6 +1138,7 @@
 		99B386E41C82FAA2005B4D8C /* PostsFlowVC */ = {
 			isa = PBXGroup;
 			children = (
+				2A0B22CA1C84D28E0077CFEF /* new design */,
 				99B386E51C82FAA2005B4D8C /* STCustomCollectionViewCell.h */,
 				99B386E61C82FAA2005B4D8C /* STCustomCollectionViewCell.m */,
 				99B386E71C82FAA2005B4D8C /* STFBAdCell.h */,
@@ -1222,6 +1237,7 @@
 				99B387171C82FAA2005B4D8C /* SuggestionsScene.storyboard */,
 				99B387181C82FAA2005B4D8C /* UserProfile.storyboard */,
 				2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */,
+				2A0B22C81C84D1980077CFEF /* FeedScene.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1427,6 +1443,7 @@
 				99B387B31C82FAA2005B4D8C /* STCustomShareView.xib in Resources */,
 				99B3879B1C82FAA2005B4D8C /* ProximaNovaCond-Light.otf in Resources */,
 				99B387951C82FAA2005B4D8C /* ProximaNova-LightItalic.otf in Resources */,
+				2A0B22C91C84D1980077CFEF /* FeedScene.storyboard in Resources */,
 				99B387921C82FAA2005B4D8C /* ProximaNova-BoldIt.otf in Resources */,
 				99B387A01C82FAA2005B4D8C /* ProximaNovaCond-SemiboldIt.otf in Resources */,
 				99B3879E1C82FAA2005B4D8C /* ProximaNovaCond-RegularIt.otf in Resources */,
@@ -1603,6 +1620,7 @@
 				99B3874E1C82FAA2005B4D8C /* STGetFollowersRequest.m in Sources */,
 				99B3877A1C82FAA2005B4D8C /* STLocationManager.m in Sources */,
 				99B3878E1C82FAA2005B4D8C /* STFollowDataProcessor.m in Sources */,
+				2A0B22CD1C84D2CD0077CFEF /* STFeedCVC.m in Sources */,
 				99B3875B1C82FAA2005B4D8C /* STGetUsersRequest.m in Sources */,
 				99B387411C82FAA2005B4D8C /* NSString+VersionComparison.m in Sources */,
 				99B387A51C82FAA2005B4D8C /* HPGrowingTextView.m in Sources */,
