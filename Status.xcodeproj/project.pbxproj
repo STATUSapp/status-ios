@@ -829,8 +829,6 @@
 		99B386541C82FAA2005B4D8C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				99B386551C82FAA2005B4D8C /* KeychainItemWrapper.h */,
-				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B386571C82FAA2005B4D8C /* STChatController.h */,
 				99B386581C82FAA2005B4D8C /* STChatController.m */,
 				99B386591C82FAA2005B4D8C /* STContactsManager.h */,
@@ -855,6 +853,8 @@
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
 				99B3865F1C82FAA2005B4D8C /* STFacebookLoginController.h */,
 				99B386601C82FAA2005B4D8C /* STFacebookLoginController.m */,
+				99B386551C82FAA2005B4D8C /* KeychainItemWrapper.h */,
+				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
 				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
 				171936C11C848604002C0202 /* STNavigationService.h */,
