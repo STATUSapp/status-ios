@@ -31,7 +31,7 @@
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"ids"] = [[weakSelf.users valueForKey:@"uuid"] componentsJoinedByString:@","];
         
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

@@ -10,10 +10,20 @@
 #import "STLoginViewController.h"
 #import "AppDelegate.h"
 
+#import "STImagePickerController.h"
+
+@interface STNavigationService ()
+
+@property (nonatomic, strong) STImagePickerController *imagePickerController;
+
+@end
 @implementation STNavigationService
 -(instancetype)init{
     self = [super init];
     if (self) {
+        
+        _imagePickerController = [STImagePickerController new];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
@@ -53,6 +63,10 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *navController = [storyboard instantiateInitialViewController];
     [appDel.window setRootViewController:navController];
+}
+
++(STImagePickerController *)imagePickerController{
+    return [[CoreManager navigationService] imagePickerController];
 }
 
 @end

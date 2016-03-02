@@ -33,7 +33,7 @@
         NSMutableDictionary *params = [self getDictParamsWithToken];
         params[@"post_id"] = weakSelf.postId;
         params[@"caption"] = weakSelf.caption;
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

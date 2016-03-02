@@ -34,7 +34,7 @@
         params[@"limit"] = @(100);
         params[@"user_id"] = weakSelf.userID;
         
-        [[STNetworkManager sharedManager] GET:url
+        [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

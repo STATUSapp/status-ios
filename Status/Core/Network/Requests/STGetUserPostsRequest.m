@@ -35,7 +35,7 @@
         params[@"offset"] = @(weakSelf.offset);
         params[@"user_id"] = weakSelf.userId;
         
-        [[STNetworkManager sharedManager] GET:url
+        [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

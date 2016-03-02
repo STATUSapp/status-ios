@@ -70,6 +70,8 @@
 
 #import "STPost.h"
 
+#import "STNavigationService.h"
+
 int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
 static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
@@ -829,9 +831,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 
     };
     if (isOwner) {
-        [[STImagePickerController sharedInstance] startImagePickerForOwnerInViewController:self withCompletion:completion];
+        [[STNavigationService imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
     } else {
-        [[STImagePickerController sharedInstance] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
+        [[STNavigationService imagePickerController] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
             [weakSelf inviteCurrentPostOwnerUserToUpload];
         }];
     }

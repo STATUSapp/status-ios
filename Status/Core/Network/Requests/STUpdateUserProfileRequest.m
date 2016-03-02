@@ -52,7 +52,7 @@
         
         NSString *url = [weakSelf urlString];
         
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:weakSelf.paramsDict
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

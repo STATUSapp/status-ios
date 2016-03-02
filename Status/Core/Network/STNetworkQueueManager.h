@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @class STBaseRequest;
+@class STNetworkManager;
 
 @interface STNetworkQueueManager : NSObject
+
++(STNetworkManager *)networkAPI;
 
 - (NSString *)getAccessToken;
 - (void)setAccessToken:(NSString *)accessToken;

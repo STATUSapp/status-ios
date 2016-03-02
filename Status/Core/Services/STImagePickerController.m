@@ -16,15 +16,6 @@
 @end
 
 @implementation STImagePickerController
-+(STImagePickerController *) sharedInstance{
-    static STImagePickerController *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[self alloc] init];
-    });
-    
-    return _sharedManager;
-}
 
 -(void)startImagePickerInViewController:(UIViewController *)viewController
                          withCompletion:(imagePickerCompletion)completion

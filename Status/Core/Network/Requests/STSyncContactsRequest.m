@@ -43,7 +43,7 @@
         else
             contactsDict[@"facebookFriends"] = @[];
         params[@"contacts"] = contactsDict;
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

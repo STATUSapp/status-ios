@@ -30,7 +30,7 @@
         NSString *url = [self urlString];
         NSMutableDictionary *params = [self getDictParamsWithToken];
         params[@"user_id"] = weakSelf.userId;
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

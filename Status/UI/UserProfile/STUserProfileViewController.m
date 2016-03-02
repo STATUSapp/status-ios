@@ -28,7 +28,7 @@
 #import "STUnfollowUsersRequest.h"
 
 #import "STNativeAdsController.h"
-
+#import "STNavigationService.h"
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
@@ -360,9 +360,9 @@
     };
     
     if (_isMyProfile) {
-        [[STImagePickerController sharedInstance] startImagePickerForOwnerInViewController:self withCompletion:completion];
+        [[STNavigationService imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
     } else {
-        [[STImagePickerController sharedInstance] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
+        [[STNavigationService imagePickerController] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
             [weakSelf inviteUserToUpload];
         }];
     }}

@@ -27,7 +27,7 @@
         
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        [[STNetworkManager sharedManager] GET:url
+        [[STNetworkQueueManager networkAPI] GET:url
                                    parameters:params
                                       success:weakSelf.standardSuccessBlock
                                       failure:weakSelf.standardErrorBlock];

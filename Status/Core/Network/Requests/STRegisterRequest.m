@@ -33,7 +33,7 @@
         params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
         params[@"app_version"] = [self getAppVersion];
         
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

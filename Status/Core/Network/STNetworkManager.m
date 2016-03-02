@@ -12,15 +12,6 @@
 @implementation STNetworkManager
 static STNetworkManager *_sharedManager = nil;
 
-+ (STNetworkManager *)sharedManager {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
-    });
-    
-    return _sharedManager;
-}
-
 - (id)initWithBaseURL:(NSURL *)url {
     self = [super initWithBaseURL:url];
     if (!self) {

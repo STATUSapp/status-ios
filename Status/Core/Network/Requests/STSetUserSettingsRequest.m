@@ -33,7 +33,7 @@
         params[@"value"] = @(weakSelf.value);
         params[@"key"] = weakSelf.key;
         
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                    parameters:params
                                       success:weakSelf.standardSuccessBlock
                                       failure:weakSelf.standardErrorBlock];

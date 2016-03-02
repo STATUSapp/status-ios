@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class STImagePickerController;
+
 @interface STNavigationService : NSObject
 
 + (void)presentLoginScreen;
 + (void)presentTabBarController;
+
++(STImagePickerController *)imagePickerController;
 
 @end

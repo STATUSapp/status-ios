@@ -13,13 +13,15 @@
 #import "STChatController.h"
 #import "STRequests.h"
 #import "KeychainItemWrapper.h"
+#import "STNetworkManager.h"
 
 @interface STNetworkQueueManager()<UIAlertViewDelegate> {
     AFNetworkReachabilityManager* _reachabilityManager;
 }
 
-@property(nonatomic, strong) NSMutableArray* requestQueue;
+@property (nonatomic, strong) NSMutableArray* requestQueue;
 @property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) STNetworkManager *networkAPI;
 
 @end
 
@@ -29,9 +31,14 @@
     self = [super init];
     if (self) {
         self.requestQueue = [NSMutableArray new];
+        _networkAPI = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
         [self loadTokenFromKeyChain];
     }
     return self;
+}
+
++(STNetworkManager *)networkAPI{
+    return [[CoreManager networkService] networkAPI];
 }
 
 #pragma mark - Access Token
@@ -182,7 +189,7 @@
 -(void)deleteAccessToken {
     KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
     [keychainWrapperAccessToken resetKeychainItem];
-    [[STNetworkManager sharedManager] clearQueue];
+    [_networkAPI clearQueue];
     _accessToken = nil;
 }
 
