@@ -81,7 +81,7 @@
 }
 
 -(void) syncContactsWithTheServer{
-    [[STFacebookHelper new] loadUserFriendsWithCompletion:^(NSArray *newObjects) {
+    [[CoreManager facebookService] loadUserFriendsWithCompletion:^(NSArray *newObjects) {
         NSLog(@"Final array %@", newObjects);
         NSArray *fbData = [NSArray arrayWithArray:newObjects];
         NSMutableArray *facebookFriends = [NSMutableArray new];

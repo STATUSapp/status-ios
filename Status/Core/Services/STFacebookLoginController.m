@@ -72,33 +72,14 @@
     if ([FBSDKAccessToken currentAccessToken]) {
         [self loginOrRegister];
     }
+    else
+        [self logout];
 }
 
 #pragma mark - Facebook DelegatesFyou
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
-   
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedOut object:nil];
-    _fetchedUserData = nil;
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [FBSDKAccessToken setCurrentAccessToken:nil];
-    [FBSDKProfile setCurrentProfile:nil];
-    //            [weakSelf presentLoginScene];
-    [NSObject cancelPreviousPerformRequestsWithTarget:[CoreManager locationService] selector:@selector(restartLocationManager) object:nil];
-    [[CoreManager locationService] stopLocationUpdates];
-    [[CoreManager locationService] setLatestLocation:nil];
-    [[CoreManager imageCacheService] cleanTemporaryFolder];
-    [[STCoreDataManager sharedManager] cleanLocalDataBase];
-    STRequestCompletionBlock completion = ^(id response, NSError *error){
-        if ([response[@"status_code"] integerValue]==200){
-            NSLog(@"APN Token deleted.");
-            [[CoreManager networkService] deleteAccessToken];
-        }
-        else  NSLog(@"APN token NOT deleted.");
-    };
-    [STSetAPNTokenRequest setAPNToken:@"" withCompletion:completion failure:nil];
-    
-    [[STChatController sharedInstance] close];
+    [self logout];
 }
 
 -(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
@@ -129,6 +110,31 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedIn object:nil];
     //get settings from server
     [self getUserSettingsFromServer];
+}
+
+-(void)logout{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedOut object:nil];
+    _fetchedUserData = nil;
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [FBSDKAccessToken setCurrentAccessToken:nil];
+    [FBSDKProfile setCurrentProfile:nil];
+    //            [weakSelf presentLoginScene];
+    [NSObject cancelPreviousPerformRequestsWithTarget:[CoreManager locationService] selector:@selector(restartLocationManager) object:nil];
+    [[CoreManager locationService] stopLocationUpdates];
+    [[CoreManager locationService] setLatestLocation:nil];
+    [[CoreManager imageCacheService] cleanTemporaryFolder];
+    [[STCoreDataManager sharedManager] cleanLocalDataBase];
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==200){
+            NSLog(@"APN Token deleted.");
+            [[CoreManager networkService] deleteAccessToken];
+        }
+        else  NSLog(@"APN token NOT deleted.");
+    };
+    [STSetAPNTokenRequest setAPNToken:@"" withCompletion:completion failure:nil];
+    
+    [[STChatController sharedInstance] close];
+
 }
 
 -(void) loginOrRegister{
@@ -181,7 +187,7 @@
         userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
         userInfo[@"facebook_id"] = userFbId;
 
-        [[STFacebookHelper new] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
+        [[CoreManager facebookService] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
             if (info[@"birthday"]) {
                 userInfo[@"birthday"] = [NSDate birthdayStringFromFacebookBirthday:info[@"birthday"]];
             }
