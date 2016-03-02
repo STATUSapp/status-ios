@@ -51,7 +51,7 @@ const NSInteger kDefaultValueForTopConstraint = 26;
     _txtFieldName.text = profile.fullName;
     _counterLabel.text = [NSString stringWithFormat:@"%lu/%ld characters", (unsigned long)[_txtViewBio.text length], (long)kMaxNumberOfCharacters];
     __weak STEditProfileViewController *weakSelf = self;
-    [[STImageCacheController sharedInstance] loadImageWithName:profile.profilePhotoURL andCompletion:^(UIImage *img) {
+    [[CoreManager imageCacheService] loadImageWithName:profile.profilePhotoURL andCompletion:^(UIImage *img) {
         weakSelf.profileImage.image = img;
     }];
 }
@@ -213,7 +213,7 @@ const NSInteger kDefaultValueForTopConstraint = 26;
         NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
         [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                [[STImageCacheController sharedInstance] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
+                [[CoreManager imageCacheService] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
                     weakSelf.profileImage.image = img;
                 }];
             }

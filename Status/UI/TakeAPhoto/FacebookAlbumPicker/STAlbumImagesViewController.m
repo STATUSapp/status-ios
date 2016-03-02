@@ -97,7 +97,7 @@
     NSLog(@"%@", _dataSource[indexPath.row]);
     NSString *fullImageLink = _dataSource[indexPath.row][@"source"];
     
-    [[STImageCacheController sharedInstance] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
+    [[CoreManager imageCacheService] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
         UIImage *newImg = img;//[img imageWithBlurBackground];
         [[NSNotificationCenter defaultCenter] postNotificationName:STFacebookPickerNotification object:newImg];
     }];

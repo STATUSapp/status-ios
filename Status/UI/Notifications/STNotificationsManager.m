@@ -220,7 +220,7 @@ static STNotificationsManager *_sharedManager = nil;
             selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
             NSString *urlString = _currentBanner.notificationInfo[@"photo"];
             if ([urlString rangeOfString:@"http"].location==NSNotFound) {
-                urlString = [NSString stringWithFormat:@"%@%@",[STImageCacheController sharedInstance].photoDownloadBaseUrl, _currentBanner.notificationInfo[@"photo"]];
+                urlString = [NSString stringWithFormat:@"%@%@",[CoreManager imageCacheService].photoDownloadBaseUrl, _currentBanner.notificationInfo[@"photo"]];
             }
 
             selectedUserInfo[@"small_photo_link"] = urlString;

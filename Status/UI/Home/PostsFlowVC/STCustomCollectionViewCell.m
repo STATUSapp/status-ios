@@ -171,7 +171,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{
     __weak STCustomCollectionViewCell *weakSelf = self;
     
-    [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
+    [[CoreManager imageCacheService] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
         
         if (img!=nil) {
             weakSelf.fitImageView.image = img;

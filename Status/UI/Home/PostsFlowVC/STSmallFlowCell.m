@@ -18,7 +18,7 @@
     
     _nameLabel.text = [ft displayedName];
     if (![ft.url isKindOfClass:[NSNull class]]) {
-        [[STImageCacheController sharedInstance] loadPostImageWithName:ft.url withPostCompletion:^(UIImage *img) {
+        [[CoreManager imageCacheService] loadPostImageWithName:ft.url withPostCompletion:^(UIImage *img) {
             
             if (img!=nil)
                 _imageView.image = img;

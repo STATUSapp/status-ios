@@ -16,14 +16,13 @@ typedef void (^downloadImageComp)(NSString *downloadedImage);
 typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded);
 @interface STImageCacheController : NSObject
 
-+(STImageCacheController *) sharedInstance;
-
 @property(nonatomic, strong) NSString *photoDownloadBaseUrl;
 
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion;
 -(void) loadPostImageWithName:(NSString *) imageFullLink withPostCompletion:(loadPostImageCompletion) completion andBlurCompletion:(loadBlurPostCompletion)blurCompl;
--(NSString *) getImageCachePath:(BOOL)forFacebook;
 -(void) cleanTemporaryFolder;
 -(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts;
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort;
+
++ (BOOL) imageDownloadedForUrl:(NSString *)url;
 @end

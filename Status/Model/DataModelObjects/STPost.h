@@ -10,6 +10,9 @@
 
 @interface STPost : STBaseObj
 + (instancetype)postWithDict:(NSDictionary *)postDict;
++ (instancetype)mockPostNoPhotosToDisplay;
++ (instancetype)mockPostYouSawAll;
+
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSString *fullPhotoUrl;
 @property (nonatomic, assign) BOOL isOwner;
@@ -21,4 +24,12 @@
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, assign) BOOL postSeen;
+
+//local added properties
+@property (nonatomic, assign) BOOL imageDownloaded;
+@property (nonatomic, assign) BOOL showFullCaption;
+
+- (BOOL) isNoPhotosToDisplayPost;
+- (BOOL) isYouSawAllPost;
+
 @end

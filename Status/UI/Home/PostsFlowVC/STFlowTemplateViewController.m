@@ -183,7 +183,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 //    [[STFacebookLoginController sharedInstance] setLogoutDelegate:self];
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [self setNotificationsNumber:appDelegate.badgeNumber];
-    [[STImageCacheController sharedInstance] changeFlowType:_flowType needsSort:YES];
+    [[CoreManager imageCacheService] changeFlowType:_flowType needsSort:YES];
     
     if (self.flowType == STFlowTypeMyGallery || self.flowType == STFlowTypeUserGallery) {
         _notifNumberLabel.hidden = YES;
@@ -698,7 +698,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         __block UIImage *fullImage = nil;
         __block UIImage *bluredImage = nil;
         __weak STFlowTemplateViewController *weakSelf = self;
-        [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *origImg) {
+        [[CoreManager imageCacheService] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *origImg) {
             fullImage = origImg;
             [weakSelf presentZoomablePostWithFullImage:fullImage andBluredImage:bluredImage];
             
@@ -916,7 +916,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     [currentCell captionShadowPressed:nil];
     __block NSDictionary *currentDict = [self getCurrentDictionary];
     
-    [[STImageCacheController sharedInstance] loadPostImageWithName:currentDict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
+    [[CoreManager imageCacheService] loadPostImageWithName:currentDict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
         viewController.imgData =UIImageJPEGRepresentation(img, 1.f);
@@ -1023,7 +1023,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 -(IBAction)onMoveAndScale:(id)sender{
     NSDictionary *dict = [self getCurrentDictionary];
     __weak STFlowTemplateViewController *weakSelf = self;
-    [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
+    [[CoreManager imageCacheService] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
         if (img!=nil) {
             [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:NO editedPostId:dict[@"post_id"] captionString:dict[@"caption"]];
         }
@@ -1078,7 +1078,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 
 -(void) getCurrentImageDataWithCompletion:(loadImageCompletion) completion{
     NSDictionary *dict = [self getCurrentDictionary];
-    [[STImageCacheController sharedInstance] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *origImg) {
+    [[CoreManager imageCacheService] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *origImg) {
         completion(origImg);
         
     } andBlurCompletion:nil];
@@ -1177,7 +1177,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     return self.view.frame.size;
 }
 -(void)loadImages:(NSArray *)array{
-    [[STImageCacheController sharedInstance] startImageDownloadForNewFlowType:_flowType andDataSource:array];
+    [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:array];
 }
 
 - (void)processLastPostWithIndex:(NSIndexPath *)indexPath {

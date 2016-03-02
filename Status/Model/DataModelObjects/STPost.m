@@ -27,6 +27,10 @@
 
 #import "STPost.h"
 #import "NSDate+Additions.h"
+#import "STImageCacheController.h"
+
+NSString * const kPostUuidForNoPhotosToDisplay = @"uuid_1";
+NSString * const kPostUuidForYouSawAll = @"uuid_2";
 
 @implementation STPost
 + (instancetype)postWithDict:(NSDictionary *)postDict {
@@ -36,6 +40,27 @@
     
     return post;
 }
+
++ (instancetype)mockPostNoPhotosToDisplay{
+    STPost * post = [STPost new];
+    post.uuid = kPostUuidForNoPhotosToDisplay;
+    return post;
+
+}
++ (instancetype)mockPostYouSawAll{
+    STPost * post = [STPost new];
+    post.uuid = kPostUuidForYouSawAll;
+    return post;
+}
+
+- (BOOL) isNoPhotosToDisplayPost{
+    return [self.uuid isEqualToString:kPostUuidForNoPhotosToDisplay];
+}
+
+- (BOOL) isYouSawAllPost{
+    return [self.uuid isEqualToString:kPostUuidForYouSawAll];
+}
+
 
 -(void)setup{
     self.appVersion = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"app_version"];
@@ -52,6 +77,9 @@
     _userId = [CreateDataModelHelper validStringIdentifierFromValue:self.infoDict[@"user_id"]];
     _userName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_name"];
     _postSeen = [self.infoDict[@"post_seen"] boolValue];
+    
+    _imageDownloaded = [STImageCacheController imageDownloadedForUrl:_fullPhotoUrl];
+    _showFullCaption = NO;
     
     
 }

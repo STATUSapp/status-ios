@@ -13,6 +13,7 @@
 @class STNetworkQueueManager;
 @class STNavigationService;
 @class STFacebookLoginController;
+@class STImageCacheController;
 
 @interface CoreManager : NSObject
 
@@ -24,5 +25,6 @@
 + (STNetworkQueueManager *)networkService;
 + (STNavigationService *)navigationService;
 + (STFacebookLoginController *)loginService;
++ (STImageCacheController *)imageCacheService;
 
 @end

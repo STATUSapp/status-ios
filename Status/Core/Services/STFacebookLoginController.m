@@ -87,7 +87,7 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:[CoreManager locationService] selector:@selector(restartLocationManager) object:nil];
     [[CoreManager locationService] stopLocationUpdates];
     [[CoreManager locationService] setLatestLocation:nil];
-    [[STImageCacheController sharedInstance] cleanTemporaryFolder];
+    [[CoreManager imageCacheService] cleanTemporaryFolder];
     [[STCoreDataManager sharedManager] cleanLocalDataBase];
     STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==200){
@@ -122,7 +122,7 @@
 
 - (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
     [CoreManager networkService].accessToken = response[@"token"];
-    [STImageCacheController sharedInstance].photoDownloadBaseUrl = response[@"baseUrlStorage"];
+    [CoreManager imageCacheService].photoDownloadBaseUrl = response[@"baseUrlStorage"];
     [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
     [[CoreManager locationService] startLocationUpdates];
