@@ -1000,7 +1000,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 }
 
 - (void)sharePhotoOnFacebookWithImgUrl:(NSString *)imgUrl andDescription:(NSString *)description{
-    [[STFacebookHelper new] shareImageWithImageUrl:imgUrl description:description andCompletion:^(id result, NSError *error) {
+    [[CoreManager facebookService] shareImageWithImageUrl:imgUrl description:description andCompletion:^(id result, NSError *error) {
         if(error==nil)
             [[[UIAlertView alloc] initWithTitle:@"Success"
                                         message:@"Your photo was posted."

@@ -104,6 +104,7 @@
 
 - (void)clearQueue{
     [_requestQueue removeAllObjects];
+    _networkAPI = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
 }
 
 - (BOOL)saveQueueToDisk{
