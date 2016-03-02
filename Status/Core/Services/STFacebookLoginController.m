@@ -109,11 +109,6 @@
         [self loginOrRegister];
 }
 
--(void) saveAccessToken:(NSString *) accessToken{
-    KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
-    [keychainWrapperAccessToken setObject:accessToken forKey:(__bridge id)(kSecValueData)];
-}
-
 - (void)setUpCrashlyticsForUserId:(NSString *)userId andEmail:(NSString *)email andUserName:(NSString *)userName{
     [[Crashlytics sharedInstance] setUserIdentifier:userId];
     [[Crashlytics sharedInstance] setUserEmail:email];
@@ -126,7 +121,6 @@
     [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
     [[CoreManager locationService] startLocationUpdates];
-    [self saveAccessToken:response[@"token"]];
     NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:response[@"user_id"]];
     self.currentUserId = userId;
     [[STChatController sharedInstance] forceReconnect];
