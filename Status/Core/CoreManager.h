@@ -14,6 +14,7 @@
 @class STNavigationService;
 @class STFacebookLoginController;
 @class STImageCacheController;
+@class STFacebookHelper;
 
 @interface CoreManager : NSObject
 
@@ -26,5 +27,6 @@
 + (STNavigationService *)navigationService;
 + (STFacebookLoginController *)loginService;
 + (STImageCacheController *)imageCacheService;
++ (STFacebookHelper *)facebookService;
 
 @end

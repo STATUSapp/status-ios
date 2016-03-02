@@ -19,7 +19,6 @@
     NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) STFacebookHelper *fbLoader;
 @end
 
 @implementation STAlbumImagesViewController
@@ -38,9 +37,8 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     _dataSource = [NSMutableArray array];
-    _fbLoader = [STFacebookHelper new];
     __weak STAlbumImagesViewController *weakSelf = self;
-    [_fbLoader loadPhotosForAlbum:_albumId
+    [[CoreManager facebookService] loadPhotosForAlbum:_albumId
                  withRefreshBlock:^(NSArray *newObjects) {
                      if (newObjects.count>0) {
                          
