@@ -13,16 +13,23 @@
 #import "STFacebookHelper.h"
 #import "STSyncContactsRequest.h"
 
+@interface STContactsManager ()
+
+@property (nonatomic, strong) NSArray *allContacts;
+
+@end
+
 @implementation STContactsManager
-+(instancetype) sharedInstance{
-    static STContactsManager *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[self alloc] init];
-        [_sharedManager updateContactsList];
-    });
-    
-    return _sharedManager;
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+    }
+    return self;
+}
+
+- (NSArray *) contactsList{
+    return _allContacts;
 }
 - (void)fetchAllContacts {
     CFErrorRef *error = nil;

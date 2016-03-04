@@ -13,8 +13,6 @@ typedef void (^STAdsRequestCompletion)(NSArray *response, NSError *error);
 
 @interface STNativeAdsController : NSObject
 
-+(instancetype) sharedInstance;
-
 - (void)getAdsInBatchOf:(NSUInteger)numberOfAds withCompletion:(STAdsRequestCompletion)completion;
 
 @end
