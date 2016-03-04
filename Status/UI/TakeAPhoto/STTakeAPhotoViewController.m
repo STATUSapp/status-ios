@@ -14,6 +14,25 @@
 
 @implementation STTakeAPhotoViewController
 
++ (instancetype)newController {
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TakeAPhoto" bundle:[NSBundle mainBundle]];
+    STTakeAPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STTakeAPhotoViewController class])];
+    return vc;
+}
+
+#pragma mark - IBActions
+
+- (IBAction)takeAPhotoWithCamera:(id)sender {
+}
+
+- (IBAction)uploadPhotoFromLibrary:(id)sender {
+}
+
+- (IBAction)postPhotoFromFacebook:(id)sender {
+}
+
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
