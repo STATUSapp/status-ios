@@ -48,8 +48,12 @@
         [postsIDs addObject:post.uuid];
     }
     
+    [self removePostsWithIDs:postsIDs];
+}
+
+- (void)removePostsWithIDs:(NSArray<NSString *> *)uuids {
     NSPredicate * removePredicate = [NSPredicate predicateWithBlock:^BOOL(STPost *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ![postsIDs containsObject:evaluatedObject.uuid];
+        return ![uuids containsObject:evaluatedObject.uuid];
     }];
     [_posts filterUsingPredicate:removePredicate];
 }
