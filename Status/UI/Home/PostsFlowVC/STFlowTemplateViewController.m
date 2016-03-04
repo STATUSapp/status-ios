@@ -313,7 +313,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         return;
     }
     //disable this as Denis requested
-    BOOL shouldPresentAds = ![[STIAPHelper sharedInstance] productPurchased:kRemoveAdsInAppPurchaseProductID];
+    BOOL shouldPresentAds = ![[CoreManager IAPService] productPurchased:kRemoveAdsInAppPurchaseProductID];
     
     if (shouldPresentAds) {
         [self presentInterstitialControllerWithType:STInterstitialTypeAds];

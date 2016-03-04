@@ -91,7 +91,7 @@
 - (void)loadProductsInfo {
     _products = nil;
     __weak STRemoveAdsViewController *weakSelf = self;
-    [[STIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+    [[CoreManager IAPService] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         if (success) {
             _products = products;
             _removeAdsProduct = _products.count ? _products.firstObject : nil;
@@ -117,13 +117,13 @@
 
 - (IBAction)onTapRemoveAds:(id)sender {
 
-    [[STIAPHelper sharedInstance] buyProduct:_removeAdsProduct];
+    [[CoreManager IAPService] buyProduct:_removeAdsProduct];
     _removeAdsBtn.enabled = NO;
     _restorePurchaseBtn.enabled = NO;
     [_activityIndicator startAnimating];
 }
 - (IBAction)onTapRestoreAds:(id)sender {
-    [[STIAPHelper sharedInstance] restoreCompletedTransactions];
+    [[CoreManager IAPService] restoreCompletedTransactions];
 }
 
 - (IBAction)dismissController:(id)sender {

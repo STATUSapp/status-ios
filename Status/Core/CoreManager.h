@@ -15,6 +15,8 @@
 @class STFacebookLoginController;
 @class STImageCacheController;
 @class STFacebookHelper;
+@class STIAPHelper;
+@class STContactsManager;
 
 @interface CoreManager : NSObject
 
@@ -28,5 +30,7 @@
 + (STFacebookLoginController *)loginService;
 + (STImageCacheController *)imageCacheService;
 + (STFacebookHelper *)facebookService;
++ (STIAPHelper *)IAPService;
++ (STContactsManager *)contactsService;
 
 @end

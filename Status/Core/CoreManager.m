@@ -14,6 +14,8 @@
 #import "STFacebookLoginController.h"
 #import "STImageCacheController.h"
 #import "STFacebookHelper.h"
+#import "STIAPHelper.h"
+#import "STContactsManager.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -23,7 +25,8 @@
 @property (nonatomic, strong) STFacebookLoginController *loginService;
 @property (nonatomic, strong) STImageCacheController *imageCacheService;
 @property (nonatomic, strong) STFacebookHelper *facebookService;
-
+@property (nonatomic, strong) STIAPHelper *IAPService;
+@property (nonatomic, strong) STContactsManager *contactsService;
 @end
 
 @implementation CoreManager
@@ -48,6 +51,8 @@
         _loginService = [STFacebookLoginController new];
         _imageCacheService = [STImageCacheController new];
         _facebookService = [STFacebookHelper new];
+        _IAPService = [STIAPHelper new];
+        _contactsService = [STContactsManager new];
         
     }
     return self;
@@ -89,6 +94,14 @@
 
 + (STFacebookHelper *)facebookService{
     return [[CoreManager sharedInstance] facebookService];
+}
+
++ (STIAPHelper *)IAPService{
+    return [[CoreManager sharedInstance] IAPService];
+}
+
++ (STContactsManager *)contactsService{
+    return [[CoreManager sharedInstance] contactsService];
 }
 
 #pragma mark - Private implementation
