@@ -20,20 +20,9 @@
     NSMutableSet * _purchasedProductIdentifiers;
 }
 
-+ (STIAPHelper *)sharedInstance {
-    static dispatch_once_t once;
-    static STIAPHelper * sharedInstance;
-    dispatch_once(&once, ^{
-        NSSet * productIdentifiers = [NSSet setWithObject:kRemoveAdsInAppPurchaseProductID];
-        sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
-    });
-    return sharedInstance;
-}
-
-
-- (id)initWithProductIdentifiers:(NSSet *)productIdentifiers {
+- (id)init {
     if ((self = [super init])) {
-        
+        NSSet * productIdentifiers = [NSSet setWithObject:kRemoveAdsInAppPurchaseProductID];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         // Store product identifiers
         _productIdentifiers = productIdentifiers;

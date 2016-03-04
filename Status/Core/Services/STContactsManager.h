@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface STContactsManager : NSObject
-+(instancetype) sharedInstance;
-@property (nonatomic, strong) NSArray *allContacts;
+
+-(NSArray *)contactsList;
+-(void)updateContactsList;
 @end
