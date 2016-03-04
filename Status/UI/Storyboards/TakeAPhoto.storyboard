@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--TakeA Photo View Controller-->
+        <scene sceneID="qBU-gV-buW">
+            <objects>
+                <viewController storyboardIdentifier="STTakeAPhotoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jnD-jc-64a" customClass="STTakeAPhotoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7gz-Ia-8Ob"/>
+                        <viewControllerLayoutGuide type="bottom" id="7IQ-hF-146"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HuZ-tU-7hc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgK-dC-PjG">
+                                <rect key="frame" x="166" y="319" width="43" height="30"/>
+                                <state key="normal" title="library"/>
+                                <connections>
+                                    <action selector="uploadPhotoFromLibrary:" destination="jnD-jc-64a" eventType="touchUpInside" id="hj5-4L-F2D"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU4-ml-K3T">
+                                <rect key="frame" x="155" y="375" width="64" height="30"/>
+                                <state key="normal" title="facebook"/>
+                                <connections>
+                                    <action selector="postPhotoFromFacebook:" destination="jnD-jc-64a" eventType="touchUpInside" id="toQ-md-8ky"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3g-7a-rAZ">
+                                <rect key="frame" x="162" y="273" width="51" height="30"/>
+                                <state key="normal" title="camera"/>
+                                <connections>
+                                    <action selector="takeAPhotoWithCamera:" destination="jnD-jc-64a" eventType="touchUpInside" id="1ZL-wI-SvS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eU4-ml-K3T" firstAttribute="centerX" secondItem="dgK-dC-PjG" secondAttribute="centerX" id="JDe-09-whF"/>
+                            <constraint firstItem="dgK-dC-PjG" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" id="PV0-uC-CVX"/>
+                            <constraint firstItem="eU4-ml-K3T" firstAttribute="top" secondItem="dgK-dC-PjG" secondAttribute="bottom" constant="26" id="hgV-tb-SJC"/>
+                            <constraint firstItem="dgK-dC-PjG" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" id="q8b-ml-FvZ"/>
+                            <constraint firstItem="S3g-7a-rAZ" firstAttribute="centerX" secondItem="dgK-dC-PjG" secondAttribute="centerX" id="rgE-Nn-aBE"/>
+                            <constraint firstItem="dgK-dC-PjG" firstAttribute="top" secondItem="S3g-7a-rAZ" secondAttribute="bottom" constant="16" id="zjb-dR-2kO"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h2n-N5-sYE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="148" y="296"/>
+        </scene>
+    </scenes>
+</document>

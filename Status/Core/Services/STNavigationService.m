@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 
 #import "STImagePickerController.h"
+#import "STTabBarViewController.h"
 
 @interface STNavigationService ()
 
@@ -60,9 +61,12 @@
     NSLog(@"Tabbar Controller presented");
     //TODO: dev_1_2 add tab bar here as root
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateInitialViewController];
-    [appDel.window setRootViewController:navController];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UINavigationController *navController = [storyboard instantiateInitialViewController];
+//    [appDel.window setRootViewController:navController];
+    
+    STTabBarViewController * tabBar = [STTabBarViewController newController];
+    [appDel.window setRootViewController:tabBar];
 }
 
 +(STImagePickerController *)imagePickerController{

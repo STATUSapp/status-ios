@@ -10,4 +10,6 @@
 
 @interface STTakeAPhotoViewController : UIViewController
 
++ (instancetype)newController;
+
 @end
