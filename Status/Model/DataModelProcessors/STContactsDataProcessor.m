@@ -26,7 +26,7 @@
             predicate = [NSPredicate predicateWithFormat:@"hasPhones == 1"];
         }
 
-        _items = [[[STContactsManager sharedInstance] allContacts] filteredArrayUsingPredicate:predicate];
+        _items = [[[CoreManager contactsService] contactsList] filteredArrayUsingPredicate:predicate];
         
         NSLog(@"Items: %@", [_items valueForKey:@"firstName"]);
     }

@@ -72,7 +72,6 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [STIAPHelper sharedInstance];
     [application setStatusBarHidden:YES];
     [self loadBadgeNumber];
     [[STNotificationsManager sharedManager] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
