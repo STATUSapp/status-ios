@@ -133,7 +133,6 @@
 		99B387A11C82FAA2005B4D8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99B386AB1C82FAA2005B4D8C /* Images.xcassets */; };
 		99B387A21C82FAA2005B4D8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 99B386AD1C82FAA2005B4D8C /* InfoPlist.strings */; };
 		99B387A31C82FAA2005B4D8C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386AF1C82FAA2005B4D8C /* main.m */; };
-		99B387A41C82FAA2005B4D8C /* Status-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99B386B01C82FAA2005B4D8C /* Status-Info.plist */; };
 		99B387A51C82FAA2005B4D8C /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386B51C82FAA2005B4D8C /* HPGrowingTextView.m */; };
 		99B387A61C82FAA2005B4D8C /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386B71C82FAA2005B4D8C /* HPTextViewInternal.m */; };
 		99B387A71C82FAA2005B4D8C /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386BB1C82FAA2005B4D8C /* SRWebSocket.m */; };
@@ -1377,7 +1376,7 @@
 		172EAE5B18B0B12D00C5637B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Andrus Cosmin";
 				TargetAttributes = {
 					172EAE6218B0B12D00C5637B = {
@@ -1439,7 +1438,6 @@
 				99B3879A1C82FAA2005B4D8C /* ProximaNova-SemiboldItalic.otf in Resources */,
 				99B3879F1C82FAA2005B4D8C /* ProximaNovaCond-Semibold.otf in Resources */,
 				99B387971C82FAA2005B4D8C /* ProximaNova-Regular.otf in Resources */,
-				99B387A41C82FAA2005B4D8C /* Status-Info.plist in Resources */,
 				99B387D31C82FAA2005B4D8C /* UserProfile.storyboard in Resources */,
 				99B387D21C82FAA2005B4D8C /* SuggestionsScene.storyboard in Resources */,
 				99B387CE1C82FAA2005B4D8C /* FacebookPickerScene.storyboard in Resources */,
