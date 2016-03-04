@@ -23,18 +23,6 @@
 
 #pragma mark - init
 
-
-+(instancetype) sharedInstance{
-    static STNativeAdsController *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[self alloc] init];
-    });
-    
-    return _sharedManager;
-}
-
-
 - (instancetype)init
 {
     self = [super init];

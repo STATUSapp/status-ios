@@ -15,7 +15,7 @@
 #import "STFlowTemplate.h"
 #import <FBAudienceNetwork/FBAudienceNetwork.h>
 
-#import "STNativeAdsController.h"
+#import "STFacebookHelper.h"
 #import "STMenuController.h"
 
 static const NSInteger kNumberOfTiles = 6;
@@ -54,7 +54,7 @@ static const NSInteger kNumberOfTiles = 6;
             _collectionView.delegate = self;
             _collectionView.dataSource = self;
             [_collectionView reloadData];
-            [[STNativeAdsController sharedInstance] getAdsInBatchOf:kNumberOfTiles - [_itemsArray count] withCompletion:^(NSArray *response, NSError *error) {
+            [[STFacebookHelper fbNativeAdsService] getAdsInBatchOf:kNumberOfTiles - [_itemsArray count] withCompletion:^(NSArray *response, NSError *error) {
                 if (error == nil) {
                     [_itemsArray addObjectsFromArray:response];
                     [_collectionView reloadData];
