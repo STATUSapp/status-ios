@@ -94,6 +94,37 @@
     
 }
 
+- (void)testPoolMultipleRemovalByPosts {
+    STPostsPool * pool = [[STPostsPool alloc] init];
+    
+    [pool addPosts:[self mockPosts]];
+    
+    
+    [pool removePosts:[self mockPosts]];
+    
+    XCTAssertEqual([pool getAllPosts].count, 0);
+    
+}
+
+- (void)testPoolMultipleRemovalByIDs {
+    STPostsPool * pool = [[STPostsPool alloc] init];
+    
+    NSArray * mocks = [self mockPosts];
+    
+    [pool addPosts:mocks];
+    
+    NSMutableArray * udids = [NSMutableArray array];
+    
+    for (STPost * post in mocks) {
+        [udids addObject:post.uuid];
+    }
+    
+    [pool removePostsWithIDs:udids];
+    
+    XCTAssertEqual([pool getAllPosts].count, 0);
+    
+}
+
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
