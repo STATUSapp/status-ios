@@ -28,7 +28,7 @@
 #import "STUnfollowUsersRequest.h"
 
 #import "STNativeAdsController.h"
-
+#import "STNavigationService.h"
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
@@ -231,7 +231,7 @@
     _imageViewStatusIcon.hidden = !hasLastSeenStatus;
     
     
-    NSString * distanceText = [[STLocationManager sharedInstance] distanceStringToLocationWithLatitudeString:profile.latitude
+    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
                                                                                           andLongitudeString:profile.longitude];
 
     CGFloat fontSize = _lblDistance.font.pointSize;
@@ -360,9 +360,9 @@
     };
     
     if (_isMyProfile) {
-        [[STImagePickerController sharedInstance] startImagePickerForOwnerInViewController:self withCompletion:completion];
+        [[STNavigationService imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
     } else {
-        [[STImagePickerController sharedInstance] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
+        [[STNavigationService imagePickerController] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
             [weakSelf inviteUserToUpload];
         }];
     }}

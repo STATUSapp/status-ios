@@ -20,7 +20,7 @@
     request.retryCount = 0;
     request.offset = offset;
     request.userID = userID;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -34,7 +34,7 @@
         params[@"limit"] = @(100);
         params[@"user_id"] = weakSelf.userID;
         
-        [[STNetworkManager sharedManager] GET:url
+        [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

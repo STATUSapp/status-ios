@@ -10,7 +10,7 @@
 
 @interface STNetworkManager : AFHTTPSessionManager
 
-+ (STNetworkManager *)sharedManager;
+- (id)initWithBaseURL:(NSURL *)url;
 - (void)clearQueue;
 + (AFJSONResponseSerializer *)customResponseSerializer;
 

@@ -53,7 +53,7 @@ static STNotificationsManager *_sharedManager = nil;
 
     if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
         
-        if ([STNetworkQueueManager sharedManager].accessToken == nil) {
+        if (![CoreManager loggedIn]) {
             //wait for the login to be performed and after handle the notification
             _lastNotification = notif;
             return;
@@ -220,7 +220,7 @@ static STNotificationsManager *_sharedManager = nil;
             selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
             NSString *urlString = _currentBanner.notificationInfo[@"photo"];
             if ([urlString rangeOfString:@"http"].location==NSNotFound) {
-                urlString = [NSString stringWithFormat:@"%@%@",[STImageCacheController sharedInstance].photoDownloadBaseUrl, _currentBanner.notificationInfo[@"photo"]];
+                urlString = [NSString stringWithFormat:@"%@%@",[CoreManager imageCacheService].photoDownloadBaseUrl, _currentBanner.notificationInfo[@"photo"]];
             }
 
             selectedUserInfo[@"small_photo_link"] = urlString;

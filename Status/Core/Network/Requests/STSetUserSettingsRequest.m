@@ -21,7 +21,7 @@
     request.retryCount = 0;
     request.value = value;
     request.key = key;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -33,7 +33,7 @@
         params[@"value"] = @(weakSelf.value);
         params[@"key"] = weakSelf.key;
         
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                    parameters:params
                                       success:weakSelf.standardSuccessBlock
                                       failure:weakSelf.standardErrorBlock];

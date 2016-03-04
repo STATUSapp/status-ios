@@ -70,7 +70,7 @@
         if([MFMessageComposeViewController canSendText])
         {
             MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-            NSString *bodyString = [NSString stringWithFormat:@"Your friend %@ invites you on Get STATUS. Download the app from App Store: http://bit.ly/STATUSiOS  or Google Play: http://bit.ly/STATUSAndroid", [STFacebookLoginController sharedInstance].fetchedUserData[@"full_name"]];
+            NSString *bodyString = [NSString stringWithFormat:@"Your friend %@ invites you on Get STATUS. Download the app from App Store: http://bit.ly/STATUSiOS  or Google Play: http://bit.ly/STATUSAndroid", [[CoreManager loginService] currentUserFullName]];
             controller.body = bodyString;
             controller.recipients = numbers;
             controller.messageComposeDelegate = viewController;

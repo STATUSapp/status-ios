@@ -29,7 +29,7 @@
                 weakSelf.completionBlock(weakSelf.returnAttributes,nil);
             }
             
-            [[STNetworkQueueManager sharedManager] requestDidSucceed:weakSelf];
+            [[CoreManager networkService] requestDidSucceed:weakSelf];
             
         };
         
@@ -56,7 +56,7 @@
     self.retryCount--;
     if (self.retryCount <= 0) self.shouldAddToQueue = NO;
     
-    [[STNetworkQueueManager sharedManager] request:self didFailWithError:error];
+    [[CoreManager networkService] request:self didFailWithError:error];
 }
 
 - (void)failRequestWithError:(NSError *)err {
@@ -132,7 +132,7 @@
 
 - (NSMutableDictionary *)getDictParamsWithToken
 {
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:@{@"token":[STNetworkQueueManager sharedManager].accessToken}];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:@{@"token":[[CoreManager networkService] getAccessToken]}];
     return params;
 }
 

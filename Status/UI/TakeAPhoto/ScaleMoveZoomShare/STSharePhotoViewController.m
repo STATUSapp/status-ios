@@ -272,7 +272,7 @@ static NSInteger const  kMaxCaptionLenght = 250;
 }
 - (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId andImageUrl:(NSString *)imageUrl {
     __weak STSharePhotoViewController *weakSelf = self;
-    [[STFacebookHelper new] shareImageWithImageUrl:imageUrl description:_captiontextView.text andCompletion:^(id result, NSError *error) {
+    [[CoreManager facebookService] shareImageWithImageUrl:imageUrl description:_captiontextView.text andCompletion:^(id result, NSError *error) {
         _donePostingToFacebook = YES;
         if (error) {
             _fbError = error;

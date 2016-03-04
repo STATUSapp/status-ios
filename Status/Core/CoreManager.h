@@ -9,10 +9,24 @@
 #import <Foundation/Foundation.h>
 
 @class STPostsPool;
+@class STLocationManager;
+@class STNetworkQueueManager;
+@class STNavigationService;
+@class STFacebookLoginController;
+@class STImageCacheController;
+@class STFacebookHelper;
 
 @interface CoreManager : NSObject
 
 + (BOOL)shouldLogin;
++ (BOOL)loggedIn;
+
 + (STPostsPool *)postsPool;
++ (STLocationManager *)locationService;
++ (STNetworkQueueManager *)networkService;
++ (STNavigationService *)navigationService;
++ (STFacebookLoginController *)loginService;
++ (STImageCacheController *)imageCacheService;
++ (STFacebookHelper *)facebookService;
 
 @end

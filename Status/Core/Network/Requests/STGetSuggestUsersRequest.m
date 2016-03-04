@@ -21,7 +21,7 @@
     request.retryCount = 0;
     request.offset = offset;
     request.followType = followType;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -34,7 +34,7 @@
         params[@"offset"] = weakSelf.offset;
         params[@"limit"] = @(25);
 
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

@@ -19,7 +19,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.users = users;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -31,7 +31,7 @@
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"ids"] = [[weakSelf.users valueForKey:@"uuid"] componentsJoinedByString:@","];
         
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

@@ -36,7 +36,7 @@
 - (void)configureBanner {
     NSString *urlString = _notificationInfo[@"photo"];
     if (urlString!=nil && [urlString rangeOfString:@"http"].location==NSNotFound) {
-        urlString = [NSString stringWithFormat:@"%@%@",[STImageCacheController sharedInstance].photoDownloadBaseUrl, _notificationInfo[@"photo"]];
+        urlString = [NSString stringWithFormat:@"%@%@",[CoreManager imageCacheService].photoDownloadBaseUrl, _notificationInfo[@"photo"]];
     }
     [_profileImage sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"placeholder notifications screen"]];
     _messageText.attributedText = [[NSAttributedString alloc]initWithString:@""];

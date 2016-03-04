@@ -230,7 +230,7 @@
 - (void)goMyProfile{
     [self resetNavigationControllerStack];
     [self hideMenu];
-    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[STFacebookLoginController sharedInstance].currentUserId];
+    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:[[CoreManager loginService] currentUserUuid]];
     userProfileVC.isMyProfile = YES;
     [_currentVC.navigationController pushViewController:userProfileVC animated:YES];
 }

@@ -20,15 +20,6 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 @end
 
 @implementation STImageCacheController
-+(STImageCacheController *) sharedInstance{
-    static STImageCacheController *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[self alloc] init];
-    });
-    
-    return _sharedManager;
-}
 
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion{
     
@@ -267,6 +258,15 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
         [weakSelf loadNextPhoto];
     }];
     
+}
+
++ (BOOL) imageDownloadedForUrl:(NSString *)url{
+    if (!url)
+        return NO;
+    
+    SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+    
+    return [sdManager diskImageExistsForURL:[NSURL URLWithString:url]];
 }
 
 @end

@@ -23,7 +23,7 @@
     request.postId = postId;
     request.caption = caption;
     request.postData = postData;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -54,7 +54,7 @@
                 weakSelf.completionBlock(responseObject,nil);
             }
             
-            [[STNetworkQueueManager sharedManager] requestDidSucceed:weakSelf];        }
+            [[CoreManager networkService] requestDidSucceed:weakSelf];        }
                                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@ ", operation.responseString);
                 NSInteger statusCode = [operation.response statusCode];
@@ -65,7 +65,7 @@
                 NSError *err = [NSError errorWithDomain:error.domain
                                                    code:statusCode
                                                userInfo:error.userInfo];
-                [[STNetworkQueueManager sharedManager] removeFromQueue:weakSelf];
+                [[CoreManager networkService] removeFromQueue:weakSelf];
                 if (weakSelf.failureBlock) {
                     weakSelf.failureBlock(err);
                 }

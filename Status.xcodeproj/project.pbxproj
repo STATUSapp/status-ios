@@ -9,12 +9,9 @@
 /* Begin PBXBuildFile section */
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
 		16ACF5F582F40A0966AE8820 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D422D9C06AC39526914FFF /* libPods.a */; };
+		171936C31C848604002C0202 /* STNavigationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 171936C21C848604002C0202 /* STNavigationService.m */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
-		172EAE8718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
-		172EAE8818B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
-		172EAE9018B0B12E00C5637B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 172EAE8E18B0B12E00C5637B /* InfoPlist.strings */; };
-		172EAE9218B0B12E00C5637B /* StatusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 172EAE9118B0B12E00C5637B /* StatusTests.m */; };
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
@@ -28,7 +25,11 @@
 		1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B0194FA5E800A29A86 /* AVFoundation.framework */; };
 		1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */; };
 		1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */; };
+		2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A119DF61C832182001C17DB /* STPostFlowProcessor.m */; };
+		2A1D66831C8472D400633D87 /* STUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1D66821C8472D400633D87 /* STUIHelper.m */; };
 		2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D7EAF1C82FEDC00F65026 /* STPost.m */; };
+		2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC777781C83A5CC00DAA273 /* LaunchViewController.m */; };
+		2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
 		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
 		99B3873D1C82FAA2005B4D8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B385E91C82FAA2005B4D8C /* AppDelegate.m */; };
@@ -109,9 +110,7 @@
 		99B387881C82FAA2005B4D8C /* STSuggestedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3868A1C82FAA2005B4D8C /* STSuggestedUser.m */; };
 		99B387891C82FAA2005B4D8C /* STUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3868C1C82FAA2005B4D8C /* STUserProfile.m */; };
 		99B3878A1C82FAA2005B4D8C /* CreateDataModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3868F1C82FAA2005B4D8C /* CreateDataModelHelper.m */; };
-		99B3878B1C82FAA2005B4D8C /* STContactsDataProcessor.h.orig in Resources */ = {isa = PBXBuildFile; fileRef = 99B386911C82FAA2005B4D8C /* STContactsDataProcessor.h.orig */; };
 		99B3878C1C82FAA2005B4D8C /* STContactsDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386921C82FAA2005B4D8C /* STContactsDataProcessor.m */; };
-		99B3878D1C82FAA2005B4D8C /* STContactsDataProcessor.m.orig in Resources */ = {isa = PBXBuildFile; fileRef = 99B386931C82FAA2005B4D8C /* STContactsDataProcessor.m.orig */; };
 		99B3878E1C82FAA2005B4D8C /* STFollowDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386951C82FAA2005B4D8C /* STFollowDataProcessor.m */; };
 		99B3878F1C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 99B386991C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg */; };
 		99B387901C82FAA2005B4D8C /* ProximaNova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99B3869A1C82FAA2005B4D8C /* ProximaNova-Black.otf */; };
@@ -200,12 +199,14 @@
 		99B387E51C830082005B4D8C /* CoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E41C830082005B4D8C /* CoreManager.m */; };
 		99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E81C8302AD005B4D8C /* STTabBarViewController.m */; };
 		99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387EB1C8324E0005B4D8C /* STPostsPool.m */; };
+		99B387F41C833D20005B4D8C /* STATUSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387F31C833D20005B4D8C /* STATUSTests.m */; };
+		99B387FE1C838FA8005B4D8C /* STTakeAPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
 		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		172EAE8918B0B12E00C5637B /* PBXContainerItemProxy */ = {
+		99B387F61C833D20005B4D8C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 172EAE5B18B0B12D00C5637B /* Project object */;
 			proxyType = 1;
@@ -216,14 +217,12 @@
 
 /* Begin PBXFileReference section */
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		171936C11C848604002C0202 /* STNavigationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNavigationService.h; sourceTree = "<group>"; };
+		171936C21C848604002C0202 /* STNavigationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNavigationService.m; sourceTree = "<group>"; };
 		172EAE6318B0B12E00C5637B /* STATUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE6618B0B12E00C5637B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		172EAE6818B0B12E00C5637B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		172EAE6A18B0B12E00C5637B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		172EAE8418B0B12E00C5637B /* StatusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		172EAE8D18B0B12E00C5637B /* StatusTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StatusTests-Info.plist"; sourceTree = "<group>"; };
-		172EAE8F18B0B12E00C5637B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		172EAE9118B0B12E00C5637B /* StatusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatusTests.m; sourceTree = "<group>"; };
 		172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -237,8 +236,15 @@
 		1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		228B2C727ABFBB875FD4D193 /* Pods.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.distribution.xcconfig; path = "Pods/Target Support Files/Pods/Pods.distribution.xcconfig"; sourceTree = "<group>"; };
+		2A119DF51C832182001C17DB /* STPostFlowProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostFlowProcessor.h; sourceTree = "<group>"; };
+		2A119DF61C832182001C17DB /* STPostFlowProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostFlowProcessor.m; sourceTree = "<group>"; };
+		2A1D66811C8472D400633D87 /* STUIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUIHelper.h; sourceTree = "<group>"; };
+		2A1D66821C8472D400633D87 /* STUIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUIHelper.m; sourceTree = "<group>"; };
 		2A6D7EAE1C82FEDC00F65026 /* STPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPost.h; sourceTree = "<group>"; };
 		2A6D7EAF1C82FEDC00F65026 /* STPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPost.m; sourceTree = "<group>"; };
+		2AC777771C83A5CC00DAA273 /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
+		2AC777781C83A5CC00DAA273 /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
+		2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScene.storyboard; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		62D422D9C06AC39526914FFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -401,9 +407,7 @@
 		99B3868E1C82FAA2005B4D8C /* CreateDataModelHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateDataModelHelper.h; sourceTree = "<group>"; };
 		99B3868F1C82FAA2005B4D8C /* CreateDataModelHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateDataModelHelper.m; sourceTree = "<group>"; };
 		99B386901C82FAA2005B4D8C /* STContactsDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STContactsDataProcessor.h; sourceTree = "<group>"; };
-		99B386911C82FAA2005B4D8C /* STContactsDataProcessor.h.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = STContactsDataProcessor.h.orig; sourceTree = "<group>"; };
 		99B386921C82FAA2005B4D8C /* STContactsDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STContactsDataProcessor.m; sourceTree = "<group>"; };
-		99B386931C82FAA2005B4D8C /* STContactsDataProcessor.m.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = STContactsDataProcessor.m.orig; sourceTree = "<group>"; };
 		99B386941C82FAA2005B4D8C /* STFollowDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFollowDataProcessor.h; sourceTree = "<group>"; };
 		99B386951C82FAA2005B4D8C /* STFollowDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFollowDataProcessor.m; sourceTree = "<group>"; };
 		99B386991C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Proxima Nova Fonts Collection.jpg"; sourceTree = "<group>"; };
@@ -549,6 +553,11 @@
 		99B387E81C8302AD005B4D8C /* STTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTabBarViewController.m; sourceTree = "<group>"; };
 		99B387EA1C8324E0005B4D8C /* STPostsPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostsPool.h; sourceTree = "<group>"; };
 		99B387EB1C8324E0005B4D8C /* STPostsPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostsPool.m; sourceTree = "<group>"; };
+		99B387F11C833D20005B4D8C /* STATUSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STATUSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		99B387F31C833D20005B4D8C /* STATUSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STATUSTests.m; sourceTree = "<group>"; };
+		99B387F51C833D20005B4D8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99B387FC1C838FA8005B4D8C /* STTakeAPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTakeAPhotoViewController.h; sourceTree = "<group>"; };
+		99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTakeAPhotoViewController.m; sourceTree = "<group>"; };
 		A9FCFE236622BF1EAA4BC917 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CD532FD219B9A451009B1445 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -583,12 +592,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		172EAE8118B0B12E00C5637B /* Frameworks */ = {
+		99B387EE1C833D20005B4D8C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172EAE8818B0B12E00C5637B /* UIKit.framework in Frameworks */,
-				172EAE8718B0B12E00C5637B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,9 +606,9 @@
 			isa = PBXGroup;
 			children = (
 				99B385E71C82FAA2005B4D8C /* Status */,
+				99B387F21C833D20005B4D8C /* STATUSTests */,
 				172EAE6418B0B12E00C5637B /* Products */,
 				172EAE6518B0B12E00C5637B /* Frameworks */,
-				172EAE8B18B0B12E00C5637B /* StatusTests */,
 				CCDB922D4CEA119F06C7B473 /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -610,7 +617,7 @@
 			isa = PBXGroup;
 			children = (
 				172EAE6318B0B12E00C5637B /* STATUS.app */,
-				172EAE8418B0B12E00C5637B /* StatusTests.xctest */,
+				99B387F11C833D20005B4D8C /* STATUSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -643,22 +650,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		172EAE8B18B0B12E00C5637B /* StatusTests */ = {
+		2A1D66801C8472AC00633D87 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				172EAE9118B0B12E00C5637B /* StatusTests.m */,
-				172EAE8C18B0B12E00C5637B /* Supporting Files */,
+				2A1D66811C8472D400633D87 /* STUIHelper.h */,
+				2A1D66821C8472D400633D87 /* STUIHelper.m */,
 			);
-			path = StatusTests;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
-		172EAE8C18B0B12E00C5637B /* Supporting Files */ = {
+		2AC777761C83A5AE00DAA273 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				172EAE8D18B0B12E00C5637B /* StatusTests-Info.plist */,
-				172EAE8E18B0B12E00C5637B /* InfoPlist.strings */,
+				2AC777771C83A5CC00DAA273 /* LaunchViewController.h */,
+				2AC777781C83A5CC00DAA273 /* LaunchViewController.m */,
 			);
-			name = "Supporting Files";
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		99B385E71C82FAA2005B4D8C /* Status */ = {
@@ -822,8 +829,6 @@
 		99B386541C82FAA2005B4D8C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				99B386551C82FAA2005B4D8C /* KeychainItemWrapper.h */,
-				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B386571C82FAA2005B4D8C /* STChatController.h */,
 				99B386581C82FAA2005B4D8C /* STChatController.m */,
 				99B386591C82FAA2005B4D8C /* STContactsManager.h */,
@@ -832,18 +837,12 @@
 				99B3865C1C82FAA2005B4D8C /* STDataAccessUtils.m */,
 				99B3865D1C82FAA2005B4D8C /* STFacebookHelper.h */,
 				99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */,
-				99B3865F1C82FAA2005B4D8C /* STFacebookLoginController.h */,
-				99B386601C82FAA2005B4D8C /* STFacebookLoginController.m */,
 				99B386611C82FAA2005B4D8C /* STIAPHelper.h */,
 				99B386621C82FAA2005B4D8C /* STIAPHelper.m */,
 				99B386631C82FAA2005B4D8C /* STImageCacheController.h */,
 				99B386641C82FAA2005B4D8C /* STImageCacheController.m */,
-				99B386651C82FAA2005B4D8C /* STImagePickerController.h */,
-				99B386661C82FAA2005B4D8C /* STImagePickerController.m */,
 				99B386671C82FAA2005B4D8C /* STInviteController.h */,
 				99B386681C82FAA2005B4D8C /* STInviteController.m */,
-				99B386691C82FAA2005B4D8C /* STLocationManager.h */,
-				99B3866A1C82FAA2005B4D8C /* STLocationManager.m */,
 				99B3866B1C82FAA2005B4D8C /* STMenuController.h */,
 				99B3866C1C82FAA2005B4D8C /* STMenuController.m */,
 				99B3866D1C82FAA2005B4D8C /* STNativeAdsController.h */,
@@ -852,8 +851,18 @@
 				99B386701C82FAA2005B4D8C /* STNearbyController.m */,
 				99B386711C82FAA2005B4D8C /* STUpdateToNewerVersionController.h */,
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
+				99B3865F1C82FAA2005B4D8C /* STFacebookLoginController.h */,
+				99B386601C82FAA2005B4D8C /* STFacebookLoginController.m */,
+				99B386551C82FAA2005B4D8C /* KeychainItemWrapper.h */,
+				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
 				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
+				171936C11C848604002C0202 /* STNavigationService.h */,
+				171936C21C848604002C0202 /* STNavigationService.m */,
+				99B386651C82FAA2005B4D8C /* STImagePickerController.h */,
+				99B386661C82FAA2005B4D8C /* STImagePickerController.m */,
+				99B386691C82FAA2005B4D8C /* STLocationManager.h */,
+				99B3866A1C82FAA2005B4D8C /* STLocationManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -912,9 +921,9 @@
 				99B3868E1C82FAA2005B4D8C /* CreateDataModelHelper.h */,
 				99B3868F1C82FAA2005B4D8C /* CreateDataModelHelper.m */,
 				99B386901C82FAA2005B4D8C /* STContactsDataProcessor.h */,
-				99B386911C82FAA2005B4D8C /* STContactsDataProcessor.h.orig */,
 				99B386921C82FAA2005B4D8C /* STContactsDataProcessor.m */,
-				99B386931C82FAA2005B4D8C /* STContactsDataProcessor.m.orig */,
+				2A119DF51C832182001C17DB /* STPostFlowProcessor.h */,
+				2A119DF61C832182001C17DB /* STPostFlowProcessor.m */,
 				99B386941C82FAA2005B4D8C /* STFollowDataProcessor.h */,
 				99B386951C82FAA2005B4D8C /* STFollowDataProcessor.m */,
 			);
@@ -1017,6 +1026,8 @@
 		99B386BF1C82FAA2005B4D8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				99B387111C82FAA2005B4D8C /* Storyboards */,
+				2A1D66801C8472AC00633D87 /* Helpers */,
 				99B387E61C83027C005B4D8C /* TabBar */,
 				99B386C01C82FAA2005B4D8C /* Chat */,
 				99B386CF1C82FAA2005B4D8C /* CustomViews */,
@@ -1024,7 +1035,7 @@
 				99B386F11C82FAA2005B4D8C /* InviteFlow */,
 				99B387031C82FAA2005B4D8C /* Login */,
 				99B387061C82FAA2005B4D8C /* Notifications */,
-				99B387111C82FAA2005B4D8C /* Storyboards */,
+				2AC777761C83A5AE00DAA273 /* Launch */,
 				99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */,
 				99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */,
 				99B3871B1C82FAA2005B4D8C /* TakeAPhoto */,
@@ -1210,6 +1221,7 @@
 				99B387161C82FAA2005B4D8C /* Main.storyboard */,
 				99B387171C82FAA2005B4D8C /* SuggestionsScene.storyboard */,
 				99B387181C82FAA2005B4D8C /* UserProfile.storyboard */,
+				2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1219,6 +1231,8 @@
 			children = (
 				99B3871C1C82FAA2005B4D8C /* FacebookAlbumPicker */,
 				99B387261C82FAA2005B4D8C /* ScaleMoveZoomShare */,
+				99B387FC1C838FA8005B4D8C /* STTakeAPhotoViewController.h */,
+				99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */,
 			);
 			path = TakeAPhoto;
 			sourceTree = "<group>";
@@ -1296,6 +1310,15 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		99B387F21C833D20005B4D8C /* STATUSTests */ = {
+			isa = PBXGroup;
+			children = (
+				99B387F31C833D20005B4D8C /* STATUSTests.m */,
+				99B387F51C833D20005B4D8C /* Info.plist */,
+			);
+			path = STATUSTests;
+			sourceTree = "<group>";
+		};
 		CCDB922D4CEA119F06C7B473 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1330,22 +1353,22 @@
 			productReference = 172EAE6318B0B12E00C5637B /* STATUS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		172EAE8318B0B12E00C5637B /* StatusTests */ = {
+		99B387F01C833D20005B4D8C /* STATUSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 172EAE9818B0B12E00C5637B /* Build configuration list for PBXNativeTarget "StatusTests" */;
+			buildConfigurationList = 99B387F81C833D20005B4D8C /* Build configuration list for PBXNativeTarget "STATUSTests" */;
 			buildPhases = (
-				172EAE8018B0B12E00C5637B /* Sources */,
-				172EAE8118B0B12E00C5637B /* Frameworks */,
-				172EAE8218B0B12E00C5637B /* Resources */,
+				99B387ED1C833D20005B4D8C /* Sources */,
+				99B387EE1C833D20005B4D8C /* Frameworks */,
+				99B387EF1C833D20005B4D8C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				172EAE8A18B0B12E00C5637B /* PBXTargetDependency */,
+				99B387F71C833D20005B4D8C /* PBXTargetDependency */,
 			);
-			name = StatusTests;
-			productName = StatusTests;
-			productReference = 172EAE8418B0B12E00C5637B /* StatusTests.xctest */;
+			name = STATUSTests;
+			productName = STATUSTests;
+			productReference = 99B387F11C833D20005B4D8C /* STATUSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1368,8 +1391,8 @@
 							};
 						};
 					};
-					172EAE8318B0B12E00C5637B = {
-						DevelopmentTeam = 3VYJECFUTG;
+					99B387F01C833D20005B4D8C = {
+						CreatedOnToolsVersion = 7.2.1;
 						TestTargetID = 172EAE6218B0B12D00C5637B;
 					};
 				};
@@ -1388,7 +1411,7 @@
 			projectRoot = "";
 			targets = (
 				172EAE6218B0B12D00C5637B /* Status */,
-				172EAE8318B0B12E00C5637B /* StatusTests */,
+				99B387F01C833D20005B4D8C /* STATUSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1399,9 +1422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99B387B51C82FAA2005B4D8C /* STMenuView.xib in Resources */,
-				99B3878D1C82FAA2005B4D8C /* STContactsDataProcessor.m.orig in Resources */,
 				99B387AD1C82FAA2005B4D8C /* TimestampView.xib in Resources */,
-				99B3878B1C82FAA2005B4D8C /* STContactsDataProcessor.h.orig in Resources */,
 				99B3879D1C82FAA2005B4D8C /* ProximaNovaCond-Regular.otf in Resources */,
 				99B387B31C82FAA2005B4D8C /* STCustomShareView.xib in Resources */,
 				99B3879B1C82FAA2005B4D8C /* ProximaNovaCond-Light.otf in Resources */,
@@ -1431,15 +1452,15 @@
 				99B387981C82FAA2005B4D8C /* ProximaNova-RegularItalic.otf in Resources */,
 				99B387CD1C82FAA2005B4D8C /* ChatScene.storyboard in Resources */,
 				99B3878F1C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg in Resources */,
+				2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */,
 				99B387911C82FAA2005B4D8C /* ProximaNova-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		172EAE8218B0B12E00C5637B /* Resources */ = {
+		99B387EF1C833D20005B4D8C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172EAE9018B0B12E00C5637B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1514,6 +1535,7 @@
 				99B387D41C82FAA2005B4D8C /* STRemoveAdsViewController.m in Sources */,
 				99B387651C82FAA2005B4D8C /* STSetUserSettingsRequest.m in Sources */,
 				99B387881C82FAA2005B4D8C /* STSuggestedUser.m in Sources */,
+				99B387FE1C838FA8005B4D8C /* STTakeAPhotoViewController.m in Sources */,
 				99B387621C82FAA2005B4D8C /* STSetPostLikeRequest.m in Sources */,
 				99B3877D1C82FAA2005B4D8C /* STNearbyController.m in Sources */,
 				99B387AC1C82FAA2005B4D8C /* STMessageSendCell.m in Sources */,
@@ -1567,6 +1589,7 @@
 				99B3874D1C82FAA2005B4D8C /* STGetChatUrlAndPortRequest.m in Sources */,
 				99B387AF1C82FAA2005B4D8C /* STConversationsListViewController.m in Sources */,
 				99B387521C82FAA2005B4D8C /* STGetNotificationsRequest.m in Sources */,
+				171936C31C848604002C0202 /* STNavigationService.m in Sources */,
 				99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */,
 				99B3875A1C82FAA2005B4D8C /* STGetUserSettingsRequest.m in Sources */,
 				99B387571C82FAA2005B4D8C /* STGetUserInfoRequest.m in Sources */,
@@ -1605,6 +1628,8 @@
 				99B387B91C82FAA2005B4D8C /* STLikeCell.m in Sources */,
 				99B387BD1C82FAA2005B4D8C /* STFooterView.m in Sources */,
 				99B387481C82FAA2005B4D8C /* UIImageView+TouchesEffects.m in Sources */,
+				2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */,
+				2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */,
 				99B387B01C82FAA2005B4D8C /* STFacebookActivity.m in Sources */,
 				99B387C11C82FAA2005B4D8C /* STSuggestionsViewController.m in Sources */,
 				99B387591C82FAA2005B4D8C /* STGetUserProfileRequest.m in Sources */,
@@ -1616,6 +1641,7 @@
 				99B3876D1C82FAA2005B4D8C /* STBaseRequest.m in Sources */,
 				99B3876F1C82FAA2005B4D8C /* STNetworkQueueManager.m in Sources */,
 				99B387701C82FAA2005B4D8C /* KeychainItemWrapper.m in Sources */,
+				2A1D66831C8472D400633D87 /* STUIHelper.m in Sources */,
 				99B387461C82FAA2005B4D8C /* UIImage+RoundedCorner.m in Sources */,
 				99B387AA1C82FAA2005B4D8C /* STConversationCell.m in Sources */,
 				99B387401C82FAA2005B4D8C /* NSString+MD5.m in Sources */,
@@ -1650,33 +1676,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		172EAE8018B0B12E00C5637B /* Sources */ = {
+		99B387ED1C833D20005B4D8C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172EAE9218B0B12E00C5637B /* StatusTests.m in Sources */,
+				99B387F41C833D20005B4D8C /* STATUSTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		172EAE8A18B0B12E00C5637B /* PBXTargetDependency */ = {
+		99B387F71C833D20005B4D8C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 172EAE6218B0B12D00C5637B /* Status */;
-			targetProxy = 172EAE8918B0B12E00C5637B /* PBXContainerItemProxy */;
+			targetProxy = 99B387F61C833D20005B4D8C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		172EAE8E18B0B12E00C5637B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				172EAE8F18B0B12E00C5637B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		99B386AD1C82FAA2005B4D8C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1830,54 +1848,6 @@
 			};
 			name = Release;
 		};
-		172EAE9918B0B12E00C5637B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Status.app/Status";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Status/Supporting Files/Status-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "StatusTests/StatusTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		172EAE9A18B0B12E00C5637B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9FCFE236622BF1EAA4BC917 /* Pods.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Status.app/Status";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Status/Supporting Files/Status-Prefix.pch";
-				INFOPLIST_FILE = "StatusTests/StatusTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 		17DD2F4918D8D0F9000A3779 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1946,25 +1916,65 @@
 			};
 			name = Distribution;
 		};
-		17DD2F4B18D8D0F9000A3779 /* Distribution */ = {
+		99B387F91C833D20005B4D8C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 228B2C727ABFBB875FD4D193 /* Pods.distribution.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Status.app/Status";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Status/Supporting Files/Status-Prefix.pch";
-				INFOPLIST_FILE = "StatusTests/StatusTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = STATUSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.STATUSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STATUS.app/STATUS";
+			};
+			name = Debug;
+		};
+		99B387FA1C833D20005B4D8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = STATUSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.STATUSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STATUS.app/STATUS";
+			};
+			name = Release;
+		};
+		99B387FB1C833D20005B4D8C /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = STATUSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.STATUSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STATUS.app/STATUS";
 			};
 			name = Distribution;
 		};
@@ -1991,12 +2001,12 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		172EAE9818B0B12E00C5637B /* Build configuration list for PBXNativeTarget "StatusTests" */ = {
+		99B387F81C833D20005B4D8C /* Build configuration list for PBXNativeTarget "STATUSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				172EAE9918B0B12E00C5637B /* Debug */,
-				172EAE9A18B0B12E00C5637B /* Release */,
-				17DD2F4B18D8D0F9000A3779 /* Distribution */,
+				99B387F91C833D20005B4D8C /* Debug */,
+				99B387FA1C833D20005B4D8C /* Release */,
+				99B387FB1C833D20005B4D8C /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

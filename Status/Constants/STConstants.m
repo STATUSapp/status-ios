@@ -113,4 +113,12 @@ NSString *const STNotificationsPhotosWaitingKey = @"notifications_photos_waiting
 NSString *const STNotificationsExtraLikesKey = @"notifications_earn_extra_likes";
 NSString *const STNotificationsFollowersKey = @"notifications_new_follower";
 
+#pragma mark - Login Constants
+
+NSString *const kNotificationUserDidLoggedIn = @"NotificationUserDidLoggedIn";
+NSString *const kNotificationUserDidRegister = @"NotificationUserDidRegister";
+NSString *const kNotificationUserDidLoggedOut = @"NotificationUserDidLoggedOut";
+NSString *const kNotificationSessionExpired = @"NotificationSessionExpired";
+
+
 

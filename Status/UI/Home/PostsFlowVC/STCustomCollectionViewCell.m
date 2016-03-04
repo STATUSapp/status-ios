@@ -171,7 +171,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
 - (void)setUpWithPicturesURLs:(NSArray *)urlArray{
     __weak STCustomCollectionViewCell *weakSelf = self;
     
-    [[STImageCacheController sharedInstance] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
+    [[CoreManager imageCacheService] loadPostImageWithName:urlArray[0] withPostCompletion:^(UIImage *img) {
         
         if (img!=nil) {
             weakSelf.fitImageView.image = img;
@@ -214,7 +214,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
         if (rect.size.height > _captionLabel.bounds.size.height){
             wrapped = YES;
         }
-        if ([userId isEqualToString:[STFacebookLoginController sharedInstance].currentUserId]) {
+        if ([userId isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
             if (caption.length == 0 || wrapped == NO) {
                 _captionButton.hidden = YES;
                 _seeMoreWidthContraint.constant = 0.f;
@@ -228,7 +228,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
     }
     else
     {
-        if (![userId isEqualToString:[STFacebookLoginController sharedInstance].currentUserId])
+        if (![userId isEqualToString:[[CoreManager loginService] currentUserUuid]])
         {
             _captionButton.hidden = YES;
             _seeMoreWidthContraint.constant = 12.f;

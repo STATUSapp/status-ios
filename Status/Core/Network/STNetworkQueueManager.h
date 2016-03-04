@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class STBaseRequest;
+@class STNetworkManager;
 
 @interface STNetworkQueueManager : NSObject
 
-@property(nonatomic, strong) NSMutableArray* requestQueue;
-@property (nonatomic, strong) NSString *accessToken;
-@property (atomic, assign) BOOL isPerformLoginOrRegistration;
++(STNetworkManager *)networkAPI;
 
-+ (STNetworkQueueManager *)sharedManager;
+- (NSString *)getAccessToken;
+- (void)setAccessToken:(NSString *)accessToken;
 
 - (void)startDownload;
 
@@ -24,15 +24,20 @@
 - (void)addToQueue:(STBaseRequest*)request;
 - (void)addToQueueTop:(STBaseRequest*)request;
 - (void)removeFromQueue:(STBaseRequest*)request;
+- (void)clearQueue;
 - (void)loadQueueFromDisk;
 - (BOOL)saveQueueToDisk;
 - (void)deleteQueueFileFromDisk;
 
+- (BOOL)canSendLoginOrRegisterRequest;
 
 //Network handlers
 - (void)requestDidSucceed:(STBaseRequest*)request;
 - (void)request:(STBaseRequest*)request didFailWithError:(NSError*)error;
 
 - (BOOL)isConnectionWorking;
+
+- (void)deleteAccessToken;
+- (void)loadTokenFromKeyChain;
 
 @end

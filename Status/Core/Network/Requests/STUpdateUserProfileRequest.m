@@ -42,7 +42,7 @@
     }
     request.paramsDict = paramsDict;
     
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -52,7 +52,7 @@
         
         NSString *url = [weakSelf urlString];
         
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:weakSelf.paramsDict
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];

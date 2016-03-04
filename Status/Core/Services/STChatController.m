@@ -78,10 +78,9 @@ NSString *const kFirstChatVersion = @"1.0.4";
         return;
     }
     
-    if ([STNetworkQueueManager sharedManager].accessToken==nil &&
-        [STNetworkQueueManager sharedManager].accessToken.length==0 &&
+    if (![CoreManager loggedIn] &&
         [FBSDKAccessToken currentAccessToken]==nil&&
-        [STFacebookLoginController sharedInstance].currentUserId==nil)
+        [[CoreManager loginService] currentUserUuid]==nil)
     {
         NSLog(@"Missing Acces token. Connect when available");
         return;
@@ -161,7 +160,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
             _currentUserId =  [CreateDataModelHelper validStringIdentifierFromValue:response[@"userID"]];
             if (_currentUserId == nil) {
                 //fall back when the chat is not connected
-                _currentUserId = [STFacebookLoginController sharedInstance].currentUserId;
+                _currentUserId = [[CoreManager loginService] currentUserUuid];
             }
             for (NSDictionary *message in response[@"notReceivedMessages"]) {
                 [self addMessage:message seen:NO];
@@ -257,11 +256,10 @@ NSString *const kFirstChatVersion = @"1.0.4";
 
 -(void)authenticate{
     
-    if ([STNetworkQueueManager sharedManager].accessToken!=nil &&
-        [STNetworkQueueManager sharedManager].accessToken.length!=0 &&
+    if ([CoreManager loggedIn] &&
         [FBSDKAccessToken currentAccessToken]!=nil&&
-        [STFacebookLoginController sharedInstance].currentUserId!=nil) {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"login", @"token": [STNetworkQueueManager sharedManager].accessToken} options:NSJSONWritingPrettyPrinted error:nil];
+        [[CoreManager loginService] currentUserUuid]!=nil) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"type": @"login", @"token": [[CoreManager networkService] getAccessToken]} options:NSJSONWritingPrettyPrinted error:nil];
         NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         [_webSocket send:jsonString];
     }

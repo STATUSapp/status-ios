@@ -10,16 +10,6 @@
 #import "STNetworkQueueManager.h"
 
 @implementation STNetworkManager
-static STNetworkManager *_sharedManager = nil;
-
-+ (STNetworkManager *)sharedManager {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
-    });
-    
-    return _sharedManager;
-}
 
 - (id)initWithBaseURL:(NSURL *)url {
     self = [super initWithBaseURL:url];
@@ -45,16 +35,16 @@ static STNetworkManager *_sharedManager = nil;
 }
 
 - (void)clearQueue{
-    [[STNetworkQueueManager sharedManager].requestQueue removeAllObjects];
     [[self operationQueue] cancelAllOperations];
     [self invalidateSessionCancelingTasks:YES];
-    _sharedManager = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
 
     [[self session] getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         [self cancelTasksInArray:dataTasks];
         [self cancelTasksInArray:uploadTasks];
         [self cancelTasksInArray:downloadTasks];
     }];
+    [[CoreManager networkService] clearQueue];
+
 }
 
 - (void)cancelTasksInArray:(NSArray *)tasksArray

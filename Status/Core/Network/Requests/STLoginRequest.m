@@ -19,7 +19,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.userInfo = userInfo;
-    [[STNetworkQueueManager sharedManager] addToQueueTop:request];
+    [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
@@ -33,7 +33,7 @@
         params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
         params[@"app_version"] = [self getAppVersion];
         
-        [[STNetworkManager sharedManager] POST:url
+        [[STNetworkQueueManager networkAPI] POST:url
                                         parameters:params
                                            success:weakSelf.standardSuccessBlock
                                            failure:weakSelf.standardErrorBlock];
