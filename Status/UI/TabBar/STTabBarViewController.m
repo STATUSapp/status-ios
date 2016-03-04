@@ -42,8 +42,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     STTakeAPhotoViewController * takeAPhotoVC = [STTakeAPhotoViewController newController];
     takeAPhotoVC.title = @"Take a Photo";
-    UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
-    takePhotoNav.title = @"Take a Photo";
+    
     // add message / notifications
     
     // add my profile
@@ -55,7 +54,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     settingsNav.title = @"Settings";
 
 
-    [self setViewControllers:@[homeVc, takePhotoNav, settingsNav] animated:NO];
+    [self setViewControllers:@[homeVc, takeAPhotoVC, settingsNav] animated:NO];
 }
 
 - (void)viewDidLoad {
