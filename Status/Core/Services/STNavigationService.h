@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @class STImagePickerController;
+@class STImagePickerService;
 
 @interface STNavigationService : NSObject
 
-+ (void)presentLoginScreen;
-+ (void)presentTabBarController;
+//TODO: replace imagePickerController with imagePickerService
 
-+(STImagePickerController *)imagePickerController;
+@property (nonatomic, strong) STImagePickerController *imagePickerController;
+@property (nonatomic, strong) STImagePickerService * imagePickerService;
+
+- (void)presentLoginScreen;
+- (void)presentTabBarController;
 
 @end
