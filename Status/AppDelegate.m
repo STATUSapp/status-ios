@@ -177,11 +177,6 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 //    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
 //    [viewController updateNotificationsNumber];
     
-//TODO: remove comments
-//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-//    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
-//    [viewController updateNotificationsNumber];
-    
     // MAT will not function without the measureSession call included
     [Tune measureSession];
     
