@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 
 #import "STImagePickerController.h"
+#import "STImagePickerService.h"
 #import "STTabBarViewController.h"
 #import "STImagePickerService.h"
 
@@ -24,6 +25,7 @@
     if (self) {
         
         _imagePickerController = [STImagePickerController new];
+        _imagePickerService = [STImagePickerService new];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
