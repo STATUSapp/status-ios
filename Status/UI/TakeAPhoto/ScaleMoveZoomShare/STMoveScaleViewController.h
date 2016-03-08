@@ -10,6 +10,8 @@
 
 @protocol STSharePostDelegate <NSObject>
 
+@optional
+
 -(void)imageWasPostedWithPostId:(NSString *)postId;
 -(void)imageWasEdited:(NSDictionary *)dict;
 -(void)captionWasEditedForPost:(NSDictionary *)postDict withNewCaption:(NSString *)newCaption;
@@ -22,4 +24,7 @@
 @property (nonatomic, strong) NSString *editPostId;
 @property (nonatomic, strong) NSString *captionString;
 @property (nonatomic, assign) BOOL shouldCompress;
+
++ (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing editedPostId:(NSString *)postId captionString:(NSString *)captionString delegate:(id<STSharePostDelegate>)delegate;
+
 @end
