@@ -12,18 +12,19 @@
 
 #import "STImagePickerController.h"
 #import "STTabBarViewController.h"
+#import "STImagePickerService.h"
 
 @interface STNavigationService ()
 
-@property (nonatomic, strong) STImagePickerController *imagePickerController;
-
 @end
+
 @implementation STNavigationService
 -(instancetype)init{
     self = [super init];
     if (self) {
         
         _imagePickerController = [STImagePickerController new];
+        _imagePickerService = [STImagePickerService new];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
@@ -34,18 +35,18 @@
 }
 
 - (void)userDidLoggedIn{
-    [STNavigationService presentTabBarController];
+    [self presentTabBarController];
 }
 
 - (void)userDidRegister{
-    [STNavigationService presentTabBarController];
+    [self presentTabBarController];
 }
 
 - (void)userDidLoggedOut{
-    [STNavigationService presentLoginScreen];
+    [self presentLoginScreen];
 }
 
-+ (void)presentLoginScreen{
+- (void)presentLoginScreen{
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     if ([appDel.window.rootViewController isKindOfClass:[STLoginViewController class]]) {
         return;
@@ -57,7 +58,7 @@
 
 }
 
-+ (void)presentTabBarController{
+- (void)presentTabBarController{
     NSLog(@"Tabbar Controller presented");
     //TODO: dev_1_2 add tab bar here as root
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -69,8 +70,8 @@
     [appDel.window setRootViewController:tabBar];
 }
 
-+(STImagePickerController *)imagePickerController{
-    return [[CoreManager navigationService] imagePickerController];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
