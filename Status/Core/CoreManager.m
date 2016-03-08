@@ -47,12 +47,12 @@
         _postsPool = [[STPostsPool alloc] init];
         _locationService = [[STLocationManager alloc] init];
         _networkService = [[STNetworkQueueManager alloc] init];
-        _navigationService = [STNavigationService new];
-        _loginService = [STFacebookLoginController new];
-        _imageCacheService = [STImageCacheController new];
-        _facebookService = [STFacebookHelper new];
-        _IAPService = [STIAPHelper new];
-        _contactsService = [STContactsManager new];
+        _navigationService = [[STNavigationService alloc] init];
+        _loginService = [[STFacebookLoginController alloc] init];
+        _imageCacheService = [[STImageCacheController alloc] init];
+        _facebookService = [[STFacebookHelper alloc] init];
+        _IAPService = [[STIAPHelper alloc] init];
+        _contactsService = [[STContactsManager alloc] init];
         
     }
     return self;
