@@ -831,9 +831,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 
     };
     if (isOwner) {
-        [[STNavigationService imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
+        [[[CoreManager navigationService] imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
     } else {
-        [[STNavigationService imagePickerController] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
+        [[[CoreManager navigationService] imagePickerController] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
             [weakSelf inviteCurrentPostOwnerUserToUpload];
         }];
     }

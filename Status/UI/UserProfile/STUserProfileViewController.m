@@ -360,9 +360,9 @@
     };
     
     if (_isMyProfile) {
-        [[STNavigationService imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
+        [[[CoreManager navigationService] imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
     } else {
-        [[STNavigationService imagePickerController] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
+        [[[CoreManager navigationService] imagePickerController] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
             [weakSelf inviteUserToUpload];
         }];
     }}
