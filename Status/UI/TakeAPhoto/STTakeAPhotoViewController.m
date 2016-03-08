@@ -35,7 +35,7 @@
         [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
     };
     
-    [[CoreManager navigationService].imagePickerService takeCameraPictureFromController:self withCompletion:completion];
+    [[CoreManager imagePickerService] takeCameraPictureFromController:self withCompletion:completion];
 }
 
 - (IBAction)uploadPhotoFromLibrary:(id)sender {
@@ -46,7 +46,7 @@
         [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
     };
     
-    [[CoreManager navigationService].imagePickerService launchLibraryPickerFromController:self withCompletion:completion];
+    [[CoreManager imagePickerService] launchLibraryPickerFromController:self withCompletion:completion];
 }
 
 - (IBAction)postPhotoFromFacebook:(id)sender {
@@ -57,7 +57,7 @@
         [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
     };
     
-    [[CoreManager navigationService].imagePickerService launchFacebookPickerFromController:self withCompletion:completion];
+    [[CoreManager imagePickerService] launchFacebookPickerFromController:self withCompletion:completion];
 }
 
 #pragma mark - STSharePostDelegate
