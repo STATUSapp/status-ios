@@ -31,6 +31,7 @@
 
 NSString * const kPostUuidForNoPhotosToDisplay = @"uuid_1";
 NSString * const kPostUuidForYouSawAll = @"uuid_2";
+NSString * const kPostUuidForLoading = @"uuid_3";
 
 @implementation STPost
 + (instancetype)postWithDict:(NSDictionary *)postDict {
@@ -53,8 +54,19 @@ NSString * const kPostUuidForYouSawAll = @"uuid_2";
     return post;
 }
 
++ (instancetype)mockPostLoading{
+    STPost * post = [STPost new];
+    post.uuid = kPostUuidForLoading;
+    return post;
+}
+
+
 - (BOOL) isNoPhotosToDisplayPost{
     return [self.uuid isEqualToString:kPostUuidForNoPhotosToDisplay];
+}
+
+- (BOOL) isLoadingPost{
+    return [self.uuid isEqualToString:kPostUuidForLoading];
 }
 
 - (BOOL) isYouSawAllPost{

@@ -7,6 +7,7 @@
 //
 
 #import "STNoPhotosCell.h"
+#import "STPost.h"
 
 @interface STNoPhotosCell()
 @property (weak, nonatomic) IBOutlet UIButton *profileNameBtn;
@@ -32,6 +33,17 @@
             break;
     }
 }
+
+-(void)configureWitPost:(STPost*)post{
+    [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", post.userName] forState:UIControlStateNormal];
+    
+    if (post.isOwner) {
+        self.noPhotosLabel.text = @"You don't have any photo. Take a photo";
+    }
+    else
+        self.noPhotosLabel.text = [NSString stringWithFormat:@"Ask %@ to take a photo", post.userName];
+}
+
 - (NSString *)reuseIdentifier{
     return @"STNoPhotosCellIdentifier";
 }

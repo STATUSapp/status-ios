@@ -30,6 +30,11 @@
 		2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D7EAF1C82FEDC00F65026 /* STPost.m */; };
 		2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC777781C83A5CC00DAA273 /* LaunchViewController.m */; };
 		2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */; };
+		2AD97BAD1C8C133B00C9B3D5 /* FeedScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */; };
+		2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */; };
+		2AD97BB51C8C144700C9B3D5 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BB41C8C144700C9B3D5 /* FeedCell.m */; };
+		2AD97BBB1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BBA1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m */; };
+		2AD97BC11C8C632B00C9B3D5 /* FooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BC01C8C632B00C9B3D5 /* FooterCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
 		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
 		99B3873D1C82FAA2005B4D8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B385E91C82FAA2005B4D8C /* AppDelegate.m */; };
@@ -245,6 +250,15 @@
 		2AC777771C83A5CC00DAA273 /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
 		2AC777781C83A5CC00DAA273 /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
 		2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScene.storyboard; sourceTree = "<group>"; };
+		2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedScene.storyboard; sourceTree = "<group>"; };
+		2AD97BB01C8C143300C9B3D5 /* FeedCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCVC.h; sourceTree = "<group>"; };
+		2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCVC.m; sourceTree = "<group>"; };
+		2AD97BB31C8C144700C9B3D5 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
+		2AD97BB41C8C144700C9B3D5 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
+		2AD97BB91C8C4E6000C9B3D5 /* FullCaptionFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullCaptionFeedCell.h; sourceTree = "<group>"; };
+		2AD97BBA1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullCaptionFeedCell.m; sourceTree = "<group>"; };
+		2AD97BBF1C8C632B00C9B3D5 /* FooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterCell.h; sourceTree = "<group>"; };
+		2AD97BC01C8C632B00C9B3D5 /* FooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		62D422D9C06AC39526914FFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -668,6 +682,29 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		2AD97BAE1C8C141E00C9B3D5 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				2AD97BAF1C8C141E00C9B3D5 /* cells */,
+				2AD97BB01C8C143300C9B3D5 /* FeedCVC.h */,
+				2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		2AD97BAF1C8C141E00C9B3D5 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				2AD97BB31C8C144700C9B3D5 /* FeedCell.h */,
+				2AD97BB41C8C144700C9B3D5 /* FeedCell.m */,
+				2AD97BB91C8C4E6000C9B3D5 /* FullCaptionFeedCell.h */,
+				2AD97BBA1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m */,
+				2AD97BBF1C8C632B00C9B3D5 /* FooterCell.h */,
+				2AD97BC01C8C632B00C9B3D5 /* FooterCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
 		99B385E71C82FAA2005B4D8C /* Status */ = {
 			isa = PBXGroup;
 			children = (
@@ -1026,6 +1063,7 @@
 		99B386BF1C82FAA2005B4D8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2AD97BAE1C8C141E00C9B3D5 /* Feed */,
 				99B387111C82FAA2005B4D8C /* Storyboards */,
 				2A1D66801C8472AC00633D87 /* Helpers */,
 				99B387E61C83027C005B4D8C /* TabBar */,
@@ -1222,6 +1260,7 @@
 				99B387171C82FAA2005B4D8C /* SuggestionsScene.storyboard */,
 				99B387181C82FAA2005B4D8C /* UserProfile.storyboard */,
 				2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */,
+				2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1426,6 +1465,7 @@
 				99B3879D1C82FAA2005B4D8C /* ProximaNovaCond-Regular.otf in Resources */,
 				99B387B31C82FAA2005B4D8C /* STCustomShareView.xib in Resources */,
 				99B3879B1C82FAA2005B4D8C /* ProximaNovaCond-Light.otf in Resources */,
+				2AD97BAD1C8C133B00C9B3D5 /* FeedScene.storyboard in Resources */,
 				99B387951C82FAA2005B4D8C /* ProximaNova-LightItalic.otf in Resources */,
 				99B387921C82FAA2005B4D8C /* ProximaNova-BoldIt.otf in Resources */,
 				99B387A01C82FAA2005B4D8C /* ProximaNovaCond-SemiboldIt.otf in Resources */,
@@ -1617,19 +1657,23 @@
 				99B387751C82FAA2005B4D8C /* STFacebookLoginController.m in Sources */,
 				99B387771C82FAA2005B4D8C /* STImageCacheController.m in Sources */,
 				99B387A91C82FAA2005B4D8C /* STBubbleCell.m in Sources */,
+				2AD97BBB1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m in Sources */,
 				99B3876A1C82FAA2005B4D8C /* STUpdateUserProfileRequest.m in Sources */,
 				99B3878A1C82FAA2005B4D8C /* CreateDataModelHelper.m in Sources */,
 				99B387BA1C82FAA2005B4D8C /* STCustomCollectionViewCell.m in Sources */,
 				99B3874C1C82FAA2005B4D8C /* STFollowUsersRequest.m in Sources */,
 				99B3878C1C82FAA2005B4D8C /* STContactsDataProcessor.m in Sources */,
 				99B387DD1C82FAA2005B4D8C /* STTutorialPresenterViewController.m in Sources */,
+				2AD97BB51C8C144700C9B3D5 /* FeedCell.m in Sources */,
 				99B3873E1C82FAA2005B4D8C /* NSDate+Additions.m in Sources */,
+				2AD97BC11C8C632B00C9B3D5 /* FooterCell.m in Sources */,
 				99B387491C82FAA2005B4D8C /* STConstants.m in Sources */,
 				99B387B91C82FAA2005B4D8C /* STLikeCell.m in Sources */,
 				99B387BD1C82FAA2005B4D8C /* STFooterView.m in Sources */,
 				99B387481C82FAA2005B4D8C /* UIImageView+TouchesEffects.m in Sources */,
 				2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */,
 				2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */,
+				2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */,
 				99B387B01C82FAA2005B4D8C /* STFacebookActivity.m in Sources */,
 				99B387C11C82FAA2005B4D8C /* STSuggestionsViewController.m in Sources */,
 				99B387591C82FAA2005B4D8C /* STGetUserProfileRequest.m in Sources */,

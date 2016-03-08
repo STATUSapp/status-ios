@@ -9,6 +9,7 @@
 #import "STNavigationService.h"
 #import "STLoginViewController.h"
 #import "AppDelegate.h"
+#import "FeedCVC.h"
 
 #import "STImagePickerController.h"
 
@@ -60,8 +61,7 @@
     NSLog(@"Tabbar Controller presented");
     //TODO: dev_1_2 add tab bar here as root
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    UINavigationController *navController = [FeedCVC mainFeedController];
     [appDel.window setRootViewController:navController];
 }
 
