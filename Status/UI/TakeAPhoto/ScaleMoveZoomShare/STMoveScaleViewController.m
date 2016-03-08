@@ -23,6 +23,20 @@
 
 @implementation STMoveScaleViewController
 
++ (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing editedPostId:(NSString *)postId captionString:(NSString *)captionString delegate:(id<STSharePostDelegate>)delegate {
+    // here, no compressing should be done, because it might be a cropping after this
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
+    viewController.currentImg = img;
+    viewController.editPostId = postId;
+    viewController.shouldCompress = compressing;
+    viewController.captionString = captionString;
+    viewController.delegate = delegate;
+    
+    return viewController;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

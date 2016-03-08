@@ -8,8 +8,11 @@
 
 #import "STTakeAPhotoViewController.h"
 #import "CoreManager.h"
+#import "STImagePickerService.h"
+#import "STMoveScaleViewController.h"
+#import "STNavigationService.h"
 
-@interface STTakeAPhotoViewController ()
+@interface STTakeAPhotoViewController ()<STSharePostDelegate>
 
 @end
 
@@ -24,12 +27,44 @@
 #pragma mark - IBActions
 
 - (IBAction)takeAPhotoWithCamera:(id)sender {
+    
+    __weak STTakeAPhotoViewController * weakSelf = self;
+    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
+        
+        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil delegate:weakSelf];
+        [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
+    };
+    
+    [[CoreManager navigationService].imagePickerService takeCameraPictureFromController:self withCompletion:completion];
 }
 
 - (IBAction)uploadPhotoFromLibrary:(id)sender {
+    __weak STTakeAPhotoViewController * weakSelf = self;
+    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
+        
+        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil delegate:weakSelf];
+        [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
+    };
+    
+    [[CoreManager navigationService].imagePickerService launchLibraryPickerFromController:self withCompletion:completion];
 }
 
 - (IBAction)postPhotoFromFacebook:(id)sender {
+    __weak STTakeAPhotoViewController * weakSelf = self;
+    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
+        
+        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil delegate:weakSelf];
+        [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
+    };
+    
+    [[CoreManager navigationService].imagePickerService launchFacebookPickerFromController:self withCompletion:completion];
+}
+
+#pragma mark - STSharePostDelegate
+
+
+- (void)imageWasPostedWithPostId:(NSString *)postId {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - Lifecycle
