@@ -8,20 +8,22 @@
 
 #import "STBaseObj.h"
 
+extern NSString * const kNotificationPostDownloadSuccess;
+
 @class STPost;
 
 @interface STPostFlowProcessor : STBaseObj
--(instancetype)initWithFlowType:(STFlowType)flowType;
--(instancetype)initWithFlowType:(STFlowType)flowType
+- (instancetype)initWithFlowType:(STFlowType)flowType;
+- (instancetype)initWithFlowType:(STFlowType)flowType
                          userId:(NSString *)userId;
--(instancetype)initWithFlowType:(STFlowType)flowType
+- (instancetype)initWithFlowType:(STFlowType)flowType
                          postId:(NSString *)postId;
 
 
 //mothods
--(NSInteger)numberOfPosts;
--(STPost *)postAtIndex:(NSInteger)index;
+- (NSInteger)numberOfPosts;
+- (STPost *)postAtIndex:(NSInteger)index;
 - (void)processPostAtIndex:(NSInteger)index;
--(void)deleteItemAtIndex:(NSInteger)index;
+- (void)deleteItemAtIndex:(NSInteger)index;
 
 @end

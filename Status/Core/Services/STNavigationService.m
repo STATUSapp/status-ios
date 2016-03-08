@@ -9,6 +9,7 @@
 #import "STNavigationService.h"
 #import "STLoginViewController.h"
 #import "AppDelegate.h"
+#import "FeedCVC.h"
 
 #import "STImagePickerController.h"
 #import "STImagePickerService.h"
@@ -68,6 +69,8 @@
     
     STTabBarViewController * tabBar = [STTabBarViewController newController];
     [appDel.window setRootViewController:tabBar];
+    UINavigationController *navController = [FeedCVC mainFeedController];
+    [appDel.window setRootViewController:navController];
 }
 
 - (void)dealloc {

@@ -12,6 +12,7 @@
 + (instancetype)postWithDict:(NSDictionary *)postDict;
 + (instancetype)mockPostNoPhotosToDisplay;
 + (instancetype)mockPostYouSawAll;
++ (instancetype)mockPostLoading;
 
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSString *fullPhotoUrl;
@@ -31,5 +32,6 @@
 
 - (BOOL) isNoPhotosToDisplayPost;
 - (BOOL) isYouSawAllPost;
+- (BOOL) isLoadingPost;
 
 @end

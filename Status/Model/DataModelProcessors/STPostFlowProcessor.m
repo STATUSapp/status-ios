@@ -126,6 +126,14 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
     
     NSMutableArray *sheetArray = [NSMutableArray arrayWithArray:array];
     
+    
+    STPost *firstPost = [[CoreManager postsPool] getPostWithId:[_postIds firstObject]];
+    if (array.count > 0 &&
+        firstPost &&
+        [firstPost isLoadingPost]) {
+        [_postIds removeObject:firstPost.uuid];
+    }
+    
     for (NSString *postId in array) {
         if ([_postIds containsObject:postId]) {
             NSLog(@"Duplicate found");
@@ -139,8 +147,14 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
 
 
 -(void)getMoreData{
+    if (_postIds.count == 0) {//add mock loading post
+        STPost *loadingPost = [STPost mockPostLoading];
+        [_postIds addObject:loadingPost.uuid];
+        [[CoreManager postsPool] addPosts:@[loadingPost]];
+        
+    }
     NSInteger offset = _postIds.count + _numberOfDuplicates;
-    NSLog(@"Offset: %ld", offset);
+    NSLog(@"Offset: %ld", (long)offset);
 
     __weak STPostFlowProcessor *weakSelf = self;
     STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error){
@@ -150,7 +164,6 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
                 error.code == 404) {
                 //user has no location force an update
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLocationHasBeenUploaded) name:kNotificationNewLocationHasBeenUploaded object:nil];
-                //TODO: we should consider to add a notification to make this call for a better separation of the modules?
                 [[CoreManager locationService] forceLocationToUpdate];
             }
             else
