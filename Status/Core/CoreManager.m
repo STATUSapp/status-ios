@@ -16,6 +16,7 @@
 #import "STFacebookHelper.h"
 #import "STIAPHelper.h"
 #import "STContactsManager.h"
+#import "STImagePickerService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -27,6 +28,7 @@
 @property (nonatomic, strong) STFacebookHelper *facebookService;
 @property (nonatomic, strong) STIAPHelper *IAPService;
 @property (nonatomic, strong) STContactsManager *contactsService;
+@property (nonatomic, strong) STImagePickerService * imagePickerService;
 @end
 
 @implementation CoreManager
@@ -44,15 +46,16 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _postsPool = [[STPostsPool alloc] init];
-        _locationService = [[STLocationManager alloc] init];
-        _networkService = [[STNetworkQueueManager alloc] init];
-        _navigationService = [[STNavigationService alloc] init];
-        _loginService = [[STFacebookLoginController alloc] init];
-        _imageCacheService = [[STImageCacheController alloc] init];
-        _facebookService = [[STFacebookHelper alloc] init];
-        _IAPService = [[STIAPHelper alloc] init];
-        _contactsService = [[STContactsManager alloc] init];
+        _postsPool = [STPostsPool new];
+        _locationService = [STLocationManager new];
+        _networkService = [STNetworkQueueManager new];
+        _navigationService = [STNavigationService new];
+        _loginService = [STFacebookLoginController new];
+        _imageCacheService = [STImageCacheController new];
+        _facebookService = [STFacebookHelper new];
+        _IAPService = [STIAPHelper new];
+        _contactsService = [STContactsManager new];
+        _imagePickerService = [STImagePickerService new];
         
     }
     return self;
@@ -102,6 +105,10 @@
 
 + (STContactsManager *)contactsService{
     return [[CoreManager sharedInstance] contactsService];
+}
+
++ (STImagePickerService *)imagePickerService {
+    return [[CoreManager sharedInstance] imagePickerService];
 }
 
 #pragma mark - Private implementation

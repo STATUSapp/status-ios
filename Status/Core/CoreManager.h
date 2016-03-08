@@ -17,6 +17,7 @@
 @class STFacebookHelper;
 @class STIAPHelper;
 @class STContactsManager;
+@class STImagePickerService;
 
 @interface CoreManager : NSObject
 
@@ -32,5 +33,6 @@
 + (STFacebookHelper *)facebookService;
 + (STIAPHelper *)IAPService;
 + (STContactsManager *)contactsService;
++ (STImagePickerService *)imagePickerService;
 
 @end
