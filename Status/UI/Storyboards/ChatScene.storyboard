@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OGj-r7-V9E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OGj-r7-V9E">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,6 +17,10 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+        </mutableArray>
+        <mutableArray key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
+            <string>ProximaNova-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -97,7 +101,7 @@
                                     <navigationItem id="g2f-F3-Fuk">
                                         <barButtonItem key="leftBarButtonItem" id="kn6-fe-uG3">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XGo-HF-h5c">
-                                                <rect key="frame" x="16" y="7" width="92" height="22"/>
+                                                <rect key="frame" x="16" y="11" width="92" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="contentEdgeInsets" minX="-54" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" image="back button black 2">
@@ -183,10 +187,10 @@
                                 </button>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageReceivedCell" rowHeight="50" id="Kex-UK-Z8K" customClass="STMessageReceivedCell">
-                                        <rect key="frame" x="0.0" y="66" width="390" height="50"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kex-UK-Z8K" id="rre-qj-L3I">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_nrLIkes_normal" translatesAutoresizingMaskIntoConstraints="NO" id="mb9-ic-zho">
@@ -248,10 +252,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageSendCell" rowHeight="50" id="dfR-KH-Aig" customClass="STMessageSendCell">
-                                        <rect key="frame" x="0.0" y="116" width="390" height="50"/>
+                                        <rect key="frame" x="0.0" y="116" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dfR-KH-Aig" id="b5o-fu-F19">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubble_send" translatesAutoresizingMaskIntoConstraints="NO" id="8BZ-Tx-KnT">
@@ -421,7 +425,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x5b-Y0-Kgr" id="a4d-zg-yTA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WRT-Z7-HjA">
@@ -536,7 +540,7 @@
                                     <navigationItem title="Chats" id="Noq-wo-mJI">
                                         <barButtonItem key="leftBarButtonItem" id="XAi-r8-mY0">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XcX-t2-wGS">
-                                                <rect key="frame" x="16" y="7" width="92" height="22"/>
+                                                <rect key="frame" x="16" y="11" width="92" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="contentEdgeInsets" minX="-54" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" image="back button black 2">
@@ -627,6 +631,99 @@
             </objects>
             <point key="canvasLocation" x="910" y="740"/>
         </scene>
+        <!--Notification And Chat Container View Controller-->
+        <scene sceneID="gIU-HM-k6g">
+            <objects>
+                <viewController storyboardIdentifier="STNotificationAndChatContainerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C9x-Am-wMX" customClass="STNotificationAndChatContainerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v1G-6t-QV6"/>
+                        <viewControllerLayoutGuide type="bottom" id="TWW-hI-W3f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wZE-un-gSn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="and-jC-Gzo">
+                                <rect key="frame" x="0.0" y="70" width="320" height="498"/>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WK0-AW-qYO">
+                                <rect key="frame" x="160" y="30" width="159.5" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="saw-IX-lfb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="MESSAGES">
+                                    <color key="titleColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToMessages:" destination="C9x-Am-wMX" eventType="touchUpInside" id="lpm-DZ-M5e"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2h-Ou-G7e" userLabel="pageIndicatorSupportLine">
+                                <rect key="frame" x="20" y="68" width="280" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="jhd-aN-bbC"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBu-jz-Pco" userLabel="pageIndicator">
+                                <rect key="frame" x="20" y="68" width="66.5" height="2"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="l34-3F-9Ld"/>
+                                    <constraint firstAttribute="width" constant="66.5" id="vLG-WQ-CAI"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2G-BR-QRE">
+                                <rect key="frame" x="0.0" y="30" width="160" height="35"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="NOTIFICATIONS">
+                                    <color key="titleColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToNotifications:" destination="C9x-Am-wMX" eventType="touchUpInside" id="c3V-Rh-f5y"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="and-jC-Gzo" firstAttribute="top" secondItem="WK0-AW-qYO" secondAttribute="bottom" constant="5" id="0c6-MP-hDd"/>
+                            <constraint firstAttribute="trailing" secondItem="and-jC-Gzo" secondAttribute="trailing" id="2np-aD-dyg"/>
+                            <constraint firstItem="and-jC-Gzo" firstAttribute="leading" secondItem="wZE-un-gSn" secondAttribute="leading" id="5R9-FV-lYs"/>
+                            <constraint firstItem="EBu-jz-Pco" firstAttribute="leading" secondItem="wZE-un-gSn" secondAttribute="leading" constant="20" id="6UJ-jG-Pnl"/>
+                            <constraint firstItem="l2G-BR-QRE" firstAttribute="width" secondItem="WK0-AW-qYO" secondAttribute="width" id="8x5-Dk-rmi"/>
+                            <constraint firstItem="EBu-jz-Pco" firstAttribute="top" secondItem="WK0-AW-qYO" secondAttribute="bottom" constant="3" id="AUX-ct-LMR"/>
+                            <constraint firstAttribute="trailing" secondItem="f2h-Ou-G7e" secondAttribute="trailing" constant="20" id="Agi-bK-yWk"/>
+                            <constraint firstItem="TWW-hI-W3f" firstAttribute="top" secondItem="and-jC-Gzo" secondAttribute="bottom" id="PIT-6A-DHj"/>
+                            <constraint firstItem="f2h-Ou-G7e" firstAttribute="centerY" secondItem="EBu-jz-Pco" secondAttribute="centerY" id="X9b-JD-voI"/>
+                            <constraint firstItem="WK0-AW-qYO" firstAttribute="top" secondItem="v1G-6t-QV6" secondAttribute="bottom" constant="10" id="eoI-jQ-cVj"/>
+                            <constraint firstItem="l2G-BR-QRE" firstAttribute="leading" secondItem="wZE-un-gSn" secondAttribute="leading" id="f3R-aj-AgL"/>
+                            <constraint firstAttribute="trailing" secondItem="WK0-AW-qYO" secondAttribute="trailing" id="jKR-iW-bMy"/>
+                            <constraint firstItem="l2G-BR-QRE" firstAttribute="centerY" secondItem="WK0-AW-qYO" secondAttribute="centerY" id="l7P-Ci-IYw"/>
+                            <constraint firstItem="l2G-BR-QRE" firstAttribute="height" secondItem="WK0-AW-qYO" secondAttribute="height" id="lAG-Ig-kaa"/>
+                            <constraint firstItem="f2h-Ou-G7e" firstAttribute="leading" secondItem="wZE-un-gSn" secondAttribute="leading" constant="20" id="mlp-vp-6pJ"/>
+                            <constraint firstItem="WK0-AW-qYO" firstAttribute="leading" secondItem="l2G-BR-QRE" secondAttribute="trailing" id="sgb-YO-g3L"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnMessages" destination="WK0-AW-qYO" id="fKw-Fr-38L"/>
+                        <outlet property="btnNotifications" destination="l2G-BR-QRE" id="Xtq-Ax-hSM"/>
+                        <outlet property="childContainer" destination="and-jC-Gzo" id="9RR-fo-m7N"/>
+                        <outlet property="pageIndicatorView" destination="EBu-jz-Pco" id="CVi-Rm-cJL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pDO-4C-p08" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="375" y="306"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back button black 2" width="39" height="20"/>
@@ -639,9 +736,4 @@
         <image name="message_text" width="75" height="40"/>
         <image name="offline chat" width="13" height="14"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

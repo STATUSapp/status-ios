@@ -10,6 +10,7 @@
 #import "STFlowTemplateViewController.h"
 #import "STSettingsViewController.h"
 #import "STTakeAPhotoViewController.h"
+#import "STNotificationAndChatContainerViewController.h"
 
 #import "FeedCVC.h"
 
@@ -45,7 +46,13 @@ static NSString * storyboardIdentifier = @"tabBarController";
     takeAPhotoVC.title = @"Take a Photo";
     UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
     takePhotoNav.title = @"Take a Photo";
+    takePhotoNav.navigationBarHidden = YES;
     // add message / notifications
+    
+    STNotificationAndChatContainerViewController * notifAndChatVC = [STNotificationAndChatContainerViewController newController];
+    UINavigationController * notifChatNav = [[UINavigationController alloc] initWithRootViewController:notifAndChatVC];
+    notifChatNav.title = @"Notifications and Messages";
+    notifChatNav.navigationBarHidden = YES;
     
     // add my profile
     
@@ -56,7 +63,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     settingsNav.title = @"Settings";
 
 
-    [self setViewControllers:@[homeVc, takePhotoNav, settingsNav] animated:NO];
+    [self setViewControllers:@[homeVc, takePhotoNav, notifChatNav, settingsNav] animated:NO];
 }
 
 - (void)viewDidLoad {

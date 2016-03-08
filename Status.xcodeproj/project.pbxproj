@@ -39,6 +39,7 @@
 		52466BE51C89D52000EEAA2B /* TakeAPhoto.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52466BE41C89D52000EEAA2B /* TakeAPhoto.storyboard */; };
 		52DC4DC91C8D53E30064F23F /* STImagePickerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC4DC81C8D53E30064F23F /* STImagePickerService.m */; };
 		52DC4DCD1C8D87F00064F23F /* UIAlertController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC4DCC1C8D87F00064F23F /* UIAlertController+Additions.m */; };
+		52DC4DD11C8F0E520064F23F /* STNotificationAndChatContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC4DD01C8F0E520064F23F /* STNotificationAndChatContainerViewController.m */; };
 		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
 		99B3873D1C82FAA2005B4D8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B385E91C82FAA2005B4D8C /* AppDelegate.m */; };
 		99B3873E1C82FAA2005B4D8C /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B385EC1C82FAA2005B4D8C /* NSDate+Additions.m */; };
@@ -236,8 +237,6 @@
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		17FBCB201C8F041E00261A39 /* STImagePickerService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STImagePickerService.h; sourceTree = "<group>"; };
-		17FBCB211C8F044800261A39 /* UIAlertController+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Additions.h"; sourceTree = "<group>"; };
 		1D98A4C219603064007F4AB2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -269,6 +268,8 @@
 		52DC4DC81C8D53E30064F23F /* STImagePickerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImagePickerService.m; sourceTree = "<group>"; };
 		52DC4DCB1C8D87F00064F23F /* UIAlertController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Additions.h"; sourceTree = "<group>"; };
 		52DC4DCC1C8D87F00064F23F /* UIAlertController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Additions.m"; sourceTree = "<group>"; };
+		52DC4DCF1C8F0E520064F23F /* STNotificationAndChatContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationAndChatContainerViewController.h; sourceTree = "<group>"; };
+		52DC4DD01C8F0E520064F23F /* STNotificationAndChatContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationAndChatContainerViewController.m; sourceTree = "<group>"; };
 		62D422D9C06AC39526914FFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9901E4961B6D99E50064223C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -540,8 +541,8 @@
 		99B387161C82FAA2005B4D8C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		99B387171C82FAA2005B4D8C /* SuggestionsScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SuggestionsScene.storyboard; sourceTree = "<group>"; };
 		99B387181C82FAA2005B4D8C /* UserProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
-		99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STRemoveAdsViewController.h; sourceTree = "<group>"; };
-		99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STRemoveAdsViewController.m; sourceTree = "<group>"; };
+		99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STRemoveAdsViewController.h; path = UI/STRemoveAdsViewController.h; sourceTree = "<group>"; };
+		99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STRemoveAdsViewController.m; path = UI/STRemoveAdsViewController.m; sourceTree = "<group>"; };
 		99B3871E1C82FAA2005B4D8C /* STAlbumImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlbumImageCell.h; sourceTree = "<group>"; };
 		99B3871F1C82FAA2005B4D8C /* STAlbumImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlbumImageCell.m; sourceTree = "<group>"; };
 		99B387201C82FAA2005B4D8C /* STFacebookAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookAlbumCell.h; sourceTree = "<group>"; };
@@ -714,6 +715,15 @@
 			path = cells;
 			sourceTree = "<group>";
 		};
+		52DC4DCE1C8F0E1F0064F23F /* NotificationsAndChat */ = {
+			isa = PBXGroup;
+			children = (
+				52DC4DCF1C8F0E520064F23F /* STNotificationAndChatContainerViewController.h */,
+				52DC4DD01C8F0E520064F23F /* STNotificationAndChatContainerViewController.m */,
+			);
+			path = NotificationsAndChat;
+			sourceTree = "<group>";
+		};
 		99B385E71C82FAA2005B4D8C /* Status */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +732,8 @@
 				99B386041C82FAA2005B4D8C /* Core */,
 				99B386731C82FAA2005B4D8C /* Model */,
 				99B386BF1C82FAA2005B4D8C /* UI */,
+				99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */,
+				99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */,
 				99B386011C82FAA2005B4D8C /* Constants */,
 				99B385EA1C82FAA2005B4D8C /* Categories */,
 				99B386B21C82FAA2005B4D8C /* ThirdParties */,
@@ -1076,8 +1088,8 @@
 		99B386BF1C82FAA2005B4D8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				52DC4DCE1C8F0E1F0064F23F /* NotificationsAndChat */,
 				2AD97BAE1C8C141E00C9B3D5 /* Feed */,
-				99B387111C82FAA2005B4D8C /* Storyboards */,
 				2A1D66801C8472AC00633D87 /* Helpers */,
 				99B387E61C83027C005B4D8C /* TabBar */,
 				99B386C01C82FAA2005B4D8C /* Chat */,
@@ -1087,11 +1099,10 @@
 				99B387031C82FAA2005B4D8C /* Login */,
 				99B387061C82FAA2005B4D8C /* Notifications */,
 				2AC777761C83A5AE00DAA273 /* Launch */,
-				99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */,
-				99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */,
 				99B3871B1C82FAA2005B4D8C /* TakeAPhoto */,
 				99B3872D1C82FAA2005B4D8C /* Tutorial */,
 				99B387341C82FAA2005B4D8C /* UserProfile */,
+				99B387111C82FAA2005B4D8C /* Storyboards */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1726,6 +1737,7 @@
 				99B387431C82FAA2005B4D8C /* UIImage+FixedOrientation.m in Sources */,
 				99B387D91C82FAA2005B4D8C /* STMoveScaleViewController.m in Sources */,
 				99B387C21C82FAA2005B4D8C /* STFacebookInviterViewController.m in Sources */,
+				52DC4DD11C8F0E520064F23F /* STNotificationAndChatContainerViewController.m in Sources */,
 				99B3874F1C82FAA2005B4D8C /* STGetFollowingRequest.m in Sources */,
 				99B387471C82FAA2005B4D8C /* UIImageView+Mask.m in Sources */,
 				99B3877C1C82FAA2005B4D8C /* STNativeAdsController.m in Sources */,
