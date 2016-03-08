@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedCVC : UICollectionViewController
-+ (UINavigationController *)mainFeedController;
++ (FeedCVC *)mainFeedController;
 
 @end

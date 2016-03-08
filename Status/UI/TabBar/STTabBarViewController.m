@@ -11,6 +11,8 @@
 #import "STSettingsViewController.h"
 #import "STTakeAPhotoViewController.h"
 
+#import "FeedCVC.h"
+
 static NSString * storyboardIdentifier = @"tabBarController";
 
 @interface STTabBarViewController ()
@@ -33,9 +35,8 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     // add home flow
     
-    UIViewController * homeVc = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    homeVc.title = @"Home";
-    
+    FeedCVC *homeVc = [FeedCVC mainFeedController];
+    homeVc.title = NSLocalizedString(@"Home", nil);
     // add explore flow
     
     // add take a photo

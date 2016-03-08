@@ -236,6 +236,8 @@
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		17FBCB201C8F041E00261A39 /* STImagePickerService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STImagePickerService.h; sourceTree = "<group>"; };
+		17FBCB211C8F044800261A39 /* UIAlertController+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Additions.h"; sourceTree = "<group>"; };
 		1D98A4C219603064007F4AB2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -730,7 +732,7 @@
 		99B385EA1C82FAA2005B4D8C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				52DC4DCB1C8D87F00064F23F /* UIAlertController+Additions.h */,
+				17FBCB211C8F044800261A39 /* UIAlertController+Additions.h */,
 				52DC4DCC1C8D87F00064F23F /* UIAlertController+Additions.m */,
 				99B385EB1C82FAA2005B4D8C /* NSDate+Additions.h */,
 				99B385EC1C82FAA2005B4D8C /* NSDate+Additions.m */,
@@ -903,7 +905,7 @@
 				171936C21C848604002C0202 /* STNavigationService.m */,
 				99B386651C82FAA2005B4D8C /* STImagePickerController.h */,
 				99B386661C82FAA2005B4D8C /* STImagePickerController.m */,
-				52DC4DC71C8D53E30064F23F /* STImagePickerService.h */,
+				17FBCB201C8F041E00261A39 /* STImagePickerService.h */,
 				52DC4DC81C8D53E30064F23F /* STImagePickerService.m */,
 				99B386691C82FAA2005B4D8C /* STLocationManager.h */,
 				99B3866A1C82FAA2005B4D8C /* STLocationManager.m */,

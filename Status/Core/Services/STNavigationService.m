@@ -69,8 +69,6 @@
     
     STTabBarViewController * tabBar = [STTabBarViewController newController];
     [appDel.window setRootViewController:tabBar];
-    UINavigationController *navController = [FeedCVC mainFeedController];
-    [appDel.window setRootViewController:navController];
 }
 
 - (void)dealloc {

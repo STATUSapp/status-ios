@@ -110,19 +110,8 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     
     [Appirater appLaunched:YES];
     
-    
-//    if ([CoreManager shouldLogin]) {
-//    } else {
-//        self.window.rootViewController = [STTabBarViewController newController];
-//    }
-//
     self.window.rootViewController = [LaunchViewController launchVC];
-    
-    if ([CoreManager shouldLogin]) {
-    } else {
-        self.window.rootViewController = [STTabBarViewController newController];
-    }
-    
+        
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 
@@ -182,7 +171,6 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 //    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
 //    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
 //    [viewController updateNotificationsNumber];
-    [[STFacebookLoginController sharedInstance] loadTokenFromKeyChain];
     
     //TODO: dev_1_2 make this on a notification
 //    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
@@ -193,7 +181,6 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 //    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
 //    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
 //    [viewController updateNotificationsNumber];
-    [[STFacebookLoginController sharedInstance] loadTokenFromKeyChain];
     
     // MAT will not function without the measureSession call included
     [Tune measureSession];

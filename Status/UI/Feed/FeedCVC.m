@@ -30,7 +30,7 @@ static NSString * const youSawAllCell = @"FeedCell";
 //TODO: dev_1_2 add no photo to display cell
 static NSString * const noPhotosToDisplayCell = @"FooterCell";
 
-+ (UINavigationController *)mainFeedController{
++ (FeedCVC *)mainFeedController{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
     UINavigationController *navController = [storyboard instantiateInitialViewController];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
@@ -38,7 +38,7 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     STPostFlowProcessor *feedProcessor = [[STPostFlowProcessor alloc] initWithFlowType:STFlowTypeHome];
     feedCVC.feedProcessor = feedProcessor;
     
-    return navController;
+    return feedCVC;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

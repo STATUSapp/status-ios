@@ -116,6 +116,9 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 }
 
 - (void)saveImageForBlur:(UIImage *)image imageURL:(NSURL *)imageURL {
+    if (!_photoDownloadBaseUrl) {
+        return;
+    }
     if ([imageURL.absoluteString rangeOfString:_photoDownloadBaseUrl].location!=NSNotFound) {
         UIImage *img = image;
         img = [img imageCropedFullScreenSize];
