@@ -223,7 +223,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     }
     
     //sort the flows - move the current to the top
-    NSArray *imagesLinksArray = [newPosts valueForKey:@"full_photo_link"];
+    NSArray *imagesLinksArray = [newPosts valueForKey:@"fullPhotoUrl"];
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     for (NSString *link in imagesLinksArray) {
         if (![sdManager diskImageExistsForURL:[NSURL URLWithString:link]]) {

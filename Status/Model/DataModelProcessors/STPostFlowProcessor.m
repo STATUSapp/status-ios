@@ -13,6 +13,8 @@
 #import "CoreManager.h"
 #import "STPostsPool.h"
 
+#import "STImageCacheController.h"
+
 NSString * const kNotificationPostDownloadFailed = @"NotificationPostDownloadFailed";
 NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSuccess";
 
@@ -34,6 +36,7 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
     self = [super init];
     if (self) {
         self.flowType = flowType;
+        _loaded = NO;
         self.postIds = [NSMutableArray new];
         if (flowType == STFlowTypeHome ||
             flowType == STFlowTypePopular||
@@ -88,6 +91,9 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
     
         NSInteger offsetRemaining = weakSelf.postIds.count - index;
         BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && index!=0;
+#ifdef DEBUG
+        shouldGetNextBatch = NO;
+#endif
         if (shouldGetNextBatch) {
             [weakSelf getMoreData];
         }
@@ -114,25 +120,20 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
     }
 }
 
--(void)deleteItemAtIndex:(NSInteger)index
+- (void)deleteItemAtIndex:(NSInteger)index
 {
     [_postIds removeObjectAtIndex:index];
 }
 
+- (BOOL)loading{
+    return (_loaded == NO);
+}
 
 #pragma mark - Internal Helpers
 
 -(void)updatePostIdsWithNewArray:(NSArray *)array{
     
     NSMutableArray *sheetArray = [NSMutableArray arrayWithArray:array];
-    
-    
-    STPost *firstPost = [[CoreManager postsPool] getPostWithId:[_postIds firstObject]];
-    if (array.count > 0 &&
-        firstPost &&
-        [firstPost isLoadingPost]) {
-        [_postIds removeObject:firstPost.uuid];
-    }
     
     for (NSString *postId in array) {
         if ([_postIds containsObject:postId]) {
@@ -142,19 +143,56 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
         }
     }
     
-    [_postIds addObjectsFromArray:sheetArray];
+    if (sheetArray.count > 0) {
+        [_postIds addObjectsFromArray:sheetArray];
+    }
+    
+    //remove loading mock post
+    STPost *loadingPost = [[CoreManager postsPool] getPostWithId:kPostUuidForLoading];
+    if (loadingPost) {
+        [_postIds removeObject:loadingPost.uuid];
+    }
+
+    //add mock posts at the end of the list
+    
+    STPost *noPhotosPost = [[CoreManager postsPool] getPostWithId:kPostUuidForNoPhotosToDisplay];
+    if (!noPhotosPost) {
+        noPhotosPost = [STPost mockPostNoPhotosToDisplay];
+        [[CoreManager postsPool] addPosts:@[noPhotosPost]];
+    }
+    else
+        [_postIds removeObject:noPhotosPost.uuid];
+    
+    STPost *youSawAllPost = [[CoreManager postsPool] getPostWithId:kPostUuidForYouSawAll];
+    if (!youSawAllPost) {
+        youSawAllPost = [STPost mockPostYouSawAll];
+        [[CoreManager postsPool] addPosts:@[youSawAllPost]];
+    }
+    else
+        [_postIds removeObject:youSawAllPost.uuid];
+
+    
+    if (_postIds.count == 0 &&
+        (_flowType == STFlowTypeMyGallery||
+         _flowType == STFlowTypeUserGallery)) {
+            [_postIds addObject:noPhotosPost.uuid];
+        }
+    else
+        [_postIds addObject:youSawAllPost.uuid];
+
+    
 }
 
 
 -(void)getMoreData{
-    if (_postIds.count == 0) {//add mock loading post
-        STPost *loadingPost = [STPost mockPostLoading];
-        [_postIds addObject:loadingPost.uuid];
-        [[CoreManager postsPool] addPosts:@[loadingPost]];
-        
-    }
     NSInteger offset = _postIds.count + _numberOfDuplicates;
     NSLog(@"Offset: %ld", (long)offset);
+    
+    if (_loaded == NO) {
+        STPost *loadingPost = [STPost mockPostLoading];
+        [[CoreManager postsPool] addPosts:@[loadingPost]];
+        [self.postIds addObject:loadingPost.uuid];
+    }
 
     __weak STPostFlowProcessor *weakSelf = self;
     STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error){
@@ -183,13 +221,20 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
         {
             weakSelf.loaded = YES;
             //TODO: dev_1_2 handle the listener
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPostDownloadSuccess
-                                                                object:nil];
             
             [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
+            if (objects.count > 0) {
+#ifdef DEBUG
+                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel. Ut tota soluta principes has, in alterum maiorum pro, mel graece pericula ut. Sea discere nominavi cu, id pro blandit complectitur. Ut per legere expetendis, te vel offendit intellegam." forKey:@"caption"];
+#endif
+                [[CoreManager postsPool] addPosts:objects];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPostDownloadSuccess
+                                                                object:nil];
+            [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:objects];
+
             
             //TODO: dev_1_2 show Suggestions
-            //TODO: dev_1_2 start load images
             //TODO: dev_1_2 enable refresh button
         }
     };

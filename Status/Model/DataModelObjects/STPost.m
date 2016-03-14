@@ -53,24 +53,22 @@ NSString * const kPostUuidForLoading = @"uuid_3";
     post.uuid = kPostUuidForYouSawAll;
     return post;
 }
-
 + (instancetype)mockPostLoading{
     STPost * post = [STPost new];
     post.uuid = kPostUuidForLoading;
     return post;
 }
 
-
 - (BOOL) isNoPhotosToDisplayPost{
     return [self.uuid isEqualToString:kPostUuidForNoPhotosToDisplay];
 }
 
-- (BOOL) isLoadingPost{
-    return [self.uuid isEqualToString:kPostUuidForLoading];
-}
-
 - (BOOL) isYouSawAllPost{
     return [self.uuid isEqualToString:kPostUuidForYouSawAll];
+}
+
+- (BOOL) isLoadingPost{
+    return [self.uuid isEqualToString:kPostUuidForLoading];
 }
 
 

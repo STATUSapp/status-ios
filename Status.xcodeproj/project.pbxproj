@@ -19,6 +19,7 @@
 		17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5C41A1BB7EF240057180E /* AddressBook.framework */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
+		17FBCB281C8F17D500261A39 /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FBCB271C8F17D500261A39 /* LoadingCell.m */; };
 		1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
 		1DE2D5AD194FA5D600A29A86 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */; };
 		1DE2D5AF194FA5DF00A29A86 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */; };
@@ -236,8 +237,8 @@
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		17FBCB201C8F041E00261A39 /* STImagePickerService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STImagePickerService.h; sourceTree = "<group>"; };
-		17FBCB211C8F044800261A39 /* UIAlertController+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Additions.h"; sourceTree = "<group>"; };
+		17FBCB261C8F17D500261A39 /* LoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingCell.h; sourceTree = "<group>"; };
+		17FBCB271C8F17D500261A39 /* LoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingCell.m; sourceTree = "<group>"; };
 		1D98A4C219603064007F4AB2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -710,6 +711,8 @@
 				2AD97BBA1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m */,
 				2AD97BBF1C8C632B00C9B3D5 /* FooterCell.h */,
 				2AD97BC01C8C632B00C9B3D5 /* FooterCell.m */,
+				17FBCB261C8F17D500261A39 /* LoadingCell.h */,
+				17FBCB271C8F17D500261A39 /* LoadingCell.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -881,8 +884,6 @@
 				99B386581C82FAA2005B4D8C /* STChatController.m */,
 				99B3865B1C82FAA2005B4D8C /* STDataAccessUtils.h */,
 				99B3865C1C82FAA2005B4D8C /* STDataAccessUtils.m */,
-				99B386631C82FAA2005B4D8C /* STImageCacheController.h */,
-				99B386641C82FAA2005B4D8C /* STImageCacheController.m */,
 				99B386671C82FAA2005B4D8C /* STInviteController.h */,
 				99B386681C82FAA2005B4D8C /* STInviteController.m */,
 				99B3866B1C82FAA2005B4D8C /* STMenuController.h */,
@@ -893,13 +894,15 @@
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
 				99B3865F1C82FAA2005B4D8C /* STFacebookLoginController.h */,
 				99B386601C82FAA2005B4D8C /* STFacebookLoginController.m */,
+				99B386631C82FAA2005B4D8C /* STImageCacheController.h */,
+				99B386641C82FAA2005B4D8C /* STImageCacheController.m */,
 				99B3865D1C82FAA2005B4D8C /* STFacebookHelper.h */,
 				99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */,
 				99B3866D1C82FAA2005B4D8C /* STNativeAdsController.h */,
-				99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */,
 				99B386551C82FAA2005B4D8C /* KeychainItemWrapper.h */,
 				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
+				99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */,
 				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
 				99B386591C82FAA2005B4D8C /* STContactsManager.h */,
 				99B3865A1C82FAA2005B4D8C /* STContactsManager.m */,
@@ -1712,6 +1715,7 @@
 				99B387BB1C82FAA2005B4D8C /* STFBAdCell.m in Sources */,
 				99B387581C82FAA2005B4D8C /* STGetUserPostsRequest.m in Sources */,
 				99B387861C82FAA2005B4D8C /* STFlowTemplate.m in Sources */,
+				17FBCB281C8F17D500261A39 /* LoadingCell.m in Sources */,
 				99B387841C82FAA2005B4D8C /* STAddressBookContact.m in Sources */,
 				99B387DE1C82FAA2005B4D8C /* STTutorialViewController.m in Sources */,
 				99B387A81C82FAA2005B4D8C /* UITableView+SPXRevealAdditions.m in Sources */,

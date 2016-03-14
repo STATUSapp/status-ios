@@ -23,11 +23,9 @@
 @implementation FeedCVC
 
 static NSString * const normalFeedCell = @"FeedCell";
-//TODO: dev_1_2 add loading cell
-static NSString * const loadingFeedCell = @"FullCaptionFeedCell";
-//TODO: dev_1_2 add you saw all cell
+static NSString * const fullCaptionFeedCell = @"FullCaptionFeedCell";
+static NSString * const loadingFeedCell = @"LoadingCell";
 static NSString * const youSawAllCell = @"FeedCell";
-//TODO: dev_1_2 add no photo to display cell
 static NSString * const noPhotosToDisplayCell = @"FooterCell";
 
 + (FeedCVC *)mainFeedController{
@@ -44,6 +42,8 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationPostDownloadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +56,30 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
 - (void)processorLoaded{
     [self.collectionView reloadData];
 }
+
+-(void)imageWasSavedLocally:(NSNotification *)notif{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        STPost *currentPost = [self getCurrentPost];
+        if ([currentPost.fullPhotoUrl isEqualToString:notif.object]) {
+            [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
+        }
+        
+        
+    });
+    
+}
+
+#pragma mark - Helpers
+-(STPost *) getCurrentPost{
+    if (self.feedProcessor.numberOfPosts == 0) {
+        return nil;
+    }
+    NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
+    STPost *post = [_feedProcessor postAtIndex:[[visibleInxPath objectAtIndex:0] row]];
+    
+    return post;
+}
+
 
 /*
 #pragma mark - Navigation
@@ -75,11 +99,12 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [_feedProcessor numberOfPosts];
+    NSInteger numRows = [_feedProcessor numberOfPosts];
+    return numRows;
 }
 
 -(NSString *)identifierForPost:(STPost *)post{
-    if (!post.imageDownloaded)
+    if ([post isLoadingPost] || !post.imageDownloaded)
         return loadingFeedCell;
     
     if (post.isNoPhotosToDisplayPost)
@@ -87,6 +112,10 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     
     if (post.isYouSawAllPost)
         return youSawAllCell;
+    
+    if (post.showFullCaption == YES) {
+        return fullCaptionFeedCell;
+    }
     
     return normalFeedCell;
 }
@@ -152,12 +181,25 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
 - (IBAction)onNamePressed:(id)sender {
 }
 - (IBAction)onSeeMorePressed:(id)sender {
+    //TODO: dev_1_2 add animations
+    STPost *post = [self getCurrentPost];
+    [self.collectionView performBatchUpdates:^{
+        post.showFullCaption = !post.showFullCaption;
+        [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+    } completion:nil];
+
 }
 - (IBAction)onLikesPressed:(id)sender {
 }
 - (IBAction)onMorePressed:(id)sender {
 }
 - (IBAction)onShadowPressed:(id)sender {
+    //TODO: dev_1_2 add animations
+    STPost *post = [self getCurrentPost];
+    [self.collectionView performBatchUpdates:^{
+        post.showFullCaption = !post.showFullCaption;
+        [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+    } completion:nil];
 }
 
 

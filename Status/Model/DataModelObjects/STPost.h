@@ -8,6 +8,10 @@
 
 #import "STBaseObj.h"
 
+extern NSString * const kPostUuidForNoPhotosToDisplay ;
+extern NSString * const kPostUuidForYouSawAll ;
+extern NSString * const kPostUuidForLoading;
+
 @interface STPost : STBaseObj
 + (instancetype)postWithDict:(NSDictionary *)postDict;
 + (instancetype)mockPostNoPhotosToDisplay;

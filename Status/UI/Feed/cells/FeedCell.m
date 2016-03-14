@@ -10,6 +10,7 @@
 #import "STPost.h"
 #import "NSString+VersionComparison.h"
 #import "NSDate+Additions.h"
+#import "STImageCacheController.h"
 
 NSString *const kChatMinimumVersion = @"1.0.4";
 CGFloat const kCaptionMargins = 28.f;
@@ -37,9 +38,23 @@ CGFloat const kSeeMoreButtonWidthConstant = 56.f;
 -(void)configureCellWithPost:(STPost *)post{
     _currentPost = post;
     [_nameButton setTitle:_currentPost.userName forState:UIControlStateNormal];
-    [_likeButton setTitle:_currentPost.postLikedByCurrentUser?NSLocalizedString(@"Liked", nil):NSLocalizedString(@"Like", nil) forState:UIControlStateNormal];
-    _messageButton.hidden = [_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
+    [_likeButton setTitle:_currentPost.postLikedByCurrentUser?NSLocalizedString(@"LIKED", nil):NSLocalizedString(@"LIKE", nil) forState:UIControlStateNormal];
+    _messageButton.hidden = ![_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
     [self configureBottomView];
+    
+    __weak FeedCell *weakSelf = self;
+    
+    [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *img) {
+        
+        if (img!=nil) {
+            weakSelf.normalImage.image = img;
+            
+        }
+    } andBlurCompletion:^(UIImage *bluredImg) {
+        if (bluredImg!=nil) {
+            weakSelf.blurImageView.image=bluredImg;
+        }
+    }];
     
 }
 
@@ -52,7 +67,7 @@ CGFloat const kSeeMoreButtonWidthConstant = 56.f;
 
     CGRect rect = [_currentPost.caption boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
     
-    if (rect.size.width > textWidth - kSeeMoreButtonWidthConstant){
+    if (rect.size.height <= kCaptionDefaultHeight){
         _seeMoreButton.hidden = YES;
         _seeMoreButtonWidthConstr.constant = 0.f;
     }
@@ -62,6 +77,8 @@ CGFloat const kSeeMoreButtonWidthConstant = 56.f;
         _seeMoreButtonWidthConstr.constant = kSeeMoreButtonWidthConstant;
         
     }
+
+    [_seeMoreButton invalidateIntrinsicContentSize];
 
     _captionLabel.text = _currentPost.caption;
     [_likesButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ likes", nil), _currentPost.numberOfLikes] forState:UIControlStateNormal];

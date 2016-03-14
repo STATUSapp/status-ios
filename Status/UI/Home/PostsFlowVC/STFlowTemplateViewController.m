@@ -500,6 +500,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     }
     return sheetArray;
 }
+//moved
 -(void)imageWasSavedLocally:(NSNotification *)notif{
 //    NSLog(@"Notif: %@", notif);
     dispatch_async(dispatch_get_main_queue(), ^{

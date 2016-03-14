@@ -25,5 +25,5 @@ extern NSString * const kNotificationPostDownloadSuccess;
 - (STPost *)postAtIndex:(NSInteger)index;
 - (void)processPostAtIndex:(NSInteger)index;
 - (void)deleteItemAtIndex:(NSInteger)index;
-
+- (BOOL)loading;
 @end

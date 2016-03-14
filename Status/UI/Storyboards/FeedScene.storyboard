@@ -35,7 +35,7 @@
         <scene sceneID="d9d-Xu-XM1">
             <objects>
                 <collectionViewController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="4dN-sM-RAG" customClass="FeedCVC" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="qPh-XZ-ea6">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="qPh-XZ-ea6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -53,10 +53,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test_screen" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-Mr-X69" userLabel="FullBlurImage">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-Mr-X69" userLabel="FullBlurImage">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <gestureRecognizers/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="esF-qt-j7J" userLabel="FitImage">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKn-J4-udb" userLabel="BottomItems">
                                             <rect key="frame" x="14" y="455" width="292" height="68"/>
@@ -72,6 +75,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
                                                     <state key="normal" title="Lavinia Stegaru"/>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="onNamePressed:" destination="4dN-sM-RAG" eventType="touchUpInside" id="VvV-TS-LJP"/>
                                                     </connections>
@@ -84,6 +90,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="10"/>
                                                     <state key="normal" title="LIKE" backgroundImage="message_background"/>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="onLikePressed:" destination="4dN-sM-RAG" eventType="touchUpInside" id="OQc-fm-lBw"/>
                                                     </connections>
@@ -96,6 +105,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="10"/>
                                                     <state key="normal" title="MESSAGE" backgroundImage="message_background"/>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="onMessagePressed:" destination="4dN-sM-RAG" eventType="touchUpInside" id="9K5-cz-fAh"/>
                                                     </connections>
@@ -109,13 +121,14 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kt3-Ob-LSy">
+                                                <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="kt3-Ob-LSy">
                                                     <rect key="frame" x="236" y="22" width="56" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="38" id="2jn-HW-Qo5"/>
                                                         <constraint firstAttribute="width" constant="56" id="tpb-w0-OkP"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
+                                                    <inset key="titleEdgeInsets" minX="0.0" minY="-6" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="See More">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -149,7 +162,9 @@
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="11"/>
                                                     <inset key="titleEdgeInsets" minX="6" minY="1" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="1250 likes" image="like"/>
-                                                    <state key="highlighted" image="like_pressed"/>
+                                                    <state key="highlighted" image="like_pressed">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="onLikesPressed:" destination="4dN-sM-RAG" eventType="touchUpInside" id="vpR-hs-J9X"/>
                                                     </connections>
@@ -179,6 +194,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="llF-wb-eo4" secondAttribute="trailing" constant="-14" id="IdL-v3-TT3"/>
                                                 <constraint firstItem="kt3-Ob-LSy" firstAttribute="top" secondItem="3Al-Jx-btc" secondAttribute="bottom" constant="3" id="K4T-mi-x7P"/>
                                                 <constraint firstItem="M7e-Oe-Hgg" firstAttribute="leading" secondItem="s0j-MI-kcP" secondAttribute="trailing" constant="5" id="Kod-1x-6Dx"/>
+                                                <constraint firstAttribute="bottom" secondItem="kt3-Ob-LSy" secondAttribute="bottom" constant="8" id="OJQ-od-0lc"/>
+                                                <constraint firstItem="kt3-Ob-LSy" firstAttribute="leading" secondItem="v8I-1f-JMo" secondAttribute="trailing" id="Uei-ZD-qke"/>
                                                 <constraint firstItem="Lry-da-oFP" firstAttribute="leading" secondItem="MBy-n6-3PZ" secondAttribute="trailing" constant="2" id="WN1-a5-VwJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="kt3-Ob-LSy" secondAttribute="trailing" id="YHA-uh-tCs"/>
                                                 <constraint firstItem="5i1-eq-2HM" firstAttribute="top" secondItem="v8I-1f-JMo" secondAttribute="bottom" constant="2" id="dg1-Lp-DKV"/>
@@ -198,13 +215,12 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="K4T-mi-x7P"/>
                                                     <exclude reference="YHA-uh-tCs"/>
+                                                    <exclude reference="r0j-gc-bhe"/>
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="esF-qt-j7J" userLabel="FitImage">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -225,7 +241,6 @@
                                 <size key="customSize" width="320" height="568"/>
                                 <connections>
                                     <outlet property="blurImageView" destination="vAe-Mr-X69" id="MBc-mp-Wyc"/>
-                                    <outlet property="bottomViewHeightConstr" destination="gMR-wD-9Kl" id="4PB-Qq-frS"/>
                                     <outlet property="captionLabel" destination="v8I-1f-JMo" id="nj9-tC-o2i"/>
                                     <outlet property="likeButton" destination="3Al-Jx-btc" id="eM5-Sa-cgy"/>
                                     <outlet property="likesButton" destination="VYi-Ed-X7a" id="ABf-ew-QnF"/>
@@ -393,6 +408,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="lAN-cu-hIy" userLabel="FullBlurImage">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <gestureRecognizers/>
+                                        </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8P2-mU-3mf" userLabel="BottomItems">
                                             <rect key="frame" x="13" y="454" width="292" height="68"/>
                                             <subviews>
@@ -450,11 +470,6 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="lAN-cu-hIy" userLabel="FullBlurImage">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <gestureRecognizers/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -662,6 +677,36 @@
                                     <outlet property="backgroundImageView" destination="4r0-Gu-PEZ" id="lgO-Rv-KQ2"/>
                                     <outlet property="flowsCV" destination="TdM-7t-Ezt" id="U8i-9B-LN7"/>
                                 </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LoadingCell" id="mWJ-1l-boh" customClass="LoadingCell">
+                                <rect key="frame" x="1280" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="I1z-NC-eaT">
+                                            <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="37" id="2eW-oz-h4e"/>
+                                                <constraint firstAttribute="width" constant="37" id="b5d-iK-fa3"/>
+                                            </constraints>
+                                        </activityIndicatorView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder STATUS loading" translatesAutoresizingMaskIntoConstraints="NO" id="jXE-ZN-oW6">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="I1z-NC-eaT" firstAttribute="centerY" secondItem="jXE-ZN-oW6" secondAttribute="centerY" id="19b-Qf-LaJ"/>
+                                    <constraint firstItem="jXE-ZN-oW6" firstAttribute="leading" secondItem="mWJ-1l-boh" secondAttribute="leading" id="8EN-F7-wPW"/>
+                                    <constraint firstItem="I1z-NC-eaT" firstAttribute="centerX" secondItem="jXE-ZN-oW6" secondAttribute="centerX" id="EL6-Uv-jxl"/>
+                                    <constraint firstAttribute="trailing" secondItem="jXE-ZN-oW6" secondAttribute="trailing" id="G31-kk-bai"/>
+                                    <constraint firstAttribute="bottom" secondItem="jXE-ZN-oW6" secondAttribute="bottom" id="lv4-ZP-yBx"/>
+                                    <constraint firstItem="jXE-ZN-oW6" firstAttribute="top" secondItem="mWJ-1l-boh" secondAttribute="top" id="ref-Ya-qmz"/>
+                                </constraints>
+                                <size key="customSize" width="320" height="568"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
