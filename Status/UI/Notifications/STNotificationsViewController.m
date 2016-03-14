@@ -328,4 +328,30 @@ const float kNoNotifHeight = 24.f;
     return YES;
 }
 
+#pragma mark - Disable and Enable scrolling
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+    
+    if ([_containeeDelegate respondsToSelector:@selector(containeeStartedScrolling)]) {
+        [_containeeDelegate containeeStartedScrolling];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if ([_containeeDelegate respondsToSelector:@selector(containeeEndedScrolling)]) {
+        [_containeeDelegate containeeEndedScrolling];
+    }
+}
+
+- (void)containerEndedScrolling {
+    _notificationTable.scrollEnabled = YES;
+}
+
+- (void)containerStartedScrolling {
+    _notificationTable.scrollEnabled = NO;
+}
+
 @end
