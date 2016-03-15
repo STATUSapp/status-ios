@@ -30,6 +30,8 @@
 #import "STNativeAdsController.h"
 #import "STNavigationService.h"
 
+#import "STListUser.h"
+
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewBlurryPicture;
@@ -374,10 +376,12 @@
     [self presentViewController: setttingsNav animated:YES completion:nil];
 }
 - (IBAction)onTapSendMessageToUser:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    //TODO: get user from the pool first and then initialize
+    STListUser *lu = [STListUser new];
+    lu.uuid = _profileUserId;
+    //TODO: dev_1_2 add other properties if exists
+    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
     
-    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:@{@"user_id":_profileUserId}];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

@@ -13,6 +13,7 @@ typedef void (^STDataAccessCompletionBlock)(NSArray *objects, NSError *error);
 typedef void (^STDataUploadCompletionBlock)(NSError *error);
 @interface STDataAccessUtils : NSObject
 
+//users
 +(void)getSuggestUsersForFollowType:(STFollowType)followType
                          withOffset:(NSNumber *)offset
                       andCompletion:(STDataAccessCompletionBlock)completion;
@@ -26,6 +27,9 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
           withCompletion:(STDataAccessCompletionBlock)completion;
 
 +(void)getFlowTemplatesWithCompletion:(STDataAccessCompletionBlock)completion;
+
++(void)getUserDataForUserId:(NSString *)userId
+             withCompletion:(STDataAccessCompletionBlock)completion;
 
 
 //upload stuff to server
@@ -45,10 +49,13 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
                   offset:(NSInteger)offset
           withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getPostWithPostId:(NSString *)postId
-                  offset:(NSInteger)offset
           withCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload post stuff
 +(void)setPostSeenForPostId:(NSString *)postId
              withCompletion:(STDataUploadCompletionBlock)completion;
++ (void)setPostLikeUnlikeWithPostId:(NSString *)postId
+                     withCompletion:(STDataUploadCompletionBlock)completion;
+
+
 @end

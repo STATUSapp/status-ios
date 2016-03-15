@@ -9,8 +9,35 @@
 #import "STDataAccessUtils.h"
 #import "STDataModelObjects.h"
 #import "STRequests.h"
+#import "STUsersPool.h"
+#import "STPostsPool.h"
+#import "STPost.h"
 
 @implementation STDataAccessUtils
+
+#pragma mark - Users
++(void)getUserDataForUserId:(NSString *)userId
+             withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock respnseCompletion = ^(id response, NSError *error){
+        if([response[@"status_code"] integerValue] == STWebservicesSuccesCod){
+            STListUser *receivedUser = [STListUser new];
+            receivedUser.uuid = userId;
+            receivedUser.thumbnail = response[@"small_photo_link"];
+            receivedUser.userName = response[@"user_name"];
+            [[CoreManager usersPool] addUsers:@[receivedUser]];
+            completion(@[receivedUser], nil);
+        }
+        else
+            completion(nil, error);
+    };
+    [STGetUserInfoRequest getInfoForUser:userId
+                              completion:respnseCompletion
+                                 failure:^(NSError *error) {
+                                     completion(nil, error);
+                                 }];
+    
+}
+
 +(void)getSuggestUsersForFollowType:(STFollowType)followType
                          withOffset:(NSNumber *)offset
                       andCompletion:(STDataAccessCompletionBlock)completion{
@@ -40,6 +67,7 @@
                     [objects addObject:su];
                 }
             }
+            [[CoreManager usersPool] addUsers:objects];
             completion([NSArray arrayWithArray:objects], nil);
             
         }
@@ -55,9 +83,10 @@
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             NSMutableArray *objects = [NSMutableArray new];
             for (NSDictionary *dict in response[@"data"]) {
-                STListUser *lu = [STListUser likeUserWithDict:dict];
+                STListUser *lu = [STListUser listUserWithDict:dict];
                 [objects addObject:lu];
             }
+            [[CoreManager usersPool] addUsers:objects];
             completion([NSArray arrayWithArray:objects], nil);
         }
     };
@@ -70,9 +99,10 @@
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             NSMutableArray *objects = [NSMutableArray new];
             for (NSDictionary *dict in response[@"data"]) {
-                STListUser *lu = [STListUser likeUserWithDict:dict];
+                STListUser *lu = [STListUser listUserWithDict:dict];
                 [objects addObject:lu];
             }
+            [[CoreManager usersPool] addUsers:objects];
             completion([NSArray arrayWithArray:objects], nil);
         }
     };
@@ -91,9 +121,10 @@
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             NSMutableArray *objects = [NSMutableArray new];
             for (NSDictionary *dict in response[@"data"]) {
-                STListUser *lu = [STListUser likeUserWithDict:dict];
+                STListUser *lu = [STListUser listUserWithDict:dict];
                 [objects addObject:lu];
             }
+            [[CoreManager usersPool] addUsers:objects];
             completion([NSArray arrayWithArray:objects], nil);
         }
     };
@@ -184,9 +215,25 @@
     STRequestCompletionBlock responseCompletion = ^(id response, NSError *error){
         NSMutableArray *objects = [NSMutableArray new];
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-            for (NSDictionary *dict in response[@"data"]) {
-                STPost *post = [STPost postWithDict:dict];
-                [objects addObject:post];
+            id data = response[@"data"];
+            NSArray *dataArray = nil;
+            if ([data isKindOfClass:[NSArray class]]) {
+                dataArray = [NSArray arrayWithArray:data];
+            }
+            else if ([data isKindOfClass:[NSDictionary class]]){
+                dataArray = @[data];
+            }
+            if (dataArray) {
+                for (NSDictionary *dict in dataArray) {
+                    STPost *post = [STPost postWithDict:dict];
+                    [objects addObject:post];
+                }
+            }
+            else
+            {
+#ifdef DEBUG
+                NSAssert(NO, @"We should never get this case");
+#endif
             }
         }
         completion(objects, error);
@@ -257,7 +304,6 @@
 }
 
 +(void)getPostWithPostId:(NSString *)postId
-                  offset:(NSInteger)offset
           withCompletion:(STDataAccessCompletionBlock)completion{
     STRequestCompletionBlock responseCompletion = [self postsDefaultHandlerWithCompletion:completion];
     STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
@@ -280,5 +326,28 @@
                        }];
 }
 
++ (void)setPostLikeUnlikeWithPostId:(NSString *)postId
+                     withCompletion:(STDataUploadCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            [STDataAccessUtils getPostWithPostId:postId withCompletion:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    [[CoreManager postsPool] addPosts:objects];
+                    completion(nil);
+                }
+                else
+                    completion(error);
+            }];
+        }
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        completion(error);
+    };
+    
+    [STSetPostLikeRequest setPostLikeForPostId:postId
+                                withCompletion:completion1
+                                       failure:failBlock];
+}
 
 @end

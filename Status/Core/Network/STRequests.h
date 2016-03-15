@@ -23,6 +23,8 @@
 #import "STSetPostSeenRequest.h"
 #import "STLoginRequest.h"
 #import "STRegisterRequest.h"
+#import "STGetUserInfoRequest.h"
+#import "STSetPostLikeRequest.h"
 
 #endif
 

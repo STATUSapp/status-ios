@@ -6,13 +6,14 @@
 //  Copyright © 2016 Andrus Cosmin. All rights reserved.
 //
 
-#import "STBaseObj.h"
+#import <Foundation/Foundation.h>
 
 extern NSString * const kNotificationPostDownloadSuccess;
+typedef void (^STProcessorCompletionBlock)(NSError *error);
 
 @class STPost;
 
-@interface STPostFlowProcessor : STBaseObj
+@interface STPostFlowProcessor : NSObject
 - (instancetype)initWithFlowType:(STFlowType)flowType;
 - (instancetype)initWithFlowType:(STFlowType)flowType
                          userId:(NSString *)userId;
@@ -20,10 +21,14 @@ extern NSString * const kNotificationPostDownloadSuccess;
                          postId:(NSString *)postId;
 
 
-//mothods
+//methods
 - (NSInteger)numberOfPosts;
 - (STPost *)postAtIndex:(NSInteger)index;
 - (void)processPostAtIndex:(NSInteger)index;
 - (void)deleteItemAtIndex:(NSInteger)index;
 - (BOOL)loading;
+
+//actions
+- (void)setLikeUnlikeAtIndex:(NSInteger)index
+              withCompletion:(STProcessorCompletionBlock)completion;
 @end

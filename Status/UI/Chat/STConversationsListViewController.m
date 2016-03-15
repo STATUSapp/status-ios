@@ -19,6 +19,7 @@
 #import "STGetUsersRequest.h"
 
 #import "CreateDataModelHelper.h"
+#import "STListUser.h"
 
 @interface STConversationsListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 {
@@ -123,20 +124,16 @@
     if (selectedUserInfo == nil) {
         return;
     }
-    NSString *selectedUserId = [CreateDataModelHelper validStringIdentifierFromValue:selectedUserInfo[@"user_id"]];
-    if ([selectedUserId isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
+    //TODO: get user from the pool first and then initialize
+    STListUser *lu = [STListUser new];
+    lu.uuid = [CreateDataModelHelper validStringIdentifierFromValue:selectedUserInfo[@"user_id"]];
+    //TODO: dev_1_2 add other properties, too
+    if ([lu.uuid isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
     }
-//    if (![[STChatController sharedInstance] canChat]) {
-//        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-////#ifndef DEBUG
-//        return;
-////#endif
-//    }
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:selectedUserInfo];
+
+    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

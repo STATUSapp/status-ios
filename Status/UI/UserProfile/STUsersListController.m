@@ -158,10 +158,8 @@
 //        return;
 ////#endif
 //    }
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
     STListUser *lu = _dataSource[((UIButton *)sender).tag];
-    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:lu.infoDict];
+    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

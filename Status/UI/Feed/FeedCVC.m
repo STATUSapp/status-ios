@@ -15,7 +15,19 @@
 #import "STNoPhotosCell.h"
 #import "FooterCell.h"
 
+#import "STFacebookLoginController.h"
+#import "STChatRoomViewController.h"
+#import "STListUser.h"
+
+#import "STUsersPool.h"
+
 @interface FeedCVC ()
+{
+    CGPoint _start;
+    CGPoint _end;
+    BOOL _shouldForceSetSeen;
+
+}
 
 @property (nonatomic, strong) STPostFlowProcessor *feedProcessor;
 @end
@@ -42,7 +54,8 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationPostDownloadSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:STPostPoolObjectUpdatedNotification object:nil];
+    
 
 }
 
@@ -57,15 +70,12 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     [self.collectionView reloadData];
 }
 
--(void)imageWasSavedLocally:(NSNotification *)notif{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        STPost *currentPost = [self getCurrentPost];
-        if ([currentPost.fullPhotoUrl isEqualToString:notif.object]) {
-            [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
-        }
-        
-        
-    });
+- (void)postUpdated:(NSNotification *)notif{
+    STPost *post = (STPost*)notif.object;
+    STPost *curentPost = [self getCurrentPost];
+    if ([post.uuid isEqualToString:curentPost.uuid]) {
+        [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
+    }
     
 }
 
@@ -80,6 +90,16 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     return post;
 }
 
+- (void)goToNextPostWithIndex:(NSNumber *)currentIndex{
+    [[self.collectionView delegate] scrollViewWillBeginDragging:self.collectionView];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentIndex.integerValue inSection:0]
+                                atScrollPosition:UICollectionViewScrollPositionNone
+                                        animated:YES];
+    
+    _shouldForceSetSeen = YES;
+    [[self.collectionView delegate] scrollViewDidEndDragging:self.collectionView willDecelerate:YES];
+}
+
 
 /*
 #pragma mark - Navigation
@@ -90,6 +110,30 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UIScrollViewDelegate
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    //    _numberOfSeenPosts++;
+    //    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
+    
+    _end = scrollView.contentOffset;
+    if (_start.x < _end.x || _shouldForceSetSeen == YES)
+    {//swipe to the right
+        _shouldForceSetSeen = NO;
+        CGPoint point = scrollView.contentOffset;
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        NSUInteger currentIndex = point.x/screenWidth;
+        NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
+        [_feedProcessor processPostAtIndex:currentIndex];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    _start = scrollView.contentOffset;
+}
+
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -118,6 +162,10 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     }
     
     return normalFeedCell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return self.view.frame.size;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -175,8 +223,40 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
 
 #pragma mark - IBACtions
 - (IBAction)onLikePressed:(id)sender {
+    [(UIButton *)sender setUserInteractionEnabled:NO];
+    __weak FeedCVC *weakSelf = self;
+    __block NSInteger index = [[[self.collectionView indexPathsForVisibleItems] firstObject] row];
+    [_feedProcessor setLikeUnlikeAtIndex:index
+                          withCompletion:^(NSError *error) {
+                              [(UIButton *)sender setUserInteractionEnabled:YES];
+                              STPost *post = [weakSelf.feedProcessor postAtIndex:index];
+                              if (post.postLikedByCurrentUser == YES &&
+                                  [weakSelf.feedProcessor numberOfPosts] >= index + 1) {
+                                  [weakSelf performSelector:@selector(goToNextPostWithIndex:)
+                                                 withObject:@(index + 1)
+                                                 afterDelay:0.25f];
+                              }
+                          }];
 }
 - (IBAction)onMessagePressed:(id)sender {
+    STPost *post = [self getCurrentPost];
+    
+    if ([post.userId isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
+        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        return;
+    }
+    //TODO: get user from the pool first and then initialize
+    STListUser *lu = (STListUser *)[[CoreManager usersPool] getUserWithId:post.userId];
+    if (!lu) {
+       lu = [STListUser new];
+        lu.uuid = post.userId;
+        lu.userName = post.userName;
+        lu.thumbnail = post.smallPhotoUrl;
+    }
+    
+    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+    [self.navigationController pushViewController:viewController animated:YES];
+
 }
 - (IBAction)onNamePressed:(id)sender {
 }

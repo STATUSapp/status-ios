@@ -18,6 +18,7 @@
 @class STIAPHelper;
 @class STContactsManager;
 @class STImagePickerService;
+@class STUsersPool;
 
 @interface CoreManager : NSObject
 
@@ -34,5 +35,6 @@
 + (STIAPHelper *)IAPService;
 + (STContactsManager *)contactsService;
 + (STImagePickerService *)imagePickerService;
++ (STUsersPool *)usersPool;
 
 @end

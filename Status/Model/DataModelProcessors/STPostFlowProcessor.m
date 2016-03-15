@@ -129,6 +129,17 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
     return (_loaded == NO);
 }
 
+#pragma mark - Actions
+
+- (void)setLikeUnlikeAtIndex:(NSInteger)index
+              withCompletion:(STProcessorCompletionBlock)completion{
+    NSString *postId = [_postIds objectAtIndex:index];
+    [STDataAccessUtils setPostLikeUnlikeWithPostId:postId
+                                    withCompletion:^(NSError *error) {
+                                        completion(error);
+                                    }];
+}
+
 #pragma mark - Internal Helpers
 
 -(void)updatePostIdsWithNewArray:(NSArray *)array{
@@ -266,7 +277,6 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
         }
         case STFlowTypeSinglePost:{
             [STDataAccessUtils getPostWithPostId:_postId
-                                          offset:offset
                                   withCompletion:completion];
             break;
         }

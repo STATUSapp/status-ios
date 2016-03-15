@@ -29,6 +29,9 @@
 
 #import "NSString+MD5.h"
 
+#import "STListUser.h"
+#import "STDataAccessUtils.h"
+
 static NSInteger const  kBlockUserAlertTag = 11;
 static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 @interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SLCoreDataRequestManagerDelegate>
@@ -57,10 +60,18 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 @property (weak, nonatomic) IBOutlet UIButton *userNameLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewWidth;
 
-
+@property (strong, nonatomic) STListUser *user;
 @end
 
 @implementation STChatRoomViewController
+
++ (STChatRoomViewController *)roomWithUser:(STListUser *)user{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    viewController.user = user;
+    
+    return viewController;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -73,12 +84,9 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 
 - (void)loadUserInfo
 {
-    [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateNormal];
-    [_userNameLbl setTitle:_userInfo[@"user_name"] forState:UIControlStateHighlighted];
-    NSString *photoLink = _userInfo[@"small_photo_link"];
-    if (photoLink == nil) {
-        photoLink = _userInfo[@"full_photo_link"];
-    }
+    [_userNameLbl setTitle:_user.userName forState:UIControlStateNormal];
+    [_userNameLbl setTitle:_user.userName forState:UIControlStateHighlighted];
+    NSString *photoLink = _user.thumbnail;
     __weak STChatRoomViewController *weakSelf = self;
     
     [_userImg sd_setImageWithURL:[NSURL URLWithString:photoLink] placeholderImage:[UIImage imageNamed:@"btn_nrLIkes_normal"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -104,15 +112,18 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     [self initiateCustomControls];
-    if (_userInfo[@"user_name"] == nil) {//notification, need fetch
+    if (_user.userName == nil) {//notification, need fetch
         __weak STChatRoomViewController *weakSelf = self;
-        STRequestCompletionBlock completion = ^(id response, NSError *error){
-            if([response[@"status_code"] integerValue] == STWebservicesSuccesCod){
-                [weakSelf.userInfo addEntriesFromDictionary:response];
+        [STDataAccessUtils getUserDataForUserId:_user.uuid withCompletion:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                weakSelf.user = [objects firstObject];
                 [weakSelf loadUserInfo];
+                
             }
-        };
-        [STGetUserInfoRequest getInfoForUser: [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]] completion:completion failure:nil];
+            else{
+                //TODO dev_1_2 restrict access?
+            }
+        }];
     }
     else
         [self loadUserInfo];
@@ -128,7 +139,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     [super viewWillAppear:animated];
     if (chatController.canChat == NO) {
         NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
-        NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]];
+        NSString *userId = _user.uuid;
         STCoreDataRequestManager *messages = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message"
                                                                                         sortDescritors:@[sd1]
                                                                                              predicate:[NSPredicate predicateWithFormat:@"userId like %@", userId]
@@ -145,7 +156,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     else
     {
         if (chatController.authenticated == YES) {
-            [chatController openChatRoomForUserId: [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]]];
+            [chatController openChatRoomForUserId: _user.uuid];
         }
         else
             [chatController authenticate];
@@ -292,12 +303,12 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 }
 - (IBAction)onClickUserName:(id)sender {
     
-    if (_userInfo[@"user_id"] == nil) {
+    if (_user.uuid == nil) {
         NSLog(@"Error from server. No user id.");
         return;
     }
     
-    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]]];
+    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: _user.uuid];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {
@@ -382,7 +393,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 }
 -(void)chatDidAuthenticate{
     [self hideStatusAlert];
-    [chatController openChatRoomForUserId: [CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]]];
+    [chatController openChatRoomForUserId: _user.uuid];
 }
 
 -(void)userWasBlocked{
@@ -425,7 +436,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == kBlockUserAlertTag) {
         if (buttonIndex == 1) {
-            [chatController blockUserWithId:[CreateDataModelHelper validStringIdentifierFromValue:_userInfo[@"user_id"]]];
+            [chatController blockUserWithId:_user.uuid];
         }
 
     }

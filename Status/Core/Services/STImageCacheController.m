@@ -12,6 +12,7 @@
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
 NSUInteger const STImageDownloadSpecialPriority = -1;
+
 @interface STImageCacheController()
 
 @property (nonatomic, strong) NSMutableArray *currentPosts;
@@ -248,10 +249,12 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     }
     _inProgress = YES;
     __weak STImageCacheController *weakSelf = self;
-    [self downloadImageWithName:[[_currentPosts firstObject] valueForKey:@"link"] andCompletion:^(NSString *downloadedImage, BOOL downloaded) {
+    __block NSString *fullUrlString = [[_currentPosts firstObject] valueForKey:@"link"];
+    [self downloadImageWithName:fullUrlString
+                  andCompletion:^(NSString *downloadedImage, BOOL downloaded) {
         
         if (downloaded==YES) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:[NSString stringWithString:downloadedImage]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:fullUrlString];
         }
         NSUInteger index = [[weakSelf.currentPosts valueForKey:@"link"] indexOfObject:downloadedImage];
         if (index!=NSNotFound) {

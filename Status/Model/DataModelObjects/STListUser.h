@@ -9,5 +9,5 @@
 #import "STSuggestedUser.h"
 
 @interface STListUser : STSuggestedUser
-+(STListUser *)likeUserWithDict:(NSDictionary *)dict;
++(STListUser *)listUserWithDict:(NSDictionary *)dict;
 @end

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STChatRoomViewController : UIViewController
+@class STListUser;
 
-@property (nonatomic, strong) NSMutableDictionary *userInfo;
+@interface STChatRoomViewController : UIViewController
++ (STChatRoomViewController *)roomWithUser:(STListUser *)user;
 @end

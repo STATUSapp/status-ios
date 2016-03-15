@@ -35,9 +35,13 @@ static NSString * storyboardIdentifier = @"tabBarController";
 - (void)setupTabBar {
     
     // add home flow
-    
+    //TODO: dev_1_2 use the storyboard to load navCtrl
     FeedCVC *homeVc = [FeedCVC mainFeedController];
     homeVc.title = NSLocalizedString(@"Home", nil);
+    UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
+    
+    homeNavCtrl.navigationBarHidden = YES;
+
     // add explore flow
     
     // add take a photo
@@ -61,9 +65,8 @@ static NSString * storyboardIdentifier = @"tabBarController";
     UINavigationController   * settingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
     settingsNav.navigationBarHidden = YES;
     settingsNav.title = @"Settings";
-
-
-    [self setViewControllers:@[homeVc, takePhotoNav, notifChatNav, settingsNav] animated:NO];
+    
+    [self setViewControllers:@[homeNavCtrl, takePhotoNav, notifChatNav, settingsNav] animated:NO];
 }
 
 - (void)viewDidLoad {

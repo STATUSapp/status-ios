@@ -19,6 +19,8 @@
 		17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5C41A1BB7EF240057180E /* AddressBook.framework */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
+		17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F2881C96DED500D53EC1 /* STBasePool.m */; };
+		17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */; };
 		17FBCB281C8F17D500261A39 /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FBCB271C8F17D500261A39 /* LoadingCell.m */; };
 		1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
 		1DE2D5AD194FA5D600A29A86 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */; };
@@ -238,6 +240,10 @@
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		17F4F2871C96DED500D53EC1 /* STBasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBasePool.h; sourceTree = "<group>"; };
+		17F4F2881C96DED500D53EC1 /* STBasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBasePool.m; sourceTree = "<group>"; };
+		17F4F28A1C96E5F800D53EC1 /* STUsersPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUsersPool.h; sourceTree = "<group>"; };
+		17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUsersPool.m; sourceTree = "<group>"; };
 		17FBCB261C8F17D500261A39 /* LoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingCell.h; sourceTree = "<group>"; };
 		17FBCB271C8F17D500261A39 /* LoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingCell.m; sourceTree = "<group>"; };
 		1D98A4C219603064007F4AB2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -913,11 +919,15 @@
 				99B3865D1C82FAA2005B4D8C /* STFacebookHelper.h */,
 				99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */,
 				99B3866D1C82FAA2005B4D8C /* STNativeAdsController.h */,
+				99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */,
 				99B386551C82FAA2005B4D8C /* KeychainItemWrapper.h */,
 				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
-				99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */,
 				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
+				17F4F28A1C96E5F800D53EC1 /* STUsersPool.h */,
+				17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */,
+				17F4F2871C96DED500D53EC1 /* STBasePool.h */,
+				17F4F2881C96DED500D53EC1 /* STBasePool.m */,
 				99B386591C82FAA2005B4D8C /* STContactsManager.h */,
 				99B3865A1C82FAA2005B4D8C /* STContactsManager.m */,
 				171936C11C848604002C0202 /* STNavigationService.h */,
@@ -1603,6 +1613,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99B387D41C82FAA2005B4D8C /* STRemoveAdsViewController.m in Sources */,
+				17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */,
 				99B387651C82FAA2005B4D8C /* STSetUserSettingsRequest.m in Sources */,
 				99B387881C82FAA2005B4D8C /* STSuggestedUser.m in Sources */,
 				99B387FE1C838FA8005B4D8C /* STTakeAPhotoViewController.m in Sources */,
@@ -1635,6 +1646,7 @@
 				99B387851C82FAA2005B4D8C /* STBaseObj.m in Sources */,
 				99B387C51C82FAA2005B4D8C /* STInviteFriendsViewController.m in Sources */,
 				99B387C41C82FAA2005B4D8C /* STInviteFriendCell.m in Sources */,
+				17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */,
 				99B3875E1C82FAA2005B4D8C /* STLoginRequest.m in Sources */,
 				99B387441C82FAA2005B4D8C /* UIImage+ImageEffects.m in Sources */,
 				99B387DC1C82FAA2005B4D8C /* STTutorialCell.m in Sources */,

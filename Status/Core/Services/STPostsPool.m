@@ -11,8 +11,6 @@
 
 @interface STPostsPool ()
 
-@property (nonatomic, strong) NSMutableSet <STPost *> * posts;
-
 @end
 
 @implementation STPostsPool
@@ -20,59 +18,57 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _posts = [NSMutableSet set];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
+
     }
     return self;
+}
+
+#pragma mark - Notifications
+
+-(void)imageWasSavedLocally:(NSNotification *)notif{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *fullUrl = (NSString *)notif.object;
+        STPost *updatedPost = [self postForUrl:fullUrl];
+        if (updatedPost) {
+            updatedPost.imageDownloaded = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:STPostPoolObjectUpdatedNotification object:updatedPost];
+        }
+    });
 }
 
 
 #pragma mark - Public methods
 
 - (void)addPosts:(NSArray<STPost *> *)posts {
-    for (STPost * post in posts) {
-        [self addOrUpdatePost:post];
-    }
+    [super addObjects:posts];
 }
 
 - (NSArray<STPost *> *)getAllPosts {
-    return _posts.allObjects;
+    return (NSArray<STPost *> *)[super getAllObjects];
 }
 
 - (void)clearAllPosts {
-    [_posts removeAllObjects];
+    [super clearAllObjects];
 }
 
 - (void)removePosts:(NSArray<STPost *> *)posts {
-    NSMutableArray * postsIDs = [NSMutableArray array];
-    for (STPost * post in posts) {
-        [postsIDs addObject:post.uuid];
-    }
-    
-    [self removePostsWithIDs:postsIDs];
+    [super removeObjects:posts];
 }
 
 - (void)removePostsWithIDs:(NSArray<NSString *> *)uuids {
-    NSPredicate * removePredicate = [NSPredicate predicateWithBlock:^BOOL(STPost *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ![uuids containsObject:evaluatedObject.uuid];
-    }];
-    [_posts filterUsingPredicate:removePredicate];
+    [super removeObjectsWithIDs:uuids];
 }
 
 - (STPost *)getPostWithId:(NSString *)postId {
-    NSPredicate * predicate = [NSPredicate predicateWithBlock:^BOOL(STPost *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [evaluatedObject.uuid isEqualToString:postId];
-    }];
-    return [_posts filteredSetUsingPredicate:predicate].anyObject;
+    return (STPost *)[super getObjectWithId:postId];
 }
 
 #pragma mark - Private methods
 
-- (void)addOrUpdatePost:(STPost *)post {
-    NSPredicate * removePreviousInstancesOfPostPredicate = [NSPredicate predicateWithBlock:^BOOL(STPost *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ![evaluatedObject.uuid isEqualToString:post.uuid];
-    }];
-    [_posts filterUsingPredicate:removePreviousInstancesOfPostPredicate];
-    [_posts addObject:post];
+- (STPost *)postForUrl:(NSString *)url{
+    NSArray *filteredArray = [[self getAllPosts] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"fullPhotoUrl like %@", url]];
+    return [filteredArray firstObject];
 }
 
 @end

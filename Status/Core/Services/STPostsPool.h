@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "STBasePool.h"
 @class STPost;
 
-@interface STPostsPool : NSObject
+@interface STPostsPool : STBasePool
 
 - (void)addPosts:(NSArray <STPost * > *)posts;
 - (STPost *)getPostWithId:(NSString *)postId;

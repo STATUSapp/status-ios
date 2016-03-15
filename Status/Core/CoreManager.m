@@ -17,6 +17,7 @@
 #import "STIAPHelper.h"
 #import "STContactsManager.h"
 #import "STImagePickerService.h"
+#import "STUsersPool.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) STIAPHelper *IAPService;
 @property (nonatomic, strong) STContactsManager *contactsService;
 @property (nonatomic, strong) STImagePickerService * imagePickerService;
+@property (nonatomic, strong) STUsersPool *usersPool;
 @end
 
 @implementation CoreManager
@@ -56,6 +58,7 @@
         _IAPService = [STIAPHelper new];
         _contactsService = [STContactsManager new];
         _imagePickerService = [STImagePickerService new];
+        _usersPool = [STUsersPool new];
         
     }
     return self;
@@ -109,6 +112,10 @@
 
 + (STImagePickerService *)imagePickerService {
     return [[CoreManager sharedInstance] imagePickerService];
+}
+
++ (STUsersPool *)usersPool{
+    return [[CoreManager sharedInstance] usersPool];
 }
 
 #pragma mark - Private implementation

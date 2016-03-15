@@ -155,6 +155,8 @@ extern NSString *const STUnreadMessagesValueDidChanged;
 extern NSString *const STChatControllerAuthenticate;
 extern NSString *const STFacebookPickerNotification;
 extern NSString *const STLoadImageNotification;
+extern NSString *const STPostPoolObjectUpdatedNotification;
+
 
 #pragma mark - Invite Friends
 

@@ -7,6 +7,7 @@
 //
 
 #import "STNotificationsManager.h"
+#import "FeedCVC.h"
 #import "STFlowTemplateViewController.h"
 #import "STChatController.h"
 #import "STChatRoomViewController.h"
@@ -17,6 +18,8 @@
 #import "STUserProfileViewController.h"
 #import "STNotificationsViewController.h"
 #import "STImageCacheController.h"
+
+#import "STListUser.h"
 
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
@@ -38,6 +41,7 @@ static STNotificationsManager *_sharedManager = nil;
     return _sharedManager;
 }
 - (UIViewController *)getCurrentViewController {
+    //TODO: dev_1_2 this hierarchy is no longer valid
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     
     UINavigationController *navController = (UINavigationController *)mainWindow.rootViewController;
@@ -51,7 +55,7 @@ static STNotificationsManager *_sharedManager = nil;
     }
     UIViewController *lastVC = [self getCurrentViewController];
 
-    if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
+    if ([lastVC isKindOfClass:[FeedCVC class]]) {
         
         if (![CoreManager loggedIn]) {
             //wait for the login to be performed and after handle the notification
@@ -61,13 +65,17 @@ static STNotificationsManager *_sharedManager = nil;
         if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
             _lastNotification = nil;
             NSDictionary *userInfo = notif[@"user_info"];
-            if (userInfo[@"user_id"] == nil) {
+            //TODO: get user from the pool first and then initialize
+            STListUser *lu = [STListUser new];
+            lu.uuid = userInfo[@"user_id"];
+            //TODO: dev_1_2 add other params if existent, too
+
+            if (lu.uuid == nil) {
                 NSLog(@"Error from notification: user_id = nil");
                 return;
             }
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-            STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-            viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:notif[@"user_info"]];
+            
+            STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
             [lastVC.navigationController pushViewController:viewController animated:YES];
         }
         else
@@ -200,6 +208,7 @@ static STNotificationsManager *_sharedManager = nil;
     STNotificationType notifType = _currentBanner.notificationType;
     UIViewController *lastVC = [self getCurrentViewController];
     [self dissmissPresentedVCs:lastVC];
+    //TODO: dev_1_2 add proper handlers
     switch (notifType) {
         case STNotificationTypeLike:
         {
@@ -215,21 +224,19 @@ static STNotificationsManager *_sharedManager = nil;
             break;
         case STNotificationTypeChatMessage:
         {
-            NSMutableDictionary *selectedUserInfo = [NSMutableDictionary new];
-            selectedUserInfo[@"user_id"] = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
-            selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
+            //TODO: get user from the pool first and then initialize
+            STListUser *lu = [STListUser new];
+            lu.uuid = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
+            lu.userName = _currentBanner.notificationInfo[@"name"];
             NSString *urlString = _currentBanner.notificationInfo[@"photo"];
             if ([urlString rangeOfString:@"http"].location==NSNotFound) {
                 urlString = [NSString stringWithFormat:@"%@%@",[CoreManager imageCacheService].photoDownloadBaseUrl, _currentBanner.notificationInfo[@"photo"]];
             }
+            lu.thumbnail = urlString;
 
-            selectedUserInfo[@"small_photo_link"] = urlString;
-
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-            STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-            viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:selectedUserInfo];
-
+            STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
             
+            //TODO: dev_1_2 this hierarchy is no longer valid
             if ([lastVC isKindOfClass:[STChatRoomViewController class]]) {
                 //replace this last room with the new one
                 UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];

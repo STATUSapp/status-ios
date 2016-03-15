@@ -640,8 +640,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
             break;
     }
 }
+//moved
 - (IBAction)onChatWithUser:(id)sender {
-    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:[self getCurrentDictionary]];
+//    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:[self getCurrentDictionary]];
 //    if (![[STChatController sharedInstance] canChat]) {
 //        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 ////#ifndef DEBUG
@@ -649,17 +650,17 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 ////#endif
 //    }
     
-    if (userInfo[@"user_id"]==nil && _flowUserID!=nil) {
-        userInfo[@"user_id"]=_flowUserID;
-    }
-    if ([userInfo[@"user_id"] isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        return;
-    }
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
-    [self.navigationController pushViewController:viewController animated:YES];
+//    if (userInfo[@"user_id"]==nil && _flowUserID!=nil) {
+//        userInfo[@"user_id"]=_flowUserID;
+//    }
+//    if ([userInfo[@"user_id"] isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
+//        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+//        return;
+//    }
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+//    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+//    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
+//    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)onChat:(id)sender {
@@ -1229,7 +1230,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         }
     }
 }
-
+//moved
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 //    _numberOfSeenPosts++;
 //    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
@@ -1246,7 +1247,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         [self processLastPostWithIndex:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
     }
 }
-
+//moved
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     _start = scrollView.contentOffset;

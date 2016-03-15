@@ -100,6 +100,7 @@ NSString *const STUnreadMessagesValueDidChanged = @"STUnreadMessagesValueDidChan
 NSString *const STChatControllerAuthenticate = @"STChatControllerAuthenticate";
 NSString *const STFacebookPickerNotification = @"STFacebookPickerNotification";
 NSString *const STLoadImageNotification = @"STLoadImageNotification";
+NSString *const STPostPoolObjectUpdatedNotification = @"STPostPoolObjectUpdatedNotification";
 
 
 #pragma mark - Invite Friends
