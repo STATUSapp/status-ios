@@ -10,6 +10,7 @@
 #import "STConstants.h"
 
 #import "STSetUserLocationRequest.h"
+#import "STLocalNotificationService.h"
 
 static const double kGPSRecordTime = 1800;//seconds, half an hour
 static const double kGPSAccuracyMetters = 150;
@@ -94,8 +95,8 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
             }
             if (_updateForced) {
                 _updateForced = NO;
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewLocationHasBeenUploaded
-                                                                    object:nil];
+                [[CoreManager notificationService] postNotificationName:kNotificationNewLocationHasBeenUploaded
+                                                                    object:nil userInfo:nil];
             }
         }
     };

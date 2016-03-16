@@ -9,6 +9,7 @@
 #import "STBasePool.h"
 #import "STBaseObj.h"
 #import "STPost.h"
+#import "STLocalNotificationService.h"
 
 @interface STBasePool ()
 
@@ -59,6 +60,13 @@
     NSPredicate * removePredicate = [NSPredicate predicateWithBlock:^BOOL(STBaseObj *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
         return ![uuids containsObject:evaluatedObject.uuid];
     }];
+    NSSet *matches = [_objects filteredSetUsingPredicate:removePredicate];
+    for (id object in matches) {
+        if ([object isKindOfClass:[STPost class]]) {
+            [[CoreManager notificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];
+        }
+        //TODO: dev_1_2 add anoter notifications
+    }
     [_objects filterUsingPredicate:removePredicate];
 
 }
@@ -78,7 +86,7 @@
     if (countBeforeFilter > 0 && countBeforeFilter>countAfterFilter) {
         //there was an update
         if ([obj isKindOfClass:[STPost class]]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:STPostPoolObjectUpdatedNotification object:obj];
+            [[CoreManager notificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
         }
         //TODO: dev_1_2 add more updates here
     }

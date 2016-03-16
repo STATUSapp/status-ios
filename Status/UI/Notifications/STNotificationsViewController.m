@@ -13,7 +13,6 @@
 #import "STSmartNotificationCell.h"
 #import "STImageCacheController.h"
 #import "AppDelegate.h"
-#import "STFlowTemplateViewController.h"
 #import "STFacebookLoginController.h"
 #import "UIImageView+WebCache.h"
 #import "NSDate+Additions.h"
@@ -24,6 +23,8 @@
 #import "STUserProfileViewController.h"
 
 #import "NSString+MD5.h"
+
+#import "FeedCVC.h"
 
 const float kNoNotifHeight = 24.f;
 
@@ -146,11 +147,7 @@ const float kNoNotifHeight = 24.f;
             case STNotificationType5DaysUploadNewPhoto:
             {
                 //go to main feed with camera button pressed
-                UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-                UINavigationController *navController = (UINavigationController *)window.rootViewController;
-                STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers firstObject];
-                viewController.shouldActionCameraBtn = YES;
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                //TODO: dev_1_2 got tho the take a photo tab
             }
                 break;
             default:
@@ -184,12 +181,15 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeLike:
         case STNotificationTypeUploaded:
         {
-            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-            flowCtrl.flowType = STFlowTypeSinglePost;
-            flowCtrl.postID = dict[@"post_id"];
-            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
-            flowCtrl.userName = dict[@"user_name"];
-            [self.navigationController pushViewController:flowCtrl animated:YES];
+            
+            //TODO: dev_1_2 do not use dictionaries, use objects
+            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:dict[@"post_id"]];
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeSinglePost;
+//            flowCtrl.postID = dict[@"post_id"];
+//            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
+//            flowCtrl.userName = dict[@"user_name"];
+            [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
         case STNotificationTypeInvite:
@@ -215,12 +215,15 @@ const float kNoNotifHeight = 24.f;
             
         default:
         {
-            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-            flowCtrl.flowType = STFlowTypeSinglePost;
-            flowCtrl.postID = dict[@"post_id"];
-            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
-            flowCtrl.userName = dict[@"user_name"];
-            [self.navigationController pushViewController:flowCtrl animated:YES];
+            
+            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:dict[@"post_id"]];
+
+//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeSinglePost;
+//            flowCtrl.postID = dict[@"post_id"];
+//            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
+//            flowCtrl.userName = dict[@"user_name"];
+            [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
     }

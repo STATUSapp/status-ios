@@ -7,6 +7,7 @@
 //
 
 #import "STIAPHelper.h"
+#import "STLocalNotificationService.h"
 
 @interface STIAPHelper()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
@@ -115,12 +116,12 @@
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : error.localizedDescription}];
+    [[CoreManager notificationService] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : error.localizedDescription}];
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
     if (queue.transactions.count == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : @"No purchase to restore"}];
+        [[CoreManager notificationService] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : @"No purchase to restore"}];
     }
 }
 
@@ -148,7 +149,7 @@
     }
     
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedFailedNotification object:nil userInfo:@{@"error" : transaction.error.localizedDescription}];
+    [[CoreManager notificationService] postNotificationName:IAPHelperProductPurchasedFailedNotification object:nil userInfo:@{@"error" : transaction.error.localizedDescription}];
 }
 
 - (void)provideContentForProductIdentifier:(NSString *)productIdentifier {
@@ -156,7 +157,7 @@
     [_purchasedProductIdentifiers addObject:productIdentifier];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
+    [[CoreManager notificationService] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
     
 }
 

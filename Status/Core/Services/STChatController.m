@@ -21,6 +21,7 @@
 #import "CreateDataModelHelper.h"
 #import "NSString+VersionComparison.h"
 #import "CreateDataModelHelper.h"
+#import "STLocalNotificationService.h"
 
 NSString *const kFirstChatVersion = @"1.0.4";
 
@@ -49,7 +50,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
 
 -(void)setUnreadMessages:(NSInteger)unreadMessages{
     _unreadMessages = unreadMessages;
-    [[NSNotificationCenter defaultCenter] postNotificationName:STUnreadMessagesValueDidChanged object:nil];
+    [[CoreManager notificationService] postNotificationName:STUnreadMessagesValueDidChanged object:nil userInfo:nil];
     
 }
 
@@ -130,7 +131,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
-    NSLog(@":( Websocket Failed With Error %@", error);
+//    NSLog(@":( Websocket Failed With Error %@", error);
     
     _status = STWebSockerStatusClosed;
     if (_delegate && [_delegate respondsToSelector:@selector(chatDidClose)])
@@ -168,7 +169,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
             if (_delegate && [_delegate respondsToSelector:@selector(chatDidAuthenticate)]) {
                 [_delegate performSelector:@selector(chatDidAuthenticate)];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:STChatControllerAuthenticate object:nil];
+            [[CoreManager notificationService] postNotificationName:STChatControllerAuthenticate object:nil userInfo:nil];
 
             [self setUnreadMessages:[response[@"unseenMessagesCount"] integerValue]];
         }

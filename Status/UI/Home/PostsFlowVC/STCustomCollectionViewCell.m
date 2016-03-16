@@ -11,7 +11,6 @@
 #import "STConstants.h"
 #import "STImageCacheController.h"
 #import "STNetworkQueueManager.h"
-#import "STFlowTemplateViewController.h"
 #import "STFacebookLoginController.h"
 #import "UIImageView+Mask.h"
 #import "UIImageView+WebCache.h"

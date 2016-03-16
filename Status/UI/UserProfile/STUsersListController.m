@@ -10,7 +10,6 @@
 #import "STNetworkQueueManager.h"
 #import "STLikeCell.h"
 #import "STImageCacheController.h"
-#import "STFlowTemplateViewController.h"
 #import "STFacebookLoginController.h"
 #import "STChatRoomViewController.h"
 #import "STChatController.h"

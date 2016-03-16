@@ -221,7 +221,7 @@
                 dataArray = [NSArray arrayWithArray:data];
             }
             else if ([data isKindOfClass:[NSDictionary class]]){
-                dataArray = @[data];
+                dataArray = [NSArray arrayWithObject:data];
             }
             if (dataArray) {
                 for (NSDictionary *dict in dataArray) {
@@ -348,6 +348,114 @@
     [STSetPostLikeRequest setPostLikeForPostId:postId
                                 withCompletion:completion1
                                        failure:failBlock];
+}
+
++ (void)deletePostWithId:(NSString *)postId
+          withCompletion:(STDataUploadCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+            [[CoreManager postsPool] removePostsWithIDs:@[postId]];
+            completion(nil);
+        }
+        else
+            completion(error);
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        completion(error);
+    };
+
+    [STDeletePostRequest deletePost:postId
+                     withCompletion:completion1
+                            failure:failBlock];
+
+}
++ (void)reportPostWithId:(NSString *)postId
+          withCompletion:(STDataUploadCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"A message was sent to the admin." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        }
+        else
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        }
+        completion(nil);
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        completion(error);
+    };
+
+    
+    [STRepostPostRequest reportPostWithId:postId
+                           withCompletion:completion1
+                                  failure:failBlock];
+
+}
+
++ (void)updatePostWithId:(NSString *)postId
+          withNewCaption:(NSString *)newCaption
+          withCompletion:(STDataUploadCompletionBlock)completion{
+    [STUpdatePostCaptionRequest setPostCaption:newCaption
+                                     forPostId:postId
+                                withCompletion:^(id response, NSError *error) {
+                                    if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                                        STPost *post = [[CoreManager postsPool] getPostWithId:postId];
+                                        post.caption = newCaption;
+                                        [[CoreManager postsPool] addPosts:@[post]];
+                                        completion(nil);
+                                    }
+                                    else{
+                                        completion([NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+                                    }
+                                } failure:^(NSError *error) {
+                                    NSLog(@"Error: %@", error.debugDescription);
+                                    completion(error);
+                                }];
+
+}
+
++ (void)editPpostWithId:(NSString *)postId
+           withNewImageData:(NSData *)imageData
+         withNewCaption:(NSString *)newCaption
+         withCompletion:(STDataAccessCompletionBlock)completion{
+
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            
+            NSString * postUuid = postId;
+            if(postId == nil)
+                postUuid = response[@"post_id"];
+
+            [STDataAccessUtils getPostWithPostId:postUuid
+                                  withCompletion:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    [[CoreManager postsPool] addPosts:objects];
+                    completion(objects, nil);
+                }
+                else
+                    completion(nil, error);
+            }];
+        }
+        else
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            completion(nil,[NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+            
+        }
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        completion(nil,error);
+    };
+    [STUploadPostRequest uploadPostForId:postId
+                                withData:imageData
+                              andCaption:newCaption
+                          withCompletion:completion1
+                                 failure:failBlock];
+
 }
 
 @end

@@ -18,6 +18,7 @@
 #import "STContactsManager.h"
 #import "STImagePickerService.h"
 #import "STUsersPool.h"
+#import "STLocalNotificationService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) STContactsManager *contactsService;
 @property (nonatomic, strong) STImagePickerService * imagePickerService;
 @property (nonatomic, strong) STUsersPool *usersPool;
+@property (nonatomic, strong) STLocalNotificationService *localNotifCenter;
 @end
 
 @implementation CoreManager
@@ -59,6 +61,7 @@
         _contactsService = [STContactsManager new];
         _imagePickerService = [STImagePickerService new];
         _usersPool = [STUsersPool new];
+        _localNotifCenter = [STLocalNotificationService new];
         
     }
     return self;
@@ -116,6 +119,10 @@
 
 + (STUsersPool *)usersPool{
     return [[CoreManager sharedInstance] usersPool];
+}
+
++ (STLocalNotificationService *)notificationService{
+    return [[CoreManager sharedInstance] localNotifCenter];
 }
 
 #pragma mark - Private implementation

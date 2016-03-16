@@ -13,7 +13,7 @@
 #import "STFacebookHelper.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
-
+#import "STLocalNotificationService.h"
 @interface STAlbumImagesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 {
     NSMutableArray *_dataSource;
@@ -97,7 +97,7 @@
     
     [[CoreManager imageCacheService] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
         UIImage *newImg = img;//[img imageWithBlurBackground];
-        [[NSNotificationCenter defaultCenter] postNotificationName:STFacebookPickerNotification object:newImg];
+        [[CoreManager notificationService] postNotificationName:STFacebookPickerNotification object:nil userInfo:@{kImageKey:newImg}];
     }];
     
 }

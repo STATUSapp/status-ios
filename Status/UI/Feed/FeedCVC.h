@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedCVC : UICollectionViewController
+
 + (FeedCVC *)mainFeedController;
++ (FeedCVC *)singleFeedControllerWithPostId:(NSString *)postId;
++ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId;
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "STFlowTemplateViewController.h"
 #import "STNetworkQueueManager.h"
 #import "STConstants.h"
 #import "STFacebookLoginController.h"
@@ -39,6 +38,7 @@
 #import "STTabBarViewController.h"
 
 #import "LaunchViewController.h"
+#import "STLocalNotificationService.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
@@ -55,7 +55,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     [[NSUserDefaults standardUserDefaults] setValue:@(badgeNumber) forKey:kSTLastBadgeNumber];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
-    [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
+    [[CoreManager notificationService] postNotificationName:STNotificationBadgeValueDidChanged object:nil userInfo:nil];
 }
 
 -(void)loadBadgeNumber{

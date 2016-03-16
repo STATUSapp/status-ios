@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
@@ -32,11 +33,11 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="7ra-Y6-v7y"/>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="2bP-9q-8Kv"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b75-0M-y77">
-                    <rect key="frame" x="0.0" y="268" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="218" width="320" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="eZv-tt-urI"/>
                     </constraints>
@@ -45,12 +46,12 @@
                     <state key="selected" backgroundImage="share on facebook button pressed"/>
                     <state key="highlighted" title="Share on Facebook"/>
                     <connections>
-                        <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="Igu-aL-XqS"/>
-                        <action selector="onSharePostToFacebook:" destination="-2" eventType="touchUpInside" id="RvO-Rq-j58"/>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="DmD-4u-ilk"/>
+                        <action selector="onShareFb:" destination="1" eventType="touchUpInside" id="SeA-Pj-4bo"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a46-Fq-RUX">
-                    <rect key="frame" x="0.0" y="318" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="268" width="320" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="y77-PY-AXp"/>
                     </constraints>
@@ -61,12 +62,12 @@
                     <state key="selected" backgroundImage="save to camera roll pressed"/>
                     <state key="highlighted" title="Save to Camera Roll"/>
                     <connections>
-                        <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="xVp-Cg-kJE"/>
-                        <action selector="onSavePostLocally:" destination="-2" eventType="touchUpInside" id="wNI-Vn-9ft"/>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="uRu-yq-qQ5"/>
+                        <action selector="onSaveLocally:" destination="1" eventType="touchUpInside" id="XHL-Ug-0fW"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNf-kU-Jer">
-                    <rect key="frame" x="0.0" y="368" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="318" width="320" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="4oQ-mQ-1Dy"/>
                     </constraints>
@@ -77,8 +78,24 @@
                     <state key="selected" backgroundImage="move and scale pressed"/>
                     <state key="highlighted" title="Move and Scale"/>
                     <connections>
-                        <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="dWr-L4-H0W"/>
-                        <action selector="onMoveAndScale:" destination="-2" eventType="touchUpInside" id="n93-zv-fjo"/>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="kPG-CV-tEF"/>
+                        <action selector="onMoveAndScale:" destination="1" eventType="touchUpInside" id="KJY-kC-94s"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cj2-TJ-8Qc">
+                    <rect key="frame" x="0.0" y="368" width="320" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="7IU-2d-EB8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="19"/>
+                    <state key="normal" title="Edit Caption" backgroundImage="share button background">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="move and scale pressed"/>
+                    <state key="highlighted" title="Edit Caption"/>
+                    <connections>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="M7j-u2-OAi"/>
+                        <action selector="onEditPost:" destination="1" eventType="touchUpInside" id="L5D-J3-ek4"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3To-xL-SWq">
@@ -93,8 +110,8 @@
                     <state key="selected" backgroundImage="delete post button pressed"/>
                     <state key="highlighted" title="Delete Post"/>
                     <connections>
-                        <action selector="onDeletePost:" destination="-2" eventType="touchUpInside" id="4UB-8k-LKx"/>
-                        <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="GcN-h9-5vf"/>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="5eK-kj-gNg"/>
+                        <action selector="onDeletePost:" destination="1" eventType="touchUpInside" id="Tql-8y-gsU"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOU-gd-BIt">
@@ -109,8 +126,8 @@
                     <state key="selected" backgroundImage="report post pressed"/>
                     <state key="highlighted" title="Report Post"/>
                     <connections>
-                        <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="PJO-XL-t1g"/>
-                        <action selector="onReportPost:" destination="-2" eventType="touchUpInside" id="uXy-4t-cti"/>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="tNe-fy-CMe"/>
+                        <action selector="onReportPost:" destination="1" eventType="touchUpInside" id="lyg-fB-UZ1"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKL-pY-gUb">
@@ -125,7 +142,7 @@
                     <state key="selected" backgroundImage="report post pressed"/>
                     <state key="highlighted" title="Cancel"/>
                     <connections>
-                        <action selector="onDismissShareOptions:" destination="-2" eventType="touchUpInside" id="H5I-tk-UM8"/>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="gzY-W7-S4M"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share button line" translatesAutoresizingMaskIntoConstraints="NO" id="mzl-5F-cyO">
@@ -140,20 +157,26 @@
                         <constraint firstAttribute="height" constant="1" id="y53-29-PEi"/>
                     </constraints>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share button line" translatesAutoresizingMaskIntoConstraints="NO" id="PH3-HG-Pod">
+                    <rect key="frame" x="10" y="318" width="300" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="pOq-xP-L1i"/>
+                    </constraints>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share button line" translatesAutoresizingMaskIntoConstraints="NO" id="qzK-NQ-Dnq">
                     <rect key="frame" x="10" y="418" width="300" height="1"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="ep5-yP-xZj"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share button line" translatesAutoresizingMaskIntoConstraints="NO" id="PH3-HG-Pod">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share button line" translatesAutoresizingMaskIntoConstraints="NO" id="Y9R-1X-IKB" userLabel="Edit line">
                     <rect key="frame" x="10" y="368" width="300" height="1"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="pOq-xP-L1i"/>
+                        <constraint firstAttribute="height" constant="1" id="n5u-MP-NvA"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share button line" translatesAutoresizingMaskIntoConstraints="NO" id="1fC-Se-XNa">
-                    <rect key="frame" x="10" y="318" width="300" height="1"/>
+                    <rect key="frame" x="10" y="268" width="300" height="1"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="nUV-KT-fMx"/>
                     </constraints>
@@ -172,6 +195,7 @@
                 <constraint firstAttribute="trailing" secondItem="KOU-gd-BIt" secondAttribute="trailing" id="AZ1-nw-V42"/>
                 <constraint firstItem="KOU-gd-BIt" firstAttribute="top" secondItem="3To-xL-SWq" secondAttribute="bottom" id="BgQ-am-mlp"/>
                 <constraint firstAttribute="trailing" secondItem="qzK-NQ-Dnq" secondAttribute="trailing" constant="10" id="Eg3-e1-cHM"/>
+                <constraint firstItem="cj2-TJ-8Qc" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Evo-I4-LMc"/>
                 <constraint firstAttribute="trailing" secondItem="h9b-m3-HbM" secondAttribute="trailing" id="EwU-I6-sql"/>
                 <constraint firstItem="a46-Fq-RUX" firstAttribute="top" secondItem="1fC-Se-XNa" secondAttribute="top" id="G1Q-hU-sbI"/>
                 <constraint firstItem="iWG-w3-KyS" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="GGy-mv-Dv8"/>
@@ -180,22 +204,27 @@
                 <constraint firstItem="AKL-pY-gUb" firstAttribute="top" secondItem="KOU-gd-BIt" secondAttribute="bottom" id="MjK-We-jwH"/>
                 <constraint firstItem="mzl-5F-cyO" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="OSE-9R-NCX"/>
                 <constraint firstAttribute="trailing" secondItem="AKL-pY-gUb" secondAttribute="trailing" id="TBl-Kd-9tC"/>
+                <constraint firstItem="cj2-TJ-8Qc" firstAttribute="top" secondItem="vNf-kU-Jer" secondAttribute="bottom" id="TOG-pG-oKb"/>
                 <constraint firstItem="AKL-pY-gUb" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Vxx-9o-2H7"/>
                 <constraint firstAttribute="trailing" secondItem="gFz-vz-tEO" secondAttribute="trailing" constant="10" id="WN4-ka-4So"/>
                 <constraint firstAttribute="trailing" secondItem="3To-xL-SWq" secondAttribute="trailing" id="c4G-11-L2e"/>
                 <constraint firstAttribute="trailing" secondItem="mzl-5F-cyO" secondAttribute="trailing" constant="10" id="c8S-Ex-WpF"/>
                 <constraint firstItem="vNf-kU-Jer" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="cFQ-Vw-Ip5"/>
+                <constraint firstAttribute="trailing" secondItem="Y9R-1X-IKB" secondAttribute="trailing" constant="10" id="cig-ut-GhV"/>
                 <constraint firstItem="1fC-Se-XNa" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="eJF-Yw-jeZ"/>
                 <constraint firstItem="KOU-gd-BIt" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="hKc-DV-Iph"/>
                 <constraint firstAttribute="trailing" secondItem="1fC-Se-XNa" secondAttribute="trailing" constant="10" id="hfu-gH-cba"/>
                 <constraint firstItem="gFz-vz-tEO" firstAttribute="top" secondItem="KOU-gd-BIt" secondAttribute="top" id="jIo-pV-nYe"/>
                 <constraint firstItem="a46-Fq-RUX" firstAttribute="top" secondItem="b75-0M-y77" secondAttribute="bottom" id="jM1-ip-LXd"/>
-                <constraint firstItem="3To-xL-SWq" firstAttribute="top" secondItem="vNf-kU-Jer" secondAttribute="bottom" id="kxT-SV-dXe"/>
+                <constraint firstItem="Y9R-1X-IKB" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="lAU-Ti-RnL"/>
+                <constraint firstItem="Y9R-1X-IKB" firstAttribute="top" secondItem="cj2-TJ-8Qc" secondAttribute="top" id="lje-NO-vZV"/>
                 <constraint firstItem="h9b-m3-HbM" firstAttribute="top" secondItem="1" secondAttribute="top" id="lvv-fn-Dca"/>
                 <constraint firstAttribute="trailing" secondItem="a46-Fq-RUX" secondAttribute="trailing" id="mqd-mU-rfn"/>
                 <constraint firstAttribute="bottom" secondItem="iWG-w3-KyS" secondAttribute="bottom" id="n2Y-vX-xzq"/>
+                <constraint firstAttribute="trailing" secondItem="cj2-TJ-8Qc" secondAttribute="trailing" id="n8D-li-q2E"/>
                 <constraint firstItem="qzK-NQ-Dnq" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="nTG-zy-8t7"/>
                 <constraint firstItem="iWG-w3-KyS" firstAttribute="top" secondItem="1" secondAttribute="top" id="pcw-ur-mkR"/>
+                <constraint firstItem="3To-xL-SWq" firstAttribute="top" secondItem="cj2-TJ-8Qc" secondAttribute="bottom" id="qqr-1o-ibO"/>
                 <constraint firstAttribute="bottom" secondItem="h9b-m3-HbM" secondAttribute="bottom" id="rN7-Q3-xoc"/>
                 <constraint firstItem="gFz-vz-tEO" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="tvO-zg-F83"/>
                 <constraint firstAttribute="trailing" secondItem="b75-0M-y77" secondAttribute="trailing" id="u8c-fV-xrH"/>
@@ -205,9 +234,12 @@
             </constraints>
             <connections>
                 <outlet property="constrDeleteHeight" destination="2wD-1g-gh1" id="nvV-8S-Ypy"/>
+                <outlet property="constrEditHeight" destination="7IU-2d-EB8" id="eU7-6E-94X"/>
                 <outlet property="constrMoveScaleHeight" destination="4oQ-mQ-1Dy" id="hF2-hl-y9Y"/>
                 <outlet property="deletaBtn" destination="3To-xL-SWq" id="gzk-s3-sHr"/>
+                <outlet property="editBtn" destination="cj2-TJ-8Qc" id="T0D-s2-z7W"/>
                 <outlet property="lineDelete" destination="qzK-NQ-Dnq" id="9cP-xo-hfS"/>
+                <outlet property="lineEdit" destination="Y9R-1X-IKB" id="H9F-8N-O2K"/>
                 <outlet property="lineMoveAndScale" destination="PH3-HG-Pod" id="xty-52-qZT"/>
                 <outlet property="moveScaleBtn" destination="vNf-kU-Jer" id="yYj-KW-vhg"/>
                 <outlet property="shadowView" destination="h9b-m3-HbM" id="h5b-F3-MPN"/>
@@ -224,9 +256,4 @@
         <image name="share button line" width="396" height="1"/>
         <image name="share on facebook button pressed" width="320" height="50"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

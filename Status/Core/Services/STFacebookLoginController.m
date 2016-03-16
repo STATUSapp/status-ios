@@ -8,7 +8,6 @@
 
 #import "STFacebookLoginController.h"
 #import "STConstants.h"
-#import "STFlowTemplateViewController.h"
 #import "KeychainItemWrapper.h"
 #import "STImageCacheController.h"
 #import "AppDelegate.h"
@@ -31,6 +30,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "CreateDataModelHelper.h"
+#import "STLocalNotificationService.h"
 
 @interface STFacebookLoginController ()<FBSDKLoginButtonDelegate>
 
@@ -107,13 +107,13 @@
     [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     [self requestRemoteNotificationAccess];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedIn object:nil];
+    [[CoreManager notificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
     //get settings from server
     [self getUserSettingsFromServer];
 }
 
 -(void)logout{
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedOut object:nil];
+    [[CoreManager notificationService] postNotificationName:kNotificationUserDidLoggedOut object:nil userInfo:nil];
     _fetchedUserData = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [FBSDKAccessToken setCurrentAccessToken:nil];
@@ -153,7 +153,7 @@
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 [weakSelf measureRegister];
                 [weakSelf setUpEnvironment:response andUserInfo:userInfo];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidRegister object:nil];
+                [[CoreManager notificationService] postNotificationName:kNotificationUserDidRegister object:nil userInfo:nil];
             }
             else
             {

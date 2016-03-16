@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface STCustomShareView : UIView
-@property (weak, nonatomic) IBOutlet UIButton *deletaBtn;
-@property (weak, nonatomic) IBOutlet UIButton *moveScaleBtn;
-@property (weak, nonatomic) IBOutlet UIView *shadowView;
 
--(void) setUpForThreeButtons:(BOOL)isThree;
--(void) setForDissmiss:(BOOL) isDissmissed;
++(void)presentViewForPostId:(NSString *)postUuid
+         withExtendedRights:(BOOL)extendedRights;
++(void)dismissView;
+
 @end

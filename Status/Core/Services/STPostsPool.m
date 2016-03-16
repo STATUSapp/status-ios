@@ -8,6 +8,7 @@
 
 #import "STPostsPool.h"
 #import "STPost.h"
+#import "STLocalNotificationService.h"
 
 @interface STPostsPool ()
 
@@ -28,11 +29,11 @@
 
 -(void)imageWasSavedLocally:(NSNotification *)notif{
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *fullUrl = (NSString *)notif.object;
+        NSString *fullUrl = notif.userInfo[kImageUrlKey];
         STPost *updatedPost = [self postForUrl:fullUrl];
         if (updatedPost) {
             updatedPost.imageDownloaded = YES;
-            [[NSNotificationCenter defaultCenter] postNotificationName:STPostPoolObjectUpdatedNotification object:updatedPost];
+            [[CoreManager notificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:updatedPost.uuid}];
         }
     });
 }

@@ -7,7 +7,6 @@
 //
 
 #import "STTabBarViewController.h"
-#import "STFlowTemplateViewController.h"
 #import "STSettingsViewController.h"
 #import "STTakeAPhotoViewController.h"
 #import "STNotificationAndChatContainerViewController.h"
@@ -39,7 +38,6 @@ static NSString * storyboardIdentifier = @"tabBarController";
     FeedCVC *homeVc = [FeedCVC mainFeedController];
     homeVc.title = NSLocalizedString(@"Home", nil);
     UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
-    
     homeNavCtrl.navigationBarHidden = YES;
 
     // add explore flow

@@ -17,9 +17,13 @@
 
 #import "STFacebookLoginController.h"
 #import "STChatRoomViewController.h"
+#import "STMoveScaleViewController.h"
+
 #import "STListUser.h"
 
 #import "STUsersPool.h"
+#import "STPostsPool.h"
+#import "STCustomShareView.h"
 
 @interface FeedCVC ()
 {
@@ -50,12 +54,40 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     
     return feedCVC;
 }
+
++ (FeedCVC *)singleFeedControllerWithPostId:(NSString *)postId{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
+    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    FeedCVC *feedCVC = [[navController viewControllers] firstObject];
+    
+    STPostFlowProcessor *feedProcessor = [[STPostFlowProcessor alloc] initWithFlowType:STFlowTypeSinglePost postId:postId];
+    feedCVC.feedProcessor = feedProcessor;
+    
+    return feedCVC;
+}
+
++ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
+    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    FeedCVC *feedCVC = [[navController viewControllers] firstObject];
+    
+    BOOL userIsMe = [[CoreManager loginService].currentUserUuid isEqualToString:userId];
+    STFlowType flowType = userIsMe ? STFlowTypeMyGallery : STFlowTypeUserGallery;
+    
+    STPostFlowProcessor *feedProcessor = [[STPostFlowProcessor alloc] initWithFlowType:flowType userId:userId];
+    feedCVC.feedProcessor = feedProcessor;
+    
+    return feedCVC;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationPostDownloadSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:STPostPoolObjectUpdatedNotification object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationPostDownloadSuccess object:_feedProcessor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationPostUpdated object:_feedProcessor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationPostDeleted object:_feedProcessor];
 
 }
 
@@ -67,16 +99,20 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
 #pragma mark - Notifications
 
 - (void)processorLoaded{
-    [self.collectionView reloadData];
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
 }
 
 - (void)postUpdated:(NSNotification *)notif{
-    STPost *post = (STPost*)notif.object;
+    STPost *post = [[CoreManager postsPool] getPostWithId:notif.userInfo[kPostIdKey]];
     STPost *curentPost = [self getCurrentPost];
-    if ([post.uuid isEqualToString:curentPost.uuid]) {
+    if ([curentPost isLoadingPost] || [post.uuid isEqualToString:curentPost.uuid]) {
         [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
     }
     
+}
+- (void)postDeleted:(NSNotification *)notif{
+    //TODO: dev_1_2 delete only the notif.userInfo[kPostIdKey] ?
+    [self.collectionView reloadData];
 }
 
 #pragma mark - Helpers
@@ -272,6 +308,13 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
 - (IBAction)onLikesPressed:(id)sender {
 }
 - (IBAction)onMorePressed:(id)sender {
+    STPost *post = [self getCurrentPost];
+    BOOL extendedRights = NO;
+    if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
+        extendedRights = YES;
+    }
+    [STCustomShareView presentViewForPostId:post.uuid
+                         withExtendedRights:extendedRights];
 }
 - (IBAction)onShadowPressed:(id)sender {
     //TODO: dev_1_2 add animations

@@ -19,10 +19,14 @@
 
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
+
+#import "STDataAccessUtils.h"
+#import "STPost.h"
+#import "STLocalNotificationService.h"
+
 static NSInteger const  kMaxCaptionLenght = 250;
 
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
-    NSDictionary *editResponseDict;
     
     BOOL _shouldPostToFacebook;
     BOOL _shouldPostToTwitter;
@@ -82,8 +86,8 @@ static NSInteger const  kMaxCaptionLenght = 250;
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     
-    if (_captionString!=nil && ![_captionString isKindOfClass:[NSNull class]] && _captionString.length > 0) {
-        _captiontextView.text = _captionString;
+    if (_post) {
+        _captiontextView.text = _post.caption;
     }
     else{
         _captiontextView.text = @"";
@@ -181,68 +185,40 @@ static NSInteger const  kMaxCaptionLenght = 250;
     __weak STSharePhotoViewController *weakSelf = self;
     if (_controllerType == STShareControllerAddPost ||
         _controllerType == STShareControllerEditPost) {
-        STRequestCompletionBlock completion = ^(id response, NSError *error){
-            if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-                
-                NSString * postId;
-                
-                if (weakSelf.editPostId != nil) {
-                    postId = weakSelf.editPostId;
-                } else {
-                    postId = response[@"post_id"];
-                }
-                if (weakSelf.editPostId!=nil) {
-                    editResponseDict = [NSDictionary dictionaryWithDictionary:response];
-                }
-                if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
-                    [weakSelf startPostingWithPostId:postId andImageUrl:response[@"image_link"]];
-                }
-                else
-                {
-                    [weakSelf callTheDelegateIfNeededForPostId:postId];
-                }
-                
-            }
-            else
-            {
-                [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-                weakSelf.shareButton.enabled = TRUE;
-                
-            }
-        };
         
-        STRequestFailureBlock failBlock = ^(NSError *error){
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            weakSelf.shareButton.enabled = TRUE;
-        };
-        [STUploadPostRequest uploadPostForId:_editPostId
-                                    withData:_imgData
-                                  andCaption:_captiontextView.text
-                              withCompletion:completion
-                                     failure:failBlock];
+        [STDataAccessUtils editPpostWithId:_post.uuid
+                          withNewImageData:_imgData
+                            withNewCaption:_captiontextView.text
+                            withCompletion:^(NSArray *objects, NSError *error) {
+                                if (!error) {
+                                    STPost *post = [objects firstObject];
+                                    if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
+                                        [weakSelf startPostingWithPostId:post.uuid andImageUrl:post.fullPhotoUrl];
+                                    }
+                                    else
+                                    {
+                                        [weakSelf callTheDelegateIfNeededForPostId:post.uuid];
+                                    }
+
+                                }
+                            }];
     }
     else
     {
         [_captiontextView resignFirstResponder];
         
         __weak STSharePhotoViewController *weakSelf = self;
-        if (_editPostId!=nil) {
-            [STUpdatePostCaptionRequest setPostCaption:_captiontextView.text
-                                             forPostId:_editPostId
-                                        withCompletion:^(id response, NSError *error) {
-                                            if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                                                [weakSelf.delegate captionWasEditedForPost:@{@"post_id":_editPostId} withNewCaption:_captiontextView.text];
-                                                [weakSelf onClickBack:nil];
-                                            }
-                                            else{
-                                                [self showErrorAlert];
-                                            }
-                                        } failure:^(NSError *error) {
-                                            NSLog(@"Error: %@", error.debugDescription);
-                                            [self showErrorAlert];
-                                        }];
-            
-            
+        if (_post.uuid!=nil) {
+            [STDataAccessUtils updatePostWithId:_post.uuid
+                                 withNewCaption:_captiontextView.text
+                                 withCompletion:^(NSError *error) {
+                                     if (error) {
+                                         [weakSelf showErrorAlert];
+                                     }
+                                     else
+                                         [weakSelf onClickBack:nil];
+                                     
+                                 }];
         }
     }
 }
@@ -389,11 +365,12 @@ static NSInteger const  kMaxCaptionLenght = 250;
             [[[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
             
         }
-        if (_editPostId!=nil) {
-            [_delegate imageWasEdited:editResponseDict];
+        if ([_post.uuid isEqualToString:postId]) {
+            //TODO: dev_1_2 use STPost insead of a dictionary
+            [[CoreManager notificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
         }
         else
-            [_delegate imageWasPostedWithPostId:postId];
+            [[CoreManager notificationService] postNotificationName:STPostNewImageUploaded object:nil userInfo:@{kPostIdKey:postId}];
     });
 
 }
@@ -426,9 +403,6 @@ static NSInteger const  kMaxCaptionLenght = 250;
 
 #pragma mark - UITextViewDelegate
 
--(void)textViewDidEndEditing:(UITextView *)textView{
-    _captionString = textView.text;
-}
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];

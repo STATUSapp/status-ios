@@ -14,11 +14,20 @@
 #import "STPostsPool.h"
 
 #import "STImageCacheController.h"
+#import "STFacebookHelper.h"
+#import "STLocalNotificationService.h"
+
+int const kDeletePostTag = 11;
 
 NSString * const kNotificationPostDownloadFailed = @"NotificationPostDownloadFailed";
 NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSuccess";
+NSString * const kNotificationPostUpdated = @"NotificationPostUpdated";
+NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 
-@interface STPostFlowProcessor ()
+@interface STPostFlowProcessor ()<UIAlertViewDelegate>
+{
+    NSString *postIdToDelete;
+}
 
 @property (nonatomic) STFlowType flowType;
 @property (nonatomic, strong) NSString *userId;
@@ -43,6 +52,8 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
             flowType == STFlowTypeRecent) {
             [self getMoreData];
         }
+        
+        [self registerForUpdates];
     }
     return self;
 }
@@ -68,6 +79,20 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
 }
 
 #pragma makr - Interface Methods
+
+- (void)registerForUpdates{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onShareOnFacebookNotification:) name:STOptionsViewShareFbNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSaveLocallyNotification:) name:STOptionsViewSaveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDeletePostNotification:) name:STOptionsViewDeletePostNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onReportPostNotification:) name:STOptionsViewReportPostNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:STPostPoolObjectUpdatedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:STPostPoolObjectDeletedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postImageWasEdited:) name:STPostImageWasEdited object:nil];
+
+
+
+}
 
 -(NSInteger)numberOfPosts{
     return _postIds.count;
@@ -220,8 +245,9 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
                 weakSelf.loaded = YES;
                 //handle error
                 //TODO: dev_1_2 handle the listener
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPostDownloadFailed
-                                                                    object:nil];
+                [[CoreManager notificationService] postNotificationName:kNotificationPostDownloadFailed
+                                                                 object:self
+                                                               userInfo:nil];
                 
                 //TODO: dev_1_2 enable refresh button
                 
@@ -236,12 +262,11 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
             [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
             if (objects.count > 0) {
 #ifdef DEBUG
-                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel. Ut tota soluta principes has, in alterum maiorum pro, mel graece pericula ut. Sea discere nominavi cu, id pro blandit complectitur. Ut per legere expetendis, te vel offendit intellegam." forKey:@"caption"];
+                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel." forKey:@"caption"];
 #endif
                 [[CoreManager postsPool] addPosts:objects];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPostDownloadSuccess
-                                                                object:nil];
+            [[CoreManager notificationService] postNotificationName:kNotificationPostDownloadSuccess object:self userInfo:nil];
             [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:objects];
 
             
@@ -287,8 +312,121 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
 
 #pragma mark - Notifications
 
+- (void)postImageWasEdited:(NSNotification *)notif{
+    NSString *postId = notif.userInfo[kPostIdKey];
+    if ([_postIds containsObject:postId]) {
+        STPost *post = [[CoreManager postsPool] getPostWithId:postId];
+        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:@[post]];
+    }
+
+}
+
+- (void)postUpdated:(NSNotification *)notif{
+    NSString *postId = notif.userInfo[kPostIdKey];
+    if ([_postIds containsObject:postId]) {
+        [[CoreManager notificationService] postNotificationName:kNotificationPostUpdated object:self userInfo:@{kPostIdKey:postId}];
+    }
+}
+- (void)postDeleted:(NSNotification *)notif{
+    
+    NSString *postId = notif.userInfo[kPostIdKey];
+    if ([_postIds containsObject:postId]) {
+        [[CoreManager notificationService] postNotificationName:kNotificationPostDeleted object:self userInfo:@{kPostIdKey:postId}];
+    }
+}
+
+
+
 -(void)newLocationHasBeenUploaded{
     [self getMoreData];
+}
+
+//custom share view notifications
+- (void)onShareOnFacebookNotification:(NSNotification*)notif{
+    NSString *postId = notif.userInfo[kPostIdKey];
+    STPost *post = [[CoreManager postsPool] getPostWithId:postId];
+    [[CoreManager facebookService] shareImageWithImageUrl:post.fullPhotoUrl description:nil
+                                            andCompletion:^(id result, NSError *error) {
+        if(error==nil)
+            [[[UIAlertView alloc] initWithTitle:@"Success"
+                                        message:@"Your photo was posted."
+                                       delegate:nil cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil] show];
+        else
+            [[[UIAlertView alloc] initWithTitle:@"Error"
+                                        message:@"Something went wrong. You can try again later."
+                                       delegate:nil cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil] show];
+    }];
+}
+
+- (void)onSaveLocallyNotification:(NSNotification *)notif{
+    NSString *postId = notif.userInfo[kPostIdKey];
+    STPost *post = [[CoreManager postsPool] getPostWithId:postId];
+    //TODO: dev_1_2 disable the button until the image is downloaded
+    if (post.imageDownloaded) {
+        __weak STPostFlowProcessor *weakSelf = self;
+        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl
+                                            withPostCompletion:^(UIImage *origImg) {
+                                                UIImageWriteToSavedPhotosAlbum(origImg, weakSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
+                                                
+                                            } andBlurCompletion:nil];
+    }
+
+}
+
+- (void)onDeletePostNotification:(NSNotification *)notif{
+    postIdToDelete = notif.userInfo[kPostIdKey];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
+                                                        message:@"Are you sure you want to delete this post?"
+                                                       delegate:self cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Delete", nil];
+    [alertView setTag:kDeletePostTag];
+    [alertView show];
+
+}
+
+- (void)onReportPostNotification:(NSNotification *)notif{
+    NSString *postId = notif.userInfo[kPostIdKey];
+    STPost *post = [[CoreManager postsPool] getPostWithId:postId];
+    
+    if ([post.reportStatus integerValue] == 1) {
+            [STDataAccessUtils reportPostWithId:postId withCompletion:^(NSError *error) {
+                NSLog(@"Post was reported with error: %@", nil);
+            }];
+    }
+    else
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    }
+
+}
+
+- (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
+    if (error)
+        [[[UIAlertView alloc] initWithTitle:@"Error"
+                                    message:@"Something went wrong. You can try again later."
+                                   delegate:nil cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    else
+        [[[UIAlertView alloc] initWithTitle:@"Success"
+                                    message:@"Your photo was saved."
+                                   delegate:nil cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == kDeletePostTag) {
+        if (buttonIndex==1) {
+            
+            [STDataAccessUtils deletePostWithId:postIdToDelete withCompletion:^(NSError *error) {
+                postIdToDelete = nil;
+                NSLog(@"Post deleted with error: %@", error);
+            }];
+        }
+    }
 }
 
 @end

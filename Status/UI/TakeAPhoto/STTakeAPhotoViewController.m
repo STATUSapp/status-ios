@@ -12,7 +12,7 @@
 #import "STMoveScaleViewController.h"
 #import "STNavigationService.h"
 
-@interface STTakeAPhotoViewController ()<STSharePostDelegate>
+@interface STTakeAPhotoViewController ()
 
 @end
 
@@ -31,7 +31,7 @@
     __weak STTakeAPhotoViewController * weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
         
-        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil delegate:weakSelf];
+        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage andPost:nil];
         [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
     };
     
@@ -42,7 +42,7 @@
     __weak STTakeAPhotoViewController * weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
         
-        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil delegate:weakSelf];
+        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage andPost:nil];
         [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
     };
     
@@ -53,17 +53,19 @@
     __weak STTakeAPhotoViewController * weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
         
-        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil delegate:weakSelf];
+        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage andPost:nil];
         [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
     };
     
     [[CoreManager imagePickerService] launchFacebookPickerFromController:self withCompletion:completion];
 }
 
-#pragma mark - STSharePostDelegate
+#pragma mark - Notifications
 
 
-- (void)imageWasPostedWithPostId:(NSString *)postId {
+- (void)imageWasPostedWithPostId:(NSNotification *)notif {
+    NSString *postId = notif.userInfo[kPostIdKey];
+    //TODO: redirect to a screen with a single post?
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -71,6 +73,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostNewImageUploaded object:nil];
+
     // Do any additional setup after loading the view.
 }
 

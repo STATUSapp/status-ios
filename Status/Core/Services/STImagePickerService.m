@@ -121,7 +121,8 @@
     NSLog(@"self.navigationController.viewControllers =  %@", _viewController.navigationController.presentedViewController);
     if (![_viewController.presentedViewController isBeingDismissed])
         [_viewController.presentedViewController dismissViewControllerAnimated:YES completion:^{
-            [self callCompletion:(UIImage *)[notif object] shouldBeCompressed:NO];
+            UIImage *image = notif.userInfo[kImageKey];
+            [self callCompletion:image shouldBeCompressed:NO];
         }];
 }
 

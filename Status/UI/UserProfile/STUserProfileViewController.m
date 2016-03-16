@@ -14,7 +14,6 @@
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
 #import "STLocationManager.h"
-#import "STFlowTemplateViewController.h"
 #import "STConstants.h"
 #import "STImagePickerController.h"
 #import "STConversationsListViewController.h"
@@ -31,6 +30,8 @@
 #import "STNavigationService.h"
 
 #import "STListUser.h"
+
+#import "FeedCVC.h"
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
@@ -297,13 +298,15 @@
 
 - (IBAction)onTapGallery:(id)sender {
     
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = _isMyProfile ? STFlowTypeMyGallery : STFlowTypeUserGallery;
-    flowCtrl.flowUserID = _profileUserId;
-    flowCtrl.userName = _userProfile.fullName;
+    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_profileUserId];
     
-    [self.navigationController pushViewController:flowCtrl animated:YES];
+//    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+//    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//    flowCtrl.flowType = _isMyProfile ? STFlowTypeMyGallery : STFlowTypeUserGallery;
+//    flowCtrl.flowUserID = _profileUserId;
+//    flowCtrl.userName = _userProfile.fullName;
+    
+    [self.navigationController pushViewController:feedCVC animated:YES];
 }
 
 - (IBAction)onTapMenu:(id)sender {
@@ -390,7 +393,7 @@
     editVC.userProfile = _userProfile;
     [self.navigationController pushViewController:editVC animated:YES];
 }
-
+//moved
 - (void)startMoveScaleShareControllerForImage:(UIImage *)img
                                shouldCompress:(BOOL)compressing
                                  editedPostId:(NSString *)postId
@@ -398,16 +401,16 @@
     
     // here, no compressing should be done, because it might be a cropping after this
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
-    viewController.currentImg = img;
-    
-    
-    viewController.delegate = (id<STSharePostDelegate>)[STMenuController sharedInstance].appMainController;
-    viewController.editPostId = postId;
-    viewController.shouldCompress = compressing;
-    viewController.captionString = captionString;
-    [self.navigationController pushViewController:viewController animated:NO];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
+//    viewController.currentImg = img;
+//    
+//    
+//    viewController.delegate = (id<STSharePostDelegate>)[STMenuController sharedInstance].appMainController;
+//    viewController.editPostId = postId;
+//    viewController.shouldCompress = compressing;
+//    viewController.captionString = captionString;
+//    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 - (void)inviteUserToUpload{

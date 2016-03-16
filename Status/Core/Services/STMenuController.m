@@ -14,7 +14,6 @@
 #import "STInviteController.h"
 #import "STUserProfileViewController.h"
 #import "STFacebookLoginController.h"
-#import "STFlowTemplateViewController.h"
 #import "STLocationManager.h"
 #import "STNearbyController.h"
 #import "STNotificationsViewController.h"
@@ -150,6 +149,9 @@
 }
 
 #pragma mark - MenuView Actions
+//TODO: dev_1_2 make sure all those are moved in the right place
+
+/*
 - (void)goHome{
     [self hideMenu];
     STFlowTemplateViewController *vc = nil;
@@ -286,7 +288,7 @@
     _currentVC = _currentVC.navigationController.viewControllers.firstObject;
     [navController popToRootViewControllerAnimated:NO];
 }
-
+*/
 
 - (STFlowTemplateViewController *)appMainController {
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;

@@ -19,6 +19,7 @@
 		17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5C41A1BB7EF240057180E /* AddressBook.framework */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
+		17DF47351C9974700053F633 /* STLocalNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF47341C9974700053F633 /* STLocalNotificationService.m */; };
 		17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F2881C96DED500D53EC1 /* STBasePool.m */; };
 		17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */; };
 		17FBCB281C8F17D500261A39 /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FBCB271C8F17D500261A39 /* LoadingCell.m */; };
@@ -168,7 +169,6 @@
 		99B387B91C82FAA2005B4D8C /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386E31C82FAA2005B4D8C /* STLikeCell.m */; };
 		99B387BA1C82FAA2005B4D8C /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386E61C82FAA2005B4D8C /* STCustomCollectionViewCell.m */; };
 		99B387BB1C82FAA2005B4D8C /* STFBAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386E81C82FAA2005B4D8C /* STFBAdCell.m */; };
-		99B387BC1C82FAA2005B4D8C /* STFlowTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386EA1C82FAA2005B4D8C /* STFlowTemplateViewController.m */; };
 		99B387BD1C82FAA2005B4D8C /* STFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386EC1C82FAA2005B4D8C /* STFooterView.m */; };
 		99B387BE1C82FAA2005B4D8C /* STNoPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386EE1C82FAA2005B4D8C /* STNoPhotosCell.m */; };
 		99B387BF1C82FAA2005B4D8C /* STSmallFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386F01C82FAA2005B4D8C /* STSmallFlowCell.m */; };
@@ -240,6 +240,8 @@
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		17DF47331C9974700053F633 /* STLocalNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocalNotificationService.h; sourceTree = "<group>"; };
+		17DF47341C9974700053F633 /* STLocalNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocalNotificationService.m; sourceTree = "<group>"; };
 		17F4F2871C96DED500D53EC1 /* STBasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBasePool.h; sourceTree = "<group>"; };
 		17F4F2881C96DED500D53EC1 /* STBasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBasePool.m; sourceTree = "<group>"; };
 		17F4F28A1C96E5F800D53EC1 /* STUsersPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUsersPool.h; sourceTree = "<group>"; };
@@ -940,6 +942,8 @@
 				99B3866A1C82FAA2005B4D8C /* STLocationManager.m */,
 				99B386611C82FAA2005B4D8C /* STIAPHelper.h */,
 				99B386621C82FAA2005B4D8C /* STIAPHelper.m */,
+				17DF47331C9974700053F633 /* STLocalNotificationService.h */,
+				17DF47341C9974700053F633 /* STLocalNotificationService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1632,7 +1636,6 @@
 				99B387B11C82FAA2005B4D8C /* STWhatsAppActivity.m in Sources */,
 				99B387501C82FAA2005B4D8C /* STGetNearbyProfilesRequest.m in Sources */,
 				99B387731C82FAA2005B4D8C /* STDataAccessUtils.m in Sources */,
-				99B387BC1C82FAA2005B4D8C /* STFlowTemplateViewController.m in Sources */,
 				99B387631C82FAA2005B4D8C /* STSetPostSeenRequest.m in Sources */,
 				99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */,
 				99B387D51C82FAA2005B4D8C /* STAlbumImageCell.m in Sources */,
@@ -1670,6 +1673,7 @@
 				99B3875C1C82FAA2005B4D8C /* STInviteFriendsByEmailRequest.m in Sources */,
 				99B387E01C82FAA2005B4D8C /* STSettingsViewController.m in Sources */,
 				99B3874D1C82FAA2005B4D8C /* STGetChatUrlAndPortRequest.m in Sources */,
+				17DF47351C9974700053F633 /* STLocalNotificationService.m in Sources */,
 				99B387AF1C82FAA2005B4D8C /* STConversationsListViewController.m in Sources */,
 				99B387521C82FAA2005B4D8C /* STGetNotificationsRequest.m in Sources */,
 				171936C31C848604002C0202 /* STNavigationService.m in Sources */,

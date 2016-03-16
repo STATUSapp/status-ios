@@ -11,6 +11,8 @@
 #import "UIImage+ImageEffects.h"
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
+#import "STLocalNotificationService.h"
+
 NSUInteger const STImageDownloadSpecialPriority = -1;
 
 @interface STImageCacheController()
@@ -254,7 +256,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                   andCompletion:^(NSString *downloadedImage, BOOL downloaded) {
         
         if (downloaded==YES) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:fullUrlString];
+            [[CoreManager notificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString}];
         }
         NSUInteger index = [[weakSelf.currentPosts valueForKey:@"link"] indexOfObject:downloadedImage];
         if (index!=NSNotFound) {

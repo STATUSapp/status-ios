@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define USE_PRODUCTION_SERVER 1
+#define USE_PRODUCTION_SERVER 0
 #define APP_STORE_ID          @"841855995"
 #define APP_URL_STRING        @"itms-apps://itunes.apple.com/app/id841855995"
 #define APP_REVIEW_URL_STRING @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=841855995&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"
@@ -156,7 +156,25 @@ extern NSString *const STChatControllerAuthenticate;
 extern NSString *const STFacebookPickerNotification;
 extern NSString *const STLoadImageNotification;
 extern NSString *const STPostPoolObjectUpdatedNotification;
+extern NSString *const STPostPoolObjectDeletedNotification;
 
+extern NSString *const STOptionsViewReportPostNotification;
+extern NSString *const STOptionsViewDeletePostNotification;
+extern NSString *const STOptionsViewEditPostNotification;
+extern NSString *const STOptionsViewMoveAndScaleNotification;
+extern NSString *const STOptionsViewSaveNotification;
+extern NSString *const STOptionsViewShareFbNotification;
+
+extern NSString *const STPostNewImageUploaded;
+extern NSString *const STPostImageWasEdited;
+extern NSString *const STPostCaptionWasEdited;
+
+
+#pragma mark - Notification User Info Keys
+
+extern NSString *const kPostIdKey;
+extern NSString *const kImageKey;
+extern NSString *const kImageUrlKey;
 
 #pragma mark - Invite Friends
 

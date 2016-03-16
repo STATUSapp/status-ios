@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const kNotificationPostDownloadSuccess;
+extern NSString * const kNotificationPostUpdated;
+extern NSString * const kNotificationPostDeleted;
+
 typedef void (^STProcessorCompletionBlock)(NSError *error);
 
 @class STPost;

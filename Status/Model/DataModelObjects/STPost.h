@@ -24,7 +24,7 @@ extern NSString * const kPostUuidForLoading;
 @property (nonatomic, strong) NSNumber *numberOfLikes;
 @property (nonatomic, strong) NSDate *postDate;
 @property (nonatomic, assign) BOOL postLikedByCurrentUser;
-@property (nonatomic, assign) BOOL reportStatus;
+@property (nonatomic, assign) NSNumber *reportStatus;
 @property (nonatomic, strong) NSString *smallPhotoUrl;
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;

@@ -101,7 +101,24 @@ NSString *const STChatControllerAuthenticate = @"STChatControllerAuthenticate";
 NSString *const STFacebookPickerNotification = @"STFacebookPickerNotification";
 NSString *const STLoadImageNotification = @"STLoadImageNotification";
 NSString *const STPostPoolObjectUpdatedNotification = @"STPostPoolObjectUpdatedNotification";
+NSString *const STPostPoolObjectDeletedNotification = @"STPostPoolObjectDeletedNotification";
 
+NSString *const STOptionsViewReportPostNotification = @"STOptionsViewReportPostNotification";
+NSString *const STOptionsViewDeletePostNotification = @"STOptionsViewDeletePostNotification";
+NSString *const STOptionsViewEditPostNotification = @"STOptionsViewEditPostNotification";
+NSString *const STOptionsViewMoveAndScaleNotification = @"STOptionsViewMoveAndScaleNotification";
+NSString *const STOptionsViewSaveNotification = @"STOptionsViewSaveNotification";
+NSString *const STOptionsViewShareFbNotification = @"STOptionsViewShareFbNotification";
+
+NSString *const STPostNewImageUploaded = @"STPostNewImageUploaded";
+NSString *const STPostImageWasEdited = @"STPostImageWasEdited";
+NSString *const STPostCaptionWasEdited = @"STPostCaptionWasEdited";
+
+#pragma mark - Notification User Info Keys
+
+NSString *const kPostIdKey = @"_key_post_id";
+NSString *const kImageKey = @"key_image";
+NSString *const kImageUrlKey = @"key_image_url";
 
 #pragma mark - Invite Friends
 

@@ -8,7 +8,6 @@
 
 #import "STNotificationsManager.h"
 #import "FeedCVC.h"
-#import "STFlowTemplateViewController.h"
 #import "STChatController.h"
 #import "STChatRoomViewController.h"
 #import "STNetworkQueueManager.h"
@@ -20,6 +19,8 @@
 #import "STImageCacheController.h"
 
 #import "STListUser.h"
+
+#import "FeedCVC.h"
 
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
@@ -44,9 +45,15 @@ static STNotificationsManager *_sharedManager = nil;
     //TODO: dev_1_2 this hierarchy is no longer valid
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     
-    UINavigationController *navController = (UINavigationController *)mainWindow.rootViewController;
-    UIViewController *lastVC = [navController.viewControllers lastObject];
-    return lastVC;
+    UITabBarController *tbc = (UITabBarController *)mainWindow.rootViewController;
+    
+    //TODO: dev_1_2 should we use only the first tab to handle the notifications or use the selected bar
+    UINavigationController *navController = [[tbc viewControllers] firstObject];
+    
+    UIViewController *homeVC = [navController.viewControllers firstObject];
+    
+    [navController setViewControllers:@[homeVC]];
+    return homeVC;
 }
 
 -(void) handleNotification:(NSDictionary *) notif{
@@ -212,13 +219,16 @@ static STNotificationsManager *_sharedManager = nil;
     switch (notifType) {
         case STNotificationTypeLike:
         {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-            flowCtrl.flowType = STFlowTypeSinglePost;
-            flowCtrl.postID = _currentBanner.notificationInfo[@"post_id"];
-            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
-            flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
-            [lastVC.navigationController pushViewController:flowCtrl animated:YES];
+//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
+//            flowCtrl.flowType = STFlowTypeSinglePost;
+//            flowCtrl.postID = _currentBanner.notificationInfo[@"post_id"];
+//            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
+//            flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
+
+            
+            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:_currentBanner.notificationInfo[@"post_id"]];
+            [lastVC.navigationController pushViewController:feedCVC animated:YES];
 
         }
             break;

@@ -10,6 +10,7 @@
 #import "UIImage+ImageEffects.h"
 #import "STSharePhotoViewController.h"
 #import "UIImage+Resize.h"
+#import "STPost.h"
 
 @interface STMoveScaleViewController ()<UIScrollViewDelegate>
 {
@@ -23,16 +24,14 @@
 
 @implementation STMoveScaleViewController
 
-+ (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing editedPostId:(NSString *)postId captionString:(NSString *)captionString delegate:(id<STSharePostDelegate>)delegate {
++ (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing andPost:(STPost *)post {
     // here, no compressing should be done, because it might be a cropping after this
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
     viewController.currentImg = img;
-    viewController.editPostId = postId;
+    viewController.post = post;
     viewController.shouldCompress = compressing;
-    viewController.captionString = captionString;
-    viewController.delegate = delegate;
     
     return viewController;
 }
@@ -56,6 +55,8 @@
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
     [self setUpTheContext];
     [self cropAndBlur];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostImageWasEdited object:nil];
 }
 
 
@@ -104,6 +105,28 @@
     _imageView.frame = contentsFrame;
 }
 
+#pragma mark - Notification
+
+- (void)imageWasPostedWithPostId:(NSNotification *)notif {
+    NSString *postId = notif.userInfo[kPostIdKey];
+    //TODO:dev_1_2 redirect to a screen with a single post?
+    //TODO:dev_1_2 move this on the navigation service
+    NSMutableArray *newStack = [NSMutableArray new];
+    BOOL shouldBeAdded = YES;
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[STMoveScaleViewController class]]) {
+            shouldBeAdded = NO;
+        }
+        
+        if (shouldBeAdded == YES) {
+            [newStack addObject:vc];
+        }
+    }
+    
+    [self.navigationController setViewControllers:newStack animated:YES];
+}
+
+
 #pragma mark UIScrollViewDelegate
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
@@ -145,10 +168,8 @@
     STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
     viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
     viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
-    viewController.delegate = _delegate;
-    viewController.editPostId = _editPostId;
-    viewController.captionString = _captionString;
-    viewController.controllerType = _editPostId==nil?STShareControllerAddPost:STShareControllerEditPost;
+    viewController.post = _post;
+    viewController.controllerType = _post==nil?STShareControllerAddPost:STShareControllerEditPost;
     [self.navigationController pushViewController:viewController animated:YES];
 
    }

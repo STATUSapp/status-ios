@@ -13,7 +13,6 @@
 #import "UIImageView+Mask.h"
 #import "STImageCacheController.h"
 #import "STChatController.h"
-#import "STFlowTemplateViewController.h"
 #import "STFacebookLoginController.h"
 #import "AppDelegate.h"
 #import "STCoreDataRequestManager.h"
