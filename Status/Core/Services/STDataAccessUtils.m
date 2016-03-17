@@ -458,4 +458,24 @@
 
 }
 
++ (void)inviteUserToUpload:(NSString *)userID
+              withUserName:(NSString *)userName
+withCompletion:(STDataUploadCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        NSInteger statusCode = [response[@"status_code"] integerValue];
+        if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo. We'll announce you when the new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", userName];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
+                                                  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            completion(nil);
+        }
+        else
+            completion([NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+    };
+    [STInviteUserToUploadRequest inviteUserToUpload:userID withCompletion:completion1 failure:^(NSError *error) {
+        completion(error);
+    }];
+}
+
 @end

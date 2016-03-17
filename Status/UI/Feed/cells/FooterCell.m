@@ -14,6 +14,8 @@
 #import "STFBAdCell.h"
 
 #import "STFlowTemplate.h"
+#import "STNavigationService.h"
+#import "STLocalNotificationService.h"
 
 static const NSInteger kNumberOfTiles = 6;
 
@@ -25,8 +27,7 @@ static const NSInteger kNumberOfTiles = 6;
 @end
 
 @implementation FooterCell
--(void)configureFooterWithBkImage:(UIImage *)image
-            handlerViewController:(UIViewController *)vc{
+-(void)configureFooterWithBkImage:(UIImage *)image{
     _itemsArray = [NSMutableArray new];
     _backgroundImageView.image = [UIImage imageNamed:@"you-saw-all-photos-background-"];
     [STDataAccessUtils getFlowTemplatesWithCompletion:^(NSArray *objects, NSError *error) {
@@ -57,7 +58,7 @@ static const NSInteger kNumberOfTiles = 6;
  */
 
 -(NSString *)reuseIdentifier{
-    return @"footerView";
+    return @"FooterCell";
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -85,8 +86,7 @@ static const NSInteger kNumberOfTiles = 6;
     }
     else if ([cell isKindOfClass:[STFBAdCell class]]){
         [(STFBAdCell *)cell configureCellWithFBNativeAdd:object];
-        //TODO: dev_1_2 make this work
-//        [(FBNativeAd *)object registerViewForInteraction:cell withViewController:_currentVc];
+        [(FBNativeAd *)object registerViewForInteraction:cell withViewController:[STNavigationService viewControllerForSelectedTab]];
         
     }
     
@@ -109,26 +109,11 @@ static const NSInteger kNumberOfTiles = 6;
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     if (cell!=nil && [cell isKindOfClass:[STSmallFlowCell class]]) {
         STFlowTemplate *ft = [_itemsArray objectAtIndex:indexPath.row];
-        if ([ft.type isEqualToString:@"home"]) {
-            //TODO: dev_1_2 make this work
-//            [[STMenuController sharedInstance] goHome];
-        }
-        else if ([ft.type isEqualToString:@"popular"]){
-            //TODO: dev_1_2 make this work
-//            [[STMenuController sharedInstance] goPopular];
-        }
-        else if ([ft.type isEqualToString:@"recent"]){
-            //TODO: dev_1_2 make this work
-//            [[STMenuController sharedInstance] goRecent];
-        }
-        else if ([ft.type isEqualToString:@"nearby"]){
-            //TODO: dev_1_2 make this work
-//            [[STMenuController sharedInstance] goNearby];
-        }
+        [[CoreManager notificationService] postNotificationName:STFooterFlowsNotification object:nil userInfo:@{kFlowTypeKey:ft.type}];
     }
     else
     {
-        //TODO: should we handle ads tap?
+        //not handled in here, handled by the framework
     }
 }
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define USE_PRODUCTION_SERVER 0
+#define USE_PRODUCTION_SERVER 1
 #define APP_STORE_ID          @"841855995"
 #define APP_URL_STRING        @"itms-apps://itunes.apple.com/app/id841855995"
 #define APP_REVIEW_URL_STRING @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=841855995&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"
@@ -28,6 +28,15 @@
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
 #pragma mark - Enums
+
+typedef NS_ENUM(NSUInteger,STTabBarIndex){
+    STTabBarIndexHome = 0,
+    //TODO: dev_1_2 enable this one and add a new screen
+//    STTabBarIndexSearch,
+    STTabBarIndexTakAPhoto,
+    STTabBarIndexChat,
+    STTabBarIndexProfile
+};
 
 typedef NS_ENUM(NSUInteger,STFlowType){
     STFlowTypeHome = 0,
@@ -169,12 +178,15 @@ extern NSString *const STPostNewImageUploaded;
 extern NSString *const STPostImageWasEdited;
 extern NSString *const STPostCaptionWasEdited;
 
+extern NSString *const STFooterFlowsNotification;
+extern NSString *const STHomeFlowShouldBeReloadedNotification;
 
 #pragma mark - Notification User Info Keys
 
 extern NSString *const kPostIdKey;
 extern NSString *const kImageKey;
 extern NSString *const kImageUrlKey;
+extern NSString *const kFlowTypeKey;
 
 #pragma mark - Invite Friends
 

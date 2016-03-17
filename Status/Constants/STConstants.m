@@ -114,11 +114,15 @@ NSString *const STPostNewImageUploaded = @"STPostNewImageUploaded";
 NSString *const STPostImageWasEdited = @"STPostImageWasEdited";
 NSString *const STPostCaptionWasEdited = @"STPostCaptionWasEdited";
 
+NSString *const STFooterFlowsNotification = @"STFooterFlowsNotification";
+NSString *const STHomeFlowShouldBeReloadedNotification = @"STHomeFlowShouldBeReloadedNotification";
+
 #pragma mark - Notification User Info Keys
 
 NSString *const kPostIdKey = @"_key_post_id";
 NSString *const kImageKey = @"key_image";
 NSString *const kImageUrlKey = @"key_image_url";
+NSString *const kFlowTypeKey = @"flow_type_key";
 
 #pragma mark - Invite Friends
 

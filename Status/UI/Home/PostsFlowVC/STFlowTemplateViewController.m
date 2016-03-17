@@ -742,7 +742,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
-
+//moved
 - (IBAction)onTapProfileName:(id)sender {
     if (self.flowType == STFlowTypeUserGallery || self.flowType == STFlowTypeMyGallery) {
         //is already in user profile

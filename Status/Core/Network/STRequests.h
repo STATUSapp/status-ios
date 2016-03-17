@@ -29,6 +29,7 @@
 #import "STRepostPostRequest.h"
 #import "STUpdatePostCaptionRequest.h"
 #import "STUploadPostRequest.h"
+#import "STInviteUserToUploadRequest.h"
 
 #endif
 

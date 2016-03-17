@@ -298,7 +298,7 @@
 
 - (IBAction)onTapGallery:(id)sender {
     
-    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_profileUserId];
+    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_profileUserId andUserName:_userProfile.fullName];
     
 //    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 //    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];

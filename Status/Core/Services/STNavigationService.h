@@ -18,5 +18,9 @@
 
 - (void)presentLoginScreen;
 - (void)presentTabBarController;
+-(void)switchToTabBarAtIndex:(NSInteger)index
+                 popToRootVC:(BOOL)popToRoot;
+
++ (UIViewController *)viewControllerForSelectedTab;
 
 @end

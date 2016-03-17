@@ -5,33 +5,11 @@
       "scale" : "1x"
     },
     {
-      "resizing" : {
-        "mode" : "3-part-horizontal",
-        "center" : {
-          "mode" : "tile",
-          "width" : 1
-        },
-        "cap-insets" : {
-          "right" : 0,
-          "left" : 0
-        }
-      },
       "idiom" : "universal",
       "filename" : "down_shaddow@2x.png",
       "scale" : "2x"
     },
     {
-      "resizing" : {
-        "mode" : "3-part-horizontal",
-        "center" : {
-          "mode" : "tile",
-          "width" : 1
-        },
-        "cap-insets" : {
-          "right" : 0,
-          "left" : 0
-        }
-      },
       "idiom" : "universal",
       "filename" : "down_shaddow@3x.png",
       "scale" : "3x"

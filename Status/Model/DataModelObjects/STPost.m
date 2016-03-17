@@ -45,12 +45,14 @@ NSString * const kPostUuidForLoading = @"uuid_3";
 + (instancetype)mockPostNoPhotosToDisplay{
     STPost * post = [STPost new];
     post.uuid = kPostUuidForNoPhotosToDisplay;
+    post.imageDownloaded = YES;
     return post;
 
 }
 + (instancetype)mockPostYouSawAll{
     STPost * post = [STPost new];
     post.uuid = kPostUuidForYouSawAll;
+    post.imageDownloaded = YES;
     return post;
 }
 + (instancetype)mockPostLoading{

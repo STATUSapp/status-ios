@@ -353,12 +353,12 @@
 }
 
 #pragma mark - Helper
-
+//moved
 +(UIImage *)blurScreen:(UIViewController *)vc{
     UIImage * imageFromCurrentView = [STMenuController snapshotForViewController:vc];
     return [imageFromCurrentView applyDarkEffect];
 }
-
+//moved
 + (UIImage *)snapshotForViewController:(UIViewController *)vc{
     UIGraphicsBeginImageContextWithOptions(vc.view.bounds.size, YES, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();

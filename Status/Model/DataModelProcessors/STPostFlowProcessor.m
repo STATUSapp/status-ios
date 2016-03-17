@@ -16,6 +16,9 @@
 #import "STImageCacheController.h"
 #import "STFacebookHelper.h"
 #import "STLocalNotificationService.h"
+#import "STNavigationService.h"
+
+#import "STImageCacheObj.h"
 
 int const kDeletePostTag = 11;
 
@@ -154,6 +157,23 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
     return (_loaded == NO);
 }
 
+- (void)reloadProcessor{
+    _loaded = NO;
+    [_postIds removeAllObjects];
+    [self getMoreData];
+}
+
+- (BOOL)canGoToUserProfile{
+    if (_flowType == STFlowTypeUserGallery ||
+        _flowType == STFlowTypeMyGallery) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)currentFlowUserIsTheLoggedInUser{
+    return [_userId isEqualToString:[CoreManager loginService].currentUserUuid];
+}
 #pragma mark - Actions
 
 - (void)setLikeUnlikeAtIndex:(NSInteger)index
@@ -163,6 +183,27 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
                                     withCompletion:^(NSError *error) {
                                         completion(error);
                                     }];
+}
+
+- (void)handleBigCameraButtonActionWithUserName:(NSString *)userName{
+    switch (self.flowType) {
+        case STFlowTypeMyGallery:{
+            [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakAPhoto popToRootVC:YES];
+            break;
+        }
+        case STFlowTypeUserGallery:{
+            [STDataAccessUtils inviteUserToUpload:_userId withUserName:userName withCompletion:^(NSError *error) {
+                if (!error) {
+                    [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexHome popToRootVC:YES];
+                }
+            }];
+            break;
+        }
+            
+        default:
+            return;
+            break;
+    }
 }
 
 #pragma mark - Internal Helpers
@@ -259,15 +300,21 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
             weakSelf.loaded = YES;
             //TODO: dev_1_2 handle the listener
             
-            [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
             if (objects.count > 0) {
-#ifdef DEBUG
-                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel." forKey:@"caption"];
-#endif
-                [[CoreManager postsPool] addPosts:objects];
+//#ifdef DEBUG
+//                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel." forKey:@"caption"];
+//#endif
+            [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
+
+            [[CoreManager postsPool] addPosts:objects];
             }
             [[CoreManager notificationService] postNotificationName:kNotificationPostDownloadSuccess object:self userInfo:nil];
-            [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:objects];
+            NSMutableArray *objToDownload = [NSMutableArray new];
+            for (STPost *post in objects) {
+                STImageCacheObj *obj = [STImageCacheObj imageCacheObjFromPost:post];
+                [objToDownload addObject:obj];
+            }
+            [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:objToDownload];
 
             
             //TODO: dev_1_2 show Suggestions
@@ -316,7 +363,8 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
     NSString *postId = notif.userInfo[kPostIdKey];
     if ([_postIds containsObject:postId]) {
         STPost *post = [[CoreManager postsPool] getPostWithId:postId];
-        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:@[post]];
+        STImageCacheObj *objToDownload = [STImageCacheObj imageCacheObjFromPost:post];
+        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:@[objToDownload]];
     }
 
 }

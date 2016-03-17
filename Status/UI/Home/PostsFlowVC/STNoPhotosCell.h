@@ -12,5 +12,6 @@
 
 @interface STNoPhotosCell : UICollectionViewCell
 -(void)setUpCellWithUserName:(NSString *)userName andFlow:(STFlowType)flowType;
--(void)configureWitPost:(STPost*)post;
+-(void)configureWithUserName:(NSString *)userName
+            isTheCurrentUser:(BOOL)isOwner;
 @end

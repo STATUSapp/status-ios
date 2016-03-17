@@ -12,6 +12,7 @@
 
 + (FeedCVC *)mainFeedController;
 + (FeedCVC *)singleFeedControllerWithPostId:(NSString *)postId;
-+ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId;
++ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId
+                                andUserName:(NSString *)userName;
 
 @end

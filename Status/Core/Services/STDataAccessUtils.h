@@ -67,6 +67,8 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 + (void)updatePostWithId:(NSString *)postId
           withNewCaption:(NSString *)newCaption
           withCompletion:(STDataUploadCompletionBlock)completion;
-
++ (void)inviteUserToUpload:(NSString *)userID
+              withUserName:(NSString *)userName
+            withCompletion:(STDataUploadCompletionBlock)completion;
 
 @end

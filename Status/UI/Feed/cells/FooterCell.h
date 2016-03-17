@@ -10,4 +10,6 @@
 
 @interface FooterCell : UICollectionViewCell
 
+-(void)configureFooterWithBkImage:(UIImage *)image;
+
 @end

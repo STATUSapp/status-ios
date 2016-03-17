@@ -29,6 +29,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
     SRWebSocket *_webSocket;
     AFNetworkReachabilityManager* _reachabilityManager;
     NSTimer *_pingTimer;
+    BOOL _chatLoadingParameters;
 }
 
 @end
@@ -87,17 +88,26 @@ NSString *const kFirstChatVersion = @"1.0.4";
         return;
     }
     if (_chatSocketUrl==nil ||_chatPort == -1) {
-        [STGetChatUrlAndPortRequest getReconnectInfoWithCompletion:^(id response, NSError *error) {
-            if ([response[@"status_code"] integerValue] == 200) {
-                _chatSocketUrl = response[@"hostname"];
-                _chatPort = [response[@"port"] integerValue];
-                [self connectChat];
-                             
-            }
-            
-        } failure:^(NSError *error) {
-            NSLog(@"Get chat reconnect params failed : %@", error);
-        }];
+        if (_chatLoadingParameters == NO) {
+            _chatLoadingParameters = YES;
+            [STGetChatUrlAndPortRequest getReconnectInfoWithCompletion:^(id response, NSError *error) {
+                _chatLoadingParameters = NO;
+                if ([response[@"status_code"] integerValue] == 200) {
+                    _chatSocketUrl = response[@"hostname"];
+                    _chatPort = [response[@"port"] integerValue];
+                    [self connectChat];
+                    
+                }
+                
+            } failure:^(NSError *error) {
+                _chatLoadingParameters = NO;
+                NSLog(@"Get chat reconnect params failed : %@", error);
+            }];
+        }
+        else
+        {
+            //wait the next reconnect
+        }
     }
     else
         [self connectChat];
@@ -142,7 +152,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
     [_pingTimer invalidate];
     _pingTimer = nil;
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-        [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.f];
+        [self performSelector:@selector(reconnect) withObject:nil afterDelay:5.f];
        
     }
 

@@ -25,6 +25,9 @@
 #import "STPostsPool.h"
 #import "STCustomShareView.h"
 
+#import "UIViewController+Snapshot.h"
+#import "STUserProfileViewController.h"
+
 @interface FeedCVC ()
 {
     CGPoint _start;
@@ -34,6 +37,8 @@
 }
 
 @property (nonatomic, strong) STPostFlowProcessor *feedProcessor;
+
+@property (nonatomic, strong) NSString *userName;
 @end
 
 @implementation FeedCVC
@@ -41,8 +46,8 @@
 static NSString * const normalFeedCell = @"FeedCell";
 static NSString * const fullCaptionFeedCell = @"FullCaptionFeedCell";
 static NSString * const loadingFeedCell = @"LoadingCell";
-static NSString * const youSawAllCell = @"FeedCell";
-static NSString * const noPhotosToDisplayCell = @"FooterCell";
+static NSString * const youSawAllCell = @"FooterCell";
+static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 + (FeedCVC *)mainFeedController{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
@@ -66,11 +71,12 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     return feedCVC;
 }
 
-+ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId{
++ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId
+                                andUserName:(NSString *)userName{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
     UINavigationController *navController = [storyboard instantiateInitialViewController];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
-    
+    feedCVC.userName = userName;
     BOOL userIsMe = [[CoreManager loginService].currentUserUuid isEqualToString:userId];
     STFlowType flowType = userIsMe ? STFlowTypeMyGallery : STFlowTypeUserGallery;
     
@@ -88,6 +94,7 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationPostDownloadSuccess object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationPostUpdated object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationPostDeleted object:_feedProcessor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
 
 }
 
@@ -112,6 +119,11 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
 }
 - (void)postDeleted:(NSNotification *)notif{
     //TODO: dev_1_2 delete only the notif.userInfo[kPostIdKey] ?
+    [self.collectionView reloadData];
+}
+
+- (void)dataShouldBeReloaded:(NSNotification *)notif{
+    [_feedProcessor reloadProcessor];
     [self.collectionView reloadData];
 }
 
@@ -216,12 +228,21 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
         [(FullCaptionFeedCell *)cell configureCellWithPost:post];
     }
     else if ([cell isKindOfClass:[STNoPhotosCell class]]){
-        [(STNoPhotosCell *)cell configureWitPost:post];
+        [(STNoPhotosCell *)cell configureWithUserName:_userName
+                                     isTheCurrentUser:[_feedProcessor currentFlowUserIsTheLoggedInUser]];
     }
     else if ([cell isKindOfClass:[FooterCell class]]){
-        //TODO: dev_1_2
+        UIImage *bluredImage = nil;
+        if ([_feedProcessor numberOfPosts] > 0) {
+            bluredImage = [self blurScreen];
+        }
+        else
+        {
+            bluredImage = [UIImage imageNamed:@"placeholder STATUS loading"];
+            
+        }
+        [(FooterCell *)cell configureFooterWithBkImage:bluredImage];
     }
-    
     
     return cell;
 }
@@ -295,6 +316,16 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
 
 }
 - (IBAction)onNamePressed:(id)sender {
+    if (![_feedProcessor canGoToUserProfile]) {
+        //is already in user profile
+        return;
+    }
+    
+    STPost *post = [self getCurrentPost];
+    
+    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:post.userId];
+    [self.navigationController pushViewController:userProfileVC animated:YES];
+
 }
 - (IBAction)onSeeMorePressed:(id)sender {
     //TODO: dev_1_2 add animations
@@ -325,5 +356,8 @@ static NSString * const noPhotosToDisplayCell = @"FooterCell";
     } completion:nil];
 }
 
+- (IBAction)onBigCameraPressed:(id)sender {
+    [_feedProcessor handleBigCameraButtonActionWithUserName:_userName];
+}
 
 @end

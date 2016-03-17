@@ -30,8 +30,13 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
 - (void)processPostAtIndex:(NSInteger)index;
 - (void)deleteItemAtIndex:(NSInteger)index;
 - (BOOL)loading;
+- (void)reloadProcessor;
+- (BOOL)canGoToUserProfile;
+- (BOOL)currentFlowUserIsTheLoggedInUser;
 
 //actions
 - (void)setLikeUnlikeAtIndex:(NSInteger)index
               withCompletion:(STProcessorCompletionBlock)completion;
+- (void)handleBigCameraButtonActionWithUserName:(NSString *)userName;
+
 @end

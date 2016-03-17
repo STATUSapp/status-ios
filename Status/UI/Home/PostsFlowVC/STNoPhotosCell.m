@@ -34,14 +34,15 @@
     }
 }
 
--(void)configureWitPost:(STPost*)post{
-    [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", post.userName] forState:UIControlStateNormal];
+-(void)configureWithUserName:(NSString *)userName
+            isTheCurrentUser:(BOOL)isOwner{
+    [self.profileNameBtn setTitle:[NSString stringWithFormat:@"%@ Profile ", userName] forState:UIControlStateNormal];
     
-    if (post.isOwner) {
+    if (isOwner) {
         self.noPhotosLabel.text = @"You don't have any photo. Take a photo";
     }
     else
-        self.noPhotosLabel.text = [NSString stringWithFormat:@"Ask %@ to take a photo", post.userName];
+        self.noPhotosLabel.text = [NSString stringWithFormat:@"Ask %@ to take a photo", userName];
 }
 
 - (NSString *)reuseIdentifier{

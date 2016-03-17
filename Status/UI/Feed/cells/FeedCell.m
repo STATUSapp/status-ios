@@ -39,7 +39,7 @@ CGFloat const kSeeMoreButtonWidthConstant = 56.f;
     _currentPost = post;
     [_nameButton setTitle:_currentPost.userName forState:UIControlStateNormal];
     [_likeButton setTitle:_currentPost.postLikedByCurrentUser?NSLocalizedString(@"LIKED", nil):NSLocalizedString(@"LIKE", nil) forState:UIControlStateNormal];
-    _messageButton.hidden = ![_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
+    _messageButton.enabled = [_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
     [self configureBottomView];
     
     __weak FeedCell *weakSelf = self;

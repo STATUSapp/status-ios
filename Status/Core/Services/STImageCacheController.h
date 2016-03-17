@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "STConstants.h"
 
+@class STImageCacheObj;
+
 typedef void (^loadImageCompletion)(UIImage *img);
 typedef void (^loadPostImageCompletion)(UIImage *origImg);
 typedef void (^loadBlurPostCompletion) (UIImage *bluredImg);
@@ -21,7 +23,7 @@ typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded);
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion;
 -(void) loadPostImageWithName:(NSString *) imageFullLink withPostCompletion:(loadPostImageCompletion) completion andBlurCompletion:(loadBlurPostCompletion)blurCompl;
 -(void) cleanTemporaryFolder;
--(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts;
+-(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray <STImageCacheObj *>*)newObjects;
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort;
 
 + (BOOL) imageDownloadedForUrl:(NSString *)url;

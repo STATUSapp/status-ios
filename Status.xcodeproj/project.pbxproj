@@ -19,6 +19,8 @@
 		17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5C41A1BB7EF240057180E /* AddressBook.framework */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
+		17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */; };
+		17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */; };
 		17DF47351C9974700053F633 /* STLocalNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF47341C9974700053F633 /* STLocalNotificationService.m */; };
 		17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F2881C96DED500D53EC1 /* STBasePool.m */; };
 		17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */; };
@@ -240,6 +242,10 @@
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		17B587401C9ABAF3006AC7BD /* UIViewController+Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Snapshot.h"; sourceTree = "<group>"; };
+		17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Snapshot.m"; sourceTree = "<group>"; };
+		17B587431C9ABEE5006AC7BD /* STImageCacheObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImageCacheObj.h; sourceTree = "<group>"; };
+		17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImageCacheObj.m; sourceTree = "<group>"; };
 		17DF47331C9974700053F633 /* STLocalNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocalNotificationService.h; sourceTree = "<group>"; };
 		17DF47341C9974700053F633 /* STLocalNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocalNotificationService.m; sourceTree = "<group>"; };
 		17F4F2871C96DED500D53EC1 /* STBasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBasePool.h; sourceTree = "<group>"; };
@@ -783,6 +789,8 @@
 				99B385FE1C82FAA2005B4D8C /* UIImageView+Mask.m */,
 				99B385FF1C82FAA2005B4D8C /* UIImageView+TouchesEffects.h */,
 				99B386001C82FAA2005B4D8C /* UIImageView+TouchesEffects.m */,
+				17B587401C9ABAF3006AC7BD /* UIViewController+Snapshot.h */,
+				17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -984,6 +992,8 @@
 				99B386841C82FAA2005B4D8C /* STDataModelObjects.h */,
 				99B386851C82FAA2005B4D8C /* STFlowTemplate.h */,
 				99B386861C82FAA2005B4D8C /* STFlowTemplate.m */,
+				17B587431C9ABEE5006AC7BD /* STImageCacheObj.h */,
+				17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */,
 				99B386871C82FAA2005B4D8C /* STListUser.h */,
 				99B386881C82FAA2005B4D8C /* STListUser.m */,
 				99B386891C82FAA2005B4D8C /* STSuggestedUser.h */,
@@ -1630,6 +1640,7 @@
 				99B3875D1C82FAA2005B4D8C /* STInviteUserToUploadRequest.m in Sources */,
 				99B387C81C82FAA2005B4D8C /* STNotificationBaseCell.m in Sources */,
 				99B3877B1C82FAA2005B4D8C /* STMenuController.m in Sources */,
+				17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */,
 				99B387511C82FAA2005B4D8C /* STGetNotificationsCountRequest.m in Sources */,
 				99B387D71C82FAA2005B4D8C /* STAlbumImagesViewController.m in Sources */,
 				99B387B21C82FAA2005B4D8C /* STCustomShareView.m in Sources */,
@@ -1638,6 +1649,7 @@
 				99B387731C82FAA2005B4D8C /* STDataAccessUtils.m in Sources */,
 				99B387631C82FAA2005B4D8C /* STSetPostSeenRequest.m in Sources */,
 				99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */,
+				17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */,
 				99B387D51C82FAA2005B4D8C /* STAlbumImageCell.m in Sources */,
 				99B387CA1C82FAA2005B4D8C /* STNotificationsManager.m in Sources */,
 				99B387E21C82FAA2005B4D8C /* STUsersListController.m in Sources */,
