@@ -61,7 +61,15 @@
     
     NSInteger offset = [self offsetForIndex:index];
     
-    [_pageController setViewControllers:@[_viewControllers[index]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+    NSInteger currentVCIndex = [_viewControllers indexOfObject:_pageController.viewControllers.lastObject];
+    
+    if (index == currentVCIndex) {
+        return;
+    }
+    
+    UIPageViewControllerNavigationDirection direction = index > currentVCIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
+    
+    [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:^(BOOL finished) {
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.pageIndicatorLeading.constant =  offset;
             [UIView animateWithDuration:0.35 animations:^{
