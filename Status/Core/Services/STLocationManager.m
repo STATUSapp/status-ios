@@ -147,7 +147,7 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
 
 +(BOOL)locationUpdateEnabled{
     return [CLLocationManager locationServicesEnabled] &&
-    ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized ||
+    ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedAlways ||
      [CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse);
 }
 

@@ -66,10 +66,10 @@
     
     NSDate *today = [NSDate date];
     
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     
     // pass as many or as little units as you like here, separated by pipes
-    NSUInteger units = NSYearCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit;
+    NSUInteger units = NSCalendarUnitYear | NSCalendarUnitDay | NSCalendarUnitMonth;
     
     NSDateComponents *components = [gregorianCalendar components:units fromDate:referenceDate toDate:today options:0];
     

@@ -108,7 +108,7 @@
 #pragma mark - Notification
 
 - (void)imageWasPostedWithPostId:(NSNotification *)notif {
-    NSString *postId = notif.userInfo[kPostIdKey];
+//    NSString *postId = notif.userInfo[kPostIdKey];
     //TODO:dev_1_2 redirect to a screen with a single post?
     //TODO:dev_1_2 move this on the navigation service
     NSMutableArray *newStack = [NSMutableArray new];

@@ -64,7 +64,7 @@
 
 
 - (void)imageWasPostedWithPostId:(NSNotification *)notif {
-    NSString *postId = notif.userInfo[kPostIdKey];
+//    NSString *postId = notif.userInfo[kPostIdKey];
     //TODO: redirect to a screen with a single post?
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

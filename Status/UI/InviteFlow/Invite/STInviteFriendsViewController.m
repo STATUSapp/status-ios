@@ -88,12 +88,12 @@
     
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
     activityViewController.excludedActivityTypes = excludedActivities;
-    UIActivityViewControllerCompletionHandler completion = ^(NSString *activityType, BOOL completed){
+    UIActivityViewControllerCompletionWithItemsHandler completion = ^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
         if (completed == YES) {
             [[STInviteController sharedInstance] setCurrentDateForSelectedItem];
         }
     };
-    [activityViewController setCompletionHandler:completion];
+    [activityViewController setCompletionWithItemsHandler:completion];
     
     [self presentViewController:activityViewController animated:YES completion:^{
         [(UIButton *)sender setUserInteractionEnabled:YES];

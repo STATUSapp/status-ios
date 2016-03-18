@@ -229,17 +229,8 @@
     [Tune measureEventName:@"registration"];
 }
 
-static const UIRemoteNotificationType REMOTE_NOTIFICATION_TYPES_REQUIRED = (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound);
-
 - (void)requestRemoteNotificationAccess;
 {
-    bool isIOS8OrGreater = [[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)];
-    if (!isIOS8OrGreater)
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:REMOTE_NOTIFICATION_TYPES_REQUIRED];
-        return;
-    }
-
     UIUserNotificationSettings *settings =
     [UIUserNotificationSettings
      settingsForTypes: (UIUserNotificationTypeBadge |
