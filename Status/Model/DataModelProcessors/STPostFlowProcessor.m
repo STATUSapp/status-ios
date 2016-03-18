@@ -159,6 +159,7 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 
 - (void)reloadProcessor{
     _loaded = NO;
+    _numberOfDuplicates = 0;
     [_postIds removeAllObjects];
     [self getMoreData];
 }

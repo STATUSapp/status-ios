@@ -25,7 +25,7 @@
 #import "NSString+MD5.h"
 
 #import "FeedCVC.h"
-
+#import "STNavigationService.h"
 const float kNoNotifHeight = 24.f;
 
 @interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
@@ -137,7 +137,8 @@ const float kNoNotifHeight = 24.f;
         switch (notificationType) {
             case STNotificationTypePhotosWaiting:
                 //go to main feed
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexHome
+                                                           popToRootVC:YES];
                 break;
             case STNotificationTypeNewUserJoinsStatus:
                 //go to user profile
@@ -146,8 +147,8 @@ const float kNoNotifHeight = 24.f;
             case STNotificationTypeGuaranteedViewsForNextPhoto:
             case STNotificationType5DaysUploadNewPhoto:
             {
-                //go to main feed with camera button pressed
-                //TODO: dev_1_2 got tho the take a photo tab
+                [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakAPhoto popToRootVC:YES];
+
             }
                 break;
             default:
@@ -162,6 +163,9 @@ const float kNoNotifHeight = 24.f;
     
     
     switch (notifType) {
+        case STNotificationTypeInvite:
+            [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakAPhoto popToRootVC:YES];
+            break;
         default:
         {
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]]];
@@ -194,6 +198,7 @@ const float kNoNotifHeight = 24.f;
             break;
         case STNotificationTypeInvite:
         {
+            
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]]];
             [self.navigationController pushViewController:profileVC animated:YES];
             
