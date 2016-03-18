@@ -47,6 +47,23 @@
 }
 
 #pragma mark - Methods
+
+-(void)setBadge:(NSInteger)badge
+  forTabAtIndex:(NSInteger)index{
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
+    
+    NSString *badgeString = @"";
+    if (badge > 0) {
+        if (badge > 99)
+            badgeString = @"99+";
+        else
+            badgeString = [NSString stringWithFormat:@"%ld", (long)badge];
+    }
+    
+    [[tbc.viewControllers objectAtIndex:index] tabBarItem].badgeValue = badgeString;
+}
+
 -(void)switchToTabBarAtIndex:(NSInteger)index
                  popToRootVC:(BOOL)popToRoot{
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
@@ -79,6 +96,16 @@
 
 - (void)resetTabBarStacks{
     //TODO: dev_1_2 should we reset some nav controller?
+}
+
+-(void)pushViewController:(UIViewController *) vc
+          inTabbarAtIndex:(NSInteger)index
+      keepThecurrentStack:(BOOL)keepTheStack{
+    
+    [self switchToTabBarAtIndex:index popToRootVC:!keepTheStack];
+    if (vc) {
+        [self pushViewController:vc inTabBarIndex:index animated:YES];
+    }
 }
 
 #pragma mark - NSNOtifications

@@ -20,8 +20,15 @@
 - (void)presentTabBarController;
 - (void)resetTabBarStacks;
 
+-(void)setBadge:(NSInteger)badge
+  forTabAtIndex:(NSInteger)index;
+
 -(void)switchToTabBarAtIndex:(NSInteger)index
                  popToRootVC:(BOOL)popToRoot;
+
+-(void)pushViewController:(UIViewController *) vc
+          inTabbarAtIndex:(NSInteger)index
+      keepThecurrentStack:(BOOL)keepTheStack;
 
 + (UIViewController *)viewControllerForSelectedTab;
 

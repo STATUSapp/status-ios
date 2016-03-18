@@ -224,6 +224,16 @@
     [self.childContainer addSubview:_pageController.view];
     [self addChildViewController:_pageController];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsShouldBeReloaded:) name:STNotificationsShouldBeReloaded object:nil];
+}
+
+#pragma mark - Notifications
+
+- (void)notificationsShouldBeReloaded:(NSNotification *)notif{
+    [self goToNotifications:nil];
+    
+    STNotificationsViewController *notifVc = (STNotificationsViewController *)[_viewControllers firstObject];
+    [notifVc getNotificationsFromServer];
 }
 
 @end

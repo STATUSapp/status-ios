@@ -82,6 +82,7 @@
     _menuView.alpha = 0.f;
     _menuView.blurBackground.image = [STMenuController blurScreen:_currentVC];
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    /*
     NSInteger notifNumber = app.badgeNumber;
     if (notifNumber > 0) {
         _menuView.notificationBadge.text = [NSString stringWithFormat:@"%@ %zd %@",notifNumber>10?@"":@" ",notifNumber,notifNumber>10?@"":@" "];
@@ -90,6 +91,7 @@
     else{
         _menuView.notificationBadge.hidden = YES;
     }
+     */
     _menuView.homeNotifBadge.hidden =
     _menuView.recentNotifBadge.hidden =
     _menuView.populatNotifBadge.hidden = YES;

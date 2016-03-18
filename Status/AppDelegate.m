@@ -42,7 +42,6 @@
 #import "STNavigationService.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
-static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 @interface AppDelegate()<UIAlertViewDelegate>
 
@@ -50,31 +49,11 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 @implementation AppDelegate
 
-- (void)setBadgeNumber:(NSInteger)badgeNumber{
-    
-    _badgeNumber = badgeNumber;
-    [[NSUserDefaults standardUserDefaults] setValue:@(badgeNumber) forKey:kSTLastBadgeNumber];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
-    [[CoreManager localNotificationService] postNotificationName:STNotificationBadgeValueDidChanged object:nil userInfo:nil];
-}
-
--(void)loadBadgeNumber{
-    NSNumber *lastBadgeNumber = [[NSUserDefaults standardUserDefaults] valueForKey:kSTLastBadgeNumber];
-    if (lastBadgeNumber !=nil) {
-        self.badgeNumber = [lastBadgeNumber integerValue];
-    }
-    else
-        self.badgeNumber = 0;
-    
-
-}
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [application setStatusBarHidden:YES];
-    [self loadBadgeNumber];
+    
+    [[CoreManager notificationsService] loadBadgeNumber];
     [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     // setup Mobile App Tracker
@@ -149,8 +128,6 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    
-    
     if ([[STInviteController sharedInstance] shouldInviteBeAvailable]) {
         [[STInviteController sharedInstance] callTheDelegate];
     }
@@ -232,42 +209,12 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     NSLog(@"Notif: %@", userInfo);
     NSLog(@"App state: %lu", (unsigned long)application.applicationState);
 
-    self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
-    if (application.applicationState!=UIApplicationStateActive) {
+    [[CoreManager notificationsService] setOverAllBadgeNumber:[userInfo[@"aps"][@"badge"] integerValue]];
+    if (application.applicationState!=UIApplicationStateActive)
         [[CoreManager notificationsService] handleNotification:userInfo];
 
-    }
     else
-    {
-//#warning remove this mockup
-//        NSMutableDictionary *debugUserInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
-//        NSMutableDictionary *payloadUserInfo = [NSMutableDictionary dictionaryWithDictionary: debugUserInfo[@"user_info"]];
-//        payloadUserInfo[@"name"] = @"Einstein";
-//        payloadUserInfo[@"photo"] = @"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/s200x200/10354686_10150004552801856_220367501106153455_n.jpg?oh=9dc41c83e9eea8ba96538c6b8ea6d16d&oe=550DCA50&__gda__=1426728006_926067ef0f35eed4118319b475d142bd";
-//        payloadUserInfo[@"post_id"] = @(71);
-//        payloadUserInfo[@"user_id"] = @(35);
-//        debugUserInfo[@"user_info"] = payloadUserInfo;
-//#ifdef DEBUG
-//        [[STNotificationsManager sharedManager] handleInAppNotification:debugUserInfo];
-//
-//#else
         [[CoreManager notificationsService] handleInAppNotification:userInfo];
-//#endif
-    }
-}
-
--(void)checkForNotificationNumber{
-    __weak AppDelegate *weakSelf = self;
-    if ([CoreManager loggedIn]) {
-        STRequestCompletionBlock completion = ^(id response, NSError *error){
-            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    weakSelf.badgeNumber = [response[@"count"] integerValue];
-                });
-            }
-        };
-        [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
-    }
 }
 
 @end

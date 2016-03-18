@@ -116,6 +116,7 @@ NSString *const STPostCaptionWasEdited = @"STPostCaptionWasEdited";
 
 NSString *const STFooterFlowsNotification = @"STFooterFlowsNotification";
 NSString *const STHomeFlowShouldBeReloadedNotification = @"STHomeFlowShouldBeReloadedNotification";
+NSString *const STNotificationsShouldBeReloaded = @"STNotificationsShouldBeReloaded";
 
 #pragma mark - Notification User Info Keys
 

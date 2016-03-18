@@ -180,6 +180,7 @@ extern NSString *const STPostCaptionWasEdited;
 
 extern NSString *const STFooterFlowsNotification;
 extern NSString *const STHomeFlowShouldBeReloadedNotification;
+extern NSString *const STNotificationsShouldBeReloaded;
 
 #pragma mark - Notification User Info Keys
 
