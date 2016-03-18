@@ -104,23 +104,23 @@ NSInteger const kShareViewTag = 1001;
     [STCustomShareView dismissView];
 }
 - (IBAction)onReportPost:(id)sender {
-    [[CoreManager notificationService] postNotificationName:STOptionsViewReportPostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [[CoreManager localNotificationService] postNotificationName:STOptionsViewReportPostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
 }
 - (IBAction)onDeletePost:(id)sender {
-    [[CoreManager notificationService] postNotificationName:STOptionsViewDeletePostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [[CoreManager localNotificationService] postNotificationName:STOptionsViewDeletePostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
 }
 - (IBAction)onEditPost:(id)sender {
-    [[CoreManager notificationService] postNotificationName:STOptionsViewEditPostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [[CoreManager localNotificationService] postNotificationName:STOptionsViewEditPostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
 }
 - (IBAction)onMoveAndScale:(id)sender {
-    [[CoreManager notificationService] postNotificationName:STOptionsViewMoveAndScaleNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [[CoreManager localNotificationService] postNotificationName:STOptionsViewMoveAndScaleNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
 }
 - (IBAction)onSaveLocally:(id)sender {
-    [[CoreManager notificationService] postNotificationName:STOptionsViewSaveNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [[CoreManager localNotificationService] postNotificationName:STOptionsViewSaveNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
     
 }
 - (IBAction)onShareFb:(id)sender {
-    [[CoreManager notificationService] postNotificationName:STOptionsViewShareFbNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [[CoreManager localNotificationService] postNotificationName:STOptionsViewShareFbNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
 }
 
 

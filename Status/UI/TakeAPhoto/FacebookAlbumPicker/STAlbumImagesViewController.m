@@ -97,7 +97,7 @@
     
     [[CoreManager imageCacheService] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
         UIImage *newImg = img;//[img imageWithBlurBackground];
-        [[CoreManager notificationService] postNotificationName:STFacebookPickerNotification object:nil userInfo:@{kImageKey:newImg}];
+        [[CoreManager localNotificationService] postNotificationName:STFacebookPickerNotification object:nil userInfo:@{kImageKey:newImg}];
     }];
     
 }

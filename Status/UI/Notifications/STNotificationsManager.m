@@ -30,17 +30,7 @@
 
 @end
 
-static STNotificationsManager *_sharedManager = nil;
-
 @implementation STNotificationsManager
-+ (STNotificationsManager *)sharedManager {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [STNotificationsManager new];
-    });
-    
-    return _sharedManager;
-}
 - (UIViewController *)getCurrentViewController {
     //TODO: dev_1_2 this hierarchy is no longer valid
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];

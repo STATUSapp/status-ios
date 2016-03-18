@@ -63,7 +63,7 @@
     NSSet *matches = [_objects filteredSetUsingPredicate:removePredicate];
     for (id object in matches) {
         if ([object isKindOfClass:[STPost class]]) {
-            [[CoreManager notificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];
+            [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];
         }
         //TODO: dev_1_2 add anoter notifications
     }
@@ -86,7 +86,7 @@
     if (countBeforeFilter > 0 && countBeforeFilter>countAfterFilter) {
         //there was an update
         if ([obj isKindOfClass:[STPost class]]) {
-            [[CoreManager notificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
+            [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
         }
         //TODO: dev_1_2 add more updates here
     }

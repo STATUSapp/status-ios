@@ -367,10 +367,10 @@ static NSInteger const  kMaxCaptionLenght = 250;
         }
         if ([_post.uuid isEqualToString:postId]) {
             //TODO: dev_1_2 use STPost insead of a dictionary
-            [[CoreManager notificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
+            [[CoreManager localNotificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
         }
         else
-            [[CoreManager notificationService] postNotificationName:STPostNewImageUploaded object:nil userInfo:@{kPostIdKey:postId}];
+            [[CoreManager localNotificationService] postNotificationName:STPostNewImageUploaded object:nil userInfo:@{kPostIdKey:postId}];
     });
 
 }

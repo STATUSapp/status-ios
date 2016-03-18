@@ -95,7 +95,7 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
             }
             if (_updateForced) {
                 _updateForced = NO;
-                [[CoreManager notificationService] postNotificationName:kNotificationNewLocationHasBeenUploaded
+                [[CoreManager localNotificationService] postNotificationName:kNotificationNewLocationHasBeenUploaded
                                                                     object:nil userInfo:nil];
             }
         }

@@ -116,12 +116,12 @@
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
-    [[CoreManager notificationService] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : error.localizedDescription}];
+    [[CoreManager localNotificationService] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : error.localizedDescription}];
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
     if (queue.transactions.count == 0) {
-        [[CoreManager notificationService] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : @"No purchase to restore"}];
+        [[CoreManager localNotificationService] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : @"No purchase to restore"}];
     }
 }
 
@@ -149,7 +149,7 @@
     }
     
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [[CoreManager notificationService] postNotificationName:IAPHelperProductPurchasedFailedNotification object:nil userInfo:@{@"error" : transaction.error.localizedDescription}];
+    [[CoreManager localNotificationService] postNotificationName:IAPHelperProductPurchasedFailedNotification object:nil userInfo:@{@"error" : transaction.error.localizedDescription}];
 }
 
 - (void)provideContentForProductIdentifier:(NSString *)productIdentifier {
@@ -157,7 +157,7 @@
     [_purchasedProductIdentifiers addObject:productIdentifier];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[CoreManager notificationService] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
+    [[CoreManager localNotificationService] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
     
 }
 

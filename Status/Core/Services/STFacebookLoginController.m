@@ -107,13 +107,13 @@
     [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     [self requestRemoteNotificationAccess];
-    [[CoreManager notificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
+    [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
     //get settings from server
     [self getUserSettingsFromServer];
 }
 
 -(void)logout{
-    [[CoreManager notificationService] postNotificationName:kNotificationUserDidLoggedOut object:nil userInfo:nil];
+    [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedOut object:nil userInfo:nil];
     _fetchedUserData = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [FBSDKAccessToken setCurrentAccessToken:nil];
@@ -153,7 +153,7 @@
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 [weakSelf measureRegister];
                 [weakSelf setUpEnvironment:response andUserInfo:userInfo];
-                [[CoreManager notificationService] postNotificationName:kNotificationUserDidRegister object:nil userInfo:nil];
+                [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidRegister object:nil userInfo:nil];
             }
             else
             {

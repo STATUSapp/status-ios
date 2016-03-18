@@ -266,7 +266,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                   andCompletion:^(NSString *downloadedImage, BOOL downloaded) {
                       
                       if (downloaded==YES) {
-                          [[CoreManager notificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString}];
+                          [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString}];
                       }
                       
                       [weakSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];

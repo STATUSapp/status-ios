@@ -18,6 +18,8 @@
 
 - (void)presentLoginScreen;
 - (void)presentTabBarController;
+- (void)resetTabBarStacks;
+
 -(void)switchToTabBarAtIndex:(NSInteger)index
                  popToRootVC:(BOOL)popToRoot;
 

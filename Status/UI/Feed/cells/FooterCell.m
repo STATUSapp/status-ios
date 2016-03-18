@@ -109,7 +109,7 @@ static const NSInteger kNumberOfTiles = 6;
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     if (cell!=nil && [cell isKindOfClass:[STSmallFlowCell class]]) {
         STFlowTemplate *ft = [_itemsArray objectAtIndex:indexPath.row];
-        [[CoreManager notificationService] postNotificationName:STFooterFlowsNotification object:nil userInfo:@{kFlowTypeKey:ft.type}];
+        [[CoreManager localNotificationService] postNotificationName:STFooterFlowsNotification object:nil userInfo:@{kFlowTypeKey:ft.type}];
     }
     else
     {

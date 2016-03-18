@@ -51,7 +51,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
 
 -(void)setUnreadMessages:(NSInteger)unreadMessages{
     _unreadMessages = unreadMessages;
-    [[CoreManager notificationService] postNotificationName:STUnreadMessagesValueDidChanged object:nil userInfo:nil];
+    [[CoreManager localNotificationService] postNotificationName:STUnreadMessagesValueDidChanged object:nil userInfo:nil];
     
 }
 
@@ -179,7 +179,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
             if (_delegate && [_delegate respondsToSelector:@selector(chatDidAuthenticate)]) {
                 [_delegate performSelector:@selector(chatDidAuthenticate)];
             }
-            [[CoreManager notificationService] postNotificationName:STChatControllerAuthenticate object:nil userInfo:nil];
+            [[CoreManager localNotificationService] postNotificationName:STChatControllerAuthenticate object:nil userInfo:nil];
 
             [self setUnreadMessages:[response[@"unseenMessagesCount"] integerValue]];
         }
@@ -381,7 +381,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
                                                         andCompletion:^(BOOL success, id returnObject) {
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 if (seen == NO && message[@"notification_info"]!=nil) {
-                                                                    [[STNotificationsManager sharedManager] handleInAppMessageNotification:message];
+                                                                    [[CoreManager notificationsService] handleInAppMessageNotification:message];
                                                                 }
                                                             });
 

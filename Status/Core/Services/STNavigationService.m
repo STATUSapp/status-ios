@@ -77,6 +77,10 @@
     [appDel.window setRootViewController:tabBar];
 }
 
+- (void)resetTabBarStacks{
+    //TODO: dev_1_2 should we reset some nav controller?
+}
+
 #pragma mark - NSNOtifications
 - (void)userDidLoggedIn{
     [self presentTabBarController];
@@ -136,7 +140,7 @@
     if ([flowType isEqualToString:@"home"]) {
         //go to home tab and refresh the data
         [self switchToTabBarAtIndex:STTabBarIndexHome popToRootVC:YES];
-        [[CoreManager notificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
+        [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
         
     }
     else if ([flowType isEqualToString:@"popular"]){

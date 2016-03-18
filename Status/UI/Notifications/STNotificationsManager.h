@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface STNotificationsManager : NSObject
-+ (STNotificationsManager *)sharedManager;
 
 -(void)handleLastNotification;
--(void) handleNotification:(NSDictionary *) notif;
+-(void)handleNotification:(NSDictionary *) notif;
 -(void)handleInAppNotification:(NSDictionary *)notification;
 -(void)handleInAppMessageNotification:(NSDictionary *)notification;
 @end

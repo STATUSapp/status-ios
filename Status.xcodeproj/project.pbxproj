@@ -545,8 +545,8 @@
 		99B387081C82FAA2005B4D8C /* STNotificationBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationBaseCell.m; sourceTree = "<group>"; };
 		99B387091C82FAA2005B4D8C /* STNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationCell.h; sourceTree = "<group>"; };
 		99B3870A1C82FAA2005B4D8C /* STNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationCell.m; sourceTree = "<group>"; };
-		99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationsManager.h; sourceTree = "<group>"; };
-		99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationsManager.m; sourceTree = "<group>"; };
+		99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STNotificationsManager.h; path = ../../UI/Notifications/STNotificationsManager.h; sourceTree = "<group>"; };
+		99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STNotificationsManager.m; path = ../../UI/Notifications/STNotificationsManager.m; sourceTree = "<group>"; };
 		99B3870D1C82FAA2005B4D8C /* STNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationsViewController.h; sourceTree = "<group>"; };
 		99B3870E1C82FAA2005B4D8C /* STNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationsViewController.m; sourceTree = "<group>"; };
 		99B3870F1C82FAA2005B4D8C /* STSmartNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSmartNotificationCell.h; sourceTree = "<group>"; };
@@ -952,6 +952,8 @@
 				99B386621C82FAA2005B4D8C /* STIAPHelper.m */,
 				17DF47331C9974700053F633 /* STLocalNotificationService.h */,
 				17DF47341C9974700053F633 /* STLocalNotificationService.m */,
+				99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */,
+				99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1292,8 +1294,6 @@
 				99B387081C82FAA2005B4D8C /* STNotificationBaseCell.m */,
 				99B387091C82FAA2005B4D8C /* STNotificationCell.h */,
 				99B3870A1C82FAA2005B4D8C /* STNotificationCell.m */,
-				99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */,
-				99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */,
 				99B3870D1C82FAA2005B4D8C /* STNotificationsViewController.h */,
 				99B3870E1C82FAA2005B4D8C /* STNotificationsViewController.m */,
 				99B3870F1C82FAA2005B4D8C /* STSmartNotificationCell.h */,

@@ -287,7 +287,7 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
                 weakSelf.loaded = YES;
                 //handle error
                 //TODO: dev_1_2 handle the listener
-                [[CoreManager notificationService] postNotificationName:kNotificationPostDownloadFailed
+                [[CoreManager localNotificationService] postNotificationName:kNotificationPostDownloadFailed
                                                                  object:self
                                                                userInfo:nil];
                 
@@ -309,7 +309,7 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 
             [[CoreManager postsPool] addPosts:objects];
             }
-            [[CoreManager notificationService] postNotificationName:kNotificationPostDownloadSuccess object:self userInfo:nil];
+            [[CoreManager localNotificationService] postNotificationName:kNotificationPostDownloadSuccess object:self userInfo:nil];
             NSMutableArray *objToDownload = [NSMutableArray new];
             for (STPost *post in objects) {
                 STImageCacheObj *obj = [STImageCacheObj imageCacheObjFromPost:post];
@@ -373,14 +373,14 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 - (void)postUpdated:(NSNotification *)notif{
     NSString *postId = notif.userInfo[kPostIdKey];
     if ([_postIds containsObject:postId]) {
-        [[CoreManager notificationService] postNotificationName:kNotificationPostUpdated object:self userInfo:@{kPostIdKey:postId}];
+        [[CoreManager localNotificationService] postNotificationName:kNotificationPostUpdated object:self userInfo:@{kPostIdKey:postId}];
     }
 }
 - (void)postDeleted:(NSNotification *)notif{
     
     NSString *postId = notif.userInfo[kPostIdKey];
     if ([_postIds containsObject:postId]) {
-        [[CoreManager notificationService] postNotificationName:kNotificationPostDeleted object:self userInfo:@{kPostIdKey:postId}];
+        [[CoreManager localNotificationService] postNotificationName:kNotificationPostDeleted object:self userInfo:@{kPostIdKey:postId}];
     }
 }
 

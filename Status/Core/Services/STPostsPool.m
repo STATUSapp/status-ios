@@ -33,7 +33,7 @@
         STPost *updatedPost = [self postForUrl:fullUrl];
         if (updatedPost) {
             updatedPost.imageDownloaded = YES;
-            [[CoreManager notificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:updatedPost.uuid}];
+            [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:updatedPost.uuid}];
         }
     });
 }

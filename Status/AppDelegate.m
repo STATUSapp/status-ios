@@ -39,6 +39,7 @@
 
 #import "LaunchViewController.h"
 #import "STLocalNotificationService.h"
+#import "STNavigationService.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
@@ -55,7 +56,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     [[NSUserDefaults standardUserDefaults] setValue:@(badgeNumber) forKey:kSTLastBadgeNumber];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
-    [[CoreManager notificationService] postNotificationName:STNotificationBadgeValueDidChanged object:nil userInfo:nil];
+    [[CoreManager localNotificationService] postNotificationName:STNotificationBadgeValueDidChanged object:nil userInfo:nil];
 }
 
 -(void)loadBadgeNumber{
@@ -74,7 +75,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 {
     [application setStatusBarHidden:YES];
     [self loadBadgeNumber];
-    [[STNotificationsManager sharedManager] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+    [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     // setup Mobile App Tracker
     
@@ -129,19 +130,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-//TODO: dev_1_2 move this where it bellongs and make it not crashable
-//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-//    NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
-//    BOOL removed = NO;
-//    //TODO: add more clasess here, as needed
-//    while ([[stackVCs lastObject] isKindOfClass:[STChatRoomViewController class]] ||
-//           [[stackVCs lastObject] isKindOfClass:[STConversationsListViewController class]]) {
-//        removed = YES;
-//        [stackVCs removeLastObject];
-//    }
-//    if (removed == YES) {
-//        [navController setViewControllers:stackVCs];
-//    }
+    [[CoreManager navigationService] resetTabBarStacks];
     [[STChatController sharedInstance] leaveCurrentRoom];
 }
 
@@ -245,7 +234,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
     self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
     if (application.applicationState!=UIApplicationStateActive) {
-        [[STNotificationsManager sharedManager] handleNotification:userInfo];
+        [[CoreManager notificationsService] handleNotification:userInfo];
 
     }
     else
@@ -262,7 +251,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 //        [[STNotificationsManager sharedManager] handleInAppNotification:debugUserInfo];
 //
 //#else
-        [[STNotificationsManager sharedManager] handleInAppNotification:userInfo];
+        [[CoreManager notificationsService] handleInAppNotification:userInfo];
 //#endif
     }
 }
