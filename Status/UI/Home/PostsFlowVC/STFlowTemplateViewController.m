@@ -916,7 +916,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
             break;
     }
 }
-//TODO: dev_1_2 add a new item on the custom view and move it
+//moved
 - (IBAction)onTapEditPost:(id)sender {
 //    STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
 //    [currentCell captionShadowPressed:nil];
@@ -936,6 +936,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 //    } andBlurCompletion:nil];
 
 }
+//moved
 - (IBAction)onTapSeeMore:(id)sender {
     STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
     NSString *captionString = [[self getCurrentDictionary] valueForKey:@"caption"];

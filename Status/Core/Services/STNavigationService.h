@@ -12,10 +12,6 @@
 
 @interface STNavigationService : NSObject
 
-//TODO: replace imagePickerController with imagePickerService
-
-@property (nonatomic, strong) STImagePickerController *imagePickerController;
-
 - (void)presentLoginScreen;
 - (void)presentTabBarController;
 - (void)resetTabBarStacks;

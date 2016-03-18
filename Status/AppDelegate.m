@@ -133,15 +133,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     }
     
     [FBSDKAppEvents activateApp];
-//TODO: remove comments
-//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-//    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
-//    [viewController updateNotificationsNumber];
-    
-    //TODO: dev_1_2 make this on a notification
-//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-//    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
-//    [viewController updateNotificationsNumber];
     
     // MAT will not function without the measureSession call included
     [Tune measureSession];
@@ -168,7 +159,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 }
 
-#ifdef __IPHONE_8_0
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
     //register to receive notifications
@@ -181,8 +171,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
         //TODO: show alert here?
     }
 }
-
-#endif
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {

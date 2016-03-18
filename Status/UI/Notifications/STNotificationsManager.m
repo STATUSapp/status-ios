@@ -103,7 +103,7 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
                 
                 [[CoreManager navigationService] setBadge:unseenHomePosts forTabAtIndex:STTabBarIndexHome];
                 
-                //TODO: dev_1_2 enable this one and add a new screen
+                //TODO: dev_1_2 go enable this when ready
 //                [[CoreManager navigationService] setBadge:unseenPopularPosts + unseenRecentPosts forTabAtIndex:STTabBarIndexSearch];
             }
         } failure:^(NSError *error) {
@@ -147,7 +147,6 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
     }
 }
 
-//TODO: dev_1_2 move this where is should be
 -(void)handleLastNotification{
     [self handleNotification:_lastNotification];
 }
@@ -314,6 +313,7 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
 }
 
 - (void)userDidLoggedIn{
+    [self handleLastNotification];
     [self checkForNotificationNumber];
 }
 

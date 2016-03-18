@@ -52,12 +52,6 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
     if (_latestLocation == nil) {
         _latestLocation = currentLocation;
     }
-    //TODO: reduce this sanitizer
-    if(currentLocation.horizontalAccuracy > kGPSAccuracyMetters)
-    {
-//        NSLog(@"Ignoring GPS location more than %0.2f meters inaccurate :%0.2f",kGPSAccuracyMetters,currentLocation.horizontalAccuracy);
-        return;
-    }
     
     NSDate* locationDate = currentLocation.timestamp;
     NSTimeInterval howRecent = [locationDate timeIntervalSinceNow];

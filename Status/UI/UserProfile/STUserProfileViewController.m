@@ -357,6 +357,7 @@
     }
 }
 
+//TODO: dev_1_2 this button should not be here. we have a tab for this
 - (IBAction)onTapCamera:(id)sender {
     __weak STUserProfileViewController *weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
@@ -364,13 +365,14 @@
         
     };
     
-    if (_isMyProfile) {
-        [[[CoreManager navigationService] imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
-    } else {
-        [[[CoreManager navigationService] imagePickerController] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
-            [weakSelf inviteUserToUpload];
-        }];
-    }}
+//    if (_isMyProfile) {
+//        [[CoreManager imagePickerService] startImagePickerForOwnerInViewController:self withCompletion:completion];
+//    } else {
+//        [[[CoreManager navigationService] imagePickerController] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
+//            [weakSelf inviteUserToUpload];
+//        }];
+//    }
+}
 
 - (IBAction)onTapSettings:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

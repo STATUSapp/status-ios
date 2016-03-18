@@ -35,7 +35,6 @@
 @interface STFacebookLoginController ()<FBSDKLoginButtonDelegate>
 
 @property (nonatomic, strong) NSString *currentUserId;
-//TODO: should we use the STUser instead of the fetchedUserData
 @property (nonatomic, strong) NSDictionary *fetchedUserData;
 
 @end

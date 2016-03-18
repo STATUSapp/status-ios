@@ -32,9 +32,7 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-        
-        _imagePickerController = [STImagePickerController new];
-        
+                
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
@@ -134,12 +132,7 @@
                 viewController.bluredImgData = UIImageJPEGRepresentation(origImg, 1.f);
                 viewController.post = post;
                 viewController.controllerType = STShareControllerEditCaption;
-                //TODO: dev_1_2 move all those redirects in here and make some class methods
-                UIWindow *window = [[UIApplication sharedApplication].delegate window];
-                UITabBarController *tbc = (UITabBarController *)[window rootViewController];
-                UINavigationController *navCtrl = (UINavigationController *)[tbc selectedViewController];
-                [navCtrl pushViewController:viewController animated:YES];
-
+                [self pushViewController:viewController inTabBarIndex:[self selectedTabBarIndex] animated:YES];
             }
             
         } andBlurCompletion:nil];
@@ -171,13 +164,17 @@
         
     }
     else if ([flowType isEqualToString:@"popular"]){
-        //TODO: dev_1_2 go to search tab
+        //TODO: dev_1_2 go enable this when ready
+//        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
+
     }
     else if ([flowType isEqualToString:@"recent"]){
-        //TODO: dev_1_2 go to search tab
+        //TODO: dev_1_2 go enable this when ready
+        //        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
     }
     else if ([flowType isEqualToString:@"nearby"]){
-        //TODO: dev_1_2 go to search tab
+        //TODO: dev_1_2 go enable this when ready
+        //        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
     }
 
 }
