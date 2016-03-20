@@ -66,6 +66,7 @@
 }
 
 - (STPost *)randomPost {
+
     if (self.getAllPosts.count == 0) {
         return nil;
     }

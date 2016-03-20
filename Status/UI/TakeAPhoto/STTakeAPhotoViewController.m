@@ -88,11 +88,14 @@
     
     __weak typeof(self) weakSelf = self;
     STPost * randomPost = [CoreManager postsPool].randomPost;
-    [[CoreManager imageCacheService] loadPostImageWithName:randomPost.fullPhotoUrl withPostCompletion:^(UIImage *origImg) {
-        
-    } andBlurCompletion:^(UIImage *bluredImg) {
-        weakSelf.backgroundImageView.image = bluredImg;
-    }];
+    
+    if (randomPost != nil) {
+        [[CoreManager imageCacheService] loadPostImageWithName:randomPost.fullPhotoUrl withPostCompletion:^(UIImage *origImg) {
+            
+        } andBlurCompletion:^(UIImage *bluredImg) {
+            weakSelf.backgroundImageView.image = bluredImg;
+        }];
+    }
     
 }
 
