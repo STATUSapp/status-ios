@@ -18,17 +18,19 @@
 #import "STFacebookLoginController.h"
 #import "STChatRoomViewController.h"
 #import "STMoveScaleViewController.h"
+#import "STSharePhotoViewController.h"
 
 #import "STListUser.h"
 
 #import "STUsersPool.h"
 #import "STPostsPool.h"
-#import "STCustomShareView.h"
+#import "STContextualMenu.h"
+#import "STImageCacheController.h"
 
 #import "UIViewController+Snapshot.h"
 #import "STUserProfileViewController.h"
 
-@interface FeedCVC ()
+@interface FeedCVC ()<STContextualMenuDelegate>
 {
     CGPoint _start;
     CGPoint _end;
@@ -103,6 +105,10 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Notifications
 
 - (void)processorLoaded{
@@ -118,7 +124,6 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     
 }
 - (void)postDeleted:(NSNotification *)notif{
-    //TODO: dev_1_2 delete only the notif.userInfo[kPostIdKey] ?
     [self.collectionView reloadData];
 }
 
@@ -128,15 +133,19 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 }
 
 #pragma mark - Helpers
+
+-(NSInteger)getCurrentIndex{
+    NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
+    return [[visibleInxPath objectAtIndex:0] row];
+
+}
+
 -(STPost *) getCurrentPost{
     if (self.feedProcessor.numberOfPosts == 0) {
         return nil;
     }
-    NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
     STPost *post = nil;
-    if (visibleInxPath.count) {
-        post = [_feedProcessor postAtIndex:[[visibleInxPath objectAtIndex:0] row]];
-    }
+    post = [_feedProcessor postAtIndex:[self getCurrentIndex]];
     
     return post;
 }
@@ -347,7 +356,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
         extendedRights = YES;
     }
-    [STCustomShareView presentViewForPostId:post.uuid
+    [STContextualMenu presentViewWithDelegate:self
                          withExtendedRights:extendedRights];
 }
 - (IBAction)onShadowPressed:(id)sender {
@@ -363,4 +372,62 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     [_feedProcessor handleBigCameraButtonActionWithUserName:_userName];
 }
 
+#pragma mark - STContextualMenuDelegate
+
+-(void)contextualMenuAskUserToUpload{
+    [_feedProcessor askUserToUploadAtIndex:[self getCurrentIndex]];
+}
+
+-(void)contextualMenuDeletePost{
+    [_feedProcessor deletePostAtIndex:[self getCurrentIndex]];
+}
+
+-(void)contextualMenuEditPost{
+    STPost *post = [self getCurrentPost];
+    //TODO: dev_1_2 disable option until image is downloaded
+    if (post.imageDownloaded == YES) {
+        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *origImg) {
+            if (origImg!=nil) {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+                viewController.imgData = UIImageJPEGRepresentation(origImg, 1.f);
+                viewController.bluredImgData = UIImageJPEGRepresentation(origImg, 1.f);
+                viewController.post = post;
+                viewController.controllerType = STShareControllerEditCaption;
+                [self.navigationController pushViewController:viewController animated:YES];
+            }
+            
+        } andBlurCompletion:nil];
+    }
+
+}
+
+-(void)contextualMenuMoveAndScalePost{
+    STPost *post = [self getCurrentPost];
+    
+    //TODO: dev_1_2 disable option until image is downloaded
+    if (post.imageDownloaded == YES) {
+        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *img) {
+            if (img!=nil) {
+                STMoveScaleViewController *vc = [STMoveScaleViewController newControllerForImage:img shouldCompress:NO andPost:post];
+                
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        } andBlurCompletion:nil];
+        
+    }
+}
+
+-(void)contextualMenuReportPost{
+    [_feedProcessor reportPostAtIndex:[self getCurrentIndex]];
+}
+
+-(void)contextualMenuSavePostLocally{
+    [_feedProcessor savePostImageLocallyAtIndex:[self getCurrentIndex]];
+}
+
+-(void)contextualMenuSharePostonFacebook{
+    [_feedProcessor sharePostOnfacebokAtIndex:[self getCurrentIndex]];
+    
+}
 @end

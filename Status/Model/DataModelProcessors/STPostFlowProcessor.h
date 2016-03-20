@@ -39,4 +39,11 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
               withCompletion:(STProcessorCompletionBlock)completion;
 - (void)handleBigCameraButtonActionWithUserName:(NSString *)userName;
 
+//actions for contextual menu
+- (void)askUserToUploadAtIndex:(NSInteger)index;
+- (void)deletePostAtIndex:(NSInteger)index;
+- (void)reportPostAtIndex:(NSInteger)index;
+- (void)savePostImageLocallyAtIndex:(NSInteger)index;
+- (void)sharePostOnfacebokAtIndex:(NSInteger)index;
+
 @end

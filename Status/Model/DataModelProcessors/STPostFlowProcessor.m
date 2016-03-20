@@ -84,17 +84,9 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 #pragma makr - Interface Methods
 
 - (void)registerForUpdates{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onShareOnFacebookNotification:) name:STOptionsViewShareFbNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSaveLocallyNotification:) name:STOptionsViewSaveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDeletePostNotification:) name:STOptionsViewDeletePostNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onReportPostNotification:) name:STOptionsViewReportPostNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:STPostPoolObjectUpdatedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:STPostPoolObjectDeletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postImageWasEdited:) name:STPostImageWasEdited object:nil];
-
-
-
 }
 
 -(NSInteger)numberOfPosts{
@@ -202,6 +194,76 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
             return;
             break;
     }
+}
+
+#pragma mark - Contextul Menu Actions
+
+- (void)askUserToUploadAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    
+    [STDataAccessUtils inviteUserToUpload:post.userId withUserName:post.userName withCompletion:^(NSError *error) {
+        NSLog(@"Error asking user : %@", error);
+    }];
+    
+}
+
+- (void)deletePostAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    postIdToDelete = post.uuid;
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
+                                                        message:@"Are you sure you want to delete this post?"
+                                                       delegate:self cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Delete", nil];
+    [alertView setTag:kDeletePostTag];
+    [alertView show];
+
+}
+
+- (void)reportPostAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    
+    if ([post.reportStatus integerValue] == 1) {
+        [STDataAccessUtils reportPostWithId:post.uuid withCompletion:^(NSError *error) {
+            NSLog(@"Post was reported with error: %@", nil);
+        }];
+    }
+    else
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    }
+
+}
+
+- (void)savePostImageLocallyAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    //TODO: dev_1_2 disable the button until the image is downloaded
+    if (post.imageDownloaded) {
+        __weak STPostFlowProcessor *weakSelf = self;
+        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl
+                                            withPostCompletion:^(UIImage *origImg) {
+                                                UIImageWriteToSavedPhotosAlbum(origImg, weakSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
+                                                
+                                            } andBlurCompletion:nil];
+    }
+}
+
+- (void)sharePostOnfacebokAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    [[CoreManager facebookService] shareImageWithImageUrl:post.fullPhotoUrl description:nil
+                                            andCompletion:^(id result, NSError *error) {
+                                                if(error==nil)
+                                                    [[[UIAlertView alloc] initWithTitle:@"Success"
+                                                                                message:@"Your photo was posted."
+                                                                               delegate:nil cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil, nil] show];
+                                                else
+                                                    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                message:@"Something went wrong. You can try again later."
+                                                                               delegate:nil cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil, nil] show];
+                                            }];
+
 }
 
 #pragma mark - Internal Helpers
@@ -377,6 +439,7 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
     
     NSString *postId = notif.userInfo[kPostIdKey];
     if ([_postIds containsObject:postId]) {
+        [_postIds removeObject:postId];
         [[CoreManager localNotificationService] postNotificationName:kNotificationPostDeleted object:self userInfo:@{kPostIdKey:postId}];
     }
 }
@@ -385,67 +448,6 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 
 -(void)newLocationHasBeenUploaded{
     [self getMoreData];
-}
-
-//custom share view notifications
-- (void)onShareOnFacebookNotification:(NSNotification*)notif{
-    NSString *postId = notif.userInfo[kPostIdKey];
-    STPost *post = [[CoreManager postsPool] getPostWithId:postId];
-    [[CoreManager facebookService] shareImageWithImageUrl:post.fullPhotoUrl description:nil
-                                            andCompletion:^(id result, NSError *error) {
-        if(error==nil)
-            [[[UIAlertView alloc] initWithTitle:@"Success"
-                                        message:@"Your photo was posted."
-                                       delegate:nil cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil, nil] show];
-        else
-            [[[UIAlertView alloc] initWithTitle:@"Error"
-                                        message:@"Something went wrong. You can try again later."
-                                       delegate:nil cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil, nil] show];
-    }];
-}
-
-- (void)onSaveLocallyNotification:(NSNotification *)notif{
-    NSString *postId = notif.userInfo[kPostIdKey];
-    STPost *post = [[CoreManager postsPool] getPostWithId:postId];
-    //TODO: dev_1_2 disable the button until the image is downloaded
-    if (post.imageDownloaded) {
-        __weak STPostFlowProcessor *weakSelf = self;
-        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl
-                                            withPostCompletion:^(UIImage *origImg) {
-                                                UIImageWriteToSavedPhotosAlbum(origImg, weakSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
-                                                
-                                            } andBlurCompletion:nil];
-    }
-
-}
-
-- (void)onDeletePostNotification:(NSNotification *)notif{
-    postIdToDelete = notif.userInfo[kPostIdKey];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
-                                                        message:@"Are you sure you want to delete this post?"
-                                                       delegate:self cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles:@"Delete", nil];
-    [alertView setTag:kDeletePostTag];
-    [alertView show];
-
-}
-
-- (void)onReportPostNotification:(NSNotification *)notif{
-    NSString *postId = notif.userInfo[kPostIdKey];
-    STPost *post = [[CoreManager postsPool] getPostWithId:postId];
-    
-    if ([post.reportStatus integerValue] == 1) {
-            [STDataAccessUtils reportPostWithId:postId withCompletion:^(NSError *error) {
-                NSLog(@"Post was reported with error: %@", nil);
-            }];
-    }
-    else
-    {
-        [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-    }
-
 }
 
 - (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
@@ -463,7 +465,7 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 
 #pragma mark - UIAlertViewDelegate
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (alertView.tag == kDeletePostTag) {
         if (buttonIndex==1) {
             
@@ -472,7 +474,13 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
                 NSLog(@"Post deleted with error: %@", error);
             }];
         }
+        else
+            postIdToDelete = nil;
     }
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

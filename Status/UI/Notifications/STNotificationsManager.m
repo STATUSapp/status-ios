@@ -55,6 +55,8 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
     
     [_dismissTimer invalidate];
     _dismissTimer = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)setOverAllBadgeNumber:(NSInteger)badgeNumber{

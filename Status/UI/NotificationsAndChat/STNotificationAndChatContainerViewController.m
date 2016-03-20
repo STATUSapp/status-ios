@@ -234,6 +234,10 @@
     self.pageIndicatorWidth.constant = _btnMessages.frame.size.width - 20;
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Notifications
 
 - (void)notificationsShouldBeReloaded:(NSNotification *)notif{

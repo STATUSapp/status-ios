@@ -36,8 +36,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onMoveAndScaleNotification:) name:STOptionsViewMoveAndScaleNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onEditPostNotification:) name:STOptionsViewEditPostNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flowWasSelectedFromFooter:) name:STFooterFlowsNotification object:nil];
 
     }
@@ -117,42 +115,6 @@
 
 - (void)userDidLoggedOut{
     [self presentLoginScreen];
-}
-
-- (void)onEditPostNotification:(NSNotification *)notif{
-    NSString *postId = notif.userInfo[kPostIdKey];
-    STPost *post = [[CoreManager postsPool] getPostWithId:postId];
-    //TODO: dev_1_2 disable option until image is downloaded
-    if (post.imageDownloaded == YES) {
-        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *origImg) {
-            if (origImg!=nil) {
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-                viewController.imgData = UIImageJPEGRepresentation(origImg, 1.f);
-                viewController.bluredImgData = UIImageJPEGRepresentation(origImg, 1.f);
-                viewController.post = post;
-                viewController.controllerType = STShareControllerEditCaption;
-                [self pushViewController:viewController inTabBarIndex:[self selectedTabBarIndex] animated:YES];
-            }
-            
-        } andBlurCompletion:nil];
-    }
-
-}
-- (void)onMoveAndScaleNotification:(NSNotification *)notif{
-    NSString *postId = notif.userInfo[kPostIdKey];
-    STPost *post = [[CoreManager postsPool] getPostWithId:postId];
-    
-    //TODO: dev_1_2 disable option until image is downloaded
-    if (post.imageDownloaded == YES) {
-        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *img) {
-            if (img!=nil) {
-                STMoveScaleViewController *vc = [STMoveScaleViewController newControllerForImage:img shouldCompress:NO andPost:post];
-                [self pushViewController:vc inTabBarIndex:[self selectedTabBarIndex] animated:YES];
-            }
-        } andBlurCompletion:nil];
-        
-    }
 }
 
 -(void) flowWasSelectedFromFooter:(NSNotification *)notif{

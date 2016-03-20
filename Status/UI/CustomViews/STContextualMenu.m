@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
-#import "STCustomShareView.h"
+#import "STContextualMenu.h"
 #import "STLocalNotificationService.h"
 #import "STPost.h"
 #import "STPostsPool.h"
@@ -15,7 +15,7 @@
 CGFloat const kDefaultButtonHeight = 50.f;
 NSInteger const kShareViewTag = 1001;
 
-@interface STCustomShareView()
+@interface STContextualMenu()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrMoveScaleHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrDeleteHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrEditHeight;
@@ -30,17 +30,17 @@ NSInteger const kShareViewTag = 1001;
 @property (weak, nonatomic) IBOutlet UIButton *askUserBtn;
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
 
-@property (nonatomic, strong) NSString *postUuid;
+@property (nonatomic, weak) id <STContextualMenuDelegate>delegate;
 @end
 
-@implementation STCustomShareView
+@implementation STContextualMenu
 
-+(void)presentViewForPostId:(NSString *)postUuid
++(void)presentViewWithDelegate:(id<STContextualMenuDelegate>)delegate
           withExtendedRights:(BOOL)extendedRights{
-    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"STCustomShareView" owner:self options:nil];
+    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"STContextualMenu" owner:self options:nil];
     
-    STCustomShareView *shareOptionsView = (STCustomShareView*)[array objectAtIndex:0];
-    shareOptionsView.postUuid = postUuid;
+    STContextualMenu *shareOptionsView = (STContextualMenu*)[array objectAtIndex:0];
+    shareOptionsView.delegate = delegate;
     shareOptionsView.hidden = TRUE;
     UIWindow *mainWindow = [[UIApplication sharedApplication].delegate window];
     shareOptionsView.frame = mainWindow.frame;
@@ -61,7 +61,7 @@ NSInteger const kShareViewTag = 1001;
 
 +(void)dismissView{
     UIWindow *mainWindow = [[UIApplication sharedApplication].delegate window];
-    STCustomShareView *shareOptionsView = [mainWindow viewWithTag:kShareViewTag];
+    STContextualMenu *shareOptionsView = [mainWindow viewWithTag:kShareViewTag];
     [UIView animateWithDuration:0.35f animations:^{
         [shareOptionsView setAlfaForDissmiss:YES];
         shareOptionsView.shadowView.alpha = 0.0;
@@ -110,35 +110,30 @@ NSInteger const kShareViewTag = 1001;
 #pragma mark - IBActions
 
 - (IBAction)onCancelPressed:(id)sender {
-    [STCustomShareView dismissView];
+    [STContextualMenu dismissView];
 }
 - (IBAction)onReportPost:(id)sender {
-    [[CoreManager localNotificationService] postNotificationName:STOptionsViewReportPostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [_delegate contextualMenuReportPost];
 }
 - (IBAction)onDeletePost:(id)sender {
-    [[CoreManager localNotificationService] postNotificationName:STOptionsViewDeletePostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [_delegate contextualMenuDeletePost];
 }
 - (IBAction)onEditPost:(id)sender {
-    [[CoreManager localNotificationService] postNotificationName:STOptionsViewEditPostNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [_delegate contextualMenuEditPost];
 }
 - (IBAction)onMoveAndScale:(id)sender {
-    [[CoreManager localNotificationService] postNotificationName:STOptionsViewMoveAndScaleNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [_delegate contextualMenuMoveAndScalePost];
 }
 - (IBAction)onSaveLocally:(id)sender {
-    [[CoreManager localNotificationService] postNotificationName:STOptionsViewSaveNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [_delegate contextualMenuSavePostLocally];
     
 }
 - (IBAction)onShareFb:(id)sender {
-    [[CoreManager localNotificationService] postNotificationName:STOptionsViewShareFbNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
+    [_delegate contextualMenuSharePostonFacebook];
 }
 
 - (IBAction)onAskUser:(id)sender {
-    STPost *post = [[CoreManager postsPool] getPostWithId:_postUuid];
-    
-    [STDataAccessUtils inviteUserToUpload:post.userId withUserName:post.userName withCompletion:^(NSError *error) {
-        NSLog(@"Error asking user : %@", error);
-    }];
-    
+    [_delegate contextualMenuAskUserToUpload];    
 }
 
 @end

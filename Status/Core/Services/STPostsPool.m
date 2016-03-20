@@ -72,4 +72,8 @@
     return [filteredArray firstObject];
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

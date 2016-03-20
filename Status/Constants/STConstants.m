@@ -103,13 +103,6 @@ NSString *const STLoadImageNotification = @"STLoadImageNotification";
 NSString *const STPostPoolObjectUpdatedNotification = @"STPostPoolObjectUpdatedNotification";
 NSString *const STPostPoolObjectDeletedNotification = @"STPostPoolObjectDeletedNotification";
 
-NSString *const STOptionsViewReportPostNotification = @"STOptionsViewReportPostNotification";
-NSString *const STOptionsViewDeletePostNotification = @"STOptionsViewDeletePostNotification";
-NSString *const STOptionsViewEditPostNotification = @"STOptionsViewEditPostNotification";
-NSString *const STOptionsViewMoveAndScaleNotification = @"STOptionsViewMoveAndScaleNotification";
-NSString *const STOptionsViewSaveNotification = @"STOptionsViewSaveNotification";
-NSString *const STOptionsViewShareFbNotification = @"STOptionsViewShareFbNotification";
-
 NSString *const STPostNewImageUploaded = @"STPostNewImageUploaded";
 NSString *const STPostImageWasEdited = @"STPostImageWasEdited";
 NSString *const STPostCaptionWasEdited = @"STPostCaptionWasEdited";

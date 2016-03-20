@@ -167,13 +167,6 @@ extern NSString *const STLoadImageNotification;
 extern NSString *const STPostPoolObjectUpdatedNotification;
 extern NSString *const STPostPoolObjectDeletedNotification;
 
-extern NSString *const STOptionsViewReportPostNotification;
-extern NSString *const STOptionsViewDeletePostNotification;
-extern NSString *const STOptionsViewEditPostNotification;
-extern NSString *const STOptionsViewMoveAndScaleNotification;
-extern NSString *const STOptionsViewSaveNotification;
-extern NSString *const STOptionsViewShareFbNotification;
-
 extern NSString *const STPostNewImageUploaded;
 extern NSString *const STPostImageWasEdited;
 extern NSString *const STPostCaptionWasEdited;

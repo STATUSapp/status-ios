@@ -569,6 +569,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     // Dispose of any resources that can be recreated.
 }
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     _tableView.delegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [actionSheet dismissWithClickedButtonIndex:2 animated:NO];

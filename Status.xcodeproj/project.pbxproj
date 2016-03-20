@@ -161,8 +161,8 @@
 		99B387AF1C82FAA2005B4D8C /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386CE1C82FAA2005B4D8C /* STConversationsListViewController.m */; };
 		99B387B01C82FAA2005B4D8C /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D21C82FAA2005B4D8C /* STFacebookActivity.m */; };
 		99B387B11C82FAA2005B4D8C /* STWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D41C82FAA2005B4D8C /* STWhatsAppActivity.m */; };
-		99B387B21C82FAA2005B4D8C /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D61C82FAA2005B4D8C /* STCustomShareView.m */; };
-		99B387B31C82FAA2005B4D8C /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B386D71C82FAA2005B4D8C /* STCustomShareView.xib */; };
+		99B387B21C82FAA2005B4D8C /* STContextualMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D61C82FAA2005B4D8C /* STContextualMenu.m */; };
+		99B387B31C82FAA2005B4D8C /* STContextualMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B386D71C82FAA2005B4D8C /* STContextualMenu.xib */; };
 		99B387B41C82FAA2005B4D8C /* STMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D91C82FAA2005B4D8C /* STMenuView.m */; };
 		99B387B51C82FAA2005B4D8C /* STMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B386DA1C82FAA2005B4D8C /* STMenuView.xib */; };
 		99B387B61C82FAA2005B4D8C /* STNotificationBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386DC1C82FAA2005B4D8C /* STNotificationBanner.m */; };
@@ -500,9 +500,9 @@
 		99B386D21C82FAA2005B4D8C /* STFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookActivity.m; sourceTree = "<group>"; };
 		99B386D31C82FAA2005B4D8C /* STWhatsAppActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWhatsAppActivity.h; sourceTree = "<group>"; };
 		99B386D41C82FAA2005B4D8C /* STWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhatsAppActivity.m; sourceTree = "<group>"; };
-		99B386D51C82FAA2005B4D8C /* STCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomShareView.h; sourceTree = "<group>"; };
-		99B386D61C82FAA2005B4D8C /* STCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomShareView.m; sourceTree = "<group>"; };
-		99B386D71C82FAA2005B4D8C /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
+		99B386D51C82FAA2005B4D8C /* STContextualMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STContextualMenu.h; sourceTree = "<group>"; };
+		99B386D61C82FAA2005B4D8C /* STContextualMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STContextualMenu.m; sourceTree = "<group>"; };
+		99B386D71C82FAA2005B4D8C /* STContextualMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STContextualMenu.xib; sourceTree = "<group>"; };
 		99B386D81C82FAA2005B4D8C /* STMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMenuView.h; sourceTree = "<group>"; };
 		99B386D91C82FAA2005B4D8C /* STMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMenuView.m; sourceTree = "<group>"; };
 		99B386DA1C82FAA2005B4D8C /* STMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMenuView.xib; sourceTree = "<group>"; };
@@ -1170,9 +1170,9 @@
 			isa = PBXGroup;
 			children = (
 				99B386D01C82FAA2005B4D8C /* CustomActivities */,
-				99B386D51C82FAA2005B4D8C /* STCustomShareView.h */,
-				99B386D61C82FAA2005B4D8C /* STCustomShareView.m */,
-				99B386D71C82FAA2005B4D8C /* STCustomShareView.xib */,
+				99B386D51C82FAA2005B4D8C /* STContextualMenu.h */,
+				99B386D61C82FAA2005B4D8C /* STContextualMenu.m */,
+				99B386D71C82FAA2005B4D8C /* STContextualMenu.xib */,
 				99B386D81C82FAA2005B4D8C /* STMenuView.h */,
 				99B386D91C82FAA2005B4D8C /* STMenuView.m */,
 				99B386DA1C82FAA2005B4D8C /* STMenuView.xib */,
@@ -1518,7 +1518,7 @@
 				99B387AD1C82FAA2005B4D8C /* TimestampView.xib in Resources */,
 				52466BE51C89D52000EEAA2B /* TakeAPhoto.storyboard in Resources */,
 				99B3879D1C82FAA2005B4D8C /* ProximaNovaCond-Regular.otf in Resources */,
-				99B387B31C82FAA2005B4D8C /* STCustomShareView.xib in Resources */,
+				99B387B31C82FAA2005B4D8C /* STContextualMenu.xib in Resources */,
 				99B3879B1C82FAA2005B4D8C /* ProximaNovaCond-Light.otf in Resources */,
 				2AD97BAD1C8C133B00C9B3D5 /* FeedScene.storyboard in Resources */,
 				99B387951C82FAA2005B4D8C /* ProximaNova-LightItalic.otf in Resources */,
@@ -1643,7 +1643,7 @@
 				17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */,
 				99B387511C82FAA2005B4D8C /* STGetNotificationsCountRequest.m in Sources */,
 				99B387D71C82FAA2005B4D8C /* STAlbumImagesViewController.m in Sources */,
-				99B387B21C82FAA2005B4D8C /* STCustomShareView.m in Sources */,
+				99B387B21C82FAA2005B4D8C /* STContextualMenu.m in Sources */,
 				99B387B11C82FAA2005B4D8C /* STWhatsAppActivity.m in Sources */,
 				99B387501C82FAA2005B4D8C /* STGetNearbyProfilesRequest.m in Sources */,
 				99B387731C82FAA2005B4D8C /* STDataAccessUtils.m in Sources */,
