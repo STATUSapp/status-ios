@@ -14,46 +14,76 @@
                         <viewControllerLayoutGuide type="bottom" id="7IQ-hF-146"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HuZ-tU-7hc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgK-dC-PjG">
-                                <rect key="frame" x="166" y="319" width="43" height="30"/>
-                                <state key="normal" title="library"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash4.7in" translatesAutoresizingMaskIntoConstraints="NO" id="EUI-8q-1oS">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </imageView>
+                            <view opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2t-vJ-vVQ">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgK-dC-PjG">
+                                <rect key="frame" x="13" y="287" width="134" height="134"/>
+                                <state key="normal" image="gallery_btn"/>
+                                <state key="highlighted" image="gallery_btn_active"/>
                                 <connections>
                                     <action selector="uploadPhotoFromLibrary:" destination="jnD-jc-64a" eventType="touchUpInside" id="hj5-4L-F2D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU4-ml-K3T">
-                                <rect key="frame" x="155" y="375" width="64" height="30"/>
-                                <state key="normal" title="facebook"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU4-ml-K3T">
+                                <rect key="frame" x="173" y="287" width="134" height="134"/>
+                                <state key="normal" image="facebook_btn"/>
+                                <state key="highlighted" image="facebook_btn_active"/>
                                 <connections>
                                     <action selector="postPhotoFromFacebook:" destination="jnD-jc-64a" eventType="touchUpInside" id="toQ-md-8ky"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3g-7a-rAZ">
-                                <rect key="frame" x="162" y="273" width="51" height="30"/>
-                                <state key="normal" title="camera"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3g-7a-rAZ">
+                                <rect key="frame" x="93" y="147" width="134" height="134"/>
+                                <state key="normal" image="camera_btn"/>
+                                <state key="highlighted" image="camera_btn_active"/>
                                 <connections>
                                     <action selector="takeAPhotoWithCamera:" destination="jnD-jc-64a" eventType="touchUpInside" id="1ZL-wI-SvS"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eU4-ml-K3T" firstAttribute="centerX" secondItem="dgK-dC-PjG" secondAttribute="centerX" id="JDe-09-whF"/>
-                            <constraint firstItem="dgK-dC-PjG" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" id="PV0-uC-CVX"/>
-                            <constraint firstItem="eU4-ml-K3T" firstAttribute="top" secondItem="dgK-dC-PjG" secondAttribute="bottom" constant="26" id="hgV-tb-SJC"/>
-                            <constraint firstItem="dgK-dC-PjG" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" id="q8b-ml-FvZ"/>
-                            <constraint firstItem="S3g-7a-rAZ" firstAttribute="centerX" secondItem="dgK-dC-PjG" secondAttribute="centerX" id="rgE-Nn-aBE"/>
-                            <constraint firstItem="dgK-dC-PjG" firstAttribute="top" secondItem="S3g-7a-rAZ" secondAttribute="bottom" constant="16" id="zjb-dR-2kO"/>
+                            <constraint firstItem="7IQ-hF-146" firstAttribute="top" secondItem="EUI-8q-1oS" secondAttribute="bottom" id="28y-Uf-1VI"/>
+                            <constraint firstItem="U2t-vJ-vVQ" firstAttribute="bottom" secondItem="EUI-8q-1oS" secondAttribute="bottom" id="Aru-P1-X8l"/>
+                            <constraint firstItem="dgK-dC-PjG" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" constant="-80" id="FPZ-zI-zrv"/>
+                            <constraint firstItem="U2t-vJ-vVQ" firstAttribute="top" secondItem="EUI-8q-1oS" secondAttribute="top" id="HsC-aa-JJw"/>
+                            <constraint firstItem="U2t-vJ-vVQ" firstAttribute="trailing" secondItem="EUI-8q-1oS" secondAttribute="trailing" id="KCd-Lq-sGo"/>
+                            <constraint firstAttribute="trailing" secondItem="EUI-8q-1oS" secondAttribute="trailing" id="SE4-rk-H05"/>
+                            <constraint firstItem="dgK-dC-PjG" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" constant="70" id="SJf-cV-HJa"/>
+                            <constraint firstItem="S3g-7a-rAZ" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" constant="-70" id="dG3-cY-Pkc"/>
+                            <constraint firstItem="EUI-8q-1oS" firstAttribute="leading" secondItem="HuZ-tU-7hc" secondAttribute="leading" id="hNK-y3-kaR"/>
+                            <constraint firstItem="U2t-vJ-vVQ" firstAttribute="leading" secondItem="EUI-8q-1oS" secondAttribute="leading" id="jde-6J-VkQ"/>
+                            <constraint firstItem="eU4-ml-K3T" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" constant="70" id="lIt-2t-HHN"/>
+                            <constraint firstItem="EUI-8q-1oS" firstAttribute="top" secondItem="7gz-Ia-8Ob" secondAttribute="bottom" id="lrf-ah-jBW"/>
+                            <constraint firstItem="eU4-ml-K3T" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" constant="80" id="moI-Ai-xI0"/>
+                            <constraint firstItem="S3g-7a-rAZ" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" id="wlH-2B-PsX"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="EUI-8q-1oS" id="vC3-aq-gaP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2n-N5-sYE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="148" y="296"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera_btn" width="134" height="134"/>
+        <image name="camera_btn_active" width="134" height="134"/>
+        <image name="facebook_btn" width="134" height="134"/>
+        <image name="facebook_btn_active" width="134" height="134"/>
+        <image name="gallery_btn" width="134" height="134"/>
+        <image name="gallery_btn_active" width="134" height="134"/>
+        <image name="splash4.7in" width="375" height="667"/>
+    </resources>
 </document>

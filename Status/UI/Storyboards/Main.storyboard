@@ -1502,10 +1502,12 @@
         <scene sceneID="jh0-e7-GQb">
             <objects>
                 <tabBarController storyboardIdentifier="tabBarController" id="SnE-wE-Is3" customClass="STTabBarViewController" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="FQo-M2-Col">
+                    <tabBar key="tabBar" alpha="0.94999999999999996" contentMode="scaleToFill" backgroundImage="tab_bar_black" id="FQo-M2-Col">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYL-RG-aY0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1544,6 +1546,7 @@
         <image name="selected grey area notifications screen" width="320" height="82"/>
         <image name="selected state" width="320" height="60"/>
         <image name="status logo" width="282" height="53"/>
+        <image name="tab_bar_black" width="375" height="57"/>
         <image name="transparenta" width="320" height="568"/>
         <image name="user chat black button" width="36" height="36"/>
         <image name="user chat black button pressed" width="36" height="36"/>

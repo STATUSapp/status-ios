@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "STBasePool.h"
-@class STPost;
+#import "STPost.h"
 
 @interface STPostsPool : STBasePool
 
@@ -18,5 +18,6 @@
 - (void)clearAllPosts;
 - (void)removePosts:(NSArray <STPost * > *)posts;
 - (void)removePostsWithIDs:(NSArray <NSString * > *)uuids;
+- (STPost *)randomPost;
 
 @end
