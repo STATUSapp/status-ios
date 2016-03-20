@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnMessages;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pageIndicatorLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pageIndicatorWidth;
 
 @property (strong, nonatomic) UIPageViewController * pageController;
 @property (strong, nonatomic) NSArray<UIViewController *> * viewControllers;
@@ -225,6 +226,12 @@
     [self addChildViewController:_pageController];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsShouldBeReloaded:) name:STNotificationsShouldBeReloaded object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.pageIndicatorWidth.constant = _btnMessages.frame.size.width - 20;
 }
 
 #pragma mark - Notifications

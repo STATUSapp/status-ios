@@ -558,8 +558,8 @@
 		99B387161C82FAA2005B4D8C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		99B387171C82FAA2005B4D8C /* SuggestionsScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SuggestionsScene.storyboard; sourceTree = "<group>"; };
 		99B387181C82FAA2005B4D8C /* UserProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
-		99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STRemoveAdsViewController.h; path = UI/STRemoveAdsViewController.h; sourceTree = "<group>"; };
-		99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STRemoveAdsViewController.m; path = UI/STRemoveAdsViewController.m; sourceTree = "<group>"; };
+		99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STRemoveAdsViewController.h; sourceTree = "<group>"; };
+		99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STRemoveAdsViewController.m; sourceTree = "<group>"; };
 		99B3871E1C82FAA2005B4D8C /* STAlbumImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlbumImageCell.h; sourceTree = "<group>"; };
 		99B3871F1C82FAA2005B4D8C /* STAlbumImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlbumImageCell.m; sourceTree = "<group>"; };
 		99B387201C82FAA2005B4D8C /* STFacebookAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookAlbumCell.h; sourceTree = "<group>"; };
@@ -751,8 +751,6 @@
 				99B386041C82FAA2005B4D8C /* Core */,
 				99B386731C82FAA2005B4D8C /* Model */,
 				99B386BF1C82FAA2005B4D8C /* UI */,
-				99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */,
-				99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */,
 				99B386011C82FAA2005B4D8C /* Constants */,
 				99B385EA1C82FAA2005B4D8C /* Categories */,
 				99B386B21C82FAA2005B4D8C /* ThirdParties */,
@@ -1134,6 +1132,8 @@
 				99B3872D1C82FAA2005B4D8C /* Tutorial */,
 				99B387341C82FAA2005B4D8C /* UserProfile */,
 				99B387111C82FAA2005B4D8C /* Storyboards */,
+				99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */,
+				99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
