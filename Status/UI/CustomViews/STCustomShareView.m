@@ -8,6 +8,9 @@
 
 #import "STCustomShareView.h"
 #import "STLocalNotificationService.h"
+#import "STPost.h"
+#import "STPostsPool.h"
+#import "STDataAccessUtils.h"
 
 CGFloat const kDefaultButtonHeight = 50.f;
 NSInteger const kShareViewTag = 1001;
@@ -16,12 +19,15 @@ NSInteger const kShareViewTag = 1001;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrMoveScaleHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrDeleteHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrEditHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *constrAskUserHeight;
 @property (weak, nonatomic) IBOutlet UIImageView *lineDelete;
 @property (weak, nonatomic) IBOutlet UIImageView *lineMoveAndScale;
 @property (weak, nonatomic) IBOutlet UIImageView *lineEdit;
+@property (weak, nonatomic) IBOutlet UIImageView *askUserLine;
 @property (weak, nonatomic) IBOutlet UIButton *deletaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *moveScaleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
+@property (weak, nonatomic) IBOutlet UIButton *askUserBtn;
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
 
 @property (nonatomic, strong) NSString *postUuid;
@@ -86,8 +92,11 @@ NSInteger const kShareViewTag = 1001;
 -(void) setUpForExtendedRights:(BOOL)extendedRights{
 
     _constrDeleteHeight.constant = _constrMoveScaleHeight.constant = _constrEditHeight.constant = (extendedRights ? kDefaultButtonHeight : 0);
+    _constrAskUserHeight.constant = (!extendedRights ? kDefaultButtonHeight : 0);
     _deletaBtn.hidden = _moveScaleBtn.hidden = _editBtn.hidden = !extendedRights;
+    _askUserBtn.hidden = extendedRights;
     _lineDelete.hidden = _lineMoveAndScale.hidden = _lineEdit.hidden = !extendedRights;
+    _askUserLine.hidden = extendedRights;
 
 }
 
@@ -123,5 +132,13 @@ NSInteger const kShareViewTag = 1001;
     [[CoreManager localNotificationService] postNotificationName:STOptionsViewShareFbNotification object:nil userInfo:@{kPostIdKey:_postUuid}];
 }
 
+- (IBAction)onAskUser:(id)sender {
+    STPost *post = [[CoreManager postsPool] getPostWithId:_postUuid];
+    
+    [STDataAccessUtils inviteUserToUpload:post.userId withUserName:post.userName withCompletion:^(NSError *error) {
+        NSLog(@"Error asking user : %@", error);
+    }];
+    
+}
 
 @end

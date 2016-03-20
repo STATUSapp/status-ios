@@ -74,7 +74,6 @@ const float kNoNotifHeight = 24.f;
     STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             _notificationDataSource = [NSArray arrayWithArray:response[@"data"]];
-            [[CoreManager navigationService] setBadge:_notificationDataSource.count forTabAtIndex:STTabBarIndexChat];
             BOOL shouldShowPlaceholder = _notificationDataSource.count > 0;
             weakSelf.noNotifLabel.hidden = shouldShowPlaceholder;
             

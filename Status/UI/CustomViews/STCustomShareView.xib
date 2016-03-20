@@ -13,6 +13,7 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -48,6 +49,20 @@
                     <connections>
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="DmD-4u-ilk"/>
                         <action selector="onShareFb:" destination="1" eventType="touchUpInside" id="SeA-Pj-4bo"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50u-SS-sPe">
+                    <rect key="frame" x="0.0" y="168" width="320" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="rdr-Rs-LoC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="19"/>
+                    <state key="normal" title="Ask user to take a photo" backgroundImage="share button background"/>
+                    <state key="selected" backgroundImage="share on facebook button pressed"/>
+                    <state key="highlighted" title="Ask user to take a photo"/>
+                    <connections>
+                        <action selector="onAskUser:" destination="1" eventType="touchUpInside" id="qP7-r2-Zc7"/>
+                        <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="Jxv-Xr-98u"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a46-Fq-RUX">
@@ -145,6 +160,12 @@
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="gzY-W7-S4M"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share button line" translatesAutoresizingMaskIntoConstraints="NO" id="AQG-2F-bX9" userLabel="Ask Line">
+                    <rect key="frame" x="10" y="217" width="300" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="I8g-m2-dYY"/>
+                    </constraints>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share button line" translatesAutoresizingMaskIntoConstraints="NO" id="mzl-5F-cyO">
                     <rect key="frame" x="10" y="518" width="300" height="1"/>
                     <constraints>
@@ -184,7 +205,9 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="b75-0M-y77" firstAttribute="top" secondItem="50u-SS-sPe" secondAttribute="bottom" id="0PU-RX-pCJ"/>
                 <constraint firstItem="3To-xL-SWq" firstAttribute="top" secondItem="qzK-NQ-Dnq" secondAttribute="top" id="0db-Yt-4kV"/>
+                <constraint firstItem="AQG-2F-bX9" firstAttribute="bottom" secondItem="50u-SS-sPe" secondAttribute="bottom" id="15t-Nw-gY3"/>
                 <constraint firstAttribute="trailing" secondItem="PH3-HG-Pod" secondAttribute="trailing" constant="10" id="1Cb-QU-nCb"/>
                 <constraint firstItem="3To-xL-SWq" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="5V4-r1-5Qj"/>
                 <constraint firstItem="a46-Fq-RUX" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="6cU-MT-peX"/>
@@ -200,13 +223,17 @@
                 <constraint firstItem="a46-Fq-RUX" firstAttribute="top" secondItem="1fC-Se-XNa" secondAttribute="top" id="G1Q-hU-sbI"/>
                 <constraint firstItem="iWG-w3-KyS" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="GGy-mv-Dv8"/>
                 <constraint firstItem="PH3-HG-Pod" firstAttribute="top" secondItem="vNf-kU-Jer" secondAttribute="top" id="I33-nG-BLn"/>
+                <constraint firstItem="AQG-2F-bX9" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="JIN-4Q-3Hq"/>
                 <constraint firstItem="h9b-m3-HbM" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="JUf-S2-z4G"/>
+                <constraint firstItem="50u-SS-sPe" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="M54-rh-YqL"/>
                 <constraint firstItem="AKL-pY-gUb" firstAttribute="top" secondItem="KOU-gd-BIt" secondAttribute="bottom" id="MjK-We-jwH"/>
                 <constraint firstItem="mzl-5F-cyO" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="OSE-9R-NCX"/>
                 <constraint firstAttribute="trailing" secondItem="AKL-pY-gUb" secondAttribute="trailing" id="TBl-Kd-9tC"/>
                 <constraint firstItem="cj2-TJ-8Qc" firstAttribute="top" secondItem="vNf-kU-Jer" secondAttribute="bottom" id="TOG-pG-oKb"/>
                 <constraint firstItem="AKL-pY-gUb" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Vxx-9o-2H7"/>
                 <constraint firstAttribute="trailing" secondItem="gFz-vz-tEO" secondAttribute="trailing" constant="10" id="WN4-ka-4So"/>
+                <constraint firstAttribute="trailing" secondItem="AQG-2F-bX9" secondAttribute="trailing" constant="10" id="XQk-bS-rbw"/>
+                <constraint firstAttribute="trailing" secondItem="50u-SS-sPe" secondAttribute="trailing" id="Ym8-hE-Yvy"/>
                 <constraint firstAttribute="trailing" secondItem="3To-xL-SWq" secondAttribute="trailing" id="c4G-11-L2e"/>
                 <constraint firstAttribute="trailing" secondItem="mzl-5F-cyO" secondAttribute="trailing" constant="10" id="c8S-Ex-WpF"/>
                 <constraint firstItem="vNf-kU-Jer" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="cFQ-Vw-Ip5"/>
@@ -233,6 +260,9 @@
                 <constraint firstAttribute="trailing" secondItem="vNf-kU-Jer" secondAttribute="trailing" id="zpc-sV-PUk"/>
             </constraints>
             <connections>
+                <outlet property="askUserBtn" destination="50u-SS-sPe" id="QMo-nr-cGp"/>
+                <outlet property="askUserLine" destination="AQG-2F-bX9" id="HTR-bu-PQ7"/>
+                <outlet property="constrAskUserHeight" destination="rdr-Rs-LoC" id="Ow9-8x-8sa"/>
                 <outlet property="constrDeleteHeight" destination="2wD-1g-gh1" id="nvV-8S-Ypy"/>
                 <outlet property="constrEditHeight" destination="7IU-2d-EB8" id="eU7-6E-94X"/>
                 <outlet property="constrMoveScaleHeight" destination="4oQ-mQ-1Dy" id="hF2-hl-y9Y"/>

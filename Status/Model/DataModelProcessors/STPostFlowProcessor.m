@@ -119,9 +119,6 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
     
         NSInteger offsetRemaining = weakSelf.postIds.count - index;
         BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && index!=0;
-#ifdef DEBUG
-        shouldGetNextBatch = NO;
-#endif
         if (shouldGetNextBatch) {
             [weakSelf getMoreData];
         }
