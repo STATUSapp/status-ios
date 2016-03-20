@@ -71,6 +71,13 @@
 
 }
 
+- (STBaseObj *)randomObject {
+    if (self.objects.count == 0) {
+        return nil;
+    }
+    
+    return self.objects.anyObject;
+}
 
 #pragma mark - Private methods
 

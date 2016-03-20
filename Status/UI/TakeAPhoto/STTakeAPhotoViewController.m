@@ -12,7 +12,12 @@
 #import "STMoveScaleViewController.h"
 #import "STNavigationService.h"
 
+#import "STImageCacheController.h"
+#import "STPostsPool.h"
+
 @interface STTakeAPhotoViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @end
 
@@ -78,9 +83,26 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    __weak typeof(self) weakSelf = self;
+    STPost * randomPost = [CoreManager postsPool].randomPost;
+    [[CoreManager imageCacheService] loadPostImageWithName:randomPost.fullPhotoUrl withPostCompletion:^(UIImage *origImg) {
+        
+    } andBlurCompletion:^(UIImage *bluredImg) {
+        weakSelf.backgroundImageView.image = bluredImg;
+    }];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

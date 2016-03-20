@@ -65,6 +65,20 @@
     return (STPost *)[super getObjectWithId:postId];
 }
 
+- (STPost *)randomPost {
+    if (self.getAllPosts.count == 0) {
+        return nil;
+    }
+    
+    STPost * randomPost = nil;
+    
+    while (randomPost.fullPhotoUrl == nil) {
+        u_int32_t randomIndex = arc4random_uniform((u_int32_t)(self.getAllPosts.count - 1));
+        randomPost = [self.getAllPosts objectAtIndex:randomIndex];
+    }
+    return randomPost;
+}
+
 #pragma mark - Private methods
 
 - (STPost *)postForUrl:(NSString *)url{
