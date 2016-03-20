@@ -37,18 +37,21 @@ static NSString * storyboardIdentifier = @"tabBarController";
     // add home flow
     //TODO: dev_1_2 use the storyboard to load navCtrl
     FeedCVC *homeVc = [FeedCVC mainFeedController];
-    homeVc.title = NSLocalizedString(@"Home", nil);
+//    homeVc.title = NSLocalizedString(@"Home", nil);
     UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
     homeNavCtrl.navigationBarHidden = YES;
+    
+
+    
     [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
     // add explore flow
     
     // add take a photo
     
     STTakeAPhotoViewController * takeAPhotoVC = [STTakeAPhotoViewController newController];
-    takeAPhotoVC.title = @"Take a Photo";
+//    takeAPhotoVC.title = @"Take a Photo";
     UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
-    takePhotoNav.title = @"Take a Photo";
+//    takePhotoNav.title = @"Take a Photo";
     takePhotoNav.navigationBarHidden = YES;
     
     
@@ -56,7 +59,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     STNotificationAndChatContainerViewController * notifAndChatVC = [STNotificationAndChatContainerViewController newController];
     UINavigationController * notifChatNav = [[UINavigationController alloc] initWithRootViewController:notifAndChatVC];
-    notifChatNav.title = @"Notifications and Messages";
+//    notifChatNav.title = @"Notifications and Messages";
     notifChatNav.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
     // add my profile
@@ -65,7 +68,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
     UINavigationController   * settingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
     settingsNav.navigationBarHidden = YES;
-    settingsNav.title = @"Settings";
+//    settingsNav.title = @"Settings";
     
     [tabBarControllers insertObject:homeNavCtrl atIndex:STTabBarIndexHome];
     [tabBarControllers insertObject:takePhotoNav atIndex:STTabBarIndexTakAPhoto];
@@ -73,6 +76,22 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [tabBarControllers insertObject:settingsNav atIndex:STTabBarIndexProfile];
 
     [self setViewControllers:tabBarControllers animated:NO];
+    
+    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[UIImage imageNamed:@"home"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakAPhoto] setImage:[UIImage imageNamed:@"camera"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"message"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[UIImage imageNamed:@"profile"]];
+    
+    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[UIImage imageNamed:@"home_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakAPhoto] setSelectedImage:[UIImage imageNamed:@"camera_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"message_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[UIImage imageNamed:@"profile_active"]];
+    
+    for (UITabBarItem * item in self.tabBar.items) {
+        [item setTitle:nil];
+    }
+    
+    self.tabBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewDidLoad {
