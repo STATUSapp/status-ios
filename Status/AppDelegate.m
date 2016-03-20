@@ -166,9 +166,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     if (notificationSettings.types) {
         NSLog(@"User allowed notifications");
         [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }else{
-        NSLog(@"User did not allow notifications");
-        //TODO: show alert here?
     }
 }
 

@@ -51,7 +51,7 @@
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     UITabBarController *tbc = (UITabBarController *)[window rootViewController];
     
-    NSString *badgeString = @"";
+    NSString *badgeString = nil;
     if (badge > 0) {
         if (badge > 99)
             badgeString = @"99+";
