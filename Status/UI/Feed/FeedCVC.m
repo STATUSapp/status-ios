@@ -133,7 +133,10 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
         return nil;
     }
     NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
-    STPost *post = [_feedProcessor postAtIndex:[[visibleInxPath objectAtIndex:0] row]];
+    STPost *post = nil;
+    if (visibleInxPath.count) {
+        post = [_feedProcessor postAtIndex:[[visibleInxPath objectAtIndex:0] row]];
+    }
     
     return post;
 }

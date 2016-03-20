@@ -15,7 +15,7 @@
 
 static NSString * storyboardIdentifier = @"tabBarController";
 
-@interface STTabBarViewController ()
+@interface STTabBarViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -40,6 +40,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     homeVc.title = NSLocalizedString(@"Home", nil);
     UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
     homeNavCtrl.navigationBarHidden = YES;
+    [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
     // add explore flow
     
     // add take a photo
@@ -57,7 +58,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     UINavigationController * notifChatNav = [[UINavigationController alloc] initWithRootViewController:notifAndChatVC];
     notifChatNav.title = @"Notifications and Messages";
     notifChatNav.navigationBarHidden = YES;
-    
+    [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
     // add my profile
     
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
@@ -79,6 +80,19 @@ static NSString * storyboardIdentifier = @"tabBarController";
     // Do any additional setup after loading the view.
 }
 
+#pragma mark - Helper
+
+-(void)configureNavControllerToHandleSwipeToBackGesture:(UINavigationController *)navController{
+    navController.interactivePopGestureRecognizer.delegate =self;
+    navController.interactivePopGestureRecognizer.enabled = YES;
+
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
 
 
 @end
