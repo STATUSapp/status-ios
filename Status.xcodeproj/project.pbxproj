@@ -14,6 +14,7 @@
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
 		173A29511C9FF64500157945 /* STConversationUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A29501C9FF64500157945 /* STConversationUser.m */; };
+		173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A29531CA04B3E00157945 /* STNotificationObj.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
@@ -237,6 +238,8 @@
 		172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		173A294F1C9FF64500157945 /* STConversationUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationUser.h; sourceTree = "<group>"; };
 		173A29501C9FF64500157945 /* STConversationUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationUser.m; sourceTree = "<group>"; };
+		173A29521CA04B3E00157945 /* STNotificationObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationObj.h; sourceTree = "<group>"; };
+		173A29531CA04B3E00157945 /* STNotificationObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationObj.m; sourceTree = "<group>"; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -994,6 +997,8 @@
 				99B3868C1C82FAA2005B4D8C /* STUserProfile.m */,
 				2A6D7EAE1C82FEDC00F65026 /* STPost.h */,
 				2A6D7EAF1C82FEDC00F65026 /* STPost.m */,
+				173A29521CA04B3E00157945 /* STNotificationObj.h */,
+				173A29531CA04B3E00157945 /* STNotificationObj.m */,
 			);
 			path = DataModelObjects;
 			sourceTree = "<group>";
@@ -1747,6 +1752,7 @@
 				99B387D81C82FAA2005B4D8C /* STFacebookAlbumsViewController.m in Sources */,
 				99B387A31C82FAA2005B4D8C /* main.m in Sources */,
 				99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */,
+				173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */,
 				99B3877F1C82FAA2005B4D8C /* Message.m in Sources */,
 				52DC4DCD1C8D87F00064F23F /* UIAlertController+Additions.m in Sources */,
 				99B387E51C830082005B4D8C /* CoreManager.m in Sources */,

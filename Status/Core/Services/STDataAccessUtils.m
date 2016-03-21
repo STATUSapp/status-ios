@@ -13,6 +13,7 @@
 #import "STPostsPool.h"
 #import "STPost.h"
 #import "STConversationUser.h"
+#import "STNotificationObj.h"
 
 @implementation STDataAccessUtils
 
@@ -511,6 +512,30 @@ withCompletion:(STDataUploadCompletionBlock)completion{
     [STInviteUserToUploadRequest inviteUserToUpload:userID withCompletion:completion1 failure:^(NSError *error) {
         completion(error);
     }];
+}
+
+#pragma mark - Notifications
+
++ (void)getNotificationsWithCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            
+            NSMutableArray *objects = [NSMutableArray new];
+            for (NSDictionary *dict in response[@"data"]) {
+                STNotificationObj *no = [STNotificationObj notificationObjFromDict:dict];
+                [objects addObject:no];
+            }
+            completion(objects, nil);
+        }
+        else
+            completion(nil, [NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+    };
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        completion(nil, error);
+    };
+    
+    [STGetNotificationsRequest getNotificationsWithCompletion:completion1 failure:failBlock];
+
 }
 
 @end

@@ -75,4 +75,7 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
               withUserName:(NSString *)userName
             withCompletion:(STDataUploadCompletionBlock)completion;
 
+//get notifications
++ (void)getNotificationsWithCompletion:(STDataAccessCompletionBlock)completion;
+
 @end

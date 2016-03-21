@@ -31,6 +31,7 @@
 #import "STUploadPostRequest.h"
 #import "STInviteUserToUploadRequest.h"
 #import "STGetUsersRequest.h"
+#import "STGetNotificationsRequest.h"
 
 #endif
 

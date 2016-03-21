@@ -26,6 +26,8 @@
 #import "FeedCVC.h"
 #import "STNavigationService.h"
 #import "STNotificationsManager.h"
+#import "STDataAccessUtils.h"
+#import "STNotificationObj.h"
 
 const float kNoNotifHeight = 24.f;
 
@@ -70,9 +72,10 @@ const float kNoNotifHeight = 24.f;
         return;
     }
     __weak STNotificationsViewController *weakSelf = self;
-    STRequestCompletionBlock completion = ^(id response, NSError *error){
-        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-            _notificationDataSource = [NSArray arrayWithArray:response[@"data"]];
+    
+    [STDataAccessUtils getNotificationsWithCompletion:^(NSArray *objects, NSError *error) {
+        _notificationDataSource = [NSArray arrayWithArray:objects];
+        if (!error) {
             BOOL shouldShowPlaceholder = _notificationDataSource.count > 0;
             weakSelf.noNotifLabel.hidden = shouldShowPlaceholder;
             
@@ -81,12 +84,7 @@ const float kNoNotifHeight = 24.f;
         }
         else
             weakSelf.noNotifLabel.hidden = NO;
-    };
-    STRequestFailureBlock failBlock = ^(NSError *error){
-        weakSelf.noNotifLabel.hidden = NO;
-    };
-
-    [STGetNotificationsRequest getNotificationsWithCompletion:completion failure:failBlock];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,8 +130,8 @@ const float kNoNotifHeight = 24.f;
         }
     }
     else if ([cell isKindOfClass:[STSmartNotificationCell class]]){
-        NSDictionary *dict = _notificationDataSource[indexPathOfSelectedRow.row];
-        NSInteger notificationType = [dict[@"type"] integerValue];
+        STNotificationObj *no = _notificationDataSource[indexPathOfSelectedRow.row];
+        STNotificationType notificationType = no.type;
         
         switch (notificationType) {
             case STNotificationTypePhotosWaiting:
@@ -159,8 +157,8 @@ const float kNoNotifHeight = 24.f;
 }
 
 - (void)onTapUserNameOrUserProfilePictureAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
-    STNotificationType notifType = [dict[@"type"] integerValue];
+    STNotificationObj *no = [_notificationDataSource objectAtIndex:indexPath.row];
+    STNotificationType notifType = no.type;
     
     
     switch (notifType) {
@@ -169,7 +167,7 @@ const float kNoNotifHeight = 24.f;
             break;
         default:
         {
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:no.userId];
             profileVC.shouldOpenCameraRoll = (notifType == STNotificationTypeInvite);
             [self.navigationController pushViewController:profileVC animated:YES];
         }
@@ -179,42 +177,29 @@ const float kNoNotifHeight = 24.f;
 
 - (void)onTapPostPictureAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
-    STNotificationType notifType = [dict[@"type"] integerValue];
+    STNotificationObj *no = [_notificationDataSource objectAtIndex:indexPath.row];
+    STNotificationType notifType = no.type;
     
     switch (notifType) {
         case STNotificationTypeLike:
         case STNotificationTypeUploaded:
         {
             
-            //TODO: dev_1_2 do not use dictionaries, use objects
-            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:dict[@"post_id"]];
-//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//            flowCtrl.flowType = STFlowTypeSinglePost;
-//            flowCtrl.postID = dict[@"post_id"];
-//            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
-//            flowCtrl.userName = dict[@"user_name"];
+            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:no.postId];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
         case STNotificationTypeInvite:
         {
             
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]]];
+            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:no.userId];
             [self.navigationController pushViewController:profileVC animated:YES];
             
         }
             break;
-//        case STNotificationTypeUploaded:
-//        {
-//            
-//            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: [CreateDataModelHelper validStringFromValue:dict[@"user_id"]]];
-//            [self.navigationController pushViewController:profileVC animated:YES];
-//        }
-//            break;
         case STNotificationTypeGotFollowed:
         {
-            STUsersListController * newVC = [STUsersListController newControllerWithUserId:[CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]] postID:nil andType:UsersListControllerTypeFollowers];
+            STUsersListController * newVC = [STUsersListController newControllerWithUserId:no.userId postID:nil andType:UsersListControllerTypeFollowers];
             [self.navigationController pushViewController:newVC animated:YES];
         }
             break;
@@ -222,13 +207,7 @@ const float kNoNotifHeight = 24.f;
         default:
         {
             
-            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:dict[@"post_id"]];
-
-//            STFlowTemplateViewController *flowCtrl = [self.storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//            flowCtrl.flowType = STFlowTypeSinglePost;
-//            flowCtrl.postID = dict[@"post_id"];
-//            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
-//            flowCtrl.userName = dict[@"user_name"];
+            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:no.userId];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
@@ -238,19 +217,19 @@ const float kNoNotifHeight = 24.f;
 #pragma mark - UITableView Delegate
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *dict = [_notificationDataSource objectAtIndex:indexPath.row];
-    NSInteger notificationType = [dict[@"type"] integerValue];
+    STNotificationObj *no = [_notificationDataSource objectAtIndex:indexPath.row];
+    STNotificationType notificationType = no.type;
     STNotificationBaseCell *cell = nil;
 
     if (notificationType < STNotificationTypeChatMessage || notificationType == STNotificationTypeGotFollowed) {
         // normal notifications (user generated notifications)
         cell = (STNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
         STNotificationCell *actualCell = (STNotificationCell *)cell;
-        [actualCell.postImg sd_setImageWithURL:[NSURL URLWithString:dict[@"post_photo_link"]]];
-        [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:dict[@"user_photo_link"]]];
-        actualCell.isSeen = [dict[@"seen"] boolValue];
-        actualCell.messageLbl.text = [NSString stringWithFormat:@"%@", dict[@"user_name"]];
-        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDateTime:dict[@"date"]]];
+        [actualCell.postImg sd_setImageWithURL:[NSURL URLWithString:no.postPhotoUrl]];
+        [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:no.userThumbnail]];
+        actualCell.isSeen = no.seen;
+        actualCell.messageLbl.text = [NSString stringWithFormat:@"%@", no.message];
+        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:no.date];
         actualCell.notificationTypeMessage.text = [self getNotificationTypeStringForType:notificationType];
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -258,26 +237,26 @@ const float kNoNotifHeight = 24.f;
     {   //smart notifications, generated by server
         cell = (STSmartNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"smartNotificationCell"];
         STSmartNotificationCell *actualCell = (STSmartNotificationCell *)cell;
-        NSString *postPhotoLink = dict[@"user_photo_link"];
+        NSString *postPhotoLink = no.postPhotoUrl;
         if (postPhotoLink.length == 0) {
             actualCell.userImg.image = [UIImage imageNamed:@"logo"];
         }
         else
             [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:postPhotoLink]];
-        actualCell.seenCircle.hidden = [dict[@"seen"] boolValue];
-        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:[ NSDate dateFromServerDateTime:dict[@"date"]]];
+        actualCell.seenCircle.hidden = no.seen;
+        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:no.date];
         if (notificationType == STNotificationTypeNewUserJoinsStatus) {
-            NSString *string = [NSString stringWithFormat:@"%@ is on STATUS. Say hello :)", dict[@"user_name"]];
+            NSString *string = [NSString stringWithFormat:@"%@ is on STATUS. Say hello :)", no.userName];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
             UIFont *boldFont = [UIFont fontWithName:@"ProximaNova-Semibold" size:13.f];
             NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                    boldFont, NSFontAttributeName,nil];
 
-            [attributedString setAttributes:attrs range:NSMakeRange(0, [dict[@"user_name"] length])];
+            [attributedString setAttributes:attrs range:NSMakeRange(0, [no.userName length])];
             actualCell.notificationTypeMessage.attributedText = attributedString;
         }
         else
-            actualCell.notificationTypeMessage.text = dict[@"message"];
+            actualCell.notificationTypeMessage.text = no.message;
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         

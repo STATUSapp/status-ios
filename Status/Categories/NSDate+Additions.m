@@ -36,7 +36,6 @@
     return resultDate;
 }
 
-
 + (NSString *)notificationTimeIntervalSinceDate: (NSDate *)dateOfNotification{
     NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:dateOfNotification];
     
