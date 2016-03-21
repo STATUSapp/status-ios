@@ -21,6 +21,7 @@
 #import "STInviteUserToUploadRequest.h"
 #import "STSettingsViewController.h"
 #import "STUsersListController.h"
+#import "STFacebookLoginController.h"
 
 #import "STFollowUsersRequest.h"
 #import "STUnfollowUsersRequest.h"
@@ -85,6 +86,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([_profileUserId isEqualToString:[CoreManager loginService].currentUserUuid]) {
+        _isMyProfile = YES;
+    }
+    
     _loadingPlaceholder.hidden = NO;
     
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
@@ -229,13 +235,22 @@
         hasLastSeenStatus = NO;
     }
     
-   statusText = hasLastSeenStatus ? [NSString stringWithFormat:@" - %@", statusText] : @"";
+    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
+                                                                                     andLongitudeString:profile.longitude];
+
+    if ([distanceText isEqualToString:ST_UNKNOWN_DISTANCE_MESSAGE]) {
+        distanceText = @"";
+    }
+    
+    if (distanceText.length == 0) {
+        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@"%@", statusText] : @"";
+    }else {
+        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@" - %@", statusText] : @"";
+    }
     _imageViewStatusIcon.hidden = !hasLastSeenStatus;
     
     
-    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
-                                                                                          andLongitudeString:profile.longitude];
-
+    
     CGFloat fontSize = _lblDistance.font.pointSize;
     UIFont * statusFont = [UIFont fontWithName:@"ProximaNova-Regular" size:fontSize];
     UIFont * distanceFont = [UIFont fontWithName:@"ProximaNova-Semibold" size:fontSize];
@@ -286,31 +301,13 @@
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
-- (IBAction)onTapMessages:(id)sender {
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STConversationsListViewController *viewController = (STConversationsListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STConversationsListViewController"];
-    [self.navigationController pushViewController:viewController animated:YES];
-    
-    
-}
 
 - (IBAction)onTapGallery:(id)sender {
     
     FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_profileUserId andUserName:_userProfile.fullName];
-    
-//    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-//    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-//    flowCtrl.flowType = _isMyProfile ? STFlowTypeMyGallery : STFlowTypeUserGallery;
-//    flowCtrl.flowUserID = _profileUserId;
-//    flowCtrl.userName = _userProfile.fullName;
-    
     [self.navigationController pushViewController:feedCVC animated:YES];
 }
 
-//TODO:dev_1_2 safely remove this after removing the menu button
-- (IBAction)onTapMenu:(id)sender {
-}
 
 - (IBAction)onTapNextProfile:(id)sender {
     
@@ -356,21 +353,8 @@
     }
 }
 
-//TODO: dev_1_2 this button should not be here. we have a tab for this
 - (IBAction)onTapCamera:(id)sender {
-    __weak STUserProfileViewController *weakSelf = self;
-    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
-        [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil];
-        
-    };
-    
-//    if (_isMyProfile) {
-//        [[CoreManager imagePickerService] startImagePickerForOwnerInViewController:self withCompletion:completion];
-//    } else {
-//        [[[CoreManager navigationService] imagePickerController] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
-//            [weakSelf inviteUserToUpload];
-//        }];
-//    }
+    //TODO: dev_1_2 maybe ask user for upload action?
 }
 
 - (IBAction)onTapSettings:(id)sender {
@@ -394,25 +378,7 @@
     editVC.userProfile = _userProfile;
     [self.navigationController pushViewController:editVC animated:YES];
 }
-//moved
-- (void)startMoveScaleShareControllerForImage:(UIImage *)img
-                               shouldCompress:(BOOL)compressing
-                                 editedPostId:(NSString *)postId
-                                captionString:(NSString *)captionString{
-    
-    // here, no compressing should be done, because it might be a cropping after this
-    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
-//    viewController.currentImg = img;
-//    
-//    
-//    viewController.delegate = (id<STSharePostDelegate>)[STMenuController sharedInstance].appMainController;
-//    viewController.editPostId = postId;
-//    viewController.shouldCompress = compressing;
-//    viewController.captionString = captionString;
-//    [self.navigationController pushViewController:viewController animated:NO];
-}
+
 
 - (void)inviteUserToUpload{
     

@@ -10,6 +10,8 @@
 #import "STSettingsViewController.h"
 #import "STTakeAPhotoViewController.h"
 #import "STNotificationAndChatContainerViewController.h"
+#import "STUserProfileViewController.h"
+#import "STFacebookLoginController.h"
 
 #import "FeedCVC.h"
 
@@ -64,16 +66,15 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
     // add my profile
     
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
-    UINavigationController   * settingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
-    settingsNav.navigationBarHidden = YES;
-//    settingsNav.title = @"Settings";
+    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[[CoreManager loginService] currentUserUuid]];
+    UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
+    profileNav.navigationBarHidden = YES;
+    [self configureNavControllerToHandleSwipeToBackGesture:profileNav];
     
     [tabBarControllers insertObject:homeNavCtrl atIndex:STTabBarIndexHome];
     [tabBarControllers insertObject:takePhotoNav atIndex:STTabBarIndexTakAPhoto];
     [tabBarControllers insertObject:notifChatNav atIndex:STTabBarIndexChat];
-    [tabBarControllers insertObject:settingsNav atIndex:STTabBarIndexProfile];
+    [tabBarControllers insertObject:profileNav atIndex:STTabBarIndexProfile];
 
     [self setViewControllers:tabBarControllers animated:NO];
     

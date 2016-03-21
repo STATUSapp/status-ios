@@ -110,35 +110,7 @@
                                     <constraint firstAttribute="height" constant="96" id="Ufk-8W-hei"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCL-pa-P8X" userLabel="messages btn">
-                                <rect key="frame" x="255" y="0.0" width="65" height="67"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="C4r-i4-kmx"/>
-                                    <constraint firstAttribute="height" constant="67" id="D1L-8s-94Y"/>
-                                </constraints>
-                                <state key="normal" image="Message icon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="Message icon pressed"/>
-                                <connections>
-                                    <action selector="onTapMessages:" destination="AU9-ws-jB7" eventType="touchUpInside" id="ni7-YE-4D6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drt-N9-twb" userLabel="menu btn">
-                                <rect key="frame" x="0.0" y="0.0" width="55" height="67"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="FXL-yc-VvO"/>
-                                    <constraint firstAttribute="height" constant="67" id="NUm-WY-84b"/>
-                                </constraints>
-                                <state key="normal" image="Menu">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="Menu pressed"/>
-                                <connections>
-                                    <action selector="onTapMenu:" destination="AU9-ws-jB7" eventType="touchUpInside" id="dPZ-bs-peB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCt-OH-ynU" userLabel="camera btn">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCt-OH-ynU" userLabel="camera btn">
                                 <rect key="frame" x="16" y="477" width="66" height="66"/>
                                 <state key="normal" image="camera button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -296,7 +268,6 @@
                             <constraint firstAttribute="trailing" secondItem="cfA-AY-ajk" secondAttribute="trailing" id="DLe-be-iL7"/>
                             <constraint firstItem="zof-zo-rAp" firstAttribute="centerY" secondItem="yWQ-93-hQl" secondAttribute="centerY" id="DRi-qc-1Ne"/>
                             <constraint firstAttribute="trailing" secondItem="ykj-hN-llS" secondAttribute="trailing" id="EWQ-k8-i7T"/>
-                            <constraint firstItem="Drt-N9-twb" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" id="Fpi-X7-svG"/>
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="zof-zo-rAp" secondAttribute="centerX" id="G09-Fo-ip2"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" constant="17" id="IIJ-tJ-Yen"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="15" id="Jdd-me-RUK"/>
@@ -319,7 +290,6 @@
                             <constraint firstItem="UHe-3U-SnI" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" id="hmo-oZ-eaS"/>
                             <constraint firstItem="f6U-my-Zda" firstAttribute="trailing" secondItem="zof-zo-rAp" secondAttribute="trailing" id="iFh-FJ-B6P"/>
                             <constraint firstAttribute="trailing" secondItem="d3Y-4t-VOm" secondAttribute="trailing" constant="16" id="iQ4-hG-jRL"/>
-                            <constraint firstItem="Drt-N9-twb" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="ibf-xn-vIQ"/>
                             <constraint firstItem="En9-l3-8Et" firstAttribute="top" secondItem="zof-zo-rAp" secondAttribute="bottom" constant="8" id="ijk-r4-h89"/>
                             <constraint firstItem="zof-zo-rAp" firstAttribute="centerX" secondItem="1Mz-qe-w3x" secondAttribute="centerX" id="jea-VD-Sf4"/>
                             <constraint firstItem="DpI-c0-H0H" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" id="jyG-tu-lIV"/>
@@ -333,8 +303,6 @@
                             <constraint firstAttribute="trailing" secondItem="DpI-c0-H0H" secondAttribute="trailing" id="s1Z-e4-ZDh"/>
                             <constraint firstItem="f6U-my-Zda" firstAttribute="top" secondItem="zof-zo-rAp" secondAttribute="top" id="t0S-2D-2US"/>
                             <constraint firstItem="ykj-hN-llS" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="vPN-qh-IcB"/>
-                            <constraint firstAttribute="trailing" secondItem="KCL-pa-P8X" secondAttribute="trailing" id="vdH-Po-7ho"/>
-                            <constraint firstItem="KCL-pa-P8X" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" id="x40-m6-sEo"/>
                             <constraint firstItem="DpI-c0-H0H" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" id="yhG-7M-FfR"/>
                             <constraint firstAttribute="trailing" secondItem="3nA-Cz-4Si" secondAttribute="trailing" id="ziJ-oF-FMi"/>
                         </constraints>
@@ -351,8 +319,6 @@
                         <outlet property="btnFollowersCount" destination="f6U-my-Zda" id="fnT-aT-MdW"/>
                         <outlet property="btnFollowing" destination="j1h-Ll-f34" id="KXe-Ki-62z"/>
                         <outlet property="btnGallery" destination="e6B-n6-hfW" id="tuC-E3-oyf"/>
-                        <outlet property="btnMenu" destination="Drt-N9-twb" id="eO3-aA-wL6"/>
-                        <outlet property="btnMessages" destination="KCL-pa-P8X" id="gGc-f4-BWI"/>
                         <outlet property="btnSendMessageToUser" destination="yWQ-93-hQl" id="pR2-oU-ghN"/>
                         <outlet property="btnSettings" destination="Nje-IF-zzR" id="EBl-Gm-0LU"/>
                         <outlet property="imageViewBlurryPicture" destination="DpI-c0-H0H" id="kFP-5O-aEQ"/>
@@ -595,10 +561,6 @@
     <resources>
         <image name="Likes Counter background" width="33" height="28"/>
         <image name="Likes Counter background pressed" width="33" height="28"/>
-        <image name="Menu" width="21" height="21"/>
-        <image name="Menu pressed" width="21" height="21"/>
-        <image name="Message icon" width="33" height="33"/>
-        <image name="Message icon pressed" width="33" height="33"/>
         <image name="btn_follow" width="101" height="28"/>
         <image name="camera button" width="66" height="66"/>
         <image name="camera button pressed" width="66" height="66"/>

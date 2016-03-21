@@ -130,7 +130,7 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
     CLLocationDistance distance = [newLocation distanceFromLocation:self.latestLocation];
     
     if (distance < 0 || latitude == nil || longitudeString == nil) {
-        return @"Unknown distance";
+        return ST_UNKNOWN_DISTANCE_MESSAGE;
     }
     
     if (distance < 1000) { // 1000 meters = 1 km
