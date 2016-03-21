@@ -17,7 +17,6 @@
 #import "UIImageView+WebCache.h"
 #import "NSDate+Additions.h"
 #import "STGetNotificationsRequest.h"
-#import "STMenuController.h"
 #import "STUsersListController.h"
 
 #import "STUserProfileViewController.h"

@@ -10,7 +10,6 @@
 #import "STGetUserProfileRequest.h"
 #import "NSDate+Additions.h"
 #import "STEditProfileViewController.h"
-#import "STMenuController.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
 #import "STLocationManager.h"
@@ -309,8 +308,8 @@
     [self.navigationController pushViewController:feedCVC animated:YES];
 }
 
+//TODO:dev_1_2 safely remove this after removing the menu button
 - (IBAction)onTapMenu:(id)sender {
-    [[STMenuController sharedInstance] showMenuForController:self];
 }
 
 - (IBAction)onTapNextProfile:(id)sender {

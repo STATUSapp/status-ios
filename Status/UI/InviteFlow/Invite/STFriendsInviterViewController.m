@@ -11,7 +11,6 @@
 #import "STFacebookInviterViewController.h"
 #import "STContactsManager.h"
 #import "STSuggestionsViewController.h"
-#import "STMenuController.h"
 
 @interface STFriendsInviterViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STInvitationsDelegate, STSuggestionsDelegate>
 
@@ -125,7 +124,7 @@
 #pragma mark - STSuggestionsDelegate
 
 - (void)userDidEndApplyingSugegstions {
-    [[STMenuController sharedInstance] goHome];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - STInvitationsDelegate
