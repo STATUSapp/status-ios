@@ -253,6 +253,13 @@
                                     <action selector="onTapGallery:" destination="AU9-ws-jB7" eventType="touchUpInside" id="3q6-UG-0Zu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBV-E1-a2b">
+                                <rect key="frame" x="20" y="20" width="48" height="48"/>
+                                <state key="normal" image="btnBack"/>
+                                <connections>
+                                    <action selector="onTapBack:" destination="AU9-ws-jB7" eventType="touchUpInside" id="DaM-Jk-HBn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -270,6 +277,7 @@
                             <constraint firstAttribute="trailing" secondItem="ykj-hN-llS" secondAttribute="trailing" id="EWQ-k8-i7T"/>
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="zof-zo-rAp" secondAttribute="centerX" id="G09-Fo-ip2"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" constant="17" id="IIJ-tJ-Yen"/>
+                            <constraint firstItem="mBV-E1-a2b" firstAttribute="leading" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="20" id="JCC-tz-c1m"/>
                             <constraint firstItem="1Mz-qe-w3x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jn8-KM-v51" secondAttribute="leading" constant="15" id="Jdd-me-RUK"/>
                             <constraint firstItem="vng-F0-JPs" firstAttribute="centerY" secondItem="j1h-Ll-f34" secondAttribute="centerY" id="KdF-BZ-mIZ"/>
                             <constraint firstItem="XCt-OH-ynU" firstAttribute="centerY" secondItem="Nje-IF-zzR" secondAttribute="centerY" id="MCo-cw-Z9K"/>
@@ -295,6 +303,7 @@
                             <constraint firstItem="DpI-c0-H0H" firstAttribute="top" secondItem="ykj-hN-llS" secondAttribute="bottom" id="jyG-tu-lIV"/>
                             <constraint firstAttribute="centerX" secondItem="Nje-IF-zzR" secondAttribute="centerX" id="l7r-AH-rVL"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Mz-qe-w3x" secondAttribute="trailing" constant="15" id="l8k-PR-dfh"/>
+                            <constraint firstItem="mBV-E1-a2b" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" constant="20" id="mOY-Tc-U37"/>
                             <constraint firstItem="JwS-ph-s0L" firstAttribute="centerX" secondItem="1Mz-qe-w3x" secondAttribute="centerX" id="mZy-Ub-ThT"/>
                             <constraint firstItem="3nA-Cz-4Si" firstAttribute="top" secondItem="mPw-kP-ggI" secondAttribute="bottom" id="oH6-8m-WYF"/>
                             <constraint firstItem="e6B-n6-hfW" firstAttribute="top" secondItem="3nA-Cz-4Si" secondAttribute="bottom" constant="-48" id="p5j-HA-Ws4"/>
@@ -312,6 +321,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnBack" destination="mBV-E1-a2b" id="AiX-0s-yKP"/>
                         <outlet property="btnCamera" destination="XCt-OH-ynU" id="JSZ-jK-vtC"/>
                         <outlet property="btnEditUserProfile" destination="d3Y-4t-VOm" id="6IW-O9-bFW"/>
                         <outlet property="btnFollow" destination="zof-zo-rAp" id="ZTc-mm-bg0"/>
@@ -561,6 +571,7 @@
     <resources>
         <image name="Likes Counter background" width="33" height="28"/>
         <image name="Likes Counter background pressed" width="33" height="28"/>
+        <image name="btnBack" width="48" height="48"/>
         <image name="btn_follow" width="101" height="28"/>
         <image name="camera button" width="66" height="66"/>
         <image name="camera button pressed" width="66" height="66"/>

@@ -67,6 +67,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     // add my profile
     
     STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[[CoreManager loginService] currentUserUuid]];
+    profileVC.shouldHideBackButton = YES;
     UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
     profileNav.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:profileNav];

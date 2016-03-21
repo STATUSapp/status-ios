@@ -56,6 +56,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFollowing;
 @property (weak, nonatomic) IBOutlet UIButton *btnSendMessageToUser;
 @property (weak, nonatomic) IBOutlet UIView *loadingPlaceholder;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
 
 @property (nonatomic, strong) NSString * profileUserId;
 @property (nonatomic, strong) STUserProfile * userProfile;
@@ -112,6 +113,8 @@
     } else {
         [self getAndDisplayProfile];
     }
+    
+    _btnBack.hidden = _shouldHideBackButton;
     
     if (_isMyProfile) {
         _btnNextProfile.hidden = YES;
@@ -295,6 +298,19 @@
                                                                             postID:nil andType:UsersListControllerTypeFollowing];
     [self.navigationController pushViewController:newVC animated:YES];
 }
+
+
+- (IBAction)onTapBack:(id)sender {
+    
+    if (self.navigationController != nil) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
+
+
 - (IBAction)onTapFollowers:(id)sender {
     STUsersListController * newVC = [STUsersListController newControllerWithUserId:_profileUserId
                                                                             postID:nil andType:UsersListControllerTypeFollowers];
