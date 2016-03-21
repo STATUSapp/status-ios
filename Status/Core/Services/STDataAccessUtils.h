@@ -31,6 +31,10 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 +(void)getUserDataForUserId:(NSString *)userId
              withCompletion:(STDataAccessCompletionBlock)completion;
 
++(void)getConversationUsersForScope:(STSearchScopeControl)scope
+                       searchString:(NSString *)searchString
+                         fromOffset:(NSInteger)offset
+                      andCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload stuff to server
 +(void)followUsers:(NSArray *)users

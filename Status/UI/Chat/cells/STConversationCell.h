@@ -8,14 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class STConversationUser;
+
 @interface STConversationCell : UITableViewCell
 
-- (void)setupWithProfileImageUrl:(NSString *)imageUrl
-                     profileName:(NSString *)profileName
-                     lastMessage:(NSString *)lastMessage
-               dateOfLastMessage:(NSDate *)date
-                   showsYouLabel:(BOOL)showsYouLabel
-                     andIsUnread:(BOOL)isUnread;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
--(void)configureCellWithInfo:(NSDictionary *)info;
+-(void)configureCellWithConversationUser:(STConversationUser *)cu;
 @end

@@ -14,6 +14,7 @@
 
 #import "STImageCacheController.h"
 #import "STPostsPool.h"
+#import "FeedCVC.h"
 
 @interface STTakeAPhotoViewController ()
 
@@ -67,10 +68,10 @@
 
 #pragma mark - Notifications
 
-
 - (void)imageWasPostedWithPostId:(NSNotification *)notif {
-//    NSString *postId = notif.userInfo[kPostIdKey];
-    //TODO: redirect to a screen with a single post?
+    NSString *postId = notif.userInfo[kPostIdKey];
+    FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postId];
+    [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -79,6 +80,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostNewImageUploaded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostImageWasEdited object:nil];
+
 
     // Do any additional setup after loading the view.
 }

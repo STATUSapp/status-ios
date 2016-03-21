@@ -314,7 +314,6 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
     }
-    //TODO: get user from the pool first and then initialize
     STListUser *lu = (STListUser *)[[CoreManager usersPool] getUserWithId:post.userId];
     if (!lu) {
        lu = [STListUser new];
@@ -384,7 +383,6 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 -(void)contextualMenuEditPost{
     STPost *post = [self getCurrentPost];
-    //TODO: dev_1_2 disable option until image is downloaded
     if (post.imageDownloaded == YES) {
         [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *origImg) {
             if (origImg!=nil) {
@@ -405,7 +403,6 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 -(void)contextualMenuMoveAndScalePost{
     STPost *post = [self getCurrentPost];
     
-    //TODO: dev_1_2 disable option until image is downloaded
     if (post.imageDownloaded == YES) {
         [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *img) {
             if (img!=nil) {

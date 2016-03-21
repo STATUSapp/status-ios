@@ -139,10 +139,6 @@ static const NSInteger kNumberOfTiles = 6;
             [[STMenuController sharedInstance] goNearby];
         }
     }
-    else
-    {
-        //TODO: should we handle ads tap?
-    }
 }
 
 @end

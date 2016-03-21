@@ -20,14 +20,17 @@
 
 #import "CreateDataModelHelper.h"
 #import "STListUser.h"
+#import "STUsersPool.h"
+#import "STDataAccessUtils.h"
+#import "STConversationUser.h"
 
 @interface STConversationsListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 {
     NSString *_searchTextString;
     
-    NSMutableArray *_allUsersArray;
-    NSMutableArray *_nearbyUsers;
-    NSMutableArray *_recentUsers;
+    NSMutableArray *_allCUsersArray;
+    NSMutableArray *_nearbyCUsers;
+    NSMutableArray *_recentCUsers;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -52,9 +55,9 @@
 {
     [super viewDidLoad];
     _searchTextString = @"";
-    _allUsersArray = [NSMutableArray new];
-    _nearbyUsers = [NSMutableArray new];
-    _recentUsers = [NSMutableArray new];
+    _allCUsersArray = [NSMutableArray new];
+    _nearbyCUsers = [NSMutableArray new];
+    _recentCUsers = [NSMutableArray new];
     [_segment setSelectedSegmentIndex:STSearchControlRecent];
     _searchBarHeightContraint.constant = 0;
 }
@@ -76,18 +79,18 @@
 
 #pragma mark - UITableView datasource and delegate methods
 
--(NSDictionary *)getDictionaryorIndex:(NSInteger)index{
+-(STConversationUser *)getConversationUserAtIndex:(NSInteger)index{
     NSArray *currentArray = nil;
     switch (_segment.selectedSegmentIndex) {
         case STSearchControlAll:
-            currentArray = _allUsersArray;
+            currentArray = _allCUsersArray;
             break;
         case STSearchControlNearby:
-            currentArray = _nearbyUsers;
+            currentArray = _nearbyCUsers;
             break;
             
         case STSearchControlRecent:
-            currentArray = _recentUsers;
+            currentArray = _recentCUsers;
             break;
     }
     if (currentArray.count>index) {
@@ -100,14 +103,14 @@
     NSInteger numRows = 0;
     switch (_segment.selectedSegmentIndex) {
         case STSearchControlAll:
-            numRows = _allUsersArray.count;
+            numRows = _allCUsersArray.count;
             break;
         case STSearchControlNearby:
-           numRows = _nearbyUsers.count;
+           numRows = _nearbyCUsers.count;
             break;
             
         case STSearchControlRecent:
-            numRows = _recentUsers.count;
+            numRows = _recentCUsers.count;
             break;
     }
     return numRows;
@@ -115,19 +118,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     STConversationCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([STConversationCell class])];
-    [cell configureCellWithInfo:[self getDictionaryorIndex:indexPath.row]];
+    [cell configureCellWithConversationUser:[self getConversationUserAtIndex:indexPath.row]];
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *selectedUserInfo = [self getDictionaryorIndex:indexPath.row];
-    if (selectedUserInfo == nil) {
+    STConversationUser *selectedCu = [self getConversationUserAtIndex:indexPath.row];
+    if (selectedCu == nil) {
         return;
     }
-    //TODO: get user from the pool first and then initialize
+    
     STListUser *lu = [STListUser new];
-    lu.uuid = [CreateDataModelHelper validStringIdentifierFromValue:selectedUserInfo[@"user_id"]];
-    //TODO: dev_1_2 add other properties, too
+    lu.uuid = selectedCu.uuid;
+    lu.userName = selectedCu.userName;
+    lu.thumbnail = selectedCu.thumbnail;
+
     if ([lu.uuid isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
@@ -196,37 +201,28 @@
     NSInteger offset = 0;
     switch (_segment.selectedSegmentIndex) {
         case STSearchControlAll:{
-            offset = _allUsersArray.count;
+            offset = _allCUsersArray.count;
         }
             break;
         case STSearchControlNearby:{
-            offset = _nearbyUsers.count;
+            offset = _nearbyCUsers.count;
         }
             break;
             
         case STSearchControlRecent:{
-            offset = _recentUsers.count;
+            offset = _recentCUsers.count;
         }
             break;
     }
-    STRequestCompletionBlock completion = ^(id response, NSError *error){
-        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-            [weakSelf saveNewDataAndReload:response[@"data"] isNewOffset:newOffset];
-        }
-        weakSelf.loadMoreButton.enabled = YES;
-        weakSelf.loadMoreButton = nil;
-    };
-
-    STRequestFailureBlock failBlock = ^(NSError *error){
-        NSLog(@"Error on getting users");
-        weakSelf.loadMoreButton.enabled = YES;
-        weakSelf.loadMoreButton = nil;
-    };
-
-    [STGetUsersRequest getUsersForScope:_segment.selectedSegmentIndex
-                         withSearchText:_searchTextString andOffset:newOffset == YES?offset:0
-                             completion:completion
-                                failure:failBlock];
+    
+    [STDataAccessUtils getConversationUsersForScope:_segment.selectedSegmentIndex
+                                       searchString:_searchTextString
+                                         fromOffset:newOffset == YES?offset:0
+                                      andCompletion:^(NSArray *objects, NSError *error) {
+                                          weakSelf.loadMoreButton.enabled = YES;
+                                          weakSelf.loadMoreButton = nil;
+                                          [weakSelf saveNewDataAndReload:objects isNewOffset:newOffset];
+                                      }];
 }
 
 -(void)saveNewDataAndReload:(NSArray *)newData isNewOffset:(BOOL)newOffset{
@@ -235,24 +231,24 @@
         case STSearchControlAll:
         {
             if (newOffset == YES) {
-                [_allUsersArray addObjectsFromArray:newData];
+                [_allCUsersArray addObjectsFromArray:newData];
             }
             else
             {
-                [_allUsersArray removeAllObjects];
-                [_allUsersArray addObjectsFromArray:newData];
+                [_allCUsersArray removeAllObjects];
+                [_allCUsersArray addObjectsFromArray:newData];
             }
         }
             break;
         case STSearchControlNearby:
         {
             if (newOffset == YES) {
-                [_nearbyUsers addObjectsFromArray:newData];
+                [_nearbyCUsers addObjectsFromArray:newData];
             }
             else
             {
-                [_nearbyUsers removeAllObjects];
-                [_nearbyUsers addObjectsFromArray:newData];
+                [_nearbyCUsers removeAllObjects];
+                [_nearbyCUsers addObjectsFromArray:newData];
             }
         }
             break;
@@ -261,12 +257,12 @@
         {
             if (newData.count>0) {
                 if (newOffset == YES) {
-                    [_recentUsers addObjectsFromArray:newData];
+                    [_recentCUsers addObjectsFromArray:newData];
                 }
                 else
                 {
-                    [_recentUsers removeAllObjects];
-                    [_recentUsers addObjectsFromArray:newData];
+                    [_recentCUsers removeAllObjects];
+                    [_recentCUsers addObjectsFromArray:newData];
                 }
             }
            

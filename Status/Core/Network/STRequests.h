@@ -30,6 +30,7 @@
 #import "STUpdatePostCaptionRequest.h"
 #import "STUploadPostRequest.h"
 #import "STInviteUserToUploadRequest.h"
+#import "STGetUsersRequest.h"
 
 #endif
 

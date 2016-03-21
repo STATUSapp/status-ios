@@ -11,6 +11,8 @@
 #import "STSharePhotoViewController.h"
 #import "UIImage+Resize.h"
 #import "STPost.h"
+#import "STNavigationService.h"
+#import "FeedCVC.h"
 
 @interface STMoveScaleViewController ()<UIScrollViewDelegate>
 {
@@ -54,9 +56,7 @@
     [self.view bringSubviewToFront:_transparentNavBar];
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
     [self setUpTheContext];
-    [self cropAndBlur];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostImageWasEdited object:nil];
+    [self cropAndBlur];    
 }
 
 
@@ -104,28 +104,6 @@
     
     _imageView.frame = contentsFrame;
 }
-
-#pragma mark - Notification
-
-- (void)imageWasPostedWithPostId:(NSNotification *)notif {
-//    NSString *postId = notif.userInfo[kPostIdKey];
-    //TODO:dev_1_2 redirect to a screen with a single post?
-    //TODO:dev_1_2 move this on the navigation service
-    NSMutableArray *newStack = [NSMutableArray new];
-    BOOL shouldBeAdded = YES;
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[STMoveScaleViewController class]]) {
-            shouldBeAdded = NO;
-        }
-        
-        if (shouldBeAdded == YES) {
-            [newStack addObject:vc];
-        }
-    }
-    
-    [self.navigationController setViewControllers:newStack animated:YES];
-}
-
 
 #pragma mark UIScrollViewDelegate
 

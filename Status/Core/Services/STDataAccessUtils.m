@@ -12,6 +12,7 @@
 #import "STUsersPool.h"
 #import "STPostsPool.h"
 #import "STPost.h"
+#import "STConversationUser.h"
 
 @implementation STDataAccessUtils
 
@@ -137,6 +138,40 @@
         completion(nil, error);
     }];
 }
+
++(void)getConversationUsersForScope:(STSearchScopeControl)scope
+                       searchString:(NSString *)searchString
+                         fromOffset:(NSInteger)offset
+                      andCompletion:(STDataAccessCompletionBlock)completion{
+    
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            
+            NSMutableArray *objects = [NSMutableArray new];
+            for (NSDictionary *dict in response[@"data"]) {
+                STConversationUser *cu = [STConversationUser conversationUserFromDict:dict];
+                [objects addObject:cu];
+            }
+            completion([NSArray arrayWithArray:objects], nil);
+        }
+        else
+            completion(nil, [NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+        
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        NSLog(@"Error on getting users");
+        completion(nil, error);
+    };
+
+    
+    [STGetUsersRequest getUsersForScope:scope
+                         withSearchText:searchString
+                              andOffset:offset
+                             completion:completion1
+                                failure:failBlock];
+}
+
 
 +(void)getFlowTemplatesWithCompletion:(STDataAccessCompletionBlock)completion{
     STRequestCompletionBlock completionBlock = ^(id response, NSError *error){

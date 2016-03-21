@@ -31,10 +31,11 @@
 - (NSArray *) contactsList{
     return _allContacts;
 }
+
 - (void)fetchAllContacts {
     CFErrorRef *error = nil;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
-    //TODO: add notification update
+
     ABRecordRef source = ABAddressBookCopyDefaultSource(addressBook);
     CFArrayRef allPeople = (ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName));
     //CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);

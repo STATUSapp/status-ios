@@ -65,7 +65,7 @@
         if ([object isKindOfClass:[STPost class]]) {
             [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];
         }
-        //TODO: dev_1_2 add anoter notifications
+        //here is where we should add anoter notifications
     }
     [_objects filterUsingPredicate:removePredicate];
 
@@ -95,7 +95,7 @@
         if ([obj isKindOfClass:[STPost class]]) {
             [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
         }
-        //TODO: dev_1_2 add more updates here
+        //here is where we should add more updates
     }
 }
 

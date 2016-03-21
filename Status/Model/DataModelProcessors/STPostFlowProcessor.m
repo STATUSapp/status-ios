@@ -129,10 +129,6 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
                                          STPost *post = [self postAtIndex:index];
                                          post.postSeen = YES;
                                      }
-                                     else
-                                     {
-                                         //TODO: dev_1_2 retry later?
-                                     }
                                  }];
     }
 }
@@ -237,7 +233,6 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 
 - (void)savePostImageLocallyAtIndex:(NSInteger)index{
     STPost *post = [self postAtIndex:index];
-    //TODO: dev_1_2 disable the button until the image is downloaded
     if (post.imageDownloaded) {
         __weak STPostFlowProcessor *weakSelf = self;
         [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl
