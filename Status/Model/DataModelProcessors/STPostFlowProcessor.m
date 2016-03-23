@@ -27,6 +27,9 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
 NSString * const kNotificationPostUpdated = @"NotificationPostUpdated";
 NSString * const kNotificationPostAdded = @"NotificationPostAdded";
 NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
+NSString * const kNotificationShowSuggestions = @"NotificationShowSuggestion";
+
+NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
 @interface STPostFlowProcessor ()<UIAlertViewDelegate>
 {
@@ -358,37 +361,42 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
                 [[CoreManager localNotificationService] postNotificationName:kNotificationPostDownloadFailed
                                                                  object:self
                                                                userInfo:nil];
-                
-                //TODO: dev_1_2 enable refresh button
-                
             }
 
         }
         else
         {
             weakSelf.loaded = YES;
+            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+            BOOL suggestionsShown = [[ud valueForKey:kShowSuggestionKey] boolValue];
+            if (weakSelf.flowType == STFlowTypeHome &&
+                [weakSelf.postIds count] == 1 &&
+                suggestionsShown == NO) {
+                
+                [[CoreManager localNotificationService] postNotificationName:kNotificationShowSuggestions object:self userInfo:nil];
+                [ud setValue:@(YES) forKey:kShowSuggestionKey];
+                [ud synchronize];
+            }
+
             //TODO: dev_1_2 handle the listener
             
-//            if (objects.count > 0) {
-//#ifdef DEBUG
-//                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel." forKey:@"caption"];
-//#endif
+            //            if (objects.count > 0) {
+            //#ifdef DEBUG
+            //                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel." forKey:@"caption"];
+            //#endif
             [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
-
-            [[CoreManager postsPool] addPosts:objects];
-            }
-            [[CoreManager localNotificationService] postNotificationName:kNotificationPostDownloadSuccess object:self userInfo:nil];
-            NSMutableArray *objToDownload = [NSMutableArray new];
-            for (STPost *post in objects) {
-                STImageCacheObj *obj = [STImageCacheObj imageCacheObjFromPost:post];
-                [objToDownload addObject:obj];
-            }
-            [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:objToDownload];
-
             
-            //TODO: dev_1_2 show Suggestions
-            //TODO: dev_1_2 enable refresh button
-//        }
+            [[CoreManager postsPool] addPosts:objects];
+        }
+        [[CoreManager localNotificationService] postNotificationName:kNotificationPostDownloadSuccess object:self userInfo:nil];
+        NSMutableArray *objToDownload = [NSMutableArray new];
+        for (STPost *post in objects) {
+            STImageCacheObj *obj = [STImageCacheObj imageCacheObjFromPost:post];
+            [objToDownload addObject:obj];
+        }
+        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:objToDownload];
+        
+        //        }
     };
     switch (_flowType) {
         case STFlowTypePopular:

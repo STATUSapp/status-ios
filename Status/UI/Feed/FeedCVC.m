@@ -19,6 +19,7 @@
 #import "STChatRoomViewController.h"
 #import "STMoveScaleViewController.h"
 #import "STSharePhotoViewController.h"
+#import "STFriendsInviterViewController.h"
 
 #import "STListUser.h"
 
@@ -98,6 +99,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationPostDeleted object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationPostAdded object:_feedProcessor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
 
 }
 
@@ -137,7 +139,13 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     [self.collectionView reloadData];
 }
 
+- (void)showSuggestions:(NSNotification *)notif{
+    STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
+    [self.navigationController presentViewController:[[UINavigationController alloc ]initWithRootViewController:vc] animated:NO completion:nil];
+
+}
 #pragma mark - Helpers
+
 
 -(NSInteger)getCurrentIndex{
     NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
@@ -352,9 +360,11 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 - (IBAction)onSeeMorePressed:(id)sender {
     //TODO: dev_1_2 add animations
     STPost *post = [self getCurrentPost];
+    [UIView setAnimationsEnabled:NO];
     [self.collectionView performBatchUpdates:^{
         post.showFullCaption = !post.showFullCaption;
         [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+        [UIView setAnimationsEnabled:YES];
     } completion:nil];
 
 }
@@ -372,9 +382,11 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 - (IBAction)onShadowPressed:(id)sender {
     //TODO: dev_1_2 add animations
     STPost *post = [self getCurrentPost];
+    [UIView setAnimationsEnabled:NO];
     [self.collectionView performBatchUpdates:^{
         post.showFullCaption = !post.showFullCaption;
         [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+        [UIView setAnimationsEnabled:YES];
     } completion:nil];
 }
 

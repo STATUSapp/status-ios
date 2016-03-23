@@ -12,6 +12,7 @@ extern NSString * const kNotificationPostDownloadSuccess;
 extern NSString * const kNotificationPostUpdated;
 extern NSString * const kNotificationPostDeleted;
 extern NSString * const kNotificationPostAdded;
+extern NSString * const kNotificationShowSuggestions;
 
 typedef void (^STProcessorCompletionBlock)(NSError *error);
 

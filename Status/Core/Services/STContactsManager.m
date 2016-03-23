@@ -57,7 +57,9 @@
             
         }
     }
-    CFRelease(allPeople);
+    if (allPeople)
+        CFRelease(allPeople);
+    
     CFRelease(addressBook);
     CFRelease(source);
     
@@ -86,6 +88,8 @@
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"You should grant access to the contacts list for STATUS App" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 
     }
+    
+    CFRelease(addressBookRef);
 }
 
 -(void) syncContactsWithTheServer{

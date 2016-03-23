@@ -13,7 +13,6 @@
 #import "STLocalNotificationService.h"
 
 static const double kGPSRecordTime = 1800;//seconds, half an hour
-static const double kGPSAccuracyMetters = 150;
 static const double kGPSTimestampSeconds = 15.0;
 
 NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLocationHasBeenUploaded";
