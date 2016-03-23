@@ -25,6 +25,7 @@ int const kDeletePostTag = 11;
 NSString * const kNotificationPostDownloadFailed = @"NotificationPostDownloadFailed";
 NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSuccess";
 NSString * const kNotificationPostUpdated = @"NotificationPostUpdated";
+NSString * const kNotificationPostAdded = @"NotificationPostAdded";
 NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
 
 @interface STPostFlowProcessor ()<UIAlertViewDelegate>
@@ -87,6 +88,7 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:STPostPoolObjectUpdatedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:STPostPoolObjectDeletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postImageWasEdited:) name:STPostImageWasEdited object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:STPostPoolNewObjectNotification object:nil];
 }
 
 -(NSInteger)numberOfPosts{
@@ -286,7 +288,11 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
     }
 
     //add mock posts at the end of the list
+    [self addMockPosts];
     
+}
+
+-(void)addMockPosts{
     STPost *noPhotosPost = [[CoreManager postsPool] getPostWithId:kPostUuidForNoPhotosToDisplay];
     if (!noPhotosPost) {
         noPhotosPost = [STPost mockPostNoPhotosToDisplay];
@@ -302,19 +308,27 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
     }
     else
         [_postIds removeObject:youSawAllPost.uuid];
-
     
-    if (_postIds.count == 0 &&
-        (_flowType == STFlowTypeMyGallery||
-         _flowType == STFlowTypeUserGallery)) {
+    
+    if (_postIds.count == 0)
+    {
+        if(_flowType == STFlowTypeMyGallery||
+           _flowType == STFlowTypeUserGallery) {
             [_postIds addObject:noPhotosPost.uuid];
         }
+        else
+            [_postIds addObject:youSawAllPost.uuid];
+    }
     else
-        [_postIds addObject:youSawAllPost.uuid];
-
+    {
+        if(_flowType == STFlowTypeMyGallery||
+           _flowType == STFlowTypeUserGallery) {
+        }
+        else
+            [_postIds addObject:youSawAllPost.uuid];
+    }
     
 }
-
 
 -(void)getMoreData{
     NSInteger offset = _postIds.count + _numberOfDuplicates;
@@ -355,7 +369,7 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
             weakSelf.loaded = YES;
             //TODO: dev_1_2 handle the listener
             
-            if (objects.count > 0) {
+//            if (objects.count > 0) {
 //#ifdef DEBUG
 //                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel." forKey:@"caption"];
 //#endif
@@ -374,7 +388,7 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
             
             //TODO: dev_1_2 show Suggestions
             //TODO: dev_1_2 enable refresh button
-        }
+//        }
     };
     switch (_flowType) {
         case STFlowTypePopular:
@@ -435,11 +449,23 @@ NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
     NSString *postId = notif.userInfo[kPostIdKey];
     if ([_postIds containsObject:postId]) {
         [_postIds removeObject:postId];
+        
+        [self addMockPosts];
+        
         [[CoreManager localNotificationService] postNotificationName:kNotificationPostDeleted object:self userInfo:@{kPostIdKey:postId}];
     }
 }
 
-
+- (void)postAdded:(NSNotification *)notif{
+    NSString *userId = notif.userInfo[kUserIdKey];
+    if ([userId isEqualToString:_userId]) {
+        NSString *postId = notif.userInfo[kPostIdKey];
+        if (![_postIds containsObject:postId]) {
+            [self updatePostIdsWithNewArray:@[postId]];
+            [[CoreManager localNotificationService] postNotificationName:kNotificationPostAdded object:self userInfo:@{kPostIdKey:postId}];
+        }
+    }
+}
 
 -(void)newLocationHasBeenUploaded{
     [self getMoreData];

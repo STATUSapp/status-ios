@@ -25,7 +25,7 @@
     no.postPhotoUrl = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"post_photo_link"];
     no.seen = [no.infoDict[@"seen"] boolValue];
     no.type = [no.infoDict[@"type"] integerValue];
-    no.userId = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"user_id"];
+    no.userId = [CreateDataModelHelper validStringIdentifierFromValue:no.infoDict[@"user_id"]];
     no.userName = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"user_name"];
     no.userThumbnail = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"user_photo_link"];
     

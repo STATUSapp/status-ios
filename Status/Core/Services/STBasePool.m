@@ -60,15 +60,14 @@
     NSPredicate * removePredicate = [NSPredicate predicateWithBlock:^BOOL(STBaseObj *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
         return ![uuids containsObject:evaluatedObject.uuid];
     }];
-    NSSet *matches = [_objects filteredSetUsingPredicate:removePredicate];
+    NSMutableSet *matches =[NSMutableSet setWithSet:_objects];
+    [matches minusSet:[_objects filteredSetUsingPredicate:removePredicate]];
     for (id object in matches) {
         if ([object isKindOfClass:[STPost class]]) {
             [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];
         }
         //here is where we should add anoter notifications
     }
-    [_objects filterUsingPredicate:removePredicate];
-
 }
 
 - (STBaseObj *)randomObject {
@@ -85,17 +84,32 @@
     NSPredicate * removePreviousInstancesOfPostPredicate = [NSPredicate predicateWithBlock:^BOOL(STBaseObj *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
         return ![evaluatedObject.uuid isEqualToString:obj.uuid];
     }];
+    
     NSInteger countBeforeFilter = _objects.count;
     [_objects filterUsingPredicate:removePreviousInstancesOfPostPredicate];
     NSInteger countAfterFilter = _objects.count;
     [_objects addObject:obj];
 
-    if (countBeforeFilter > 0 && countBeforeFilter>countAfterFilter) {
-        //there was an update
-        if ([obj isKindOfClass:[STPost class]]) {
-            [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
+    if (countBeforeFilter > 0) {
+        
+        if (countBeforeFilter>countAfterFilter) {
+            //there was an update
+            //here is where we should add more notifications
+            if ([obj isKindOfClass:[STPost class]]) {
+                [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
+            }
         }
-        //here is where we should add more updates
+        
+        else if (countBeforeFilter == countAfterFilter){
+            //new object added
+            //here is where we should add more notifications
+            if ([obj isKindOfClass:[STPost class]]) {
+                NSString *userId = ((STPost *)obj).userId;
+                if (userId) {
+                    [[CoreManager localNotificationService] postNotificationName:STPostPoolNewObjectNotification object:nil userInfo:@{kUserIdKey:userId, kPostIdKey:obj.uuid}];
+                }
+            }
+        }
     }
 }
 

@@ -97,6 +97,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationPostUpdated object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationPostDeleted object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationPostAdded object:_feedProcessor];
 
 }
 
@@ -123,6 +124,10 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     }
     
 }
+
+- (void)postAdded:(NSNotification *)notif{
+    [self.collectionView reloadData];
+}
 - (void)postDeleted:(NSNotification *)notif{
     [self.collectionView reloadData];
 }
@@ -136,6 +141,9 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 -(NSInteger)getCurrentIndex{
     NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
+    if (visibleInxPath.count == 0) {
+        return NSNotFound;
+    }
     return [[visibleInxPath objectAtIndex:0] row];
 
 }
@@ -145,7 +153,10 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
         return nil;
     }
     STPost *post = nil;
-    post = [_feedProcessor postAtIndex:[self getCurrentIndex]];
+    NSInteger index = [self getCurrentIndex];
+    if (index!=NSNotFound) {
+        post = [_feedProcessor postAtIndex:index];
+    }
     
     return post;
 }

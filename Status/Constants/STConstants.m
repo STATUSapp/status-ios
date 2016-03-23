@@ -101,6 +101,7 @@ NSString *const STChatControllerAuthenticate = @"STChatControllerAuthenticate";
 NSString *const STFacebookPickerNotification = @"STFacebookPickerNotification";
 NSString *const STLoadImageNotification = @"STLoadImageNotification";
 NSString *const STPostPoolObjectUpdatedNotification = @"STPostPoolObjectUpdatedNotification";
+NSString *const STPostPoolNewObjectNotification = @"STPostPoolNewObjectNotification";
 NSString *const STPostPoolObjectDeletedNotification = @"STPostPoolObjectDeletedNotification";
 
 NSString *const STPostNewImageUploaded = @"STPostNewImageUploaded";
@@ -117,6 +118,7 @@ NSString *const kPostIdKey = @"_key_post_id";
 NSString *const kImageKey = @"key_image";
 NSString *const kImageUrlKey = @"key_image_url";
 NSString *const kFlowTypeKey = @"flow_type_key";
+NSString *const kUserIdKey = @"user_id_key";
 
 #pragma mark - Invite Friends
 

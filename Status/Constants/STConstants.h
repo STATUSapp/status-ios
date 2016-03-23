@@ -168,6 +168,7 @@ extern NSString *const STChatControllerAuthenticate;
 extern NSString *const STFacebookPickerNotification;
 extern NSString *const STLoadImageNotification;
 extern NSString *const STPostPoolObjectUpdatedNotification;
+extern NSString *const STPostPoolNewObjectNotification;
 extern NSString *const STPostPoolObjectDeletedNotification;
 
 extern NSString *const STPostNewImageUploaded;
@@ -184,7 +185,7 @@ extern NSString *const kPostIdKey;
 extern NSString *const kImageKey;
 extern NSString *const kImageUrlKey;
 extern NSString *const kFlowTypeKey;
-
+extern NSString *const kUserIdKey;
 #pragma mark - Invite Friends
 
 extern NSString *const STInviteText;
