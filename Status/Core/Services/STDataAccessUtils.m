@@ -9,8 +9,37 @@
 #import "STDataAccessUtils.h"
 #import "STDataModelObjects.h"
 #import "STRequests.h"
+#import "STUsersPool.h"
+#import "STPostsPool.h"
+#import "STPost.h"
+#import "STConversationUser.h"
+#import "STNotificationObj.h"
 
 @implementation STDataAccessUtils
+
+#pragma mark - Users
++(void)getUserDataForUserId:(NSString *)userId
+             withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock respnseCompletion = ^(id response, NSError *error){
+        if([response[@"status_code"] integerValue] == STWebservicesSuccesCod){
+            STListUser *receivedUser = [STListUser new];
+            receivedUser.uuid = userId;
+            receivedUser.thumbnail = response[@"small_photo_link"];
+            receivedUser.userName = response[@"user_name"];
+            [[CoreManager usersPool] addUsers:@[receivedUser]];
+            completion(@[receivedUser], nil);
+        }
+        else
+            completion(nil, error);
+    };
+    [STGetUserInfoRequest getInfoForUser:userId
+                              completion:respnseCompletion
+                                 failure:^(NSError *error) {
+                                     completion(nil, error);
+                                 }];
+    
+}
+
 +(void)getSuggestUsersForFollowType:(STFollowType)followType
                          withOffset:(NSNumber *)offset
                       andCompletion:(STDataAccessCompletionBlock)completion{
@@ -40,6 +69,7 @@
                     [objects addObject:su];
                 }
             }
+            [[CoreManager usersPool] addUsers:objects];
             completion([NSArray arrayWithArray:objects], nil);
             
         }
@@ -55,9 +85,10 @@
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             NSMutableArray *objects = [NSMutableArray new];
             for (NSDictionary *dict in response[@"data"]) {
-                STListUser *lu = [STListUser likeUserWithDict:dict];
+                STListUser *lu = [STListUser listUserWithDict:dict];
                 [objects addObject:lu];
             }
+            [[CoreManager usersPool] addUsers:objects];
             completion([NSArray arrayWithArray:objects], nil);
         }
     };
@@ -70,9 +101,10 @@
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             NSMutableArray *objects = [NSMutableArray new];
             for (NSDictionary *dict in response[@"data"]) {
-                STListUser *lu = [STListUser likeUserWithDict:dict];
+                STListUser *lu = [STListUser listUserWithDict:dict];
                 [objects addObject:lu];
             }
+            [[CoreManager usersPool] addUsers:objects];
             completion([NSArray arrayWithArray:objects], nil);
         }
     };
@@ -91,9 +123,10 @@
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             NSMutableArray *objects = [NSMutableArray new];
             for (NSDictionary *dict in response[@"data"]) {
-                STListUser *lu = [STListUser likeUserWithDict:dict];
+                STListUser *lu = [STListUser listUserWithDict:dict];
                 [objects addObject:lu];
             }
+            [[CoreManager usersPool] addUsers:objects];
             completion([NSArray arrayWithArray:objects], nil);
         }
     };
@@ -106,6 +139,40 @@
         completion(nil, error);
     }];
 }
+
++(void)getConversationUsersForScope:(STSearchScopeControl)scope
+                       searchString:(NSString *)searchString
+                         fromOffset:(NSInteger)offset
+                      andCompletion:(STDataAccessCompletionBlock)completion{
+    
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            
+            NSMutableArray *objects = [NSMutableArray new];
+            for (NSDictionary *dict in response[@"data"]) {
+                STConversationUser *cu = [STConversationUser conversationUserFromDict:dict];
+                [objects addObject:cu];
+            }
+            completion([NSArray arrayWithArray:objects], nil);
+        }
+        else
+            completion(nil, [NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+        
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        NSLog(@"Error on getting users");
+        completion(nil, error);
+    };
+
+    
+    [STGetUsersRequest getUsersForScope:scope
+                         withSearchText:searchString
+                              andOffset:offset
+                             completion:completion1
+                                failure:failBlock];
+}
+
 
 +(void)getFlowTemplatesWithCompletion:(STDataAccessCompletionBlock)completion{
     STRequestCompletionBlock completionBlock = ^(id response, NSError *error){
@@ -184,9 +251,25 @@
     STRequestCompletionBlock responseCompletion = ^(id response, NSError *error){
         NSMutableArray *objects = [NSMutableArray new];
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-            for (NSDictionary *dict in response[@"data"]) {
-                STPost *post = [STPost postWithDict:dict];
-                [objects addObject:post];
+            id data = response[@"data"];
+            NSArray *dataArray = nil;
+            if ([data isKindOfClass:[NSArray class]]) {
+                dataArray = [NSArray arrayWithArray:data];
+            }
+            else if ([data isKindOfClass:[NSDictionary class]]){
+                dataArray = [NSArray arrayWithObject:data];
+            }
+            if (dataArray) {
+                for (NSDictionary *dict in dataArray) {
+                    STPost *post = [STPost postWithDict:dict];
+                    [objects addObject:post];
+                }
+            }
+            else
+            {
+#ifdef DEBUG
+                NSAssert(NO, @"We should never get this case");
+#endif
             }
         }
         completion(objects, error);
@@ -257,7 +340,6 @@
 }
 
 +(void)getPostWithPostId:(NSString *)postId
-                  offset:(NSInteger)offset
           withCompletion:(STDataAccessCompletionBlock)completion{
     STRequestCompletionBlock responseCompletion = [self postsDefaultHandlerWithCompletion:completion];
     STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
@@ -280,5 +362,180 @@
                        }];
 }
 
++ (void)setPostLikeUnlikeWithPostId:(NSString *)postId
+                     withCompletion:(STDataUploadCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            [STDataAccessUtils getPostWithPostId:postId withCompletion:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    [[CoreManager postsPool] addPosts:objects];
+                    completion(nil);
+                }
+                else
+                    completion(error);
+            }];
+        }
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        completion(error);
+    };
+    
+    [STSetPostLikeRequest setPostLikeForPostId:postId
+                                withCompletion:completion1
+                                       failure:failBlock];
+}
+
++ (void)deletePostWithId:(NSString *)postId
+          withCompletion:(STDataUploadCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+            [[CoreManager postsPool] removePostsWithIDs:@[postId]];
+            completion(nil);
+        }
+        else
+            completion(error);
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        completion(error);
+    };
+
+    [STDeletePostRequest deletePost:postId
+                     withCompletion:completion1
+                            failure:failBlock];
+
+}
++ (void)reportPostWithId:(NSString *)postId
+          withCompletion:(STDataUploadCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"A message was sent to the admin." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        }
+        else
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        }
+        completion(nil);
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        completion(error);
+    };
+
+    
+    [STRepostPostRequest reportPostWithId:postId
+                           withCompletion:completion1
+                                  failure:failBlock];
+
+}
+
++ (void)updatePostWithId:(NSString *)postId
+          withNewCaption:(NSString *)newCaption
+          withCompletion:(STDataUploadCompletionBlock)completion{
+    [STUpdatePostCaptionRequest setPostCaption:newCaption
+                                     forPostId:postId
+                                withCompletion:^(id response, NSError *error) {
+                                    if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                                        STPost *post = [[CoreManager postsPool] getPostWithId:postId];
+                                        post.caption = newCaption;
+                                        [[CoreManager postsPool] addPosts:@[post]];
+                                        completion(nil);
+                                    }
+                                    else{
+                                        completion([NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+                                    }
+                                } failure:^(NSError *error) {
+                                    NSLog(@"Error: %@", error.debugDescription);
+                                    completion(error);
+                                }];
+
+}
+
++ (void)editPpostWithId:(NSString *)postId
+           withNewImageData:(NSData *)imageData
+         withNewCaption:(NSString *)newCaption
+         withCompletion:(STDataAccessCompletionBlock)completion{
+
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            
+            NSString * postUuid = postId;
+            if(postId == nil)
+                postUuid = response[@"post_id"];
+
+            [STDataAccessUtils getPostWithPostId:postUuid
+                                  withCompletion:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    [[CoreManager postsPool] addPosts:objects];
+                    completion(objects, nil);
+                }
+                else
+                    completion(nil, error);
+            }];
+        }
+        else
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            completion(nil,[NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+            
+        }
+    };
+    
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        completion(nil,error);
+    };
+    [STUploadPostRequest uploadPostForId:postId
+                                withData:imageData
+                              andCaption:newCaption
+                          withCompletion:completion1
+                                 failure:failBlock];
+
+}
+
++ (void)inviteUserToUpload:(NSString *)userID
+              withUserName:(NSString *)userName
+withCompletion:(STDataUploadCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        NSInteger statusCode = [response[@"status_code"] integerValue];
+        if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo. We'll announce you when the new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", userName];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
+                                                  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            completion(nil);
+        }
+        else
+            completion([NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+    };
+    [STInviteUserToUploadRequest inviteUserToUpload:userID withCompletion:completion1 failure:^(NSError *error) {
+        completion(error);
+    }];
+}
+
+#pragma mark - Notifications
+
++ (void)getNotificationsWithCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
+            
+            NSMutableArray *objects = [NSMutableArray new];
+            for (NSDictionary *dict in response[@"data"]) {
+                STNotificationObj *no = [STNotificationObj notificationObjFromDict:dict];
+                [objects addObject:no];
+            }
+            completion(objects, nil);
+        }
+        else
+            completion(nil, [NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+    };
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        completion(nil, error);
+    };
+    
+    [STGetNotificationsRequest getNotificationsWithCompletion:completion1 failure:failBlock];
+
+}
 
 @end

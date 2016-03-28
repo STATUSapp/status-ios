@@ -8,10 +8,15 @@
 
 #import "STBaseObj.h"
 
+extern NSString * const kPostUuidForNoPhotosToDisplay ;
+extern NSString * const kPostUuidForYouSawAll ;
+extern NSString * const kPostUuidForLoading;
+
 @interface STPost : STBaseObj
 + (instancetype)postWithDict:(NSDictionary *)postDict;
 + (instancetype)mockPostNoPhotosToDisplay;
 + (instancetype)mockPostYouSawAll;
++ (instancetype)mockPostLoading;
 
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSString *fullPhotoUrl;
@@ -19,7 +24,7 @@
 @property (nonatomic, strong) NSNumber *numberOfLikes;
 @property (nonatomic, strong) NSDate *postDate;
 @property (nonatomic, assign) BOOL postLikedByCurrentUser;
-@property (nonatomic, assign) BOOL reportStatus;
+@property (nonatomic, assign) NSNumber *reportStatus;
 @property (nonatomic, strong) NSString *smallPhotoUrl;
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;
@@ -31,5 +36,6 @@
 
 - (BOOL) isNoPhotosToDisplayPost;
 - (BOOL) isYouSawAllPost;
+- (BOOL) isLoadingPost;
 
 @end

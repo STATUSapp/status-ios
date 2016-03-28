@@ -10,7 +10,7 @@
 #import "NSString+MD5.h"
 
 @implementation STListUser
-+(STListUser *)likeUserWithDict:(NSDictionary *)dict{
++(STListUser *)listUserWithDict:(NSDictionary *)dict{
     STListUser *lu = [STListUser new];
     lu.infoDict = dict;
     lu.appVersion = [CreateDataModelHelper validObjectFromDict:dict forKey:@"app_version"];

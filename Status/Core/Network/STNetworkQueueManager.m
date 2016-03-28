@@ -14,6 +14,7 @@
 #import "STRequests.h"
 #import "KeychainItemWrapper.h"
 #import "STNetworkManager.h"
+#import "KeychainItemWrapper.h"
 
 @interface STNetworkQueueManager()<UIAlertViewDelegate> {
     AFNetworkReachabilityManager* _reachabilityManager;
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray* requestQueue;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) STNetworkManager *networkAPI;
+@property (nonatomic, strong) KeychainItemWrapper *keychain;
 
 @end
 
@@ -32,6 +34,8 @@
     if (self) {
         self.requestQueue = [NSMutableArray new];
         _networkAPI = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+        _keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
+
         [self loadTokenFromKeyChain];
     }
     return self;
@@ -45,6 +49,9 @@
 
 - (void)setAccessToken:(NSString *)accessToken{
     _accessToken = accessToken;
+    [_keychain setObject:accessToken forKey:(__bridge id)(kSecValueData)];
+
+    
 }
 
 - (NSString *)getAccessToken{
@@ -97,6 +104,7 @@
 
 - (void)clearQueue{
     [_requestQueue removeAllObjects];
+    _networkAPI = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
 }
 
 - (BOOL)saveQueueToDisk{
@@ -181,14 +189,12 @@
 }
 
 -(void)loadTokenFromKeyChain {
-    KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
-    _accessToken = [keychainWrapperAccessToken objectForKey:(__bridge id)(kSecValueData)];
+    _accessToken = [_keychain objectForKey:(__bridge id)(kSecValueData)];
     NSLog(@"Loaded Access Token: %@",_accessToken);
 }
 
 -(void)deleteAccessToken {
-    KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
-    [keychainWrapperAccessToken resetKeychainItem];
+    [_keychain resetKeychainItem];
     [_networkAPI clearQueue];
     _accessToken = nil;
 }

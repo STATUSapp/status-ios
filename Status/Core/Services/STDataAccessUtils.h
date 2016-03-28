@@ -13,6 +13,7 @@ typedef void (^STDataAccessCompletionBlock)(NSArray *objects, NSError *error);
 typedef void (^STDataUploadCompletionBlock)(NSError *error);
 @interface STDataAccessUtils : NSObject
 
+//users
 +(void)getSuggestUsersForFollowType:(STFollowType)followType
                          withOffset:(NSNumber *)offset
                       andCompletion:(STDataAccessCompletionBlock)completion;
@@ -27,6 +28,13 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 
 +(void)getFlowTemplatesWithCompletion:(STDataAccessCompletionBlock)completion;
 
++(void)getUserDataForUserId:(NSString *)userId
+             withCompletion:(STDataAccessCompletionBlock)completion;
+
++(void)getConversationUsersForScope:(STSearchScopeControl)scope
+                       searchString:(NSString *)searchString
+                         fromOffset:(NSInteger)offset
+                      andCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload stuff to server
 +(void)followUsers:(NSArray *)users
@@ -45,10 +53,29 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
                   offset:(NSInteger)offset
           withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getPostWithPostId:(NSString *)postId
-                  offset:(NSInteger)offset
           withCompletion:(STDataAccessCompletionBlock)completion;
++ (void)editPpostWithId:(NSString *)postId
+       withNewImageData:(NSData *)imageData
+         withNewCaption:(NSString *)newCaption
+         withCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload post stuff
 +(void)setPostSeenForPostId:(NSString *)postId
              withCompletion:(STDataUploadCompletionBlock)completion;
++ (void)setPostLikeUnlikeWithPostId:(NSString *)postId
+                     withCompletion:(STDataUploadCompletionBlock)completion;
++ (void)deletePostWithId:(NSString *)postId
+          withCompletion:(STDataUploadCompletionBlock)completion;
++ (void)reportPostWithId:(NSString *)postId
+          withCompletion:(STDataUploadCompletionBlock)completion;
++ (void)updatePostWithId:(NSString *)postId
+          withNewCaption:(NSString *)newCaption
+          withCompletion:(STDataUploadCompletionBlock)completion;
++ (void)inviteUserToUpload:(NSString *)userID
+              withUserName:(NSString *)userName
+            withCompletion:(STDataUploadCompletionBlock)completion;
+
+//get notifications
++ (void)getNotificationsWithCompletion:(STDataAccessCompletionBlock)completion;
+
 @end

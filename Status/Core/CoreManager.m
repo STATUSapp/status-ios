@@ -13,6 +13,13 @@
 #import "STNavigationService.h"
 #import "STFacebookLoginController.h"
 #import "STImageCacheController.h"
+#import "STFacebookHelper.h"
+#import "STIAPHelper.h"
+#import "STContactsManager.h"
+#import "STImagePickerService.h"
+#import "STUsersPool.h"
+#import "STLocalNotificationService.h"
+#import "STNotificationsManager.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -21,6 +28,13 @@
 @property (nonatomic, strong) STNavigationService *navigationService;
 @property (nonatomic, strong) STFacebookLoginController *loginService;
 @property (nonatomic, strong) STImageCacheController *imageCacheService;
+@property (nonatomic, strong) STFacebookHelper *facebookService;
+@property (nonatomic, strong) STIAPHelper *IAPService;
+@property (nonatomic, strong) STContactsManager *contactsService;
+@property (nonatomic, strong) STImagePickerService * imagePickerService;
+@property (nonatomic, strong) STUsersPool *usersPool;
+@property (nonatomic, strong) STLocalNotificationService *localNotifCenter;
+@property (nonatomic, strong) STNotificationsManager *notificationsService;
 
 @end
 
@@ -39,12 +53,19 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _postsPool = [[STPostsPool alloc] init];
-        _locationService = [[STLocationManager alloc] init];
-        _networkService = [[STNetworkQueueManager alloc] init];
+        _postsPool = [STPostsPool new];
+        _locationService = [STLocationManager new];
+        _networkService = [STNetworkQueueManager new];
         _navigationService = [STNavigationService new];
         _loginService = [STFacebookLoginController new];
         _imageCacheService = [STImageCacheController new];
+        _facebookService = [STFacebookHelper new];
+        _IAPService = [STIAPHelper new];
+        _contactsService = [STContactsManager new];
+        _imagePickerService = [STImagePickerService new];
+        _usersPool = [STUsersPool new];
+        _localNotifCenter = [STLocalNotificationService new];
+        _notificationsService = [STNotificationsManager new];
         
     }
     return self;
@@ -82,6 +103,34 @@
 
 + (STImageCacheController *)imageCacheService{
     return [[CoreManager sharedInstance] imageCacheService];
+}
+
++ (STFacebookHelper *)facebookService{
+    return [[CoreManager sharedInstance] facebookService];
+}
+
++ (STIAPHelper *)IAPService{
+    return [[CoreManager sharedInstance] IAPService];
+}
+
++ (STContactsManager *)contactsService{
+    return [[CoreManager sharedInstance] contactsService];
+}
+
++ (STImagePickerService *)imagePickerService {
+    return [[CoreManager sharedInstance] imagePickerService];
+}
+
++ (STUsersPool *)usersPool{
+    return [[CoreManager sharedInstance] usersPool];
+}
+
++ (STLocalNotificationService *)localNotificationService{
+    return [[CoreManager sharedInstance] localNotifCenter];
+}
+
++ (STNotificationsManager *)notificationsService{
+    return [[CoreManager sharedInstance] notificationsService];
 }
 
 #pragma mark - Private implementation

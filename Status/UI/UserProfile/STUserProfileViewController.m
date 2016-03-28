@@ -10,11 +10,9 @@
 #import "STGetUserProfileRequest.h"
 #import "NSDate+Additions.h"
 #import "STEditProfileViewController.h"
-#import "STMenuController.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
 #import "STLocationManager.h"
-#import "STFlowTemplateViewController.h"
 #import "STConstants.h"
 #import "STImagePickerController.h"
 #import "STConversationsListViewController.h"
@@ -23,12 +21,17 @@
 #import "STInviteUserToUploadRequest.h"
 #import "STSettingsViewController.h"
 #import "STUsersListController.h"
+#import "STFacebookLoginController.h"
 
 #import "STFollowUsersRequest.h"
 #import "STUnfollowUsersRequest.h"
 
 #import "STNativeAdsController.h"
 #import "STNavigationService.h"
+
+#import "STListUser.h"
+
+#import "FeedCVC.h"
 
 @interface STUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
@@ -53,6 +56,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFollowing;
 @property (weak, nonatomic) IBOutlet UIButton *btnSendMessageToUser;
 @property (weak, nonatomic) IBOutlet UIView *loadingPlaceholder;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
 
 @property (nonatomic, strong) NSString * profileUserId;
 @property (nonatomic, strong) STUserProfile * userProfile;
@@ -83,6 +87,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([_profileUserId isEqualToString:[CoreManager loginService].currentUserUuid]) {
+        _isMyProfile = YES;
+    }
+    
     _loadingPlaceholder.hidden = NO;
     
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
@@ -104,6 +113,8 @@
     } else {
         [self getAndDisplayProfile];
     }
+    
+    _btnBack.hidden = _shouldHideBackButton;
     
     if (_isMyProfile) {
         _btnNextProfile.hidden = YES;
@@ -227,13 +238,22 @@
         hasLastSeenStatus = NO;
     }
     
-   statusText = hasLastSeenStatus ? [NSString stringWithFormat:@" - %@", statusText] : @"";
+    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
+                                                                                     andLongitudeString:profile.longitude];
+
+    if ([distanceText isEqualToString:ST_UNKNOWN_DISTANCE_MESSAGE]) {
+        distanceText = @"";
+    }
+    
+    if (distanceText.length == 0) {
+        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@"%@", statusText] : @"";
+    }else {
+        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@" - %@", statusText] : @"";
+    }
     _imageViewStatusIcon.hidden = !hasLastSeenStatus;
     
     
-    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
-                                                                                          andLongitudeString:profile.longitude];
-
+    
     CGFloat fontSize = _lblDistance.font.pointSize;
     UIFont * statusFont = [UIFont fontWithName:@"ProximaNova-Regular" size:fontSize];
     UIFont * distanceFont = [UIFont fontWithName:@"ProximaNova-Semibold" size:fontSize];
@@ -278,35 +298,32 @@
                                                                             postID:nil andType:UsersListControllerTypeFollowing];
     [self.navigationController pushViewController:newVC animated:YES];
 }
+
+
+- (IBAction)onTapBack:(id)sender {
+    
+    if (self.navigationController != nil) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
+
+
 - (IBAction)onTapFollowers:(id)sender {
     STUsersListController * newVC = [STUsersListController newControllerWithUserId:_profileUserId
                                                                             postID:nil andType:UsersListControllerTypeFollowers];
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
-- (IBAction)onTapMessages:(id)sender {
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STConversationsListViewController *viewController = (STConversationsListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STConversationsListViewController"];
-    [self.navigationController pushViewController:viewController animated:YES];
-    
-    
-}
 
 - (IBAction)onTapGallery:(id)sender {
     
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-    flowCtrl.flowType = _isMyProfile ? STFlowTypeMyGallery : STFlowTypeUserGallery;
-    flowCtrl.flowUserID = _profileUserId;
-    flowCtrl.userName = _userProfile.fullName;
-    
-    [self.navigationController pushViewController:flowCtrl animated:YES];
+    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_profileUserId andUserName:_userProfile.fullName];
+    [self.navigationController pushViewController:feedCVC animated:YES];
 }
 
-- (IBAction)onTapMenu:(id)sender {
-    [[STMenuController sharedInstance] showMenuForController:self];
-}
 
 - (IBAction)onTapNextProfile:(id)sender {
     
@@ -353,19 +370,8 @@
 }
 
 - (IBAction)onTapCamera:(id)sender {
-    __weak STUserProfileViewController *weakSelf = self;
-    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
-        [weakSelf startMoveScaleShareControllerForImage:img shouldCompress:shouldCompressImage editedPostId:nil captionString:nil];
-        
-    };
-    
-    if (_isMyProfile) {
-        [[STNavigationService imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
-    } else {
-        [[STNavigationService imagePickerController] startImagePickerInViewController:self.parentViewController withCompletion:completion andAskCompletion:^{
-            [weakSelf inviteUserToUpload];
-        }];
-    }}
+    //TODO: dev_1_2 maybe ask user for upload action?
+}
 
 - (IBAction)onTapSettings:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -374,10 +380,12 @@
     [self presentViewController: setttingsNav animated:YES completion:nil];
 }
 - (IBAction)onTapSendMessageToUser:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+    //TODO: get user from the pool first and then initialize
+    STListUser *lu = [STListUser new];
+    lu.uuid = _profileUserId;
+    //TODO: dev_1_2 add other properties if exists
+    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
     
-    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:@{@"user_id":_profileUserId}];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -387,24 +395,6 @@
     [self.navigationController pushViewController:editVC animated:YES];
 }
 
-- (void)startMoveScaleShareControllerForImage:(UIImage *)img
-                               shouldCompress:(BOOL)compressing
-                                 editedPostId:(NSString *)postId
-                                captionString:(NSString *)captionString{
-    
-    // here, no compressing should be done, because it might be a cropping after this
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
-    viewController.currentImg = img;
-    
-    
-    viewController.delegate = (id<STSharePostDelegate>)[STMenuController sharedInstance].appMainController;
-    viewController.editPostId = postId;
-    viewController.shouldCompress = compressing;
-    viewController.captionString = captionString;
-    [self.navigationController pushViewController:viewController animated:NO];
-}
 
 - (void)inviteUserToUpload{
     

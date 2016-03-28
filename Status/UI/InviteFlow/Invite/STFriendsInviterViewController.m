@@ -11,7 +11,6 @@
 #import "STFacebookInviterViewController.h"
 #import "STContactsManager.h"
 #import "STSuggestionsViewController.h"
-#import "STMenuController.h"
 
 @interface STFriendsInviterViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STInvitationsDelegate, STSuggestionsDelegate>
 
@@ -67,7 +66,15 @@
     
     NSInteger offset = [self offsetForIndex:index];
     
-    [_pageController setViewControllers:@[_viewControllers[index]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+    NSInteger currentVCIndex = [_viewControllers indexOfObject:_pageController.viewControllers.lastObject];
+    
+    if (index == currentVCIndex) {
+        return;
+    }
+    
+    UIPageViewControllerNavigationDirection direction = index > currentVCIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
+    
+    [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:^(BOOL finished) {
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.pageIndicatorLeading.constant =  offset;
             [UIView animateWithDuration:0.35 animations:^{
@@ -117,7 +124,7 @@
 #pragma mark - STSuggestionsDelegate
 
 - (void)userDidEndApplyingSugegstions {
-    [[STMenuController sharedInstance] goHome];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - STInvitationsDelegate
@@ -247,15 +254,15 @@
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES];
     
+    [[CoreManager contactsService] updateContactsList];
+    
     UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
     self.view.backgroundColor = backgroundColor;
     self.childContainer.backgroundColor = backgroundColor;
     _viewControllers = @[[STFacebookInviterViewController newController],
                          [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:self],
                          [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeEmail delegate:self]];
-    
-    [STContactsManager sharedInstance];
-    
+        
     _pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     _pageController.view.backgroundColor = backgroundColor;
     _pageController.view.tintColor = backgroundColor;
@@ -273,22 +280,7 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
-    // Dispose of any resources that can be recreated.
-    
-    
-}
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

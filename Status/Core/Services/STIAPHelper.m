@@ -7,6 +7,7 @@
 //
 
 #import "STIAPHelper.h"
+#import "STLocalNotificationService.h"
 
 @interface STIAPHelper()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
@@ -20,20 +21,9 @@
     NSMutableSet * _purchasedProductIdentifiers;
 }
 
-+ (STIAPHelper *)sharedInstance {
-    static dispatch_once_t once;
-    static STIAPHelper * sharedInstance;
-    dispatch_once(&once, ^{
-        NSSet * productIdentifiers = [NSSet setWithObject:kRemoveAdsInAppPurchaseProductID];
-        sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
-    });
-    return sharedInstance;
-}
-
-
-- (id)initWithProductIdentifiers:(NSSet *)productIdentifiers {
+- (id)init {
     if ((self = [super init])) {
-        
+        NSSet * productIdentifiers = [NSSet setWithObject:kRemoveAdsInAppPurchaseProductID];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         // Store product identifiers
         _productIdentifiers = productIdentifiers;
@@ -126,12 +116,12 @@
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : error.localizedDescription}];
+    [[CoreManager localNotificationService] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : error.localizedDescription}];
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
     if (queue.transactions.count == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : @"No purchase to restore"}];
+        [[CoreManager localNotificationService] postNotificationName:IAPHelperRestorePurchaseFailedNotification  object:nil userInfo:@{@"error" : @"No purchase to restore"}];
     }
 }
 
@@ -159,7 +149,7 @@
     }
     
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedFailedNotification object:nil userInfo:@{@"error" : transaction.error.localizedDescription}];
+    [[CoreManager localNotificationService] postNotificationName:IAPHelperProductPurchasedFailedNotification object:nil userInfo:@{@"error" : transaction.error.localizedDescription}];
 }
 
 - (void)provideContentForProductIdentifier:(NSString *)productIdentifier {
@@ -167,7 +157,7 @@
     [_purchasedProductIdentifiers addObject:productIdentifier];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
+    [[CoreManager localNotificationService] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
     
 }
 

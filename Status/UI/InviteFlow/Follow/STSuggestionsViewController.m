@@ -26,9 +26,7 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     NSMutableArray *_suggestedFriends;
     
     STFollowDataProcessor *_followPeopleProcessor;
-    STFollowDataProcessor *_followFriendsProcessor;
-    
-    STFacebookHelper *_testHelper;
+    STFollowDataProcessor *_followFriendsProcessor;    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *followAllBtn;
@@ -84,6 +82,8 @@ static NSString * followThemTitle = @"FOLLOW THEM";
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:YES];
+    
     _suggestedPeople = [NSMutableArray new];
     _suggestedFriends = [NSMutableArray new];
 

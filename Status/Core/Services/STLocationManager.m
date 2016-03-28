@@ -10,9 +10,9 @@
 #import "STConstants.h"
 
 #import "STSetUserLocationRequest.h"
+#import "STLocalNotificationService.h"
 
 static const double kGPSRecordTime = 1800;//seconds, half an hour
-static const double kGPSAccuracyMetters = 150;
 static const double kGPSTimestampSeconds = 15.0;
 
 NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLocationHasBeenUploaded";
@@ -51,12 +51,6 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
     if (_latestLocation == nil) {
         _latestLocation = currentLocation;
     }
-    //TODO: reduce this sanitizer
-    if(currentLocation.horizontalAccuracy > kGPSAccuracyMetters)
-    {
-//        NSLog(@"Ignoring GPS location more than %0.2f meters inaccurate :%0.2f",kGPSAccuracyMetters,currentLocation.horizontalAccuracy);
-        return;
-    }
     
     NSDate* locationDate = currentLocation.timestamp;
     NSTimeInterval howRecent = [locationDate timeIntervalSinceNow];
@@ -94,8 +88,8 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
             }
             if (_updateForced) {
                 _updateForced = NO;
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewLocationHasBeenUploaded
-                                                                    object:nil];
+                [[CoreManager localNotificationService] postNotificationName:kNotificationNewLocationHasBeenUploaded
+                                                                    object:nil userInfo:nil];
             }
         }
     };
@@ -135,7 +129,7 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
     CLLocationDistance distance = [newLocation distanceFromLocation:self.latestLocation];
     
     if (distance < 0 || latitude == nil || longitudeString == nil) {
-        return @"Unknown distance";
+        return ST_UNKNOWN_DISTANCE_MESSAGE;
     }
     
     if (distance < 1000) { // 1000 meters = 1 km
@@ -146,7 +140,7 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
 
 +(BOOL)locationUpdateEnabled{
     return [CLLocationManager locationServicesEnabled] &&
-    ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized ||
+    ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedAlways ||
      [CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse);
 }
 

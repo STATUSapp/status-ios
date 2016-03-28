@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Mask.h"
 #import "NSDate+Additions.h"
+#import "STConversationUser.h"
 
 static NSString *kOfflineImageName = @"offline chat";
 static NSString *kOnlineImageName = @"online chat";
@@ -60,40 +61,23 @@ static NSString *kOnlineImageName = @"online chat";
 
 #pragma mark - Setup cell
 
-- (void)setupWithProfileImageUrl:(NSString *)imageUrl
-                     profileName:(NSString *)profileName
-                     lastMessage:(NSString *)lastMessage
-               dateOfLastMessage:(NSDate *)date
-                   showsYouLabel:(BOOL)showsYouLabel
-                     andIsUnread:(BOOL)isUnread {
-    _fullNameLbl.text = profileName;
+-(void)configureCellWithConversationUser:(STConversationUser *)cu{
+    NSString *imageUrl = cu.thumbnail;
+    [_profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [_profileImageView maskImage:image];
+    }];
+    NSString *lastMessage = cu.lastMessage;
     _lastMessageLbl.text = lastMessage;
-}
-
--(void)configureCellWithInfo:(NSDictionary *)info{
-    NSString *imageUrl = info[@"small_photo_link"];
-    if (![imageUrl isEqual:[NSNull null]]) {
-        [_profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [_profileImageView maskImage:image];
-        }];
-    }
-    NSString *lastMessage = info[@"last_message"];
-    if (![lastMessage isKindOfClass:[NSString class]]) {
-        lastMessage = @"";
-    }
-    _lastMessageLbl.text = lastMessage;
-    _fullNameLbl.text = info[@"user_name"];
-    BOOL isOnline = [info[@"is_online"] boolValue];
+    _fullNameLbl.text = cu.userName;
+    BOOL isOnline = cu.isOnline;
     _userChatStatus.image = [UIImage imageNamed:isOnline==YES?kOnlineImageName:kOfflineImageName];
-    NSString *lastMessageTimeString = info[@"last_message_date"];
-    if (lastMessageTimeString!=nil && ![lastMessageTimeString isKindOfClass:[NSNull class]] && lastMessageTimeString.length > 0) {
-        NSDate *lastMessageDate = [NSDate dateFromServerDateTime:lastMessageTimeString];
-        _dateLbl.text = [NSDate timeStringForLastMessageDate:lastMessageDate];
+    if (cu.lastMessageDate) {
+        _dateLbl.text = [NSDate timeStringForLastMessageDate:cu.lastMessageDate];
     }
     else
         _dateLbl.text = @"NA";
     
-    NSInteger numberOfUnreadMessages = [info[@"unread_messages_count"] integerValue];
+    NSInteger numberOfUnreadMessages = cu.unreadMessageCount;
     if (numberOfUnreadMessages > 0) {
         [_numberOfUnreadMessages setTitle:[NSString stringWithFormat:@"%ld", (long)numberOfUnreadMessages] forState:UIControlStateNormal];
         _numberOfUnreadMessages.hidden = NO;

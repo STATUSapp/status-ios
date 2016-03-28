@@ -26,8 +26,19 @@ NSString *const kReachableURL = @"ec2-52-86-4-15.compute-1.amazonaws.com";
 #endif
 
 NSInteger const kHTTPErrorNoConnection = 447;
+
+#ifdef DEBUG
+
+NSInteger const kPostsLimit = 5;
+NSInteger const kStartLoadOffset = 3;
+
+#else
+
 NSInteger const kPostsLimit = 20;
 NSInteger const kStartLoadOffset = 10;
+
+#endif
+
 
 NSString *const kSTAdUnitID = @"ca-app-pub-2971682460090432/5255730305";
 
@@ -89,7 +100,25 @@ NSString *const STUnreadMessagesValueDidChanged = @"STUnreadMessagesValueDidChan
 NSString *const STChatControllerAuthenticate = @"STChatControllerAuthenticate";
 NSString *const STFacebookPickerNotification = @"STFacebookPickerNotification";
 NSString *const STLoadImageNotification = @"STLoadImageNotification";
+NSString *const STPostPoolObjectUpdatedNotification = @"STPostPoolObjectUpdatedNotification";
+NSString *const STPostPoolNewObjectNotification = @"STPostPoolNewObjectNotification";
+NSString *const STPostPoolObjectDeletedNotification = @"STPostPoolObjectDeletedNotification";
 
+NSString *const STPostNewImageUploaded = @"STPostNewImageUploaded";
+NSString *const STPostImageWasEdited = @"STPostImageWasEdited";
+NSString *const STPostCaptionWasEdited = @"STPostCaptionWasEdited";
+
+NSString *const STFooterFlowsNotification = @"STFooterFlowsNotification";
+NSString *const STHomeFlowShouldBeReloadedNotification = @"STHomeFlowShouldBeReloadedNotification";
+NSString *const STNotificationsShouldBeReloaded = @"STNotificationsShouldBeReloaded";
+
+#pragma mark - Notification User Info Keys
+
+NSString *const kPostIdKey = @"_key_post_id";
+NSString *const kImageKey = @"key_image";
+NSString *const kImageUrlKey = @"key_image_url";
+NSString *const kFlowTypeKey = @"flow_type_key";
+NSString *const kUserIdKey = @"user_id_key";
 
 #pragma mark - Invite Friends
 

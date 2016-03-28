@@ -27,17 +27,17 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
-  - Crashlytics (3.6.0):
+  - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.5)
-  - FBAudienceNetwork (4.10.0)
-  - FBSDKCoreKit (4.10.0):
+  - Fabric (1.6.7)
+  - FBAudienceNetwork (4.10.1)
+  - FBSDKCoreKit (4.10.1):
     - Bolts (~> 1.5)
-  - FBSDKLoginKit (4.10.0):
+  - FBSDKLoginKit (4.10.1):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.10.0):
+  - FBSDKShareKit (4.10.1):
     - FBSDKCoreKit
-  - MobileAppTracker (3.15.0)
+  - MobileAppTracker (3.17.1)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -58,13 +58,13 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
   Bolts: f52a250053bb517ca874523c3913776359ab3def
-  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
-  Fabric: 338ffd3c2afcab120638907b4251189de9ad17b3
-  FBAudienceNetwork: ca28e0286a5d41353b6809584d622178a3ee7525
-  FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
-  FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
-  FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
-  MobileAppTracker: a89dba3c74277b48c6b10440a23ca648a760bb7f
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  FBAudienceNetwork: 0f70ec0af1e726d3451c429e93120dd201aea431
+  FBSDKCoreKit: d2aaed5e9ab7d8d6301c533376a1fbff1cf3deb5
+  FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
+  FBSDKShareKit: 2fd887cce0056bdda91f99b2021d724a4fed8e88
+  MobileAppTracker: 39ccb300439d4a6be34ffbd040e68566b6818ffa
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 
 COCOAPODS: 0.39.0

@@ -10,7 +10,6 @@
 #import "STNetworkQueueManager.h"
 
 @implementation STNetworkManager
-static STNetworkManager *_sharedManager = nil;
 
 - (id)initWithBaseURL:(NSURL *)url {
     self = [super initWithBaseURL:url];
@@ -36,16 +35,16 @@ static STNetworkManager *_sharedManager = nil;
 }
 
 - (void)clearQueue{
-    [[CoreManager networkService] clearQueue];
     [[self operationQueue] cancelAllOperations];
     [self invalidateSessionCancelingTasks:YES];
-    _sharedManager = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
 
     [[self session] getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         [self cancelTasksInArray:dataTasks];
         [self cancelTasksInArray:uploadTasks];
         [self cancelTasksInArray:downloadTasks];
     }];
+    [[CoreManager networkService] clearQueue];
+
 }
 
 - (void)cancelTasksInArray:(NSArray *)tasksArray

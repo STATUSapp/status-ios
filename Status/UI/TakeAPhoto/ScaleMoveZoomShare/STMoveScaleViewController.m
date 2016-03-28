@@ -10,6 +10,9 @@
 #import "UIImage+ImageEffects.h"
 #import "STSharePhotoViewController.h"
 #import "UIImage+Resize.h"
+#import "STPost.h"
+#import "STNavigationService.h"
+#import "FeedCVC.h"
 
 @interface STMoveScaleViewController ()<UIScrollViewDelegate>
 {
@@ -22,6 +25,18 @@
 @end
 
 @implementation STMoveScaleViewController
+
++ (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing andPost:(STPost *)post {
+    // here, no compressing should be done, because it might be a cropping after this
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
+    viewController.currentImg = img;
+    viewController.post = post;
+    viewController.shouldCompress = compressing;
+    
+    return viewController;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +56,7 @@
     [self.view bringSubviewToFront:_transparentNavBar];
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
     [self setUpTheContext];
-    [self cropAndBlur];
+    [self cropAndBlur];    
 }
 
 
@@ -131,10 +146,8 @@
     STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
     viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
     viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
-    viewController.delegate = _delegate;
-    viewController.editPostId = _editPostId;
-    viewController.captionString = _captionString;
-    viewController.controllerType = _editPostId==nil?STShareControllerAddPost:STShareControllerEditPost;
+    viewController.post = _post;
+    viewController.controllerType = _post==nil?STShareControllerAddPost:STShareControllerEditPost;
     [self.navigationController pushViewController:viewController animated:YES];
 
    }
@@ -202,6 +215,7 @@
 -(void)dealloc{
     //remove the delegate will prevent scroll to call functions after the view did not exists
     [self.scrollView setDelegate:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

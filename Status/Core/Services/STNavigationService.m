@@ -9,64 +9,165 @@
 #import "STNavigationService.h"
 #import "STLoginViewController.h"
 #import "AppDelegate.h"
+#import "FeedCVC.h"
 
 #import "STImagePickerController.h"
+#import "STImagePickerService.h"
+#import "STTabBarViewController.h"
+#import "STImagePickerService.h"
+#import "STMoveScaleViewController.h"
+
+#import "STPost.h"
+#import "STFlowTemplate.h"
+#import "STPostsPool.h"
+#import "STImageCacheController.h"
+#import "STSharePhotoViewController.h"
+#import "STLocalNotificationService.h"
 
 @interface STNavigationService ()
 
-@property (nonatomic, strong) STImagePickerController *imagePickerController;
-
 @end
+
 @implementation STNavigationService
 -(instancetype)init{
     self = [super init];
     if (self) {
-        
-        _imagePickerController = [STImagePickerController new];
-        
+                
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flowWasSelectedFromFooter:) name:STFooterFlowsNotification object:nil];
+
     }
     return self;
 }
 
-- (void)userDidLoggedIn{
-    [STNavigationService presentTabBarController];
+#pragma mark - Methods
+
+-(void)setBadge:(NSInteger)badge
+  forTabAtIndex:(NSInteger)index{
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
+    
+    NSString *badgeString = nil;
+    if (badge > 0) {
+        if (badge > 99)
+            badgeString = @"99+";
+        else
+            badgeString = [NSString stringWithFormat:@"%ld", (long)badge];
+    }
+    
+    [[tbc.viewControllers objectAtIndex:index] tabBarItem].badgeValue = badgeString;
 }
 
-- (void)userDidRegister{
-    [STNavigationService presentTabBarController];
+-(void)switchToTabBarAtIndex:(NSInteger)index
+                 popToRootVC:(BOOL)popToRoot{
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
+    [tbc setSelectedIndex:index];
+    if (popToRoot) {
+        UINavigationController *navCtrl = (UINavigationController *)[[tbc viewControllers] objectAtIndex:index];
+        [navCtrl popToRootViewControllerAnimated:YES];
+    }
 }
 
-- (void)userDidLoggedOut{
-    [STNavigationService presentLoginScreen];
-}
-
-+ (void)presentLoginScreen{
+- (void)presentLoginScreen{
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     if ([appDel.window.rootViewController isKindOfClass:[STLoginViewController class]]) {
         return;
     }
-
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
     STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
     [appDel.window setRootViewController:viewController];
-
+    
 }
 
-+ (void)presentTabBarController{
+- (void)presentTabBarController{
     NSLog(@"Tabbar Controller presented");
-    //TODO: dev_1_2 add tab bar here as root
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateInitialViewController];
-    [appDel.window setRootViewController:navController];
+    STTabBarViewController * tabBar = [STTabBarViewController newController];
+    [appDel.window setRootViewController:tabBar];
 }
 
-+(STImagePickerController *)imagePickerController{
-    return [[CoreManager navigationService] imagePickerController];
+- (void)resetTabBarStacks{
+    //TODO: dev_1_2 should we reset some nav controller?
+}
+
+-(void)pushViewController:(UIViewController *) vc
+          inTabbarAtIndex:(NSInteger)index
+      keepThecurrentStack:(BOOL)keepTheStack{
+    
+    [self switchToTabBarAtIndex:index popToRootVC:!keepTheStack];
+    if (vc) {
+        [self pushViewController:vc inTabBarIndex:index animated:YES];
+    }
+}
+
+#pragma mark - NSNOtifications
+- (void)userDidLoggedIn{
+    [self presentTabBarController];
+}
+
+- (void)userDidRegister{
+    [self presentTabBarController];
+}
+
+- (void)userDidLoggedOut{
+    [self presentLoginScreen];
+}
+
+-(void) flowWasSelectedFromFooter:(NSNotification *)notif{
+    NSString *flowType = [[notif userInfo] objectForKey:kFlowTypeKey];
+    if ([flowType isEqualToString:@"home"]) {
+        //go to home tab and refresh the data
+        [self switchToTabBarAtIndex:STTabBarIndexHome popToRootVC:YES];
+        [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
+        
+    }
+    else if ([flowType isEqualToString:@"popular"]){
+        //TODO: dev_1_2 go enable this when ready
+//        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
+
+    }
+    else if ([flowType isEqualToString:@"recent"]){
+        //TODO: dev_1_2 go enable this when ready
+        //        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
+    }
+    else if ([flowType isEqualToString:@"nearby"]){
+        //TODO: dev_1_2 go enable this when ready
+        //        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
+    }
+
+}
+
+#pragma mark - Helpers
+
+-(NSInteger)selectedTabBarIndex{
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
+    return tbc.selectedIndex;
+}
+
+-(void)pushViewController:(UIViewController *)vc
+            inTabBarIndex:(NSInteger)index
+                 animated:(BOOL)animated{
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
+    UINavigationController *navCtrl = (UINavigationController *)[[tbc viewControllers] objectAtIndex:index];
+    [navCtrl pushViewController:vc animated:animated];
+
+}
+
++ (UIViewController *)viewControllerForSelectedTab{
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
+    UINavigationController *navCtrl = (UINavigationController *)[tbc selectedViewController];
+    return [[navCtrl viewControllers] lastObject];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

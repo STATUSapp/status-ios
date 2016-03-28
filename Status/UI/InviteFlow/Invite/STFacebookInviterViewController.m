@@ -10,7 +10,6 @@
 #import "STFacebookHelper.h"
 
 @interface STFacebookInviterViewController ()
-@property (nonatomic, strong) STFacebookHelper * facebookHelper;
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *inviteCollection;
 
@@ -41,8 +40,7 @@
 
 
 - (IBAction)inviteFacebookFriends:(id)sender {
-    _facebookHelper = [STFacebookHelper new];
-    [_facebookHelper promoteTheApp];
+    [[CoreManager facebookService] promoteTheApp];
 }
 
 - (void)didReceiveMemoryWarning {

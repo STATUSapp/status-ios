@@ -21,6 +21,7 @@
 #import "CreateDataModelHelper.h"
 #import "NSString+VersionComparison.h"
 #import "CreateDataModelHelper.h"
+#import "STLocalNotificationService.h"
 
 NSString *const kFirstChatVersion = @"1.0.4";
 
@@ -28,6 +29,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
     SRWebSocket *_webSocket;
     AFNetworkReachabilityManager* _reachabilityManager;
     NSTimer *_pingTimer;
+    BOOL _chatLoadingParameters;
 }
 
 @end
@@ -49,7 +51,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
 
 -(void)setUnreadMessages:(NSInteger)unreadMessages{
     _unreadMessages = unreadMessages;
-    [[NSNotificationCenter defaultCenter] postNotificationName:STUnreadMessagesValueDidChanged object:nil];
+    [[CoreManager localNotificationService] postNotificationName:STUnreadMessagesValueDidChanged object:nil userInfo:nil];
     
 }
 
@@ -86,17 +88,26 @@ NSString *const kFirstChatVersion = @"1.0.4";
         return;
     }
     if (_chatSocketUrl==nil ||_chatPort == -1) {
-        [STGetChatUrlAndPortRequest getReconnectInfoWithCompletion:^(id response, NSError *error) {
-            if ([response[@"status_code"] integerValue] == 200) {
-                _chatSocketUrl = response[@"hostname"];
-                _chatPort = [response[@"port"] integerValue];
-                [self connectChat];
-                             
-            }
-            
-        } failure:^(NSError *error) {
-            NSLog(@"Get chat reconnect params failed : %@", error);
-        }];
+        if (_chatLoadingParameters == NO) {
+            _chatLoadingParameters = YES;
+            [STGetChatUrlAndPortRequest getReconnectInfoWithCompletion:^(id response, NSError *error) {
+                _chatLoadingParameters = NO;
+                if ([response[@"status_code"] integerValue] == 200) {
+                    _chatSocketUrl = response[@"hostname"];
+                    _chatPort = [response[@"port"] integerValue];
+                    [self connectChat];
+                    
+                }
+                
+            } failure:^(NSError *error) {
+                _chatLoadingParameters = NO;
+                NSLog(@"Get chat reconnect params failed : %@", error);
+            }];
+        }
+        else
+        {
+            //wait the next reconnect
+        }
     }
     else
         [self connectChat];
@@ -130,7 +141,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
-    NSLog(@":( Websocket Failed With Error %@", error);
+//    NSLog(@":( Websocket Failed With Error %@", error);
     
     _status = STWebSockerStatusClosed;
     if (_delegate && [_delegate respondsToSelector:@selector(chatDidClose)])
@@ -141,7 +152,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
     [_pingTimer invalidate];
     _pingTimer = nil;
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-        [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.f];
+        [self performSelector:@selector(reconnect) withObject:nil afterDelay:5.f];
        
     }
 
@@ -168,7 +179,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
             if (_delegate && [_delegate respondsToSelector:@selector(chatDidAuthenticate)]) {
                 [_delegate performSelector:@selector(chatDidAuthenticate)];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:STChatControllerAuthenticate object:nil];
+            [[CoreManager localNotificationService] postNotificationName:STChatControllerAuthenticate object:nil userInfo:nil];
 
             [self setUnreadMessages:[response[@"unseenMessagesCount"] integerValue]];
         }
@@ -370,7 +381,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
                                                         andCompletion:^(BOOL success, id returnObject) {
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 if (seen == NO && message[@"notification_info"]!=nil) {
-                                                                    [[STNotificationsManager sharedManager] handleInAppMessageNotification:message];
+                                                                    [[CoreManager notificationsService] handleInAppMessageNotification:message];
                                                                 }
                                                             });
 

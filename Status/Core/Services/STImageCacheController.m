@@ -11,10 +11,14 @@
 #import "UIImage+ImageEffects.h"
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
+#import "STLocalNotificationService.h"
+#import "STImageCacheObj.h"
+
 NSUInteger const STImageDownloadSpecialPriority = -1;
+
 @interface STImageCacheController()
 
-@property (nonatomic, strong) NSMutableArray *currentPosts;
+@property (nonatomic, strong) NSMutableArray <STImageCacheObj *> *objectsArray;
 @property (nonatomic, strong) NSMutableArray *sortedFlows;
 @property (nonatomic, assign) BOOL inProgress;
 @end
@@ -60,9 +64,15 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     
+    NSArray *filteredArray = [_objectsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl like %@", imageFullLink]];
+    
     if (![sdManager diskImageExistsForURL:[NSURL URLWithString:imageFullLink]]) {
-        if (imageFullLink && ![[_currentPosts valueForKey:@"link"] containsObject:imageFullLink])
-            [self startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[@{@"full_photo_link":imageFullLink}]];
+        if (imageFullLink && filteredArray.count == 0){
+            STImageCacheObj *obj = [STImageCacheObj new];
+            obj.imageUrl = imageFullLink;
+            obj.flowType = @(STImageDownloadSpecialPriority);
+            [self startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[obj]];
+        }
         [self callEmptyCompletions:completion blurCompl:blurCompl];
     }
     else
@@ -116,6 +126,9 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 }
 
 - (void)saveImageForBlur:(UIImage *)image imageURL:(NSURL *)imageURL {
+    if (!_photoDownloadBaseUrl) {
+        return;
+    }
     if ([imageURL.absoluteString rangeOfString:_photoDownloadBaseUrl].location!=NSNotFound) {
         UIImage *img = image;
         img = [img imageCropedFullScreenSize];
@@ -206,25 +219,27 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 }
 
 -(void)sortDownloadArray{
-    [_currentPosts sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-        return [@([_sortedFlows indexOfObject:@([obj1[@"flowType"] integerValue])]) compare:@([_sortedFlows indexOfObject:@([obj2[@"flowType"] integerValue])])];
+    [_objectsArray sortUsingComparator:^NSComparisonResult(STImageCacheObj *obj1, STImageCacheObj *obj2) {
+        return [@([_sortedFlows indexOfObject:obj1.flowType]) compare:@([_sortedFlows indexOfObject:obj2.flowType])];
     }];
     
 }
 
--(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray *)newPosts{
+-(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray <STImageCacheObj *>*)newObjects{
     
     [self changeFlowType:flowType needsSort:NO];
-    if (_currentPosts == nil) {
-        _currentPosts = [NSMutableArray new];
+    if (_objectsArray == nil) {
+        _objectsArray = [NSMutableArray new];
     }
     
     //sort the flows - move the current to the top
-    NSArray *imagesLinksArray = [newPosts valueForKey:@"full_photo_link"];
+    
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
-    for (NSString *link in imagesLinksArray) {
-        if (![sdManager diskImageExistsForURL:[NSURL URLWithString:link]]) {
-            [_currentPosts addObject:@{@"link":link, @"flowType":@(flowType)}];
+    for (STImageCacheObj *obj in newObjects) {
+        if (![sdManager diskImageExistsForURL:[NSURL URLWithString:obj.imageUrl]]) {
+            STImageCacheObj *objToAdd = obj;
+            objToAdd.flowType = @(flowType);
+            [_objectsArray addObject:objToAdd];
         }
         
     }
@@ -233,8 +248,8 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 }
 
 -(void)loadNextPhoto{
-    NSLog(@"Photo for download count: %lu", (unsigned long)_currentPosts.count);
-    while (_currentPosts.count == 0) {
+    NSLog(@"Photo for download count: %lu", (unsigned long)_objectsArray.count);
+    while (_objectsArray.count == 0) {
         [[SDImageCache sharedImageCache] clearMemory];
 //        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
         _inProgress = NO;
@@ -245,18 +260,20 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     }
     _inProgress = YES;
     __weak STImageCacheController *weakSelf = self;
-    [self downloadImageWithName:[[_currentPosts firstObject] valueForKey:@"link"] andCompletion:^(NSString *downloadedImage, BOOL downloaded) {
-        
-        if (downloaded==YES) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:STLoadImageNotification object:[NSString stringWithString:downloadedImage]];
-        }
-        NSUInteger index = [[weakSelf.currentPosts valueForKey:@"link"] indexOfObject:downloadedImage];
-        if (index!=NSNotFound) {
-            [weakSelf.currentPosts removeObjectAtIndex:index];
-        }
-        weakSelf.inProgress = NO;
-        [weakSelf loadNextPhoto];
-    }];
+    STImageCacheObj *obj = [_objectsArray firstObject];
+    __block NSString *fullUrlString = obj.imageUrl;
+    [self downloadImageWithName:fullUrlString
+                  andCompletion:^(NSString *downloadedImage, BOOL downloaded) {
+                      
+                      if (downloaded==YES) {
+                          [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString}];
+                      }
+                      
+                      [weakSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
+                      
+                      weakSelf.inProgress = NO;
+                      [weakSelf loadNextPhoto];
+                  }];
     
 }
 

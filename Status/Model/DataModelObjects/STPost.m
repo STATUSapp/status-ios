@@ -31,6 +31,7 @@
 
 NSString * const kPostUuidForNoPhotosToDisplay = @"uuid_1";
 NSString * const kPostUuidForYouSawAll = @"uuid_2";
+NSString * const kPostUuidForLoading = @"uuid_3";
 
 @implementation STPost
 + (instancetype)postWithDict:(NSDictionary *)postDict {
@@ -44,12 +45,19 @@ NSString * const kPostUuidForYouSawAll = @"uuid_2";
 + (instancetype)mockPostNoPhotosToDisplay{
     STPost * post = [STPost new];
     post.uuid = kPostUuidForNoPhotosToDisplay;
+    post.imageDownloaded = YES;
     return post;
 
 }
 + (instancetype)mockPostYouSawAll{
     STPost * post = [STPost new];
     post.uuid = kPostUuidForYouSawAll;
+    post.imageDownloaded = YES;
+    return post;
+}
++ (instancetype)mockPostLoading{
+    STPost * post = [STPost new];
+    post.uuid = kPostUuidForLoading;
     return post;
 }
 
@@ -59,6 +67,10 @@ NSString * const kPostUuidForYouSawAll = @"uuid_2";
 
 - (BOOL) isYouSawAllPost{
     return [self.uuid isEqualToString:kPostUuidForYouSawAll];
+}
+
+- (BOOL) isLoadingPost{
+    return [self.uuid isEqualToString:kPostUuidForLoading];
 }
 
 
@@ -72,7 +84,7 @@ NSString * const kPostUuidForYouSawAll = @"uuid_2";
     _postDate = [NSDate dateFromServerDateTime:self.infoDict[@"post_date"]];
     self.uuid = [CreateDataModelHelper validStringIdentifierFromValue:self.infoDict[@"post_id"]];
     _postLikedByCurrentUser = [self.infoDict[@"post_liked_by_current_user"] boolValue];
-    _reportStatus = [self.infoDict[@"report_status"] boolValue];
+    _reportStatus = self.infoDict[@"report_status"];
     _smallPhotoUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"small_photo_link"];
     _userId = [CreateDataModelHelper validStringIdentifierFromValue:self.infoDict[@"user_id"]];
     _userName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_name"];

@@ -11,7 +11,5 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic) NSInteger badgeNumber;
 
--(void)checkForNotificationNumber;
 @end

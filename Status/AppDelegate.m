@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "STFlowTemplateViewController.h"
 #import "STNetworkQueueManager.h"
 #import "STConstants.h"
 #import "STFacebookLoginController.h"
@@ -39,9 +38,10 @@
 #import "STTabBarViewController.h"
 
 #import "LaunchViewController.h"
+#import "STLocalNotificationService.h"
+#import "STNavigationService.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
-static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 @interface AppDelegate()<UIAlertViewDelegate>
 
@@ -49,33 +49,12 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 @implementation AppDelegate
 
-- (void)setBadgeNumber:(NSInteger)badgeNumber{
-    
-    _badgeNumber = badgeNumber;
-    [[NSUserDefaults standardUserDefaults] setValue:@(badgeNumber) forKey:kSTLastBadgeNumber];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
-    [[NSNotificationCenter defaultCenter] postNotificationName:STNotificationBadgeValueDidChanged object:nil];
-}
-
--(void)loadBadgeNumber{
-    NSNumber *lastBadgeNumber = [[NSUserDefaults standardUserDefaults] valueForKey:kSTLastBadgeNumber];
-    if (lastBadgeNumber !=nil) {
-        self.badgeNumber = [lastBadgeNumber integerValue];
-    }
-    else
-        self.badgeNumber = 0;
-    
-
-}
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [STIAPHelper sharedInstance];
     [application setStatusBarHidden:YES];
-    [self loadBadgeNumber];
-    [[STNotificationsManager sharedManager] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+    
+    [[CoreManager notificationsService] loadBadgeNumber];
+    [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     // setup Mobile App Tracker
     
@@ -111,14 +90,8 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     
     [Appirater appLaunched:YES];
     
-    
-//    if ([CoreManager shouldLogin]) {
-//    } else {
-//        self.window.rootViewController = [STTabBarViewController newController];
-//    }
-//
     self.window.rootViewController = [LaunchViewController launchVC];
-    
+        
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 
@@ -136,19 +109,7 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-//TODO: dev_1_2 move this where it bellongs and make it not crashable
-//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-//    NSMutableArray *stackVCs = [NSMutableArray arrayWithArray:navController.viewControllers];
-//    BOOL removed = NO;
-//    //TODO: add more clasess here, as needed
-//    while ([[stackVCs lastObject] isKindOfClass:[STChatRoomViewController class]] ||
-//           [[stackVCs lastObject] isKindOfClass:[STConversationsListViewController class]]) {
-//        removed = YES;
-//        [stackVCs removeLastObject];
-//    }
-//    if (removed == YES) {
-//        [navController setViewControllers:stackVCs];
-//    }
+    [[CoreManager navigationService] resetTabBarStacks];
     [[STChatController sharedInstance] leaveCurrentRoom];
 }
 
@@ -167,17 +128,11 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    
-    
     if ([[STInviteController sharedInstance] shouldInviteBeAvailable]) {
         [[STInviteController sharedInstance] callTheDelegate];
     }
     
     [FBSDKAppEvents activateApp];
-    //TODO: dev_1_2 make this on a notification
-//    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-//    STFlowTemplateViewController *viewController = (STFlowTemplateViewController *)[navController.viewControllers objectAtIndex:0];
-//    [viewController updateNotificationsNumber];
     
     // MAT will not function without the measureSession call included
     [Tune measureSession];
@@ -204,7 +159,6 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
 
 }
 
-#ifdef __IPHONE_8_0
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
     //register to receive notifications
@@ -212,13 +166,8 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     if (notificationSettings.types) {
         NSLog(@"User allowed notifications");
         [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }else{
-        NSLog(@"User did not allow notifications");
-        //TODO: show alert here?
     }
 }
-
-#endif
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
@@ -245,42 +194,12 @@ static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
     NSLog(@"Notif: %@", userInfo);
     NSLog(@"App state: %lu", (unsigned long)application.applicationState);
 
-    self.badgeNumber = [userInfo[@"aps"][@"badge"] integerValue];
-    if (application.applicationState!=UIApplicationStateActive) {
-        [[STNotificationsManager sharedManager] handleNotification:userInfo];
+    [[CoreManager notificationsService] setOverAllBadgeNumber:[userInfo[@"aps"][@"badge"] integerValue]];
+    if (application.applicationState!=UIApplicationStateActive)
+        [[CoreManager notificationsService] handleNotification:userInfo];
 
-    }
     else
-    {
-//#warning remove this mockup
-//        NSMutableDictionary *debugUserInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
-//        NSMutableDictionary *payloadUserInfo = [NSMutableDictionary dictionaryWithDictionary: debugUserInfo[@"user_info"]];
-//        payloadUserInfo[@"name"] = @"Einstein";
-//        payloadUserInfo[@"photo"] = @"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/s200x200/10354686_10150004552801856_220367501106153455_n.jpg?oh=9dc41c83e9eea8ba96538c6b8ea6d16d&oe=550DCA50&__gda__=1426728006_926067ef0f35eed4118319b475d142bd";
-//        payloadUserInfo[@"post_id"] = @(71);
-//        payloadUserInfo[@"user_id"] = @(35);
-//        debugUserInfo[@"user_info"] = payloadUserInfo;
-//#ifdef DEBUG
-//        [[STNotificationsManager sharedManager] handleInAppNotification:debugUserInfo];
-//
-//#else
-        [[STNotificationsManager sharedManager] handleInAppNotification:userInfo];
-//#endif
-    }
-}
-
--(void)checkForNotificationNumber{
-    __weak AppDelegate *weakSelf = self;
-    if ([CoreManager loggedIn]) {
-        STRequestCompletionBlock completion = ^(id response, NSError *error){
-            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    weakSelf.badgeNumber = [response[@"count"] integerValue];
-                });
-            }
-        };
-        [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
-    }
+        [[CoreManager notificationsService] handleInAppNotification:userInfo];
 }
 
 @end

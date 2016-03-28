@@ -18,7 +18,6 @@
     NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) STFacebookHelper *fbLoader;
 @end
 
 @implementation STFacebookAlbumsViewController
@@ -37,7 +36,6 @@
     [super viewDidLoad];
 
     _dataSource = [NSMutableArray new];
-    _fbLoader = [STFacebookHelper new];
     
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -53,7 +51,7 @@
 - (void)loadDataSource
 {
     __weak STFacebookAlbumsViewController *weakSelf = self;
-    [_fbLoader loadAlbumsWithRefreshBlock:^(NSArray *newObjects) {
+    [[CoreManager facebookService] loadAlbumsWithRefreshBlock:^(NSArray *newObjects) {
 //        if (newObjects.count > 0) {
 //            [_dataSource addObjectsFromArray:newObjects];
 //            [weakSelf.tableView reloadData];

@@ -13,12 +13,20 @@
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
+		173A29511C9FF64500157945 /* STConversationUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A29501C9FF64500157945 /* STConversationUser.m */; };
+		173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A29531CA04B3E00157945 /* STNotificationObj.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
 		17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5C41A1BB7EF240057180E /* AddressBook.framework */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
+		17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */; };
+		17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */; };
+		17DF47351C9974700053F633 /* STLocalNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF47341C9974700053F633 /* STLocalNotificationService.m */; };
+		17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F2881C96DED500D53EC1 /* STBasePool.m */; };
+		17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */; };
+		17FBCB281C8F17D500261A39 /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FBCB271C8F17D500261A39 /* LoadingCell.m */; };
 		1D98A4C319603064007F4AB2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D98A4C219603064007F4AB2 /* iAd.framework */; };
 		1DE2D5AD194FA5D600A29A86 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */; };
 		1DE2D5AF194FA5DF00A29A86 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */; };
@@ -30,7 +38,16 @@
 		2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D7EAF1C82FEDC00F65026 /* STPost.m */; };
 		2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC777781C83A5CC00DAA273 /* LaunchViewController.m */; };
 		2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */; };
+		2AD97BAD1C8C133B00C9B3D5 /* FeedScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */; };
+		2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */; };
+		2AD97BB51C8C144700C9B3D5 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BB41C8C144700C9B3D5 /* FeedCell.m */; };
+		2AD97BBB1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BBA1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m */; };
+		2AD97BC11C8C632B00C9B3D5 /* FooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BC01C8C632B00C9B3D5 /* FooterCell.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
+		52466BE51C89D52000EEAA2B /* TakeAPhoto.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52466BE41C89D52000EEAA2B /* TakeAPhoto.storyboard */; };
+		52DC4DC91C8D53E30064F23F /* STImagePickerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC4DC81C8D53E30064F23F /* STImagePickerService.m */; };
+		52DC4DCD1C8D87F00064F23F /* UIAlertController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC4DCC1C8D87F00064F23F /* UIAlertController+Additions.m */; };
+		52DC4DD11C8F0E520064F23F /* STNotificationAndChatContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC4DD01C8F0E520064F23F /* STNotificationAndChatContainerViewController.m */; };
 		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
 		99B3873D1C82FAA2005B4D8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B385E91C82FAA2005B4D8C /* AppDelegate.m */; };
 		99B3873E1C82FAA2005B4D8C /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B385EC1C82FAA2005B4D8C /* NSDate+Additions.m */; };
@@ -94,7 +111,6 @@
 		99B387781C82FAA2005B4D8C /* STImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386661C82FAA2005B4D8C /* STImagePickerController.m */; };
 		99B387791C82FAA2005B4D8C /* STInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386681C82FAA2005B4D8C /* STInviteController.m */; };
 		99B3877A1C82FAA2005B4D8C /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3866A1C82FAA2005B4D8C /* STLocationManager.m */; };
-		99B3877B1C82FAA2005B4D8C /* STMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3866C1C82FAA2005B4D8C /* STMenuController.m */; };
 		99B3877C1C82FAA2005B4D8C /* STNativeAdsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */; };
 		99B3877D1C82FAA2005B4D8C /* STNearbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386701C82FAA2005B4D8C /* STNearbyController.m */; };
 		99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */; };
@@ -133,7 +149,6 @@
 		99B387A11C82FAA2005B4D8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99B386AB1C82FAA2005B4D8C /* Images.xcassets */; };
 		99B387A21C82FAA2005B4D8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 99B386AD1C82FAA2005B4D8C /* InfoPlist.strings */; };
 		99B387A31C82FAA2005B4D8C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386AF1C82FAA2005B4D8C /* main.m */; };
-		99B387A41C82FAA2005B4D8C /* Status-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99B386B01C82FAA2005B4D8C /* Status-Info.plist */; };
 		99B387A51C82FAA2005B4D8C /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386B51C82FAA2005B4D8C /* HPGrowingTextView.m */; };
 		99B387A61C82FAA2005B4D8C /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386B71C82FAA2005B4D8C /* HPTextViewInternal.m */; };
 		99B387A71C82FAA2005B4D8C /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386BB1C82FAA2005B4D8C /* SRWebSocket.m */; };
@@ -147,18 +162,14 @@
 		99B387AF1C82FAA2005B4D8C /* STConversationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386CE1C82FAA2005B4D8C /* STConversationsListViewController.m */; };
 		99B387B01C82FAA2005B4D8C /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D21C82FAA2005B4D8C /* STFacebookActivity.m */; };
 		99B387B11C82FAA2005B4D8C /* STWhatsAppActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D41C82FAA2005B4D8C /* STWhatsAppActivity.m */; };
-		99B387B21C82FAA2005B4D8C /* STCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D61C82FAA2005B4D8C /* STCustomShareView.m */; };
-		99B387B31C82FAA2005B4D8C /* STCustomShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B386D71C82FAA2005B4D8C /* STCustomShareView.xib */; };
-		99B387B41C82FAA2005B4D8C /* STMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D91C82FAA2005B4D8C /* STMenuView.m */; };
-		99B387B51C82FAA2005B4D8C /* STMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B386DA1C82FAA2005B4D8C /* STMenuView.xib */; };
+		99B387B21C82FAA2005B4D8C /* STContextualMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386D61C82FAA2005B4D8C /* STContextualMenu.m */; };
+		99B387B31C82FAA2005B4D8C /* STContextualMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B386D71C82FAA2005B4D8C /* STContextualMenu.xib */; };
 		99B387B61C82FAA2005B4D8C /* STNotificationBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386DC1C82FAA2005B4D8C /* STNotificationBanner.m */; };
 		99B387B71C82FAA2005B4D8C /* STNotificationBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B386DD1C82FAA2005B4D8C /* STNotificationBanner.xib */; };
 		99B387B81C82FAA2005B4D8C /* STTapAnimationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386DF1C82FAA2005B4D8C /* STTapAnimationLabel.m */; };
 		99B387B91C82FAA2005B4D8C /* STLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386E31C82FAA2005B4D8C /* STLikeCell.m */; };
 		99B387BA1C82FAA2005B4D8C /* STCustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386E61C82FAA2005B4D8C /* STCustomCollectionViewCell.m */; };
 		99B387BB1C82FAA2005B4D8C /* STFBAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386E81C82FAA2005B4D8C /* STFBAdCell.m */; };
-		99B387BC1C82FAA2005B4D8C /* STFlowTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386EA1C82FAA2005B4D8C /* STFlowTemplateViewController.m */; };
-		99B387BD1C82FAA2005B4D8C /* STFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386EC1C82FAA2005B4D8C /* STFooterView.m */; };
 		99B387BE1C82FAA2005B4D8C /* STNoPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386EE1C82FAA2005B4D8C /* STNoPhotosCell.m */; };
 		99B387BF1C82FAA2005B4D8C /* STSmallFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386F01C82FAA2005B4D8C /* STSmallFlowCell.m */; };
 		99B387C01C82FAA2005B4D8C /* STSuggestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386F51C82FAA2005B4D8C /* STSuggestionCell.m */; };
@@ -225,10 +236,26 @@
 		172EAE6A18B0B12E00C5637B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		173A294F1C9FF64500157945 /* STConversationUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConversationUser.h; sourceTree = "<group>"; };
+		173A29501C9FF64500157945 /* STConversationUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationUser.m; sourceTree = "<group>"; };
+		173A29521CA04B3E00157945 /* STNotificationObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationObj.h; sourceTree = "<group>"; };
+		173A29531CA04B3E00157945 /* STNotificationObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationObj.m; sourceTree = "<group>"; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		17B587401C9ABAF3006AC7BD /* UIViewController+Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Snapshot.h"; sourceTree = "<group>"; };
+		17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Snapshot.m"; sourceTree = "<group>"; };
+		17B587431C9ABEE5006AC7BD /* STImageCacheObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImageCacheObj.h; sourceTree = "<group>"; };
+		17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImageCacheObj.m; sourceTree = "<group>"; };
+		17DF47331C9974700053F633 /* STLocalNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocalNotificationService.h; sourceTree = "<group>"; };
+		17DF47341C9974700053F633 /* STLocalNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocalNotificationService.m; sourceTree = "<group>"; };
+		17F4F2871C96DED500D53EC1 /* STBasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBasePool.h; sourceTree = "<group>"; };
+		17F4F2881C96DED500D53EC1 /* STBasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBasePool.m; sourceTree = "<group>"; };
+		17F4F28A1C96E5F800D53EC1 /* STUsersPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUsersPool.h; sourceTree = "<group>"; };
+		17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUsersPool.m; sourceTree = "<group>"; };
+		17FBCB261C8F17D500261A39 /* LoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingCell.h; sourceTree = "<group>"; };
+		17FBCB271C8F17D500261A39 /* LoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingCell.m; sourceTree = "<group>"; };
 		1D98A4C219603064007F4AB2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1DE2D5AC194FA5D600A29A86 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1DE2D5AE194FA5DF00A29A86 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -245,7 +272,23 @@
 		2AC777771C83A5CC00DAA273 /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
 		2AC777781C83A5CC00DAA273 /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
 		2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScene.storyboard; sourceTree = "<group>"; };
+		2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedScene.storyboard; sourceTree = "<group>"; };
+		2AD97BB01C8C143300C9B3D5 /* FeedCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCVC.h; sourceTree = "<group>"; };
+		2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCVC.m; sourceTree = "<group>"; };
+		2AD97BB31C8C144700C9B3D5 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
+		2AD97BB41C8C144700C9B3D5 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
+		2AD97BB91C8C4E6000C9B3D5 /* FullCaptionFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullCaptionFeedCell.h; sourceTree = "<group>"; };
+		2AD97BBA1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullCaptionFeedCell.m; sourceTree = "<group>"; };
+		2AD97BBF1C8C632B00C9B3D5 /* FooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterCell.h; sourceTree = "<group>"; };
+		2AD97BC01C8C632B00C9B3D5 /* FooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterCell.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		52466BE41C89D52000EEAA2B /* TakeAPhoto.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TakeAPhoto.storyboard; sourceTree = "<group>"; };
+		52DC4DC71C8D53E30064F23F /* STImagePickerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImagePickerService.h; sourceTree = "<group>"; };
+		52DC4DC81C8D53E30064F23F /* STImagePickerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImagePickerService.m; sourceTree = "<group>"; };
+		52DC4DCB1C8D87F00064F23F /* UIAlertController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Additions.h"; sourceTree = "<group>"; };
+		52DC4DCC1C8D87F00064F23F /* UIAlertController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Additions.m"; sourceTree = "<group>"; };
+		52DC4DCF1C8F0E520064F23F /* STNotificationAndChatContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationAndChatContainerViewController.h; sourceTree = "<group>"; };
+		52DC4DD01C8F0E520064F23F /* STNotificationAndChatContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationAndChatContainerViewController.m; sourceTree = "<group>"; };
 		62D422D9C06AC39526914FFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBF4A5C5D9CB748EACB9ABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9901E4961B6D99E50064223C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -374,8 +417,6 @@
 		99B386681C82FAA2005B4D8C /* STInviteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInviteController.m; sourceTree = "<group>"; };
 		99B386691C82FAA2005B4D8C /* STLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocationManager.h; sourceTree = "<group>"; };
 		99B3866A1C82FAA2005B4D8C /* STLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocationManager.m; sourceTree = "<group>"; };
-		99B3866B1C82FAA2005B4D8C /* STMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMenuController.h; sourceTree = "<group>"; };
-		99B3866C1C82FAA2005B4D8C /* STMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMenuController.m; sourceTree = "<group>"; };
 		99B3866D1C82FAA2005B4D8C /* STNativeAdsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNativeAdsController.h; sourceTree = "<group>"; };
 		99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNativeAdsController.m; sourceTree = "<group>"; };
 		99B3866F1C82FAA2005B4D8C /* STNearbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNearbyController.h; sourceTree = "<group>"; };
@@ -459,12 +500,9 @@
 		99B386D21C82FAA2005B4D8C /* STFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookActivity.m; sourceTree = "<group>"; };
 		99B386D31C82FAA2005B4D8C /* STWhatsAppActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWhatsAppActivity.h; sourceTree = "<group>"; };
 		99B386D41C82FAA2005B4D8C /* STWhatsAppActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhatsAppActivity.m; sourceTree = "<group>"; };
-		99B386D51C82FAA2005B4D8C /* STCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCustomShareView.h; sourceTree = "<group>"; };
-		99B386D61C82FAA2005B4D8C /* STCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCustomShareView.m; sourceTree = "<group>"; };
-		99B386D71C82FAA2005B4D8C /* STCustomShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STCustomShareView.xib; sourceTree = "<group>"; };
-		99B386D81C82FAA2005B4D8C /* STMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMenuView.h; sourceTree = "<group>"; };
-		99B386D91C82FAA2005B4D8C /* STMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMenuView.m; sourceTree = "<group>"; };
-		99B386DA1C82FAA2005B4D8C /* STMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMenuView.xib; sourceTree = "<group>"; };
+		99B386D51C82FAA2005B4D8C /* STContextualMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STContextualMenu.h; sourceTree = "<group>"; };
+		99B386D61C82FAA2005B4D8C /* STContextualMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STContextualMenu.m; sourceTree = "<group>"; };
+		99B386D71C82FAA2005B4D8C /* STContextualMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STContextualMenu.xib; sourceTree = "<group>"; };
 		99B386DB1C82FAA2005B4D8C /* STNotificationBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationBanner.h; sourceTree = "<group>"; };
 		99B386DC1C82FAA2005B4D8C /* STNotificationBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationBanner.m; sourceTree = "<group>"; };
 		99B386DD1C82FAA2005B4D8C /* STNotificationBanner.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STNotificationBanner.xib; sourceTree = "<group>"; };
@@ -478,8 +516,6 @@
 		99B386E81C82FAA2005B4D8C /* STFBAdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFBAdCell.m; sourceTree = "<group>"; };
 		99B386E91C82FAA2005B4D8C /* STFlowTemplateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFlowTemplateViewController.h; sourceTree = "<group>"; };
 		99B386EA1C82FAA2005B4D8C /* STFlowTemplateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFlowTemplateViewController.m; sourceTree = "<group>"; };
-		99B386EB1C82FAA2005B4D8C /* STFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFooterView.h; sourceTree = "<group>"; };
-		99B386EC1C82FAA2005B4D8C /* STFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFooterView.m; sourceTree = "<group>"; };
 		99B386ED1C82FAA2005B4D8C /* STNoPhotosCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNoPhotosCell.h; sourceTree = "<group>"; };
 		99B386EE1C82FAA2005B4D8C /* STNoPhotosCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNoPhotosCell.m; sourceTree = "<group>"; };
 		99B386EF1C82FAA2005B4D8C /* STSmallFlowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSmallFlowCell.h; sourceTree = "<group>"; };
@@ -504,8 +540,8 @@
 		99B387081C82FAA2005B4D8C /* STNotificationBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationBaseCell.m; sourceTree = "<group>"; };
 		99B387091C82FAA2005B4D8C /* STNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationCell.h; sourceTree = "<group>"; };
 		99B3870A1C82FAA2005B4D8C /* STNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationCell.m; sourceTree = "<group>"; };
-		99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationsManager.h; sourceTree = "<group>"; };
-		99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationsManager.m; sourceTree = "<group>"; };
+		99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STNotificationsManager.h; path = ../../UI/Notifications/STNotificationsManager.h; sourceTree = "<group>"; };
+		99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STNotificationsManager.m; path = ../../UI/Notifications/STNotificationsManager.m; sourceTree = "<group>"; };
 		99B3870D1C82FAA2005B4D8C /* STNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationsViewController.h; sourceTree = "<group>"; };
 		99B3870E1C82FAA2005B4D8C /* STNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationsViewController.m; sourceTree = "<group>"; };
 		99B3870F1C82FAA2005B4D8C /* STSmartNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSmartNotificationCell.h; sourceTree = "<group>"; };
@@ -668,6 +704,40 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		2AD97BAE1C8C141E00C9B3D5 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				2AD97BAF1C8C141E00C9B3D5 /* cells */,
+				2AD97BB01C8C143300C9B3D5 /* FeedCVC.h */,
+				2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		2AD97BAF1C8C141E00C9B3D5 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				2AD97BB31C8C144700C9B3D5 /* FeedCell.h */,
+				2AD97BB41C8C144700C9B3D5 /* FeedCell.m */,
+				2AD97BB91C8C4E6000C9B3D5 /* FullCaptionFeedCell.h */,
+				2AD97BBA1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m */,
+				2AD97BBF1C8C632B00C9B3D5 /* FooterCell.h */,
+				2AD97BC01C8C632B00C9B3D5 /* FooterCell.m */,
+				17FBCB261C8F17D500261A39 /* LoadingCell.h */,
+				17FBCB271C8F17D500261A39 /* LoadingCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		52DC4DCE1C8F0E1F0064F23F /* NotificationsAndChat */ = {
+			isa = PBXGroup;
+			children = (
+				52DC4DCF1C8F0E520064F23F /* STNotificationAndChatContainerViewController.h */,
+				52DC4DD01C8F0E520064F23F /* STNotificationAndChatContainerViewController.m */,
+			);
+			path = NotificationsAndChat;
+			sourceTree = "<group>";
+		};
 		99B385E71C82FAA2005B4D8C /* Status */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,6 +758,8 @@
 		99B385EA1C82FAA2005B4D8C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				52DC4DCB1C8D87F00064F23F /* UIAlertController+Additions.h */,
+				52DC4DCC1C8D87F00064F23F /* UIAlertController+Additions.m */,
 				99B385EB1C82FAA2005B4D8C /* NSDate+Additions.h */,
 				99B385EC1C82FAA2005B4D8C /* NSDate+Additions.m */,
 				99B385ED1C82FAA2005B4D8C /* NSIndexPath+Additions.h */,
@@ -710,6 +782,8 @@
 				99B385FE1C82FAA2005B4D8C /* UIImageView+Mask.m */,
 				99B385FF1C82FAA2005B4D8C /* UIImageView+TouchesEffects.h */,
 				99B386001C82FAA2005B4D8C /* UIImageView+TouchesEffects.m */,
+				17B587401C9ABAF3006AC7BD /* UIViewController+Snapshot.h */,
+				17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -829,40 +903,48 @@
 		99B386541C82FAA2005B4D8C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				99B386551C82FAA2005B4D8C /* KeychainItemWrapper.h */,
-				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B386571C82FAA2005B4D8C /* STChatController.h */,
 				99B386581C82FAA2005B4D8C /* STChatController.m */,
-				99B386591C82FAA2005B4D8C /* STContactsManager.h */,
-				99B3865A1C82FAA2005B4D8C /* STContactsManager.m */,
 				99B3865B1C82FAA2005B4D8C /* STDataAccessUtils.h */,
 				99B3865C1C82FAA2005B4D8C /* STDataAccessUtils.m */,
-				99B3865D1C82FAA2005B4D8C /* STFacebookHelper.h */,
-				99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */,
-				99B386611C82FAA2005B4D8C /* STIAPHelper.h */,
-				99B386621C82FAA2005B4D8C /* STIAPHelper.m */,
-				99B386631C82FAA2005B4D8C /* STImageCacheController.h */,
-				99B386641C82FAA2005B4D8C /* STImageCacheController.m */,
 				99B386671C82FAA2005B4D8C /* STInviteController.h */,
 				99B386681C82FAA2005B4D8C /* STInviteController.m */,
-				99B3866B1C82FAA2005B4D8C /* STMenuController.h */,
-				99B3866C1C82FAA2005B4D8C /* STMenuController.m */,
-				99B3866D1C82FAA2005B4D8C /* STNativeAdsController.h */,
-				99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */,
 				99B3866F1C82FAA2005B4D8C /* STNearbyController.h */,
 				99B386701C82FAA2005B4D8C /* STNearbyController.m */,
 				99B386711C82FAA2005B4D8C /* STUpdateToNewerVersionController.h */,
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
 				99B3865F1C82FAA2005B4D8C /* STFacebookLoginController.h */,
 				99B386601C82FAA2005B4D8C /* STFacebookLoginController.m */,
+				99B386631C82FAA2005B4D8C /* STImageCacheController.h */,
+				99B386641C82FAA2005B4D8C /* STImageCacheController.m */,
+				99B3865D1C82FAA2005B4D8C /* STFacebookHelper.h */,
+				99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */,
+				99B3866D1C82FAA2005B4D8C /* STNativeAdsController.h */,
+				99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */,
+				99B386551C82FAA2005B4D8C /* KeychainItemWrapper.h */,
+				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
 				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
+				17F4F28A1C96E5F800D53EC1 /* STUsersPool.h */,
+				17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */,
+				17F4F2871C96DED500D53EC1 /* STBasePool.h */,
+				17F4F2881C96DED500D53EC1 /* STBasePool.m */,
+				99B386591C82FAA2005B4D8C /* STContactsManager.h */,
+				99B3865A1C82FAA2005B4D8C /* STContactsManager.m */,
 				171936C11C848604002C0202 /* STNavigationService.h */,
 				171936C21C848604002C0202 /* STNavigationService.m */,
 				99B386651C82FAA2005B4D8C /* STImagePickerController.h */,
 				99B386661C82FAA2005B4D8C /* STImagePickerController.m */,
+				52DC4DC71C8D53E30064F23F /* STImagePickerService.h */,
+				52DC4DC81C8D53E30064F23F /* STImagePickerService.m */,
 				99B386691C82FAA2005B4D8C /* STLocationManager.h */,
 				99B3866A1C82FAA2005B4D8C /* STLocationManager.m */,
+				99B386611C82FAA2005B4D8C /* STIAPHelper.h */,
+				99B386621C82FAA2005B4D8C /* STIAPHelper.m */,
+				17DF47331C9974700053F633 /* STLocalNotificationService.h */,
+				17DF47341C9974700053F633 /* STLocalNotificationService.m */,
+				99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */,
+				99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -903,14 +985,20 @@
 				99B386841C82FAA2005B4D8C /* STDataModelObjects.h */,
 				99B386851C82FAA2005B4D8C /* STFlowTemplate.h */,
 				99B386861C82FAA2005B4D8C /* STFlowTemplate.m */,
+				17B587431C9ABEE5006AC7BD /* STImageCacheObj.h */,
+				17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */,
 				99B386871C82FAA2005B4D8C /* STListUser.h */,
 				99B386881C82FAA2005B4D8C /* STListUser.m */,
 				99B386891C82FAA2005B4D8C /* STSuggestedUser.h */,
 				99B3868A1C82FAA2005B4D8C /* STSuggestedUser.m */,
+				173A294F1C9FF64500157945 /* STConversationUser.h */,
+				173A29501C9FF64500157945 /* STConversationUser.m */,
 				99B3868B1C82FAA2005B4D8C /* STUserProfile.h */,
 				99B3868C1C82FAA2005B4D8C /* STUserProfile.m */,
 				2A6D7EAE1C82FEDC00F65026 /* STPost.h */,
 				2A6D7EAF1C82FEDC00F65026 /* STPost.m */,
+				173A29521CA04B3E00157945 /* STNotificationObj.h */,
+				173A29531CA04B3E00157945 /* STNotificationObj.m */,
 			);
 			path = DataModelObjects;
 			sourceTree = "<group>";
@@ -1026,7 +1114,8 @@
 		99B386BF1C82FAA2005B4D8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				99B387111C82FAA2005B4D8C /* Storyboards */,
+				52DC4DCE1C8F0E1F0064F23F /* NotificationsAndChat */,
+				2AD97BAE1C8C141E00C9B3D5 /* Feed */,
 				2A1D66801C8472AC00633D87 /* Helpers */,
 				99B387E61C83027C005B4D8C /* TabBar */,
 				99B386C01C82FAA2005B4D8C /* Chat */,
@@ -1036,11 +1125,12 @@
 				99B387031C82FAA2005B4D8C /* Login */,
 				99B387061C82FAA2005B4D8C /* Notifications */,
 				2AC777761C83A5AE00DAA273 /* Launch */,
-				99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */,
-				99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */,
 				99B3871B1C82FAA2005B4D8C /* TakeAPhoto */,
 				99B3872D1C82FAA2005B4D8C /* Tutorial */,
 				99B387341C82FAA2005B4D8C /* UserProfile */,
+				99B387111C82FAA2005B4D8C /* Storyboards */,
+				99B387191C82FAA2005B4D8C /* STRemoveAdsViewController.h */,
+				99B3871A1C82FAA2005B4D8C /* STRemoveAdsViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1077,12 +1167,9 @@
 			isa = PBXGroup;
 			children = (
 				99B386D01C82FAA2005B4D8C /* CustomActivities */,
-				99B386D51C82FAA2005B4D8C /* STCustomShareView.h */,
-				99B386D61C82FAA2005B4D8C /* STCustomShareView.m */,
-				99B386D71C82FAA2005B4D8C /* STCustomShareView.xib */,
-				99B386D81C82FAA2005B4D8C /* STMenuView.h */,
-				99B386D91C82FAA2005B4D8C /* STMenuView.m */,
-				99B386DA1C82FAA2005B4D8C /* STMenuView.xib */,
+				99B386D51C82FAA2005B4D8C /* STContextualMenu.h */,
+				99B386D61C82FAA2005B4D8C /* STContextualMenu.m */,
+				99B386D71C82FAA2005B4D8C /* STContextualMenu.xib */,
 				99B386DB1C82FAA2005B4D8C /* STNotificationBanner.h */,
 				99B386DC1C82FAA2005B4D8C /* STNotificationBanner.m */,
 				99B386DD1C82FAA2005B4D8C /* STNotificationBanner.xib */,
@@ -1130,8 +1217,6 @@
 				99B386E81C82FAA2005B4D8C /* STFBAdCell.m */,
 				99B386E91C82FAA2005B4D8C /* STFlowTemplateViewController.h */,
 				99B386EA1C82FAA2005B4D8C /* STFlowTemplateViewController.m */,
-				99B386EB1C82FAA2005B4D8C /* STFooterView.h */,
-				99B386EC1C82FAA2005B4D8C /* STFooterView.m */,
 				99B386ED1C82FAA2005B4D8C /* STNoPhotosCell.h */,
 				99B386EE1C82FAA2005B4D8C /* STNoPhotosCell.m */,
 				99B386EF1C82FAA2005B4D8C /* STSmallFlowCell.h */,
@@ -1201,8 +1286,6 @@
 				99B387081C82FAA2005B4D8C /* STNotificationBaseCell.m */,
 				99B387091C82FAA2005B4D8C /* STNotificationCell.h */,
 				99B3870A1C82FAA2005B4D8C /* STNotificationCell.m */,
-				99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */,
-				99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */,
 				99B3870D1C82FAA2005B4D8C /* STNotificationsViewController.h */,
 				99B3870E1C82FAA2005B4D8C /* STNotificationsViewController.m */,
 				99B3870F1C82FAA2005B4D8C /* STSmartNotificationCell.h */,
@@ -1222,6 +1305,8 @@
 				99B387171C82FAA2005B4D8C /* SuggestionsScene.storyboard */,
 				99B387181C82FAA2005B4D8C /* UserProfile.storyboard */,
 				2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */,
+				52466BE41C89D52000EEAA2B /* TakeAPhoto.storyboard */,
+				2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1377,7 +1462,7 @@
 		172EAE5B18B0B12D00C5637B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Andrus Cosmin";
 				TargetAttributes = {
 					172EAE6218B0B12D00C5637B = {
@@ -1421,11 +1506,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99B387B51C82FAA2005B4D8C /* STMenuView.xib in Resources */,
 				99B387AD1C82FAA2005B4D8C /* TimestampView.xib in Resources */,
+				52466BE51C89D52000EEAA2B /* TakeAPhoto.storyboard in Resources */,
 				99B3879D1C82FAA2005B4D8C /* ProximaNovaCond-Regular.otf in Resources */,
-				99B387B31C82FAA2005B4D8C /* STCustomShareView.xib in Resources */,
+				99B387B31C82FAA2005B4D8C /* STContextualMenu.xib in Resources */,
 				99B3879B1C82FAA2005B4D8C /* ProximaNovaCond-Light.otf in Resources */,
+				2AD97BAD1C8C133B00C9B3D5 /* FeedScene.storyboard in Resources */,
 				99B387951C82FAA2005B4D8C /* ProximaNova-LightItalic.otf in Resources */,
 				99B387921C82FAA2005B4D8C /* ProximaNova-BoldIt.otf in Resources */,
 				99B387A01C82FAA2005B4D8C /* ProximaNovaCond-SemiboldIt.otf in Resources */,
@@ -1439,7 +1525,6 @@
 				99B3879A1C82FAA2005B4D8C /* ProximaNova-SemiboldItalic.otf in Resources */,
 				99B3879F1C82FAA2005B4D8C /* ProximaNovaCond-Semibold.otf in Resources */,
 				99B387971C82FAA2005B4D8C /* ProximaNova-Regular.otf in Resources */,
-				99B387A41C82FAA2005B4D8C /* Status-Info.plist in Resources */,
 				99B387D31C82FAA2005B4D8C /* UserProfile.storyboard in Resources */,
 				99B387D21C82FAA2005B4D8C /* SuggestionsScene.storyboard in Resources */,
 				99B387CE1C82FAA2005B4D8C /* FacebookPickerScene.storyboard in Resources */,
@@ -1533,6 +1618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99B387D41C82FAA2005B4D8C /* STRemoveAdsViewController.m in Sources */,
+				17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */,
 				99B387651C82FAA2005B4D8C /* STSetUserSettingsRequest.m in Sources */,
 				99B387881C82FAA2005B4D8C /* STSuggestedUser.m in Sources */,
 				99B387FE1C838FA8005B4D8C /* STTakeAPhotoViewController.m in Sources */,
@@ -1544,26 +1630,27 @@
 				99B387531C82FAA2005B4D8C /* STGetPostDetailsRequest.m in Sources */,
 				99B3875D1C82FAA2005B4D8C /* STInviteUserToUploadRequest.m in Sources */,
 				99B387C81C82FAA2005B4D8C /* STNotificationBaseCell.m in Sources */,
-				99B3877B1C82FAA2005B4D8C /* STMenuController.m in Sources */,
+				17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */,
 				99B387511C82FAA2005B4D8C /* STGetNotificationsCountRequest.m in Sources */,
 				99B387D71C82FAA2005B4D8C /* STAlbumImagesViewController.m in Sources */,
-				99B387B21C82FAA2005B4D8C /* STCustomShareView.m in Sources */,
+				99B387B21C82FAA2005B4D8C /* STContextualMenu.m in Sources */,
 				99B387B11C82FAA2005B4D8C /* STWhatsAppActivity.m in Sources */,
 				99B387501C82FAA2005B4D8C /* STGetNearbyProfilesRequest.m in Sources */,
 				99B387731C82FAA2005B4D8C /* STDataAccessUtils.m in Sources */,
-				99B387BC1C82FAA2005B4D8C /* STFlowTemplateViewController.m in Sources */,
 				99B387631C82FAA2005B4D8C /* STSetPostSeenRequest.m in Sources */,
 				99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */,
+				17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */,
 				99B387D51C82FAA2005B4D8C /* STAlbumImageCell.m in Sources */,
 				99B387CA1C82FAA2005B4D8C /* STNotificationsManager.m in Sources */,
 				99B387E21C82FAA2005B4D8C /* STUsersListController.m in Sources */,
-				99B387B41C82FAA2005B4D8C /* STMenuView.m in Sources */,
 				99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */,
 				99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */,
+				52DC4DC91C8D53E30064F23F /* STImagePickerService.m in Sources */,
 				99B387DF1C82FAA2005B4D8C /* STEditProfileViewController.m in Sources */,
 				99B387851C82FAA2005B4D8C /* STBaseObj.m in Sources */,
 				99B387C51C82FAA2005B4D8C /* STInviteFriendsViewController.m in Sources */,
 				99B387C41C82FAA2005B4D8C /* STInviteFriendCell.m in Sources */,
+				17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */,
 				99B3875E1C82FAA2005B4D8C /* STLoginRequest.m in Sources */,
 				99B387441C82FAA2005B4D8C /* UIImage+ImageEffects.m in Sources */,
 				99B387DC1C82FAA2005B4D8C /* STTutorialCell.m in Sources */,
@@ -1587,6 +1674,7 @@
 				99B3875C1C82FAA2005B4D8C /* STInviteFriendsByEmailRequest.m in Sources */,
 				99B387E01C82FAA2005B4D8C /* STSettingsViewController.m in Sources */,
 				99B3874D1C82FAA2005B4D8C /* STGetChatUrlAndPortRequest.m in Sources */,
+				17DF47351C9974700053F633 /* STLocalNotificationService.m in Sources */,
 				99B387AF1C82FAA2005B4D8C /* STConversationsListViewController.m in Sources */,
 				99B387521C82FAA2005B4D8C /* STGetNotificationsRequest.m in Sources */,
 				171936C31C848604002C0202 /* STNavigationService.m in Sources */,
@@ -1617,19 +1705,22 @@
 				99B387751C82FAA2005B4D8C /* STFacebookLoginController.m in Sources */,
 				99B387771C82FAA2005B4D8C /* STImageCacheController.m in Sources */,
 				99B387A91C82FAA2005B4D8C /* STBubbleCell.m in Sources */,
+				2AD97BBB1C8C4E6000C9B3D5 /* FullCaptionFeedCell.m in Sources */,
 				99B3876A1C82FAA2005B4D8C /* STUpdateUserProfileRequest.m in Sources */,
 				99B3878A1C82FAA2005B4D8C /* CreateDataModelHelper.m in Sources */,
 				99B387BA1C82FAA2005B4D8C /* STCustomCollectionViewCell.m in Sources */,
 				99B3874C1C82FAA2005B4D8C /* STFollowUsersRequest.m in Sources */,
 				99B3878C1C82FAA2005B4D8C /* STContactsDataProcessor.m in Sources */,
 				99B387DD1C82FAA2005B4D8C /* STTutorialPresenterViewController.m in Sources */,
+				2AD97BB51C8C144700C9B3D5 /* FeedCell.m in Sources */,
 				99B3873E1C82FAA2005B4D8C /* NSDate+Additions.m in Sources */,
+				2AD97BC11C8C632B00C9B3D5 /* FooterCell.m in Sources */,
 				99B387491C82FAA2005B4D8C /* STConstants.m in Sources */,
 				99B387B91C82FAA2005B4D8C /* STLikeCell.m in Sources */,
-				99B387BD1C82FAA2005B4D8C /* STFooterView.m in Sources */,
 				99B387481C82FAA2005B4D8C /* UIImageView+TouchesEffects.m in Sources */,
 				2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */,
 				2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */,
+				2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */,
 				99B387B01C82FAA2005B4D8C /* STFacebookActivity.m in Sources */,
 				99B387C11C82FAA2005B4D8C /* STSuggestionsViewController.m in Sources */,
 				99B387591C82FAA2005B4D8C /* STGetUserProfileRequest.m in Sources */,
@@ -1653,19 +1744,24 @@
 				99B387BB1C82FAA2005B4D8C /* STFBAdCell.m in Sources */,
 				99B387581C82FAA2005B4D8C /* STGetUserPostsRequest.m in Sources */,
 				99B387861C82FAA2005B4D8C /* STFlowTemplate.m in Sources */,
+				17FBCB281C8F17D500261A39 /* LoadingCell.m in Sources */,
 				99B387841C82FAA2005B4D8C /* STAddressBookContact.m in Sources */,
+				173A29511C9FF64500157945 /* STConversationUser.m in Sources */,
 				99B387DE1C82FAA2005B4D8C /* STTutorialViewController.m in Sources */,
 				99B387A81C82FAA2005B4D8C /* UITableView+SPXRevealAdditions.m in Sources */,
 				99B387D81C82FAA2005B4D8C /* STFacebookAlbumsViewController.m in Sources */,
 				99B387A31C82FAA2005B4D8C /* main.m in Sources */,
 				99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */,
+				173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */,
 				99B3877F1C82FAA2005B4D8C /* Message.m in Sources */,
+				52DC4DCD1C8D87F00064F23F /* UIAlertController+Additions.m in Sources */,
 				99B387E51C830082005B4D8C /* CoreManager.m in Sources */,
 				99B387E11C82FAA2005B4D8C /* STUserProfileViewController.m in Sources */,
 				99B387551C82FAA2005B4D8C /* STGetPostsRequest.m in Sources */,
 				99B387431C82FAA2005B4D8C /* UIImage+FixedOrientation.m in Sources */,
 				99B387D91C82FAA2005B4D8C /* STMoveScaleViewController.m in Sources */,
 				99B387C21C82FAA2005B4D8C /* STFacebookInviterViewController.m in Sources */,
+				52DC4DD11C8F0E520064F23F /* STNotificationAndChatContainerViewController.m in Sources */,
 				99B3874F1C82FAA2005B4D8C /* STGetFollowingRequest.m in Sources */,
 				99B387471C82FAA2005B4D8C /* UIImageView+Mask.m in Sources */,
 				99B3877C1C82FAA2005B4D8C /* STNativeAdsController.m in Sources */,
@@ -1802,7 +1898,7 @@
 				INFOPLIST_FILE = "Status/Supporting Files/Status-Info.plist";
 				INSTALL_GROUP = "";
 				INSTALL_OWNER = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
@@ -1834,7 +1930,7 @@
 				INFOPLIST_FILE = "Status/Supporting Files/Status-Info.plist";
 				INSTALL_GROUP = "";
 				INSTALL_OWNER = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
@@ -1902,7 +1998,7 @@
 				INFOPLIST_FILE = "Status/Supporting Files/Status-Info.plist";
 				INSTALL_GROUP = "";
 				INSTALL_OWNER = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",

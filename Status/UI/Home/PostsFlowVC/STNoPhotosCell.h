@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class STPost;
+
 @interface STNoPhotosCell : UICollectionViewCell
 -(void)setUpCellWithUserName:(NSString *)userName andFlow:(STFlowType)flowType;
+-(void)configureWithUserName:(NSString *)userName
+            isTheCurrentUser:(BOOL)isOwner;
 @end

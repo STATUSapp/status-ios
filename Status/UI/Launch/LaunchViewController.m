@@ -29,7 +29,7 @@
     _launchImage.image = image;
     
     if ([CoreManager shouldLogin])
-        [STNavigationService presentLoginScreen];
+        [[CoreManager navigationService] presentLoginScreen];
     [[CoreManager loginService] startLoginIfPossible];
 }
 

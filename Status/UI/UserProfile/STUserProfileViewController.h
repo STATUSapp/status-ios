@@ -18,6 +18,7 @@
 @property (nonatomic, assign) BOOL isMyProfile;
 @property (nonatomic, assign) BOOL isLaunchedFromNearbyController;
 @property (nonatomic, assign) BOOL shouldOpenCameraRoll;
+@property (nonatomic, assign) BOOL shouldHideBackButton;
 
 @property (nonatomic, weak) id<STUserProfileControllerDelegate> delegate;
 

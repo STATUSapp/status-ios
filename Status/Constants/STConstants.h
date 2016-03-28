@@ -27,7 +27,19 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
+
+#define ST_UNKNOWN_DISTANCE_MESSAGE @"Unknown distance"
+
 #pragma mark - Enums
+
+typedef NS_ENUM(NSUInteger,STTabBarIndex){
+    STTabBarIndexHome = 0,
+    //TODO: dev_1_2 enable this one and add a new screen
+//    STTabBarIndexSearch,
+    STTabBarIndexTakAPhoto,
+    STTabBarIndexChat,
+    STTabBarIndexProfile
+};
 
 typedef NS_ENUM(NSUInteger,STFlowType){
     STFlowTypeHome = 0,
@@ -155,7 +167,25 @@ extern NSString *const STUnreadMessagesValueDidChanged;
 extern NSString *const STChatControllerAuthenticate;
 extern NSString *const STFacebookPickerNotification;
 extern NSString *const STLoadImageNotification;
+extern NSString *const STPostPoolObjectUpdatedNotification;
+extern NSString *const STPostPoolNewObjectNotification;
+extern NSString *const STPostPoolObjectDeletedNotification;
 
+extern NSString *const STPostNewImageUploaded;
+extern NSString *const STPostImageWasEdited;
+extern NSString *const STPostCaptionWasEdited;
+
+extern NSString *const STFooterFlowsNotification;
+extern NSString *const STHomeFlowShouldBeReloadedNotification;
+extern NSString *const STNotificationsShouldBeReloaded;
+
+#pragma mark - Notification User Info Keys
+
+extern NSString *const kPostIdKey;
+extern NSString *const kImageKey;
+extern NSString *const kImageUrlKey;
+extern NSString *const kFlowTypeKey;
+extern NSString *const kUserIdKey;
 #pragma mark - Invite Friends
 
 extern NSString *const STInviteText;

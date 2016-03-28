@@ -16,10 +16,18 @@ NSString *const kGetAlbumsGraph = @"/me/albums?fields=name,count,cover_photo,id"
 NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 
 @interface STFacebookHelper()<FBSDKAppInviteDialogDelegate>
-
+@property (nonatomic, strong) STNativeAdsController *fbNativeAdService;
 @end
 
 @implementation STFacebookHelper
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        self.fbNativeAdService = [STNativeAdsController new];
+    }
+    return self;
+}
 
 -(void)loadPhotosForAlbum:(NSString *)albumId withRefreshBlock:(refreshCompletion)refreshCompletion{
     
@@ -317,6 +325,12 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 }
 -(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error{
     NSLog(@"Result error: %@", error);
+}
+
+#pragma mark - FB Native Ads
+
++ (STNativeAdsController *)fbNativeAdsService{
+    return [[CoreManager facebookService] fbNativeAdService];
 }
 
 @end

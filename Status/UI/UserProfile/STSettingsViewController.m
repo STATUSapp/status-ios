@@ -11,10 +11,12 @@
 #import "STFacebookLoginController.h"
 #import <FBSDKLoginKit.h>
 #import "AppDelegate.h"
-#import "STMenuController.h"
 
 #import "STGetUserSettingsRequest.h"
 #import "STSetUserSettingsRequest.h"
+#import "STTutorialPresenterViewController.h"
+#import "STSuggestionsViewController.h"
+#import "STFriendsInviterViewController.h"
 
 // test
 
@@ -136,7 +138,7 @@ const NSInteger kSectionNumberLogout = 3;
         case kSectionNumberNotifications:
             return 7;
         case kSectionNumberContactLikeAds:
-            return 2;
+            return 3;
         case kSectionNumberInviteFollow:
             return 2;
         case kSectionNumberLogout:
@@ -164,15 +166,14 @@ const NSInteger kSectionNumberLogout = 3;
 }
 
 - (IBAction)onTapInviteFriends:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
-        [[STMenuController sharedInstance] goFriendsInviter];
-    }];
+    STFriendsInviterViewController * inviteFriendsVC = [STFriendsInviterViewController newController];
+    [self.navigationController pushViewController:inviteFriendsVC animated:NO];
+
 }
 
 - (IBAction)onTapFollowPeople:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
-        [[STMenuController sharedInstance] goFollowPeople];
-    }];
+    STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithDelegate:nil andFollowTyep:STFollowTypeFriendsAndPeople];
+    [self.navigationController pushViewController:suggestionsVC animated:YES];
 }
 
 - (IBAction)onTapLikeUsOnFacebook:(id)sender {
@@ -212,6 +213,11 @@ const NSInteger kSectionNumberLogout = 3;
     [self setSetting:STNotificationsFollowersKey fromSwitch:sender];
 }
 
+- (IBAction)onHowItWorksPressed:(id)sender {
+    STTutorialPresenterViewController * tutorialVC = [STTutorialPresenterViewController newInstance];
+    tutorialVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:tutorialVC animated:YES completion:nil];
+}
 
 
 - (void)setSetting:(NSString *)setting fromSwitch:(UISwitch *)sender {

@@ -7,12 +7,17 @@
 //
 
 #import "STTabBarViewController.h"
-#import "STFlowTemplateViewController.h"
 #import "STSettingsViewController.h"
+#import "STTakeAPhotoViewController.h"
+#import "STNotificationAndChatContainerViewController.h"
+#import "STUserProfileViewController.h"
+#import "STFacebookLoginController.h"
+
+#import "FeedCVC.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
 
-@interface STTabBarViewController ()
+@interface STTabBarViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -29,15 +34,66 @@ static NSString * storyboardIdentifier = @"tabBarController";
 #pragma mark - Lifecycle
 
 - (void)setupTabBar {
-    STFlowTemplateViewController * homeFlow = [STFlowTemplateViewController getFlowControllerWithFlowType:STFlowTypeHome];
-    UINavigationController   * homeNav = [[UINavigationController alloc] initWithRootViewController:homeFlow];
-    homeNav.navigationBarHidden = YES;
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
-    UINavigationController   * settingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
-    settingsNav.navigationBarHidden = YES;
     
-    [self setViewControllers:@[homeNav, settingsNav] animated:NO];
+    NSMutableArray *tabBarControllers = [NSMutableArray new];
+    // add home flow
+    //TODO: dev_1_2 use the storyboard to load navCtrl
+    FeedCVC *homeVc = [FeedCVC mainFeedController];
+//    homeVc.title = NSLocalizedString(@"Home", nil);
+    UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
+    homeNavCtrl.navigationBarHidden = YES;
+    
+
+    
+    [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
+    // add explore flow
+    
+    // add take a photo
+    
+    STTakeAPhotoViewController * takeAPhotoVC = [STTakeAPhotoViewController newController];
+//    takeAPhotoVC.title = @"Take a Photo";
+    UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
+//    takePhotoNav.title = @"Take a Photo";
+    takePhotoNav.navigationBarHidden = YES;
+    
+    
+    // add message / notifications
+    
+    STNotificationAndChatContainerViewController * notifAndChatVC = [STNotificationAndChatContainerViewController newController];
+    UINavigationController * notifChatNav = [[UINavigationController alloc] initWithRootViewController:notifAndChatVC];
+//    notifChatNav.title = @"Notifications and Messages";
+    notifChatNav.navigationBarHidden = YES;
+    [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
+    // add my profile
+    
+    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[[CoreManager loginService] currentUserUuid]];
+    profileVC.shouldHideBackButton = YES;
+    UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
+    profileNav.navigationBarHidden = YES;
+    [self configureNavControllerToHandleSwipeToBackGesture:profileNav];
+    
+    [tabBarControllers insertObject:homeNavCtrl atIndex:STTabBarIndexHome];
+    [tabBarControllers insertObject:takePhotoNav atIndex:STTabBarIndexTakAPhoto];
+    [tabBarControllers insertObject:notifChatNav atIndex:STTabBarIndexChat];
+    [tabBarControllers insertObject:profileNav atIndex:STTabBarIndexProfile];
+
+    [self setViewControllers:tabBarControllers animated:NO];
+    
+    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[UIImage imageNamed:@"home"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakAPhoto] setImage:[UIImage imageNamed:@"camera"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"message"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[UIImage imageNamed:@"profile"]];
+    
+    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[UIImage imageNamed:@"home_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakAPhoto] setSelectedImage:[UIImage imageNamed:@"camera_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"message_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[UIImage imageNamed:@"profile_active"]];
+    
+    for (UITabBarItem * item in self.tabBar.items) {
+        [item setTitle:nil];
+    }
+    
+    self.tabBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewDidLoad {
@@ -45,21 +101,19 @@ static NSString * storyboardIdentifier = @"tabBarController";
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Helper
+
+-(void)configureNavControllerToHandleSwipeToBackGesture:(UINavigationController *)navController{
+    navController.interactivePopGestureRecognizer.delegate =self;
+    navController.interactivePopGestureRecognizer.enabled = YES;
+
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UIGestureRecognizerDelegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
-*/
-
 
 
 @end

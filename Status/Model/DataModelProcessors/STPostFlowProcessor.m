@@ -13,10 +13,28 @@
 #import "CoreManager.h"
 #import "STPostsPool.h"
 
+#import "STImageCacheController.h"
+#import "STFacebookHelper.h"
+#import "STLocalNotificationService.h"
+#import "STNavigationService.h"
+
+#import "STImageCacheObj.h"
+
+int const kDeletePostTag = 11;
+
 NSString * const kNotificationPostDownloadFailed = @"NotificationPostDownloadFailed";
 NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSuccess";
+NSString * const kNotificationPostUpdated = @"NotificationPostUpdated";
+NSString * const kNotificationPostAdded = @"NotificationPostAdded";
+NSString * const kNotificationPostDeleted = @"NotificationPostDeleted";
+NSString * const kNotificationShowSuggestions = @"NotificationShowSuggestion";
 
-@interface STPostFlowProcessor ()
+NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
+
+@interface STPostFlowProcessor ()<UIAlertViewDelegate>
+{
+    NSString *postIdToDelete;
+}
 
 @property (nonatomic) STFlowType flowType;
 @property (nonatomic, strong) NSString *userId;
@@ -34,12 +52,15 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
     self = [super init];
     if (self) {
         self.flowType = flowType;
+        _loaded = NO;
         self.postIds = [NSMutableArray new];
         if (flowType == STFlowTypeHome ||
             flowType == STFlowTypePopular||
             flowType == STFlowTypeRecent) {
             [self getMoreData];
         }
+        
+        [self registerForUpdates];
     }
     return self;
 }
@@ -65,6 +86,13 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
 }
 
 #pragma makr - Interface Methods
+
+- (void)registerForUpdates{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:STPostPoolObjectUpdatedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:STPostPoolObjectDeletedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postImageWasEdited:) name:STPostImageWasEdited object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:STPostPoolNewObjectNotification object:nil];
+}
 
 -(NSInteger)numberOfPosts{
     return _postIds.count;
@@ -106,19 +134,137 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
                                          STPost *post = [self postAtIndex:index];
                                          post.postSeen = YES;
                                      }
-                                     else
-                                     {
-                                         //TODO: dev_1_2 retry later?
-                                     }
                                  }];
     }
 }
 
--(void)deleteItemAtIndex:(NSInteger)index
+- (void)deleteItemAtIndex:(NSInteger)index
 {
     [_postIds removeObjectAtIndex:index];
 }
 
+- (BOOL)loading{
+    return (_loaded == NO);
+}
+
+- (void)reloadProcessor{
+    _loaded = NO;
+    _numberOfDuplicates = 0;
+    [_postIds removeAllObjects];
+    [self getMoreData];
+}
+
+- (BOOL)canGoToUserProfile{
+    if (_flowType == STFlowTypeUserGallery ||
+        _flowType == STFlowTypeMyGallery) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)currentFlowUserIsTheLoggedInUser{
+    return [_userId isEqualToString:[CoreManager loginService].currentUserUuid];
+}
+#pragma mark - Actions
+
+- (void)setLikeUnlikeAtIndex:(NSInteger)index
+              withCompletion:(STProcessorCompletionBlock)completion{
+    NSString *postId = [_postIds objectAtIndex:index];
+    [STDataAccessUtils setPostLikeUnlikeWithPostId:postId
+                                    withCompletion:^(NSError *error) {
+                                        completion(error);
+                                    }];
+}
+
+- (void)handleBigCameraButtonActionWithUserName:(NSString *)userName{
+    switch (self.flowType) {
+        case STFlowTypeMyGallery:{
+            [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakAPhoto popToRootVC:YES];
+            break;
+        }
+        case STFlowTypeUserGallery:{
+            [STDataAccessUtils inviteUserToUpload:_userId withUserName:userName withCompletion:^(NSError *error) {
+                if (!error) {
+                    [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexHome popToRootVC:YES];
+                }
+            }];
+            break;
+        }
+            
+        default:
+            return;
+            break;
+    }
+}
+
+#pragma mark - Contextul Menu Actions
+
+- (void)askUserToUploadAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    
+    [STDataAccessUtils inviteUserToUpload:post.userId withUserName:post.userName withCompletion:^(NSError *error) {
+        NSLog(@"Error asking user : %@", error);
+    }];
+    
+}
+
+- (void)deletePostAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    postIdToDelete = post.uuid;
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
+                                                        message:@"Are you sure you want to delete this post?"
+                                                       delegate:self cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Delete", nil];
+    [alertView setTag:kDeletePostTag];
+    [alertView show];
+
+}
+
+- (void)reportPostAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    
+    if ([post.reportStatus integerValue] == 1) {
+        [STDataAccessUtils reportPostWithId:post.uuid withCompletion:^(NSError *error) {
+            NSLog(@"Post was reported with error: %@", nil);
+        }];
+    }
+    else
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    }
+
+}
+
+- (void)savePostImageLocallyAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    if (post.imageDownloaded) {
+        __weak STPostFlowProcessor *weakSelf = self;
+        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl
+                                            withPostCompletion:^(UIImage *origImg) {
+                                                UIImageWriteToSavedPhotosAlbum(origImg, weakSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
+                                                
+                                            } andBlurCompletion:nil];
+    }
+}
+
+- (void)sharePostOnfacebokAtIndex:(NSInteger)index{
+    STPost *post = [self postAtIndex:index];
+    [[CoreManager facebookService] shareImageWithImageUrl:post.fullPhotoUrl description:nil
+                                            andCompletion:^(id result, NSError *error) {
+                                                if(error==nil)
+                                                    [[[UIAlertView alloc] initWithTitle:@"Success"
+                                                                                message:@"Your photo was posted."
+                                                                               delegate:nil cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil, nil] show];
+                                                else
+                                                    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                message:@"Something went wrong. You can try again later."
+                                                                               delegate:nil cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil, nil] show];
+                                            }];
+
+}
 
 #pragma mark - Internal Helpers
 
@@ -134,13 +280,68 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
         }
     }
     
-    [_postIds addObjectsFromArray:sheetArray];
+    if (sheetArray.count > 0) {
+        [_postIds addObjectsFromArray:sheetArray];
+    }
+    
+    //remove loading mock post
+    STPost *loadingPost = [[CoreManager postsPool] getPostWithId:kPostUuidForLoading];
+    if (loadingPost) {
+        [_postIds removeObject:loadingPost.uuid];
+    }
+
+    //add mock posts at the end of the list
+    [self addMockPosts];
+    
 }
 
+-(void)addMockPosts{
+    STPost *noPhotosPost = [[CoreManager postsPool] getPostWithId:kPostUuidForNoPhotosToDisplay];
+    if (!noPhotosPost) {
+        noPhotosPost = [STPost mockPostNoPhotosToDisplay];
+        [[CoreManager postsPool] addPosts:@[noPhotosPost]];
+    }
+    else
+        [_postIds removeObject:noPhotosPost.uuid];
+    
+    STPost *youSawAllPost = [[CoreManager postsPool] getPostWithId:kPostUuidForYouSawAll];
+    if (!youSawAllPost) {
+        youSawAllPost = [STPost mockPostYouSawAll];
+        [[CoreManager postsPool] addPosts:@[youSawAllPost]];
+    }
+    else
+        [_postIds removeObject:youSawAllPost.uuid];
+    
+    
+    if (_postIds.count == 0)
+    {
+        if(_flowType == STFlowTypeMyGallery||
+           _flowType == STFlowTypeUserGallery) {
+            [_postIds addObject:noPhotosPost.uuid];
+        }
+        else
+            [_postIds addObject:youSawAllPost.uuid];
+    }
+    else
+    {
+        if(_flowType == STFlowTypeMyGallery||
+           _flowType == STFlowTypeUserGallery) {
+        }
+        else
+            [_postIds addObject:youSawAllPost.uuid];
+    }
+    
+}
 
 -(void)getMoreData{
     NSInteger offset = _postIds.count + _numberOfDuplicates;
-    NSLog(@"Offset: %ld", offset);
+    NSLog(@"Offset: %ld", (long)offset);
+    
+    if (_loaded == NO) {
+        STPost *loadingPost = [STPost mockPostLoading];
+        [[CoreManager postsPool] addPosts:@[loadingPost]];
+        [self.postIds addObject:loadingPost.uuid];
+    }
 
     __weak STPostFlowProcessor *weakSelf = self;
     STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error){
@@ -150,7 +351,6 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
                 error.code == 404) {
                 //user has no location force an update
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLocationHasBeenUploaded) name:kNotificationNewLocationHasBeenUploaded object:nil];
-                //TODO: we should consider to add a notification to make this call for a better separation of the modules?
                 [[CoreManager locationService] forceLocationToUpdate];
             }
             else
@@ -158,27 +358,45 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
                 weakSelf.loaded = YES;
                 //handle error
                 //TODO: dev_1_2 handle the listener
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPostDownloadFailed
-                                                                    object:nil];
-                
-                //TODO: dev_1_2 enable refresh button
-                
+                [[CoreManager localNotificationService] postNotificationName:kNotificationPostDownloadFailed
+                                                                 object:self
+                                                               userInfo:nil];
             }
 
         }
         else
         {
             weakSelf.loaded = YES;
+            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+            BOOL suggestionsShown = [[ud valueForKey:kShowSuggestionKey] boolValue];
+            if (weakSelf.flowType == STFlowTypeHome &&
+                [weakSelf.postIds count] == 1 &&
+                suggestionsShown == NO) {
+                
+                [[CoreManager localNotificationService] postNotificationName:kNotificationShowSuggestions object:self userInfo:nil];
+                [ud setValue:@(YES) forKey:kShowSuggestionKey];
+                [ud synchronize];
+            }
+
             //TODO: dev_1_2 handle the listener
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPostDownloadSuccess
-                                                                object:nil];
             
+            //            if (objects.count > 0) {
+            //#ifdef DEBUG
+            //                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel." forKey:@"caption"];
+            //#endif
             [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
             
-            //TODO: dev_1_2 show Suggestions
-            //TODO: dev_1_2 start load images
-            //TODO: dev_1_2 enable refresh button
+            [[CoreManager postsPool] addPosts:objects];
         }
+        [[CoreManager localNotificationService] postNotificationName:kNotificationPostDownloadSuccess object:self userInfo:nil];
+        NSMutableArray *objToDownload = [NSMutableArray new];
+        for (STPost *post in objects) {
+            STImageCacheObj *obj = [STImageCacheObj imageCacheObjFromPost:post];
+            [objToDownload addObject:obj];
+        }
+        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:objToDownload];
+        
+        //        }
     };
     switch (_flowType) {
         case STFlowTypePopular:
@@ -208,7 +426,6 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
         }
         case STFlowTypeSinglePost:{
             [STDataAccessUtils getPostWithPostId:_postId
-                                          offset:offset
                                   withCompletion:completion];
             break;
         }
@@ -219,8 +436,80 @@ NSString * const kNotificationPostDownloadSuccess = @"NotificationPostDownloadSu
 
 #pragma mark - Notifications
 
+- (void)postImageWasEdited:(NSNotification *)notif{
+    NSString *postId = notif.userInfo[kPostIdKey];
+    if ([_postIds containsObject:postId]) {
+        STPost *post = [[CoreManager postsPool] getPostWithId:postId];
+        STImageCacheObj *objToDownload = [STImageCacheObj imageCacheObjFromPost:post];
+        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:@[objToDownload]];
+    }
+
+}
+
+- (void)postUpdated:(NSNotification *)notif{
+    NSString *postId = notif.userInfo[kPostIdKey];
+    if ([_postIds containsObject:postId]) {
+        [[CoreManager localNotificationService] postNotificationName:kNotificationPostUpdated object:self userInfo:@{kPostIdKey:postId}];
+    }
+}
+- (void)postDeleted:(NSNotification *)notif{
+    
+    NSString *postId = notif.userInfo[kPostIdKey];
+    if ([_postIds containsObject:postId]) {
+        [_postIds removeObject:postId];
+        
+        [self addMockPosts];
+        
+        [[CoreManager localNotificationService] postNotificationName:kNotificationPostDeleted object:self userInfo:@{kPostIdKey:postId}];
+    }
+}
+
+- (void)postAdded:(NSNotification *)notif{
+    NSString *userId = notif.userInfo[kUserIdKey];
+    if ([userId isEqualToString:_userId]) {
+        NSString *postId = notif.userInfo[kPostIdKey];
+        if (![_postIds containsObject:postId]) {
+            [self updatePostIdsWithNewArray:@[postId]];
+            [[CoreManager localNotificationService] postNotificationName:kNotificationPostAdded object:self userInfo:@{kPostIdKey:postId}];
+        }
+    }
+}
+
 -(void)newLocationHasBeenUploaded{
     [self getMoreData];
+}
+
+- (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
+    if (error)
+        [[[UIAlertView alloc] initWithTitle:@"Error"
+                                    message:@"Something went wrong. You can try again later."
+                                   delegate:nil cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    else
+        [[[UIAlertView alloc] initWithTitle:@"Success"
+                                    message:@"Your photo was saved."
+                                   delegate:nil cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == kDeletePostTag) {
+        if (buttonIndex==1) {
+            
+            [STDataAccessUtils deletePostWithId:postIdToDelete withCompletion:^(NSError *error) {
+                postIdToDelete = nil;
+                NSLog(@"Post deleted with error: %@", error);
+            }];
+        }
+        else
+            postIdToDelete = nil;
+    }
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

@@ -72,13 +72,12 @@
 
 #import "STNavigationService.h"
 
-int const kDeletePostTag = 11;
 int const kInviteUserToUpload = 14;
 static NSString * const kSTTutorialIsSeen = @"Tutorial is already seen";
 
 @interface STFlowTemplateViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate,STSharePostDelegate, STSuggestionsDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, STSuggestionsDelegate>
 {    
     STCustomShareView *_shareOptionsView;
     NSLayoutConstraint *_shareOptionsViewContraint;
@@ -218,52 +217,52 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         [self.navigationController popToRootViewControllerAnimated:NO];
     }];
 }
-
+//moved
 -(void) initCustomShareView{
-    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"STCustomShareView" owner:self options:nil];
-    
-    _shareOptionsView = (STCustomShareView*)[array objectAtIndex:0];
-    _shareOptionsView.hidden = TRUE;
-    _shareOptionsView.translatesAutoresizingMaskIntoConstraints = NO;
-     [self.view addSubview:_shareOptionsView];
-
-    _shareOptionsViewContraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
-                                                              attribute:NSLayoutAttributeTop
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.view
-                                                              attribute:NSLayoutAttributeTop
-                                                             multiplier:1.f
-                                                               constant:0];
-    
-    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
-                                                              attribute:NSLayoutAttributeBottom
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.view
-                                                              attribute:NSLayoutAttributeBottom
-                                                             multiplier:1.f
-                                                               constant:0];
-    
-    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
-                                                                        attribute:NSLayoutAttributeLeading
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.view
-                                                                        attribute:NSLayoutAttributeLeading
-                                                                       multiplier:1.f
-                                                                         constant:0];
-
-    
-    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
-                                                                        attribute:NSLayoutAttributeTrailing
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.view
-                                                                        attribute:NSLayoutAttributeTrailing
-                                                                       multiplier:1.f
-                                                                         constant:0];
-
-    
-    
-    [self.view addConstraints:@[_shareOptionsViewContraint, bottomConstraint, leftConstraint, rightConstraint]];
-    [_shareOptionsView setForDissmiss:YES];
+//    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"STCustomShareView" owner:self options:nil];
+//    
+//    _shareOptionsView = (STCustomShareView*)[array objectAtIndex:0];
+//    _shareOptionsView.hidden = TRUE;
+//    _shareOptionsView.translatesAutoresizingMaskIntoConstraints = NO;
+//     [self.view addSubview:_shareOptionsView];
+//
+//    _shareOptionsViewContraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
+//                                                              attribute:NSLayoutAttributeTop
+//                                                              relatedBy:NSLayoutRelationEqual
+//                                                                 toItem:self.view
+//                                                              attribute:NSLayoutAttributeTop
+//                                                             multiplier:1.f
+//                                                               constant:0];
+//    
+//    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
+//                                                              attribute:NSLayoutAttributeBottom
+//                                                              relatedBy:NSLayoutRelationEqual
+//                                                                 toItem:self.view
+//                                                              attribute:NSLayoutAttributeBottom
+//                                                             multiplier:1.f
+//                                                               constant:0];
+//    
+//    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
+//                                                                        attribute:NSLayoutAttributeLeading
+//                                                                        relatedBy:NSLayoutRelationEqual
+//                                                                           toItem:self.view
+//                                                                        attribute:NSLayoutAttributeLeading
+//                                                                       multiplier:1.f
+//                                                                         constant:0];
+//
+//    
+//    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_shareOptionsView
+//                                                                        attribute:NSLayoutAttributeTrailing
+//                                                                        relatedBy:NSLayoutRelationEqual
+//                                                                           toItem:self.view
+//                                                                        attribute:NSLayoutAttributeTrailing
+//                                                                       multiplier:1.f
+//                                                                         constant:0];
+//
+//    
+//    
+//    [self.view addConstraints:@[_shareOptionsViewContraint, bottomConstraint, leftConstraint, rightConstraint]];
+//    [_shareOptionsView setForDissmiss:YES];
     
 }
 
@@ -313,7 +312,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         return;
     }
     //disable this as Denis requested
-    BOOL shouldPresentAds = ![[STIAPHelper sharedInstance] productPurchased:kRemoveAdsInAppPurchaseProductID];
+    BOOL shouldPresentAds = ![[CoreManager IAPService] productPurchased:kRemoveAdsInAppPurchaseProductID];
     
     if (shouldPresentAds) {
         [self presentInterstitialControllerWithType:STInterstitialTypeAds];
@@ -426,6 +425,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 }
 #pragma mark - STShareImageDelegate
 
+//moved
 -(void)imageWasPostedWithPostId:(NSString *)postId{
     
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -449,6 +449,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     }
 }
 
+//moved
 -(void)imageWasEdited:(NSDictionary *)result{
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navCtrl = (UINavigationController *)[appDel.window rootViewController];
@@ -500,6 +501,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     }
     return sheetArray;
 }
+//moved
 -(void)imageWasSavedLocally:(NSNotification *)notif{
 //    NSLog(@"Notif: %@", notif);
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -639,8 +641,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
             break;
     }
 }
+//moved
 - (IBAction)onChatWithUser:(id)sender {
-    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:[self getCurrentDictionary]];
+//    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:[self getCurrentDictionary]];
 //    if (![[STChatController sharedInstance] canChat]) {
 //        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 ////#ifndef DEBUG
@@ -648,17 +651,17 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 ////#endif
 //    }
     
-    if (userInfo[@"user_id"]==nil && _flowUserID!=nil) {
-        userInfo[@"user_id"]=_flowUserID;
-    }
-    if ([userInfo[@"user_id"] isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        return;
-    }
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
-    [self.navigationController pushViewController:viewController animated:YES];
+//    if (userInfo[@"user_id"]==nil && _flowUserID!=nil) {
+//        userInfo[@"user_id"]=_flowUserID;
+//    }
+//    if ([userInfo[@"user_id"] isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
+//        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+//        return;
+//    }
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+//    STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
+//    viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
+//    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)onChat:(id)sender {
@@ -739,7 +742,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     
     [self.navigationController pushViewController:flowCtrl animated:YES];
 }
-
+//moved
 - (IBAction)onTapProfileName:(id)sender {
     if (self.flowType == STFlowTypeUserGallery || self.flowType == STFlowTypeMyGallery) {
         //is already in user profile
@@ -762,18 +765,18 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     [self.navigationController pushViewController:userProfileVC animated:YES];
 
 }
-
+//moved
 - (IBAction)onTapShare:(id)sender {
-    NSDictionary *dict = [self getCurrentDictionary];
-    BOOL isOwner = [dict[@"is_owner"] boolValue];
-    _shareOptionsView.shadowView.alpha = 0.0;
-    [self.view layoutIfNeeded];
-    [UIView animateWithDuration:0.35f animations:^{
-        [_shareOptionsView setUpForThreeButtons:!isOwner];
-        _shareOptionsView.hidden=FALSE;
-        _shareOptionsView.shadowView.alpha = 0.5;
-        [_shareOptionsView setForDissmiss:NO];
-    }];
+//    NSDictionary *dict = [self getCurrentDictionary];
+//    BOOL isOwner = [dict[@"is_owner"] boolValue];
+//    _shareOptionsView.shadowView.alpha = 0.0;
+//    [self.view layoutIfNeeded];
+//    [UIView animateWithDuration:0.35f animations:^{
+//        [_shareOptionsView setUpForThreeButtons:!isOwner];
+//        _shareOptionsView.hidden=FALSE;
+//        _shareOptionsView.shadowView.alpha = 0.5;
+//        [_shareOptionsView setForDissmiss:NO];
+//    }];
     
 }
 
@@ -831,9 +834,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 
     };
     if (isOwner) {
-        [[STNavigationService imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
+        [[[CoreManager navigationService] imagePickerController] startImagePickerForOwnerInViewController:self withCompletion:completion];
     } else {
-        [[STNavigationService imagePickerController] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
+        [[[CoreManager navigationService] imagePickerController] startImagePickerInViewController:self withCompletion:completion andAskCompletion:^{
             [weakSelf inviteCurrentPostOwnerUserToUpload];
         }];
     }
@@ -913,26 +916,27 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
             break;
     }
 }
+//moved
 - (IBAction)onTapEditPost:(id)sender {
-    STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
-    [currentCell captionShadowPressed:nil];
-    __block NSDictionary *currentDict = [self getCurrentDictionary];
-    
-    [[CoreManager imageCacheService] loadPostImageWithName:currentDict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-        viewController.imgData =UIImageJPEGRepresentation(img, 1.f);
-        viewController.bluredImgData = UIImageJPEGRepresentation([img applyLightEffect], 1.f);
-        viewController.delegate = self;
-        viewController.captionString = currentDict[@"caption"];
-        viewController.editPostId = currentDict[@"post_id"];
-        viewController.controllerType = STShareControllerEditCaption;
-        [self.navigationController pushViewController:viewController animated:YES];
-        
-        
-    } andBlurCompletion:nil];
+//    STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
+//    [currentCell captionShadowPressed:nil];
+//    __block NSDictionary *currentDict = [self getCurrentDictionary];
+//    
+//    [[CoreManager imageCacheService] loadPostImageWithName:currentDict[@"full_photo_link"] withPostCompletion:^(UIImage *img) {
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+//        viewController.imgData =UIImageJPEGRepresentation(img, 1.f);
+//        viewController.bluredImgData = UIImageJPEGRepresentation([img applyLightEffect], 1.f);
+//        viewController.captionString = currentDict[@"caption"];
+//        viewController.editPostId = currentDict[@"post_id"];
+//        viewController.controllerType = STShareControllerEditCaption;
+//        [self.navigationController pushViewController:viewController animated:YES];
+//        
+//        
+//    } andBlurCompletion:nil];
 
 }
+//moved
 - (IBAction)onTapSeeMore:(id)sender {
     STCustomCollectionViewCell *currentCell = (STCustomCollectionViewCell *)[[self.collectionView visibleCells] firstObject];
     NSString *captionString = [[self getCurrentDictionary] valueForKey:@"caption"];
@@ -985,22 +989,23 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     
     [self inviteUserToUpload:userID withUserName:userName];
 }
-
+//moved
 - (IBAction)onDismissShareOptions:(id)sender {
-    [UIView animateWithDuration:0.35f animations:^{
-        [_shareOptionsView setForDissmiss:YES];
-        _shareOptionsView.shadowView.alpha = 0.0;
-        [self.view layoutIfNeeded];
-    }  completion:^(BOOL finished) {
-        _shareOptionsView.hidden = TRUE;
-    }];
+//    [UIView animateWithDuration:0.35f animations:^{
+//        [_shareOptionsView setForDissmiss:YES];
+//        _shareOptionsView.shadowView.alpha = 0.0;
+//        [self.view layoutIfNeeded];
+//    }  completion:^(BOOL finished) {
+//        _shareOptionsView.hidden = TRUE;
+//    }];
 }
+//moved
 - (IBAction)onSharePostToFacebook:(id)sender {
     [self sharePhotoOnFacebookWithImgUrl:[self getCurrentDictionary][@"full_photo_link"] andDescription:nil];
 }
-
+//moved
 - (void)sharePhotoOnFacebookWithImgUrl:(NSString *)imgUrl andDescription:(NSString *)description{
-    [[STFacebookHelper new] shareImageWithImageUrl:imgUrl description:description andCompletion:^(id result, NSError *error) {
+    [[CoreManager facebookService] shareImageWithImageUrl:imgUrl description:description andCompletion:^(id result, NSError *error) {
         if(error==nil)
             [[[UIAlertView alloc] initWithTitle:@"Success"
                                         message:@"Your photo was posted."
@@ -1013,7 +1018,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
                               otherButtonTitles:nil, nil] show];
     }];
 }
-
+//moved
 - (IBAction)onSavePostLocally:(id)sender {
     __weak STFlowTemplateViewController *weakSelf = self;
     [self getCurrentImageDataWithCompletion:^(UIImage *img) {
@@ -1021,7 +1026,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     }];
     
 }
-
+//moved
 -(IBAction)onMoveAndScale:(id)sender{
     NSDictionary *dict = [self getCurrentDictionary];
     __weak STFlowTemplateViewController *weakSelf = self;
@@ -1031,16 +1036,17 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         }
     } andBlurCompletion:nil];
 }
-
+//moved
 -(IBAction)onDeletePost:(id)sender{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
-                                                        message:@"Are you sure you want to delete this post?"
-                                                       delegate:self cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles:@"Delete", nil];
-    [alertView setTag:kDeletePostTag];
-    [alertView show];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
+//                                                        message:@"Are you sure you want to delete this post?"
+//                                                       delegate:self cancelButtonTitle:@"Cancel"
+//                                              otherButtonTitles:@"Delete", nil];
+//    [alertView setTag:kDeletePostTag];
+//    [alertView show];
     
 }
+//moved
 - (IBAction)onReportPost:(id)sender {
     NSDictionary *dict = [self getCurrentDictionary];
 
@@ -1065,6 +1071,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
     }
 }
+//moved
 - (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
     if (error)
         [[[UIAlertView alloc] initWithTitle:@"Error"
@@ -1077,7 +1084,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
                                    delegate:nil cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
 }
-
+//moved
 -(void) getCurrentImageDataWithCompletion:(loadImageCompletion) completion{
     NSDictionary *dict = [self getCurrentDictionary];
     [[CoreManager imageCacheService] loadPostImageWithName:dict[@"full_photo_link"] withPostCompletion:^(UIImage *origImg) {
@@ -1228,7 +1235,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         }
     }
 }
-
+//moved
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 //    _numberOfSeenPosts++;
 //    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
@@ -1245,7 +1252,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
         [self processLastPostWithIndex:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
     }
 }
-
+//moved
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     _start = scrollView.contentOffset;
@@ -1307,8 +1314,9 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
 #pragma mark - UIAlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == kDeletePostTag)
+    /*if (alertView.tag == kDeletePostTag)
     {
+        //moved
         if (buttonIndex==1) {
             NSDictionary *dict = [self getCurrentDictionary];
             __weak STFlowTemplateViewController *weakSelf = self;
@@ -1341,7 +1349,8 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
             [STDeletePostRequest deletePost:dict[@"post_id"] withCompletion:completion failure:nil];
         }
     }
-    else if (alertView.tag == kInviteUserToUpload){
+    else*/
+    if (alertView.tag == kInviteUserToUpload){
         if (buttonIndex ==1) {
             [[STMenuController sharedInstance] goHome];
         }
@@ -1361,7 +1370,7 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     [self.postsDataSource removeObjectsAtIndexes:indexSet];
     
 }
-
+//moved
 - (void)startMoveScaleShareControllerForImage:(UIImage *)img
                                shouldCompress:(BOOL)compressing
                                     editedPostId:(NSString *)postId
@@ -1369,14 +1378,13 @@ UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate
     
     // here, no compressing should be done, because it might be a cropping after this
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
-    viewController.currentImg = img;
-    viewController.delegate = self;
-    viewController.editPostId = postId;
-    viewController.shouldCompress = compressing;
-    viewController.captionString = captionString;
-    [self.navigationController pushViewController:viewController animated:NO];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
+//    viewController.currentImg = img;
+//    viewController.editPostId = postId;
+//    viewController.shouldCompress = compressing;
+//    viewController.captionString = captionString;
+//    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 -(BOOL)prefersStatusBarHidden{

@@ -14,6 +14,13 @@
 @class STNavigationService;
 @class STFacebookLoginController;
 @class STImageCacheController;
+@class STFacebookHelper;
+@class STIAPHelper;
+@class STContactsManager;
+@class STImagePickerService;
+@class STUsersPool;
+@class STLocalNotificationService;
+@class STNotificationsManager;
 
 @interface CoreManager : NSObject
 
@@ -26,5 +33,12 @@
 + (STNavigationService *)navigationService;
 + (STFacebookLoginController *)loginService;
 + (STImageCacheController *)imageCacheService;
++ (STFacebookHelper *)facebookService;
++ (STIAPHelper *)IAPService;
++ (STContactsManager *)contactsService;
++ (STImagePickerService *)imagePickerService;
++ (STUsersPool *)usersPool;
++ (STLocalNotificationService *)localNotificationService;
++ (STNotificationsManager *)notificationsService;
 
 @end

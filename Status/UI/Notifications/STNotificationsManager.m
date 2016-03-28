@@ -7,7 +7,7 @@
 //
 
 #import "STNotificationsManager.h"
-#import "STFlowTemplateViewController.h"
+#import "FeedCVC.h"
 #import "STChatController.h"
 #import "STChatRoomViewController.h"
 #import "STNetworkQueueManager.h"
@@ -18,65 +18,134 @@
 #import "STNotificationsViewController.h"
 #import "STImageCacheController.h"
 
+#import "STListUser.h"
+#import "STNavigationService.h"
+#import "STLocalNotificationService.h"
+#import "STGetNotificationsCountRequest.h"
+#import "STUnseenPostsCountRequest.h"
+
+static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
+static NSTimeInterval const kRefreshTimerInterval = 120.f;
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
     NSTimer *_dismissTimer;
+    NSTimer *_serviceTimer;
     STNotificationBanner *_currentBanner;
 }
 
+@property (nonatomic, strong) NSNumber *overAllBadge;
+
 @end
 
-static STNotificationsManager *_sharedManager = nil;
 
 @implementation STNotificationsManager
-+ (STNotificationsManager *)sharedManager {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [STNotificationsManager new];
-    });
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        _serviceTimer = [NSTimer scheduledTimerWithTimeInterval:kRefreshTimerInterval target:self selector:@selector(checkForNotificationNumber) userInfo:nil repeats:YES];
+    }
     
-    return _sharedManager;
+    return self;
 }
-- (UIViewController *)getCurrentViewController {
-    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+
+-(void)dealloc{
+    [_serviceTimer invalidate];
+    _serviceTimer = nil;
     
-    UINavigationController *navController = (UINavigationController *)mainWindow.rootViewController;
-    UIViewController *lastVC = [navController.viewControllers lastObject];
-    return lastVC;
+    [_dismissTimer invalidate];
+    _dismissTimer = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+-(void)setOverAllBadgeNumber:(NSInteger)badgeNumber{
+    _overAllBadge = @(badgeNumber);
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
+    [[NSUserDefaults standardUserDefaults] setValue:@(badgeNumber) forKey:kSTLastBadgeNumber];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[CoreManager localNotificationService] postNotificationName:STNotificationBadgeValueDidChanged object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
+
+
+}
+
+-(void)loadBadgeNumber{
+    NSNumber *lastBadgeNumber = [[NSUserDefaults standardUserDefaults] valueForKey:kSTLastBadgeNumber];
+    if (lastBadgeNumber !=nil) {
+        [self setOverAllBadgeNumber:lastBadgeNumber.integerValue];
+    }
+    else
+        [self setOverAllBadgeNumber:0];
+}
+
+-(void)checkForNotificationNumber{
+    __weak STNotificationsManager *weakSelf = self;
+    if ([CoreManager loggedIn]) {
+        STRequestCompletionBlock completion = ^(id response, NSError *error){
+            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSInteger unreadNotificationsCount = [response[@"count"] integerValue];
+                    [weakSelf setOverAllBadgeNumber:unreadNotificationsCount];
+                    [[CoreManager navigationService] setBadge:unreadNotificationsCount forTabAtIndex:STTabBarIndexChat];
+
+                });
+            }
+        };
+        [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
+        
+        
+        [STUnseenPostsCountRequest getUnseenCountersWithCompletion:^(id response, NSError *error) {
+            if ([response[@"status_code"] integerValue] == 200) {
+                NSInteger unseenHomePosts = [response[@"unseenHomePosts"] integerValue];
+                NSInteger unseenPopularPosts = [response[@"unseenPopularPosts"] integerValue];
+                NSInteger unseenRecentPosts = [response[@"unseenRecentPosts"] integerValue];
+                
+                [[CoreManager navigationService] setBadge:unseenHomePosts forTabAtIndex:STTabBarIndexHome];
+                
+                //TODO: dev_1_2 go enable this when ready
+//                [[CoreManager navigationService] setBadge:unseenPopularPosts + unseenRecentPosts forTabAtIndex:STTabBarIndexSearch];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"Load counters error: %@", error);
+        }];
+
+    }
+}
+
 
 -(void) handleNotification:(NSDictionary *) notif{
     if (notif == nil) {
         return;
     }
-    UIViewController *lastVC = [self getCurrentViewController];
-
-    if ([lastVC isKindOfClass:[STFlowTemplateViewController class]]) {
+    
+    if (![CoreManager loggedIn]) {
+        //wait for the login to be performed and after handle the notification
+        _lastNotification = notif;
+        return;
+    }
+    if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
+        _lastNotification = nil;
+        NSDictionary *userInfo = notif[@"user_info"];
+        STListUser *lu = [STListUser new];
+        lu.uuid = userInfo[@"user_id"];
+        //TODO: dev_1_2 add other params if existent, too
         
-        if (![CoreManager loggedIn]) {
-            //wait for the login to be performed and after handle the notification
-            _lastNotification = notif;
+        if (lu.uuid == nil) {
+            NSLog(@"Error from notification: user_id = nil");
             return;
         }
-        if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
-            _lastNotification = nil;
-            NSDictionary *userInfo = notif[@"user_info"];
-            if (userInfo[@"user_id"] == nil) {
-                NSLog(@"Error from notification: user_id = nil");
-                return;
-            }
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-            STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-            viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:notif[@"user_info"]];
-            [lastVC.navigationController pushViewController:viewController animated:YES];
-        }
-        else
-        {   _lastNotification = nil;
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            STNotificationsViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"notificationScene"];
-            [lastVC.navigationController pushViewController:vc animated:YES];
-//            [lastVC performSegueWithIdentifier:@"notifSegue" sender:nil];
-        }
+        
+        STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+        [[CoreManager navigationService] pushViewController:viewController
+                                            inTabbarAtIndex:STTabBarIndexChat
+                                        keepThecurrentStack:NO];
+    }
+    else
+    {   _lastNotification = nil;
+        [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexChat popToRootVC:YES];
     }
 }
 
@@ -93,10 +162,8 @@ static STNotificationsManager *_sharedManager = nil;
 }
 
 -(void)handleInAppNotification:(NSDictionary *)notification{
-    UIViewController *lastVC = [self getCurrentViewController];
-    if ([lastVC isKindOfClass:[STNotificationsViewController class]]){
-        [(STNotificationsViewController *)lastVC getNotificationsFromServer];
-    }
+    [[CoreManager localNotificationService] postNotificationName:STNotificationsShouldBeReloaded object:nil userInfo:nil];
+    
     NSMutableDictionary *notificationDict = [[NSMutableDictionary alloc] initWithDictionary:notification[@"user_info"]];
     STNotificationType notifType = [notificationDict[@"notification_type"] integerValue];
     if (notifType == STNotificationTypeLike ||
@@ -142,6 +209,8 @@ static STNotificationsManager *_sharedManager = nil;
     banner = [self createBannerWithNotificationInfo:notificationDict];
     [self showBanner:banner];
 }
+
+#pragma mark - Banner View
 
 -(void)showBanner:(STNotificationBanner *)banner{
     [self removeBanner];
@@ -189,63 +258,32 @@ static STNotificationsManager *_sharedManager = nil;
 
 #pragma mark STNotificationBannerDelegate
 
-- (void)dissmissPresentedVCs:(UIViewController *)lastVC {
-    while (lastVC.presentedViewController != nil) {
-        [lastVC.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-    }
-}
-
 -(void)bannerTapped{
     NSLog(@"Banner pressed");
     STNotificationType notifType = _currentBanner.notificationType;
-    UIViewController *lastVC = [self getCurrentViewController];
-    [self dissmissPresentedVCs:lastVC];
     switch (notifType) {
         case STNotificationTypeLike:
         {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            STFlowTemplateViewController *flowCtrl = [storyboard instantiateViewControllerWithIdentifier: @"flowTemplate"];
-            flowCtrl.flowType = STFlowTypeSinglePost;
-            flowCtrl.postID = _currentBanner.notificationInfo[@"post_id"];
-            flowCtrl.flowUserID = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
-            flowCtrl.userName = _currentBanner.notificationInfo[@"name"];
-            [lastVC.navigationController pushViewController:flowCtrl animated:YES];
-
+            NSString *postID = _currentBanner.notificationInfo[@"post_id"];
+            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postID];
+            
+            [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
         }
             break;
         case STNotificationTypeChatMessage:
         {
-            NSMutableDictionary *selectedUserInfo = [NSMutableDictionary new];
-            selectedUserInfo[@"user_id"] = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
-            selectedUserInfo[@"user_name"] = _currentBanner.notificationInfo[@"name"];
+            STListUser *lu = [STListUser new];
+            lu.uuid = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
+            lu.userName = _currentBanner.notificationInfo[@"name"];
             NSString *urlString = _currentBanner.notificationInfo[@"photo"];
             if ([urlString rangeOfString:@"http"].location==NSNotFound) {
                 urlString = [NSString stringWithFormat:@"%@%@",[CoreManager imageCacheService].photoDownloadBaseUrl, _currentBanner.notificationInfo[@"photo"]];
             }
+            lu.thumbnail = urlString;
 
-            selectedUserInfo[@"small_photo_link"] = urlString;
-
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-            STChatRoomViewController *viewController = (STChatRoomViewController *)[storyboard instantiateViewControllerWithIdentifier:@"chat_room"];
-            viewController.userInfo = [NSMutableDictionary dictionaryWithDictionary:selectedUserInfo];
-
+            STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
             
-            if ([lastVC isKindOfClass:[STChatRoomViewController class]]) {
-                //replace this last room with the new one
-                UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
-                
-                UINavigationController *navController = (UINavigationController *)mainWindow.rootViewController;
-
-                NSMutableArray *vcs = [NSMutableArray arrayWithArray:navController.viewControllers];
-                [vcs removeLastObject];
-                [vcs addObject:viewController];
-                
-                [lastVC.navigationController setViewControllers:vcs];
-                
-            }
-            else
-                [lastVC.navigationController pushViewController:viewController animated:YES];
-
+            [[CoreManager navigationService] pushViewController:viewController inTabbarAtIndex:STTabBarIndexChat keepThecurrentStack:NO];
         }
             break;
         case STNotificationTypeUploaded:
@@ -259,8 +297,6 @@ static STNotificationsManager *_sharedManager = nil;
 }
 
 -(void)bannerProfileImageTapped{
-    UIViewController *lastVC = [self getCurrentViewController];
-    [self dissmissPresentedVCs:lastVC];
     NSString * userId = nil;
     id userIdentifier = [_currentBanner.notificationInfo valueForKey:@"user_id"];
     if ([userIdentifier respondsToSelector:@selector(stringValue)]) {
@@ -269,7 +305,7 @@ static STNotificationsManager *_sharedManager = nil;
     else
         userId = userIdentifier;
     STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:userId];
-    [lastVC.navigationController pushViewController:profileVC animated:YES];
+    [[CoreManager navigationService] pushViewController:profileVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
     
     [self dismissCurrentBanner];
 }
@@ -277,4 +313,18 @@ static STNotificationsManager *_sharedManager = nil;
 -(void)bannerPressedClose{
     [self dismissCurrentBanner];
 }
+
+- (void)userDidLoggedIn{
+    [self handleLastNotification];
+    [self checkForNotificationNumber];
+}
+
+- (void)userDidRegister{
+    [self checkForNotificationNumber];
+}
+
+- (void)userDidLoggedOut{
+    
+}
+
 @end

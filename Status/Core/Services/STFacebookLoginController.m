@@ -8,7 +8,6 @@
 
 #import "STFacebookLoginController.h"
 #import "STConstants.h"
-#import "STFlowTemplateViewController.h"
 #import "KeychainItemWrapper.h"
 #import "STImageCacheController.h"
 #import "AppDelegate.h"
@@ -31,11 +30,11 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "CreateDataModelHelper.h"
+#import "STLocalNotificationService.h"
 
 @interface STFacebookLoginController ()<FBSDKLoginButtonDelegate>
 
 @property (nonatomic, strong) NSString *currentUserId;
-//TODO: should we use the STUser instead of the fetchedUserData
 @property (nonatomic, strong) NSDictionary *fetchedUserData;
 
 @end
@@ -72,13 +71,48 @@
     if ([FBSDKAccessToken currentAccessToken]) {
         [self loginOrRegister];
     }
+    else
+        [self logout];
 }
 
 #pragma mark - Facebook DelegatesFyou
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
-   
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedOut object:nil];
+    [self logout];
+}
+
+-(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
+    if (error!=nil) {
+        _currentUserId = nil;
+    }
+    else
+        [self loginOrRegister];
+}
+
+- (void)setUpCrashlyticsForUserId:(NSString *)userId andEmail:(NSString *)email andUserName:(NSString *)userName{
+    [[Crashlytics sharedInstance] setUserIdentifier:userId];
+    [[Crashlytics sharedInstance] setUserEmail:email];
+    [[Crashlytics sharedInstance] setUserName:userName];
+}
+
+- (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
+    [CoreManager networkService].accessToken = response[@"token"];
+    [CoreManager imageCacheService].photoDownloadBaseUrl = response[@"baseUrlStorage"];
+    [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
+    [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
+    [[CoreManager locationService] startLocationUpdates];
+    NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:response[@"user_id"]];
+    self.currentUserId = userId;
+    [[STChatController sharedInstance] forceReconnect];
+    [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
+    [self requestRemoteNotificationAccess];
+    [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
+    //get settings from server
+    [self getUserSettingsFromServer];
+}
+
+-(void)logout{
+    [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedOut object:nil userInfo:nil];
     _fetchedUserData = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [FBSDKAccessToken setCurrentAccessToken:nil];
@@ -99,42 +133,7 @@
     [STSetAPNTokenRequest setAPNToken:@"" withCompletion:completion failure:nil];
     
     [[STChatController sharedInstance] close];
-}
 
--(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
-    if (error!=nil) {
-        _currentUserId = nil;
-    }
-    else
-        [self loginOrRegister];
-}
-
--(void) saveAccessToken:(NSString *) accessToken{
-    KeychainItemWrapper *keychainWrapperAccessToken = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
-    [keychainWrapperAccessToken setObject:accessToken forKey:(__bridge id)(kSecValueData)];
-}
-
-- (void)setUpCrashlyticsForUserId:(NSString *)userId andEmail:(NSString *)email andUserName:(NSString *)userName{
-    [[Crashlytics sharedInstance] setUserIdentifier:userId];
-    [[Crashlytics sharedInstance] setUserEmail:email];
-    [[Crashlytics sharedInstance] setUserName:userName];
-}
-
-- (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
-    [CoreManager networkService].accessToken = response[@"token"];
-    [CoreManager imageCacheService].photoDownloadBaseUrl = response[@"baseUrlStorage"];
-    [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
-    [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
-    [[CoreManager locationService] startLocationUpdates];
-    [self saveAccessToken:response[@"token"]];
-    NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:response[@"user_id"]];
-    self.currentUserId = userId;
-    [[STChatController sharedInstance] forceReconnect];
-    [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
-    [self requestRemoteNotificationAccess];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidLoggedIn object:nil];
-    //get settings from server
-    [self getUserSettingsFromServer];
 }
 
 -(void) loginOrRegister{
@@ -153,7 +152,7 @@
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 [weakSelf measureRegister];
                 [weakSelf setUpEnvironment:response andUserInfo:userInfo];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidRegister object:nil];
+                [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidRegister object:nil userInfo:nil];
             }
             else
             {
@@ -187,7 +186,7 @@
         userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
         userInfo[@"facebook_id"] = userFbId;
 
-        [[STFacebookHelper new] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
+        [[CoreManager facebookService] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
             if (info[@"birthday"]) {
                 userInfo[@"birthday"] = [NSDate birthdayStringFromFacebookBirthday:info[@"birthday"]];
             }
@@ -229,17 +228,8 @@
     [Tune measureEventName:@"registration"];
 }
 
-static const UIRemoteNotificationType REMOTE_NOTIFICATION_TYPES_REQUIRED = (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound);
-
 - (void)requestRemoteNotificationAccess;
 {
-    bool isIOS8OrGreater = [[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)];
-    if (!isIOS8OrGreater)
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:REMOTE_NOTIFICATION_TYPES_REQUIRED];
-        return;
-    }
-
     UIUserNotificationSettings *settings =
     [UIUserNotificationSettings
      settingsForTypes: (UIUserNotificationTypeBadge |

@@ -13,21 +13,29 @@
 #import "STFacebookHelper.h"
 #import "STSyncContactsRequest.h"
 
+@interface STContactsManager ()
+
+@property (nonatomic, strong) NSArray *allContacts;
+
+@end
+
 @implementation STContactsManager
-+(instancetype) sharedInstance{
-    static STContactsManager *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [[self alloc] init];
-        [_sharedManager updateContactsList];
-    });
-    
-    return _sharedManager;
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+    }
+    return self;
 }
+
+- (NSArray *) contactsList{
+    return _allContacts;
+}
+
 - (void)fetchAllContacts {
     CFErrorRef *error = nil;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
-    //TODO: add notification update
+
     ABRecordRef source = ABAddressBookCopyDefaultSource(addressBook);
     CFArrayRef allPeople = (ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName));
     //CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
@@ -49,7 +57,9 @@
             
         }
     }
-    CFRelease(allPeople);
+    if (allPeople)
+        CFRelease(allPeople);
+    
     CFRelease(addressBook);
     CFRelease(source);
     
@@ -78,10 +88,12 @@
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"You should grant access to the contacts list for STATUS App" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 
     }
+    
+    CFRelease(addressBookRef);
 }
 
 -(void) syncContactsWithTheServer{
-    [[STFacebookHelper new] loadUserFriendsWithCompletion:^(NSArray *newObjects) {
+    [[CoreManager facebookService] loadUserFriendsWithCompletion:^(NSArray *newObjects) {
         NSLog(@"Final array %@", newObjects);
         NSArray *fbData = [NSArray arrayWithArray:newObjects];
         NSMutableArray *facebookFriends = [NSMutableArray new];

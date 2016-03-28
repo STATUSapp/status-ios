@@ -75,6 +75,7 @@
         return;
     }
     
+    
     if (buttonIndex<=1) {
         @try {
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -153,5 +154,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

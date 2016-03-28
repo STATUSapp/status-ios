@@ -113,7 +113,7 @@
 
 +(NSData *)thumbnailForPerson:(ABRecordRef)person{
     CFDataRef imgData = ABPersonCopyImageData(person);
-    NSData *imageData = (__bridge NSData *)imgData;
+    NSData *imageData = [NSData dataWithData:(__bridge NSData *)imgData];
     
     if (imgData != NULL) {
         CFRelease(imgData);
