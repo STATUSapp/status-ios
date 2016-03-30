@@ -8,6 +8,7 @@
 
 #import "STUserProfile.h"
 #import "NSDate+Additions.h"
+#import "STImageCacheController.h"
 
 @implementation STUserProfile
 
@@ -47,7 +48,11 @@
     _followingCount = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followingCount"] integerValue];
     _isFollowedByCurrentUser = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followed_by_current_user"] boolValue];
     
-    _profilePhotoURL = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"];
+    //super properties
+    self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"];
+    self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
+    self.imageSize = CGSizeZero;
+
     
 }
 

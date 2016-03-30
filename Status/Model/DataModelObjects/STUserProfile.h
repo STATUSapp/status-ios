@@ -30,8 +30,6 @@
 
 @property (nonatomic, assign) NSInteger numberOfPosts;
 
-@property (nonatomic, strong) NSString * profilePhotoURL;
-
 + (instancetype)userProfileWithDict:(NSDictionary *)userDict;
 
 

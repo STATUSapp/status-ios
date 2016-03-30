@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class STPost;
+@class STBaseObj;
 
 @interface STImageCacheObj : NSObject
 
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSNumber *flowType;
 
-+ (STImageCacheObj *)imageCacheObjFromPost:(STPost *)post;
++ (STImageCacheObj *)imageCacheObjFromObj:(STBaseObj *)obj;
 
 @end

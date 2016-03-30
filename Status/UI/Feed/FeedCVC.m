@@ -7,7 +7,7 @@
 //
 
 #import "FeedCVC.h"
-#import "STPostFlowProcessor.h"
+#import "STFlowProcessor.h"
 #import "STPost.h"
 
 #import "FeedCell.h"
@@ -39,7 +39,7 @@
 
 }
 
-@property (nonatomic, strong) STPostFlowProcessor *feedProcessor;
+@property (nonatomic, strong) STFlowProcessor *feedProcessor;
 
 @property (nonatomic, strong) NSString *userName;
 @end
@@ -57,7 +57,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     UINavigationController *navController = [storyboard instantiateInitialViewController];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
     
-    STPostFlowProcessor *feedProcessor = [[STPostFlowProcessor alloc] initWithFlowType:STFlowTypeHome];
+    STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeHome];
     feedCVC.feedProcessor = feedProcessor;
     
     return feedCVC;
@@ -68,7 +68,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     UINavigationController *navController = [storyboard instantiateInitialViewController];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
     
-    STPostFlowProcessor *feedProcessor = [[STPostFlowProcessor alloc] initWithFlowType:STFlowTypeSinglePost postId:postId];
+    STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeSinglePost postId:postId];
     feedCVC.feedProcessor = feedProcessor;
     
     return feedCVC;
@@ -83,7 +83,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     BOOL userIsMe = [[CoreManager loginService].currentUserUuid isEqualToString:userId];
     STFlowType flowType = userIsMe ? STFlowTypeMyGallery : STFlowTypeUserGallery;
     
-    STPostFlowProcessor *feedProcessor = [[STPostFlowProcessor alloc] initWithFlowType:flowType userId:userId];
+    STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:flowType userId:userId];
     feedCVC.feedProcessor = feedProcessor;
     
     return feedCVC;
@@ -94,11 +94,11 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     [super viewDidLoad];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationPostDownloadSuccess object:_feedProcessor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationPostUpdated object:_feedProcessor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationPostDeleted object:_feedProcessor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationObjDownloadSuccess object:_feedProcessor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationObjUpdated object:_feedProcessor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationObjDeleted object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationPostAdded object:_feedProcessor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
 
 }
@@ -121,7 +121,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 - (void)postUpdated:(NSNotification *)notif{
     STPost *post = [[CoreManager postsPool] getPostWithId:notif.userInfo[kPostIdKey]];
     STPost *curentPost = [self getCurrentPost];
-    if ([curentPost isLoadingPost] || [post.uuid isEqualToString:curentPost.uuid]) {
+    if ([curentPost isLoadingObject] || [post.uuid isEqualToString:curentPost.uuid]) {
         [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
     }
     
@@ -157,13 +157,13 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 }
 
 -(STPost *) getCurrentPost{
-    if (self.feedProcessor.numberOfPosts == 0) {
+    if (self.feedProcessor.numberOfObjects == 0) {
         return nil;
     }
     STPost *post = nil;
     NSInteger index = [self getCurrentIndex];
     if (index!=NSNotFound) {
-        post = [_feedProcessor postAtIndex:index];
+        post = [_feedProcessor objectAtIndex:index];
     }
     
     return post;
@@ -204,7 +204,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
         CGFloat screenWidth = screenRect.size.width;
         NSUInteger currentIndex = point.x/screenWidth;
         NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
-        [_feedProcessor processPostAtIndex:currentIndex];
+        [_feedProcessor processObjectAtIndex:currentIndex];
     }
 }
 
@@ -222,12 +222,12 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSInteger numRows = [_feedProcessor numberOfPosts];
+    NSInteger numRows = [_feedProcessor numberOfObjects];
     return numRows;
 }
 
 -(NSString *)identifierForPost:(STPost *)post{
-    if ([post isLoadingPost] || !post.imageDownloaded)
+    if ([post isLoadingObject] || !post.mainImageDownloaded)
         return loadingFeedCell;
     
     if (post.isNoPhotosToDisplayPost)
@@ -248,7 +248,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    STPost *post = [_feedProcessor postAtIndex:indexPath.row];
+    STPost *post = [_feedProcessor objectAtIndex:indexPath.row];
     NSString *identifier = [self identifierForPost:post];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
@@ -264,7 +264,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     }
     else if ([cell isKindOfClass:[FooterCell class]]){
         UIImage *bluredImage = nil;
-        if ([_feedProcessor numberOfPosts] > 0) {
+        if ([_feedProcessor numberOfObjects] > 0) {
             bluredImage = [self blurScreen];
         }
         else
@@ -278,37 +278,6 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
-
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
-
 #pragma mark - IBACtions
 - (IBAction)onLikePressed:(id)sender {
     [(UIButton *)sender setUserInteractionEnabled:NO];
@@ -317,9 +286,9 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     [_feedProcessor setLikeUnlikeAtIndex:index
                           withCompletion:^(NSError *error) {
                               [(UIButton *)sender setUserInteractionEnabled:YES];
-                              STPost *post = [weakSelf.feedProcessor postAtIndex:index];
+                              STPost *post = [weakSelf.feedProcessor objectAtIndex:index];
                               if (post.postLikedByCurrentUser == YES &&
-                                  [weakSelf.feedProcessor numberOfPosts] >= index + 1) {
+                                  [weakSelf.feedProcessor numberOfObjects] >= index + 1) {
                                   [weakSelf performSelector:@selector(goToNextPostWithIndex:)
                                                  withObject:@(index + 1)
                                                  afterDelay:0.25f];
@@ -401,13 +370,13 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 }
 
 -(void)contextualMenuDeletePost{
-    [_feedProcessor deletePostAtIndex:[self getCurrentIndex]];
+    [_feedProcessor deleteObjectAtIndex:[self getCurrentIndex]];
 }
 
 -(void)contextualMenuEditPost{
     STPost *post = [self getCurrentPost];
-    if (post.imageDownloaded == YES) {
-        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *origImg) {
+    if (post.mainImageDownloaded == YES) {
+        [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
             if (origImg!=nil) {
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
@@ -426,8 +395,8 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 -(void)contextualMenuMoveAndScalePost{
     STPost *post = [self getCurrentPost];
     
-    if (post.imageDownloaded == YES) {
-        [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *img) {
+    if (post.mainImageDownloaded == YES) {
+        [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *img) {
             if (img!=nil) {
                 STMoveScaleViewController *vc = [STMoveScaleViewController newControllerForImage:img shouldCompress:NO andPost:post];
                 

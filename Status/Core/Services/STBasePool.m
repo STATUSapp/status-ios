@@ -23,6 +23,7 @@
     self = [super init];
     if (self) {
         _objects = [NSMutableSet set];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
     }
     return self;
 }
@@ -71,12 +72,19 @@
 }
 
 - (STBaseObj *)randomObject {
-    if (self.objects.count == 0) {
+    NSSet *downloadedSet = [self.objects filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageDownloaded == YES"]];
+    if (downloadedSet.count == 0) {
         return nil;
     }
     
-    return self.objects.anyObject;
+    return downloadedSet.anyObject;
 }
+
+- (STBaseObj *)objectForUrl:(NSString *)url{
+    NSArray *filteredArray = [[self getAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageUrl like %@", url]];
+    return [filteredArray firstObject];
+}
+
 
 #pragma mark - Private methods
 
@@ -111,6 +119,21 @@
             }
         }
     }
+}
+
+#pragma mark - Notifications
+
+-(void)imageWasSavedLocally:(NSNotification *)notif{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *fullUrl = notif.userInfo[kImageUrlKey];
+        CGSize imageSize = CGSizeFromString(notif.userInfo[kImageSizeKey]);
+        STBaseObj *updatedObj = [self objectForUrl:fullUrl];
+        if (updatedObj) {
+            updatedObj.mainImageDownloaded = YES;
+            updatedObj.imageSize = imageSize;
+            [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:updatedObj.uuid}];
+        }
+    });
 }
 
 

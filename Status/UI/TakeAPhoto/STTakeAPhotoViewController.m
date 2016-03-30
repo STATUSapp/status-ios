@@ -93,7 +93,7 @@
     STPost * randomPost = [CoreManager postsPool].randomPost;
     
     if (randomPost != nil) {
-        [[CoreManager imageCacheService] loadPostImageWithName:randomPost.fullPhotoUrl withPostCompletion:^(UIImage *origImg) {
+        [[CoreManager imageCacheService] loadPostImageWithName:randomPost.mainImageUrl withPostCompletion:^(UIImage *origImg) {
             
         } andBlurCompletion:^(UIImage *bluredImg) {
             weakSelf.backgroundImageView.image = bluredImg;

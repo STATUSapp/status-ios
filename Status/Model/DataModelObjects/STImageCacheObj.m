@@ -8,14 +8,14 @@
 
 #import "STImageCacheObj.h"
 #import "STPost.h"
+#import "STUserProfile.h"
 
 @implementation STImageCacheObj
 
-+ (STImageCacheObj *)imageCacheObjFromPost:(STPost *)post{
++ (STImageCacheObj *)imageCacheObjFromObj:(STBaseObj *)obj{
     STImageCacheObj *ico = [STImageCacheObj new];
-    ico.imageUrl = post.fullPhotoUrl;
+    ico.imageUrl = obj.mainImageUrl;
     return ico;
 }
-
 
 @end

@@ -193,7 +193,7 @@ static NSInteger const  kMaxCaptionLenght = 250;
                                 if (!error) {
                                     STPost *post = [objects firstObject];
                                     if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
-                                        [weakSelf startPostingWithPostId:post.uuid andImageUrl:post.fullPhotoUrl];
+                                        [weakSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl];
                                     }
                                     else
                                     {

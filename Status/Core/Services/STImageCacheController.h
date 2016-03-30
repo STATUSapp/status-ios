@@ -15,7 +15,7 @@ typedef void (^loadImageCompletion)(UIImage *img);
 typedef void (^loadPostImageCompletion)(UIImage *origImg);
 typedef void (^loadBlurPostCompletion) (UIImage *bluredImg);
 typedef void (^downloadImageComp)(NSString *downloadedImage);
-typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded);
+typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded, CGSize downloadedImageSize);
 @interface STImageCacheController : NSObject
 
 @property(nonatomic, strong) NSString *photoDownloadBaseUrl;

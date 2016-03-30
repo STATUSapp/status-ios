@@ -126,17 +126,14 @@
         
     }
     else if ([flowType isEqualToString:@"popular"]){
-        //TODO: dev_1_2 go enable this when ready
-//        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
+        [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexExplore popToRootVC:YES];
 
     }
     else if ([flowType isEqualToString:@"recent"]){
-        //TODO: dev_1_2 go enable this when ready
-        //        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
+                [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexExplore popToRootVC:YES];
     }
     else if ([flowType isEqualToString:@"nearby"]){
-        //TODO: dev_1_2 go enable this when ready
-        //        [[CoreManager navigationService] switchToTabBarAtIndex:[STTabBarIndexSearch popToRootVC:YES];
+                [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexExplore popToRootVC:YES];
     }
 
 }

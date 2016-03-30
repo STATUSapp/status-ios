@@ -12,6 +12,7 @@
 #import "STNotificationAndChatContainerViewController.h"
 #import "STUserProfileViewController.h"
 #import "STFacebookLoginController.h"
+#import "ExploreTVC.h"
 
 #import "FeedCVC.h"
 
@@ -47,6 +48,10 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
     // add explore flow
+    ExploreTVC *exploreTVC = [ExploreTVC exploreController];
+    UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:exploreTVC];
+    exploreNavCtrl.navigationBarHidden = YES;
+
     
     // add take a photo
     
@@ -73,19 +78,22 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [self configureNavControllerToHandleSwipeToBackGesture:profileNav];
     
     [tabBarControllers insertObject:homeNavCtrl atIndex:STTabBarIndexHome];
-    [tabBarControllers insertObject:takePhotoNav atIndex:STTabBarIndexTakAPhoto];
+    [tabBarControllers insertObject:exploreNavCtrl atIndex:STTabBarIndexExplore];
+    [tabBarControllers insertObject:takePhotoNav atIndex:STTabBarIndexTakeAPhoto];
     [tabBarControllers insertObject:notifChatNav atIndex:STTabBarIndexChat];
     [tabBarControllers insertObject:profileNav atIndex:STTabBarIndexProfile];
 
     [self setViewControllers:tabBarControllers animated:NO];
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[UIImage imageNamed:@"home"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexTakAPhoto] setImage:[UIImage imageNamed:@"camera"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setImage:[UIImage imageNamed:@"explore"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[UIImage imageNamed:@"camera"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"message"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[UIImage imageNamed:@"profile"]];
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[UIImage imageNamed:@"home_active"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexTakAPhoto] setSelectedImage:[UIImage imageNamed:@"camera_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setSelectedImage:[UIImage imageNamed:@"explore_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[UIImage imageNamed:@"camera_active"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"message_active"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[UIImage imageNamed:@"profile_active"]];
     

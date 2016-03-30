@@ -146,7 +146,7 @@ const float kNoNotifHeight = 24.f;
             case STNotificationTypeGuaranteedViewsForNextPhoto:
             case STNotificationType5DaysUploadNewPhoto:
             {
-                [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakAPhoto popToRootVC:YES];
+                [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakeAPhoto popToRootVC:YES];
 
             }
                 break;
@@ -163,7 +163,7 @@ const float kNoNotifHeight = 24.f;
     
     switch (notifType) {
         case STNotificationTypeInvite:
-            [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakAPhoto popToRootVC:YES];
+            [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakeAPhoto popToRootVC:YES];
             break;
         default:
         {

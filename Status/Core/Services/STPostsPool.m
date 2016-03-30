@@ -8,6 +8,7 @@
 
 #import "STPostsPool.h"
 #import "STPost.h"
+#import "STUserProfile.h"
 #import "STLocalNotificationService.h"
 
 @interface STPostsPool ()
@@ -19,25 +20,10 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
 
     }
     return self;
 }
-
-#pragma mark - Notifications
-
--(void)imageWasSavedLocally:(NSNotification *)notif{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *fullUrl = notif.userInfo[kImageUrlKey];
-        STPost *updatedPost = [self postForUrl:fullUrl];
-        if (updatedPost) {
-            updatedPost.imageDownloaded = YES;
-            [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:updatedPost.uuid}];
-        }
-    });
-}
-
 
 #pragma mark - Public methods
 
@@ -67,25 +53,21 @@
 
 - (STPost *)randomPost {
 
-    if (self.getAllPosts.count == 0) {
+    NSArray *allObjects = [[self getAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageDownloaded == YES AND mainImageUrl != nil"]];
+    if (allObjects.count == 0) {
         return nil;
     }
     
     STPost * randomPost = nil;
     
-    while (randomPost.fullPhotoUrl == nil) {
-        u_int32_t randomIndex = arc4random_uniform((u_int32_t)(self.getAllPosts.count - 1));
-        randomPost = [self.getAllPosts objectAtIndex:randomIndex];
+    while (randomPost.mainImageUrl == nil) {
+        u_int32_t randomIndex = arc4random_uniform((u_int32_t)(allObjects.count - 1));
+        randomPost = [allObjects objectAtIndex:randomIndex];
     }
     return randomPost;
 }
 
 #pragma mark - Private methods
-
-- (STPost *)postForUrl:(NSString *)url{
-    NSArray *filteredArray = [[self getAllPosts] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"fullPhotoUrl like %@", url]];
-    return [filteredArray firstObject];
-}
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

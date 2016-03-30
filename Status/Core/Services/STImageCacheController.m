@@ -151,7 +151,7 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                                       if (error!=nil) {
                                                           NSLog(@"Error downloading image: %@", error.debugDescription);
-                                                          completion(imageFullLink, NO);
+                                                          completion(imageFullLink, NO, CGSizeZero);
                                                       }
                                                       else if(finished)
                                                       {
@@ -160,16 +160,16 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
                                                               dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                                                                   [weakSelf saveImageForBlur:image imageURL:imageURL];
                                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                                      completion(imageFullLink, YES);
+                                                                      completion(imageFullLink, YES, image.size);
                                                                   });
                                                               });
                                                           }
                                                           else
-                                                              completion(imageFullLink,NO);
+                                                              completion(imageFullLink,NO, CGSizeZero);
                                                           
                                                       }
                                                       else
-                                                          completion(imageFullLink,NO);
+                                                          completion(imageFullLink,NO, CGSizeZero);
                                                   }];
 
 }
@@ -263,10 +263,10 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     STImageCacheObj *obj = [_objectsArray firstObject];
     __block NSString *fullUrlString = obj.imageUrl;
     [self downloadImageWithName:fullUrlString
-                  andCompletion:^(NSString *downloadedImage, BOOL downloaded) {
+                  andCompletion:^(NSString *downloadedImage, BOOL downloaded, CGSize downloadedImageSize) {
                       
                       if (downloaded==YES) {
-                          [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString}];
+                          [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString, kImageSizeKey:NSStringFromCGSize(downloadedImageSize)}];
                       }
                       
                       [weakSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
@@ -283,7 +283,23 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     
-    return [sdManager diskImageExistsForURL:[NSURL URLWithString:url]];
+    BOOL cacheImageExists = [sdManager diskImageExistsForURL:[NSURL URLWithString:url]];
+    
+    if (cacheImageExists) {
+        [sdManager downloadImageWithURL:[NSURL URLWithString:url] options:SDWebImageHighPriority progress:nil
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                  if (error!=nil) {
+                                      NSLog(@"Error downloading image: %@", error.debugDescription);
+                                  }
+                                  else if(finished)
+                                  {
+                                      [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:url, kImageSizeKey:NSStringFromCGSize(image.size)}];
+                                  }
+                              }];
+
+
+    }
+    return cacheImageExists;
 }
 
 @end

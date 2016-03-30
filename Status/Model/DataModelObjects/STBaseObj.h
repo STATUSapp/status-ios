@@ -9,10 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "CreateDataModelHelper.h"
 
+extern NSString * const kObjectUuidForLoading;
+
 @interface STBaseObj : NSObject
 
 @property(nonatomic, strong) NSDictionary *infoDict;
 @property(nonatomic, strong) NSString *uuid;
 @property(nonatomic, strong) NSString *appVersion;
+
+@property (nonatomic, assign) BOOL mainImageDownloaded;
+@property (nonatomic, assign) CGSize imageSize;
+@property (nonatomic, strong) NSString * mainImageUrl;
+
++ (instancetype)mockObjectLoading;
+- (BOOL) isLoadingObject;
 
 @end

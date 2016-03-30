@@ -8,17 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kNotificationPostDownloadSuccess;
-extern NSString * const kNotificationPostUpdated;
-extern NSString * const kNotificationPostDeleted;
-extern NSString * const kNotificationPostAdded;
+extern NSString * const kNotificationObjDownloadSuccess;
+extern NSString * const kNotificationObjUpdated;
+extern NSString * const kNotificationObjDeleted;
+extern NSString * const kNotificationObjAdded;
 extern NSString * const kNotificationShowSuggestions;
 
 typedef void (^STProcessorCompletionBlock)(NSError *error);
 
-@class STPost;
-
-@interface STPostFlowProcessor : NSObject
+@interface STFlowProcessor : NSObject
 - (instancetype)initWithFlowType:(STFlowType)flowType;
 - (instancetype)initWithFlowType:(STFlowType)flowType
                          userId:(NSString *)userId;
@@ -27,10 +25,10 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
 
 
 //methods
-- (NSInteger)numberOfPosts;
-- (STPost *)postAtIndex:(NSInteger)index;
-- (void)processPostAtIndex:(NSInteger)index;
-- (void)deleteItemAtIndex:(NSInteger)index;
+- (NSInteger)numberOfObjects;
+- (id)objectAtIndex:(NSInteger)index;
+- (void)processObjectAtIndex:(NSInteger)index;
+- (void)deleteObjectAtIndex:(NSInteger)index;
 - (BOOL)loading;
 - (void)reloadProcessor;
 - (BOOL)canGoToUserProfile;

@@ -105,8 +105,7 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
                 
                 [[CoreManager navigationService] setBadge:unseenHomePosts forTabAtIndex:STTabBarIndexHome];
                 
-                //TODO: dev_1_2 go enable this when ready
-//                [[CoreManager navigationService] setBadge:unseenPopularPosts + unseenRecentPosts forTabAtIndex:STTabBarIndexSearch];
+                [[CoreManager navigationService] setBadge:unseenPopularPosts + unseenRecentPosts forTabAtIndex:STTabBarIndexExplore];
             }
         } failure:^(NSError *error) {
             NSLog(@"Load counters error: %@", error);

@@ -15,6 +15,11 @@
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
 		173A29511C9FF64500157945 /* STConversationUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A29501C9FF64500157945 /* STConversationUser.m */; };
 		173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A29531CA04B3E00157945 /* STNotificationObj.m */; };
+		174575B61CA95CD5006CA25F /* ExploreScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174575B51CA95CD5006CA25F /* ExploreScene.storyboard */; };
+		174575BA1CA964CA006CA25F /* ExploreTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 174575B91CA964CA006CA25F /* ExploreTVC.m */; };
+		174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 174D0B961CABDAA7001EB6E2 /* STUserProfilePool.m */; };
+		175204411CAAB73000C55170 /* SmallFeedCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 175204401CAAB73000C55170 /* SmallFeedCVC.m */; };
+		175204451CAAC84200C55170 /* SmallFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 175204441CAAC84200C55170 /* SmallFeedCell.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
@@ -33,7 +38,7 @@
 		1DE2D5B1194FA5E800A29A86 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B0194FA5E800A29A86 /* AVFoundation.framework */; };
 		1DE2D5B3194FA5FD00A29A86 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */; };
 		1DE2D5B5194FA60C00A29A86 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */; };
-		2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A119DF61C832182001C17DB /* STPostFlowProcessor.m */; };
+		2A119DF71C832182001C17DB /* STFlowProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A119DF61C832182001C17DB /* STFlowProcessor.m */; };
 		2A1D66831C8472D400633D87 /* STUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1D66821C8472D400633D87 /* STUIHelper.m */; };
 		2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D7EAF1C82FEDC00F65026 /* STPost.m */; };
 		2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC777781C83A5CC00DAA273 /* LaunchViewController.m */; };
@@ -240,6 +245,15 @@
 		173A29501C9FF64500157945 /* STConversationUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationUser.m; sourceTree = "<group>"; };
 		173A29521CA04B3E00157945 /* STNotificationObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationObj.h; sourceTree = "<group>"; };
 		173A29531CA04B3E00157945 /* STNotificationObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationObj.m; sourceTree = "<group>"; };
+		174575B51CA95CD5006CA25F /* ExploreScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ExploreScene.storyboard; sourceTree = "<group>"; };
+		174575B81CA964CA006CA25F /* ExploreTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTVC.h; sourceTree = "<group>"; };
+		174575B91CA964CA006CA25F /* ExploreTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTVC.m; sourceTree = "<group>"; };
+		174D0B951CABDAA7001EB6E2 /* STUserProfilePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserProfilePool.h; sourceTree = "<group>"; };
+		174D0B961CABDAA7001EB6E2 /* STUserProfilePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserProfilePool.m; sourceTree = "<group>"; };
+		1752043F1CAAB73000C55170 /* SmallFeedCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallFeedCVC.h; sourceTree = "<group>"; };
+		175204401CAAB73000C55170 /* SmallFeedCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallFeedCVC.m; sourceTree = "<group>"; };
+		175204431CAAC84200C55170 /* SmallFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallFeedCell.h; sourceTree = "<group>"; };
+		175204441CAAC84200C55170 /* SmallFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallFeedCell.m; sourceTree = "<group>"; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -263,8 +277,8 @@
 		1DE2D5B2194FA5FD00A29A86 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1DE2D5B4194FA60C00A29A86 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		228B2C727ABFBB875FD4D193 /* Pods.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.distribution.xcconfig; path = "Pods/Target Support Files/Pods/Pods.distribution.xcconfig"; sourceTree = "<group>"; };
-		2A119DF51C832182001C17DB /* STPostFlowProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostFlowProcessor.h; sourceTree = "<group>"; };
-		2A119DF61C832182001C17DB /* STPostFlowProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostFlowProcessor.m; sourceTree = "<group>"; };
+		2A119DF51C832182001C17DB /* STFlowProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFlowProcessor.h; sourceTree = "<group>"; };
+		2A119DF61C832182001C17DB /* STFlowProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFlowProcessor.m; sourceTree = "<group>"; };
 		2A1D66811C8472D400633D87 /* STUIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUIHelper.h; sourceTree = "<group>"; };
 		2A1D66821C8472D400633D87 /* STUIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUIHelper.m; sourceTree = "<group>"; };
 		2A6D7EAE1C82FEDC00F65026 /* STPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPost.h; sourceTree = "<group>"; };
@@ -686,6 +700,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		174575B71CA964B3006CA25F /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				175204421CAAC7DC00C55170 /* cells */,
+				174575B81CA964CA006CA25F /* ExploreTVC.h */,
+				174575B91CA964CA006CA25F /* ExploreTVC.m */,
+				1752043F1CAAB73000C55170 /* SmallFeedCVC.h */,
+				175204401CAAB73000C55170 /* SmallFeedCVC.m */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		175204421CAAC7DC00C55170 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				175204431CAAC84200C55170 /* SmallFeedCell.h */,
+				175204441CAAC84200C55170 /* SmallFeedCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
 		2A1D66801C8472AC00633D87 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,6 +960,8 @@
 				99B386561C82FAA2005B4D8C /* KeychainItemWrapper.m */,
 				99B387EA1C8324E0005B4D8C /* STPostsPool.h */,
 				99B387EB1C8324E0005B4D8C /* STPostsPool.m */,
+				174D0B951CABDAA7001EB6E2 /* STUserProfilePool.h */,
+				174D0B961CABDAA7001EB6E2 /* STUserProfilePool.m */,
 				17F4F28A1C96E5F800D53EC1 /* STUsersPool.h */,
 				17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */,
 				17F4F2871C96DED500D53EC1 /* STBasePool.h */,
@@ -1010,8 +1047,8 @@
 				99B3868F1C82FAA2005B4D8C /* CreateDataModelHelper.m */,
 				99B386901C82FAA2005B4D8C /* STContactsDataProcessor.h */,
 				99B386921C82FAA2005B4D8C /* STContactsDataProcessor.m */,
-				2A119DF51C832182001C17DB /* STPostFlowProcessor.h */,
-				2A119DF61C832182001C17DB /* STPostFlowProcessor.m */,
+				2A119DF51C832182001C17DB /* STFlowProcessor.h */,
+				2A119DF61C832182001C17DB /* STFlowProcessor.m */,
 				99B386941C82FAA2005B4D8C /* STFollowDataProcessor.h */,
 				99B386951C82FAA2005B4D8C /* STFollowDataProcessor.m */,
 			);
@@ -1116,6 +1153,7 @@
 			children = (
 				52DC4DCE1C8F0E1F0064F23F /* NotificationsAndChat */,
 				2AD97BAE1C8C141E00C9B3D5 /* Feed */,
+				174575B71CA964B3006CA25F /* Explore */,
 				2A1D66801C8472AC00633D87 /* Helpers */,
 				99B387E61C83027C005B4D8C /* TabBar */,
 				99B386C01C82FAA2005B4D8C /* Chat */,
@@ -1307,6 +1345,7 @@
 				2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */,
 				52466BE41C89D52000EEAA2B /* TakeAPhoto.storyboard */,
 				2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */,
+				174575B51CA95CD5006CA25F /* ExploreScene.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1535,6 +1574,7 @@
 				99B3879C1C82FAA2005B4D8C /* ProximaNovaCond-LightIt.otf in Resources */,
 				99B387CF1C82FAA2005B4D8C /* Invite.storyboard in Resources */,
 				99B387981C82FAA2005B4D8C /* ProximaNova-RegularItalic.otf in Resources */,
+				174575B61CA95CD5006CA25F /* ExploreScene.storyboard in Resources */,
 				99B387CD1C82FAA2005B4D8C /* ChatScene.storyboard in Resources */,
 				99B3878F1C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg in Resources */,
 				2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */,
@@ -1630,6 +1670,7 @@
 				99B387531C82FAA2005B4D8C /* STGetPostDetailsRequest.m in Sources */,
 				99B3875D1C82FAA2005B4D8C /* STInviteUserToUploadRequest.m in Sources */,
 				99B387C81C82FAA2005B4D8C /* STNotificationBaseCell.m in Sources */,
+				174575BA1CA964CA006CA25F /* ExploreTVC.m in Sources */,
 				17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */,
 				99B387511C82FAA2005B4D8C /* STGetNotificationsCountRequest.m in Sources */,
 				99B387D71C82FAA2005B4D8C /* STAlbumImagesViewController.m in Sources */,
@@ -1711,6 +1752,7 @@
 				99B387BA1C82FAA2005B4D8C /* STCustomCollectionViewCell.m in Sources */,
 				99B3874C1C82FAA2005B4D8C /* STFollowUsersRequest.m in Sources */,
 				99B3878C1C82FAA2005B4D8C /* STContactsDataProcessor.m in Sources */,
+				174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */,
 				99B387DD1C82FAA2005B4D8C /* STTutorialPresenterViewController.m in Sources */,
 				2AD97BB51C8C144700C9B3D5 /* FeedCell.m in Sources */,
 				99B3873E1C82FAA2005B4D8C /* NSDate+Additions.m in Sources */,
@@ -1718,7 +1760,7 @@
 				99B387491C82FAA2005B4D8C /* STConstants.m in Sources */,
 				99B387B91C82FAA2005B4D8C /* STLikeCell.m in Sources */,
 				99B387481C82FAA2005B4D8C /* UIImageView+TouchesEffects.m in Sources */,
-				2A119DF71C832182001C17DB /* STPostFlowProcessor.m in Sources */,
+				2A119DF71C832182001C17DB /* STFlowProcessor.m in Sources */,
 				2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */,
 				2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */,
 				99B387B01C82FAA2005B4D8C /* STFacebookActivity.m in Sources */,
@@ -1762,7 +1804,9 @@
 				99B387D91C82FAA2005B4D8C /* STMoveScaleViewController.m in Sources */,
 				99B387C21C82FAA2005B4D8C /* STFacebookInviterViewController.m in Sources */,
 				52DC4DD11C8F0E520064F23F /* STNotificationAndChatContainerViewController.m in Sources */,
+				175204411CAAB73000C55170 /* SmallFeedCVC.m in Sources */,
 				99B3874F1C82FAA2005B4D8C /* STGetFollowingRequest.m in Sources */,
+				175204451CAAC84200C55170 /* SmallFeedCell.m in Sources */,
 				99B387471C82FAA2005B4D8C /* UIImageView+Mask.m in Sources */,
 				99B3877C1C82FAA2005B4D8C /* STNativeAdsController.m in Sources */,
 				99B387A61C82FAA2005B4D8C /* HPTextViewInternal.m in Sources */,
@@ -1839,7 +1883,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "ce37f6db-b332-4a10-b9ce-7bdc8deb7476";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1874,7 +1918,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "84e24f74-486a-44d8-bc59-7f1d5e78c027";
+				PROVISIONING_PROFILE = "51822722-4932-4fc8-ba57-4eeef8ae3113";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1938,7 +1982,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51822722-4932-4fc8-ba57-4eeef8ae3113";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1974,7 +2018,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "84e24f74-486a-44d8-bc59-7f1d5e78c027";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

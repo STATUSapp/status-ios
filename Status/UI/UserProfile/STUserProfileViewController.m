@@ -218,7 +218,7 @@
         _lblLocation.text = profile.homeLocation;
     }
     
-    [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:profile.profilePhotoURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:profile.mainImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         _imageViewBlurryPicture.image = [image applyDarkEffect];
     }];
     

@@ -12,6 +12,7 @@
 #import "STUsersPool.h"
 #import "STPostsPool.h"
 #import "STPost.h"
+#import "STUserProfile.h"
 #import "STConversationUser.h"
 #import "STNotificationObj.h"
 
@@ -304,8 +305,9 @@
         NSMutableArray *objects = [NSMutableArray new];
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
             for (NSDictionary *dict in response[@"data"]) {
-                STPost *post = [STPost postWithDict:dict];
-                [objects addObject:post];
+            
+                STUserProfile *up = [STUserProfile userProfileWithDict:dict];
+                [objects addObject:up];
             }
             completion(objects, error);
         }

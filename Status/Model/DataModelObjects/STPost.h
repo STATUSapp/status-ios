@@ -10,16 +10,13 @@
 
 extern NSString * const kPostUuidForNoPhotosToDisplay ;
 extern NSString * const kPostUuidForYouSawAll ;
-extern NSString * const kPostUuidForLoading;
 
 @interface STPost : STBaseObj
 + (instancetype)postWithDict:(NSDictionary *)postDict;
 + (instancetype)mockPostNoPhotosToDisplay;
 + (instancetype)mockPostYouSawAll;
-+ (instancetype)mockPostLoading;
 
 @property (nonatomic, strong) NSString *caption;
-@property (nonatomic, strong) NSString *fullPhotoUrl;
 @property (nonatomic, assign) BOOL isOwner;
 @property (nonatomic, strong) NSNumber *numberOfLikes;
 @property (nonatomic, strong) NSDate *postDate;
@@ -31,11 +28,9 @@ extern NSString * const kPostUuidForLoading;
 @property (nonatomic, assign) BOOL postSeen;
 
 //local added properties
-@property (nonatomic, assign) BOOL imageDownloaded;
 @property (nonatomic, assign) BOOL showFullCaption;
 
 - (BOOL) isNoPhotosToDisplayPost;
 - (BOOL) isYouSawAllPost;
-- (BOOL) isLoadingPost;
 
 @end

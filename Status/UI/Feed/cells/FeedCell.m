@@ -44,7 +44,7 @@ CGFloat const kSeeMoreButtonWidthConstant = 56.f;
     
     __weak FeedCell *weakSelf = self;
     
-    [[CoreManager imageCacheService] loadPostImageWithName:post.fullPhotoUrl withPostCompletion:^(UIImage *img) {
+    [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *img) {
         
         if (img!=nil) {
             weakSelf.normalImage.image = img;

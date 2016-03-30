@@ -21,6 +21,7 @@
 @class STUsersPool;
 @class STLocalNotificationService;
 @class STNotificationsManager;
+@class STUserProfilePool;
 
 @interface CoreManager : NSObject
 
@@ -38,6 +39,7 @@
 + (STContactsManager *)contactsService;
 + (STImagePickerService *)imagePickerService;
 + (STUsersPool *)usersPool;
++ (STUserProfilePool *)profilePool;
 + (STLocalNotificationService *)localNotificationService;
 + (STNotificationsManager *)notificationsService;
 

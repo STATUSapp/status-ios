@@ -31,7 +31,6 @@
 
 NSString * const kPostUuidForNoPhotosToDisplay = @"uuid_1";
 NSString * const kPostUuidForYouSawAll = @"uuid_2";
-NSString * const kPostUuidForLoading = @"uuid_3";
 
 @implementation STPost
 + (instancetype)postWithDict:(NSDictionary *)postDict {
@@ -45,19 +44,14 @@ NSString * const kPostUuidForLoading = @"uuid_3";
 + (instancetype)mockPostNoPhotosToDisplay{
     STPost * post = [STPost new];
     post.uuid = kPostUuidForNoPhotosToDisplay;
-    post.imageDownloaded = YES;
+    post.mainImageDownloaded = YES;
     return post;
 
 }
 + (instancetype)mockPostYouSawAll{
     STPost * post = [STPost new];
     post.uuid = kPostUuidForYouSawAll;
-    post.imageDownloaded = YES;
-    return post;
-}
-+ (instancetype)mockPostLoading{
-    STPost * post = [STPost new];
-    post.uuid = kPostUuidForLoading;
+    post.mainImageDownloaded = YES;
     return post;
 }
 
@@ -69,15 +63,9 @@ NSString * const kPostUuidForLoading = @"uuid_3";
     return [self.uuid isEqualToString:kPostUuidForYouSawAll];
 }
 
-- (BOOL) isLoadingPost{
-    return [self.uuid isEqualToString:kPostUuidForLoading];
-}
-
-
 -(void)setup{
     self.appVersion = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"app_version"];
     _caption = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"caption"];
-    _fullPhotoUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"full_photo_link"];
     _isOwner = [self.infoDict[@"is_owner"] boolValue];
     _numberOfLikes = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"number_of_likes"];
     
@@ -89,9 +77,12 @@ NSString * const kPostUuidForLoading = @"uuid_3";
     _userId = [CreateDataModelHelper validStringIdentifierFromValue:self.infoDict[@"user_id"]];
     _userName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_name"];
     _postSeen = [self.infoDict[@"post_seen"] boolValue];
-    
-    _imageDownloaded = [STImageCacheController imageDownloadedForUrl:_fullPhotoUrl];
     _showFullCaption = NO;
+
+    //super properties
+    self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"full_photo_link"];
+    self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
+    self.imageSize = CGSizeZero;
     
     
 }

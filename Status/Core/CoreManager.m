@@ -18,11 +18,14 @@
 #import "STContactsManager.h"
 #import "STImagePickerService.h"
 #import "STUsersPool.h"
+#import "STUserProfilePool.h"
 #import "STLocalNotificationService.h"
 #import "STNotificationsManager.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
+@property (nonatomic, strong) STUsersPool *usersPool;
+@property (nonatomic, strong) STUserProfilePool *profilePool;
 @property (nonatomic, strong) STLocationManager *locationService;
 @property (nonatomic, strong) STNetworkQueueManager *networkService;
 @property (nonatomic, strong) STNavigationService *navigationService;
@@ -32,7 +35,6 @@
 @property (nonatomic, strong) STIAPHelper *IAPService;
 @property (nonatomic, strong) STContactsManager *contactsService;
 @property (nonatomic, strong) STImagePickerService * imagePickerService;
-@property (nonatomic, strong) STUsersPool *usersPool;
 @property (nonatomic, strong) STLocalNotificationService *localNotifCenter;
 @property (nonatomic, strong) STNotificationsManager *notificationsService;
 
@@ -64,6 +66,7 @@
         _contactsService = [STContactsManager new];
         _imagePickerService = [STImagePickerService new];
         _usersPool = [STUsersPool new];
+        _profilePool = [STUserProfilePool new];
         _localNotifCenter = [STLocalNotificationService new];
         _notificationsService = [STNotificationsManager new];
         
@@ -123,6 +126,10 @@
 
 + (STUsersPool *)usersPool{
     return [[CoreManager sharedInstance] usersPool];
+}
+
++ (STUserProfilePool *)profilePool{
+    return [[CoreManager sharedInstance] profilePool];
 }
 
 + (STLocalNotificationService *)localNotificationService{

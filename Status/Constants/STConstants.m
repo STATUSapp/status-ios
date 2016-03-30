@@ -29,8 +29,8 @@ NSInteger const kHTTPErrorNoConnection = 447;
 
 #ifdef DEBUG
 
-NSInteger const kPostsLimit = 5;
-NSInteger const kStartLoadOffset = 3;
+NSInteger const kPostsLimit = 15;
+NSInteger const kStartLoadOffset = 13;
 
 #else
 
@@ -119,6 +119,7 @@ NSString *const kImageKey = @"key_image";
 NSString *const kImageUrlKey = @"key_image_url";
 NSString *const kFlowTypeKey = @"flow_type_key";
 NSString *const kUserIdKey = @"user_id_key";
+NSString *const kImageSizeKey = @"image_size_key";
 
 #pragma mark - Invite Friends
 

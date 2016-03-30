@@ -34,9 +34,8 @@
 
 typedef NS_ENUM(NSUInteger,STTabBarIndex){
     STTabBarIndexHome = 0,
-    //TODO: dev_1_2 enable this one and add a new screen
-//    STTabBarIndexSearch,
-    STTabBarIndexTakAPhoto,
+    STTabBarIndexExplore,
+    STTabBarIndexTakeAPhoto,
     STTabBarIndexChat,
     STTabBarIndexProfile
 };
@@ -186,6 +185,8 @@ extern NSString *const kImageKey;
 extern NSString *const kImageUrlKey;
 extern NSString *const kFlowTypeKey;
 extern NSString *const kUserIdKey;
+extern NSString *const kImageSizeKey;
+
 #pragma mark - Invite Friends
 
 extern NSString *const STInviteText;
