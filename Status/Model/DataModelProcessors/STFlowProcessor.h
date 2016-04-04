@@ -27,7 +27,8 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
 //methods
 - (NSInteger)numberOfObjects;
 - (id)objectAtIndex:(NSInteger)index;
-- (void)processObjectAtIndex:(NSInteger)index;
+- (void)processObjectAtIndex:(NSInteger)index
+           setSeenIfRequired:(BOOL)setSeenRequired;
 - (void)deleteObjectAtIndex:(NSInteger)index;
 - (BOOL)loading;
 - (void)reloadProcessor;

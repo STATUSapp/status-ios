@@ -30,7 +30,7 @@ NSInteger const kHTTPErrorNoConnection = 447;
 #ifdef DEBUG
 
 NSInteger const kPostsLimit = 15;
-NSInteger const kStartLoadOffset = 13;
+NSInteger const kStartLoadOffset = 5;
 
 #else
 

@@ -204,7 +204,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
         CGFloat screenWidth = screenRect.size.width;
         NSUInteger currentIndex = point.x/screenWidth;
         NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
-        [_feedProcessor processObjectAtIndex:currentIndex];
+        [_feedProcessor processObjectAtIndex:currentIndex setSeenIfRequired:YES ];
     }
 }
 
@@ -230,10 +230,10 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     if ([post isLoadingObject] || !post.mainImageDownloaded)
         return loadingFeedCell;
     
-    if (post.isNoPhotosToDisplayPost)
+    if (post.isNothingToDisplayObj)
         return noPhotosToDisplayCell;
     
-    if (post.isYouSawAllPost)
+    if (post.isTheEndObject)
         return youSawAllCell;
     
     if (post.showFullCaption == YES) {

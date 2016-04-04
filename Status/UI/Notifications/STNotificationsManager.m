@@ -129,9 +129,7 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
         _lastNotification = nil;
         NSDictionary *userInfo = notif[@"user_info"];
         STListUser *lu = [STListUser new];
-        lu.uuid = userInfo[@"user_id"];
-        //TODO: dev_1_2 add other params if existent, too
-        
+        lu.uuid = userInfo[@"user_id"];        
         if (lu.uuid == nil) {
             NSLog(@"Error from notification: user_id = nil");
             return;

@@ -41,7 +41,7 @@ const CGFloat kBottomHeight = 8.f;
     if (bkImage == nil) {
         bkImage = [STUIHelper splashImageWithLogo:NO];
     }
-    UIImageView *bkImView = [[UIImageView alloc] initWithImage:bluredImg];
+    UIImageView *bkImView = [[UIImageView alloc] initWithImage:bkImage];
     [backgroundView addSubview:bkImView];
     if (bluredImg!=nil) {
         UIView *darkView = [[UIView alloc] initWithFrame:self.tableView.frame];

@@ -12,13 +12,13 @@
 #import "STPost.h"
 #import "STUserProfile.h"
 #import "SmallFeedCell.h"
+#import "SmallTheEndFeedCell.h"
 #import "STImageCacheController.h"
 
 @interface SmallFeedCVC ()
 {
     CGPoint _start;
     CGPoint _end;
-    BOOL _shouldForceSetSeen;
 }
 @property (nonatomic, strong) STFlowProcessor *feedProcessor;
 
@@ -92,30 +92,6 @@
     [self.collectionView reloadData];
 }
 
-#pragma mark - UIScrollViewDelegate
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    //    _numberOfSeenPosts++;
-    //    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
-    
-    _end = scrollView.contentOffset;
-    if (_start.x < _end.x || _shouldForceSetSeen == YES)
-    {//swipe to the right
-        _shouldForceSetSeen = NO;
-        CGPoint point = scrollView.contentOffset;
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat screenWidth = screenRect.size.width;
-        NSUInteger currentIndex = point.x/screenWidth;
-        NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
-        [_feedProcessor processObjectAtIndex:currentIndex];
-    }
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    _start = scrollView.contentOffset;
-}
-
-
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -147,32 +123,52 @@
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 5.f;
+    return 7.f;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 5.f;
+    return 7.f;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger currentIndex = indexPath.row;
+    NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
+    [_feedProcessor processObjectAtIndex:currentIndex setSeenIfRequired:NO];
+
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[SmallTheEndFeedCell class]]) {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+    }
+}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     STBaseObj *obj = [_feedProcessor objectAtIndex:indexPath.row];
     NSString *identifier = @"SmallFeedCell";
     
+    if ([obj isTheEndObject]) {
+        identifier = @"SmallTheEndFeedCell";
+    }
+    
     SmallFeedCell *cell = (SmallFeedCell *)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
-    if ([obj isLoadingObject]) {
-        [cell.activityIndicator startAnimating];
+    if ([cell isKindOfClass:[SmallFeedCell class]]) {
+        if ([obj isLoadingObject]) {
+            [cell.activityIndicator startAnimating];
+        }
+        else
+        {
+            [[CoreManager imageCacheService] loadPostImageWithName:obj.mainImageUrl withPostCompletion:^(UIImage *img) {
+                if (img!=nil) {
+                    cell.imageView.image = img;
+                    [cell.activityIndicator stopAnimating];
+                }
+            } andBlurCompletion:nil];
+            
+        }
     }
-    else
-    {
-        [[CoreManager imageCacheService] loadPostImageWithName:obj.mainImageUrl withPostCompletion:^(UIImage *img) {
-            if (img!=nil) {
-                cell.imageView.image = img;
-                [cell.activityIndicator stopAnimating];
-            }
-        } andBlurCompletion:nil];
-
-    }
+    
     
     return cell;
 }

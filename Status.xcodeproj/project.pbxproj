@@ -28,6 +28,7 @@
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */; };
 		17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */; };
+		17D8C6771CAD3D9C0046D04F /* SmallTheEndFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D8C6761CAD3D9C0046D04F /* SmallTheEndFeedCell.m */; };
 		17DF47351C9974700053F633 /* STLocalNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF47341C9974700053F633 /* STLocalNotificationService.m */; };
 		17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F2881C96DED500D53EC1 /* STBasePool.m */; };
 		17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F28B1C96E5F800D53EC1 /* STUsersPool.m */; };
@@ -262,6 +263,8 @@
 		17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Snapshot.m"; sourceTree = "<group>"; };
 		17B587431C9ABEE5006AC7BD /* STImageCacheObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImageCacheObj.h; sourceTree = "<group>"; };
 		17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImageCacheObj.m; sourceTree = "<group>"; };
+		17D8C6751CAD3D9C0046D04F /* SmallTheEndFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallTheEndFeedCell.h; sourceTree = "<group>"; };
+		17D8C6761CAD3D9C0046D04F /* SmallTheEndFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallTheEndFeedCell.m; sourceTree = "<group>"; };
 		17DF47331C9974700053F633 /* STLocalNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocalNotificationService.h; sourceTree = "<group>"; };
 		17DF47341C9974700053F633 /* STLocalNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocalNotificationService.m; sourceTree = "<group>"; };
 		17F4F2871C96DED500D53EC1 /* STBasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBasePool.h; sourceTree = "<group>"; };
@@ -717,6 +720,8 @@
 			children = (
 				175204431CAAC84200C55170 /* SmallFeedCell.h */,
 				175204441CAAC84200C55170 /* SmallFeedCell.m */,
+				17D8C6751CAD3D9C0046D04F /* SmallTheEndFeedCell.h */,
+				17D8C6761CAD3D9C0046D04F /* SmallTheEndFeedCell.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -1809,6 +1814,7 @@
 				175204451CAAC84200C55170 /* SmallFeedCell.m in Sources */,
 				99B387471C82FAA2005B4D8C /* UIImageView+Mask.m in Sources */,
 				99B3877C1C82FAA2005B4D8C /* STNativeAdsController.m in Sources */,
+				17D8C6771CAD3D9C0046D04F /* SmallTheEndFeedCell.m in Sources */,
 				99B387A61C82FAA2005B4D8C /* HPTextViewInternal.m in Sources */,
 				99B3873D1C82FAA2005B4D8C /* AppDelegate.m in Sources */,
 				99B387711C82FAA2005B4D8C /* STChatController.m in Sources */,

@@ -38,15 +38,11 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     NSMutableArray *tabBarControllers = [NSMutableArray new];
     // add home flow
-    //TODO: dev_1_2 use the storyboard to load navCtrl
     FeedCVC *homeVc = [FeedCVC mainFeedController];
-//    homeVc.title = NSLocalizedString(@"Home", nil);
     UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
     homeNavCtrl.navigationBarHidden = YES;
-    
-
-    
     [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
+    
     // add explore flow
     ExploreTVC *exploreTVC = [ExploreTVC exploreController];
     UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:exploreTVC];
@@ -54,23 +50,17 @@ static NSString * storyboardIdentifier = @"tabBarController";
 
     
     // add take a photo
-    
     STTakeAPhotoViewController * takeAPhotoVC = [STTakeAPhotoViewController newController];
-//    takeAPhotoVC.title = @"Take a Photo";
     UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
-//    takePhotoNav.title = @"Take a Photo";
     takePhotoNav.navigationBarHidden = YES;
     
-    
     // add message / notifications
-    
     STNotificationAndChatContainerViewController * notifAndChatVC = [STNotificationAndChatContainerViewController newController];
     UINavigationController * notifChatNav = [[UINavigationController alloc] initWithRootViewController:notifAndChatVC];
-//    notifChatNav.title = @"Notifications and Messages";
     notifChatNav.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
-    // add my profile
     
+    // add my profile
     STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[[CoreManager loginService] currentUserUuid]];
     profileVC.shouldHideBackButton = YES;
     UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
@@ -82,7 +72,6 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [tabBarControllers insertObject:takePhotoNav atIndex:STTabBarIndexTakeAPhoto];
     [tabBarControllers insertObject:notifChatNav atIndex:STTabBarIndexChat];
     [tabBarControllers insertObject:profileNav atIndex:STTabBarIndexProfile];
-
     [self setViewControllers:tabBarControllers animated:NO];
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[UIImage imageNamed:@"home"]];

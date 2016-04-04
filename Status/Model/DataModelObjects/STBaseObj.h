@@ -10,6 +10,8 @@
 #import "CreateDataModelHelper.h"
 
 extern NSString * const kObjectUuidForLoading;
+extern NSString * const kObjectUuidForNothingToDisplay;
+extern NSString * const kObjectUuidForTheEnd;
 
 @interface STBaseObj : NSObject
 
@@ -22,6 +24,10 @@ extern NSString * const kObjectUuidForLoading;
 @property (nonatomic, strong) NSString * mainImageUrl;
 
 + (instancetype)mockObjectLoading;
-- (BOOL) isLoadingObject;
++ (instancetype)mockObjNothingToDisplay;
++ (instancetype)mockObjTheEnd;
 
+- (BOOL) isLoadingObject;
+- (BOOL) isTheEndObject;
+- (BOOL) isNothingToDisplayObj;
 @end

@@ -8,13 +8,8 @@
 
 #import "STBaseObj.h"
 
-extern NSString * const kPostUuidForNoPhotosToDisplay ;
-extern NSString * const kPostUuidForYouSawAll ;
-
 @interface STPost : STBaseObj
 + (instancetype)postWithDict:(NSDictionary *)postDict;
-+ (instancetype)mockPostNoPhotosToDisplay;
-+ (instancetype)mockPostYouSawAll;
 
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, assign) BOOL isOwner;
@@ -29,8 +24,5 @@ extern NSString * const kPostUuidForYouSawAll ;
 
 //local added properties
 @property (nonatomic, assign) BOOL showFullCaption;
-
-- (BOOL) isNoPhotosToDisplayPost;
-- (BOOL) isYouSawAllPost;
 
 @end

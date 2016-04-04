@@ -44,6 +44,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 @property (nonatomic, strong) NSMutableArray *objectIds;
 @property (nonatomic) NSInteger numberOfDuplicates;
 @property (nonatomic, assign) BOOL loaded;
+@property (nonatomic, assign) BOOL noMoreObjectsToDownload;
 
 @end
 
@@ -113,7 +114,12 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     }
 }
 
-- (void)processObjectAtIndex:(NSInteger)index {
+- (void)processObjectAtIndex:(NSInteger)index
+           setSeenIfRequired:(BOOL)setSeenRequired{
+    if (_noMoreObjectsToDownload == YES) {
+        return;
+    }
+    
     if (index >= _objectIds.count)
         return;
     
@@ -128,6 +134,9 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         if (shouldGetNextBatch) {
             [weakSelf getMoreData];
         }
+    if (!setSeenRequired) {
+        return;
+    }
     
     if (self.flowType == STFlowTypePopular ||
         self.flowType == STFlowTypeRecent ||
@@ -159,6 +168,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 - (void)reloadProcessor{
     _loaded = NO;
     _numberOfDuplicates = 0;
+    _noMoreObjectsToDownload = NO;
     [_objectIds removeAllObjects];
     [self getMoreData];
 }
@@ -301,37 +311,37 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
     if (_flowType!=STFlowTypeDiscoverNearby) {
         //add mock posts at the end of the list
-        [self addMockPosts];
+        [self addMockObjects];
     }
     
 }
 
--(void)addMockPosts{
-    STPost *noPhotosPost = [[CoreManager postsPool] getPostWithId:kPostUuidForNoPhotosToDisplay];
-    if (!noPhotosPost) {
-        noPhotosPost = [STPost mockPostNoPhotosToDisplay];
-        [self addObjectsToObjectPool:@[noPhotosPost]];
+-(void)addMockObjects{
+    STBaseObj *nothingToDisplayObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForNothingToDisplay];
+    if (!nothingToDisplayObject) {
+        nothingToDisplayObject = [STBaseObj mockObjNothingToDisplay];
+        [self addObjectsToObjectPool:@[nothingToDisplayObject]];
     }
     else
-        [_objectIds removeObject:noPhotosPost.uuid];
+        [_objectIds removeObject:nothingToDisplayObject.uuid];
     
-    STPost *youSawAllPost = [[CoreManager postsPool] getPostWithId:kPostUuidForYouSawAll];
-    if (!youSawAllPost) {
-        youSawAllPost = [STPost mockPostYouSawAll];
-        [self addObjectsToObjectPool:@[youSawAllPost]];
+    STBaseObj *theEndObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForTheEnd];
+    if (!theEndObject) {
+        theEndObject = [STBaseObj mockObjTheEnd];
+        [self addObjectsToObjectPool:@[theEndObject]];
     }
     else
-        [_objectIds removeObject:youSawAllPost.uuid];
+        [_objectIds removeObject:theEndObject.uuid];
     
     
     if (_objectIds.count == 0)
     {
         if(_flowType == STFlowTypeMyGallery||
            _flowType == STFlowTypeUserGallery) {
-            [_objectIds addObject:noPhotosPost.uuid];
+            [_objectIds addObject:nothingToDisplayObject.uuid];
         }
         else
-            [_objectIds addObject:youSawAllPost.uuid];
+            [_objectIds addObject:theEndObject.uuid];
     }
     else
     {
@@ -339,7 +349,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
            _flowType == STFlowTypeUserGallery) {
         }
         else
-            [_objectIds addObject:youSawAllPost.uuid];
+            [_objectIds addObject:theEndObject.uuid];
     }
     
 }
@@ -386,6 +396,9 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         else
         {
             weakSelf.loaded = YES;
+            if (objects.count == 0) {
+                _noMoreObjectsToDownload = YES;
+            }
             NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             BOOL suggestionsShown = [[ud valueForKey:kShowSuggestionKey] boolValue];
             if (weakSelf.flowType == STFlowTypeHome &&
@@ -476,7 +489,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     if ([_objectIds containsObject:postId]) {
         [_objectIds removeObject:postId];
         
-        [self addMockPosts];
+        [self addMockObjects];
         
         [[CoreManager localNotificationService] postNotificationName:kNotificationObjDeleted object:self userInfo:@{kPostIdKey:postId}];
     }

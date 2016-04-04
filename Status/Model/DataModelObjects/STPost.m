@@ -29,9 +29,6 @@
 #import "NSDate+Additions.h"
 #import "STImageCacheController.h"
 
-NSString * const kPostUuidForNoPhotosToDisplay = @"uuid_1";
-NSString * const kPostUuidForYouSawAll = @"uuid_2";
-
 @implementation STPost
 + (instancetype)postWithDict:(NSDictionary *)postDict {
     STPost * post = [STPost new];
@@ -39,28 +36,6 @@ NSString * const kPostUuidForYouSawAll = @"uuid_2";
     [post setup];
     
     return post;
-}
-
-+ (instancetype)mockPostNoPhotosToDisplay{
-    STPost * post = [STPost new];
-    post.uuid = kPostUuidForNoPhotosToDisplay;
-    post.mainImageDownloaded = YES;
-    return post;
-
-}
-+ (instancetype)mockPostYouSawAll{
-    STPost * post = [STPost new];
-    post.uuid = kPostUuidForYouSawAll;
-    post.mainImageDownloaded = YES;
-    return post;
-}
-
-- (BOOL) isNoPhotosToDisplayPost{
-    return [self.uuid isEqualToString:kPostUuidForNoPhotosToDisplay];
-}
-
-- (BOOL) isYouSawAllPost{
-    return [self.uuid isEqualToString:kPostUuidForYouSawAll];
 }
 
 -(void)setup{
