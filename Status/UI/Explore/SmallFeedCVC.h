@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const kSmallFeedSelectionNotification;
+
 @interface SmallFeedCVC : UICollectionViewController
 
 @property (nonatomic, assign) STFlowType flowType;

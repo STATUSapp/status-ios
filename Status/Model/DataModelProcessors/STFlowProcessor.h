@@ -34,6 +34,11 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
 - (void)reloadProcessor;
 - (BOOL)canGoToUserProfile;
 - (BOOL)currentFlowUserIsTheLoggedInUser;
+- (void)setCurrentOffset:(NSInteger)offset;
+- (NSInteger)currentOffset;
+- (NSInteger)indexOfObject:(id)object;
+
+-(STFlowType)processorFlowType;
 
 //actions
 - (void)setLikeUnlikeAtIndex:(NSInteger)index

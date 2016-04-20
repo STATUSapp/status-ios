@@ -12,93 +12,89 @@
 #import "STLocationManager.h"
 #import "STGetNearbyProfilesRequest.h"
 
+#import "STFlowProcessor.h"
+#import "STProcessorsService.h"
+
 @interface STNearbyController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STUserProfileControllerDelegate>{
     UIScrollView *_contentScrollView;
+    UIViewController *parentVC;
 }
 
 @property (strong, nonatomic) UIPageViewController * pageViewController;
-@property (strong, nonatomic) NSMutableArray * profiles;
+@property (nonatomic, strong) STFlowProcessor *feedProcessor;
 
 @end
 
 @implementation STNearbyController
 
 
-- (void)getProfilesFromServerWithOffset:(NSInteger)offset withCompletion:(STCompletionBlock)completionBlock {
-    
-    if (_profiles == nil) {
-        _profiles = [NSMutableArray array];
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        _feedProcessor = [[CoreManager processorService] getProcessorWithType:STFlowTypeDiscoverNearby];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationObjDownloadSuccess object:_feedProcessor];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationObjUpdated object:_feedProcessor];
+
     }
-    
-    __weak STNearbyController * weakSelf = self;
-    
-    STRequestCompletionBlock completion = ^(id response, NSError *error){
-        if ([response[@"status_code"] integerValue] == 404) {
-            //user has no location force an update
-            
-            [[CoreManager locationService] startLocationUpdatesWithCompletion:^{
-                [weakSelf getProfilesFromServerWithOffset:offset withCompletion:completionBlock];
-            }];
-        }
-        else
-        {
-            NSArray *newPosts = response[@"data"];
-            
-            for (NSDictionary * userProfileDict in newPosts) {
-                STUserProfile * userProfile = [STUserProfile userProfileWithDict:userProfileDict];
-                [weakSelf.profiles addObject:userProfile];
-            }
-            if (completionBlock) {
-                completionBlock(nil);
-            }
-        }
-    };
-    
-    STRequestFailureBlock failBlock = ^(NSError *error){
-        NSLog(@"error with %@", error.description);
-        if (completionBlock) {
-            completionBlock(nil);
-        }
-    };
-    
-    [STGetNearbyProfilesRequest getNearbyProfilesWithOffset:offset withCompletion:completion failure:failBlock ];
+    return self;
 }
 
-- (void)pushNearbyFlowFromController:(UIViewController *)viewController withCompletionBlock:(STCompletionBlock)completionBlock{
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Notifications
+
+- (void)processorLoaded{
+    STUserProfile *up = [_feedProcessor objectAtIndex:0];
+    
+    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:up];
+    userVC.isLaunchedFromNearbyController = YES;
+    userVC.delegate = self;
+    [self.pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    [parentVC.navigationController pushViewController:self.pageViewController animated:YES];
+}
+
+- (void)postUpdated:(NSNotification *)notif{
+    
+}
+
+- (void)addChild {
+    if ([_feedProcessor loading] == NO) {
+        STUserProfile *up = [_feedProcessor objectAtIndex:[_feedProcessor currentOffset]];
+        STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:up];
+        userVC.isLaunchedFromNearbyController = YES;
+        userVC.delegate = self;
+        [self.pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [parentVC.navigationController pushViewController:self.pageViewController animated:YES];
+    }
+}
+
+- (void)pushNearbyFlowFromController:(UIViewController *)viewController{
+    parentVC = viewController;
     if (_pageViewController == nil) {
         _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
         _pageViewController.delegate = self;
-        _pageViewController.dataSource = self;        
+        _pageViewController.dataSource = self;
+        
+        [self addChild];
     }
-    
-    [self getProfilesFromServerWithOffset:_profiles.count withCompletion:^(NSError *error) {
-        if (error == nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:_profiles.firstObject];
-                userVC.isLaunchedFromNearbyController = YES;
-                userVC.delegate = self;
-                [self.pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-                [viewController.navigationController pushViewController:self.pageViewController animated:YES];
-            });
-        }
-        completionBlock(error);
-
-    }];
+    else
+    {
+        [self addChild];
+    }
 }
 
 #pragma mark UIPageViewController delegate and data source methods
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(STUserProfileViewController *)viewController {
     NSInteger actualVCIndex = [self indexOfProfile:[viewController userProfile]];
-    if (actualVCIndex == ( _profiles.count - 5 )) {
-        [self getProfilesFromServerWithOffset:_profiles.count withCompletion:nil];
-    }
     
-    if (actualVCIndex == _profiles.count - 1 || actualVCIndex == NSNotFound) {
+    if (actualVCIndex == _feedProcessor.numberOfObjects - 1 || actualVCIndex == NSNotFound) {
         return nil;
     }
     
-    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:[_profiles objectAtIndex:actualVCIndex + 1]];
+    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:[_feedProcessor objectAtIndex:actualVCIndex + 1]];
     userVC.isLaunchedFromNearbyController = YES;
     userVC.delegate = self;
     return userVC;
@@ -112,10 +108,15 @@
         return nil;
     }
     
-    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:[_profiles objectAtIndex:actualVCIndex - 1]];
+    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:[_feedProcessor objectAtIndex:actualVCIndex - 1]];
     userVC.isLaunchedFromNearbyController = YES;
     userVC.delegate = self;
     return userVC;
+}
+
+-(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<STUserProfileViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed{
+    NSInteger currentIndex = [self indexOfProfile:[[previousViewControllers lastObject] userProfile]];
+    [_feedProcessor processObjectAtIndex:currentIndex setSeenIfRequired:NO];
 }
 
 #pragma mark - STUserProfileDelegate
@@ -130,13 +131,7 @@
 
 
 - (NSUInteger)indexOfProfile:(STUserProfile *)userProfile {
-    for (STUserProfile * profile in _profiles) {
-        
-        if ([userProfile.uuid isEqualToString: profile.uuid]) {
-            return [_profiles indexOfObject:profile];
-        }
-    }
-    return NSNotFound;
+    return [_feedProcessor indexOfObject:userProfile];
 }
 
 @end

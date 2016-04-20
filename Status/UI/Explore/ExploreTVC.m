@@ -12,12 +12,18 @@
 #import "STImageCacheController.h"
 #import "UIImage+ImageEffects.h"
 #import "SmallFeedCVC.h"
+#import "STFlowProcessor.h"
+#import "STProcessorsService.h"
+#import "FeedCVC.h"
+#import "STNearbyController.h"
 
 const CGFloat kHeaderHeight = 30.f;
 const CGFloat kBottomHeight = 8.f;
 
 @interface ExploreTVC ()
-
+{
+    STNearbyController *nearbyController;
+}
 @end
 
 @implementation ExploreTVC
@@ -31,6 +37,9 @@ const CGFloat kBottomHeight = 8.f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    nearbyController = [STNearbyController new];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSmallFlowSelection:) name:kSmallFeedSelectionNotification object:nil];
     
 }
 
@@ -70,6 +79,27 @@ const CGFloat kBottomHeight = 8.f;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - SmallFlowNotification
+
+-(void)onSmallFlowSelection:(NSNotification *)notif{
+    STFlowType flowType = [notif.userInfo[kFlowTypeKey] integerValue];
+    NSInteger offset = [notif.userInfo[kOffsetKey] integerValue];
+    STFlowProcessor *feedProcessor = [[CoreManager processorService] getProcessorWithType:flowType];
+    [feedProcessor setCurrentOffset:offset];
+    if (flowType == STFlowTypeDiscoverNearby) {
+        [nearbyController pushNearbyFlowFromController:self];
+    }
+    else
+    {
+        FeedCVC *feed = [FeedCVC feedControllerWithFlowProcessor:feedProcessor];
+        [self.navigationController pushViewController:feed animated:YES];
+    }
 }
 
 #pragma mark - Table view data source

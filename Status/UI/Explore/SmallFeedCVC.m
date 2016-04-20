@@ -14,6 +14,10 @@
 #import "SmallFeedCell.h"
 #import "SmallTheEndFeedCell.h"
 #import "STImageCacheController.h"
+#import "STLocalNotificationService.h"
+#import "STProcessorsService.h"
+
+NSString * const kSmallFeedSelectionNotification = @"SmallFeedSelectionNotification";
 
 @interface SmallFeedCVC ()
 {
@@ -27,16 +31,25 @@
 @implementation SmallFeedCVC
 
 #pragma mark - Setters
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:_flowType];
+    STFlowProcessor *feedProcessor = [[CoreManager processorService] getProcessorWithType:_flowType];
     _feedProcessor = feedProcessor;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationObjDownloadSuccess object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationObjUpdated object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationObjDeleted object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,9 +88,9 @@
 }
 
 - (void)postUpdated:(NSNotification *)notif{
-//    [self.collectionView.collectionViewLayout invalidateLayout];
-//    [self.collectionView setCollectionViewLayout:self.collectionView.collectionViewLayout animated:YES];
-    [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView reloadData];
+    } completion:nil];
 }
 
 - (void)postAdded:(NSNotification *)notif{
@@ -141,6 +154,9 @@
     if ([cell isKindOfClass:[SmallTheEndFeedCell class]]) {
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
     }
+    else if ([cell isKindOfClass:[SmallFeedCell class]]){
+        [[CoreManager localNotificationService] postNotificationName:kSmallFeedSelectionNotification object:nil userInfo:@{kFlowTypeKey:@(_flowType), kOffsetKey: @(indexPath.row)}];
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -155,15 +171,14 @@
     
     if ([cell isKindOfClass:[SmallFeedCell class]]) {
         if ([obj isLoadingObject]) {
-            [cell.activityIndicator startAnimating];
+            [cell setUpImage:nil];
         }
         else
         {
+            __weak SmallFeedCell *weakCell = cell;
             [[CoreManager imageCacheService] loadPostImageWithName:obj.mainImageUrl withPostCompletion:^(UIImage *img) {
-                if (img!=nil) {
-                    cell.imageView.image = img;
-                    [cell.activityIndicator stopAnimating];
-                }
+                [weakCell setUpImage:img];
+                
             } andBlurCompletion:nil];
             
         }

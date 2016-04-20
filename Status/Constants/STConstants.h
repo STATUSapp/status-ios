@@ -186,6 +186,7 @@ extern NSString *const kImageUrlKey;
 extern NSString *const kFlowTypeKey;
 extern NSString *const kUserIdKey;
 extern NSString *const kImageSizeKey;
+extern NSString *const kOffsetKey;
 
 #pragma mark - Invite Friends
 

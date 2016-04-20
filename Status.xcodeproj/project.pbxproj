@@ -15,6 +15,7 @@
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
 		173A29511C9FF64500157945 /* STConversationUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A29501C9FF64500157945 /* STConversationUser.m */; };
 		173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A29531CA04B3E00157945 /* STNotificationObj.m */; };
+		17423E801CBE377600B11F16 /* STProcessorsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17423E7F1CBE377600B11F16 /* STProcessorsService.m */; };
 		174575B61CA95CD5006CA25F /* ExploreScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174575B51CA95CD5006CA25F /* ExploreScene.storyboard */; };
 		174575BA1CA964CA006CA25F /* ExploreTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 174575B91CA964CA006CA25F /* ExploreTVC.m */; };
 		174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 174D0B961CABDAA7001EB6E2 /* STUserProfilePool.m */; };
@@ -246,6 +247,8 @@
 		173A29501C9FF64500157945 /* STConversationUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConversationUser.m; sourceTree = "<group>"; };
 		173A29521CA04B3E00157945 /* STNotificationObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNotificationObj.h; sourceTree = "<group>"; };
 		173A29531CA04B3E00157945 /* STNotificationObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNotificationObj.m; sourceTree = "<group>"; };
+		17423E7E1CBE377600B11F16 /* STProcessorsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STProcessorsService.h; sourceTree = "<group>"; };
+		17423E7F1CBE377600B11F16 /* STProcessorsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STProcessorsService.m; sourceTree = "<group>"; };
 		174575B51CA95CD5006CA25F /* ExploreScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ExploreScene.storyboard; sourceTree = "<group>"; };
 		174575B81CA964CA006CA25F /* ExploreTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTVC.h; sourceTree = "<group>"; };
 		174575B91CA964CA006CA25F /* ExploreTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTVC.m; sourceTree = "<group>"; };
@@ -987,6 +990,8 @@
 				17DF47341C9974700053F633 /* STLocalNotificationService.m */,
 				99B3870B1C82FAA2005B4D8C /* STNotificationsManager.h */,
 				99B3870C1C82FAA2005B4D8C /* STNotificationsManager.m */,
+				17423E7E1CBE377600B11F16 /* STProcessorsService.h */,
+				17423E7F1CBE377600B11F16 /* STProcessorsService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1746,6 +1751,7 @@
 				99B387741C82FAA2005B4D8C /* STFacebookHelper.m in Sources */,
 				99B387681C82FAA2005B4D8C /* STUnseenPostsCountRequest.m in Sources */,
 				99B387821C82FAA2005B4D8C /* STCoreDataRequestManager.m in Sources */,
+				17423E801CBE377600B11F16 /* STProcessorsService.m in Sources */,
 				99B387B61C82FAA2005B4D8C /* STNotificationBanner.m in Sources */,
 				99B387831C82FAA2005B4D8C /* STDAOEngine.m in Sources */,
 				99B387751C82FAA2005B4D8C /* STFacebookLoginController.m in Sources */,

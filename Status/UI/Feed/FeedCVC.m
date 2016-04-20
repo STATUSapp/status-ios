@@ -42,6 +42,7 @@
 @property (nonatomic, strong) STFlowProcessor *feedProcessor;
 
 @property (nonatomic, strong) NSString *userName;
+
 @end
 
 @implementation FeedCVC
@@ -60,6 +61,16 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeHome];
     feedCVC.feedProcessor = feedProcessor;
     
+    return feedCVC;
+}
+
++ (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
+    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    FeedCVC *feedCVC = [[navController viewControllers] firstObject];
+    
+    feedCVC.feedProcessor = processor;
+    feedCVC.shouldAddBackButton = YES;
     return feedCVC;
 }
 
@@ -101,6 +112,16 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
 
+    if ([_feedProcessor loading] == NO) {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    }
+    
+    if (_shouldAddBackButton) {
+        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 20, 48, 48)];
+        [backButton setImage:[UIImage imageNamed:@"btnBack"] forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(onBackButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:backButton];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,6 +137,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 - (void)processorLoaded{
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 }
 
 - (void)postUpdated:(NSNotification *)notif{
@@ -196,16 +218,17 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     //    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
     
     _end = scrollView.contentOffset;
+    CGPoint point = scrollView.contentOffset;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    NSUInteger currentIndex = point.x/screenWidth;
+    NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
     if (_start.x < _end.x || _shouldForceSetSeen == YES)
     {//swipe to the right
         _shouldForceSetSeen = NO;
-        CGPoint point = scrollView.contentOffset;
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat screenWidth = screenRect.size.width;
-        NSUInteger currentIndex = point.x/screenWidth;
-        NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
         [_feedProcessor processObjectAtIndex:currentIndex setSeenIfRequired:YES ];
     }
+    [_feedProcessor setCurrentOffset:currentIndex];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -251,7 +274,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     STPost *post = [_feedProcessor objectAtIndex:indexPath.row];
     NSString *identifier = [self identifierForPost:post];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
+
     if ([cell isKindOfClass:[FeedCell class]]) {
         [(FeedCell *)cell configureCellWithPost:post];
     }
@@ -361,6 +384,10 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 - (IBAction)onBigCameraPressed:(id)sender {
     [_feedProcessor handleBigCameraButtonActionWithUserName:_userName];
+}
+
+- (IBAction)onBackButtonPressed:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - STContextualMenuDelegate

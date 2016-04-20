@@ -12,6 +12,6 @@ typedef void (^STCompletionBlock)(NSError *error);
 
 @interface STNearbyController : NSObject
 
-- (void)pushNearbyFlowFromController:(UIViewController *)viewController withCompletionBlock:(STCompletionBlock)completionBlock;
+- (void)pushNearbyFlowFromController:(UIViewController *)viewController;
 
 @end

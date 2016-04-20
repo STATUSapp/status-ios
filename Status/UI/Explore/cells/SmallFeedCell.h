@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SmallFeedCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+-(void)setUpImage:(UIImage *)image;
 
 @end

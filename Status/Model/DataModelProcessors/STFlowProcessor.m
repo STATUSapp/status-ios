@@ -46,6 +46,8 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 @property (nonatomic, assign) BOOL loaded;
 @property (nonatomic, assign) BOOL noMoreObjectsToDownload;
 
+@property (nonatomic, assign) NSInteger offset;
+
 @end
 
 @implementation STFlowProcessor
@@ -169,6 +171,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     _loaded = NO;
     _numberOfDuplicates = 0;
     _noMoreObjectsToDownload = NO;
+    _offset = 0;
     [_objectIds removeAllObjects];
     [self getMoreData];
 }
@@ -183,6 +186,21 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
 - (BOOL)currentFlowUserIsTheLoggedInUser{
     return [_userId isEqualToString:[CoreManager loginService].currentUserUuid];
+}
+
+-(STFlowType)processorFlowType{
+    return _flowType;
+}
+
+- (void)setCurrentOffset:(NSInteger)offset{
+    _offset = offset;
+}
+- (NSInteger)currentOffset{
+    return _offset;
+}
+
+- (NSInteger)indexOfObject:(id)object{
+    return [_objectIds indexOfObject:[object valueForKey:@"uuid"]];
 }
 #pragma mark - Actions
 

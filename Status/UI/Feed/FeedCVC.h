@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class STFlowProcessor;
 
 @interface FeedCVC : UICollectionViewController
 
@@ -14,5 +15,9 @@
 + (FeedCVC *)singleFeedControllerWithPostId:(NSString *)postId;
 + (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId
                                 andUserName:(NSString *)userName;
+
++ (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor;
+
+@property (nonatomic, assign) BOOL shouldAddBackButton;
 
 @end

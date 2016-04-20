@@ -120,6 +120,7 @@ NSString *const kImageUrlKey = @"key_image_url";
 NSString *const kFlowTypeKey = @"flow_type_key";
 NSString *const kUserIdKey = @"user_id_key";
 NSString *const kImageSizeKey = @"image_size_key";
+NSString *const kOffsetKey = @"offset_key";
 
 #pragma mark - Invite Friends
 
