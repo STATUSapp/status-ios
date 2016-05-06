@@ -42,11 +42,9 @@ static NSString * followThemTitle = @"FOLLOW THEM";
 
 @implementation STSuggestionsViewController
 
-+(STSuggestionsViewController *)instatiateWithDelegate:(id)delegate
-                                         andFollowTyep:(STFollowType)followType{
++(STSuggestionsViewController *)instatiateWithFollowType:(STFollowType)followType{
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
     STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
-    vc.delegate = delegate;
     vc.followType = followType;
     return vc;
 
@@ -250,29 +248,36 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     
 }
 - (IBAction)onArrowPressed:(id)sender {
+    
+    __weak typeof(self) weakSelf = self;
+    
     if ([[self allSuggestions] count] == 0) {
-        if (_delegate) {
-            [_delegate userDidEndApplyingSugegstions];
-        }
+        [self closeFlow];
     }
     else{
         [_followPeopleProcessor uploadDataToServer:_suggestedPeople withCompletion:^(NSError *error) {
             [_followFriendsProcessor uploadDataToServer:_suggestedFriends withCompletion:^(NSError *error) {
-                if (_delegate) {
-                    [_delegate userDidEndApplyingSugegstions];
-                }
+                [weakSelf closeFlow];
             }];
         }];
     }
-    
-    if (self.presentingViewController) {
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)closeFlow {
+    if (self.navigationController.presentingViewController) {
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        return;
     }
     
     if (self.navigationController) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
     }
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (IBAction)onFollowAllButtonPressed:(id)sender {
     //update the model then make the reuest at the end
     

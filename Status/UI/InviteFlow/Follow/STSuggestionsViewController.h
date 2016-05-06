@@ -9,15 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "STRequests.h"
 
-@protocol STSuggestionsDelegate <NSObject>
-
--(void)userDidEndApplyingSugegstions;
-
-@end
 
 @interface STSuggestionsViewController : UIViewController
-@property (nonatomic, weak) id <STSuggestionsDelegate>delegate;
+
 @property (nonatomic) STFollowType followType;
-+(STSuggestionsViewController *)instatiateWithDelegate:(id)delegate
-                                         andFollowTyep:(STFollowType)followType;
++(STSuggestionsViewController *)instatiateWithFollowType:(STFollowType)followType;
+
 @end

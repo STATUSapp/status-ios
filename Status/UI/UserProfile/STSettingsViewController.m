@@ -59,8 +59,12 @@ const NSInteger kSectionNumberLogout = 3;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewDidLoad
@@ -172,7 +176,7 @@ const NSInteger kSectionNumberLogout = 3;
 }
 
 - (IBAction)onTapFollowPeople:(id)sender {
-    STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithDelegate:nil andFollowTyep:STFollowTypeFriendsAndPeople];
+    STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithFollowType:STFollowTypeFriendsAndPeople];
     [self.navigationController pushViewController:suggestionsVC animated:YES];
 }
 
