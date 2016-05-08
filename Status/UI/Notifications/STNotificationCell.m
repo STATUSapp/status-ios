@@ -12,8 +12,12 @@
 CGFloat const seenCircleWidth = 15;
 
 @interface STNotificationCell()
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationTextTrailingConstraint;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *seenCircleWidthConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightImageWidthConstraint;
+
+
 @end
 
 @implementation STNotificationCell
@@ -67,9 +71,9 @@ CGFloat const seenCircleWidth = 15;
     // the notification label should extend if there is no photo on the right part of the cell
     
     if (self.postImg.image == nil) {
-        self.notificationTextTrailingConstraint.constant = 54;
+        self.rightImageWidthConstraint.constant = 0;
     } else {
-        self.notificationTextTrailingConstraint.constant = 104;
+        self.rightImageWidthConstraint.constant = 60;
     }
 }
 

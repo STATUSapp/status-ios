@@ -559,7 +559,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Silviu Burlacu 12345" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ijF-HU-uXA" customClass="STTapAnimationLabel">
-                                                    <rect key="frame" x="84" y="35" width="121" height="13"/>
+                                                    <rect key="frame" x="84" y="35" width="137" height="13"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -586,6 +586,8 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="FTc-yJ-76w" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ijF-HU-uXA" secondAttribute="bottom" constant="8" id="3JW-f4-S0L"/>
+                                                <constraint firstItem="p1o-Ab-gIN" firstAttribute="leading" secondItem="ijF-HU-uXA" secondAttribute="trailing" constant="8" id="CY6-RG-uAs"/>
                                                 <constraint firstItem="83t-DH-ybh" firstAttribute="leading" secondItem="p1o-Ab-gIN" secondAttribute="trailing" constant="5" id="JFL-cn-z1c"/>
                                                 <constraint firstItem="p1o-Ab-gIN" firstAttribute="top" secondItem="H10-S8-1tq" secondAttribute="top" constant="11" id="OdN-ez-gm2"/>
                                                 <constraint firstAttribute="trailing" secondItem="83t-DH-ybh" secondAttribute="trailing" constant="11" id="YVu-eR-JdA"/>
@@ -597,6 +599,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="FTc-yJ-76w" secondAttribute="bottom" constant="11" id="fgV-jY-TtW"/>
                                                 <constraint firstItem="FTc-yJ-76w" firstAttribute="leading" secondItem="zLu-PD-Bhw" secondAttribute="trailing" constant="8" id="l2f-6J-gwO"/>
                                                 <constraint firstItem="zLu-PD-Bhw" firstAttribute="leading" secondItem="H10-S8-1tq" secondAttribute="leading" constant="16" id="laB-Nl-fYB"/>
+                                                <constraint firstItem="ijF-HU-uXA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H10-S8-1tq" secondAttribute="topMargin" constant="11" id="o1K-0W-966"/>
                                                 <constraint firstItem="zLu-PD-Bhw" firstAttribute="top" secondItem="H10-S8-1tq" secondAttribute="top" constant="11" id="p3y-iQ-q8j"/>
                                                 <constraint firstAttribute="trailing" secondItem="ee3-Ov-apI" secondAttribute="trailing" id="rI3-2M-U9K"/>
                                                 <constraint firstItem="ee3-Ov-apI" firstAttribute="leading" secondItem="H10-S8-1tq" secondAttribute="leading" id="tT0-n6-Qhn"/>
@@ -608,6 +611,7 @@
                                         <connections>
                                             <outlet property="messageLbl" destination="ijF-HU-uXA" id="YdA-Yp-qqG"/>
                                             <outlet property="postImg" destination="p1o-Ab-gIN" id="RQB-gJ-G0g"/>
+                                            <outlet property="rightImageWidthConstraint" destination="CGc-Mw-QVi" id="BZd-ZC-ilk"/>
                                             <outlet property="seenCircle" destination="83t-DH-ybh" id="3j6-i2-Ite"/>
                                             <outlet property="seenCircleWidthConstraint" destination="OZt-FJ-nZa" id="nHx-Jb-APH"/>
                                             <outlet property="selectedBackgroundView" destination="ee3-Ov-apI" id="7Ew-WC-Cie"/>
