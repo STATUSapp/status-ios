@@ -63,6 +63,8 @@ const CGFloat kBottomHeight = 8.f;
 
 -(void)viewWillAppear:(BOOL)animated{
     __weak typeof(self) weakSelf = self;
+    [super viewWillAppear:animated];
+    
     STPost * randomPost = [CoreManager postsPool].randomPost;
     
     if (randomPost != nil) {
