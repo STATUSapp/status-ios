@@ -311,7 +311,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
                               [(UIButton *)sender setUserInteractionEnabled:YES];
                               STPost *post = [weakSelf.feedProcessor objectAtIndex:index];
                               if (post.postLikedByCurrentUser == YES &&
-                                  [weakSelf.feedProcessor numberOfObjects] >= index + 1) {
+                                  [weakSelf.feedProcessor numberOfObjects] > index + 1) {
                                   [weakSelf performSelector:@selector(goToNextPostWithIndex:)
                                                  withObject:@(index + 1)
                                                  afterDelay:0.25f];
