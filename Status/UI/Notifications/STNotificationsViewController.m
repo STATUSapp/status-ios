@@ -230,7 +230,6 @@ const float kNoNotifHeight = 24.f;
         actualCell.isSeen = no.seen;
         actualCell.messageLbl.text = [NSString stringWithFormat:@"%@", no.message];
         actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:no.date];
-        actualCell.notificationTypeMessage.text = [self getNotificationTypeStringForType:notificationType];
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     else
@@ -258,8 +257,6 @@ const float kNoNotifHeight = 24.f;
         else
             actualCell.notificationTypeMessage.text = no.message;
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        
     }
     return cell;
 
