@@ -13,5 +13,7 @@
 + (instancetype)newController;
 
 - (void)goToPreviousSelectedIndex;
+- (void)setActivityIcon;
+- (void)setMessagesIcon;
 
 @end

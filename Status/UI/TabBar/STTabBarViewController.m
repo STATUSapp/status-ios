@@ -80,20 +80,31 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[UIImage imageNamed:@"home"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setImage:[UIImage imageNamed:@"explore"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[UIImage imageNamed:@"camera"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"message"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[UIImage imageNamed:@"profile"]];
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[UIImage imageNamed:@"home_active"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setSelectedImage:[UIImage imageNamed:@"explore_active"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[UIImage imageNamed:@"camera_active"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"message_active"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[UIImage imageNamed:@"profile_active"]];
+    
+    
+    [self setMessagesIcon];
     
     for (UITabBarItem * item in self.tabBar.items) {
         [item setTitle:nil];
     }
     
     self.tabBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)setActivityIcon {
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"activity"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"activity_active"]];
+}
+
+- (void)setMessagesIcon {
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"message"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"message_active"]];
 }
 
 - (void)viewDidLoad {

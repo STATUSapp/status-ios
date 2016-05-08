@@ -24,6 +24,10 @@
 
 - (void)goToPreviousTabBarScene;
 
+- (void)showActivityIconOnTabBar;
+
+- (void)showMessagesIconOnTabBar;
+
 -(void)pushViewController:(UIViewController *) vc
           inTabbarAtIndex:(NSInteger)index
       keepThecurrentStack:(BOOL)keepTheStack;

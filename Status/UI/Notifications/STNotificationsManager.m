@@ -90,7 +90,12 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
                     NSInteger unreadNotificationsCount = [response[@"count"] integerValue];
                     [weakSelf setOverAllBadgeNumber:unreadNotificationsCount];
                     [[CoreManager navigationService] setBadge:unreadNotificationsCount forTabAtIndex:STTabBarIndexChat];
-
+                    
+                    if (unreadNotificationsCount == 0) {
+                        [[CoreManager navigationService] showMessagesIconOnTabBar];
+                    } else {
+                        [[CoreManager navigationService] showActivityIconOnTabBar];
+                    }
                 });
             }
         };

@@ -44,10 +44,14 @@
 
 #pragma mark - Methods
 
+- (STTabBarViewController *)appTabBar {
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    STTabBarViewController *tbc = (STTabBarViewController *)[window rootViewController];
+    return tbc;
+}
+
 -(void)setBadge:(NSInteger)badge
   forTabAtIndex:(NSInteger)index{
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
     
     NSString *badgeString = nil;
     if (badge > 0) {
@@ -57,24 +61,28 @@
             badgeString = [NSString stringWithFormat:@"%ld", (long)badge];
     }
     
-    [[tbc.viewControllers objectAtIndex:index] tabBarItem].badgeValue = badgeString;
+    [[self.appTabBar.viewControllers objectAtIndex:index] tabBarItem].badgeValue = badgeString;
 }
 
 -(void)switchToTabBarAtIndex:(NSInteger)index
                  popToRootVC:(BOOL)popToRoot{
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
-    [tbc setSelectedIndex:index];
+    [self.appTabBar setSelectedIndex:index];
     if (popToRoot) {
-        UINavigationController *navCtrl = (UINavigationController *)[[tbc viewControllers] objectAtIndex:index];
+        UINavigationController *navCtrl = (UINavigationController *)[[self.appTabBar viewControllers] objectAtIndex:index];
         [navCtrl popToRootViewControllerAnimated:YES];
     }
 }
 
 - (void)goToPreviousTabBarScene {
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    STTabBarViewController *tbc = (STTabBarViewController *)[window rootViewController];
-    [tbc goToPreviousSelectedIndex];
+    [self.appTabBar goToPreviousSelectedIndex];
+}
+
+- (void)showActivityIconOnTabBar {
+    [self.appTabBar setActivityIcon];
+}
+
+- (void)showMessagesIconOnTabBar {
+    [self.appTabBar setMessagesIcon];
 }
 
 - (void)presentLoginScreen{
@@ -147,17 +155,13 @@
 #pragma mark - Helpers
 
 -(NSInteger)selectedTabBarIndex{
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
-    return tbc.selectedIndex;
+    return self.appTabBar.selectedIndex;
 }
 
 -(void)pushViewController:(UIViewController *)vc
             inTabBarIndex:(NSInteger)index
                  animated:(BOOL)animated{
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    UITabBarController *tbc = (UITabBarController *)[window rootViewController];
-    UINavigationController *navCtrl = (UINavigationController *)[[tbc viewControllers] objectAtIndex:index];
+    UINavigationController *navCtrl = (UINavigationController *)[[self.appTabBar viewControllers] objectAtIndex:index];
     [navCtrl pushViewController:vc animated:animated];
 
 }
