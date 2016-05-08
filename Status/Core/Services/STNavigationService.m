@@ -71,6 +71,12 @@
     }
 }
 
+- (void)goToPreviousTabBarScene {
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    STTabBarViewController *tbc = (STTabBarViewController *)[window rootViewController];
+    [tbc goToPreviousSelectedIndex];
+}
+
 - (void)presentLoginScreen{
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     if ([appDel.window.rootViewController isKindOfClass:[STLoginViewController class]]) {

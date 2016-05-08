@@ -12,4 +12,6 @@
 
 + (instancetype)newController;
 
+- (void)goToPreviousSelectedIndex;
+
 @end

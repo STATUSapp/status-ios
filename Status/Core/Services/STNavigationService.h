@@ -22,6 +22,8 @@
 -(void)switchToTabBarAtIndex:(NSInteger)index
                  popToRootVC:(BOOL)popToRoot;
 
+- (void)goToPreviousTabBarScene;
+
 -(void)pushViewController:(UIViewController *) vc
           inTabbarAtIndex:(NSInteger)index
       keepThecurrentStack:(BOOL)keepTheStack;

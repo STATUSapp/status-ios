@@ -66,6 +66,10 @@
     [[CoreManager imagePickerService] launchFacebookPickerFromController:self withCompletion:completion];
 }
 
+- (void)onTapOnView:(id)sender {
+    [[CoreManager navigationService] goToPreviousTabBarScene];
+}
+
 #pragma mark - Notifications
 
 - (void)imageWasPostedWithPostId:(NSNotification *)notif {
@@ -82,6 +86,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostNewImageUploaded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostImageWasEdited object:nil];
 
+    UITapGestureRecognizer * tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapOnView:)];
+    [self.view addGestureRecognizer:tapGR];
 
     // Do any additional setup after loading the view.
 }

@@ -20,6 +20,8 @@ static NSString * storyboardIdentifier = @"tabBarController";
 
 @interface STTabBarViewController ()<UIGestureRecognizerDelegate>
 
+@property (nonatomic, assign) NSInteger previousSelectedIndex;
+
 @end
 
 @implementation STTabBarViewController
@@ -29,6 +31,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     STTabBarViewController * vc = [storyboard instantiateViewControllerWithIdentifier:storyboardIdentifier];
     [vc setupTabBar];
+    vc.previousSelectedIndex = 0;
     return vc;
 }
 
@@ -104,6 +107,24 @@ static NSString * storyboardIdentifier = @"tabBarController";
     navController.interactivePopGestureRecognizer.delegate =self;
     navController.interactivePopGestureRecognizer.enabled = YES;
 
+}
+
+#pragma mark - Custom implementations for selecting the index
+
+
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    _previousSelectedIndex = self.selectedIndex;
+    [super setSelectedIndex:selectedIndex];
+}
+
+- (void)setSelectedViewController:(__kindof UIViewController *)selectedViewController {
+    _previousSelectedIndex = self.selectedIndex;
+    [super setSelectedViewController:selectedViewController];
+}
+
+- (void)goToPreviousSelectedIndex {
+    [self setSelectedIndex:_previousSelectedIndex];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
