@@ -168,7 +168,6 @@ const float kNoNotifHeight = 24.f;
         default:
         {
             STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:no.userId];
-            profileVC.shouldOpenCameraRoll = (notifType == STNotificationTypeInvite);
             [self.navigationController pushViewController:profileVC animated:YES];
         }
             break;

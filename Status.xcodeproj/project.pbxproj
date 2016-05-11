@@ -21,6 +21,9 @@
 		174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 174D0B961CABDAA7001EB6E2 /* STUserProfilePool.m */; };
 		175204411CAAB73000C55170 /* SmallFeedCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 175204401CAAB73000C55170 /* SmallFeedCVC.m */; };
 		175204451CAAC84200C55170 /* SmallFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 175204441CAAC84200C55170 /* SmallFeedCell.m */; };
+		1756DB0F1CE0C74A00DDA876 /* UserProfileInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756DB0E1CE0C74A00DDA876 /* UserProfileInfoCell.m */; };
+		1756DB121CE0C77200DDA876 /* UserProfileFriendsInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756DB111CE0C77200DDA876 /* UserProfileFriendsInfoCell.m */; };
+		1756DB151CE0C78800DDA876 /* UserProfileBioLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756DB141CE0C78800DDA876 /* UserProfileBioLocationCell.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		1794DD5E1960D36B0009066D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6818B0B12E00C5637B /* CoreGraphics.framework */; };
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
@@ -258,6 +261,12 @@
 		175204401CAAB73000C55170 /* SmallFeedCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallFeedCVC.m; sourceTree = "<group>"; };
 		175204431CAAC84200C55170 /* SmallFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallFeedCell.h; sourceTree = "<group>"; };
 		175204441CAAC84200C55170 /* SmallFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallFeedCell.m; sourceTree = "<group>"; };
+		1756DB0D1CE0C74A00DDA876 /* UserProfileInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileInfoCell.h; sourceTree = "<group>"; };
+		1756DB0E1CE0C74A00DDA876 /* UserProfileInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileInfoCell.m; sourceTree = "<group>"; };
+		1756DB101CE0C77200DDA876 /* UserProfileFriendsInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileFriendsInfoCell.h; sourceTree = "<group>"; };
+		1756DB111CE0C77200DDA876 /* UserProfileFriendsInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileFriendsInfoCell.m; sourceTree = "<group>"; };
+		1756DB131CE0C78800DDA876 /* UserProfileBioLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileBioLocationCell.h; sourceTree = "<group>"; };
+		1756DB141CE0C78800DDA876 /* UserProfileBioLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileBioLocationCell.m; sourceTree = "<group>"; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -725,6 +734,19 @@
 				175204441CAAC84200C55170 /* SmallFeedCell.m */,
 				17D8C6751CAD3D9C0046D04F /* SmallTheEndFeedCell.h */,
 				17D8C6761CAD3D9C0046D04F /* SmallTheEndFeedCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		1756DB0C1CE0C71700DDA876 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				1756DB0D1CE0C74A00DDA876 /* UserProfileInfoCell.h */,
+				1756DB0E1CE0C74A00DDA876 /* UserProfileInfoCell.m */,
+				1756DB101CE0C77200DDA876 /* UserProfileFriendsInfoCell.h */,
+				1756DB111CE0C77200DDA876 /* UserProfileFriendsInfoCell.m */,
+				1756DB131CE0C78800DDA876 /* UserProfileBioLocationCell.h */,
+				1756DB141CE0C78800DDA876 /* UserProfileBioLocationCell.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -1423,6 +1445,7 @@
 		99B387341C82FAA2005B4D8C /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				1756DB0C1CE0C71700DDA876 /* cells */,
 				99B387351C82FAA2005B4D8C /* STEditProfileViewController.h */,
 				99B387361C82FAA2005B4D8C /* STEditProfileViewController.m */,
 				99B387371C82FAA2005B4D8C /* STSettingsViewController.h */,
@@ -1709,6 +1732,7 @@
 				99B387801C82FAA2005B4D8C /* StatusDM.xcdatamodeld in Sources */,
 				99B387AE1C82FAA2005B4D8C /* STChatRoomViewController.m in Sources */,
 				99B387CB1C82FAA2005B4D8C /* STNotificationsViewController.m in Sources */,
+				1756DB151CE0C78800DDA876 /* UserProfileBioLocationCell.m in Sources */,
 				99B387761C82FAA2005B4D8C /* STIAPHelper.m in Sources */,
 				99B3874B1C82FAA2005B4D8C /* STFlowImagesRequest.m in Sources */,
 				99B387691C82FAA2005B4D8C /* STUpdatePostCaptionRequest.m in Sources */,
@@ -1824,6 +1848,8 @@
 				99B387A61C82FAA2005B4D8C /* HPTextViewInternal.m in Sources */,
 				99B3873D1C82FAA2005B4D8C /* AppDelegate.m in Sources */,
 				99B387711C82FAA2005B4D8C /* STChatController.m in Sources */,
+				1756DB0F1CE0C74A00DDA876 /* UserProfileInfoCell.m in Sources */,
+				1756DB121CE0C77200DDA876 /* UserProfileFriendsInfoCell.m in Sources */,
 				99B387671C82FAA2005B4D8C /* STUnfollowUsersRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

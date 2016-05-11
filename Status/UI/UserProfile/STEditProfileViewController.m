@@ -11,6 +11,7 @@
 #import "STUserProfileViewController.h"
 #import "STImageCacheController.h"
 #import "STUploadNewProfilePictureRequest.h"
+#import "STUserProfilePool.h"
 
 const NSInteger kMaxNumberOfCharacters = 150;
 const NSInteger kDefaultValueForTopConstraint = 26;
@@ -72,6 +73,12 @@ const NSInteger kDefaultValueForTopConstraint = 26;
                                                            bio:_txtViewBio.text
                                                 withCompletion:^(id response, NSError *error) {
                                                     
+                                                    weakSelf.userProfile.fullName = _txtFieldName.text;
+                                                    weakSelf.userProfile.homeLocation = _txtFieldLocation.text;
+                                                    weakSelf.userProfile.bio = _txtViewBio.text;
+                                                    
+                                                    [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
+
                                                     [[[UIAlertView alloc] initWithTitle:@"Update Profile" message:@"Succes!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
                                                     
                                                     [weakSelf.navigationController popViewControllerAnimated:YES];

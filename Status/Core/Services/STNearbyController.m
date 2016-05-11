@@ -46,13 +46,15 @@
 #pragma mark - Notifications
 
 - (void)processorLoaded{
-    STUserProfile *up = [_feedProcessor objectAtIndex:0];
-    
-    STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:up];
-    userVC.isLaunchedFromNearbyController = YES;
-    userVC.delegate = self;
-    [self.pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    [parentVC.navigationController pushViewController:self.pageViewController animated:YES];
+    if ([_pageViewController.viewControllers count] == 0) {
+        
+        STUserProfile *up = [_feedProcessor objectAtIndex:0];
+        
+        STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:up];
+        userVC.delegate = self;
+        [self.pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [parentVC.navigationController pushViewController:self.pageViewController animated:YES];
+    }
 }
 
 - (void)postUpdated:(NSNotification *)notif{
@@ -63,7 +65,6 @@
     if ([_feedProcessor loading] == NO) {
         STUserProfile *up = [_feedProcessor objectAtIndex:[_feedProcessor currentOffset]];
         STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:up];
-        userVC.isLaunchedFromNearbyController = YES;
         userVC.delegate = self;
         [self.pageViewController setViewControllers:@[userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
         [parentVC.navigationController pushViewController:self.pageViewController animated:YES];
@@ -95,7 +96,6 @@
     }
     
     STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:[_feedProcessor objectAtIndex:actualVCIndex + 1]];
-    userVC.isLaunchedFromNearbyController = YES;
     userVC.delegate = self;
     return userVC;
 }
@@ -109,7 +109,6 @@
     }
     
     STUserProfileViewController * userVC = [STUserProfileViewController newControllerWithUserUserDataModel:[_feedProcessor objectAtIndex:actualVCIndex - 1]];
-    userVC.isLaunchedFromNearbyController = YES;
     userVC.delegate = self;
     return userVC;
 }

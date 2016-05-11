@@ -117,8 +117,9 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     }
     
     if (_shouldAddBackButton) {
-        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 20, 48, 48)];
+        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(4, 4, 48, 48)];
         [backButton setImage:[UIImage imageNamed:@"btnBack"] forState:UIControlStateNormal];
+        [backButton setImage:[UIImage imageNamed:@"btnBackPressed"] forState:UIControlStateHighlighted];
         [backButton addTarget:self action:@selector(onBackButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:backButton];
     }

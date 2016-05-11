@@ -33,30 +33,29 @@
 
 #import "FeedCVC.h"
 
-@interface STUserProfileViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewProfilePicture;
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewBlurryPicture;
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewLocationIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewStatusIcon;
-@property (weak, nonatomic) IBOutlet UILabel *lblNameAndAge;
-@property (weak, nonatomic) IBOutlet UILabel *lblDistance;
-@property (weak, nonatomic) IBOutlet UILabel *lblLocation;
-@property (weak, nonatomic) IBOutlet UILabel *lblUserDescription;
-@property (weak, nonatomic) IBOutlet UIButton *btnFollowersCount;
+#import "UserProfileInfoCell.h"
+#import "UserProfileFriendsInfoCell.h"
+#import "UserProfileBioLocationCell.h"
 
-@property (weak, nonatomic) IBOutlet UIButton *btnMessages;
-@property (weak, nonatomic) IBOutlet UIButton *btnGallery;
-@property (weak, nonatomic) IBOutlet UIButton *btnMenu;
-@property (weak, nonatomic) IBOutlet UIButton *btnCamera;
-@property (weak, nonatomic) IBOutlet UIButton *btnSettings;
-@property (weak, nonatomic) IBOutlet UIButton *btnEditUserProfile;
-@property (weak, nonatomic) IBOutlet UIButton *btnNextProfile;
-@property (weak, nonatomic) IBOutlet UIButton *btnFollow;
-@property (weak, nonatomic) IBOutlet UIButton *btnFollowers;
-@property (weak, nonatomic) IBOutlet UIButton *btnFollowing;
-@property (weak, nonatomic) IBOutlet UIButton *btnSendMessageToUser;
-@property (weak, nonatomic) IBOutlet UIView *loadingPlaceholder;
-@property (weak, nonatomic) IBOutlet UIButton *btnBack;
+typedef NS_ENUM(NSInteger, ProfileSection) {
+    ProfileSectionInfo = 0,
+    ProfileSectionFriendsInfo,
+    ProfileSectionBioAndLocation,
+    ProfileSectionCount,
+};
+
+
+NSInteger const kTopLeftButtonTagBack = 11;
+NSInteger const kTopLeftButtonTagSettings = 12;
+
+@interface STUserProfileViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingSpinner;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIButton *topLeftButton;
+@property (weak, nonatomic) IBOutlet UIButton *topRightButton;
+
 
 @property (nonatomic, strong) NSString * profileUserId;
 @property (nonatomic, strong) STUserProfile * userProfile;
@@ -85,28 +84,37 @@
     return newController;
 }
 
+-(void)setLoadingScreen:(BOOL)loading{
+    if (loading == YES) {
+        _collectionView.hidden = YES;
+//        [self.view bringSubviewToFront:_backgroundImageView];
+        _loadingSpinner.hidden = NO;
+        [_loadingSpinner startAnimating];
+//        [self.view bringSubviewToFront:_loadingSpinner];
+    }
+    else
+    {
+        _collectionView.hidden = NO;
+        _loadingSpinner.hidden = YES;
+        [_loadingSpinner stopAnimating];
+//        [self.view sendSubviewToBack:_loadingSpinner];
+
+        _backgroundImageView.image = [[STUIHelper splashImageWithLogo:NO] applyDarkEffect];
+//        [self.view sendSubviewToBack:_backgroundImageView];
+
+    }
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _backgroundImageView.image = [[STUIHelper splashImageWithLogo:NO] applyDarkEffect];
+
     if ([_profileUserId isEqualToString:[CoreManager loginService].currentUserUuid]) {
         _isMyProfile = YES;
     }
     
-    _loadingPlaceholder.hidden = NO;
-    
-    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
-    tapGestureRecognizer.numberOfTapsRequired = 1;
-    [_imageViewProfilePicture addGestureRecognizer:tapGestureRecognizer];
-    _imageViewProfilePicture.userInteractionEnabled = YES;
-    
-    if (_shouldOpenCameraRoll) {
-        [self onTapCamera:nil];
-    }
-}
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     if (_skipRefreshReqeust) {
         _skipRefreshReqeust = NO;
         [self setupVisualsWithProfile:_userProfile];
@@ -114,37 +122,34 @@
         [self getAndDisplayProfile];
     }
     
-    _btnBack.hidden = _shouldHideBackButton;
+    NSString *leftBtn = @"btnBack";
+    NSString *leftBtnPressed = @"btnBackPressed";
+    NSInteger leftButtonTag = kTopLeftButtonTagBack;
     
     if (_isMyProfile) {
-        _btnNextProfile.hidden = YES;
-        _btnFollow.hidden = YES;
-        _btnSettings.hidden = NO;
-        _btnSendMessageToUser.hidden = YES;
-        _btnEditUserProfile.hidden = NO;
-        _btnFollowers.hidden = NO;
-        _btnFollowing.hidden = NO;
-        _btnFollowersCount.hidden = YES;
-    } else {
-        _btnNextProfile.hidden = NO;
-        _btnFollow.hidden = NO;
-        _btnSettings.hidden = YES;
-        _btnSendMessageToUser.hidden = NO;
-        _btnEditUserProfile.hidden = YES;
-        _btnFollowers.hidden = YES;
-        _btnFollowing.hidden = YES;
-        _btnFollowersCount.hidden = NO;
+        leftBtn = @"settings_btn";
+        leftBtnPressed = @"settings_btn_pressed";
+        leftButtonTag = kTopLeftButtonTagSettings;
     }
-    
-    if (!_isLaunchedFromNearbyController) {
-        UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
-        swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-        [self.view addGestureRecognizer:swipeLeft];
-        
-        UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onBack)];
-        swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-        [self.view addGestureRecognizer:swipeRight];
-    }
+    _topRightButton.hidden = !_isMyProfile;
+    [_topLeftButton setImage:[UIImage imageNamed:leftBtn] forState:UIControlStateNormal];
+    [_topLeftButton setImage:[UIImage imageNamed:leftBtnPressed] forState:UIControlStateHighlighted];
+    _topLeftButton.tag = leftButtonTag;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.collectionView reloadData];
+//    if (!_isLaunchedFromNearbyController) {
+//        UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
+//        swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+//        [self.view addGestureRecognizer:swipeLeft];
+//        
+//        UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onBack)];
+//        swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+//        [self.view addGestureRecognizer:swipeRight];
+//    }
 }
 
 - (void)onBack {
@@ -157,7 +162,7 @@
 
 - (void)getAndDisplayProfile {
     
-    _loadingPlaceholder.hidden = NO;
+    [self setLoadingScreen:YES];
     
     if (_userProfile) {
         [self setupVisualsWithProfile:_userProfile];
@@ -181,118 +186,126 @@
 
 - (void)setupVisualsWithProfile:(STUserProfile *)profile {
     
-    if (profile.firstname.length) {
-        _lblNameAndAge.text = profile.firstname;
-    } else {
-        _lblNameAndAge.text = profile.fullName;
-    }
+    [self setLoadingScreen:profile==nil];
     
-    if (profile.birthday) {
-        NSString * age = [NSDate yearsFromDate:profile.birthday];
-        if (age) {
-            _lblNameAndAge.text = [NSString stringWithFormat:@"%@, %@", _lblNameAndAge.text, age];
-        }
-    }
-
-    [_btnGallery setTitle:[NSString stringWithFormat:@"%li", (long)profile.numberOfPosts] forState:UIControlStateNormal];
+    [self.collectionView reloadData];
     
-    if (profile.bio == nil) {
-        profile.bio = @"";
-    }
-    
-    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 3;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-    
-    NSString *bioStr = profile.bio?:@"";
-    NSAttributedString * bioString = [[NSAttributedString alloc] initWithString:bioStr
-                                                                     attributes:@{NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:14.0f],NSParagraphStyleAttributeName : paragraphStyle}];
-    _lblUserDescription.attributedText = bioString;
-    
-    
-    if (profile.homeLocation == nil) {
-        _imageViewLocationIcon.hidden = YES;
-        _lblLocation.text = @"";
-    }else {
-        _imageViewLocationIcon.hidden = YES;
-        _lblLocation.text = profile.homeLocation;
-    }
-    
-    [_imageViewProfilePicture sd_setImageWithURL:[NSURL URLWithString:profile.mainImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        _imageViewBlurryPicture.image = [image applyDarkEffect];
-    }];
-    
-    
-    BOOL hasLastSeenStatus = YES;
-    NSString * statusText;
-    if (profile.isActive) {
-        statusText = @"Active Now";
-        [self setStatusIconForStatus:STUserStatusActive];
-    } else if (profile.wasNeverActive) {
-        statusText = @"Not Active";
-        [self setStatusIconForStatus:STUserStatusOffline];
-    } else if (profile.lastActive != nil) {
-        statusText = [NSDate statusForLastTimeSeen:profile.lastActive];
-        [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:profile.lastActive]];
-    } else {
-        hasLastSeenStatus = NO;
-    }
-    
-    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
-                                                                                     andLongitudeString:profile.longitude];
-
-    if ([distanceText isEqualToString:ST_UNKNOWN_DISTANCE_MESSAGE]) {
-        distanceText = @"";
-    }
-    
-    if (distanceText.length == 0) {
-        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@"%@", statusText] : @"";
-    }else {
-        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@" - %@", statusText] : @"";
-    }
-    _imageViewStatusIcon.hidden = !hasLastSeenStatus;
-    
-    
-    
-    CGFloat fontSize = _lblDistance.font.pointSize;
-    UIFont * statusFont = [UIFont fontWithName:@"ProximaNova-Regular" size:fontSize];
-    UIFont * distanceFont = [UIFont fontWithName:@"ProximaNova-Semibold" size:fontSize];
-    
-    NSDictionary * statusDict = @{NSFontAttributeName : statusFont};
-    NSDictionary * distanceDict = @{NSFontAttributeName : distanceFont};
-    
-    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:distanceText attributes:distanceDict];
-    [text appendAttributedString:[[NSAttributedString alloc] initWithString:statusText attributes:statusDict]];
-    _lblDistance.attributedText = text;
-    
-    _loadingPlaceholder.hidden = YES;
-    
-    _btnFollow.selected = profile.isFollowedByCurrentUser;
-    [_btnFollowers setTitle:[NSString stringWithFormat:@"Followers %li", (long)profile.followersCount] forState:UIControlStateNormal];
-    [_btnFollowing setTitle:[NSString stringWithFormat:@"Following %li", (long)profile.followingCount] forState:UIControlStateNormal];
-    [_btnFollowersCount setTitle:[NSString stringWithFormat:@"%li", (long)profile.followersCount] forState:UIControlStateNormal];
 }
 
-- (void)setStatusIconForStatus:(STUserStatus)userStatus {
-    switch (userStatus) {
-        case STUserStatusAway:
-            _imageViewStatusIcon.image = [UIImage imageNamed:@"status_away"];
-            break;
-        case STUserStatusOffline:
-            _imageViewStatusIcon.image = [UIImage imageNamed:@"status_offline"];
-            break;
-            
-        case STUserStatusActive:
-            _imageViewStatusIcon.image = [UIImage imageNamed:@"status_online"];
+#pragma mark - UICollectionViewDelegates
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return ProfileSectionCount;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    NSInteger numRows = 0;
+    switch (section) {
+        case ProfileSectionInfo:
+        case ProfileSectionFriendsInfo:
+        case ProfileSectionBioAndLocation:
+            numRows = 1;
             break;
             
         default:
-            _imageViewStatusIcon.image = nil;
             break;
+    }
+
+    return numRows;
+}
+
+- (NSString *)identifierForIndexPath:(NSIndexPath *)indexPath{
+    NSString *identifier = @"";
+    switch (indexPath.section) {
+        case ProfileSectionInfo:
+            identifier = @"UserProfileInfoCell";
+            break;
+        case ProfileSectionFriendsInfo:
+            identifier = @"UserProfileFriendsInfoCell";
+            break;
+        case ProfileSectionBioAndLocation:
+            identifier = @"UserProfileBioLocationCell";
+            break;
+
+        default:
+            break;
+    }
+    
+    return identifier;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self identifierForIndexPath:indexPath] forIndexPath:indexPath];
+    
+    if ([cell isKindOfClass:[UserProfileInfoCell class]]) {
+        [((UserProfileInfoCell *)cell).profileImageView sd_setImageWithURL:[NSURL URLWithString:_userProfile.mainImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image) {
+                _backgroundImageView.image = [image applyDarkEffect];
+            }
+            else
+                _backgroundImageView.image = [[STUIHelper splashImageWithLogo:NO] applyDarkEffect];
+        }];
+        
+        [(UserProfileInfoCell *)cell configureCellWithUserProfile:_userProfile];
+
+    }
+    else if ([cell isKindOfClass:[UserProfileFriendsInfoCell class]]){
+        [(UserProfileFriendsInfoCell *)cell configureForProfile:_userProfile];
+    }
+    else if ([cell isKindOfClass:[UserProfileBioLocationCell class]]){
+        [(UserProfileBioLocationCell *)cell configureCellForProfile:_userProfile];
+    }
+    
+    return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == ProfileSectionInfo) {
+        [self onTapGallery:nil];
     }
 }
 
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CGSize cellSize = CGSizeZero;
+    CGFloat screenWidth = self.view.frame.size.width;
+
+    switch (indexPath.section) {
+        case ProfileSectionInfo:{
+
+            cellSize = CGSizeMake(screenWidth, screenWidth);
+    }
+            break;
+        case ProfileSectionFriendsInfo:{
+            
+            cellSize = CGSizeMake(screenWidth, [UserProfileFriendsInfoCell defaultCellHeight]);
+        }
+
+            break;
+        case ProfileSectionBioAndLocation:{
+            
+            cellSize = CGSizeMake(screenWidth, [UserProfileBioLocationCell cellHeightForProfile:_userProfile]);
+        }
+    
+        default:
+            break;
+    }
+    
+    return cellSize;
+}
+
+
 #pragma mark - IBActions
+- (IBAction)onTopLeftButtonPressed:(id)sender {
+    if ([(UIButton *)sender tag] == kTopLeftButtonTagBack) {
+        [self onTapBack:sender];
+    }
+    else if ([(UIButton*)sender tag] == kTopLeftButtonTagSettings){
+        [self onTapSettings:sender];
+    }
+}
+
 - (IBAction)onTapFollowing:(id)sender {
     STUsersListController * newVC = [STUsersListController newControllerWithUserId:_profileUserId
                                                                             postID:nil andType:UsersListControllerTypeFollowing];
@@ -321,17 +334,12 @@
 - (IBAction)onTapGallery:(id)sender {
     
     FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_profileUserId andUserName:_userProfile.fullName];
+    feedCVC.shouldAddBackButton = YES;
     [self.navigationController pushViewController:feedCVC animated:YES];
 }
 
 
 - (IBAction)onTapNextProfile:(id)sender {
-    
-    if (!_isLaunchedFromNearbyController) {
-        [self onTapGallery:nil];
-        return;
-    }
-    
     if (_delegate) {
         if ([_delegate respondsToSelector:@selector(advanceToNextProfile)]) {
             [_delegate advanceToNextProfile];
@@ -346,7 +354,6 @@
         //unfollow user
         
         [STUnfollowUsersRequest unfollowUsers:@[@{@"uuid" : _userProfile.uuid}] withCompletion:^(id response, NSError *error) {
-            weakSelf.btnFollow.selected = NO;
             weakSelf.userProfile.followersCount --;
             weakSelf.userProfile.isFollowedByCurrentUser = NO;
             [weakSelf setupVisualsWithProfile:weakSelf.userProfile];
@@ -358,7 +365,6 @@
         //follow user
         
         [STFollowUsersRequest followUsers:@[@{@"uuid" : _userProfile.uuid}] withCompletion:^(id response, NSError *error) {
-            weakSelf.btnFollow.selected = YES;
             weakSelf.userProfile.followersCount ++;
             weakSelf.userProfile.isFollowedByCurrentUser = YES;
             [weakSelf setupVisualsWithProfile:weakSelf.userProfile];
@@ -367,10 +373,6 @@
         }];
         
     }
-}
-
-- (IBAction)onTapCamera:(id)sender {
-    //TODO: dev_1_2 maybe ask user for upload action?
 }
 
 - (IBAction)onTapSettings:(id)sender {
