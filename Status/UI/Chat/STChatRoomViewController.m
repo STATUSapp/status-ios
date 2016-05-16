@@ -218,7 +218,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
 
     }];
-    _bottomTextViewConstraint.constant = keyboardBounds.size.height;
+    _bottomTextViewConstraint.constant = keyboardBounds.size.height - self.tabBarController.tabBar.frame.size.height;
 
 }
 

@@ -91,6 +91,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     for (UITabBarItem * item in self.tabBar.items) {
         [item setTitle:nil];
+        item.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     }
     
     self.tabBar.tintColor = [UIColor whiteColor];

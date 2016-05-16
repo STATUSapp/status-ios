@@ -31,6 +31,8 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
     NSTimer *_dismissTimer;
     NSTimer *_serviceTimer;
     STNotificationBanner *_currentBanner;
+    NSInteger notificationsCount;
+    BOOL isActivitySubTabSelected;
 }
 
 @property (nonatomic, strong) NSNumber *overAllBadge;
@@ -59,6 +61,10 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL)isActivitySubTab{
+    return isActivitySubTabSelected;
+}
+
 -(void)setOverAllBadgeNumber:(NSInteger)badgeNumber{
     _overAllBadge = @(badgeNumber);
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
@@ -68,8 +74,30 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateNotificationTab)
+                                                 name:STUnreadMessagesValueDidChanged
+                                               object:nil];
 
 
+}
+
+-(void)updateNotificationTab{
+    NSInteger overAllNotificationCount = 0;
+    if ([STChatController sharedInstance].unreadMessages > 0) {
+        isActivitySubTabSelected = NO;
+        overAllNotificationCount = [STChatController sharedInstance].unreadMessages;
+        [[CoreManager navigationService] showMessagesIconOnTabBar];
+    }
+    else
+    {
+        isActivitySubTabSelected = YES;
+        overAllNotificationCount = notificationsCount;
+        [[CoreManager navigationService] showActivityIconOnTabBar];
+    }
+    
+    [self setOverAllBadgeNumber:overAllNotificationCount];
+    [[CoreManager navigationService] setBadge:overAllNotificationCount forTabAtIndex:STTabBarIndexChat];
 }
 
 -(void)loadBadgeNumber{
@@ -87,15 +115,8 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSInteger unreadNotificationsCount = [response[@"count"] integerValue];
-                    [weakSelf setOverAllBadgeNumber:unreadNotificationsCount];
-                    [[CoreManager navigationService] setBadge:unreadNotificationsCount forTabAtIndex:STTabBarIndexChat];
-                    
-                    if (unreadNotificationsCount == 0) {
-                        [[CoreManager navigationService] showMessagesIconOnTabBar];
-                    } else {
-                        [[CoreManager navigationService] showActivityIconOnTabBar];
-                    }
+                    notificationsCount = [response[@"count"] integerValue];
+                    [weakSelf updateNotificationTab];
                 });
             }
         };

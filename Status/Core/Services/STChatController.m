@@ -380,7 +380,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
                                                              withData:resultDict
                                                         andCompletion:^(BOOL success, id returnObject) {
                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                if (seen == NO && message[@"notification_info"]!=nil) {
+                                                                if (seen == NO && received && message[@"notification_info"]!=nil) {
                                                                     [[CoreManager notificationsService] handleInAppMessageNotification:message];
                                                                 }
                                                             });

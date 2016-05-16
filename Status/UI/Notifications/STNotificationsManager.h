@@ -17,4 +17,6 @@
 -(void)handleNotification:(NSDictionary *) notif;
 -(void)handleInAppNotification:(NSDictionary *)notification;
 -(void)handleInAppMessageNotification:(NSDictionary *)notification;
+
+- (BOOL)isActivitySubTab;
 @end

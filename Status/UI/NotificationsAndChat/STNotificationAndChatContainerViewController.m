@@ -10,6 +10,7 @@
 
 #import "STNotificationsViewController.h"
 #import "STConversationsListViewController.h"
+#import "STNotificationsManager.h"
 
 @interface STNotificationAndChatContainerViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
@@ -226,6 +227,12 @@
     [self addChildViewController:_pageController];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsShouldBeReloaded:) name:STNotificationsShouldBeReloaded object:nil];
+
+    if ([[CoreManager notificationsService] isActivitySubTab]) {
+        [self goToNotifications:nil];
+    }
+    else
+        [self goToMessages:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
