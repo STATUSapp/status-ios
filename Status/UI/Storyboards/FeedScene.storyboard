@@ -251,6 +251,7 @@
                                     <outlet property="seeMoreButton" destination="kt3-Ob-LSy" id="gJ7-Q1-m78"/>
                                     <outlet property="seeMoreButtonWidthConstr" destination="tpb-w0-OkP" id="Mrz-iW-PQH"/>
                                     <outlet property="timeLabel" destination="s0j-MI-kcP" id="3yA-vL-b7y"/>
+                                    <outlet property="userNameWidthConstr" destination="1y3-4e-O3M" id="113-t4-RTm"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FullCaptionFeedCell" id="KpT-Ct-UVm" customClass="FullCaptionFeedCell">

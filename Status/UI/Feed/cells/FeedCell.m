@@ -16,6 +16,7 @@ NSString *const kChatMinimumVersion = @"1.0.4";
 CGFloat const kCaptionMargins = 28.f;
 CGFloat const kCaptionDefaultHeight = 21.f;
 CGFloat const kSeeMoreButtonWidthConstant = 56.f;
+CGFloat const kUserNameWidthOffset = 180.f;
 
 @interface FeedCell ()
 
@@ -31,12 +32,24 @@ CGFloat const kSeeMoreButtonWidthConstant = 56.f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *seeMoreButtonWidthConstr;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likesButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userNameWidthConstr;
 @end
 
 @implementation FeedCell
 
 -(void)configureCellWithPost:(STPost *)post{
     _currentPost = post;
+    _currentPost.userName = @"Gigi Gigigigigigigigi gigigi gigi";
+    UIFont *font = _nameButton.titleLabel.font;
+    
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    
+    CGFloat maxTextWidth = mainWindow.frame.size.width-kUserNameWidthOffset;
+    
+    CGRect rect = [_currentPost.userName boundingRectWithSize:CGSizeMake(maxTextWidth, _nameButton.frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+
+    _userNameWidthConstr.constant = round(rect.size.width) + 8.f;
+    
     [_nameButton setTitle:_currentPost.userName forState:UIControlStateNormal];
     [_likeButton setTitle:_currentPost.postLikedByCurrentUser?NSLocalizedString(@"LIKED", nil):NSLocalizedString(@"LIKE", nil) forState:UIControlStateNormal];
     _messageButton.enabled = [_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
