@@ -84,7 +84,7 @@
                                                         <action selector="onNamePressed:" destination="4dN-sM-RAG" eventType="touchUpInside" id="VvV-TS-LJP"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Al-Jx-btc">
+                                                <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Al-Jx-btc">
                                                     <rect key="frame" x="193" y="0.0" width="70" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="0D2-jl-8FH"/>
@@ -93,7 +93,7 @@
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="10"/>
                                                     <state key="normal" title="LIKE" backgroundImage="message_background"/>
                                                     <state key="highlighted">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                        <color key="titleColor" red="0.83921568627450982" green="0.3411764705882353" blue="0.027450980392156862" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="onLikePressed:" destination="4dN-sM-RAG" eventType="touchUpInside" id="OQc-fm-lBw"/>
@@ -338,9 +338,8 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iFq-lZ-YHL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="112" height="19"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="292" height="19"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="112" id="Sef-bR-vSn"/>
                                                         <constraint firstAttribute="height" constant="19" id="u1u-kj-eKx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
@@ -360,6 +359,7 @@
                                                 <constraint firstItem="c8q-Ml-PXb" firstAttribute="top" secondItem="x18-lD-jGr" secondAttribute="bottom" constant="5" id="9uR-Za-J7i"/>
                                                 <constraint firstItem="x18-lD-jGr" firstAttribute="leading" secondItem="qFh-bT-7ty" secondAttribute="leading" id="F8A-QT-9As"/>
                                                 <constraint firstItem="GnH-NR-q4h" firstAttribute="leading" secondItem="c8q-Ml-PXb" secondAttribute="trailing" constant="5" id="KEU-lK-fbv"/>
+                                                <constraint firstAttribute="trailing" secondItem="iFq-lZ-YHL" secondAttribute="trailing" id="UBE-jI-8Cz"/>
                                                 <constraint firstItem="x18-lD-jGr" firstAttribute="top" secondItem="iFq-lZ-YHL" secondAttribute="bottom" id="aYv-20-LlW"/>
                                                 <constraint firstItem="0if-uN-vbN" firstAttribute="leading" secondItem="qFh-bT-7ty" secondAttribute="leading" id="gYD-AW-E6c"/>
                                                 <constraint firstItem="c8q-Ml-PXb" firstAttribute="leading" secondItem="0if-uN-vbN" secondAttribute="trailing" constant="8" id="gr6-yr-kaW"/>
