@@ -39,7 +39,6 @@ CGFloat const kUserNameWidthOffset = 180.f;
 
 -(void)configureCellWithPost:(STPost *)post{
     _currentPost = post;
-    _currentPost.userName = @"Gigi Gigigigigigigigi gigigi gigi";
     UIFont *font = _nameButton.titleLabel.font;
     
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
