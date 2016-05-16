@@ -84,7 +84,7 @@
                                                         <action selector="onNamePressed:" destination="4dN-sM-RAG" eventType="touchUpInside" id="VvV-TS-LJP"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Al-Jx-btc">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Al-Jx-btc">
                                                     <rect key="frame" x="193" y="0.0" width="70" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="0D2-jl-8FH"/>
@@ -92,8 +92,11 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="10"/>
                                                     <state key="normal" title="LIKE" backgroundImage="message_background"/>
+                                                    <state key="selected">
+                                                        <color key="titleColor" red="0.83921568629999999" green="0.3411764706" blue="0.027450980390000001" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <state key="highlighted">
-                                                        <color key="titleColor" red="0.83921568627450982" green="0.3411764705882353" blue="0.027450980392156862" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="onLikePressed:" destination="4dN-sM-RAG" eventType="touchUpInside" id="OQc-fm-lBw"/>
