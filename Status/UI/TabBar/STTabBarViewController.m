@@ -50,7 +50,6 @@ static NSString * storyboardIdentifier = @"tabBarController";
     ExploreTVC *exploreTVC = [ExploreTVC exploreController];
     UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:exploreTVC];
     exploreNavCtrl.navigationBarHidden = YES;
-
     
     // add take a photo
     STTakeAPhotoViewController * takeAPhotoVC = [STTakeAPhotoViewController newController];

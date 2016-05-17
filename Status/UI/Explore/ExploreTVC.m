@@ -20,6 +20,15 @@
 const CGFloat kHeaderHeight = 30.f;
 const CGFloat kBottomHeight = 8.f;
 
+typedef NS_ENUM(NSInteger, ExploreSection) {
+    ExploreSectionPopular,
+    ExploreSectionNearby,
+    ExploreSectionRecent,
+    ExploreSectionTransparentTabBar,
+    ExploreSectionCount
+};
+
+
 @interface ExploreTVC ()
 {
     STNearbyController *nearbyController;
@@ -40,7 +49,6 @@ const CGFloat kBottomHeight = 8.f;
     nearbyController = [STNearbyController new];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSmallFlowSelection:) name:kSmallFeedSelectionNotification object:nil];
-    
 }
 
 - (void)setBackgroundImage:(UIImage *)bluredImg {
@@ -107,7 +115,7 @@ const CGFloat kBottomHeight = 8.f;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return ExploreSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -115,17 +123,35 @@ const CGFloat kBottomHeight = 8.f;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat height = 0.f;
     
+    CGFloat normalCellHeight = 0.f;
     CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
     CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
     
-    height = (screenHeight - self.tableView.numberOfSections * kHeaderHeight - kBottomHeight- tabBarHeight)/3.f;
+    normalCellHeight = (screenHeight - self.tableView.numberOfSections * kHeaderHeight - kBottomHeight- tabBarHeight)/3.f;
+
     
-    return roundf(height);
+    if (indexPath.section == ExploreSectionTransparentTabBar) {
+        CGFloat theRest = screenHeight - 3*normalCellHeight - 3*kHeaderHeight;
+        return theRest;
+    }
+    else
+    {
+        
+        return roundf(normalCellHeight);
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == ExploreSectionTransparentTabBar) {
+        self.tabBarController.tabBar.hidden = !self.tabBarController.tabBar.hidden;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == ExploreSectionTransparentTabBar) {
+        return 0.f;
+    }
     return kHeaderHeight;
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash4.7in" translatesAutoresizingMaskIntoConstraints="NO" id="EUI-8q-1oS">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash4.7in" translatesAutoresizingMaskIntoConstraints="NO" id="EUI-8q-1oS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <view opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2t-vJ-vVQ">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgK-dC-PjG">
@@ -62,7 +62,7 @@
                             <constraint firstItem="EUI-8q-1oS" firstAttribute="leading" secondItem="HuZ-tU-7hc" secondAttribute="leading" id="hNK-y3-kaR"/>
                             <constraint firstItem="U2t-vJ-vVQ" firstAttribute="leading" secondItem="EUI-8q-1oS" secondAttribute="leading" id="jde-6J-VkQ"/>
                             <constraint firstItem="eU4-ml-K3T" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" constant="70" id="lIt-2t-HHN"/>
-                            <constraint firstItem="EUI-8q-1oS" firstAttribute="top" secondItem="7gz-Ia-8Ob" secondAttribute="bottom" id="lrf-ah-jBW"/>
+                            <constraint firstItem="EUI-8q-1oS" firstAttribute="top" secondItem="7gz-Ia-8Ob" secondAttribute="bottom" constant="-20" id="lrf-ah-jBW"/>
                             <constraint firstItem="eU4-ml-K3T" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" constant="80" id="moI-Ai-xI0"/>
                             <constraint firstItem="S3g-7a-rAZ" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" id="wlH-2B-PsX"/>
                         </constraints>

@@ -28,7 +28,7 @@
         [_imageView setImage:[UIImage imageNamed:@"photo_placeholder"]];
     }
     
-    [self.imageView.layer setCornerRadius:3.0];
+    [self.imageView.layer setCornerRadius:5.0];
     [self.imageView.layer setMasksToBounds:YES];
     self.imageView.clipsToBounds = YES;
     

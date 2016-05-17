@@ -18,8 +18,9 @@
 #import "STProcessorsService.h"
 
 NSString * const kSmallFeedSelectionNotification = @"SmallFeedSelectionNotification";
+CGFloat const kMarginsOffset = 8.f;
 
-@interface SmallFeedCVC ()
+@interface SmallFeedCVC ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 {
     CGPoint _start;
     CGPoint _end;
@@ -116,6 +117,37 @@ NSString * const kSmallFeedSelectionNotification = @"SmallFeedSelectionNotificat
     NSInteger numRows = [_feedProcessor numberOfObjects];
     return numRows;
 }
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    CGFloat viewHeight = self.view.frame.size.height;
+
+    return CGSizeMake(kMarginsOffset, viewHeight);
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    CGFloat viewHeight = self.view.frame.size.height;
+    
+    return CGSizeMake(kMarginsOffset, viewHeight);
+}
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
+    UICollectionReusableView * reusableview = nil ;
+    
+    NSString *identifier = nil;
+    if ( [kind isEqualToString: UICollectionElementKindSectionHeader])
+        identifier = @"EmptyHeader";
+    if ( [kind isEqualToString: UICollectionElementKindSectionFooter ])
+        identifier = @"EmptyFooter";
+    
+    reusableview = [ collectionView dequeueReusableSupplementaryViewOfKind : kind
+                                                       withReuseIdentifier : identifier
+                                                              forIndexPath : indexPath ] ;
+
+    return reusableview;
+
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat viewHeight = self.view.frame.size.height;
     //initial is 4/3 ratio

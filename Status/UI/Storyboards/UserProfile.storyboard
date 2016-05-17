@@ -32,7 +32,7 @@
         <!--User Profile View Controller-->
         <scene sceneID="6xV-kk-Ow1">
             <objects>
-                <viewController storyboardIdentifier="STUserProfileViewController" id="AU9-ws-jB7" customClass="STUserProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="STUserProfileViewController" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="AU9-ws-jB7" customClass="STUserProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mPw-kP-ggI"/>
                         <viewControllerLayoutGuide type="bottom" id="En9-l3-8Et"/>
