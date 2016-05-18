@@ -91,10 +91,8 @@
                                                         <constraint firstAttribute="height" constant="19" id="WSC-oG-TIx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="10"/>
-                                                    <state key="normal" title="LIKE" backgroundImage="message_background_white">
-                                                        <color key="titleColor" red="0.83921568629999999" green="0.3411764706" blue="0.027450980390000001" alpha="0.5" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                    <state key="selected">
+                                                    <state key="normal" title="LIKE" backgroundImage="message_background"/>
+                                                    <state key="selected" backgroundImage="message_background_white">
                                                         <color key="titleColor" red="0.83921568629999999" green="0.3411764706" blue="0.027450980390000001" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <state key="highlighted" backgroundImage="message_background_white_highlighted">

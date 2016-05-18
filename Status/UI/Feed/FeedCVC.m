@@ -30,6 +30,7 @@
 
 #import "UIViewController+Snapshot.h"
 #import "STUserProfileViewController.h"
+#import "STUsersListController.h"
 
 @interface FeedCVC ()<STContextualMenuDelegate>
 {
@@ -362,6 +363,11 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 }
 - (IBAction)onLikesPressed:(id)sender {
+    STPost *post = [self getCurrentPost];
+    STUsersListController *viewController = [STUsersListController newControllerWithUserId:post.userId postID:post.uuid andType:UsersListControllerTypeLikes];
+    
+    [self.navigationController pushViewController:viewController animated:YES];
+
 }
 - (IBAction)onMorePressed:(id)sender {
     STPost *post = [self getCurrentPost];

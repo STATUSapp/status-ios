@@ -52,6 +52,7 @@ CGFloat const kUserNameWidthOffset = 180.f;
     [_nameButton setTitle:_currentPost.userName forState:UIControlStateNormal];
     
     [_likeButton setTitle:_currentPost.postLikedByCurrentUser?NSLocalizedString(@"LIKED", nil):NSLocalizedString(@"LIKE", nil) forState:UIControlStateNormal];
+    _likeButton.selected = _currentPost.postLikedByCurrentUser;
 
     _messageButton.enabled = [_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
     [self configureBottomView];
@@ -71,11 +72,13 @@ CGFloat const kUserNameWidthOffset = 180.f;
     }];
     
     if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
-        _likeButton.hidden = _messageButton.hidden = YES;
+        
+        _messageButton.hidden = YES;
     }
     else
     {
-        _likeButton.hidden = _messageButton.hidden = NO;
+        
+        _messageButton.hidden = NO;
         
     }
 }
