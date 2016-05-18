@@ -90,7 +90,7 @@
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onTapSendMessageToUser:" destination="AU9-ws-jB7" eventType="touchUpInside" id="97Z-HF-clW"/>
+                                                        <action selector="onMessageEditButtonPressed:" destination="AU9-ws-jB7" eventType="touchUpInside" id="jOe-aW-f9q"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pC1-pV-Evf">
@@ -164,7 +164,7 @@
                                             <outlet property="distanceLabel" destination="mOI-kI-yjs" id="k4D-Ip-2bL"/>
                                             <outlet property="distanceLabelWidthConstr" destination="OEa-Zl-u0I" id="TXF-YE-9vq"/>
                                             <outlet property="followButton" destination="pC1-pV-Evf" id="E6v-tu-W59"/>
-                                            <outlet property="messageButton" destination="kgo-UR-oYm" id="Wjs-nq-3h0"/>
+                                            <outlet property="messageEditButton" destination="kgo-UR-oYm" id="4cO-Ee-tzH"/>
                                             <outlet property="nameAndAgeButton" destination="5DB-XB-smn" id="6QN-SY-7x2"/>
                                             <outlet property="profileImageView" destination="1A7-9O-gbS" id="Lz6-1G-Nf4"/>
                                             <outlet property="statusImageView" destination="1rF-g8-mlS" id="mGe-oO-xiB"/>
@@ -397,6 +397,7 @@
                                         <connections>
                                             <outlet property="bioLabel" destination="HDV-KH-28W" id="Qdi-G1-VdN"/>
                                             <outlet property="locationLabel" destination="sHi-VK-3UX" id="P1s-Ay-yPO"/>
+                                            <outlet property="locationPin" destination="c6V-E2-uei" id="2oT-hd-4aD"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -412,10 +413,10 @@
                                     <constraint firstAttribute="width" constant="48" id="cev-gV-Zsx"/>
                                     <constraint firstAttribute="height" constant="48" id="hOn-uG-1Oc"/>
                                 </constraints>
-                                <state key="normal" image="settings_btn"/>
-                                <state key="highlighted" image="settings_btn_pressed"/>
+                                <state key="normal" image="btnBack"/>
+                                <state key="highlighted" image="btnBackPressed"/>
                                 <connections>
-                                    <action selector="onTopLeftButtonPressed:" destination="AU9-ws-jB7" eventType="touchUpInside" id="riC-QC-1GH"/>
+                                    <action selector="onTapBack:" destination="AU9-ws-jB7" eventType="touchUpInside" id="fzW-L6-ucd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWW-zl-H26">
@@ -424,10 +425,10 @@
                                     <constraint firstAttribute="width" constant="48" id="RW5-Bf-h0U"/>
                                     <constraint firstAttribute="height" constant="48" id="kst-Lc-gWu"/>
                                 </constraints>
-                                <state key="normal" image="more_options_btn"/>
-                                <state key="highlighted" image="more_options_btn_pressed"/>
+                                <state key="normal" image="settings_btn"/>
+                                <state key="highlighted" image="settings_btn_pressed"/>
                                 <connections>
-                                    <action selector="onTapEditUserProfile:" destination="AU9-ws-jB7" eventType="touchUpInside" id="kXl-0C-C3y"/>
+                                    <action selector="onTapSettings:" destination="AU9-ws-jB7" eventType="touchUpInside" id="OaQ-2q-yjY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -686,12 +687,12 @@
     </scenes>
     <resources>
         <image name="Get User Profile Screen 7 320 568" width="320" height="569"/>
+        <image name="btnBack" width="32" height="32"/>
+        <image name="btnBackPressed" width="32" height="32"/>
         <image name="description" width="36" height="36"/>
         <image name="location" width="36" height="36"/>
         <image name="location icon" width="10" height="14"/>
         <image name="message_background" width="6" height="19"/>
-        <image name="more_options_btn" width="32" height="32"/>
-        <image name="more_options_btn_pressed" width="32" height="32"/>
         <image name="settings_btn" width="32" height="32"/>
         <image name="settings_btn_pressed" width="32" height="32"/>
         <image name="status_online" width="10" height="10"/>

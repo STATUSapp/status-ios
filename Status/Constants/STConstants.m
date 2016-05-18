@@ -151,5 +151,6 @@ NSString *const kNotificationUserDidRegister = @"NotificationUserDidRegister";
 NSString *const kNotificationUserDidLoggedOut = @"NotificationUserDidLoggedOut";
 NSString *const kNotificationSessionExpired = @"NotificationSessionExpired";
 
+NSString *const kChatMinimumVersion = @"1.0.4";
 
 

@@ -11,13 +11,14 @@
 #import "NSDate+Additions.h"
 #import "STLocationManager.h"
 #import "STFacebookLoginController.h"
+#import "NSString+VersionComparison.h"
 
 CGFloat distanceLabelWidthPadding = 30.f;
 CGFloat distanceLabelStandardHeight = 21.f;
 
 @interface UserProfileInfoCell() 
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
-@property (weak, nonatomic) IBOutlet UIButton *messageButton;
+@property (weak, nonatomic) IBOutlet UIButton *messageEditButton;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet UIButton *nameAndAgeButton;
@@ -31,11 +32,20 @@ CGFloat distanceLabelStandardHeight = 21.f;
 - (void)configureCellWithUserProfile:(STUserProfile *)profile{
     
     if ([profile.uuid isEqualToString:[CoreManager loginService].currentUserUuid]) {
-        _followButton.hidden = _messageButton.hidden = YES;
+        _followButton.hidden = YES;
+        [_messageEditButton setTitle:@"EDIT" forState:UIControlStateNormal];
+        [_messageEditButton setTitle:@"EDIT" forState:UIControlStateHighlighted];
+        _messageEditButton.enabled = YES;
+
     }
     else
     {
-        _followButton.hidden = _messageButton.hidden = NO;
+        _followButton.hidden = NO;
+        [_messageEditButton setTitle:@"MESSAGE" forState:UIControlStateNormal];
+        [_messageEditButton setTitle:@"MESSAGE" forState:UIControlStateHighlighted];
+        _messageEditButton.enabled = [profile.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
+
+
 
     }
     

@@ -11,8 +11,8 @@
 #import "NSString+VersionComparison.h"
 #import "NSDate+Additions.h"
 #import "STImageCacheController.h"
+#import "STFacebookLoginController.h"
 
-NSString *const kChatMinimumVersion = @"1.0.4";
 CGFloat const kCaptionMargins = 28.f;
 CGFloat const kCaptionDefaultHeight = 21.f;
 CGFloat const kSeeMoreButtonWidthConstant = 56.f;
@@ -50,6 +50,7 @@ CGFloat const kUserNameWidthOffset = 180.f;
     _userNameWidthConstr.constant = round(rect.size.width) + 8.f;
     
     [_nameButton setTitle:_currentPost.userName forState:UIControlStateNormal];
+    
     [_likeButton setTitle:_currentPost.postLikedByCurrentUser?NSLocalizedString(@"LIKED", nil):NSLocalizedString(@"LIKE", nil) forState:UIControlStateNormal];
 
     _messageButton.enabled = [_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
@@ -69,6 +70,14 @@ CGFloat const kUserNameWidthOffset = 180.f;
         }
     }];
     
+    if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
+        _likeButton.hidden = _messageButton.hidden = YES;
+    }
+    else
+    {
+        _likeButton.hidden = _messageButton.hidden = NO;
+        
+    }
 }
 
 -(void)configureBottomView{

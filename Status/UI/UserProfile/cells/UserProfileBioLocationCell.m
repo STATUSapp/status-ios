@@ -16,16 +16,20 @@ CGFloat const kBioLabelWidthOffset = 28.f;
 
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *locationPin;
 
 @end
 
 @implementation UserProfileBioLocationCell
 
 -(void)configureCellForProfile:(STUserProfile *)profile{
-    if (profile.homeLocation == nil) {
-        _locationLabel.text = @"N/A";
+    if (profile.homeLocation == nil ||
+        profile.homeLocation.length == 0) {
+        _locationLabel.text = @"";
+        _locationPin.hidden = YES;
     }else {
         _locationLabel.text = profile.homeLocation;
+        _locationPin.hidden = NO;
     }
 
     if (profile.bio == nil) {

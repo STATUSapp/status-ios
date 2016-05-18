@@ -215,3 +215,5 @@ extern NSString *const kNotificationUserDidRegister;
 extern NSString *const kNotificationUserDidLoggedOut;
 extern NSString *const kNotificationSessionExpired;
 
+extern NSString *const kChatMinimumVersion;
+

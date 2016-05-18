@@ -45,8 +45,8 @@ typedef NS_ENUM(NSInteger, ProfileSection) {
 };
 
 
-NSInteger const kTopLeftButtonTagBack = 11;
-NSInteger const kTopLeftButtonTagSettings = 12;
+//NSInteger const kTopLeftButtonTagBack = 11;
+//NSInteger const kTopLeftButtonTagSettings = 12;
 
 @interface STUserProfileViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -121,21 +121,6 @@ NSInteger const kTopLeftButtonTagSettings = 12;
     } else {
         [self getAndDisplayProfile];
     }
-    
-    NSString *leftBtn = @"btnBack";
-    NSString *leftBtnPressed = @"btnBackPressed";
-    NSInteger leftButtonTag = kTopLeftButtonTagBack;
-    
-    if (_isMyProfile) {
-        leftBtn = @"settings_btn";
-        leftBtnPressed = @"settings_btn_pressed";
-        leftButtonTag = kTopLeftButtonTagSettings;
-    }
-    _topRightButton.hidden = !_isMyProfile;
-    [_topLeftButton setImage:[UIImage imageNamed:leftBtn] forState:UIControlStateNormal];
-    [_topLeftButton setImage:[UIImage imageNamed:leftBtnPressed] forState:UIControlStateHighlighted];
-    _topLeftButton.tag = leftButtonTag;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -297,14 +282,6 @@ NSInteger const kTopLeftButtonTagSettings = 12;
 
 
 #pragma mark - IBActions
-- (IBAction)onTopLeftButtonPressed:(id)sender {
-    if ([(UIButton *)sender tag] == kTopLeftButtonTagBack) {
-        [self onTapBack:sender];
-    }
-    else if ([(UIButton*)sender tag] == kTopLeftButtonTagSettings){
-        [self onTapSettings:sender];
-    }
-}
 
 - (IBAction)onTapFollowing:(id)sender {
     STUsersListController * newVC = [STUsersListController newControllerWithUserId:_profileUserId
@@ -389,6 +366,19 @@ NSInteger const kTopLeftButtonTagSettings = 12;
     STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
     
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (IBAction)onMessageEditButtonPressed:(id)sender{
+    if (_isMyProfile) {
+        //go to Edit Profile
+        [self onTapEditUserProfile:nil];
+    }
+    else
+    {
+        //go to Message to User
+        [self onTapSendMessageToUser:nil];
+        
+    }
 }
 
 - (IBAction)onTapEditUserProfile:(id)sender {
