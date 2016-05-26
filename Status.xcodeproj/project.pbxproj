@@ -1496,6 +1496,7 @@
 				6657909E4EB07A6D103FEE67 /* Check Pods Manifest.lock */,
 				172EAE5F18B0B12D00C5637B /* Sources */,
 				172EAE6018B0B12D00C5637B /* Frameworks */,
+				99BA9CA61CF631BB00DCF800 /* ShellScript */,
 				172EAE6118B0B12D00C5637B /* Resources */,
 				17B9234419CAB51400E38FB5 /* ShellScript */,
 				C4C6BF11FBA71CE8107599E1 /* Copy Pods Resources */,
@@ -1667,6 +1668,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		99BA9CA61CF631BB00DCF800 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 		C4C6BF11FBA71CE8107599E1 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
