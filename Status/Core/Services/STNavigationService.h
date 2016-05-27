@@ -24,6 +24,10 @@
 
 - (void)goToPreviousTabBarScene;
 
+- (void)goToNotifications;
+
+- (void)goToChat;
+
 - (void)showActivityIconOnTabBar;
 
 - (void)showMessagesIconOnTabBar;

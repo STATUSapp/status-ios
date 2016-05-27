@@ -178,6 +178,9 @@ extern NSString *const STFooterFlowsNotification;
 extern NSString *const STHomeFlowShouldBeReloadedNotification;
 extern NSString *const STNotificationsShouldBeReloaded;
 
+extern NSString *const STNotificationSelectNotificationsScreen;
+extern NSString *const STNotificationSelectChatScreen;
+
 #pragma mark - Notification User Info Keys
 
 extern NSString *const kPostIdKey;

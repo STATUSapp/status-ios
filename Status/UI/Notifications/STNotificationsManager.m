@@ -162,13 +162,14 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
         }
         
         STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+        [[CoreManager navigationService] goToChat];
         [[CoreManager navigationService] pushViewController:viewController
                                             inTabbarAtIndex:STTabBarIndexChat
                                         keepThecurrentStack:NO];
     }
     else
     {   _lastNotification = nil;
-        [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexChat popToRootVC:YES];
+        [[CoreManager navigationService] goToNotifications];
     }
 }
 

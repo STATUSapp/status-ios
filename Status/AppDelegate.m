@@ -53,9 +53,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 {
     [application setStatusBarHidden:YES];
     
-    [[CoreManager notificationsService] loadBadgeNumber];
-    [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
-    
     // setup Mobile App Tracker
     
     // Account Configuration info - must be set
@@ -91,7 +88,12 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [Appirater appLaunched:YES];
     
     self.window.rootViewController = [LaunchViewController launchVC];
-        
+    
+    [[CoreManager notificationsService] loadBadgeNumber];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+    });
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 

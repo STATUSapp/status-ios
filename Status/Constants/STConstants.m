@@ -112,6 +112,9 @@ NSString *const STFooterFlowsNotification = @"STFooterFlowsNotification";
 NSString *const STHomeFlowShouldBeReloadedNotification = @"STHomeFlowShouldBeReloadedNotification";
 NSString *const STNotificationsShouldBeReloaded = @"STNotificationsShouldBeReloaded";
 
+NSString *const STNotificationSelectNotificationsScreen = @"STSelectNotificationsScreenNotification";
+NSString *const STNotificationSelectChatScreen = @"STSelectChatScreenNotification";
+
 #pragma mark - Notification User Info Keys
 
 NSString *const kPostIdKey = @"_key_post_id";

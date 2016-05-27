@@ -77,6 +77,16 @@
     [self.appTabBar goToPreviousSelectedIndex];
 }
 
+- (void)goToNotifications {
+    [self switchToTabBarAtIndex:STTabBarIndexChat popToRootVC:YES];
+    [[CoreManager localNotificationService] postNotificationName:STNotificationSelectNotificationsScreen object:nil userInfo:nil];
+}
+
+- (void)goToChat {
+    [self switchToTabBarAtIndex:STTabBarIndexChat popToRootVC:YES];
+    [[CoreManager localNotificationService] postNotificationName:STNotificationSelectChatScreen object:nil userInfo:nil];
+}
+
 - (void)showActivityIconOnTabBar {
     [self.appTabBar setActivityIcon];
 }

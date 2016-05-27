@@ -44,13 +44,19 @@
     [self messagesSelected];
 }
 - (IBAction)goToNotifications:(id)sender {
-    [self setControllerAndIndicatorViewForIndex:0];
-    [self notificationsSelected];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setControllerAndIndicatorViewForIndex:0];
+        [self notificationsSelected];
+    });
 }
 
 - (void)messagesSelected {
-    _btnMessages.selected = YES;
-    _btnNotifications.selected = NO;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _btnMessages.selected = YES;
+        _btnNotifications.selected = NO;
+    });
 }
 
 - (void)notificationsSelected {
@@ -200,6 +206,9 @@
     UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
     self.view.backgroundColor = backgroundColor;
     self.childContainer.backgroundColor = backgroundColor;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectNotificationsScreen object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectChatScreen object:nil];
     
     UIStoryboard * mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     STNotificationsViewController *notifController = [mainStoryboard instantiateViewControllerWithIdentifier: @"notificationScene"];
