@@ -114,7 +114,9 @@ typedef NS_ENUM(NSInteger, ProfileSection) {
         _isMyProfile = YES;
     }
     
-
+    _topLeftButton.hidden = _isMyProfile;
+    _topRightButton.hidden = !_isMyProfile;
+    
     if (_skipRefreshReqeust) {
         _skipRefreshReqeust = NO;
         [self setupVisualsWithProfile:_userProfile];
