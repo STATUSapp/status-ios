@@ -404,7 +404,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 }
 
 -(void)contextualMenuDeletePost{
-    [_feedProcessor deleteObjectAtIndex:[self getCurrentIndex]];
+    [_feedProcessor deletePostAtIndex:[self getCurrentIndex]];
 }
 
 -(void)contextualMenuEditPost{

@@ -549,6 +549,9 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
             
             [STDataAccessUtils deletePostWithId:postIdToDelete withCompletion:^(NSError *error) {
                 postIdToDelete = nil;
+                if (error == nil) {
+                    [[[UIAlertView alloc] initWithTitle:@"Your post was deleted." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+                }
                 NSLog(@"Post deleted with error: %@", error);
             }];
         }
