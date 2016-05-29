@@ -116,17 +116,16 @@ typedef NS_ENUM(NSInteger, ProfileSection) {
     
     _topLeftButton.hidden = _isMyProfile;
     _topRightButton.hidden = !_isMyProfile;
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if (_skipRefreshReqeust) {
         _skipRefreshReqeust = NO;
         [self setupVisualsWithProfile:_userProfile];
     } else {
         [self getAndDisplayProfile];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     [self.collectionView reloadData];
 //    if (!_isLaunchedFromNearbyController) {
 //        UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGallery:)];
