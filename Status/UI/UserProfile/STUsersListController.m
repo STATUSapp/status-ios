@@ -180,9 +180,13 @@
         [appVersion rangeOfString:@"1.0."].location == NSNotFound ||*/
         [[[CoreManager loginService] currentUserUuid] isEqualToString:lu.uuid]) {//not setted
         cell.chatButton.hidden = YES;
+        cell.followBtn.hidden = YES;
     }
     else
+    {
         cell.chatButton.hidden = NO;
+        cell.chatButton.hidden = NO;
+    }
     
     
     return cell;
