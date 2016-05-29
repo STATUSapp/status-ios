@@ -43,7 +43,9 @@ CGFloat distanceLabelStandardHeight = 21.f;
         _followButton.hidden = NO;
         [_messageEditButton setTitle:@"MESSAGE" forState:UIControlStateNormal];
         [_messageEditButton setTitle:@"MESSAGE" forState:UIControlStateHighlighted];
-        _messageEditButton.enabled = [profile.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
+        //not use message appVersion since there is a problem for some users
+//        _messageEditButton.enabled = [profile.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
+        _messageEditButton.enabled = YES;
 
 
 

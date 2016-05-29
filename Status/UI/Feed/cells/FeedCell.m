@@ -54,7 +54,9 @@ CGFloat const kUserNameWidthOffset = 180.f;
     [_likeButton setTitle:_currentPost.postLikedByCurrentUser?NSLocalizedString(@"LIKED", nil):NSLocalizedString(@"LIKE", nil) forState:UIControlStateNormal];
     _likeButton.selected = _currentPost.postLikedByCurrentUser;
 
-    _messageButton.enabled = [_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
+    //not use message appVersion since there is a problem for some users
+//    _messageButton.enabled = [_currentPost.appVersion isGreaterThanEqualWithVersion:kChatMinimumVersion];
+    _messageButton.enabled = YES;
     [self configureBottomView];
     
     __weak FeedCell *weakSelf = self;
