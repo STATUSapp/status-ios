@@ -101,11 +101,7 @@
     
     NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:lastSeenDate];
     
-    if (timeInterval < 0) {
-        timeInterval = - timeInterval;
-    }
-    
-    if (0 <= timeInterval && timeInterval <= 60) {
+    if (timeInterval <= 60) {
         return @"Active";
     }
     int mins = timeInterval / 60;
