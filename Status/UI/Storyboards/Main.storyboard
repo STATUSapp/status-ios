@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QM4-Ve-mia">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -388,7 +388,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="agI-yp-vPn">
-                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="likeCell" rowHeight="60" id="rxj-vu-bxv" customClass="STLikeCell">
@@ -495,7 +495,7 @@
                             <constraint firstAttribute="trailing" secondItem="GPH-ez-EFE" secondAttribute="trailing" id="0kH-hB-Xnv"/>
                             <constraint firstAttribute="trailing" secondItem="Ym8-9j-b5r" secondAttribute="trailing" constant="31" id="5HW-P8-2Zd"/>
                             <constraint firstItem="GPH-ez-EFE" firstAttribute="trailing" secondItem="agI-yp-vPn" secondAttribute="trailing" id="7km-FG-Rb9"/>
-                            <constraint firstAttribute="bottom" secondItem="agI-yp-vPn" secondAttribute="bottom" id="Ri8-Iy-UDB"/>
+                            <constraint firstAttribute="bottom" secondItem="agI-yp-vPn" secondAttribute="bottom" constant="49" id="Ri8-Iy-UDB"/>
                             <constraint firstAttribute="trailing" secondItem="0k3-fn-P9J" secondAttribute="trailing" constant="15" id="SIt-c8-VAb"/>
                             <constraint firstItem="GPH-ez-EFE" firstAttribute="top" secondItem="ngy-3T-qGN" secondAttribute="bottom" id="TW6-Lf-T60"/>
                             <constraint firstItem="GPH-ez-EFE" firstAttribute="bottom" secondItem="agI-yp-vPn" secondAttribute="top" id="Ub2-cv-2AQ"/>
@@ -509,6 +509,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="OdX-5O-zeR"/>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="lblTitle" destination="Ym8-9j-b5r" id="MZ2-Dh-cmJ"/>
                         <outlet property="tableView" destination="agI-yp-vPn" id="EgE-qI-IUC"/>
