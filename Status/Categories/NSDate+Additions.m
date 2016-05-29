@@ -132,11 +132,20 @@
     }
     
     int months = timeInterval / (86400 * 30);
+    
+    if (months == 0) { //(the difference between 28 days - 4 weeks and a month)
+        months = 1;
+    }
+    
     if (timeInterval < 12 * 86400 * 30) {
         return [NSString stringWithFormat:@"Active %d month%@ ago", months, (months == 1) ? @"" : @"s"];
     }
     
     int years = [[NSDate yearsFromDate:lastSeenDate] intValue];
+    
+    if (years == 0) { //(the difference between 11 months  and a year)
+        years = 1;
+    }
     return [NSString stringWithFormat:@"Active %d year%@ ago", years, (years == 1) ? @"" : @"s"];
 }
 
