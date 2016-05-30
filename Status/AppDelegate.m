@@ -40,6 +40,7 @@
 #import "LaunchViewController.h"
 #import "STLocalNotificationService.h"
 #import "STNavigationService.h"
+#import "BadgeService.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
@@ -89,7 +90,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     self.window.rootViewController = [LaunchViewController launchVC];
     
-    [[CoreManager notificationsService] loadBadgeNumber];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     });
@@ -196,7 +196,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     NSLog(@"Notif: %@", userInfo);
     NSLog(@"App state: %lu", (unsigned long)application.applicationState);
 
-    [[CoreManager notificationsService] setOverAllBadgeNumber:[userInfo[@"aps"][@"badge"] integerValue]];
+    [[CoreManager badgeService] checkForNotificationNumber];
     if (application.applicationState!=UIApplicationStateActive)
         [[CoreManager notificationsService] handleNotification:userInfo];
 

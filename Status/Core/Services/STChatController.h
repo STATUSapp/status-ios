@@ -35,7 +35,6 @@
 @property (nonatomic, assign) STConnectionStatus connectionStatus;
 @property (nonatomic, weak) id <STChatControllerDelegate> delegate;
 @property (nonatomic, weak) id <STRechabilityDelegate> rechabilityDelegate;
-@property (nonatomic, assign) NSInteger unreadMessages;
 @property (nonatomic, strong) NSString *currentRoomId;
 @property (nonatomic, strong) NSString *currentUserId;
 @property (nonatomic, assign) BOOL authenticated;

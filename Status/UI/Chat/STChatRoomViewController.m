@@ -30,6 +30,7 @@
 
 #import "STListUser.h"
 #import "STDataAccessUtils.h"
+#import "BadgeService.h"
 
 static NSInteger const  kBlockUserAlertTag = 11;
 static CGFloat const TEXT_VIEW_OFFSET = 18.f;
@@ -373,8 +374,8 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"roomID like %@", _roomId] sectionNameKeyPath:@"sectionDate" delegate:self andTableView:nil];
 
     NSNumber *seen = [[[_currentManager allObjects] valueForKey:@"seen"] valueForKeyPath: @"@sum.self"];
-    NSInteger unseen = [[_currentManager allObjects] count] - seen.integerValue;
-    [chatController setUnreadMessages:chatController.unreadMessages-unseen];
+//    NSInteger unseen = [[_currentManager allObjects] count] - seen.integerValue;
+    [[CoreManager badgeService] adjustUnreadMessages: (-1) * seen.integerValue];
     [_tableView reloadData];
     
     if ([[_currentManager allObjects] count]>0) {

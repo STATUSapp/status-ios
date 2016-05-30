@@ -23,6 +23,7 @@
 @class STNotificationsManager;
 @class STUserProfilePool;
 @class STProcessorsService;
+@class BadgeService;
 
 @interface CoreManager : NSObject
 
@@ -44,5 +45,6 @@
 + (STLocalNotificationService *)localNotificationService;
 + (STNotificationsManager *)notificationsService;
 + (STProcessorsService *)processorService;
++ (BadgeService *)badgeService;
 
 @end

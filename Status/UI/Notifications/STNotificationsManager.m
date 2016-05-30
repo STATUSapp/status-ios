@@ -23,19 +23,13 @@
 #import "STLocalNotificationService.h"
 #import "STGetNotificationsCountRequest.h"
 #import "STUnseenPostsCountRequest.h"
+#import "BadgeService.h"
 
-static NSString * const kSTLastBadgeNumber = @"kSTLastBadgeNumber";
-static NSTimeInterval const kRefreshTimerInterval = 120.f;
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
     NSTimer *_dismissTimer;
-    NSTimer *_serviceTimer;
     STNotificationBanner *_currentBanner;
-    NSInteger notificationsCount;
-    BOOL isActivitySubTabSelected;
 }
-
-@property (nonatomic, strong) NSNumber *overAllBadge;
 
 @end
 
@@ -45,101 +39,20 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
 -(instancetype)init{
     self = [super init];
     if (self) {
-        _serviceTimer = [NSTimer scheduledTimerWithTimeInterval:kRefreshTimerInterval target:self selector:@selector(checkForNotificationNumber) userInfo:nil repeats:YES];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
     }
     
     return self;
 }
 
 -(void)dealloc{
-    [_serviceTimer invalidate];
-    _serviceTimer = nil;
-    
     [_dismissTimer invalidate];
     _dismissTimer = nil;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-- (BOOL)isActivitySubTab{
-    return isActivitySubTabSelected;
-}
-
--(void)setOverAllBadgeNumber:(NSInteger)badgeNumber{
-    _overAllBadge = @(badgeNumber);
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeNumber];
-    [[NSUserDefaults standardUserDefaults] setValue:@(badgeNumber) forKey:kSTLastBadgeNumber];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[CoreManager localNotificationService] postNotificationName:STNotificationBadgeValueDidChanged object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateNotificationTab)
-                                                 name:STUnreadMessagesValueDidChanged
-                                               object:nil];
-
-
-}
-
--(void)updateNotificationTab{
-    NSInteger overAllNotificationCount = 0;
-    if ([STChatController sharedInstance].unreadMessages > 0) {
-        isActivitySubTabSelected = NO;
-        overAllNotificationCount = [STChatController sharedInstance].unreadMessages;
-        [[CoreManager navigationService] showMessagesIconOnTabBar];
-    }
-    else
-    {
-        isActivitySubTabSelected = YES;
-        overAllNotificationCount = notificationsCount;
-        [[CoreManager navigationService] showActivityIconOnTabBar];
-    }
-    
-    [self setOverAllBadgeNumber:overAllNotificationCount];
-    [[CoreManager navigationService] setBadge:overAllNotificationCount forTabAtIndex:STTabBarIndexChat];
-}
-
--(void)loadBadgeNumber{
-    NSNumber *lastBadgeNumber = [[NSUserDefaults standardUserDefaults] valueForKey:kSTLastBadgeNumber];
-    if (lastBadgeNumber !=nil) {
-        [self setOverAllBadgeNumber:lastBadgeNumber.integerValue];
-    }
-    else
-        [self setOverAllBadgeNumber:0];
-}
-
--(void)checkForNotificationNumber{
-    __weak STNotificationsManager *weakSelf = self;
-    if ([CoreManager loggedIn]) {
-        STRequestCompletionBlock completion = ^(id response, NSError *error){
-            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    notificationsCount = [response[@"count"] integerValue];
-                    [weakSelf updateNotificationTab];
-                });
-            }
-        };
-        [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
-        
-        
-        [STUnseenPostsCountRequest getUnseenCountersWithCompletion:^(id response, NSError *error) {
-            if ([response[@"status_code"] integerValue] == 200) {
-                NSInteger unseenHomePosts = [response[@"unseenHomePosts"] integerValue];
-                NSInteger unseenPopularPosts = [response[@"unseenPopularPosts"] integerValue];
-                NSInteger unseenRecentPosts = [response[@"unseenRecentPosts"] integerValue];
-                
-                [[CoreManager navigationService] setBadge:unseenHomePosts forTabAtIndex:STTabBarIndexHome];
-                
-                [[CoreManager navigationService] setBadge:unseenPopularPosts + unseenRecentPosts forTabAtIndex:STTabBarIndexExplore];
-            }
-        } failure:^(NSError *error) {
-            NSLog(@"Load counters error: %@", error);
-        }];
-
-    }
-}
-
 
 -(void) handleNotification:(NSDictionary *) notif{
     if (notif == nil) {
@@ -340,15 +253,15 @@ static NSTimeInterval const kRefreshTimerInterval = 120.f;
 
 - (void)userDidLoggedIn{
     [self handleLastNotification];
-    [self checkForNotificationNumber];
+    [[CoreManager badgeService] startService];
 }
 
 - (void)userDidRegister{
-    [self checkForNotificationNumber];
+    [[CoreManager badgeService] startService];
 }
 
 - (void)userDidLoggedOut{
-    
+    [[CoreManager badgeService] stopService];
 }
 
 @end

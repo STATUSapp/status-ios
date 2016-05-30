@@ -22,6 +22,7 @@
 #import "NSString+VersionComparison.h"
 #import "CreateDataModelHelper.h"
 #import "STLocalNotificationService.h"
+#import "BadgeService.h"
 
 NSString *const kFirstChatVersion = @"1.0.4";
 
@@ -47,12 +48,6 @@ NSString *const kFirstChatVersion = @"1.0.4";
     
     return _sharedManager;
                   
-}
-
--(void)setUnreadMessages:(NSInteger)unreadMessages{
-    _unreadMessages = unreadMessages;
-    [[CoreManager localNotificationService] postNotificationName:STUnreadMessagesValueDidChanged object:nil userInfo:nil];
-    
 }
 
 -(void)forceReconnect{
@@ -181,7 +176,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
             }
             [[CoreManager localNotificationService] postNotificationName:STChatControllerAuthenticate object:nil userInfo:nil];
 
-            [self setUnreadMessages:[response[@"unseenMessagesCount"] integerValue]];
+            [[CoreManager localNotificationService] postNotificationName:kUnreadMessagesCountChangedNotification object:nil userInfo:@{kUnreadMessagesCountKey:response[@"unseenMessagesCount"]}];
         }
         else
         {
@@ -374,7 +369,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
     resultDict[@"received"] = @(received);
     resultDict[@"seen"] = @(seen);
     if (seen == NO) {
-        [self setUnreadMessages:_unreadMessages+1];
+        [[CoreManager badgeService] adjustUnreadMessages:1];
     }
     [[STCoreDataManager sharedManager] synchronizeAsyncCoreDataEntity:@"Message"
                                                              withData:resultDict

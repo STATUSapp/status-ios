@@ -11,8 +11,13 @@
 #import "STNotificationsViewController.h"
 #import "STConversationsListViewController.h"
 #import "STNotificationsManager.h"
+#import "BadgeService.h"
+#import "STNavigationService.h"
 
 @interface STNotificationAndChatContainerViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+{
+    BOOL isActivityChild;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *childContainer;
 @property (weak, nonatomic) IBOutlet UIView *pageIndicatorView;
@@ -42,12 +47,16 @@
 - (IBAction)goToMessages:(id)sender {
     [self setControllerAndIndicatorViewForIndex:1];
     [self messagesSelected];
+    [[CoreManager navigationService] showMessagesIconOnTabBar];
+    [[CoreManager badgeService] setBadgeForMessages];
 }
 - (IBAction)goToNotifications:(id)sender {
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self setControllerAndIndicatorViewForIndex:0];
         [self notificationsSelected];
+        [[CoreManager navigationService] showActivityIconOnTabBar];
+        [[CoreManager badgeService] setBadgeForNotifications];
     });
 }
 
@@ -236,8 +245,9 @@
     [self addChildViewController:_pageController];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsShouldBeReloaded:) name:STNotificationsShouldBeReloaded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(badgeNotificationChanged:) name:kBadgeCountChangedNotification object:nil];
 
-    if ([[CoreManager notificationsService] isActivitySubTab]) {
+    if (isActivityChild == YES) {
         [self goToNotifications:nil];
     }
     else
@@ -261,6 +271,26 @@
     
     STNotificationsViewController *notifVc = (STNotificationsViewController *)[_viewControllers firstObject];
     [notifVc getNotificationsFromServer];
+}
+
+- (void)badgeNotificationChanged:(NSNotification *)notification{
+    
+    NSNumber *unreadMessages = notification.userInfo[kBadgeCountMessagesKey];
+//    NSNumber *unreadNotifications = notification.userInfo[kBadgeCountNotificationsKey];
+    
+    if (unreadMessages == nil) {
+        isActivityChild = YES;
+        [self goToNotifications:nil];
+        
+        STNotificationsViewController *notifVc = (STNotificationsViewController *)[_viewControllers firstObject];
+        [notifVc getNotificationsFromServer];
+    }
+    else
+    {
+        isActivityChild = NO;
+        [self goToMessages:nil];
+    }
+    
 }
 
 @end

@@ -10,6 +10,7 @@
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
 		16ACF5F582F40A0966AE8820 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D422D9C06AC39526914FFF /* libPods.a */; };
 		171936C31C848604002C0202 /* STNavigationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 171936C21C848604002C0202 /* STNavigationService.m */; };
+		17232F191CFC50F300280B6B /* BadgeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17232F181CFC50F300280B6B /* BadgeService.m */; };
 		172EAE6718B0B12E00C5637B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6618B0B12E00C5637B /* Foundation.framework */; };
 		172EAE6B18B0B12E00C5637B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAE6A18B0B12E00C5637B /* UIKit.framework */; };
 		172EAEBB18B0BAE900C5637B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEBA18B0BAE900C5637B /* MobileCoreServices.framework */; };
@@ -240,6 +241,8 @@
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		171936C11C848604002C0202 /* STNavigationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNavigationService.h; sourceTree = "<group>"; };
 		171936C21C848604002C0202 /* STNavigationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNavigationService.m; sourceTree = "<group>"; };
+		17232F171CFC50F300280B6B /* BadgeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeService.h; sourceTree = "<group>"; };
+		17232F181CFC50F300280B6B /* BadgeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeService.m; sourceTree = "<group>"; };
 		172EAE6318B0B12E00C5637B /* STATUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172EAE6618B0B12E00C5637B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		172EAE6818B0B12E00C5637B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -968,6 +971,8 @@
 		99B386541C82FAA2005B4D8C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				17232F171CFC50F300280B6B /* BadgeService.h */,
+				17232F181CFC50F300280B6B /* BadgeService.m */,
 				99B386571C82FAA2005B4D8C /* STChatController.h */,
 				99B386581C82FAA2005B4D8C /* STChatController.m */,
 				99B3865B1C82FAA2005B4D8C /* STDataAccessUtils.h */,
@@ -1801,6 +1806,7 @@
 				99B387BA1C82FAA2005B4D8C /* STCustomCollectionViewCell.m in Sources */,
 				99B3874C1C82FAA2005B4D8C /* STFollowUsersRequest.m in Sources */,
 				99B3878C1C82FAA2005B4D8C /* STContactsDataProcessor.m in Sources */,
+				17232F191CFC50F300280B6B /* BadgeService.m in Sources */,
 				174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */,
 				99B387DD1C82FAA2005B4D8C /* STTutorialPresenterViewController.m in Sources */,
 				2AD97BB51C8C144700C9B3D5 /* FeedCell.m in Sources */,

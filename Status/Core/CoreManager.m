@@ -22,6 +22,7 @@
 #import "STLocalNotificationService.h"
 #import "STNotificationsManager.h"
 #import "STProcessorsService.h"
+#import "BadgeService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -39,6 +40,7 @@
 @property (nonatomic, strong) STLocalNotificationService *localNotifCenter;
 @property (nonatomic, strong) STNotificationsManager *notificationsService;
 @property (nonatomic, strong) STProcessorsService *processorsService;
+@property (nonatomic, strong) BadgeService *badgeService;
 
 @end
 
@@ -72,6 +74,7 @@
         _localNotifCenter = [STLocalNotificationService new];
         _notificationsService = [STNotificationsManager new];
         _processorsService = [STProcessorsService new];
+        _badgeService = [BadgeService new];
         
     }
     return self;
@@ -145,6 +148,10 @@
 
 + (STProcessorsService *)processorService{
     return [[CoreManager sharedInstance] processorsService];
+}
+
++(BadgeService *)badgeService{
+    return [[CoreManager sharedInstance] badgeService];
 }
 
 #pragma mark - Private implementation

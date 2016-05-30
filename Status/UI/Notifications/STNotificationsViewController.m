@@ -75,7 +75,6 @@ const float kNoNotifHeight = 24.f;
     
     [STDataAccessUtils getNotificationsWithCompletion:^(NSArray *objects, NSError *error) {
         _notificationDataSource = [NSArray arrayWithArray:objects];
-        [[CoreManager notificationsService] setOverAllBadgeNumber:0];
         if (!error) {
             BOOL shouldShowPlaceholder = _notificationDataSource.count > 0;
             weakSelf.noNotifLabel.hidden = shouldShowPlaceholder;
