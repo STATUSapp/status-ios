@@ -90,9 +90,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     self.window.rootViewController = [LaunchViewController launchVC];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
-    });
+    [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];

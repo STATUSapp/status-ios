@@ -218,5 +218,11 @@ extern NSString *const kNotificationUserDidRegister;
 extern NSString *const kNotificationUserDidLoggedOut;
 extern NSString *const kNotificationSessionExpired;
 
+#pragma mark - facebook Login Constants
+
+extern NSString *const kNotificationFacebokDidLogin ;
+extern NSString *const kNotificationFacebokDidLogout ;
+
+
 extern NSString *const kChatMinimumVersion;
 

@@ -10,9 +10,6 @@
 
 @interface STNotificationsManager : NSObject
 
-//-(void)loadBadgeNumber;
-//-(void)setOverAllBadgeNumber:(NSInteger)badgeNumber;
-
 -(void)handleLastNotification;
 -(void)handleNotification:(NSDictionary *) notif;
 -(void)handleInAppNotification:(NSDictionary *)notification;

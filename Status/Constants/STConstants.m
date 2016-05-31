@@ -154,6 +154,12 @@ NSString *const kNotificationUserDidRegister = @"NotificationUserDidRegister";
 NSString *const kNotificationUserDidLoggedOut = @"NotificationUserDidLoggedOut";
 NSString *const kNotificationSessionExpired = @"NotificationSessionExpired";
 
+#pragma mark - Facebook Login Constants
+
+NSString *const kNotificationFacebokDidLogin = @"NotificationFacebokDidLogin";
+NSString *const kNotificationFacebokDidLogout = @"NotificationFacebokDidLogout";
+
+
 NSString *const kChatMinimumVersion = @"1.0.4";
 
 

@@ -105,7 +105,7 @@
             break;
             
         case 1:
-            offset = self.view.frame.size.width - 20 - self.pageIndicatorView.frame.size.width;
+            offset = self.view.frame.size.width - 20 - self.pageIndicatorWidth.constant;
             break;
             
         default:
@@ -247,6 +247,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsShouldBeReloaded:) name:STNotificationsShouldBeReloaded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(badgeNotificationChanged:) name:kBadgeCountChangedNotification object:nil];
 
+    self.pageIndicatorWidth.constant = _btnMessages.frame.size.width - 20;
+    
+    [self.pageIndicatorView setNeedsLayout];
     if (isActivityChild == YES) {
         [self goToNotifications:nil];
     }
@@ -256,8 +259,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    self.pageIndicatorWidth.constant = _btnMessages.frame.size.width - 20;
 }
 
 -(void)dealloc{

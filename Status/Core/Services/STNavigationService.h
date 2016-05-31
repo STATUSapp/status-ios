@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class STImagePickerController;
+@class STTabBarViewController;
 
 @interface STNavigationService : NSObject
 
@@ -38,4 +39,5 @@
 
 + (UIViewController *)viewControllerForSelectedTab;
 
++ (STTabBarViewController *)appTabBar;
 @end

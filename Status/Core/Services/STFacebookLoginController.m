@@ -78,6 +78,7 @@
 #pragma mark - Facebook DelegatesFyou
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
+    [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogout object:nil userInfo:nil];
     [self logout];
 }
 
@@ -86,7 +87,11 @@
         _currentUserId = nil;
     }
     else
+    {
+        [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogin object:nil userInfo:nil];
         [self loginOrRegister];
+        
+    }
 }
 
 - (void)setUpCrashlyticsForUserId:(NSString *)userId andEmail:(NSString *)email andUserName:(NSString *)userName{

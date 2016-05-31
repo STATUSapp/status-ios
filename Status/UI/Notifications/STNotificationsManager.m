@@ -59,7 +59,7 @@
         return;
     }
     
-    if (![CoreManager loggedIn]) {
+    if (![CoreManager loggedIn] || [STNavigationService appTabBar] == nil) {
         //wait for the login to be performed and after handle the notification
         _lastNotification = notif;
         return;

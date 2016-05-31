@@ -44,10 +44,14 @@
 
 #pragma mark - Methods
 
-- (STTabBarViewController *)appTabBar {
++ (STTabBarViewController *)appTabBar {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    STTabBarViewController *tbc = (STTabBarViewController *)[window rootViewController];
-    return tbc;
+    if ([[window rootViewController] isKindOfClass:[STTabBarViewController class]]) {
+        STTabBarViewController *tbc = (STTabBarViewController *)[window rootViewController];
+        return tbc;
+    }
+    
+    return nil;
 }
 
 -(void)setBadge:(NSInteger)badge
@@ -61,20 +65,20 @@
             badgeString = [NSString stringWithFormat:@"%ld", (long)badge];
     }
     
-    [[self.appTabBar.viewControllers objectAtIndex:index] tabBarItem].badgeValue = badgeString;
+    [[[STNavigationService appTabBar].viewControllers objectAtIndex:index] tabBarItem].badgeValue = badgeString;
 }
 
 -(void)switchToTabBarAtIndex:(NSInteger)index
                  popToRootVC:(BOOL)popToRoot{
-    [self.appTabBar setSelectedIndex:index];
+    [[STNavigationService appTabBar] setSelectedIndex:index];
     if (popToRoot) {
-        UINavigationController *navCtrl = (UINavigationController *)[[self.appTabBar viewControllers] objectAtIndex:index];
+        UINavigationController *navCtrl = (UINavigationController *)[[[STNavigationService appTabBar] viewControllers] objectAtIndex:index];
         [navCtrl popToRootViewControllerAnimated:YES];
     }
 }
 
 - (void)goToPreviousTabBarScene {
-    [self.appTabBar goToPreviousSelectedIndex];
+    [[STNavigationService appTabBar] goToPreviousSelectedIndex];
 }
 
 - (void)goToNotifications {
@@ -88,11 +92,11 @@
 }
 
 - (void)showActivityIconOnTabBar {
-    [self.appTabBar setActivityIcon];
+    [[STNavigationService appTabBar] setActivityIcon];
 }
 
 - (void)showMessagesIconOnTabBar {
-    [self.appTabBar setMessagesIcon];
+    [[STNavigationService appTabBar] setMessagesIcon];
 }
 
 - (void)presentLoginScreen{
@@ -165,13 +169,13 @@
 #pragma mark - Helpers
 
 -(NSInteger)selectedTabBarIndex{
-    return self.appTabBar.selectedIndex;
+    return [STNavigationService appTabBar].selectedIndex;
 }
 
 -(void)pushViewController:(UIViewController *)vc
             inTabBarIndex:(NSInteger)index
                  animated:(BOOL)animated{
-    UINavigationController *navCtrl = (UINavigationController *)[[self.appTabBar viewControllers] objectAtIndex:index];
+    UINavigationController *navCtrl = (UINavigationController *)[[[STNavigationService appTabBar] viewControllers] objectAtIndex:index];
     [navCtrl pushViewController:vc animated:animated];
 
 }

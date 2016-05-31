@@ -13,6 +13,8 @@
 #import "STNetworkQueueManager.h"
 #import <FBSDKLoginKit.h>
 
+NSInteger const kLoginButtonTag = 121;
+
 @interface STLoginViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *splashBackground;
 @end
@@ -31,8 +33,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationFacebokDidLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationFacebokDidLogout object:nil];
+
+    
     _splashBackground.image = [STUIHelper splashImageWithLogo:NO];
     FBSDKLoginButton *loginButton = [[CoreManager loginService] facebookLoginButton];
+    loginButton.tag = kLoginButtonTag;
     [loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
 
     loginButton.hidden = NO;
@@ -84,4 +92,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - NSNotifications
+- (void)userDidLoggedIn{
+    FBSDKLoginButton *loginButton = [self.view viewWithTag:kLoginButtonTag];
+    loginButton.hidden = YES;
+}
+
+- (void)userDidLoggedOut{
+    FBSDKLoginButton *loginButton = [self.view viewWithTag:kLoginButtonTag];
+    loginButton.hidden = NO;
+
+}
 @end

@@ -137,6 +137,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 //    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
     
     [super viewWillAppear:animated];
+    [self.tabBarController.tabBar setHidden:YES];
     if (chatController.canChat == NO) {
         NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
         NSString *userId = _user.uuid;
@@ -164,8 +165,14 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController.tabBar setHidden:NO];
+}
+
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+
     if(_roomId){
         [chatController leaveRoom:_roomId];
     }
@@ -219,7 +226,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
 
     }];
-    _bottomTextViewConstraint.constant = keyboardBounds.size.height - self.tabBarController.tabBar.frame.size.height;
+    _bottomTextViewConstraint.constant = keyboardBounds.size.height;
 
 }
 
@@ -250,8 +257,6 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     r.origin.y += diff;
     [UIView animateWithDuration:0.25 animations:^{
         _heightConstraint.constant = height + TEXT_VIEW_OFFSET;
-        //_bottomTextViewConstraint.constant =
-        //_containerView.frame = r;
         if ([[_currentManager allObjects] count]>0) {
             [_tableView scrollToRowAtIndexPath:[_currentManager indexPathForObject:[[_currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
