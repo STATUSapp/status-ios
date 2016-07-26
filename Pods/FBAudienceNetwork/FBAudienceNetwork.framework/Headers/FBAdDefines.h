@@ -66,4 +66,14 @@
 #define FBInterfaceOrientationMask NSUInteger
 #endif
 
+#define FB_ALIAS __attribute__((weak, weakref, alias ("kFBAdSizeInterstital")))
+
+#ifndef FB_SUBCLASSING_RESTRICTED
+#if defined(__has_attribute) && __has_attribute(objc_subclassing_restricted)
+#define FB_SUBCLASSING_RESTRICTED __attribute__((objc_subclassing_restricted))
+#else
+#define FB_SUBCLASSING_RESTRICTED
+#endif
+#endif
+
 #endif
