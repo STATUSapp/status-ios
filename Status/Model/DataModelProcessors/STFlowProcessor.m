@@ -129,11 +129,16 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         return;
     
     __block STPost *post = [self objectAtIndex:index];
+    
+    if ([post isTheEndObject]) {
+        return;
+    }
     __weak STFlowProcessor *weakSelf = self;
     
         NSInteger offsetRemaining = weakSelf.objectIds.count - index;
         BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && index!=0;
-        if (shouldGetNextBatch) {
+
+    if (shouldGetNextBatch) {
             [weakSelf getMoreData];
         }
     if (!setSeenRequired) {

@@ -49,7 +49,7 @@
     [vc presentViewController:imagePicker animated:YES completion:nil];
     
 }
-- (void)launchFacebookPickerFromController:(UIViewController *)vc withCompletion:(imagePickerCompletion)completion {
+- (void)launchFacebookPickerFromController:(UIViewController *)vc {
     
     _viewController = vc;
     

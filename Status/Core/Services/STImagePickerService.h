@@ -14,7 +14,7 @@ typedef void (^imagePickerCompletion)(UIImage *img, BOOL shouldCompressImage);
 
 - (void)takeCameraPictureFromController:(UIViewController *)vc withCompletion:(imagePickerCompletion)completion;
 - (void)launchLibraryPickerFromController:(UIViewController *)vc withCompletion:(imagePickerCompletion)completion;
-- (void)launchFacebookPickerFromController:(UIViewController *)vc withCompletion:(imagePickerCompletion)completion;
+- (void)launchFacebookPickerFromController:(UIViewController *)vc;
 
 
 

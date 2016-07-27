@@ -56,14 +56,8 @@
 }
 
 - (IBAction)postPhotoFromFacebook:(id)sender {
-    __weak STTakeAPhotoViewController * weakSelf = self;
-    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
-        
-        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage andPost:nil];
-        [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
-    };
     
-    [[CoreManager imagePickerService] launchFacebookPickerFromController:self withCompletion:completion];
+    [[CoreManager imagePickerService] launchFacebookPickerFromController:self];
 }
 
 - (void)onTapOnView:(id)sender {
@@ -79,6 +73,17 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+-(void)facebookPickerDidChooseImage:(NSNotification *)notif{
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        UIImage *image = notif.userInfo[kImageKey];
+        
+        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:image shouldCompress:NO andPost:nil];
+        [self.navigationController pushViewController:moveScaleVC animated:YES];
+    }];
+}
+
+
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
@@ -88,6 +93,12 @@
 
     UITapGestureRecognizer * tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapOnView:)];
     [self.view addGestureRecognizer:tapGR];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(facebookPickerDidChooseImage:)
+                                                 name:STFacebookPickerNotification
+                                               object:nil];
+
 
     // Do any additional setup after loading the view.
 }
