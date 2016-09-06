@@ -58,12 +58,15 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/Appirater.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/Appirater.bundle"
 fi
 if [[ "$CONFIGURATION" == "Distribution" ]]; then
+  install_resource "FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/Appirater.bundle"
 fi
 

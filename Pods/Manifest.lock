@@ -21,26 +21,26 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Appirater (2.0.5)
-  - Bolts (1.8.3):
-    - Bolts/AppLinks (= 1.8.3)
-    - Bolts/Tasks (= 1.8.3)
-  - Bolts/AppLinks (1.8.3):
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
-  - Bolts/Tasks (1.8.3)
-  - Crashlytics (3.7.2):
+  - Bolts/Tasks (1.8.4)
+  - Crashlytics (3.8.0):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.7)
-  - FBAudienceNetwork (4.13.1)
-  - FBSDKCoreKit (4.13.1):
+  - Fabric (1.6.8)
+  - FBAudienceNetwork (4.15.0)
+  - FBSDKCoreKit (4.15.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.13.1):
+  - FBSDKLoginKit (4.15.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.13.1):
+  - FBSDKShareKit (4.15.0):
     - FBSDKCoreKit
   - MobileAppTracker (3.17.1)
-  - SDWebImage (3.8.1):
-    - SDWebImage/Core (= 3.8.1)
-  - SDWebImage/Core (3.8.1)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
@@ -57,14 +57,14 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
-  Bolts: 52551f96df2f8aac6b4414347f3f8353a39f1966
-  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  FBAudienceNetwork: 00f43ca44ee26fdadda3aa42032b8b87c8ace033
-  FBSDKCoreKit: 2807fe0da2ddb49a1469da6d6ff597f99912980f
-  FBSDKLoginKit: 6d350cb6a22d6956e9d078885de6ee8a0ebc51b4
-  FBSDKShareKit: c9438df7573b33780ac8c3451201c5ebb260ffca
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Crashlytics: 8601d9c74a4c4d28f3e7f408bf4c0e490c70e8b4
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  FBAudienceNetwork: 9ec54f1058e08ac8f5326358302795a43efbcfe2
+  FBSDKCoreKit: 6680cbd33a4243d80700f182d0af36b3fa7f3118
+  FBSDKLoginKit: 96d9b70b5784490f02ab86119e542a1f182017a8
+  FBSDKShareKit: 06ef20cb2f16828ca4b20055333313dd445de362
   MobileAppTracker: 39ccb300439d4a6be34ffbd040e68566b6818ffa
-  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
 COCOAPODS: 0.39.0
