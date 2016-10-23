@@ -21,6 +21,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     //fix a strange bug where the width is not right loaded
     CGRect rect = self.bounds;
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];

@@ -31,7 +31,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1113</string>
+	<string>1145</string>
 	<key>FacebookAppID</key>
 	<string>642056059181757</string>
 	<key>FacebookDisplayName</key>
@@ -76,6 +76,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSContactsUsageDescription</key>
+	<string>Contacts will be used to find your firends on Status App. </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location will be used for nearby user posts. </string>
 	<key>UIMainStoryboardFile</key>

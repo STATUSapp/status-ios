@@ -1,7 +1,11 @@
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!! DEPRECATED IN FAVOR OF : [TUNE](https://cocoapods.org/pods/Tune) !!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 Installing MobileAppTracking iOS SDK using CocoaPods
 =======
 
-[CocoaPods: The Objective-C Library Manager](http://www.cocoapods.org) allows you to manage the library dependencies of your iOS Xcode project. 
+[CocoaPods: The Objective-C Library Manager](https://www.cocoapods.org) allows you to manage the library dependencies of your iOS Xcode project.
 You can use CocoaPods to install MobileAppTracking iOS SDK and required system frameworks.
 
 ## Steps to include MobileAppTracking (MAT) iOS SDK to your iOS Xcode project

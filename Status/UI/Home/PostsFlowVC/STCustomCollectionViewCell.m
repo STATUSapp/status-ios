@@ -62,6 +62,7 @@ NSInteger const kCaptionMarginOffset = 25.f;    //modify this according with the
 }
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [self.contentView bringSubviewToFront:_fullBlurImageView];
     [self.contentView bringSubviewToFront:_activityIndicator];
 }
