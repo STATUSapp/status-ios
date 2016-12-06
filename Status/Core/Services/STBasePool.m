@@ -82,7 +82,14 @@
 
 - (STBaseObj *)objectForUrl:(NSString *)url{
     NSArray *filteredArray = [[self getAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageUrl like %@", url]];
-    return [filteredArray firstObject];
+    STBaseObj *result = [filteredArray firstObject];
+    if (!result) {
+        //try to filter for thumbnail
+        filteredArray = [[self getAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"thumbnailPhotoUrl like %@", url]];
+        result = [filteredArray firstObject];
+    }
+    
+    return result;
 }
 
 
@@ -126,11 +133,17 @@
 -(void)imageWasSavedLocally:(NSNotification *)notif{
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *fullUrl = notif.userInfo[kImageUrlKey];
+        BOOL urlIsThumbnail = [fullUrl containsString:@"_th.jpg"];
         CGSize imageSize = CGSizeFromString(notif.userInfo[kImageSizeKey]);
         STBaseObj *updatedObj = [self objectForUrl:fullUrl];
         if (updatedObj) {
-            updatedObj.mainImageDownloaded = YES;
-            updatedObj.imageSize = imageSize;
+            if (urlIsThumbnail == NO) {
+                updatedObj.mainImageDownloaded = YES;
+                updatedObj.imageSize = imageSize;
+            }
+            else
+                updatedObj.thumbnailImageDownloaded = YES;
+            
             [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:updatedObj.uuid}];
         }
     });

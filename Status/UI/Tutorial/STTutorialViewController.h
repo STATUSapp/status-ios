@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol STTutorialDelegate <NSObject>
+
+- (void)loginButtonPressed:(id)sender;
+
+@end
+
 @interface STTutorialViewController : UIViewController
+@property (nonatomic, weak) id <STTutorialDelegate> delegate;
 @property (nonatomic) BOOL skipFirstItem;
 @end

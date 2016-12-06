@@ -28,6 +28,7 @@
 #import "STPost.h"
 #import "NSDate+Additions.h"
 #import "STImageCacheController.h"
+#import "STShopProduct.h"
 
 @implementation STPost
 + (instancetype)postWithDict:(NSDictionary *)postDict {
@@ -41,6 +42,9 @@
 -(void)setup{
     self.appVersion = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"app_version"];
     _caption = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"caption"];
+    if (_caption == nil) {
+        _caption = @"";
+    }
     _isOwner = [self.infoDict[@"is_owner"] boolValue];
     _numberOfLikes = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"number_of_likes"];
     
@@ -53,13 +57,42 @@
     _userName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_name"];
     _postSeen = [self.infoDict[@"post_seen"] boolValue];
     _showFullCaption = NO;
+    _showShopProducts = NO;
+    
+    self.shopProducts = @[];
 
     //super properties
     self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"full_photo_link"];
+    self.thumbnailPhotoUrl = [self.mainImageUrl stringByReplacingOccurrencesOfString:@".jpg" withString:@"_th.jpg"];
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
-    self.imageSize = CGSizeZero;
+    self.thumbnailImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.thumbnailPhotoUrl];
+    self.imageSize = [STImageCacheController imageSizeForUrl:self.mainImageUrl];
     
+//#ifdef DEBUG
+//    self.userName = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+//    self.caption = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor vitae eros imperdiet placerat. Integer lacinia quam elit, et ultrices dui scelerisque ultricies. Vestibulum quis ultrices enim, vitae blandit turpis. In in lorem lacus. Integer malesuada nisl rhoncus elit dignissim placerat. Praesent ut dui fermentum, condimentum lacus ac, rhoncus quam. Cras eget neque sed sapien facilisis maximus. Quisque leo tortor, tempus a maximus ut, interdum vel risus.";
+//#endif
     
+    NSArray *products = self.infoDict[@"shop_style_products"];
+#ifdef DEBUG
+    NSMutableArray *mockProducts = [NSMutableArray new];
+    NSInteger productsCount = [self.uuid integerValue] % 10;
+    for (int i =0; i<productsCount; i++) {
+        NSDictionary *product = @{@"link": @"http://www.emag.ro/",
+                         @"image": @"http://is4.barenecessities.com/is/image/BareNecessities/le945_almond1?$Main375x440$"};
+        [mockProducts addObject:product];
+    }
+    products = [NSArray arrayWithArray:mockProducts];
+#endif
+    if (products && products.count) {
+        NSMutableArray *productsArray = [NSMutableArray new];
+        
+        for (NSDictionary *productDict in products) {
+            STShopProduct *product = [STShopProduct shopProductWithDict:productDict];
+            [productsArray addObject:product];
+        }
+        self.shopProducts = [NSArray arrayWithArray:productsArray];
+    }
 }
 
 @end

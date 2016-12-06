@@ -18,5 +18,6 @@
 + (NSString *)statusForLastTimeSeen:(NSDate *)lastSeenDate;
 + (NSString *)timeStringForLastMessageDate:(NSDate *)messageDate;
 + (STUserStatus)statusTypeForLastTimeSeen:(NSDate *)lastSeenDate;
++ (NSString *)timeAgoFromDate:(NSDate *)date;
 
 @end

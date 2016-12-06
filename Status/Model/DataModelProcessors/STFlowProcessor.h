@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class STUserProfile;
+
 extern NSString * const kNotificationObjDownloadSuccess;
 extern NSString * const kNotificationObjUpdated;
 extern NSString * const kNotificationObjDeleted;
@@ -37,6 +39,9 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
 - (void)setCurrentOffset:(NSInteger)offset;
 - (NSInteger)currentOffset;
 - (NSInteger)indexOfObject:(id)object;
+- (STUserProfile *)userProfile;
+- (NSString *)userId;
+- (BOOL)processorIsAGallery;
 
 -(STFlowType)processorFlowType;
 

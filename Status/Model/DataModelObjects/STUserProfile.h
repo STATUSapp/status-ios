@@ -7,6 +7,15 @@
 //
 
 #import "STBaseObj.h"
+
+typedef NS_ENUM(NSUInteger, STProfileGender) {
+    STProfileGenderUndefined = 0,
+    STProfileGenderMale,
+    STProfileGenderFemale,
+};
+
+@class STListUser;
+
 @interface STUserProfile : STBaseObj
 
 @property (nonatomic, strong) NSString * fullName;
@@ -30,7 +39,11 @@
 
 @property (nonatomic, assign) NSInteger numberOfPosts;
 
+@property (nonatomic, assign) STProfileGender profileGender;
+
+- (NSString *)genderImageName;
+
 + (instancetype)userProfileWithDict:(NSDictionary *)userDict;
 
-
+- (STListUser *)listUserFromProfile;
 @end

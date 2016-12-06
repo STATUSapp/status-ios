@@ -540,4 +540,23 @@ withCompletion:(STDataUploadCompletionBlock)completion{
 
 }
 
+#pragma mark - UserProfile
+
++ (void)getUserProfileForUserId:(NSString *)userId
+                  andCompletion:(STDataAccessCompletionBlock)completion{
+//    STRequestCompletionBlock responseCompletion = [self nearbyPostsHandlerWithCompletion:completion];
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STGetUserProfileRequest getProfileForUserID:userId
+                                  withCompletion:^(id response, NSError *error) {
+                                      NSMutableArray *objects = [NSMutableArray new];
+                                      if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                                          STUserProfile *up = [STUserProfile userProfileWithDict:response];
+                                          [objects addObject:up];
+
+                                          completion(objects, error);
+                                      }
+                                  }failure:failBlock];
+
+}
+
 @end

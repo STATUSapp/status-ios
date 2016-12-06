@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--TakeA Photo View Controller-->
@@ -14,18 +15,18 @@
                         <viewControllerLayoutGuide type="bottom" id="7IQ-hF-146"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HuZ-tU-7hc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash4.7in" translatesAutoresizingMaskIntoConstraints="NO" id="EUI-8q-1oS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </imageView>
-                            <view opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2t-vJ-vVQ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashscreen" translatesAutoresizingMaskIntoConstraints="NO" id="EUI-8q-1oS"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ola-Vd-9Hx">
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0EQ-g5-BgR">
+                                    <frame key="frameInset"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgK-dC-PjG">
-                                <rect key="frame" x="13" y="287" width="134" height="134"/>
                                 <state key="normal" image="gallery_btn"/>
                                 <state key="highlighted" image="gallery_btn_active"/>
                                 <connections>
@@ -33,7 +34,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU4-ml-K3T">
-                                <rect key="frame" x="173" y="287" width="134" height="134"/>
                                 <state key="normal" image="facebook_btn"/>
                                 <state key="highlighted" image="facebook_btn_active"/>
                                 <connections>
@@ -41,7 +41,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3g-7a-rAZ">
-                                <rect key="frame" x="93" y="147" width="134" height="134"/>
                                 <state key="normal" image="camera_btn"/>
                                 <state key="highlighted" image="camera_btn_active"/>
                                 <connections>
@@ -49,32 +48,32 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="7IQ-hF-146" firstAttribute="top" secondItem="EUI-8q-1oS" secondAttribute="bottom" id="28y-Uf-1VI"/>
-                            <constraint firstItem="U2t-vJ-vVQ" firstAttribute="bottom" secondItem="EUI-8q-1oS" secondAttribute="bottom" id="Aru-P1-X8l"/>
+                            <constraint firstAttribute="trailing" secondItem="Ola-Vd-9Hx" secondAttribute="trailing" id="BX5-s2-ERZ"/>
                             <constraint firstItem="dgK-dC-PjG" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" constant="-80" id="FPZ-zI-zrv"/>
-                            <constraint firstItem="U2t-vJ-vVQ" firstAttribute="top" secondItem="EUI-8q-1oS" secondAttribute="top" id="HsC-aa-JJw"/>
-                            <constraint firstItem="U2t-vJ-vVQ" firstAttribute="trailing" secondItem="EUI-8q-1oS" secondAttribute="trailing" id="KCd-Lq-sGo"/>
+                            <constraint firstItem="Ola-Vd-9Hx" firstAttribute="leading" secondItem="HuZ-tU-7hc" secondAttribute="leading" id="Hdr-Ky-Pq4"/>
+                            <constraint firstItem="Ola-Vd-9Hx" firstAttribute="top" secondItem="HuZ-tU-7hc" secondAttribute="top" id="J2F-x1-wCX"/>
                             <constraint firstAttribute="trailing" secondItem="EUI-8q-1oS" secondAttribute="trailing" id="SE4-rk-H05"/>
                             <constraint firstItem="dgK-dC-PjG" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" constant="70" id="SJf-cV-HJa"/>
+                            <constraint firstItem="7IQ-hF-146" firstAttribute="top" secondItem="Ola-Vd-9Hx" secondAttribute="bottom" id="ZzK-Wx-KLs"/>
                             <constraint firstItem="S3g-7a-rAZ" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" constant="-70" id="dG3-cY-Pkc"/>
                             <constraint firstItem="EUI-8q-1oS" firstAttribute="leading" secondItem="HuZ-tU-7hc" secondAttribute="leading" id="hNK-y3-kaR"/>
-                            <constraint firstItem="U2t-vJ-vVQ" firstAttribute="leading" secondItem="EUI-8q-1oS" secondAttribute="leading" id="jde-6J-VkQ"/>
                             <constraint firstItem="eU4-ml-K3T" firstAttribute="centerY" secondItem="HuZ-tU-7hc" secondAttribute="centerY" constant="70" id="lIt-2t-HHN"/>
                             <constraint firstItem="EUI-8q-1oS" firstAttribute="top" secondItem="7gz-Ia-8Ob" secondAttribute="bottom" constant="-20" id="lrf-ah-jBW"/>
                             <constraint firstItem="eU4-ml-K3T" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" constant="80" id="moI-Ai-xI0"/>
                             <constraint firstItem="S3g-7a-rAZ" firstAttribute="centerX" secondItem="HuZ-tU-7hc" secondAttribute="centerX" id="wlH-2B-PsX"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="backgroundImageView" destination="EUI-8q-1oS" id="vC3-aq-gaP"/>
+                        <outlet property="blurEffect" destination="Ola-Vd-9Hx" id="piA-aR-EEj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2n-N5-sYE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="148" y="296"/>
+            <point key="canvasLocation" x="146.25" y="295.77464788732397"/>
         </scene>
     </scenes>
     <resources>
@@ -84,6 +83,6 @@
         <image name="facebook_btn_active" width="134" height="134"/>
         <image name="gallery_btn" width="134" height="134"/>
         <image name="gallery_btn_active" width="134" height="134"/>
-        <image name="splash4.7in" width="375" height="667"/>
+        <image name="splashscreen" width="360" height="643"/>
     </resources>
 </document>

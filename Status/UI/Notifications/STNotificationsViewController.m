@@ -19,8 +19,6 @@
 #import "STGetNotificationsRequest.h"
 #import "STUsersListController.h"
 
-#import "STUserProfileViewController.h"
-
 #import "NSString+MD5.h"
 
 #import "FeedCVC.h"
@@ -165,8 +163,10 @@ const float kNoNotifHeight = 24.f;
             break;
         default:
         {
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:no.userId];
-            [self.navigationController pushViewController:profileVC animated:YES];
+            
+            FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:no.userId andUserName:nil];
+            feedCVC.shouldAddBackButton = YES;
+            [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
     }
@@ -189,9 +189,9 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeInvite:
         {
             
-            STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:no.userId];
-            [self.navigationController pushViewController:profileVC animated:YES];
-            
+            FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:no.userId andUserName:nil];
+            feedCVC.shouldAddBackButton = YES;
+            [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
         case STNotificationTypeGotFollowed:
@@ -327,6 +327,8 @@ const float kNoNotifHeight = 24.f;
         [_containeeDelegate containeeEndedScrolling];
     }
 }
+
+#pragma mark - STSideBySideConatinerProtocol
 
 - (void)containerEndedScrolling {
     _notificationTable.scrollEnabled = YES;

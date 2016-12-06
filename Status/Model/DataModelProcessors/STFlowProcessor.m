@@ -41,6 +41,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *postId;
 
+@property (nonatomic, strong) STUserProfile *userProfile;
 @property (nonatomic, strong) NSMutableArray *objectIds;
 @property (nonatomic) NSInteger numberOfDuplicates;
 @property (nonatomic, assign) BOOL loaded;
@@ -130,16 +131,13 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     
     __block STPost *post = [self objectAtIndex:index];
     
-    if ([post isTheEndObject]) {
-        return;
-    }
-    __weak STFlowProcessor *weakSelf = self;
+//    __weak STFlowProcessor *weakSelf = self;
     
-        NSInteger offsetRemaining = weakSelf.objectIds.count - index;
+        NSInteger offsetRemaining = self.objectIds.count - index;
         BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && index!=0;
-
+//    shouldGetNextBatch = NO;
     if (shouldGetNextBatch) {
-            [weakSelf getMoreData];
+            [self getMoreData];
         }
     if (!setSeenRequired) {
         return;
@@ -197,6 +195,11 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     return _flowType;
 }
 
+- (BOOL)processorIsAGallery{
+    return (_flowType == STFlowTypeUserGallery ||
+            _flowType == STFlowTypeMyGallery);
+}
+
 - (void)setCurrentOffset:(NSInteger)offset{
     _offset = offset;
 }
@@ -206,6 +209,19 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
 - (NSInteger)indexOfObject:(id)object{
     return [_objectIds indexOfObject:[object valueForKey:@"uuid"]];
+}
+
+- (STUserProfile *)userProfile{
+    STUserProfile *userProfile = _userProfile;
+    if (userProfile == nil && _userId!=nil) {
+        userProfile = [[CoreManager profilePool] getUserProfileWithId:_userId];
+
+    }
+    return userProfile;
+}
+
+- (NSString *)userId{
+    return _userId;
 }
 #pragma mark - Actions
 
@@ -286,7 +302,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
                                             withPostCompletion:^(UIImage *origImg) {
                                                 UIImageWriteToSavedPhotosAlbum(origImg, weakSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
                                                 
-                                            } andBlurCompletion:nil];
+                                            }];
     }
 }
 
@@ -327,55 +343,42 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     }
     
     //remove loading mock object
-    STPost *loadingObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForLoading];
-    if (loadingObject) {
-        [_objectIds removeObject:loadingObject.uuid];
-    }
+//    STPost *loadingObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForLoading];
+//    if (loadingObject) {
+//        [_objectIds removeObject:loadingObject.uuid];
+//    }
 
-    if (_flowType!=STFlowTypeDiscoverNearby) {
-        //add mock posts at the end of the list
-        [self addMockObjects];
-    }
+//    if (_flowType!=STFlowTypeDiscoverNearby) {
+//        //add mock posts at the end of the list
+//        [self addMockObjects];
+//    }
     
 }
 
--(void)addMockObjects{
-    STBaseObj *nothingToDisplayObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForNothingToDisplay];
-    if (!nothingToDisplayObject) {
-        nothingToDisplayObject = [STBaseObj mockObjNothingToDisplay];
-        [self addObjectsToObjectPool:@[nothingToDisplayObject]];
-    }
-    else
-        [_objectIds removeObject:nothingToDisplayObject.uuid];
-    
-    STBaseObj *theEndObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForTheEnd];
-    if (!theEndObject) {
-        theEndObject = [STBaseObj mockObjTheEnd];
-        [self addObjectsToObjectPool:@[theEndObject]];
-    }
-    else
-        [_objectIds removeObject:theEndObject.uuid];
-    
-    
-    if (_objectIds.count == 0)
-    {
-        if(_flowType == STFlowTypeMyGallery||
-           _flowType == STFlowTypeUserGallery) {
-            [_objectIds addObject:nothingToDisplayObject.uuid];
-        }
-        else
-            [_objectIds addObject:theEndObject.uuid];
-    }
-    else
-    {
-        if(_flowType == STFlowTypeMyGallery||
-           _flowType == STFlowTypeUserGallery) {
-        }
-        else
-            [_objectIds addObject:theEndObject.uuid];
-    }
-    
-}
+//-(void)addMockObjects{
+//    STBaseObj *nothingToDisplayObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForNothingToDisplay];
+//    if (!nothingToDisplayObject) {
+//        nothingToDisplayObject = [STBaseObj mockObjNothingToDisplay];
+//        [self addObjectsToObjectPool:@[nothingToDisplayObject]];
+//    }
+//    else
+//        [_objectIds removeObject:nothingToDisplayObject.uuid];
+//    
+//    if (_objectIds.count == 0)
+//    {
+//        if(_flowType == STFlowTypeMyGallery||
+//           _flowType == STFlowTypeUserGallery) {
+//            [_objectIds addObject:nothingToDisplayObject.uuid];
+//        }
+//    }
+//    else
+//    {
+//        if(_flowType == STFlowTypeMyGallery||
+//           _flowType == STFlowTypeUserGallery) {
+//        }
+//    }
+//    
+//}
 
 -(void)addObjectsToObjectPool:(NSArray *)objects{
     if (_flowType == STFlowTypeDiscoverNearby) {
@@ -389,11 +392,11 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     NSInteger offset = _objectIds.count + _numberOfDuplicates;
     NSLog(@"Offset: %ld", (long)offset);
     
-    if (_loaded == NO) {
-        STBaseObj *loadingObj = [STBaseObj mockObjectLoading];
-        [self addObjectsToObjectPool:@[loadingObj]];
-        [self.objectIds addObject:loadingObj.uuid];
-    }
+//    if (_loaded == NO) {
+//        STBaseObj *loadingObj = [STBaseObj mockObjectLoading];
+//        [self addObjectsToObjectPool:@[loadingObj]];
+//        [self.objectIds addObject:loadingObj.uuid];
+//    }
 
     __weak STFlowProcessor *weakSelf = self;
     STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error){
@@ -409,7 +412,6 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
             {
                 weakSelf.loaded = YES;
                 //handle error
-                //TODO: dev_1_2 handle the listener
                 [[CoreManager localNotificationService] postNotificationName:kNotificationObjectDownloadFailed
                                                                  object:self
                                                                userInfo:nil];
@@ -425,22 +427,21 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
             NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             BOOL suggestionsShown = [[ud valueForKey:kShowSuggestionKey] boolValue];
             if (weakSelf.flowType == STFlowTypeHome &&
-                [weakSelf.objectIds count] == 1 &&
                 suggestionsShown == NO) {
                 
                 [[CoreManager localNotificationService] postNotificationName:kNotificationShowSuggestions object:self userInfo:nil];
                 [ud setValue:@(YES) forKey:kShowSuggestionKey];
                 [ud synchronize];
             }
-
-            //TODO: dev_1_2 handle the listener
+//            if (_flowType != STFlowTypeMyGallery &&
+//                _flowType != STFlowTypeUserGallery) {
+//                [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
+//                [weakSelf addObjectsToObjectPool:objects];
+//            }
             
-            //            if (objects.count > 0) {
-            //#ifdef DEBUG
-            //                [objects setValue:@"Lorem ipsum dolor sit amet, eos cu prompta qualisque moderatius, eu utamur urbanitas his. Quod malorum eu qui, quo debet paulo soluta ad. Altera argumentum id mel." forKey:@"caption"];
-            //#endif
             [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
             [weakSelf addObjectsToObjectPool:objects];
+
         }
         [[CoreManager localNotificationService] postNotificationName:kNotificationObjDownloadSuccess object:self userInfo:nil];
         NSMutableArray *objToDownload = [NSMutableArray new];
@@ -472,10 +473,21 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         }
         case STFlowTypeMyGallery:
         case STFlowTypeUserGallery:{
-            
-            [STDataAccessUtils getPostsForUserId:_userId
-                                          offset:offset
-                                  withCompletion:completion];
+            STUserProfile *userProfile = [self userProfile];
+            if (userProfile == nil) {
+                [STDataAccessUtils getUserProfileForUserId:_userId
+                                             andCompletion:^(NSArray *objects, NSError *error) {
+                                                 _userProfile = [objects firstObject];
+                                                 [STDataAccessUtils getPostsForUserId:_userId
+                                                                               offset:offset
+                                                                       withCompletion:completion];
+                                             }];
+            }
+            else{
+                [STDataAccessUtils getPostsForUserId:_userId
+                                              offset:offset
+                                      withCompletion:completion];
+            }
             break;
         }
         case STFlowTypeSinglePost:{
@@ -512,7 +524,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     if ([_objectIds containsObject:postId]) {
         [_objectIds removeObject:postId];
         
-        [self addMockObjects];
+//        [self addMockObjects];
         
         [[CoreManager localNotificationService] postNotificationName:kNotificationObjDeleted object:self userInfo:@{kPostIdKey:postId}];
     }

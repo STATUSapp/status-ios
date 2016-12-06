@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CreateDataModelHelper.h"
 
-extern NSString * const kObjectUuidForLoading;
-extern NSString * const kObjectUuidForNothingToDisplay;
-extern NSString * const kObjectUuidForTheEnd;
+//extern NSString * const kObjectUuidForLoading;
+//extern NSString * const kObjectUuidForNothingToDisplay;
 
 @interface STBaseObj : NSObject
 
@@ -20,14 +19,16 @@ extern NSString * const kObjectUuidForTheEnd;
 @property(nonatomic, strong) NSString *appVersion;
 
 @property (nonatomic, assign) BOOL mainImageDownloaded;
-@property (nonatomic, assign) CGSize imageSize;
+@property (nonatomic, assign) BOOL thumbnailImageDownloaded;
+@property (nonatomic, assign) CGSize imageSize;//the full image size
 @property (nonatomic, strong) NSString * mainImageUrl;
+@property (nonatomic, strong) NSString * thumbnailPhotoUrl;
 
-+ (instancetype)mockObjectLoading;
-+ (instancetype)mockObjNothingToDisplay;
-+ (instancetype)mockObjTheEnd;
+//+ (instancetype)mockObjectLoading;
+//+ (instancetype)mockObjNothingToDisplay;
+//
+//- (BOOL) isLoadingObject;
+//- (BOOL) isNothingToDisplayObj;
+//- (BOOL) isSpecialObject;
 
-- (BOOL) isLoadingObject;
-- (BOOL) isTheEndObject;
-- (BOOL) isNothingToDisplayObj;
 @end

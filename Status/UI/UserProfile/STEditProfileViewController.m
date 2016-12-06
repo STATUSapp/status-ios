@@ -8,7 +8,6 @@
 
 #import "STEditProfileViewController.h"
 #import "STUpdateUserProfileRequest.h"
-#import "STUserProfileViewController.h"
 #import "STImageCacheController.h"
 #import "STUploadNewProfilePictureRequest.h"
 #import "STUserProfilePool.h"

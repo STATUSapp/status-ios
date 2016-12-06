@@ -51,7 +51,6 @@ CGFloat const kUserNameWidthOffset = 180.f;
     
     [_nameButton setTitle:_currentPost.userName forState:UIControlStateNormal];
     
-    [_likeButton setTitle:_currentPost.postLikedByCurrentUser?NSLocalizedString(@"LIKED", nil):NSLocalizedString(@"LIKE", nil) forState:UIControlStateNormal];
     _likeButton.selected = _currentPost.postLikedByCurrentUser;
 
     //not use message appVersion since there is a problem for some users
@@ -59,19 +58,19 @@ CGFloat const kUserNameWidthOffset = 180.f;
     _messageButton.enabled = YES;
     [self configureBottomView];
     
-    __weak FeedCell *weakSelf = self;
+//    __weak FeedCell *weakSelf = self;
     
-    [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *img) {
-        
-        if (img!=nil) {
-            weakSelf.normalImage.image = img;
-            
-        }
-    } andBlurCompletion:^(UIImage *bluredImg) {
-        if (bluredImg!=nil) {
-            weakSelf.blurImageView.image=bluredImg;
-        }
-    }];
+//    [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *img) {
+//        
+//        if (img!=nil) {
+//            weakSelf.normalImage.image = img;
+//            
+//        }
+//    } andBlurCompletion:^(UIImage *bluredImg) {
+//        if (bluredImg!=nil) {
+//            weakSelf.blurImageView.image=bluredImg;
+//        }
+//    }];
     
     if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
         

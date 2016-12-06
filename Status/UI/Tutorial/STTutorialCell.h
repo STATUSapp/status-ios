@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class STTutorialModel;
+
 @interface STTutorialCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UILabel *titleLable;
-@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *tutorialImageView;
+
+- (void)configureWithModel:(STTutorialModel *)model;
+
 @end

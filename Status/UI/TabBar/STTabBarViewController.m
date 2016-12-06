@@ -10,9 +10,8 @@
 #import "STSettingsViewController.h"
 #import "STTakeAPhotoViewController.h"
 #import "STNotificationAndChatContainerViewController.h"
-#import "STUserProfileViewController.h"
 #import "STFacebookLoginController.h"
-#import "ExploreTVC.h"
+#import "STExploreViewController.h"
 
 #import "FeedCVC.h"
 
@@ -47,9 +46,13 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
     
     // add explore flow
-    ExploreTVC *exploreTVC = [ExploreTVC exploreController];
-    UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:exploreTVC];
+    STExploreViewController *vc = [STExploreViewController exploreViewController];
+    UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:vc];
     exploreNavCtrl.navigationBarHidden = YES;
+
+//    ExploreTVC *exploreTVC = [ExploreTVC exploreController];
+//    UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:exploreTVC];
+//    exploreNavCtrl.navigationBarHidden = YES;
     
     // add take a photo
     STTakeAPhotoViewController * takeAPhotoVC = [STTakeAPhotoViewController newController];
@@ -63,8 +66,9 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
     
     // add my profile
-    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:[[CoreManager loginService] currentUserUuid]];
+    FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:[[CoreManager loginService] currentUserUuid] andUserName:nil];
     UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
+
     profileNav.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:profileNav];
     
@@ -76,14 +80,14 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [self setViewControllers:tabBarControllers animated:NO];
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[UIImage imageNamed:@"home"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setImage:[UIImage imageNamed:@"explore"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setImage:[UIImage imageNamed:@"search"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[UIImage imageNamed:@"camera"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[UIImage imageNamed:@"profile"]];
     
-    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[UIImage imageNamed:@"home_active"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setSelectedImage:[UIImage imageNamed:@"explore_active"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[UIImage imageNamed:@"camera_active"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[UIImage imageNamed:@"profile_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[UIImage imageNamed:@"home-selected"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setSelectedImage:[UIImage imageNamed:@"search-selected"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[UIImage imageNamed:@"camera"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[UIImage imageNamed:@"profile-selected"]];
     
     
     [self setMessagesIcon];
@@ -93,17 +97,23 @@ static NSString * storyboardIdentifier = @"tabBarController";
         item.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     }
     
-    self.tabBar.tintColor = [UIColor whiteColor];
+    [self.tabBar setTintColor:[UIColor blackColor]];
+    
+//    //#f8f8fd
+//    self.tabBar.tintColor = [UIColor colorWithRed:248.f/255.f
+//                                            green:248.f/255.f
+//                                             blue:253.f/255.f
+//                                            alpha:0.9f];
 }
 
 - (void)setActivityIcon {
     [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"activity"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"activity_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"activity-selected"]];
 }
 
 - (void)setMessagesIcon {
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"message"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"message_active"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"messages"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"messages-selected"]];
 }
 
 - (void)viewDidLoad {

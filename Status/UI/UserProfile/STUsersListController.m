@@ -14,8 +14,8 @@
 #import "STChatRoomViewController.h"
 #import "STChatController.h"
 #import "UIImageView+WebCache.h"
+#import "FeedCVC.h"
 
-#import "STUserProfileViewController.h"
 #import "STDataAccessUtils.h"
 #import "STDataModelObjects.h"
 #import "STFollowDataProcessor.h"
@@ -195,8 +195,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         
     STListUser *lu = [_dataSource objectAtIndex:indexPath.row];
-    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:lu.uuid];
-    [self.navigationController pushViewController:profileVC animated:YES];
+    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:lu.uuid andUserName:lu.userName];
+    feedCVC.shouldAddBackButton = YES;
+    [self.navigationController pushViewController:feedCVC animated:YES];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

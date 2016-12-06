@@ -311,6 +311,8 @@
     }
 }
 
+#pragma mark - STSideBySideConatinerProtocol
+
 - (void)containerEndedScrolling {
     _tableView.scrollEnabled = YES;
 }

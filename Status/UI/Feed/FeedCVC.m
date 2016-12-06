@@ -9,17 +9,27 @@
 #import "FeedCVC.h"
 #import "STFlowProcessor.h"
 #import "STPost.h"
+#import "STShopProduct.h"
 
-#import "FeedCell.h"
-#import "FullCaptionFeedCell.h"
+#import "STPostImageCell.h"
+#import "STPostHeader.h"
+#import "STPostDetailsCell.h"
+
+#import "UserProfileInfoCell.h"
+#import "UserProfileBioCell.h"
+#import "UserProfileLocationCell.h"
+#import "UserProfileFriendsInfoCell.h"
+#import "UserProfileNoPhotosCell.h"
+
 #import "STNoPhotosCell.h"
-#import "FooterCell.h"
 
 #import "STFacebookLoginController.h"
 #import "STChatRoomViewController.h"
 #import "STMoveScaleViewController.h"
 #import "STSharePhotoViewController.h"
 #import "STFriendsInviterViewController.h"
+#import "STSettingsViewController.h"
+#import "STEditProfileViewController.h"
 
 #import "STListUser.h"
 
@@ -27,36 +37,97 @@
 #import "STPostsPool.h"
 #import "STContextualMenu.h"
 #import "STImageCacheController.h"
+#import "STFollowDataProcessor.h"
 
 #import "UIViewController+Snapshot.h"
-#import "STUserProfileViewController.h"
 #import "STUsersListController.h"
+
+#import "STShopProductCell.h"
+#import "STPostShopProductsCell.h"
+
+typedef NS_ENUM(NSInteger, STScrollDirection)
+{
+    STScrollDirectionNone = 0,
+    STScrollDirectionUp,
+    STScrollDirectionDown
+};
+
+typedef NS_ENUM(NSInteger, STPostItems)
+{
+    STPostImage = 0,
+    STPostShop,
+    STPostDescription,
+    STPostItemsCount
+};
+
+typedef NS_ENUM(NSInteger, STProfileItems) {
+    STProfileInfo = 0,
+    STProfileFriendsInfo,
+    STProfileBio,
+    STProfileLocation,
+    STProfileNoPhotos,
+    STProfileCount,
+};
+
+CGFloat const kTopButtonMargin = 4.f;
+CGFloat const kTopButtonTopMargin = 4.f;
+CGFloat const kTopButtonSize = 48.f;
 
 @interface FeedCVC ()<STContextualMenuDelegate>
 {
     CGPoint _start;
-    CGPoint _end;
-    BOOL _shouldForceSetSeen;
-
+    BOOL _tabBarHidden;
+    STScrollDirection _scrollingDirection;
+    CGPoint _lastPanPoint;
+    CGPoint _initialStartPoint;
+    NSInteger postForContextIndex;
 }
 
 @property (nonatomic, strong) STFlowProcessor *feedProcessor;
+@property (nonatomic, strong) STFollowDataProcessor *followProcessor;
 
 @property (nonatomic, strong) NSString *userName;
+
+@property (nonatomic, assign) BOOL isMyProfile;
+
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UIImageView *loadingViewImage;
+@property (strong, nonatomic) IBOutlet UIView *noDataView;
+
 
 @end
 
 @implementation FeedCVC
 
-static NSString * const normalFeedCell = @"FeedCell";
-static NSString * const fullCaptionFeedCell = @"FullCaptionFeedCell";
-static NSString * const loadingFeedCell = @"LoadingCell";
-static NSString * const youSawAllCell = @"FooterCell";
-static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
+static NSString * const postHeaderIdentifier = @"STPostHeader";
+static NSString * const postImageCellIdentifier = @"STPostImageCell";
+static NSString * const postDetailsCellIdentifier = @"STPostDetailsCell";
+static NSString * const postShopCellIdentifier = @"STPostShopProductsCell";
+static NSString * const profileInfoCell = @"UserProfileInfoCell";
+static NSString * const profileFriendsInfoCell = @"UserProfileFriendsInfoCell";
+static NSString * const profileBioCell = @"UserProfileBioCell";
+static NSString * const profileLocationCell = @"UserProfileLocationCell";
+static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
+
+- (void)configureLoadingView{
+    if (_feedProcessor.loading) {
+        _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = _loadingView;
+        self.tabBarController.tabBar.hidden = YES;
+    }
+    else
+    {
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = nil;
+        self.tabBarController.tabBar.hidden = NO;
+
+    }
+}
 
 + (FeedCVC *)mainFeedController{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
     
     STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeHome];
@@ -67,7 +138,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 + (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
     
     feedCVC.feedProcessor = processor;
@@ -77,7 +148,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 + (FeedCVC *)singleFeedControllerWithPostId:(NSString *)postId{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
     
     STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeSinglePost postId:postId];
@@ -89,7 +160,7 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 + (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId
                                 andUserName:(NSString *)userName{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateInitialViewController];
+    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
     feedCVC.userName = userName;
     BOOL userIsMe = [[CoreManager loginService].currentUserUuid isEqualToString:userId];
@@ -105,7 +176,13 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    layout.sectionHeadersPinToVisibleBounds = YES;
     
+    self.collectionView.contentInset = UIEdgeInsetsMake(0.f, 0.f, self.tabBarController.tabBar.frame.size.height, 0.f);
+    CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+    _initialStartPoint = tabBarFrame.origin;
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationObjDownloadSuccess object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationObjUpdated object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationObjDeleted object:_feedProcessor];
@@ -114,15 +191,33 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
 
     if ([_feedProcessor loading] == NO) {
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:[_feedProcessor currentOffset]] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
     
-    if (_shouldAddBackButton) {
-        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(4, 4, 48, 48)];
-        [backButton setImage:[UIImage imageNamed:@"btnBack"] forState:UIControlStateNormal];
-        [backButton setImage:[UIImage imageNamed:@"btnBackPressed"] forState:UIControlStateHighlighted];
-        [backButton addTarget:self action:@selector(onBackButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:backButton];
+    if ([[_feedProcessor userId] isEqualToString:[CoreManager loginService].currentUserUuid]) {
+        _isMyProfile = YES;
+    }
+    
+    [self configureLoadingView];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    if (_tabBarHidden) {
+        CGFloat yPoints = [[UIScreen mainScreen] bounds].size.height;
+        CGFloat velocityY = 1.f;
+        NSTimeInterval duration = yPoints / velocityY;
+        
+        [UIView animateWithDuration:1.f/duration animations:^{
+            CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+            tabBarFrame.origin.y = _initialStartPoint.y;
+            self.tabBarController.tabBar.frame = tabBarFrame;
+            
+        } completion:^(BOOL finished) {
+            _tabBarHidden = NO;
+            _scrollingDirection = STScrollDirectionNone;
+        }];
     }
 }
 
@@ -138,29 +233,50 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 #pragma mark - Notifications
 
 - (void)processorLoaded{
-    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    [self configureLoadingView];
+    [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+
+//    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 }
 
 - (void)postUpdated:(NSNotification *)notif{
-    STPost *post = [[CoreManager postsPool] getPostWithId:notif.userInfo[kPostIdKey]];
-    STPost *curentPost = [self getCurrentPost];
-    if ([curentPost isLoadingObject] || [post.uuid isEqualToString:curentPost.uuid]) {
+//    [self.collectionView reloadData];
+    NSString *updatedPostId = notif.userInfo[kPostIdKey];
+    NSArray *visibleIndexPath = [self.collectionView indexPathsForVisibleItems];
+    NSMutableArray *visiblePosts = [NSMutableArray new];
+    for (NSIndexPath *indexPath in visibleIndexPath) {
+        NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+        STPost *post = [_feedProcessor objectAtIndex:sectionIndex];
+
+        if (![visiblePosts containsObject:post.uuid]) {
+            [visiblePosts addObject:post.uuid];
+        }
+    }
+    if ([visiblePosts containsObject:updatedPostId]) {
         [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
+        [self.collectionView.collectionViewLayout invalidateLayout];
     }
     
 }
 
 - (void)postAdded:(NSNotification *)notif{
     [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+
 }
 - (void)postDeleted:(NSNotification *)notif{
     [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+
 }
 
 - (void)dataShouldBeReloaded:(NSNotification *)notif{
     [_feedProcessor reloadProcessor];
     [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+
 }
 
 - (void)showSuggestions:(NSNotification *)notif{
@@ -169,23 +285,30 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 }
 #pragma mark - Helpers
-
-
--(NSInteger)getCurrentIndex{
-    NSArray *visibleInxPath = self.collectionView.indexPathsForVisibleItems;
-    if (visibleInxPath.count == 0) {
-        return NSNotFound;
+- (NSInteger)postIndexFromIndexPath:(NSIndexPath *)indexPath{
+    NSInteger sectionIndex = indexPath.section;
+    if ([_feedProcessor processorIsAGallery] && sectionIndex > 0) {
+        //substract the first section because this is the user profile section
+        sectionIndex -- ;
     }
-    return [[visibleInxPath objectAtIndex:0] row];
-
+    return sectionIndex;
 }
 
--(STPost *) getCurrentPost{
+-(NSInteger)getCurrentIndexForButton:(UIButton *)button{
+    NSInteger index = button.tag;
+    if ([_feedProcessor processorIsAGallery]) {
+        //substract the first section
+        index --;
+    }
+    return index;
+}
+
+-(STPost *) getCurrentPostForButton:(UIButton *)button{
     if (self.feedProcessor.numberOfObjects == 0) {
         return nil;
     }
     STPost *post = nil;
-    NSInteger index = [self getCurrentIndex];
+    NSInteger index = [self getCurrentIndexForButton:button];
     if (index!=NSNotFound) {
         post = [_feedProcessor objectAtIndex:index];
     }
@@ -193,113 +316,276 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
     return post;
 }
 
-- (void)goToNextPostWithIndex:(NSNumber *)currentIndex{
-    [[self.collectionView delegate] scrollViewWillBeginDragging:self.collectionView];
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentIndex.integerValue inSection:0]
-                                atScrollPosition:UICollectionViewScrollPositionNone
-                                        animated:YES];
-    
-    _shouldForceSetSeen = YES;
-    [[self.collectionView delegate] scrollViewDidEndDragging:self.collectionView willDecelerate:YES];
-}
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - UIScrollViewDelegate
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    //    _numberOfSeenPosts++;
-    //    [self presentInterstitialControllerForIndex:_numberOfSeenPosts];
-    
-    _end = scrollView.contentOffset;
-    CGPoint point = scrollView.contentOffset;
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    NSUInteger currentIndex = point.x/screenWidth;
-    NSLog(@"CurrentIndex: %lu", (unsigned long)currentIndex);
-    if (_start.x < _end.x || _shouldForceSetSeen == YES)
-    {//swipe to the right
-        _shouldForceSetSeen = NO;
-        [_feedProcessor processObjectAtIndex:currentIndex setSeenIfRequired:YES ];
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if ([_containeeDelegate respondsToSelector:@selector(containeeEndedScrolling)]) {
+        [_containeeDelegate containeeEndedScrolling];
     }
-    [_feedProcessor setCurrentOffset:currentIndex];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    [self.view endEditing:YES];
+    
+    if ([_containeeDelegate respondsToSelector:@selector(containeeStartedScrolling)]) {
+        [_containeeDelegate containeeStartedScrolling];
+    }
+
     _start = scrollView.contentOffset;
+    _lastPanPoint = scrollView.contentOffset;
 }
 
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    CGPoint scrollPosition = scrollView.contentOffset;
+//    CGFloat offset = 0.f;
+
+    if (_tabBarHidden) {
+        CGFloat yPoints = [[UIScreen mainScreen] bounds].size.height;
+        CGFloat velocityY = fabs([scrollView.panGestureRecognizer velocityInView:self.view].y);
+        NSTimeInterval duration = yPoints / velocityY;
+        
+        [UIView animateWithDuration:1.f/duration animations:^{
+            CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+            tabBarFrame.origin.y = _initialStartPoint.y;
+            self.tabBarController.tabBar.frame = tabBarFrame;
+            
+        } completion:^(BOOL finished) {
+            _tabBarHidden = NO;
+            _scrollingDirection = STScrollDirectionNone;
+        }];
+    }
+}
+
+#pragma mark - STSideBySideConatinerProtocol
+
+- (void)containerEndedScrolling {
+    self.collectionView.scrollEnabled = YES;
+}
+
+- (void)containerStartedScrolling {
+    self.collectionView.scrollEnabled = NO;
+}
 
 #pragma mark <UICollectionViewDataSource>
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+- (void)showNoDataViewIfNeeded{
+    if (_feedProcessor.loading == NO &&
+        [_feedProcessor numberOfObjects] ==0 &&
+        [_feedProcessor processorFlowType] == STFlowTypeHome) {
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = _noDataView;
+        self.tabBarController.tabBar.hidden = NO;
+    }
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    
+    [self showNoDataViewIfNeeded];
+    
+    NSInteger sectionsCount = [_feedProcessor numberOfObjects];
+    if ([_feedProcessor processorIsAGallery] && ![_feedProcessor loading]) {
+        //add one more section at the top
+        sectionsCount ++;
+    }
+    return sectionsCount;
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSInteger numRows = [_feedProcessor numberOfObjects];
-    return numRows;
-}
-
--(NSString *)identifierForPost:(STPost *)post{
-    if ([post isLoadingObject] || !post.mainImageDownloaded)
-        return loadingFeedCell;
     
-    if (post.isNothingToDisplayObj)
-        return noPhotosToDisplayCell;
+    NSInteger numItems = STPostItemsCount;
     
-    if (post.isTheEndObject)
-        return youSawAllCell;
-    
-    if (post.showFullCaption == YES) {
-        return fullCaptionFeedCell;
+    if ([_feedProcessor processorIsAGallery]) {
+        numItems = STProfileCount;
     }
     
-    return normalFeedCell;
+    return numItems;
+}
+
+-(NSString *)identifierForIndexPath:(NSIndexPath *)indexPath{
+    if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
+        switch (indexPath.row) {
+            case STProfileInfo:
+                return  profileInfoCell;
+                break;
+            case STProfileFriendsInfo:
+                return profileFriendsInfoCell;
+                break;
+            case STProfileBio:
+                return profileBioCell;
+                break;
+            case STProfileLocation:
+                return profileLocationCell;
+                break;
+            case STProfileNoPhotos:
+                return profileNoPhotosCell;
+                break;
+
+        }
+    }
+    else
+    {
+        switch (indexPath.row) {
+            case STPostImage:
+                return postImageCellIdentifier;
+                break;
+            case STPostDescription:
+                return postDetailsCellIdentifier;
+                break;
+            case STPostShop:
+                return postShopCellIdentifier;
+                break;
+        }
+    }
+    
+    NSAssert(YES, @"You should not be here");
+    
+    return @"";
+}
+
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+    NSLog(@"CurrentIndex: %lu", (unsigned long)sectionIndex);
+    
+    if (_feedProcessor.currentOffset < sectionIndex) {//scroling down
+        [_feedProcessor processObjectAtIndex:sectionIndex setSeenIfRequired:YES];
+    }
+    [_feedProcessor setCurrentOffset:sectionIndex];
+    
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return self.view.frame.size;
+    
+    if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
+        switch (indexPath.row) {
+            case STProfileInfo:
+                return [UserProfileInfoCell cellSize];
+                break;
+            case STProfileFriendsInfo:
+            {
+                return [UserProfileFriendsInfoCell cellSize];
+            }
+                break;
+            case STProfileBio:
+            {
+                return [UserProfileBioCell cellSizeForProfile:[_feedProcessor userProfile]];
+            }
+                break;
+            case STProfileLocation:
+            {
+                return [UserProfileLocationCell cellSizeForProfile:[_feedProcessor userProfile]];
+            }
+                break;
+            case STProfileNoPhotos:
+            {
+                return [UserProfileNoPhotosCell cellSizeForNumberOfPhotos:[_feedProcessor numberOfObjects]];
+            }
+                break;
+
+        }
+
+    }
+    else{
+        NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+        STPost *post = [_feedProcessor objectAtIndex:sectionIndex];
+        
+        switch (indexPath.row) {
+            case STPostImage:
+                return [STPostImageCell celSizeForPost:post];
+                break;
+            case STPostDescription:
+            {
+                return [STPostDetailsCell cellSizeForPost:post];
+            }
+                break;
+            case STPostShop:
+            {
+                if (post.showShopProducts == NO)
+                    return CGSizeZero;
+                else
+                    return [STPostShopProductsCell cellSize];
+            }
+                break;
+        }
+    }
+    
+    return CGSizeZero;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        
+        if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
+            return nil;
+        }
+        
+        NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+        STPost *post = [_feedProcessor objectAtIndex:sectionIndex];
+        STPostHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:postHeaderIdentifier forIndexPath:indexPath];
+            [header configureCellWithPost:post];
+            [header configureForSection:indexPath.section];
+        return header;
+    }
+    
+    return nil;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+
+    if ([_feedProcessor processorIsAGallery] && section == 0) {
+        return CGSizeZero;
+    }
+    return [STPostHeader headerSize];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    STPost *post = [_feedProcessor objectAtIndex:indexPath.row];
-    NSString *identifier = [self identifierForPost:post];
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    UICollectionViewCell *cell = nil;
+    NSString *identifier = [self identifierForIndexPath:indexPath];
+    cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
 
-    if ([cell isKindOfClass:[FeedCell class]]) {
-        [(FeedCell *)cell configureCellWithPost:post];
+    NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+    STPost *post = nil;
+    if ([_feedProcessor numberOfObjects]) {
+        post = [_feedProcessor objectAtIndex:sectionIndex];
+
     }
-    else if ([cell isKindOfClass:[FullCaptionFeedCell class]]){
-        [(FullCaptionFeedCell *)cell configureCellWithPost:post];
+    
+    if ([cell isKindOfClass:[STPostImageCell class]]) {
+        [(STPostImageCell *)cell configureCellWithPost:post];
+        [(STPostImageCell *)cell configureForSection:indexPath.section];
+        
+    }
+    else if ([cell isKindOfClass:[STPostDetailsCell class]]){
+        [(STPostDetailsCell *)cell configureCellWithPost:post];
+        [(STPostDetailsCell *)cell configureForSection:indexPath.section];
+        
+    }
+    else if ([cell isKindOfClass:[STPostShopProductsCell class]]){
+        [(STPostShopProductsCell *)cell configureWithProducts:post.shopProducts];
+    }
+    else if ([cell isKindOfClass:[UserProfileInfoCell class]]){
+        [(UserProfileInfoCell *)cell configureCellWithUserProfile:[_feedProcessor userProfile]];
+        [(UserProfileInfoCell *)cell setBackButtonHidden:!_shouldAddBackButton];
+        [(UserProfileInfoCell *)cell setSettingsButtonHidden:!_isMyProfile];
+        
+    }
+    else if ([cell isKindOfClass:[UserProfileFriendsInfoCell class]]){
+        [(UserProfileFriendsInfoCell *)cell configureForProfile:[_feedProcessor userProfile]];
+    }
+    else if ([cell isKindOfClass:[UserProfileBioCell class]]){
+        [(UserProfileBioCell *)cell configureCellForProfile:[_feedProcessor userProfile]];
+    }
+    else if ([cell isKindOfClass:[UserProfileLocationCell class]]){
+        [(UserProfileLocationCell *)cell configureCellForProfile:[_feedProcessor userProfile]];
     }
     else if ([cell isKindOfClass:[STNoPhotosCell class]]){
         [(STNoPhotosCell *)cell configureWithUserName:_userName
                                      isTheCurrentUser:[_feedProcessor currentFlowUserIsTheLoggedInUser]];
     }
-    else if ([cell isKindOfClass:[FooterCell class]]){
-        UIImage *bluredImage = nil;
-        if ([_feedProcessor numberOfObjects] > 0) {
-            bluredImage = [self blurScreen];
-        }
-        else
-        {
-            bluredImage = [UIImage imageNamed:@"placeholder STATUS loading"];
-            
-        }
-        [(FooterCell *)cell configureFooterWithBkImage:bluredImage];
-    }
-    
+
     return cell;
 }
 
@@ -307,22 +593,20 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 - (IBAction)onLikePressed:(id)sender {
     [(UIButton *)sender setUserInteractionEnabled:NO];
     __weak FeedCVC *weakSelf = self;
-    __block NSInteger index = [[[self.collectionView indexPathsForVisibleItems] firstObject] row];
+    NSInteger index = [self getCurrentIndexForButton:sender];
     [_feedProcessor setLikeUnlikeAtIndex:index
                           withCompletion:^(NSError *error) {
                               [(UIButton *)sender setUserInteractionEnabled:YES];
                               STPost *post = [weakSelf.feedProcessor objectAtIndex:index];
                               if (post.postLikedByCurrentUser == YES &&
                                   [weakSelf.feedProcessor numberOfObjects] > index + 1) {
-                                  [weakSelf performSelector:@selector(goToNextPostWithIndex:)
-                                                 withObject:@(index + 1)
-                                                 afterDelay:0.25f];
                               }
                           }];
 }
 - (IBAction)onMessagePressed:(id)sender {
-    STPost *post = [self getCurrentPost];
     
+    STPost *post = [self getCurrentPostForButton:sender];
+
     if ([post.userId isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
@@ -345,15 +629,16 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
         return;
     }
     
-    STPost *post = [self getCurrentPost];
+    STPost *post = [self getCurrentPostForButton:sender];
     
-    STUserProfileViewController * userProfileVC = [STUserProfileViewController newControllerWithUserId:post.userId];
-    [self.navigationController pushViewController:userProfileVC animated:YES];
+    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:post.userId andUserName:post.userName];
+    feedCVC.shouldAddBackButton = YES;
+    [self.navigationController pushViewController:feedCVC animated:YES];
 
 }
 - (IBAction)onSeeMorePressed:(id)sender {
-    //TODO: dev_1_2 add animations
-    STPost *post = [self getCurrentPost];
+    STPost *post = [self getCurrentPostForButton:sender];
+    
     [UIView setAnimationsEnabled:NO];
     [self.collectionView performBatchUpdates:^{
         post.showFullCaption = !post.showFullCaption;
@@ -363,24 +648,24 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 
 }
 - (IBAction)onLikesPressed:(id)sender {
-    STPost *post = [self getCurrentPost];
+    STPost *post = [self getCurrentPostForButton:sender];
     STUsersListController *viewController = [STUsersListController newControllerWithUserId:post.userId postID:post.uuid andType:UsersListControllerTypeLikes];
     
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
 - (IBAction)onMorePressed:(id)sender {
-    STPost *post = [self getCurrentPost];
+    STPost *post = [self getCurrentPostForButton:sender];
     BOOL extendedRights = NO;
     if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
         extendedRights = YES;
     }
+    postForContextIndex = [self getCurrentIndexForButton:sender];
     [STContextualMenu presentViewWithDelegate:self
                          withExtendedRights:extendedRights];
 }
 - (IBAction)onShadowPressed:(id)sender {
-    //TODO: dev_1_2 add animations
-    STPost *post = [self getCurrentPost];
+    STPost *post = [self getCurrentPostForButton:sender];
     [UIView setAnimationsEnabled:NO];
     [self.collectionView performBatchUpdates:^{
         post.showFullCaption = !post.showFullCaption;
@@ -390,25 +675,170 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
 }
 
 - (IBAction)onBigCameraPressed:(id)sender {
-    [_feedProcessor handleBigCameraButtonActionWithUserName:_userName];
+    STUserProfile *up = [_feedProcessor userProfile];
+    [_feedProcessor handleBigCameraButtonActionWithUserName:up.fullName];
 }
 
 - (IBAction)onBackButtonPressed:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)onSettingsButtonPressed:(id)sender{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
+    UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
+    [self presentViewController: setttingsNav animated:YES completion:nil];
+}
+
+- (IBAction)onTapFollowing:(id)sender {
+    STUsersListController * newVC = [STUsersListController newControllerWithUserId:[_feedProcessor userId]
+                                                                            postID:nil andType:UsersListControllerTypeFollowing];
+    [self.navigationController pushViewController:newVC animated:YES];
+}
+
+- (IBAction)onTapFollowers:(id)sender {
+    STUsersListController * newVC = [STUsersListController newControllerWithUserId:[_feedProcessor userId]
+                                                                            postID:nil andType:UsersListControllerTypeFollowers];
+    [self.navigationController pushViewController:newVC animated:YES];
+}
+
+- (IBAction)onTapFollowUser:(UIButton *)followBtn {
+    
+    __block STUserProfile *userProfile = [_feedProcessor userProfile];
+    STListUser *listUser = [userProfile listUserFromProfile];
+    _followProcessor = [[STFollowDataProcessor alloc] initWithUsers:@[listUser]];
+    
+    listUser.followedByCurrentUser = @(![listUser.followedByCurrentUser boolValue]);
+    
+    __weak FeedCVC * weakSelf = self;
+
+    [_followProcessor uploadDataToServer:@[listUser]
+                          withCompletion:^(NSError *error) {
+                              if (error == nil) {//success
+                                  userProfile.isFollowedByCurrentUser = !userProfile.isFollowedByCurrentUser;
+                                  [weakSelf.collectionView reloadData];
+                                  [weakSelf.collectionView.collectionViewLayout invalidateLayout];
+
+                              }
+                          }];
+}
+
+- (IBAction)onTapSendMessageToUser:(id)sender {
+    
+    STListUser *lu = [[_feedProcessor userProfile] listUserFromProfile];
+    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (IBAction)onMessageEditButtonPressed:(id)sender{
+    if (_isMyProfile) {
+        //go to Edit Profile
+        [self onTapEditUserProfile:nil];
+    }
+    else
+    {
+        //go to Message to User
+        [self onTapSendMessageToUser:nil];
+        
+    }
+}
+
+- (IBAction)onTapEditUserProfile:(id)sender {
+    STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:[_feedProcessor userId]];
+    editVC.userProfile = [_feedProcessor userProfile];
+    [self.navigationController pushViewController:editVC animated:YES];
+}
+
+
+- (void)inviteUserToUpload{
+    
+    STUserProfile *userProfile = [_feedProcessor userProfile];
+    NSString * name = [NSString stringWithFormat:@"%@", userProfile.fullName];
+    NSString * userId = [NSString stringWithFormat:@"%@", userProfile.uuid];
+    
+    STRequestCompletionBlock completion = ^(id response, NSError *error){
+        NSInteger statusCode = [response[@"status_code"] integerValue];
+        if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
+            NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", name];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:nil
+                                                  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+    };
+    [STInviteUserToUploadRequest inviteUserToUpload:userId withCompletion:completion failure:nil];
+}
+
+- (IBAction)onShopButtonPressed:(id)sender {
+    STPost *post = [self getCurrentPostForButton:sender];
+
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView performBatchUpdates:^{
+        
+        if (post.showShopProducts == NO) {
+            [UIView animateWithDuration:1.f animations:^{
+                
+                CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+                _initialStartPoint = tabBarFrame.origin;
+                tabBarFrame.origin.y = tabBarFrame.origin.y + tabBarFrame.size.height;
+                self.tabBarController.tabBar.frame = tabBarFrame;
+                
+            } completion:^(BOOL finished) {
+                _tabBarHidden = YES;
+            }];
+        }
+        else
+        {
+            [UIView animateWithDuration:1.f animations:^{
+                
+                CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+                tabBarFrame.origin.y = _initialStartPoint.y;
+                self.tabBarController.tabBar.frame = tabBarFrame;
+                
+            } completion:^(BOOL finished) {
+                _tabBarHidden = NO;
+            }];
+        }
+        
+        post.showShopProducts = !post.showShopProducts;
+
+        
+    } completion:^(BOOL finished) {
+        if (post.showShopProducts) {
+            NSInteger index = [self getCurrentIndexForButton:sender];
+            if ([_feedProcessor processorIsAGallery]) {
+                index ++;
+            }
+            NSIndexPath * indexPath = [NSIndexPath indexPathForItem:STPostShop inSection:index];
+            
+            [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+        }
+
+    }];
+
+    
+    UIButton *shopProductButton = (UIButton *)sender;
+    shopProductButton.selected = !shopProductButton.selected;
+
+}
+- (IBAction)onPeopleYouShouldFollowPressed:(id)sender {
+    [self showSuggestions:nil];
+}
+
 #pragma mark - STContextualMenuDelegate
 
 -(void)contextualMenuAskUserToUpload{
-    [_feedProcessor askUserToUploadAtIndex:[self getCurrentIndex]];
+    [_feedProcessor askUserToUploadAtIndex:postForContextIndex];
+    postForContextIndex = 0;
 }
 
 -(void)contextualMenuDeletePost{
-    [_feedProcessor deletePostAtIndex:[self getCurrentIndex]];
+    [_feedProcessor deletePostAtIndex:postForContextIndex];
+    postForContextIndex = 0;
 }
 
 -(void)contextualMenuEditPost{
-    STPost *post = [self getCurrentPost];
+    STPost *post = [_feedProcessor objectAtIndex:postForContextIndex];
+    postForContextIndex = 0;
     if (post.mainImageDownloaded == YES) {
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
             if (origImg!=nil) {
@@ -421,13 +851,14 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
                 [self.navigationController pushViewController:viewController animated:YES];
             }
             
-        } andBlurCompletion:nil];
+        }];
     }
 
 }
 
 -(void)contextualMenuMoveAndScalePost{
-    STPost *post = [self getCurrentPost];
+    STPost *post = [_feedProcessor objectAtIndex:postForContextIndex];
+    postForContextIndex = 0;
     
     if (post.mainImageDownloaded == YES) {
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *img) {
@@ -436,21 +867,24 @@ static NSString * const noPhotosToDisplayCell = @"STNoPhotosCellIdentifier";
                 
                 [self.navigationController pushViewController:vc animated:YES];
             }
-        } andBlurCompletion:nil];
+        }];
         
     }
 }
 
 -(void)contextualMenuReportPost{
-    [_feedProcessor reportPostAtIndex:[self getCurrentIndex]];
+    [_feedProcessor reportPostAtIndex:postForContextIndex];
+    postForContextIndex = 0;
 }
 
 -(void)contextualMenuSavePostLocally{
-    [_feedProcessor savePostImageLocallyAtIndex:[self getCurrentIndex]];
+    [_feedProcessor savePostImageLocallyAtIndex:postForContextIndex];
+    postForContextIndex = 0;
 }
 
 -(void)contextualMenuSharePostonFacebook{
-    [_feedProcessor sharePostOnfacebokAtIndex:[self getCurrentIndex]];
+    [_feedProcessor sharePostOnfacebokAtIndex:postForContextIndex];
+    postForContextIndex = 0;
     
 }
 @end

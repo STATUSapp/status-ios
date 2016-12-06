@@ -9,6 +9,7 @@
 #import "STUserProfile.h"
 #import "NSDate+Additions.h"
 #import "STImageCacheController.h"
+#import "STListUser.h"
 
 @implementation STUserProfile
 
@@ -53,6 +54,37 @@
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
     self.imageSize = CGSizeZero;
 
+//    self.profileGender = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"profileGender"] integerValue];
+#warning remove this whe the BE is ready
+    self.profileGender = [self.uuid integerValue] % 3 ;
+}
+
+- (NSString *)genderImageName{
+    NSString *imageName = @"boy";
+    switch (self.profileGender) {
+        case STProfileGenderUndefined:
+        case STProfileGenderMale:
+            imageName = @"boy";
+            break;
+        case STProfileGenderFemale:
+            imageName = @"girl";
+            break;
+        default:
+            break;
+    }
+    
+    return imageName;
+}
+
+- (STListUser *)listUserFromProfile{
+    STListUser *lu = [STListUser new];
+    //these params are the only on needed for now
+    lu.followedByCurrentUser = @(self.isFollowedByCurrentUser);
+    lu.uuid = self.uuid;
+    lu.userName = self.fullName;
+    lu.thumbnail = self.thumbnailPhotoUrl;
+    
+    return lu;
     
 }
 

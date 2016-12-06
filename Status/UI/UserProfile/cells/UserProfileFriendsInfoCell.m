@@ -27,7 +27,8 @@ CGFloat const kDefaultCellHeight = 56.f;
     [_followingLabel setText:[NSString stringWithFormat:@"%li", (long)profile.followingCount]];
 }
 
-+ (CGFloat)defaultCellHeight{
-    return kDefaultCellHeight;
++ (CGSize)cellSize{
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    return CGSizeMake(screenSize.width, kDefaultCellHeight);
 }
 @end

@@ -19,6 +19,7 @@
 @interface STTakeAPhotoViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
 
 @end
 
@@ -111,9 +112,7 @@
     
     if (randomPost != nil) {
         [[CoreManager imageCacheService] loadPostImageWithName:randomPost.mainImageUrl withPostCompletion:^(UIImage *origImg) {
-            
-        } andBlurCompletion:^(UIImage *bluredImg) {
-            weakSelf.backgroundImageView.image = bluredImg;
+            weakSelf.backgroundImageView.image = origImg;
         }];
     }
     

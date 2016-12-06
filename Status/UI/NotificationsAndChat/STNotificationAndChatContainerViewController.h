@@ -7,16 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STSideBySideContaineeProtocol.h"
 
-
-@protocol STSideBySideContaineeDelegate <NSObject>
-
-- (void)containeeEndedScrolling;
-- (void)containeeStartedScrolling;
-
-@end
-
-@interface STNotificationAndChatContainerViewController : UIViewController<STSideBySideContaineeDelegate>
+@interface STNotificationAndChatContainerViewController : UIViewController<STSideBySideContaineeProtocol>
 
 + (instancetype)newController;
 

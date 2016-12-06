@@ -99,32 +99,36 @@
         return nil;
     }
     
-    NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:lastSeenDate];
+    return [NSString stringWithFormat:@"Active %@", [self timeAgoFromDate:lastSeenDate]];
+}
+
++ (NSString *)timeAgoFromDate:(NSDate *)date{
+    NSTimeInterval timeInterval =  [[NSDate date] timeIntervalSinceDate:date];
     
     if (timeInterval <= 60) {
-        return @"Active";
+        return @"now";
     }
     int mins = timeInterval / 60;
     if (mins <= 60) {
-        return [NSString stringWithFormat:@"Active %d minute%@ ago", mins, (mins==1)?@"":@"s"];
+        return [NSString stringWithFormat:@"%d minute%@ ago", mins, (mins==1)?@"":@"s"];
     }
     int hours = timeInterval / 3600;
     if (hours <= 24) {
-        return [NSString stringWithFormat:@"Active %d hour%@ ago", hours, (hours==1)?@"":@"s"];
+        return [NSString stringWithFormat:@"%d hour%@ ago", hours, (hours==1)?@"":@"s"];
     }
     
     if (timeInterval / 3600 <= 48) {
-        return @"Active yesterday";
+        return @"yesterday";
     }
     
     if (timeInterval <= 86400 * 7) {
-        return [NSString stringWithFormat:@"Active %d days ago", (int)(timeInterval / 86400)];
+        return [NSString stringWithFormat:@"%d days ago", (int)(timeInterval / 86400)];
     }
     
     
     int weeks = timeInterval / ( 86400 * 7 );
     if (timeInterval <= (4 * 86400 * 7)) {
-        return [NSString stringWithFormat:@"Active %d week%@ ago", weeks, (weeks == 1) ? @"" : @"s"];
+        return [NSString stringWithFormat:@"%d week%@ ago", weeks, (weeks == 1) ? @"" : @"s"];
     }
     
     int months = timeInterval / (86400 * 30);
@@ -134,15 +138,16 @@
     }
     
     if (timeInterval < 12 * 86400 * 30) {
-        return [NSString stringWithFormat:@"Active %d month%@ ago", months, (months == 1) ? @"" : @"s"];
+        return [NSString stringWithFormat:@"%d month%@ ago", months, (months == 1) ? @"" : @"s"];
     }
     
-    int years = [[NSDate yearsFromDate:lastSeenDate] intValue];
+    int years = [[NSDate yearsFromDate:date] intValue];
     
     if (years == 0) { //(the difference between 11 months  and a year)
         years = 1;
     }
-    return [NSString stringWithFormat:@"Active %d year%@ ago", years, (years == 1) ? @"" : @"s"];
+    return [NSString stringWithFormat:@"%d year%@ ago", years, (years == 1) ? @"" : @"s"];
+
 }
 
 + (NSString *)timeStringForLastMessageDate:(NSDate *)messageDate{

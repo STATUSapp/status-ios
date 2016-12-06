@@ -8,16 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "STNotificationAndChatContainerViewController.h"
+#import "STSideBySideContaineeProtocol.h"
+#import "STSideBySideContainerProtocol.h"
 
+@interface STConversationsListViewController : UIViewController<STSideBySideContainerProtocol>
 
-@interface STConversationsListViewController : UIViewController
-
-@property (nonatomic, weak) id<STSideBySideContaineeDelegate> containeeDelegate;
+@property (nonatomic, weak) id<STSideBySideContaineeProtocol> containeeDelegate;
 
 -(void)loadNewDataWithOffset:(BOOL)newOffset;
-
-- (void)containerEndedScrolling;
-- (void)containerStartedScrolling;
-
 
 @end

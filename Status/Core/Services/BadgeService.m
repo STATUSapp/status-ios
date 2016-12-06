@@ -95,20 +95,20 @@ NSString * const kBadgeCountNotificationsKey = @"kBadgeCountNotificationsKey";
         };
         [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
         
-        
-        [STUnseenPostsCountRequest getUnseenCountersWithCompletion:^(id response, NSError *error) {
-            if ([response[@"status_code"] integerValue] == 200) {
-                NSInteger unseenHomePosts = [response[@"unseenHomePosts"] integerValue];
-                NSInteger unseenPopularPosts = [response[@"unseenPopularPosts"] integerValue];
-                NSInteger unseenRecentPosts = [response[@"unseenRecentPosts"] integerValue];
-                
-                [[CoreManager navigationService] setBadge:unseenHomePosts forTabAtIndex:STTabBarIndexHome];
-                
-                [[CoreManager navigationService] setBadge:unseenPopularPosts + unseenRecentPosts forTabAtIndex:STTabBarIndexExplore];
-            }
-        } failure:^(NSError *error) {
-            NSLog(@"Load counters error: %@", error);
-        }];
+//        
+//        [STUnseenPostsCountRequest getUnseenCountersWithCompletion:^(id response, NSError *error) {
+//            if ([response[@"status_code"] integerValue] == 200) {
+//                NSInteger unseenHomePosts = [response[@"unseenHomePosts"] integerValue];
+//                NSInteger unseenPopularPosts = [response[@"unseenPopularPosts"] integerValue];
+//                NSInteger unseenRecentPosts = [response[@"unseenRecentPosts"] integerValue];
+//                
+//                [[CoreManager navigationService] setBadge:unseenHomePosts forTabAtIndex:STTabBarIndexHome];
+//                
+//                [[CoreManager navigationService] setBadge:unseenPopularPosts + unseenRecentPosts forTabAtIndex:STTabBarIndexExplore];
+//            }
+//        } failure:^(NSError *error) {
+//            NSLog(@"Load counters error: %@", error);
+//        }];
         
     }
 }

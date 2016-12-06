@@ -12,6 +12,7 @@
 #import "STLocationManager.h"
 #import "STFacebookLoginController.h"
 #import "NSString+VersionComparison.h"
+#import "UIImageView+WebCache.h"
 
 CGFloat distanceLabelWidthPadding = 30.f;
 CGFloat distanceLabelStandardHeight = 21.f;
@@ -23,13 +24,28 @@ CGFloat distanceLabelStandardHeight = 21.f;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet UIButton *nameAndAgeButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *distanceLabelWidthConstr;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
 @end
 
 @implementation UserProfileInfoCell
 
+- (void)setBackButtonHidden:(BOOL)backButtonHidden{
+    _backButton.hidden = backButtonHidden;
+}
+
+- (void)setSettingsButtonHidden:(BOOL)settingsButtonHidden{
+    _settingsButton.hidden = settingsButtonHidden;
+}
 
 - (void)configureCellWithUserProfile:(STUserProfile *)profile{
+    
+    [_profileImageView sd_setImageWithURL:[NSURL URLWithString:profile.mainImageUrl] placeholderImage:[UIImage imageNamed:[profile genderImageName]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (error) {
+            
+        }
+    }];
     
     if ([profile.uuid isEqualToString:[CoreManager loginService].currentUserUuid]) {
         _followButton.hidden = YES;
@@ -132,5 +148,10 @@ CGFloat distanceLabelStandardHeight = 21.f;
     }
 }
 
++ (CGSize)cellSize{
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    
+    return CGSizeMake(screenSize.width, screenSize.width);
+}
 
 @end

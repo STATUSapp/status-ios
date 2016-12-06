@@ -46,7 +46,7 @@
                         
                         [STDataAccessUtils unfollowUsers:followUsersShouldUnfollow withCompletion:^(NSError *error) {
                             NSLog(@"Error unfollow: %@", error.debugDescription);
-                            if(completion) completion(nil);
+                            if(completion) completion(error);
                         }];
                     }];
 }

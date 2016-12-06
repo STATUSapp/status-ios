@@ -14,7 +14,6 @@
 #import "STNotificationsViewController.h"
 #import "STNotificationBanner.h"
 #import "STFacebookLoginController.h"
-#import "STUserProfileViewController.h"
 #import "STNotificationsViewController.h"
 #import "STImageCacheController.h"
 
@@ -241,8 +240,10 @@
     }
     else
         userId = userIdentifier;
-    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId:userId];
-    [[CoreManager navigationService] pushViewController:profileVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
+    
+    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
+    feedCVC.shouldAddBackButton = YES;
+    [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
     
     [self dismissCurrentBanner];
 }

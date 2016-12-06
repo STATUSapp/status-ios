@@ -21,10 +21,11 @@ typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded, CGSize
 @property(nonatomic, strong) NSString *photoDownloadBaseUrl;
 
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion;
--(void) loadPostImageWithName:(NSString *) imageFullLink withPostCompletion:(loadPostImageCompletion) completion andBlurCompletion:(loadBlurPostCompletion)blurCompl;
+-(void) loadPostImageWithName:(NSString *) imageFullLink withPostCompletion:(loadPostImageCompletion) completion;
 -(void) cleanTemporaryFolder;
 -(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray <STImageCacheObj *>*)newObjects;
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort;
 
 + (BOOL) imageDownloadedForUrl:(NSString *)url;
++ (CGSize) imageSizeForUrl:(NSString *)url;
 @end

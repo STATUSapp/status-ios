@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STSideBySideContaineeProtocol.h"
+#import "STSideBySideContainerProtocol.h"
+
 @class STFlowProcessor;
 
-@interface FeedCVC : UICollectionViewController
+@interface FeedCVC : UICollectionViewController<STSideBySideContainerProtocol>
 
 + (FeedCVC *)mainFeedController;
 + (FeedCVC *)singleFeedControllerWithPostId:(NSString *)postId;
@@ -19,5 +22,6 @@
 + (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor;
 
 @property (nonatomic, assign) BOOL shouldAddBackButton;
+@property (nonatomic, weak) id<STSideBySideContaineeProtocol> containeeDelegate;
 
 @end

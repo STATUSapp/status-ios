@@ -14,6 +14,6 @@
 
 -(void)configureForProfile:(STUserProfile *)profile;
 
-+ (CGFloat)defaultCellHeight;
++ (CGSize)cellSize;
 
 @end

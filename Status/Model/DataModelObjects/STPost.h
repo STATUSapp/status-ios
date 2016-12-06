@@ -21,8 +21,8 @@
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, assign) BOOL postSeen;
-
+@property (nonatomic, strong) NSArray *shopProducts;
 //local added properties
 @property (nonatomic, assign) BOOL showFullCaption;
-
+@property (nonatomic, assign) BOOL showShopProducts;
 @end

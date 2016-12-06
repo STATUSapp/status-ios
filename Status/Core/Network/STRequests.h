@@ -32,6 +32,7 @@
 #import "STInviteUserToUploadRequest.h"
 #import "STGetUsersRequest.h"
 #import "STGetNotificationsRequest.h"
+#import "STGetUserProfileRequest.h"
 
 #endif
 

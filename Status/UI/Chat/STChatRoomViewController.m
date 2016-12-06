@@ -21,9 +21,9 @@
 #import "Message.h"
 #import "STNetworkQueueManager.h"
 #import "UIImageView+WebCache.h"
+#import "FeedCVC.h"
 
 #import "STGetUserInfoRequest.h"
-#import "STUserProfileViewController.h"
 #import "UITableView+SPXRevealAdditions.h"
 
 #import "NSString+MD5.h"
@@ -313,8 +313,10 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         return;
     }
     
-    STUserProfileViewController * profileVC = [STUserProfileViewController newControllerWithUserId: _user.uuid];
-    [self.navigationController pushViewController:profileVC animated:YES];
+    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_user.uuid andUserName:nil];
+    feedCVC.shouldAddBackButton = YES;
+
+    [self.navigationController pushViewController:feedCVC animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {
    
