@@ -1580,6 +1580,9 @@
 							com.apple.Keychain = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					99B387F01C833D20005B4D8C = {
@@ -2035,6 +2038,7 @@
 				CODE_SIGN_ENTITLEMENTS = Status/STATUS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
+				DEVELOPMENT_TEAM = 3VYJECFUTG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2044,7 +2048,7 @@
 				INFOPLIST_FILE = "Status/Supporting Files/Status-Info.plist";
 				INSTALL_GROUP = "";
 				INSTALL_OWNER = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
@@ -2052,7 +2056,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bec1bb0c-969f-4168-91fe-dec975d956f6";
+				PROVISIONING_PROFILE_SPECIFIER = StatusApnDevProfile;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2068,6 +2073,7 @@
 				CODE_SIGN_ENTITLEMENTS = Status/STATUS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
+				DEVELOPMENT_TEAM = 3VYJECFUTG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2077,7 +2083,7 @@
 				INFOPLIST_FILE = "Status/Supporting Files/Status-Info.plist";
 				INSTALL_GROUP = "";
 				INSTALL_OWNER = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
@@ -2085,7 +2091,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "c620d5e1-b353-4910-9071-092e7732e419";
+				PROVISIONING_PROFILE = "0a9b27eb-8a51-4dd7-a140-42f424aad718";
+				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: co.getstatusapp.status";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2142,6 +2149,7 @@
 				CODE_SIGN_ENTITLEMENTS = Status/STATUS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
+				DEVELOPMENT_TEAM = 3VYJECFUTG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2151,7 +2159,7 @@
 				INFOPLIST_FILE = "Status/Supporting Files/Status-Info.plist";
 				INSTALL_GROUP = "";
 				INSTALL_OWNER = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"$(inherited)",
@@ -2159,7 +2167,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = co.getstatusapp.status;
 				PRODUCT_NAME = STATUS;
-				PROVISIONING_PROFILE = "c620d5e1-b353-4910-9071-092e7732e419";
+				PROVISIONING_PROFILE = "4300dc48-ad86-426b-8bde-1853bdafb50c";
+				PROVISIONING_PROFILE_SPECIFIER = StatusAppStore;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
