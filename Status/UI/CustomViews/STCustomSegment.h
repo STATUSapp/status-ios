@@ -10,9 +10,13 @@
 
 @protocol STSCustomSegmentProtocol  <NSObject>
 
+@required
 - (NSInteger)numberOfButtons;
 - (NSString *)buttonTitleForIndex:(NSInteger)index;
 - (void)buttonPressedAtIndex:(NSInteger)index;
+
+@optional
+- (NSInteger)defaultSelectedIndex;
 
 @end
 

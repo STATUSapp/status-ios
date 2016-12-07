@@ -74,16 +74,16 @@
 //#endif
     
     NSArray *products = self.infoDict[@"shop_style_products"];
-#ifdef DEBUG
-    NSMutableArray *mockProducts = [NSMutableArray new];
-    NSInteger productsCount = [self.uuid integerValue] % 10;
-    for (int i =0; i<productsCount; i++) {
-        NSDictionary *product = @{@"link": @"http://www.emag.ro/",
-                         @"image": @"http://is4.barenecessities.com/is/image/BareNecessities/le945_almond1?$Main375x440$"};
-        [mockProducts addObject:product];
-    }
-    products = [NSArray arrayWithArray:mockProducts];
-#endif
+//#ifdef DEBUG
+//    NSMutableArray *mockProducts = [NSMutableArray new];
+//    NSInteger productsCount = [self.uuid integerValue] % 10;
+//    for (int i =0; i<productsCount; i++) {
+//        NSDictionary *product = @{@"link": @"http://www.emag.ro/",
+//                         @"image": @"http://is4.barenecessities.com/is/image/BareNecessities/le945_almond1?$Main375x440$"};
+//        [mockProducts addObject:product];
+//    }
+//    products = [NSArray arrayWithArray:mockProducts];
+//#endif
     if (products && products.count) {
         NSMutableArray *productsArray = [NSMutableArray new];
         

@@ -53,9 +53,12 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     STShopProduct *product = [_products objectAtIndex:indexPath.row];
-    NSURL *url = [NSURL URLWithString:product.productUrl];
+    NSURL *url = [NSURL URLWithString:[product.productUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
-    [[UIApplication sharedApplication] openURL:url];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

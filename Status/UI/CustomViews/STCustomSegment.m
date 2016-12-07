@@ -81,6 +81,18 @@ NSInteger const kButtonTagOffset = 100;
     
     //configure the selection
     _selectionWidthConstr.constant = buttonWidth;
+    
+    //add the default selection
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(defaultSelectedIndex)]) {
+        NSInteger defaultIndex = [_delegate defaultSelectedIndex];
+        
+        UIButton *button = [self viewWithTag:kButtonTagOffset + defaultIndex];
+        if (button) {
+            [self onSegmentButtonPressed:button];
+        }
+    }
+    
 }
 
 - (void)onSegmentButtonPressed:(id)sender{

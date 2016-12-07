@@ -63,10 +63,20 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     return @"";
 }
 
+-(NSInteger)defaultSelectedIndex{
+    return STActivityChat;
+}
+
 -(void)buttonPressedAtIndex:(NSInteger)index{
     NSLog(@"Button pressed: %ld",(long)index);
     
     NSInteger currentVCIndex = [_viewControllers indexOfObject:_pageController.viewControllers.lastObject];
+    
+    if (index == STActivityChat) {
+        [self goToMessages:nil];
+    }
+    else
+        [self goToNotifications:nil];
     
     if (index == currentVCIndex) {
         return;
@@ -75,13 +85,6 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     UIPageViewControllerNavigationDirection direction = index > currentVCIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
     [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:nil];
-    
-    if (index == STActivityChat) {
-        [self goToMessages:nil];
-    }
-    else
-        [self goToNotifications:nil];
-    
 }
 
 #pragma mark - IBActions
@@ -186,19 +189,6 @@ typedef NS_ENUM(NSUInteger, STActivity) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController setNavigationBarHidden:YES];
-    _customSegment = [STCustomSegment customSegmentWithDelegate:self];
-    _customSegment.frame = CGRectMake(0, 0, self.view.frame.size.width, 44.f);
-    [_customSegment selectSegmentIndex:STActivityNotifications];
-
-    [self.view addSubview:_customSegment];
-
-    UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
-    self.view.backgroundColor = backgroundColor;
-    self.childContainer.backgroundColor = backgroundColor;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectNotificationsScreen object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectChatScreen object:nil];
     
     UIStoryboard * mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     STNotificationsViewController *notifController = [mainStoryboard instantiateViewControllerWithIdentifier: @"notificationScene"];
@@ -209,6 +199,10 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     messagesViewController.containeeDelegate = self;
     
     _viewControllers = @[notifController, messagesViewController];
+    
+    UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
+    self.view.backgroundColor = backgroundColor;
+    self.childContainer.backgroundColor = backgroundColor;
     
     _pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     _pageController.view.backgroundColor = backgroundColor;
@@ -222,6 +216,15 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     _pageController.view.frame = self.childContainer.bounds;
     [self.childContainer addSubview:_pageController.view];
     [self addChildViewController:_pageController];
+    
+    [self.navigationController setNavigationBarHidden:YES];
+    _customSegment = [STCustomSegment customSegmentWithDelegate:self];
+    _customSegment.frame = CGRectMake(0, 0, self.view.frame.size.width, 44.f);
+
+    [self.view addSubview:_customSegment];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectNotificationsScreen object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectChatScreen object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsShouldBeReloaded:) name:STNotificationsShouldBeReloaded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(badgeNotificationChanged:) name:kBadgeCountChangedNotification object:nil];

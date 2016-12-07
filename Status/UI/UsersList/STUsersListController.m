@@ -166,7 +166,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     STListUser *lu = [_dataSource objectAtIndex:indexPath.row];
-    STUserListCell *cell = (STUserListCell *)[tableView dequeueReusableCellWithIdentifier:@"likeCell"];
+    STUserListCell *cell = (STUserListCell *)[tableView dequeueReusableCellWithIdentifier:@"STUserListCell"];
     [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:lu.thumbnail]];
    
     cell.userName.text = lu.userName;
