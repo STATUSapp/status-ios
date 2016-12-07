@@ -21,8 +21,6 @@
 #import "UserProfileFriendsInfoCell.h"
 #import "UserProfileNoPhotosCell.h"
 
-#import "STNoPhotosCell.h"
-
 #import "STFacebookLoginController.h"
 #import "STChatRoomViewController.h"
 #import "STMoveScaleViewController.h"
@@ -588,10 +586,6 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     }
     else if ([cell isKindOfClass:[UserProfileLocationCell class]]){
         [(UserProfileLocationCell *)cell configureCellForProfile:[_feedProcessor userProfile]];
-    }
-    else if ([cell isKindOfClass:[STNoPhotosCell class]]){
-        [(STNoPhotosCell *)cell configureWithUserName:_userName
-                                     isTheCurrentUser:[_feedProcessor currentFlowUserIsTheLoggedInUser]];
     }
 
     return cell;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STLikeCell : UITableViewCell
+@interface STUserListCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UIButton *chatButton;
 @property (weak, nonatomic) IBOutlet UIImageView *userPhoto;

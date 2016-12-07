@@ -8,7 +8,7 @@
 
 #import "STUsersListController.h"
 #import "STNetworkQueueManager.h"
-#import "STLikeCell.h"
+#import "STUserListCell.h"
 #import "STImageCacheController.h"
 #import "STFacebookLoginController.h"
 #import "STChatRoomViewController.h"
@@ -166,7 +166,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     STListUser *lu = [_dataSource objectAtIndex:indexPath.row];
-    STLikeCell *cell = (STLikeCell *)[tableView dequeueReusableCellWithIdentifier:@"likeCell"];
+    STUserListCell *cell = (STUserListCell *)[tableView dequeueReusableCellWithIdentifier:@"likeCell"];
     [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:lu.thumbnail]];
    
     cell.userName.text = lu.userName;

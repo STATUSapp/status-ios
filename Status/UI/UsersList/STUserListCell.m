@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
-#import "STLikeCell.h"
+#import "STUserListCell.h"
 
-@implementation STLikeCell
+@implementation STUserListCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
