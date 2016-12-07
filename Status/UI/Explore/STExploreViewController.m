@@ -157,6 +157,9 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
     }
 }
 
+-(UITabBarController *)containeeTabBarController{
+    return self.tabBarController;
+}
 #pragma mark - UIPageViewController Delegate and Datasource
 
 

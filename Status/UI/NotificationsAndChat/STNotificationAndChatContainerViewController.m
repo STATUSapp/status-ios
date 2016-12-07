@@ -13,19 +13,19 @@
 #import "STNotificationsManager.h"
 #import "BadgeService.h"
 #import "STNavigationService.h"
+#import "STCustomSegment.h"
 
-@interface STNotificationAndChatContainerViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
-{
-    BOOL isActivityChild;
-}
+typedef NS_ENUM(NSUInteger, STActivity) {
+    STActivityNotifications = 0,
+    STActivityChat,
+    STActivityCount
+};
+
+@interface STNotificationAndChatContainerViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate, STSCustomSegmentProtocol>
 
 @property (weak, nonatomic) IBOutlet UIView *childContainer;
-@property (weak, nonatomic) IBOutlet UIView *pageIndicatorView;
-@property (weak, nonatomic) IBOutlet UIButton *btnNotifications;
-@property (weak, nonatomic) IBOutlet UIButton *btnMessages;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pageIndicatorLeading;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pageIndicatorWidth;
+@property (strong, nonatomic) STCustomSegment *customSegment;
 
 @property (strong, nonatomic) UIPageViewController * pageController;
 @property (strong, nonatomic) NSArray<UIViewController *> * viewControllers;
@@ -41,42 +41,30 @@
     return [storyboard instantiateViewControllerWithIdentifier:@"STNotificationAndChatContainerViewController"];
 }
 
+#pragma mark STSCustomSegmentProtocol
 
-#pragma mark - IBActions
-
-- (IBAction)goToMessages:(id)sender {
-    [self setControllerAndIndicatorViewForIndex:1];
-    [self messagesSelected];
-    [[CoreManager navigationService] showMessagesIconOnTabBar];
-    [[CoreManager badgeService] setBadgeForMessages];
+-(NSInteger)numberOfButtons{
+    return STActivityCount;
 }
-- (IBAction)goToNotifications:(id)sender {
+
+-(NSString *)buttonTitleForIndex:(NSInteger)index{
+    switch (index) {
+        case STActivityNotifications:
+            return @"ACTIVITY";
+            break;
+            
+        case STActivityChat:
+            return @"MESSAGES";
+            break;
+        default:
+            break;
+    }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setControllerAndIndicatorViewForIndex:0];
-        [self notificationsSelected];
-        [[CoreManager navigationService] showActivityIconOnTabBar];
-        [[CoreManager badgeService] setBadgeForNotifications];
-    });
+    return @"";
 }
 
-- (void)messagesSelected {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        _btnMessages.selected = YES;
-        _btnNotifications.selected = NO;
-    });
-}
-
-- (void)notificationsSelected {
-    _btnMessages.selected = NO;
-    _btnNotifications.selected = YES;
-}
-
-- (void)setControllerAndIndicatorViewForIndex:(NSInteger)index {
-    __weak STNotificationAndChatContainerViewController * weakSelf = self;
-    
-    NSInteger offset = [self offsetForIndex:index];
+-(void)buttonPressedAtIndex:(NSInteger)index{
+    NSLog(@"Button pressed: %ld",(long)index);
     
     NSInteger currentVCIndex = [_viewControllers indexOfObject:_pageController.viewControllers.lastObject];
     
@@ -86,34 +74,28 @@
     
     UIPageViewControllerNavigationDirection direction = index > currentVCIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
-    [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:^(BOOL finished) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.pageIndicatorLeading.constant =  offset;
-            [UIView animateWithDuration:0.35 animations:^{
-                [weakSelf.view layoutIfNeeded];
-            }];
-        });
-    }];
+    [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:nil];
+    
+    if (index == STActivityChat) {
+        [self goToMessages:nil];
+    }
+    else
+        [self goToNotifications:nil];
+    
 }
 
-- (NSInteger)offsetForIndex:(NSInteger)index {
-    NSInteger offset = 0;
+#pragma mark - IBActions
+
+- (IBAction)goToMessages:(id)sender {
+    [[CoreManager navigationService] showMessagesIconOnTabBar];
+    [[CoreManager badgeService] setBadgeForMessages];
+}
+- (IBAction)goToNotifications:(id)sender {
     
-    switch (index) {
-        case 0:
-            offset = 20;
-            break;
-            
-        case 1:
-            offset = self.view.frame.size.width - 20 - self.pageIndicatorWidth.constant;
-            break;
-            
-        default:
-            offset = 0;
-            break;
-    }
-    
-    return offset;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[CoreManager navigationService] showActivityIconOnTabBar];
+        [[CoreManager badgeService] setBadgeForNotifications];
+    });
 }
 
 #pragma mark - UIPageViewController Delegate and Datasource
@@ -151,23 +133,13 @@
         
         NSInteger currentVCIndex = [_viewControllers indexOfObject:pageViewController.viewControllers.lastObject];
         
-        switch (currentVCIndex) {
-            case 0:
-                [self notificationsSelected];
-                break;
-            case 1:
-                [self messagesSelected];
-                break;
-                
-            default:
-                break;
+        [_customSegment selectSegmentIndex:currentVCIndex];
+        
+        if (currentVCIndex == STActivityChat) {
+            [self goToMessages:nil];
         }
-        
-        _pageIndicatorLeading.constant = [self offsetForIndex:currentVCIndex];
-        
-        [UIView animateWithDuration:0.35 animations:^{
-            [self.view layoutIfNeeded];
-        }];
+        else
+            [self goToNotifications:nil];
     }
     
     for (UIViewController * controller in _viewControllers) {
@@ -205,13 +177,22 @@
     }
 }
 
+-(UITabBarController *)containeeTabBarController{
+    return self.tabBarController;
+}
+
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES];
-    
+    _customSegment = [STCustomSegment customSegmentWithDelegate:self];
+    _customSegment.frame = CGRectMake(0, 0, self.view.frame.size.width, 44.f);
+    [_customSegment selectSegmentIndex:STActivityNotifications];
+
+    [self.view addSubview:_customSegment];
+
     UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
     self.view.backgroundColor = backgroundColor;
     self.childContainer.backgroundColor = backgroundColor;
@@ -237,8 +218,6 @@
     _pageController.dataSource = self;
     
     [_pageController setViewControllers:@[_viewControllers.firstObject] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    [self notificationsSelected];
-    
     
     _pageController.view.frame = self.childContainer.bounds;
     [self.childContainer addSubview:_pageController.view];
@@ -247,14 +226,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsShouldBeReloaded:) name:STNotificationsShouldBeReloaded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(badgeNotificationChanged:) name:kBadgeCountChangedNotification object:nil];
 
-    self.pageIndicatorWidth.constant = _btnMessages.frame.size.width - 20;
-    
-    [self.pageIndicatorView setNeedsLayout];
-    if (isActivityChild == YES) {
-        [self goToNotifications:nil];
-    }
-    else
-        [self goToMessages:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -280,7 +251,6 @@
 //    NSNumber *unreadNotifications = notification.userInfo[kBadgeCountNotificationsKey];
     
     if (unreadMessages == nil) {
-        isActivityChild = YES;
         [self goToNotifications:nil];
         
         STNotificationsViewController *notifVc = (STNotificationsViewController *)[_viewControllers firstObject];
@@ -288,7 +258,6 @@
     }
     else
     {
-        isActivityChild = NO;
         [self goToMessages:nil];
     }
     

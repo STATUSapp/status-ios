@@ -33,13 +33,22 @@ static NSString * const nearbyCell = @"STNearbyCell";
     if (_feedProcessor.loading) {
         _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
         [_loadingView removeFromSuperview];
+        _loadingView.frame = self.view.frame;
         [self.view addSubview:_loadingView];
-        self.tabBarController.tabBar.hidden = YES;
+        if (_containeeDelegate) {
+            [_containeeDelegate containeeTabBarController].tabBar.hidden = YES;
+        }
+        else
+            self.tabBarController.tabBar.hidden = YES;
     }
     else
     {
         [_loadingView removeFromSuperview];
-        self.tabBarController.tabBar.hidden = NO;
+        if (_containeeDelegate) {
+            [_containeeDelegate containeeTabBarController].tabBar.hidden = NO;
+        }
+        else
+            self.tabBarController.tabBar.hidden = NO;
     }
 }
 
@@ -70,7 +79,7 @@ static NSString * const nearbyCell = @"STNearbyCell";
 //    if ([_feedProcessor loading] == NO) {
 //        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:[_feedProcessor currentOffset]] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 //    }
-
+    [self configureLoadingView];
     
 }
 
@@ -169,9 +178,11 @@ static NSString * const nearbyCell = @"STNearbyCell";
     NSInteger index = indexPath.row;
     NSLog(@"CurrentIndex: %lu", (unsigned long)index);
     
-    if (_feedProcessor.currentOffset < index) {//scroling down
+    if ([self.collectionView.panGestureRecognizer translationInView:self.view].y <= 0){
+        //scrolling down
         [_feedProcessor processObjectAtIndex:index setSeenIfRequired:YES];
     }
+    
     [_feedProcessor setCurrentOffset:index];
 
 }

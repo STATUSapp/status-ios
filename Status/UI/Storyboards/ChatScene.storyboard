@@ -13,9 +13,6 @@
         <array key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
         </array>
-        <array key="ProximaNova-Semibold.otf">
-            <string>ProximaNova-Semibold</string>
-        </array>
     </customFonts>
     <scenes>
         <!--Chat Room View Controller-->
@@ -377,7 +374,7 @@
                                     <segment title="Nearby"/>
                                     <segment title="Recent"/>
                                 </segments>
-                                <color key="tintColor" red="0.49157371837771408" green="0.49091085724356132" blue="0.65472146739130432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentValueChanged:" destination="RDg-gZ-zNL" eventType="valueChanged" id="EbS-GX-4z3"/>
                                 </connections>
@@ -401,7 +398,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x5b-Y0-Kgr" id="a4d-zg-yTA">
-                                            <frame key="frameInset" width="320" height="87"/>
+                                            <frame key="frameInset" width="320" height="87.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WRT-Z7-HjA">
@@ -586,77 +583,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="and-jC-Gzo"/>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WK0-AW-qYO">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="saw-IX-lfb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="MESSAGES">
-                                    <color key="titleColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="goToMessages:" destination="C9x-Am-wMX" eventType="touchUpInside" id="lpm-DZ-M5e"/>
-                                </connections>
-                            </button>
-                            <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2h-Ou-G7e" userLabel="pageIndicatorSupportLine">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="jhd-aN-bbC"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBu-jz-Pco" userLabel="pageIndicator">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="l34-3F-9Ld"/>
-                                    <constraint firstAttribute="width" constant="66.5" id="vLG-WQ-CAI"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2G-BR-QRE">
-                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="ACTIVITY">
-                                    <color key="titleColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="goToNotifications:" destination="C9x-Am-wMX" eventType="touchUpInside" id="c3V-Rh-f5y"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="and-jC-Gzo" firstAttribute="top" secondItem="WK0-AW-qYO" secondAttribute="bottom" constant="5" id="0c6-MP-hDd"/>
                             <constraint firstAttribute="trailing" secondItem="and-jC-Gzo" secondAttribute="trailing" id="2np-aD-dyg"/>
                             <constraint firstItem="and-jC-Gzo" firstAttribute="leading" secondItem="wZE-un-gSn" secondAttribute="leading" id="5R9-FV-lYs"/>
-                            <constraint firstItem="EBu-jz-Pco" firstAttribute="leading" secondItem="wZE-un-gSn" secondAttribute="leading" constant="20" id="6UJ-jG-Pnl"/>
-                            <constraint firstItem="l2G-BR-QRE" firstAttribute="width" secondItem="WK0-AW-qYO" secondAttribute="width" id="8x5-Dk-rmi"/>
-                            <constraint firstItem="EBu-jz-Pco" firstAttribute="top" secondItem="WK0-AW-qYO" secondAttribute="bottom" constant="3" id="AUX-ct-LMR"/>
-                            <constraint firstAttribute="trailing" secondItem="f2h-Ou-G7e" secondAttribute="trailing" constant="20" id="Agi-bK-yWk"/>
                             <constraint firstItem="TWW-hI-W3f" firstAttribute="top" secondItem="and-jC-Gzo" secondAttribute="bottom" constant="-49" id="PIT-6A-DHj"/>
-                            <constraint firstItem="f2h-Ou-G7e" firstAttribute="centerY" secondItem="EBu-jz-Pco" secondAttribute="centerY" id="X9b-JD-voI"/>
-                            <constraint firstItem="WK0-AW-qYO" firstAttribute="top" secondItem="v1G-6t-QV6" secondAttribute="bottom" constant="10" id="eoI-jQ-cVj"/>
-                            <constraint firstItem="l2G-BR-QRE" firstAttribute="leading" secondItem="wZE-un-gSn" secondAttribute="leading" id="f3R-aj-AgL"/>
-                            <constraint firstAttribute="trailing" secondItem="WK0-AW-qYO" secondAttribute="trailing" id="jKR-iW-bMy"/>
-                            <constraint firstItem="l2G-BR-QRE" firstAttribute="centerY" secondItem="WK0-AW-qYO" secondAttribute="centerY" id="l7P-Ci-IYw"/>
-                            <constraint firstItem="l2G-BR-QRE" firstAttribute="height" secondItem="WK0-AW-qYO" secondAttribute="height" id="lAG-Ig-kaa"/>
-                            <constraint firstItem="f2h-Ou-G7e" firstAttribute="leading" secondItem="wZE-un-gSn" secondAttribute="leading" constant="20" id="mlp-vp-6pJ"/>
-                            <constraint firstItem="WK0-AW-qYO" firstAttribute="leading" secondItem="l2G-BR-QRE" secondAttribute="trailing" id="sgb-YO-g3L"/>
+                            <constraint firstItem="and-jC-Gzo" firstAttribute="top" secondItem="v1G-6t-QV6" secondAttribute="bottom" constant="44" id="y2P-V8-kEP"/>
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
-                        <outlet property="btnMessages" destination="WK0-AW-qYO" id="fKw-Fr-38L"/>
-                        <outlet property="btnNotifications" destination="l2G-BR-QRE" id="Xtq-Ax-hSM"/>
                         <outlet property="childContainer" destination="and-jC-Gzo" id="9RR-fo-m7N"/>
-                        <outlet property="pageIndicatorLeading" destination="6UJ-jG-Pnl" id="58Q-cd-IlN"/>
-                        <outlet property="pageIndicatorView" destination="EBu-jz-Pco" id="CVi-Rm-cJL"/>
-                        <outlet property="pageIndicatorWidth" destination="vLG-WQ-CAI" id="iMg-Eq-0tX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pDO-4C-p08" userLabel="First Responder" sceneMemberID="firstResponder"/>

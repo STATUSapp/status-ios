@@ -12,5 +12,6 @@
 
 - (void)containeeEndedScrolling;
 - (void)containeeStartedScrolling;
+- (UITabBarController *)containeeTabBarController;
 
 @end

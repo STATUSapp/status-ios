@@ -114,13 +114,21 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
         [self.collectionView.backgroundView removeFromSuperview];
         self.collectionView.backgroundView = _loadingView;
-        self.tabBarController.tabBar.hidden = YES;
+        if (_containeeDelegate) {
+            [_containeeDelegate containeeTabBarController].tabBar.hidden = YES;
+        }
+        else
+            self.tabBarController.tabBar.hidden = YES;
     }
     else
     {
         [self.collectionView.backgroundView removeFromSuperview];
         self.collectionView.backgroundView = nil;
-        self.tabBarController.tabBar.hidden = NO;
+        if (_containeeDelegate) {
+            [_containeeDelegate containeeTabBarController].tabBar.hidden = NO;
+        }
+        else
+            self.tabBarController.tabBar.hidden = NO;
 
     }
 }
