@@ -138,6 +138,10 @@ NSString * const kTutorialCell = @"STTutorialCell";
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return dataSource.count;
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return self.view.frame.size;
+}
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGPoint point = scrollView.contentOffset;
     CGRect screenRect = [[UIScreen mainScreen] bounds];

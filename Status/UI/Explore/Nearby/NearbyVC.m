@@ -14,6 +14,7 @@
 #import "STChatRoomViewController.h"
 #import "FeedCVC.h"
 #import "STNearbyCollectionLayout.h"
+#import "STTabBarViewController.h"
 
 @interface NearbyVC ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, STNearbyLayoutDelegate>
 
@@ -30,25 +31,32 @@
 static NSString * const nearbyCell = @"STNearbyCell";
 
 - (void)configureLoadingView{
+    
     if (_feedProcessor.loading) {
         _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
         [_loadingView removeFromSuperview];
         _loadingView.frame = self.view.frame;
         [self.view addSubview:_loadingView];
+        UITabBarController *tabBarController = nil;
         if (_containeeDelegate) {
-            [_containeeDelegate containeeTabBarController].tabBar.hidden = YES;
+            tabBarController = [_containeeDelegate containeeTabBarController];
         }
         else
-            self.tabBarController.tabBar.hidden = YES;
+            tabBarController = self.tabBarController;
+        
+        [((STTabBarViewController *)tabBarController) setTabBarHidden:YES];
     }
     else
     {
         [_loadingView removeFromSuperview];
+        UITabBarController *tabBarController = nil;
         if (_containeeDelegate) {
-            [_containeeDelegate containeeTabBarController].tabBar.hidden = NO;
+            tabBarController = [_containeeDelegate containeeTabBarController];
         }
         else
-            self.tabBarController.tabBar.hidden = NO;
+            tabBarController = self.tabBarController;
+        
+        [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
     }
 }
 
@@ -70,6 +78,9 @@ static NSString * const nearbyCell = @"STNearbyCell";
     _layout.cellPadding = 8.f;
     _layout.delegate = self;
     
+    if (_feedProcessor.loading == NO) {
+        _layout.newDataAvailable = YES;
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationObjDownloadSuccess object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationObjUpdated object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationObjDeleted object:_feedProcessor];
@@ -168,7 +179,6 @@ static NSString * const nearbyCell = @"STNearbyCell";
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [_feedProcessor numberOfObjects];

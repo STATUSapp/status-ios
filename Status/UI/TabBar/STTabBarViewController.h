@@ -16,4 +16,7 @@
 - (void)setActivityIcon;
 - (void)setMessagesIcon;
 
+- (void)setTabBarHidden:(BOOL)tabBarHidden;
+- (void)setTabBarFrame:(CGRect)rect;
+
 @end

@@ -20,6 +20,8 @@ static NSString * storyboardIdentifier = @"tabBarController";
 @interface STTabBarViewController ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) NSInteger previousSelectedIndex;
+@property (nonatomic, strong) UIButton *centerButton;
+@property (nonatomic) CGRect defaultTabBarFrame;
 
 @end
 
@@ -81,12 +83,12 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[UIImage imageNamed:@"home"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setImage:[UIImage imageNamed:@"search"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[UIImage imageNamed:@"camera"]];
+//    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[UIImage imageNamed:@"camera"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[UIImage imageNamed:@"profile"]];
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[UIImage imageNamed:@"home-selected"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setSelectedImage:[UIImage imageNamed:@"search-selected"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[UIImage imageNamed:@"camera"]];
+//    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[UIImage imageNamed:@"camera"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[UIImage imageNamed:@"profile-selected"]];
     
     
@@ -104,8 +106,12 @@ static NSString * storyboardIdentifier = @"tabBarController";
 //                                            green:248.f/255.f
 //                                             blue:253.f/255.f
 //                                            alpha:0.9f];
+
 }
 
+-(void)handleDoubleTapOnView:(id)sender{
+    
+}
 - (void)setActivityIcon {
     [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"activity"]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"activity-selected"]];
@@ -118,6 +124,11 @@ static NSString * storyboardIdentifier = @"tabBarController";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _defaultTabBarFrame = self.tabBar.frame;
+    [self addCenterButtonWithImage:[UIImage imageNamed:@"camera"]
+                    highlightImage:[UIImage imageNamed:@"camera"]
+                            target:self
+                            action:@selector(buttonPressed:)];
     // Do any additional setup after loading the view.
 }
 
@@ -129,17 +140,81 @@ static NSString * storyboardIdentifier = @"tabBarController";
 
 }
 
+// Create a custom UIButton and add it to the center of our tab bar
+- (void)addCenterButtonWithImage:(UIImage *)buttonImage highlightImage:(UIImage *)highlightImage target:(id)target action:(SEL)action
+{
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+
+    button.frame = CGRectMake(0.0, 0.0, 44.f, 44.f);
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    [button setImage:highlightImage forState:UIControlStateHighlighted];
+    
+    CGFloat heightDifference = buttonImage.size.height - self.tabBar.frame.size.height;
+    if (heightDifference < 0) {
+        button.center = self.tabBar.center;
+    } else {
+        CGPoint center = self.tabBar.center;
+        center.y = center.y - heightDifference/2.0;
+        button.center = center;
+    }
+    
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    self.centerButton = button;
+}
+
+- (void)buttonPressed:(id)sender
+{
+    [self setSelectedIndex:STTabBarIndexTakeAPhoto];
+    [self performSelector:@selector(doHighlight:) withObject:sender afterDelay:0];
+}
+
+- (void)doHighlight:(UIButton*)b {
+    [b setHighlighted:YES];
+}
+
+- (void)doNotHighlight:(UIButton*)b {
+    [b setHighlighted:NO];
+}
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    if(self.tabBarController.selectedIndex != STTabBarIndexTakeAPhoto){
+        [self performSelector:@selector(doNotHighlight:) withObject:_centerButton afterDelay:0];
+    }
+}
+
+- (BOOL)tabBarHidden {
+    return self.centerButton.hidden && self.tabBar.hidden;
+}
+
+- (void)setTabBarHidden:(BOOL)tabBarHidden
+{
+    self.centerButton.hidden = tabBarHidden;
+    self.tabBar.hidden = tabBarHidden;
+}
+
+- (void)setTabBarFrame:(CGRect)rect
+{
+    CGFloat offsetY = self.tabBar.frame.origin.y - rect.origin.y;
+    CGRect centerButtonFrame = _centerButton.frame;
+    centerButtonFrame.origin.y = centerButtonFrame.origin.y - offsetY;
+    self.centerButton.frame = centerButtonFrame;
+    self.tabBar.frame = rect;
+}
+
 #pragma mark - Custom implementations for selecting the index
-
-
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
     _previousSelectedIndex = self.selectedIndex;
+    [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedIndex:selectedIndex];
 }
 
 - (void)setSelectedViewController:(__kindof UIViewController *)selectedViewController {
     _previousSelectedIndex = self.selectedIndex;
+    [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedViewController:selectedViewController];
 }
 

@@ -43,58 +43,6 @@
 
     
     _splashBackground.image = [STUIHelper splashImageWithLogo:NO];
-//    FBSDKLoginButton *loginButton = [[CoreManager loginService] facebookLoginButton];
-//    loginButton.tag = kLoginButtonTag;
-//    [loginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [loginButton setBackgroundImage:[UIImage imageNamed:@"fb-login-base"] forState:UIControlStateNormal];
-//    [loginButton setBackgroundImage:[UIImage imageNamed:@"fb-login-base-pressed"] forState:UIControlStateHighlighted];
-//    [loginButton setImage:[UIImage imageNamed:@"fb-icon"] forState:UIControlStateNormal];
-//    [loginButton.titleLabel setText:@"FACEBOOK LOGIN"];
-//    
-//    CGRect frame = loginButton.frame;
-//    frame.size.width = 245.f;
-//    frame.size.height = 69.f;
-//    frame.origin.y = 0.f;
-//    loginButton.frame = frame;
-//    
-//    loginButton.hidden = NO;
-//    [self.view addSubview:loginButton];
-//    NSLayoutConstraint *bottomConstraint =[NSLayoutConstraint
-//                                           constraintWithItem:loginButton
-//                                           attribute:NSLayoutAttributeBottom
-//                                           relatedBy:NSLayoutRelationEqual
-//                                           toItem:self.view
-//                                           attribute:NSLayoutAttributeBottom
-//                                           multiplier:1.f
-//                                           constant:-65];
-//    NSLayoutConstraint *centerConstraint = [NSLayoutConstraint constraintWithItem:loginButton
-//                                                                        attribute:NSLayoutAttributeCenterX
-//                                                                        relatedBy:NSLayoutRelationEqual
-//                                                                           toItem:self.view
-//                                                                        attribute:NSLayoutAttributeCenterX
-//                                                                       multiplier:1.f
-//                                                                         constant:1.f];
-//    
-//    NSLayoutConstraint *widthContraint = [NSLayoutConstraint constraintWithItem:loginButton
-//                                                                        attribute:NSLayoutAttributeWidth
-//                                                                        relatedBy:NSLayoutRelationEqual
-//                                                                           toItem:nil
-//                                                                        attribute:NSLayoutAttributeNotAnAttribute
-//                                                                       multiplier:1.f
-//                                                                         constant:245.f];
-//    
-//    NSLayoutConstraint *heightContraint = [NSLayoutConstraint constraintWithItem:loginButton
-//                                                                      attribute:NSLayoutAttributeHeight
-//                                                                      relatedBy:NSLayoutRelationEqual
-//                                                                         toItem:nil
-//                                                                      attribute:NSLayoutAttributeNotAnAttribute
-//                                                                     multiplier:1.f
-//                                                                       constant:69.f];
-//
-//
-//    
-//    
-//     [self.view addConstraints:@[bottomConstraint, centerConstraint, widthContraint, heightContraint]];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

@@ -28,6 +28,7 @@
 #import "STFriendsInviterViewController.h"
 #import "STSettingsViewController.h"
 #import "STEditProfileViewController.h"
+#import "STTabBarViewController.h"
 
 #import "STListUser.h"
 
@@ -112,21 +113,27 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
         [self.collectionView.backgroundView removeFromSuperview];
         self.collectionView.backgroundView = _loadingView;
+        UITabBarController *tabBarController = nil;
         if (_containeeDelegate) {
-            [_containeeDelegate containeeTabBarController].tabBar.hidden = YES;
+            tabBarController = [_containeeDelegate containeeTabBarController];
         }
         else
-            self.tabBarController.tabBar.hidden = YES;
+            tabBarController = self.tabBarController;
+        
+        [((STTabBarViewController *)tabBarController) setTabBarHidden:YES];
     }
     else
     {
         [self.collectionView.backgroundView removeFromSuperview];
         self.collectionView.backgroundView = nil;
+        UITabBarController *tabBarController = nil;
         if (_containeeDelegate) {
-            [_containeeDelegate containeeTabBarController].tabBar.hidden = NO;
+            tabBarController = [_containeeDelegate containeeTabBarController];
         }
         else
-            self.tabBarController.tabBar.hidden = NO;
+            tabBarController = self.tabBarController;
+        
+        [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
 
     }
 }
@@ -218,7 +225,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         [UIView animateWithDuration:1.f/duration animations:^{
             CGRect tabBarFrame = self.tabBarController.tabBar.frame;
             tabBarFrame.origin.y = _initialStartPoint.y;
-            self.tabBarController.tabBar.frame = tabBarFrame;
+            [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
             
         } completion:^(BOOL finished) {
             _tabBarHidden = NO;
@@ -357,7 +364,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         [UIView animateWithDuration:1.f/duration animations:^{
             CGRect tabBarFrame = self.tabBarController.tabBar.frame;
             tabBarFrame.origin.y = _initialStartPoint.y;
-            self.tabBarController.tabBar.frame = tabBarFrame;
+            [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
             
         } completion:^(BOOL finished) {
             _tabBarHidden = NO;
@@ -384,7 +391,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         [_feedProcessor processorFlowType] == STFlowTypeHome) {
         [self.collectionView.backgroundView removeFromSuperview];
         self.collectionView.backgroundView = _noDataView;
-        self.tabBarController.tabBar.hidden = NO;
+        [((STTabBarViewController *)self.tabBarController) setTabBarHidden:NO];
     }
 }
 
@@ -785,7 +792,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                 CGRect tabBarFrame = self.tabBarController.tabBar.frame;
                 _initialStartPoint = tabBarFrame.origin;
                 tabBarFrame.origin.y = tabBarFrame.origin.y + tabBarFrame.size.height;
-                self.tabBarController.tabBar.frame = tabBarFrame;
+                [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
                 
             } completion:^(BOOL finished) {
                 _tabBarHidden = YES;
@@ -797,7 +804,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                 
                 CGRect tabBarFrame = self.tabBarController.tabBar.frame;
                 tabBarFrame.origin.y = _initialStartPoint.y;
-                self.tabBarController.tabBar.frame = tabBarFrame;
+                [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
                 
             } completion:^(BOOL finished) {
                 _tabBarHidden = NO;
