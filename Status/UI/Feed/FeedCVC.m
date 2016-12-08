@@ -248,7 +248,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 - (void)postUpdated:(NSNotification *)notif{
-//    [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
+
+    /*
     NSString *updatedPostId = notif.userInfo[kPostIdKey];
     NSArray *visibleIndexPath = [self.collectionView indexPathsForVisibleItems];
     NSMutableArray *visiblePosts = [NSMutableArray new];
@@ -264,7 +267,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
         [self.collectionView.collectionViewLayout invalidateLayout];
     }
-    
+    */
 }
 
 - (void)postAdded:(NSNotification *)notif{
