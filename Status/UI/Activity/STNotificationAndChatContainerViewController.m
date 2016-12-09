@@ -220,7 +220,7 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     [self.navigationController setNavigationBarHidden:YES];
     _customSegment = [STCustomSegment customSegmentWithDelegate:self];
     _customSegment.frame = CGRectMake(0, 0, self.view.frame.size.width, 44.f);
-
+    _customSegment.translatesAutoresizingMaskIntoConstraints = YES;
     [self.view addSubview:_customSegment];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectNotificationsScreen object:nil];
