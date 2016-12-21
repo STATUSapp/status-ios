@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UserProfileNoPhotosCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIButton *uploadPhotoButton;
 + (CGSize)cellSizeForNumberOfPhotos:(NSInteger)itemsCount;
 @end

@@ -242,9 +242,9 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         }
         case STFlowTypeUserGallery:{
             [STDataAccessUtils inviteUserToUpload:_userId withUserName:userName withCompletion:^(NSError *error) {
-                if (!error) {
-                    [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexHome popToRootVC:YES];
-                }
+//                if (!error) {
+//                    [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexHome popToRootVC:YES];
+//                }
             }];
             break;
         }

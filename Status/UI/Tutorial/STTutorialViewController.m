@@ -8,6 +8,7 @@
 
 #import "STTutorialViewController.h"
 #import "STTutorialCell.h"
+#import "STTutorialStartCell.h"
 #import "STTutorialModel.h"
 
 NSString * const kTutorialStartCell = @"STTutorialStartCell";
@@ -132,6 +133,9 @@ NSString * const kTutorialCell = @"STTutorialCell";
     if ([cell isKindOfClass:[STTutorialCell class]]) {
         STTutorialCell *theCell = (STTutorialCell *)cell;
         [theCell configureWithModel:model];
+    }
+    else if ([cell isKindOfClass:[STTutorialStartCell class]]){
+        [(STTutorialStartCell *)cell configureCell];
     }
     return cell;
 }

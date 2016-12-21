@@ -10,11 +10,14 @@
 
 CGFloat const kSegmentViewMargins = 40.f;
 NSInteger const kButtonTagOffset = 100;
+CGFloat const kButtonHeight = 44.f;
+
 @interface STCustomSegment ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectionWidthConstr;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectionLeadingConstr;
 @property (nonatomic, weak) id <STSCustomSegmentProtocol>delegate;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstr;
 @end
 
 @implementation STCustomSegment
@@ -40,12 +43,20 @@ NSInteger const kButtonTagOffset = 100;
 
 - (CGFloat)buttonWidth{
     NSInteger numberOfButtons = [_delegate numberOfButtons];
-    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGSize requiredSize = [self requiredSize];
+    CGFloat screenWidth = requiredSize.width;
     CGFloat availableWidth = screenWidth - kSegmentViewMargins;
     CGFloat buttonWidth = availableWidth / numberOfButtons;
     
     return buttonWidth;
 
+}
+
+- (CGSize)requiredSize{
+    CGFloat bottomSpace = [_delegate bottomSpace];
+    CGFloat topSpace = [_delegate topSpace];
+    
+    return CGSizeMake([UIScreen mainScreen].bounds.size.width, bottomSpace + topSpace + kButtonHeight);
 }
 
 - (void)configureView{
@@ -54,9 +65,20 @@ NSInteger const kButtonTagOffset = 100;
 
     CGFloat buttonWidth = [self buttonWidth];
     
-    CGSize buttonSize = CGSizeMake(buttonWidth, self.frame.size.height);
+    CGSize requiredSize = [self requiredSize];
+    CGRect rect = self.frame;
+    rect.size = requiredSize;
+    self.frame = rect;
+    
+    CGFloat topSpace = [_delegate topSpace];
+    CGFloat bottomSpace = [_delegate bottomSpace];
+    _bottomConstr.constant = bottomSpace;
+    
+    CGSize buttonSize = CGSizeMake(buttonWidth, kButtonHeight);
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 15, 0);
+
     for (int i =0 ; i< numberOfButtons; i++) {
-        CGPoint origin = CGPointMake(i * buttonWidth + kSegmentViewMargins/2.f, 0.f);
+        CGPoint origin = CGPointMake(i * buttonWidth + kSegmentViewMargins/2.f, topSpace);
         CGRect frame = CGRectZero;
         frame.origin = origin;
         frame.size = buttonSize;
@@ -76,6 +98,8 @@ NSInteger const kButtonTagOffset = 100;
         [button addTarget:self
                    action:@selector(onSegmentButtonPressed:)
          forControlEvents:UIControlEventTouchUpInside];
+        button.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        button.contentEdgeInsets = insets;
         [self addSubview:button];
     }
     

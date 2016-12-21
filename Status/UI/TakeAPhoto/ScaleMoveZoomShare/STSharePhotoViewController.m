@@ -23,6 +23,7 @@
 #import "STDataAccessUtils.h"
 #import "STPost.h"
 #import "STLocalNotificationService.h"
+#import "STTabBarViewController.h"
 
 static NSInteger const  kMaxCaptionLenght = 250;
 
@@ -98,6 +99,18 @@ static NSInteger const  kMaxCaptionLenght = 250;
     _captiontextView.userInteractionEnabled = (_controllerType != STShareControllerEditPost);
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self twitterAccess];
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
+}
+
+
 - (void)appplicationIsActive:(NSNotification *)notification {
     NSLog(@"Application Did Become Active");
     [self twitterAccess];
@@ -124,13 +137,6 @@ static NSInteger const  kMaxCaptionLenght = 250;
              weakSelf.isTwitterAvailable = NO;
          }
      }];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self twitterAccess];
-
 }
 
 - (void)didReceiveMemoryWarning

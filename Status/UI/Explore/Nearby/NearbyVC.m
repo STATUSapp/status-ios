@@ -75,7 +75,7 @@ static NSString * const nearbyCell = @"STNearbyCell";
     [super viewDidLoad];
     _layout = (STNearbyCollectionLayout *)_collectionView.collectionViewLayout;
     _layout.numberOfColumns = 2;
-    _layout.cellPadding = 8.f;
+    _layout.cellPadding = 4.f;
     _layout.delegate = self;
     
     if (_feedProcessor.loading == NO) {

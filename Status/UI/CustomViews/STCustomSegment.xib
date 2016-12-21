@@ -14,15 +14,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Yf-8y-bwA" userLabel="pageIndicatorSupportLine">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Yf-8y-bwA" userLabel="pageIndicatorSupportLine">
                     <rect key="frame" x="20" y="42" width="280" height="2"/>
-                    <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="2" id="QhT-0K-aOa"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSy-Q6-vrD" userLabel="pageIndicator">
-                    <rect key="frame" x="20" y="40" width="66.5" height="4"/>
+                    <rect key="frame" x="20" y="40" width="67" height="4"/>
                     <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="4" id="CYu-Il-OUu"/>
@@ -30,17 +30,18 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="QSy-Q6-vrD" secondAttribute="bottom" id="IZJ-qf-3cu"/>
                 <constraint firstAttribute="bottom" secondItem="9Yf-8y-bwA" secondAttribute="bottom" id="JkB-pp-AtN"/>
                 <constraint firstItem="9Yf-8y-bwA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="RIs-zv-rBR"/>
+                <constraint firstItem="9Yf-8y-bwA" firstAttribute="top" secondItem="QSy-Q6-vrD" secondAttribute="bottom" constant="-2" id="UdC-e6-38s"/>
                 <constraint firstItem="QSy-Q6-vrD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="qr1-Lx-rjd"/>
                 <constraint firstAttribute="trailing" secondItem="9Yf-8y-bwA" secondAttribute="trailing" constant="20" id="rsv-uH-4cm"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="bottomConstr" destination="JkB-pp-AtN" id="nZE-b8-Q6A"/>
                 <outlet property="selectionLeadingConstr" destination="qr1-Lx-rjd" id="fYy-Xc-bAX"/>
                 <outlet property="selectionWidthConstr" destination="Jkh-X5-jHh" id="HaR-pR-3Aa"/>
             </connections>

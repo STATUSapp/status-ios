@@ -22,6 +22,7 @@
 #import "STNetworkQueueManager.h"
 #import "UIImageView+WebCache.h"
 #import "FeedCVC.h"
+#import "STTabBarViewController.h"
 
 #import "STGetUserInfoRequest.h"
 #import "UITableView+SPXRevealAdditions.h"
@@ -137,7 +138,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 //    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
     
     [super viewWillAppear:animated];
-    [self.tabBarController.tabBar setHidden:YES];
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
     if (chatController.canChat == NO) {
         NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
         NSString *userId = _user.uuid;
@@ -167,7 +168,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController.tabBar setHidden:NO];
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

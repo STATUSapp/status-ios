@@ -597,6 +597,16 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     else if ([cell isKindOfClass:[UserProfileLocationCell class]]){
         [(UserProfileLocationCell *)cell configureCellForProfile:[_feedProcessor userProfile]];
     }
+    else if ([cell isKindOfClass:[UserProfileNoPhotosCell class]]){
+        NSString *title = @"Ask user to take a photo";
+        
+        if (_isMyProfile) {
+            title = @"Upload first photo";
+        }
+        [((UserProfileNoPhotosCell *)cell).uploadPhotoButton setTitle:title forState:UIControlStateNormal];
+        [((UserProfileNoPhotosCell *)cell).uploadPhotoButton setTitle:title forState:UIControlStateSelected];
+        
+    }
 
     return cell;
 }

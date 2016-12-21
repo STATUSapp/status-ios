@@ -8,8 +8,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="ProximaNova-Semibold.otf">
-            <string>ProximaNova-Semibold</string>
+        <array key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXa-Uo-21L">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="62" width="375" height="605"/>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,9 +34,11 @@
                             <constraint firstItem="BXa-Uo-21L" firstAttribute="leading" secondItem="vmR-yF-ypr" secondAttribute="leading" id="1yE-az-3Fd"/>
                             <constraint firstAttribute="bottom" secondItem="BXa-Uo-21L" secondAttribute="bottom" id="AaT-Vt-DCx"/>
                             <constraint firstAttribute="trailing" secondItem="BXa-Uo-21L" secondAttribute="trailing" id="C9j-wF-RhV"/>
-                            <constraint firstItem="BXa-Uo-21L" firstAttribute="top" secondItem="223-CW-Zk3" secondAttribute="bottom" constant="44" id="YNe-QP-aaC"/>
+                            <constraint firstItem="BXa-Uo-21L" firstAttribute="top" secondItem="223-CW-Zk3" secondAttribute="bottom" constant="62" id="cqB-Ys-aCH"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="containerView" destination="BXa-Uo-21L" id="KEO-0F-76Q"/>
@@ -85,7 +87,7 @@
                                                                         <constraint firstAttribute="height" constant="47" id="5W7-XK-xet"/>
                                                                         <constraint firstAttribute="width" constant="114" id="lna-GM-KY2"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="17"/>
+                                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                                     <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -96,6 +98,9 @@
                                                                         <constraint firstAttribute="width" constant="34" id="MCh-Lp-c7Q"/>
                                                                     </constraints>
                                                                     <state key="normal" image="user message"/>
+                                                                    <connections>
+                                                                        <action selector="onTapSendMessageToUser:" destination="rmj-DE-0EB" eventType="touchUpInside" id="Zx1-bx-Y6Y"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -145,7 +150,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.87058823529411766" green="0.87058823529411766" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="GZv-5V-mDV" firstAttribute="leading" secondItem="o6i-1e-65I" secondAttribute="leading" constant="8" id="1pc-CA-RHM"/>
                             <constraint firstItem="GZv-5V-mDV" firstAttribute="top" secondItem="o6i-1e-65I" secondAttribute="top" id="4Ae-Bp-NFZ"/>
@@ -167,7 +172,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         </imageView>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yLd-tO-fzy">
-                            <rect key="frame" x="141.5" y="265.5" width="37" height="37"/>
+                            <rect key="frame" x="142" y="266" width="37" height="37"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="37" id="fXF-QW-LHC"/>
                                 <constraint firstAttribute="height" constant="37" id="yDP-i2-VGv"/>

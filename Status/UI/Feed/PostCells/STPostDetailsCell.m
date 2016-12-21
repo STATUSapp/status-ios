@@ -38,17 +38,35 @@ CGFloat const kDefaultTextWidthDelta = 20.f;
 }
 
 + (NSAttributedString *)formattedCaptionStringForPost:(STPost *)post{
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:post.caption];
+    
+    NSString *formattedString = [NSString stringWithFormat:@"%@\n%@", post.userName, post.caption];
+    NSInteger nameLengh = [post.userName length];
+
+    if (post.caption.length == 0) {
+        formattedString = @"";
+        nameLengh = 0;
+    }
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:formattedString];
     NSMutableAttributedString *mutableAttrString = [attributedString mutableCopy];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [paragraphStyle setLineSpacing: 3.0f];
     
+    NSDictionary *nameAttributes = @{
+                                 NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Semibold" size:14.0],
+                                 NSForegroundColorAttributeName:[UIColor colorWithRed:26.f/255.f
+                                                                                green:26.f/255.f
+                                                                                 blue:26.f/255.f
+                                                                                alpha:1.f],
+                                 NSParagraphStyleAttributeName: paragraphStyle
+};
+    [mutableAttrString addAttributes:nameAttributes range:NSMakeRange(0, nameLengh)];
+
     NSDictionary *attributes = @{
-                                 NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Regular" size:13.0],
-                                 NSForegroundColorAttributeName:[UIColor colorWithRed:38.f/255.f
-                                                                                green:38.f/255.f
-                                                                                 blue:38.f/255.f
+                                 NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Regular" size:14.0],
+                                 NSForegroundColorAttributeName:[UIColor colorWithRed:26.f/255.f
+                                                                                green:26.f/255.f
+                                                                                 blue:26.f/255.f
                                                                                 alpha:1.f],
                                  NSParagraphStyleAttributeName: paragraphStyle
                                  };
@@ -58,11 +76,11 @@ CGFloat const kDefaultTextWidthDelta = 20.f;
                                                                                          blue:242.f/255.f
                                                                                         alpha:1.f]};
     
-    [mutableAttrString addAttributes:attributes range:NSMakeRange(0, attributedString.length)];
+    [mutableAttrString addAttributes:attributes range:NSMakeRange(nameLengh, attributedString.length - nameLengh)];
     
-    NSArray *hasTags = [post.caption hashTags];
+    NSArray *hasTags = [formattedString hashTags];
     for (NSString *hash in hasTags) {
-        NSRange range = [post.caption rangeOfString:hash];
+        NSRange range = [formattedString rangeOfString:hash];
         [mutableAttrString addAttributes:hashTagAttributes range:range];
         
     }
@@ -76,7 +94,7 @@ CGFloat const kDefaultTextWidthDelta = 20.f;
 }
 
 + (CGSize)cellSizeForPost:(STPost *)post{
-    CGSize size = [UIScreen mainScreen].applicationFrame.size;
+    CGSize size = [UIScreen mainScreen].bounds.size;
     CGFloat captionHeight = 0.f;
     if (post.caption.length > 0) {
         NSAttributedString *formattedString = [STPostDetailsCell formattedCaptionStringForPost:post];

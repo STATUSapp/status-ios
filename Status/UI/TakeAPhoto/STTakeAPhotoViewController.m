@@ -15,6 +15,7 @@
 #import "STImageCacheController.h"
 #import "STPostsPool.h"
 #import "FeedCVC.h"
+#import "STTabBarViewController.h"
 
 @interface STTakeAPhotoViewController ()
 
@@ -68,10 +69,12 @@
 #pragma mark - Notifications
 
 - (void)imageWasPostedWithPostId:(NSNotification *)notif {
-    NSString *postId = notif.userInfo[kPostIdKey];
-    FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postId];
-    [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//    NSString *postId = notif.userInfo[kPostIdKey];
+//    FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postId];
+//    [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexProfile popToRootVC:YES];
 }
 
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
@@ -89,6 +92,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostNewImageUploaded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostImageWasEdited object:nil];
 
@@ -106,7 +110,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
+
     __weak typeof(self) weakSelf = self;
     STPost * randomPost = [CoreManager postsPool].randomPost;
     
@@ -116,6 +121,10 @@
         }];
     }
     
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {

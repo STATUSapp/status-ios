@@ -41,6 +41,14 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
 
 #pragma mark STSCustomSegmentProtocol
 
+-(CGFloat)bottomSpace{
+    return 9.f;
+}
+
+-(CGFloat)topSpace{
+    return 9.f;
+}
+
 -(NSInteger)numberOfButtons{
     return STExploreFlowCount;
 }
@@ -83,8 +91,12 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     _customSegment = [STCustomSegment customSegmentWithDelegate:self];
-    _customSegment.frame = CGRectMake(0, 0, self.view.frame.size.width, 44.f);
-    
+    CGRect rect = _customSegment.frame;
+    rect.origin.x = 0.f;
+    rect.origin.y = 0.f;
+    _customSegment.frame = rect;
+    _customSegment.translatesAutoresizingMaskIntoConstraints = YES;
+
     [self.view addSubview:_customSegment];
     
     NSMutableArray <UIViewController *> *viewControllers = [NSMutableArray new];

@@ -10,4 +10,6 @@
 
 @interface STTutorialStartCell : UICollectionViewCell
 
+-(void)configureCell;
+
 @end

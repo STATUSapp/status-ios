@@ -60,7 +60,11 @@ CGFloat const kMessageBottomWidth = 37.f;
     
     self.layer.cornerRadius = 5.0f;
     self.layer.borderWidth = 1.0f;
-    self.layer.borderColor = [UIColor clearColor].CGColor;
+    UIColor *borderColor = [UIColor colorWithRed:211.f/255.f
+                                          green:211.f/255.f
+                                           blue:211.f/255.f
+                                          alpha:1.f];
+    self.layer.borderColor = borderColor.CGColor;
     self.layer.masksToBounds = YES;
 }
 

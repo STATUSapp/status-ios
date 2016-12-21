@@ -173,7 +173,7 @@
                                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="17"/>
                                                     <inset key="titleEdgeInsets" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="-20" minY="-2" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="FACEBOOK LOGIN" image="fb-icon" backgroundImage="fb-login-base"/>
+                                                    <state key="normal" image="fb-icon" backgroundImage="fb-login-base"/>
                                                     <connections>
                                                         <action selector="onLoginButtonPressed:" destination="91j-x6-xGm" eventType="touchUpInside" id="1Sg-et-yiC"/>
                                                     </connections>
@@ -190,6 +190,9 @@
                                             <constraint firstItem="Ef8-k8-fl0" firstAttribute="top" secondItem="qJ6-Qg-Nx4" secondAttribute="top" id="xpq-Mg-a2U"/>
                                         </constraints>
                                         <size key="customSize" width="375" height="667"/>
+                                        <connections>
+                                            <outlet property="facebookLoginButton" destination="XpJ-sB-bK6" id="Pm4-sy-qna"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STTutorialCell" id="lvO-jz-rPi" customClass="STTutorialCell">
                                         <rect key="frame" x="375" y="0.0" width="375" height="667"/>
@@ -294,6 +297,6 @@ Popular, Nearby and Recent.</string>
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="XN1-aR-jDG"/>
+        <segue reference="wMN-vK-mIu"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,6 +13,7 @@
 #import "STPost.h"
 #import "STNavigationService.h"
 #import "FeedCVC.h"
+#import "STTabBarViewController.h"
 
 @interface STMoveScaleViewController ()<UIScrollViewDelegate>
 {
@@ -59,6 +60,15 @@
     [self cropAndBlur];    
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -194,7 +204,7 @@
 - (void)cropAndBlur {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         UIImage *cropppedImage = [[self croppedImage] imageCropedFullScreenSize];
-        cropppedImage = [cropppedImage applyLightEffect];
+//        cropppedImage = [cropppedImage applyLightEffect];
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView transitionWithView:_backgroundBlurImgView
                               duration:0.2f

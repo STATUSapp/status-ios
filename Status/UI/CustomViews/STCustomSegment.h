@@ -11,6 +11,8 @@
 @protocol STSCustomSegmentProtocol  <NSObject>
 
 @required
+- (CGFloat)topSpace;
+- (CGFloat)bottomSpace;
 - (NSInteger)numberOfButtons;
 - (NSString *)buttonTitleForIndex:(NSInteger)index;
 - (void)buttonPressedAtIndex:(NSInteger)index;
