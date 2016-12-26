@@ -10,26 +10,41 @@
 #import "STPost.h"
 #import "UIImageView+WebCache.h"
 #import "STImageCacheController.h"
+#import "DGActivityIndicatorView.h"
 
 @interface STPostImageCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *postImage;
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
+@property (weak, nonatomic) IBOutlet DGActivityIndicatorView *activityIndicator;
+
 @property (weak, nonatomic) IBOutlet UIButton *postLikeButton;
 @property (weak, nonatomic) IBOutlet UIButton *postShopButton;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *downShadow;
 
 @end
 
 @implementation STPostImageCell
 
+-(void)awakeFromNib{
+    [super awakeFromNib];
+    _activityIndicator.tintColor = [UIColor blackColor];
+    _activityIndicator.type = DGActivityIndicatorAnimationTypeBallClipRotate;
+    [_activityIndicator startAnimating];
+}
+
 -(void)prepareForReuse{
     _postImage.image = nil;
-    [_activityIndicator startAnimating];
     _blurEffectView.hidden = NO;
+    [self setBottomItemsHidden:YES];
+    
+}
+
+-(void)setBottomItemsHidden:(BOOL)hidded{
+    _postLikeButton.hidden = _postShopButton.hidden = _downShadow.hidden = hidded;
 }
 - (void) configureCellWithPost:(STPost *)post{
     if (post.mainImageDownloaded) {
-        
+        [self setBottomItemsHidden:NO];
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
             [_activityIndicator stopAnimating];
             _blurEffectView.hidden = YES;
@@ -38,6 +53,7 @@
     }
     else if (post.thumbnailImageDownloaded)
     {
+        [self setBottomItemsHidden:NO];
         [[CoreManager imageCacheService] loadPostImageWithName:post.thumbnailPhotoUrl withPostCompletion:^(UIImage *origImg) {
             [_activityIndicator startAnimating];
             _blurEffectView.hidden = NO;
@@ -59,10 +75,10 @@
 + (CGSize)celSizeForPost:(STPost *)post{
     CGSize size = [UIScreen mainScreen].applicationFrame.size;
 
-    if (!post.mainImageDownloaded &&
-        !post.thumbnailImageDownloaded) {
-        return CGSizeMake(size.width, 0.f);
-    }
+//    if (!post.mainImageDownloaded &&
+//        !post.thumbnailImageDownloaded) {
+//        return CGSizeMake(size.width, 0.f);
+//    }
     if (!post.mainImageDownloaded) {
         return CGSizeMake(size.width, size.width);
     }
