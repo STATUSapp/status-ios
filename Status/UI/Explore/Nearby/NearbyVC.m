@@ -15,12 +15,14 @@
 #import "FeedCVC.h"
 #import "STNearbyCollectionLayout.h"
 #import "STTabBarViewController.h"
+#import "STLoadingView.h"
 
 @interface NearbyVC ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, STNearbyLayoutDelegate>
 
 @property (nonatomic, strong) STFlowProcessor *feedProcessor;
 @property (nonatomic, strong) STNearbyCollectionLayout *layout;
 
+@property (strong, nonatomic) STLoadingView *customLoadingView;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingViewImage;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -32,31 +34,24 @@ static NSString * const nearbyCell = @"STNearbyCell";
 
 - (void)configureLoadingView{
     
+    //use the custom loading view
+    UITabBarController *tabBarController = nil;
+    if (_containeeDelegate) {
+        tabBarController = [_containeeDelegate containeeTabBarController];
+    }
+    else
+        tabBarController = self.tabBarController;
+    
+    [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
+    
     if (_feedProcessor.loading) {
-        _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
-        [_loadingView removeFromSuperview];
-        _loadingView.frame = self.view.frame;
-        [self.view addSubview:_loadingView];
-        UITabBarController *tabBarController = nil;
-        if (_containeeDelegate) {
-            tabBarController = [_containeeDelegate containeeTabBarController];
-        }
-        else
-            tabBarController = self.tabBarController;
-        
-        [((STTabBarViewController *)tabBarController) setTabBarHidden:YES];
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = _customLoadingView;
     }
     else
     {
-        [_loadingView removeFromSuperview];
-        UITabBarController *tabBarController = nil;
-        if (_containeeDelegate) {
-            tabBarController = [_containeeDelegate containeeTabBarController];
-        }
-        else
-            tabBarController = self.tabBarController;
-        
-        [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = nil;
     }
 }
 
@@ -73,6 +68,9 @@ static NSString * const nearbyCell = @"STNearbyCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
+
     _layout = (STNearbyCollectionLayout *)_collectionView.collectionViewLayout;
     _layout.numberOfColumns = 2;
     _layout.cellPadding = 4.f;

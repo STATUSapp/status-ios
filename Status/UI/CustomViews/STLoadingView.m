@@ -40,7 +40,7 @@
     CGFloat activityIndicatorOriginX = roundf((size.width - activityIndicatorWidth) / 2.f);
     CGFloat activityIndicatorOriginY = roundf((size.height - activityIndicatorHeight) / 2.f);
 
-    DGActivityIndicatorView *activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeThreeDots tintColor:[UIColor blackColor] size:44.0f];
+    DGActivityIndicatorView *activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeBallPulse tintColor:[UIColor blackColor] size:44.0f];
     activityIndicatorView.frame = CGRectMake(activityIndicatorOriginX, activityIndicatorOriginY, activityIndicatorWidth, activityIndicatorHeight);
     [self addSubview:activityIndicatorView];
     [activityIndicatorView startAnimating];
