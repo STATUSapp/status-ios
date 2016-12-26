@@ -98,6 +98,7 @@ NSString *const IAPHelperRestorePurchaseFailedNotification = @"IAPHelperRestoreP
 
 #pragma mark - Local Notifications
 
+NSString *const STNotificationShouldGoToTop = @"STNotificationShouldGoToTop";
 NSString *const STNotificationBadgeValueDidChanged = @"STNotificationBadgeValueDidChanged";
 NSString *const STUnreadMessagesValueDidChanged = @"STUnreadMessagesValueDidChanged";
 NSString *const STChatControllerAuthenticate = @"STChatControllerAuthenticate";
@@ -127,6 +128,8 @@ NSString *const kFlowTypeKey = @"flow_type_key";
 NSString *const kUserIdKey = @"user_id_key";
 NSString *const kImageSizeKey = @"image_size_key";
 NSString *const kOffsetKey = @"offset_key";
+NSString *const kSelectedTabBarKey = @"selected_index";
+NSString *const kAnimatedTabBarKey = @"animated";
 
 #pragma mark - Invite Friends
 

@@ -12,7 +12,7 @@
 #import "STNotificationAndChatContainerViewController.h"
 #import "STFacebookLoginController.h"
 #import "STExploreViewController.h"
-
+#import "STLocalNotificationService.h"
 #import "FeedCVC.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
@@ -22,7 +22,6 @@ static NSString * storyboardIdentifier = @"tabBarController";
 @property (nonatomic, assign) NSInteger previousSelectedIndex;
 @property (nonatomic, strong) UIButton *centerButton;
 @property (nonatomic) CGRect defaultTabBarFrame;
-
 @end
 
 @implementation STTabBarViewController
@@ -183,6 +182,16 @@ static NSString * storyboardIdentifier = @"tabBarController";
     if(self.tabBarController.selectedIndex != STTabBarIndexTakeAPhoto){
         [self performSelector:@selector(doNotHighlight:) withObject:_centerButton afterDelay:0];
     }
+    
+    NSUInteger selectedItem = [[tabBar items] indexOfObject:item];
+    
+    if (_previousSelectedIndex == selectedItem) {
+        UINavigationController *navController = (UINavigationController *)[self.viewControllers objectAtIndex:selectedItem];
+        if ([[navController viewControllers] count] == 1) {
+            [[CoreManager localNotificationService] postNotificationName:STNotificationShouldGoToTop object:nil userInfo:@{kSelectedTabBarKey:@(selectedItem), kAnimatedTabBarKey:@(NO)}];
+            
+        }
+    }
 }
 
 - (BOOL)tabBarHidden {
@@ -213,7 +222,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
 }
 
 - (void)setSelectedViewController:(__kindof UIViewController *)selectedViewController {
-    _previousSelectedIndex = self.selectedIndex;
+    _previousSelectedIndex = [self.viewControllers indexOfObject:selectedViewController];
     [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedViewController:selectedViewController];
 }

@@ -13,6 +13,7 @@ pod 'SDWebImage', '~>3.7'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'MobileAppTracker'
+pod 'DGActivityIndicatorView'
 
 end
 

@@ -58,6 +58,8 @@ const float kNoNotifHeight = 24.f;
     _tapOnRow.numberOfTapsRequired = 1;
     _tapOnRow.numberOfTouchesRequired = 1;
     [self.notificationTable addGestureRecognizer:_tapOnRow];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -91,9 +93,17 @@ const float kNoNotifHeight = 24.f;
 
 -(void)dealloc{
     _notificationTable.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (IBAction)onClickback:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark Notification
+
+- (void) shouldGoToTop:(NSNotification *)notif{
+    BOOL animated = [notif.userInfo[kAnimatedTabBarKey] boolValue];
+    [self.notificationTable setContentOffset:CGPointZero animated:animated];
 }
 
 #pragma mark - DidSelectedNotification

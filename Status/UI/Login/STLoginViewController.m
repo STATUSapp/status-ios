@@ -19,7 +19,6 @@
 
 @interface STLoginViewController ()<STTutorialDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *splashBackground;
-@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 @property (weak, nonatomic) IBOutlet UIButton *fBLoginButton;
 @end
 

@@ -60,6 +60,8 @@
     _recentCUsers = [NSMutableArray new];
     [_segment setSelectedSegmentIndex:STSearchControlRecent];
     _searchBarHeightContraint.constant = 0;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -75,6 +77,13 @@
 
 -(void)dealloc{
     _tableView.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Notifications
+- (void) shouldGoToTop:(NSNotification *)notif{
+    BOOL animated = [notif.userInfo[kAnimatedTabBarKey] boolValue];
+    [self.tableView setContentOffset:CGPointZero animated:animated];
 }
 
 #pragma mark - UITableView datasource and delegate methods

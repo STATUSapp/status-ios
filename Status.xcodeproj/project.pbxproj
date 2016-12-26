@@ -60,6 +60,8 @@
 		1794DD5F1960D36B0009066D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172EAEB818B0BAE000C5637B /* SystemConfiguration.framework */; };
 		17A5C41B1BB7EF240057180E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5C41A1BB7EF240057180E /* AddressBook.framework */; };
 		17AB89EB193B182500A6E7FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AB89EA193B182500A6E7FD /* libicucore.dylib */; };
+		17AC8ECF1E11192B002D213E /* STLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17AC8ECE1E11192B002D213E /* STLoadingView.xib */; };
+		17AC8ED21E111954002D213E /* STLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AC8ED11E111954002D213E /* STLoadingView.m */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */; };
 		17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */; };
@@ -340,6 +342,9 @@
 		178D13691DBCCEC500851617 /* STATUS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = STATUS.entitlements; path = ../STATUS.entitlements; sourceTree = "<group>"; };
 		17A5C41A1BB7EF240057180E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		17AB89EA193B182500A6E7FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		17AC8ECE1E11192B002D213E /* STLoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STLoadingView.xib; sourceTree = "<group>"; };
+		17AC8ED01E111954002D213E /* STLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoadingView.h; sourceTree = "<group>"; };
+		17AC8ED11E111954002D213E /* STLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoadingView.m; sourceTree = "<group>"; };
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		17B587401C9ABAF3006AC7BD /* UIViewController+Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Snapshot.h"; sourceTree = "<group>"; };
 		17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Snapshot.m"; sourceTree = "<group>"; };
@@ -1326,6 +1331,9 @@
 				170912261DF87FAC00B2AF81 /* STCustomSegment.h */,
 				170912271DF87FAC00B2AF81 /* STCustomSegment.m */,
 				170912281DF87FAC00B2AF81 /* STCustomSegment.xib */,
+				17AC8ED01E111954002D213E /* STLoadingView.h */,
+				17AC8ED11E111954002D213E /* STLoadingView.m */,
+				17AC8ECE1E11192B002D213E /* STLoadingView.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1648,6 +1656,7 @@
 				174575B61CA95CD5006CA25F /* ExploreScene.storyboard in Resources */,
 				99B387CD1C82FAA2005B4D8C /* ChatScene.storyboard in Resources */,
 				99B3878F1C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg in Resources */,
+				17AC8ECF1E11192B002D213E /* STLoadingView.xib in Resources */,
 				2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */,
 				99B387911C82FAA2005B4D8C /* ProximaNova-Bold.otf in Resources */,
 			);
@@ -1853,6 +1862,7 @@
 				2A119DF71C832182001C17DB /* STFlowProcessor.m in Sources */,
 				2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */,
 				2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */,
+				17AC8ED21E111954002D213E /* STLoadingView.m in Sources */,
 				99B387B01C82FAA2005B4D8C /* STFacebookActivity.m in Sources */,
 				99B387C11C82FAA2005B4D8C /* STSuggestionsViewController.m in Sources */,
 				99B387591C82FAA2005B4D8C /* STGetUserProfileRequest.m in Sources */,

@@ -86,7 +86,8 @@ static NSString * const nearbyCell = @"STNearbyCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationObjDeleted object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
+
 //    if ([_feedProcessor loading] == NO) {
 //        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:[_feedProcessor currentOffset]] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 //    }
@@ -172,6 +173,13 @@ static NSString * const nearbyCell = @"STNearbyCell";
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
     
+}
+
+- (void) shouldGoToTop:(NSNotification *)notif{
+    BOOL animated = [notif.userInfo[kAnimatedTabBarKey] boolValue];
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    [layout invalidateLayout];
+    [self.collectionView setContentOffset:CGPointZero animated:animated];
 }
 
 #pragma mark <UICollectionViewDataSource>

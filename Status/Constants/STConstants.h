@@ -161,6 +161,7 @@ extern NSString *const IAPHelperRestorePurchaseFailedNotification;
 
 #pragma mark - Local Notifications
 
+extern NSString *const STNotificationShouldGoToTop;
 extern NSString *const STNotificationBadgeValueDidChanged;
 extern NSString *const STUnreadMessagesValueDidChanged;
 extern NSString *const STChatControllerAuthenticate;
@@ -190,6 +191,8 @@ extern NSString *const kFlowTypeKey;
 extern NSString *const kUserIdKey;
 extern NSString *const kImageSizeKey;
 extern NSString *const kOffsetKey;
+extern NSString *const kSelectedTabBarKey;
+extern NSString *const kAnimatedTabBarKey;
 
 #pragma mark - Invite Friends
 

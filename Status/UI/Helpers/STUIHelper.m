@@ -11,7 +11,7 @@
 @implementation STUIHelper
 
 + (UIImage *)splashImageWithLogo:(BOOL)withLogo{
-    NSString *imageName = @"splash1202x2208";
+    NSString *imageName = @"splash1242x2208";
     if ([[UIScreen mainScreen] scale] == 2.0) {
         
         if([UIScreen mainScreen].bounds.size.height == 667){
@@ -32,7 +32,7 @@
         //if you want to detect the iPhone 6+ only
         if([UIScreen mainScreen].bounds.size.height == 736.0){
             //iPhone retina-5.5 inch screen(iPhone 6 plus)
-            imageName = @"splash1202x2208";
+            imageName = @"splash1242x2208";
         }
     }
     

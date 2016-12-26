@@ -37,6 +37,7 @@
 #import "STContextualMenu.h"
 #import "STImageCacheController.h"
 #import "STFollowDataProcessor.h"
+#import "STLoadingView.h"
 
 #import "UIViewController+Snapshot.h"
 #import "STUsersListController.h"
@@ -89,10 +90,11 @@ CGFloat const kTopButtonSize = 48.f;
 
 @property (nonatomic, assign) BOOL isMyProfile;
 
+@property (nonatomic, strong) STLoadingView *customLoadingView;
+
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingViewImage;
 @property (strong, nonatomic) IBOutlet UIView *noDataView;
-
 
 @end
 
@@ -109,23 +111,39 @@ static NSString * const profileLocationCell = @"UserProfileLocationCell";
 static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 - (void)configureLoadingView{
-    if (_feedProcessor.loading) {
-        _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
-        [self.collectionView.backgroundView removeFromSuperview];
-        self.collectionView.backgroundView = _loadingView;
-        UITabBarController *tabBarController = nil;
-        if (_containeeDelegate) {
-            tabBarController = [_containeeDelegate containeeTabBarController];
+    if ([_feedProcessor processorFlowType] == STFlowTypeHome) {
+        //use the standard loading
+        if (_feedProcessor.loading) {
+            _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
+            [self.collectionView.backgroundView removeFromSuperview];
+            self.collectionView.backgroundView = _loadingView;
+            UITabBarController *tabBarController = nil;
+            if (_containeeDelegate) {
+                tabBarController = [_containeeDelegate containeeTabBarController];
+            }
+            else
+                tabBarController = self.tabBarController;
+            
+            [((STTabBarViewController *)tabBarController) setTabBarHidden:YES];
         }
         else
-            tabBarController = self.tabBarController;
-        
-        [((STTabBarViewController *)tabBarController) setTabBarHidden:YES];
+        {
+            [self.collectionView.backgroundView removeFromSuperview];
+            self.collectionView.backgroundView = nil;
+            UITabBarController *tabBarController = nil;
+            if (_containeeDelegate) {
+                tabBarController = [_containeeDelegate containeeTabBarController];
+            }
+            else
+                tabBarController = self.tabBarController;
+            
+            [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
+            
+        }
     }
     else
     {
-        [self.collectionView.backgroundView removeFromSuperview];
-        self.collectionView.backgroundView = nil;
+        //use the custom loading view
         UITabBarController *tabBarController = nil;
         if (_containeeDelegate) {
             tabBarController = [_containeeDelegate containeeTabBarController];
@@ -134,6 +152,16 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
             tabBarController = self.tabBarController;
         
         [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
+
+        if (_feedProcessor.loading) {
+            [self.collectionView.backgroundView removeFromSuperview];
+            self.collectionView.backgroundView = _customLoadingView;
+        }
+        else
+        {
+            [self.collectionView.backgroundView removeFromSuperview];
+            self.collectionView.backgroundView = nil;
+        }
 
     }
 }
@@ -188,6 +216,9 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
+    
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.sectionHeadersPinToVisibleBounds = YES;
@@ -202,14 +233,21 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
+    
+    if ([self.collectionView respondsToSelector:@selector(setPrefetchingEnabled:)]) {
+        self.collectionView.prefetchingEnabled = false;
+    }
+    
     if ([_feedProcessor loading] == NO) {
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:[_feedProcessor currentOffset]] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        [self.collectionView setContentOffset:CGPointZero animated:NO];
     }
     
     if ([[_feedProcessor userId] isEqualToString:[CoreManager loginService].currentUserUuid]) {
         _isMyProfile = YES;
     }
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self configureLoadingView];
 }
@@ -299,6 +337,36 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
     [self.navigationController presentViewController:[[UINavigationController alloc ]initWithRootViewController:vc] animated:NO completion:nil];
 
+}
+
+- (void) shouldGoToTop:(NSNotification *)notif{
+    NSInteger selectedIndex = [notif.userInfo[kSelectedTabBarKey] integerValue];
+    BOOL animated = [notif.userInfo[kAnimatedTabBarKey] boolValue];
+    
+    BOOL shouldScrollToTop = NO;
+    if (selectedIndex == STTabBarIndexHome &&
+        _feedProcessor.processorFlowType == STFlowTypeHome) {
+        shouldScrollToTop = YES;
+    }
+    
+    if (selectedIndex == STTabBarIndexExplore &&
+        (_feedProcessor.processorFlowType == STFlowTypeRecent ||
+         _feedProcessor.processorFlowType == STFlowTypePopular)) {
+            shouldScrollToTop = YES;
+    }
+    
+    if (selectedIndex == STTabBarIndexProfile &&
+        _feedProcessor.processorFlowType == STFlowTypeMyGallery) {
+        shouldScrollToTop = YES;
+    }
+    
+    if (shouldScrollToTop) {
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+        [layout invalidateLayout];
+        [self.collectionView setContentOffset:CGPointZero animated:animated];
+
+    }
+    
 }
 #pragma mark - Helpers
 - (NSInteger)postIndexFromIndexPath:(NSIndexPath *)indexPath{
