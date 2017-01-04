@@ -188,7 +188,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     if (_previousSelectedIndex == selectedItem) {
         UINavigationController *navController = (UINavigationController *)[self.viewControllers objectAtIndex:selectedItem];
         if ([[navController viewControllers] count] == 1) {
-            [[CoreManager localNotificationService] postNotificationName:STNotificationShouldGoToTop object:nil userInfo:@{kSelectedTabBarKey:@(selectedItem), kAnimatedTabBarKey:@(NO)}];
+            [[CoreManager localNotificationService] postNotificationName:STNotificationShouldGoToTop object:nil userInfo:@{kSelectedTabBarKey:@(selectedItem), kAnimatedTabBarKey:@(YES)}];
             
         }
     }

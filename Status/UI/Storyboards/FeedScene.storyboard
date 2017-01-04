@@ -501,11 +501,11 @@
                                                     <blurEffect style="light"/>
                                                 </visualEffectView>
                                                 <view clipsSubviews="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="ENs-uA-bc2" customClass="DGActivityIndicatorView">
-                                                    <rect key="frame" x="130" y="130" width="60" height="60"/>
+                                                    <rect key="frame" x="110" y="110" width="100" height="100"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="V6F-pY-LbG"/>
-                                                        <constraint firstAttribute="height" constant="60" id="mCT-5q-Ltf"/>
+                                                        <constraint firstAttribute="width" constant="100" id="V6F-pY-LbG"/>
+                                                        <constraint firstAttribute="height" constant="100" id="mCT-5q-Ltf"/>
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down shaddow" translatesAutoresizingMaskIntoConstraints="NO" id="Nv4-We-BjT">
