@@ -125,7 +125,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [super viewDidLoad];
     _defaultTabBarFrame = self.tabBar.frame;
     [self addCenterButtonWithImage:[UIImage imageNamed:@"camera"]
-                    highlightImage:[UIImage imageNamed:@"camera"]
+                    highlightImage:[UIImage imageNamed:@"camera-selected"]
                             target:self
                             action:@selector(buttonPressed:)];
     // Do any additional setup after loading the view.
@@ -228,6 +228,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
 }
 
 - (void)goToPreviousSelectedIndex {
+    [self.centerButton setHighlighted:NO];
     [self setSelectedIndex:_previousSelectedIndex];
 }
 

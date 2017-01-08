@@ -8,40 +8,28 @@
 
 #import "STBaseObj.h"
 
-//NSString * const kObjectUuidForLoading = @"uuid_3";
-//NSString * const kObjectUuidForNothingToDisplay = @"uuid_1";
-
 @implementation STBaseObj
 
 -(NSString *)debugDescription{
     return [NSString stringWithFormat:@"%@", self.infoDict];
 }
 
-//+ (instancetype)mockObjectLoading{
-//    STBaseObj * obj = [STBaseObj new];
-//    obj.uuid = kObjectUuidForLoading;
-//    return obj;
-//}
-//
-//+ (instancetype)mockObjNothingToDisplay{
-//    STBaseObj * obj = [STBaseObj new];
-//    obj.uuid = kObjectUuidForNothingToDisplay;
-//    obj.mainImageDownloaded = YES;
-//    obj.thumbnailImageDownloaded = YES;
-//    return obj;
-//    
-//}
-//
-//- (BOOL) isLoadingObject{
-//    return [self.uuid isEqualToString:kObjectUuidForLoading];
-//}
-//
-//- (BOOL) isNothingToDisplayObj{
-//    return [self.uuid isEqualToString:kObjectUuidForNothingToDisplay];
-//}
+- (NSString *)genderImageNameForGender:(STProfileGender)gender{
+    NSString *imageName = @"boy";
+    switch (gender) {
+        case STProfileGenderUndefined:
+        case STProfileGenderMale:
+            imageName = @"boy";
+            break;
+        case STProfileGenderFemale:
+            imageName = @"girl";
+            break;
+        default:
+            break;
+    }
+    
+    return imageName;
+}
 
-//- (BOOL) isSpecialObject{
-//    return [self isLoadingObject] || [self isNothingToDisplayObj];
-//}
 
 @end

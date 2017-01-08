@@ -31,7 +31,7 @@
     __weak STGetUsersRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [self urlString];
-        NSInteger limit = 100;
+        NSInteger limit = 20;
         NSMutableDictionary *params = [self getDictParamsWithToken];
         params[@"limit"] = @(limit);
         params[@"offset"] = @(weakSelf.offset);

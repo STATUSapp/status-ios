@@ -12,5 +12,9 @@
 @property(nonatomic, strong) NSNumber *followedByCurrentUser;
 @property(nonatomic, strong) NSString *userName;
 @property(nonatomic, strong) NSString *thumbnail;
+@property (nonatomic, assign) STProfileGender gender;
+
 +(STSuggestedUser *)suggestedUserWithDict:(NSDictionary *)dict;
+
+- (NSString *)genderImage;
 @end

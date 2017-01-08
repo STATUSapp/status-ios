@@ -12,6 +12,12 @@
 //extern NSString * const kObjectUuidForLoading;
 //extern NSString * const kObjectUuidForNothingToDisplay;
 
+typedef NS_ENUM(NSUInteger, STProfileGender) {
+    STProfileGenderUndefined = 0,
+    STProfileGenderMale,
+    STProfileGenderFemale,
+};
+
 @interface STBaseObj : NSObject
 
 @property(nonatomic, strong) NSDictionary *infoDict;
@@ -24,11 +30,6 @@
 @property (nonatomic, strong) NSString * mainImageUrl;
 @property (nonatomic, strong) NSString * thumbnailPhotoUrl;
 
-//+ (instancetype)mockObjectLoading;
-//+ (instancetype)mockObjNothingToDisplay;
-//
-//- (BOOL) isLoadingObject;
-//- (BOOL) isNothingToDisplayObj;
-//- (BOOL) isSpecialObject;
+- (NSString *)genderImageNameForGender:(STProfileGender)gender;
 
 @end

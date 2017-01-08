@@ -33,7 +33,7 @@ CGFloat const kMessageBottomWidth = 37.f;
 }
 - (void)configureCellWithUserProfile:(STUserProfile *)userProfile{
     
-    [_profileImage sd_setImageWithURL:[NSURL URLWithString:userProfile.mainImageUrl] placeholderImage:[UIImage imageNamed:[userProfile genderImageName]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_profileImage sd_setImageWithURL:[NSURL URLWithString:userProfile.mainImageUrl] placeholderImage:[UIImage imageNamed:[userProfile genderImage]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         //TODO: CA - add the placeholders when needed
     }];
     

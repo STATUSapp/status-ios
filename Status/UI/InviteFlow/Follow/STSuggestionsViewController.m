@@ -180,7 +180,7 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     
     STSuggestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"STSuggestionCell"];
     STSuggestedUser *su = [self suggestedUserForIndexpath:indexPath];
-    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:su.thumbnail] placeholderImage:[UIImage imageNamed:@"photo placeholder "]];
+    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:su.thumbnail] placeholderImage:[UIImage imageNamed:[su genderImage]]];
     cell.followButton.tag = [NSIndexPath tagForIndexPath:indexPath];
     
     NSInteger numberOfRowsInSection = [self tableView:tableView numberOfRowsInSection:indexPath.section];

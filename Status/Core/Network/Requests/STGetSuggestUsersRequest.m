@@ -32,7 +32,7 @@
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"offset"] = weakSelf.offset;
-        params[@"limit"] = @(25);
+        params[@"limit"] = @(20);
 
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params

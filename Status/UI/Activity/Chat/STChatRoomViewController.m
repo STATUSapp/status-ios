@@ -90,7 +90,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     NSString *photoLink = _user.thumbnail;
     __weak STChatRoomViewController *weakSelf = self;
     
-    [_userImg sd_setImageWithURL:[NSURL URLWithString:photoLink] placeholderImage:[UIImage imageNamed:@"btn_nrLIkes_normal"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_userImg sd_setImageWithURL:[NSURL URLWithString:photoLink] placeholderImage:[UIImage imageNamed:[_user genderImage]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         userImage = image;
         [weakSelf.tableView reloadData];
         [weakSelf.userImg maskImage:userImage];

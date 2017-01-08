@@ -59,23 +59,6 @@
     self.profileGender = [self.uuid integerValue] % 3 ;
 }
 
-- (NSString *)genderImageName{
-    NSString *imageName = @"boy";
-    switch (self.profileGender) {
-        case STProfileGenderUndefined:
-        case STProfileGenderMale:
-            imageName = @"boy";
-            break;
-        case STProfileGenderFemale:
-            imageName = @"girl";
-            break;
-        default:
-            break;
-    }
-    
-    return imageName;
-}
-
 - (STListUser *)listUserFromProfile{
     STListUser *lu = [STListUser new];
     //these params are the only on needed for now
@@ -83,9 +66,13 @@
     lu.uuid = self.uuid;
     lu.userName = self.fullName;
     lu.thumbnail = self.thumbnailPhotoUrl;
+    lu.gender = self.profileGender;
     
     return lu;
     
 }
 
+- (NSString *)genderImage{
+    return [self genderImageNameForGender:self.profileGender];
+}
 @end

@@ -141,7 +141,8 @@
     lu.uuid = selectedCu.uuid;
     lu.userName = selectedCu.userName;
     lu.thumbnail = selectedCu.thumbnail;
-
+    lu.gender = selectedCu.gender;
+    
     if ([lu.uuid isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;

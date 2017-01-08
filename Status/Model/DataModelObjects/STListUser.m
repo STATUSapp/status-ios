@@ -23,6 +23,9 @@
     
     lu.uuid = [CreateDataModelHelper validStringIdentifierFromValue:dict[@"user_id"]];
     lu.userName = [CreateDataModelHelper validObjectFromDict:dict forKey:@"user_name"];
+    
+#warning remove this whe the BE is ready
+    lu.gender = [lu.uuid integerValue] % 3 ;
     return lu;
 }
 

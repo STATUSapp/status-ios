@@ -167,7 +167,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     STListUser *lu = [_dataSource objectAtIndex:indexPath.row];
     STUserListCell *cell = (STUserListCell *)[tableView dequeueReusableCellWithIdentifier:@"STUserListCell"];
-    [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:lu.thumbnail]];
+    [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:lu.thumbnail] placeholderImage:[UIImage imageNamed:[lu genderImage]]];
    
     cell.userName.text = lu.userName;
     cell.chatButton.tag = cell.followBtn.tag = indexPath.row;

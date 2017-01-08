@@ -16,6 +16,7 @@
 @property (nonatomic, assign) NSInteger unreadMessageCount;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *thumbnail;
+@property (nonatomic, assign) STProfileGender gender;
 
 +(STConversationUser *)conversationUserFromDict:(NSDictionary *)dict;
 @end
