@@ -211,7 +211,6 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     __weak STEditProfileViewController *weakSelf = self;
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -237,10 +236,8 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 
 }
 
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+-(BOOL)prefersStatusBarHidden{
+    return YES;
 }
-
 
 @end

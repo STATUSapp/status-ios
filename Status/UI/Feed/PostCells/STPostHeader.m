@@ -50,7 +50,7 @@
 }
 
 + (CGSize)headerSize{
-    CGSize size = [UIScreen mainScreen].applicationFrame.size;
+    CGSize size = [UIScreen mainScreen].bounds.size;
 
     return CGSizeMake(size.width, 58.f);
 }

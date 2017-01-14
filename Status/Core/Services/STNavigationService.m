@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "FeedCVC.h"
 
-#import "STImagePickerController.h"
 #import "STImagePickerService.h"
 #import "STTabBarViewController.h"
 #import "STImagePickerService.h"
@@ -36,8 +35,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flowWasSelectedFromFooter:) name:STFooterFlowsNotification object:nil];
-
     }
     return self;
 }
@@ -143,27 +140,6 @@
 
 - (void)userDidLoggedOut{
     [self presentLoginScreen];
-}
-
--(void) flowWasSelectedFromFooter:(NSNotification *)notif{
-    NSString *flowType = [[notif userInfo] objectForKey:kFlowTypeKey];
-    if ([flowType isEqualToString:@"home"]) {
-        //go to home tab and refresh the data
-        [self switchToTabBarAtIndex:STTabBarIndexHome popToRootVC:YES];
-        [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
-        
-    }
-    else if ([flowType isEqualToString:@"popular"]){
-        [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexExplore popToRootVC:YES];
-
-    }
-    else if ([flowType isEqualToString:@"recent"]){
-                [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexExplore popToRootVC:YES];
-    }
-    else if ([flowType isEqualToString:@"nearby"]){
-                [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexExplore popToRootVC:YES];
-    }
-
 }
 
 #pragma mark - Helpers

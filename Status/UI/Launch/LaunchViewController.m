@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     UIImage *image = [STUIHelper splashImageWithLogo:YES];
     _launchImage.image = image;
     

@@ -206,10 +206,16 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     feedCVC.userName = userName;
     BOOL userIsMe = [[CoreManager loginService].currentUserUuid isEqualToString:userId];
     STFlowType flowType = userIsMe ? STFlowTypeMyGallery : STFlowTypeUserGallery;
-    
+
     STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:flowType userId:userId];
     feedCVC.feedProcessor = feedProcessor;
     
+    if ([[feedProcessor userId] isEqualToString:[CoreManager loginService].currentUserUuid]) {
+        feedCVC.isMyProfile = YES;
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:feedCVC selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
+
     return feedCVC;
 }
 
@@ -223,14 +229,16 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.sectionHeadersPinToVisibleBounds = YES;
     
-    self.collectionView.contentInset = UIEdgeInsetsMake(0.f, 0.f, self.tabBarController.tabBar.frame.size.height, 0.f);
+    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        self.collectionView.contentInset = UIEdgeInsetsMake(0.f, 0.f, self.tabBarController.tabBar.frame.size.height, 0.f);
+    }
+    
     CGRect tabBarFrame = self.tabBarController.tabBar.frame;
     _initialStartPoint = tabBarFrame.origin;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationObjDownloadSuccess object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationObjUpdated object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationObjDeleted object:_feedProcessor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
@@ -241,10 +249,6 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     
     if ([_feedProcessor loading] == NO) {
         [self.collectionView setContentOffset:CGPointZero animated:NO];
-    }
-    
-    if ([[_feedProcessor userId] isEqualToString:[CoreManager loginService].currentUserUuid]) {
-        _isMyProfile = YES;
     }
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -275,6 +279,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(BOOL)extendedLayoutIncludesOpaqueBars{
+    return YES;
 }
 
 -(void)dealloc{
@@ -327,10 +335,12 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 - (void)dataShouldBeReloaded:(NSNotification *)notif{
-    [_feedProcessor reloadProcessor];
-    [self.collectionView reloadData];
-    [self.collectionView.collectionViewLayout invalidateLayout];
-
+    if (_isMyProfile) {
+        //a new post was uploaded/edited and the profile feed should be reloaded
+        [_feedProcessor reloadProcessor];
+        [self.collectionView reloadData];
+        [self.collectionView.collectionViewLayout invalidateLayout];
+    }
 }
 
 - (void)showSuggestions:(NSNotification *)notif{
@@ -860,10 +870,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 - (IBAction)onShopButtonPressed:(id)sender {
     STPost *post = [self getCurrentPostForButton:sender];
-
     [self.collectionView.collectionViewLayout invalidateLayout];
+
     [self.collectionView performBatchUpdates:^{
-        
+    
         if (post.showShopProducts == NO) {
             [UIView animateWithDuration:1.f animations:^{
                 
@@ -905,7 +915,6 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
     }];
 
-    
     UIButton *shopProductButton = (UIButton *)sender;
     shopProductButton.selected = !shopProductButton.selected;
 

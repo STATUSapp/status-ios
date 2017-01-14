@@ -37,87 +37,51 @@
     
     return fullName;
 }
-+(STAddressBookContact *)contactWithPerson:(ABRecordRef) person{
++(STAddressBookContact *)contactWithPerson:(CNContact*) contact{
     STAddressBookContact *returnObject = [STAddressBookContact new];
-    NSArray *emails = [STAddressBookContact emailsFromPerson:person];
+    NSArray *emails = [STAddressBookContact emailsFromPerson:contact];
     returnObject.emails = emails;
     
-    NSArray *phones = [STAddressBookContact phonesFromPerson:person];
+    NSArray *phones = [STAddressBookContact phonesFromPerson:contact];
     returnObject.phones = phones;
     
-    returnObject.firstName = [STAddressBookContact firstNameForPerson:person];
-    returnObject.lastName = [STAddressBookContact lastNameForPerson:person];
+    returnObject.firstName = [STAddressBookContact firstNameForPerson:contact];
+    returnObject.lastName = [STAddressBookContact lastNameForPerson:contact];
     
-    returnObject.thumbnail = [STAddressBookContact thumbnailForPerson:person];
+    returnObject.thumbnail = [STAddressBookContact thumbnailForPerson:contact];
     
     returnObject.selected = @(0);
     return returnObject;
 
 }
 
-+(NSArray *)emailsFromPerson:(ABRecordRef) person{
-    NSMutableArray *contactEmails = [NSMutableArray new];
-    ABMultiValueRef multiEmails = ABRecordCopyValue(person, kABPersonEmailProperty);
++(NSArray *)emailsFromPerson:(CNContact *) contact{
     
-    for (CFIndex i=0; i<ABMultiValueGetCount(multiEmails); i++) {
-        @autoreleasepool {
-            CFStringRef contactEmailRef = ABMultiValueCopyValueAtIndex(multiEmails, i);
-            NSString *contactEmail = CFBridgingRelease(contactEmailRef);
-            if (contactEmail != nil)[contactEmails addObject:contactEmail];
-        }
+    NSMutableArray *items = [NSMutableArray new];
+    for (CNLabeledValue *item in contact.emailAddresses) {
+        [items addObject:item.value];
     }
-    
-    if (multiEmails != NULL) {
-        CFRelease(multiEmails);
-    }
-    return [NSArray arrayWithArray:contactEmails];
+    return items;
 }
 
-+(NSArray *)phonesFromPerson:(ABRecordRef) person{
-    NSMutableArray *phoneNumbers = [[NSMutableArray alloc] init];
-    ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    
-    for(CFIndex i=0; i<ABMultiValueGetCount(multiPhones); i++) {
-        @autoreleasepool {
-            CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
-            NSString *phoneNumber = CFBridgingRelease(phoneNumberRef);
-            if (phoneNumber != nil)[phoneNumbers addObject:phoneNumber];
-        }
++(NSArray *)phonesFromPerson:(CNContact *) contact{
+    NSMutableArray *items = [NSMutableArray new];
+    for (CNLabeledValue *item in contact.phoneNumbers) {
+        CNPhoneNumber *number = item.value;
+        [items addObject:number.stringValue];
     }
-    
-    if (multiPhones != NULL) {
-        CFRelease(multiPhones);
-    }
-    return [NSArray arrayWithArray:phoneNumbers];
+    return items;
 }
 
-+(NSString *)firstNameForPerson:(ABRecordRef)person{
-    CFStringRef firstName = (CFStringRef)ABRecordCopyValue(person,kABPersonFirstNameProperty);
-    NSString *firstNameStr = [(__bridge NSString*)firstName copy];
-    
-    if (firstName != NULL) {
-        CFRelease(firstName);
-    }
-    return firstNameStr;
++(NSString *)firstNameForPerson:(CNContact *)contact{
+    return contact.familyName;
 }
 
-+(NSString *)lastNameForPerson:(ABRecordRef) person{
-    CFStringRef lastName = (CFStringRef)ABRecordCopyValue(person,kABPersonLastNameProperty);
-    NSString *lastNameStr = [(__bridge NSString*)lastName copy];
-    
-    if (lastName != NULL) {
-        CFRelease(lastName);
-    }
-    return lastNameStr;
++(NSString *)lastNameForPerson:(CNContact *) contact{
+    return contact.givenName;
 }
 
-+(NSData *)thumbnailForPerson:(ABRecordRef)person{
-    CFDataRef imgData = ABPersonCopyImageData(person);
-    NSData *imageData = [NSData dataWithData:(__bridge NSData *)imgData];
-    
-    if (imgData != NULL) {
-        CFRelease(imgData);
-    }
-    return imageData;
++(NSData *)thumbnailForPerson:(CNContact *)contact{
+    return contact.imageData;
 }
 @end

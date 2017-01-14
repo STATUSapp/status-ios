@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, STActivity) {
 };
 
 @interface STNotificationAndChatContainerViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate, STSCustomSegmentProtocol>
+@property (weak, nonatomic) IBOutlet UIView *topContainerView;
 
 @property (weak, nonatomic) IBOutlet UIView *childContainer;
 
@@ -230,9 +231,11 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     CGRect rect = _customSegment.frame;
     rect.origin.x = 0.f;
     rect.origin.y = 0.f;
+    rect.size.width = self.topContainerView.frame.size.width;
+    rect.size.height = self.topContainerView.frame.size.height;
     _customSegment.frame = rect;
     _customSegment.translatesAutoresizingMaskIntoConstraints = YES;
-    [self.view addSubview:_customSegment];
+    [self.topContainerView addSubview:_customSegment];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectNotificationsScreen object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectChatScreen object:nil];

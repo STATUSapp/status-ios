@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
 };
 
 @interface STExploreViewController ()<STSCustomSegmentProtocol, UIPageViewControllerDelegate, UIPageViewControllerDataSource, STSideBySideContaineeProtocol>
+@property (weak, nonatomic) IBOutlet UIView *topViewContainer;
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) UIPageViewController * pageController;
@@ -94,10 +95,12 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
     CGRect rect = _customSegment.frame;
     rect.origin.x = 0.f;
     rect.origin.y = 0.f;
+    rect.size.height = self.topViewContainer.frame.size.height;
+    rect.size.width = self.topViewContainer.frame.size.width;
     _customSegment.frame = rect;
     _customSegment.translatesAutoresizingMaskIntoConstraints = YES;
 
-    [self.view addSubview:_customSegment];
+    [self.topViewContainer addSubview:_customSegment];
     
     NSMutableArray <UIViewController *> *viewControllers = [NSMutableArray new];
     for (int i=0; i<STExploreFlowCount; i++) {
@@ -144,6 +147,10 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
     [self.containerView addSubview:_pageController.view];
     [self addChildViewController:_pageController];
 
+}
+
+-(BOOL)extendedLayoutIncludesOpaqueBars{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

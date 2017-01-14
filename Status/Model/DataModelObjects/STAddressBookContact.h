@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AddressBook/AddressBook.h>
+#import <Contacts/Contacts.h>
 
 @interface STAddressBookContact : NSObject
 @property (nonatomic, strong) NSString *firstName;
@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSArray *phones;
 @property (nonatomic, strong) NSData *thumbnail;
 @property (nonatomic, strong) NSNumber *selected;
-+(STAddressBookContact *)contactWithPerson:(ABRecordRef) person;
++(STAddressBookContact *)contactWithPerson:(CNContact*) contact;
 
 -(NSNumber *)hasEmails;
 -(NSNumber *)hasPhones;

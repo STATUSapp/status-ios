@@ -31,5 +31,5 @@ typedef NS_ENUM(NSUInteger, STProfileGender) {
 @property (nonatomic, strong) NSString * thumbnailPhotoUrl;
 
 - (NSString *)genderImageNameForGender:(STProfileGender)gender;
-
+- (STProfileGender)genderFromString:(NSString *)genderString;
 @end

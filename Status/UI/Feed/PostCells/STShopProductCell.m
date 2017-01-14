@@ -18,7 +18,7 @@
 @implementation STShopProductCell
 
 + (CGSize)cellSize{
-    CGSize size = [UIScreen mainScreen].applicationFrame.size;
+    CGSize size = [UIScreen mainScreen].bounds.size;
     
     //TODO: CA - replace this magic numbers
     CGFloat height = roundf(size.height * 0.23);

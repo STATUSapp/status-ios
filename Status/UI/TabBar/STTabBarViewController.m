@@ -44,6 +44,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     FeedCVC *homeVc = [FeedCVC mainFeedController];
     UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
     homeNavCtrl.navigationBarHidden = YES;
+
     [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
     
     // add explore flow
@@ -99,6 +100,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     }
     
     [self.tabBar setTintColor:[UIColor blackColor]];
+    [self.tabBar setTranslucent:NO];
     
 //    //#f8f8fd
 //    self.tabBar.tintColor = [UIColor colorWithRed:248.f/255.f
@@ -217,6 +219,9 @@ static NSString * storyboardIdentifier = @"tabBarController";
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
     _previousSelectedIndex = self.selectedIndex;
+    if (selectedIndex != STTabBarIndexTakeAPhoto) {
+        [self.centerButton setHighlighted:NO];
+    }
     [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedIndex:selectedIndex];
 }

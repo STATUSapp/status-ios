@@ -21,15 +21,41 @@
 
 @implementation STPostShopProductsCell
 
+-(void)prepareForReuse{
+    [super prepareForReuse];
+
+}
+
+-(void)awakeFromNib{
+    [super awakeFromNib];
+}
+
+-(CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return [STShopProductCell cellSize];
+}
+
 - (void)configureWithProducts:(NSArray <STShopProduct *> *)products{
     _products = products;
+
+    NSMutableArray <NSIndexPath *> *indexPaths = [NSMutableArray new];
+    for (NSInteger i = 0; i< _products.count; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+    }
     [self.produsctsCollection.collectionViewLayout invalidateLayout];
-    [self.produsctsCollection reloadData];
+    NSInteger alreadyItemsCount = [self.produsctsCollection numberOfItemsInSection:0];
+    [self.produsctsCollection performBatchUpdates:^{
+        if (alreadyItemsCount == 0) {
+            [self.produsctsCollection insertItemsAtIndexPaths:indexPaths];
+        }
+//        [self.produsctsCollection reloadData];
+    } completion:^(BOOL finished) {
+        
+    }];
     [self.produsctsCollection layoutIfNeeded];
 }
 
 + (CGSize)cellSize{
-    CGSize screenSize = [UIScreen mainScreen].applicationFrame.size;
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGSize size = [STShopProductCell cellSize];
     size.height = roundf(size.height + 32.f);
     size.width = roundf(screenSize.width);
@@ -53,7 +79,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     STShopProduct *product = [_products objectAtIndex:indexPath.row];
-    NSURL *url = [NSURL URLWithString:[product.productUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *url = [NSURL URLWithString:[product.productUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         [[UIApplication sharedApplication] openURL:url];

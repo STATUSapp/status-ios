@@ -31,7 +31,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1914</string>
+	<string>2061</string>
 	<key>FacebookAppID</key>
 	<string>642056059181757</string>
 	<key>FacebookDisplayName</key>
@@ -76,6 +76,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera will be used for sharing great moments with STATUS friends. </string>
 	<key>NSContactsUsageDescription</key>
 	<string>Contacts will be used to find your firends on Status App. </string>
 	<key>NSLocationWhenInUseUsageDescription</key>

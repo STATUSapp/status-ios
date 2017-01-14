@@ -54,9 +54,9 @@
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
     self.imageSize = CGSizeZero;
 
-//    self.profileGender = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"profileGender"] integerValue];
-#warning remove this whe the BE is ready
-    self.profileGender = [self.uuid integerValue] % 3 ;
+    NSString *userGender = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_gender"];
+
+    self.profileGender = [self genderFromString:userGender];
 }
 
 - (STListUser *)listUserFromProfile{

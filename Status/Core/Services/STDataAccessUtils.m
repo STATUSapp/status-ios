@@ -15,6 +15,8 @@
 #import "STUserProfile.h"
 #import "STConversationUser.h"
 #import "STNotificationObj.h"
+#import "CoreManager.h"
+#import "STLocalNotificationService.h"
 
 @implementation STDataAccessUtils
 
@@ -462,6 +464,8 @@
     STRequestCompletionBlock completion1 = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             
+            [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
+
             NSString * postUuid = postId;
             if(postId == nil)
                 postUuid = response[@"post_id"];

@@ -7,7 +7,7 @@
 //
 
 #import "STContactsManager.h"
-#import <AddressBook/AddressBook.h>
+#import <Contacts/Contacts.h>
 #import "STAddressBookContact.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "STFacebookHelper.h"
@@ -16,6 +16,8 @@
 @interface STContactsManager ()
 
 @property (nonatomic, strong) NSArray *allContacts;
+@property (nonatomic, strong) CNContactStore *contactStore;
+
 
 @end
 
@@ -24,6 +26,7 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
+        _contactStore =[[CNContactStore alloc] init];
     }
     return self;
 }
@@ -33,63 +36,60 @@
 }
 
 - (void)fetchAllContacts {
-    CFErrorRef *error = nil;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
+    
+    NSMutableArray* items = [NSMutableArray new];
 
-    ABRecordRef source = ABAddressBookCopyDefaultSource(addressBook);
-    CFArrayRef allPeople = (ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName));
-    //CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
-    CFIndex nPeople = CFArrayGetCount(allPeople); // bugfix who synced contacts with facebook
-    NSMutableArray* items = [NSMutableArray arrayWithCapacity:nPeople];
+    NSError *error = nil;
     
-    if (!allPeople || !nPeople) {
-        NSLog(@"people nil");
-    }
+    NSArray *keys = [[NSArray alloc]initWithObjects:
+                     CNContactIdentifierKey, CNContactEmailAddressesKey,
+                     CNContactImageDataKey, CNContactPhoneNumbersKey,
+                     CNContactGivenNameKey, CNContactMiddleNameKey,
+                     CNContactFamilyNameKey, nil];
     
+    // Create a request object
+    CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:keys];
+    request.predicate = nil;
     
-    for (int i = 0; i < nPeople; i++) {
-        
-        @autoreleasepool {
-            
-            ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
-            STAddressBookContact *contact = [STAddressBookContact contactWithPerson:person];
-            [items addObject:contact];
-            
-        }
-    }
-    if (allPeople)
-        CFRelease(allPeople);
-    
-    CFRelease(addressBook);
-    CFRelease(source);
-    
+    [_contactStore enumerateContactsWithFetchRequest:request
+                                              error:&error
+                                         usingBlock:^(CNContact* __nonnull contact, BOOL* __nonnull stop)
+     {
+         if (contact) {
+             STAddressBookContact *person = [STAddressBookContact contactWithPerson:contact];
+             [items addObject:person];
+         }
+     }];
     _allContacts = [NSArray arrayWithArray:items];
     [self syncContactsWithTheServer];
+
 }
 
 -(void)updateContactsList{
-    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
-    __weak STContactsManager *weakSelf = self;
-    void(^statusCompletion)(bool, CFErrorRef) = ^void(bool granted, CFErrorRef error){
-        if (granted==YES) {
-            [weakSelf fetchAllContacts];
-        }
-    };
     
-    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
-        ABAddressBookRequestAccessWithCompletion(addressBookRef, statusCompletion);
+    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    
+    if (status == CNAuthorizationStatusNotDetermined)
+    {
+        __weak STContactsManager *weakSelf = self;
+        [_contactStore requestAccessForEntityType:CNEntityTypeContacts
+                                completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                    if (granted) {
+                                        [weakSelf fetchAllContacts];
+                                    }
+                                }];
+
     }
-    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
-        
-        [self fetchAllContacts];
+    else if( status == CNAuthorizationStatusDenied ||
+       status == CNAuthorizationStatusRestricted)
+    {
+        NSLog(@"access denied");
+        [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"You should grant access to the contacts list for STATUS App" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
     }
     else
     {
-        [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"You should grant access to the contacts list for STATUS App" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-
+        [self fetchAllContacts];
     }
-    
-    CFRelease(addressBookRef);
 }
 
 -(void) syncContactsWithTheServer{

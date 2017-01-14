@@ -32,10 +32,15 @@
 #import "CreateDataModelHelper.h"
 #import "STLocalNotificationService.h"
 
+#import "STUserProfile.h"
+#import "CoreManager.h"
+#import "STUserProfilePool.h"
+
 @interface STFacebookLoginController ()<FBSDKLoginButtonDelegate>
 
 @property (nonatomic, strong) NSString *currentUserId;
 @property (nonatomic, strong) NSDictionary *fetchedUserData;
+@property (nonatomic, strong) STUserProfile *loggedInUserProfile;
 
 @end
 
@@ -64,7 +69,15 @@
     return _currentUserId;
 }
 - (NSString *)currentUserFullName{
-    return _fetchedUserData[@"full_name"];
+    NSString *fullName = _fetchedUserData[@"full_name"];
+    
+    if (fullName == nil) {
+        _loggedInUserProfile = [[CoreManager profilePool] getUserProfileWithId:[self currentUserId]];
+        if (_loggedInUserProfile) {
+            return [_loggedInUserProfile fullName];
+        }
+    }
+    return fullName;
 }
 
 - (void)startLoginIfPossible {
@@ -167,6 +180,7 @@
         };
         
         STRequestFailureBlock failBlock = ^(NSError *error){
+            NSLog(@"Error: %@", error.debugDescription);
         };
         
         STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){

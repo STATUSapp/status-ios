@@ -51,9 +51,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [application setStatusBarHidden:YES];
-    
+{    
     // setup Mobile App Tracker
     
     // Account Configuration info - must be set

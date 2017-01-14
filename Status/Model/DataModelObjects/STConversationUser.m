@@ -26,8 +26,8 @@
     cu.unreadMessageCount = [cu.infoDict[@"unread_messages_count"] integerValue];
     cu.userName = [CreateDataModelHelper validObjectFromDict:cu.infoDict forKey:@"user_name"];
     
-#warning remove this whe the BE is ready
-    cu.gender = [cu.uuid integerValue] % 3 ;
+    NSString *userGender = [CreateDataModelHelper validObjectFromDict:dict forKey:@"user_gender"];
+    cu.gender = [cu genderFromString:userGender];
 
     return cu;
     

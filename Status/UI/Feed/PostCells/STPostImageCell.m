@@ -73,7 +73,7 @@
 }
 
 + (CGSize)celSizeForPost:(STPost *)post{
-    CGSize size = [UIScreen mainScreen].applicationFrame.size;
+    CGSize size = [UIScreen mainScreen].bounds.size;
 
 //    if (!post.mainImageDownloaded &&
 //        !post.thumbnailImageDownloaded) {

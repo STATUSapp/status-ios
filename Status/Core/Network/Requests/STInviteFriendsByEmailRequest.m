@@ -59,7 +59,7 @@
             NSData *dictData = [NSJSONSerialization dataWithJSONObject:obj options:NSJSONWritingPrettyPrinted error:nil];
             keyValueString = [[NSString alloc] initWithData:dictData encoding:NSUTF8StringEncoding];
         }
-        NSString *escapedString = [keyValueString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        NSString *escapedString = [keyValueString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 
         NSString *param = [NSString stringWithFormat:@"%@=%@", key, escapedString];
         [parameterArray addObject:param];

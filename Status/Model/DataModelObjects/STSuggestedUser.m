@@ -17,8 +17,8 @@
     sUser.followedByCurrentUser = dict[@"followed_by_current_user"];
     sUser.userName = [CreateDataModelHelper validObjectFromDict:dict forKey:@"user_name"];
     sUser.thumbnail = [CreateDataModelHelper validObjectFromDict:dict forKey:@"user_photo"];
-#warning remove this whe the BE is ready
-    sUser.gender = [sUser.uuid integerValue] % 3 ;
+    NSString *userGender = [CreateDataModelHelper validObjectFromDict:dict forKey:@"user_gender"];
+    sUser.gender = [sUser genderFromString:userGender];
 
     return sUser;
 }

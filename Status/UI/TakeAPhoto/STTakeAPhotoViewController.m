@@ -72,8 +72,7 @@
 //    NSString *postId = notif.userInfo[kPostIdKey];
 //    FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postId];
 //    [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
     [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexProfile popToRootVC:YES];
 }
 
@@ -125,6 +124,10 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
+}
+
+-(BOOL)prefersStatusBarHidden{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

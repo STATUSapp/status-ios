@@ -31,5 +31,14 @@
     return imageName;
 }
 
+- (STProfileGender)genderFromString:(NSString *)genderString{
+    STProfileGender gender = STProfileGenderMale;
+    
+    if ([genderString isEqualToString:@"female"]) {
+        gender = STProfileGenderFemale;
+    }
+    
+    return gender;
+}
 
 @end

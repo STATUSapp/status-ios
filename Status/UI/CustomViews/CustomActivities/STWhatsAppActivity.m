@@ -47,7 +47,7 @@
     
     if (message)
     {
-        url = [NSString stringWithFormat:@"%@send?text=%@",url,[message stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        url = [NSString stringWithFormat:@"%@send?text=%@",url,[message stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     }
     
     return [NSURL URLWithString:url];

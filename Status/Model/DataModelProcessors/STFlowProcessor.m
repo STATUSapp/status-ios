@@ -137,7 +137,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && index!=0;
 //    shouldGetNextBatch = NO;
     if (shouldGetNextBatch) {
-            [self getMoreData];
+//            [self getMoreData];
         }
     if (!setSeenRequired) {
         return;
@@ -478,6 +478,8 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
                 [STDataAccessUtils getUserProfileForUserId:_userId
                                              andCompletion:^(NSArray *objects, NSError *error) {
                                                  _userProfile = [objects firstObject];
+                                                 [[CoreManager profilePool] addProfiles:@[_userProfile]];
+
                                                  [STDataAccessUtils getPostsForUserId:_userId
                                                                                offset:offset
                                                                        withCompletion:completion];
