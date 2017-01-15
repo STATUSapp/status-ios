@@ -9,7 +9,7 @@
 #import "UserProfileBioCell.h"
 #import "STUserProfile.h"
 
-CGFloat const kCellHeightOffset = 22.f;
+CGFloat const kCellHeightOffset = 8.f;
 CGFloat const kBioLabelWidthOffset = 28.f;
 
 @interface UserProfileBioCell()

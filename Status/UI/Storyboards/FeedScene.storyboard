@@ -24,7 +24,7 @@
         <scene sceneID="gdD-po-VFS">
             <objects>
                 <collectionViewController automaticallyAdjustsScrollViewInsets="NO" id="kUw-q3-wvD" customClass="FeedCVC" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -356,7 +356,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Fashion Designer.  Known for exotic prints and for creating the sand blasted look for jeans. Livin' the dream." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-qF-e7M">
-                                            <rect key="frame" x="14" y="14" width="292" height="48"/>
+                                            <rect key="frame" x="14" y="0.0" width="292" height="62"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -366,7 +366,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="2eP-qF-e7M" secondAttribute="trailing" constant="14" id="G2V-aV-hIt"/>
                                     <constraint firstItem="2eP-qF-e7M" firstAttribute="leading" secondItem="9lJ-pS-CRA" secondAttribute="leading" constant="14" id="jbU-Jr-nIT"/>
-                                    <constraint firstItem="2eP-qF-e7M" firstAttribute="top" secondItem="9lJ-pS-CRA" secondAttribute="top" constant="14" id="n0b-ho-yfg"/>
+                                    <constraint firstItem="2eP-qF-e7M" firstAttribute="top" secondItem="9lJ-pS-CRA" secondAttribute="top" id="n0b-ho-yfg"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="2eP-qF-e7M" secondAttribute="bottom" id="puW-VE-XCm"/>
                                 </constraints>
                                 <size key="customSize" width="320" height="70"/>
@@ -414,14 +414,14 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileNoPhotosCell" id="qlV-vh-foT" customClass="UserProfileNoPhotosCell">
-                                <rect key="frame" x="0.0" y="540" width="320" height="320"/>
+                                <rect key="frame" x="0.0" y="540" width="320" height="304"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="304"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gGv-JS-nqj">
-                                            <rect key="frame" x="30" y="31" width="260" height="248"/>
+                                            <rect key="frame" x="30" y="17" width="260" height="239"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no picture" translatesAutoresizingMaskIntoConstraints="NO" id="99V-7s-0RN">
                                                     <rect key="frame" x="74" y="0.0" width="111" height="111"/>
@@ -431,7 +431,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no photos to be shown yet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fup-2S-Eo8">
-                                                    <rect key="frame" x="25" y="145" width="211" height="13"/>
+                                                    <rect key="frame" x="25" y="134" width="211" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="13" id="Db2-lb-nEU"/>
                                                         <constraint firstAttribute="width" constant="211" id="rWA-Gi-7eu"/>
@@ -441,7 +441,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Tk-I5-4gs">
-                                                    <rect key="frame" x="20" y="202" width="220" height="46"/>
+                                                    <rect key="frame" x="20" y="193" width="220" height="46"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="220" id="A9c-mx-lvJ"/>
                                                         <constraint firstAttribute="height" constant="46" id="QuC-o9-y1H"/>
@@ -458,9 +458,9 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="260" id="1HR-9A-PDC"/>
-                                                <constraint firstItem="1Tk-I5-4gs" firstAttribute="top" secondItem="Fup-2S-Eo8" secondAttribute="bottom" constant="44" id="5F4-XH-2Yi"/>
-                                                <constraint firstItem="Fup-2S-Eo8" firstAttribute="top" secondItem="99V-7s-0RN" secondAttribute="bottom" constant="34" id="5eN-kU-V7g"/>
-                                                <constraint firstAttribute="height" constant="248" id="T8t-Vt-jqi"/>
+                                                <constraint firstItem="1Tk-I5-4gs" firstAttribute="top" secondItem="Fup-2S-Eo8" secondAttribute="bottom" constant="46" id="5F4-XH-2Yi"/>
+                                                <constraint firstItem="Fup-2S-Eo8" firstAttribute="top" secondItem="99V-7s-0RN" secondAttribute="bottom" constant="23" id="5eN-kU-V7g"/>
+                                                <constraint firstAttribute="height" constant="239" id="T8t-Vt-jqi"/>
                                                 <constraint firstItem="Fup-2S-Eo8" firstAttribute="leading" secondItem="gGv-JS-nqj" secondAttribute="leading" constant="25" id="bna-n2-qpx"/>
                                                 <constraint firstItem="1Tk-I5-4gs" firstAttribute="leading" secondItem="gGv-JS-nqj" secondAttribute="leading" constant="20" id="hxV-3w-ipk"/>
                                                 <constraint firstItem="99V-7s-0RN" firstAttribute="top" secondItem="gGv-JS-nqj" secondAttribute="top" id="nLp-Z0-hve"/>
@@ -471,15 +471,15 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="gGv-JS-nqj" firstAttribute="centerX" secondItem="qlV-vh-foT" secondAttribute="centerX" id="UH8-1U-Qxr"/>
-                                    <constraint firstItem="gGv-JS-nqj" firstAttribute="top" secondItem="qlV-vh-foT" secondAttribute="topMargin" constant="23" id="VNz-Vf-vH8"/>
+                                    <constraint firstItem="gGv-JS-nqj" firstAttribute="top" secondItem="qlV-vh-foT" secondAttribute="topMargin" constant="9" id="VNz-Vf-vH8"/>
                                 </constraints>
-                                <size key="customSize" width="320" height="320"/>
+                                <size key="customSize" width="320" height="304"/>
                                 <connections>
                                     <outlet property="uploadPhotoButton" destination="1Tk-I5-4gs" id="I6J-jp-COQ"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STPostImageCell" id="FUh-ej-yk9" customClass="STPostImageCell">
-                                <rect key="frame" x="0.0" y="860" width="320" height="320"/>
+                                <rect key="frame" x="0.0" y="844" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
@@ -579,7 +579,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STPostDetailsCell" id="FQx-X6-2sZ" customClass="STPostDetailsCell">
-                                <rect key="frame" x="0.0" y="1180" width="320" height="120"/>
+                                <rect key="frame" x="0.0" y="1164" width="320" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
@@ -648,7 +648,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STPostShopProductsCell" id="7CW-CG-oqC" customClass="STPostShopProductsCell">
-                                <rect key="frame" x="0.0" y="1300" width="320" height="199"/>
+                                <rect key="frame" x="0.0" y="1284" width="320" height="199"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>

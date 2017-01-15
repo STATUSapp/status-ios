@@ -15,6 +15,6 @@
         return CGSizeZero;
     }
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    return CGSizeMake(screenSize.width, 320.f);
+    return CGSizeMake(screenSize.width, 304.f);
 }
 @end
