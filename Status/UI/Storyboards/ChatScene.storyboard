@@ -20,7 +20,7 @@
         <!--Chat Room View Controller-->
         <scene sceneID="WPx-TS-1CC">
             <objects>
-                <viewController storyboardIdentifier="chat_room" id="jBq-zi-zpJ" customClass="STChatRoomViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chat_room" extendedLayoutIncludesOpaqueBars="YES" id="jBq-zi-zpJ" customClass="STChatRoomViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BMk-t1-dFo"/>
                         <viewControllerLayoutGuide type="bottom" id="y3f-3J-p2q"/>
@@ -343,7 +343,7 @@
             <objects>
                 <navigationController storyboardIdentifier="messages_nav_ctrl" automaticallyAdjustsScrollViewInsets="NO" id="GZO-2G-L0p" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Mts-ui-5Bm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mts-ui-5Bm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -419,7 +419,7 @@
                                         <rect key="frame" x="0.0" y="22" width="375" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x5b-Y0-Kgr" id="a4d-zg-yTA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="87.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WRT-Z7-HjA">
@@ -430,12 +430,12 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNJ-Pd-uQH">
-                                                    <rect key="frame" x="82" y="11" width="71.5" height="16"/>
+                                                    <rect key="frame" x="82" y="11" width="69.5" height="19"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="16"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last message will be placed here last message will be placed here" lineBreakMode="tailTruncation" numberOfLines="3" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="188" translatesAutoresizingMaskIntoConstraints="NO" id="N6J-My-YGP">
-                                                    <rect key="frame" x="82" y="35" width="243" height="42"/>
+                                                    <rect key="frame" x="82" y="28" width="243" height="49"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
                                                     <color key="textColor" red="0.45082345604896545" green="0.45000547170639038" blue="0.47532406449317932" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -463,14 +463,14 @@
                                                     <rect key="frame" x="309" y="13" width="58" height="20"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat time icon" translatesAutoresizingMaskIntoConstraints="NO" id="EyJ-nV-0ds">
-                                                            <rect key="frame" x="20.5" y="1" width="19" height="19"/>
+                                                            <rect key="frame" x="17" y="1" width="19" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="19" id="NWH-Ke-hnd"/>
                                                                 <constraint firstAttribute="height" constant="19" id="WMU-xc-lR1"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6JA-Sd-CcG">
-                                                            <rect key="frame" x="42.5" y="2" width="12.5" height="17"/>
+                                                            <rect key="frame" x="39" y="2" width="16" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="ItY-OL-rWC"/>
                                                             </constraints>
@@ -586,7 +586,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OGj-r7-V9E" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="TYM-KY-JjD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TYM-KY-JjD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

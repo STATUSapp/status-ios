@@ -81,15 +81,15 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [tabBarControllers insertObject:profileNav atIndex:STTabBarIndexProfile];
     [self setViewControllers:tabBarControllers animated:NO];
     
-    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[UIImage imageNamed:@"home"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setImage:[UIImage imageNamed:@"search"]];
-//    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[UIImage imageNamed:@"camera"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[UIImage imageNamed:@"profile"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[[UIImage imageNamed:@"home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setImage:[[UIImage imageNamed:@"search"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+//    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[[UIImage imageNamed:@"camera"]  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[[UIImage imageNamed:@"profile"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[UIImage imageNamed:@"home-selected"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setSelectedImage:[UIImage imageNamed:@"search-selected"]];
-//    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[UIImage imageNamed:@"camera"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[UIImage imageNamed:@"profile-selected"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[[UIImage imageNamed:@"home-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setSelectedImage:[[UIImage imageNamed:@"search-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+//    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[[UIImage imageNamed:@"camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[[UIImage imageNamed:@"profile-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     
     [self setMessagesIcon];
@@ -114,13 +114,13 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
 }
 - (void)setActivityIcon {
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"activity"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"activity-selected"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[[UIImage imageNamed:@"activity"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[[UIImage imageNamed:@"activity-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 }
 
 - (void)setMessagesIcon {
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[UIImage imageNamed:@"messages"]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[UIImage imageNamed:@"messages-selected"]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[[UIImage imageNamed:@"messages"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[[UIImage imageNamed:@"messages-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 }
 
 - (void)viewDidLoad {
