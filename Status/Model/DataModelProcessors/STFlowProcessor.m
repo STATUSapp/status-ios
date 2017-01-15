@@ -137,7 +137,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && index!=0;
 //    shouldGetNextBatch = NO;
     if (shouldGetNextBatch) {
-//            [self getMoreData];
+            [self getMoreData];
         }
     if (!setSeenRequired) {
         return;
