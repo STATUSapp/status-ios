@@ -143,8 +143,8 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         return;
     }
     
-    if (self.flowType == STFlowTypePopular ||
-        self.flowType == STFlowTypeRecent ||
+    if (/*self.flowType == STFlowTypePopular ||
+        self.flowType == STFlowTypeRecent ||*/
         self.flowType == STFlowTypeHome) {
 
         if (post.postSeen == TRUE) {
