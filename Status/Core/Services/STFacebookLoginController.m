@@ -221,8 +221,8 @@
             if (info[@"gender"]!=nil) {
                 userInfo[@"gender"] = info[@"gender"];
             }
-            if (info[@"bio"]!=nil) {
-                userInfo[@"bio"] = info[@"bio"];
+            if (info[@"about"]!=nil) {
+                userInfo[@"bio"] = info[@"about"];
             }
             if (info[@"location"][@"name"]!=nil) {
                 userInfo[@"location"] = info[@"location"][@"name"];

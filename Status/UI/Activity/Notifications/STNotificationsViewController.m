@@ -78,10 +78,14 @@ const float kNoNotifHeight = 24.f;
         if (!error) {
             BOOL shouldShowPlaceholder = _notificationDataSource.count > 0;
             weakSelf.noNotifLabel.hidden = shouldShowPlaceholder;
+            weakSelf.notificationTable.hidden = !shouldShowPlaceholder;
             [weakSelf.notificationTable reloadData];
         }
         else
+        {
             weakSelf.noNotifLabel.hidden = NO;
+            weakSelf.notificationTable.hidden = YES;
+        }
     }];
 }
 

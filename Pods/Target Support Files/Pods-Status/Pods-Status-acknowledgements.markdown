@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 ## Appirater
 
-Copyright 2015. Arash Payan. This library is distributed under the terms of the MIT/X11.
+Copyright 2016. Arash Payan. This library is distributed under the terms of the MIT/X11.
 
 ## Bolts
 

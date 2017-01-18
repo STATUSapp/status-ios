@@ -192,7 +192,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 
 - (void)requestForExtendedInfoWithCompletion:(void (^)(NSDictionary *info))completion {
     
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me?fields=birthday,email,picture.type(large),name,gender,bio,location"
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me?fields=birthday,email,picture.type(large),name,gender,about,location"
                                                                    parameters:nil];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
