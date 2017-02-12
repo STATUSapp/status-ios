@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "STRequests.h"
 
+@class STShopProduct;
+
 typedef void (^STDataAccessCompletionBlock)(NSArray *objects, NSError *error);
 typedef void (^STDataUploadCompletionBlock)(NSError *error);
 @interface STDataAccessUtils : NSObject
@@ -57,6 +59,7 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 + (void)editPpostWithId:(NSString *)postId
        withNewImageData:(NSData *)imageData
          withNewCaption:(NSString *)newCaption
+       withShopProducts:(NSArray <STShopProduct *> *) shopProducts
          withCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload post stuff

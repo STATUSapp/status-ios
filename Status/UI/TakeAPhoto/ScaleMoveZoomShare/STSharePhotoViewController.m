@@ -25,6 +25,8 @@
 #import "STLocalNotificationService.h"
 #import "STTabBarViewController.h"
 
+#import "STShopProduct.h"
+
 static NSInteger const  kMaxCaptionLenght = 250;
 
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
@@ -51,6 +53,9 @@ static NSInteger const  kMaxCaptionLenght = 250;
 @property (assign, nonatomic) BOOL isTwitterAvailable;
 @property (weak, nonatomic) IBOutlet UILabel *writeCaptionPlaceholder;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
+
+//initialized with the post.shopProducts if exists and then new items can be added/removed
+@property (nonatomic, strong) NSMutableArray<STShopProduct *> *shopProducts;
 
 @end
 
@@ -89,9 +94,11 @@ static NSInteger const  kMaxCaptionLenght = 250;
     
     if (_post) {
         _captiontextView.text = _post.caption;
+        _shopProducts = [NSMutableArray arrayWithArray:_post.shopProducts];
     }
     else{
         _captiontextView.text = @"";
+        _shopProducts = [@[] mutableCopy];
     }
     _captiontextView.delegate = self;
     _writeCaptionPlaceholder.hidden = _captiontextView.text.length>0;
@@ -195,6 +202,7 @@ static NSInteger const  kMaxCaptionLenght = 250;
         [STDataAccessUtils editPpostWithId:_post.uuid
                           withNewImageData:_imgData
                             withNewCaption:_captiontextView.text
+                          withShopProducts:_shopProducts
                             withCompletion:^(NSArray *objects, NSError *error) {
                                 if (!error) {
                                     STPost *post = [objects firstObject];

@@ -12,6 +12,7 @@
 #import "STUsersPool.h"
 #import "STPostsPool.h"
 #import "STPost.h"
+#import "STShopProduct.h"
 #import "STUserProfile.h"
 #import "STConversationUser.h"
 #import "STNotificationObj.h"
@@ -459,8 +460,13 @@
 + (void)editPpostWithId:(NSString *)postId
            withNewImageData:(NSData *)imageData
          withNewCaption:(NSString *)newCaption
+       withShopProducts:(NSArray <STShopProduct *> *) shopProducts
          withCompletion:(STDataAccessCompletionBlock)completion{
 
+    //check if all the shop products have a valid uuid
+    //if not, upload all the shop_products, obtain an id and then upload the post
+    
+    
     STRequestCompletionBlock completion1 = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             
