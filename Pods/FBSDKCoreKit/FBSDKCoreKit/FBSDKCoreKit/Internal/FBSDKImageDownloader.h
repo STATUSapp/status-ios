@@ -1,4 +1,4 @@
-// Copyright 2004-present Facebook. All Rights Reserved.
+// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
 // copy, modify, and distribute this software in source code or binary form for use
@@ -16,26 +16,26 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <FBAudienceNetwork/FBAdChoicesView.h>
-#import <FBAudienceNetwork/FBAdDefines.h>
-#import <FBAudienceNetwork/FBAdSettings.h>
-#import <FBAudienceNetwork/FBAdView.h>
-#import <FBAudienceNetwork/FBInstreamAdView.h>
-#import <FBAudienceNetwork/FBInterstitialAd.h>
-#import <FBAudienceNetwork/FBMediaView.h>
-#import <FBAudienceNetwork/FBNativeAd.h>
-#import <FBAudienceNetwork/FBNativeAdCollectionViewAdProvider.h>
-#import <FBAudienceNetwork/FBNativeAdCollectionViewCellProvider.h>
-#import <FBAudienceNetwork/FBNativeAdScrollView.h>
-#import <FBAudienceNetwork/FBNativeAdTableViewAdProvider.h>
-#import <FBAudienceNetwork/FBNativeAdTableViewCellProvider.h>
-#import <FBAudienceNetwork/FBNativeAdView.h>
-#import <FBAudienceNetwork/FBNativeAdsManager.h>
-#import <FBAudienceNetwork/FBRewardedVideoAd.h>
+/*
+  simple class to manage image downloads
 
-// NOTE: Any changes should also be made to the module.modulemap
-// to ensure comptability with Swift apps using Cocoapods
+ this class is not smart enough to dedupe identical requests in flight.
+ */
+@interface FBSDKImageDownloader : NSObject
 
-#define FB_AD_SDK_VERSION @"4.19.0"
++ (instancetype)sharedInstance;
+
+/*
+  download an image or retrieve it from cache
+ - Parameter url: the url to download
+ - Parameter ttl: the amount of time (in seconds) that using a cached version is acceptable.
+ - Parameter completion: the callback with the image - for simplicity nil is returned rather than surfacing an error.
+ */
+- (void)downloadImageWithURL:(NSURL *)url ttl:(NSTimeInterval)ttl completion:(void(^)(UIImage* image))completion;
+
+- (void)removeAll;
+
+@end
