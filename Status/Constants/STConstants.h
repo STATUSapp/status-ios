@@ -150,6 +150,11 @@ extern NSString *const kSyncContacts;
 extern NSString *const kGetFriendsYouShouldFollow;
 extern NSString *const kGetPeopleYouShouldFollow;
 extern NSString *const kGetFriendsPeopleYouShouldFollow;
+extern NSString *const kUploadShopProduct;
+extern NSString *const kGetCatalogParentCategories;
+extern NSString *const kGetCatalofCategories;
+extern NSString *const kGetBrands;
+
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

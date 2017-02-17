@@ -12,6 +12,9 @@
 
 @property (nonatomic, strong) NSString *productUrl;
 
+//this will exists only for client-added products
+@property (nonatomic, strong) UIImage *localImage;
+
 + (instancetype)shopProductWithDict:(NSDictionary *)postDict;
 
 @end

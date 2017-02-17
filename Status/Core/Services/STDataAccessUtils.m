@@ -12,12 +12,16 @@
 #import "STUsersPool.h"
 #import "STPostsPool.h"
 #import "STPost.h"
+#import "STCatalogParentCategory.h"
+#import "STCatalogCategory.h"
+#import "STBrandObj.h"
 #import "STShopProduct.h"
 #import "STUserProfile.h"
 #import "STConversationUser.h"
 #import "STNotificationObj.h"
 #import "CoreManager.h"
 #import "STLocalNotificationService.h"
+#import "STShopProductsUploader.h"
 
 @implementation STDataAccessUtils
 
@@ -248,6 +252,78 @@
                        }];
 }
 
+#pragma mark - Shop Products
+
++ (void)getCatalogParentEntitiesWithCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetCatalogParentCategoriesRequest getCatalogParentEntities:^(id response, NSError *error) {
+        
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            id data = response[@"data"];
+            NSMutableArray *result = [@[] mutableCopy];
+            for (NSDictionary *dict in data) {
+                STCatalogParentCategory *pCat = [STCatalogParentCategory parentCategoryFromDict:dict];
+                [result addObject:pCat];
+            }
+            
+            completion(result, nil);
+        }
+        else
+            completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
+
+        
+    } failure:^(NSError *error) {
+        completion(nil, error);
+    }];
+}
+
++ (void)getCatalogCategoriesForParentCategoryId:(NSString *) parentCategoryId
+                                 withCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetCatalogCategoriesRequest getCatalogCategoriesForparentCategoryId:parentCategoryId
+                                                     withCompletion:^(id response, NSError *error) {
+                                                         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                                                             id data = response[@"data"];
+                                                             NSMutableArray *result = [@[] mutableCopy];
+                                                             for (NSDictionary *dict in data) {
+                                                                 STCatalogCategory *category = [STCatalogCategory categoryFromDict:dict];
+                                                                 [result addObject:category];
+                                                             }
+                                                             
+                                                             completion(result, nil);
+                                                         }
+                                                         else
+                                                             completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
+
+                                                     } failure:^(NSError *error) {
+                                                         completion(nil, error);
+                                                         
+                                                     }];
+}
+
++ (void)getBrandsEntitiesWithCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetBrandsRequest getBrandsEntities:^(id response, NSError *error) {
+        
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            id data = response[@"data"];
+            NSMutableArray *result = [@[] mutableCopy];
+            for (NSDictionary *dict in data) {
+                STBrandObj *brandObj = [STBrandObj brandObjFromDict:dict];
+                [result addObject:brandObj];
+            }
+            
+            completion(result, nil);
+        }
+        else
+            completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
+
+        
+    } failure:^(NSError *error) {
+        completion(nil, error);
+        
+    }];
+    
+}
+
+
 #pragma mark - Get Posts
 
 + (STRequestCompletionBlock)postsDefaultHandlerWithCompletion:(STDataAccessCompletionBlock)completion
@@ -465,26 +541,24 @@
 
     //check if all the shop products have a valid uuid
     //if not, upload all the shop_products, obtain an id and then upload the post
-    
-    
     STRequestCompletionBlock completion1 = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             
             [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
-
+            
             NSString * postUuid = postId;
             if(postId == nil)
                 postUuid = response[@"post_id"];
-
+            
             [STDataAccessUtils getPostWithPostId:postUuid
                                   withCompletion:^(NSArray *objects, NSError *error) {
-                if (!error) {
-                    [[CoreManager postsPool] addPosts:objects];
-                    completion(objects, nil);
-                }
-                else
-                    completion(nil, error);
-            }];
+                                      if (!error) {
+                                          [[CoreManager postsPool] addPosts:objects];
+                                          completion(objects, nil);
+                                      }
+                                      else
+                                          completion(nil, error);
+                                  }];
         }
         else
         {
@@ -498,11 +572,25 @@
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         completion(nil,error);
     };
-    [STUploadPostRequest uploadPostForId:postId
-                                withData:imageData
-                              andCaption:newCaption
-                          withCompletion:completion1
-                                 failure:failBlock];
+
+    
+    shopProductsCompletion shopProductCompletion = ^(NSArray<STShopProduct *> *shopProds, ShopProductsUploadStatus status) {
+        if (status == ShopProductsUploadStatusComplete) {
+            [STUploadPostRequest uploadPostForId:postId
+                                        withData:imageData
+                                      andCaption:newCaption
+                                    shopProducts:shopProds
+                                  withCompletion:completion1
+                                         failure:failBlock];
+        }
+        else
+            failBlock([NSError errorWithDomain:@"com.status.prerequisite" code:10001 userInfo:nil]);
+    };
+    
+    [[STShopProductsUploader new] uploadShopProducts:shopProducts
+                                      withCompletion:shopProductCompletion];
+
+    
 
 }
 

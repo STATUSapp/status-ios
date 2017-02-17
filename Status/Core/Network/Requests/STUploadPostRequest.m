@@ -7,11 +7,13 @@
 //
 
 #import "STUploadPostRequest.h"
+#import "STShopProduct.h"
 
 @implementation STUploadPostRequest
 + (void)uploadPostForId:(NSString *)postId
                withData:(NSData*)postData
              andCaption:(NSString *)caption
+           shopProducts:(NSArray <STShopProduct *> *)shopProducts
          withCompletion:(STRequestCompletionBlock)completion
                 failure:(STRequestFailureBlock)failure{
     
@@ -23,6 +25,7 @@
     request.postId = postId;
     request.caption = caption;
     request.postData = postData;
+    request.shopProducts = shopProducts;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -38,6 +41,17 @@
         else if (weakSelf.caption) {
             params[@"caption"] = weakSelf.caption;
         }
+        
+        NSMutableArray *stopProductsIds = [@[] mutableCopy];
+        for (STShopProduct *sp in weakSelf.shopProducts) {
+            if (sp.uuid && [sp.uuid length]) {
+                [stopProductsIds addObject:sp.uuid];
+            }
+        }
+        if (stopProductsIds.count) {
+            params[@"tagged_products"] = stopProductsIds;
+        }
+        
         AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
         AFJSONResponseSerializer *jsonReponseSerializer;
         jsonReponseSerializer = [STNetworkManager customResponseSerializer];

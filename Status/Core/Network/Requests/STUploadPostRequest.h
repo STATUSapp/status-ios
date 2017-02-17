@@ -7,14 +7,18 @@
 //
 
 #import "STBaseRequest.h"
+@class STShopProduct;
 
 @interface STUploadPostRequest : STBaseRequest
 @property(nonatomic, strong)NSString *postId;
 @property(nonatomic, strong)NSString *caption;
 @property(nonatomic, strong)NSData *postData;
+@property(nonatomic, strong)NSArray <STShopProduct *> *shopProducts;
+
 + (void)uploadPostForId:(NSString *)postId
                withData:(NSData*)postData
              andCaption:(NSString *)caption
+           shopProducts:(NSArray <STShopProduct *> *)shopProducts
          withCompletion:(STRequestCompletionBlock)completion
                 failure:(STRequestFailureBlock)failure;
 @end

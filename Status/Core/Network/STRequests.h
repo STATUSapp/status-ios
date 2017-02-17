@@ -33,6 +33,9 @@
 #import "STGetUsersRequest.h"
 #import "STGetNotificationsRequest.h"
 #import "STGetUserProfileRequest.h"
+#import "STGetCatalogParentCategoriesRequest.h"
+#import "STGetCatalogCategoriesRequest.h"
+#import "STGetBrandsRequest.h"
 
 #endif
 

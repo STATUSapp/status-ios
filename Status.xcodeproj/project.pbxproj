@@ -54,6 +54,14 @@
 		174575B61CA95CD5006CA25F /* ExploreScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174575B51CA95CD5006CA25F /* ExploreScene.storyboard */; };
 		174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 174D0B961CABDAA7001EB6E2 /* STUserProfilePool.m */; };
 		175204451CAAC84200C55170 /* SmallFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 175204441CAAC84200C55170 /* SmallFeedCell.m */; };
+		17648B851E50977200D9C428 /* STShopProductsUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B841E50977200D9C428 /* STShopProductsUploader.m */; };
+		17648B881E50993F00D9C428 /* STUploadShopProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B871E50993F00D9C428 /* STUploadShopProduct.m */; };
+		17648B8B1E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B8A1E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.m */; };
+		17648B8E1E50DBF400D9C428 /* STCatalogParentCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B8D1E50DBF400D9C428 /* STCatalogParentCategory.m */; };
+		17648B911E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B901E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m */; };
+		17648B941E50F1F200D9C428 /* STCatalogCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B931E50F1F200D9C428 /* STCatalogCategory.m */; };
+		17648B971E50F39400D9C428 /* STGetBrandsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B961E50F39400D9C428 /* STGetBrandsRequest.m */; };
+		17648B9A1E50F49F00D9C428 /* STBrandObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B991E50F49F00D9C428 /* STBrandObj.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		1780AC781DEAEA3E007A5689 /* STExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1780AC771DEAEA3E007A5689 /* STExploreViewController.m */; };
 		1787A74C1DBDD7AD006B79D4 /* STShopProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 1787A74B1DBDD7AD006B79D4 /* STShopProduct.m */; };
@@ -333,6 +341,22 @@
 		174D0B961CABDAA7001EB6E2 /* STUserProfilePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserProfilePool.m; sourceTree = "<group>"; };
 		175204431CAAC84200C55170 /* SmallFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallFeedCell.h; sourceTree = "<group>"; };
 		175204441CAAC84200C55170 /* SmallFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallFeedCell.m; sourceTree = "<group>"; };
+		17648B831E50977200D9C428 /* STShopProductsUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STShopProductsUploader.h; sourceTree = "<group>"; };
+		17648B841E50977200D9C428 /* STShopProductsUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STShopProductsUploader.m; sourceTree = "<group>"; };
+		17648B861E50993F00D9C428 /* STUploadShopProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUploadShopProduct.h; sourceTree = "<group>"; };
+		17648B871E50993F00D9C428 /* STUploadShopProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUploadShopProduct.m; sourceTree = "<group>"; };
+		17648B891E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetCatalogParentCategoriesRequest.h; sourceTree = "<group>"; };
+		17648B8A1E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetCatalogParentCategoriesRequest.m; sourceTree = "<group>"; };
+		17648B8C1E50DBF400D9C428 /* STCatalogParentCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCatalogParentCategory.h; sourceTree = "<group>"; };
+		17648B8D1E50DBF400D9C428 /* STCatalogParentCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCatalogParentCategory.m; sourceTree = "<group>"; };
+		17648B8F1E50F05D00D9C428 /* STGetCatalogCategoriesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetCatalogCategoriesRequest.h; sourceTree = "<group>"; };
+		17648B901E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetCatalogCategoriesRequest.m; sourceTree = "<group>"; };
+		17648B921E50F1F200D9C428 /* STCatalogCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCatalogCategory.h; sourceTree = "<group>"; };
+		17648B931E50F1F200D9C428 /* STCatalogCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCatalogCategory.m; sourceTree = "<group>"; };
+		17648B951E50F39400D9C428 /* STGetBrandsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetBrandsRequest.h; sourceTree = "<group>"; };
+		17648B961E50F39400D9C428 /* STGetBrandsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetBrandsRequest.m; sourceTree = "<group>"; };
+		17648B981E50F49F00D9C428 /* STBrandObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBrandObj.h; sourceTree = "<group>"; };
+		17648B991E50F49F00D9C428 /* STBrandObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBrandObj.m; sourceTree = "<group>"; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1780AC761DEAEA3E007A5689 /* STExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STExploreViewController.h; sourceTree = "<group>"; };
 		1780AC771DEAEA3E007A5689 /* STExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreViewController.m; sourceTree = "<group>"; };
@@ -1073,6 +1097,14 @@
 				99B3864A1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m */,
 				99B3864B1C82FAA2005B4D8C /* STUploadPostRequest.h */,
 				99B3864C1C82FAA2005B4D8C /* STUploadPostRequest.m */,
+				17648B861E50993F00D9C428 /* STUploadShopProduct.h */,
+				17648B871E50993F00D9C428 /* STUploadShopProduct.m */,
+				17648B891E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.h */,
+				17648B8A1E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.m */,
+				17648B8F1E50F05D00D9C428 /* STGetCatalogCategoriesRequest.h */,
+				17648B901E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m */,
+				17648B951E50F39400D9C428 /* STGetBrandsRequest.h */,
+				17648B961E50F39400D9C428 /* STGetBrandsRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1112,6 +1144,8 @@
 				17F4F2881C96DED500D53EC1 /* STBasePool.m */,
 				99B386591C82FAA2005B4D8C /* STContactsManager.h */,
 				99B3865A1C82FAA2005B4D8C /* STContactsManager.m */,
+				17648B831E50977200D9C428 /* STShopProductsUploader.h */,
+				17648B841E50977200D9C428 /* STShopProductsUploader.m */,
 				171936C11C848604002C0202 /* STNavigationService.h */,
 				171936C21C848604002C0202 /* STNavigationService.m */,
 				52DC4DC71C8D53E30064F23F /* STImagePickerService.h */,
@@ -1180,6 +1214,12 @@
 				1787A74B1DBDD7AD006B79D4 /* STShopProduct.m */,
 				173A29521CA04B3E00157945 /* STNotificationObj.h */,
 				173A29531CA04B3E00157945 /* STNotificationObj.m */,
+				17648B8C1E50DBF400D9C428 /* STCatalogParentCategory.h */,
+				17648B8D1E50DBF400D9C428 /* STCatalogParentCategory.m */,
+				17648B921E50F1F200D9C428 /* STCatalogCategory.h */,
+				17648B931E50F1F200D9C428 /* STCatalogCategory.m */,
+				17648B981E50F49F00D9C428 /* STBrandObj.h */,
+				17648B991E50F49F00D9C428 /* STBrandObj.m */,
 			);
 			path = DataModelObjects;
 			sourceTree = "<group>";
@@ -1750,6 +1790,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				170912201DF87F5C00B2AF81 /* STNotificationBaseCell.m in Sources */,
+				17648B971E50F39400D9C428 /* STGetBrandsRequest.m in Sources */,
 				17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */,
 				1709123C1DF8827100B2AF81 /* UserProfileLocationCell.m in Sources */,
 				99B387651C82FAA2005B4D8C /* STSetUserSettingsRequest.m in Sources */,
@@ -1762,6 +1803,7 @@
 				99B3875D1C82FAA2005B4D8C /* STInviteUserToUploadRequest.m in Sources */,
 				170912231DF87F5C00B2AF81 /* STNotificationsViewController.m in Sources */,
 				17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */,
+				17648B9A1E50F49F00D9C428 /* STBrandObj.m in Sources */,
 				99B387511C82FAA2005B4D8C /* STGetNotificationsCountRequest.m in Sources */,
 				99B387D71C82FAA2005B4D8C /* STAlbumImagesViewController.m in Sources */,
 				99B387B21C82FAA2005B4D8C /* STContextualMenu.m in Sources */,
@@ -1787,6 +1829,7 @@
 				99B3875E1C82FAA2005B4D8C /* STLoginRequest.m in Sources */,
 				170AE3BD1DF60F9D00859C8E /* STTutorialStartCell.m in Sources */,
 				99B387441C82FAA2005B4D8C /* UIImage+ImageEffects.m in Sources */,
+				17648B911E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m in Sources */,
 				99B387DC1C82FAA2005B4D8C /* STTutorialCell.m in Sources */,
 				99B387B81C82FAA2005B4D8C /* STTapAnimationLabel.m in Sources */,
 				99B387801C82FAA2005B4D8C /* StatusDM.xcdatamodeld in Sources */,
@@ -1797,6 +1840,8 @@
 				99B387811C82FAA2005B4D8C /* STCoreDataManager.m in Sources */,
 				99B387891C82FAA2005B4D8C /* STUserProfile.m in Sources */,
 				1709123D1DF8827100B2AF81 /* UserProfileNoPhotosCell.m in Sources */,
+				17648B8B1E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.m in Sources */,
+				17648B941E50F1F200D9C428 /* STCatalogCategory.m in Sources */,
 				99B387C71C82FAA2005B4D8C /* STLoginViewController.m in Sources */,
 				99B387561C82FAA2005B4D8C /* STGetSuggestUsersRequest.m in Sources */,
 				99B387DB1C82FAA2005B4D8C /* STZoomablePostViewController.m in Sources */,
@@ -1828,7 +1873,9 @@
 				99B387411C82FAA2005B4D8C /* NSString+VersionComparison.m in Sources */,
 				170912251DF87F5C00B2AF81 /* STNotificationAndChatContainerViewController.m in Sources */,
 				170911FB1DF87F0400B2AF81 /* STNearbyCollectionLayout.m in Sources */,
+				17648B881E50993F00D9C428 /* STUploadShopProduct.m in Sources */,
 				99B387A51C82FAA2005B4D8C /* HPGrowingTextView.m in Sources */,
+				17648B8E1E50DBF400D9C428 /* STCatalogParentCategory.m in Sources */,
 				99B387421C82FAA2005B4D8C /* UIImage+Alpha.m in Sources */,
 				99B3876C1C82FAA2005B4D8C /* STUploadPostRequest.m in Sources */,
 				1709121F1DF87F5C00B2AF81 /* STConversationsListViewController.m in Sources */,
@@ -1858,6 +1905,7 @@
 				99B387481C82FAA2005B4D8C /* UIImageView+TouchesEffects.m in Sources */,
 				170912531DF883FC00B2AF81 /* STUserListCell.m in Sources */,
 				2A119DF71C832182001C17DB /* STFlowProcessor.m in Sources */,
+				17648B851E50977200D9C428 /* STShopProductsUploader.m in Sources */,
 				2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */,
 				2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */,
 				17AC8ED21E111954002D213E /* STLoadingView.m in Sources */,
