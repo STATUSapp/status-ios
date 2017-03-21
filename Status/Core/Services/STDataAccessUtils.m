@@ -299,6 +299,28 @@
                                                      }];
 }
 
++ (void)getUsedCatalogCategoriesWithCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetUsedCatalogCategoriesRequest getUsedCatalogCategoriesWithCompletion:^(id response, NSError *error) {
+        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+            id data = response[@"data"];
+            NSMutableArray *result = [@[] mutableCopy];
+            for (NSDictionary *dict in data) {
+                STCatalogCategory *category = [STCatalogCategory categoryFromDict:dict];
+                [result addObject:category];
+            }
+            
+            completion(result, nil);
+        }
+        else
+            completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
+        
+    } failure:^(NSError *error) {
+        completion(nil, error);
+
+    }];
+}
+
+
 + (void)getBrandsEntitiesWithCompletion:(STDataAccessCompletionBlock)completion{
     [STGetBrandsRequest getBrandsEntities:^(id response, NSError *error) {
         
@@ -322,6 +344,55 @@
     }];
     
 }
+
++ (void)getSuggestionsForCategory:(NSString *)categoryId
+                         andBrand:(NSString *)brandId
+                    andCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetSuggestionsRequest getSuggestionsEntitiesForCategory:categoryId
+                                                    andBrandId:brandId
+                                                 andCompletion:^(id response, NSError *error) {
+                                                     
+                                                     if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                                                         id data = response[@"data"];
+                                                         NSMutableArray *result = [@[] mutableCopy];
+                                                         for (NSDictionary *dict in data) {
+                                                             STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
+                                                             [result addObject:shopObj];
+                                                         }
+                                                         
+                                                         completion(result, nil);
+                                                     }
+                                                     else
+                                                         completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
+                                                     
+                                                 } failure:^(NSError *error) {
+                                                     completion(nil, error);
+                                                 }];
+}
+
++ (void)getUsedSuggestionsForCategory:(NSString *)categoryId
+                    andCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetUsedSuggestionsRequest getUsedSuggestionsEntitiesForCategory:categoryId
+                                                 andCompletion:^(id response, NSError *error) {
+                                                     
+                                                     if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                                                         id data = response[@"data"];
+                                                         NSMutableArray *result = [@[] mutableCopy];
+                                                         for (NSDictionary *dict in data) {
+                                                             STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
+                                                             [result addObject:shopObj];
+                                                         }
+                                                         
+                                                         completion(result, nil);
+                                                     }
+                                                     else
+                                                         completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
+                                                     
+                                                 } failure:^(NSError *error) {
+                                                     completion(nil, error);
+                                                 }];
+}
+
 
 
 #pragma mark - Get Posts

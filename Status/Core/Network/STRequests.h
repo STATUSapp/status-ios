@@ -36,6 +36,9 @@
 #import "STGetCatalogParentCategoriesRequest.h"
 #import "STGetCatalogCategoriesRequest.h"
 #import "STGetBrandsRequest.h"
+#import "STGetSuggestionsRequest.h"
+#import "STGetUsedSuggestionsRequest.h"
+#import "STGetUsedCatalogCategoriesRequest.h"
 
 #endif
 

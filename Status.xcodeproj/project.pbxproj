@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
+		072BACB51E80FED80055B6F3 /* STGetSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */; };
+		072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */; };
+		072BACBB1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */; };
 		08F88F3E9A6987DC111E6745 /* libPods-Status.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9F74085E81B30D0D32BB3C /* libPods-Status.a */; };
 		170911F91DF87F0400B2AF81 /* NearbyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F41DF87F0400B2AF81 /* NearbyVC.m */; };
 		170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F61DF87F0400B2AF81 /* STNearbyCell.m */; };
@@ -254,6 +257,12 @@
 
 /* Begin PBXFileReference section */
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		072BACB31E80FED80055B6F3 /* STGetSuggestionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetSuggestionsRequest.h; sourceTree = "<group>"; };
+		072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetSuggestionsRequest.m; sourceTree = "<group>"; };
+		072BACB61E81012D0055B6F3 /* STGetUsedSuggestionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetUsedSuggestionsRequest.h; sourceTree = "<group>"; };
+		072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUsedSuggestionsRequest.m; sourceTree = "<group>"; };
+		072BACB91E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetUsedCatalogCategoriesRequest.h; sourceTree = "<group>"; };
+		072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUsedCatalogCategoriesRequest.m; sourceTree = "<group>"; };
 		170911F31DF87F0400B2AF81 /* NearbyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyVC.h; sourceTree = "<group>"; };
 		170911F41DF87F0400B2AF81 /* NearbyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyVC.m; sourceTree = "<group>"; };
 		170911F51DF87F0400B2AF81 /* STNearbyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNearbyCell.h; sourceTree = "<group>"; };
@@ -1103,8 +1112,14 @@
 				17648B8A1E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.m */,
 				17648B8F1E50F05D00D9C428 /* STGetCatalogCategoriesRequest.h */,
 				17648B901E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m */,
+				072BACB91E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.h */,
+				072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */,
 				17648B951E50F39400D9C428 /* STGetBrandsRequest.h */,
 				17648B961E50F39400D9C428 /* STGetBrandsRequest.m */,
+				072BACB31E80FED80055B6F3 /* STGetSuggestionsRequest.h */,
+				072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */,
+				072BACB61E81012D0055B6F3 /* STGetUsedSuggestionsRequest.h */,
+				072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1921,13 +1936,16 @@
 				99B3876D1C82FAA2005B4D8C /* STBaseRequest.m in Sources */,
 				99B3876F1C82FAA2005B4D8C /* STNetworkQueueManager.m in Sources */,
 				99B387701C82FAA2005B4D8C /* KeychainItemWrapper.m in Sources */,
+				072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */,
 				2A1D66831C8472D400633D87 /* STUIHelper.m in Sources */,
 				99B387461C82FAA2005B4D8C /* UIImage+RoundedCorner.m in Sources */,
 				170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */,
 				99B387401C82FAA2005B4D8C /* NSString+MD5.m in Sources */,
 				99B387721C82FAA2005B4D8C /* STContactsManager.m in Sources */,
+				072BACBB1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m in Sources */,
 				99B387C01C82FAA2005B4D8C /* STSuggestionCell.m in Sources */,
 				99B387641C82FAA2005B4D8C /* STSetUserLocationRequest.m in Sources */,
+				072BACB51E80FED80055B6F3 /* STGetSuggestionsRequest.m in Sources */,
 				99B387871C82FAA2005B4D8C /* STListUser.m in Sources */,
 				99B387581C82FAA2005B4D8C /* STGetUserPostsRequest.m in Sources */,
 				99B387861C82FAA2005B4D8C /* STFlowTemplate.m in Sources */,
