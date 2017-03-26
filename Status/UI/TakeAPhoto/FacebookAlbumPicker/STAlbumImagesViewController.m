@@ -106,4 +106,10 @@
     return _dataSource.count;
 }
 
+#pragma mark - IBACTIONS
+- (IBAction)onBackButtonPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 @end

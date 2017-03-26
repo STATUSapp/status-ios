@@ -944,7 +944,6 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
                 viewController.imgData = UIImageJPEGRepresentation(origImg, 1.f);
-                viewController.bluredImgData = UIImageJPEGRepresentation(origImg, 1.f);
                 viewController.post = post;
                 viewController.controllerType = STShareControllerEditCaption;
                 [self.navigationController pushViewController:viewController animated:YES];

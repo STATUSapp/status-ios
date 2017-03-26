@@ -19,7 +19,6 @@
 {
     UIImageView *_imageView;
 }
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 
@@ -57,7 +56,6 @@
     [self.view bringSubviewToFront:_transparentNavBar];
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
     [self setUpTheContext];
-    [self cropAndBlur];    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -125,18 +123,6 @@
     [self centerScrollViewContents];
 }
 
--(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
-    [self refreshBacgroundBlur];
-}
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self refreshBacgroundBlur];
-}
-
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [self refreshBacgroundBlur];
-}
-
 #pragma mark IBACTIONS
 - (IBAction)onUseBtnPressed:(id)sender {
     UIImage *croppedImg = [self croppedImage];
@@ -155,7 +141,6 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
     viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
-    viewController.bluredImgData = UIImageJPEGRepresentation(_backgroundBlurImgView.image, 1.f);
     viewController.post = _post;
     viewController.controllerType = _post==nil?STShareControllerAddPost:STShareControllerEditPost;
     [self.navigationController pushViewController:viewController animated:YES];
@@ -199,27 +184,6 @@
         newRect.origin.y = (intoRect.size.height-newRect.size.height)/2;
     }
 	return CGRectIntegral(newRect);
-}
-
-- (void)cropAndBlur {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        UIImage *cropppedImage = [[self croppedImage] imageCropedFullScreenSize];
-//        cropppedImage = [cropppedImage applyLightEffect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [UIView transitionWithView:_backgroundBlurImgView
-                              duration:0.2f
-                               options:UIViewAnimationOptionTransitionCrossDissolve
-                            animations:^{
-                                _backgroundBlurImgView.image= cropppedImage;
-                            } completion:NULL];
-        });
-    });
-}
-
-- (void)refreshBacgroundBlur {
-    if (_scrollView.zoomScale<1.f) {
-        [self cropAndBlur];
-    }
 }
 
 -(void)dealloc{

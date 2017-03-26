@@ -8,7 +8,7 @@
 
 #import "STTabBarViewController.h"
 #import "STSettingsViewController.h"
-#import "STTakeAPhotoViewController.h"
+#import "STChoosePhotoViewController.h"
 #import "STNotificationAndChatContainerViewController.h"
 #import "STFacebookLoginController.h"
 #import "STExploreViewController.h"
@@ -57,7 +57,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
 //    exploreNavCtrl.navigationBarHidden = YES;
     
     // add take a photo
-    STTakeAPhotoViewController * takeAPhotoVC = [STTakeAPhotoViewController newController];
+    STChoosePhotoViewController * takeAPhotoVC = [STChoosePhotoViewController newController];
     UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
     takePhotoNav.navigationBarHidden = YES;
     

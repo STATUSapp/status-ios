@@ -11,6 +11,7 @@
 		072BACB51E80FED80055B6F3 /* STGetSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */; };
 		072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */; };
 		072BACBB1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */; };
+		0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0755E2381E87DF140016519E /* STChoosePhotoViewController.m */; };
 		08F88F3E9A6987DC111E6745 /* libPods-Status.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9F74085E81B30D0D32BB3C /* libPods-Status.a */; };
 		170911F91DF87F0400B2AF81 /* NearbyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F41DF87F0400B2AF81 /* NearbyVC.m */; };
 		170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F61DF87F0400B2AF81 /* STNearbyCell.m */; };
@@ -263,6 +264,8 @@
 		072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUsedSuggestionsRequest.m; sourceTree = "<group>"; };
 		072BACB91E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetUsedCatalogCategoriesRequest.h; sourceTree = "<group>"; };
 		072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUsedCatalogCategoriesRequest.m; sourceTree = "<group>"; };
+		0755E2371E87DF140016519E /* STChoosePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChoosePhotoViewController.h; sourceTree = "<group>"; };
+		0755E2381E87DF140016519E /* STChoosePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChoosePhotoViewController.m; sourceTree = "<group>"; };
 		170911F31DF87F0400B2AF81 /* NearbyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyVC.h; sourceTree = "<group>"; };
 		170911F41DF87F0400B2AF81 /* NearbyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyVC.m; sourceTree = "<group>"; };
 		170911F51DF87F0400B2AF81 /* STNearbyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNearbyCell.h; sourceTree = "<group>"; };
@@ -1482,6 +1485,8 @@
 				99B387261C82FAA2005B4D8C /* ScaleMoveZoomShare */,
 				99B387FC1C838FA8005B4D8C /* STTakeAPhotoViewController.h */,
 				99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */,
+				0755E2371E87DF140016519E /* STChoosePhotoViewController.h */,
+				0755E2381E87DF140016519E /* STChoosePhotoViewController.m */,
 			);
 			path = TakeAPhoto;
 			sourceTree = "<group>";
@@ -1829,6 +1834,7 @@
 				170912491DF882DC00B2AF81 /* STPostDetailsCell.m in Sources */,
 				99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */,
 				17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */,
+				0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */,
 				99B387D51C82FAA2005B4D8C /* STAlbumImageCell.m in Sources */,
 				99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */,
 				99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */,

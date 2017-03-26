@@ -19,7 +19,6 @@ typedef NS_ENUM(NSUInteger,STShareControllerType){
 };
 @interface STSharePhotoViewController : UIViewController
 @property (nonatomic, strong) NSData *imgData;
-@property (nonatomic, strong) NSData *bluredImgData;
 @property (nonatomic, strong) STPost *post;
 @property (nonatomic) STShareControllerType controllerType;
 @end

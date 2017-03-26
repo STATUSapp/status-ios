@@ -89,11 +89,11 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                          }
                      }
                  }
-                 [weakSelf loadFBCoverPicturesWithIds:coverIds withLoadFbCompletion:^(NSDictionary *resultAlbum) {
+                 [weakSelf loadFBCoverPicturesWithIds:[coverIds valueForKey:@"id"] withLoadFbCompletion:^(NSDictionary *resultAlbum) {
                      for (NSString *coverId in [resultAlbum allKeys]) {
                          NSMutableDictionary *dict = nil;
                          for (NSDictionary *album in newObjects) {
-                             if ([album[@"cover_photo"] isEqualToString:coverId]) {
+                             if ([album[@"cover_photo"][@"id"] isEqualToString:coverId]) {
                                  dict = [NSMutableDictionary dictionaryWithDictionary:album];
                                  break;
                              }

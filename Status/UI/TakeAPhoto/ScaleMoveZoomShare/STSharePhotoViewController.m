@@ -28,6 +28,8 @@
 #import "STShopProduct.h"
 
 static NSInteger const  kMaxCaptionLenght = 250;
+static CGFloat const kTagProductsViewDefaultHeight = 44.f;
+static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
 
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
     
@@ -43,9 +45,11 @@ static NSInteger const  kMaxCaptionLenght = 250;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurImgView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UITextView *captiontextView;
+@property (weak, nonatomic) IBOutlet UICollectionView *productsCollection;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tagProductsViewHeightConstr;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tagProductsCollectionHeightConstr;
 
 @property (strong, nonatomic) ACAccountStore * accountStore;
 @property (strong, nonatomic) ACAccountType * accountType;
@@ -84,8 +88,6 @@ static NSInteger const  kMaxCaptionLenght = 250;
     sharedImage = [sharedImage resizedImage:newSize interpolationQuality:kCGInterpolationDefault];
     _sharedImageView.image = sharedImage;
 //    _sharedImageView.layer.contentsRect = CGRectMake(0, 0, 1, 0.25);
-
-    _backgroundBlurImgView.image = [UIImage imageWithData:_bluredImgData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appplicationIsActive:)
@@ -104,6 +106,15 @@ static NSInteger const  kMaxCaptionLenght = 250;
     _writeCaptionPlaceholder.hidden = _captiontextView.text.length>0;
     _shareView.hidden = (_controllerType == STShareControllerEditCaption) ;
     _captiontextView.userInteractionEnabled = (_controllerType != STShareControllerEditPost);
+    
+    if (_shopProducts.count > 0) {
+        _tagProductsViewHeightConstr.constant = 0;
+        _tagProductsCollectionHeightConstr.constant = kTagProductsCollectionDefaultHeight;
+    }
+    else{
+        _tagProductsViewHeightConstr.constant = kTagProductsViewDefaultHeight;
+        _tagProductsCollectionHeightConstr.constant = 0.f;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -159,6 +170,9 @@ static NSInteger const  kMaxCaptionLenght = 250;
 #pragma mark IBACTIONS
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)onClickTagProducts:(id)sender {
+    
 }
 - (IBAction)onClickEmail:(id)sender {
     MFMailComposeViewController *emailShareController = [[MFMailComposeViewController alloc] init];

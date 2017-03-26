@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -32,7 +32,7 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgK-dC-PjG">
-                                <rect key="frame" x="40.5" y="336.5" width="134" height="134"/>
+                                <rect key="frame" x="41" y="337" width="134" height="134"/>
                                 <state key="normal" image="gallery_btn"/>
                                 <state key="highlighted" image="gallery_btn_active"/>
                                 <connections>
@@ -40,7 +40,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU4-ml-K3T">
-                                <rect key="frame" x="200.5" y="336.5" width="134" height="134"/>
+                                <rect key="frame" x="201" y="337" width="134" height="134"/>
                                 <state key="normal" image="facebook_btn"/>
                                 <state key="highlighted" image="facebook_btn_active"/>
                                 <connections>
@@ -48,7 +48,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3g-7a-rAZ">
-                                <rect key="frame" x="120.5" y="196.5" width="134" height="134"/>
+                                <rect key="frame" x="121" y="197" width="134" height="134"/>
                                 <state key="normal" image="camera_btn"/>
                                 <state key="highlighted" image="camera_btn_active"/>
                                 <connections>
@@ -83,8 +83,80 @@
             </objects>
             <point key="canvasLocation" x="146.25" y="295.77464788732397"/>
         </scene>
+        <!--Choose Photo View Controller-->
+        <scene sceneID="cet-cM-Qcq">
+            <objects>
+                <viewController storyboardIdentifier="STChoosePhotoViewController" extendedLayoutIncludesOpaqueBars="YES" id="0BU-W2-Z8i" customClass="STChoosePhotoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qiB-S3-Tpu"/>
+                        <viewControllerLayoutGuide type="bottom" id="HNU-5m-utN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5uR-br-fjM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmt-Gf-9pg">
+                                <rect key="frame" x="0.0" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="jFw-uN-uwM"/>
+                                    <constraint firstAttribute="height" constant="44" id="qbS-bS-Img"/>
+                                </constraints>
+                                <state key="normal" image="btnBack"/>
+                                <state key="selected" image="btnBackPressed"/>
+                                <state key="highlighted" image="btnBackPressed"/>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="0BU-W2-Z8i" eventType="touchUpInside" id="w4g-qZ-qJl"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwi-UX-gzZ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <connections>
+                                    <segue destination="spR-Cs-q33" kind="embed" id="z9p-ND-sjB"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRf-iH-enc">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="5Jr-OX-1kN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qmt-Gf-9pg" firstAttribute="top" secondItem="qiB-S3-Tpu" secondAttribute="bottom" id="Dgw-6o-ohf"/>
+                            <constraint firstAttribute="trailing" secondItem="mwi-UX-gzZ" secondAttribute="trailing" id="O3W-8v-GRH"/>
+                            <constraint firstItem="qmt-Gf-9pg" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" id="OEw-Bl-Qyi"/>
+                            <constraint firstAttribute="trailing" secondItem="kRf-iH-enc" secondAttribute="trailing" id="OZf-Mr-kqh"/>
+                            <constraint firstItem="mwi-UX-gzZ" firstAttribute="top" secondItem="qmt-Gf-9pg" secondAttribute="bottom" id="SBc-MT-fuC"/>
+                            <constraint firstItem="kRf-iH-enc" firstAttribute="top" secondItem="mwi-UX-gzZ" secondAttribute="bottom" id="abS-GP-ReM"/>
+                            <constraint firstItem="HNU-5m-utN" firstAttribute="top" secondItem="kRf-iH-enc" secondAttribute="bottom" id="edX-2o-sXv"/>
+                            <constraint firstItem="kRf-iH-enc" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" id="roX-T3-azP"/>
+                            <constraint firstItem="mwi-UX-gzZ" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" id="wGC-tb-VlW"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="bottomActionView" destination="kRf-iH-enc" id="RVk-GQ-Zsl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JI5-Wt-9AD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="816.79999999999995" y="538.38080959520244"/>
+        </scene>
+        <!--FacebookPickerScene-->
+        <scene sceneID="gNz-D0-WWx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FacebookPickerScene" id="spR-Cs-q33" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Rk-e7-2A2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817" y="976"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="btnBack" width="32" height="32"/>
+        <image name="btnBackPressed" width="32" height="32"/>
         <image name="camera_btn" width="134" height="134"/>
         <image name="camera_btn_active" width="134" height="134"/>
         <image name="facebook_btn" width="134" height="134"/>
