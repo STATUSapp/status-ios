@@ -28,7 +28,9 @@
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"category_id"] = weakSelf.categoryId;
+        if (weakSelf.categoryId) {
+            params[@"category_id"] = weakSelf.categoryId;
+        }
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                         success:weakSelf.standardSuccessBlock

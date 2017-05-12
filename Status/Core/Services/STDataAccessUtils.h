@@ -84,4 +84,17 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 //get user profile
 + (void)getUserProfileForUserId:(NSString *)userId
                   andCompletion:(STDataAccessCompletionBlock)completion;
+
+//tag products
++ (void)getCatalogParentEntitiesWithCompletion:(STDataAccessCompletionBlock)completion;
++ (void)getCatalogCategoriesForParentCategoryId:(NSString *) parentCategoryId
+                                 withCompletion:(STDataAccessCompletionBlock)completion;
++ (void)getUsedCatalogCategoriesWithCompletion:(STDataAccessCompletionBlock)completion;
++ (void)getBrandsEntitiesWithCompletion:(STDataAccessCompletionBlock)completion;
++ (void)getSuggestionsForCategory:(NSString *)categoryId
+                         andBrand:(NSString *)brandId
+                    andCompletion:(STDataAccessCompletionBlock)completion;
++ (void)getUsedSuggestionsForCategory:(NSString *)categoryId
+                        andCompletion:(STDataAccessCompletionBlock)completion;
+
 @end

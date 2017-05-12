@@ -838,7 +838,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     else
     {
         //go to Message to User
-        [self onTapSendMessageToUser:nil];
+//        [self onTapSendMessageToUser:nil];
         
     }
 }

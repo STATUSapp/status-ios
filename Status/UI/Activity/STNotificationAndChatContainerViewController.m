@@ -44,19 +44,19 @@ typedef NS_ENUM(NSUInteger, STActivity) {
 
 #pragma mark STSCustomSegmentProtocol
 
--(CGFloat)bottomSpace{
+-(CGFloat)segmentBottomSpace:(STCustomSegment *)segment{
     return 9.f;
 }
 
--(CGFloat)topSpace{
+-(CGFloat)segmentTopSpace:(STCustomSegment *)segment{
     return 9.f;
 }
 
--(NSInteger)numberOfButtons{
+-(NSInteger)segmentNumberOfButtons:(STCustomSegment *)segment{
     return STActivityCount;
 }
 
--(NSString *)buttonTitleForIndex:(NSInteger)index{
+-(NSString *)segment:(STCustomSegment *)segment buttonTitleForIndex:(NSInteger)index{
     switch (index) {
         case STActivityNotifications:
             return @"ACTIVITY";
@@ -72,11 +72,11 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     return @"";
 }
 
--(NSInteger)defaultSelectedIndex{
+-(NSInteger)segmentDefaultSelectedIndex:(STCustomSegment *)segment{
     return STActivityChat;
 }
 
--(void)buttonPressedAtIndex:(NSInteger)index{
+-(void)segment:(STCustomSegment *)segment buttonPressedAtIndex:(NSInteger)index{
     NSLog(@"Button pressed: %ld",(long)index);
     
     NSInteger currentVCIndex = [_viewControllers indexOfObject:_pageController.viewControllers.lastObject];
@@ -228,6 +228,7 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     
     [self.navigationController setNavigationBarHidden:YES];
     _customSegment = [STCustomSegment customSegmentWithDelegate:self];
+    [_customSegment configureSegmentWithDelegate:self];
     CGRect rect = _customSegment.frame;
     rect.origin.x = 0.f;
     rect.origin.y = 0.f;

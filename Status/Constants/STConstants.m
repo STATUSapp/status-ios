@@ -20,8 +20,8 @@ NSString *const kReachableURL = @"api2.getstatusapp.co";
 
 #else
 
-NSString *const kBaseURL = @"http://api2.getstatusapp.co/api/";
-NSString *const kReachableURL = @"api2.getstatusapp.co";
+NSString *const kBaseURL = @"http://ec2-52-86-4-15.compute-1.amazonaws.com/api/";
+NSString *const kReachableURL = @"ec2-52-86-4-15.compute-1.amazonaws.com";
 
 //NSString *const kBaseURL = @"http://ec2-52-86-4-15.compute-1.amazonaws.com/api/";
 //NSString *const kReachableURL = @"ec2-52-86-4-15.compute-1.amazonaws.com";
@@ -87,13 +87,13 @@ NSString *const kSyncContacts = @"sync_contacts";
 NSString *const kGetFriendsYouShouldFollow = @"friends_you_should_follow";
 NSString *const kGetPeopleYouShouldFollow = @"people_you_should_follow";
 NSString *const kGetFriendsPeopleYouShouldFollow = @"frieds_people_you_should_follow";
-NSString *const kUploadShopProduct = @"add_suggestion";
-NSString *const kGetCatalogParentCategories = @"get_catalog_parent_categories";
-NSString *const kGetCatalofCategories = @"get_categories";
-NSString *const kGetUsedCatalofCategories = @"get_used_categories";
-NSString *const kGetBrands = @"get_brands";
-NSString *const kGetSuggestions = @"get_suggestions";
-NSString *const kGetUsedSuggestions = @"get_used_suggestions";
+NSString *const kUploadShopProduct = @"catalog/products";
+NSString *const kGetCatalogParentCategories = @"catalog/root_categories";
+NSString *const kGetCatalofCategories = @"catalog/categories/all";
+NSString *const kGetUsedCatalofCategories = @"catalog/categories/used";
+NSString *const kGetBrands = @"catalog/brands";
+NSString *const kGetSuggestions = @"catalog/products/all";
+NSString *const kGetUsedSuggestions = @"catalog/products/used";
 
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";

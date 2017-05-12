@@ -7,10 +7,12 @@
 //
 
 #import "STBaseObj.h"
+#import "STCatalogCategory.h"
 
 @interface STCatalogParentCategory : STBaseObj
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSArray <STCatalogCategory *>*categories;
 
 + (STCatalogParentCategory *)parentCategoryFromDict:(NSDictionary *)dict;
 @end

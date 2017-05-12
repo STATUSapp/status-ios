@@ -26,22 +26,21 @@
 #import "STTabBarViewController.h"
 
 #import "STShopProduct.h"
+#import "STTagProductsContainer.h"
+
+#import "STTagProductsManager.h"
+#import "STShopProductCell.h"
 
 static NSInteger const  kMaxCaptionLenght = 250;
 static CGFloat const kTagProductsViewDefaultHeight = 44.f;
-static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
+
+typedef NS_ENUM(NSUInteger, TagProductSection) {
+    TagProductSectionProducts,
+    TagProductSectionAddProduct,
+    TagProductSectionCount,
+};
 
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
-    
-    BOOL _shouldPostToFacebook;
-    BOOL _shouldPostToTwitter;
-    
-    BOOL _donePostingToFacebook;
-    BOOL _donePostingToTwitter;
-    
-    NSError *_fbError;
-    NSError *_twitterError;
-    
 }
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
@@ -58,8 +57,18 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
 @property (weak, nonatomic) IBOutlet UILabel *writeCaptionPlaceholder;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
 
+@property (assign, nonatomic) BOOL shouldPostToFacebook;
+@property (assign, nonatomic)BOOL shouldPostToTwitter;
+
+@property (assign, nonatomic)BOOL donePostingToFacebook;
+@property (assign, nonatomic)BOOL donePostingToTwitter;
+
+@property (strong, nonatomic)NSError *fbError;
+@property (strong, nonatomic)NSError *twitterError;
+
+
 //initialized with the post.shopProducts if exists and then new items can be added/removed
-@property (nonatomic, strong) NSMutableArray<STShopProduct *> *shopProducts;
+@property (nonatomic, strong) NSArray <STShopProduct *> *shopProducts;
 
 @end
 
@@ -77,6 +86,7 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[STTagProductsManager sharedInstance] startDownload];
     [_transparentNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     _transparentNavBar.shadowImage = [UIImage new];
     _transparentNavBar.translucent = YES;
@@ -93,23 +103,33 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
                                              selector:@selector(appplicationIsActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tagProductsNotification:) name:kTagProductNotification object:nil];
+
     if (_post) {
         _captiontextView.text = _post.caption;
-        _shopProducts = [NSMutableArray arrayWithArray:_post.shopProducts];
+        for (STShopProduct *sp in _post.shopProducts) {
+            [[STTagProductsManager sharedInstance] processProduct:sp];
+        }
     }
     else{
         _captiontextView.text = @"";
-        _shopProducts = [@[] mutableCopy];
+        _shopProducts = @[];
     }
     _captiontextView.delegate = self;
     _writeCaptionPlaceholder.hidden = _captiontextView.text.length>0;
     _shareView.hidden = (_controllerType == STShareControllerEditCaption) ;
     _captiontextView.userInteractionEnabled = (_controllerType != STShareControllerEditPost);
     
+    [self updateProductsCollection];
+}
+
+-(void)updateProductsCollection{
+    [self.productsCollection reloadData];
     if (_shopProducts.count > 0) {
         _tagProductsViewHeightConstr.constant = 0;
-        _tagProductsCollectionHeightConstr.constant = kTagProductsCollectionDefaultHeight;
+        _tagProductsCollectionHeightConstr.constant = [STShopProductCell cellSize].height;
+;
     }
     else{
         _tagProductsViewHeightConstr.constant = kTagProductsViewDefaultHeight;
@@ -165,6 +185,24 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[STTagProductsManager sharedInstance] resetManager];
+}
+
+-(void)tagProductsNotification:(NSNotification *)sender{
+    NSDictionary *userInfo = sender.userInfo;
+    
+    STTagManagerEvent event = [userInfo[kTagProductUserInfoEventKey] integerValue];
+    
+    switch (event) {
+        case STTagManagerEventSelectedProducts:
+        {
+            _shopProducts = [NSArray arrayWithArray:[STTagProductsManager sharedInstance].selectedProducts];
+            [self updateProductsCollection];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark IBACTIONS
@@ -172,7 +210,10 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)onClickTagProducts:(id)sender {
+    [STTagProductsManager sharedInstance].rootViewController = self;
+    STTagProductsContainer *vc = [STTagProductsContainer newController];
     
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)onClickEmail:(id)sender {
     MFMailComposeViewController *emailShareController = [[MFMailComposeViewController alloc] init];
@@ -206,21 +247,28 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
                           otherButtonTitles:nil] show];
     }
 }
+- (IBAction)onDeleteProductPressed:(id)sender {
+    NSInteger buttonTag = ((UIButton *)sender).tag;
+    STShopProduct *product = [_shopProducts objectAtIndex:buttonTag];
+    [[STTagProductsManager sharedInstance] processProduct:product];
+}
 
 - (IBAction)onClickShare:(id)sender {
     _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
     if (_controllerType == STShareControllerAddPost ||
         _controllerType == STShareControllerEditPost) {
-        
+                
         [STDataAccessUtils editPpostWithId:_post.uuid
                           withNewImageData:_imgData
                             withNewCaption:_captiontextView.text
                           withShopProducts:_shopProducts
                             withCompletion:^(NSArray *objects, NSError *error) {
+                                weakSelf.shareButton.enabled = TRUE;
                                 if (!error) {
                                     STPost *post = [objects firstObject];
-                                    if (_shouldPostToFacebook==YES || _shouldPostToTwitter == YES) {
+                                    if (weakSelf.shouldPostToFacebook==YES ||
+                                        weakSelf.shouldPostToTwitter == YES) {
                                         [weakSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl];
                                     }
                                     else
@@ -277,9 +325,9 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
 - (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId andImageUrl:(NSString *)imageUrl {
     __weak STSharePhotoViewController *weakSelf = self;
     [[CoreManager facebookService] shareImageWithImageUrl:imageUrl description:_captiontextView.text andCompletion:^(id result, NSError *error) {
-        _donePostingToFacebook = YES;
+        weakSelf.donePostingToFacebook = YES;
         if (error) {
-            _fbError = error;
+            weakSelf.fbError = error;
         }
         [weakSelf callTheDelegateIfNeededForPostId:postId];
     }];
@@ -309,7 +357,7 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
     
     SLRequestHandler requestHandler =
     ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        _donePostingToTwitter = YES;
+        weakSelf.donePostingToTwitter = YES;
         if (responseData) {
             NSInteger statusCode = urlResponse.statusCode;
             if (statusCode >= 200 && statusCode < 300) {
@@ -320,13 +368,13 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
                 NSLog(@"[SUCCESS!] Created Tweet with ID: %@", postResponseData[@"id_str"]);
             }
             else {
-                _twitterError = [NSError errorWithDomain:@"com.twiter.post" code:statusCode userInfo:nil];
+                weakSelf.twitterError = [NSError errorWithDomain:@"com.twiter.post" code:statusCode userInfo:nil];
                 NSLog(@"[ERROR] Server responded: status code %ld %@", (long)statusCode,
                       [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
             }
         }
         else {
-            _twitterError = error;
+            weakSelf.twitterError = error;
             NSLog(@"[ERROR] An error occurred while posting: %@", [error localizedDescription]);
         }
         [weakSelf callTheDelegateIfNeededForPostId:postId];
@@ -352,8 +400,8 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
             [request performRequestWithHandler:requestHandler];
         }
         else {
-            _donePostingToTwitter = YES;
-            _twitterError = error;
+            weakSelf.donePostingToTwitter = YES;
+            weakSelf.twitterError = error;
             [weakSelf callTheDelegateIfNeededForPostId:postId];
             NSLog(@"[ERROR] An error occurred while asking for user authorization: %@",
                   [error localizedDescription]);
@@ -447,4 +495,85 @@ static CGFloat const kTagProductsCollectionDefaultHeight = 151.f;
     }
     return YES;
 }
+
+#pragma mark - UICollectionViewDelegate
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return TagProductSectionCount;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (section == TagProductSectionProducts) {
+        return [_shopProducts count];
+    }
+    else if (section == TagProductSectionAddProduct){
+        return 1;
+    }
+    
+    return 0;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return [STShopProductCell cellSize];
+
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == TagProductSectionAddProduct) {
+        [self onClickTagProducts:nil];
+    }
+}
+
+-(NSString *)identifierForIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == TagProductSectionProducts) {
+        return @"STShopProductCell";
+    }
+    else if (indexPath.section == TagProductSectionAddProduct){
+        return @"STAddProductCell";
+    }
+    
+    return @"";
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self identifierForIndexPath:indexPath] forIndexPath:indexPath];
+    if ([cell isKindOfClass:[STShopProductCell class]]) {
+        STShopProduct *product = [_shopProducts objectAtIndex:indexPath.row];
+        [(STShopProductCell *)cell configureWithShopProduct:product];
+    }
+    
+    return cell;
+}
+
+/*
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    NSString *identifier = nil;
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        identifier = @"STProductsHeader";
+    }
+    else
+        identifier = @"STProductsFooter";
+    
+    return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:identifier forIndexPath:indexPath];
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    CGSize cellSize = [STShopProductCell cellSize];
+    cellSize.width = 16.f;
+    
+    return cellSize;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    CGSize cellSize = [STShopProductCell cellSize];
+    cellSize.width = 16.f;
+    
+    return cellSize;
+    
+}
+
+ */
 @end

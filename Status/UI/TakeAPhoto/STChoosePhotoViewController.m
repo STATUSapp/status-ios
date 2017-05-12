@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     _customSegment = [STCustomSegment customSegmentWithDelegate:self];
+    [_customSegment configureSegmentWithDelegate:self];
     CGRect rect = _customSegment.frame;
     rect.origin.x = 0.f;
     rect.origin.y = 0.f;
@@ -112,19 +113,19 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 
 #pragma mark - STCustomSegmentProtocol
 
-- (CGFloat)topSpace{
+- (CGFloat)segmentTopSpace:(STCustomSegment *)segment{
     return 0.f;
 }
-- (CGFloat)bottomSpace{
+- (CGFloat)segmentBottomSpace:(STCustomSegment *)segment{
     return 0.f;
 }
-- (NSInteger)numberOfButtons{
+- (NSInteger)segmentNumberOfButtons:(STCustomSegment *)segment{
     return STChoosePhotoBottomOptionCount;
 }
-- (NSString *)buttonTitleForIndex:(NSInteger)index{
+- (NSString *)segment:(STCustomSegment *)segment buttonTitleForIndex:(NSInteger)index{
     return [self stringForOption:index];
 }
-- (void)buttonPressedAtIndex:(NSInteger)index{
+- (void)segment:(STCustomSegment *)segment buttonPressedAtIndex:(NSInteger)index{
     STChoosePhotoBottomOption option = index;
     switch (option) {
         case STChoosePhotoBottomOptionLibrary:
@@ -141,7 +142,7 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     }
 }
 
-- (NSInteger)defaultSelectedIndex{
+- (NSInteger)segmentDefaultSelectedIndex:(STCustomSegment *)segment{
     return STChoosePhotoBottomOptionFacebook;
 }
 

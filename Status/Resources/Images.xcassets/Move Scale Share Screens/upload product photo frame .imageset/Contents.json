@@ -5,11 +5,39 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 2,
+          "height" : 2
+        },
+        "cap-insets" : {
+          "bottom" : 14,
+          "top" : 17,
+          "right" : 14,
+          "left" : 14
+        }
+      },
       "idiom" : "universal",
       "filename" : "upload product photo frame @2x.png",
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 2,
+          "height" : 2
+        },
+        "cap-insets" : {
+          "bottom" : 21,
+          "top" : 21,
+          "right" : 21,
+          "left" : 21
+        }
+      },
       "idiom" : "universal",
       "filename" : "upload product photo frame @3x.png",
       "scale" : "3x"

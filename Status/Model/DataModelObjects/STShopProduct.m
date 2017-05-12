@@ -29,12 +29,21 @@
 
 -(void)setup{
     
+    self.uuid = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"id"] stringValue];
     self.productUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"link"];
     //super properties
-    self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image"];
+    self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image_url"];
+    if (!self.mainImageUrl) {
+        self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image"];
+    }
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
     self.imageSize = CGSizeZero;
     
+}
+
+-(BOOL)isEqual:(STShopProduct *)object{
+    return [self.uuid isEqualToString:object.uuid] ||
+    [self.mainImageUrl isEqualToString:object.mainImageUrl];
 }
 
 @end

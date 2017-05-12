@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -96,7 +96,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmt-Gf-9pg">
-                                <rect key="frame" x="0.0" y="20" width="44" height="44"/>
+                                <rect key="frame" x="8" y="20" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="jFw-uN-uwM"/>
                                     <constraint firstAttribute="height" constant="44" id="qbS-bS-Img"/>
@@ -126,7 +126,7 @@
                         <constraints>
                             <constraint firstItem="qmt-Gf-9pg" firstAttribute="top" secondItem="qiB-S3-Tpu" secondAttribute="bottom" id="Dgw-6o-ohf"/>
                             <constraint firstAttribute="trailing" secondItem="mwi-UX-gzZ" secondAttribute="trailing" id="O3W-8v-GRH"/>
-                            <constraint firstItem="qmt-Gf-9pg" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" id="OEw-Bl-Qyi"/>
+                            <constraint firstItem="qmt-Gf-9pg" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" constant="8" id="OEw-Bl-Qyi"/>
                             <constraint firstAttribute="trailing" secondItem="kRf-iH-enc" secondAttribute="trailing" id="OZf-Mr-kqh"/>
                             <constraint firstItem="mwi-UX-gzZ" firstAttribute="top" secondItem="qmt-Gf-9pg" secondAttribute="bottom" id="SBc-MT-fuC"/>
                             <constraint firstItem="kRf-iH-enc" firstAttribute="top" secondItem="mwi-UX-gzZ" secondAttribute="bottom" id="abS-GP-ReM"/>

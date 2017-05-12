@@ -18,6 +18,8 @@ CGFloat const kButtonHeight = 44.f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectionLeadingConstr;
 @property (nonatomic, weak) id <STSCustomSegmentProtocol>delegate;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstr;
+@property (nonatomic, assign, readwrite) NSInteger selectedIndex;
+
 @end
 
 @implementation STCustomSegment
@@ -25,13 +27,11 @@ CGFloat const kButtonHeight = 44.f;
 + (STCustomSegment *)customSegmentWithDelegate:(id<STSCustomSegmentProtocol>)delegate{
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"STCustomSegment" owner:delegate options:nil];
     STCustomSegment *customSegment = (STCustomSegment *)[views firstObject];
-    
-    [customSegment configureSegmentWithDelegate:delegate];
-    
     return customSegment;
 }
 
 - (void)selectSegmentIndex:(NSInteger)index{
+    _selectedIndex = index;
     UIButton *button = [self viewWithTag:index + kButtonTagOffset];
     [self onSegmentButtonPressed:button];
 }
@@ -42,7 +42,7 @@ CGFloat const kButtonHeight = 44.f;
 }
 
 - (CGFloat)buttonWidth{
-    NSInteger numberOfButtons = [_delegate numberOfButtons];
+    NSInteger numberOfButtons = [_delegate segmentNumberOfButtons:self];
     CGSize requiredSize = [self requiredSize];
     CGFloat screenWidth = requiredSize.width;
     CGFloat availableWidth = screenWidth - kSegmentViewMargins;
@@ -53,15 +53,15 @@ CGFloat const kButtonHeight = 44.f;
 }
 
 - (CGSize)requiredSize{
-    CGFloat bottomSpace = [_delegate bottomSpace];
-    CGFloat topSpace = [_delegate topSpace];
+    CGFloat bottomSpace = [_delegate segmentBottomSpace:self];
+    CGFloat topSpace = [_delegate segmentTopSpace:self];
     
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, bottomSpace + topSpace + kButtonHeight);
 }
 
 - (void)configureView{
     // add buttons
-    NSInteger numberOfButtons = [_delegate numberOfButtons];
+    NSInteger numberOfButtons = [_delegate segmentNumberOfButtons:self];
 
     CGFloat buttonWidth = [self buttonWidth];
     
@@ -70,8 +70,8 @@ CGFloat const kButtonHeight = 44.f;
     rect.size = requiredSize;
     self.frame = rect;
     
-    CGFloat topSpace = [_delegate topSpace];
-    CGFloat bottomSpace = [_delegate bottomSpace];
+    CGFloat topSpace = [_delegate segmentTopSpace:self];
+    CGFloat bottomSpace = [_delegate segmentBottomSpace:self];
     _bottomConstr.constant = bottomSpace;
     
     CGSize buttonSize = CGSizeMake(buttonWidth, kButtonHeight);
@@ -84,7 +84,7 @@ CGFloat const kButtonHeight = 44.f;
         frame.size = buttonSize;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = frame;
-        NSString *stringTitle = [self.delegate buttonTitleForIndex:i];
+        NSString *stringTitle = [self.delegate segment:self buttonTitleForIndex:i];
         [button setTitle:stringTitle forState:UIControlStateNormal];
         [button setTitle:stringTitle forState:UIControlStateSelected];
         button.titleLabel.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:17.f];
@@ -108,9 +108,9 @@ CGFloat const kButtonHeight = 44.f;
     
     //add the default selection
     
-    if (_delegate && [_delegate respondsToSelector:@selector(defaultSelectedIndex)]) {
-        NSInteger defaultIndex = [_delegate defaultSelectedIndex];
-        
+    if (_delegate && [_delegate respondsToSelector:@selector(segmentDefaultSelectedIndex:)]) {
+        NSInteger defaultIndex = [_delegate segmentDefaultSelectedIndex:self];
+        _selectedIndex = defaultIndex;
         UIButton *button = [self viewWithTag:kButtonTagOffset + defaultIndex];
         if (button) {
             [self onSegmentButtonPressed:button];
@@ -122,7 +122,8 @@ CGFloat const kButtonHeight = 44.f;
 - (void)onSegmentButtonPressed:(id)sender{
     UIButton *button = (UIButton *)sender;
     
-    [self.delegate buttonPressedAtIndex:button.tag - kButtonTagOffset];
+    _selectedIndex = button.tag - kButtonTagOffset;
+    [self.delegate segment:self buttonPressedAtIndex:_selectedIndex];
     
     CGFloat leading = (button.tag - kButtonTagOffset) * [self buttonWidth] + (kSegmentViewMargins / 2.f);
     

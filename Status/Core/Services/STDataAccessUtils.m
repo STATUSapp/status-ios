@@ -257,19 +257,17 @@
 + (void)getCatalogParentEntitiesWithCompletion:(STDataAccessCompletionBlock)completion{
     [STGetCatalogParentCategoriesRequest getCatalogParentEntities:^(id response, NSError *error) {
         
-        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-            id data = response[@"data"];
-            NSMutableArray *result = [@[] mutableCopy];
-            for (NSDictionary *dict in data) {
-                STCatalogParentCategory *pCat = [STCatalogParentCategory parentCategoryFromDict:dict];
-                [result addObject:pCat];
-            }
-            
-            completion(result, nil);
+        NSMutableArray *result = [@[] mutableCopy];
+        for (NSDictionary *dict in response) {
+            STCatalogParentCategory *pCat = [STCatalogParentCategory parentCategoryFromDict:dict];
+            [result addObject:pCat];
         }
-        else
-            completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
-
+        
+        NSSortDescriptor *uuidSD = [NSSortDescriptor sortDescriptorWithKey:@"uuid" ascending:YES];
+        
+        [result sortUsingDescriptors:@[uuidSD]];
+        
+        completion(result, nil);
         
     } failure:^(NSError *error) {
         completion(nil, error);
@@ -280,18 +278,13 @@
                                  withCompletion:(STDataAccessCompletionBlock)completion{
     [STGetCatalogCategoriesRequest getCatalogCategoriesForparentCategoryId:parentCategoryId
                                                      withCompletion:^(id response, NSError *error) {
-                                                         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                                                             id data = response[@"data"];
                                                              NSMutableArray *result = [@[] mutableCopy];
-                                                             for (NSDictionary *dict in data) {
+                                                             for (NSDictionary *dict in response) {
                                                                  STCatalogCategory *category = [STCatalogCategory categoryFromDict:dict];
                                                                  [result addObject:category];
                                                              }
                                                              
                                                              completion(result, nil);
-                                                         }
-                                                         else
-                                                             completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
 
                                                      } failure:^(NSError *error) {
                                                          completion(nil, error);
@@ -301,19 +294,13 @@
 
 + (void)getUsedCatalogCategoriesWithCompletion:(STDataAccessCompletionBlock)completion{
     [STGetUsedCatalogCategoriesRequest getUsedCatalogCategoriesWithCompletion:^(id response, NSError *error) {
-        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-            id data = response[@"data"];
-            NSMutableArray *result = [@[] mutableCopy];
-            for (NSDictionary *dict in data) {
-                STCatalogCategory *category = [STCatalogCategory categoryFromDict:dict];
-                [result addObject:category];
-            }
-            
-            completion(result, nil);
+        NSMutableArray *result = [@[] mutableCopy];
+        for (NSDictionary *dict in response) {
+            STCatalogCategory *category = [STCatalogCategory categoryFromDict:dict];
+            [result addObject:category];
         }
-        else
-            completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
         
+        completion(result, nil);
     } failure:^(NSError *error) {
         completion(nil, error);
 
@@ -324,19 +311,13 @@
 + (void)getBrandsEntitiesWithCompletion:(STDataAccessCompletionBlock)completion{
     [STGetBrandsRequest getBrandsEntities:^(id response, NSError *error) {
         
-        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-            id data = response[@"data"];
-            NSMutableArray *result = [@[] mutableCopy];
-            for (NSDictionary *dict in data) {
-                STBrandObj *brandObj = [STBrandObj brandObjFromDict:dict];
-                [result addObject:brandObj];
-            }
-            
-            completion(result, nil);
+        NSMutableArray *result = [@[] mutableCopy];
+        for (NSDictionary *dict in response) {
+            STBrandObj *brandObj = [STBrandObj brandObjFromDict:dict];
+            [result addObject:brandObj];
         }
-        else
-            completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
-
+        
+        completion(result, nil);
         
     } failure:^(NSError *error) {
         completion(nil, error);
@@ -352,18 +333,13 @@
                                                     andBrandId:brandId
                                                  andCompletion:^(id response, NSError *error) {
                                                      
-                                                     if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                                                         id data = response[@"data"];
-                                                         NSMutableArray *result = [@[] mutableCopy];
-                                                         for (NSDictionary *dict in data) {
-                                                             STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
-                                                             [result addObject:shopObj];
-                                                         }
-                                                         
-                                                         completion(result, nil);
+                                                     NSMutableArray *result = [@[] mutableCopy];
+                                                     for (NSDictionary *dict in response) {
+                                                         STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
+                                                         [result addObject:shopObj];
                                                      }
-                                                     else
-                                                         completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
+                                                     
+                                                     completion(result, nil);
                                                      
                                                  } failure:^(NSError *error) {
                                                      completion(nil, error);
@@ -375,18 +351,13 @@
     [STGetUsedSuggestionsRequest getUsedSuggestionsEntitiesForCategory:categoryId
                                                  andCompletion:^(id response, NSError *error) {
                                                      
-                                                     if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                                                         id data = response[@"data"];
-                                                         NSMutableArray *result = [@[] mutableCopy];
-                                                         for (NSDictionary *dict in data) {
-                                                             STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
-                                                             [result addObject:shopObj];
-                                                         }
-                                                         
-                                                         completion(result, nil);
+                                                     NSMutableArray *result = [@[] mutableCopy];
+                                                     for (NSDictionary *dict in response) {
+                                                         STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
+                                                         [result addObject:shopObj];
                                                      }
-                                                     else
-                                                         completion(nil, [NSError errorWithDomain:@"com.status.status_code_error" code:10001 userInfo:nil]);
+                                                     
+                                                     completion(result, nil);
                                                      
                                                  } failure:^(NSError *error) {
                                                      completion(nil, error);

@@ -40,13 +40,9 @@
                                 withCompletion:^(id response, NSError *error) {
                                     
                                     if (!error) {
-                                        if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                                            blockSP.uuid = response[@"id"];
-                                            shopProductsWithId ++;
-                                        }
-                                        else
-                                            shopProductsNotUploaded ++;
-
+                                        blockSP.uuid = [response[@"id"] stringValue];
+                                        shopProductsWithId ++;
+                                        
                                     }
                                     else
                                         shopProductsNotUploaded ++;

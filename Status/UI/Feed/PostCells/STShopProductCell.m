@@ -28,7 +28,12 @@
 }
 
 - (void)configureWithShopProduct:(STShopProduct *)shopProduct{
-    [_productImage sd_setImageWithURL:[NSURL URLWithString:shopProduct.mainImageUrl]];
+    if (shopProduct.localImage) {
+        _productImage.image = shopProduct.localImage;
+    }
+    else{
+        [_productImage sd_setImageWithURL:[NSURL URLWithString:shopProduct.mainImageUrl]];
+    }
 }
 
 -(void)awakeFromNib{

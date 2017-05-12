@@ -42,14 +42,14 @@
             params[@"caption"] = weakSelf.caption;
         }
         
-        NSMutableArray *stopProductsIds = [@[] mutableCopy];
+        NSMutableArray *shopProductsIds = [@[] mutableCopy];
         for (STShopProduct *sp in weakSelf.shopProducts) {
-            if (sp.uuid && [sp.uuid length]) {
-                [stopProductsIds addObject:sp.uuid];
+            if (sp.uuid) {
+                [shopProductsIds addObject:sp.uuid];
             }
         }
-        if (stopProductsIds.count) {
-            params[@"tagged_products"] = stopProductsIds;
+        if (shopProductsIds.count) {
+            params[@"products"] = shopProductsIds;
         }
         
         AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];

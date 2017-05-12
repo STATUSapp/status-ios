@@ -26,9 +26,11 @@
 {
     __weak STGetCatalogCategoriesRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
+//        NSString *url = [NSString stringWithFormat:@"%@/%@", [weakSelf urlString], weakSelf.parentCategoryId];
         NSString *url = [weakSelf urlString];
+
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"parent_category_id"] = weakSelf.parentCategoryId;
+        params[@"root_category_id"] = weakSelf.parentCategoryId;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                         success:weakSelf.standardSuccessBlock

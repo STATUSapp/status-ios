@@ -7,18 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+@class STCustomSegment;
 
 @protocol STSCustomSegmentProtocol  <NSObject>
 
 @required
-- (CGFloat)topSpace;
-- (CGFloat)bottomSpace;
-- (NSInteger)numberOfButtons;
-- (NSString *)buttonTitleForIndex:(NSInteger)index;
-- (void)buttonPressedAtIndex:(NSInteger)index;
+- (CGFloat)segmentTopSpace:(STCustomSegment *)segment;
+- (CGFloat)segmentBottomSpace:(STCustomSegment *)segment;
+- (NSInteger)segmentNumberOfButtons:(STCustomSegment *)segment;
+- (NSString *)segment:(STCustomSegment *)segment
+  buttonTitleForIndex:(NSInteger)index;
+- (void)segment:(STCustomSegment *)segment
+buttonPressedAtIndex:(NSInteger)index;
 
 @optional
-- (NSInteger)defaultSelectedIndex;
+- (NSInteger)segmentDefaultSelectedIndex:(STCustomSegment *)segment;
 
 @end
 
@@ -26,5 +29,9 @@
 
 + (STCustomSegment *)customSegmentWithDelegate:(id<STSCustomSegmentProtocol>)delegate;
 
+@property (nonatomic, assign, readonly) NSInteger selectedIndex;
+
+- (void)configureSegmentWithDelegate:(id<STSCustomSegmentProtocol>)delegate;
 - (void)selectSegmentIndex:(NSInteger)index;
+
 @end
