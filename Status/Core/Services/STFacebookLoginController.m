@@ -121,7 +121,7 @@
     [[CoreManager locationService] startLocationUpdates];
     NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:response[@"user_id"]];
     self.currentUserId = userId;
-    [[STChatController sharedInstance] forceReconnect];
+//    [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     [self requestRemoteNotificationAccess];
     [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];

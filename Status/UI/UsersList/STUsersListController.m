@@ -150,17 +150,17 @@
     lu.followedByCurrentUser = @(!lu.followedByCurrentUser.boolValue);
     [_tableView reloadData];
 }
-- (IBAction)onChatWithUser:(id)sender {
+//- (IBAction)onChatWithUser:(id)sender {
 //    if (![[STChatController sharedInstance] canChat]) {
 //        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Chat connection appears to be offline right now. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 ////#ifndef DEBUG
 //        return;
 ////#endif
 //    }
-    STListUser *lu = _dataSource[((UIButton *)sender).tag];
-    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
-    [self.navigationController pushViewController:viewController animated:YES];
-}
+//    STListUser *lu = _dataSource[((UIButton *)sender).tag];
+//    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+//    [self.navigationController pushViewController:viewController animated:YES];
+//}
 
 #pragma mark - UITableView Delegate
 
@@ -170,7 +170,7 @@
     [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:lu.thumbnail] placeholderImage:[UIImage imageNamed:[lu genderImage]]];
    
     cell.userName.text = lu.userName;
-    cell.chatButton.tag = cell.followBtn.tag = indexPath.row;
+//    cell.chatButton.tag = cell.followBtn.tag = indexPath.row;
     cell.followBtn.selected = [lu.followedByCurrentUser boolValue];
     
     //not use message appVersion since there is a problem for some users
@@ -179,14 +179,14 @@
         ![appVersion isKindOfClass:[NSString class]] ||
         [appVersion rangeOfString:@"1.0."].location == NSNotFound ||*/
         [[[CoreManager loginService] currentUserUuid] isEqualToString:lu.uuid]) {//not setted
-        cell.chatButton.hidden = YES;
+//        cell.chatButton.hidden = YES;
         cell.followBtn.hidden = YES;
     }
-    else
-    {
-        cell.chatButton.hidden = NO;
-        cell.chatButton.hidden = NO;
-    }
+//    else
+//    {
+//        cell.chatButton.hidden = NO;
+//        cell.chatButton.hidden = NO;
+//    }
     
     
     return cell;

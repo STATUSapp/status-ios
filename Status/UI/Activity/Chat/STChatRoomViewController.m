@@ -421,7 +421,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 
 -(void)networkOn{
     [self hideStatusAlert];
-    [chatController reconnect];
+//    [chatController reconnect];
 }
 
 #pragma mark Helpers

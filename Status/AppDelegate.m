@@ -135,7 +135,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     // MAT will not function without the measureSession call included
     [Tune measureSession];
     
-    [[STChatController sharedInstance] reconnect];
+//    [[STChatController sharedInstance] reconnect];
     [[STChatController sharedInstance] startReachabilityService];
 }
 

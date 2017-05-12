@@ -52,7 +52,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
 
 -(void)forceReconnect{
     [self close];
-    [self reconnect];
+//    [self reconnect];
 }
 - (void)connectChat
 {

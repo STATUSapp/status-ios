@@ -92,9 +92,9 @@
     [[STNavigationService appTabBar] setActivityIcon];
 }
 
-- (void)showMessagesIconOnTabBar {
-    [[STNavigationService appTabBar] setMessagesIcon];
-}
+//- (void)showMessagesIconOnTabBar {
+//    [[STNavigationService appTabBar] setMessagesIcon];
+//}
 
 - (void)presentLoginScreen{
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;

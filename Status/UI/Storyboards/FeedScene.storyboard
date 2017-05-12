@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="knr-t8-3Sm">
-                            <size key="itemSize" width="320" height="568"/>
+                            <size key="itemSize" width="320" height="480"/>
                             <size key="headerReferenceSize" width="320" height="58"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -52,13 +52,13 @@
                                             </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-mk-gY4">
-                                            <rect key="frame" x="236" y="274" width="70" height="19"/>
+                                            <rect key="frame" x="236" y="291" width="70" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="TDV-0S-kOS"/>
                                                 <constraint firstAttribute="width" constant="70" id="uFs-78-mYG"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="10"/>
-                                            <state key="normal" title="MESSAGE" backgroundImage="button:wKb-mk-gY4:backgroundImage"/>
+                                            <state key="normal" title="EDIT" backgroundImage="button:wKb-mk-gY4:backgroundImage"/>
                                             <state key="highlighted">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
@@ -67,7 +67,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZr-mu-kjB">
-                                            <rect key="frame" x="157" y="274" width="70" height="19"/>
+                                            <rect key="frame" x="157" y="291" width="70" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="eox-1j-Gkp"/>
                                                 <constraint firstAttribute="width" constant="70" id="zbs-Pg-azD"/>
@@ -81,25 +81,8 @@
                                                 <action selector="onTapFollowUser:" destination="kUw-q3-wvD" eventType="touchUpInside" id="sGd-Lk-v0S"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Less than a kilometter away, Active now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="djy-IM-3Tk">
-                                            <rect key="frame" x="14" y="291" width="180" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="89L-vx-BcZ"/>
-                                                <constraint firstAttribute="width" constant="180" id="ogg-86-zmi"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="11"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status_online" translatesAutoresizingMaskIntoConstraints="NO" id="E7P-dq-CxO" userLabel="status icon">
-                                            <rect key="frame" x="198" y="297" width="10" height="10"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="10" id="VO9-L3-lNl"/>
-                                                <constraint firstAttribute="height" constant="10" id="WoJ-2a-W4U"/>
-                                            </constraints>
-                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUt-6v-yge">
-                                            <rect key="frame" x="12" y="274" width="143" height="19"/>
+                                            <rect key="frame" x="12" y="291" width="143" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="5xc-Mu-FY3"/>
                                             </constraints>
@@ -140,21 +123,17 @@
                                     <constraint firstItem="ILD-rb-6Es" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" id="4qG-xi-382"/>
                                     <constraint firstItem="BaU-l3-KLL" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" id="5co-OH-Jk0"/>
                                     <constraint firstItem="hUt-6v-yge" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" constant="12" id="AnS-bv-KCX"/>
-                                    <constraint firstItem="djy-IM-3Tk" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" constant="14" id="DLk-DP-vir"/>
-                                    <constraint firstAttribute="bottom" secondItem="hUt-6v-yge" secondAttribute="bottom" constant="27" id="FOy-NY-IyB"/>
+                                    <constraint firstAttribute="bottom" secondItem="hUt-6v-yge" secondAttribute="bottom" constant="10" id="FOy-NY-IyB"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="dZr-mu-kjB" secondAttribute="bottom" constant="2" id="HBF-EO-UIg"/>
                                     <constraint firstAttribute="trailing" secondItem="wKb-mk-gY4" secondAttribute="trailing" constant="14" id="J4O-LC-2el"/>
                                     <constraint firstItem="qac-IY-t25" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" id="LD9-NC-mww"/>
                                     <constraint firstAttribute="bottom" secondItem="ILD-rb-6Es" secondAttribute="bottom" id="M6m-5N-xyg"/>
                                     <constraint firstItem="wKb-mk-gY4" firstAttribute="leading" secondItem="dZr-mu-kjB" secondAttribute="trailing" constant="9" id="MOe-1I-XLd"/>
-                                    <constraint firstItem="E7P-dq-CxO" firstAttribute="leading" secondItem="djy-IM-3Tk" secondAttribute="trailing" constant="4" id="UNf-Vb-nBa"/>
-                                    <constraint firstItem="E7P-dq-CxO" firstAttribute="centerY" secondItem="djy-IM-3Tk" secondAttribute="centerY" id="WDQ-PQ-oww"/>
-                                    <constraint firstAttribute="bottom" secondItem="wKb-mk-gY4" secondAttribute="bottom" constant="27" id="lXs-pO-e1P"/>
-                                    <constraint firstAttribute="bottom" secondItem="djy-IM-3Tk" secondAttribute="bottom" constant="8" id="lnR-PH-e12"/>
+                                    <constraint firstAttribute="bottom" secondItem="wKb-mk-gY4" secondAttribute="bottom" constant="10" id="lXs-pO-e1P"/>
                                     <constraint firstAttribute="trailing" secondItem="BaU-l3-KLL" secondAttribute="trailing" id="nNg-cb-2qt"/>
                                     <constraint firstItem="qac-IY-t25" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" id="ofM-83-4Xc"/>
                                     <constraint firstItem="dZr-mu-kjB" firstAttribute="leading" secondItem="hUt-6v-yge" secondAttribute="trailing" constant="2" id="p35-29-dI8"/>
                                     <constraint firstItem="1q9-b9-Q0E" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" id="sDI-sS-nmI"/>
-                                    <constraint firstItem="E7P-dq-CxO" firstAttribute="top" secondItem="dZr-mu-kjB" secondAttribute="bottom" constant="4" id="uBi-t2-4BE"/>
                                     <constraint firstAttribute="trailing" secondItem="ILD-rb-6Es" secondAttribute="trailing" id="wUe-VS-AFb"/>
                                     <constraint firstAttribute="bottom" secondItem="BaU-l3-KLL" secondAttribute="bottom" id="wfu-Ry-0ed"/>
                                     <constraint firstItem="BaU-l3-KLL" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" id="xcN-j2-93Z"/>
@@ -162,14 +141,11 @@
                                 <size key="customSize" width="320" height="320"/>
                                 <connections>
                                     <outlet property="backButton" destination="qac-IY-t25" id="RwW-aO-mmc"/>
-                                    <outlet property="distanceLabel" destination="djy-IM-3Tk" id="MiK-x4-Oi6"/>
-                                    <outlet property="distanceLabelWidthConstr" destination="ogg-86-zmi" id="YtW-aq-W3D"/>
                                     <outlet property="followButton" destination="dZr-mu-kjB" id="E8l-zA-gFm"/>
                                     <outlet property="messageEditButton" destination="wKb-mk-gY4" id="bdE-Ip-17i"/>
                                     <outlet property="nameAndAgeButton" destination="hUt-6v-yge" id="3ri-5e-4cJ"/>
                                     <outlet property="profileImageView" destination="BaU-l3-KLL" id="JGd-o6-DAS"/>
                                     <outlet property="settingsButton" destination="1q9-b9-Q0E" id="dhF-YA-51J"/>
-                                    <outlet property="statusImageView" destination="E7P-dq-CxO" id="AbP-2z-Eew"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileFriendsInfoCell" id="bbJ-ng-Ybc" customClass="UserProfileFriendsInfoCell">
@@ -770,17 +746,6 @@
                                                 <action selector="onMorePressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="atG-7h-HcD"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlI-NQ-OJc">
-                                            <rect key="frame" x="171" y="0.0" width="44" height="58"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="44" id="6q2-fB-xnG"/>
-                                                <constraint firstAttribute="height" constant="58" id="KMS-Hr-4Jq"/>
-                                            </constraints>
-                                            <state key="normal" image="user message"/>
-                                            <connections>
-                                                <action selector="onMessagePressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="XLJ-WI-1Qm"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdw-KL-jVX">
                                             <rect key="frame" x="0.0" y="0.0" width="171" height="58"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -796,16 +761,13 @@
                                         <constraint firstItem="gn7-Ee-jmo" firstAttribute="centerY" secondItem="6Pm-xN-EoZ" secondAttribute="centerY" id="5cH-MU-xkg"/>
                                         <constraint firstItem="gn7-Ee-jmo" firstAttribute="leading" secondItem="6Pm-xN-EoZ" secondAttribute="leading" constant="16" id="6qL-nk-t2J"/>
                                         <constraint firstAttribute="trailing" secondItem="cpX-Qz-CQa" secondAttribute="trailing" id="Aih-Ng-QU3"/>
-                                        <constraint firstItem="xlI-NQ-OJc" firstAttribute="leading" secondItem="Zod-fz-Ct2" secondAttribute="trailing" id="FqN-Qu-IVb"/>
                                         <constraint firstItem="Zod-fz-Ct2" firstAttribute="top" secondItem="6Pm-xN-EoZ" secondAttribute="top" constant="13" id="Hsv-Tj-T8b"/>
                                         <constraint firstItem="Zod-fz-Ct2" firstAttribute="leading" secondItem="gn7-Ee-jmo" secondAttribute="trailing" constant="16" id="KhP-BI-csp"/>
                                         <constraint firstAttribute="bottom" secondItem="Sdw-KL-jVX" secondAttribute="bottom" id="LKn-B7-8HP"/>
                                         <constraint firstAttribute="bottom" secondItem="cpX-Qz-CQa" secondAttribute="bottom" id="OBv-rW-3tJ"/>
-                                        <constraint firstItem="cpX-Qz-CQa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xlI-NQ-OJc" secondAttribute="trailing" id="T0v-oW-o2f"/>
                                         <constraint firstItem="Sdw-KL-jVX" firstAttribute="trailing" secondItem="Zod-fz-Ct2" secondAttribute="trailing" id="Xqx-7t-Zee"/>
                                         <constraint firstItem="cpX-Qz-CQa" firstAttribute="top" secondItem="6Pm-xN-EoZ" secondAttribute="top" id="cG0-bw-Zzf"/>
                                         <constraint firstItem="Sdw-KL-jVX" firstAttribute="top" secondItem="6Pm-xN-EoZ" secondAttribute="top" id="e9K-4Z-sQ6"/>
-                                        <constraint firstItem="xlI-NQ-OJc" firstAttribute="top" secondItem="6Pm-xN-EoZ" secondAttribute="top" id="jUz-Of-tfK"/>
                                         <constraint firstItem="Sdw-KL-jVX" firstAttribute="leading" secondItem="6Pm-xN-EoZ" secondAttribute="leading" id="qiH-pT-oVz"/>
                                     </constraints>
                                 </view>
@@ -817,7 +779,6 @@
                                 <constraint firstAttribute="bottom" secondItem="6Pm-xN-EoZ" secondAttribute="bottom" id="mYq-U7-g5l"/>
                             </constraints>
                             <connections>
-                                <outlet property="messageButton" destination="xlI-NQ-OJc" id="n6U-hy-N4s"/>
                                 <outlet property="moreButton" destination="cpX-Qz-CQa" id="j7M-VB-aSP"/>
                                 <outlet property="selectionButton" destination="Sdw-KL-jVX" id="E2i-UD-bxd"/>
                                 <outlet property="userNameLabel" destination="Zod-fz-Ct2" id="Cab-FS-6vy"/>
@@ -1039,8 +1000,6 @@ AAAAAAAAAAAAAAAMEw
         <image name="shop" width="13" height="17"/>
         <image name="shop_pressed" width="13" height="17"/>
         <image name="splashscreen" width="360" height="643"/>
-        <image name="status_online" width="10" height="10"/>
-        <image name="user message" width="18" height="19"/>
         <image name="user_photo_gradient" width="375" height="151"/>
     </resources>
 </document>

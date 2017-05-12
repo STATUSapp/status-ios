@@ -233,14 +233,14 @@ static NSString * const nearbyCell = @"STNearbyCell";
     [self.navigationController pushViewController:feedCVC animated:YES];
 }
 
-- (IBAction)onTapSendMessageToUser:(id)sender {
-    
-    UIButton *btn = (UIButton *)sender;
-    STUserProfile *userProfile = [_feedProcessor objectAtIndex:btn.tag];
-    STListUser *lu = [userProfile listUserFromProfile];
-    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
-    [self.navigationController pushViewController:viewController animated:YES];
-}
+//- (IBAction)onTapSendMessageToUser:(id)sender {
+//    
+//    UIButton *btn = (UIButton *)sender;
+//    STUserProfile *userProfile = [_feedProcessor objectAtIndex:btn.tag];
+//    STListUser *lu = [userProfile listUserFromProfile];
+//    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+//    [self.navigationController pushViewController:viewController animated:YES];
+//}
 
 
 @end

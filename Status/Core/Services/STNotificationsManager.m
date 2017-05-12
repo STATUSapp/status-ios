@@ -64,6 +64,7 @@
         return;
     }
     if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
+        return;
         _lastNotification = nil;
         NSDictionary *userInfo = notif[@"user_info"];
         STListUser *lu = [STListUser new];
@@ -103,8 +104,8 @@
     NSMutableDictionary *notificationDict = [[NSMutableDictionary alloc] initWithDictionary:notification[@"user_info"]];
     STNotificationType notifType = [notificationDict[@"notification_type"] integerValue];
     if (notifType == STNotificationTypeLike ||
-          notifType == STNotificationTypeUploaded ||
-          notifType == STNotificationTypeChatMessage) {
+          notifType == STNotificationTypeUploaded /* ||
+          notifType == STNotificationTypeChatMessage*/) {
         NSString *alertMesage = notification[@"aps"][@"alert"];
         
         if (alertMesage !=nil )
@@ -208,6 +209,7 @@
             break;
         case STNotificationTypeChatMessage:
         {
+            return;
             STListUser *lu = [STListUser new];
             lu.uuid = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
             lu.userName = _currentBanner.notificationInfo[@"name"];

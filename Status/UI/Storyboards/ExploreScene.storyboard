@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -95,34 +95,21 @@
                                                             <rect key="frame" x="0.0" y="148" width="148" height="47"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denis, 27" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1n-bu-yh5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="114" height="47"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="148" height="47"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="47" id="5W7-XK-xet"/>
-                                                                        <constraint firstAttribute="width" constant="114" id="lna-GM-KY2"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                                     <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDk-Gl-PMY">
-                                                                    <rect key="frame" x="114" y="0.0" width="34" height="47"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="47" id="46s-ND-07k"/>
-                                                                        <constraint firstAttribute="width" constant="34" id="MCh-Lp-c7Q"/>
-                                                                    </constraints>
-                                                                    <state key="normal" image="user message"/>
-                                                                    <connections>
-                                                                        <action selector="onTapSendMessageToUser:" destination="rmj-DE-0EB" eventType="touchUpInside" id="Zx1-bx-Y6Y"/>
-                                                                    </connections>
-                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstItem="yDk-Gl-PMY" firstAttribute="leading" secondItem="B1n-bu-yh5" secondAttribute="trailing" id="U89-3O-5X2"/>
+                                                                <constraint firstAttribute="trailing" secondItem="B1n-bu-yh5" secondAttribute="trailing" id="oLn-Fi-GYc"/>
                                                                 <constraint firstItem="B1n-bu-yh5" firstAttribute="leading" secondItem="43C-u1-6CM" secondAttribute="leading" id="oYA-Xx-aXk"/>
                                                                 <constraint firstAttribute="height" constant="47" id="or3-RI-Z7z"/>
                                                                 <constraint firstItem="B1n-bu-yh5" firstAttribute="top" secondItem="43C-u1-6CM" secondAttribute="top" id="wCa-rD-PG3"/>
-                                                                <constraint firstItem="yDk-Gl-PMY" firstAttribute="top" secondItem="43C-u1-6CM" secondAttribute="top" id="xOx-sP-w85"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -149,9 +136,7 @@
                                         <size key="customSize" width="148" height="195"/>
                                         <connections>
                                             <outlet property="mainView" destination="muW-y4-Jze" id="QYF-8E-kq3"/>
-                                            <outlet property="messageButton" destination="yDk-Gl-PMY" id="bdJ-bf-zTZ"/>
                                             <outlet property="nameLeftContraint" destination="oYA-Xx-aXk" id="V18-8g-HFY"/>
-                                            <outlet property="nameWidthConstraint" destination="lna-GM-KY2" id="LVj-Lf-csW"/>
                                             <outlet property="profileImage" destination="Su5-Dq-vJ4" id="SyV-Dd-b7K"/>
                                             <outlet property="profileName" destination="B1n-bu-yh5" id="fA5-zf-twZ"/>
                                         </connections>
@@ -210,6 +195,5 @@
     <resources>
         <image name="boy" width="246" height="246"/>
         <image name="splashscreen" width="360" height="643"/>
-        <image name="user message" width="18" height="19"/>
     </resources>
 </document>

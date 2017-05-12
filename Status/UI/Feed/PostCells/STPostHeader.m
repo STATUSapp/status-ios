@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet UIButton *selectionButton;
-@property (weak, nonatomic) IBOutlet UIButton *messageButton;
+//@property (weak, nonatomic) IBOutlet UIButton *messageButton;
 
 @end
 
@@ -26,8 +26,8 @@
 
 - (void)configureCellWithPost:(STPost *)post{
     _userNameLabel.text = post.userName;
-    BOOL currentUser = [post.userId isEqualToString:[CoreManager loginService].currentUserUuid];
-    _messageButton.hidden = currentUser;
+//    BOOL currentUser = [post.userId isEqualToString:[CoreManager loginService].currentUserUuid];
+//    _messageButton.hidden = currentUser;
     [_userThumbnail sd_setImageWithURL: [NSURL URLWithString:post.smallPhotoUrl]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         CGRect rect = _userThumbnail.frame;
         _userThumbnail.layer.cornerRadius = rect.size.width/2;
@@ -39,7 +39,7 @@
 - (void)configureForSection:(NSInteger)sectionIndex{
     _moreButton.tag = sectionIndex;
     _selectionButton.tag = sectionIndex;
-    _messageButton.tag = sectionIndex;
+//    _messageButton.tag = sectionIndex;
 
 }
 

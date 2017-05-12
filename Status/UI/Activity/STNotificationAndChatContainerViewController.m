@@ -15,18 +15,18 @@
 #import "STNavigationService.h"
 #import "STCustomSegment.h"
 
-typedef NS_ENUM(NSUInteger, STActivity) {
-    STActivityNotifications = 0,
-    STActivityChat,
-    STActivityCount
-};
+//typedef NS_ENUM(NSUInteger, STActivity) {
+//    STActivityNotifications = 0,
+//    STActivityChat,
+//    STActivityCount
+//};
 
-@interface STNotificationAndChatContainerViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate, STSCustomSegmentProtocol>
-@property (weak, nonatomic) IBOutlet UIView *topContainerView;
+@interface STNotificationAndChatContainerViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+//@property (weak, nonatomic) IBOutlet UIView *topContainerView;
 
 @property (weak, nonatomic) IBOutlet UIView *childContainer;
 
-@property (strong, nonatomic) STCustomSegment *customSegment;
+//@property (strong, nonatomic) STCustomSegment *customSegment;
 
 @property (strong, nonatomic) UIPageViewController * pageController;
 @property (strong, nonatomic) NSArray<UIViewController *> * viewControllers;
@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     return [storyboard instantiateViewControllerWithIdentifier:@"STNotificationAndChatContainerViewController"];
 }
 
+/*
 #pragma mark STSCustomSegmentProtocol
 
 -(CGFloat)segmentBottomSpace:(STCustomSegment *)segment{
@@ -95,13 +96,13 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     
     [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:nil];
 }
-
+*/
 #pragma mark - IBActions
 
-- (IBAction)goToMessages:(id)sender {
-    [[CoreManager navigationService] showMessagesIconOnTabBar];
-    [[CoreManager badgeService] setBadgeForMessages];
-}
+//- (IBAction)goToMessages:(id)sender {
+//    [[CoreManager navigationService] showMessagesIconOnTabBar];
+//    [[CoreManager badgeService] setBadgeForMessages];
+//}
 - (IBAction)goToNotifications:(id)sender {
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -143,14 +144,14 @@ typedef NS_ENUM(NSUInteger, STActivity) {
         NSLog(@"completed");
         
         
-        NSInteger currentVCIndex = [_viewControllers indexOfObject:pageViewController.viewControllers.lastObject];
+//        NSInteger currentVCIndex = [_viewControllers indexOfObject:pageViewController.viewControllers.lastObject];
         
-        [_customSegment selectSegmentIndex:currentVCIndex];
-        
-        if (currentVCIndex == STActivityChat) {
-            [self goToMessages:nil];
-        }
-        else
+//        [_customSegment selectSegmentIndex:currentVCIndex];
+//        
+//        if (currentVCIndex == STActivityChat) {
+//            [self goToMessages:nil];
+//        }
+//        else
             [self goToNotifications:nil];
     }
     
@@ -203,11 +204,11 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     STNotificationsViewController *notifController = [mainStoryboard instantiateViewControllerWithIdentifier: @"notificationScene"];
     notifController.containeeDelegate = self;
     
-    UIStoryboard *chatStoryboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
-    STConversationsListViewController *messagesViewController = (STConversationsListViewController *)[chatStoryboard instantiateViewControllerWithIdentifier:@"STConversationsListViewController"];
-    messagesViewController.containeeDelegate = self;
+//    UIStoryboard *chatStoryboard = [UIStoryboard storyboardWithName:@"ChatScene" bundle:nil];
+//    STConversationsListViewController *messagesViewController = (STConversationsListViewController *)[chatStoryboard instantiateViewControllerWithIdentifier:@"STConversationsListViewController"];
+//    messagesViewController.containeeDelegate = self;
     
-    _viewControllers = @[notifController, messagesViewController];
+    _viewControllers = @[notifController];
     
     UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
     self.view.backgroundColor = backgroundColor;
@@ -226,17 +227,19 @@ typedef NS_ENUM(NSUInteger, STActivity) {
     [self.childContainer addSubview:_pageController.view];
     [self addChildViewController:_pageController];
     
+    [_pageController setViewControllers:@[_viewControllers[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+
     [self.navigationController setNavigationBarHidden:YES];
-    _customSegment = [STCustomSegment customSegmentWithDelegate:self];
-    [_customSegment configureSegmentWithDelegate:self];
-    CGRect rect = _customSegment.frame;
-    rect.origin.x = 0.f;
-    rect.origin.y = 0.f;
-    rect.size.width = self.topContainerView.frame.size.width;
-    rect.size.height = self.topContainerView.frame.size.height;
-    _customSegment.frame = rect;
-    _customSegment.translatesAutoresizingMaskIntoConstraints = YES;
-    [self.topContainerView addSubview:_customSegment];
+//    _customSegment = [STCustomSegment customSegmentWithDelegate:self];
+//    [_customSegment configureSegmentWithDelegate:self];
+//    CGRect rect = _customSegment.frame;
+//    rect.origin.x = 0.f;
+//    rect.origin.y = 0.f;
+//    rect.size.width = self.topContainerView.frame.size.width;
+//    rect.size.height = self.topContainerView.frame.size.height;
+//    _customSegment.frame = rect;
+//    _customSegment.translatesAutoresizingMaskIntoConstraints = YES;
+//    [self.topContainerView addSubview:_customSegment];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectNotificationsScreen object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNotifications:) name:STNotificationSelectChatScreen object:nil];
@@ -274,10 +277,10 @@ typedef NS_ENUM(NSUInteger, STActivity) {
         STNotificationsViewController *notifVc = (STNotificationsViewController *)[_viewControllers firstObject];
         [notifVc getNotificationsFromServer];
     }
-    else
-    {
-        [self goToMessages:nil];
-    }
+//    else
+//    {
+//        [self goToMessages:nil];
+//    }
     
 }
 

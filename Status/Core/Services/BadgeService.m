@@ -74,7 +74,7 @@ NSString * const kBadgeCountNotificationsKey = @"kBadgeCountNotificationsKey";
 - (void)adjustUnreadMessages:(NSInteger)messagesCountToBeAdded{
     _unreadMessages = @(_unreadMessages.integerValue + messagesCountToBeAdded);
     [[CoreManager localNotificationService] postNotificationName:kBadgeCountChangedNotification object:nil userInfo:@{kBadgeCountMessagesKey:_unreadMessages}];
-    [[CoreManager navigationService] showMessagesIconOnTabBar];
+//    [[CoreManager navigationService] showMessagesIconOnTabBar];
     [[CoreManager navigationService] setBadge:_unreadMessages.integerValue forTabAtIndex:STTabBarIndexChat];
 }
 
@@ -136,7 +136,7 @@ NSString * const kBadgeCountNotificationsKey = @"kBadgeCountNotificationsKey";
     _unreadMessages = notification.userInfo[kUnreadMessagesCountKey];
     
     [[CoreManager localNotificationService] postNotificationName:kBadgeCountChangedNotification object:nil userInfo:@{kBadgeCountMessagesKey:_unreadMessages}];
-    [[CoreManager navigationService] showMessagesIconOnTabBar];
+//    [[CoreManager navigationService] showMessagesIconOnTabBar];
     [[CoreManager navigationService] setBadge:_unreadMessages.integerValue forTabAtIndex:STTabBarIndexChat];
 
 

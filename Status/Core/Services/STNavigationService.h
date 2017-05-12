@@ -30,7 +30,7 @@
 
 - (void)showActivityIconOnTabBar;
 
-- (void)showMessagesIconOnTabBar;
+//- (void)showMessagesIconOnTabBar;
 
 -(void)pushViewController:(UIViewController *) vc
           inTabbarAtIndex:(NSInteger)index

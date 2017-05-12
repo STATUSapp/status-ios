@@ -92,7 +92,7 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[[UIImage imageNamed:@"profile-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     
-    [self setMessagesIcon];
+//    [self setMessagesIcon];
     
     for (UITabBarItem * item in self.tabBar.items) {
         [item setTitle:nil];
@@ -118,10 +118,10 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[[UIImage imageNamed:@"activity-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 }
 
-- (void)setMessagesIcon {
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[[UIImage imageNamed:@"messages"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[[UIImage imageNamed:@"messages-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-}
+//- (void)setMessagesIcon {
+//    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[[UIImage imageNamed:@"messages"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+//    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[[UIImage imageNamed:@"messages-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

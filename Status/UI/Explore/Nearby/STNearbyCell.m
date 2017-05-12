@@ -18,7 +18,7 @@ CGFloat const kMessageBottomWidth = 37.f;
 @interface STNearbyCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *profileName;
-@property (weak, nonatomic) IBOutlet UIButton *messageButton;
+//@property (weak, nonatomic) IBOutlet UIButton *messageButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameLeftContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
@@ -69,7 +69,7 @@ CGFloat const kMessageBottomWidth = 37.f;
 }
 
 - (void)configureWithIndexPath:(NSIndexPath *)indexPath{
-    _messageButton.tag = indexPath.row;
+//    _messageButton.tag = indexPath.row;
 }
 
 + (CGSize ) cellSizeForProfile:(STUserProfile *)profile{

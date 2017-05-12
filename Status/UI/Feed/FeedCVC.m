@@ -703,26 +703,26 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                               }
                           }];
 }
-- (IBAction)onMessagePressed:(id)sender {
-    
-    STPost *post = [self getCurrentPostForButton:sender];
-
-    if ([post.userId isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-        return;
-    }
-    STListUser *lu = (STListUser *)[[CoreManager usersPool] getUserWithId:post.userId];
-    if (!lu) {
-       lu = [STListUser new];
-        lu.uuid = post.userId;
-        lu.userName = post.userName;
-        lu.thumbnail = post.smallPhotoUrl;
-    }
-    
-    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
-    [self.navigationController pushViewController:viewController animated:YES];
-
-}
+//- (IBAction)onMessagePressed:(id)sender {
+//    
+//    STPost *post = [self getCurrentPostForButton:sender];
+//
+//    if ([post.userId isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
+//        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+//        return;
+//    }
+//    STListUser *lu = (STListUser *)[[CoreManager usersPool] getUserWithId:post.userId];
+//    if (!lu) {
+//       lu = [STListUser new];
+//        lu.uuid = post.userId;
+//        lu.userName = post.userName;
+//        lu.thumbnail = post.smallPhotoUrl;
+//    }
+//    
+//    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+//    [self.navigationController pushViewController:viewController animated:YES];
+//
+//}
 - (IBAction)onNamePressed:(id)sender {
     if (![_feedProcessor canGoToUserProfile]) {
         //is already in user profile
@@ -823,12 +823,12 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                           }];
 }
 
-- (IBAction)onTapSendMessageToUser:(id)sender {
-    
-    STListUser *lu = [[_feedProcessor userProfile] listUserFromProfile];
-    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
-    [self.navigationController pushViewController:viewController animated:YES];
-}
+//- (IBAction)onTapSendMessageToUser:(id)sender {
+//    
+//    STListUser *lu = [[_feedProcessor userProfile] listUserFromProfile];
+//    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+//    [self.navigationController pushViewController:viewController animated:YES];
+//}
 
 - (IBAction)onMessageEditButtonPressed:(id)sender{
     if (_isMyProfile) {

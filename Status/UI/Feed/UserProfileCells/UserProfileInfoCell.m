@@ -20,10 +20,10 @@ CGFloat distanceLabelStandardHeight = 21.f;
 @interface UserProfileInfoCell() 
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIButton *messageEditButton;
-@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
+//@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+//@property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet UIButton *nameAndAgeButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *distanceLabelWidthConstr;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *distanceLabelWidthConstr;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
@@ -78,45 +78,45 @@ CGFloat distanceLabelStandardHeight = 21.f;
     [_nameAndAgeButton setTitle:nameAndAgeString forState:UIControlStateNormal];
     [_nameAndAgeButton setTitle:nameAndAgeString forState:UIControlStateHighlighted];
 
-    BOOL hasLastSeenStatus = YES;
-    NSString * statusText;
-    if (profile.isActive) {
-        statusText = @"Active Now";
-        [self setStatusIconForStatus:STUserStatusActive];
-    } else if (profile.wasNeverActive) {
-        statusText = @"Not Active";
-        [self setStatusIconForStatus:STUserStatusOffline];
-    } else if (profile.lastActive != nil) {
-        statusText = [NSDate statusForLastTimeSeen:profile.lastActive];
-        [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:profile.lastActive]];
-    } else {
-        hasLastSeenStatus = NO;
-    }
+//    BOOL hasLastSeenStatus = YES;
+//    NSString * statusText;
+//    if (profile.isActive) {
+//        statusText = @"Active Now";
+//        [self setStatusIconForStatus:STUserStatusActive];
+//    } else if (profile.wasNeverActive) {
+//        statusText = @"Not Active";
+//        [self setStatusIconForStatus:STUserStatusOffline];
+//    } else if (profile.lastActive != nil) {
+//        statusText = [NSDate statusForLastTimeSeen:profile.lastActive];
+//        [self setStatusIconForStatus:[NSDate statusTypeForLastTimeSeen:profile.lastActive]];
+//    } else {
+//        hasLastSeenStatus = NO;
+//    }
     
-    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
-                                                                                     andLongitudeString:profile.longitude];
+//    NSString * distanceText = [[CoreManager locationService] distanceStringToLocationWithLatitudeString:profile.latitude
+//                                                                                     andLongitudeString:profile.longitude];
+//    
+//    if ([distanceText isEqualToString:ST_UNKNOWN_DISTANCE_MESSAGE]) {
+//        distanceText = @"";
+//    }
+//    
+//    if (distanceText.length == 0) {
+//        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@"%@", statusText] : @"";
+//    }else {
+//        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@", %@", statusText] : @"";
+//    }
+//    _statusImageView.hidden = !hasLastSeenStatus;
     
-    if ([distanceText isEqualToString:ST_UNKNOWN_DISTANCE_MESSAGE]) {
-        distanceText = @"";
-    }
     
-    if (distanceText.length == 0) {
-        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@"%@", statusText] : @"";
-    }else {
-        statusText = hasLastSeenStatus ? [NSString stringWithFormat:@", %@", statusText] : @"";
-    }
-    _statusImageView.hidden = !hasLastSeenStatus;
+//    NSString *statusAndLocationString = [NSString stringWithFormat:@"%@%@", distanceText, statusText];
     
-    
-    NSString *statusAndLocationString = [NSString stringWithFormat:@"%@%@", distanceText, statusText];
-    
-    _distanceLabel.text = statusAndLocationString;
-    CGFloat maxWidth = self.contentView.frame.size.width - distanceLabelWidthPadding;
-    NSDictionary *attributes = @{NSFontAttributeName : self.distanceLabel.font};
-    CGRect rect = [statusAndLocationString boundingRectWithSize:CGSizeMake(maxWidth, distanceLabelStandardHeight)
-                                                        options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                     attributes:attributes context:nil];
-    _distanceLabelWidthConstr.constant = round(rect.size.width) + 2.f;
+//    _distanceLabel.text = statusAndLocationString;
+//    CGFloat maxWidth = self.contentView.frame.size.width - distanceLabelWidthPadding;
+//    NSDictionary *attributes = @{NSFontAttributeName : self.distanceLabel.font};
+//    CGRect rect = [statusAndLocationString boundingRectWithSize:CGSizeMake(maxWidth, distanceLabelStandardHeight)
+//                                                        options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+//                                                     attributes:attributes context:nil];
+//    _distanceLabelWidthConstr.constant = round(rect.size.width) + 2.f;
     
     if (!profile.isFollowedByCurrentUser) {
         [_followButton setTitle:@"FOLLOW" forState:UIControlStateNormal];
@@ -130,24 +130,24 @@ CGFloat distanceLabelStandardHeight = 21.f;
     
 }
 
-- (void)setStatusIconForStatus:(STUserStatus)userStatus {
-    switch (userStatus) {
-        case STUserStatusAway:
-            _statusImageView.image = [UIImage imageNamed:@"status_away"];
-            break;
-        case STUserStatusOffline:
-            _statusImageView.image = [UIImage imageNamed:@"status_offline"];
-            break;
-            
-        case STUserStatusActive:
-            _statusImageView.image = [UIImage imageNamed:@"status_online"];
-            break;
-            
-        default:
-            _statusImageView.image = nil;
-            break;
-    }
-}
+//- (void)setStatusIconForStatus:(STUserStatus)userStatus {
+//    switch (userStatus) {
+//        case STUserStatusAway:
+//            _statusImageView.image = [UIImage imageNamed:@"status_away"];
+//            break;
+//        case STUserStatusOffline:
+//            _statusImageView.image = [UIImage imageNamed:@"status_offline"];
+//            break;
+//            
+//        case STUserStatusActive:
+//            _statusImageView.image = [UIImage imageNamed:@"status_online"];
+//            break;
+//            
+//        default:
+//            _statusImageView.image = nil;
+//            break;
+//    }
+//}
 
 + (CGSize)cellSize{
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;

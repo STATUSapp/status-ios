@@ -14,7 +14,7 @@
 
 - (void)goToPreviousSelectedIndex;
 - (void)setActivityIcon;
-- (void)setMessagesIcon;
+//- (void)setMessagesIcon;
 
 - (void)setTabBarHidden:(BOOL)tabBarHidden;
 - (void)setTabBarFrame:(CGRect)rect;

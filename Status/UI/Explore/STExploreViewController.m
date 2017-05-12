@@ -16,7 +16,7 @@
 
 typedef NS_ENUM(NSUInteger, STExploreFlow) {
     STExploreFlowPopular = 0,
-    STExploreFlowNearby,
+//    STExploreFlowNearby,
     STExploreFlowRecent,
     STExploreFlowCount
 };
@@ -56,10 +56,10 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
 
 -(NSString *)segment:(STCustomSegment *)segment buttonTitleForIndex:(NSInteger)index{
     switch (index) {
-        case STExploreFlowNearby:
-            return @"NEARBY";
-            break;
-            
+//        case STExploreFlowNearby:
+//            return @"NEARBY";
+//            break;
+//            
         case STExploreFlowRecent:
             return @"RECENT";
             break;
@@ -113,23 +113,23 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
             case STExploreFlowPopular:
                 flowType = STFlowTypePopular;
                 break;
-            case STExploreFlowNearby:
-                flowType = STFlowTypeDiscoverNearby;
-                break;
+//            case STExploreFlowNearby:
+//                flowType = STFlowTypeDiscoverNearby;
+//                break;
         }
         
-        if (flowType == STFlowTypeDiscoverNearby) {
-            NearbyVC *nearbyVC = [NearbyVC nearbyFeedController];
-            nearbyVC.containeeDelegate = self;
-            [viewControllers addObject:nearbyVC];
-        }
-        else
-        {
+//        if (flowType == STFlowTypeDiscoverNearby) {
+//            NearbyVC *nearbyVC = [NearbyVC nearbyFeedController];
+//            nearbyVC.containeeDelegate = self;
+//            [viewControllers addObject:nearbyVC];
+//        }
+//        else
+//        {
             STFlowProcessor *feedProcessor = [[CoreManager processorService] getProcessorWithType:flowType];
             FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:feedProcessor];
             vc.containeeDelegate = self;
             [viewControllers addObject:vc];
-        }
+//        }
 
     }
     
