@@ -21,8 +21,6 @@
 
 #import "STImageCacheObj.h"
 
-int const kDeletePostTag = 11;
-
 NSString * const kNotificationObjectDownloadFailed = @"NotificationDownloadFailed";
 NSString * const kNotificationObjDownloadSuccess = @"NotificationDownloadSuccess";
 NSString * const kNotificationObjUpdated = @"NotificationObjUpdated";
@@ -32,9 +30,8 @@ NSString * const kNotificationShowSuggestions = @"NotificationShowSuggestion";
 
 NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
-@interface STFlowProcessor ()<UIAlertViewDelegate>
+@interface STFlowProcessor ()
 {
-    NSString *postIdToDelete;
 }
 
 @property (nonatomic) STFlowType flowType;
@@ -48,6 +45,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 @property (nonatomic, assign) BOOL noMoreObjectsToDownload;
 
 @property (nonatomic, assign) NSInteger offset;
+@property (nonatomic, strong) NSString *postIdToDelete;
 
 @end
 
@@ -268,15 +266,30 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
 - (void)deletePostAtIndex:(NSInteger)index{
     STPost *post = [self objectAtIndex:index];
-    postIdToDelete = post.uuid;
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
-                                                        message:@"Are you sure you want to delete this post?"
-                                                       delegate:self cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles:@"Delete", nil];
-    [alertView setTag:kDeletePostTag];
-    [alertView show];
+    _postIdToDelete = post.uuid;
+    __weak STFlowProcessor *weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Post"
+                                                                   message:@"Are you sure you want to delete this post?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        weakSelf.postIdToDelete = nil;
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [STDataAccessUtils deletePostWithId:weakSelf.postIdToDelete withCompletion:^(NSError *error) {
+            weakSelf.postIdToDelete = nil;
+            if (error == nil) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Your post was deleted."
+                                                                               message:nil
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [[CoreManager navigationService] presentAlertController:alert];
+            }
+            NSLog(@"Post deleted with error: %@", error);
+        }];
+    }]];
 
+    [[CoreManager navigationService] presentAlertController:alert];
 }
 
 - (void)reportPostAtIndex:(NSInteger)index{
@@ -289,9 +302,11 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     }
     else
     {
-        [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Report Post" message:@"This post was already reported." preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [[CoreManager navigationService] presentAlertController:alert];
     }
-
 }
 
 - (void)savePostImageLocallyAtIndex:(NSInteger)index{
@@ -310,16 +325,21 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     STPost *post = [self objectAtIndex:index];
     [[CoreManager facebookService] shareImageWithImageUrl:post.mainImageUrl description:nil
                                             andCompletion:^(id result, NSError *error) {
-                                                if(error==nil)
-                                                    [[[UIAlertView alloc] initWithTitle:@"Success"
-                                                                                message:@"Your photo was posted."
-                                                                               delegate:nil cancelButtonTitle:@"OK"
-                                                                      otherButtonTitles:nil, nil] show];
-                                                else
-                                                    [[[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                message:@"Something went wrong. You can try again later."
-                                                                               delegate:nil cancelButtonTitle:@"OK"
-                                                                      otherButtonTitles:nil, nil] show];
+                                                NSString *titleAlert = nil;
+                                                NSString *messageAlert = nil;
+                                                if(error==nil){
+                                                    titleAlert = @"Success";
+                                                    messageAlert =@"Your photo was posted.";
+                                                }
+                                                else{
+                                                    titleAlert = @"Error";
+                                                    messageAlert = @"Something went wrong. You can try again later.";
+                                                }
+                                                UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleAlert message:messageAlert preferredStyle:UIAlertControllerStyleAlert];
+                                                
+                                                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                                                [[CoreManager navigationService] presentAlertController:alert];
+
                                             }];
 
 }
@@ -548,35 +568,25 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 }
 
 - (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
-    if (error)
-        [[[UIAlertView alloc] initWithTitle:@"Error"
-                                    message:@"Something went wrong. You can try again later."
-                                   delegate:nil cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-    else
-        [[[UIAlertView alloc] initWithTitle:@"Success"
-                                    message:@"Your photo was saved."
-                                   delegate:nil cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-}
-
-#pragma mark - UIAlertViewDelegate
-
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == kDeletePostTag) {
-        if (buttonIndex==1) {
-            
-            [STDataAccessUtils deletePostWithId:postIdToDelete withCompletion:^(NSError *error) {
-                postIdToDelete = nil;
-                if (error == nil) {
-                    [[[UIAlertView alloc] initWithTitle:@"Your post was deleted." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-                }
-                NSLog(@"Post deleted with error: %@", error);
-            }];
-        }
-        else
-            postIdToDelete = nil;
+    NSString *alertTitle = nil;
+    NSString *alertMessage = nil;
+    
+    if (error){
+        alertTitle = @"Error";
+        alertMessage = @"Something went wrong. You can try again later.";
     }
+    else{
+        alertTitle = @"Success";
+        alertMessage = @"Your photo was saved.";
+
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                   message:alertMessage
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    
+    [[CoreManager navigationService] presentAlertController:alert];
 }
 
 -(void)dealloc{

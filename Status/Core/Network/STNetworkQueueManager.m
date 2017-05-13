@@ -16,7 +16,7 @@
 #import "STNetworkManager.h"
 #import "KeychainItemWrapper.h"
 
-@interface STNetworkQueueManager()<UIAlertViewDelegate> {
+@interface STNetworkQueueManager() {
     AFNetworkReachabilityManager* _reachabilityManager;
 }
 

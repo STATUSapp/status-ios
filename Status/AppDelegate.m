@@ -44,7 +44,7 @@
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
-@interface AppDelegate()<UIAlertViewDelegate>
+@interface AppDelegate()
 
 @end
 
@@ -171,9 +171,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-//#warning remove this
-//    NSLog(@"APN Token --- %@", token);
-//    [[[UIAlertView alloc] initWithTitle:@"Test" message:[NSString stringWithFormat:@"%@", token] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
     if ([CoreManager loggedIn]) {
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod)  NSLog(@"APN Token set.");

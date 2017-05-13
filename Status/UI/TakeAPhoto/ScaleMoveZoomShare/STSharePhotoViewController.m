@@ -241,10 +241,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
         btn.selected = !btn.selected;
         _shouldPostToTwitter = btn.selected;
     } else {
-        [[[UIAlertView alloc] initWithTitle:@"Twitter issue"
-                                    message:@"In order to post to Twitter you have to setup an account in your device's settings and grant access to STATUS app."
-                                   delegate:nil cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Twitter issue" message:@"In order to post to Twitter you have to setup an account in your device's settings and grant access to STATUS app." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self.navigationController presentViewController:alert animated:YES completion:nil];
     }
 }
 - (IBAction)onDeleteProductPressed:(id)sender {
@@ -305,8 +304,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     [controller dismissViewControllerAnimated:YES completion:nil];
     
     if (result == MFMailComposeResultSent) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email sent" message:@"Your message was shared." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Email sent" message:@"Your message was shared." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self.navigationController presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -438,8 +438,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
             alertMessage = @"Your photo was posted on STATUS";
         }
         if (alertMessage!=nil) {
-            [[[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self.navigationController presentViewController:alert animated:YES completion:nil];
         }
         if ([_post.uuid isEqualToString:postId]) {
             [[CoreManager localNotificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
@@ -472,7 +473,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 }
 
 -(void)showErrorAlert{
-    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong. Please try again later." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self.navigationController presentViewController:alert animated:YES completion:nil];
 }
 
 

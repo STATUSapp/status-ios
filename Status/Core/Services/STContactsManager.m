@@ -12,6 +12,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "STFacebookHelper.h"
 #import "STSyncContactsRequest.h"
+#import "STNavigationService.h"
 
 @interface STContactsManager ()
 
@@ -84,7 +85,10 @@
        status == CNAuthorizationStatusRestricted)
     {
         NSLog(@"access denied");
-        [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"You should grant access to the contacts list for STATUS App" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"You should grant access to the contacts list for STATUS App" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [[CoreManager navigationService] presentAlertController:alert];
     }
     else
     {

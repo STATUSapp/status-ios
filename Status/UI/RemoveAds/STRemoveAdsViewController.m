@@ -67,11 +67,10 @@
     [_products enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
         if ([product.productIdentifier isEqualToString:productIdentifier]) {
             [weakSelf dismissController:nil];
-            [[[UIAlertView alloc] initWithTitle:@"Congratulations"
-                                        message:@"You have now an ads free STATUS app"
-                                       delegate:nil cancelButtonTitle:@"OK"
-                              otherButtonTitles: nil]
-             show];
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congratulations" message:@"You have now an ads free STATUS app" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
         }
     }];
     
@@ -81,11 +80,15 @@
     [_activityIndicator stopAnimating];
     _removeAdsBtn.enabled = YES;
     _restorePurchaseBtn.enabled = YES;
-    [[[UIAlertView alloc] initWithTitle:@"Something went wrong..." message:notification.userInfo[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Something went wrong..." message:notification.userInfo[@"error"] preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self.navigationController presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)restorePurchaseFailed:(NSNotification *)notification{
-    [[[UIAlertView alloc] initWithTitle:@"Something went wrong..." message:notification.userInfo[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Something went wrong..." message:notification.userInfo[@"error"] preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self.navigationController presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)loadProductsInfo {
@@ -100,7 +103,9 @@
         }
         
         if (!success || _removeAdsProduct == nil) {
-            [[[UIAlertView alloc] initWithTitle:@"Something went wrong..." message:@"Tap to dismiss." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Something went wrong..." message:@"Tap to dismiss." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
         }
         
         [weakSelf.activityIndicator stopAnimating];

@@ -860,9 +860,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         NSInteger statusCode = [response[@"status_code"] integerValue];
         if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
             NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", name];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:nil
-                                                  cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:message preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self.navigationController presentViewController:alert animated:YES completion:nil];
         }
     };
     [STInviteUserToUploadRequest inviteUserToUpload:userId withCompletion:completion failure:nil];

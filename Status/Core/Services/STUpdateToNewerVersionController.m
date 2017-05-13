@@ -8,10 +8,11 @@
 
 #import "STUpdateToNewerVersionController.h"
 #import "STBaseRequest.h"
+#import "STNavigationService.h"
 
 @interface STUpdateToNewerVersionController()
 
-@property (nonatomic, strong) UIAlertView *newerVersionAlert;
+@property (nonatomic, strong) UIAlertController *newerVersionAlert;
 
 @end
 
@@ -46,24 +47,22 @@ static STUpdateToNewerVersionController *_sharedManager = nil;
                                                             NSString *appVersion = [[STBaseRequest new] getAppVersion];
                                                             NSString *appStoreVersion = [responseDict[@"results"] firstObject][@"version"];
                                                             if (![appStoreVersion isEqualToString:appVersion] && _newerVersionAlert==nil) {
-                                                                _newerVersionAlert = [[UIAlertView alloc] initWithTitle:@"A new version of Get STATUS is available on Appstore!\n\nWhat's new:" message:[responseDict[@"results"] firstObject][@"releaseNotes"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Download", nil];
-                                                                [_newerVersionAlert show];
+                                                                _newerVersionAlert = [UIAlertController alertControllerWithTitle:@"A new version of Get STATUS is available on Appstore!\n\nWhat's new:" message:[responseDict[@"results"] firstObject][@"releaseNotes"] preferredStyle:UIAlertControllerStyleAlert];
+                                                                
+                                                                [_newerVersionAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                                                                
+                                                                [_newerVersionAlert addAction:[UIAlertAction actionWithTitle:@"Download" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                                                    _newerVersionAlert = nil;
+                                                                        NSString *iTunesLink = @"https://itunes.apple.com/us/app/apple-store/id841855995?mt=8";
+                                                                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                                                                }]];
+                                                                
+                                                                [[CoreManager navigationService] presentAlertController:_newerVersionAlert];
                                                             }
                                                         }
                                                         
                                                     }];
     
     [dataTask resume];
-}
-
-#pragma mark - UIAlertViewDelegate
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if ([alertView isEqual:_newerVersionAlert]) {
-        _newerVersionAlert = nil;
-        if (buttonIndex == 1) {
-            NSString *iTunesLink = @"https://itunes.apple.com/us/app/apple-store/id841855995?mt=8";
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
-        }
-    }
 }
 @end

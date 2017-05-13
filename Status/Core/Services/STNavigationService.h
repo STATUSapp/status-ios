@@ -36,6 +36,8 @@
           inTabbarAtIndex:(NSInteger)index
       keepThecurrentStack:(BOOL)keepTheStack;
 
+-(void)presentAlertController:(UIAlertController *)alert;
+
 + (UIViewController *)viewControllerForSelectedTab;
 
 + (STTabBarViewController *)appTabBar;

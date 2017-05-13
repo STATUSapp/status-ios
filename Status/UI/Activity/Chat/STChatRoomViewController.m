@@ -33,20 +33,15 @@
 #import "STDataAccessUtils.h"
 #import "BadgeService.h"
 
-static NSInteger const  kBlockUserAlertTag = 11;
 static CGFloat const TEXT_VIEW_OFFSET = 18.f;
-@interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SLCoreDataRequestManagerDelegate>
+@interface STChatRoomViewController ()<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, STChatControllerDelegate, STRechabilityDelegate, UIScrollViewDelegate, SLCoreDataRequestManagerDelegate>
 {
     UIImage *userImage;
-    STChatController *chatController;
-    NSString *_roomId;
-    
-    UIAlertView *statusAlert;
-    BOOL deliberateDismiss;
+    UIAlertController *statusAlert;
     STCoreDataRequestManager *_currentManager;
     NSInteger loadMoreIndex;
-    UIActionSheet *actionSheet;
-    UIAlertView *successBlockAlert;
+    UIAlertController *actionSheet;
+    UIAlertController *successBlockAlert;
     CGPoint lastContentOffset;
     CGRect keyboardBounds;
     BOOL justEnteredRoom;
@@ -62,6 +57,9 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewWidth;
 
 @property (strong, nonatomic) STListUser *user;
+@property (strong, nonatomic) STChatController *chatController;
+@property (strong, nonatomic) NSString *roomId;
+
 @end
 
 @implementation STChatRoomViewController
@@ -128,9 +126,9 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     }
     else
         [self loadUserInfo];
-    chatController = [STChatController sharedInstance];
-    chatController.delegate = self;
-    chatController.rechabilityDelegate = self;
+    _chatController = [STChatController sharedInstance];
+    _chatController.delegate = self;
+    _chatController.rechabilityDelegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -139,7 +137,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     
     [super viewWillAppear:animated];
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
-    if (chatController.canChat == NO) {
+    if (_chatController.canChat == NO) {
         NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
         NSString *userId = _user.uuid;
         STCoreDataRequestManager *messages = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message"
@@ -157,11 +155,11 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     }
     else
     {
-        if (chatController.authenticated == YES) {
-            [chatController openChatRoomForUserId: _user.uuid];
+        if (_chatController.authenticated == YES) {
+            [_chatController openChatRoomForUserId: _user.uuid];
         }
         else
-            [chatController authenticate];
+            [_chatController authenticate];
 
     }
 }
@@ -175,7 +173,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     [super viewDidDisappear:animated];
 
     if(_roomId){
-        [chatController leaveRoom:_roomId];
+        [_chatController leaveRoom:_roomId];
     }
 }
 
@@ -266,7 +264,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 }
 
 -(void)growingTextViewDidChange:(HPGrowingTextView *)growingTextView{
-    _sendBtn.enabled = [chatController canChat] && _textView.text.length>0;
+    _sendBtn.enabled = [_chatController canChat] && _textView.text.length>0;
 }
 
 -(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView{
@@ -289,7 +287,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 - (IBAction)onLoadMore:(id)sender {
     if (_roomId) {
         lastContentOffset = _tableView.contentOffset;
-        [chatController getRoomMessages:_roomId withOffset:[[_currentManager allObjects] count]];
+        [_chatController getRoomMessages:_roomId withOffset:[[_currentManager allObjects] count]];
     }
 }
 
@@ -301,7 +299,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     if (toSendMessage.length == 0) {
         return;
     }
-    [chatController sendMessage:toSendMessage inRoom:_roomId];
+    [_chatController sendMessage:toSendMessage inRoom:_roomId];
     [_textView setText:@""];
 }
 - (IBAction)onClickBack:(id)sender {
@@ -321,46 +319,34 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 }
 - (IBAction)onClickDelete:(id)sender {
    
-    actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Block User",@"Delete Conversation", nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
-    [actionSheet showInView:self.view];
-    
-    UIColor *tintColor = [UIColor redColor];
-    
-    NSArray *actionSheetButtons = actionSheet.subviews;
-    for (int i = 0; [actionSheetButtons count] > i; i++) {
-        UIView *view = (UIView*)[actionSheetButtons objectAtIndex:i];
-        if([view isKindOfClass:[UIButton class]]){
-            UIButton *btn = (UIButton*)view;
-            if (((UIButton*)view).tag != 3)//Cancel button
-                [btn setTitleColor:tintColor forState:UIControlStateNormal];
-                
-        }
-    }
-}
-//- (IBAction)onSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
-////    _tableViewWidth.constant = 320.f;
-//    _tableViewWidth.constant = self.view.frame.size.width;  // shrink tableViewWidth in order to show the time of the message
-//    [_tableView setNeedsUpdateConstraints];
-//
-//    [UIView animateWithDuration:0.0f animations:^{
-//        [self.view layoutIfNeeded];
-//    }];
-//}
+    __weak STChatRoomViewController *weakSelf = self;
 
-//-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-//    NSLog(@"TOUCH END");
-//    
-//}
-//- (IBAction)onSwipeRight:(id)sender {
-////    _tableViewWidth.constant = 390.f;
-//    _tableViewWidth.constant = self.view.frame.size.width + 70; // enlarge tableViewWidth in order to hide the time of the message
-//    [_tableView setNeedsUpdateConstraints];
-//
-//    [UIView animateWithDuration:0.0f animations:^{
-//        [_tableView layoutIfNeeded];
-//    }];
-//}
+    actionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                      message:nil
+                                               preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Block User" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Block User" message:@"Are you sure do you want to block this user?" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Block" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [weakSelf.chatController blockUserWithId:weakSelf.user.uuid];
+        }]];
+        
+        [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Delete Conversation" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (weakSelf.roomId){
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", weakSelf.roomId];
+            [[STCoreDataManager sharedManager] deleteAllObjectsFromTable:@"Message" withPredicate:predicate];
+            [[STCoreDataManager sharedManager] save];
+        }
+    }]];
+    
+    [self.navigationController presentViewController:actionSheet animated:YES completion:nil];
+}
 - (IBAction)onTapBackgound:(id)sender {
     [_textView resignFirstResponder];
 }
@@ -396,12 +382,12 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
             [self onLoadMore:nil];
         }
     }
-    [chatController syncRoomMessages:_roomId withMessagesIds:[_currentManager.allObjects valueForKey:@"uuid"]];
+    [_chatController syncRoomMessages:_roomId withMessagesIds:[_currentManager.allObjects valueForKey:@"uuid"]];
 
 }
 -(void)chatDidAuthenticate{
     [self hideStatusAlert];
-    [chatController openChatRoomForUserId: _user.uuid];
+    [_chatController openChatRoomForUserId: _user.uuid];
 }
 
 -(void)userWasBlocked{
@@ -409,8 +395,9 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 }
 
 -(void)userBlockSuccess{
-    successBlockAlert = [[UIAlertView alloc] initWithTitle:@"Block User" message:@"This user was blocked. You will no longer receive messages from him." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [successBlockAlert show];
+    successBlockAlert = [UIAlertController alertControllerWithTitle:@"Block User" message:@"This user was blocked. You will no longer receive messages from him." preferredStyle:UIAlertControllerStyleAlert];
+    [successBlockAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self.navigationController presentViewController:successBlockAlert animated:YES completion:nil];
 }
 
 #pragma mark - STRechabilityDelegate
@@ -428,59 +415,25 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 
 -(void)showStatusAlertWithMessage:(NSString *)message{
     if (statusAlert==nil && [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
-        statusAlert = [[UIAlertView alloc] initWithTitle:@"Chat" message:message delegate:self cancelButtonTitle:@"GO BACK" otherButtonTitles:nil, nil];
-        deliberateDismiss = NO;
-        [statusAlert show];
+        __weak STChatRoomViewController *weakSelf = self;
+        statusAlert = [UIAlertController alertControllerWithTitle:@"Chat" message:message preferredStyle:UIAlertControllerStyleAlert];
+        [statusAlert addAction:[UIAlertAction actionWithTitle:@"GO BACK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }]];
+        [self.navigationController presentViewController:statusAlert animated:YES completion:nil];
     }
 }
 
 -(void)hideStatusAlert{
-    deliberateDismiss = YES;
-    [statusAlert dismissWithClickedButtonIndex:0 animated:YES];
+    [statusAlert dismissViewControllerAnimated:YES completion:nil];
     statusAlert = nil;
     
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == kBlockUserAlertTag) {
-        if (buttonIndex == 1) {
-            [chatController blockUserWithId:_user.uuid];
-        }
-
-    }
-    else
-    {
-        if (deliberateDismiss == YES) {
-            deliberateDismiss = NO;
-            return;
-        }
-        if ([alertView isEqual:statusAlert]) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    }
-}
-
-#pragma mark UIActionSheetDelegate
-
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 0) {//Block User
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Block User" message:@"Are you sure do you want to block this user?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Block", nil];
-        alertView.tag = kBlockUserAlertTag;
-        [alertView show];
-    }
-    else if (buttonIndex == 1){//Delete conversation
-        if (_roomId){
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", _roomId];
-            [[STCoreDataManager sharedManager] deleteAllObjectsFromTable:@"Message" withPredicate:predicate];
-            [[STCoreDataManager sharedManager] save];
-        }
-    }
 }
 
 #pragma mark - UITableViewDelegate
 -(NSString *)getIdentifierForIndexPath:(NSIndexPath *)indexPath{
     Message *message = [_currentManager objectAtIndexPath:indexPath];
-    BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
+    BOOL received = ![message.userId isEqualToString:_chatController.currentUserId];
     if (received == YES) {
         return @"MessageReceivedCell";
     }
@@ -511,7 +464,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     Message *message = [_currentManager objectAtIndexPath:indexPath];
-    BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
+    BOOL received = ![message.userId isEqualToString:_chatController.currentUserId];
     if (received == YES) {
         [(STMessageReceivedCell *)cell configureCellWithMessage:message andUserImage:userImage];
     }
@@ -524,7 +477,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     float height = 50.f;
 
     Message *message = [_currentManager objectAtIndexPath:indexPath];
-    BOOL received = ![message.userId isEqualToString:chatController.currentUserId];
+    BOOL received = ![message.userId isEqualToString:_chatController.currentUserId];
     if (received == YES) {
         height = [STMessageReceivedCell cellHeightForMessage:message];
     }
@@ -581,20 +534,20 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     _tableView.delegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [actionSheet dismissWithClickedButtonIndex:2 animated:NO];
+    [actionSheet dismissViewControllerAnimated:YES completion:nil];
     [self hideStatusAlert];
-    [successBlockAlert dismissWithClickedButtonIndex:0 animated:NO];
-    chatController.delegate = nil;
-    chatController.rechabilityDelegate = nil;
+    [successBlockAlert dismissViewControllerAnimated:YES completion:nil];
+    _chatController.delegate = nil;
+    _chatController.rechabilityDelegate = nil;
     if(_roomId){
-        [chatController leaveRoom:_roomId];
+        [_chatController leaveRoom:_roomId];
         [[STCoreDataManager sharedManager] save];
     }
 }
 
 -(void)controllerContentChanged:(NSArray *)objects{
     [self.tableView reloadData];
-    if (chatController.loadMore==NO) {
+    if (_chatController.loadMore==NO) {
         [_tableView scrollToRowAtIndexPath:[_currentManager indexPathForObject:[[_currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 

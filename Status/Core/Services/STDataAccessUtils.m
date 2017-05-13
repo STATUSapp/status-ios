@@ -22,6 +22,7 @@
 #import "CoreManager.h"
 #import "STLocalNotificationService.h"
 #import "STShopProductsUploader.h"
+#import "STNavigationService.h"
 
 @implementation STDataAccessUtils
 
@@ -532,13 +533,25 @@
 + (void)reportPostWithId:(NSString *)postId
           withCompletion:(STDataUploadCompletionBlock)completion{
     STRequestCompletionBlock completion1 = ^(id response, NSError *error){
+        NSString *message = nil;
+        NSString *title = @"Report Post";
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-            [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"A message was sent to the admin." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            message = @"A message was sent to the admin.";
         }
         else
         {
-            [[[UIAlertView alloc] initWithTitle:@"Report Post" message:@"This post was already reported." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            message = @"This post was already reported.";
         }
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                       message:message
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                  style:UIAlertActionStyleDefault
+                                                handler:nil]];
+        
+        [[CoreManager navigationService] presentAlertController:alert];
         completion(nil);
     };
     
@@ -604,14 +617,20 @@
         }
         else
         {
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                           message:@"Something went wrong. You can try again later." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [[CoreManager navigationService] presentAlertController:alert];
             completion(nil,[NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
             
         }
     };
     
     STRequestFailureBlock failBlock = ^(NSError *error){
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. You can try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:@"Something went wrong. You can try again later." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [[CoreManager navigationService] presentAlertController:alert];
         completion(nil,error);
     };
 
@@ -643,9 +662,11 @@ withCompletion:(STDataUploadCompletionBlock)completion{
         NSInteger statusCode = [response[@"status_code"] integerValue];
         if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
             NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo. We'll announce you when the new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", userName];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self
-                                                  cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success"
+                                                                           message:message preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [[CoreManager navigationService] presentAlertController:alert];
             completion(nil);
         }
         else

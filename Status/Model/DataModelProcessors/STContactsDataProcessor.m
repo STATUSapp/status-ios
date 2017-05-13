@@ -11,6 +11,7 @@
 #import "STAddressBookContact.h"
 #import "STInviteFriendsByEmailRequest.h"
 #import "STFacebookLoginController.h"
+#import "STNavigationService.h"
 
 @interface STContactsDataProcessor()
 @property (nonatomic) STContactsProcessorType processorType;
@@ -78,7 +79,10 @@
         }
         else
         {
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device is not able to send messages" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Your device is not able to send messages." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            
+            [[CoreManager navigationService] presentAlertController:alert];
         }
     }
 }

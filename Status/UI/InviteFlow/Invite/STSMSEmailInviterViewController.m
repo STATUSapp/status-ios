@@ -98,7 +98,10 @@ static NSString * inviteThemTitle = @"INVITE THEM";
     }
     
     if (result == MessageComposeResultFailed) {
-        [[[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Please try again later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Something went wrong" message:@"Please try again later" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self.navigationController presentViewController:alert animated:YES completion:nil];
         return;
     }
     

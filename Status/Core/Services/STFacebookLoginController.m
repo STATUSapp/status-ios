@@ -35,6 +35,7 @@
 #import "STUserProfile.h"
 #import "CoreManager.h"
 #import "STUserProfilePool.h"
+#import "STNavigationService.h"
 
 @interface STFacebookLoginController ()<FBSDKLoginButtonDelegate>
 
@@ -174,8 +175,9 @@
             }
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong with the registration." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alert show];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong with the registration." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [[CoreManager navigationService] presentAlertController:alert];
             }
         };
         
@@ -196,8 +198,9 @@
             }
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong on login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alert show];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong on login." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [[CoreManager navigationService] presentAlertController:alert];
             }
         };
         NSString *userFbId = [[FBSDKAccessToken currentAccessToken] userID];

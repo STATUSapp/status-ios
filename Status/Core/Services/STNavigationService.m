@@ -156,6 +156,15 @@
 
 }
 
+-(void)presentAlertController:(UIAlertController *)alert{
+    STTabBarViewController *tbc = [STNavigationService appTabBar];
+    UINavigationController *navCtrl = (UINavigationController *)[[tbc viewControllers] objectAtIndex:tbc.selectedIndex];
+    
+    [navCtrl.visibleViewController presentViewController:alert
+                                                animated:YES
+                                              completion:nil];
+}
+
 + (UIViewController *)viewControllerForSelectedTab{
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     UITabBarController *tbc = (UITabBarController *)[window rootViewController];

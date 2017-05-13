@@ -209,7 +209,7 @@
             break;
         case STNotificationTypeChatMessage:
         {
-            return;
+            /*
             STListUser *lu = [STListUser new];
             lu.uuid = [CreateDataModelHelper validStringIdentifierFromValue:_currentBanner.notificationInfo[@"user_id"]];
             lu.userName = _currentBanner.notificationInfo[@"name"];
@@ -222,6 +222,7 @@
             STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
             
             [[CoreManager navigationService] pushViewController:viewController inTabbarAtIndex:STTabBarIndexChat keepThecurrentStack:NO];
+             */
         }
             break;
         case STNotificationTypeUploaded:

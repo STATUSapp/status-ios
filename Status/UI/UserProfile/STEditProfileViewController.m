@@ -15,7 +15,7 @@
 const NSInteger kMaxNumberOfCharacters = 150;
 const NSInteger kDefaultValueForTopConstraint = 26;
 
-@interface STEditProfileViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+@interface STEditProfileViewController () <UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldLocation;
 @property (weak, nonatomic) IBOutlet UITextView *txtViewBio;
@@ -77,10 +77,14 @@ const NSInteger kDefaultValueForTopConstraint = 26;
                                                     weakSelf.userProfile.bio = _txtViewBio.text;
                                                     
                                                     [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
-
-                                                    [[[UIAlertView alloc] initWithTitle:@"Update Profile" message:@"Succes!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Update Profile" message:@"Success!" preferredStyle:UIAlertControllerStyleAlert];
+                                                    
+                                                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
                                                     
                                                     [weakSelf.navigationController popViewControllerAnimated:YES];
+
+                                                    [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
+
                                                 }
                                                        failure:^(NSError *error) {
                                                            NSLog(@"%@", error.debugDescription);
@@ -179,35 +183,44 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 #pragma mark - IBAction
 
 - (IBAction)onChangeProfileImagePressed:(id)sender {
-    UIActionSheet *actionChoose = [[UIActionSheet alloc] initWithTitle:@"Photos" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Take a Photo",@"Open Camera Roll", nil];
+    __weak STEditProfileViewController *weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Photos"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+                                            handler:nil]];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [alert addAction:[UIAlertAction actionWithTitle:@"Take a Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [weakSelf presentImagePickerForType:UIImagePickerControllerSourceTypeCamera];
+        }]];
+
+    }
+    [alert addAction:[UIAlertAction actionWithTitle:@"Open Camera Roll" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf presentImagePickerForType:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+
+    }]];
     
-    
-    [actionChoose showFromRect: ((UIButton *)sender).frame inView:self.view animated:YES];
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
 }
 
-#pragma \mark - UIActionSheetDelegate
-
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if (buttonIndex<2) {
-        @try {
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.delegate = self;
-            imagePicker.sourceType = (buttonIndex==0)?UIImagePickerControllerSourceTypeCamera:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-            [imagePicker setAllowsEditing:YES];
-            [self presentViewController:imagePicker animated:YES completion:nil];
-        }
-        @catch (NSException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device has no camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-    }
+-(void)presentImagePickerForType:(UIImagePickerControllerSourceType)type{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = type;
+    [imagePicker setAllowsEditing:YES];
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)showErrorAlert {
-    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Your photo could not be updated at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:@"Your photo could not be updated at this time. Please try again later."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{

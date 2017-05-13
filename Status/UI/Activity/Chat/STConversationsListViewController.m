@@ -144,7 +144,10 @@
     lu.gender = selectedCu.gender;
     
     if ([lu.uuid isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:@"You cannot chat with yourself." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self.navigationController presentViewController:alert animated:YES completion:nil];
         return;
     }
 

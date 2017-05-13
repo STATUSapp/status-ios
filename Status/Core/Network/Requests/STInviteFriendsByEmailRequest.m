@@ -31,14 +31,16 @@
     
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"dataAsString %@", [NSString stringWithUTF8String:[data bytes]]);
-        
         NSError *error1;
-        NSMutableDictionary * receivedJson = [NSJSONSerialization
-                                           JSONObjectWithData:data
-                                           options:kNilOptions
-                                           error:&error1];
-        completion(receivedJson, error);
+        if (!error) {
+            NSMutableDictionary * receivedJson = [NSJSONSerialization
+                                                  JSONObjectWithData:data
+                                                  options:kNilOptions
+                                                  error:&error1];
+            completion(receivedJson, error);
+        }
+        else
+            completion(nil, error);
         
     }];
     
