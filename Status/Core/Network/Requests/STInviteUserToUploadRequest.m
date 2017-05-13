@@ -32,6 +32,7 @@
         params[@"user_id"] = weakSelf.userId;
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
+                                        progress:nil
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];
     };

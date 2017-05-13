@@ -30,6 +30,7 @@
         
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
+                                       progress:nil
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];
     };

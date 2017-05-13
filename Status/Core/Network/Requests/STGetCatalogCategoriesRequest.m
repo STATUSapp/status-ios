@@ -33,6 +33,7 @@
         params[@"root_category_id"] = weakSelf.parentCategoryId;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
+                                       progress:nil
                                         success:weakSelf.standardSuccessBlock
                                         failure:weakSelf.standardErrorBlock];
     };

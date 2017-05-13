@@ -54,6 +54,7 @@
         
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:weakSelf.paramsDict
+                                        progress:nil
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];
     };
