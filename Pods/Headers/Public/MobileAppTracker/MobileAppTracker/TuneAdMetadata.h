@@ -1,1 +1,0 @@
-../../../../MobileAppTracker/MobileAppTracker.framework/Headers/TuneAdMetadata.h

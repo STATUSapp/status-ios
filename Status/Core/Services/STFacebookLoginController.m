@@ -15,7 +15,7 @@
 #import "STChatController.h"
 #import "STSetAPNTokenRequest.h"
 
-#import <MobileAppTracker/MobileAppTracker.h>
+#import <Tune/Tune.h>
 #import <AdSupport/AdSupport.h>
 #import "STCoreDataManager.h"
 #import <Crashlytics/Crashlytics.h>

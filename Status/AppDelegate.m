@@ -15,7 +15,7 @@
 #import "STIAPHelper.h"
 #import "STChatRoomViewController.h"
 
-#import <MobileAppTracker/MobileAppTracker.h>
+#import <Tune/Tune.h>
 #import <AdSupport/AdSupport.h>
 
 #import "STInviteController.h"

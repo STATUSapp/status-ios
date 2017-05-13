@@ -8,7 +8,6 @@
 
 
 #import "STBaseRequest.h"
-#import "AFHTTPRequestOperation.h"
 
 @implementation STBaseRequest
 

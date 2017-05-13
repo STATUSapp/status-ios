@@ -8,7 +8,6 @@
 
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPRequestOperationManager.h"
 #import "STNetworkManager.h"
 #import "STNetworkQueueManager.h"
 

@@ -33,40 +33,37 @@
         if (weakSelf.shopProduct.productUrl) {
             params[@"link"] = weakSelf.shopProduct.productUrl;
         }
-        AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
-        AFJSONResponseSerializer *jsonReponseSerializer;
-        jsonReponseSerializer = [STNetworkManager customResponseSerializer];
-        manager.responseSerializer = jsonReponseSerializer;
         
-        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        NSData *imageData = UIImageJPEGRepresentation(weakSelf.shopProduct.localImage, 1.f);
         
+        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", kBaseURL, [weakSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [formData appendPartWithFileData:imageData
+                                        name:@"image"
+                                    fileName:@"image.jpg"
+                                    mimeType:@"image/jpg"];
+        } error:nil];
         
-        AFHTTPRequestOperation *op = [manager POST:[weakSelf urlString] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            [formData appendPartWithFileData:UIImageJPEGRepresentation(weakSelf.shopProduct.localImage, 1.f) name:@"image" fileName:@"image.jpg" mimeType:@"image/jpg"];
-            
-        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if (weakSelf.completionBlock) {
-                weakSelf.completionBlock(responseObject,nil);
-            }
-            
-            [[CoreManager networkService] requestDidSucceed:weakSelf];        }
-                                           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                               NSLog(@"Error: %@ ", operation.responseString);
-                                               NSInteger statusCode = [operation.response statusCode];
-                                               if (error.code == NSURLErrorCancelled) { //cancelled
-                                                   statusCode = NSURLErrorCancelled;
-                                               }
-                                               
-                                               NSError *err = [NSError errorWithDomain:error.domain
-                                                                                  code:statusCode
-                                                                              userInfo:error.userInfo];
-                                               [[CoreManager networkService] removeFromQueue:weakSelf];
-                                               if (weakSelf.failureBlock) {
-                                                   weakSelf.failureBlock(err);
-                                               }
-                                               
-                                           }];
-        [op start];
+        NSURLSessionUploadTask *uploadTask = [[STNetworkQueueManager networkAPI]
+                                              uploadTaskWithStreamedRequest:request
+                                              progress:nil
+                                              completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                                  [[CoreManager networkService] removeFromQueue:weakSelf];
+                                                  
+                                                  if (error) {
+                                                      NSLog(@"Error: %@", error);
+                                                      if (weakSelf.failureBlock) {
+                                                          weakSelf.failureBlock(error);
+                                                      }
+                                                      
+                                                  } else {
+                                                      if (weakSelf.completionBlock) {
+                                                          weakSelf.completionBlock(responseObject,nil);
+                                                      }
+                                                      [[CoreManager networkService] requestDidSucceed:weakSelf];
+                                                  }
+                                              }];
+        
+        [uploadTask resume];
     };
     
     return executionBlock;
