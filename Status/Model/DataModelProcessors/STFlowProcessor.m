@@ -96,6 +96,8 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:STPostPoolObjectDeletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postImageWasEdited:) name:STPostImageWasEdited object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:STPostPoolNewObjectNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdated:) name:STProfilePoolObjectUpdatedNotification object:nil];
+
 }
 
 -(NSInteger)numberOfObjects{
@@ -540,6 +542,18 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         [[CoreManager localNotificationService] postNotificationName:kNotificationObjUpdated object:self userInfo:@{kPostIdKey:postId}];
     }
 }
+
+- (void)profileUpdated:(NSNotification *)notif{
+    NSString *profileId = notif.userInfo[kUserIdKey];
+    if ([_userId isEqualToString:profileId]) {
+        for (NSString *postId in _objectIds) {
+            STPost *post = [[CoreManager postsPool] getPostWithId:postId];
+            post.smallPhotoUrl = _userProfile.mainImageUrl;
+        }
+        [[CoreManager localNotificationService] postNotificationName:kNotificationObjUpdated object:self userInfo:nil];
+    }
+}
+
 - (void)postDeleted:(NSNotification *)notif{
     
     NSString *postId = notif.userInfo[kPostIdKey];

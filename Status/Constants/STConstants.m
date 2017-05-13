@@ -114,6 +114,9 @@ NSString *const STLoadImageNotification = @"STLoadImageNotification";
 NSString *const STPostPoolObjectUpdatedNotification = @"STPostPoolObjectUpdatedNotification";
 NSString *const STPostPoolNewObjectNotification = @"STPostPoolNewObjectNotification";
 NSString *const STPostPoolObjectDeletedNotification = @"STPostPoolObjectDeletedNotification";
+NSString *const STProfilePoolObjectUpdatedNotification = @"STProfilePoolObjectUpdatedNotification";
+NSString *const STProfilePoolNewObjectNotification = @"STProfilePoolNewObjectNotification";
+NSString *const STProfilePoolObjectDeletedNotification = @"STProfilePoolObjectDeletedNotification";
 
 NSString *const STPostNewImageUploaded = @"STPostNewImageUploaded";
 NSString *const STPostImageWasEdited = @"STPostImageWasEdited";

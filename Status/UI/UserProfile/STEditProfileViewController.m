@@ -72,22 +72,30 @@ const NSInteger kDefaultValueForTopConstraint = 26;
                                                            bio:_txtViewBio.text
                                                 withCompletion:^(id response, NSError *error) {
                                                     
-                                                    weakSelf.userProfile.fullName = _txtFieldName.text;
-                                                    weakSelf.userProfile.homeLocation = _txtFieldLocation.text;
-                                                    weakSelf.userProfile.bio = _txtViewBio.text;
-                                                    
-                                                    [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
-                                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Update Profile" message:@"Success!" preferredStyle:UIAlertControllerStyleAlert];
-                                                    
-                                                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-                                                    
-                                                    [weakSelf.navigationController popViewControllerAnimated:YES];
-
-                                                    [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
+                                                    if (!error) {
+                                                        weakSelf.userProfile.fullName = _txtFieldName.text;
+                                                        weakSelf.userProfile.homeLocation = _txtFieldLocation.text;
+                                                        weakSelf.userProfile.bio = _txtViewBio.text;
+                                                        
+                                                        [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
+                                                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Update Profile" message:@"Success!" preferredStyle:UIAlertControllerStyleAlert];
+                                                        
+                                                        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                                                        
+                                                        [weakSelf.navigationController popViewControllerAnimated:YES];
+                                                        
+                                                        [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
+                                                    }
+                                                    else
+                                                    {
+                                                        NSLog(@"%@", error.debugDescription);
+                                                        [weakSelf showProfileErrorAlert];
+                                                    }
 
                                                 }
                                                        failure:^(NSError *error) {
                                                            NSLog(@"%@", error.debugDescription);
+                                                           [weakSelf showProfileErrorAlert];
         
                                                 }];
 }
@@ -215,13 +223,22 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 
 #pragma mark - UIImagePickerControllerDelegate
 
-- (void)showErrorAlert {
+- (void)showPhotoErrorAlert {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                    message:@"Your photo could not be updated at this time. Please try again later."
                                                             preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+- (void)showProfileErrorAlert {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:@"Your profile could not be updated at this time. Please try again later."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     __weak STEditProfileViewController *weakSelf = self;
@@ -231,6 +248,8 @@ const NSInteger kDefaultValueForTopConstraint = 26;
         NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
         [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                weakSelf.userProfile.mainImageUrl = response[@"user_photo"];
+                [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
                 [[CoreManager imageCacheService] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
                     weakSelf.profileImage.image = img;
                 }];
@@ -238,11 +257,11 @@ const NSInteger kDefaultValueForTopConstraint = 26;
             else
             {
                 NSLog(@"Response: %@", response);
-                [self showErrorAlert];
+                [self showPhotoErrorAlert];
             }
         } failure:^(NSError *error) {
             NSLog(@"Error uploading new profile photo: %@", error.description);
-            [self showErrorAlert];
+            [self showPhotoErrorAlert];
 
         }];
     }];

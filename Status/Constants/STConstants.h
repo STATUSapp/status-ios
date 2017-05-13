@@ -177,6 +177,9 @@ extern NSString *const STLoadImageNotification;
 extern NSString *const STPostPoolObjectUpdatedNotification;
 extern NSString *const STPostPoolNewObjectNotification;
 extern NSString *const STPostPoolObjectDeletedNotification;
+extern NSString *const STProfilePoolObjectUpdatedNotification;
+extern NSString *const STProfilePoolNewObjectNotification;
+extern NSString *const STProfilePoolObjectDeletedNotification;
 
 extern NSString *const STPostNewImageUploaded;
 extern NSString *const STPostImageWasEdited;

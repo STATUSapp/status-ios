@@ -9,6 +9,8 @@
 #import "STBasePool.h"
 #import "STBaseObj.h"
 #import "STPost.h"
+#import "STUserProfile.h"
+
 #import "STLocalNotificationService.h"
 
 @interface STBasePool ()
@@ -67,6 +69,9 @@
         if ([object isKindOfClass:[STPost class]]) {
             [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];
         }
+        else if ([object isKindOfClass:[STUserProfile class]]){
+            [[CoreManager localNotificationService] postNotificationName:STProfilePoolObjectDeletedNotification object:nil userInfo:@{kUserIdKey:((STPost *)object).uuid}];
+        }
         //here is where we should add anoter notifications
     }
 }
@@ -113,6 +118,9 @@
             if ([obj isKindOfClass:[STPost class]]) {
                 [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
             }
+            else if ([obj isKindOfClass:[STUserProfile class]]){
+                [[CoreManager localNotificationService] postNotificationName:STProfilePoolObjectUpdatedNotification object:nil userInfo:@{kUserIdKey:obj.uuid}];
+            }
         }
         
         else if (countBeforeFilter == countAfterFilter){
@@ -123,6 +131,9 @@
                 if (userId) {
                     [[CoreManager localNotificationService] postNotificationName:STPostPoolNewObjectNotification object:nil userInfo:@{kUserIdKey:userId, kPostIdKey:obj.uuid}];
                 }
+            }
+            else if ([obj isKindOfClass:[STUserProfile class]]) {
+                    [[CoreManager localNotificationService] postNotificationName:STProfilePoolNewObjectNotification object:nil userInfo:@{kUserIdKey:obj.uuid}];
             }
         }
     }
