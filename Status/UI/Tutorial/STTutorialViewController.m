@@ -59,32 +59,32 @@ NSString * const kTutorialCell = @"STTutorialCell";
             case STTutorialLogin:
                 //nothing to do here
                 break;
-            case STTutorialFeed:
-            {
-                title = @"SHOP MY STYLE";
-                subtitle = @"You can see what your\nfavorite persons are wearing.";
-                imageName = @"tutorial_feed";
-            }
-                break;
-            case STTutorialFeedShop:
-            {
-                title = @"SHOP MY STYLE";
-                subtitle = @"Each time you see the shopping icon\nit means that you can shop the look.";
-                imageName = @"tutorial_feed_shop";
-            }
-                break;
-            case STTutorialExplore:
+            case STTutorialDiscover:
             {
                 title = @"DISCOVER";
-                subtitle = @"You’re in control. Discover people\nyou like by browsing in our 3 news feeds:\nPopular, Nearby and Recent.";
-                imageName = @"tutorial_explore";
+                subtitle = @"You’re in control. Discover hundreds of\nready to wear outfits by browsing in our 2\nnews feeds: Popular and Recent.";
+                imageName = @"tutorial_discover";
             }
                 break;
-            case STTutorialProfile:
+            case STTutorialShopStyle:
             {
-                title = @"CHAT AND CONNECT";
-                subtitle = @"Chat with the people you like\nand follow them. That’s how the\nnew friendships are born!";
-                imageName = @"tutorial_profile";
+                title = @"SHOP THE STYLE";
+                subtitle = @"Each time you see the shopping icon\nit means that you can shop the look.";
+                imageName = @"tutorial_shop_style";
+            }
+                break;
+            case STTutorialTagProducts:
+            {
+                title = @"TAG THE PRODUCTS";
+                subtitle = @"Let the people know what you wear.\nChoose the products from hundreds brands\nlike Topman, Topshop, ASOS and many more.";
+                imageName = @"tutorial_tag_products";
+            }
+                break;
+            case STTutorialShareOutfit:
+            {
+                title = @"SHARE YOUR OUTFITS";
+                subtitle = @"Be a source of inspiration for other people\nand climb the TOP in the Popular section.";
+                imageName = @"tutorial_share_outfit";
             }
                 break;
                 

@@ -243,11 +243,14 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     }
     else if (customView == _wardrobeView){
         _selectionType = STContainerSelectionWardrobe;
+        _wizardSegment.hidden = YES;
+        _wardrobeSegment.hidden = NO;
+
     }
     else if (customView == _manualView){
         _selectionType = STContainerSelectionManual;
         _wizardSegment.hidden = YES;
-        _wardrobeSegment.hidden = NO;
+        _wardrobeSegment.hidden = YES;
     }
     [self configureContainer];
 }

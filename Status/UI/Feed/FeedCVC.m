@@ -242,7 +242,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostImageWasEdited object:nil];
+
     if ([self.collectionView respondsToSelector:@selector(setPrefetchingEnabled:)]) {
         self.collectionView.prefetchingEnabled = false;
     }
@@ -290,6 +291,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 #pragma mark - Notifications
+
+- (void)imageWasPostedWithPostId:(NSNotification *)notif {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 - (void)processorLoaded{
     [self configureLoadingView];

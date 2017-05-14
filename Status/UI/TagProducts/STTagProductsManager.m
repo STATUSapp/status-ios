@@ -91,7 +91,7 @@ NSString *const kTagProductUserInfoIndexKey = @"notification_index";
 
 -(NSArray <STShopProduct *> *)manualAddedProducts{
     return [_selectedProducts filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(STShopProduct *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return (evaluatedObject.uuid == nil);
+        return (evaluatedObject.uuid == nil && evaluatedObject.mainImageUrl == nil);
     }]];
 }
 

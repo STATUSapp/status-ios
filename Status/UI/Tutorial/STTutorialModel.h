@@ -10,10 +10,10 @@
 
 typedef NS_ENUM(NSUInteger, STTutorial) {
     STTutorialLogin = 0,
-    STTutorialExplore,
-    STTutorialProfile,
-    STTutorialFeed,
-    STTutorialFeedShop,
+    STTutorialDiscover,
+    STTutorialShopStyle,
+    STTutorialTagProducts,
+    STTutorialShareOutfit,
     STTutorialCount
 };
 

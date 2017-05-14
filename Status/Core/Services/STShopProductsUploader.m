@@ -30,40 +30,43 @@
     __weak STShopProductsUploader *weakSelf = self;
     
     for (STShopProduct *sp in _shopProducts) {
-        if (sp.uuid) {
+        if (sp.uuid || sp.mainImageUrl) {
             shopProductsWithId ++;
-            break;
         }
-        
-        __block STShopProduct *blockSP = sp;
-        [STUploadShopProduct uploadShopProduct:sp
-                                withCompletion:^(id response, NSError *error) {
-                                    
-                                    if (!error) {
-                                        blockSP.uuid = [response[@"id"] stringValue];
-                                        shopProductsWithId ++;
+        else
+        {
+            __block STShopProduct *blockSP = sp;
+            [STUploadShopProduct uploadShopProduct:sp
+                                    withCompletion:^(id response, NSError *error) {
                                         
-                                    }
-                                    else
+                                        if (!error) {
+                                            NSDictionary *uploadedItem = [response firstObject];
+                                            blockSP.uuid = [uploadedItem[@"id"] stringValue];
+                                            blockSP.mainImageUrl = uploadedItem[@"image_url"];
+                                            shopProductsWithId ++;
+                                            
+                                        }
+                                        else
+                                            shopProductsNotUploaded ++;
+                                        
+                                        if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
+                                            if (_completion) {
+                                                _completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
+                                            }
+                                        }
+                                        
+                                        
+                                        
+                                    } failure:^(NSError *error) {
                                         shopProductsNotUploaded ++;
-                                    
-                                    if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
-                                        if (_completion) {
-                                            _completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
+                                        if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
+                                            if (_completion) {
+                                                _completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
+                                            }
                                         }
-                                    }
-                                    
-                                    
-                                    
-                                } failure:^(NSError *error) {
-                                    shopProductsNotUploaded ++;
-                                    if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
-                                        if (_completion) {
-                                            _completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
-                                        }
-                                    }
-
-                                }];
+                                        
+                                    }];
+        }
     }
     
     if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
