@@ -438,8 +438,11 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
             alertMessage = @"Your photo was posted on STATUS";
         }
         if (alertMessage!=nil) {
+            __weak STSharePhotoViewController *weakSelf = self;
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            }]];
             [self.navigationController presentViewController:alert animated:YES completion:nil];
         }
         if ([_post.uuid isEqualToString:postId]) {

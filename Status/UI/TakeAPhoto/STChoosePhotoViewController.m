@@ -55,7 +55,7 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     [_bottomActionView addSubview:_customSegment];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostNewImageUploaded object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostImageWasEdited object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasPostedWithPostId:) name:STPostImageWasEdited object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(facebookPickerDidChooseImage:)
                                                  name:STFacebookPickerNotification

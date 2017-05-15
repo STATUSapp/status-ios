@@ -81,6 +81,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     _selectionType = STContainerSelectionWardrobe;
     [self addCustomSegmentForType:STContainerSelectionWardrobe];
     [self configureTopViewsForSelectedView:_wardrobeView];
+    [self configureContainer];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
