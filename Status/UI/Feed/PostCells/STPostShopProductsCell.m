@@ -42,16 +42,8 @@
         [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
     }
     [self.produsctsCollection.collectionViewLayout invalidateLayout];
-    NSInteger alreadyItemsCount = [self.produsctsCollection numberOfItemsInSection:0];
-    [self.produsctsCollection performBatchUpdates:^{
-        if (alreadyItemsCount == 0) {
-            [self.produsctsCollection insertItemsAtIndexPaths:indexPaths];
-        }
-//        [self.produsctsCollection reloadData];
-    } completion:^(BOOL finished) {
-        
-    }];
     [self.produsctsCollection layoutIfNeeded];
+    [self.produsctsCollection reloadData];
 }
 
 + (CGSize)cellSize{

@@ -95,7 +95,8 @@
 }
 
 + (STLocationManager *)locationService{
-    return [[CoreManager sharedInstance] locationService];
+    return nil;
+//    return [[CoreManager sharedInstance] locationService];
 }
 
 + (STNetworkQueueManager *)networkService{
