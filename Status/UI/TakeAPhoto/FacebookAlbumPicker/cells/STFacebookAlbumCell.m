@@ -35,7 +35,7 @@
 
 -(void)configureCellWithALbum:(NSDictionary *)album{
     _albumTitleLbl.text = album[@"name"];
-    _albumPhotoNumberLbl.text = [NSString stringWithFormat:@"%ld photos", (long)[album[@"count"] integerValue]];
+    _albumPhotoNumberLbl.text = [NSString stringWithFormat:@"%ld", (long)[album[@"count"] integerValue]];
     
 }
 

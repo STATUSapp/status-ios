@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 
 +(instancetype)newController{
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TakeAPhoto" bundle:[NSBundle mainBundle]];
-    STChoosePhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([STChoosePhotoViewController class])];
+    STChoosePhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"STChoosePhotoViewController"];
     return vc;
 
 }
@@ -93,13 +93,13 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     
-    STFacebookAlbumsViewController *vc = [self.childViewControllers firstObject];
-    [vc.navigationController popToRootViewControllerAnimated:YES];
-    
     UIImage *image = notif.userInfo[kImageKey];
     
     STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:image shouldCompress:NO andPost:nil];
-    [self.navigationController pushViewController:moveScaleVC animated:YES];
+    
+    NSArray *viewControllers = @[[self.navigationController.viewControllers firstObject], moveScaleVC];
+    
+    [self.navigationController setViewControllers:viewControllers animated:YES];
     
 }
 
@@ -107,7 +107,7 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 #pragma mark - IBACTIONS
 
 - (IBAction)onBackButtonPressed:(id)sender {
-    [[CoreManager navigationService] goToPreviousTabBarScene];
+    [[CoreManager navigationService] dismissChoosePhotoVC];
 }
 
 
@@ -146,6 +146,16 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     return STChoosePhotoBottomOptionFacebook;
 }
 
+-(UIColor *)backgroundColorForSegment:(STCustomSegment *)segment{
+    return [UIColor colorWithRed:247.f/255.f
+                           green:247.f/255.f
+                            blue:247.f/255.f
+                           alpha:1.f];
+}
+
+-(STSegmentSelection)segmentSelectionForSegment:(STCustomSegment *)segment{
+    return STSegmentSelectionHighlightButton;
+}
 
 #pragma mark - STCustomSegment Helpers
 

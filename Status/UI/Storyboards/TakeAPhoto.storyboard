@@ -95,47 +95,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmt-Gf-9pg">
-                                <rect key="frame" x="8" y="20" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="jFw-uN-uwM"/>
-                                    <constraint firstAttribute="height" constant="44" id="qbS-bS-Img"/>
-                                </constraints>
-                                <state key="normal" image="btnBack"/>
-                                <state key="selected" image="btnBackPressed"/>
-                                <state key="highlighted" image="btnBackPressed"/>
-                                <connections>
-                                    <action selector="onBackButtonPressed:" destination="0BU-W2-Z8i" eventType="touchUpInside" id="w4g-qZ-qJl"/>
-                                </connections>
-                            </button>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwi-UX-gzZ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="578"/>
                                 <connections>
                                     <segue destination="spR-Cs-q33" kind="embed" id="z9p-ND-sjB"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRf-iH-enc">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="5Jr-OX-1kN"/>
+                                    <constraint firstAttribute="height" constant="45" id="5Jr-OX-1kN"/>
                                 </constraints>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09u-1P-zwi">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="G4e-zP-BLF"/>
+                                </constraints>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Select Photo" id="n9F-bn-B4H">
+                                        <barButtonItem key="leftBarButtonItem" id="5Q2-P8-rzI">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PVZ-Kf-1XN">
+                                                <rect key="frame" x="16" y="6" width="32" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" image="btnBack">
+                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="selected" image="btnBackPressed"/>
+                                                <state key="highlighted" image="btnBackPressed"/>
+                                                <connections>
+                                                    <action selector="onBackButtonPressed:" destination="0BU-W2-Z8i" eventType="touchUpInside" id="lHI-yt-88f"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qmt-Gf-9pg" firstAttribute="top" secondItem="qiB-S3-Tpu" secondAttribute="bottom" id="Dgw-6o-ohf"/>
                             <constraint firstAttribute="trailing" secondItem="mwi-UX-gzZ" secondAttribute="trailing" id="O3W-8v-GRH"/>
-                            <constraint firstItem="qmt-Gf-9pg" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" constant="8" id="OEw-Bl-Qyi"/>
                             <constraint firstAttribute="trailing" secondItem="kRf-iH-enc" secondAttribute="trailing" id="OZf-Mr-kqh"/>
-                            <constraint firstItem="mwi-UX-gzZ" firstAttribute="top" secondItem="qmt-Gf-9pg" secondAttribute="bottom" id="SBc-MT-fuC"/>
                             <constraint firstItem="kRf-iH-enc" firstAttribute="top" secondItem="mwi-UX-gzZ" secondAttribute="bottom" id="abS-GP-ReM"/>
                             <constraint firstItem="HNU-5m-utN" firstAttribute="top" secondItem="kRf-iH-enc" secondAttribute="bottom" id="edX-2o-sXv"/>
+                            <constraint firstItem="09u-1P-zwi" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" id="hAj-nV-696"/>
+                            <constraint firstItem="mwi-UX-gzZ" firstAttribute="top" secondItem="09u-1P-zwi" secondAttribute="bottom" id="qHn-mi-Kbr"/>
                             <constraint firstItem="kRf-iH-enc" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" id="roX-T3-azP"/>
+                            <constraint firstItem="09u-1P-zwi" firstAttribute="top" secondItem="5uR-br-fjM" secondAttribute="top" id="tru-hW-vdr"/>
                             <constraint firstItem="mwi-UX-gzZ" firstAttribute="leading" secondItem="5uR-br-fjM" secondAttribute="leading" id="wGC-tb-VlW"/>
+                            <constraint firstAttribute="trailing" secondItem="09u-1P-zwi" secondAttribute="trailing" id="xRB-qL-gbq"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bottomActionView" destination="kRf-iH-enc" id="RVk-GQ-Zsl"/>
@@ -143,7 +163,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JI5-Wt-9AD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816.79999999999995" y="538.38080959520244"/>
+            <point key="canvasLocation" x="959" y="489"/>
+        </scene>
+        <!--Take Photo Root View Controller-->
+        <scene sceneID="USH-rh-rNW">
+            <objects>
+                <viewController storyboardIdentifier="TAKE_PHOTO_EMPTY_VC" id="ZfP-Yh-ZU3" customClass="STTakePhotoRootViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="giU-vc-1hj"/>
+                        <viewControllerLayoutGuide type="bottom" id="wZF-La-9fI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ArJ-HR-0sK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vLR-6k-GaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2073" y="538"/>
         </scene>
         <!--FacebookPickerScene-->
         <scene sceneID="gNz-D0-WWx">
@@ -163,6 +201,6 @@
         <image name="facebook_btn_active" width="134" height="134"/>
         <image name="gallery_btn" width="134" height="134"/>
         <image name="gallery_btn_active" width="134" height="134"/>
-        <image name="splashscreen" width="360" height="643"/>
+        <image name="splashscreen" width="375" height="667"/>
     </resources>
 </document>

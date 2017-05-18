@@ -36,6 +36,8 @@
     @catch (NSException *exception) {
         
         [UIAlertController presentAlertControllerInViewController:vc title:@"Error" message:@"Your device has no camera." andDismissButtonTitle:@"OK"];
+        _completion = nil;
+        _viewController = nil;
         completion(nil, NO);
     }
     

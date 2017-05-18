@@ -22,7 +22,7 @@
 -(void)switchToTabBarAtIndex:(NSInteger)index
                  popToRootVC:(BOOL)popToRoot;
 
-- (void)goToPreviousTabBarScene;
+- (void)dismissChoosePhotoVC;
 
 - (void)goToNotifications;
 

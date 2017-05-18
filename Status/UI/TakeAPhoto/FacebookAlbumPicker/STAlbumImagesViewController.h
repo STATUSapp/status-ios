@@ -10,4 +10,6 @@
 
 @interface STAlbumImagesViewController : UIViewController
 @property (nonatomic, strong) NSString *albumId;
+
++ (STAlbumImagesViewController *)newController;
 @end

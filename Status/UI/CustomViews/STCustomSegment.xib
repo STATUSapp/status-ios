@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -42,6 +42,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bottomConstr" destination="JkB-pp-AtN" id="nZE-b8-Q6A"/>
+                <outlet property="bottomLine" destination="9Yf-8y-bwA" id="O5d-Yy-Oj2"/>
+                <outlet property="bottomSelectionBar" destination="QSy-Q6-vrD" id="YJq-6H-Dk2"/>
                 <outlet property="selectionLeadingConstr" destination="qr1-Lx-rjd" id="fYy-Xc-bAX"/>
                 <outlet property="selectionWidthConstr" destination="Jkh-X5-jHh" id="HaR-pR-3Aa"/>
             </connections>

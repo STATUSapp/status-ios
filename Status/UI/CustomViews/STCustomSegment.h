@@ -7,6 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef NS_ENUM(NSUInteger, STSegmentSelection) {
+    STSegmentSelectionBottomBar = 0,
+    STSegmentSelectionHighlightButton
+};
+
 @class STCustomSegment;
 
 @protocol STSCustomSegmentProtocol  <NSObject>
@@ -17,9 +22,10 @@
 - (NSInteger)segmentNumberOfButtons:(STCustomSegment *)segment;
 - (NSString *)segment:(STCustomSegment *)segment
   buttonTitleForIndex:(NSInteger)index;
-- (void)segment:(STCustomSegment *)segment
-buttonPressedAtIndex:(NSInteger)index;
-
+- (void)segment:(STCustomSegment *)segment buttonPressedAtIndex:(NSInteger)index;
+@optional
+- (UIColor *)backgroundColorForSegment:(STCustomSegment *)segment;
+- (STSegmentSelection) segmentSelectionForSegment:(STCustomSegment *)segment;
 @optional
 - (NSInteger)segmentDefaultSelectedIndex:(STCustomSegment *)segment;
 

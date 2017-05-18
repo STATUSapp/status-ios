@@ -19,6 +19,8 @@ CGFloat const kButtonHeight = 44.f;
 @property (nonatomic, weak) id <STSCustomSegmentProtocol>delegate;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstr;
 @property (nonatomic, assign, readwrite) NSInteger selectedIndex;
+@property (weak, nonatomic) IBOutlet UIView *bottomLine;
+@property (weak, nonatomic) IBOutlet UIView *bottomSelectionBar;
 
 @end
 
@@ -31,7 +33,6 @@ CGFloat const kButtonHeight = 44.f;
 }
 
 - (void)selectSegmentIndex:(NSInteger)index{
-    _selectedIndex = index;
     UIButton *button = [self viewWithTag:index + kButtonTagOffset];
     [self onSegmentButtonPressed:button];
 }
@@ -59,7 +60,29 @@ CGFloat const kButtonHeight = 44.f;
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, bottomSpace + topSpace + kButtonHeight);
 }
 
+- (STSegmentSelection )segmentSelectionType{
+    STSegmentSelection selectionType = STSegmentSelectionBottomBar;
+    if ([_delegate respondsToSelector:@selector(segmentSelectionForSegment:)]) {
+        selectionType = [_delegate segmentSelectionForSegment:self];
+    }
+    
+    return selectionType;
+}
+
 - (void)configureView{
+    //background color
+    UIColor *backgroundColor = [UIColor whiteColor];
+    if ([_delegate respondsToSelector:@selector(backgroundColorForSegment:)]) {
+        backgroundColor = [_delegate backgroundColorForSegment:self];
+    }
+    self.backgroundColor = backgroundColor;
+    
+    //configure selection
+    STSegmentSelection selectionType = [self segmentSelectionType];
+    if (selectionType == STSegmentSelectionHighlightButton) {
+        _bottomLine.hidden = YES;
+        _bottomSelectionBar.hidden = YES;
+    }
     // add buttons
     NSInteger numberOfButtons = [_delegate segmentNumberOfButtons:self];
 
@@ -92,8 +115,19 @@ CGFloat const kButtonHeight = 44.f;
                                          green:38.f/255.f
                                           blue:38.f/255.f
                                          alpha:1.f];
-        [button setTitleColor:color forState:UIControlStateNormal];
-        [button setTitleColor:color forState:UIControlStateSelected];
+        if (selectionType == STSegmentSelectionHighlightButton) {
+            UIColor *unselectedColor = [UIColor colorWithRed:38.f/255.f
+                                                      green:38.f/255.f
+                                                       blue:38.f/255.f
+                                                      alpha:0.5f];
+            [button setTitleColor:unselectedColor forState:UIControlStateNormal];
+            [button setTitleColor:color forState:UIControlStateSelected];
+        }
+        else
+        {
+            [button setTitleColor:color forState:UIControlStateNormal];
+            [button setTitleColor:color forState:UIControlStateSelected];
+        }
         button.tag = kButtonTagOffset + i;
         [button addTarget:self
                    action:@selector(onSegmentButtonPressed:)
@@ -121,17 +155,28 @@ CGFloat const kButtonHeight = 44.f;
 
 - (void)onSegmentButtonPressed:(id)sender{
     UIButton *button = (UIButton *)sender;
-    
+    NSInteger previuosSelectedIndex = _selectedIndex;
     _selectedIndex = button.tag - kButtonTagOffset;
     [self.delegate segment:self buttonPressedAtIndex:_selectedIndex];
     
-    CGFloat leading = (button.tag - kButtonTagOffset) * [self buttonWidth] + (kSegmentViewMargins / 2.f);
+    STSegmentSelection selectionType = [self segmentSelectionType];
+
+    if (selectionType == STSegmentSelectionHighlightButton) {
+        UIButton *previuosSelectedButton = [self viewWithTag:kButtonTagOffset + previuosSelectedIndex];
+        previuosSelectedButton.selected = NO;
+        button.selected = YES;
+    }
+    else
+    {
+        CGFloat leading = (button.tag - kButtonTagOffset) * [self buttonWidth] + (kSegmentViewMargins / 2.f);
+        
+        [UIView animateWithDuration:0.33f
+                         animations:^{
+                             _selectionLeadingConstr.constant = leading;
+                             [self layoutIfNeeded];
+                         }];
+    }
     
-    [UIView animateWithDuration:0.33f
-                     animations:^{
-                         _selectionLeadingConstr.constant = leading;
-                         [self layoutIfNeeded];
-                     }];
 }
 
 @end

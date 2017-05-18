@@ -63,7 +63,7 @@
 }
 
 - (void)onTapOnView:(id)sender {
-    [[CoreManager navigationService] goToPreviousTabBarScene];
+    [[CoreManager navigationService] dismissChoosePhotoVC];
 }
 
 #pragma mark - Notifications

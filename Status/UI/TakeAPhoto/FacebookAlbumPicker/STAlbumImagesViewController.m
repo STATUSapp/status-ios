@@ -14,7 +14,7 @@
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
 #import "STLocalNotificationService.h"
-@interface STAlbumImagesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface STAlbumImagesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
     NSMutableArray *_dataSource;
 }
@@ -22,6 +22,13 @@
 @end
 
 @implementation STAlbumImagesViewController
+
++ (STAlbumImagesViewController *)newController{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FacebookPickerScene" bundle:nil];
+    STAlbumImagesViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"FACEBOOK_ALBUM_PHOTOS_VC"];
+    
+    return vc;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -104,6 +111,15 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _dataSource.count;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+ 
+    CGFloat layoutWidth = collectionView.frame.size.width;
+    //substract 3 * 2px (distance between items)
+    layoutWidth = layoutWidth - 6.f;
+    
+    return CGSizeMake(layoutWidth/4.f, layoutWidth/4.f);
 }
 
 #pragma mark - IBACTIONS

@@ -12,9 +12,9 @@
 
 + (instancetype)newController;
 
-- (void)goToPreviousSelectedIndex;
 - (void)setActivityIcon;
-//- (void)setMessagesIcon;
+
+- (void)dismissChoosePhotoVC;
 
 - (void)setTabBarHidden:(BOOL)tabBarHidden;
 - (void)setTabBarFrame:(CGRect)rect;

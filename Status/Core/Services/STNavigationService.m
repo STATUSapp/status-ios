@@ -74,8 +74,8 @@
     }
 }
 
-- (void)goToPreviousTabBarScene {
-    [[STNavigationService appTabBar] goToPreviousSelectedIndex];
+- (void)dismissChoosePhotoVC {
+    [[STNavigationService appTabBar] dismissChoosePhotoVC];
 }
 
 - (void)goToNotifications {

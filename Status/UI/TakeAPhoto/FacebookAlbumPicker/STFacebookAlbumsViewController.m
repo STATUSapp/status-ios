@@ -12,6 +12,7 @@
 #import "STImageCacheController.h"
 #import "STFacebookHelper.h"
 #import "UIImageView+WebCache.h"
+#import "STNavigationService.h"
 
 @interface STFacebookAlbumsViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -52,22 +53,23 @@
 {
     __weak STFacebookAlbumsViewController *weakSelf = self;
     [[CoreManager facebookService] loadAlbumsWithRefreshBlock:^(NSArray *newObjects) {
-//        if (newObjects.count > 0) {
-//            [_dataSource addObjectsFromArray:newObjects];
-//            [weakSelf.tableView reloadData];
-//        }
-        
         if (newObjects.count>0) {
             
-            NSUInteger resultsSize = [_dataSource count];
             [_dataSource addObjectsFromArray:newObjects];
             
+            [weakSelf.tableView reloadData];
+            
+            //activate this for animation
+            /*
+             NSUInteger resultsSize = [_dataSource count];
+
             NSMutableArray *arrayWithIndexPaths = [NSMutableArray array];
             
             for (NSUInteger i = resultsSize; i < resultsSize + newObjects.count; i++)
                 [arrayWithIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
 
             [weakSelf.tableView insertRowsAtIndexPaths:arrayWithIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+             */
         }
     }];
 }
@@ -80,20 +82,6 @@
 - (IBAction)onClickCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    STFacebookAlbumCell *cell = (STFacebookAlbumCell *)sender;
-    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-    STAlbumImagesViewController *destVC = (STAlbumImagesViewController *)[segue destinationViewController];
-     NSString *albumId = _dataSource[indexPath.row][@"id"];
-    destVC.albumId = albumId;
-}
-
 
 #pragma mark - UITableViewDelegate
 
@@ -113,7 +101,13 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44.f;
+    return 73.f;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    STAlbumImagesViewController *destVC = [STAlbumImagesViewController newController];
+    NSString *albumId = _dataSource[indexPath.row][@"id"];
+    destVC.albumId = albumId;
+    [self.parentViewController.navigationController pushViewController:destVC animated:YES];
+}
 @end

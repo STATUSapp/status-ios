@@ -16,12 +16,15 @@
 #import "FeedCVC.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
+static CGFloat kTabBarHeight = 45.f;
+static CGFloat kImageInset = 3.f;
 
 @interface STTabBarViewController ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) NSInteger previousSelectedIndex;
-@property (nonatomic, strong) UIButton *centerButton;
 @property (nonatomic) CGRect defaultTabBarFrame;
+@property (nonatomic, strong) UINavigationController * takeAPhotoNav;
+
 @end
 
 @implementation STTabBarViewController
@@ -43,21 +46,18 @@ static NSString * storyboardIdentifier = @"tabBarController";
     // add home flow
     FeedCVC *homeVc = [FeedCVC mainFeedController];
     UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
-    homeNavCtrl.navigationBarHidden = YES;
-
+//    homeNavCtrl.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
     
     // add explore flow
     STExploreViewController *vc = [STExploreViewController exploreViewController];
     UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:vc];
     exploreNavCtrl.navigationBarHidden = YES;
-
-//    ExploreTVC *exploreTVC = [ExploreTVC exploreController];
-//    UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:exploreTVC];
-//    exploreNavCtrl.navigationBarHidden = YES;
     
     // add take a photo
-    STChoosePhotoViewController * takeAPhotoVC = [STChoosePhotoViewController newController];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TakeAPhoto" bundle:nil];
+    
+    UIViewController *takeAPhotoVC = [storyboard instantiateViewControllerWithIdentifier:@"TAKE_PHOTO_EMPTY_VC"];
     UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
     takePhotoNav.navigationBarHidden = YES;
     
@@ -83,31 +83,21 @@ static NSString * storyboardIdentifier = @"tabBarController";
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setImage:[[UIImage imageNamed:@"home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setImage:[[UIImage imageNamed:@"search"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-//    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[[UIImage imageNamed:@"camera"]  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setImage:[[UIImage imageNamed:@"camera"]  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setImage:[[UIImage imageNamed:@"profile"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     [[self.tabBar.items objectAtIndex:STTabBarIndexHome] setSelectedImage:[[UIImage imageNamed:@"home-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexExplore] setSelectedImage:[[UIImage imageNamed:@"search-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-//    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[[UIImage imageNamed:@"camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[[UIImage imageNamed:@"camera-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[[UIImage imageNamed:@"profile-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
-    
-//    [self setMessagesIcon];
     
     for (UITabBarItem * item in self.tabBar.items) {
         [item setTitle:nil];
-        item.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+        item.imageInsets = UIEdgeInsetsMake(kImageInset, 0, -1 * kImageInset, 0);
     }
     
     [self.tabBar setTintColor:[UIColor blackColor]];
     [self.tabBar setTranslucent:NO];
-    
-//    //#f8f8fd
-//    self.tabBar.tintColor = [UIColor colorWithRed:248.f/255.f
-//                                            green:248.f/255.f
-//                                             blue:253.f/255.f
-//                                            alpha:0.9f];
-
 }
 
 -(void)handleDoubleTapOnView:(id)sender{
@@ -118,20 +108,37 @@ static NSString * storyboardIdentifier = @"tabBarController";
     [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[[UIImage imageNamed:@"activity-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 }
 
-//- (void)setMessagesIcon {
-//    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[[UIImage imageNamed:@"messages"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-//    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[[UIImage imageNamed:@"messages-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setNavigationBarHeight:kTabBarHeight];
     _defaultTabBarFrame = self.tabBar.frame;
-    [self addCenterButtonWithImage:[UIImage imageNamed:@"camera"]
-                    highlightImage:[UIImage imageNamed:@"camera-selected"]
-                            target:self
-                            action:@selector(buttonPressed:)];
+    STChoosePhotoViewController *vc = [STChoosePhotoViewController newController];
+    _takeAPhotoNav = [[UINavigationController alloc] initWithRootViewController:vc];
+    _takeAPhotoNav.navigationBarHidden = YES;
     // Do any additional setup after loading the view.
 }
+
+-(void)setNavigationBarHeight:(CGFloat)height{
+    CGRect tabRect = self.tabBar.frame;
+    CGFloat initialHeight = tabRect.size.height;
+    tabRect.size.height = height;
+    tabRect.origin.y = tabRect.origin.y + (initialHeight - tabRect.size.height);
+    self.tabBar.frame = tabRect;
+
+}
+
+
+- (void)presentChoosePhotoVC{
+    [self presentViewController:_takeAPhotoNav
+                       animated:YES
+                     completion:nil];
+}
+- (void)dismissChoosePhotoVC{
+    [self goToPreviousSelectedIndex];
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
+
 
 #pragma mark - Helper
 
@@ -141,99 +148,59 @@ static NSString * storyboardIdentifier = @"tabBarController";
 
 }
 
-// Create a custom UIButton and add it to the center of our tab bar
-- (void)addCenterButtonWithImage:(UIImage *)buttonImage highlightImage:(UIImage *)highlightImage target:(id)target action:(SEL)action
-{
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-
-    button.frame = CGRectMake(0.0, 0.0, 44.f, 44.f);
-    [button setImage:buttonImage forState:UIControlStateNormal];
-    [button setImage:highlightImage forState:UIControlStateHighlighted];
-    
-    CGFloat heightDifference = buttonImage.size.height - self.tabBar.frame.size.height;
-    if (heightDifference < 0) {
-        button.center = self.tabBar.center;
-    } else {
-        CGPoint center = self.tabBar.center;
-        center.y = center.y - heightDifference/2.0;
-        button.center = center;
-    }
-    
-    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-    self.centerButton = button;
-}
-
-- (void)buttonPressed:(id)sender
-{
-    [self setSelectedIndex:STTabBarIndexTakeAPhoto];
-    [self performSelector:@selector(doHighlight:) withObject:sender afterDelay:0];
-}
-
-- (void)doHighlight:(UIButton*)b {
-    [b setHighlighted:YES];
-}
-
-- (void)doNotHighlight:(UIButton*)b {
-    [b setHighlighted:NO];
-}
-
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    if(self.tabBarController.selectedIndex != STTabBarIndexTakeAPhoto){
-        [self performSelector:@selector(doNotHighlight:) withObject:_centerButton afterDelay:0];
-    }
-    
     NSUInteger selectedItem = [[tabBar items] indexOfObject:item];
     
-    if (_previousSelectedIndex == selectedItem) {
-        UINavigationController *navController = (UINavigationController *)[self.viewControllers objectAtIndex:selectedItem];
-        if ([[navController viewControllers] count] == 1) {
-            [[CoreManager localNotificationService] postNotificationName:STNotificationShouldGoToTop object:nil userInfo:@{kSelectedTabBarKey:@(selectedItem), kAnimatedTabBarKey:@(YES)}];
-            
+    if (selectedItem == STTabBarIndexTakeAPhoto) {
+        [self presentChoosePhotoVC];
+    }
+    else
+    {
+        if (_previousSelectedIndex == selectedItem) {
+            UINavigationController *navController = (UINavigationController *)[self.viewControllers objectAtIndex:selectedItem];
+            if ([[navController viewControllers] count] == 1) {
+                [[CoreManager localNotificationService] postNotificationName:STNotificationShouldGoToTop object:nil userInfo:@{kSelectedTabBarKey:@(selectedItem), kAnimatedTabBarKey:@(YES)}];
+                
+            }
         }
     }
 }
 
 - (BOOL)tabBarHidden {
-    return self.centerButton.hidden && self.tabBar.hidden;
+    return self.tabBar.hidden;
 }
 
 - (void)setTabBarHidden:(BOOL)tabBarHidden
 {
-    self.centerButton.hidden = tabBarHidden;
     self.tabBar.hidden = tabBarHidden;
 }
 
 - (void)setTabBarFrame:(CGRect)rect
 {
-    CGFloat offsetY = self.tabBar.frame.origin.y - rect.origin.y;
-    CGRect centerButtonFrame = _centerButton.frame;
-    centerButtonFrame.origin.y = centerButtonFrame.origin.y - offsetY;
-    self.centerButton.frame = centerButtonFrame;
     self.tabBar.frame = rect;
 }
 
 #pragma mark - Custom implementations for selecting the index
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
-    _previousSelectedIndex = self.selectedIndex;
     if (selectedIndex != STTabBarIndexTakeAPhoto) {
-        [self.centerButton setHighlighted:NO];
+        _previousSelectedIndex = selectedIndex;
     }
     [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedIndex:selectedIndex];
 }
 
 - (void)setSelectedViewController:(__kindof UIViewController *)selectedViewController {
-    _previousSelectedIndex = [self.viewControllers indexOfObject:selectedViewController];
+    NSInteger selectedIndex = [self.viewControllers indexOfObject:selectedViewController];
+    if (selectedIndex != STTabBarIndexTakeAPhoto) {
+        _previousSelectedIndex = selectedIndex;
+    }
     [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedViewController:selectedViewController];
 }
 
 - (void)goToPreviousSelectedIndex {
-    [self.centerButton setHighlighted:NO];
     [self setSelectedIndex:_previousSelectedIndex];
 }
 
