@@ -95,6 +95,7 @@ CGFloat const kTopButtonSize = 48.f;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingViewImage;
 @property (strong, nonatomic) IBOutlet UIView *noDataView;
+@property (strong, nonatomic) IBOutlet UIView *navBarLogoView;
 
 @end
 
@@ -110,7 +111,19 @@ static NSString * const profileBioCell = @"UserProfileBioCell";
 static NSString * const profileLocationCell = @"UserProfileLocationCell";
 static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
+- (void)configureNavigationBar{
+    BOOL navBarHidden = YES;
+    if (_feedProcessor.loading == NO &&
+        _feedProcessor.processorFlowType == STFlowTypeHome) {
+        navBarHidden = NO;
+    }
+    [self.navigationController setNavigationBarHidden:navBarHidden animated:YES];
+}
+
 - (void)configureLoadingView{
+
+    [self configureNavigationBar];
+    
     if ([_feedProcessor processorFlowType] == STFlowTypeHome) {
         //use the standard loading
         if (_feedProcessor.loading) {
@@ -224,7 +237,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     [super viewDidLoad];
     
     self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
-    
+    self.navigationItem.titleView = _navBarLogoView;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.sectionHeadersPinToVisibleBounds = YES;
@@ -256,9 +269,13 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     [self configureLoadingView];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self configureNavigationBar];
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
     if (_tabBarHidden) {
         CGFloat yPoints = [[UIScreen mainScreen] bounds].size.height;
         CGFloat velocityY = 1.f;

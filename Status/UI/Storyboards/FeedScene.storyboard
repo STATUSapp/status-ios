@@ -24,7 +24,7 @@
         <scene sceneID="gdD-po-VFS">
             <objects>
                 <collectionViewController automaticallyAdjustsScrollViewInsets="NO" id="kUw-q3-wvD" customClass="FeedCVC" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -790,6 +790,7 @@
                             <outlet property="delegate" destination="kUw-q3-wvD" id="l0v-Dx-vNH"/>
                         </connections>
                     </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="MOr-Sp-1ba"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -798,6 +799,7 @@
                     <connections>
                         <outlet property="loadingView" destination="JqY-Wn-ru7" id="Oxu-rv-VEA"/>
                         <outlet property="loadingViewImage" destination="SUQ-Ff-C4q" id="9cQ-sq-c0g"/>
+                        <outlet property="navBarLogoView" destination="C51-kd-Pdl" id="aOt-jP-F5w"/>
                         <outlet property="noDataView" destination="iCq-M5-6oM" id="GDv-xz-eba"/>
                     </connections>
                 </collectionViewController>
@@ -895,6 +897,17 @@
                         <constraint firstItem="SUQ-Ff-C4q" firstAttribute="leading" secondItem="JqY-Wn-ru7" secondAttribute="leading" id="x33-pS-FKA"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" id="C51-kd-Pdl" userLabel="TabBarLogo">
+                    <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo status home screen" translatesAutoresizingMaskIntoConstraints="NO" id="OMH-OK-q2A">
+                            <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="1211" y="1176"/>
         </scene>
@@ -912,6 +925,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -935,6 +949,7 @@
         <image name="like" width="15" height="13"/>
         <image name="like_pressed" width="15" height="13"/>
         <image name="location-icon" width="10" height="14"/>
+        <image name="logo status home screen" width="110" height="17"/>
         <image name="message_background" width="6" height="19"/>
         <image name="more-icon" width="16" height="3"/>
         <image name="no picture" width="111" height="111"/>

@@ -87,12 +87,30 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [Appirater appLaunched:YES];
     
     self.window.rootViewController = [LaunchViewController launchVC];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self configureAppearance];
     
     [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 
+}
+
+-(void)configureAppearance{
+    UIColor *barColor = [UIColor colorWithRed:248.f/255.f
+                                        green:248.F/255.f
+                                         blue:253.f/255.f
+                                        alpha:1.f];
+    
+    [[UITabBar appearance] setBarTintColor:barColor];
+    [[UITabBar appearance] setTranslucent:NO];
+    [[UITabBar appearance] setBackgroundColor:[UIColor clearColor]];
+    
+    [[UINavigationBar appearance] setBarTintColor:barColor];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
+    
 }
 
 -(void)cleanLocalDBIfNeeded{
