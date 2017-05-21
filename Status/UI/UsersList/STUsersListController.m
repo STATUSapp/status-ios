@@ -188,11 +188,11 @@
 //        cell.chatButton.hidden = YES;
         cell.followBtn.hidden = YES;
     }
-//    else
-//    {
+    else
+    {
 //        cell.chatButton.hidden = NO;
-//        cell.chatButton.hidden = NO;
-//    }
+        cell.followBtn.hidden = NO;
+    }
     
     
     return cell;
