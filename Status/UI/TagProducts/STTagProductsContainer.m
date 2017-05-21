@@ -72,15 +72,16 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     _wardrobeView.delegate = self;
     _manualView.delegate = self;
     
+    _selectionType = STContainerSelectionWizzard;
+    [self configureTopViewsForSelectedView:_wizzardView];
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(tagProductsNotification:) name:kTagProductNotification object:nil];
     
     if ([[STTagProductsManager sharedInstance] rootCategoriesDownloaded]) {
         [self addCustomSegmentForType:STContainerSelectionWizzard];
     }
-    _selectionType = STContainerSelectionWardrobe;
     [self addCustomSegmentForType:STContainerSelectionWardrobe];
-    [self configureTopViewsForSelectedView:_wardrobeView];
     [self configureContainer];
 }
 
@@ -343,8 +344,16 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     [self configureContainer];
 }
 
-- (NSInteger)defaultSelectedIndex{
+- (NSInteger)segmentDefaultSelectedIndex:(STCustomSegment *)segment{
     return 0;
+}
+
+-(STSegmentSelection)segmentSelectionForSegment:(STCustomSegment *)segment{
+    return STSegmentSelectionHighlightButton;
+}
+
+-(BOOL)segmentShouldHaveOptionsSeparators:(STCustomSegment *)segment{
+    return YES;
 }
 
 - (IBAction)onBackPressed:(id)sender {

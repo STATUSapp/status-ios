@@ -20,7 +20,6 @@
     UIImageView *_imageView;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 
 @end
 
@@ -50,10 +49,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.transparentNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.transparentNavBar.shadowImage = [UIImage new];
-    self.transparentNavBar.translucent = YES;
-    [self.view bringSubviewToFront:_transparentNavBar];
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
     [self setUpTheContext];
 }

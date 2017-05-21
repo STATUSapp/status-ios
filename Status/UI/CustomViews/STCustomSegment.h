@@ -26,9 +26,8 @@ typedef NS_ENUM(NSUInteger, STSegmentSelection) {
 @optional
 - (UIColor *)backgroundColorForSegment:(STCustomSegment *)segment;
 - (STSegmentSelection) segmentSelectionForSegment:(STCustomSegment *)segment;
-@optional
 - (NSInteger)segmentDefaultSelectedIndex:(STCustomSegment *)segment;
-
+- (BOOL)segmentShouldHaveOptionsSeparators:(STCustomSegment *)segment;
 @end
 
 @interface STCustomSegment : UIView

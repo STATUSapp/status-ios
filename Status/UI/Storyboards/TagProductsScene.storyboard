@@ -91,7 +91,7 @@
                                             </button>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGq-qk-14z">
                                                 <rect key="frame" x="0.0" y="57" width="124" height="41"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                                 <state key="normal" title="Wizard">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -140,7 +140,7 @@
                                             </button>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ns6-6f-pRK">
                                                 <rect key="frame" x="0.0" y="57" width="124" height="41"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                                 <state key="normal" title="Wardobe">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -189,7 +189,7 @@
                                             </button>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJj-hF-1Eg">
                                                 <rect key="frame" x="0.0" y="57" width="124" height="41"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                                 <state key="normal" title="Manual">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -283,9 +283,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="barHeightConstraint" destination="Pjq-Pa-Lfg" id="nH1-xi-Hpk"/>
                         <outlet property="customSegmentHolder" destination="DZ9-aO-VUQ" id="clj-1K-7JH"/>
+                        <outlet property="leftButton" destination="cjU-FH-YTa" id="tm7-8O-tGs"/>
                         <outlet property="mainContainer" destination="KIf-1D-x1X" id="fyM-4O-EyW"/>
                         <outlet property="manualView" destination="UOJ-9i-goY" id="E4O-xf-bcC"/>
+                        <outlet property="navigationBar" destination="2O5-1y-c6G" id="ZMi-fd-FHv"/>
                         <outlet property="segmentHeightConstr" destination="odW-bL-8eZ" id="crh-ub-dYz"/>
                         <outlet property="wardrobeView" destination="EWn-ou-YNb" id="6Zk-T0-Ovk"/>
                         <outlet property="wizzardView" destination="Kr6-1Y-UX5" id="XGv-Wx-wq4"/>
@@ -329,7 +332,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRESSES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzV-qf-lex">
                                                     <rect key="frame" x="8" y="16" width="162" height="143"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -408,7 +411,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="32k-AD-DXw">
-                                <rect key="frame" x="6" y="6" width="363" height="567"/>
+                                <rect key="frame" x="6" y="6" width="363" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="efW-ht-mUr">
                                     <size key="itemSize" width="172" height="156"/>
@@ -442,9 +445,9 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhA-1F-dCp">
-                                <rect key="frame" x="0.0" y="579" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="575" width="375" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="29W-QJ-S5j"/>
+                                    <constraint firstAttribute="height" constant="48" id="29W-QJ-S5j"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                 <state key="normal" title="ADD PRODUCT" backgroundImage="orange-base-0">
@@ -573,7 +576,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="so4-8r-FQa">
-                                <rect key="frame" x="6" y="6" width="363" height="421"/>
+                                <rect key="frame" x="6" y="6" width="363" height="417"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="oCn-Fv-9FL">
                                     <size key="itemSize" width="357" height="147"/>
@@ -766,9 +769,9 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdY-Ac-eyT">
-                                <rect key="frame" x="0.0" y="433" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="429" width="375" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Vkg-zZ-afY"/>
+                                    <constraint firstAttribute="height" constant="48" id="Vkg-zZ-afY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                 <state key="normal" title="DONE" backgroundImage="orange-base-0">
@@ -895,7 +898,10 @@
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="barHeightConstraint" destination="prq-54-mNY" id="BGJ-3e-w0G"/>
                         <outlet property="collectionView" destination="VkD-9C-yeF" id="iRd-qh-IJT"/>
+                        <outlet property="leftButton" destination="RCS-2Q-NtF" id="1WF-f3-p4F"/>
+                        <outlet property="navigationBar" destination="nHA-hK-XHi" id="1d2-lO-mm5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHR-MV-UZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -963,7 +969,10 @@
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="barHeightConstraint" destination="MTA-7P-Z1b" id="ThQ-Tf-dNA"/>
                         <outlet property="containerView" destination="fSz-gK-MyT" id="ePr-ja-e62"/>
+                        <outlet property="leftButton" destination="G45-Jl-h7Z" id="jNM-pF-8CV"/>
+                        <outlet property="navigationBar" destination="318-Gd-3Dv" id="b0s-cc-N9q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ef-hn-iLw" userLabel="First Responder" sceneMemberID="firstResponder"/>

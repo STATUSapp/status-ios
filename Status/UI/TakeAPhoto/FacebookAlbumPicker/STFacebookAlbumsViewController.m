@@ -106,8 +106,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     STAlbumImagesViewController *destVC = [STAlbumImagesViewController newController];
-    NSString *albumId = _dataSource[indexPath.row][@"id"];
+    NSDictionary *album = _dataSource[indexPath.row];
+    NSString *albumId = album[@"id"];
     destVC.albumId = albumId;
+    destVC.albumTitle = album[@"name"];
     [self.parentViewController.navigationController pushViewController:destVC animated:YES];
 }
 @end

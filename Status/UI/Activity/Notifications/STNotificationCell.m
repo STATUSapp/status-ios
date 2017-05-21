@@ -9,14 +9,7 @@
 #import "STNotificationCell.h"
 #import "UIImageView+TouchesEffects.h"
 
-CGFloat const seenCircleWidth = 15;
-
 @interface STNotificationCell()
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *seenCircleWidthConstraint;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightImageWidthConstraint;
-
 
 @end
 
@@ -33,12 +26,6 @@ CGFloat const seenCircleWidth = 15;
     }
     
     return STNotificationRegionTypeUserRelated;
-}
-
-- (void)setIsSeen:(BOOL)isSeen {
-    _isSeen = isSeen;
-    _seenCircleWidthConstraint.constant = isSeen ? 0 : seenCircleWidth;
-    self.seenCircle.hidden = isSeen;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -62,19 +49,7 @@ CGFloat const seenCircleWidth = 15;
 }
 
 -(void)prepareForReuse{
-    self.seenCircle.hidden = NO;
-}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    // the notification label should extend if there is no photo on the right part of the cell
-    
-    if (self.postImg.image == nil) {
-        self.rightImageWidthConstraint.constant = 0;
-    } else {
-        self.rightImageWidthConstraint.constant = 60;
-    }
+    [super prepareForReuse];
 }
 
 @end

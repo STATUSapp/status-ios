@@ -8,10 +8,10 @@
 
 #import "STCustomSegment.h"
 
-CGFloat const kSegmentViewMargins = 40.f;
+CGFloat const kDefaultSegmentViewMargins = 40.f;
 NSInteger const kButtonTagOffset = 100;
 CGFloat const kButtonHeight = 44.f;
-
+CGFloat const kSeparatorHeight = 20.f;
 @interface STCustomSegment ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectionWidthConstr;
@@ -32,6 +32,15 @@ CGFloat const kButtonHeight = 44.f;
     return customSegment;
 }
 
+-(CGFloat)usedViewMargins{
+    STSegmentSelection selectionType = [self segmentSelectionType];
+    if (selectionType == STSegmentSelectionBottomBar) {
+        return kDefaultSegmentViewMargins;
+    }
+    
+    return 8.f;
+}
+
 - (void)selectSegmentIndex:(NSInteger)index{
     UIButton *button = [self viewWithTag:index + kButtonTagOffset];
     [self onSegmentButtonPressed:button];
@@ -46,7 +55,7 @@ CGFloat const kButtonHeight = 44.f;
     NSInteger numberOfButtons = [_delegate segmentNumberOfButtons:self];
     CGSize requiredSize = [self requiredSize];
     CGFloat screenWidth = requiredSize.width;
-    CGFloat availableWidth = screenWidth - kSegmentViewMargins;
+    CGFloat availableWidth = screenWidth - [self usedViewMargins];
     CGFloat buttonWidth = availableWidth / numberOfButtons;
     
     return buttonWidth;
@@ -100,8 +109,14 @@ CGFloat const kButtonHeight = 44.f;
     CGSize buttonSize = CGSizeMake(buttonWidth, kButtonHeight);
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 15, 0);
 
+    BOOL shouldAddSeparators = NO;
+    if (_delegate && [_delegate respondsToSelector:@selector(segmentShouldHaveOptionsSeparators:)]) {
+        shouldAddSeparators = [_delegate segmentShouldHaveOptionsSeparators:self];
+    }
+
+    
     for (int i =0 ; i< numberOfButtons; i++) {
-        CGPoint origin = CGPointMake(i * buttonWidth + kSegmentViewMargins/2.f, topSpace);
+        CGPoint origin = CGPointMake(i * buttonWidth + [self usedViewMargins]/2.f, topSpace);
         CGRect frame = CGRectZero;
         frame.origin = origin;
         frame.size = buttonSize;
@@ -135,6 +150,16 @@ CGFloat const kButtonHeight = 44.f;
         button.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         button.contentEdgeInsets = insets;
         [self addSubview:button];
+        
+        if (shouldAddSeparators) {
+            if (i < numberOfButtons - 1) {
+                //not for the last one
+                CGRect separatorFrame = CGRectMake(frame.origin.x + frame.size.width, (kButtonHeight - kSeparatorHeight)/2.f, 1.f, kSeparatorHeight);
+                UIView *separator = [[UIView alloc] initWithFrame:separatorFrame];
+                separator.backgroundColor = [UIColor lightGrayColor];
+                [self addSubview:separator];
+            }
+        }
     }
     
     //configure the selection
@@ -168,7 +193,7 @@ CGFloat const kButtonHeight = 44.f;
     }
     else
     {
-        CGFloat leading = (button.tag - kButtonTagOffset) * [self buttonWidth] + (kSegmentViewMargins / 2.f);
+        CGFloat leading = (button.tag - kButtonTagOffset) * [self buttonWidth] + ([self usedViewMargins] / 2.f);
         
         [UIView animateWithDuration:0.33f
                          animations:^{

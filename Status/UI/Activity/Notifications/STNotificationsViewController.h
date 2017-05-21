@@ -16,5 +16,5 @@
 @property (nonatomic, weak) id<STSideBySideContaineeProtocol> containeeDelegate;
 
 -(void) getNotificationsFromServer;
-
++ (STNotificationsViewController *)newController;
 @end

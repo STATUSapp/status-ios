@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STWhiteNavBarViewController.h"
 
-@interface STTagSuggestions : UIViewController
+@interface STTagSuggestions : STWhiteNavBarViewController
 
 +(STTagSuggestions *)suggestionsVC;
 

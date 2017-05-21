@@ -9,7 +9,7 @@
 #import "STTabBarViewController.h"
 #import "STSettingsViewController.h"
 #import "STChoosePhotoViewController.h"
-#import "STNotificationAndChatContainerViewController.h"
+#import "STNotificationsViewController.h"
 #import "STFacebookLoginController.h"
 #import "STExploreViewController.h"
 #import "STLocalNotificationService.h"
@@ -62,7 +62,7 @@ static CGFloat kImageInset = 3.f;
     takePhotoNav.navigationBarHidden = YES;
     
     // add message / notifications
-    STNotificationAndChatContainerViewController * notifAndChatVC = [STNotificationAndChatContainerViewController newController];
+    STNotificationsViewController * notifAndChatVC = [STNotificationsViewController newController];
     UINavigationController * notifChatNav = [[UINavigationController alloc] initWithRootViewController:notifAndChatVC];
     notifChatNav.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];

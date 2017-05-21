@@ -13,7 +13,7 @@
 + (STCatalogCategory *)categoryFromDict:(NSDictionary *)dict{
     STCatalogCategory *category = [STCatalogCategory new];
     category.uuid = dict[@"id"];
-    category.name = dict[@"name"];
+    category.name = [dict[@"name"] uppercaseString];
     category.mainImageUrl = dict[@"image_url"];
     
     return category;

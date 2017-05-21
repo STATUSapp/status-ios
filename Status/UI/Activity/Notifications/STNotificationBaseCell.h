@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STTapAnimationLabel.h"
 
 @interface STNotificationBaseCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userImg;
-@property (weak, nonatomic) IBOutlet UILabel *timeLbl;
-@property (weak, nonatomic) IBOutlet UIImageView *seenCircle;
-@property (weak, nonatomic) IBOutlet UILabel *notificationTypeMessage;
+@property (weak, nonatomic) IBOutlet STTapAnimationLabel *messageLbl;
 
 @end

@@ -267,10 +267,10 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
         
         [self.collectionView reloadData];
     }
-    else
-    {
-        [self showInvalidUrlAlertForTextView:textView];
-    }
+//    else
+//    {
+//        [self showInvalidUrlAlertForTextView:textView];
+//    }
 }
 
 -(void)showInvalidUrlAlertForTextView:(UITextView *)textView{

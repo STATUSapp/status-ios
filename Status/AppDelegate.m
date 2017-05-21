@@ -42,6 +42,8 @@
 #import "STNavigationService.h"
 #import "BadgeService.h"
 
+#import "STWhiteNavBarViewController.h"
+
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @interface AppDelegate()
@@ -110,7 +112,19 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [[UINavigationBar appearance] setBarTintColor:barColor];
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
+ 
+    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[STWhiteNavBarViewController class]]] setBarTintColor:[UIColor whiteColor]];
     
+    UIFont *font = [UIFont fontWithName:@"ProximaNova-Regular" size:20.f];
+    NSDictionary *attibutes = @{NSFontAttributeName:font,
+                                NSForegroundColorAttributeName:[UIColor blackColor]};
+    
+    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[STWhiteNavBarViewController class]]] setTitleTextAttributes:attibutes];
+    
+    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[STWhiteNavBarViewController class]]] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+
+    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[STWhiteNavBarViewController class]]] setShadowImage:[[UIImage alloc] init]];
+
 }
 
 -(void)cleanLocalDBIfNeeded{

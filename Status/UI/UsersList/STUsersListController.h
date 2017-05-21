@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STWhiteNavBarViewController.h"
 
 typedef NS_ENUM(NSUInteger, UsersListControllerType) {
     UsersListControllerTypeLikes,
@@ -14,7 +15,7 @@ typedef NS_ENUM(NSUInteger, UsersListControllerType) {
     UsersListControllerTypeFollowers
 };
 
-@interface STUsersListController : UIViewController
+@interface STUsersListController : STWhiteNavBarViewController
 
 @property (nonatomic, strong) NSString *postId;
 @property (nonatomic, strong) NSString *userId;

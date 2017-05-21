@@ -70,7 +70,8 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGFloat itemWidth = (collectionView.frame.size.width - 6.f)/2.f;
+    CGFloat itemWidth = ([[UIScreen mainScreen] bounds].size.width - 18.f)/2.f;
+
     CGSize itemSize = CGSizeMake(itemWidth, itemWidth * 0.73);
     
     return itemSize;

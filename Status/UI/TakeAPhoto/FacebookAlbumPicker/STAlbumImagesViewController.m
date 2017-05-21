@@ -42,7 +42,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+
+    if (_albumTitle) {
+        [self setNavigationTitle:_albumTitle];
+    }
     _dataSource = [NSMutableArray array];
     __weak STAlbumImagesViewController *weakSelf = self;
     [[CoreManager facebookService] loadPhotosForAlbum:_albumId

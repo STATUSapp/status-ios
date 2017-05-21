@@ -212,7 +212,10 @@
                     <navigationItem key="navigationItem" title="Photos" id="h6G-y9-Bh5"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="barHeightConstraint" destination="SEG-gc-jAW" id="VYG-pM-Wka"/>
                         <outlet property="collectionView" destination="XdV-u7-jML" id="miB-5X-Rou"/>
+                        <outlet property="leftButton" destination="96A-to-NIt" id="dpw-g7-OFm"/>
+                        <outlet property="navigationBar" destination="ctW-rj-RcX" id="XoC-GT-0Yo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDw-m4-wU2" userLabel="First Responder" sceneMemberID="firstResponder"/>

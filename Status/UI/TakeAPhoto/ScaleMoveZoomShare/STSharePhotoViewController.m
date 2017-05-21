@@ -43,7 +43,6 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 @interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
 }
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
-@property (weak, nonatomic) IBOutlet UINavigationBar *transparentNavBar;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UITextView *captiontextView;
 @property (weak, nonatomic) IBOutlet UICollectionView *productsCollection;
@@ -87,9 +86,6 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 {
     [super viewDidLoad];
     [[STTagProductsManager sharedInstance] startDownload];
-    [_transparentNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    _transparentNavBar.shadowImage = [UIImage new];
-    _transparentNavBar.translucent = YES;
     
     UIImage * sharedImage = [UIImage imageWithData:_imgData];
     CGFloat resizeRatio = sharedImage.size.width / self.view.frame.size.width;
@@ -128,7 +124,7 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     [self.productsCollection reloadData];
     if (_shopProducts.count > 0) {
         _tagProductsViewHeightConstr.constant = 0;
-        _tagProductsCollectionHeightConstr.constant = [STShopProductCell cellSize].height;
+        _tagProductsCollectionHeightConstr.constant = [STShopProductCell cellSize].height + 6;
 ;
     }
     else{
@@ -484,6 +480,14 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 
 #pragma mark - UITextViewDelegate
 
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    _writeCaptionPlaceholder.hidden = YES;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    _writeCaptionPlaceholder.hidden = textView.text.length > 0;
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
@@ -495,7 +499,6 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     }
     else
         textLenght--;//delete pressed
-    _writeCaptionPlaceholder.hidden = (textLenght>0);
     if (textLenght>kMaxCaptionLenght) {
         return NO;
     }

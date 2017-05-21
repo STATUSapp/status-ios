@@ -14,7 +14,7 @@
 -(void)maskImage:(UIImage *)image{
     self.image = image;
     CGRect rect = self.frame;
-    self.layer.cornerRadius = rect.size.width/2;
+    self.layer.cornerRadius = rect.size.width/2.f;
     self.layer.backgroundColor = [[UIColor clearColor] CGColor];
     self.layer.masksToBounds = YES;
 }

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STWhiteNavBarViewController.h"
 
 @class STPost;
 
-@interface STMoveScaleViewController : UIViewController
+@interface STMoveScaleViewController : STWhiteNavBarViewController
 @property (nonatomic, strong) UIImage *currentImg;
 @property (nonatomic, strong) STPost *post;
 @property (nonatomic, assign) BOOL shouldCompress;

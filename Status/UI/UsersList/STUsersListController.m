@@ -23,8 +23,6 @@
 @interface STUsersListController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
-
 @property (strong, nonatomic) NSMutableArray * dataSource;
 @property (strong, nonatomic) STFollowDataProcessor * dataProcessor;
 
@@ -52,20 +50,23 @@
 }
 
 - (void)setTitleLabel {
+    NSString *title = @"";
     switch (self.controllerType) {
         case UsersListControllerTypeFollowers:
-            self.lblTitle.text = @"Followers";
+            title = @"Followers";
             break;
         case UsersListControllerTypeFollowing:
-            self.lblTitle.text = @"Following";
+            title = @"Following";
             break;
         case UsersListControllerTypeLikes:
-            self.lblTitle.text = @"Likes";
+            title = @"Likes";
             break;
             
         default:
             break;
     }
+    
+    [self setNavigationTitle:title];
 }
 
 - (void)getDataSource {
@@ -125,6 +126,11 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     [_dataProcessor uploadDataToServer:_dataSource
@@ -172,7 +178,7 @@
     cell.userName.text = lu.userName;
 //    cell.chatButton.tag = cell.followBtn.tag = indexPath.row;
     cell.followBtn.selected = [lu.followedByCurrentUser boolValue];
-    
+    cell.followBtn.tag = indexPath.row;
     //not use message appVersion since there is a problem for some users
 //    NSString *appVersion = lu.appVersion;
     if (/*appVersion == nil ||

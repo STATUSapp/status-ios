@@ -15,9 +15,11 @@
 #import "AppDelegate.h"
 #import "STFacebookLoginController.h"
 #import "UIImageView+WebCache.h"
+#import "UIImageView+Mask.h"
 #import "NSDate+Additions.h"
 #import "STGetNotificationsRequest.h"
 #import "STUsersListController.h"
+#import "UIImage+Resize.h"
 
 #import "NSString+MD5.h"
 
@@ -26,19 +28,32 @@
 #import "STNotificationsManager.h"
 #import "STDataAccessUtils.h"
 #import "STNotificationObj.h"
+#import "STFollowDataProcessor.h"
+#import "STListUser.h"
 
 const float kNoNotifHeight = 24.f;
 
 @interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {
     NSArray *_notificationDataSource;
+    UIImage *timeIconImage;
+    
 }
 @property (weak, nonatomic) IBOutlet UILabel *noNotifLabel;
 @property (weak, nonatomic) IBOutlet UITableView *notificationTable;
 @property (strong, nonatomic) UITapGestureRecognizer * tapOnRow;
+@property (nonatomic, strong) STFollowDataProcessor *followProcessor;
+
 @end
 
 @implementation STNotificationsViewController
+
++ (STNotificationsViewController *)newController{
+    UIStoryboard * mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    STNotificationsViewController *notifController = [mainStoryboard instantiateViewControllerWithIdentifier: @"notificationScene"];
+
+    return notifController;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +68,7 @@ const float kNoNotifHeight = 24.f;
 {
     [super viewDidLoad];
     
+    timeIconImage =  [[UIImage imageNamed:@"chat time icon"] resizedImage:CGSizeMake(10.f, 10.f) interpolationQuality:kCGInterpolationMedium];
     // add gesture recognizer to use instead of didSelectRowAtIndexPath
     _tapOnRow = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     _tapOnRow.numberOfTapsRequired = 1;
@@ -102,6 +118,13 @@ const float kNoNotifHeight = 24.f;
 - (IBAction)onClickback:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark - Hook Methods
+
+-(BOOL)shouldHideLeftButton{
+    return YES;
+}
+
 
 #pragma mark Notification
 
@@ -188,7 +211,7 @@ const float kNoNotifHeight = 24.f;
 
 - (void)onTapPostPictureAtIndexPath:(NSIndexPath *)indexPath {
     
-    STNotificationObj *no = [_notificationDataSource objectAtIndex:indexPath.row];
+    __block STNotificationObj *no = [_notificationDataSource objectAtIndex:indexPath.row];
     STNotificationType notifType = no.type;
     
     switch (notifType) {
@@ -197,6 +220,7 @@ const float kNoNotifHeight = 24.f;
         {
             
             FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:no.postId];
+            feedCVC.shouldAddBackButton = YES;
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
@@ -210,8 +234,20 @@ const float kNoNotifHeight = 24.f;
             break;
         case STNotificationTypeGotFollowed:
         {
-            STUsersListController * newVC = [STUsersListController newControllerWithUserId:no.userId postID:nil andType:UsersListControllerTypeFollowers];
-            [self.navigationController pushViewController:newVC animated:YES];
+            STListUser *listUser = [no listUserFromNotification];
+            _followProcessor = [[STFollowDataProcessor alloc] initWithUsers:@[listUser]];
+            
+            listUser.followedByCurrentUser = @(![listUser.followedByCurrentUser boolValue]);
+            
+            __weak STNotificationsViewController * weakSelf = self;
+            
+            [_followProcessor uploadDataToServer:@[listUser]
+                                  withCompletion:^(NSError *error) {
+                                      if (error == nil) {//success
+                                          no.followed = !no.followed;
+                                          [weakSelf.notificationTable reloadData];
+                                      }
+                                  }];
         }
             break;
             
@@ -232,15 +268,66 @@ const float kNoNotifHeight = 24.f;
     STNotificationType notificationType = no.type;
     STNotificationBaseCell *cell = nil;
 
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 2.f;
+
     if (notificationType < STNotificationTypeChatMessage || notificationType == STNotificationTypeGotFollowed) {
         // normal notifications (user generated notifications)
         cell = (STNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
         STNotificationCell *actualCell = (STNotificationCell *)cell;
-        [actualCell.postImg sd_setImageWithURL:[NSURL URLWithString:no.postPhotoUrl]];
-        [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:no.userThumbnail]];
-        actualCell.isSeen = no.seen;
-        actualCell.messageLbl.text = [NSString stringWithFormat:@"%@", no.message];
-        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:no.date];
+        [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:no.userThumbnail] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [actualCell.userImg maskImage:image];
+        }];
+        if (notificationType!=STNotificationTypeGotFollowed) {
+            [actualCell.postImg sd_setImageWithURL:[NSURL URLWithString:no.postPhotoUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (image) {
+                    actualCell.rightImageWidthConstraint.constant = 38.f;
+                }
+                else
+                    actualCell.rightImageWidthConstraint.constant = 0.f;
+                
+            }];
+        }
+        else
+        {
+            actualCell.rightImageWidthConstraint.constant = 38.f;
+            UIImage *image = nil;
+            if (no.followed == YES) {
+                image = [UIImage imageNamed:@"following icon"];
+            }
+            else
+                image = [UIImage imageNamed:@"follow icon"];
+            
+            actualCell.postImg.image = image;
+        }
+
+        NSString *timeString = [[NSDate notificationTimeIntervalSinceDate:no.date] lowercaseString];
+        NSMutableAttributedString *detailsString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@  %@",no.message, timeString]];
+        
+        UIFont *nameFont = [UIFont fontWithName:@"ProximaNova-Bold" size:13.f];
+        UIFont *messageFont = [UIFont fontWithName:@"ProximaNova-Regular" size:13.f];
+        UIFont *timeFont = [UIFont fontWithName:@"ProximaNova-Regular" size:10.f];
+        
+        NSRange nameRange = [no.message rangeOfString:no.userName];
+        NSRange messageRange = NSMakeRange(0, no.message.length);
+        NSRange timeRange = [detailsString.string rangeOfString:timeString];
+        if (nameRange.location != NSNotFound) {
+            [detailsString addAttribute:NSFontAttributeName value:nameFont range:nameRange];
+            messageRange.location = nameRange.location + nameRange.length;
+            messageRange.length-=(nameRange.length + nameRange.location);
+        }
+        [detailsString addAttribute:NSFontAttributeName value:messageFont range:messageRange];
+        [detailsString addAttribute:NSFontAttributeName value:timeFont range:timeRange];
+
+        [detailsString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, detailsString.string.length)];
+
+        NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
+        textAttachment.image = timeIconImage;
+        NSAttributedString *timeIconString = [NSAttributedString attributedStringWithAttachment:textAttachment];
+        
+        [detailsString insertAttributedString:timeIconString atIndex:no.message.length + 1];
+        
+        actualCell.messageLbl.attributedText = detailsString;
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     else
@@ -253,20 +340,18 @@ const float kNoNotifHeight = 24.f;
         }
         else
             [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:postPhotoLink]];
-        actualCell.seenCircle.hidden = no.seen;
-        actualCell.timeLbl.text = [NSDate notificationTimeIntervalSinceDate:no.date];
         if (notificationType == STNotificationTypeNewUserJoinsStatus) {
             NSString *string = [NSString stringWithFormat:@"%@ is on STATUS. Say hello :)", no.userName];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-            UIFont *boldFont = [UIFont fontWithName:@"ProximaNova-Semibold" size:13.f];
+            UIFont *boldFont = [UIFont fontWithName:@"ProximaNova-Bold" size:13.f];
             NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                    boldFont, NSFontAttributeName,nil];
 
             [attributedString setAttributes:attrs range:NSMakeRange(0, [no.userName length])];
-            actualCell.notificationTypeMessage.attributedText = attributedString;
+            actualCell.messageLbl.attributedText = attributedString;
         }
         else
-            actualCell.notificationTypeMessage.text = no.message;
+            actualCell.messageLbl.text = no.message;
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;

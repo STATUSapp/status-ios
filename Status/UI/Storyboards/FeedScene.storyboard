@@ -24,7 +24,7 @@
         <scene sceneID="gdD-po-VFS">
             <objects>
                 <collectionViewController automaticallyAdjustsScrollViewInsets="NO" id="kUw-q3-wvD" customClass="FeedCVC" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -749,6 +749,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdw-KL-jVX">
                                             <rect key="frame" x="0.0" y="0.0" width="171" height="58"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <connections>
                                                 <action selector="onNamePressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="RYH-7S-9GW"/>
                                             </connections>

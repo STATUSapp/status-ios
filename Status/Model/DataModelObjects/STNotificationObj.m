@@ -8,6 +8,7 @@
 
 #import "STNotificationObj.h"
 #import "NSDate+Additions.h"
+#import "STListUser.h"
 
 @implementation STNotificationObj
 
@@ -28,8 +29,21 @@
     no.userId = [CreateDataModelHelper validStringIdentifierFromValue:no.infoDict[@"user_id"]];
     no.userName = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"user_name"];
     no.userThumbnail = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"user_photo_link"];
-    
+    no.followed = [no.infoDict[@"followed_by_current_user"] boolValue];
     return no;
     
 }
+
+- (STListUser *)listUserFromNotification{
+    STListUser *lu = [STListUser new];
+    //these params are the only on needed for now
+    lu.followedByCurrentUser = @(self.followed);
+    lu.uuid = self.userId;
+    lu.userName = self.userName;
+    lu.thumbnail = self.userThumbnail;
+    
+    return lu;
+    
+}
+
 @end

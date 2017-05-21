@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STWhiteNavBarViewController.h"
 
-@interface STTagProductsBrands : UIViewController
+@interface STTagProductsBrands : STWhiteNavBarViewController
 
 +(STTagProductsBrands *)brandsViewController;
 
