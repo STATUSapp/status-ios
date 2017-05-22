@@ -593,25 +593,26 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder imagine like screen" translatesAutoresizingMaskIntoConstraints="NO" id="GFg-ST-zP0">
-                                                    <rect key="frame" x="16" y="5" width="50" height="51"/>
+                                                    <rect key="frame" x="10" y="5" width="50" height="51"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="aZR-yZ-cFn"/>
                                                         <constraint firstAttribute="height" constant="51" id="pue-jX-87S"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="9ow-ch-hut">
-                                                    <rect key="frame" x="74" y="12" width="245" height="35"/>
+                                                    <rect key="frame" x="68" y="12" width="251" height="35"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="789-WJ-vH8">
-                                                    <rect key="frame" x="331" y="0.0" width="44" height="60"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="789-WJ-vH8">
+                                                    <rect key="frame" x="321" y="0.0" width="44" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="D6z-GE-XQN"/>
                                                         <constraint firstAttribute="height" constant="60" id="c59-ld-ODY"/>
                                                     </constraints>
                                                     <state key="normal" image="follow icon">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <state key="selected" image="following icon"/>
@@ -626,12 +627,12 @@
                                                 <constraint firstItem="9ow-ch-hut" firstAttribute="leading" secondItem="GFg-ST-zP0" secondAttribute="trailing" constant="8" id="4OE-dd-IdM"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="9ow-ch-hut" secondAttribute="bottom" constant="5" id="9Rb-MH-eEe"/>
                                                 <constraint firstAttribute="bottom" secondItem="GFg-ST-zP0" secondAttribute="bottom" constant="4" id="RQf-Bj-Emk"/>
-                                                <constraint firstAttribute="trailing" secondItem="789-WJ-vH8" secondAttribute="trailing" id="T7F-wm-afe"/>
+                                                <constraint firstAttribute="trailing" secondItem="789-WJ-vH8" secondAttribute="trailing" constant="10" id="T7F-wm-afe"/>
                                                 <constraint firstItem="789-WJ-vH8" firstAttribute="top" secondItem="BJD-jg-wUS" secondAttribute="top" id="ULh-MM-rSM"/>
                                                 <constraint firstItem="GFg-ST-zP0" firstAttribute="top" secondItem="BJD-jg-wUS" secondAttribute="top" constant="5" id="WC1-Kh-tqU"/>
                                                 <constraint firstAttribute="bottom" secondItem="789-WJ-vH8" secondAttribute="bottom" id="eoi-m4-5H4"/>
                                                 <constraint firstItem="9ow-ch-hut" firstAttribute="top" secondItem="BJD-jg-wUS" secondAttribute="topMargin" constant="4" id="sg3-H7-LxJ"/>
-                                                <constraint firstItem="GFg-ST-zP0" firstAttribute="leading" secondItem="BJD-jg-wUS" secondAttribute="leading" constant="16" id="tBd-i7-ZYK"/>
+                                                <constraint firstItem="GFg-ST-zP0" firstAttribute="leading" secondItem="BJD-jg-wUS" secondAttribute="leading" constant="10" id="tBd-i7-ZYK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -689,29 +690,29 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="52" id="2Mx-b3-A4p" customClass="STNotificationCell">
-                                        <rect key="frame" x="0.0" y="22" width="375" height="52"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="65" id="2Mx-b3-A4p" customClass="STNotificationCell">
+                                        <rect key="frame" x="0.0" y="22" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Mx-b3-A4p" id="H10-S8-1tq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder notifications screen" translatesAutoresizingMaskIntoConstraints="NO" id="zLu-PD-Bhw">
-                                                    <rect key="frame" x="8" y="11" width="29" height="29"/>
+                                                    <rect key="frame" x="10" y="7.5" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="29" id="eev-PC-NT1"/>
-                                                        <constraint firstAttribute="width" constant="29" id="lfg-8H-2J2"/>
+                                                        <constraint firstAttribute="height" constant="50" id="eev-PC-NT1"/>
+                                                        <constraint firstAttribute="width" constant="50" id="lfg-8H-2J2"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder notifications screen" translatesAutoresizingMaskIntoConstraints="NO" id="p1o-Ab-gIN">
-                                                    <rect key="frame" x="329" y="7" width="38" height="38"/>
+                                                    <rect key="frame" x="327" y="13.5" width="38" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="CGc-Mw-QVi"/>
                                                         <constraint firstAttribute="height" constant="38" id="Xm2-vb-Ta3"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Silviu Burlacu 12345" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ijF-HU-uXA" customClass="STTapAnimationLabel">
-                                                    <rect key="frame" x="45" y="20" width="276" height="13"/>
+                                                    <rect key="frame" x="68" y="26" width="251" height="13"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -720,10 +721,10 @@
                                             <constraints>
                                                 <constraint firstItem="p1o-Ab-gIN" firstAttribute="centerY" secondItem="H10-S8-1tq" secondAttribute="centerY" id="CdX-WI-53b"/>
                                                 <constraint firstItem="zLu-PD-Bhw" firstAttribute="centerY" secondItem="H10-S8-1tq" secondAttribute="centerY" id="KW6-EK-j0g"/>
-                                                <constraint firstAttribute="trailing" secondItem="p1o-Ab-gIN" secondAttribute="trailing" constant="8" id="MIi-Ad-7Yf"/>
+                                                <constraint firstAttribute="trailing" secondItem="p1o-Ab-gIN" secondAttribute="trailing" constant="10" id="MIi-Ad-7Yf"/>
                                                 <constraint firstItem="p1o-Ab-gIN" firstAttribute="leading" secondItem="ijF-HU-uXA" secondAttribute="trailing" constant="8" id="QKP-72-nDp"/>
                                                 <constraint firstItem="ijF-HU-uXA" firstAttribute="centerY" secondItem="zLu-PD-Bhw" secondAttribute="centerY" id="ex8-hE-n3v"/>
-                                                <constraint firstItem="zLu-PD-Bhw" firstAttribute="leading" secondItem="H10-S8-1tq" secondAttribute="leading" constant="8" id="laB-Nl-fYB"/>
+                                                <constraint firstItem="zLu-PD-Bhw" firstAttribute="leading" secondItem="H10-S8-1tq" secondAttribute="leading" constant="10" id="laB-Nl-fYB"/>
                                                 <constraint firstItem="ijF-HU-uXA" firstAttribute="leading" secondItem="zLu-PD-Bhw" secondAttribute="trailing" constant="8" id="txW-G4-1mo"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -735,30 +736,30 @@
                                             <outlet property="userImg" destination="zLu-PD-Bhw" id="wFM-sP-5yA"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="smartNotificationCell" rowHeight="52" id="UwG-vx-1E6" customClass="STSmartNotificationCell">
-                                        <rect key="frame" x="0.0" y="74" width="375" height="52"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="smartNotificationCell" rowHeight="65" id="UwG-vx-1E6" customClass="STSmartNotificationCell">
+                                        <rect key="frame" x="0.0" y="87" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UwG-vx-1E6" id="q73-iZ-mGf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder notifications screen" translatesAutoresizingMaskIntoConstraints="NO" id="g2y-n7-WGF">
-                                                    <rect key="frame" x="8" y="11" width="29" height="29"/>
+                                                    <rect key="frame" x="10" y="7.5" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="29" id="4Rh-q0-2ee"/>
-                                                        <constraint firstAttribute="height" constant="29" id="bKa-vG-is6"/>
+                                                        <constraint firstAttribute="width" constant="50" id="4Rh-q0-2ee"/>
+                                                        <constraint firstAttribute="height" constant="50" id="bKa-vG-is6"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="scjn jcjbchjdb gbhgbchgdb cdgvsbjdsgbvjgdvbghjgv g vgvfhjgvjc" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="s2h-rz-KeY" customClass="STTapAnimationLabel">
-                                                    <rect key="frame" x="45" y="0.0" width="322" height="52"/>
+                                                    <rect key="frame" x="68" y="0.0" width="297" height="64.5"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="s2h-rz-KeY" secondAttribute="trailing" constant="8" id="7bu-b8-U5l"/>
-                                                <constraint firstItem="g2y-n7-WGF" firstAttribute="leading" secondItem="q73-iZ-mGf" secondAttribute="leading" constant="8" id="B8D-FG-U7f"/>
+                                                <constraint firstAttribute="trailing" secondItem="s2h-rz-KeY" secondAttribute="trailing" constant="10" id="7bu-b8-U5l"/>
+                                                <constraint firstItem="g2y-n7-WGF" firstAttribute="leading" secondItem="q73-iZ-mGf" secondAttribute="leading" constant="10" id="B8D-FG-U7f"/>
                                                 <constraint firstItem="s2h-rz-KeY" firstAttribute="top" secondItem="q73-iZ-mGf" secondAttribute="top" id="Uwz-ow-XlD"/>
                                                 <constraint firstItem="s2h-rz-KeY" firstAttribute="leading" secondItem="g2y-n7-WGF" secondAttribute="trailing" constant="8" id="Ux1-sc-RAv"/>
                                                 <constraint firstItem="g2y-n7-WGF" firstAttribute="centerY" secondItem="q73-iZ-mGf" secondAttribute="centerY" id="ZFC-Xu-1Q1"/>
@@ -832,7 +833,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RYa-ns-sG1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RYa-ns-sG1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

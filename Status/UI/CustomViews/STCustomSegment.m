@@ -106,7 +106,7 @@ CGFloat const kSeparatorHeight = 20.f;
     CGFloat bottomSpace = [_delegate segmentBottomSpace:self];
     _bottomConstr.constant = bottomSpace;
     
-    CGSize buttonSize = CGSizeMake(buttonWidth, kButtonHeight);
+    CGSize buttonSize = CGSizeMake(buttonWidth, kButtonHeight + _bottomSelectionBar.frame.size.height);
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 15, 0);
 
     BOOL shouldAddSeparators = NO;

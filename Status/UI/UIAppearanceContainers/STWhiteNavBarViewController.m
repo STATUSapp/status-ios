@@ -44,6 +44,7 @@ CGFloat const kWhiteNavBarHeight = 49.f;
         rect.size.width = kWhiteNavBarHeight;
         _leftButton.frame = rect;
         _leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _leftButton.contentEdgeInsets = UIEdgeInsetsMake(0.f, 0.f, 3.f, 0.f);
     }
 }
 

@@ -121,7 +121,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Select Photo" id="n9F-bn-B4H">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="rC8-dM-3LP">
+                                        <barButtonItem key="leftBarButtonItem" id="rC8-dM-3LP">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sDo-mI-fkY">
                                                 <rect key="frame" x="16" y="6" width="32" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

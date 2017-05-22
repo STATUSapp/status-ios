@@ -302,31 +302,39 @@ const float kNoNotifHeight = 24.f;
         }
 
         NSString *timeString = [[NSDate notificationTimeIntervalSinceDate:no.date] lowercaseString];
-        NSMutableAttributedString *detailsString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@  %@",no.message, timeString]];
+        NSMutableAttributedString *detailsString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",no.message, timeString]];
         
-        UIFont *nameFont = [UIFont fontWithName:@"ProximaNova-Bold" size:13.f];
-        UIFont *messageFont = [UIFont fontWithName:@"ProximaNova-Regular" size:13.f];
-        UIFont *timeFont = [UIFont fontWithName:@"ProximaNova-Regular" size:10.f];
-        
+        UIFont *nameFont = [UIFont fontWithName:@"ProximaNova-Bold" size:16.f];
+        UIFont *messageFont = [UIFont fontWithName:@"ProximaNova-Regular" size:16.f];
         NSRange nameRange = [no.message rangeOfString:no.userName];
-        NSRange messageRange = NSMakeRange(0, no.message.length);
+        NSRange messageRange = NSMakeRange(0, detailsString.string.length);
         NSRange timeRange = [detailsString.string rangeOfString:timeString];
+        
         if (nameRange.location != NSNotFound) {
             [detailsString addAttribute:NSFontAttributeName value:nameFont range:nameRange];
             messageRange.location = nameRange.location + nameRange.length;
             messageRange.length-=(nameRange.length + nameRange.location);
         }
         [detailsString addAttribute:NSFontAttributeName value:messageFont range:messageRange];
-        [detailsString addAttribute:NSFontAttributeName value:timeFont range:timeRange];
 
+        if (timeRange.location != NSNotFound) {
+            UIColor *grayColor = [UIColor colorWithRed:178.f/255.f
+                                                 green:178.f/255.f
+                                                  blue:178.f/255.f
+                                                 alpha:1.f];
+            
+            [detailsString addAttribute:NSForegroundColorAttributeName value:grayColor range:timeRange];
+        }
+        
         [detailsString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, detailsString.string.length)];
 
+        /*
         NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
         textAttachment.image = timeIconImage;
         NSAttributedString *timeIconString = [NSAttributedString attributedStringWithAttachment:textAttachment];
         
         [detailsString insertAttributedString:timeIconString atIndex:no.message.length + 1];
-        
+        */
         actualCell.messageLbl.attributedText = detailsString;
         actualCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
