@@ -23,7 +23,7 @@
     }
     no.message = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"message"];
     no.postId = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"post_id"];
-    no.postPhotoUrl = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"post_photo_link"];
+    no.postPhotoUrl = [[CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"post_photo_link"] stringByReplacingOccurrencesOfString:@"_th" withString:@""];
     no.seen = [no.infoDict[@"seen"] boolValue];
     no.type = [no.infoDict[@"type"] integerValue];
     no.userId = [CreateDataModelHelper validStringIdentifierFromValue:no.infoDict[@"user_id"]];

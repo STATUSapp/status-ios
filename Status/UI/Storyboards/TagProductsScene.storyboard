@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2O5-1y-c6G">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Pjq-Pa-Lfg"/>
@@ -61,7 +61,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ka-Iu-9xo">
-                                <rect key="frame" x="0.0" y="44" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPD-iB-rc7" userLabel="TopView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -248,14 +248,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZ9-aO-VUQ">
-                                <rect key="frame" x="0.0" y="144" width="375" height="46"/>
+                                <rect key="frame" x="0.0" y="164" width="375" height="46"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="odW-bL-8eZ"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIf-1D-x1X">
-                                <rect key="frame" x="0.0" y="190" width="375" height="477"/>
+                                <rect key="frame" x="0.0" y="210" width="375" height="457"/>
                                 <connections>
                                     <segue destination="2ly-k8-JNZ" kind="embed" identifier="CONTAINER_TAB_BAR" id="Lb8-GW-kvR"/>
                                 </connections>
@@ -266,6 +266,7 @@
                             <constraint firstItem="12O-o8-InX" firstAttribute="top" secondItem="H4X-Gc-cfY" secondAttribute="top" id="0LB-ZA-WMZ"/>
                             <constraint firstAttribute="trailing" secondItem="1Ka-Iu-9xo" secondAttribute="trailing" id="DP4-2T-5Ff"/>
                             <constraint firstAttribute="trailing" secondItem="2O5-1y-c6G" secondAttribute="trailing" id="Prn-ex-A3L"/>
+                            <constraint firstItem="2O5-1y-c6G" firstAttribute="top" secondItem="BGH-F5-czp" secondAttribute="bottom" id="QXs-uv-xlC"/>
                             <constraint firstItem="12O-o8-InX" firstAttribute="leading" secondItem="H4X-Gc-cfY" secondAttribute="leading" id="R7o-Xx-VIN"/>
                             <constraint firstItem="KIf-1D-x1X" firstAttribute="leading" secondItem="H4X-Gc-cfY" secondAttribute="leading" id="TEs-ac-jdu"/>
                             <constraint firstAttribute="trailing" secondItem="DZ9-aO-VUQ" secondAttribute="trailing" id="V1k-ae-ef4"/>
@@ -277,11 +278,11 @@
                             <constraint firstAttribute="trailing" secondItem="KIf-1D-x1X" secondAttribute="trailing" id="iVK-ho-F0R"/>
                             <constraint firstAttribute="trailing" secondItem="12O-o8-InX" secondAttribute="trailing" id="msD-6S-EmJ"/>
                             <constraint firstItem="q2w-3x-tex" firstAttribute="top" secondItem="KIf-1D-x1X" secondAttribute="bottom" id="ofv-7G-eJr"/>
-                            <constraint firstItem="2O5-1y-c6G" firstAttribute="top" secondItem="H4X-Gc-cfY" secondAttribute="top" id="qWn-bo-tcG"/>
                             <constraint firstItem="q2w-3x-tex" firstAttribute="top" secondItem="12O-o8-InX" secondAttribute="bottom" id="ydU-ju-vLb"/>
                             <constraint firstItem="1Ka-Iu-9xo" firstAttribute="top" secondItem="2O5-1y-c6G" secondAttribute="bottom" id="ztw-iz-lEd"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="barHeightConstraint" destination="Pjq-Pa-Lfg" id="nH1-xi-Hpk"/>
                         <outlet property="customSegmentHolder" destination="DZ9-aO-VUQ" id="clj-1K-7JH"/>
@@ -307,11 +308,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Tyg-cL-ZES"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3DX-7n-gJe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="477"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="457"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="um7-z6-ptC">
-                                <rect key="frame" x="6" y="0.0" width="363" height="471"/>
+                                <rect key="frame" x="6" y="0.0" width="363" height="451"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="9Lh-Xg-nuw">
                                     <size key="itemSize" width="178" height="175"/>
@@ -407,11 +408,11 @@
                         <viewControllerLayoutGuide type="bottom" id="NDb-7L-h7K"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dJK-cq-XTk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="32k-AD-DXw">
-                                <rect key="frame" x="6" y="6" width="363" height="563"/>
+                                <rect key="frame" x="6" y="6" width="363" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="efW-ht-mUr">
                                     <size key="itemSize" width="172" height="156"/>
@@ -445,7 +446,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhA-1F-dCp">
-                                <rect key="frame" x="0.0" y="575" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="555" width="375" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="29W-QJ-S5j"/>
                                 </constraints>
@@ -572,11 +573,11 @@
                         <viewControllerLayoutGuide type="bottom" id="FBx-tL-Osx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="b7d-zd-qZV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="477"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="457"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="so4-8r-FQa">
-                                <rect key="frame" x="6" y="6" width="363" height="417"/>
+                                <rect key="frame" x="6" y="6" width="363" height="397"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="oCn-Fv-9FL">
                                     <size key="itemSize" width="357" height="147"/>
@@ -769,7 +770,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdY-Ac-eyT">
-                                <rect key="frame" x="0.0" y="429" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="409" width="375" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Vkg-zZ-afY"/>
                                 </constraints>
@@ -817,7 +818,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHA-hK-XHi">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="prq-54-mNY"/>
@@ -846,7 +847,7 @@
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VkD-9C-yeF">
-                                <rect key="frame" x="6" y="50" width="363" height="617"/>
+                                <rect key="frame" x="6" y="70" width="363" height="597"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="gLH-iX-u97">
                                     <size key="itemSize" width="178" height="175"/>
@@ -888,14 +889,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nHA-hK-XHi" firstAttribute="leading" secondItem="Adz-ev-Sg1" secondAttribute="leading" id="4Ou-Rh-ktf"/>
+                            <constraint firstItem="nHA-hK-XHi" firstAttribute="top" secondItem="z9K-jZ-Qg8" secondAttribute="bottom" id="9PM-xZ-XDK"/>
                             <constraint firstItem="GJz-jc-eYi" firstAttribute="top" secondItem="VkD-9C-yeF" secondAttribute="bottom" id="Tde-zW-KrV"/>
                             <constraint firstAttribute="trailing" secondItem="VkD-9C-yeF" secondAttribute="trailing" constant="6" id="ayt-jM-ULN"/>
                             <constraint firstAttribute="trailing" secondItem="nHA-hK-XHi" secondAttribute="trailing" id="fOf-DP-JNG"/>
                             <constraint firstItem="VkD-9C-yeF" firstAttribute="leading" secondItem="Adz-ev-Sg1" secondAttribute="leading" constant="6" id="qaq-A6-G3e"/>
-                            <constraint firstItem="nHA-hK-XHi" firstAttribute="top" secondItem="Adz-ev-Sg1" secondAttribute="top" id="rYv-GS-SLG"/>
                             <constraint firstItem="VkD-9C-yeF" firstAttribute="top" secondItem="nHA-hK-XHi" secondAttribute="bottom" constant="6" id="xp1-CK-OwE"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barHeightConstraint" destination="prq-54-mNY" id="BGJ-3e-w0G"/>
@@ -921,7 +923,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="318-Gd-3Dv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="MTA-7P-Z1b"/>
@@ -950,7 +952,7 @@
                                 </items>
                             </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSz-gK-MyT">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
                                     <segue destination="pY6-Jd-bU6" kind="embed" identifier="" id="TqO-HL-zhL"/>
                                 </connections>
@@ -962,11 +964,12 @@
                             <constraint firstItem="fSz-gK-MyT" firstAttribute="leading" secondItem="hgR-DO-x1B" secondAttribute="leading" id="7yD-y3-su5"/>
                             <constraint firstItem="318-Gd-3Dv" firstAttribute="leading" secondItem="hgR-DO-x1B" secondAttribute="leading" id="Jfs-Uz-qng"/>
                             <constraint firstAttribute="trailing" secondItem="318-Gd-3Dv" secondAttribute="trailing" id="Nha-lM-y9V"/>
+                            <constraint firstItem="318-Gd-3Dv" firstAttribute="top" secondItem="WBc-zW-DsB" secondAttribute="bottom" id="aL3-5d-j1q"/>
                             <constraint firstAttribute="trailing" secondItem="fSz-gK-MyT" secondAttribute="trailing" id="bFV-29-Muk"/>
-                            <constraint firstItem="318-Gd-3Dv" firstAttribute="top" secondItem="hgR-DO-x1B" secondAttribute="top" id="psQ-RY-vin"/>
                             <constraint firstItem="HuW-RU-cj4" firstAttribute="top" secondItem="fSz-gK-MyT" secondAttribute="bottom" id="tYd-Ss-ln4"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barHeightConstraint" destination="MTA-7P-Z1b" id="ThQ-Tf-dNA"/>

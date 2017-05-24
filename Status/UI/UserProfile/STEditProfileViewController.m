@@ -268,8 +268,4 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 
 }
 
--(BOOL)prefersStatusBarHidden{
-    return YES;
-}
-
 @end

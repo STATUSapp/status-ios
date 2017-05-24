@@ -117,6 +117,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         _feedProcessor.processorFlowType == STFlowTypeHome) {
         navBarHidden = NO;
     }
+    [self setNeedsStatusBarAppearanceUpdate];
     [self.navigationController setNavigationBarHidden:navBarHidden animated:YES];
 }
 
@@ -300,6 +301,16 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 -(BOOL)extendedLayoutIncludesOpaqueBars{
     return YES;
+}
+
+-(BOOL)prefersStatusBarHidden{
+    BOOL statusBarHidden = YES;
+    if (_feedProcessor.loading == NO &&
+        _feedProcessor.processorFlowType == STFlowTypeHome) {
+        statusBarHidden = NO;
+    }
+
+    return statusBarHidden;
 }
 
 -(void)dealloc{

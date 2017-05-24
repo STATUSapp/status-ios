@@ -127,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XdV-u7-jML">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="jva-nS-QrV">
                                     <size key="itemSize" width="78" height="78"/>
@@ -166,7 +166,7 @@
                                 </connections>
                             </collectionView>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctW-rj-RcX">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="SEG-gc-jAW"/>
@@ -199,17 +199,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ctW-rj-RcX" firstAttribute="top" secondItem="LQ9-EZ-vLY" secondAttribute="top" id="3yi-hJ-J5w"/>
                             <constraint firstItem="XdV-u7-jML" firstAttribute="top" secondItem="ctW-rj-RcX" secondAttribute="bottom" id="DxR-mD-7tP"/>
                             <constraint firstItem="XdV-u7-jML" firstAttribute="leading" secondItem="LQ9-EZ-vLY" secondAttribute="leading" id="JkH-MF-b6g"/>
                             <constraint firstAttribute="trailing" secondItem="XdV-u7-jML" secondAttribute="trailing" id="Sbe-TP-rKL"/>
                             <constraint firstItem="xCF-q3-aky" firstAttribute="top" secondItem="XdV-u7-jML" secondAttribute="bottom" id="fuW-aR-Ik3"/>
                             <constraint firstItem="ctW-rj-RcX" firstAttribute="leading" secondItem="LQ9-EZ-vLY" secondAttribute="leading" id="r6e-6A-fx5"/>
                             <constraint firstAttribute="trailing" secondItem="ctW-rj-RcX" secondAttribute="trailing" id="tiF-Ig-2zY"/>
+                            <constraint firstItem="ctW-rj-RcX" firstAttribute="top" secondItem="f0y-gw-Luf" secondAttribute="bottom" id="uYp-vO-VQU"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Photos" id="h6G-y9-Bh5"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barHeightConstraint" destination="SEG-gc-jAW" id="VYG-pM-Wka"/>

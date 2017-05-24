@@ -52,7 +52,7 @@
                                             </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-mk-gY4">
-                                            <rect key="frame" x="236" y="291" width="70" height="19"/>
+                                            <rect key="frame" x="240" y="291" width="70" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="TDV-0S-kOS"/>
                                                 <constraint firstAttribute="width" constant="70" id="uFs-78-mYG"/>
@@ -67,7 +67,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZr-mu-kjB">
-                                            <rect key="frame" x="157" y="291" width="70" height="19"/>
+                                            <rect key="frame" x="170" y="291" width="70" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="eox-1j-Gkp"/>
                                                 <constraint firstAttribute="width" constant="70" id="zbs-Pg-azD"/>
@@ -82,7 +82,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUt-6v-yge">
-                                            <rect key="frame" x="12" y="291" width="143" height="19"/>
+                                            <rect key="frame" x="12" y="291" width="144" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="5xc-Mu-FY3"/>
                                             </constraints>
@@ -125,14 +125,13 @@
                                     <constraint firstItem="hUt-6v-yge" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" constant="12" id="AnS-bv-KCX"/>
                                     <constraint firstAttribute="bottom" secondItem="hUt-6v-yge" secondAttribute="bottom" constant="10" id="FOy-NY-IyB"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="dZr-mu-kjB" secondAttribute="bottom" constant="2" id="HBF-EO-UIg"/>
-                                    <constraint firstAttribute="trailing" secondItem="wKb-mk-gY4" secondAttribute="trailing" constant="14" id="J4O-LC-2el"/>
+                                    <constraint firstAttribute="trailing" secondItem="wKb-mk-gY4" secondAttribute="trailing" constant="10" id="J4O-LC-2el"/>
                                     <constraint firstItem="qac-IY-t25" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" id="LD9-NC-mww"/>
                                     <constraint firstAttribute="bottom" secondItem="ILD-rb-6Es" secondAttribute="bottom" id="M6m-5N-xyg"/>
-                                    <constraint firstItem="wKb-mk-gY4" firstAttribute="leading" secondItem="dZr-mu-kjB" secondAttribute="trailing" constant="9" id="MOe-1I-XLd"/>
+                                    <constraint firstItem="wKb-mk-gY4" firstAttribute="leading" secondItem="dZr-mu-kjB" secondAttribute="trailing" id="MOe-1I-XLd"/>
                                     <constraint firstAttribute="bottom" secondItem="wKb-mk-gY4" secondAttribute="bottom" constant="10" id="lXs-pO-e1P"/>
                                     <constraint firstAttribute="trailing" secondItem="BaU-l3-KLL" secondAttribute="trailing" id="nNg-cb-2qt"/>
                                     <constraint firstItem="qac-IY-t25" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" id="ofM-83-4Xc"/>
-                                    <constraint firstItem="dZr-mu-kjB" firstAttribute="leading" secondItem="hUt-6v-yge" secondAttribute="trailing" constant="2" id="p35-29-dI8"/>
                                     <constraint firstItem="1q9-b9-Q0E" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" id="sDI-sS-nmI"/>
                                     <constraint firstAttribute="trailing" secondItem="ILD-rb-6Es" secondAttribute="trailing" id="wUe-VS-AFb"/>
                                     <constraint firstAttribute="bottom" secondItem="BaU-l3-KLL" secondAttribute="bottom" id="wfu-Ry-0ed"/>
@@ -141,6 +140,7 @@
                                 <size key="customSize" width="320" height="320"/>
                                 <connections>
                                     <outlet property="backButton" destination="qac-IY-t25" id="RwW-aO-mmc"/>
+                                    <outlet property="editButtonConstraint" destination="uFs-78-mYG" id="Tne-RA-b3F"/>
                                     <outlet property="followButton" destination="dZr-mu-kjB" id="E8l-zA-gFm"/>
                                     <outlet property="messageEditButton" destination="wKb-mk-gY4" id="bdE-Ip-17i"/>
                                     <outlet property="nameAndAgeButton" destination="hUt-6v-yge" id="3ri-5e-4cJ"/>

@@ -68,6 +68,7 @@ const float kNoNotifHeight = 24.f;
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor clearColor];
     timeIconImage =  [[UIImage imageNamed:@"chat time icon"] resizedImage:CGSizeMake(10.f, 10.f) interpolationQuality:kCGInterpolationMedium];
     // add gesture recognizer to use instead of didSelectRowAtIndexPath
     _tapOnRow = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -115,6 +116,11 @@ const float kNoNotifHeight = 24.f;
     _notificationTable.delegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
 - (IBAction)onClickback:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

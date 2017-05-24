@@ -43,11 +43,11 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
 #pragma mark STSCustomSegmentProtocol
 
 -(CGFloat)segmentBottomSpace:(STCustomSegment *)segment{
-    return 9.f;
+    return 0.f;
 }
 
 -(CGFloat)segmentTopSpace:(STCustomSegment *)segment{
-    return 9.f;
+    return 0.f;
 }
 
 -(NSInteger)segmentNumberOfButtons:(STCustomSegment *)segment{
