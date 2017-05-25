@@ -17,7 +17,7 @@
 
 static NSString * storyboardIdentifier = @"tabBarController";
 static CGFloat kTabBarHeight = 45.f;
-static CGFloat kImageInset = 3.f;
+static CGFloat kImageInset = 4.f;
 
 @interface STTabBarViewController ()<UIGestureRecognizerDelegate>
 

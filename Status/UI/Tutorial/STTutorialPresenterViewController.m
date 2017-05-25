@@ -34,6 +34,10 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     NSLog(@"Segue.identifier: %@", segue.identifier);
     [(STTutorialViewController *)segue.destinationViewController setSkipFirstItem:YES];

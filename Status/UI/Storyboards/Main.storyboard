@@ -369,10 +369,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="fua-oN-BXv" secondAttribute="trailing" id="GwF-iF-Vtc"/>
-                                    <constraint firstAttribute="bottom" secondItem="fua-oN-BXv" secondAttribute="bottom" constant="3" id="Hos-4N-BLs"/>
+                                    <constraint firstAttribute="bottom" secondItem="fua-oN-BXv" secondAttribute="bottom" priority="750" constant="3" id="Hos-4N-BLs"/>
                                     <constraint firstAttribute="height" constant="173" id="JcR-7r-wp5"/>
                                     <constraint firstItem="fua-oN-BXv" firstAttribute="leading" secondItem="PWp-RT-jsY" secondAttribute="leading" id="Oy9-M6-WOS"/>
-                                    <constraint firstItem="fua-oN-BXv" firstAttribute="top" secondItem="PWp-RT-jsY" secondAttribute="top" constant="3" id="RRL-dt-xnf"/>
+                                    <constraint firstItem="fua-oN-BXv" firstAttribute="top" secondItem="PWp-RT-jsY" secondAttribute="top" priority="750" constant="3" id="RRL-dt-xnf"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFx-D5-DR6" userLabel="separator2">
@@ -685,8 +685,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="NOTIFICATION_SCREEN" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fEo-fq-kyk">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="NOTIFICATION_SCREEN" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fEo-fq-kyk">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -728,7 +728,7 @@
                                                 <constraint firstItem="ijF-HU-uXA" firstAttribute="leading" secondItem="zLu-PD-Bhw" secondAttribute="trailing" constant="8" id="txW-G4-1mo"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="separatorInset" minX="68" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="messageLbl" destination="ijF-HU-uXA" id="YdA-Yp-qqG"/>
                                             <outlet property="postImg" destination="p1o-Ab-gIN" id="RQB-gJ-G0g"/>
@@ -766,7 +766,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="s2h-rz-KeY" secondAttribute="bottom" id="xfM-9a-uor"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="separatorInset" minX="68" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="messageLbl" destination="s2h-rz-KeY" id="Ga3-h1-gGr"/>
                                             <outlet property="userImg" destination="g2y-n7-WGF" id="S0F-p8-5aC"/>
@@ -785,7 +785,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bua-gm-dnD">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Stm-Yt-kMq"/>
@@ -806,7 +806,7 @@
                             <constraint firstItem="2Ao-IN-NuF" firstAttribute="top" secondItem="fEo-fq-kyk" secondAttribute="bottom" id="8Jq-4i-g4d"/>
                             <constraint firstAttribute="centerY" secondItem="3cD-tE-Yqr" secondAttribute="centerY" id="H55-kn-kJO"/>
                             <constraint firstAttribute="trailing" secondItem="3cD-tE-Yqr" secondAttribute="trailing" id="L8t-M5-sfl"/>
-                            <constraint firstItem="fEo-fq-kyk" firstAttribute="top" secondItem="Bua-gm-dnD" secondAttribute="bottom" id="Qnh-DL-H0v"/>
+                            <constraint firstItem="fEo-fq-kyk" firstAttribute="top" secondItem="Bua-gm-dnD" secondAttribute="bottom" id="Mc6-iQ-kPq"/>
                             <constraint firstItem="fEo-fq-kyk" firstAttribute="leading" secondItem="EuL-Bd-gmE" secondAttribute="leading" id="bVA-PZ-uOP"/>
                             <constraint firstItem="3cD-tE-Yqr" firstAttribute="leading" secondItem="EuL-Bd-gmE" secondAttribute="leading" id="baD-YL-Vi9"/>
                             <constraint firstItem="Bua-gm-dnD" firstAttribute="top" secondItem="Gy2-3a-ZH7" secondAttribute="bottom" id="k97-qD-xN6"/>
@@ -814,8 +814,9 @@
                             <constraint firstItem="Bua-gm-dnD" firstAttribute="leading" secondItem="EuL-Bd-gmE" secondAttribute="leading" id="zvF-6t-SHc"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="3WG-er-H9X"/>
-                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="noNotifLabel" destination="3cD-tE-Yqr" id="e9c-Gp-VdS"/>
                         <outlet property="notificationTable" destination="fEo-fq-kyk" id="chL-Dn-Ddk"/>
@@ -833,7 +834,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RYa-ns-sG1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RYa-ns-sG1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1047,7 +1048,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXM-E5-SdM">
-                                        <rect key="frame" x="118" y="83.5" width="139" height="87"/>
+                                        <rect key="frame" x="118" y="84.5" width="139" height="87"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="aQC-Wy-Vgz"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="dAQ-NZ-fHK"/>

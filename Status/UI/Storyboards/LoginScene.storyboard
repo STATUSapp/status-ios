@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="NGw-zI-bIO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="NGw-zI-bIO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
         <!--Login View Controller-->
         <scene sceneID="X2n-9X-aSq">
             <objects>
-                <viewController storyboardIdentifier="loginScreen" id="NGw-zI-bIO" customClass="STLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginScreen" extendedLayoutIncludesOpaqueBars="YES" id="NGw-zI-bIO" customClass="STLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="o48-Z3-eaD"/>
                         <viewControllerLayoutGuide type="bottom" id="P1H-lz-gaZ"/>
@@ -29,7 +29,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashscreen" translatesAutoresizingMaskIntoConstraints="NO" id="oGC-Ih-RnU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashscreen" translatesAutoresizingMaskIntoConstraints="NO" id="oGC-Ih-RnU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJ2-Wg-uHO">
@@ -43,16 +43,15 @@
                         <constraints>
                             <constraint firstItem="QJ2-Wg-uHO" firstAttribute="leading" secondItem="khT-Yw-sWu" secondAttribute="leading" id="1xr-Ih-or7"/>
                             <constraint firstAttribute="trailing" secondItem="oGC-Ih-RnU" secondAttribute="trailing" id="3GA-dv-Srx"/>
-                            <constraint firstItem="QJ2-Wg-uHO" firstAttribute="top" secondItem="o48-Z3-eaD" secondAttribute="bottom" id="J4i-Og-v0e"/>
-                            <constraint firstItem="oGC-Ih-RnU" firstAttribute="top" secondItem="o48-Z3-eaD" secondAttribute="bottom" id="NLv-55-peU"/>
                             <constraint firstItem="oGC-Ih-RnU" firstAttribute="leading" secondItem="khT-Yw-sWu" secondAttribute="leading" id="X61-PE-a2I"/>
+                            <constraint firstItem="QJ2-Wg-uHO" firstAttribute="top" secondItem="khT-Yw-sWu" secondAttribute="top" id="Xz9-uU-nRz"/>
+                            <constraint firstItem="oGC-Ih-RnU" firstAttribute="top" secondItem="khT-Yw-sWu" secondAttribute="top" id="jbq-hc-R1K"/>
                             <constraint firstItem="P1H-lz-gaZ" firstAttribute="top" secondItem="oGC-Ih-RnU" secondAttribute="bottom" id="k1F-ey-pKx"/>
                             <constraint firstItem="P1H-lz-gaZ" firstAttribute="top" secondItem="QJ2-Wg-uHO" secondAttribute="bottom" id="vW3-pT-FOd"/>
                             <constraint firstAttribute="trailing" secondItem="QJ2-Wg-uHO" secondAttribute="trailing" id="xfp-q2-sPL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="wL2-WN-AkN"/>
-                    <nil key="simulatedStatusBarMetrics"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -61,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5tL-8W-SPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="625" y="132"/>
+            <point key="canvasLocation" x="624.5" y="131.5"/>
         </scene>
         <!--Tutorial Presenter View Controller-->
         <scene sceneID="YMx-0s-kFM">
@@ -85,7 +84,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xk7-KW-QWA">
-                                <rect key="frame" x="335" y="0.0" width="40" height="40"/>
+                                <rect key="frame" x="335" y="20" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Zaf-5p-2Sv"/>
                                     <constraint firstAttribute="width" constant="40" id="dMm-pM-hPw"/>
@@ -107,7 +106,7 @@
                             <constraint firstItem="EbR-UD-m5s" firstAttribute="leading" secondItem="jOy-aB-kAb" secondAttribute="leading" id="Ofn-4G-et8"/>
                             <constraint firstItem="EbR-UD-m5s" firstAttribute="top" secondItem="jOy-aB-kAb" secondAttribute="top" id="QLZ-sC-qoK"/>
                             <constraint firstAttribute="trailing" secondItem="xk7-KW-QWA" secondAttribute="trailing" id="QyE-jD-QwG"/>
-                            <constraint firstItem="xk7-KW-QWA" firstAttribute="top" secondItem="jOy-aB-kAb" secondAttribute="top" id="V2x-hy-cy6"/>
+                            <constraint firstItem="xk7-KW-QWA" firstAttribute="top" secondItem="jOy-aB-kAb" secondAttribute="top" constant="20" id="V2x-hy-cy6"/>
                             <constraint firstAttribute="trailing" secondItem="EbR-UD-m5s" secondAttribute="trailing" id="anm-XY-wRK"/>
                             <constraint firstItem="0no-l7-3Ou" firstAttribute="leading" secondItem="jOy-aB-kAb" secondAttribute="leading" id="scj-1n-DKY"/>
                         </constraints>
@@ -290,7 +289,7 @@ Popular, Nearby and Recent.</string>
         <image name="STATUS-logo" width="228" height="233"/>
         <image name="fb-icon" width="8" height="15"/>
         <image name="fb-login-base" width="244" height="69"/>
-        <image name="splashscreen" width="360" height="643"/>
+        <image name="splashscreen" width="375" height="667"/>
         <image name="tutorial_explore" width="281" height="500"/>
         <image name="x menu STAUS" width="20" height="20"/>
     </resources>

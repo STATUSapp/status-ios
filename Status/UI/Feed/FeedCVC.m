@@ -305,12 +305,20 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 -(BOOL)prefersStatusBarHidden{
     BOOL statusBarHidden = YES;
-    if (_feedProcessor.loading == NO &&
-        _feedProcessor.processorFlowType == STFlowTypeHome) {
+    if (_feedProcessor.loading == NO) {
         statusBarHidden = NO;
     }
 
     return statusBarHidden;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    if (_feedProcessor.processorFlowType == STFlowTypeHome) {
+        return UIStatusBarStyleDefault;
+    }
+    
+    return UIStatusBarStyleLightContent;
 }
 
 -(void)dealloc{

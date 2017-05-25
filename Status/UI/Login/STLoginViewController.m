@@ -41,6 +41,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationFacebokDidLogout object:nil];
 
     
+    self.view.backgroundColor = [UIColor clearColor];
     _splashBackground.image = [STUIHelper splashImageWithLogo:NO];
 }
 
@@ -49,6 +50,10 @@
     [(STTutorialViewController *)segue.destinationViewController setSkipFirstItem:NO];
     [(STTutorialViewController *)segue.destinationViewController setDelegate:self];
     
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning

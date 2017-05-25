@@ -24,7 +24,7 @@
         <scene sceneID="gdD-po-VFS">
             <objects>
                 <collectionViewController automaticallyAdjustsScrollViewInsets="NO" id="kUw-q3-wvD" customClass="FeedCVC" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -93,7 +93,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qac-IY-t25">
-                                            <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                            <rect key="frame" x="0.0" y="20" width="48" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="78o-Kt-cob"/>
                                                 <constraint firstAttribute="width" constant="48" id="Xjp-zv-4wu"/>
@@ -105,7 +105,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q9-b9-Q0E">
-                                            <rect key="frame" x="272" y="0.0" width="48" height="48"/>
+                                            <rect key="frame" x="272" y="20" width="48" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="2sx-6O-dfR"/>
                                                 <constraint firstAttribute="width" constant="48" id="tvX-k2-cVZ"/>
@@ -131,8 +131,8 @@
                                     <constraint firstItem="wKb-mk-gY4" firstAttribute="leading" secondItem="dZr-mu-kjB" secondAttribute="trailing" id="MOe-1I-XLd"/>
                                     <constraint firstAttribute="bottom" secondItem="wKb-mk-gY4" secondAttribute="bottom" constant="10" id="lXs-pO-e1P"/>
                                     <constraint firstAttribute="trailing" secondItem="BaU-l3-KLL" secondAttribute="trailing" id="nNg-cb-2qt"/>
-                                    <constraint firstItem="qac-IY-t25" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" id="ofM-83-4Xc"/>
-                                    <constraint firstItem="1q9-b9-Q0E" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" id="sDI-sS-nmI"/>
+                                    <constraint firstItem="qac-IY-t25" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" constant="20" id="ofM-83-4Xc"/>
+                                    <constraint firstItem="1q9-b9-Q0E" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" constant="20" id="sDI-sS-nmI"/>
                                     <constraint firstAttribute="trailing" secondItem="ILD-rb-6Es" secondAttribute="trailing" id="wUe-VS-AFb"/>
                                     <constraint firstAttribute="bottom" secondItem="BaU-l3-KLL" secondAttribute="bottom" id="wfu-Ry-0ed"/>
                                     <constraint firstItem="BaU-l3-KLL" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" id="xcN-j2-93Z"/>
@@ -580,7 +580,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tonight's #ootd for a Friday few beers. Hope you all have wonderfull weekend!! #excited #happy #fashion #inspiration" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66Q-V1-oBu">
-                                                    <rect key="frame" x="16" y="48" width="300" height="39"/>
+                                                    <rect key="frame" x="16" y="48" width="300" height="45.5"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                                     <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>

@@ -99,6 +99,10 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     [self updateFollowControllsAnimated:NO];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     NSInteger numSections = 1;

@@ -310,8 +310,8 @@ const float kNoNotifHeight = 24.f;
         NSString *timeString = [[NSDate notificationTimeIntervalSinceDate:no.date] lowercaseString];
         NSMutableAttributedString *detailsString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",no.message, timeString]];
         
-        UIFont *nameFont = [UIFont fontWithName:@"ProximaNova-Bold" size:16.f];
-        UIFont *messageFont = [UIFont fontWithName:@"ProximaNova-Regular" size:16.f];
+        UIFont *nameFont = [UIFont fontWithName:@"ProximaNova-Bold" size:15.f];
+        UIFont *messageFont = [UIFont fontWithName:@"ProximaNova-Regular" size:15.f];
         NSRange nameRange = [no.message rangeOfString:no.userName];
         NSRange messageRange = NSMakeRange(0, detailsString.string.length);
         NSRange timeRange = [detailsString.string rangeOfString:timeString];
@@ -330,6 +330,8 @@ const float kNoNotifHeight = 24.f;
                                                  alpha:1.f];
             
             [detailsString addAttribute:NSForegroundColorAttributeName value:grayColor range:timeRange];
+            [detailsString addAttribute:NSFontAttributeName value:messageFont range:timeRange];
+
         }
         
         [detailsString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, detailsString.string.length)];
@@ -357,7 +359,7 @@ const float kNoNotifHeight = 24.f;
         if (notificationType == STNotificationTypeNewUserJoinsStatus) {
             NSString *string = [NSString stringWithFormat:@"%@ is on STATUS. Say hello :)", no.userName];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-            UIFont *boldFont = [UIFont fontWithName:@"ProximaNova-Bold" size:13.f];
+            UIFont *boldFont = [UIFont fontWithName:@"ProximaNova-Bold" size:15.f];
             NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                    boldFont, NSFontAttributeName,nil];
 

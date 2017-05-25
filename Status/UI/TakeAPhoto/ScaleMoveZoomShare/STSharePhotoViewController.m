@@ -30,6 +30,7 @@
 
 #import "STTagProductsManager.h"
 #import "STShopProductCell.h"
+#import "STNavigationService.h"
 
 static NSInteger const  kMaxCaptionLenght = 250;
 static CGFloat const kTagProductsViewDefaultHeight = 44.f;
@@ -438,6 +439,8 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                [[CoreManager navigationService] dismissChoosePhotoVC];
+
             }]];
             [self.navigationController presentViewController:alert animated:YES completion:nil];
         }
