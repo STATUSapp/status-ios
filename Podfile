@@ -14,6 +14,7 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'Tune'
 pod 'DGActivityIndicatorView'
+pod 'Branch'
 
 end
 
