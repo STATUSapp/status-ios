@@ -21,21 +21,21 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Branch (0.14.12):
-    - Branch/Core (= 0.14.12)
-    - Branch/without-IDFA (= 0.14.12)
-  - Branch/Core (0.14.12)
-  - Branch/without-IDFA (0.14.12)
+  - Branch (0.15.3):
+    - Branch/Core (= 0.15.3)
+    - Branch/without-IDFA (= 0.15.3)
+  - Branch/Core (0.15.3)
+  - Branch/without-IDFA (0.15.3)
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - DGActivityIndicatorView (2.1.1)
   - Fabric (1.6.11)
-  - FBAudienceNetwork (4.22.1)
-  - FBSDKCoreKit (4.22.1):
+  - FBAudienceNetwork (4.23.0)
+  - FBSDKCoreKit (4.23.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.22.1):
+  - FBSDKLoginKit (4.23.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.22.1):
+  - FBSDKShareKit (4.23.0):
     - FBSDKCoreKit
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
@@ -61,14 +61,14 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Appirater: f1c9e53e8b612193e6256144f6a0fd2e31f4340d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Branch: f63d9cf82ac09747349a73184a0b739d28781c4d
+  Branch: d3620efcb86e8eeedfaf520e4f68a2ed4c6c9eb3
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   DGActivityIndicatorView: ff2c76073d79692f724863c8dd38685866a03cb6
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  FBAudienceNetwork: 21431de39d94b4e8f415277b2a650c6def6df26e
-  FBSDKCoreKit: 9c2daf0162214d6d2e21cf8208a9c6c2a2e42b9c
-  FBSDKLoginKit: 00cf28916b9f0169763a3d61985d745b579fe304
-  FBSDKShareKit: 1cbd0fdc2bb3277dd3522512855dcf1f4088f734
+  FBAudienceNetwork: 20a0e3d20e377dbb6708365e4c6d0711bf08ca97
+  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
+  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
+  FBSDKShareKit: 65751c3b9937ab9d594e6c37611ecc115ceeb448
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   Tune: f6c5dc67a7ca8f574e4a64165783326acea9bf89
 
