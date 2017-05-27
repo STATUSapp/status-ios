@@ -63,9 +63,7 @@
 
     //super properties
     self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"full_photo_link"];
-    self.thumbnailPhotoUrl = [self.mainImageUrl stringByReplacingOccurrencesOfString:@".jpg" withString:@"_th.jpg"];
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
-    self.thumbnailImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.thumbnailPhotoUrl];
     self.imageSize = [STImageCacheController imageSizeForUrl:self.mainImageUrl];
     
 //#ifdef DEBUG

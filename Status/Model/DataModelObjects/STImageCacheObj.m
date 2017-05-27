@@ -15,7 +15,6 @@
 + (STImageCacheObj *)imageCacheObjFromObj:(STBaseObj *)obj{
     STImageCacheObj *ico = [STImageCacheObj new];
     ico.imageUrl = obj.mainImageUrl;
-    ico.thumbnailImageUrl = obj.thumbnailPhotoUrl;
     return ico;
 }
 

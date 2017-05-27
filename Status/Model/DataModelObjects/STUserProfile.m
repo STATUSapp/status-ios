@@ -65,7 +65,7 @@
     lu.followedByCurrentUser = @(self.isFollowedByCurrentUser);
     lu.uuid = self.uuid;
     lu.userName = self.fullName;
-    lu.thumbnail = self.thumbnailPhotoUrl;
+    lu.thumbnail = self.mainImageUrl;
     lu.gender = self.profileGender;
     
     return lu;

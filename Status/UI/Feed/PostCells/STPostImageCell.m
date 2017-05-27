@@ -51,15 +51,9 @@
             _postImage.image = origImg;
         }];
     }
-    else if (post.thumbnailImageDownloaded)
+    else
     {
         [self setBottomItemsHidden:NO];
-        [[CoreManager imageCacheService] loadPostImageWithName:post.thumbnailPhotoUrl withPostCompletion:^(UIImage *origImg) {
-            [_activityIndicator startAnimating];
-            _blurEffectView.hidden = NO;
-            _postImage.image = origImg;
-        }];
-        
     }
     _postLikeButton.selected = post.postLikedByCurrentUser;
     _postShopButton.hidden = (post.shopProducts.count == 0);
@@ -75,10 +69,6 @@
 + (CGSize)celSizeForPost:(STPost *)post{
     CGSize size = [UIScreen mainScreen].bounds.size;
 
-//    if (!post.mainImageDownloaded &&
-//        !post.thumbnailImageDownloaded) {
-//        return CGSizeMake(size.width, 0.f);
-//    }
     if (!post.mainImageDownloaded) {
         return CGSizeMake(size.width, size.width);
     }

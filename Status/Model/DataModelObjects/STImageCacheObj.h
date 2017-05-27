@@ -13,7 +13,6 @@
 @interface STImageCacheObj : NSObject
 
 @property (nonatomic, strong) NSString *imageUrl;
-@property (nonatomic, strong) NSString *thumbnailImageUrl;
 @property (nonatomic, strong) NSNumber *flowType;
 
 + (STImageCacheObj *)imageCacheObjFromObj:(STBaseObj *)obj;

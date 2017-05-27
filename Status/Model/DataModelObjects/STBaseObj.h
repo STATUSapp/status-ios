@@ -25,10 +25,8 @@ typedef NS_ENUM(NSUInteger, STProfileGender) {
 @property(nonatomic, strong) NSString *appVersion;
 
 @property (nonatomic, assign) BOOL mainImageDownloaded;
-@property (nonatomic, assign) BOOL thumbnailImageDownloaded;
 @property (nonatomic, assign) CGSize imageSize;//the full image size
 @property (nonatomic, strong) NSString * mainImageUrl;
-@property (nonatomic, strong) NSString * thumbnailPhotoUrl;
 
 - (NSString *)genderImageNameForGender:(STProfileGender)gender;
 - (STProfileGender)genderFromString:(NSString *)genderString;

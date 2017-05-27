@@ -56,22 +56,12 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     
-    NSArray *filteredArray = [_objectsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl like %@ OR thumbnailImageUrl like %@", imageFullLink, imageFullLink]];
+    NSArray *filteredArray = [_objectsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl like %@", imageFullLink]];
     
     if (![sdManager diskImageExistsForURL:[NSURL URLWithString:imageFullLink]]) {
         if (imageFullLink && filteredArray.count == 0){
-            BOOL isThumbnailLink = NO;
-            NSString *mainLink = imageFullLink;
-            NSString *thumbnailLink = nil;
-            if ([imageFullLink containsString:@"_th.jpg"]) {
-                isThumbnailLink = YES;
-                mainLink = [imageFullLink stringByReplacingOccurrencesOfString:@"_th.jpg" withString:@".jpg"];
-            }
-            thumbnailLink = [mainLink stringByReplacingOccurrencesOfString:@".jpg" withString:@"_th.jpg"];
-            
             STImageCacheObj *obj = [STImageCacheObj new];
-            obj.imageUrl = mainLink;
-            obj.thumbnailImageUrl = thumbnailLink;
+            obj.imageUrl = imageFullLink;
             obj.flowType = @(STImageDownloadSpecialPriority);
             [self startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[obj]];
         }
@@ -100,31 +90,6 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     
     
 }
-
-//- (NSString *)blurPostLinkWithURL:(NSString *)imageFullLink{
-//    NSString *smallLink = imageFullLink;
-//    if (![smallLink containsString:@"_th.jpg"]) {
-//        smallLink = [STImageCacheController smallPhotoLinkFromBase:imageFullLink];
-//    }
-//    NSString *extention = [smallLink pathExtension];
-//    NSString *blurName = [[[[smallLink lastPathComponent] stringByDeletingPathExtension] stringByAppendingString:@"-blur."] stringByAppendingString:extention];
-//    NSString *imageFullPath = [[self getImageCachePath:NO] stringByAppendingPathComponent:blurName];
-//    return imageFullPath;
-//}
-
-//- (void)saveImageForBlur:(UIImage *)image imageURL:(NSURL *)imageURL {
-//    if (!_photoDownloadBaseUrl) {
-//        return;
-//    }
-//    if ([imageURL.absoluteString rangeOfString:_photoDownloadBaseUrl].location!=NSNotFound) {
-//        UIImage *img = image;
-//        img = [img imageCropedFullScreenSize];
-//        img = [img applyLightEffect];
-//        NSString *imageFullPath = [self blurPostLinkWithURL:imageURL.absoluteString];
-//        NSData *imagData = UIImageJPEGRepresentation(img, 0.25f);
-//        [imagData writeToFile:imageFullPath atomically:YES];
-//    }
-//}
 
 -(void) downloadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageComp) completion{
     
@@ -238,49 +203,21 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
     __weak STImageCacheController *weakSelf = self;
     STImageCacheObj *obj = [_objectsArray firstObject];
     
-    __block NSString *smallUrlString = obj.thumbnailImageUrl;
     __block NSString *fullUrlString = obj.imageUrl;
-
-    if (smallUrlString) {
-        [self downloadImageWithName:smallUrlString
-                      andCompletion:^(NSString *downloadedImage, BOOL downloaded, CGSize downloadedImageSize) {
-                          
-                          if (downloaded==YES) {
-                              [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:smallUrlString, kImageSizeKey:NSStringFromCGSize(CGSizeZero)}];
-                              
-                          }
-                          
-                          [weakSelf downloadImageWithName:fullUrlString
-                                        andCompletion:^(NSString *downloadedImage, BOOL downloaded, CGSize downloadedImageSize) {
-                                            
-                                            if (downloaded==YES) {
-                                                [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString, kImageSizeKey:NSStringFromCGSize(downloadedImageSize)}];
-                                            }
-                                            
-                                            [weakSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
-                                            
-                                            weakSelf.inProgress = NO;
-                                            [weakSelf loadNextPhoto];
-                                        }];
-
-                      }];
-    }
-    else
-    {
-        [self downloadImageWithName:fullUrlString
-                      andCompletion:^(NSString *downloadedImage, BOOL downloaded, CGSize downloadedImageSize) {
-                          
-                          if (downloaded==YES) {
-                              [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString, kImageSizeKey:NSStringFromCGSize(downloadedImageSize)}];
-                          }
-                          
-                          [weakSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
-                          
-                          weakSelf.inProgress = NO;
-                          [weakSelf loadNextPhoto];
-                      }];
-
-    }
+    
+    [self downloadImageWithName:fullUrlString
+                  andCompletion:^(NSString *downloadedImage, BOOL downloaded, CGSize downloadedImageSize) {
+                      
+                      if (downloaded==YES) {
+                          [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString, kImageSizeKey:NSStringFromCGSize(downloadedImageSize)}];
+                      }
+                      
+                      [weakSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
+                      
+                      weakSelf.inProgress = NO;
+                      [weakSelf loadNextPhoto];
+                  }];
+    
 }
 
 + (CGSize) imageSizeForUrl:(NSString *)url{
