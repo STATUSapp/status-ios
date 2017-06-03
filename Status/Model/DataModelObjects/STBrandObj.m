@@ -13,7 +13,7 @@
 + (STBrandObj *)brandObjFromDict:(NSDictionary *)dict{
     STBrandObj *brandObj = [STBrandObj new];
     brandObj.uuid = dict[@"id"];
-    brandObj.mainImageUrl = dict[@"image_url"];
+    brandObj.mainImageUrl = [dict[@"image_url"] stringByReplacingHttpWithHttps];
     
     return brandObj;
 }

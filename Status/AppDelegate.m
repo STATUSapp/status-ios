@@ -44,6 +44,8 @@
 
 #import "STWhiteNavBarViewController.h"
 
+#import "Branch.h"
+
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @interface AppDelegate()
@@ -94,6 +96,12 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     [[CoreManager notificationsService] handleNotification:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
     
+    Branch *branch = [Branch getInstance];
+    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary * _Nullable params, NSError * _Nullable error) {
+        if (!error && params) {
+            NSLog(@"params: %@", params.description);
+        }
+    }];
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 
@@ -176,16 +184,35 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+// Respond to URI scheme links
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     
-    [Tune applicationDidOpenURL:[url absoluteString] sourceApplication:sourceApplication];
+    BOOL branchHandled = [[Branch getInstance] application:application
+                                                   openURL:url
+                                         sourceApplication:sourceApplication
+                                                annotation:annotation];
+    
+    if (!branchHandled) {
+        BOOL tuneHandled = [Tune handleOpenURL:url
+                             sourceApplication:sourceApplication];
+        if (!tuneHandled) {
+            return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                  openURL:url
+                                                        sourceApplication:sourceApplication
+                                                               annotation:annotation];
+        }
 
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                          openURL:url
-                                                sourceApplication:sourceApplication
-                                                       annotation:annotation];
-
+    }
+    return NO;
 }
+
+// Respond to Universal Links
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+    BOOL handledByBranch = [[Branch getInstance] continueUserActivity:userActivity];
+    
+    return handledByBranch;
+}
+
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {

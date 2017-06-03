@@ -14,7 +14,7 @@
     STCatalogCategory *category = [STCatalogCategory new];
     category.uuid = dict[@"id"];
     category.name = [dict[@"name"] uppercaseString];
-    category.mainImageUrl = dict[@"image_url"];
+    category.mainImageUrl = [dict[@"image_url"] stringByReplacingHttpWithHttps];
     
     return category;
 }

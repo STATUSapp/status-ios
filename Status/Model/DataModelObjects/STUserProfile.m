@@ -50,7 +50,7 @@
     _isFollowedByCurrentUser = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followed_by_current_user"] boolValue];
     
     //super properties
-    self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"];
+    self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"] stringByReplacingHttpWithHttps];
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
     self.imageSize = CGSizeZero;
 

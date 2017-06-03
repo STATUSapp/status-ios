@@ -23,15 +23,18 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb642056059181757</string>
 				<string>statusapp</string>
+				<string>sts.one</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2888</string>
+	<string>2909</string>
 	<key>FacebookAppID</key>
 	<string>642056059181757</string>
 	<key>FacebookDisplayName</key>
@@ -100,5 +103,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>key_live_deEbyE1Uga0dbAbaOpUW2dcouzcFo8Mq</string>
+	</dict>
 </dict>
 </plist>

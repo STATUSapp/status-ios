@@ -34,10 +34,11 @@
 
 -(FBSDKShareLinkContent *)paramsForActivities:(NSArray *)activityItems{
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    content.imageURL = [NSURL URLWithString:@"http://status.glazeon.com/logo120p.png"];
-    content.contentURL = [NSURL URLWithString:activityItems[1]];
-    content.contentDescription = activityItems[0];
-    content.contentTitle =  @"STATUS";
+    //TODO: resolve these deprecations
+//    content.imageURL = [NSURL URLWithString:@"http://status.glazeon.com/logo120p.png"];
+//    content.contentURL = [NSURL URLWithString:activityItems[1]];
+//    content.contentDescription = activityItems[0];
+//    content.contentTitle =  @"STATUS";
 
     return content;
 }

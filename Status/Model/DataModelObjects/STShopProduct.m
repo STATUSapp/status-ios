@@ -32,9 +32,9 @@
     self.uuid = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"id"] stringValue];
     self.productUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"link"];
     //super properties
-    self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image_url"];
+    self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image_url"] stringByReplacingHttpWithHttps];
     if (!self.mainImageUrl) {
-        self.mainImageUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image"];
+        self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image"] stringByReplacingHttpWithHttps];
     }
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
     self.imageSize = CGSizeZero;

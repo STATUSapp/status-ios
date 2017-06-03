@@ -248,7 +248,7 @@ const NSInteger kDefaultValueForTopConstraint = 26;
         NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
         [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                weakSelf.userProfile.mainImageUrl = response[@"user_photo"];
+                weakSelf.userProfile.mainImageUrl = [response[@"user_photo"] stringByReplacingHttpWithHttps];
                 [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
                 [[CoreManager imageCacheService] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
                     weakSelf.profileImage.image = img;

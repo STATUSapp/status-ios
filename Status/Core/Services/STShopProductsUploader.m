@@ -42,7 +42,7 @@
                                         if (!error) {
                                             NSDictionary *uploadedItem = [response firstObject];
                                             blockSP.uuid = [uploadedItem[@"id"] stringValue];
-                                            blockSP.mainImageUrl = uploadedItem[@"image_url"];
+                                            blockSP.mainImageUrl = [uploadedItem[@"image_url"] stringByReplacingHttpWithHttps];
                                             shopProductsWithId ++;
                                             
                                         }

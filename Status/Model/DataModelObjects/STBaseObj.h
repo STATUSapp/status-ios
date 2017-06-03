@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CreateDataModelHelper.h"
+#import "NSString+Links.h"
 
 //extern NSString * const kObjectUuidForLoading;
 //extern NSString * const kObjectUuidForNothingToDisplay;
