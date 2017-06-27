@@ -23,6 +23,7 @@
 #import "STNotificationsManager.h"
 #import "STProcessorsService.h"
 #import "BadgeService.h"
+#import "STDeepLinkService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -41,6 +42,7 @@
 @property (nonatomic, strong) STNotificationsManager *notificationsService;
 @property (nonatomic, strong) STProcessorsService *processorsService;
 @property (nonatomic, strong) BadgeService *badgeService;
+@property (nonatomic, strong) STDeepLinkService *deepLinkService;
 
 @end
 
@@ -75,6 +77,7 @@
         _notificationsService = [STNotificationsManager new];
         _processorsService = [STProcessorsService new];
         _badgeService = [BadgeService new];
+        _deepLinkService = [STDeepLinkService new];
         
     }
     return self;
@@ -153,6 +156,10 @@
 
 +(BadgeService *)badgeService{
     return [[CoreManager sharedInstance] badgeService];
+}
+
++ (STDeepLinkService *)deepLinkService{
+    return [[CoreManager sharedInstance] deepLinkService];
 }
 
 #pragma mark - Private implementation

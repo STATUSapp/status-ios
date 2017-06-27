@@ -41,6 +41,7 @@
 #import "STLocalNotificationService.h"
 #import "STNavigationService.h"
 #import "BadgeService.h"
+#import "STDeepLinkService.h"
 
 #import "STWhiteNavBarViewController.h"
 
@@ -99,11 +100,14 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     Branch *branch = [Branch getInstance];
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary * _Nullable params, NSError * _Nullable error) {
         if (!error && params) {
+            [[CoreManager deepLinkService] addParams:params];
             NSLog(@"params: %@", params.description);
         }
     }];
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                    didFinishLaunchingWithOptions:launchOptions];
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    
+    return YES;
 
 }
 

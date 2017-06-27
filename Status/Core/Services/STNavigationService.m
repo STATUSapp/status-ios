@@ -156,6 +156,17 @@
 
 }
 
+-(void)pushViewControllers:(NSArray <UIViewController *> *) arrayVC
+           inTabbarAtIndex:(NSInteger)index
+       keepThecurrentStack:(BOOL)keepTheStack{
+    [[STNavigationService appTabBar] setSelectedIndex:index];
+    UINavigationController *navCtrl = (UINavigationController *)[[[STNavigationService appTabBar] viewControllers] objectAtIndex:index];
+    NSMutableArray *viewControllers = [[navCtrl viewControllers] mutableCopy];
+    [viewControllers addObjectsFromArray:arrayVC];
+    [navCtrl setViewControllers:viewControllers animated:YES];
+
+}
+
 -(void)presentAlertController:(UIAlertController *)alert{
     STTabBarViewController *tbc = [STNavigationService appTabBar];
     UINavigationController *navCtrl = (UINavigationController *)[[tbc viewControllers] objectAtIndex:tbc.selectedIndex];

@@ -36,6 +36,10 @@
           inTabbarAtIndex:(NSInteger)index
       keepThecurrentStack:(BOOL)keepTheStack;
 
+-(void)pushViewControllers:(NSArray <UIViewController *> *) arrayVC
+           inTabbarAtIndex:(NSInteger)index
+       keepThecurrentStack:(BOOL)keepTheStack;
+
 -(void)presentAlertController:(UIAlertController *)alert;
 
 + (UIViewController *)viewControllerForSelectedTab;

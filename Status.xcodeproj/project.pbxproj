@@ -29,6 +29,7 @@
 		077811591EB7126B0043A2E8 /* STTagCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 077811581EB7126B0043A2E8 /* STTagCategoryCell.m */; };
 		0778115C1EB75BBE0043A2E8 /* STTagProductsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */; };
 		07B053F11EDE867F0045AD7B /* NSString+Links.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B053F01EDE867F0045AD7B /* NSString+Links.m */; };
+		07D03F581F00D27F00B5A3B8 /* STDeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D03F571F00D27F00B5A3B8 /* STDeepLinkService.m */; };
 		08F88F3E9A6987DC111E6745 /* libPods-Status.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9F74085E81B30D0D32BB3C /* libPods-Status.a */; };
 		170911F91DF87F0400B2AF81 /* NearbyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F41DF87F0400B2AF81 /* NearbyVC.m */; };
 		170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F61DF87F0400B2AF81 /* STNearbyCell.m */; };
@@ -316,6 +317,8 @@
 		0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsManager.m; sourceTree = "<group>"; };
 		07B053EF1EDE867F0045AD7B /* NSString+Links.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Links.h"; sourceTree = "<group>"; };
 		07B053F01EDE867F0045AD7B /* NSString+Links.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Links.m"; sourceTree = "<group>"; };
+		07D03F561F00D27F00B5A3B8 /* STDeepLinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDeepLinkService.h; sourceTree = "<group>"; };
+		07D03F571F00D27F00B5A3B8 /* STDeepLinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDeepLinkService.m; sourceTree = "<group>"; };
 		170911F31DF87F0400B2AF81 /* NearbyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyVC.h; sourceTree = "<group>"; };
 		170911F41DF87F0400B2AF81 /* NearbyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyVC.m; sourceTree = "<group>"; };
 		170911F51DF87F0400B2AF81 /* STNearbyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNearbyCell.h; sourceTree = "<group>"; };
@@ -1288,6 +1291,8 @@
 				17DF47341C9974700053F633 /* STLocalNotificationService.m */,
 				17423E7E1CBE377600B11F16 /* STProcessorsService.h */,
 				17423E7F1CBE377600B11F16 /* STProcessorsService.m */,
+				07D03F561F00D27F00B5A3B8 /* STDeepLinkService.h */,
+				07D03F571F00D27F00B5A3B8 /* STDeepLinkService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1975,6 +1980,7 @@
 				17648B911E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m in Sources */,
 				99B387DC1C82FAA2005B4D8C /* STTutorialCell.m in Sources */,
 				99B387B81C82FAA2005B4D8C /* STTapAnimationLabel.m in Sources */,
+				07D03F581F00D27F00B5A3B8 /* STDeepLinkService.m in Sources */,
 				99B387801C82FAA2005B4D8C /* StatusDM.xcdatamodeld in Sources */,
 				99B387761C82FAA2005B4D8C /* STIAPHelper.m in Sources */,
 				1709124A1DF882DC00B2AF81 /* STPostHeader.m in Sources */,

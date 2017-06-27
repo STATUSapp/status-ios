@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:sts.one</string>
+		<string>applinks:getstatusapp.co.app.link</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

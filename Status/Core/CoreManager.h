@@ -24,6 +24,7 @@
 @class STUserProfilePool;
 @class STProcessorsService;
 @class BadgeService;
+@class STDeepLinkService;
 
 @interface CoreManager : NSObject
 
@@ -46,5 +47,6 @@
 + (STNotificationsManager *)notificationsService;
 + (STProcessorsService *)processorService;
 + (BadgeService *)badgeService;
++ (STDeepLinkService *)deepLinkService;
 
 @end
