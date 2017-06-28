@@ -59,6 +59,26 @@ NSInteger const kShareViewTag = 1001;
 
 }
 
++(void)presentProfileViewWithDelegate:(id<STContextualMenuDelegate>)delegate{
+    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"STContextualMenu" owner:self options:nil];
+    
+    STContextualMenu *shareOptionsView = (STContextualMenu*)[array objectAtIndex:1];
+    shareOptionsView.delegate = delegate;
+    shareOptionsView.hidden = TRUE;
+    UIWindow *mainWindow = [[UIApplication sharedApplication].delegate window];
+    shareOptionsView.frame = mainWindow.frame;
+    shareOptionsView.tag = kShareViewTag;
+    shareOptionsView.translatesAutoresizingMaskIntoConstraints = YES;
+    [mainWindow addSubview:shareOptionsView];
+    
+    shareOptionsView.shadowView.alpha = 0.0;
+    [UIView animateWithDuration:0.35f animations:^{
+        shareOptionsView.hidden=FALSE;
+        shareOptionsView.shadowView.alpha = 0.5;
+        [shareOptionsView setAlfaForDissmiss:NO];
+    }];
+}
+
 +(void)dismissView{
     UIWindow *mainWindow = [[UIApplication sharedApplication].delegate window];
     STContextualMenu *shareOptionsView = [mainWindow viewWithTag:kShareViewTag];
@@ -134,6 +154,14 @@ NSInteger const kShareViewTag = 1001;
 
 - (IBAction)onAskUser:(id)sender {
     [_delegate contextualMenuAskUserToUpload];    
+}
+
+-(IBAction)onCopyShareUrl:(id)sender{
+    [_delegate contextualMenuCopyShareUrl];
+}
+
+-(IBAction)onCopyProfileUrl:(id)sender{
+    [_delegate contextualMenuCopyProfileUrl];
 }
 
 @end

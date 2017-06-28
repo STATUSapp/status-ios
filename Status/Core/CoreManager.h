@@ -25,6 +25,7 @@
 @class STProcessorsService;
 @class BadgeService;
 @class STDeepLinkService;
+@class STSnackBarService;
 
 @interface CoreManager : NSObject
 
@@ -48,5 +49,6 @@
 + (STProcessorsService *)processorService;
 + (BadgeService *)badgeService;
 + (STDeepLinkService *)deepLinkService;
++ (STSnackBarService *)snackBarService;
 
 @end

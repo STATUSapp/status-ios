@@ -48,7 +48,8 @@
     _followersCount = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followersCount"] integerValue];
     _followingCount = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followingCount"] integerValue];
     _isFollowedByCurrentUser = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followed_by_current_user"] boolValue];
-    
+#warning check the parameter from server
+    _profileShareUrl = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"profile_share_url"];
     //super properties
     self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"] stringByReplacingHttpWithHttps];
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];

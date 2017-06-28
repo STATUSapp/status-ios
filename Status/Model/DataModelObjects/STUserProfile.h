@@ -34,6 +34,7 @@
 @property (nonatomic, assign) NSInteger numberOfPosts;
 
 @property (nonatomic, assign) STProfileGender profileGender;
+@property (nonatomic, strong) NSString *profileShareUrl;
 
 + (instancetype)userProfileWithDict:(NSDictionary *)userDict;
 

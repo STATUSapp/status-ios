@@ -13,6 +13,9 @@
 		0722BEA21EBCEFFF00BE8CC2 /* STTagProductsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722BEA11EBCEFFF00BE8CC2 /* STTagProductsViewController.m */; };
 		0722C01B1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722C01A1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m */; };
 		072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */ = {isa = PBXBuildFile; fileRef = 072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */; };
+		0726C6D71F0228B800E787EA /* STSnackBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0726C6D61F0228B800E787EA /* STSnackBar.xib */; };
+		0726C6DA1F0228D200E787EA /* STSnackBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726C6D91F0228D200E787EA /* STSnackBar.m */; };
+		0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726C6DC1F022B0F00E787EA /* STSnackBarService.m */; };
 		072822EC1E899CB900DCC591 /* STTagProductsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 072822EB1E899CB900DCC591 /* STTagProductsContainer.m */; };
 		072BACB51E80FED80055B6F3 /* STGetSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */; };
 		072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */; };
@@ -286,6 +289,11 @@
 		0722C01A1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhiteNavBarViewController.m; sourceTree = "<group>"; };
 		072443AC1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsEmptyWardrobe.h; sourceTree = "<group>"; };
 		072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsEmptyWardrobe.m; sourceTree = "<group>"; };
+		0726C6D61F0228B800E787EA /* STSnackBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STSnackBar.xib; sourceTree = "<group>"; };
+		0726C6D81F0228D200E787EA /* STSnackBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSnackBar.h; sourceTree = "<group>"; };
+		0726C6D91F0228D200E787EA /* STSnackBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSnackBar.m; sourceTree = "<group>"; };
+		0726C6DB1F022B0F00E787EA /* STSnackBarService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSnackBarService.h; sourceTree = "<group>"; };
+		0726C6DC1F022B0F00E787EA /* STSnackBarService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSnackBarService.m; sourceTree = "<group>"; };
 		072822EA1E899CB900DCC591 /* STTagProductsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsContainer.h; sourceTree = "<group>"; };
 		072822EB1E899CB900DCC591 /* STTagProductsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsContainer.m; sourceTree = "<group>"; };
 		072BACB31E80FED80055B6F3 /* STGetSuggestionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetSuggestionsRequest.h; sourceTree = "<group>"; };
@@ -1293,6 +1301,8 @@
 				17423E7F1CBE377600B11F16 /* STProcessorsService.m */,
 				07D03F561F00D27F00B5A3B8 /* STDeepLinkService.h */,
 				07D03F571F00D27F00B5A3B8 /* STDeepLinkService.m */,
+				0726C6DB1F022B0F00E787EA /* STSnackBarService.h */,
+				0726C6DC1F022B0F00E787EA /* STSnackBarService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1510,6 +1520,9 @@
 				17AC8ED01E111954002D213E /* STLoadingView.h */,
 				17AC8ED11E111954002D213E /* STLoadingView.m */,
 				17AC8ECE1E11192B002D213E /* STLoadingView.xib */,
+				0726C6D81F0228D200E787EA /* STSnackBar.h */,
+				0726C6D91F0228D200E787EA /* STSnackBar.m */,
+				0726C6D61F0228B800E787EA /* STSnackBar.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1826,6 +1839,7 @@
 				1709121D1DF87F5C00B2AF81 /* TimestampView.xib in Resources */,
 				99B387971C82FAA2005B4D8C /* ProximaNova-Regular.otf in Resources */,
 				99B387D31C82FAA2005B4D8C /* UserProfile.storyboard in Resources */,
+				0726C6D71F0228B800E787EA /* STSnackBar.xib in Resources */,
 				99B387D21C82FAA2005B4D8C /* SuggestionsScene.storyboard in Resources */,
 				99B387CE1C82FAA2005B4D8C /* FacebookPickerScene.storyboard in Resources */,
 				99B387941C82FAA2005B4D8C /* ProximaNova-Light.otf in Resources */,
@@ -2092,6 +2106,7 @@
 				99B387641C82FAA2005B4D8C /* STSetUserLocationRequest.m in Sources */,
 				072BACB51E80FED80055B6F3 /* STGetSuggestionsRequest.m in Sources */,
 				99B387871C82FAA2005B4D8C /* STListUser.m in Sources */,
+				0726C6DA1F0228D200E787EA /* STSnackBar.m in Sources */,
 				99B387581C82FAA2005B4D8C /* STGetUserPostsRequest.m in Sources */,
 				99B387861C82FAA2005B4D8C /* STFlowTemplate.m in Sources */,
 				99B387841C82FAA2005B4D8C /* STAddressBookContact.m in Sources */,
@@ -2106,6 +2121,7 @@
 				99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */,
 				173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */,
 				99B3877F1C82FAA2005B4D8C /* Message.m in Sources */,
+				0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */,
 				1709124C1DF882DC00B2AF81 /* STPostShopProductsCell.m in Sources */,
 				52DC4DCD1C8D87F00064F23F /* UIAlertController+Additions.m in Sources */,
 				99B387E51C830082005B4D8C /* CoreManager.m in Sources */,

@@ -23,6 +23,7 @@ CGFloat distanceLabelStandardHeight = 21.f;
 @property (weak, nonatomic) IBOutlet UIButton *nameAndAgeButton;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editButtonConstraint;
 
 @end
@@ -35,6 +36,7 @@ CGFloat distanceLabelStandardHeight = 21.f;
 
 - (void)setSettingsButtonHidden:(BOOL)settingsButtonHidden{
     _settingsButton.hidden = settingsButtonHidden;
+    _optionsButton.hidden = !settingsButtonHidden;
 }
 
 - (void)configureCellWithUserProfile:(STUserProfile *)profile{

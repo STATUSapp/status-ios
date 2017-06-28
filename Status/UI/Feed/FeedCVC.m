@@ -45,6 +45,8 @@
 #import "STShopProductCell.h"
 #import "STPostShopProductsCell.h"
 
+#import "STSnackBarService.h"
+
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
     STScrollDirectionNone = 0,
@@ -818,6 +820,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 - (IBAction)onBackButtonPressed:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)onProfileOptionsPressed:(id)sender {
+    [STContextualMenu presentProfileViewWithDelegate:self];
+
+}
 
 - (IBAction)onSettingsButtonPressed:(id)sender{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -961,6 +967,28 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 #pragma mark - STContextualMenuDelegate
+
+-(void)contextualMenuCopyProfileUrl{
+    STUserProfile *profile = [_feedProcessor userProfile];
+    NSString *shareUrl = profile.profileShareUrl;
+    [self addLinkToClipboard:shareUrl];
+}
+
+-(void)addLinkToClipboard:(NSString *)shareUrl{
+    if (shareUrl && [shareUrl length]) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = shareUrl;
+        
+        [[CoreManager snackBarService] showSnackBarWithMessage:@"Copied link to clipboard"];
+    }
+}
+
+-(void)contextualMenuCopyShareUrl{
+    STPost *post = [_feedProcessor objectAtIndex:postForContextIndex];
+    postForContextIndex = 0;
+    NSString *shareUrl = post.shareShortUrl;
+    [self addLinkToClipboard:shareUrl];
+}
 
 -(void)contextualMenuAskUserToUpload{
     [_feedProcessor askUserToUploadAtIndex:postForContextIndex];

@@ -17,6 +17,8 @@
 - (void)contextualMenuSavePostLocally;
 - (void)contextualMenuSharePostonFacebook;
 - (void)contextualMenuAskUserToUpload;
+- (void)contextualMenuCopyShareUrl;
+- (void)contextualMenuCopyProfileUrl;
 
 @end
 
@@ -24,6 +26,7 @@
 
 +(void)presentViewWithDelegate:(id<STContextualMenuDelegate>)delegate
             withExtendedRights:(BOOL)extendedRights;
++(void)presentProfileViewWithDelegate:(id<STContextualMenuDelegate>)delegate;
 +(void)dismissView;
 
 @end

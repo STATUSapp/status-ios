@@ -24,6 +24,7 @@
 #import "STProcessorsService.h"
 #import "BadgeService.h"
 #import "STDeepLinkService.h"
+#import "STSnackBarService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -43,6 +44,7 @@
 @property (nonatomic, strong) STProcessorsService *processorsService;
 @property (nonatomic, strong) BadgeService *badgeService;
 @property (nonatomic, strong) STDeepLinkService *deepLinkService;
+@property (nonatomic, strong) STSnackBarService *snackBarService;
 
 @end
 
@@ -78,6 +80,7 @@
         _processorsService = [STProcessorsService new];
         _badgeService = [BadgeService new];
         _deepLinkService = [STDeepLinkService new];
+        _snackBarService = [STSnackBarService new];
         
     }
     return self;
@@ -160,6 +163,10 @@
 
 + (STDeepLinkService *)deepLinkService{
     return [[CoreManager sharedInstance] deepLinkService];
+}
+
++(STSnackBarService *)snackBarService{
+    return [[CoreManager sharedInstance] snackBarService];
 }
 
 #pragma mark - Private implementation

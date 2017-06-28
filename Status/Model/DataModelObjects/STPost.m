@@ -58,6 +58,7 @@
     _postSeen = [self.infoDict[@"post_seen"] boolValue];
     _showFullCaption = NO;
     _showShopProducts = NO;
+    _shareShortUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"short_url"];
     
     self.shopProducts = @[];
 
