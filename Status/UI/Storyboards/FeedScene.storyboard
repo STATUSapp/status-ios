@@ -117,12 +117,12 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-1y-gCh">
-                                            <rect key="frame" x="256" y="13" width="64" height="58"/>
+                                            <rect key="frame" x="272" y="13" width="48" height="60"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="58" id="taq-c8-kJ5"/>
-                                                <constraint firstAttribute="width" constant="64" id="xFd-nb-TlI"/>
+                                                <constraint firstAttribute="height" constant="60" id="taq-c8-kJ5"/>
+                                                <constraint firstAttribute="width" constant="48" id="xFd-nb-TlI"/>
                                             </constraints>
-                                            <state key="normal" image="more-icon"/>
+                                            <state key="normal" image="more button"/>
                                             <connections>
                                                 <action selector="onProfileOptionsPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="Vrm-Br-eTg"/>
                                             </connections>
@@ -924,7 +924,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1211" y="1176"/>
+            <point key="canvasLocation" x="1209.5999999999999" y="1175.7121439280361"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oVb-IP-pWb">
@@ -966,6 +966,7 @@
         <image name="location-icon" width="10" height="14"/>
         <image name="logo status home screen" width="110" height="17"/>
         <image name="message_background" width="6" height="19"/>
+        <image name="more button" width="34" height="33"/>
         <image name="more-icon" width="16" height="3"/>
         <image name="no picture" width="111" height="111"/>
         <image name="settings_btn" width="32" height="32"/>
