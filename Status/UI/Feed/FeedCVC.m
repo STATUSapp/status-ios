@@ -886,7 +886,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 - (IBAction)onTapEditUserProfile:(id)sender {
-    STEditProfileViewController * editVC = [STEditProfileViewController newControllerWithUserId:[_feedProcessor userId]];
+    STEditProfileViewController * editVC = [STEditProfileViewController newController];
     editVC.userProfile = [_feedProcessor userProfile];
     [self.navigationController pushViewController:editVC animated:YES];
 }

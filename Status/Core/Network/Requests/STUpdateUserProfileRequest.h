@@ -7,17 +7,12 @@
 //
 
 #import "STBaseRequest.h"
+#import "STUserProfile.h"
 
 @interface STUpdateUserProfileRequest : STBaseRequest
 
-@property (strong, nonatomic) NSDictionary * paramsDict;
-
-+ (void)updateUserProfileWithFirstName:(NSString *)name
-                              lastName:(NSString *)lastName
-                              fullName:(NSString *)fullName
-                          homeLocation:(NSString *)location
-                                   bio:(NSString *)bio
-                        withCompletion:(STRequestCompletionBlock)completion
-                               failure:(STRequestFailureBlock)failure;
++ (void)updateUserProfileWithProfile:(STUserProfile *)userProfile
+                      withCompletion:(STRequestCompletionBlock)completion
+                             failure:(STRequestFailureBlock)failure;
 
 @end

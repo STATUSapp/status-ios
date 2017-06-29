@@ -13,6 +13,7 @@
 		0722BEA21EBCEFFF00BE8CC2 /* STTagProductsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722BEA11EBCEFFF00BE8CC2 /* STTagProductsViewController.m */; };
 		0722C01B1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722C01A1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m */; };
 		072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */ = {isa = PBXBuildFile; fileRef = 072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */; };
+		07269B681F04201F0041D355 /* STEditProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07269B671F04201F0041D355 /* STEditProfileTVC.m */; };
 		0726C6D71F0228B800E787EA /* STSnackBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0726C6D61F0228B800E787EA /* STSnackBar.xib */; };
 		0726C6DA1F0228D200E787EA /* STSnackBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726C6D91F0228D200E787EA /* STSnackBar.m */; };
 		0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726C6DC1F022B0F00E787EA /* STSnackBarService.m */; };
@@ -289,6 +290,8 @@
 		0722C01A1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhiteNavBarViewController.m; sourceTree = "<group>"; };
 		072443AC1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsEmptyWardrobe.h; sourceTree = "<group>"; };
 		072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsEmptyWardrobe.m; sourceTree = "<group>"; };
+		07269B661F04201F0041D355 /* STEditProfileTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditProfileTVC.h; sourceTree = "<group>"; };
+		07269B671F04201F0041D355 /* STEditProfileTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEditProfileTVC.m; sourceTree = "<group>"; };
 		0726C6D61F0228B800E787EA /* STSnackBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STSnackBar.xib; sourceTree = "<group>"; };
 		0726C6D81F0228D200E787EA /* STSnackBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSnackBar.h; sourceTree = "<group>"; };
 		0726C6D91F0228D200E787EA /* STSnackBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSnackBar.m; sourceTree = "<group>"; };
@@ -1682,6 +1685,8 @@
 			children = (
 				99B387351C82FAA2005B4D8C /* STEditProfileViewController.h */,
 				99B387361C82FAA2005B4D8C /* STEditProfileViewController.m */,
+				07269B661F04201F0041D355 /* STEditProfileTVC.h */,
+				07269B671F04201F0041D355 /* STEditProfileTVC.m */,
 				99B387371C82FAA2005B4D8C /* STSettingsViewController.h */,
 				99B387381C82FAA2005B4D8C /* STSettingsViewController.m */,
 			);
@@ -2008,6 +2013,7 @@
 				0722C01B1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m in Sources */,
 				17648B941E50F1F200D9C428 /* STCatalogCategory.m in Sources */,
 				99B387C71C82FAA2005B4D8C /* STLoginViewController.m in Sources */,
+				07269B681F04201F0041D355 /* STEditProfileTVC.m in Sources */,
 				0722BE9F1EBCEFC100BE8CC2 /* STTagProductCell.m in Sources */,
 				99B387561C82FAA2005B4D8C /* STGetSuggestUsersRequest.m in Sources */,
 				99B387DB1C82FAA2005B4D8C /* STZoomablePostViewController.m in Sources */,

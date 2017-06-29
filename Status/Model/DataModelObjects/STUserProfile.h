@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSDate * birthday;
 @property (nonatomic, strong) NSDate * lastActive;
 
+@property (nonatomic, strong) NSString *username;
+
 @property (nonatomic, assign) BOOL isActive;
 @property (nonatomic, assign) BOOL wasNeverActive;
 
@@ -34,6 +36,8 @@
 @property (nonatomic, assign) NSInteger numberOfPosts;
 
 @property (nonatomic, assign) STProfileGender profileGender;
+@property (nonatomic, strong) NSString *gender;
+
 @property (nonatomic, strong) NSString *profileShareUrl;
 
 + (instancetype)userProfileWithDict:(NSDictionary *)userDict;
@@ -41,4 +45,6 @@
 - (STListUser *)listUserFromProfile;
 
 - (NSString *)genderImage;
+- (NSString *)genderString;
+
 @end

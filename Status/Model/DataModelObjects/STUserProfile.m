@@ -48,16 +48,17 @@
     _followersCount = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followersCount"] integerValue];
     _followingCount = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followingCount"] integerValue];
     _isFollowedByCurrentUser = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followed_by_current_user"] boolValue];
-#warning check the parameter from server
-    _profileShareUrl = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"profile_share_url"];
+    _profileShareUrl = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"short_url"];
+    _username = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"username"];
     //super properties
     self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"] stringByReplacingHttpWithHttps];
     self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
     self.imageSize = CGSizeZero;
-
-    NSString *userGender = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_gender"];
-
-    self.profileGender = [self genderFromString:userGender];
+    _gender = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"gender"];
+    if (!_gender) {
+        _gender = @"other";
+    }
+    self.profileGender = [self genderFromString:_gender];
 }
 
 - (STListUser *)listUserFromProfile{
@@ -75,5 +76,19 @@
 
 - (NSString *)genderImage{
     return [self genderImageNameForGender:self.profileGender];
+}
+- (NSString *)genderString{
+    switch (self.profileGender) {
+        case STProfileGenderMale:
+            return NSLocalizedString(@"Male", nil);
+            break;
+        case STProfileGenderFemale:
+            return NSLocalizedString(@"Female", nil);
+            break;
+        default:
+            break;
+    }
+    
+    return NSLocalizedString(@"Other", nil);
 }
 @end

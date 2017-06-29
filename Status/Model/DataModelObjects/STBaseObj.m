@@ -17,7 +17,7 @@
 - (NSString *)genderImageNameForGender:(STProfileGender)gender{
     NSString *imageName = @"boy";
     switch (gender) {
-        case STProfileGenderUndefined:
+        case STProfileGenderOther:
         case STProfileGenderMale:
             imageName = @"boy";
             break;
@@ -32,10 +32,13 @@
 }
 
 - (STProfileGender)genderFromString:(NSString *)genderString{
-    STProfileGender gender = STProfileGenderMale;
+    STProfileGender gender = STProfileGenderOther;
     
     if ([genderString isEqualToString:@"female"]) {
         gender = STProfileGenderFemale;
+    }
+    else if ([genderString isEqualToString:@"male"]){
+        gender = STProfileGenderMale;
     }
     
     return gender;

@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) STUserProfile * userProfile;
 
-+ (STEditProfileViewController *)newControllerWithUserId:(NSString *)userId;
++ (STEditProfileViewController *)newController;
 
 
 @end

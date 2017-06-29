@@ -14,9 +14,9 @@
 //extern NSString * const kObjectUuidForNothingToDisplay;
 
 typedef NS_ENUM(NSUInteger, STProfileGender) {
-    STProfileGenderUndefined = 0,
-    STProfileGenderMale,
+    STProfileGenderMale = 0,
     STProfileGenderFemale,
+    STProfileGenderOther
 };
 
 @interface STBaseObj : NSObject

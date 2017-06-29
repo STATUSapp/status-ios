@@ -8,40 +8,25 @@
 
 #import "STUpdateUserProfileRequest.h"
 
+@interface STUpdateUserProfileRequest ()
+
+@property (nonatomic, strong) STUserProfile *userProfile;
+
+@end
+
 @implementation STUpdateUserProfileRequest
 
-+ (void)updateUserProfileWithFirstName:(NSString *)firstName
-                              lastName:(NSString *)lastName
-                              fullName:(NSString *)fullName
-                          homeLocation:(NSString *)location
-                                   bio:(NSString *)bio
-                        withCompletion:(STRequestCompletionBlock)completion
-                               failure:(STRequestFailureBlock)failure {
++ (void)updateUserProfileWithProfile:(STUserProfile *)userProfile
+                      withCompletion:(STRequestCompletionBlock)completion
+                             failure:(STRequestFailureBlock)failure {
     
     STUpdateUserProfileRequest *request = [STUpdateUserProfileRequest new];
     request.completionBlock = completion;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
-    
-    NSMutableDictionary * paramsDict = [request getDictParamsWithToken];
-    if (firstName.length) {
-        paramsDict[@"firstname"] = firstName;
-    }
-    if (lastName.length) {
-        paramsDict[@"lastname"] = lastName;
-    }
-    if (fullName.length) {
-        paramsDict[@"fullname"] = fullName;
-    }
-    if (location.length) {
-        paramsDict[@"location"] = location;
-    }
-    if (bio.length) {
-        paramsDict[@"bio"] = bio;
-    }
-    request.paramsDict = paramsDict;
-    
+    request.userProfile = userProfile;
+
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -50,10 +35,30 @@
     __weak STUpdateUserProfileRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
+        NSMutableDictionary * paramsDict = [weakSelf getDictParamsWithToken];
+        if (weakSelf.userProfile.firstname) {
+            paramsDict[@"firstname"] = weakSelf.userProfile.firstname;
+        }
+        if (weakSelf.userProfile.lastName) {
+            paramsDict[@"lastname"] = weakSelf.userProfile.lastName;
+        }
+        if (weakSelf.userProfile.fullName) {
+            paramsDict[@"fullname"] = weakSelf.userProfile.fullName;
+        }
+        if (weakSelf.userProfile.bio) {
+            paramsDict[@"bio"] = weakSelf.userProfile.bio;
+        }
+        if (weakSelf.userProfile.username) {
+            paramsDict[@"username"] = weakSelf.userProfile.username;
+        }
+        if (weakSelf.userProfile.gender) {
+            paramsDict[@"gender"] = weakSelf.userProfile.gender;
+        }
+        
         NSString *url = [weakSelf urlString];
         
         [[STNetworkQueueManager networkAPI] POST:url
-                                    parameters:weakSelf.paramsDict
+                                    parameters:paramsDict
                                         progress:nil
                                        success:weakSelf.standardSuccessBlock
                                        failure:weakSelf.standardErrorBlock];
