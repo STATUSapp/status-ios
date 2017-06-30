@@ -19,6 +19,37 @@
     return userProfile;
 }
 
++ (instancetype)copyUserProfile:(STUserProfile *)profile{
+    STUserProfile * userProfile = [[STUserProfile alloc] init];
+    userProfile.uuid = profile.uuid;
+    userProfile.appVersion = profile.appVersion;
+    userProfile.bio = profile.bio;
+    userProfile.birthday = profile.birthday;
+    userProfile.isActive = profile.isActive;
+    userProfile.wasNeverActive = profile.wasNeverActive;
+    userProfile.lastActive = profile.lastActive;
+    userProfile.firstname = profile.firstname;
+    userProfile.fullName = profile.fullName;
+    userProfile.lastName = profile.lastName;
+    userProfile.homeLocation = profile.homeLocation;
+    userProfile.latitude = profile.latitude;
+    userProfile.longitude = profile.longitude;
+    userProfile.numberOfPosts = profile.numberOfPosts;
+    userProfile.followersCount = profile.followersCount;
+    userProfile.followingCount = profile.followingCount;
+    userProfile.isFollowedByCurrentUser = profile.isFollowedByCurrentUser;
+    userProfile.profileShareUrl = profile.profileShareUrl;
+    userProfile.username = profile.username;
+    userProfile.mainImageUrl = profile.mainImageUrl;
+    userProfile.mainImageDownloaded = profile.mainImageDownloaded;
+    userProfile.imageSize = profile.imageSize;
+    userProfile.gender = profile.gender;
+    userProfile.profileGender = profile.profileGender;
+    
+    return userProfile;
+}
+
+
 - (void)setupWithDict:(NSDictionary *)userDict {
     self.uuid = [CreateDataModelHelper validStringIdentifierFromValue:userDict[@"user_id"]];
     self.appVersion = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"app_version"];

@@ -545,6 +545,7 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
 - (void)profileUpdated:(NSNotification *)notif{
     NSString *profileId = notif.userInfo[kUserIdKey];
+    _userProfile = [[CoreManager profilePool] getUserProfileWithId:profileId];
     if ([_userId isEqualToString:profileId]) {
         for (NSString *postId in _objectIds) {
             STPost *post = [[CoreManager postsPool] getPostWithId:postId];

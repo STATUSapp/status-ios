@@ -58,6 +58,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)resignCurrentField{
+    //validations
+    NSString *errorMessage;
+    if ([_txtFieldName.text length] == 0) {
+        errorMessage = NSLocalizedString(@"Full Name cannot be empty.", nil);
+    }
+ 
+    if ([_txtFieldUserName.text length] == 0) {
+        errorMessage = NSLocalizedString(@"Username cannot be empty.", nil);
+    }
+
+    if (errorMessage) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self.parentViewController presentViewController:alert animated:YES completion:nil];
+        return NO;
+    }
+
+    _userProfile.fullName = _txtFieldName.text;
+    _userProfile.username = _txtFieldUserName.text;
+    _userProfile.bio = _txtViewBio.text;
+    
+    [self.view endEditing:YES];
+    
+    return YES;
+}
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

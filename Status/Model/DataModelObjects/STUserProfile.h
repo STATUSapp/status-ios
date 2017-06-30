@@ -41,6 +41,7 @@
 @property (nonatomic, strong) NSString *profileShareUrl;
 
 + (instancetype)userProfileWithDict:(NSDictionary *)userDict;
++ (instancetype)copyUserProfile:(STUserProfile *)profile;
 
 - (STListUser *)listUserFromProfile;
 

@@ -13,4 +13,5 @@
 
 @property (nonatomic, strong) STUserProfile * userProfile;
 
+- (BOOL)resignCurrentField;
 @end

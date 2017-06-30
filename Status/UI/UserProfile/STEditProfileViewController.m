@@ -10,6 +10,7 @@
 #import "STUpdateUserProfileRequest.h"
 #import "STUserProfilePool.h"
 #import "STEditProfileTVC.h"
+#import "STLocalNotificationService.h"
 
 const NSInteger kMaxNumberOfCharacters = 150;
 const NSInteger kDefaultValueForTopConstraint = 26;
@@ -18,6 +19,7 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 //@property (weak, nonatomic) IBOutlet UILabel *counterLabel;
 @property (nonatomic, strong) STUserProfile *formUserProfile;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (nonatomic, strong) STEditProfileTVC *childViewController;
 @end
 
 @implementation STEditProfileViewController
@@ -44,11 +46,15 @@ const NSInteger kDefaultValueForTopConstraint = 26;
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)onTapSave:(id)sender {
+    if (![_childViewController resignCurrentField]) {
+        return;
+    }
     __weak STEditProfileViewController * weakSelf = self;
     [STUpdateUserProfileRequest updateUserProfileWithProfile:_formUserProfile
                                               withCompletion:^(id response, NSError *error) {
                                                   
                                                   if (!error) {
+                                                      weakSelf.userProfile.profileShareUrl = response[@"short_url"];
                                                       [[CoreManager profilePool] addProfiles:@[weakSelf.formUserProfile]];
                                                       UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Update Profile" message:@"Success!" preferredStyle:UIAlertControllerStyleAlert];
                                                       
@@ -77,11 +83,12 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"USER_PROFILE_TVC"]) {
-        STEditProfileTVC *vc = segue.destinationViewController;
+        _childViewController = segue.destinationViewController;
+        
         if (!_formUserProfile) {
-            _formUserProfile = [STUserProfile userProfileWithDict:_userProfile.infoDict];
+            _formUserProfile = [STUserProfile copyUserProfile:_userProfile];
         }
-        vc.userProfile = _formUserProfile;
+        _childViewController.userProfile = _formUserProfile;
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
