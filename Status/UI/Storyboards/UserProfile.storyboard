@@ -322,7 +322,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="500"/>
                     <connections>
-                        <outlet property="bioCell" destination="ZML-WX-LE9" id="gCS-mZ-5lJ"/>
                         <outlet property="pickerView" destination="FNo-IQ-MVN" id="cPa-t1-F0a"/>
                         <outlet property="profileImage" destination="Pgq-Wa-kuc" id="uly-hF-cez"/>
                         <outlet property="txtFieldGender" destination="DSP-7B-kc0" id="BGm-CZ-agL"/>
