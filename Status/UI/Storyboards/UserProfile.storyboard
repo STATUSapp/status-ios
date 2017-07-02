@@ -174,14 +174,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1A-yh-7NX">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1A-yh-7NX">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="sOz-cg-f5f"/>
+                                                    </constraints>
                                                     <state key="normal" image="User Name icon"/>
                                                 </button>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Denis Todirica" placeholder="Full Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxw-J9-GZd">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Denis Todirica" placeholder="Full Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxw-J9-GZd">
                                                     <rect key="frame" x="60" y="0.0" width="255" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
@@ -190,6 +191,15 @@
                                                     </connections>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Uxw-J9-GZd" secondAttribute="bottom" id="Afu-Sy-XAX"/>
+                                                <constraint firstAttribute="bottom" secondItem="j1A-yh-7NX" secondAttribute="bottom" id="CO7-mP-lDb"/>
+                                                <constraint firstItem="j1A-yh-7NX" firstAttribute="top" secondItem="fc6-2Q-fTl" secondAttribute="top" id="Pgq-yY-hc7"/>
+                                                <constraint firstAttribute="trailing" secondItem="Uxw-J9-GZd" secondAttribute="trailing" constant="5" id="X4P-93-Xsi"/>
+                                                <constraint firstItem="Uxw-J9-GZd" firstAttribute="leading" secondItem="j1A-yh-7NX" secondAttribute="trailing" id="nkI-Hk-rUu"/>
+                                                <constraint firstItem="Uxw-J9-GZd" firstAttribute="top" secondItem="fc6-2Q-fTl" secondAttribute="top" id="o2T-m1-fmY"/>
+                                                <constraint firstItem="j1A-yh-7NX" firstAttribute="leading" secondItem="fc6-2Q-fTl" secondAttribute="leading" id="tnY-cv-cbx"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
@@ -200,14 +210,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cQ-nk-7Fa">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cQ-nk-7Fa">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="HBm-FP-iIz"/>
+                                                    </constraints>
                                                     <state key="normal" image="User link icon"/>
                                                 </button>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="denistodirica" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cwt-cZ-rFm">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="denistodirica" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cwt-cZ-rFm">
                                                     <rect key="frame" x="60" y="0.0" width="255" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
@@ -216,6 +227,15 @@
                                                     </connections>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="cwt-cZ-rFm" secondAttribute="bottom" id="95w-FW-hSo"/>
+                                                <constraint firstItem="3cQ-nk-7Fa" firstAttribute="top" secondItem="scO-AH-QFj" secondAttribute="top" id="Jmu-Yd-aFr"/>
+                                                <constraint firstItem="cwt-cZ-rFm" firstAttribute="leading" secondItem="3cQ-nk-7Fa" secondAttribute="trailing" id="LIX-kk-nsn"/>
+                                                <constraint firstItem="cwt-cZ-rFm" firstAttribute="top" secondItem="scO-AH-QFj" secondAttribute="top" id="Ua6-Ep-GWK"/>
+                                                <constraint firstAttribute="bottom" secondItem="3cQ-nk-7Fa" secondAttribute="bottom" id="b2O-Lq-rWE"/>
+                                                <constraint firstItem="3cQ-nk-7Fa" firstAttribute="leading" secondItem="scO-AH-QFj" secondAttribute="leading" id="pmd-pk-9eP"/>
+                                                <constraint firstAttribute="trailing" secondItem="cwt-cZ-rFm" secondAttribute="trailing" constant="5" id="u0k-YT-FE1"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
@@ -226,14 +246,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvG-eY-9xX">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvG-eY-9xX">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="bmb-2l-gqo"/>
+                                                    </constraints>
                                                     <state key="normal" image="gender icon"/>
                                                 </button>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Male" placeholder="User Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DSP-7B-kc0">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Male" placeholder="User Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DSP-7B-kc0">
                                                     <rect key="frame" x="60" y="0.0" width="255" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -242,6 +263,15 @@
                                                     </connections>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DSP-7B-kc0" firstAttribute="leading" secondItem="tvG-eY-9xX" secondAttribute="trailing" id="4Tz-1r-bh4"/>
+                                                <constraint firstItem="tvG-eY-9xX" firstAttribute="leading" secondItem="mPr-Jj-qAJ" secondAttribute="leading" id="C5g-BK-cgd"/>
+                                                <constraint firstAttribute="bottom" secondItem="DSP-7B-kc0" secondAttribute="bottom" id="Pl3-ld-fUB"/>
+                                                <constraint firstAttribute="bottom" secondItem="tvG-eY-9xX" secondAttribute="bottom" id="SHG-xH-sXd"/>
+                                                <constraint firstItem="tvG-eY-9xX" firstAttribute="top" secondItem="mPr-Jj-qAJ" secondAttribute="top" id="USf-zR-amz"/>
+                                                <constraint firstItem="DSP-7B-kc0" firstAttribute="top" secondItem="mPr-Jj-qAJ" secondAttribute="top" id="ZBj-0m-GTN"/>
+                                                <constraint firstAttribute="trailing" secondItem="DSP-7B-kc0" secondAttribute="trailing" constant="5" id="bax-QP-KFe"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
@@ -252,14 +282,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTI-SN-Wco">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTI-SN-Wco">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="ftM-2s-S8C"/>
+                                                    </constraints>
                                                     <state key="normal" image="Info icon"/>
                                                 </button>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium " translatesAutoresizingMaskIntoConstraints="NO" id="Yps-Mx-DF6">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium " translatesAutoresizingMaskIntoConstraints="NO" id="Yps-Mx-DF6">
                                                     <rect key="frame" x="60" y="0.0" width="255" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
@@ -268,6 +299,15 @@
                                                     </connections>
                                                 </textView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="NTI-SN-Wco" firstAttribute="top" secondItem="lJ9-ty-Oai" secondAttribute="top" id="Obi-IQ-5Hf"/>
+                                                <constraint firstItem="NTI-SN-Wco" firstAttribute="leading" secondItem="lJ9-ty-Oai" secondAttribute="leading" id="P5X-if-5yt"/>
+                                                <constraint firstItem="Yps-Mx-DF6" firstAttribute="top" secondItem="lJ9-ty-Oai" secondAttribute="top" id="W8E-Ku-19v"/>
+                                                <constraint firstAttribute="bottom" secondItem="Yps-Mx-DF6" secondAttribute="bottom" id="axj-vZ-KKu"/>
+                                                <constraint firstItem="Yps-Mx-DF6" firstAttribute="leading" secondItem="NTI-SN-Wco" secondAttribute="trailing" id="jyg-Z4-SkU"/>
+                                                <constraint firstAttribute="trailing" secondItem="Yps-Mx-DF6" secondAttribute="trailing" constant="5" id="nZE-vr-y92"/>
+                                                <constraint firstAttribute="bottom" secondItem="NTI-SN-Wco" secondAttribute="bottom" id="obl-rZ-QJz"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
@@ -282,6 +322,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="500"/>
                     <connections>
+                        <outlet property="bioCell" destination="ZML-WX-LE9" id="gCS-mZ-5lJ"/>
                         <outlet property="pickerView" destination="FNo-IQ-MVN" id="cPa-t1-F0a"/>
                         <outlet property="profileImage" destination="Pgq-Wa-kuc" id="uly-hF-cez"/>
                         <outlet property="txtFieldGender" destination="DSP-7B-kc0" id="BGm-CZ-agL"/>
@@ -301,23 +342,6 @@
                 </pickerView>
             </objects>
             <point key="canvasLocation" x="1001.6" y="-1312.4437781109445"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="7f9-BB-Kyf">
-            <objects>
-                <viewController id="31q-Ja-U5u" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JQm-PG-anN"/>
-                        <viewControllerLayoutGuide type="bottom" id="an9-wF-3E1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WfB-E3-SNo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d5X-2a-3zz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

@@ -35,6 +35,8 @@
                                NSLocalizedString(@"Other", nil)];
     [self setupVisualsWithUserProfile:_userProfile];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 48.f;
 }
 
 - (void)setupVisualsWithUserProfile:(STUserProfile *)profile {
@@ -56,6 +58,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1 &&
+        indexPath.row == 3) {
+//        UITableViewCell *cell = [super tableView:self.tableView
+//                           cellForRowAtIndexPath:indexPath];
+//        NSLog(@"Cell : %@", NSStringFromCGSize([_txtViewBio contentSize]));
+        return [_txtViewBio contentSize].height;
+    }
+    
+    return [super tableView:self.tableView
+   heightForRowAtIndexPath:indexPath];
 }
 
 - (BOOL)resignCurrentField{
@@ -124,6 +140,15 @@
     if (textView == _txtViewBio) {
         _userProfile.bio = textView.text;
     }
+}
+
+-(void)textViewDidChange:(UITextView *)textView{
+    [UIView setAnimationsEnabled:NO];
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
+    [UIView setAnimationsEnabled:YES];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
