@@ -227,9 +227,6 @@
             if (info[@"about"]!=nil) {
                 userInfo[@"bio"] = info[@"about"];
             }
-            if (info[@"location"][@"name"]!=nil) {
-                userInfo[@"location"] = info[@"location"][@"name"];
-            }
             _fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
             [STLoginRequest loginWithUserInfo:userInfo
                                withCompletion:loginCompletion

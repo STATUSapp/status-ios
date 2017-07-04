@@ -30,17 +30,17 @@ PODS:
     - Fabric (~> 1.6.3)
   - DGActivityIndicatorView (2.1.1)
   - Fabric (1.6.11)
-  - FBAudienceNetwork (4.23.0)
-  - FBSDKCoreKit (4.23.0):
+  - FBAudienceNetwork (4.24.0)
+  - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.23.0):
+  - FBSDKLoginKit (4.24.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.23.0):
+  - FBSDKShareKit (4.24.0):
     - FBSDKCoreKit
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - Tune (4.12.4)
+  - Tune (4.12.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -65,12 +65,12 @@ SPEC CHECKSUMS:
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   DGActivityIndicatorView: ff2c76073d79692f724863c8dd38685866a03cb6
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  FBAudienceNetwork: 20a0e3d20e377dbb6708365e4c6d0711bf08ca97
-  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
-  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
-  FBSDKShareKit: 65751c3b9937ab9d594e6c37611ecc115ceeb448
+  FBAudienceNetwork: 740792924c6bcc5a59dc26fbafc9fd950bebed7d
+  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
+  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
+  FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  Tune: f6c5dc67a7ca8f574e4a64165783326acea9bf89
+  Tune: 5fb2aea8bc141ceb47aef2c6cdc8de5885cb44cf
 
 PODFILE CHECKSUM: cf655cd4b2279a89fed45fd73f6f10bd1bbc7df0
 
