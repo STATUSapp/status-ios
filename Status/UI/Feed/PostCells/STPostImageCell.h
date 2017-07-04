@@ -15,5 +15,6 @@
 - (void) configureCellWithPost:(STPost *)post;
 - (void)configureForSection:(NSInteger)sectionIndex;
 + (CGSize)celSizeForPost:(STPost *)post;
+-(void) animateLikedImage;
 
 @end

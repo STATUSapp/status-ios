@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,6 +29,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="knr-t8-3Sm">
                             <size key="itemSize" width="320" height="480"/>
                             <size key="headerReferenceSize" width="320" height="58"/>
@@ -44,6 +46,7 @@
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl" translatesAutoresizingMaskIntoConstraints="NO" id="BaU-l3-KLL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                            <gestureRecognizers/>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_photo_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="ILD-rb-6Es">
                                             <rect key="frame" x="0.0" y="192" width="320" height="128"/>
@@ -528,9 +531,17 @@
                                                         <action selector="onShopButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="Gyj-Dn-e0I"/>
                                                     </connections>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like_pressed" translatesAutoresizingMaskIntoConstraints="NO" id="qna-OC-2fZ">
+                                                    <rect key="frame" x="140" y="140" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="a9S-kW-6Nq"/>
+                                                        <constraint firstAttribute="width" secondItem="qna-OC-2fZ" secondAttribute="height" multiplier="40:40" id="bRa-dr-62a"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
+                                                <constraint firstItem="qna-OC-2fZ" firstAttribute="centerX" secondItem="7YZ-cc-HDN" secondAttribute="centerX" id="2i2-DC-qcC"/>
                                                 <constraint firstAttribute="bottom" secondItem="ph3-BZ-jbg" secondAttribute="bottom" constant="16" id="3Z0-fW-6bl"/>
                                                 <constraint firstAttribute="bottom" secondItem="qps-UM-Jij" secondAttribute="bottom" constant="16" id="3fA-qx-sRg"/>
                                                 <constraint firstItem="JNO-sK-ezf" firstAttribute="top" secondItem="7YZ-cc-HDN" secondAttribute="top" id="8bo-xw-91l"/>
@@ -545,6 +556,7 @@
                                                 <constraint firstItem="ENs-uA-bc2" firstAttribute="centerX" secondItem="7YZ-cc-HDN" secondAttribute="centerX" id="aUT-Te-e5g"/>
                                                 <constraint firstItem="LY4-gv-Dq1" firstAttribute="leading" secondItem="7YZ-cc-HDN" secondAttribute="leading" id="alE-yO-JxP"/>
                                                 <constraint firstItem="ph3-BZ-jbg" firstAttribute="leading" secondItem="7YZ-cc-HDN" secondAttribute="leading" constant="16" id="d5W-pX-I9d"/>
+                                                <constraint firstItem="qna-OC-2fZ" firstAttribute="centerY" secondItem="7YZ-cc-HDN" secondAttribute="centerY" id="joh-MT-hhY"/>
                                                 <constraint firstItem="Nv4-We-BjT" firstAttribute="leading" secondItem="7YZ-cc-HDN" secondAttribute="leading" id="lS3-0P-FcE"/>
                                                 <constraint firstAttribute="trailing" secondItem="Nv4-We-BjT" secondAttribute="trailing" id="wqN-7v-jbW"/>
                                                 <constraint firstAttribute="bottom" secondItem="JNO-sK-ezf" secondAttribute="bottom" id="yby-DL-KgF"/>
@@ -563,6 +575,8 @@
                                     <outlet property="activityIndicator" destination="ENs-uA-bc2" id="2i8-C7-pdC"/>
                                     <outlet property="blurEffectView" destination="JNO-sK-ezf" id="W9k-Ae-Sbr"/>
                                     <outlet property="downShadow" destination="Nv4-We-BjT" id="nhw-9H-6yz"/>
+                                    <outlet property="likedImage" destination="qna-OC-2fZ" id="mBn-II-7bX"/>
+                                    <outlet property="linkedImageWidthConstr" destination="a9S-kW-6Nq" id="f9H-5D-cJI"/>
                                     <outlet property="postImage" destination="LY4-gv-Dq1" id="dFK-NT-Hb9"/>
                                     <outlet property="postLikeButton" destination="ph3-BZ-jbg" id="FsC-ZP-F9H"/>
                                     <outlet property="postShopButton" destination="qps-UM-Jij" id="uXt-2P-fxG"/>
@@ -803,6 +817,7 @@
                         <connections>
                             <outlet property="dataSource" destination="kUw-q3-wvD" id="2Xt-Uc-hjq"/>
                             <outlet property="delegate" destination="kUw-q3-wvD" id="l0v-Dx-vNH"/>
+                            <outletCollection property="gestureRecognizers" destination="AxN-ZE-6dH" appends="YES" id="Bd3-eF-fbP"/>
                         </connections>
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -923,6 +938,11 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
+                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="AxN-ZE-6dH">
+                    <connections>
+                        <action selector="onDoubleTap:" destination="kUw-q3-wvD" id="NOc-8k-7kn"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1209.5999999999999" y="1175.7121439280361"/>
         </scene>

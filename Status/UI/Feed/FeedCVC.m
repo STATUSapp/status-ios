@@ -728,17 +728,34 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 #pragma mark - IBACtions
+
+-(IBAction)onDoubleTap:(id)sender{
+    CGPoint tappedPoint = [sender locationInView:self.collectionView];
+    NSIndexPath *tappedCellPath = [self.collectionView indexPathForItemAtPoint:tappedPoint];
+    
+    if (tappedCellPath)
+    {
+        if(tappedCellPath.item == STPostImage) {
+            STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
+            __block STPost *post = [_feedProcessor objectAtIndex:tappedCellPath.section];
+            if (!post.postLikedByCurrentUser) {
+                [_feedProcessor setLikeUnlikeAtIndex:tappedCellPath.section
+                                      withCompletion:^(NSError *error) {
+                                          NSLog(@"Post liked!");
+                                          [cell animateLikedImage];
+                                      }];
+            }
+        }
+    }
+}
+
 - (IBAction)onLikePressed:(id)sender {
     [(UIButton *)sender setUserInteractionEnabled:NO];
-    __weak FeedCVC *weakSelf = self;
     NSInteger index = [self getCurrentIndexForButton:sender];
     [_feedProcessor setLikeUnlikeAtIndex:index
                           withCompletion:^(NSError *error) {
+                              NSLog(@"Post liked!");
                               [(UIButton *)sender setUserInteractionEnabled:YES];
-                              STPost *post = [weakSelf.feedProcessor objectAtIndex:index];
-                              if (post.postLikedByCurrentUser == YES &&
-                                  [weakSelf.feedProcessor numberOfObjects] > index + 1) {
-                              }
                           }];
 }
 //- (IBAction)onMessagePressed:(id)sender {

@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *postLikeButton;
 @property (weak, nonatomic) IBOutlet UIButton *postShopButton;
 @property (weak, nonatomic) IBOutlet UIImageView *downShadow;
+@property (weak, nonatomic) IBOutlet UIImageView *likedImage;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *linkedImageWidthConstr;
 
 @end
 
@@ -30,6 +32,7 @@
     _activityIndicator.tintColor = [UIColor blackColor];
     _activityIndicator.type = DGActivityIndicatorAnimationTypeBallClipRotate;
     [_activityIndicator startAnimating];
+    _likedImage.hidden = YES;
 }
 
 -(void)prepareForReuse{
@@ -64,6 +67,21 @@
 - (void)configureForSection:(NSInteger)sectionIndex{
     _postLikeButton.tag = sectionIndex;
     _postShopButton.tag = sectionIndex;
+}
+
+-(void) animateLikedImage{
+    _linkedImageWidthConstr.constant = 15;
+    _likedImage.hidden = NO;
+    _likedImage.alpha = 1.f;
+    [_likedImage layoutIfNeeded];
+    _linkedImageWidthConstr.constant = 40.f;
+    [UIView animateWithDuration:1.f
+                     animations:^{
+                         _likedImage.alpha = 0.f;
+                         [self.contentView layoutIfNeeded];
+                     } completion:^(BOOL finished) {
+                         _likedImage.hidden = YES;
+                     }];
 }
 
 + (CGSize)celSizeForPost:(STPost *)post{
