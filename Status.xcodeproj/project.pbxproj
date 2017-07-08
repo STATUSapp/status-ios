@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070ABB191F11337000CAD9C1 /* STWithdrawDetailsObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 070ABB181F11337000CAD9C1 /* STWithdrawDetailsObj.m */; };
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
 		0721E8A41EC4DF6D00DF78D4 /* STTagCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721E8A31EC4DF6D00DF78D4 /* STTagCustomView.m */; };
 		0722BE9F1EBCEFC100BE8CC2 /* STTagProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722BE9E1EBCEFC100BE8CC2 /* STTagProductCell.m */; };
 		0722BEA21EBCEFFF00BE8CC2 /* STTagProductsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722BEA11EBCEFFF00BE8CC2 /* STTagProductsViewController.m */; };
 		0722C01B1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722C01A1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m */; };
+		0722F3431F0CB2A500B78823 /* STUserCommissionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722F3421F0CB2A500B78823 /* STUserCommissionsRequest.m */; };
+		0722F3461F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722F3451F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m */; };
+		0722F3491F0CB8B600B78823 /* STCommission.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722F3481F0CB8B600B78823 /* STCommission.m */; };
 		072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */ = {isa = PBXBuildFile; fileRef = 072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */; };
 		07269B681F04201F0041D355 /* STEditProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07269B671F04201F0041D355 /* STEditProfileTVC.m */; };
 		0726C6D71F0228B800E787EA /* STSnackBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0726C6D61F0228B800E787EA /* STSnackBar.xib */; };
@@ -279,6 +283,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		070ABB171F11337000CAD9C1 /* STWithdrawDetailsObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWithdrawDetailsObj.h; sourceTree = "<group>"; };
+		070ABB181F11337000CAD9C1 /* STWithdrawDetailsObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWithdrawDetailsObj.m; sourceTree = "<group>"; };
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0721E8A21EC4DF6D00DF78D4 /* STTagCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagCustomView.h; sourceTree = "<group>"; };
 		0721E8A31EC4DF6D00DF78D4 /* STTagCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagCustomView.m; sourceTree = "<group>"; };
@@ -288,6 +294,12 @@
 		0722BEA11EBCEFFF00BE8CC2 /* STTagProductsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsViewController.m; sourceTree = "<group>"; };
 		0722C0191ECE4AFE00A15E08 /* STWhiteNavBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWhiteNavBarViewController.h; sourceTree = "<group>"; };
 		0722C01A1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWhiteNavBarViewController.m; sourceTree = "<group>"; };
+		0722F3411F0CB2A500B78823 /* STUserCommissionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserCommissionsRequest.h; sourceTree = "<group>"; };
+		0722F3421F0CB2A500B78823 /* STUserCommissionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserCommissionsRequest.m; sourceTree = "<group>"; };
+		0722F3441F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserWithDrawnDetailsRequest.h; sourceTree = "<group>"; };
+		0722F3451F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserWithDrawnDetailsRequest.m; sourceTree = "<group>"; };
+		0722F3471F0CB8B600B78823 /* STCommission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCommission.h; sourceTree = "<group>"; };
+		0722F3481F0CB8B600B78823 /* STCommission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCommission.m; sourceTree = "<group>"; };
 		072443AC1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsEmptyWardrobe.h; sourceTree = "<group>"; };
 		072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsEmptyWardrobe.m; sourceTree = "<group>"; };
 		07269B661F04201F0041D355 /* STEditProfileTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditProfileTVC.h; sourceTree = "<group>"; };
@@ -1249,6 +1261,10 @@
 				072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */,
 				072BACB61E81012D0055B6F3 /* STGetUsedSuggestionsRequest.h */,
 				072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */,
+				0722F3411F0CB2A500B78823 /* STUserCommissionsRequest.h */,
+				0722F3421F0CB2A500B78823 /* STUserCommissionsRequest.m */,
+				0722F3441F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.h */,
+				0722F3451F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1368,6 +1384,10 @@
 				17648B931E50F1F200D9C428 /* STCatalogCategory.m */,
 				17648B981E50F49F00D9C428 /* STBrandObj.h */,
 				17648B991E50F49F00D9C428 /* STBrandObj.m */,
+				0722F3471F0CB8B600B78823 /* STCommission.h */,
+				0722F3481F0CB8B600B78823 /* STCommission.m */,
+				070ABB171F11337000CAD9C1 /* STWithdrawDetailsObj.h */,
+				070ABB181F11337000CAD9C1 /* STWithdrawDetailsObj.m */,
 			);
 			path = DataModelObjects;
 			sourceTree = "<group>";
@@ -2013,12 +2033,14 @@
 				0722C01B1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m in Sources */,
 				17648B941E50F1F200D9C428 /* STCatalogCategory.m in Sources */,
 				99B387C71C82FAA2005B4D8C /* STLoginViewController.m in Sources */,
+				070ABB191F11337000CAD9C1 /* STWithdrawDetailsObj.m in Sources */,
 				07269B681F04201F0041D355 /* STEditProfileTVC.m in Sources */,
 				0722BE9F1EBCEFC100BE8CC2 /* STTagProductCell.m in Sources */,
 				99B387561C82FAA2005B4D8C /* STGetSuggestUsersRequest.m in Sources */,
 				99B387DB1C82FAA2005B4D8C /* STZoomablePostViewController.m in Sources */,
 				99B3874A1C82FAA2005B4D8C /* STDeletePostRequest.m in Sources */,
 				99B387791C82FAA2005B4D8C /* STInviteController.m in Sources */,
+				0722F3431F0CB2A500B78823 /* STUserCommissionsRequest.m in Sources */,
 				99B3875C1C82FAA2005B4D8C /* STInviteFriendsByEmailRequest.m in Sources */,
 				075C52A21EBF4E2F00174CC5 /* STTagAddProductCell.m in Sources */,
 				99B387E01C82FAA2005B4D8C /* STSettingsViewController.m in Sources */,
@@ -2094,6 +2116,7 @@
 				99B387A71C82FAA2005B4D8C /* SRWebSocket.m in Sources */,
 				99B387C61C82FAA2005B4D8C /* STSMSEmailInviterViewController.m in Sources */,
 				170912291DF87FAC00B2AF81 /* STCustomSegment.m in Sources */,
+				0722F3461F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m in Sources */,
 				99B387D61C82FAA2005B4D8C /* STFacebookAlbumCell.m in Sources */,
 				075C52991EBDD25000174CC5 /* STTagBrandCell.m in Sources */,
 				99B3876D1C82FAA2005B4D8C /* STBaseRequest.m in Sources */,
@@ -2119,6 +2142,7 @@
 				173A29511C9FF64500157945 /* STConversationUser.m in Sources */,
 				99B387DE1C82FAA2005B4D8C /* STTutorialViewController.m in Sources */,
 				99B387A81C82FAA2005B4D8C /* UITableView+SPXRevealAdditions.m in Sources */,
+				0722F3491F0CB8B600B78823 /* STCommission.m in Sources */,
 				170912211DF87F5C00B2AF81 /* STNotificationCell.m in Sources */,
 				07B053F11EDE867F0045AD7B /* NSString+Links.m in Sources */,
 				99B387D81C82FAA2005B4D8C /* STFacebookAlbumsViewController.m in Sources */,

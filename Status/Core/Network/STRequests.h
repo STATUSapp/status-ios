@@ -39,6 +39,8 @@
 #import "STGetSuggestionsRequest.h"
 #import "STGetUsedSuggestionsRequest.h"
 #import "STGetUsedCatalogCategoriesRequest.h"
+#import "STUserCommissionsRequest.h"
+#import "STUserWithDrawnDetailsRequest.h"
 
 #endif
 
