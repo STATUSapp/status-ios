@@ -46,6 +46,8 @@
 #import "STPostShopProductsCell.h"
 
 #import "STSnackBarService.h"
+#import "STDeepLinkService.h"
+#import "STNavigationService.h"
 
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
@@ -115,10 +117,28 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 - (void)configureNavigationBar{
     BOOL navBarHidden = YES;
+    
     if (_feedProcessor.loading == NO &&
-        _feedProcessor.processorFlowType == STFlowTypeHome) {
+        (_feedProcessor.processorFlowType == STFlowTypeHome ||
+        _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
         navBarHidden = NO;
     }
+
+    if (navBarHidden == NO) {
+        UIViewController *currentViewController = [self.navigationController.viewControllers lastObject];
+        if (self == currentViewController) {
+            if (_feedProcessor.processorFlowType == STFlowTypeHome) {
+                self.navigationItem.titleView = _navBarLogoView;
+            }
+            else if (_feedProcessor.processorFlowType == STFlowTypeSinglePost)
+            {
+                //set tint color for the back button
+                [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+                self.navigationItem.title = NSLocalizedString(@"Photo", nil);
+            }
+        }
+    }
+
     [self setNeedsStatusBarAppearanceUpdate];
     [self.navigationController setNavigationBarHidden:navBarHidden animated:YES];
 }
@@ -239,8 +259,15 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (self.feedProcessor.processorFlowType == STFlowTypeHome) {
+        NSArray *redirectVC = [[CoreManager deepLinkService] redirectViewControllers];
+        if (redirectVC && [redirectVC count]) {
+            [[CoreManager navigationService] pushViewControllers:redirectVC
+                                                 inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:YES];
+        }
+    }
+    
     self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
-    self.navigationItem.titleView = _navBarLogoView;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.sectionHeadersPinToVisibleBounds = YES;

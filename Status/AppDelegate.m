@@ -100,7 +100,14 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     Branch *branch = [Branch getInstance];
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary * _Nullable params, NSError * _Nullable error) {
         if (!error && params) {
+//            NSDictionary *testDict = @{@"+clicked_branch_link":@(0),
+//                                       @"+is_first_session":@(0),
+//                                       @"+non_branch_link":@"getstatus://getstatusapp.co/300/26913"};
+//#ifdef DEBUG
+//            [[CoreManager deepLinkService] addParams:testDict];
+//#else
             [[CoreManager deepLinkService] addParams:params];
+//#endif
             NSLog(@"params: %@", params.description);
         }
     }];
