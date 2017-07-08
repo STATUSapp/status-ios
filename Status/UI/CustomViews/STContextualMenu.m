@@ -29,6 +29,9 @@ NSInteger const kShareViewTag = 1001;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (weak, nonatomic) IBOutlet UIButton *askUserBtn;
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
+@property (weak, nonatomic) IBOutlet UIImageView *reportPostLine;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *reportPostHeightConstr;
+@property (weak, nonatomic) IBOutlet UIButton *reportPostButton;
 
 @property (nonatomic, weak) id <STContextualMenuDelegate>delegate;
 @end
@@ -112,11 +115,12 @@ NSInteger const kShareViewTag = 1001;
 -(void) setUpForExtendedRights:(BOOL)extendedRights{
 
     _constrDeleteHeight.constant = _constrMoveScaleHeight.constant = _constrEditHeight.constant = (extendedRights ? kDefaultButtonHeight : 0);
-    _constrAskUserHeight.constant = (!extendedRights ? kDefaultButtonHeight : 0);
+    _constrAskUserHeight.constant = _reportPostHeightConstr.constant = (!extendedRights ? kDefaultButtonHeight : 0);
     _deletaBtn.hidden = _moveScaleBtn.hidden = _editBtn.hidden = !extendedRights;
-    _askUserBtn.hidden = extendedRights;
+    _askUserBtn.hidden = _reportPostButton.hidden = extendedRights;
     _lineDelete.hidden = _lineMoveAndScale.hidden = _lineEdit.hidden = !extendedRights;
-    _askUserLine.hidden = extendedRights;
+    _askUserLine.hidden = _reportPostLine.hidden = extendedRights;
+    
 
 }
 

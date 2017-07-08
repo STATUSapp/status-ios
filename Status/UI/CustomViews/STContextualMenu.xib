@@ -323,6 +323,9 @@
                 <outlet property="lineEdit" destination="Y9R-1X-IKB" id="H9F-8N-O2K"/>
                 <outlet property="lineMoveAndScale" destination="PH3-HG-Pod" id="xty-52-qZT"/>
                 <outlet property="moveScaleBtn" destination="vNf-kU-Jer" id="yYj-KW-vhg"/>
+                <outlet property="reportPostButton" destination="KOU-gd-BIt" id="6mn-V8-tp3"/>
+                <outlet property="reportPostHeightConstr" destination="Tay-3S-HAR" id="5ke-xc-Hzt"/>
+                <outlet property="reportPostLine" destination="lVF-et-dqx" id="L51-0V-aoG"/>
                 <outlet property="shadowView" destination="h9b-m3-HbM" id="h5b-F3-MPN"/>
             </connections>
             <point key="canvasLocation" x="262" y="345"/>
