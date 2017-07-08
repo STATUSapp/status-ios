@@ -772,6 +772,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                                           [cell animateLikedImage];
                                       }];
             }
+            else
+            {
+                [cell animateLikedImage];
+            }
         }
     }
 }

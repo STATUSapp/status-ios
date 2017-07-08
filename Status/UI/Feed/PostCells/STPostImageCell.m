@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *downShadow;
 @property (weak, nonatomic) IBOutlet UIImageView *likedImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *linkedImageWidthConstr;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *linkButtonWidthConstr;
 
 @end
 
@@ -70,17 +71,26 @@
 }
 
 -(void) animateLikedImage{
-    _linkedImageWidthConstr.constant = 15;
+    _linkedImageWidthConstr.constant = 0.f;
     _likedImage.hidden = NO;
     _likedImage.alpha = 1.f;
-    [_likedImage layoutIfNeeded];
-    _linkedImageWidthConstr.constant = 40.f;
-    [UIView animateWithDuration:1.f
+    [self.contentView layoutIfNeeded];
+    _linkedImageWidthConstr.constant = 80.f;
+    [UIView animateWithDuration:0.7f
+                          delay:0.f
+                        options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         _likedImage.alpha = 0.f;
                          [self.contentView layoutIfNeeded];
                      } completion:^(BOOL finished) {
-                         _likedImage.hidden = YES;
+                         _linkedImageWidthConstr.constant = 70.f;
+                         [UIView animateWithDuration:0.2f
+                                          animations:^{
+                                              [self.contentView layoutIfNeeded];
+                                              _likedImage.alpha = 0.7;
+
+                                          } completion:^(BOOL finished) {
+                                              _likedImage.hidden = YES;
+                                          }];
                      }];
 }
 
