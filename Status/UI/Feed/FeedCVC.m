@@ -1058,29 +1058,13 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                 STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
                 viewController.imgData = UIImageJPEGRepresentation(origImg, 1.f);
                 viewController.post = post;
-                viewController.controllerType = STShareControllerEditCaption;
+                viewController.controllerType = STShareControllerEditInfo;
                 [self.navigationController pushViewController:viewController animated:YES];
             }
             
         }];
     }
 
-}
-
--(void)contextualMenuMoveAndScalePost{
-    STPost *post = [_feedProcessor objectAtIndex:postForContextIndex];
-    postForContextIndex = 0;
-    
-    if (post.mainImageDownloaded == YES) {
-        [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *img) {
-            if (img!=nil) {
-                STMoveScaleViewController *vc = [STMoveScaleViewController newControllerForImage:img shouldCompress:NO andPost:post];
-                
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-        }];
-        
-    }
 }
 
 -(void)contextualMenuReportPost{

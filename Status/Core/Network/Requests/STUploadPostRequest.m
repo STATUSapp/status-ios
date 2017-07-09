@@ -40,7 +40,8 @@
         if (weakSelf.postId) {
             params[@"post_id"] = weakSelf.postId;
         }
-        else if (weakSelf.caption) {
+        
+        if (weakSelf.caption) {
             params[@"caption"] = weakSelf.caption;
         }
         

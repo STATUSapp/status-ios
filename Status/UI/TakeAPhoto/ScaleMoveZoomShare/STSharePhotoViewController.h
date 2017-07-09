@@ -14,8 +14,7 @@
 typedef NS_ENUM(NSUInteger,STShareControllerType){
     STShareControllerNotDefined = 0,
     STShareControllerAddPost,
-    STShareControllerEditPost,
-    STShareControllerEditCaption
+    STShareControllerEditInfo
 };
 @interface STSharePhotoViewController : STWhiteNavBarViewController
 @property (nonatomic, strong) NSData *imgData;

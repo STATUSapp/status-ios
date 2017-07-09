@@ -13,7 +13,6 @@
 - (void)contextualMenuReportPost;
 - (void)contextualMenuDeletePost;
 - (void)contextualMenuEditPost;
-- (void)contextualMenuMoveAndScalePost;
 - (void)contextualMenuSavePostLocally;
 - (void)contextualMenuSharePostonFacebook;
 - (void)contextualMenuAskUserToUpload;

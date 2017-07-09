@@ -49,7 +49,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view layoutSubviews];
     _imageView = [[UIImageView alloc] initWithImage:_currentImg];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self setUpTheContext];
 }
 
@@ -75,7 +80,7 @@
     NSLog(@"Image Size: %@", NSStringFromCGSize(imageSize));
     self.scrollView.contentSize = imageSize;
     
-    CGRect scrollViewFrame = self.view.bounds;
+    CGRect scrollViewFrame = self.scrollView.bounds;
     CGFloat scaleWidth = scrollViewFrame.size.width / self.scrollView.contentSize.width;
     CGFloat scaleHeight = scrollViewFrame.size.height / self.scrollView.contentSize.height;
 
@@ -90,7 +95,7 @@
 }
 
 - (void)centerScrollViewContents {
-    CGSize boundsSize = self.view.bounds.size;
+    CGSize boundsSize = _scrollView.bounds.size;
     CGRect contentsFrame = _imageView.frame;
     
     if (contentsFrame.size.width < boundsSize.width) {
@@ -133,14 +138,22 @@
         }
     }
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-    viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
-    viewController.post = _post;
-    viewController.controllerType = _post==nil?STShareControllerAddPost:STShareControllerEditPost;
-    [self.navigationController pushViewController:viewController animated:YES];
-
-   }
+    if (_delegate == nil) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+        viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
+        viewController.post = _post;
+        viewController.controllerType =STShareControllerAddPost;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    else
+    {
+        if ([_delegate respondsToSelector:@selector(postImageWasChanged:)]) {
+            [_delegate postImageWasChanged:croppedImg];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -149,7 +162,7 @@
 -(UIImage *)croppedImage{
     CGRect visibleRect;
     float scale = 1.f/_scrollView.zoomScale;
-    CGSize boundsSize = self.view.bounds.size;
+    CGSize boundsSize = _scrollView.bounds.size;
     visibleRect.origin.x = _scrollView.contentOffset.x * scale;
     visibleRect.origin.y = _scrollView.contentOffset.y * scale;
     visibleRect.size.width = boundsSize.width * scale;

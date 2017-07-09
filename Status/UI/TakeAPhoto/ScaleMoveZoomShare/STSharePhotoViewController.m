@@ -31,6 +31,7 @@
 #import "STTagProductsManager.h"
 #import "STShopProductCell.h"
 #import "STNavigationService.h"
+#import "STImageCacheController.h"
 
 static NSInteger const  kMaxCaptionLenght = 250;
 static CGFloat const kTagProductsViewDefaultHeight = 44.f;
@@ -41,7 +42,7 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     TagProductSectionCount,
 };
 
-@interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
+@interface STSharePhotoViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, STMoveAndScaleProtocol>{
 }
 @property (weak, nonatomic) IBOutlet UIImageView *sharedImageView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
@@ -66,6 +67,8 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 @property (strong, nonatomic)NSError *fbError;
 @property (strong, nonatomic)NSError *twitterError;
 
+@property (strong, nonatomic) UIImage *changedImage;
+
 
 //initialized with the post.shopProducts if exists and then new items can be added/removed
 @property (nonatomic, strong) NSArray <STShopProduct *> *shopProducts;
@@ -83,18 +86,23 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [[STTagProductsManager sharedInstance] startDownload];
-    
-    UIImage * sharedImage = [UIImage imageWithData:_imgData];
+- (void)configureImageViewWithImageData:(NSData *)imageData{
+    UIImage * sharedImage = [UIImage imageWithData:imageData];
     CGFloat resizeRatio = sharedImage.size.width / self.view.frame.size.width;
     CGSize newSize = CGSizeMake(sharedImage.size.width / resizeRatio, sharedImage.size.height / resizeRatio);
     
     sharedImage = [sharedImage resizedImage:newSize interpolationQuality:kCGInterpolationDefault];
     _sharedImageView.image = sharedImage;
-//    _sharedImageView.layer.contentsRect = CGRectMake(0, 0, 1, 0.25);
+    //    _sharedImageView.layer.contentsRect = CGRectMake(0, 0, 1, 0.25);
+
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationController.navigationBarHidden = YES;
+    [self configureImageViewWithImageData:_imgData];
+    [[STTagProductsManager sharedInstance] startDownload];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appplicationIsActive:)
@@ -115,8 +123,8 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     }
     _captiontextView.delegate = self;
     _writeCaptionPlaceholder.hidden = _captiontextView.text.length>0;
-    _shareView.hidden = (_controllerType == STShareControllerEditCaption) ;
-    _captiontextView.userInteractionEnabled = (_controllerType != STShareControllerEditPost);
+    _shareView.hidden = (_controllerType == STShareControllerEditInfo) ;
+    _captiontextView.userInteractionEnabled = YES;
     
     [self updateProductsCollection];
 }
@@ -253,10 +261,14 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
     if (_controllerType == STShareControllerAddPost ||
-        _controllerType == STShareControllerEditPost) {
-                
+        _controllerType == STShareControllerEditInfo) {
+        
+        NSData *currentImageData = _imgData;
+        if (_changedImage) {
+            currentImageData = UIImageJPEGRepresentation(_changedImage, 1.f);
+        }
         [STDataAccessUtils editPpostWithId:_post.uuid
-                          withNewImageData:_imgData
+                          withNewImageData:currentImageData
                             withNewCaption:_captiontextView.text
                           withShopProducts:_shopProducts
                             withCompletion:^(NSArray *objects, NSError *error) {
@@ -275,24 +287,24 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
                                 }
                             }];
     }
-    else
-    {
-        [_captiontextView resignFirstResponder];
-        
-        __weak STSharePhotoViewController *weakSelf = self;
-        if (_post.uuid!=nil) {
-            [STDataAccessUtils updatePostWithId:_post.uuid
-                                 withNewCaption:_captiontextView.text
-                                 withCompletion:^(NSError *error) {
-                                     if (error) {
-                                         [weakSelf showErrorAlert];
-                                     }
-                                     else
-                                         [weakSelf onClickBack:nil];
-                                     
-                                 }];
-        }
+}
+- (IBAction)onTapPicture:(id)sender {
+    UIImage *image = [UIImage imageWithData:_imgData];
+    if (_changedImage) {
+        image = _changedImage;
     }
+    STMoveScaleViewController *vc = [STMoveScaleViewController newControllerForImage:image shouldCompress:NO andPost:_post];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+
+
+}
+
+#pragma mark STMoveAndScaleProtocol
+
+-(void)postImageWasChanged:(UIImage *)changedImage{
+    _changedImage = changedImage;
+    [self configureImageViewWithImageData:UIImageJPEGRepresentation(_changedImage, 1.f)];
 }
 
 #pragma mark - MFMailControllerDelegate
