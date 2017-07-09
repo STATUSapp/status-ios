@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "STUserProfile.h"
 
 typedef void (^facebookCompletion)(id result, NSError *error);
 @interface STFacebookLoginController : NSObject
@@ -17,6 +18,8 @@ typedef void (^facebookCompletion)(id result, NSError *error);
 
 - (NSString *)currentUserUuid;
 - (NSString *)currentUserFullName;
+- (STProfileGender)currentUserGender;
+
 - (void)startLoginIfPossible;
 
 @end

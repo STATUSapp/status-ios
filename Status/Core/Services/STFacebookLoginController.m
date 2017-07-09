@@ -81,6 +81,11 @@
     return fullName;
 }
 
+- (STProfileGender)currentUserGender{
+    _loggedInUserProfile = [[CoreManager profilePool] getUserProfileWithId:[self currentUserId]];
+    return [_loggedInUserProfile profileGender];
+}
+
 - (void)startLoginIfPossible {
     if ([FBSDKAccessToken currentAccessToken]) {
         [self loginOrRegister];

@@ -18,6 +18,7 @@
 #import "STTagProductsBrands.h"
 #import "STTagManualViewController.h"
 #import "STTagCustomView.h"
+#import "STFacebookLoginController.h"
 
 typedef NS_ENUM(NSUInteger, STContainerSelection) {
     STContainerSelectionWizzard,
@@ -345,6 +346,21 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 }
 
 - (NSInteger)segmentDefaultSelectedIndex:(STCustomSegment *)segment{
+    if (segment == _wizardSegment) {
+        STProfileGender gender = [[CoreManager loginService] currentUserGender];
+        switch (gender) {
+            case STProfileGenderMale:
+                return 1;
+                break;
+            case STProfileGenderFemale:
+                return 0;
+                break;
+            default:
+                return 0;
+                break;
+        }
+        return 0;
+    }
     return 0;
 }
 
