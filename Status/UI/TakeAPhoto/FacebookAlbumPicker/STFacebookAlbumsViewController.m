@@ -111,5 +111,6 @@
     destVC.albumId = albumId;
     destVC.albumTitle = album[@"name"];
     [self.parentViewController.navigationController pushViewController:destVC animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end
