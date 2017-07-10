@@ -20,6 +20,7 @@ const CGFloat kDefaultImageViewWidth = 129.f;
 @property (weak, nonatomic) IBOutlet UITextView *linkTextView;
 @property (weak, nonatomic) IBOutlet UIButton *deleteProductButton;
 @property (weak, nonatomic) IBOutlet UIView *notLoadedView;
+@property (weak, nonatomic) IBOutlet UILabel *textViewPlaceholder;
 
 @end
 
@@ -32,11 +33,7 @@ const CGFloat kDefaultImageViewWidth = 129.f;
     _deleteProductButton.tag = index;
     _linkTextView.tag = index;
     
-    if (product.productUrl && product.productUrl.length > 0) {
-        _linkTextView.text = product.productUrl;
-    }
-    else
-        _linkTextView.text = @"Paste link...";
+    [self setTextViewWithString:product.productUrl];
     
     if (product.localImage) {
         _notLoadedWidthConstr.constant = 0.f;
@@ -51,6 +48,22 @@ const CGFloat kDefaultImageViewWidth = 129.f;
         _LoadedImageWidthConstr.constant = 0.f;
         _loadedImageView.image = nil;
     }
+}
+
+-(void)setTextViewWithString:(NSString *)text{
+    if ([_linkTextView isFirstResponder]) {
+        _textViewPlaceholder.hidden = YES;
+    }
+    else
+    {
+        _linkTextView.text = text;
+        if (text && text.length > 0) {
+            _textViewPlaceholder.hidden = YES;
+        }
+        else
+            _textViewPlaceholder.hidden = NO;
+    }
+
 }
 
 +(CGFloat)cellHeight{

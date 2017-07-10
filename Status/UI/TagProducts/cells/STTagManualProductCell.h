@@ -14,6 +14,7 @@
 
 -(void)configureCellWithproduct:(STShopProduct *)product
                        andIndex:(NSInteger)index;
+-(void)setTextViewWithString:(NSString *)text;
 
 +(CGFloat)cellHeight;
 @end

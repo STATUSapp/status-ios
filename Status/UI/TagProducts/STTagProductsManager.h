@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
 @property (nonatomic, strong, readonly) NSMutableArray<STShopProduct *> *selectedProducts;
 
 //used to pop navigation to it when products were selected
-@property (nonatomic, strong) UIViewController *rootViewController;
+@property (nonatomic, weak) UIViewController *rootViewController;
 
 +(STTagProductsManager *) sharedInstance;
 

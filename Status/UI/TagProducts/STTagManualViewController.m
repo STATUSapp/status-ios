@@ -167,24 +167,19 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
     
 }
 - (IBAction)onDonePressed:(id)sender {
-    if (currentTextView) {
-        if ([self validateUrlString:currentTextView.text]) {
-            [currentTextView resignFirstResponder];
-        }
-        else
-        {
-            [self showInvalidUrlAlertForTextView:currentTextView];
-            return;
-        }
-    }
-    
+    [currentTextView resignFirstResponder];
     NSString *errorString = nil;
     for (STShopProduct *sp in _products) {
         if (!sp.localImage) {
             errorString = NSLocalizedString(@"Added product should have an image.", nil);
             break;
         }
-        if (!sp.productUrl) {
+        if (sp.productUrl) {
+            if ([sp.productUrl rangeOfString:@"http"].location == NSNotFound) {
+                sp.productUrl = [NSString stringWithFormat:@"http://%@", sp.productUrl];
+            }
+        }
+        if (!sp.productUrl || ![self validateUrlString:sp.productUrl]) {
             errorString = NSLocalizedString(@"Added product should have a valid url.", nil);
             break;
         }
@@ -246,6 +241,10 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
     currentTextView = textView;
+    NSIndexPath *currentCellIndexPath = [NSIndexPath indexPathForItem:textView.tag inSection:STTagManualSectionProducts];
+    STTagManualProductCell *currentCell = (STTagManualProductCell *)[_collectionView cellForItemAtIndexPath:currentCellIndexPath];
+    STShopProduct *product = _products[currentCellIndexPath.item];
+    [currentCell setTextViewWithString:product.productUrl];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
@@ -257,20 +256,20 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
     return YES;
 }
 
+-(void)textViewDidChange:(UITextView *)textView{
+    NSIndexPath *currentCellIndexPath = [NSIndexPath indexPathForItem:textView.tag inSection:STTagManualSectionProducts];
+    STTagManualProductCell *currentCell = (STTagManualProductCell *)[_collectionView cellForItemAtIndexPath:currentCellIndexPath];
+    [currentCell setTextViewWithString:textView.text];
+    
+}
+
 -(void)textViewDidEndEditing:(UITextView *)textView{
+    NSIndexPath *currentCellIndexPath = [NSIndexPath indexPathForItem:textView.tag inSection:STTagManualSectionProducts];
+    STTagManualProductCell *currentCell = (STTagManualProductCell *)[_collectionView cellForItemAtIndexPath:currentCellIndexPath];
+    STShopProduct *product = _products[currentCellIndexPath.item];
+    product.productUrl = textView.text;
+    [currentCell setTextViewWithString:product.productUrl];
     currentTextView = nil;
-    if ([self validateUrlString:textView.text]) {
-        NSInteger index = textView.tag;
-        
-        STShopProduct *shopProduct = _products[index];
-        shopProduct.productUrl = textView.text;
-        
-        [self.collectionView reloadData];
-    }
-//    else
-//    {
-//        [self showInvalidUrlAlertForTextView:textView];
-//    }
 }
 
 -(void)showInvalidUrlAlertForTextView:(UITextView *)textView{

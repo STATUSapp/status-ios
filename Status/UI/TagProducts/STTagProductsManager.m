@@ -69,13 +69,21 @@ NSString *const kTagProductUserInfoIndexKey = @"notification_index";
     if (!_selectedProducts) {
         _selectedProducts = [NSMutableArray new];
     }
-    
-    if ([self isProductSelected:product]) {
-        [_selectedProducts removeObject:product];
+    if (product.uuid) {
+        if ([self isProductSelected:product]) {
+            [_selectedProducts removeObject:product];
+        }
+        else
+        {
+            [_selectedProducts addObject:product];
+        }
     }
     else
     {
-        [_selectedProducts addObject:product];
+        if (![self isProductSelected:product]) {
+            [_selectedProducts addObject:product];
+
+        }
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventSelectedProducts)}];

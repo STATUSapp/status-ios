@@ -1000,7 +1000,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                 index ++;
             }
             NSIndexPath * indexPath = [NSIndexPath indexPathForItem:STPostShop inSection:index];
-            
+            //to reload the products after they were updated
+            [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
             [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
         }
 

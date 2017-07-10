@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
+        </array>
         <array key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
         </array>
@@ -630,7 +633,7 @@
                                                             <rect key="frame" x="133" y="0.0" width="129" height="181"/>
                                                             <subviews>
                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mge-qg-Y1j">
-                                                                    <rect key="frame" x="0.0" y="8" width="129" height="153"/>
+                                                                    <rect key="frame" x="3.5" y="8" width="125.5" height="153"/>
                                                                     <state key="normal" backgroundImage="upload product photo frame "/>
                                                                     <connections>
                                                                         <action selector="uploadImagePressed:" destination="8FJ-jk-rt9" eventType="touchUpInside" id="kJz-46-Tlo"/>
@@ -644,11 +647,11 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload product photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1Y-yP-eUE">
-                                                                    <rect key="frame" x="0.0" y="99" width="129" height="32"/>
+                                                                    <rect key="frame" x="3.5" y="99" width="125.5" height="32"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="32" id="bCd-G7-1Us"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -674,7 +677,7 @@
                                                                 <constraint firstAttribute="height" constant="44" id="gom-Yw-jzW"/>
                                                                 <constraint firstAttribute="width" constant="77" id="vbk-C1-lPp"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="11"/>
                                                             <inset key="imageEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="2"/>
                                                             <state key="normal" title="Delete" image="delete icon ">
@@ -691,16 +694,25 @@
                                                                 <constraint firstAttribute="height" constant="1" id="Ttn-FV-1if"/>
                                                             </constraints>
                                                         </view>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Paste link ..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4cc-yG-URd">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4cc-yG-URd">
                                                             <rect key="frame" x="270" y="8" width="93" height="121"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits" keyboardType="URL"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="8FJ-jk-rt9" id="WNw-sk-8IB"/>
                                                             </connections>
                                                         </textView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paste link ..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hm7-2m-7gA">
+                                                            <rect key="frame" x="276" y="8" width="75" height="34"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="34" id="pZX-LS-wYr"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -717,7 +729,10 @@
                                                         <constraint firstAttribute="trailing" secondItem="OwN-Xk-mTS" secondAttribute="trailing" id="XjU-ls-ZQU"/>
                                                         <constraint firstItem="0GC-3m-cfK" firstAttribute="leading" secondItem="4Kf-mr-Jd7" secondAttribute="leading" constant="4" id="Zq6-IC-C2m"/>
                                                         <constraint firstItem="OwN-Xk-mTS" firstAttribute="leading" secondItem="4Kf-mr-Jd7" secondAttribute="leading" id="a3r-ri-cu9"/>
+                                                        <constraint firstItem="Hm7-2m-7gA" firstAttribute="leading" secondItem="4cc-yG-URd" secondAttribute="leading" constant="6" id="hCt-nW-Jmw"/>
+                                                        <constraint firstItem="Hm7-2m-7gA" firstAttribute="top" secondItem="4cc-yG-URd" secondAttribute="top" id="j2d-y5-SE4"/>
                                                         <constraint firstItem="0GC-3m-cfK" firstAttribute="top" secondItem="4Kf-mr-Jd7" secondAttribute="top" id="jvO-UE-GIU"/>
+                                                        <constraint firstItem="Hm7-2m-7gA" firstAttribute="trailing" secondItem="4cc-yG-URd" secondAttribute="trailing" constant="-12" id="otP-if-Vre"/>
                                                         <constraint firstItem="Ddx-Md-W6K" firstAttribute="leading" secondItem="0GC-3m-cfK" secondAttribute="trailing" id="p9g-T7-aXw"/>
                                                     </constraints>
                                                 </view>
@@ -738,6 +753,7 @@
                                             <outlet property="loadedImageView" destination="6eY-Kk-o3u" id="Q13-tN-dj1"/>
                                             <outlet property="notLoadedView" destination="Ddx-Md-W6K" id="nVR-OT-fxm"/>
                                             <outlet property="notLoadedWidthConstr" destination="I8L-xX-WHg" id="y38-6s-LUZ"/>
+                                            <outlet property="textViewPlaceholder" destination="Hm7-2m-7gA" id="SCI-sV-WVm"/>
                                             <outlet property="uploadProductButton" destination="mge-qg-Y1j" id="YrF-S4-lje"/>
                                         </connections>
                                     </collectionViewCell>
@@ -751,6 +767,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1PF-EZ-Hyk">
                                                     <rect key="frame" x="8" y="0.0" width="363" height="61"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
                                                     <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="Add Product" image="add product icon ">
                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
