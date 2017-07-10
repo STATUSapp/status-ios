@@ -759,14 +759,15 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 -(IBAction)onDoubleTap:(id)sender{
     CGPoint tappedPoint = [sender locationInView:self.collectionView];
     NSIndexPath *tappedCellPath = [self.collectionView indexPathForItemAtPoint:tappedPoint];
-    
     if (tappedCellPath)
     {
         if(tappedCellPath.item == STPostImage) {
+            NSInteger postIndex = [self postIndexFromIndexPath:tappedCellPath];
+
             STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
-            __block STPost *post = [_feedProcessor objectAtIndex:tappedCellPath.section];
+            __block STPost *post = [_feedProcessor objectAtIndex:postIndex];
             if (!post.postLikedByCurrentUser) {
-                [_feedProcessor setLikeUnlikeAtIndex:tappedCellPath.section
+                [_feedProcessor setLikeUnlikeAtIndex:postIndex
                                       withCompletion:^(NSError *error) {
                                           NSLog(@"Post liked!");
                                           [cell animateLikedImage];
