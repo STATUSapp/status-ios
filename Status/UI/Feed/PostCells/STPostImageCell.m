@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *linkedImageWidthConstr;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *linkButtonWidthConstr;
 
+@property (assign, nonatomic) BOOL likeImageAnimationInProgress;
 @end
 
 @implementation STPostImageCell
@@ -39,6 +40,7 @@
 -(void)prepareForReuse{
     _postImage.image = nil;
     _blurEffectView.hidden = NO;
+    _likeImageAnimationInProgress = NO;
     [self setBottomItemsHidden:YES];
     
 }
@@ -71,24 +73,33 @@
 }
 
 -(void) animateLikedImage{
+    if (_likeImageAnimationInProgress) {
+        NSLog(@"Animation skipped since there is one in progress!!!");
+        return;
+    }
     _linkedImageWidthConstr.constant = 0.f;
     _likedImage.hidden = NO;
     _likedImage.alpha = 1.f;
     [self.contentView layoutIfNeeded];
     _linkedImageWidthConstr.constant = 80.f;
+    _likeImageAnimationInProgress = YES;
+    __weak STPostImageCell *weakSelf = self;
     [UIView animateWithDuration:0.7f
                           delay:0.f
-                        options:UIViewAnimationOptionCurveLinear
+                        options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          [self.contentView layoutIfNeeded];
                      } completion:^(BOOL finished) {
                          _linkedImageWidthConstr.constant = 70.f;
                          [UIView animateWithDuration:0.2f
+                                               delay:0.f
+                                             options:UIViewAnimationOptionBeginFromCurrentState
                                           animations:^{
                                               [self.contentView layoutIfNeeded];
                                               _likedImage.alpha = 0.7;
 
                                           } completion:^(BOOL finished) {
+                                              weakSelf.likeImageAnimationInProgress = NO;
                                               _likedImage.hidden = YES;
                                           }];
                      }];
