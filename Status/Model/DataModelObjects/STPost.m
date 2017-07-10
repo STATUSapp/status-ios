@@ -29,6 +29,7 @@
 #import "NSDate+Additions.h"
 #import "STImageCacheController.h"
 #import "STShopProduct.h"
+#import "STPostsPool.h"
 
 @implementation STPost
 + (instancetype)postWithDict:(NSDictionary *)postDict {
@@ -56,8 +57,6 @@
     _userId = [CreateDataModelHelper validStringIdentifierFromValue:self.infoDict[@"user_id"]];
     _userName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_name"];
     _postSeen = [self.infoDict[@"post_seen"] boolValue];
-    _showFullCaption = NO;
-    _showShopProducts = NO;
     _shareShortUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"short_url"];
     
     self.shopProducts = @[];
@@ -92,6 +91,20 @@
         }
         self.shopProducts = [NSArray arrayWithArray:productsArray];
     }
+    
+
+    STPost *postFromPool = [[CoreManager postsPool] getPostWithId:self.uuid];
+    if (postFromPool) {
+        //copy local variable from present pool object
+        _showFullCaption = postFromPool.showFullCaption;
+        _showShopProducts = postFromPool.showShopProducts;
+
+    }
+    else{
+        _showFullCaption = NO;
+        _showShopProducts = NO;
+    }
+
 }
 
 @end
