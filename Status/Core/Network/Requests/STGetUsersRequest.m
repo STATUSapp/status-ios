@@ -32,7 +32,7 @@
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [self urlString];
         NSInteger limit = 20;
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"limit"] = @(limit);
         params[@"offset"] = @(weakSelf.offset);
         if (weakSelf.searchText && weakSelf.searchText.length) {

@@ -36,7 +36,7 @@
     __weak STUploadPostRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         if (weakSelf.postId) {
             params[@"post_id"] = weakSelf.postId;
         }
@@ -62,23 +62,24 @@
                                     mimeType:@"image/jpg"];
         } error:nil];
         
+        __block STUploadPostRequest *blockWeakSelf = weakSelf;
         NSURLSessionUploadTask *uploadTask = [[STNetworkQueueManager networkAPI]
                                               uploadTaskWithStreamedRequest:request
                                               progress:nil
                                               completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                                  [[CoreManager networkService] removeFromQueue:weakSelf];
+                                                  [[CoreManager networkService] removeFromQueue:blockWeakSelf];
                                                   
                                                   if (error) {
                                                       NSLog(@"Error: %@", error);
-                                                      if (weakSelf.failureBlock) {
-                                                          weakSelf.failureBlock(error);
+                                                      if (blockWeakSelf.failureBlock) {
+                                                          blockWeakSelf.failureBlock(error);
                                                       }
                                                       
                                                   } else {
-                                                      if (weakSelf.completionBlock) {
-                                                          weakSelf.completionBlock(responseObject,nil);
+                                                      [[CoreManager networkService] requestDidSucceed:blockWeakSelf];
+                                                      if (blockWeakSelf.completionBlock) {
+                                                          blockWeakSelf.completionBlock(responseObject,nil);
                                                       }
-                                                      [[CoreManager networkService] requestDidSucceed:weakSelf];
                                                   }
                                               }];
         

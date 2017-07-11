@@ -28,7 +28,7 @@
     STRequestExecutionBlock executionBlock = ^{
         
         NSString *url = [self urlString];
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"user_id"] = weakSelf.userId;
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params

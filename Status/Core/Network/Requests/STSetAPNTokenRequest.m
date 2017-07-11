@@ -28,7 +28,7 @@
     STRequestExecutionBlock executionBlock = ^{
         
         NSString *url = [self urlString];
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"apn_token"] = weakSelf.apnToken;
         
         [[STNetworkQueueManager networkAPI] POST:url

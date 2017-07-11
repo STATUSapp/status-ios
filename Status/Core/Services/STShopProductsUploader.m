@@ -50,8 +50,8 @@
                                             shopProductsNotUploaded ++;
                                         
                                         if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
-                                            if (_completion) {
-                                                _completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
+                                            if (weakSelf.completion) {
+                                                weakSelf.completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
                                             }
                                         }
                                         

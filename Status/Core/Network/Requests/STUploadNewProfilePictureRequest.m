@@ -27,7 +27,7 @@
     __weak STUploadNewProfilePictureRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
 
         NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", kBaseURL, [weakSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:weakSelf.pictureData
@@ -49,10 +49,10 @@
                                                       }
                                                       
                                                   } else {
+                                                      [[CoreManager networkService] requestDidSucceed:weakSelf];
                                                       if (weakSelf.completionBlock) {
                                                           weakSelf.completionBlock(responseObject,nil);
                                                       }
-                                                      [[CoreManager networkService] requestDidSucceed:weakSelf];
                                                   }
                                               }];
         

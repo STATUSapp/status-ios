@@ -26,7 +26,7 @@
     STRequestExecutionBlock executionBlock = ^{
         
         NSString *url = [self urlString];
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         
         [[STNetworkQueueManager networkAPI] GET:url
                                    parameters:params

@@ -26,7 +26,7 @@
     __weak STSetUserLocationRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [self urlString];
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         CLLocationCoordinate2D coord = [CoreManager locationService].latestLocation.coordinate;
         params[@"lat"] = @(coord.latitude);
         params[@"lng"] = @(coord.longitude);

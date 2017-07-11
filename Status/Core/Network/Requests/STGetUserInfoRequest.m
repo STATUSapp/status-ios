@@ -27,7 +27,7 @@
     __weak STGetUserInfoRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [self urlString];
-        NSMutableDictionary *params = [self getDictParamsWithToken];
+        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"user_id"] = weakSelf.userId;
 
         [[STNetworkQueueManager networkAPI] GET:url
