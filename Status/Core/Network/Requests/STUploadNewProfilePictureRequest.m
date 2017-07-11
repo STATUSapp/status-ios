@@ -36,22 +36,24 @@
                                     mimeType:@"image/jpg"];
         } error:nil];
         
+        __block STUploadNewProfilePictureRequest *blockWeakSelf = weakSelf;
+        
         NSURLSessionUploadTask *uploadTask = [[STNetworkQueueManager networkAPI]
                                               uploadTaskWithStreamedRequest:request
                                               progress:nil
                                               completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                                  [[CoreManager networkService] removeFromQueue:weakSelf];
+                                                  [[CoreManager networkService] removeFromQueue:blockWeakSelf];
                                                   
                                                   if (error) {
                                                       NSLog(@"Error: %@", error);
-                                                      if (weakSelf.failureBlock) {
-                                                          weakSelf.failureBlock(error);
+                                                      if (blockWeakSelf.failureBlock) {
+                                                          blockWeakSelf.failureBlock(error);
                                                       }
                                                       
                                                   } else {
-                                                      [[CoreManager networkService] requestDidSucceed:weakSelf];
-                                                      if (weakSelf.completionBlock) {
-                                                          weakSelf.completionBlock(responseObject,nil);
+                                                      [[CoreManager networkService] requestDidSucceed:blockWeakSelf];
+                                                      if (blockWeakSelf.completionBlock) {
+                                                          blockWeakSelf.completionBlock(responseObject,nil);
                                                       }
                                                   }
                                               }];
