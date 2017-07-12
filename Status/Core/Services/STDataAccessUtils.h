@@ -97,4 +97,13 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 + (void)getUsedSuggestionsForCategory:(NSString *)categoryId
                         andCompletion:(STDataAccessCompletionBlock)completion;
 
+//commissions
++ (void)getUserCommissionsWithCompletion:(STDataAccessCompletionBlock)completion;
++ (void)withdrawCommissionsWithCompletion:(STDataUploadCompletionBlock)completion;
+
+//withdrawn
++ (void)getUserWithdrawDetailsWithCompletion:(STDataAccessCompletionBlock)completion;
++ (void)postUserWithdrawDetails:(STWithdrawDetailsObj *)withdrawObj
+                 withCompletion:(STDataUploadCompletionBlock)completion;
+
 @end

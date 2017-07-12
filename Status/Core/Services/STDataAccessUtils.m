@@ -23,6 +23,8 @@
 #import "STLocalNotificationService.h"
 #import "STShopProductsUploader.h"
 #import "STNavigationService.h"
+#import "STCommission.h"
+#import "STWithdrawDetailsObj.h"
 
 @implementation STDataAccessUtils
 
@@ -719,5 +721,61 @@ withCompletion:(STDataUploadCompletionBlock)completion{
                                   }failure:failBlock];
 
 }
+
+#pragma mark - Commissions
++ (void)getUserCommissionsWithCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STUserCommissionsRequest getUserCommissionsWithCompletion:^(id response, NSError *error) {
+        NSMutableArray *objects = [NSMutableArray new];
+        if (!error) {
+            //TODO: check response structure
+            for (NSDictionary *dict in response) {
+                STCommission *commision = [STCommission commissionsObjWithDict:dict];
+                [objects addObject:commision];
+            }
+        }
+        completion (objects, error);
+        
+    } failure:failBlock];
+}
++ (void)withdrawCommissionsWithCompletion:(STDataUploadCompletionBlock)completion{
+    [STUserCommissionsRequest withdrawnUserCommissionsWithCompletion:^(id response, NSError *error) {
+        //TODO: check response structure
+        completion(error);
+        
+    } failure:^(NSError *error) {
+        completion(error);
+    }];
+}
+
+#pragma mark - User Withdraw Details
++ (void)getUserWithdrawDetailsWithCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STUserWithDrawnDetailsRequest getUserWithdrawnDetailsWithCompletion:^(id response, NSError *error) {
+        //TODO: check response structure
+        STWithdrawDetailsObj *withdrawDetailsObj = nil;
+        
+        if (!error && [response count]) {
+            withdrawDetailsObj = [STWithdrawDetailsObj withdrawDetailsObjWithDictionary:response];
+
+        }
+        if (withdrawDetailsObj) {
+            completion(@[withdrawDetailsObj], error);
+        }
+        else
+            completion(@[], error);
+    } failure:failBlock];
+}
++ (void)postUserWithdrawDetails:(STWithdrawDetailsObj *)withdrawObj
+                 withCompletion:(STDataUploadCompletionBlock)completion{
+    [STUserWithDrawnDetailsRequest postUserWithdrawnDetails:withdrawObj
+                                             withCompletion:^(id response, NSError *error) {
+                                                 //TODO: check response structure
+                                                 completion(error);
+                                             } failure:^(NSError *error) {
+                                                 completion(error);
+                                             }];
+}
+
 
 @end

@@ -18,6 +18,8 @@
 #import "STSuggestionsViewController.h"
 #import "STFriendsInviterViewController.h"
 
+#import "STDataAccessUtils.h"
+
 // test
 
 #import "STIAPHelper.h"
@@ -71,6 +73,28 @@ const NSInteger kSectionNumberLogout = 3;
 {
     [super viewDidLoad];
     
+    //TODO: test these requests
+    [STDataAccessUtils getUserCommissionsWithCompletion:^(NSArray *objects, NSError *error) {
+        NSLog(@"Objects: %@", objects);
+    }];
+
+    [STDataAccessUtils withdrawCommissionsWithCompletion:^(NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    __block STWithdrawDetailsObj *withdrawDetailsObj = nil;
+    
+    [STDataAccessUtils getUserWithdrawDetailsWithCompletion:^(NSArray *objects, NSError *error) {
+        withdrawDetailsObj = [objects firstObject];
+        if (withdrawDetailsObj) {
+            [STDataAccessUtils postUserWithdrawDetails:withdrawDetailsObj
+                                        withCompletion:^(NSError *error) {
+                                            NSLog(@"Error: %@", error);
+                                        }];
+        }
+    }];
+    
+
     self.title = @"Settings";
     
     NSString *versionString = [[STBaseRequest new] getAppVersion];
