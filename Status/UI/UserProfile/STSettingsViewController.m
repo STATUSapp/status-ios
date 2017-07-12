@@ -86,14 +86,14 @@ const NSInteger kSectionNumberLogout = 3;
     
     [STDataAccessUtils getUserWithdrawDetailsWithCompletion:^(NSArray *objects, NSError *error) {
         withdrawDetailsObj = [objects firstObject];
+        if (withdrawDetailsObj) {
+            [STDataAccessUtils postUserWithdrawDetails:withdrawDetailsObj
+                                        withCompletion:^(NSError *error) {
+                                            NSLog(@"Error: %@", error);
+                                        }];
+        }
     }];
     
-    if (withdrawDetailsObj) {
-        [STDataAccessUtils postUserWithdrawDetails:withdrawDetailsObj
-                                    withCompletion:^(NSError *error) {
-                                        NSLog(@"Error: %@", error);
-                                    }];
-    }
 
     self.title = @"Settings";
     

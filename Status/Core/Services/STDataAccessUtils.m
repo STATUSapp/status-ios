@@ -755,7 +755,7 @@ withCompletion:(STDataUploadCompletionBlock)completion{
         //TODO: check response structure
         STWithdrawDetailsObj *withdrawDetailsObj = nil;
         
-        if (!error) {
+        if (!error && [response count]) {
             withdrawDetailsObj = [STWithdrawDetailsObj withdrawDetailsObjWithDictionary:response];
 
         }
