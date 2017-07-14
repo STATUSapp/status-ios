@@ -45,6 +45,7 @@
     userProfile.imageSize = profile.imageSize;
     userProfile.gender = profile.gender;
     userProfile.profileGender = profile.profileGender;
+    userProfile.isInfluencer = profile.isInfluencer;
     
     return userProfile;
 }
@@ -90,6 +91,9 @@
         _gender = @"other";
     }
     self.profileGender = [self genderFromString:_gender];
+    self.isInfluencer = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"influencer"] boolValue];
+#warning remove this mock
+    self.isInfluencer = YES;
 }
 
 - (STListUser *)listUserFromProfile{

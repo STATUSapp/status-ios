@@ -39,6 +39,7 @@
 @property (nonatomic, strong) NSString *gender;
 
 @property (nonatomic, strong) NSString *profileShareUrl;
+@property (nonatomic, assign) BOOL isInfluencer;
 
 + (instancetype)userProfileWithDict:(NSDictionary *)userDict;
 + (instancetype)copyUserProfile:(STUserProfile *)profile;

@@ -8,7 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		070ABB191F11337000CAD9C1 /* STWithdrawDetailsObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 070ABB181F11337000CAD9C1 /* STWithdrawDetailsObj.m */; };
+		070DFA091F15F7F80002357B /* EarningsDashboardScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070DFA081F15F7F80002357B /* EarningsDashboardScene.storyboard */; };
+		070DFA0D1F15FA360002357B /* STEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070DFA0C1F15FA360002357B /* STEarningsViewController.m */; };
+		070DFA101F15FB880002357B /* STWithDrawDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070DFA0F1F15FB880002357B /* STWithDrawDetailsViewController.m */; };
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
+		071D515F1F195C1E0011ACF3 /* STEarningsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D515E1F195C1E0011ACF3 /* STEarningsCell.m */; };
+		071DDCB31F18976A00D2DE89 /* STNoEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071DDCB21F18976A00D2DE89 /* STNoEarningsViewController.m */; };
 		0721E8A41EC4DF6D00DF78D4 /* STTagCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721E8A31EC4DF6D00DF78D4 /* STTagCustomView.m */; };
 		0722BE9F1EBCEFC100BE8CC2 /* STTagProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722BE9E1EBCEFC100BE8CC2 /* STTagProductCell.m */; };
 		0722BEA21EBCEFFF00BE8CC2 /* STTagProductsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722BEA11EBCEFFF00BE8CC2 /* STTagProductsViewController.m */; };
@@ -285,7 +290,16 @@
 /* Begin PBXFileReference section */
 		070ABB171F11337000CAD9C1 /* STWithdrawDetailsObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWithdrawDetailsObj.h; sourceTree = "<group>"; };
 		070ABB181F11337000CAD9C1 /* STWithdrawDetailsObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWithdrawDetailsObj.m; sourceTree = "<group>"; };
+		070DFA081F15F7F80002357B /* EarningsDashboardScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EarningsDashboardScene.storyboard; sourceTree = "<group>"; };
+		070DFA0B1F15FA360002357B /* STEarningsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEarningsViewController.h; sourceTree = "<group>"; };
+		070DFA0C1F15FA360002357B /* STEarningsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEarningsViewController.m; sourceTree = "<group>"; };
+		070DFA0E1F15FB880002357B /* STWithDrawDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWithDrawDetailsViewController.h; sourceTree = "<group>"; };
+		070DFA0F1F15FB880002357B /* STWithDrawDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWithDrawDetailsViewController.m; sourceTree = "<group>"; };
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		071D515D1F195C1E0011ACF3 /* STEarningsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEarningsCell.h; sourceTree = "<group>"; };
+		071D515E1F195C1E0011ACF3 /* STEarningsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEarningsCell.m; sourceTree = "<group>"; };
+		071DDCB11F18976A00D2DE89 /* STNoEarningsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNoEarningsViewController.h; sourceTree = "<group>"; };
+		071DDCB21F18976A00D2DE89 /* STNoEarningsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNoEarningsViewController.m; sourceTree = "<group>"; };
 		0721E8A21EC4DF6D00DF78D4 /* STTagCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagCustomView.h; sourceTree = "<group>"; };
 		0721E8A31EC4DF6D00DF78D4 /* STTagCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagCustomView.m; sourceTree = "<group>"; };
 		0722BE9D1EBCEFC100BE8CC2 /* STTagProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductCell.h; sourceTree = "<group>"; };
@@ -802,6 +816,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		070DFA0A1F15FA0A0002357B /* EarningsDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				071D515C1F195C030011ACF3 /* cells */,
+				070DFA0B1F15FA360002357B /* STEarningsViewController.h */,
+				070DFA0C1F15FA360002357B /* STEarningsViewController.m */,
+				070DFA0E1F15FB880002357B /* STWithDrawDetailsViewController.h */,
+				070DFA0F1F15FB880002357B /* STWithDrawDetailsViewController.m */,
+				071DDCB11F18976A00D2DE89 /* STNoEarningsViewController.h */,
+				071DDCB21F18976A00D2DE89 /* STNoEarningsViewController.m */,
+			);
+			path = EarningsDashboard;
+			sourceTree = "<group>";
+		};
+		071D515C1F195C030011ACF3 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				071D515D1F195C1E0011ACF3 /* STEarningsCell.h */,
+				071D515E1F195C1E0011ACF3 /* STEarningsCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
 		0721E8A11EC4DF2000DF78D4 /* custom views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1519,6 +1556,7 @@
 				99B387E61C83027C005B4D8C /* TabBar */,
 				99B3871B1C82FAA2005B4D8C /* TakeAPhoto */,
 				99B3872D1C82FAA2005B4D8C /* Tutorial */,
+				070DFA0A1F15FA0A0002357B /* EarningsDashboard */,
 				99B387341C82FAA2005B4D8C /* UserProfile */,
 				1709124E1DF883FC00B2AF81 /* UsersList */,
 			);
@@ -1630,6 +1668,7 @@
 				2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */,
 				174575B51CA95CD5006CA25F /* ExploreScene.storyboard */,
 				0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */,
+				070DFA081F15F7F80002357B /* EarningsDashboardScene.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1868,6 +1907,7 @@
 				99B387D21C82FAA2005B4D8C /* SuggestionsScene.storyboard in Resources */,
 				99B387CE1C82FAA2005B4D8C /* FacebookPickerScene.storyboard in Resources */,
 				99B387941C82FAA2005B4D8C /* ProximaNova-Light.otf in Resources */,
+				070DFA091F15F7F80002357B /* EarningsDashboardScene.storyboard in Resources */,
 				99B387961C82FAA2005B4D8C /* ProximaNova-RegItalic.otf in Resources */,
 				1709122A1DF87FAC00B2AF81 /* STCustomSegment.xib in Resources */,
 				99B387B71C82FAA2005B4D8C /* STNotificationBanner.xib in Resources */,
@@ -1993,6 +2033,7 @@
 				99B387B21C82FAA2005B4D8C /* STContextualMenu.m in Sources */,
 				99B387B11C82FAA2005B4D8C /* STWhatsAppActivity.m in Sources */,
 				99B387501C82FAA2005B4D8C /* STGetNearbyProfilesRequest.m in Sources */,
+				070DFA0D1F15FA360002357B /* STEarningsViewController.m in Sources */,
 				99B387731C82FAA2005B4D8C /* STDataAccessUtils.m in Sources */,
 				99B387631C82FAA2005B4D8C /* STSetPostSeenRequest.m in Sources */,
 				170912491DF882DC00B2AF81 /* STPostDetailsCell.m in Sources */,
@@ -2001,6 +2042,7 @@
 				0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */,
 				99B387D51C82FAA2005B4D8C /* STAlbumImageCell.m in Sources */,
 				99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */,
+				071DDCB31F18976A00D2DE89 /* STNoEarningsViewController.m in Sources */,
 				0722BEA21EBCEFFF00BE8CC2 /* STTagProductsViewController.m in Sources */,
 				99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */,
 				52DC4DC91C8D53E30064F23F /* STImagePickerService.m in Sources */,
@@ -2069,6 +2111,7 @@
 				99B3875B1C82FAA2005B4D8C /* STGetUsersRequest.m in Sources */,
 				075C52961EBDD22700174CC5 /* STTagProductsBrands.m in Sources */,
 				99B387411C82FAA2005B4D8C /* NSString+VersionComparison.m in Sources */,
+				070DFA101F15FB880002357B /* STWithDrawDetailsViewController.m in Sources */,
 				170912251DF87F5C00B2AF81 /* STNotificationAndChatContainerViewController.m in Sources */,
 				170911FB1DF87F0400B2AF81 /* STNearbyCollectionLayout.m in Sources */,
 				17648B881E50993F00D9C428 /* STUploadShopProduct.m in Sources */,
@@ -2122,6 +2165,7 @@
 				99B3876D1C82FAA2005B4D8C /* STBaseRequest.m in Sources */,
 				99B3876F1C82FAA2005B4D8C /* STNetworkQueueManager.m in Sources */,
 				99B387701C82FAA2005B4D8C /* KeychainItemWrapper.m in Sources */,
+				071D515F1F195C1E0011ACF3 /* STEarningsCell.m in Sources */,
 				072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */,
 				2A1D66831C8472D400633D87 /* STUIHelper.m in Sources */,
 				99B387461C82FAA2005B4D8C /* UIImage+RoundedCorner.m in Sources */,

@@ -25,6 +25,7 @@ CGFloat distanceLabelStandardHeight = 21.f;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editButtonConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *earningsButton;
 
 @end
 
@@ -53,6 +54,7 @@ CGFloat distanceLabelStandardHeight = 21.f;
         [_messageEditButton setTitle:@"EDIT" forState:UIControlStateHighlighted];
         _messageEditButton.enabled = YES;
         _editButtonConstraint.constant = 70.f;
+        _earningsButton.hidden = !profile.isInfluencer;
 
     }
     else
@@ -61,8 +63,7 @@ CGFloat distanceLabelStandardHeight = 21.f;
         _messageEditButton.enabled = NO;
         _messageEditButton.hidden = YES;
         _editButtonConstraint.constant = 0.f;
-
-
+        _earningsButton.hidden = NO;
 
     }
     

@@ -729,7 +729,64 @@ withCompletion:(STDataUploadCompletionBlock)completion{
         NSMutableArray *objects = [NSMutableArray new];
         if (!error) {
             //TODO: check response structure
-            for (NSDictionary *dict in response) {
+            NSMutableArray *mockResponse = [NSMutableArray new];
+            NSDictionary *commissionDict1 = @{@"id": @"10",
+                                              @"product_image":@"https://p1.akcdn.net/full/140807607.calvin-klein-ck-collection-tricou-negru-logo-alb.jpg",
+                                              @"product_name":@"Logo T-shirt",
+                                              @"product_brand_name":@"CK Jeans",
+                                              @"commission_date":@"2017-05-09",
+                                              @"commission_state":@"paid",
+                                              @"commission_ammount": @(10.30)};
+            
+            NSDictionary *commissionDict2 = @{@"id": @"11",
+                                              @"product_image":@"http://www.tricouri-brand.com/image/cache/catalog/Tricouri/3-600x600.jpg",
+                                              @"product_name":@"Logo T-shirt",
+                                              @"product_brand_name":@"CK Jeans",
+                                              @"commission_date":@"2017-05-10",
+                                              @"commission_state":@"paid",
+                                              @"commission_ammount": @(6.28)};
+            
+            NSDictionary *commissionDict3 = @{@"id": @"12",
+                                              @"product_image":@"http://www.kosh.ro/3273697220-3305-thickbox_default/tricou-dama-calvin-klein.jpg",
+                                              @"product_name":@"Fitted Floral Logo T-shirt",
+                                              @"product_brand_name":@"CK Jeans",
+                                              @"commission_date":@"2017-05-12",
+                                              @"commission_state":@"paid",
+                                              @"commission_ammount": @(5.95)};
+            
+            NSDictionary *commissionDict4 = @{@"id": @"13",
+                                              @"product_image":@"http://www.tricouri-brand.com/image/cache/catalog/Tricouri/3-600x600.jpg",
+                                              @"product_name":@"Logo T-shirt",
+                                              @"product_brand_name":@"CK Jeans",
+                                              @"commission_date":@"2017-05-15",
+                                              @"commission_state":@"withdrawn",
+                                              @"commission_ammount": @(16.29)};
+            
+            NSDictionary *commissionDict5 = @{@"id": @"14",
+                                              @"product_image":@"https://p1.akcdn.net/full/140807607.calvin-klein-ck-collection-tricou-negru-logo-alb.jpg",
+                                              @"product_name":@"Logo T-shirt",
+                                              @"product_brand_name":@"CK Jeans",
+                                              @"commission_date":@"2017-05-19",
+                                              @"commission_state":[NSNull null],
+                                              @"commission_ammount": @(29.37)};
+            
+            NSDictionary *commissionDict6 = @{@"id": @"15",
+                                              @"product_image":@"http://www.kosh.ro/3273697220-3305-thickbox_default/tricou-dama-calvin-klein.jpg",
+                                              @"product_name":@"Fitted Floral Logo T-shirt",
+                                              @"product_brand_name":@"CK Jeans",
+                                              @"commission_date":@"2017-05-22",
+                                              @"commission_state":[NSNull null],
+                                              @"commission_ammount": @(75.91)};
+
+            [mockResponse addObject:commissionDict1];
+            [mockResponse addObject:commissionDict2];
+            [mockResponse addObject:commissionDict3];
+            [mockResponse addObject:commissionDict4];
+            [mockResponse addObject:commissionDict5];
+            [mockResponse addObject:commissionDict6];
+
+            //TODO: change it to the server response
+            for (NSDictionary *dict in mockResponse) {
                 STCommission *commision = [STCommission commissionsObjWithDict:dict];
                 [objects addObject:commision];
             }
