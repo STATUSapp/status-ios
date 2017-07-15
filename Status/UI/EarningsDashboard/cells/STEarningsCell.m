@@ -54,16 +54,22 @@
         NSString *statusString = nil;
         UIColor *statusColor = nil;
         if (commissionObj.commissionState == STCommissionStatePaid) {
-            statusColor = [UIColor greenColor];
+            statusColor = [UIColor colorWithRed:63.f/255.f
+                                          green:215.f/255.f
+                                           blue:70.f/255.f
+                                          alpha:1.f];
             statusString = NSLocalizedString(@"Paid", nil);
         }
         else if (commissionObj.commissionState == STCommissionStateWithdrawn){
-            statusColor = [UIColor orangeColor];
+            statusColor = [UIColor colorWithRed:254.f/255.f
+                                          green:89.f/255.f
+                                           blue:0.f/255.f
+                                          alpha:1.f];
             statusString = NSLocalizedString(@"Withdrawn", nil);
         }
         
         if (statusString) {
-            UIFont *statusFont = [UIFont fontWithName:@"HelveticaNeue" size:13.f];
+            UIFont *statusFont = [UIFont fontWithName:@"ProximaNova-Regular" size:13.f];
             CGSize statusStringSize = [statusString sizeWithAttributes:@{NSFontAttributeName:statusFont}];
             _commssionStatusLabel.text = statusString;
             _commssionStatusLabel.textColor = statusColor;
