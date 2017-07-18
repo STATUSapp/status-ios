@@ -73,7 +73,11 @@ const NSInteger kDefaultValueForTopConstraint = 26;
                                               }
                                                      failure:^(NSError *error) {
                                                          NSLog(@"%@", error.debugDescription);
-                                                         [weakSelf showProfileErrorAlert];
+                                                         if (error.code == STWebservicesUnprocessableEntity) {
+                                                             [weakSelf showUsernameTakenAlert];
+                                                         }
+                                                         else
+                                                             [weakSelf showProfileErrorAlert];
                                                          
                                                      }];
 }
@@ -102,5 +106,14 @@ const NSInteger kDefaultValueForTopConstraint = 26;
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+- (void)showUsernameTakenAlert {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:@"The username is already taken. Please choose another one."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 @end

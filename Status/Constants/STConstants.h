@@ -59,7 +59,8 @@ typedef NS_ENUM(NSUInteger, STInterstitialType){
 typedef NS_ENUM(NSUInteger,STWebservicesCodes){
     STWebservicesSuccesCod=200,
     STWebservicesNeedRegistrationCod=404,
-    STWebservicesFounded = 302
+    STWebservicesFounded = 302,
+    STWebservicesUnprocessableEntity = 422
 };
 
 typedef NS_ENUM(NSUInteger,STNotificationType){
