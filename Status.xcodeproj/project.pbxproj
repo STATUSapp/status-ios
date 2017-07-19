@@ -12,6 +12,7 @@
 		070DFA0D1F15FA360002357B /* STEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070DFA0C1F15FA360002357B /* STEarningsViewController.m */; };
 		070DFA101F15FB880002357B /* STWithDrawDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070DFA0F1F15FB880002357B /* STWithDrawDetailsViewController.m */; };
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
+		071CA92D1F1FD34300434ABB /* STIndexPathTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 071CA92C1F1FD34300434ABB /* STIndexPathTextField.m */; };
 		071D515F1F195C1E0011ACF3 /* STEarningsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D515E1F195C1E0011ACF3 /* STEarningsCell.m */; };
 		071DDCB31F18976A00D2DE89 /* STNoEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071DDCB21F18976A00D2DE89 /* STNoEarningsViewController.m */; };
 		072158551F1A49BF001481B0 /* STWithdrawDetailsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 072158541F1A49BF001481B0 /* STWithdrawDetailsHeader.m */; };
@@ -301,6 +302,8 @@
 		070DFA0E1F15FB880002357B /* STWithDrawDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWithDrawDetailsViewController.h; sourceTree = "<group>"; };
 		070DFA0F1F15FB880002357B /* STWithDrawDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWithDrawDetailsViewController.m; sourceTree = "<group>"; };
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		071CA92B1F1FD34300434ABB /* STIndexPathTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIndexPathTextField.h; sourceTree = "<group>"; };
+		071CA92C1F1FD34300434ABB /* STIndexPathTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIndexPathTextField.m; sourceTree = "<group>"; };
 		071D515D1F195C1E0011ACF3 /* STEarningsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEarningsCell.h; sourceTree = "<group>"; };
 		071D515E1F195C1E0011ACF3 /* STEarningsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEarningsCell.m; sourceTree = "<group>"; };
 		071DDCB11F18976A00D2DE89 /* STNoEarningsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNoEarningsViewController.h; sourceTree = "<group>"; };
@@ -846,6 +849,15 @@
 				071DDCB21F18976A00D2DE89 /* STNoEarningsViewController.m */,
 			);
 			path = EarningsDashboard;
+			sourceTree = "<group>";
+		};
+		071CA92A1F1FD31D00434ABB /* CustomUIElements */ = {
+			isa = PBXGroup;
+			children = (
+				071CA92B1F1FD34300434ABB /* STIndexPathTextField.h */,
+				071CA92C1F1FD34300434ABB /* STIndexPathTextField.m */,
+			);
+			path = CustomUIElements;
 			sourceTree = "<group>";
 		};
 		071D515C1F195C030011ACF3 /* cells */ = {
@@ -1599,6 +1611,7 @@
 		99B386CF1C82FAA2005B4D8C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				071CA92A1F1FD31D00434ABB /* CustomUIElements */,
 				99B386D01C82FAA2005B4D8C /* CustomActivities */,
 				99B386D51C82FAA2005B4D8C /* STContextualMenu.h */,
 				99B386D61C82FAA2005B4D8C /* STContextualMenu.m */,
@@ -2231,6 +2244,7 @@
 				99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */,
 				173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */,
 				99B3877F1C82FAA2005B4D8C /* Message.m in Sources */,
+				071CA92D1F1FD34300434ABB /* STIndexPathTextField.m in Sources */,
 				0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */,
 				1709124C1DF882DC00B2AF81 /* STPostShopProductsCell.m in Sources */,
 				072158621F1A4F3B001481B0 /* STWDInputViewModel.m in Sources */,

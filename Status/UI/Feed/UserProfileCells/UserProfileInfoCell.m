@@ -63,7 +63,7 @@ CGFloat distanceLabelStandardHeight = 21.f;
         _messageEditButton.enabled = NO;
         _messageEditButton.hidden = YES;
         _editButtonConstraint.constant = 0.f;
-        _earningsButton.hidden = NO;
+        _earningsButton.hidden = YES;
 
     }
     

@@ -14,6 +14,8 @@
 #import "STWithdrawDetailsHeader.h"
 #import "STWithdrawDetailsInputCell.h"
 
+#import "STIndexPathTextField.h"
+
 typedef NS_ENUM(NSUInteger, STWithdrawDetailsSection) {
     STWithdrawDetailsSectionPersonal = 0,
     STWithdrawDetailsSectionCompany,
@@ -36,11 +38,11 @@ typedef NS_ENUM(NSUInteger, STCompanyDetailsItem) {
     STCompanyDetailsItemIBAN,
     STCompanyDetailsItemCount
 };
-@interface STWithdrawDetailsCVC ()<UICollectionViewDelegateFlowLayout>
+@interface STWithdrawDetailsCVC ()<UICollectionViewDelegateFlowLayout, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSArray <STWDSectionViewModel *> *sectionsArray;
 @property (nonatomic, strong) STWithdrawDetailsObj *withdrawDetailsObj;
-
+@property (nonatomic, strong) UITextField *currentField;
 @end
 
 @implementation STWithdrawDetailsCVC
@@ -160,9 +162,8 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     STWithdrawDetailsInputCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:inputCellIdentifier forIndexPath:indexPath];
-    STWDSectionViewModel *sectionVM = _sectionsArray[indexPath.section];
-    STWDInputViewModel *inputVM = [sectionVM inputVMAtIndex:indexPath.item];
-    [cell configureWithInputViewModel:inputVM];
+    STWDInputViewModel *inputVM = [self inputVMForIndexPath:indexPath];
+    [cell configureWithInputViewModel:inputVM andIndexPath:indexPath];
     return cell;
 }
 
@@ -186,12 +187,150 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
     return CGSizeMake([[UIScreen mainScreen] bounds].size.width, 35.f);
 }
 
--(void)save{
-    //TODO: add the validations
+- (STWDInputViewModel *)inputVMForIndexPath:(NSIndexPath *)indexPath{
+    STWDSectionViewModel *sectionVM = _sectionsArray[indexPath.section];
+    STWDInputViewModel *inputVM = [sectionVM inputVMAtIndex:indexPath.item];
+    return inputVM;
+}
+
+-(BOOL)validate{
+    for (STWDSectionViewModel *wdSection in _sectionsArray) {
+        for (STWDInputViewModel *wdInput in wdSection.inputs) {
+            if (wdInput.inputValue.length == 0) {
+                return NO;
+            }
+        }
+    }
     
-    [STDataAccessUtils postUserWithdrawDetails:_withdrawDetailsObj
+    return YES;
+}
+
+-(void)save{
+    [_currentField resignFirstResponder];
+    if (![self validate]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Please fill in all input in order to receive the payments.", nil) preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
+        [self.parentViewController presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    STWithdrawDetailsObj *savedObject = [STWithdrawDetailsObj new];
+    STWDSectionViewModel *personalSectionVM = _sectionsArray[STWithdrawDetailsSectionPersonal];
+    STWDInputViewModel *firstNameInput = personalSectionVM.inputs[STPersonalDetailsItemFirstName];
+    savedObject.firstname = firstNameInput.inputValue;
+    STWDInputViewModel *lastNameInput = personalSectionVM.inputs[STPersonalDetailsItemLastName];
+    savedObject.lastname = lastNameInput.inputValue;
+    STWDInputViewModel *emailInput = personalSectionVM.inputs[STPersonalDetailsItemEmail];
+    savedObject.email = emailInput.inputValue;
+    STWDInputViewModel *phoneNumberInput = personalSectionVM.inputs[STPersonalDetailsItemPhoneNumber];
+    savedObject.phone_number = phoneNumberInput.inputValue;
+    STWDSectionViewModel *companySectionVM = _sectionsArray[STWithdrawDetailsSectionCompany];
+    STWDInputViewModel *companyNameInput = companySectionVM.inputs[STCompanyDetailsItemName];
+    savedObject.company = companyNameInput.inputValue;
+    STWDInputViewModel *vatInput = companySectionVM.inputs[STCompanyDetailsItemVATNumber];
+    savedObject.vat_number = vatInput.inputValue;
+    STWDInputViewModel *registerNumberInput = companySectionVM.inputs[STCompanyDetailsItemRegisterNumber];
+    savedObject.register_number = registerNumberInput.inputValue;
+    STWDInputViewModel *countryInput = companySectionVM.inputs[STCompanyDetailsItemCountry];
+    savedObject.country = countryInput.inputValue;
+    STWDInputViewModel *cityInput = companySectionVM.inputs[STCompanyDetailsItemCity];
+    savedObject.city = cityInput.inputValue;
+    STWDInputViewModel *addressInput = companySectionVM.inputs[STCompanyDetailsItemAddress];
+    savedObject.address = addressInput.inputValue;
+    STWDInputViewModel *ibanInput = companySectionVM.inputs[STCompanyDetailsItemIBAN];
+    savedObject.iban = ibanInput.inputValue;
+    
+    [STDataAccessUtils postUserWithdrawDetails:savedObject
                                 withCompletion:^(NSError *error) {
                                     NSLog(@"Error: %@", error);
                                 }];
 }
+
+#pragma mark - UITextFieldDelegate
+
+-(void)textFieldDidEndEditing:(STIndexPathTextField *)textField{
+    NSIndexPath *indexPath = textField.indexPath;
+    _currentField = nil;
+    STWDInputViewModel *inputVM = [self inputVMForIndexPath:indexPath];
+    [inputVM updateValue:textField.text];
+}
+
+-(void)textFieldDidBeginEditing:(STIndexPathTextField *)textField{
+    _currentField = textField;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 @end
+
+/*
+ STWithdrawDetailsSection section = indexPath.section;
+ switch (section) {
+ case STWithdrawDetailsSectionPersonal:{
+ STPersonalDetailsItem item = indexPath.item;
+ switch (item) {
+ case STPersonalDetailsItemFirstName:{
+ 
+ }
+ break;
+ case STPersonalDetailsItemLastName:{
+ 
+ }
+ break;
+ case STPersonalDetailsItemEmail:{
+ 
+ }
+ break;
+ case STPersonalDetailsItemPhoneNumber:{
+ 
+ }
+ break;
+ 
+ default:
+ break;
+ }
+ }
+ break;
+ case STWithdrawDetailsSectionCompany:{
+ STCompanyDetailsItem item = indexPath.item;
+ switch (item) {
+ case STCompanyDetailsItemName:{
+ 
+ }
+ break;
+ case STCompanyDetailsItemCity:{
+ 
+ }
+ break;
+ case STCompanyDetailsItemIBAN:{
+ 
+ }
+ break;
+ case STCompanyDetailsItemAddress:{
+ 
+ }
+ break;
+ case STCompanyDetailsItemCountry:{
+ 
+ }
+ break;
+ case STCompanyDetailsItemVATNumber:{
+ 
+ }
+ break;
+ case STCompanyDetailsItemRegisterNumber:{
+ 
+ }
+ break;
+ 
+ default:
+ break;
+ }
+ }
+ break;
+ default:
+ break;
+ }
+ */

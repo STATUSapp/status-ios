@@ -11,5 +11,6 @@
 
 @interface STWithdrawDetailsInputCell : UICollectionViewCell
 
--(void)configureWithInputViewModel:(STWDInputViewModel *)inputVM;
+-(void)configureWithInputViewModel:(STWDInputViewModel *)inputVM
+                      andIndexPath:(NSIndexPath *)indexPath;
 @end

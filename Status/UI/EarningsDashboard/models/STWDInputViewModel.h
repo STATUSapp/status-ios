@@ -18,4 +18,5 @@
                       value:(NSString *)inputValue
                 placehodler:(NSString *)inputPlaceholder;
 
+-(void)updateValue:(NSString *)value;
 @end

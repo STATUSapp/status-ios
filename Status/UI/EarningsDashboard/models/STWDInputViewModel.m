@@ -31,4 +31,7 @@
     return self;
 }
 
+-(void)updateValue:(NSString *)value{
+    _inputValue = value;
+}
 @end
