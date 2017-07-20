@@ -12,6 +12,9 @@
 #import "STImageCacheController.h"
 #import "DGActivityIndicatorView.h"
 
+CGFloat likeAnimationDuration = 0.9f;
+CGFloat likeAnimationZoomInProportion = 1.f/4.f;
+
 @interface STPostImageCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *postImage;
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
@@ -84,14 +87,16 @@
     _linkedImageWidthConstr.constant = 80.f;
     _likeImageAnimationInProgress = YES;
     __weak STPostImageCell *weakSelf = self;
-    [UIView animateWithDuration:0.7f
+    CGFloat zoomInDuration = likeAnimationZoomInProportion * likeAnimationDuration;
+    CGFloat zoomOutDuration = (1.f - likeAnimationZoomInProportion)/likeAnimationDuration;
+    [UIView animateWithDuration:zoomInDuration
                           delay:0.f
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          [self.contentView layoutIfNeeded];
                      } completion:^(BOOL finished) {
                          _linkedImageWidthConstr.constant = 70.f;
-                         [UIView animateWithDuration:0.2f
+                         [UIView animateWithDuration:zoomOutDuration
                                                delay:0.f
                                              options:UIViewAnimationOptionBeginFromCurrentState
                                           animations:^{
