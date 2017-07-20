@@ -30,4 +30,16 @@
 -(STWDInputViewModel *)inputVMAtIndex:(NSInteger)index{
     return _inputs[index];
 }
+
+-(BOOL)hasChanges{
+    __block BOOL hasChanges = NO;
+    [_inputs enumerateObjectsUsingBlock:^(STWDInputViewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj hasChanges]) {
+            hasChanges = YES;
+            *stop = YES;
+        }
+    }];
+    
+    return hasChanges;
+}
 @end

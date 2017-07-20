@@ -19,4 +19,5 @@
                 placehodler:(NSString *)inputPlaceholder;
 
 -(void)updateValue:(NSString *)value;
+-(BOOL)hasChanges;
 @end

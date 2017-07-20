@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface STWithdrawDetailsCVC : UICollectionViewController
+@protocol STWithdrawDetailsChildCVCProtocol <NSObject>
 
+-(void)childCVCHasChanges:(BOOL)hasChanges;
+
+@end
+
+@interface STWithdrawDetailsCVC : UICollectionViewController
+@property (nonatomic, weak) id<STWithdrawDetailsChildCVCProtocol>delegate;
 -(void)save;
 
 @end

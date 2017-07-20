@@ -17,6 +17,10 @@
 @implementation STWithdrawDetailsHeader
 
 -(void)configureWithSectionViewModel:(STWDSectionViewModel *)sectionVM{
-    _headerTitle.text = sectionVM.sectionName;
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:sectionVM.sectionName];
+    [attributedString addAttribute:NSKernAttributeName
+                             value:@(3.5)
+                             range:NSMakeRange(0, sectionVM.sectionName.length)];
+    _headerTitle.attributedText = attributedString;
 }
 @end

@@ -14,6 +14,8 @@
 @property (nonatomic, strong, readwrite) NSString *inputValue;
 @property (nonatomic, strong, readwrite) NSString *inputPlaceholder;
 
+@property (nonatomic, strong) NSString *initialInputValue;
+
 @end
 
 @implementation STWDInputViewModel
@@ -26,6 +28,7 @@
     if (self) {
         _inputName = inputName;
         _inputValue = inputValue;
+        _initialInputValue = inputValue;
         _inputPlaceholder = inputPlaceholder;
     }
     return self;
@@ -33,5 +36,17 @@
 
 -(void)updateValue:(NSString *)value{
     _inputValue = value;
+}
+
+-(BOOL)hasChanges{
+    if (!_initialInputValue) {
+        return _inputValue.length > 0;
+    }
+    
+    return ![_initialInputValue isEqualToString:_inputValue];
+}
+
+-(NSString *)debugDescription{
+    return [NSString stringWithFormat:@"Initial value: %@\nActual value: %@\n", _initialInputValue, _inputValue];
 }
 @end

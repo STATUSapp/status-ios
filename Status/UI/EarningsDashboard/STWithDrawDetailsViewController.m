@@ -11,9 +11,10 @@
 #import "STWithdrawDetailsObj.h"
 #import "STTabBarViewController.h"
 
-@interface STWithDrawDetailsViewController ()
+@interface STWithDrawDetailsViewController ()<STWithdrawDetailsChildCVCProtocol>
 
 @property (nonatomic, strong) STWithdrawDetailsCVC *childVC;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveButtonHeightConstr;
 
 @end
 
@@ -21,7 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _saveButtonHeightConstr.constant = 0.f;
+    [self.view layoutIfNeeded];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -41,6 +43,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     _childVC = segue.destinationViewController;
+    _childVC.delegate = self;
 }
 
 #pragma mark - IBActions
@@ -52,4 +55,10 @@
     [_childVC save];
 }
 
+#pragma mark - STWithdrawDetailsChildCVCProtocol
+
+-(void)childCVCHasChanges:(BOOL)hasChanges{
+    _saveButtonHeightConstr.constant = hasChanges? 48.f:0.f;
+    [self.view layoutIfNeeded];
+}
 @end

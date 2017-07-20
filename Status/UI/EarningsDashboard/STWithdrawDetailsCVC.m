@@ -168,7 +168,7 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake([[UIScreen mainScreen] bounds].size.width, 55.f);
+    return CGSizeMake([[UIScreen mainScreen] bounds].size.width, 75.f);
 }
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
@@ -253,6 +253,12 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
     _currentField = nil;
     STWDInputViewModel *inputVM = [self inputVMForIndexPath:indexPath];
     [inputVM updateValue:textField.text];
+    
+    STWDSectionViewModel *personalSectionVM = _sectionsArray[STWithdrawDetailsSectionPersonal];
+    STWDSectionViewModel *companySectionVM = _sectionsArray[STWithdrawDetailsSectionCompany];
+
+    BOOL hasChanges = [personalSectionVM hasChanges] || [companySectionVM hasChanges];
+    [_delegate childCVCHasChanges:hasChanges];
 }
 
 -(void)textFieldDidBeginEditing:(STIndexPathTextField *)textField{

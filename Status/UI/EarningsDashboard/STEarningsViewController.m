@@ -14,7 +14,7 @@
 
 @interface STEarningsViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) NSArray *commissionsArray;
+@property (nonatomic, strong) NSMutableArray *commissionsArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *withdrawButtonHeightConstr;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
@@ -32,7 +32,19 @@
     _noEarningsYetView.hidden = YES;
     __weak STEarningsViewController *weakSelf = self;
     [STDataAccessUtils getUserCommissionsWithCompletion:^(NSArray *objects, NSError *error) {
-        weakSelf.commissionsArray = [NSArray arrayWithArray:objects];
+        weakSelf.commissionsArray = [NSMutableArray arrayWithArray:objects];
+        switch (weakSelf.screenState) {
+            case STEarnigsScreenStateRemoveLastObject:{
+                [weakSelf.commissionsArray removeLastObject];
+            }
+                break;
+            case STEarnigsScreenStateRemoveAll:{
+                [weakSelf.commissionsArray removeAllObjects];
+            }
+                break;
+            default:
+                break;
+        }
         [weakSelf reloadScreen];
     }];
 }
@@ -77,13 +89,15 @@
         }
         else
         {
-            _withdrawButtonHeightConstr.constant = 60.f;
+            _withdrawButtonHeightConstr.constant = 48.f;
             _noWithdrawViewHeightConstr.constant = 0.f;
         }
         
         NSNumberFormatter *nf = [NSNumberFormatter new];
         nf.maximumFractionDigits = 2;
         _totalLabel.text = [NSString stringWithFormat:@"$ %@", [nf stringFromNumber:unpaidAmount]];
+        [self.view layoutIfNeeded];
+        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_commissionsArray.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
     }
 }
 

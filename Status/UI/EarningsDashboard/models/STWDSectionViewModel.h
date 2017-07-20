@@ -18,4 +18,5 @@
                   andInputs:(NSArray <STWDInputViewModel *>*)inputs;
 
 -(STWDInputViewModel *)inputVMAtIndex:(NSInteger)index;
+-(BOOL)hasChanges;
 @end

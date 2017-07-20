@@ -49,6 +49,8 @@
 #import "STDeepLinkService.h"
 #import "STNavigationService.h"
 
+#import "STEarningsViewController.h"
+
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
     STScrollDirectionNone = 0,
@@ -101,6 +103,7 @@ CGFloat const kTopButtonSize = 48.f;
 @property (strong, nonatomic) IBOutlet UIView *noDataView;
 @property (strong, nonatomic) IBOutlet UIView *navBarLogoView;
 
+@property (nonatomic, assign) STEarnigsScreenState lastScreenState;
 @end
 
 @implementation FeedCVC
@@ -348,6 +351,14 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     }
     
     return UIStatusBarStyleLightContent;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"EARNINGS_SEGUE_ID"]) {
+        _lastScreenState ++;
+        _lastScreenState%=STEarnigsScreenStateCount;
+        [(STEarningsViewController *)segue.destinationViewController setScreenState:_lastScreenState];
+    }
 }
 
 -(void)dealloc{
