@@ -461,8 +461,10 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 //                [weakSelf addObjectsToObjectPool:objects];
 //            }
             
-            [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
-            [weakSelf addObjectsToObjectPool:objects];
+            if (!_noMoreObjectsToDownload) {
+                [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
+                [weakSelf addObjectsToObjectPool:objects];
+            }
 
         }
         [[CoreManager localNotificationService] postNotificationName:kNotificationObjDownloadSuccess object:self userInfo:nil];
