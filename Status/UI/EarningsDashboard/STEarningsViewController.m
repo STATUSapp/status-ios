@@ -8,16 +8,21 @@
 
 #import "STEarningsViewController.h"
 #import "STEarningsCell.h"
+#import "STEarningsTotalCell.h"
 #import "STDataAccessUtils.h"
 #import "STCommission.h"
 #import "STTabBarViewController.h"
 
+typedef NS_ENUM(NSUInteger, STEarningsSection) {
+    STEarningsSectionCommissions,
+    STEarningsSectionTotal,
+    STEarningsSectionCount,
+};
 @interface STEarningsViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSMutableArray *commissionsArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *withdrawButtonHeightConstr;
-@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noWithdrawViewHeightConstr;
 @property (weak, nonatomic) IBOutlet UIView *commissionsView;
 @property (weak, nonatomic) IBOutlet UIView *noEarningsYetView;
@@ -93,11 +98,8 @@
             _noWithdrawViewHeightConstr.constant = 0.f;
         }
         
-        NSNumberFormatter *nf = [NSNumberFormatter new];
-        nf.maximumFractionDigits = 2;
-        _totalLabel.text = [NSString stringWithFormat:@"$ %@", [nf stringFromNumber:unpaidAmount]];
         [self.view layoutIfNeeded];
-        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_commissionsArray.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:STEarningsSectionTotal] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
     }
 }
 
@@ -108,23 +110,58 @@
 
 #pragma mark - UICollectionViewDelegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1.f;
+    return STEarningsSectionCount;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [_commissionsArray count];
+    NSInteger numRows = 0;
+    if (section == STEarningsSectionCommissions) {
+        numRows = [_commissionsArray count];
+    }
+    else if (section == STEarningsSectionTotal){
+        numRows = 1;
+    }
+    return numRows;
+}
+
+-(NSString *)identifierForIndexPath:(NSIndexPath *)indexPath{
+    NSString *identifier = nil;
+    if (indexPath.section == STEarningsSectionCommissions) {
+        identifier = @"STEarningsCell";
+    }
+    else if (indexPath.section == STEarningsSectionTotal){
+        identifier = @"STEarningsTotalCell";
+    }
+    
+    NSAssert(identifier, @"Earnings identifier should not be nil");
+    
+    return identifier;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    STEarningsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STEarningsCell" forIndexPath:indexPath];
-    STCommission *commissionObj = [_commissionsArray objectAtIndex:indexPath.item];
-    [cell configurCellWithCommissionObj:commissionObj];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self identifierForIndexPath:indexPath] forIndexPath:indexPath];
+    if ([cell isKindOfClass:[STEarningsCell class]]) {
+        STCommission *commissionObj = [_commissionsArray objectAtIndex:indexPath.item];
+        [(STEarningsCell *)cell configurCellWithCommissionObj:commissionObj];
+    }
+    else if([cell isKindOfClass:[STEarningsTotalCell class]]){
+        NSNumber *unpaidAmount = [self calculateTotalUnpaidAmount];
+        [(STEarningsTotalCell *)cell configureWithTotalAmount:unpaidAmount];
+    }
     
     return cell;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return CGSizeMake([[UIScreen mainScreen] bounds].size.width, 108.f);
+    CGSize cellSize = CGSizeZero;
+    if (indexPath.section == STEarningsSectionCommissions) {
+        cellSize = [STEarningsCell cellSize];
+    }
+    else if (indexPath.section == STEarningsSectionTotal){
+        cellSize = [STEarningsTotalCell cellSize];
+    }
+    
+    return cellSize;
 }
 
 #pragma mark - IBActions

@@ -15,6 +15,7 @@
 		071CA92D1F1FD34300434ABB /* STIndexPathTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 071CA92C1F1FD34300434ABB /* STIndexPathTextField.m */; };
 		071D515F1F195C1E0011ACF3 /* STEarningsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D515E1F195C1E0011ACF3 /* STEarningsCell.m */; };
 		071DDCB31F18976A00D2DE89 /* STNoEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071DDCB21F18976A00D2DE89 /* STNoEarningsViewController.m */; };
+		071FD6B51F237B300070F965 /* STEarningsTotalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 071FD6B41F237B300070F965 /* STEarningsTotalCell.m */; };
 		072158551F1A49BF001481B0 /* STWithdrawDetailsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 072158541F1A49BF001481B0 /* STWithdrawDetailsHeader.m */; };
 		072158581F1A49E0001481B0 /* STWithdrawDetailsInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 072158571F1A49E0001481B0 /* STWithdrawDetailsInputCell.m */; };
 		0721585B1F1A4B47001481B0 /* STWithdrawDetailsCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721585A1F1A4B47001481B0 /* STWithdrawDetailsCVC.m */; };
@@ -308,6 +309,8 @@
 		071D515E1F195C1E0011ACF3 /* STEarningsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEarningsCell.m; sourceTree = "<group>"; };
 		071DDCB11F18976A00D2DE89 /* STNoEarningsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNoEarningsViewController.h; sourceTree = "<group>"; };
 		071DDCB21F18976A00D2DE89 /* STNoEarningsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNoEarningsViewController.m; sourceTree = "<group>"; };
+		071FD6B31F237B300070F965 /* STEarningsTotalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEarningsTotalCell.h; sourceTree = "<group>"; };
+		071FD6B41F237B300070F965 /* STEarningsTotalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEarningsTotalCell.m; sourceTree = "<group>"; };
 		072158531F1A49BF001481B0 /* STWithdrawDetailsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWithdrawDetailsHeader.h; sourceTree = "<group>"; };
 		072158541F1A49BF001481B0 /* STWithdrawDetailsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWithdrawDetailsHeader.m; sourceTree = "<group>"; };
 		072158561F1A49E0001481B0 /* STWithdrawDetailsInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWithdrawDetailsInputCell.h; sourceTree = "<group>"; };
@@ -865,6 +868,8 @@
 			children = (
 				071D515D1F195C1E0011ACF3 /* STEarningsCell.h */,
 				071D515E1F195C1E0011ACF3 /* STEarningsCell.m */,
+				071FD6B31F237B300070F965 /* STEarningsTotalCell.h */,
+				071FD6B41F237B300070F965 /* STEarningsTotalCell.m */,
 				072158531F1A49BF001481B0 /* STWithdrawDetailsHeader.h */,
 				072158541F1A49BF001481B0 /* STWithdrawDetailsHeader.m */,
 				072158561F1A49E0001481B0 /* STWithdrawDetailsInputCell.h */,
@@ -2144,6 +2149,7 @@
 				99B387521C82FAA2005B4D8C /* STGetNotificationsRequest.m in Sources */,
 				171936C31C848604002C0202 /* STNavigationService.m in Sources */,
 				99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */,
+				071FD6B51F237B300070F965 /* STEarningsTotalCell.m in Sources */,
 				99B3875A1C82FAA2005B4D8C /* STGetUserSettingsRequest.m in Sources */,
 				99B387571C82FAA2005B4D8C /* STGetUserInfoRequest.m in Sources */,
 				99B3876E1C82FAA2005B4D8C /* STNetworkManager.m in Sources */,

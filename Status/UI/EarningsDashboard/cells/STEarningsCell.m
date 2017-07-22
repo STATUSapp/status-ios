@@ -83,4 +83,8 @@
     
 }
 
++(CGSize)cellSize{
+    return CGSizeMake([[UIScreen mainScreen] bounds].size.width, 108.f);
+}
+
 @end

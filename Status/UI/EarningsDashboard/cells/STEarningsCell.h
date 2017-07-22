@@ -13,5 +13,6 @@
 @interface STEarningsCell : UICollectionViewCell
 
 -(void) configurCellWithCommissionObj:(STCommission *)commissionObj;
++(CGSize)cellSize;
 
 @end
