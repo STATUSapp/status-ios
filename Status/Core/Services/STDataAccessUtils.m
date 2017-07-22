@@ -837,7 +837,11 @@ withCompletion:(STDataUploadCompletionBlock)completion{
         }
         else
             completion(@[], error);
-    } failure:failBlock];
+    } failure:^(NSError *error) {
+        STWithdrawDetailsObj *withdrawDetailsObj = [STWithdrawDetailsObj new];
+        completion(@[withdrawDetailsObj], error);
+
+    }];
 }
 + (void)postUserWithdrawDetails:(STWithdrawDetailsObj *)withdrawObj
                  withCompletion:(STDataUploadCompletionBlock)completion{

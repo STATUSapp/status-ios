@@ -408,13 +408,13 @@
                                 </items>
                             </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogY-rb-cPk">
-                                <rect key="frame" x="0.0" y="64" width="375" height="555"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="506"/>
                                 <connections>
                                     <segue destination="zm7-7x-6sv" kind="embed" identifier="" id="BpW-4o-scq"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-FI-4ge">
-                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="570" width="375" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="x8E-XS-vy0"/>
                                 </constraints>
@@ -437,10 +437,11 @@
                             <constraint firstAttribute="trailing" secondItem="ogY-rb-cPk" secondAttribute="trailing" id="cyM-3F-zyo"/>
                             <constraint firstItem="Kde-FI-4ge" firstAttribute="top" secondItem="ogY-rb-cPk" secondAttribute="bottom" id="dsI-0y-do2"/>
                             <constraint firstItem="Anf-zW-eSJ" firstAttribute="leading" secondItem="qf0-cJ-d2C" secondAttribute="leading" id="enZ-7H-KRP"/>
+                            <constraint firstItem="JH4-SO-sQI" firstAttribute="top" secondItem="Kde-FI-4ge" secondAttribute="bottom" id="hZo-fR-HwV"/>
                             <constraint firstAttribute="trailing" secondItem="Anf-zW-eSJ" secondAttribute="trailing" id="lqx-M1-ctc"/>
-                            <constraint firstItem="JH4-SO-sQI" firstAttribute="top" secondItem="Kde-FI-4ge" secondAttribute="bottom" id="wUQ-yw-zgh"/>
                         </constraints>
                     </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="barHeightConstraint" destination="rIN-YE-uih" id="5kB-FQ-qVt"/>
                         <outlet property="leftButton" destination="dAK-85-2CN" id="BGU-rD-DwC"/>
@@ -455,7 +456,7 @@
         <!--Withdraw DetailsCVC-->
         <scene sceneID="s84-xL-k1K">
             <objects>
-                <collectionViewController id="zm7-7x-6sv" customClass="STWithdrawDetailsCVC" sceneMemberID="viewController">
+                <collectionViewController extendedLayoutIncludesOpaqueBars="YES" id="zm7-7x-6sv" customClass="STWithdrawDetailsCVC" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" keyboardDismissMode="onDrag" dataMode="prototypes" id="ZXz-a1-uay">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="543"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -625,23 +626,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zpr-Wp-2Su" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="836" y="834"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="dIo-Or-vmV">
-            <objects>
-                <viewController id="Kp1-fk-KBx" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Xmu-tI-XvC"/>
-                        <viewControllerLayoutGuide type="bottom" id="InU-vL-buM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iFB-fM-LEJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ht8-uz-JNM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>
