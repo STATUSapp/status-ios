@@ -16,6 +16,7 @@
 typedef NS_ENUM(NSUInteger, STEarningsSection) {
     STEarningsSectionCommissions,
     STEarningsSectionTotal,
+    STEarningsSectionAvailableAfter,
     STEarningsSectionCount,
 };
 @interface STEarningsViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -23,7 +24,6 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
 @property (nonatomic, strong) NSMutableArray *commissionsArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *withdrawButtonHeightConstr;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noWithdrawViewHeightConstr;
 @property (weak, nonatomic) IBOutlet UIView *commissionsView;
 @property (weak, nonatomic) IBOutlet UIView *noEarningsYetView;
 
@@ -90,12 +90,10 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
         NSNumber *unpaidAmount = [self calculateTotalUnpaidAmount];
         if ([unpaidAmount doubleValue] < 100.f) {
             _withdrawButtonHeightConstr.constant = 0.f;
-            _noWithdrawViewHeightConstr.constant = 30.f;
         }
         else
         {
             _withdrawButtonHeightConstr.constant = 48.f;
-            _noWithdrawViewHeightConstr.constant = 0.f;
         }
         
         [self.view layoutIfNeeded];
@@ -120,6 +118,10 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     else if (section == STEarningsSectionTotal){
         numRows = 1;
     }
+    else if (section == STEarningsSectionAvailableAfter){
+        NSNumber *unpaidAmount = [self calculateTotalUnpaidAmount];
+        numRows = [unpaidAmount doubleValue] >= 100 ? 0 : 1;
+    }
     return numRows;
 }
 
@@ -130,6 +132,9 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     }
     else if (indexPath.section == STEarningsSectionTotal){
         identifier = @"STEarningsTotalCell";
+    }
+    else if (indexPath.section == STEarningsSectionAvailableAfter){
+        identifier = @"STEarningsAvailableAfterCell";
     }
     
     NSAssert(identifier, @"Earnings identifier should not be nil");
@@ -159,6 +164,9 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     }
     else if (indexPath.section == STEarningsSectionTotal){
         cellSize = [STEarningsTotalCell cellSize];
+    }
+    else if (indexPath.section == STEarningsSectionAvailableAfter){
+        cellSize = CGSizeMake([[UIScreen mainScreen] bounds].size.width, 30.f);
     }
     
     return cellSize;

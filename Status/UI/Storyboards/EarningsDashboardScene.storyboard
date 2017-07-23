@@ -81,7 +81,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JHL-eB-Uq3">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="525"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="555"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zh4-zy-4cP">
                                             <size key="itemSize" width="50" height="50"/>
@@ -280,6 +280,41 @@
                                                     <outlet property="totalAmountLabel" destination="1wG-yw-EfM" id="LX5-xw-lpS"/>
                                                 </connections>
                                             </collectionViewCell>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STEarningsAvailableAfterCell" id="irU-Te-aNS">
+                                                <rect key="frame" x="0.0" y="148" width="375" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hp4-qi-hHB">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* You can withdraw the money once you have at least $100 in your account." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" translatesAutoresizingMaskIntoConstraints="NO" id="wey-XH-OuD">
+                                                                    <rect key="frame" x="10" y="0.0" width="355" height="30"/>
+                                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="10"/>
+                                                                    <color key="textColor" red="0.65490196079999996" green="0.69019607839999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="wey-XH-OuD" secondAttribute="bottom" id="8Rn-TO-dyu"/>
+                                                                <constraint firstAttribute="trailing" secondItem="wey-XH-OuD" secondAttribute="trailing" constant="10" id="c3l-jz-NEQ"/>
+                                                                <constraint firstItem="wey-XH-OuD" firstAttribute="leading" secondItem="hp4-qi-hHB" secondAttribute="leading" constant="10" id="nrS-FF-h0i"/>
+                                                                <constraint firstItem="wey-XH-OuD" firstAttribute="top" secondItem="hp4-qi-hHB" secondAttribute="top" id="qHG-VL-Yni"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="hp4-qi-hHB" secondAttribute="bottom" id="GS5-6l-r0S"/>
+                                                    <constraint firstItem="hp4-qi-hHB" firstAttribute="leading" secondItem="irU-Te-aNS" secondAttribute="leading" id="MvM-kl-68R"/>
+                                                    <constraint firstItem="hp4-qi-hHB" firstAttribute="top" secondItem="irU-Te-aNS" secondAttribute="top" id="WjX-Cb-AUr"/>
+                                                    <constraint firstAttribute="trailing" secondItem="hp4-qi-hHB" secondAttribute="trailing" id="bEY-zE-98F"/>
+                                                </constraints>
+                                                <size key="customSize" width="375" height="30"/>
+                                            </collectionViewCell>
                                         </cells>
                                         <connections>
                                             <outlet property="dataSource" destination="SAT-Cy-3oJ" id="p0M-vT-iXR"/>
@@ -299,37 +334,15 @@
                                             <action selector="onWithDrawPressed:" destination="SAT-Cy-3oJ" eventType="touchUpInside" id="mkq-bs-sP9"/>
                                         </connections>
                                     </button>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nqp-Af-DCv" userLabel="NoWithdrawView">
-                                        <rect key="frame" x="0.0" y="525" width="375" height="30"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* You can withdraw the money once you have at least $100 in your account." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" translatesAutoresizingMaskIntoConstraints="NO" id="qFy-vi-k60">
-                                                <rect key="frame" x="10" y="0.0" width="355" height="30"/>
-                                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="10"/>
-                                                <color key="textColor" red="0.65490196078431373" green="0.69019607843137254" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="qFy-vi-k60" secondAttribute="bottom" id="RXA-s9-q7b"/>
-                                            <constraint firstAttribute="trailing" secondItem="qFy-vi-k60" secondAttribute="trailing" constant="10" id="V3R-Li-exG"/>
-                                            <constraint firstItem="qFy-vi-k60" firstAttribute="leading" secondItem="Nqp-Af-DCv" secondAttribute="leading" constant="10" id="iwH-fC-vgl"/>
-                                            <constraint firstItem="qFy-vi-k60" firstAttribute="top" secondItem="Nqp-Af-DCv" secondAttribute="top" id="pNZ-mG-zeF"/>
-                                            <constraint firstAttribute="height" constant="30" id="rYD-Bx-B51"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Nqp-Af-DCv" firstAttribute="leading" secondItem="YVZ-Pc-R8e" secondAttribute="leading" id="H0W-hA-MaR"/>
                                     <constraint firstItem="Blh-kj-9xg" firstAttribute="leading" secondItem="YVZ-Pc-R8e" secondAttribute="leading" id="I5X-31-eHc"/>
                                     <constraint firstItem="JHL-eB-Uq3" firstAttribute="top" secondItem="YVZ-Pc-R8e" secondAttribute="top" id="MpY-yM-epG"/>
-                                    <constraint firstItem="Nqp-Af-DCv" firstAttribute="top" secondItem="JHL-eB-Uq3" secondAttribute="bottom" id="XxM-EZ-qqh"/>
+                                    <constraint firstItem="Blh-kj-9xg" firstAttribute="top" secondItem="JHL-eB-Uq3" secondAttribute="bottom" id="X9W-vx-dYl"/>
                                     <constraint firstAttribute="trailing" secondItem="Blh-kj-9xg" secondAttribute="trailing" id="drh-oq-JTa"/>
                                     <constraint firstAttribute="bottom" secondItem="Blh-kj-9xg" secondAttribute="bottom" id="e4F-c5-qb1"/>
                                     <constraint firstAttribute="trailing" secondItem="JHL-eB-Uq3" secondAttribute="trailing" id="nbW-cM-MxY"/>
-                                    <constraint firstItem="Blh-kj-9xg" firstAttribute="top" secondItem="Nqp-Af-DCv" secondAttribute="bottom" id="pRj-W6-pjx"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nqp-Af-DCv" secondAttribute="trailing" id="vmE-l2-zMX"/>
                                     <constraint firstItem="JHL-eB-Uq3" firstAttribute="leading" secondItem="YVZ-Pc-R8e" secondAttribute="leading" id="zDR-yK-0DO"/>
                                 </constraints>
                             </view>
@@ -358,7 +371,6 @@
                         <outlet property="leftButton" destination="Tng-VF-LUW" id="VQU-Zp-Nay"/>
                         <outlet property="navigationBar" destination="3AG-ag-b0q" id="mPg-Fg-rje"/>
                         <outlet property="noEarningsYetView" destination="HZQ-Xl-bot" id="q8l-fN-udE"/>
-                        <outlet property="noWithdrawViewHeightConstr" destination="rYD-Bx-B51" id="NEw-05-pUd"/>
                         <outlet property="withdrawButtonHeightConstr" destination="TE8-O7-cTR" id="mGc-Ah-NTl"/>
                     </connections>
                 </viewController>
