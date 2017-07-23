@@ -23,5 +23,5 @@
 @property (nonatomic, strong) NSString *iban;
 
 + (STWithdrawDetailsObj *)withdrawDetailsObjWithDictionary:(NSDictionary *)dict;
-
++ (STWithdrawDetailsObj *)mockObject;
 @end

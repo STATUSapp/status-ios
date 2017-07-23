@@ -178,6 +178,9 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
 }
 
 - (IBAction)onWithDrawPressed:(id)sender {
+    [STDataAccessUtils withdrawCommissionsWithCompletion:^(NSError *error) {
+        NSLog(@"Commissions were withrawn : %@", error);
+    }];
 }
 
 
