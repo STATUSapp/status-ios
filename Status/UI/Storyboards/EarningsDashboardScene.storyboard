@@ -161,7 +161,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shF-m0-kYd">
-                                                                            <rect key="frame" x="75" y="0.0" width="25" height="21"/>
+                                                                            <rect key="frame" x="74" y="0.0" width="26" height="21"/>
                                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                                                             <color key="textColor" red="0.24705882352941178" green="0.84313725490196079" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -381,7 +381,7 @@
         <!--With Draw Details View Controller-->
         <scene sceneID="o2s-OC-BWQ">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="9Hz-KJ-ZiK" customClass="STWithDrawDetailsViewController" sceneMemberID="viewController">
+                <viewController autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="9Hz-KJ-ZiK" customClass="STWithDrawDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Ok-Bt-3nr"/>
                         <viewControllerLayoutGuide type="bottom" id="JH4-SO-sQI"/>
@@ -420,13 +420,13 @@
                                 </items>
                             </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogY-rb-cPk">
-                                <rect key="frame" x="0.0" y="64" width="375" height="506"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="555"/>
                                 <connections>
                                     <segue destination="zm7-7x-6sv" kind="embed" identifier="" id="BpW-4o-scq"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-FI-4ge">
-                                <rect key="frame" x="0.0" y="570" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="x8E-XS-vy0"/>
                                 </constraints>
@@ -453,7 +453,6 @@
                             <constraint firstAttribute="trailing" secondItem="Anf-zW-eSJ" secondAttribute="trailing" id="lqx-M1-ctc"/>
                         </constraints>
                     </view>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="barHeightConstraint" destination="rIN-YE-uih" id="5kB-FQ-qVt"/>
                         <outlet property="leftButton" destination="dAK-85-2CN" id="BGU-rD-DwC"/>
