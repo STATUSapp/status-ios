@@ -23,11 +23,17 @@
 // test
 
 #import "STIAPHelper.h"
+#import "STUserProfilePool.h"
+#import "STSnackBarService.h"
 
-const NSInteger kSectionNumberNotifications = 0;
-const NSInteger kSectionNumberInviteFollow = 1;
-const NSInteger kSectionNumberContactLikeAds = 2;
-const NSInteger kSectionNumberLogout = 3;
+typedef NS_ENUM(NSUInteger, STSettingsSection) {
+    STSettingsSectionNotifications = 0,
+    STSettingsSectionCopyProfile,
+    STSettingsSectionInviteFlow,
+    STSettingsSectionLikeAdds,
+    STSettingsSectionLogout,
+    STSettingsSectionCount
+};
 
 @interface STSettingsViewController ()
 {
@@ -124,6 +130,16 @@ const NSInteger kSectionNumberLogout = 3;
     // Dispose of any resources that can be recreated.
 }
 
+-(void)addLinkToClipboard:(NSString *)shareUrl{
+    if (shareUrl && [shareUrl length]) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = shareUrl;
+        
+        [[CoreManager snackBarService] showSnackBarWithMessage:@"Copied link to clipboard"];
+    }
+}
+
+
 - (void)onTapDone {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -133,26 +149,34 @@ const NSInteger kSectionNumberLogout = 3;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    NSInteger numRows = 0;
     switch (section) {
-        case kSectionNumberNotifications:
-            return 7;
-        case kSectionNumberContactLikeAds:
-            return 3;
-        case kSectionNumberInviteFollow:
-            return 2;
-        case kSectionNumberLogout:
-            return 1;
-            
+        case STSettingsSectionNotifications:
+            numRows = 7;
+            break;
+        case STSettingsSectionCopyProfile:
+            numRows = 1;
+            break;
+        case STSettingsSectionInviteFlow:
+            numRows = 2;
+            break;
+        case STSettingsSectionLikeAdds:
+            numRows = 3;
+            break;
+        case STSettingsSectionLogout:
+            numRows = 1;
+            break;
+
         default:
-            return 0;
             break;
     }
+    return numRows;
 }
 
 #pragma mark - IBActions
@@ -224,6 +248,12 @@ const NSInteger kSectionNumberLogout = 3;
     [self presentViewController:tutorialVC animated:YES completion:nil];
 }
 
+- (IBAction)onCopyProfilePressed:(id)sender {
+    NSString *currentUserId = [[CoreManager loginService] currentUserUuid];
+    STUserProfile *up = [[CoreManager profilePool] getUserProfileWithId:currentUserId];
+    [self addLinkToClipboard:up.profileShareUrl];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)setSetting:(NSString *)setting fromSwitch:(UISwitch *)sender {
     __weak UISwitch * weakSender = sender;
