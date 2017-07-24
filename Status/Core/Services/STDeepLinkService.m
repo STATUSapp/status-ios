@@ -63,6 +63,7 @@ NSString * const kNonBrankLinkKey = @"+non_branch_link";
 
             }
         }
+        [self reset];
         return stackVC;
     }
     //wait for the login, then present the link redirect

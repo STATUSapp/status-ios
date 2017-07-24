@@ -119,6 +119,10 @@ static NSString * const profileLocationCell = @"UserProfileLocationCell";
 static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 - (void)configureNavigationBar{
+    UIViewController *currentViewController = [self.navigationController.viewControllers lastObject];
+    if (self != currentViewController) {
+        return;
+    }
     BOOL navBarHidden = YES;
     
     if (_feedProcessor.loading == NO &&
@@ -128,7 +132,6 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     }
 
     if (navBarHidden == NO) {
-        UIViewController *currentViewController = [self.navigationController.viewControllers lastObject];
         if (self == currentViewController) {
             if (_feedProcessor.processorFlowType == STFlowTypeHome) {
                 self.navigationItem.titleView = _navBarLogoView;
