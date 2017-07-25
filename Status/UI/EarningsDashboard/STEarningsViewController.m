@@ -12,6 +12,7 @@
 #import "STDataAccessUtils.h"
 #import "STCommission.h"
 #import "STTabBarViewController.h"
+#import "STNavigationService.h"
 
 typedef NS_ENUM(NSUInteger, STEarningsSection) {
     STEarningsSectionCommissions,
@@ -38,18 +39,6 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     __weak STEarningsViewController *weakSelf = self;
     [STDataAccessUtils getUserCommissionsWithCompletion:^(NSArray *objects, NSError *error) {
         weakSelf.commissionsArray = [NSMutableArray arrayWithArray:objects];
-        switch (weakSelf.screenState) {
-            case STEarnigsScreenStateRemoveLastObject:{
-                [weakSelf.commissionsArray removeLastObject];
-            }
-                break;
-            case STEarnigsScreenStateRemoveAll:{
-                [weakSelf.commissionsArray removeAllObjects];
-            }
-                break;
-            default:
-                break;
-        }
         [weakSelf reloadScreen];
     }];
 }
@@ -178,8 +167,19 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
 }
 
 - (IBAction)onWithDrawPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
     [STDataAccessUtils withdrawCommissionsWithCompletion:^(NSError *error) {
         NSLog(@"Commissions were withrawn : %@", error);
+        UIAlertController *alert = nil;
+        NSString *alertMessage = nil;
+        if (!error) {
+            alertMessage = @"Your commissions were withdrawn.";
+        }else{
+            alertMessage = @"Your commissions were not withdrawn. Try again later.";
+        }
+        alert = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [[CoreManager navigationService] presentAlertController:alert];
     }];
 }
 

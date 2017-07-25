@@ -15,6 +15,7 @@
 #import "STWithdrawDetailsInputCell.h"
 
 #import "STIndexPathTextField.h"
+#import "STNavigationService.h"
 
 typedef NS_ENUM(NSUInteger, STWithdrawDetailsSection) {
     STWithdrawDetailsSectionPersonal = 0,
@@ -52,11 +53,6 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Register cell classes
-//    [self.collectionView registerClass:[STWithdrawDetailsInputCell class] forCellWithReuseIdentifier:inputCellIdentifier];
-//    [self.collectionView registerClass:[STWithdrawDetailsHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
-    
     __weak STWithdrawDetailsCVC *weakSelf = self;
     [STDataAccessUtils getUserWithdrawDetailsWithCompletion:^(NSArray *objects, NSError *error) {
         if ([objects count]) {
@@ -65,6 +61,11 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
             if (!weakSelf.withdrawDetailsObj) {
                 weakSelf.withdrawDetailsObj = [STWithdrawDetailsObj new];
             }
+            
+//#ifdef DEBUG
+//            weakSelf.withdrawDetailsObj = [STWithdrawDetailsObj mockObject];
+//#endif
+            
             [weakSelf buildViewModels];
         }
     }];
@@ -242,8 +243,30 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
     
     [STDataAccessUtils postUserWithdrawDetails:savedObject
                                 withCompletion:^(NSError *error) {
-                                    NSLog(@"Error: %@", error);
+                                    NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+                                    if (data) {
+                                        NSDictionary * response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                        
+                                        NSString * responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                        
+                                        NSLog(@"Error: %@\nData: %@\nResponseString: %@", error, response, responseString);
+                                    }else{
+                                        NSLog(@"Error: %@", error);
+                                    }
+                                    UIAlertController *alert = nil;
+                                    NSString *alertMessage = nil;
+                                    if (!error) {
+                                        alertMessage = @"Your withdraw details were saved.";
+                                    }else{
+                                        alertMessage = @"Your withdraw details were not saved. Tray again later.";
+                                    }
+                                    alert = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+                                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                                    [[CoreManager navigationService] presentAlertController:alert];
+
                                 }];
+    
+    [self.parentViewController.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITextFieldDelegate

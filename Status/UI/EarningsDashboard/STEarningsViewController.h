@@ -7,14 +7,6 @@
 //
 
 #import "STWhiteNavBarViewController.h"
-#warning - remove this mock
-typedef NS_ENUM(NSUInteger, STEarnigsScreenState) {
-    STEarnigsScreenStateNormal = 0,
-    STEarnigsScreenStateRemoveLastObject,
-    STEarnigsScreenStateRemoveAll,
-    STEarnigsScreenStateCount
-};
 @interface STEarningsViewController : STWhiteNavBarViewController
 
-@property (nonatomic, assign) STEarnigsScreenState screenState;
 @end

@@ -160,6 +160,7 @@ extern NSString *const kGetSuggestions;
 extern NSString *const kGetUsedSuggestions;
 extern NSString *const kUserCommissions;
 extern NSString *const kUserWithdrawnDetails;
+extern NSString *const kUserWithdrawnUpdateDetails;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

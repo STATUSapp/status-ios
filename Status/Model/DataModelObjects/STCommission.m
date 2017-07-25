@@ -17,13 +17,13 @@
 
     //TODO: make this consistent with the server
     commission.uuid = dict[@"id"];
-    commission.mainImageUrl = dict[@"product_image"];
+    commission.mainImageUrl = dict[@"product"][@"image_url"];
     commission.mainImageDownloaded = NO;
-    commission.productName = dict[@"product_name"];
-    commission.productBrandName = dict[@"product_brand_name"];
-    commission.commissionDate = [NSDate dateFromServerDate:dict[@"commission_date"]];
-    commission.commissionAmount = dict[@"commission_ammount"];
-    commission.commissionState = [self commssionStateFromString:dict[@"commission_state"]];
+    commission.productName = dict[@"product"][@"name"];
+    commission.productBrandName = [NSString stringWithFormat:@"%@",dict[@"product"][@"brand_name"]];
+    commission.commissionDate = [NSDate dateFromServerDateTime:dict[@"date_add"]];
+    commission.commissionAmount = @([dict[@"amount"] doubleValue]);
+    commission.commissionState = [self commssionStateFromString:dict[@"withdrawn_status"]];
     return commission;
 }
 
@@ -40,4 +40,6 @@
     
     return state;
 }
+
+
 @end

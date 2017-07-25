@@ -96,6 +96,7 @@ NSString *const kGetSuggestions = @"catalog/products/all";
 NSString *const kGetUsedSuggestions = @"catalog/products/used";
 NSString *const kUserCommissions = @"users/commissions";
 NSString *const kUserWithdrawnDetails = @"users/details";
+NSString *const kUserWithdrawnUpdateDetails = @"users/details/update";
 
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";

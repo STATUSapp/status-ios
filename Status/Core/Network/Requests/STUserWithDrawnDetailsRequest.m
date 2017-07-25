@@ -105,7 +105,12 @@ typedef NS_ENUM(NSUInteger, STUserWithdrawnDetails) {
 }
 
 -(NSString *)urlString{
-    return kUserWithdrawnDetails;
+    if (self.requestType == STUserWithdrawnDetailsGet) {
+        return kUserWithdrawnDetails;
+    }
+    
+    return kUserWithdrawnUpdateDetails;
+
 }
 
 @end
