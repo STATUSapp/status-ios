@@ -89,7 +89,8 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
         }
         
         [self.view layoutIfNeeded];
-        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:STEarningsSectionTotal] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+        CGPoint bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height);
+        [self.collectionView setContentOffset:bottomOffset animated:NO];
     }
 }
 

@@ -79,20 +79,34 @@ typedef NS_ENUM(NSUInteger, STUserWithdrawnDetails) {
                 [params setObject:weakSelf.withdrawObj.phone_number
                            forKey:@"phone_number"];
             }
-            [params setObject:weakSelf.withdrawObj.company
-                       forKey:@"company"];
-            [params setObject:weakSelf.withdrawObj.vat_number
-                       forKey:@"vat_number"];
-            [params setObject:weakSelf.withdrawObj.register_number
-                       forKey:@"register_number"];
-            [params setObject:weakSelf.withdrawObj.country
-                       forKey:@"country"];
-            [params setObject:weakSelf.withdrawObj.city
-                       forKey:@"city"];
-            [params setObject:weakSelf.withdrawObj.address
-                       forKey:@"address"];
-            [params setObject:weakSelf.withdrawObj.iban
-                       forKey:@"iban"];
+            if (weakSelf.withdrawObj.company) {
+                [params setObject:weakSelf.withdrawObj.company
+                           forKey:@"company"];
+            }
+            if (weakSelf.withdrawObj.vat_number) {
+                [params setObject:weakSelf.withdrawObj.vat_number
+                           forKey:@"vat_number"];
+            }
+            if (weakSelf.withdrawObj.register_number) {
+                [params setObject:weakSelf.withdrawObj.register_number
+                           forKey:@"register_number"];
+            }
+            if (weakSelf.withdrawObj.country) {
+                [params setObject:weakSelf.withdrawObj.country
+                           forKey:@"country"];
+            }
+            if (weakSelf.withdrawObj.city) {
+                [params setObject:weakSelf.withdrawObj.city
+                           forKey:@"city"];
+            }
+            if (weakSelf.withdrawObj.address) {
+                [params setObject:weakSelf.withdrawObj.address
+                           forKey:@"address"];
+            }
+            if (weakSelf.withdrawObj.iban) {
+                [params setObject:weakSelf.withdrawObj.iban
+                           forKey:@"iban"];
+            }
             
             [[STNetworkQueueManager networkAPI] POST:url
                                           parameters:params
