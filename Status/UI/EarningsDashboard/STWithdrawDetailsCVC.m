@@ -208,12 +208,12 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
 
 -(void)save{
     [_currentField resignFirstResponder];
-    if (![self validate]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Please fill in all input in order to receive the payments.", nil) preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
-        [self.parentViewController presentViewController:alert animated:YES completion:nil];
-        return;
-    }
+//    if (![self validate]) {
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Please fill in all input in order to receive the payments.", nil) preferredStyle:UIAlertControllerStyleAlert];
+//        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
+//        [self.parentViewController presentViewController:alert animated:YES completion:nil];
+//        return;
+//    }
     
     STWithdrawDetailsObj *savedObject = [STWithdrawDetailsObj new];
     STWDSectionViewModel *personalSectionVM = _sectionsArray[STWithdrawDetailsSectionPersonal];
@@ -243,30 +243,43 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
     
     [STDataAccessUtils postUserWithdrawDetails:savedObject
                                 withCompletion:^(NSError *error) {
-                                    NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
-                                    if (data) {
-                                        NSDictionary * response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                        
-                                        NSString * responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                        
-                                        NSLog(@"Error: %@\nData: %@\nResponseString: %@", error, response, responseString);
-                                    }else{
-                                        NSLog(@"Error: %@", error);
-                                    }
+                                    NSLog(@"Error: %@", error);
+
+                                    __weak STWithdrawDetailsCVC *weakSelf = self;
                                     UIAlertController *alert = nil;
                                     NSString *alertMessage = nil;
+                                    NSString *extraMessage = nil;
                                     if (!error) {
                                         alertMessage = @"Your withdraw details were saved.";
+                                        [weakSelf.parentViewController.navigationController popViewControllerAnimated:YES];
                                     }else{
-                                        alertMessage = @"Your withdraw details were not saved. Tray again later.";
+                                        alertMessage = @"Your withdraw details were not saved.";
+                                        if (error.code == STWebservicesUnprocessableEntity) {
+                                            extraMessage = [weakSelf requiredFieldsFromError:error];
+                                        }
                                     }
-                                    alert = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+                                    
+                                    NSString *finaleAlertMessage = alertMessage;
+                                    if (extraMessage) {
+                                        finaleAlertMessage = [NSString stringWithFormat:@"%@\n%@", alertMessage, extraMessage];
+                                    }
+                                    
+                                    alert = [UIAlertController alertControllerWithTitle:nil message:finaleAlertMessage preferredStyle:UIAlertControllerStyleAlert];
                                     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
                                     [[CoreManager navigationService] presentAlertController:alert];
 
                                 }];
+}
+
+-(NSString *)requiredFieldsFromError:(NSError *)error{
     
-    [self.parentViewController.navigationController popViewControllerAnimated:YES];
+    NSDictionary * response = nil;
+    NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+    if (data) {
+         response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    }
+    NSArray *requiredFields = [response allKeys];
+    return [NSString stringWithFormat:@"Required fields: %@.", [requiredFields componentsJoinedByString:@", "]];
 }
 
 #pragma mark - UITextFieldDelegate

@@ -36,11 +36,7 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     [super viewDidLoad];
     _commissionsView.hidden = YES;
     _noEarningsYetView.hidden = YES;
-    __weak STEarningsViewController *weakSelf = self;
-    [STDataAccessUtils getUserCommissionsWithCompletion:^(NSArray *objects, NSError *error) {
-        weakSelf.commissionsArray = [NSMutableArray arrayWithArray:objects];
-        [weakSelf reloadScreen];
-    }];
+    [self getCommissionsFromServer];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -53,6 +49,13 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
+-(void)getCommissionsFromServer{
+    __weak STEarningsViewController *weakSelf = self;
+    [STDataAccessUtils getUserCommissionsWithCompletion:^(NSArray *objects, NSError *error) {
+        weakSelf.commissionsArray = [NSMutableArray arrayWithArray:objects];
+        [weakSelf reloadScreen];
+    }];
+}
 
 -(NSNumber *)calculateTotalUnpaidAmount{
     CGFloat unpaidAmount = 0.f;
@@ -86,7 +89,7 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
         }
         
         [self.view layoutIfNeeded];
-        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:STEarningsSectionTotal] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:STEarningsSectionTotal] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
     }
 }
 
@@ -167,13 +170,14 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
 }
 
 - (IBAction)onWithDrawPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    __weak STEarningsViewController *weakSelf = self;
     [STDataAccessUtils withdrawCommissionsWithCompletion:^(NSError *error) {
         NSLog(@"Commissions were withrawn : %@", error);
         UIAlertController *alert = nil;
         NSString *alertMessage = nil;
         if (!error) {
             alertMessage = @"Your commissions were withdrawn.";
+            [weakSelf getCommissionsFromServer];
         }else{
             alertMessage = @"Your commissions were not withdrawn. Try again later.";
         }
