@@ -764,25 +764,27 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 -(IBAction)onDoubleTap:(id)sender{
     CGPoint tappedPoint = [sender locationInView:self.collectionView];
     NSIndexPath *tappedCellPath = [self.collectionView indexPathForItemAtPoint:tappedPoint];
-    if ([_feedProcessor processorIsAGallery] && tappedCellPath.section > 0) {
-        if (tappedCellPath)
-        {
-            if(tappedCellPath.item == STPostImage) {
-                NSInteger postIndex = [self postIndexFromIndexPath:tappedCellPath];
-                
-                STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
-                __block STPost *post = [_feedProcessor objectAtIndex:postIndex];
-                if (!post.postLikedByCurrentUser) {
-                    [_feedProcessor setLikeUnlikeAtIndex:postIndex
-                                          withCompletion:^(NSError *error) {
-                                              NSLog(@"Post liked!");
-                                              [cell animateLikedImage];
-                                          }];
-                }
-                else
-                {
-                    [cell animateLikedImage];
-                }
+    if ([_feedProcessor processorIsAGallery] && tappedCellPath.section == 0) {
+        return;
+    }
+    
+    if (tappedCellPath)
+    {
+        if(tappedCellPath.item == STPostImage) {
+            NSInteger postIndex = [self postIndexFromIndexPath:tappedCellPath];
+            
+            STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
+            __block STPost *post = [_feedProcessor objectAtIndex:postIndex];
+            if (!post.postLikedByCurrentUser) {
+                [_feedProcessor setLikeUnlikeAtIndex:postIndex
+                                      withCompletion:^(NSError *error) {
+                                          NSLog(@"Post liked!");
+                                          [cell animateLikedImage];
+                                      }];
+            }
+            else
+            {
+                [cell animateLikedImage];
             }
         }
     }
