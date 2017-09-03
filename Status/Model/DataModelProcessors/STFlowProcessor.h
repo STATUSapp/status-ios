@@ -15,10 +15,23 @@ extern NSString * const kNotificationObjUpdated;
 extern NSString * const kNotificationObjDeleted;
 extern NSString * const kNotificationObjAdded;
 extern NSString * const kNotificationShowSuggestions;
+extern NSString * const kNotificationPopularFiltersChanged;
+
+extern NSString * const kPopularTimeframeDaily;
+extern NSString * const kPopularTimeframeWeekly;
+extern NSString * const kPopularTimeframeMonthly;
+extern NSString * const kPopularTimeframeAllTime;
+
+extern NSString * const kPopularGenderWomen;
+extern NSString * const kPopularGenderMen;
 
 typedef void (^STProcessorCompletionBlock)(NSError *error);
 
 @interface STFlowProcessor : NSObject
+
+@property (nonatomic, strong, readonly) NSString *popularTimeframe;
+@property (nonatomic, strong, readonly) NSString *popularGender;
+
 - (instancetype)initWithFlowType:(STFlowType)flowType;
 - (instancetype)initWithFlowType:(STFlowType)flowType
                          userId:(NSString *)userId;

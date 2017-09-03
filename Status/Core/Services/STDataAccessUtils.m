@@ -433,6 +433,23 @@
 
 }
 
++(void)getPostsForFlow:(STFlowType)flowType
+             timeframe:(NSString *)timeframe
+                gender:(NSString *)gender
+                offset:(NSInteger)offset
+        withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock responseCompletion = [self postsDefaultHandlerWithCompletion:completion];
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STGetPostsRequest getPostsWithOffset:offset
+                                 flowType:flowType
+                                timeFrame:timeframe
+                                   gender:gender
+                           withCompletion:responseCompletion
+                                  failure:failBlock];
+    
+}
+
+
 + (STRequestCompletionBlock)nearbyPostsHandlerWithCompletion:(STDataAccessCompletionBlock)completion
 {
     STRequestCompletionBlock responseCompletion = ^(id response, NSError *error){

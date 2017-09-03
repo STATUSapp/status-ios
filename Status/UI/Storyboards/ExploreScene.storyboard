@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
+        </array>
+        <array key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
         </array>
     </customFonts>
     <scenes>
@@ -32,17 +36,157 @@
                                     <constraint firstAttribute="height" constant="49" id="X07-kD-gLS"/>
                                 </constraints>
                             </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwt-xD-IZb" userLabel="Popular Filter View">
+                                <rect key="frame" x="0.0" y="49" width="375" height="41"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VDK-xf-Ggv">
+                                        <rect key="frame" x="250" y="0.0" width="125" height="41"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yta-4e-uZf" userLabel="Both Button">
+                                                <rect key="frame" x="77.5" y="0.0" width="37.5" height="41"/>
+                                                <state key="normal" image="women_men"/>
+                                                <state key="selected" image="women_men_pressed"/>
+                                                <connections>
+                                                    <action selector="genderOptionSelected:" destination="HQ8-I7-Gpq" eventType="touchUpInside" id="7I7-c8-wsL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okY-0e-fOl" userLabel="Men Button">
+                                                <rect key="frame" x="40" y="0.0" width="37.5" height="41"/>
+                                                <state key="normal" image="men"/>
+                                                <state key="selected" image="men_pressed"/>
+                                                <connections>
+                                                    <action selector="genderOptionSelected:" destination="HQ8-I7-Gpq" eventType="touchUpInside" id="gaO-bc-7Qu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMM-nj-jl8" userLabel="Women Button">
+                                                <rect key="frame" x="2.5" y="0.0" width="37.5" height="41"/>
+                                                <state key="normal" image="women"/>
+                                                <state key="selected" image="women_pressed"/>
+                                                <connections>
+                                                    <action selector="genderOptionSelected:" destination="HQ8-I7-Gpq" eventType="touchUpInside" id="7WP-HQ-hMU"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="okY-0e-fOl" firstAttribute="top" secondItem="VDK-xf-Ggv" secondAttribute="top" id="227-id-ekU"/>
+                                            <constraint firstItem="okY-0e-fOl" firstAttribute="leading" secondItem="aMM-nj-jl8" secondAttribute="trailing" id="4by-iN-s77"/>
+                                            <constraint firstAttribute="bottom" secondItem="yta-4e-uZf" secondAttribute="bottom" id="6Hc-EJ-dOd"/>
+                                            <constraint firstAttribute="bottom" secondItem="aMM-nj-jl8" secondAttribute="bottom" id="NPA-f2-RJF"/>
+                                            <constraint firstAttribute="bottom" secondItem="okY-0e-fOl" secondAttribute="bottom" id="Qgs-lo-rvB"/>
+                                            <constraint firstItem="okY-0e-fOl" firstAttribute="width" secondItem="yta-4e-uZf" secondAttribute="width" id="RX1-LB-KTz"/>
+                                            <constraint firstItem="yta-4e-uZf" firstAttribute="leading" secondItem="okY-0e-fOl" secondAttribute="trailing" id="XWh-ln-2AP"/>
+                                            <constraint firstItem="aMM-nj-jl8" firstAttribute="top" secondItem="VDK-xf-Ggv" secondAttribute="top" id="bJE-RU-apT"/>
+                                            <constraint firstAttribute="trailing" secondItem="yta-4e-uZf" secondAttribute="trailing" constant="10" id="m6a-yc-UVw"/>
+                                            <constraint firstItem="yta-4e-uZf" firstAttribute="top" secondItem="VDK-xf-Ggv" secondAttribute="top" id="sug-sw-OrE"/>
+                                            <constraint firstItem="yta-4e-uZf" firstAttribute="width" secondItem="VDK-xf-Ggv" secondAttribute="width" multiplier="0.3" id="vks-fp-rga"/>
+                                            <constraint firstItem="aMM-nj-jl8" firstAttribute="width" secondItem="yta-4e-uZf" secondAttribute="width" id="xe5-fe-0T1"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8l-Db-yva">
+                                        <rect key="frame" x="10" y="0.0" width="230" height="41"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNm-dY-unK">
+                                                <rect key="frame" x="0.0" y="0.0" width="57.5" height="41"/>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                                <state key="normal" title="Daily">
+                                                    <color key="titleColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="timeframeOptionSelected:" destination="HQ8-I7-Gpq" eventType="touchUpInside" id="IVW-vY-t4X"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiT-Ym-wfN">
+                                                <rect key="frame" x="57.5" y="0.0" width="57.5" height="41"/>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                                <state key="normal" title="Weekly">
+                                                    <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="timeframeOptionSelected:" destination="HQ8-I7-Gpq" eventType="touchUpInside" id="4O6-15-r96"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOr-CU-Ld0">
+                                                <rect key="frame" x="115" y="0.0" width="57.5" height="41"/>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                                <state key="normal" title="Monthly">
+                                                    <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="timeframeOptionSelected:" destination="HQ8-I7-Gpq" eventType="touchUpInside" id="wX2-jv-V7s"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="znw-3i-TPc">
+                                                <rect key="frame" x="172.5" y="0.0" width="57.5" height="41"/>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                                                <state key="normal" title="All Time">
+                                                    <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="timeframeOptionSelected:" destination="HQ8-I7-Gpq" eventType="touchUpInside" id="rlg-1d-2Hx"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="znw-3i-TPc" secondAttribute="bottom" id="9sv-oe-2rF"/>
+                                            <constraint firstItem="gNm-dY-unK" firstAttribute="width" secondItem="e8l-Db-yva" secondAttribute="width" multiplier="0.25" id="Az9-Dn-bjA"/>
+                                            <constraint firstAttribute="bottom" secondItem="yiT-Ym-wfN" secondAttribute="bottom" id="GFX-eF-mRg"/>
+                                            <constraint firstItem="znw-3i-TPc" firstAttribute="leading" secondItem="OOr-CU-Ld0" secondAttribute="trailing" id="HaB-Yd-8zv"/>
+                                            <constraint firstItem="yiT-Ym-wfN" firstAttribute="top" secondItem="e8l-Db-yva" secondAttribute="top" id="SRl-1l-skH"/>
+                                            <constraint firstAttribute="bottom" secondItem="gNm-dY-unK" secondAttribute="bottom" id="Tmq-4z-mQd"/>
+                                            <constraint firstItem="OOr-CU-Ld0" firstAttribute="leading" secondItem="yiT-Ym-wfN" secondAttribute="trailing" id="axz-Gf-HwK"/>
+                                            <constraint firstItem="gNm-dY-unK" firstAttribute="top" secondItem="e8l-Db-yva" secondAttribute="top" id="bHS-FX-kq6"/>
+                                            <constraint firstItem="OOr-CU-Ld0" firstAttribute="top" secondItem="e8l-Db-yva" secondAttribute="top" id="djK-uJ-2UH"/>
+                                            <constraint firstItem="gNm-dY-unK" firstAttribute="leading" secondItem="e8l-Db-yva" secondAttribute="leading" id="g6x-FP-1WH"/>
+                                            <constraint firstItem="yiT-Ym-wfN" firstAttribute="leading" secondItem="gNm-dY-unK" secondAttribute="trailing" id="iHc-bI-qZF"/>
+                                            <constraint firstItem="OOr-CU-Ld0" firstAttribute="width" secondItem="gNm-dY-unK" secondAttribute="width" id="iiL-10-5M1"/>
+                                            <constraint firstItem="znw-3i-TPc" firstAttribute="width" secondItem="gNm-dY-unK" secondAttribute="width" id="pCe-2Y-z8b"/>
+                                            <constraint firstAttribute="bottom" secondItem="OOr-CU-Ld0" secondAttribute="bottom" id="rng-eU-ZPK"/>
+                                            <constraint firstItem="znw-3i-TPc" firstAttribute="top" secondItem="e8l-Db-yva" secondAttribute="top" id="xNc-GI-dIC"/>
+                                            <constraint firstItem="yiT-Ym-wfN" firstAttribute="width" secondItem="gNm-dY-unK" secondAttribute="width" id="yiC-IS-4cC"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VDK-xf-Ggv" secondAttribute="trailing" id="560-Q4-KFn"/>
+                                    <constraint firstItem="VDK-xf-Ggv" firstAttribute="leading" secondItem="e8l-Db-yva" secondAttribute="trailing" constant="10" id="EXd-yF-lL6"/>
+                                    <constraint firstAttribute="bottom" secondItem="e8l-Db-yva" secondAttribute="bottom" id="KRw-Gj-Tlf"/>
+                                    <constraint firstAttribute="bottom" secondItem="VDK-xf-Ggv" secondAttribute="bottom" id="NtW-fD-k4c"/>
+                                    <constraint firstAttribute="height" constant="41" id="hPs-F2-8eK"/>
+                                    <constraint firstItem="VDK-xf-Ggv" firstAttribute="width" secondItem="Wwt-xD-IZb" secondAttribute="width" multiplier="1/3" id="ho2-8l-T71"/>
+                                    <constraint firstItem="e8l-Db-yva" firstAttribute="top" secondItem="Wwt-xD-IZb" secondAttribute="top" id="me3-hI-6CM"/>
+                                    <constraint firstItem="VDK-xf-Ggv" firstAttribute="top" secondItem="Wwt-xD-IZb" secondAttribute="top" id="nVn-Uw-Qb6"/>
+                                    <constraint firstItem="e8l-Db-yva" firstAttribute="leading" secondItem="Wwt-xD-IZb" secondAttribute="leading" constant="10" id="ucz-pw-i82"/>
+                                </constraints>
+                            </view>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXa-Uo-21L">
-                                <rect key="frame" x="0.0" y="49" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="90" width="375" height="577"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="BXa-Uo-21L" firstAttribute="top" secondItem="W9Y-UF-Heh" secondAttribute="bottom" id="0Sa-2k-mfl"/>
                             <constraint firstItem="BXa-Uo-21L" firstAttribute="leading" secondItem="vmR-yF-ypr" secondAttribute="leading" id="1yE-az-3Fd"/>
+                            <constraint firstAttribute="trailing" secondItem="Wwt-xD-IZb" secondAttribute="trailing" id="8aK-FB-7ZB"/>
+                            <constraint firstItem="Wwt-xD-IZb" firstAttribute="top" secondItem="W9Y-UF-Heh" secondAttribute="bottom" id="9RK-xe-St6"/>
+                            <constraint firstItem="Wwt-xD-IZb" firstAttribute="leading" secondItem="vmR-yF-ypr" secondAttribute="leading" id="AQW-hd-WBF"/>
                             <constraint firstAttribute="trailing" secondItem="BXa-Uo-21L" secondAttribute="trailing" id="C9j-wF-RhV"/>
                             <constraint firstAttribute="trailing" secondItem="W9Y-UF-Heh" secondAttribute="trailing" id="MFV-vX-Ndg"/>
+                            <constraint firstItem="BXa-Uo-21L" firstAttribute="top" secondItem="Wwt-xD-IZb" secondAttribute="bottom" id="OJu-eg-E6C"/>
                             <constraint firstItem="VGZ-aY-7Ry" firstAttribute="top" secondItem="BXa-Uo-21L" secondAttribute="bottom" id="W69-oy-RTc"/>
                             <constraint firstItem="W9Y-UF-Heh" firstAttribute="leading" secondItem="vmR-yF-ypr" secondAttribute="leading" id="g0h-px-CCs"/>
                             <constraint firstItem="W9Y-UF-Heh" firstAttribute="top" secondItem="223-CW-Zk3" secondAttribute="bottom" id="zBI-F7-Ex5"/>
@@ -53,8 +197,16 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="allTimeButton" destination="znw-3i-TPc" id="hzl-s2-5dl"/>
+                        <outlet property="bothButton" destination="yta-4e-uZf" id="tc8-PW-FWP"/>
                         <outlet property="containerView" destination="BXa-Uo-21L" id="KEO-0F-76Q"/>
+                        <outlet property="dailyButton" destination="gNm-dY-unK" id="JDh-DE-IRf"/>
+                        <outlet property="menButton" destination="okY-0e-fOl" id="odS-38-g8N"/>
+                        <outlet property="monthlyButton" destination="OOr-CU-Ld0" id="gyU-4G-D0R"/>
+                        <outlet property="popularFIlterViewHeightConstr" destination="hPs-F2-8eK" id="hF7-1Y-cuV"/>
                         <outlet property="topViewContainer" destination="W9Y-UF-Heh" id="MEK-fA-XeA"/>
+                        <outlet property="weeklyButton" destination="yiT-Ym-wfN" id="Rbc-xQ-AGD"/>
+                        <outlet property="womenButton" destination="aMM-nj-jl8" id="uCw-RL-wfb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCm-nh-wWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -194,6 +346,12 @@
     </scenes>
     <resources>
         <image name="boy" width="246" height="246"/>
+        <image name="men" width="20" height="21"/>
+        <image name="men_pressed" width="20" height="21"/>
         <image name="splashscreen" width="375" height="667"/>
+        <image name="women" width="20" height="21"/>
+        <image name="women_men" width="20" height="21"/>
+        <image name="women_men_pressed" width="20" height="21"/>
+        <image name="women_pressed" width="20" height="21"/>
     </resources>
 </document>

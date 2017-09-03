@@ -30,6 +30,16 @@ NSString * const kNotificationShowSuggestions = @"NotificationShowSuggestion";
 
 NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
+NSString * const kNotificationPopularFiltersChanged = @"NotificationPopularFiltersChanged";
+
+NSString * const kPopularTimeframeDaily = @"daily";
+NSString * const kPopularTimeframeWeekly = @"weekly";
+NSString * const kPopularTimeframeMonthly = @"monthly";
+NSString * const kPopularTimeframeAllTime = @"all";
+
+NSString * const kPopularGenderWomen = @"female";
+NSString * const kPopularGenderMen = @"male";
+
 @interface STFlowProcessor ()
 {
 }
@@ -47,6 +57,8 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 @property (nonatomic, assign) NSInteger offset;
 @property (nonatomic, strong) NSString *postIdToDelete;
 
+@property (nonatomic, strong, readwrite) NSString *popularTimeframe;
+@property (nonatomic, strong, readwrite) NSString *popularGender;
 @end
 
 @implementation STFlowProcessor
@@ -57,6 +69,10 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
         self.flowType = flowType;
         _loaded = NO;
         _objectIds = [NSMutableArray new];
+        if (flowType == STFlowTypePopular) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popularFiltersChanged:) name:kNotificationPopularFiltersChanged object:nil];
+            _popularTimeframe = kPopularTimeframeDaily;
+    }
         if (flowType == STFlowTypeHome ||
             flowType == STFlowTypePopular||
             flowType == STFlowTypeRecent ||
@@ -479,6 +495,14 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
     };
     switch (_flowType) {
         case STFlowTypePopular:
+        {
+            [STDataAccessUtils getPostsForFlow:_flowType
+                                     timeframe:_popularTimeframe
+                                        gender:_popularGender
+                                        offset:offset
+                                withCompletion:completion];
+        }
+            break;
         case STFlowTypeHome:
         case STFlowTypeRecent:
         {
@@ -529,6 +553,13 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 }
 
 #pragma mark - Notifications
+
+-(void)popularFiltersChanged:(NSNotification *)notification{
+    NSDictionary *userInfo = notification.userInfo;
+    _popularTimeframe = userInfo[@"timeframe"];
+    _popularGender = userInfo[@"gender"];
+    [self reloadProcessor];
+}
 
 - (void)postImageWasEdited:(NSNotification *)notif{
     NSString *postId = notif.userInfo[kPostIdKey];

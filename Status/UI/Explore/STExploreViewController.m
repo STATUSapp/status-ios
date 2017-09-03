@@ -21,13 +21,25 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
     STExploreFlowCount
 };
 
+const CGFloat kFiltersDefaultHeight = 41.f;
+
 @interface STExploreViewController ()<STSCustomSegmentProtocol, UIPageViewControllerDelegate, UIPageViewControllerDataSource, STSideBySideContaineeProtocol>
 @property (weak, nonatomic) IBOutlet UIView *topViewContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *popularFIlterViewHeightConstr;
+@property (weak, nonatomic) IBOutlet UIButton *dailyButton;
+@property (weak, nonatomic) IBOutlet UIButton *weeklyButton;
+@property (weak, nonatomic) IBOutlet UIButton *monthlyButton;
+@property (weak, nonatomic) IBOutlet UIButton *allTimeButton;
+@property (weak, nonatomic) IBOutlet UIButton *womenButton;
+@property (weak, nonatomic) IBOutlet UIButton *menButton;
+@property (weak, nonatomic) IBOutlet UIButton *bothButton;
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) UIPageViewController * pageController;
 @property (strong, nonatomic) NSArray<UIViewController *> * viewControllers;
 @property (strong, nonatomic) STCustomSegment *customSegment;
+@property (strong, nonatomic) UIButton *selectedTimeframe;
+@property (strong, nonatomic) UIButton *selectedGender;
 
 @end
 
@@ -38,6 +50,102 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
     STExploreViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"EXPLORE_VC"];
     
     return vc;
+}
+
+#pragma mark - IBACTIONS
+- (IBAction)timeframeOptionSelected:(id)sender {
+    if (_selectedTimeframe!=sender) {
+        _selectedTimeframe = sender;
+        [self configureFilters];
+        [self invalidateDatasource];
+    }
+}
+
+- (IBAction)genderOptionSelected:(id)sender {
+    if (_selectedGender!=sender) {
+        _selectedGender = sender;
+        [self configureFilters];
+        [self invalidateDatasource];
+    }
+}
+#pragma mark - Helpers
+
+-(void)configureFilters{
+    [_dailyButton setSelected:_dailyButton==_selectedTimeframe];
+    [_weeklyButton setSelected:_weeklyButton==_selectedTimeframe];
+    [_monthlyButton setSelected:_monthlyButton==_selectedTimeframe];
+    [_allTimeButton setSelected:_allTimeButton==_selectedTimeframe];
+    
+    [_womenButton setSelected:_womenButton==_selectedGender];
+    [_menButton setSelected:_menButton==_selectedGender];
+    [_bothButton setSelected:_bothButton==_selectedGender];
+}
+
+-(void)invalidateDatasource{
+    NSString *timeframe = nil;
+    if (_dailyButton == _selectedTimeframe) {
+        timeframe = kPopularTimeframeDaily;
+    }
+    if (_weeklyButton == _selectedTimeframe) {
+        timeframe = kPopularTimeframeWeekly;
+    }
+    if (_monthlyButton == _selectedTimeframe) {
+        timeframe = kPopularTimeframeMonthly;
+    }
+    if (_allTimeButton == _selectedTimeframe) {
+        timeframe = kPopularTimeframeAllTime;
+    }
+    NSString *gender = nil;
+    if (_womenButton == _selectedGender) {
+        gender = kPopularGenderWomen;
+    }
+    if (_menButton == _selectedGender) {
+        gender = kPopularGenderMen;
+    }
+    
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    if (timeframe) {
+        [userInfo setValue:timeframe forKey:@"timeframe"];
+    }
+    else
+        NSLog(@"YOU SHOULD NEVER BE HERE!!!");
+    
+    if (gender) {
+        [userInfo setValue:gender forKey:@"gender"];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPopularFiltersChanged object:nil userInfo:userInfo];
+}
+
+-(void)loadDefaultFiltersForProcessor:(STFlowProcessor *) processor{
+    //load default values
+    NSString *timeframe = processor.popularTimeframe;
+    NSString *gender = processor.popularGender;
+    if ([timeframe isEqualToString:kPopularTimeframeDaily]) {
+        _selectedTimeframe = _dailyButton;
+    }
+    if ([timeframe isEqualToString:kPopularTimeframeMonthly]) {
+        _selectedTimeframe = _monthlyButton;
+    }
+    if ([timeframe isEqualToString:kPopularTimeframeWeekly]) {
+        _selectedTimeframe = _weeklyButton;
+    }
+    if ([timeframe isEqualToString:kPopularTimeframeAllTime]) {
+        _selectedTimeframe = _allTimeButton;
+    }
+    
+    if ([gender isEqualToString:kPopularGenderWomen]) {
+        _selectedGender = _womenButton;
+    }
+    
+    if ([gender isEqualToString:kPopularGenderMen]) {
+        _selectedGender = _menButton;
+    }
+    
+    if (!_selectedGender) {
+        _selectedGender = _bothButton;
+    }
+    
+    [self configureFilters];
 }
 
 #pragma mark STSCustomSegmentProtocol
@@ -83,6 +191,8 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
         return;
     }
     
+    _popularFIlterViewHeightConstr.constant = (index == STExploreFlowPopular)?kFiltersDefaultHeight:0.f;
+    
     UIPageViewControllerNavigationDirection direction = index > currentVCIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
     [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:nil];
@@ -113,24 +223,15 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
             case STExploreFlowPopular:
                 flowType = STFlowTypePopular;
                 break;
-//            case STExploreFlowNearby:
-//                flowType = STFlowTypeDiscoverNearby;
-//                break;
         }
+        STFlowProcessor *feedProcessor = [[CoreManager processorService] getProcessorWithType:flowType];
         
-//        if (flowType == STFlowTypeDiscoverNearby) {
-//            NearbyVC *nearbyVC = [NearbyVC nearbyFeedController];
-//            nearbyVC.containeeDelegate = self;
-//            [viewControllers addObject:nearbyVC];
-//        }
-//        else
-//        {
-            STFlowProcessor *feedProcessor = [[CoreManager processorService] getProcessorWithType:flowType];
-            FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:feedProcessor];
-            vc.containeeDelegate = self;
-            [viewControllers addObject:vc];
-//        }
-
+        if (flowType == STFlowTypePopular) {
+            [self loadDefaultFiltersForProcessor:feedProcessor];
+        }
+        FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:feedProcessor];
+        vc.containeeDelegate = self;
+        [viewControllers addObject:vc];
     }
     
     _viewControllers = [NSArray arrayWithArray:viewControllers];

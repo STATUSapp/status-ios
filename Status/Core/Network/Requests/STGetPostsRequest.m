@@ -23,6 +23,26 @@
     [[CoreManager networkService] addToQueueTop:request];
 }
 
++ (void)getPostsWithOffset:(NSInteger)offset
+                  flowType:(NSInteger)flowType
+                 timeFrame:(NSString *)timeframe
+                    gender:(NSString *)gender
+            withCompletion:(STRequestCompletionBlock)completion
+                   failure:(STRequestFailureBlock)failure{
+    
+    STGetPostsRequest *request = [STGetPostsRequest new];
+    request.completionBlock = completion;
+    request.failureBlock = failure;
+    request.executionBlock = [request _getExecutionBlock];
+    request.retryCount = 0;
+    request.offset = offset;
+    request.flowType = flowType;
+    request.timeframe = timeframe;
+    request.gender = gender;
+    [[CoreManager networkService] addToQueueTop:request];
+}
+
+
 - (STRequestExecutionBlock) _getExecutionBlock
 {
     __weak STGetPostsRequest *weakSelf = self;
@@ -33,6 +53,18 @@
         params[@"limit"] = @(kPostsLimit);
         params[@"offset"] = @(weakSelf.offset);
         
+        //filters for popular flow
+        if (weakSelf.flowType == STFlowTypePopular) {
+            if (weakSelf.timeframe) {
+                params[@"timeframe"] = weakSelf.timeframe;
+            }
+            if (weakSelf.gender) {
+                params[@"gender"] = weakSelf.gender;
+            }
+            else{
+                params[@"gender"] = [NSNumber numberWithBool:FALSE];
+            }
+        }
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil
