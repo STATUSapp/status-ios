@@ -11,8 +11,10 @@
 @interface STGetCatalogCategoriesRequest : STBaseRequest
 
 @property (nonatomic, strong) NSString *parentCategoryId;
+@property (nonatomic, assign) NSInteger pageIndex;
 
 + (void)getCatalogCategoriesForparentCategoryId:(NSString *)parentCategoryId
+                                      pageIndex:(NSInteger)pageIndex
                                  withCompletion:(STRequestCompletionBlock)completion
                                         failure:(STRequestFailureBlock)failure;
 

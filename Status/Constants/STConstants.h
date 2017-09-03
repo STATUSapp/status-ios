@@ -109,6 +109,7 @@ extern NSString *const kSTAdUnitID;
 extern NSInteger const kHTTPErrorNoConnection;
 extern NSInteger const kPostsLimit;
 extern NSInteger const kStartLoadOffset;
+extern NSInteger const kCatalogDownloadPageSize;
 
 extern NSString *const kGetPosts;
 extern NSString *const kGetHomePosts;

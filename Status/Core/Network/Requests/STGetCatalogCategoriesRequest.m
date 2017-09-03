@@ -10,6 +10,7 @@
 
 @implementation STGetCatalogCategoriesRequest
 + (void)getCatalogCategoriesForparentCategoryId:(NSString *)parentCategoryId
+                                      pageIndex:(NSInteger)pageIndex
                                  withCompletion:(STRequestCompletionBlock)completion
                                         failure:(STRequestFailureBlock)failure{
     
@@ -19,6 +20,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.parentCategoryId = parentCategoryId;
+    request.pageIndex = pageIndex;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -31,6 +33,9 @@
 
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"root_category_id"] = weakSelf.parentCategoryId;
+        params[@"pageSize"] = @(kCatalogDownloadPageSize);
+        params[@"page"] = @(weakSelf.pageIndex);
+        NSLog(@"CATALOG PARAMS: %@", params);
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

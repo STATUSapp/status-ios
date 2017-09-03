@@ -26,6 +26,9 @@
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        params[@"pageSize"] = @(kCatalogDownloadPageSize);
+        params[@"page"] = @(1);
+        
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

@@ -52,4 +52,10 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
 -(BOOL)isProductSelected:(STShopProduct *)product;
 -(BOOL)rootCategoriesDownloaded;
 -(NSArray <STShopProduct *> *)manualAddedProducts;
+
+-(void)downloadBrandsNextPage;
+-(void)downloadUsedCategoriesNextPage;
+-(void)downloadUsedProductsNextPage;
+-(void)downloadCategoryAndBrandNextPage;
+-(void)downloadRootCategoryNextPage:(STCatalogParentCategory *)rootCatgory;
 @end

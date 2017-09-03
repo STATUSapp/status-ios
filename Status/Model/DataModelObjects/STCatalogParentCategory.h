@@ -12,7 +12,10 @@
 @interface STCatalogParentCategory : STBaseObj
 
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSArray <STCatalogCategory *>*categories;
+@property (nonatomic, strong, readonly) NSMutableArray <STCatalogCategory *>*categories;
 
 + (STCatalogParentCategory *)parentCategoryFromDict:(NSDictionary *)dict;
+
+-(void)addCategoryObjects:(NSArray <STCatalogCategory *> *)categpries;
+
 @end

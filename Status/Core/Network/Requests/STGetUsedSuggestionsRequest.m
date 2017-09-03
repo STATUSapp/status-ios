@@ -10,6 +10,7 @@
 
 @implementation STGetUsedSuggestionsRequest
 + (void)getUsedSuggestionsEntitiesForCategory:(NSString *)categoryId
+                                 andPageIndex:(NSInteger)pageIndex
                             andCompletion:(STRequestCompletionBlock)completion
                                   failure:(STRequestFailureBlock)failure{
     
@@ -19,6 +20,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.categoryId = categoryId;
+    request.pageIndex = pageIndex;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -31,6 +33,9 @@
         if (weakSelf.categoryId) {
             params[@"category_id"] = weakSelf.categoryId;
         }
+        params[@"pageSize"] = @(kCatalogDownloadPageSize);
+        params[@"page"] = @(weakSelf.pageIndex);
+        
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

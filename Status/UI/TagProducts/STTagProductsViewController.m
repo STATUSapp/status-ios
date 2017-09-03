@@ -87,6 +87,15 @@
     
 }
 
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(nonnull UICollectionViewCell *)cell forItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if (indexPath.item == _products.count - 1) {//the last item
+        if (_delegate && [_delegate respondsToSelector:@selector(productsShouldDownloadNextPage)]) {
+            [_delegate productsShouldDownloadNextPage];
+        }
+    }
+}
+
+
 -(void)updateBottomView{
     NSInteger selectedProductsCount = [STTagProductsManager sharedInstance].selectedProducts.count;
     

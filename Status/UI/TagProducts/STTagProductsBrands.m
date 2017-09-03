@@ -23,18 +23,21 @@
 
 @implementation STTagProductsBrands
 
-+(STTagProductsBrands *)brandsViewController{
++(STTagProductsBrands *)brandsViewControllerWithDelegate:(id<STTagBrandsProtocol>)delegate{
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"TagProductsScene" bundle:nil];
     STTagProductsBrands *vc = [storyBoard instantiateViewControllerWithIdentifier:@"TAG_BRANDS_VC"];
-    
+    vc.delegate = delegate;
     return vc;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _brandArray = [STTagProductsManager sharedInstance].brands;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(brandsWereUpdated:) name:kTagProductNotification object:nil];
+    [self reloadScreen];
+}
 
-    [_collectionView reloadData];
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,6 +55,18 @@
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
+-(void)reloadScreen{
+    _brandArray = [STTagProductsManager sharedInstance].brands;
+    [_collectionView reloadData];
+}
+
+#pragma mark - UINotifications
+- (void)brandsWereUpdated:(NSNotification *)notification{
+    STTagManagerEvent event = [notification.userInfo[kTagProductUserInfoEventKey] integerValue];
+    if (event == STTagManagerEventBrands) {
+        [self reloadScreen];
+    }
+}
 
 #pragma mark - IBActions
 
@@ -91,9 +106,17 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     STBrandObj *brand = _brandArray[indexPath.item];
     [[STTagProductsManager sharedInstance] updateBrand:brand];
-    STTagSuggestions *vc = [STTagSuggestions suggestionsVC];
+    STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithDelegate:_delegate];
     
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(nonnull UICollectionViewCell *)cell forItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if (indexPath.item == _brandArray.count - 1) {//the last item
+        if (_delegate && [_delegate respondsToSelector:@selector(brandsShouldDownloadNextPage)]) {
+            [_delegate brandsShouldDownloadNextPage];
+        }
+    }
 }
 
 @end

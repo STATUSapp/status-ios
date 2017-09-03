@@ -9,14 +9,16 @@
 #import "STGetUsedCatalogCategoriesRequest.h"
 
 @implementation STGetUsedCatalogCategoriesRequest
-+ (void)getUsedCatalogCategoriesWithCompletion:(STRequestCompletionBlock)completion
-                                        failure:(STRequestFailureBlock)failure{
++ (void)getUsedCatalogCategoriesAtPageIndex:(NSInteger)pageIndex
+                             withCompletion:(STRequestCompletionBlock)completion
+                                    failure:(STRequestFailureBlock)failure{
     
     STGetUsedCatalogCategoriesRequest *request = [STGetUsedCatalogCategoriesRequest new];
     request.completionBlock = completion;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
+    request.pageIndex = pageIndex;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -26,6 +28,9 @@
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        params[@"pageSize"] = @(kCatalogDownloadPageSize);
+        params[@"page"] = @(weakSelf.pageIndex);
+        
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

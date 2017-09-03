@@ -10,7 +10,10 @@
 
 @interface STGetUsedSuggestionsRequest : STBaseRequest
 @property (nonatomic, strong) NSString *categoryId;
+@property (nonatomic, assign) NSInteger pageIndex;
+
 + (void)getUsedSuggestionsEntitiesForCategory:(NSString *)categoryId
+                                 andPageIndex:(NSInteger)pageIndex
                                 andCompletion:(STRequestCompletionBlock)completion
                                       failure:(STRequestFailureBlock)failure;
 @end

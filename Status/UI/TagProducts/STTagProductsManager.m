@@ -18,6 +18,9 @@ NSString *const kTagProductNotification = @"STTagProductNotification";
 NSString *const kTagProductUserInfoEventKey = @"notification_event";
 NSString *const kTagProductUserInfoIndexKey = @"notification_index";
 
+NSInteger const kCatalogFirstPage = 1;
+NSInteger const kCatalogNoMorePagesIndex = -1;
+
 @interface STTagProductsManager ()
 
 @property (nonatomic, strong, readwrite) NSArray <STCatalogParentCategory *> *rootCategories;
@@ -29,6 +32,12 @@ NSString *const kTagProductUserInfoIndexKey = @"notification_index";
 @property (nonatomic, strong, readwrite) STBrandObj *selectedBrand;
 @property (nonatomic, strong, readwrite) NSArray <STShopProduct *> *categoryAndBrandProducts;
 @property (nonatomic, strong, readwrite) NSMutableArray<STShopProduct *> *selectedProducts;
+
+@property (nonatomic, assign) NSInteger brandsPageIndex;
+@property (nonatomic, assign) NSInteger usedCategoriesPageIndex;
+@property (nonatomic, assign) NSInteger usedProductsPageIndex;
+@property (nonatomic, assign) NSInteger categoryAndBrondPageIndex;
+@property (nonatomic, strong) NSMutableDictionary *rootCategoryPageIndexes;
 
 @end
 
@@ -48,10 +57,12 @@ NSString *const kTagProductUserInfoIndexKey = @"notification_index";
     _selectedCategory = category;
     _selectedBrand = nil;
     _categoryAndBrandProducts = nil;
+    _categoryAndBrondPageIndex = kCatalogFirstPage;
 }
 
 -(void)updateBrand:(STBrandObj *)brand{
     _selectedBrand = brand;
+    _categoryAndBrondPageIndex = kCatalogFirstPage;
     if (_selectedBrand && _selectedCategory) {
         [self downloadProductsForCategoryAndBrand];
     }
@@ -63,6 +74,47 @@ NSString *const kTagProductUserInfoIndexKey = @"notification_index";
     _categoryAndBrandProducts = nil;
     _rootViewController = nil;
     _selectedProducts = nil;
+    _brandsPageIndex = kCatalogFirstPage;
+    _usedCategoriesPageIndex = kCatalogFirstPage;
+    _usedProductsPageIndex = kCatalogFirstPage;
+    _categoryAndBrondPageIndex = kCatalogFirstPage;
+    _rootCategoryPageIndexes = nil;
+}
+
+-(NSInteger)currentPageIndexForRootCategory:(STCatalogParentCategory *)rootCategory{
+    if (!_rootCategoryPageIndexes) {
+        _rootCategoryPageIndexes = [NSMutableDictionary new];
+        return kCatalogFirstPage;
+    }
+    
+    NSString *key = rootCategory.uuid;
+    if (!key || [key isKindOfClass:[NSNull class]]) {
+        NSAssert(YES, @"root category key should not be nil");
+        return kCatalogFirstPage;
+    }
+    
+    NSNumber *indexNumber = [_rootCategoryPageIndexes valueForKey:key];
+    if (!indexNumber) {
+        return kCatalogFirstPage;
+    }
+    
+    return [indexNumber integerValue];
+}
+
+-(void)setPageIndex:(NSInteger)pageIndex
+    forRootCategory:(STCatalogParentCategory *)rootCategory{
+    
+    if (!_rootCategoryPageIndexes) {
+        _rootCategoryPageIndexes = [NSMutableDictionary new];
+    }
+    
+    NSString *key = rootCategory.uuid;
+    if (!key || [key isKindOfClass:[NSNull class]]) {
+        NSAssert(YES, @"root category key should not be nil");
+    }
+
+    [_rootCategoryPageIndexes setValue:@(pageIndex)
+                                forKey:key];
 }
 
 -(void)processProduct:(STShopProduct *)product{
@@ -104,11 +156,37 @@ NSString *const kTagProductUserInfoIndexKey = @"notification_index";
 }
 
 -(void)startDownload{
+    _brandsPageIndex = kCatalogFirstPage;
+    _usedCategoriesPageIndex = kCatalogFirstPage;
+    _usedProductsPageIndex = kCatalogFirstPage;
+    _categoryAndBrondPageIndex = kCatalogFirstPage;
+    _rootCategoryPageIndexes = nil;
     [self downloadRootCatgories];
     [self downloadUsedCategories];
     [self downloadUsedProducts];
     [self downloadBrands];
 }
+
+-(void)downloadBrandsNextPage{
+    [self downloadBrands];
+}
+
+-(void)downloadUsedCategoriesNextPage{
+    [self downloadUsedCategories];
+}
+
+-(void)downloadUsedProductsNextPage{
+    [self downloadUsedProducts];
+}
+
+-(void)downloadCategoryAndBrandNextPage{
+    [self downloadProductsForCategoryAndBrand];
+}
+
+-(void)downloadRootCategoryNextPage:(STCatalogParentCategory *)rootCatgory{
+    [self downloadCategoriesForRootCategory:rootCatgory];
+}
+
 
 -(void)downloadRootCatgories{
     __weak STTagProductsManager *weakSelf = self;
@@ -125,49 +203,140 @@ NSString *const kTagProductUserInfoIndexKey = @"notification_index";
 
 -(void)downloadCategoriesForRootCategory:(STCatalogParentCategory *)rootCategory{
     __weak STTagProductsManager *weakSelf = self;
-    [STDataAccessUtils getCatalogCategoriesForParentCategoryId:rootCategory.uuid withCompletion:^(NSArray *objects, NSError *error) {
-        rootCategory.categories = [NSArray arrayWithArray:objects];
-        NSInteger index = [weakSelf.rootCategories indexOfObject:rootCategory];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventRootCategoriesUpdated), kTagProductUserInfoIndexKey:@(index)}];
-    }];
+    __block NSInteger pageIndex = [self currentPageIndexForRootCategory:rootCategory];
+    if (pageIndex == kCatalogNoMorePagesIndex) {
+        NSLog(@"No more categories to be downloaded for root category: %@", rootCategory.uuid);
+        return;
+    }
+    [STDataAccessUtils getCatalogCategoriesForParentCategoryId:rootCategory.uuid
+                                                  andPageIndex:pageIndex withCompletion:^(NSArray *objects, NSError *error) {
+                                                      if (!error) {
+                                                          [rootCategory addCategoryObjects:[NSArray arrayWithArray:objects]];
+                                                          if ([objects count] < kCatalogDownloadPageSize) {
+                                                              [self setPageIndex:-1
+                                                                 forRootCategory:rootCategory];
+                                                              NSLog(@"Categories download for root category: %@ STOP", rootCategory.uuid);
+                                                          }
+                                                          else{
+                                                              [self setPageIndex:pageIndex+1
+                                                                 forRootCategory:rootCategory];
+
+                                                          }
+                                                          NSInteger index = [weakSelf.rootCategories indexOfObject:rootCategory];
+                                                          [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventRootCategoriesUpdated), kTagProductUserInfoIndexKey:@(index)}];
+                                                      }
+                                                  }];
 }
 
 -(void)downloadUsedCategories{
+    if (_usedCategoriesPageIndex == kCatalogNoMorePagesIndex) {
+        NSLog(@"No more used categories to be downloaded");
+        return;
+    }
     __weak STTagProductsManager *weakSelf = self;
-    [STDataAccessUtils getUsedCatalogCategoriesWithCompletion:^(NSArray *objects, NSError *error) {
-        weakSelf.usedCategories = [NSArray arrayWithArray:objects];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventUsedCategories)}];
+    [STDataAccessUtils getUsedCatalogCategoriesAtPageIndex:_usedCategoriesPageIndex
+                                            withCompletion:^(NSArray *objects, NSError *error) {
+                                                if (!error) {
+                                                    NSMutableArray *categories = [NSMutableArray new];
+                                                    if (weakSelf.usedCategories) {
+                                                        [categories addObjectsFromArray:weakSelf.usedCategories];
+                                                    }
+                                                    [categories addObjectsFromArray:objects];
+                                                    
+                                                    weakSelf.usedCategories = [NSArray arrayWithArray:categories];
+                                                    if ([objects count] < kCatalogDownloadPageSize) {
+                                                        weakSelf.usedCategoriesPageIndex = kCatalogNoMorePagesIndex;
+                                                        NSLog(@"Used categories download STOP");
+                                                    }else{
+                                                        weakSelf.usedCategoriesPageIndex ++;
+                                                    }
+                                                    [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventUsedCategories)}];
+                                                }
     }];
 }
 
 -(void)downloadUsedProducts{
+    if (_usedProductsPageIndex == kCatalogNoMorePagesIndex) {
+        NSLog(@"No more used products to be downloaded");
+        return;
+    }
     __weak STTagProductsManager *weakSelf = self;
     [STDataAccessUtils getUsedSuggestionsForCategory:nil
+                                        andPageIndex:_usedProductsPageIndex
                                        andCompletion:^(NSArray *objects, NSError *error) {
-                                           NSLog(@"Received objects: %@", objects);
-                                           weakSelf.usedProducts = [NSArray arrayWithArray:objects];
-                                           [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventUsedProducts)}];
+                                           if (!error) {
+                                               NSLog(@"Received objects: %@", objects);
+                                               NSMutableArray *usedProducts = [NSMutableArray new];
+                                               if (weakSelf.usedProducts) {
+                                                   [usedProducts addObjectsFromArray:weakSelf.usedProducts];
+                                               }
+                                               weakSelf.usedProducts = [NSArray arrayWithArray:usedProducts];
+                                               if ([objects count] < kCatalogDownloadPageSize) {
+                                                   weakSelf.usedProductsPageIndex = kCatalogNoMorePagesIndex;
+                                                   NSLog(@"Used products download STOP");
+                                               }else{
+                                                   weakSelf.usedCategoriesPageIndex ++;
+                                               }
+                                               [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventUsedProducts)}];
+                                           }
                                        }];
 
 }
 
 -(void)downloadBrands{
+    if (_brandsPageIndex == kCatalogNoMorePagesIndex) {
+        NSLog(@"No more brands to be downloaded!");
+        return;
+    }
     __weak STTagProductsManager *weakSelf = self;
-    [STDataAccessUtils getBrandsEntitiesWithCompletion:^(NSArray *objects, NSError *error) {
-        weakSelf.brands = [NSArray arrayWithArray:objects];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventUsedProducts)}];
-    }];
+    STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSMutableArray *brands = [NSMutableArray new];
+            if (weakSelf.brands) {
+                [brands addObjectsFromArray:weakSelf.brands];
+            }
+            [brands addObjectsFromArray:objects];
+            weakSelf.brands = [NSArray arrayWithArray:brands];
+            if ([objects count] < kCatalogDownloadPageSize) {
+                NSLog(@"Brands download STOP");
+                weakSelf.brandsPageIndex = kCatalogNoMorePagesIndex;
+            }else{
+                weakSelf.brandsPageIndex ++;
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventBrands)}];
+        }
+    };
+
+        [STDataAccessUtils getBrandsEntitiesForPageNumber:_brandsPageIndex
+                                           withCompletion:completion];
 }
 
 -(void)downloadProductsForCategoryAndBrand{
+    if (_categoryAndBrondPageIndex == kCatalogNoMorePagesIndex) {
+        NSLog(@"No more product to be downloaded for category: %@ and brand: %@", _selectedCategory.uuid, _selectedBrand.uuid);
+        return;
+    }
     __weak STTagProductsManager *weakSelf = self;
 
     [STDataAccessUtils getSuggestionsForCategory:_selectedCategory.uuid
                                         andBrand:_selectedBrand.uuid
+                                    andPageIndex:_categoryAndBrondPageIndex
                                    andCompletion:^(NSArray *objects, NSError *error) {
-                                       weakSelf.categoryAndBrandProducts = [NSArray arrayWithArray:objects];
-                                       [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventCategoryAndBrandProducts)}];
+                                       if (!error) {
+                                           NSMutableArray *products = [NSMutableArray new];
+                                           if (weakSelf.categoryAndBrandProducts) {
+                                               [products addObjectsFromArray:weakSelf.categoryAndBrandProducts];
+                                           }
+                                           [products addObjectsFromArray:objects];
+                                           weakSelf.categoryAndBrandProducts = [NSArray arrayWithArray:products];
+                                           if ([objects count] < kCatalogDownloadPageSize) {
+                                               NSLog(@"Products for categopry: %@ and brand: %@ STOP", _selectedCategory.uuid, _selectedBrand.uuid);
+                                               weakSelf.categoryAndBrondPageIndex = kCatalogNoMorePagesIndex;
+                                           }else{
+                                               weakSelf.categoryAndBrondPageIndex ++;
+                                           }
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventCategoryAndBrandProducts)}];
+                                       }
                                    }];
 }
 

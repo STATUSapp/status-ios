@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "STWhiteNavBarViewController.h"
 
-@interface STTagProductsBrands : STWhiteNavBarViewController
+@protocol STTagBrandsProtocol <NSObject>
 
-+(STTagProductsBrands *)brandsViewController;
+-(void)brandsShouldDownloadNextPage;
+
+@end
+
+@interface STTagProductsBrands : STWhiteNavBarViewController
+@property (nonatomic, strong) id<STTagBrandsProtocol>delegate;
+
++(STTagProductsBrands *)brandsViewControllerWithDelegate:(id<STTagBrandsProtocol>)delegate;
 
 @end

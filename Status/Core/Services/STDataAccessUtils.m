@@ -278,8 +278,10 @@
 }
 
 + (void)getCatalogCategoriesForParentCategoryId:(NSString *) parentCategoryId
+                                   andPageIndex:(NSInteger)pageIndex
                                  withCompletion:(STDataAccessCompletionBlock)completion{
     [STGetCatalogCategoriesRequest getCatalogCategoriesForparentCategoryId:parentCategoryId
+                                                                 pageIndex:pageIndex
                                                      withCompletion:^(id response, NSError *error) {
                                                              NSMutableArray *result = [@[] mutableCopy];
                                                              for (NSDictionary *dict in response) {
@@ -295,24 +297,28 @@
                                                      }];
 }
 
-+ (void)getUsedCatalogCategoriesWithCompletion:(STDataAccessCompletionBlock)completion{
-    [STGetUsedCatalogCategoriesRequest getUsedCatalogCategoriesWithCompletion:^(id response, NSError *error) {
-        NSMutableArray *result = [@[] mutableCopy];
-        for (NSDictionary *dict in response) {
-            STCatalogCategory *category = [STCatalogCategory categoryFromDict:dict];
-            [result addObject:category];
-        }
-        
-        completion(result, nil);
-    } failure:^(NSError *error) {
-        completion(nil, error);
-
-    }];
++ (void)getUsedCatalogCategoriesAtPageIndex:(NSInteger)pageIndex
+                             withCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetUsedCatalogCategoriesRequest getUsedCatalogCategoriesAtPageIndex:pageIndex
+                                                            withCompletion:^(id response, NSError *error) {
+                                                                NSMutableArray *result = [@[] mutableCopy];
+                                                                for (NSDictionary *dict in response) {
+                                                                    STCatalogCategory *category = [STCatalogCategory categoryFromDict:dict];
+                                                                    [result addObject:category];
+                                                                }
+                                                                
+                                                                completion(result, nil);
+                                                            } failure:^(NSError *error) {
+                                                                completion(nil, error);
+                                                                
+                                                            }];
 }
 
 
-+ (void)getBrandsEntitiesWithCompletion:(STDataAccessCompletionBlock)completion{
-    [STGetBrandsRequest getBrandsEntities:^(id response, NSError *error) {
++ (void)getBrandsEntitiesForPageNumber:(NSInteger) pageNumber
+                        withCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetBrandsRequest getBrandsEntitiesForPage:pageNumber
+                                  withCompletion:^(id response, NSError *error) {
         
         NSMutableArray *result = [@[] mutableCopy];
         for (NSDictionary *dict in response) {
@@ -331,9 +337,11 @@
 
 + (void)getSuggestionsForCategory:(NSString *)categoryId
                          andBrand:(NSString *)brandId
+                     andPageIndex:(NSInteger)pageIndex
                     andCompletion:(STDataAccessCompletionBlock)completion{
     [STGetSuggestionsRequest getSuggestionsEntitiesForCategory:categoryId
                                                     andBrandId:brandId
+                                                  andPageIndex:pageIndex
                                                  andCompletion:^(id response, NSError *error) {
                                                      
                                                      NSMutableArray *result = [@[] mutableCopy];
@@ -350,8 +358,10 @@
 }
 
 + (void)getUsedSuggestionsForCategory:(NSString *)categoryId
+                         andPageIndex:(NSInteger)pageIndex
                     andCompletion:(STDataAccessCompletionBlock)completion{
     [STGetUsedSuggestionsRequest getUsedSuggestionsEntitiesForCategory:categoryId
+                                                          andPageIndex:pageIndex
                                                  andCompletion:^(id response, NSError *error) {
                                                      
                                                      NSMutableArray *result = [@[] mutableCopy];

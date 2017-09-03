@@ -12,6 +12,7 @@
 @protocol STTagProductsProtocol <NSObject>
 
 -(void)addProductsAction;
+-(void)productsShouldDownloadNextPage;
 
 @end
 

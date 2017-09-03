@@ -6,14 +6,23 @@
 //  Copyright © 2017 Andrus Cosmin. All rights reserved.
 //
 
+
 #import "STGetBrandsRequest.h"
 
+@interface STGetBrandsRequest ()
+
+@property (nonatomic, assign) NSInteger pageIndex;
+
+@end
+
 @implementation STGetBrandsRequest
-+ (void)getBrandsEntities:(STRequestCompletionBlock)completion
++ (void)getBrandsEntitiesForPage:(NSInteger )pageIndex
+                  withCompletion:(STRequestCompletionBlock)completion
                          failure:(STRequestFailureBlock)failure{
     
     STGetBrandsRequest *request = [STGetBrandsRequest new];
     request.completionBlock = completion;
+    request.pageIndex = pageIndex;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
@@ -26,6 +35,9 @@
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        params[@"pageSize"] = @(kCatalogDownloadPageSize);
+        params[@"page"] = @(weakSelf.pageIndex);
+//        params[@"search"] = @"";
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

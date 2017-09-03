@@ -88,13 +88,18 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 //tag products
 + (void)getCatalogParentEntitiesWithCompletion:(STDataAccessCompletionBlock)completion;
 + (void)getCatalogCategoriesForParentCategoryId:(NSString *) parentCategoryId
+                                   andPageIndex:(NSInteger)pageIndex
                                  withCompletion:(STDataAccessCompletionBlock)completion;
-+ (void)getUsedCatalogCategoriesWithCompletion:(STDataAccessCompletionBlock)completion;
-+ (void)getBrandsEntitiesWithCompletion:(STDataAccessCompletionBlock)completion;
++ (void)getUsedCatalogCategoriesAtPageIndex:(NSInteger)pageIndex
+                             withCompletion:(STDataAccessCompletionBlock)completion;
++ (void)getBrandsEntitiesForPageNumber:(NSInteger) pageNumber
+                        withCompletion:(STDataAccessCompletionBlock)completion;
 + (void)getSuggestionsForCategory:(NSString *)categoryId
                          andBrand:(NSString *)brandId
+                     andPageIndex:(NSInteger)pageIndex
                     andCompletion:(STDataAccessCompletionBlock)completion;
 + (void)getUsedSuggestionsForCategory:(NSString *)categoryId
+                         andPageIndex:(NSInteger)pageIndex
                         andCompletion:(STDataAccessCompletionBlock)completion;
 
 //commissions

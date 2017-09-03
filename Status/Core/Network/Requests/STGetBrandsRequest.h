@@ -10,7 +10,8 @@
 
 @interface STGetBrandsRequest : STBaseRequest
 
-+ (void)getBrandsEntities:(STRequestCompletionBlock)completion
-                  failure:(STRequestFailureBlock)failure;
++ (void)getBrandsEntitiesForPage:(NSInteger )pageIndex
+                  withCompletion:(STRequestCompletionBlock)completion
+                         failure:(STRequestFailureBlock)failure;
 
 @end

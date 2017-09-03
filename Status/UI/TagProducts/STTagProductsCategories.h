@@ -12,6 +12,7 @@
 @protocol STTagCategoriesProtocol <NSObject>
 
 -(void)categoryWasSelected:(STCatalogCategory *)category;
+-(void)categoriesShouldDownloadNextPage;
 
 @end
 

@@ -9,6 +9,9 @@
 #import "STBaseRequest.h"
 
 @interface STGetUsedCatalogCategoriesRequest : STBaseRequest
-+ (void)getUsedCatalogCategoriesWithCompletion:(STRequestCompletionBlock)completion
-                                       failure:(STRequestFailureBlock)failure;
+@property (nonatomic, assign) NSInteger pageIndex;
+
++ (void)getUsedCatalogCategoriesAtPageIndex:(NSInteger)pageIndex
+                             withCompletion:(STRequestCompletionBlock)completion
+                                    failure:(STRequestFailureBlock)failure;
 @end

@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     ContainerTabBarIndexManual,
     ContainerTabBarIndexEmptyWardrobe
 };
-@interface STTagProductsContainer ()<STSCustomSegmentProtocol, STTagProductsEmptyWardrobeProtocol, STTagCategoriesProtocol, STTagProductsProtocol, STTagManualProtocol, STTagCustomViewProtocol>
+@interface STTagProductsContainer ()<STSCustomSegmentProtocol, STTagProductsEmptyWardrobeProtocol, STTagCategoriesProtocol, STTagProductsProtocol, STTagManualProtocol, STTagCustomViewProtocol, STTagBrandsProtocol>
 
 @property (weak, nonatomic) IBOutlet STTagCustomView *wizzardView;
 @property (weak, nonatomic) IBOutlet STTagCustomView *wardrobeView;
@@ -274,8 +274,26 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 -(void)categoryWasSelected:(STCatalogCategory *)category{
  
     [[STTagProductsManager sharedInstance] updateCategory:category];
-    STTagProductsBrands *vc = [STTagProductsBrands brandsViewController];
+    STTagProductsBrands *vc = [STTagProductsBrands brandsViewControllerWithDelegate:self];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)categoriesShouldDownloadNextPage{
+    if (_selectionType == STContainerSelectionWardrobe) {
+        [[STTagProductsManager sharedInstance] downloadUsedCategoriesNextPage];
+    }
+    else if (_selectionType == STContainerSelectionWizzard){
+        NSInteger selectedIndex = _wizardSegment.selectedIndex;
+        STCatalogParentCategory *rootCategory = [STTagProductsManager sharedInstance].rootCategories[selectedIndex];
+        [[STTagProductsManager sharedInstance] downloadRootCategoryNextPage:rootCategory];        
+    }
+
+}
+
+#pragma mark - STTagBrandsProtocol
+
+-(void)brandsShouldDownloadNextPage{
+    [[STTagProductsManager sharedInstance] downloadBrandsNextPage];
 }
 
 #pragma mark - STTagProductsProtocol
@@ -287,6 +305,11 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     }
     else
         NSLog(@"The root vc should not be nil in this case");
+}
+
+- (void)productsShouldDownloadNextPage{
+    //used products
+    [[STTagProductsManager sharedInstance] downloadUsedProductsNextPage];
 }
 
 

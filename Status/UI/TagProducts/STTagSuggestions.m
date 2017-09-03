@@ -22,10 +22,10 @@
 
 @implementation STTagSuggestions
 
-+(STTagSuggestions *)suggestionsVC{
++(STTagSuggestions *)suggestionsVCWithDelegate:(id<STTagSuggestionsProtocol>)delegate{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TagProductsScene" bundle:nil];
     STTagSuggestions *vc = [storyboard instantiateViewControllerWithIdentifier:@"TAG_SUGGESTIONS_VC"];
-    
+    vc.delegate = delegate;
     return vc;
 }
 
@@ -96,4 +96,9 @@
     else
         NSLog(@"The root vc should not be nil in this case");
 }
+
+-(void)productsShouldDownloadNextPage{
+    [[STTagProductsManager sharedInstance] downloadCategoryAndBrandNextPage];
+}
+
 @end

@@ -16,7 +16,7 @@
     NSLog(@"Dict: %@", dict);
 
     //TODO: make this consistent with the server
-    commission.uuid = dict[@"id"];
+    commission.uuid = [dict[@"id"] stringValue];
     commission.mainImageUrl = dict[@"product"][@"image_url"];
     commission.mainImageDownloaded = NO;
     commission.productName = dict[@"product"][@"name"];

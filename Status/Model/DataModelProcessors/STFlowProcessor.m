@@ -502,11 +502,13 @@ NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
                 [STDataAccessUtils getUserProfileForUserId:_userId
                                              andCompletion:^(NSArray *objects, NSError *error) {
                                                  _userProfile = [objects firstObject];
-                                                 [[CoreManager profilePool] addProfiles:@[_userProfile]];
-
-                                                 [STDataAccessUtils getPostsForUserId:_userId
-                                                                               offset:offset
-                                                                       withCompletion:completion];
+                                                 if (_userProfile) {
+                                                     [[CoreManager profilePool] addProfiles:@[_userProfile]];
+                                                     
+                                                     [STDataAccessUtils getPostsForUserId:_userId
+                                                                                   offset:offset
+                                                                           withCompletion:completion];
+                                                 }
                                              }];
             }
             else{

@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "STWhiteNavBarViewController.h"
 
+@protocol STTagSuggestionsProtocol <NSObject>
+
+-(void)categoryAndBrandProductsShouldDownloadNextPage;
+
+@end
+
 @interface STTagSuggestions : STWhiteNavBarViewController
 
-+(STTagSuggestions *)suggestionsVC;
+@property (nonatomic, strong) id<STTagSuggestionsProtocol>delegate;
++(STTagSuggestions *)suggestionsVCWithDelegate:(id<STTagSuggestionsProtocol>)delegate;
 
 @end

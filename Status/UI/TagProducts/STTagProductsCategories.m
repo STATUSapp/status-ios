@@ -64,6 +64,14 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(nonnull UICollectionViewCell *)cell forItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if (indexPath.item == _categories.count - 1) {//the last item
+        if (_delegate && [_delegate respondsToSelector:@selector(categoriesShouldDownloadNextPage)]) {
+            [_delegate categoriesShouldDownloadNextPage];
+        }
+    }
+}
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return [_categories count];
 }

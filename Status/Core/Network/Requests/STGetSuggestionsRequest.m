@@ -12,6 +12,7 @@
 
 + (void)getSuggestionsEntitiesForCategory:(NSString *)categoryId
                                andBrandId:(NSString *)brandId
+                             andPageIndex:(NSInteger)pageIndex
                             andCompletion:(STRequestCompletionBlock)completion
                        failure:(STRequestFailureBlock)failure{
     
@@ -22,6 +23,7 @@
     request.retryCount = 0;
     request.categoryId = categoryId;
     request.brandId = brandId;
+    request.pageIndex = pageIndex;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -33,6 +35,9 @@
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"category_id"] = weakSelf.categoryId;
         params[@"brand_id"] = weakSelf.brandId;
+        params[@"pageSize"] = @(kCatalogDownloadPageSize);
+        params[@"page"] = @(weakSelf.pageIndex);
+        
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil
