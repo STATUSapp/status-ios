@@ -6,8 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:mic5.app.link</string>
-		<string>applinks:mic5-alternate.app.link</string>
+		<string>applinks:sts.one</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

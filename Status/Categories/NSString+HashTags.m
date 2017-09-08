@@ -21,7 +21,7 @@
         wordRange.length = wordRange.length + 1;
         NSString* word = [self substringWithRange:wordRange];
         [hashTags addObject:word];
-        NSLog(@"Found tag %@", word);
+//        NSLog(@"Found tag %@", word);
     }
     return hashTags;
 }

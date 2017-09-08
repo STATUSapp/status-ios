@@ -54,7 +54,8 @@
         params[@"offset"] = @(weakSelf.offset);
         
         //filters for popular flow
-        if (weakSelf.flowType == STFlowTypePopular) {
+        if (weakSelf.flowType == STFlowTypePopular ||
+            weakSelf.flowType == STFlowTypeRecent) {
             if (weakSelf.timeframe) {
                 params[@"timeframe"] = weakSelf.timeframe;
             }
@@ -65,6 +66,9 @@
                 params[@"gender"] = [NSNumber numberWithBool:FALSE];
             }
         }
+        
+        NSLog(@"Params: %@", params);
+        
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil

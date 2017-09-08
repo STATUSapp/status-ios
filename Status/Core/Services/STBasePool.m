@@ -61,10 +61,12 @@
 }
 - (void)removeObjectsWithIDs:(NSArray <NSString * > *)uuids{
     NSPredicate * removePredicate = [NSPredicate predicateWithBlock:^BOOL(STBaseObj *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ![uuids containsObject:evaluatedObject.uuid];
+        return [uuids containsObject:evaluatedObject.uuid];
     }];
     NSMutableSet *matches =[NSMutableSet setWithSet:_objects];
-    [matches minusSet:[_objects filteredSetUsingPredicate:removePredicate]];
+    NSSet *removedObjects = [_objects filteredSetUsingPredicate:removePredicate];
+    [matches minusSet:removedObjects];
+    _objects = matches;
     for (id object in matches) {
         if ([object isKindOfClass:[STPost class]]) {
             [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];

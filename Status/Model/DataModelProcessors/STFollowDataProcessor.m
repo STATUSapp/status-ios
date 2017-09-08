@@ -7,6 +7,9 @@
 //
 
 #import "STFollowDataProcessor.h"
+#import "STFacebookLoginController.h"
+#import "STUserProfile.h"
+#import "STUserProfilePool.h"
 
 @interface STFollowDataProcessor(){
     NSSet *_followedUsers;
@@ -46,7 +49,20 @@
                         
                         [STDataAccessUtils unfollowUsers:followUsersShouldUnfollow withCompletion:^(NSError *error) {
                             NSLog(@"Error unfollow: %@", error.debugDescription);
-                            if(completion) completion(error);
+                            
+                            NSString *loggedInUserId = [[CoreManager loginService] currentUserUuid];
+                            if (loggedInUserId) {
+                                [STDataAccessUtils getUserProfileForUserId:loggedInUserId
+                                                             andCompletion:^(NSArray *objects, NSError *error) {
+                                                                 STUserProfile *userProfile = [objects firstObject];
+                                                                 if (userProfile) {
+                                                                     [[CoreManager profilePool] addProfiles:@[userProfile]];
+                                                                     
+                                                                 }
+                                                                 
+                                                                 if(completion) completion(error);
+                                                             }];
+                            }
                         }];
                     }];
 }

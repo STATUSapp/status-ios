@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="STExploreFilters">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Au-b3-hUa" userLabel="Timeframe filters">
+                    <rect key="frame" x="0.0" y="0.0" width="262.5" height="41"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SvA-c9-CQU">
+                            <rect key="frame" x="0.0" y="0.0" width="65.5" height="41"/>
+                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                            <state key="normal" title="Daily">
+                                <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="timeframeOptionSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="uvl-KP-sKB"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8T-a6-6rg">
+                            <rect key="frame" x="65.5" y="0.0" width="66" height="41"/>
+                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                            <state key="normal" title="Weekly">
+                                <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="timeframeOptionSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="FkV-dP-dpF"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVy-iu-Sqc">
+                            <rect key="frame" x="131.5" y="0.0" width="65.5" height="41"/>
+                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                            <state key="normal" title="Monthly">
+                                <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="timeframeOptionSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="d6k-py-Cps"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcj-UF-c1c">
+                            <rect key="frame" x="197" y="0.0" width="65.5" height="41"/>
+                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
+                            <state key="normal" title="All Time">
+                                <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="timeframeOptionSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="Tuj-TV-7T9"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="SvA-c9-CQU" firstAttribute="leading" secondItem="5Au-b3-hUa" secondAttribute="leading" id="2rx-MF-Pts"/>
+                        <constraint firstItem="u8T-a6-6rg" firstAttribute="top" secondItem="5Au-b3-hUa" secondAttribute="top" id="4Z6-ds-cp3"/>
+                        <constraint firstItem="BVy-iu-Sqc" firstAttribute="width" secondItem="SvA-c9-CQU" secondAttribute="width" id="5uv-M9-nUt"/>
+                        <constraint firstItem="kcj-UF-c1c" firstAttribute="leading" secondItem="BVy-iu-Sqc" secondAttribute="trailing" id="7EX-aV-Cmi"/>
+                        <constraint firstAttribute="bottom" secondItem="u8T-a6-6rg" secondAttribute="bottom" id="BOb-EY-YSM"/>
+                        <constraint firstItem="SvA-c9-CQU" firstAttribute="top" secondItem="5Au-b3-hUa" secondAttribute="top" id="DXc-ib-B7a"/>
+                        <constraint firstItem="BVy-iu-Sqc" firstAttribute="leading" secondItem="u8T-a6-6rg" secondAttribute="trailing" id="E7Z-VD-YUD"/>
+                        <constraint firstAttribute="bottom" secondItem="BVy-iu-Sqc" secondAttribute="bottom" id="RX7-hT-0bj"/>
+                        <constraint firstAttribute="bottom" secondItem="SvA-c9-CQU" secondAttribute="bottom" id="Rvt-3a-2Ua"/>
+                        <constraint firstItem="kcj-UF-c1c" firstAttribute="top" secondItem="5Au-b3-hUa" secondAttribute="top" id="W1j-Mo-baa"/>
+                        <constraint firstItem="SvA-c9-CQU" firstAttribute="width" secondItem="5Au-b3-hUa" secondAttribute="width" multiplier="0.25" id="Xfw-EO-Wbh"/>
+                        <constraint firstItem="BVy-iu-Sqc" firstAttribute="top" secondItem="5Au-b3-hUa" secondAttribute="top" id="gA7-Gi-a6H"/>
+                        <constraint firstItem="kcj-UF-c1c" firstAttribute="width" secondItem="SvA-c9-CQU" secondAttribute="width" id="gG4-8d-ibJ"/>
+                        <constraint firstItem="u8T-a6-6rg" firstAttribute="width" secondItem="SvA-c9-CQU" secondAttribute="width" id="gwh-gf-Dqj"/>
+                        <constraint firstItem="u8T-a6-6rg" firstAttribute="leading" secondItem="SvA-c9-CQU" secondAttribute="trailing" id="llh-HE-AWt"/>
+                        <constraint firstAttribute="bottom" secondItem="kcj-UF-c1c" secondAttribute="bottom" id="v0v-Hj-b9M"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ydq-Jw-UkX" userLabel="Gender filters">
+                    <rect key="frame" x="262.5" y="0.0" width="112.5" height="41"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nU-nU-1yH" userLabel="Both Button">
+                            <rect key="frame" x="69" y="0.0" width="33.5" height="41"/>
+                            <state key="normal" image="women_men"/>
+                            <state key="selected" image="women_men_pressed"/>
+                            <connections>
+                                <action selector="genderOptionSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="Wmf-hO-BNp"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pzc-9q-U4c" userLabel="Men Button">
+                            <rect key="frame" x="35" y="0.0" width="34" height="41"/>
+                            <state key="normal" image="men"/>
+                            <state key="selected" image="men_pressed"/>
+                            <connections>
+                                <action selector="genderOptionSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="iJf-5D-r1n"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-bA-oCZ" userLabel="Women Button">
+                            <rect key="frame" x="1.5" y="0.0" width="33.5" height="41"/>
+                            <state key="normal" image="women"/>
+                            <state key="selected" image="women_pressed"/>
+                            <connections>
+                                <action selector="genderOptionSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="JbN-oQ-yRP"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="9nU-nU-1yH" firstAttribute="leading" secondItem="Pzc-9q-U4c" secondAttribute="trailing" id="7D7-oc-pGH"/>
+                        <constraint firstAttribute="bottom" secondItem="z4g-bA-oCZ" secondAttribute="bottom" id="HWC-A9-isN"/>
+                        <constraint firstItem="9nU-nU-1yH" firstAttribute="top" secondItem="Ydq-Jw-UkX" secondAttribute="top" id="J7A-Sf-Byb"/>
+                        <constraint firstItem="z4g-bA-oCZ" firstAttribute="width" secondItem="9nU-nU-1yH" secondAttribute="width" id="Jk0-yz-PqE"/>
+                        <constraint firstItem="z4g-bA-oCZ" firstAttribute="top" secondItem="Ydq-Jw-UkX" secondAttribute="top" id="TpD-3n-92k"/>
+                        <constraint firstItem="Pzc-9q-U4c" firstAttribute="leading" secondItem="z4g-bA-oCZ" secondAttribute="trailing" id="XFL-Wh-oUs"/>
+                        <constraint firstItem="9nU-nU-1yH" firstAttribute="width" secondItem="Ydq-Jw-UkX" secondAttribute="width" multiplier="0.3" id="YHL-Mr-vvI"/>
+                        <constraint firstAttribute="bottom" secondItem="Pzc-9q-U4c" secondAttribute="bottom" id="b6A-9M-1cs"/>
+                        <constraint firstAttribute="trailing" secondItem="9nU-nU-1yH" secondAttribute="trailing" constant="10" id="oag-VU-Rmz"/>
+                        <constraint firstItem="Pzc-9q-U4c" firstAttribute="top" secondItem="Ydq-Jw-UkX" secondAttribute="top" id="sZ0-NS-WVa"/>
+                        <constraint firstItem="Pzc-9q-U4c" firstAttribute="width" secondItem="9nU-nU-1yH" secondAttribute="width" id="wFX-8m-lcq"/>
+                        <constraint firstAttribute="bottom" secondItem="9nU-nU-1yH" secondAttribute="bottom" id="xFW-Ul-QCr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ydq-Jw-UkX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2Sm-9z-VQz"/>
+                <constraint firstItem="5Au-b3-hUa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7nc-HQ-3tS"/>
+                <constraint firstAttribute="bottom" secondItem="5Au-b3-hUa" secondAttribute="bottom" id="8pC-bC-FAB"/>
+                <constraint firstItem="Ydq-Jw-UkX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.3" id="9XD-N1-veS"/>
+                <constraint firstAttribute="trailing" secondItem="Ydq-Jw-UkX" secondAttribute="trailing" id="ij7-oe-0J1"/>
+                <constraint firstItem="Ydq-Jw-UkX" firstAttribute="leading" secondItem="5Au-b3-hUa" secondAttribute="trailing" id="ps9-RY-a4Y"/>
+                <constraint firstItem="5Au-b3-hUa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="quj-dz-lA1"/>
+                <constraint firstAttribute="bottom" secondItem="Ydq-Jw-UkX" secondAttribute="bottom" id="zuh-xW-5Ju"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="allTimeButton" destination="kcj-UF-c1c" id="iAb-fc-NmF"/>
+                <outlet property="bothButton" destination="9nU-nU-1yH" id="dUg-1Q-Bxc"/>
+                <outlet property="dailyButton" destination="SvA-c9-CQU" id="0pX-YE-hyq"/>
+                <outlet property="menButton" destination="Pzc-9q-U4c" id="G8N-3c-EpD"/>
+                <outlet property="monthlyButton" destination="BVy-iu-Sqc" id="Iz5-06-Bao"/>
+                <outlet property="timeframeContainer" destination="5Au-b3-hUa" id="XR7-E7-TKw"/>
+                <outlet property="weeklyButton" destination="u8T-a6-6rg" id="ARE-Nq-fb5"/>
+                <outlet property="womenButton" destination="z4g-bA-oCZ" id="h9Q-bm-luT"/>
+            </connections>
+            <point key="canvasLocation" x="47.5" y="-200.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="men" width="20" height="21"/>
+        <image name="men_pressed" width="20" height="21"/>
+        <image name="women" width="20" height="21"/>
+        <image name="women_men" width="20" height="21"/>
+        <image name="women_men_pressed" width="20" height="21"/>
+        <image name="women_pressed" width="20" height="21"/>
+    </resources>
+</document>

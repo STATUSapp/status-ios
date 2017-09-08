@@ -89,7 +89,7 @@ CGFloat const kTopButtonSize = 48.f;
     NSInteger postForContextIndex;
 }
 
-@property (nonatomic, strong) STFlowProcessor *feedProcessor;
+@property (nonatomic, strong, readwrite) STFlowProcessor *feedProcessor;
 @property (nonatomic, strong) STFollowDataProcessor *followProcessor;
 
 @property (nonatomic, strong) NSString *userName;
@@ -97,7 +97,7 @@ CGFloat const kTopButtonSize = 48.f;
 @property (nonatomic, assign) BOOL isMyProfile;
 
 @property (nonatomic, strong) STLoadingView *customLoadingView;
-
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingViewImage;
 @property (strong, nonatomic) IBOutlet UIView *noDataView;
@@ -128,7 +128,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         (_feedProcessor.processorFlowType == STFlowTypeHome ||
         _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
         navBarHidden = NO;
-    }
+        }else if (_refreshControl.refreshing == YES &&
+                  _feedProcessor.processorFlowType == STFlowTypeHome){
+            navBarHidden = NO;
+        }
 
     if (navBarHidden == NO) {
         if (self == currentViewController) {
@@ -153,8 +156,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     [self configureNavigationBar];
     
     if ([_feedProcessor processorFlowType] == STFlowTypeHome) {
-        //use the standard loading
-        if (_feedProcessor.loading) {
+        //use the standard loading for initial state
+        if (_feedProcessor.loading && _refreshControl.refreshing == NO) {
             _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
             [self.collectionView.backgroundView removeFromSuperview];
             self.collectionView.backgroundView = _loadingView;
@@ -302,6 +305,14 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self configureLoadingView];
+    
+    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, 30.f);
+    
+    _refreshControl = [[UIRefreshControl alloc] initWithFrame:rect];
+    _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull down to refresh"];
+    [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.collectionView addSubview:_refreshControl];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -341,6 +352,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     BOOL statusBarHidden = YES;
     if (_feedProcessor.loading == NO) {
         statusBarHidden = NO;
+    }else if (_refreshControl.refreshing == YES){
+        statusBarHidden = NO;
     }
 
     return statusBarHidden;
@@ -362,6 +375,9 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 #pragma mark - Notifications
 
 - (void)processorLoaded{
+    if (_refreshControl.refreshing) {
+        [_refreshControl endRefreshing];
+    }
     [self configureLoadingView];
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
@@ -535,6 +551,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 - (void)showNoDataViewIfNeeded{
     if (_feedProcessor.loading == NO &&
+        _refreshControl.refreshing == NO &&
         [_feedProcessor numberOfObjects] ==0 &&
         [_feedProcessor processorFlowType] == STFlowTypeHome) {
         [self.collectionView.backgroundView removeFromSuperview];
@@ -681,7 +698,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         
-        if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
+        if (_refreshControl.refreshing == YES ||
+            ([_feedProcessor processorIsAGallery] && indexPath.section == 0)) {
             return nil;
         }
         
@@ -760,6 +778,17 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 #pragma mark - IBACtions
+
+-(void)refreshControlChanged:(UIRefreshControl*)sender{
+    NSLog(@"Value changed: %@", @(sender.refreshing));
+    if (_feedProcessor.loading == NO) {
+        [_feedProcessor reloadProcessor];
+        [self configureLoadingView];
+        [self.collectionView reloadData];
+        [self.collectionView.collectionViewLayout invalidateLayout];
+    }
+    
+}
 
 -(IBAction)onDoubleTap:(id)sender{
     CGPoint tappedPoint = [sender locationInView:self.collectionView];

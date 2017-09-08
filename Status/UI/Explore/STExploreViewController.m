@@ -13,6 +13,7 @@
 #import "STProcessorsService.h"
 #import "FeedCVC.h"
 #import "NearbyVC.h"
+#import "STExploreFilters.h"
 
 typedef NS_ENUM(NSUInteger, STExploreFlow) {
     STExploreFlowPopular = 0,
@@ -23,23 +24,14 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
 
 const CGFloat kFiltersDefaultHeight = 41.f;
 
-@interface STExploreViewController ()<STSCustomSegmentProtocol, UIPageViewControllerDelegate, UIPageViewControllerDataSource, STSideBySideContaineeProtocol>
+@interface STExploreViewController ()<STSCustomSegmentProtocol, UIPageViewControllerDelegate, UIPageViewControllerDataSource, STSideBySideContaineeProtocol, STExploreFiltersProtocol>
 @property (weak, nonatomic) IBOutlet UIView *topViewContainer;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *popularFIlterViewHeightConstr;
-@property (weak, nonatomic) IBOutlet UIButton *dailyButton;
-@property (weak, nonatomic) IBOutlet UIButton *weeklyButton;
-@property (weak, nonatomic) IBOutlet UIButton *monthlyButton;
-@property (weak, nonatomic) IBOutlet UIButton *allTimeButton;
-@property (weak, nonatomic) IBOutlet UIButton *womenButton;
-@property (weak, nonatomic) IBOutlet UIButton *menButton;
-@property (weak, nonatomic) IBOutlet UIButton *bothButton;
-
+@property (weak, nonatomic) IBOutlet UIView *filtersViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) UIPageViewController * pageController;
-@property (strong, nonatomic) NSArray<UIViewController *> * viewControllers;
+@property (strong, nonatomic) NSArray<FeedCVC *> * viewControllers;
 @property (strong, nonatomic) STCustomSegment *customSegment;
-@property (strong, nonatomic) UIButton *selectedTimeframe;
-@property (strong, nonatomic) UIButton *selectedGender;
+@property (strong, nonatomic) NSArray <STExploreFilters *> *filterViewArray;//one option for each segment
 
 @end
 
@@ -52,100 +44,110 @@ const CGFloat kFiltersDefaultHeight = 41.f;
     return vc;
 }
 
-#pragma mark - IBACTIONS
-- (IBAction)timeframeOptionSelected:(id)sender {
-    if (_selectedTimeframe!=sender) {
-        _selectedTimeframe = sender;
-        [self configureFilters];
-        [self invalidateDatasource];
-    }
-}
+#pragma mark - STExploreFiltersProtocol
 
-- (IBAction)genderOptionSelected:(id)sender {
-    if (_selectedGender!=sender) {
-        _selectedGender = sender;
-        [self configureFilters];
-        [self invalidateDatasource];
-    }
-}
-#pragma mark - Helpers
-
--(void)configureFilters{
-    [_dailyButton setSelected:_dailyButton==_selectedTimeframe];
-    [_weeklyButton setSelected:_weeklyButton==_selectedTimeframe];
-    [_monthlyButton setSelected:_monthlyButton==_selectedTimeframe];
-    [_allTimeButton setSelected:_allTimeButton==_selectedTimeframe];
+-(STExploreFiltersTimeframe)defaultTimeframeOptionWithSender:(STExploreFilters *)sender{
     
-    [_womenButton setSelected:_womenButton==_selectedGender];
-    [_menButton setSelected:_menButton==_selectedGender];
-    [_bothButton setSelected:_bothButton==_selectedGender];
+    NSInteger filterIndex = [_filterViewArray indexOfObject:sender];
+    if (filterIndex == NSNotFound) {
+        NSLog(@"FILTER NOT FOUND!");
+    }else{
+        FeedCVC *feedController = _viewControllers[filterIndex];
+        STFlowProcessor *processor = feedController.feedProcessor;
+        //load default values
+        NSString *timeframe = processor.timeframeFilter;
+        if ([timeframe isEqualToString:kTimeframeDaily]) {
+            return STExploreFiltersTimeframeDaily;
+        }
+        if ([timeframe isEqualToString:kTimeframeMonthly]) {
+            return STExploreFiltersTimeframeMonthly;
+        }
+        if ([timeframe isEqualToString:kTimeframeWeekly]) {
+            return STExploreFiltersTimeframeWeekly;
+        }
+        if ([timeframe isEqualToString:kTimeframeAllTime]) {
+            return STExploreFiltersTimeframeAllTime;
+        }
+    }
+    
+    NSLog(@"DEFAULT TIMEFRAME FILTER NOT FOUND!");
+    return STExploreFiltersTimeframeDaily;
 }
+-(STExploreFiltersGender)defaultGenderOptionWithSender:(STExploreFilters *)sender{
+    
+    NSInteger filterIndex = [_filterViewArray indexOfObject:sender];
+    if (filterIndex == NSNotFound) {
+        NSLog(@"FILTER NOT FOUND!");
+    }else{
+        FeedCVC *feedController = _viewControllers[filterIndex];
+        STFlowProcessor *processor = feedController.feedProcessor;
+        //load default values
+        
+        NSString *gender = processor.genderFilter;
+        
+        if ([gender isEqualToString:kGenderWomen]) {
+            return STExploreFiltersGenderWomen;
+        }else if ([gender isEqualToString:kGenderMen]) {
+            return STExploreFiltersGenderMen;
+        }else{
+            return STExploreFiltersGenderBoth;
+        }
+    }
+    
+    NSLog(@"DEFAULT GENDER FILTER NOT FOUND!");
+    return STExploreFiltersGenderBoth;
 
--(void)invalidateDatasource{
+}
+-(void)filtersChangedInTimeFrame:(STExploreFiltersTimeframe)timeframeOption
+                       andGender:(STExploreFiltersGender)genderOption
+                       forSender:(STExploreFilters *)sender{
     NSString *timeframe = nil;
-    if (_dailyButton == _selectedTimeframe) {
-        timeframe = kPopularTimeframeDaily;
+    switch (timeframeOption) {
+        case STExploreFiltersTimeframeDaily:
+            timeframe = kTimeframeDaily;
+            break;
+        case STExploreFiltersTimeframeWeekly:
+            timeframe = kTimeframeWeekly;
+            break;
+        case STExploreFiltersTimeframeMonthly:
+            timeframe = kTimeframeMonthly;
+            break;
+        case STExploreFiltersTimeframeAllTime:
+            timeframe = kTimeframeAllTime;
+            break;
     }
-    if (_weeklyButton == _selectedTimeframe) {
-        timeframe = kPopularTimeframeWeekly;
-    }
-    if (_monthlyButton == _selectedTimeframe) {
-        timeframe = kPopularTimeframeMonthly;
-    }
-    if (_allTimeButton == _selectedTimeframe) {
-        timeframe = kPopularTimeframeAllTime;
-    }
+
     NSString *gender = nil;
-    if (_womenButton == _selectedGender) {
-        gender = kPopularGenderWomen;
-    }
-    if (_menButton == _selectedGender) {
-        gender = kPopularGenderMen;
+    switch (genderOption) {
+        case STExploreFiltersGenderWomen:
+            gender = kGenderWomen;
+            break;
+        case STExploreFiltersGenderMen:
+            gender = kGenderMen;
+            break;
+        default:
+            break;
     }
     
     NSMutableDictionary *userInfo = [NSMutableDictionary new];
     if (timeframe) {
         [userInfo setValue:timeframe forKey:@"timeframe"];
     }
-    else
-        NSLog(@"YOU SHOULD NEVER BE HERE!!!");
     
     if (gender) {
         [userInfo setValue:gender forKey:@"gender"];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPopularFiltersChanged object:nil userInfo:userInfo];
-}
+    
+    NSInteger filterIndex = [_filterViewArray indexOfObject:sender];
+    if (filterIndex == NSNotFound) {
+        NSLog(@"FILTER NOT FOUND!");
+    }else{
+        FeedCVC *feedController = _viewControllers[filterIndex];
+        STFlowProcessor *processor = feedController.feedProcessor;
+        [userInfo setValue:@(processor.processorFlowType) forKey:@"processor_type"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFiltersChanged object:nil userInfo:userInfo];
+    }
 
--(void)loadDefaultFiltersForProcessor:(STFlowProcessor *) processor{
-    //load default values
-    NSString *timeframe = processor.popularTimeframe;
-    NSString *gender = processor.popularGender;
-    if ([timeframe isEqualToString:kPopularTimeframeDaily]) {
-        _selectedTimeframe = _dailyButton;
-    }
-    if ([timeframe isEqualToString:kPopularTimeframeMonthly]) {
-        _selectedTimeframe = _monthlyButton;
-    }
-    if ([timeframe isEqualToString:kPopularTimeframeWeekly]) {
-        _selectedTimeframe = _weeklyButton;
-    }
-    if ([timeframe isEqualToString:kPopularTimeframeAllTime]) {
-        _selectedTimeframe = _allTimeButton;
-    }
-    
-    if ([gender isEqualToString:kPopularGenderWomen]) {
-        _selectedGender = _womenButton;
-    }
-    
-    if ([gender isEqualToString:kPopularGenderMen]) {
-        _selectedGender = _menButton;
-    }
-    
-    if (!_selectedGender) {
-        _selectedGender = _bothButton;
-    }
-    
-    [self configureFilters];
 }
 
 #pragma mark STSCustomSegmentProtocol
@@ -186,16 +188,33 @@ const CGFloat kFiltersDefaultHeight = 41.f;
     NSLog(@"Button pressed: %ld",(long)index);
     
     NSInteger currentVCIndex = [_viewControllers indexOfObject:_pageController.viewControllers.lastObject];
-    
+
+    [self configureFilterContainer];
+
     if (index == currentVCIndex) {
         return;
     }
     
-    _popularFIlterViewHeightConstr.constant = (index == STExploreFlowPopular)?kFiltersDefaultHeight:0.f;
-    
     UIPageViewControllerNavigationDirection direction = index > currentVCIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
     [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:nil];
+
+}
+
+-(void)configureFilterContainer{
+    NSInteger index = _customSegment.selectedIndex;
+    STExploreFilters *filterView = _filterViewArray[index];
+    CGRect rect = filterView.frame;
+    rect.origin.x = 0.f;
+    rect.origin.y = 0.f;
+    rect.size.height = self.filtersViewContainer.frame.size.height;
+    rect.size.width = self.filtersViewContainer.frame.size.width;
+    filterView.frame = rect;
+    filterView.translatesAutoresizingMaskIntoConstraints = YES;
+    filterView.tag = 101;
+    STExploreFilters *oldView = [self.filtersViewContainer viewWithTag:101];
+    [oldView removeFromSuperview];
+    [self.filtersViewContainer addSubview:filterView];
 
 }
 
@@ -226,16 +245,31 @@ const CGFloat kFiltersDefaultHeight = 41.f;
         }
         STFlowProcessor *feedProcessor = [[CoreManager processorService] getProcessorWithType:flowType];
         
-        if (flowType == STFlowTypePopular) {
-            [self loadDefaultFiltersForProcessor:feedProcessor];
-        }
         FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:feedProcessor];
         vc.containeeDelegate = self;
         [viewControllers addObject:vc];
     }
     
     _viewControllers = [NSArray arrayWithArray:viewControllers];
+    
+    NSMutableArray *filterArray = [NSMutableArray new];
+    for (int i = 0; i<STExploreFlowCount; i++) {
+        STExploreFiltersType filterType;
+        switch (i) {
+            case STExploreFlowRecent:
+                filterType = STExploreFiltersTypeRecent;
+                break;
+            case STExploreFlowPopular:
+                filterType = STExploreFiltersTypePopular;
+                break;
+        }
 
+        STExploreFilters *filter = [STExploreFilters exploreFiltersWithDelegate:self andType:filterType];
+        [filterArray addObject:filter];
+    }
+    _filterViewArray = [NSArray arrayWithArray:filterArray];
+    [self configureFilterContainer];
+    
     _pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     _pageController.view.backgroundColor = [UIColor clearColor];
     _pageController.view.tintColor = [UIColor clearColor];
@@ -285,7 +319,7 @@ const CGFloat kFiltersDefaultHeight = 41.f;
 
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    NSInteger currentIndex = [_viewControllers indexOfObject:viewController];
+    NSInteger currentIndex = [_viewControllers indexOfObject:(FeedCVC *)viewController];
     if (currentIndex + 1 < _viewControllers.count) {
         return _viewControllers[currentIndex + 1];
     }
@@ -295,7 +329,7 @@ const CGFloat kFiltersDefaultHeight = 41.f;
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     
-    NSInteger currentIndex = [_viewControllers indexOfObject:viewController];
+    NSInteger currentIndex = [_viewControllers indexOfObject:(FeedCVC *)viewController];
     if (currentIndex > 0) {
         return _viewControllers[currentIndex - 1];
     }

@@ -30,15 +30,15 @@ NSString * const kNotificationShowSuggestions = @"NotificationShowSuggestion";
 
 NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
-NSString * const kNotificationPopularFiltersChanged = @"NotificationPopularFiltersChanged";
+NSString * const kNotificationFiltersChanged = @"NotificationFiltersChanged";
 
-NSString * const kPopularTimeframeDaily = @"daily";
-NSString * const kPopularTimeframeWeekly = @"weekly";
-NSString * const kPopularTimeframeMonthly = @"monthly";
-NSString * const kPopularTimeframeAllTime = @"all";
+NSString * const kTimeframeDaily = @"daily";
+NSString * const kTimeframeWeekly = @"weekly";
+NSString * const kTimeframeMonthly = @"monthly";
+NSString * const kTimeframeAllTime = @"all";
 
-NSString * const kPopularGenderWomen = @"female";
-NSString * const kPopularGenderMen = @"male";
+NSString * const kGenderWomen = @"female";
+NSString * const kGenderMen = @"male";
 
 @interface STFlowProcessor ()
 {
@@ -57,8 +57,8 @@ NSString * const kPopularGenderMen = @"male";
 @property (nonatomic, assign) NSInteger offset;
 @property (nonatomic, strong) NSString *postIdToDelete;
 
-@property (nonatomic, strong, readwrite) NSString *popularTimeframe;
-@property (nonatomic, strong, readwrite) NSString *popularGender;
+@property (nonatomic, strong, readwrite) NSString *timeframeFilter;
+@property (nonatomic, strong, readwrite) NSString *genderFilter;
 @end
 
 @implementation STFlowProcessor
@@ -69,10 +69,16 @@ NSString * const kPopularGenderMen = @"male";
         self.flowType = flowType;
         _loaded = NO;
         _objectIds = [NSMutableArray new];
+        if (flowType == STFlowTypePopular ||
+            flowType == STFlowTypeRecent) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(filtersChanged:) name:kNotificationFiltersChanged object:nil];
+        }
+        //the default filters are:
+        // - gender: both
+        // - timeframe: daily - only for popular feed
         if (flowType == STFlowTypePopular) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popularFiltersChanged:) name:kNotificationPopularFiltersChanged object:nil];
-            _popularTimeframe = kPopularTimeframeDaily;
-    }
+            _timeframeFilter = kTimeframeDaily;
+        }
         if (flowType == STFlowTypeHome ||
             flowType == STFlowTypePopular||
             flowType == STFlowTypeRecent ||
@@ -191,6 +197,10 @@ NSString * const kPopularGenderMen = @"male";
     _numberOfDuplicates = 0;
     _noMoreObjectsToDownload = NO;
     _offset = 0;
+    if (_userId) {
+        [[CoreManager profilePool] removeProfilesWithIDs:@[_userId]];
+        _userProfile = nil;
+    }
     [_objectIds removeAllObjects];
     [self getMoreData];
 }
@@ -495,16 +505,16 @@ NSString * const kPopularGenderMen = @"male";
     };
     switch (_flowType) {
         case STFlowTypePopular:
+        case STFlowTypeRecent:
         {
             [STDataAccessUtils getPostsForFlow:_flowType
-                                     timeframe:_popularTimeframe
-                                        gender:_popularGender
+                                     timeframe:_timeframeFilter
+                                        gender:_genderFilter
                                         offset:offset
                                 withCompletion:completion];
         }
             break;
         case STFlowTypeHome:
-        case STFlowTypeRecent:
         {
             
             [STDataAccessUtils getPostsForFlow:_flowType
@@ -554,11 +564,14 @@ NSString * const kPopularGenderMen = @"male";
 
 #pragma mark - Notifications
 
--(void)popularFiltersChanged:(NSNotification *)notification{
+-(void)filtersChanged:(NSNotification *)notification{
     NSDictionary *userInfo = notification.userInfo;
-    _popularTimeframe = userInfo[@"timeframe"];
-    _popularGender = userInfo[@"gender"];
-    [self reloadProcessor];
+    NSInteger flowType = [userInfo[@"processor_type"] integerValue];
+    if (flowType == _flowType) {
+        _timeframeFilter = userInfo[@"timeframe"];
+        _genderFilter = userInfo[@"gender"];
+        [self reloadProcessor];
+    }
 }
 
 - (void)postImageWasEdited:(NSNotification *)notif{
