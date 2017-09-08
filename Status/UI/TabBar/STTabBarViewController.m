@@ -14,6 +14,7 @@
 #import "STExploreViewController.h"
 #import "STLocalNotificationService.h"
 #import "FeedCVC.h"
+#import "STNotificationsManager.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
 static CGFloat kTabBarHeight = 45.f;
@@ -77,7 +78,7 @@ static CGFloat kImageInset = 4.f;
     [tabBarControllers insertObject:homeNavCtrl atIndex:STTabBarIndexHome];
     [tabBarControllers insertObject:exploreNavCtrl atIndex:STTabBarIndexExplore];
     [tabBarControllers insertObject:takePhotoNav atIndex:STTabBarIndexTakeAPhoto];
-    [tabBarControllers insertObject:notifChatNav atIndex:STTabBarIndexChat];
+    [tabBarControllers insertObject:notifChatNav atIndex:STTabBarIndexActivity];
     [tabBarControllers insertObject:profileNav atIndex:STTabBarIndexProfile];
     [self setViewControllers:tabBarControllers animated:NO];
     
@@ -104,8 +105,8 @@ static CGFloat kImageInset = 4.f;
     
 }
 - (void)setActivityIcon {
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setImage:[[UIImage imageNamed:@"activity"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [[self.tabBar.items objectAtIndex:STTabBarIndexChat] setSelectedImage:[[UIImage imageNamed:@"activity-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexActivity] setImage:[[UIImage imageNamed:@"activity"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [[self.tabBar.items objectAtIndex:STTabBarIndexActivity] setSelectedImage:[[UIImage imageNamed:@"activity-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 }
 
 - (void)viewDidLoad {
@@ -164,7 +165,11 @@ static CGFloat kImageInset = 4.f;
                 
             }
         }
+        else if (selectedItem == STTabBarIndexActivity){
+            [[CoreManager notificationsService] requestRemoteNotificationAccess];
+        }
     }
+    
 }
 
 - (BOOL)tabBarHidden {

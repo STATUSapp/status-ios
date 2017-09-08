@@ -53,6 +53,17 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)requestRemoteNotificationAccess{
+    UIUserNotificationSettings *settings =
+    [UIUserNotificationSettings
+     settingsForTypes: (UIUserNotificationTypeBadge |
+                        UIUserNotificationTypeSound |
+                        UIUserNotificationTypeAlert)
+     categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    
+}
+
 -(void) handleNotification:(NSDictionary *) notif{
     if (notif == nil) {
         return;
@@ -77,7 +88,7 @@
         STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
         [[CoreManager navigationService] goToChat];
         [[CoreManager navigationService] pushViewController:viewController
-                                            inTabbarAtIndex:STTabBarIndexChat
+                                            inTabbarAtIndex:STTabBarIndexActivity
                                         keepThecurrentStack:NO];
     }
     else

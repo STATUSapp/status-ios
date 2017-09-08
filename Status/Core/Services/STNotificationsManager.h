@@ -10,6 +10,7 @@
 
 @interface STNotificationsManager : NSObject
 
+-(void)requestRemoteNotificationAccess;
 -(void)handleLastNotification;
 -(void)handleNotification:(NSDictionary *) notif;
 -(void)handleInAppNotification:(NSDictionary *)notification;

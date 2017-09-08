@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger,STTabBarIndex){
     STTabBarIndexHome = 0,
     STTabBarIndexExplore,
     STTabBarIndexTakeAPhoto,
-    STTabBarIndexChat,
+    STTabBarIndexActivity,
     STTabBarIndexProfile
 };
 

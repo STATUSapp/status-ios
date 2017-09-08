@@ -64,7 +64,7 @@
     self = [super init];
     if (self) {
         _postsPool = [STPostsPool new];
-        _locationService = [STLocationManager new];
+//        _locationService = [STLocationManager new];
         _networkService = [STNetworkQueueManager new];
         _navigationService = [STNavigationService new];
         _loginService = [STFacebookLoginController new];

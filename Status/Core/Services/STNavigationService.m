@@ -79,12 +79,12 @@
 }
 
 - (void)goToNotifications {
-    [self switchToTabBarAtIndex:STTabBarIndexChat popToRootVC:YES];
+    [self switchToTabBarAtIndex:STTabBarIndexActivity popToRootVC:YES];
     [[CoreManager localNotificationService] postNotificationName:STNotificationSelectNotificationsScreen object:nil userInfo:nil];
 }
 
 - (void)goToChat {
-    [self switchToTabBarAtIndex:STTabBarIndexChat popToRootVC:YES];
+    [self switchToTabBarAtIndex:STTabBarIndexActivity popToRootVC:YES];
     [[CoreManager localNotificationService] postNotificationName:STNotificationSelectChatScreen object:nil userInfo:nil];
 }
 

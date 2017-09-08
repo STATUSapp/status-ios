@@ -129,7 +129,6 @@
     self.currentUserId = userId;
 //    [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
-    [self requestRemoteNotificationAccess];
     [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
     //get settings from server
     [self getUserSettingsFromServer];
@@ -252,17 +251,6 @@
     [Tune measureEventName:@"registration"];
 }
 
-- (void)requestRemoteNotificationAccess;
-{
-    UIUserNotificationSettings *settings =
-    [UIUserNotificationSettings
-     settingsForTypes: (UIUserNotificationTypeBadge |
-                        UIUserNotificationTypeSound |
-                        UIUserNotificationTypeAlert)
-     categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    
-}
 
 - (void)getUserSettingsFromServer {
     STRequestCompletionBlock completion = ^(id response, NSError *error){
