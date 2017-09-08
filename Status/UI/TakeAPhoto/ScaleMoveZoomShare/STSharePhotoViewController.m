@@ -54,9 +54,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 @property (strong, nonatomic) ACAccountStore * accountStore;
 @property (strong, nonatomic) ACAccountType * accountType;
 
-@property (assign, nonatomic) BOOL isTwitterAvailable;
 @property (weak, nonatomic) IBOutlet UILabel *writeCaptionPlaceholder;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 
 @property (assign, nonatomic) BOOL shouldPostToFacebook;
 @property (assign, nonatomic)BOOL shouldPostToTwitter;
@@ -100,6 +100,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _accountStore = [[ACAccountStore alloc] init];
+    _accountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+
     self.navigationController.navigationBarHidden = YES;
     [self configureImageViewWithImageData:_imgData];
     [[STTagProductsManager sharedInstance] startDownload];
@@ -144,7 +147,6 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self twitterAccess];
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
 }
 
@@ -156,29 +158,31 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 
 - (void)appplicationIsActive:(NSNotification *)notification {
     NSLog(@"Application Did Become Active");
-    [self twitterAccess];
+    __weak STSharePhotoViewController * weakSelf = self;
+    if (_shouldPostToTwitter) {
+        [self getTwitterAccountWithCompletion:^void(BOOL result) {
+            if (result == NO) {
+                weakSelf.shouldPostToTwitter = NO;
+                weakSelf.twitterButton.selected = NO;
+            }
+        }];
+    }
 }
 
 
-- (void)twitterAccess {
-    // setup twitter account
-    
-    _accountStore = [[ACAccountStore alloc] init];
-    _accountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    
+- (void)getTwitterAccountWithCompletion:(void (^)(BOOL))completion{
     __weak STSharePhotoViewController * weakSelf = self;
-    
-    
     [_accountStore requestAccessToAccountsWithType:_accountType
                                            options:nil
                                         completion:^(BOOL granted, NSError *error)
      {
-         if (granted == YES)
-         {
-             weakSelf.isTwitterAvailable = ([weakSelf.accountStore accountsWithAccountType:weakSelf.accountType].count > 0);
-         } else {
-             weakSelf.isTwitterAvailable = NO;
+         BOOL twitterAccountAvailable = NO;
+         if (granted == YES){
+             twitterAccountAvailable = ([weakSelf.accountStore accountsWithAccountType:weakSelf.accountType].count > 0);
          }
+         dispatch_async(dispatch_get_main_queue(), ^{
+             completion(twitterAccountAvailable);
+         });
      }];
 }
 
@@ -241,14 +245,24 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 }
 
 - (IBAction)onClickTwitter:(id)sender {
-    if (_isTwitterAvailable) {
+    if (_shouldPostToTwitter == YES) {
+        _shouldPostToTwitter = NO;
         UIButton *btn = (UIButton *) sender;
-        btn.selected = !btn.selected;
-        _shouldPostToTwitter = btn.selected;
-    } else {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Twitter issue" message:@"In order to post to Twitter you have to setup an account in your device's settings and grant access to STATUS app." preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-        [self.navigationController presentViewController:alert animated:YES completion:nil];
+        btn.selected = NO;
+    }
+    else
+    {
+        __weak STSharePhotoViewController * weakSelf = self;
+        [self getTwitterAccountWithCompletion:^(BOOL result) {
+            if (result) {
+                weakSelf.shouldPostToTwitter = YES;
+                weakSelf.twitterButton.selected = YES;
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Twitter issue" message:@"In order to post to Twitter you have to setup an account in your device's settings and grant access to STATUS app." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
+            }
+        }];
     }
 }
 - (IBAction)onDeleteProductPressed:(id)sender {
