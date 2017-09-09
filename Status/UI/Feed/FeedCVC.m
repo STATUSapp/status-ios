@@ -315,7 +315,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, 30.f);
     
     _refreshControl = [[UIRefreshControl alloc] initWithFrame:rect];
-    _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull down to refresh"];
+//    _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull down to refresh"];
     [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
     
     [self.collectionView addSubview:_refreshControl];
@@ -385,8 +385,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         [_refreshControl endRefreshing];
     }
     [self configureLoadingView];
-    [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
 
 //    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
 //    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
@@ -536,6 +536,12 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 //    CGPoint scrollPosition = scrollView.contentOffset;
 //    CGFloat offset = 0.f;
 
+    if (scrollView.contentOffset.y < -70.f && ![_refreshControl isRefreshing]) {
+        [_refreshControl beginRefreshing];
+        [self refreshControlChanged:_refreshControl];
+//        [_refreshControl endRefreshing];
+    }
+
     if (_tabBarHidden) {
         CGFloat yPoints = [[UIScreen mainScreen] bounds].size.height;
         CGFloat velocityY = fabs([scrollView.panGestureRecognizer velocityInView:self.view].y);
@@ -576,16 +582,20 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     }
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
-    [self showNoDataViewIfNeeded];
-    
+-(NSInteger)numberOfSections{
     NSInteger sectionsCount = [_feedProcessor numberOfObjects];
     if ([_feedProcessor processorIsAGallery] && ![_feedProcessor loading]) {
         //add one more section at the top
         sectionsCount ++;
     }
     return sectionsCount;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    
+    [self showNoDataViewIfNeeded];
+    
+    return [self numberOfSections];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -799,9 +809,9 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     NSLog(@"Value changed: %@", @(sender.refreshing));
     if (_feedProcessor.loading == NO) {
         [_feedProcessor reloadProcessor];
-        [self configureLoadingView];
-        [self.collectionView reloadData];
-        [self.collectionView.collectionViewLayout invalidateLayout];
+//        [self configureLoadingView];
+//        [self.collectionView reloadData];
+//        [self.collectionView.collectionViewLayout invalidateLayout];
     }
     
 }

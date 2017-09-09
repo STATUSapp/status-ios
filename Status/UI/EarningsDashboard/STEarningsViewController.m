@@ -27,6 +27,7 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *withdrawButtonHeightConstr;
 @property (weak, nonatomic) IBOutlet UIView *commissionsView;
 @property (weak, nonatomic) IBOutlet UIView *noEarningsYetView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -36,6 +37,12 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     [super viewDidLoad];
     _commissionsView.hidden = YES;
     _noEarningsYetView.hidden = YES;
+    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, 30.f);
+    _refreshControl = [[UIRefreshControl alloc] initWithFrame:rect];
+    [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.collectionView addSubview:_refreshControl];
+
     [self getCommissionsFromServer];
 }
 
@@ -48,6 +55,12 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     [super viewWillDisappear:animated];
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
+
+-(void)refreshControlChanged:(UIRefreshControl*)sender{
+    NSLog(@"Value changed: %@", @(sender.refreshing));
+    [self getCommissionsFromServer];
+}
+
 
 -(void)getCommissionsFromServer{
     __weak STEarningsViewController *weakSelf = self;
@@ -69,6 +82,9 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
 }
 
 -(void)reloadScreen{
+    if (_refreshControl.refreshing == YES) {
+        [_refreshControl endRefreshing];
+    }
     if (_commissionsArray.count == 0) {
         _commissionsView.hidden = YES;
         _noEarningsYetView.hidden = NO;

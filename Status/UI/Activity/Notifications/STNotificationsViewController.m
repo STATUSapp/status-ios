@@ -36,7 +36,6 @@ const float kNoNotifHeight = 24.f;
 
 @interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {
-    NSArray *_notificationDataSource;
     UIImage *timeIconImage;
     
 }
@@ -44,6 +43,8 @@ const float kNoNotifHeight = 24.f;
 @property (weak, nonatomic) IBOutlet UITableView *notificationTable;
 @property (strong, nonatomic) UITapGestureRecognizer * tapOnRow;
 @property (nonatomic, strong) STFollowDataProcessor *followProcessor;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) NSArray *notificationDataSource;
 
 @end
 
@@ -78,10 +79,22 @@ const float kNoNotifHeight = 24.f;
     [self.notificationTable addGestureRecognizer:_tapOnRow];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
+    
+    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, 30.f);
+    
+    _refreshControl = [[UIRefreshControl alloc] initWithFrame:rect];
+    [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.notificationTable addSubview:_refreshControl];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self getNotificationsFromServer];
+}
+
+-(void)refreshControlChanged:(UIRefreshControl*)sender{
+    NSLog(@"Value changed: %@", @(sender.refreshing));
     [self getNotificationsFromServer];
 }
 
@@ -92,7 +105,10 @@ const float kNoNotifHeight = 24.f;
     __weak STNotificationsViewController *weakSelf = self;
     
     [STDataAccessUtils getNotificationsWithCompletion:^(NSArray *objects, NSError *error) {
-        _notificationDataSource = [NSArray arrayWithArray:objects];
+        weakSelf.notificationDataSource = [NSArray arrayWithArray:objects];
+        if (weakSelf.refreshControl.refreshing) {
+            [weakSelf.refreshControl endRefreshing];
+        }
         if (!error) {
             BOOL shouldShowPlaceholder = _notificationDataSource.count > 0;
             weakSelf.noNotifLabel.hidden = shouldShowPlaceholder;
