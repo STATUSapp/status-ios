@@ -258,8 +258,6 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         feedCVC.isMyProfile = YES;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:feedCVC selector:@selector(dataShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
-
     return feedCVC;
 }
 
@@ -293,6 +291,14 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
+
+    if (_feedProcessor.processorFlowType == STFlowTypeHome) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeFeedShouldBeReloaded:) name:STHomeFlowShouldBeReloadedNotification object:nil];
+    }
+    
+    if (_isMyProfile) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myProfileFeedShouldBeReloaded:) name:STMyProfileFlowShouldBeReloadedNotification object:nil];
+    }
 
     if ([self.collectionView respondsToSelector:@selector(setPrefetchingEnabled:)]) {
         self.collectionView.prefetchingEnabled = false;
@@ -420,7 +426,16 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 }
 
-- (void)dataShouldBeReloaded:(NSNotification *)notif{
+- (void)homeFeedShouldBeReloaded:(NSNotification *)notif{
+//    if (_isMyProfile) {
+        //a new post was uploaded/edited and the profile feed should be reloaded
+        [_feedProcessor reloadProcessor];
+        [self.collectionView reloadData];
+        [self.collectionView.collectionViewLayout invalidateLayout];
+//    }
+}
+
+- (void)myProfileFeedShouldBeReloaded:(NSNotification *)notif{
     if (_isMyProfile) {
         //a new post was uploaded/edited and the profile feed should be reloaded
         [_feedProcessor reloadProcessor];
@@ -428,6 +443,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         [self.collectionView.collectionViewLayout invalidateLayout];
     }
 }
+
 
 - (void)showSuggestions:(NSNotification *)notif{
     STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];

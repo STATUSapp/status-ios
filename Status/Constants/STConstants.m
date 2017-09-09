@@ -129,6 +129,7 @@ NSString *const STPostCaptionWasEdited = @"STPostCaptionWasEdited";
 
 NSString *const STFooterFlowsNotification = @"STFooterFlowsNotification";
 NSString *const STHomeFlowShouldBeReloadedNotification = @"STHomeFlowShouldBeReloadedNotification";
+NSString *const STMyProfileFlowShouldBeReloadedNotification = @"STMyProfileFlowShouldBeReloadedNotification";
 NSString *const STNotificationsShouldBeReloaded = @"STNotificationsShouldBeReloaded";
 
 NSString *const STNotificationSelectNotificationsScreen = @"STSelectNotificationsScreenNotification";

@@ -36,6 +36,7 @@
 #import "CoreManager.h"
 #import "STUserProfilePool.h"
 #import "STNavigationService.h"
+#import "STDataAccessUtils.h"
 
 @interface STFacebookLoginController ()<FBSDKLoginButtonDelegate>
 
@@ -73,17 +74,16 @@
     NSString *fullName = _fetchedUserData[@"full_name"];
     
     if (fullName == nil) {
-        _loggedInUserProfile = [[CoreManager profilePool] getUserProfileWithId:[self currentUserId]];
-        if (_loggedInUserProfile) {
-            return [_loggedInUserProfile fullName];
+        STUserProfile *up = [self userProfile];
+        if (up) {
+            return [up fullName];
         }
     }
     return fullName;
 }
 
 - (STProfileGender)currentUserGender{
-    _loggedInUserProfile = [[CoreManager profilePool] getUserProfileWithId:[self currentUserId]];
-    return [_loggedInUserProfile profileGender];
+    return [[self userProfile] profileGender];
 }
 
 - (void)startLoginIfPossible {
@@ -92,6 +92,17 @@
     }
     else
         [self logout];
+}
+
+- (STUserProfile *)userProfile{
+    if (_loggedInUserProfile) {
+        return _loggedInUserProfile;
+    }
+    if (_currentUserId) {
+        _loggedInUserProfile = [[CoreManager profilePool] getUserProfileWithId:_currentUserId];
+        
+    }
+    return _loggedInUserProfile;
 }
 
 #pragma mark - Facebook DelegatesFyou
@@ -129,7 +140,18 @@
     self.currentUserId = userId;
 //    [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
-    [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
+    STUserProfile *userProfile = [self userProfile];
+    if (userProfile == nil) {
+        [STDataAccessUtils getUserProfileForUserId:_currentUserId
+                                     andCompletion:^(NSArray *objects, NSError *error) {
+                                         _loggedInUserProfile = [objects firstObject];
+                                         if (_loggedInUserProfile) {
+                                             [[CoreManager profilePool] addProfiles:@[_loggedInUserProfile]];
+                                         }
+                                         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
+                                     }];
+    }
+    
     //get settings from server
     [self getUserSettingsFromServer];
 }

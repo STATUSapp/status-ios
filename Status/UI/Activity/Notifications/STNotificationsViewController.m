@@ -30,6 +30,7 @@
 #import "STNotificationObj.h"
 #import "STFollowDataProcessor.h"
 #import "STListUser.h"
+#import "STLocalNotificationService.h"
 
 const float kNoNotifHeight = 24.f;
 
@@ -252,6 +253,7 @@ const float kNoNotifHeight = 24.f;
                                       if (error == nil) {//success
                                           no.followed = !no.followed;
                                           [weakSelf.notificationTable reloadData];
+                                          [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
                                       }
                                   }];
         }

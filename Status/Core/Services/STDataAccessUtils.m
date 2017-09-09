@@ -628,7 +628,7 @@
     STRequestCompletionBlock completion1 = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             
-            [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
+            [[CoreManager localNotificationService] postNotificationName:STMyProfileFlowShouldBeReloadedNotification object:nil userInfo:nil];
             
             NSString * postUuid = postId;
             if(postId == nil)

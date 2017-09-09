@@ -99,6 +99,13 @@ static CGFloat kImageInset = 4.f;
     
     [self.tabBar setTintColor:[UIColor blackColor]];
     [self.tabBar setTranslucent:NO];
+    
+    STTabBarIndex selectedIndex = STTabBarIndexExplore;
+    if ([[[CoreManager loginService] userProfile] followingCount] > 0) {
+        selectedIndex = STTabBarIndexHome;
+    }
+    
+    [self setSelectedIndex:selectedIndex];
 }
 
 -(void)handleDoubleTapOnView:(id)sender{

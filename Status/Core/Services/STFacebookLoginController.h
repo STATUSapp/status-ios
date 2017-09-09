@@ -19,7 +19,7 @@ typedef void (^facebookCompletion)(id result, NSError *error);
 - (NSString *)currentUserUuid;
 - (NSString *)currentUserFullName;
 - (STProfileGender)currentUserGender;
-
+- (STUserProfile *)userProfile;
 - (void)startLoginIfPossible;
 
 @end

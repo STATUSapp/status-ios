@@ -192,6 +192,7 @@ extern NSString *const STPostCaptionWasEdited;
 
 extern NSString *const STFooterFlowsNotification;
 extern NSString *const STHomeFlowShouldBeReloadedNotification;
+extern NSString *const STMyProfileFlowShouldBeReloadedNotification;
 extern NSString *const STNotificationsShouldBeReloaded;
 
 extern NSString *const STNotificationSelectNotificationsScreen;

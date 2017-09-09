@@ -19,6 +19,7 @@
 #import "STDataAccessUtils.h"
 #import "STDataModelObjects.h"
 #import "STFollowDataProcessor.h"
+#import "STLocalNotificationService.h"
 
 @interface STUsersListController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -134,7 +135,9 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     [_dataProcessor uploadDataToServer:_dataSource
-                        withCompletion:nil];
+                        withCompletion:^(NSError *error) {
+                            [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
+                        }];
 }
 - (void)didReceiveMemoryWarning
 {

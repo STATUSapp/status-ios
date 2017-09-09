@@ -16,6 +16,7 @@
 #import "STContactsDataProcessor.h"
 #import <MessageUI/MessageUI.h>
 #import "NSIndexPath+Additions.h"
+#import "STLocalNotificationService.h"
 
 static NSString * followAllTitle = @"FOLLOW ALL";
 static NSString * followThemTitle = @"FOLLOW THEM";
@@ -262,6 +263,7 @@ static NSString * followThemTitle = @"FOLLOW THEM";
         [_followPeopleProcessor uploadDataToServer:_suggestedPeople withCompletion:^(NSError *error) {
             [_followFriendsProcessor uploadDataToServer:_suggestedFriends withCompletion:^(NSError *error) {
                 [weakSelf closeFlow];
+                [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
             }];
         }];
     }
