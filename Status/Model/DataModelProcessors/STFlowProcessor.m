@@ -53,7 +53,7 @@ NSString * const kGenderMen = @"male";
 @property (nonatomic) NSInteger numberOfDuplicates;
 @property (nonatomic, assign) BOOL loaded;
 @property (nonatomic, assign) BOOL noMoreObjectsToDownload;
-
+@property (nonatomic, assign) BOOL processorInvalidated;
 @property (nonatomic, assign) NSInteger offset;
 @property (nonatomic, strong) NSString *postIdToDelete;
 
@@ -193,16 +193,28 @@ NSString * const kGenderMen = @"male";
 }
 
 - (void)reloadProcessor{
-    _loaded = NO;
-    _numberOfDuplicates = 0;
-    _noMoreObjectsToDownload = NO;
-    _offset = 0;
-    if (_userId) {
-        [[CoreManager profilePool] removeProfilesWithIDs:@[_userId]];
-        _userProfile = nil;
-    }
-    [_objectIds removeAllObjects];
+    _processorInvalidated = YES;
+//    _loaded = NO;
+//    _numberOfDuplicates = 0;
+//    _noMoreObjectsToDownload = NO;
+//    _offset = 0;
+//    if (_userId) {
+//        [[CoreManager profilePool] removeProfilesWithIDs:@[_userId]];
+//        _userProfile = nil;
+//    }
+//    [_objectIds removeAllObjects];
     [self getMoreData];
+}
+
+-(void)resetProcessorPropertiesIfNeeded{
+    if (_processorInvalidated) {
+        _processorInvalidated = NO;
+        _loaded = NO;
+        _numberOfDuplicates = 0;
+        _noMoreObjectsToDownload = NO;
+        _offset = 0;
+        [_objectIds removeAllObjects];
+    }
 }
 
 - (BOOL)canGoToUserProfile{
@@ -438,6 +450,9 @@ NSString * const kGenderMen = @"male";
 
 -(void)getMoreData{
     NSInteger offset = _objectIds.count + _numberOfDuplicates;
+    if (_processorInvalidated == YES) {
+        offset = 0;
+    }
     NSLog(@"Offset: %ld", (long)offset);
     
 //    if (_loaded == NO) {
@@ -449,6 +464,7 @@ NSString * const kGenderMen = @"male";
     __weak STFlowProcessor *weakSelf = self;
     STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error){
         if (error) {
+            _processorInvalidated = NO;
             if (_flowType == STFlowTypeDiscoverNearby &&
                 [error.domain isEqualToString:@"LOCATION_MISSING_ERROR"] &&
                 error.code == 404) {
@@ -468,6 +484,7 @@ NSString * const kGenderMen = @"male";
         }
         else
         {
+            [weakSelf resetProcessorPropertiesIfNeeded];
             weakSelf.loaded = YES;
             if (objects.count == 0) {
                 _noMoreObjectsToDownload = YES;
@@ -532,7 +549,8 @@ NSString * const kGenderMen = @"male";
         case STFlowTypeMyGallery:
         case STFlowTypeUserGallery:{
             STUserProfile *userProfile = [self userProfile];
-            if (userProfile == nil) {
+            if (_processorInvalidated ||
+                userProfile == nil) {
                 [STDataAccessUtils getUserProfileForUserId:_userId
                                              andCompletion:^(NSArray *objects, NSError *error) {
                                                  _userProfile = [objects firstObject];

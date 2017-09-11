@@ -124,8 +124,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     }
     BOOL navBarHidden = YES;
     
-    if (_feedProcessor.loading == NO &&
-        (_feedProcessor.processorFlowType == STFlowTypeHome ||
+    if ((_feedProcessor.processorFlowType == STFlowTypeHome ||
         _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
         navBarHidden = NO;
         }else if (_refreshControl.refreshing == YES &&
@@ -155,38 +154,38 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
     [self configureNavigationBar];
     
-    if ([_feedProcessor processorFlowType] == STFlowTypeHome) {
-        //use the standard loading for initial state
-        if (_feedProcessor.loading && _refreshControl.refreshing == NO) {
-            _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
-            [self.collectionView.backgroundView removeFromSuperview];
-            self.collectionView.backgroundView = _loadingView;
-            UITabBarController *tabBarController = nil;
-            if (_containeeDelegate) {
-                tabBarController = [_containeeDelegate containeeTabBarController];
-            }
-            else
-                tabBarController = self.tabBarController;
-            
-            [((STTabBarViewController *)tabBarController) setTabBarHidden:YES];
-        }
-        else
-        {
-            [self.collectionView.backgroundView removeFromSuperview];
-            self.collectionView.backgroundView = nil;
-            UITabBarController *tabBarController = nil;
-            if (_containeeDelegate) {
-                tabBarController = [_containeeDelegate containeeTabBarController];
-            }
-            else
-                tabBarController = self.tabBarController;
-            
-            [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
-            
-        }
-    }
-    else
-    {
+//    if ([_feedProcessor processorFlowType] == STFlowTypeHome) {
+//        //use the standard loading for initial state
+//        if (_feedProcessor.loading && _refreshControl.refreshing == NO) {
+//            _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
+//            [self.collectionView.backgroundView removeFromSuperview];
+//            self.collectionView.backgroundView = _loadingView;
+//            UITabBarController *tabBarController = nil;
+//            if (_containeeDelegate) {
+//                tabBarController = [_containeeDelegate containeeTabBarController];
+//            }
+//            else
+//                tabBarController = self.tabBarController;
+//            
+//            [((STTabBarViewController *)tabBarController) setTabBarHidden:YES];
+//        }
+//        else
+//        {
+//            [self.collectionView.backgroundView removeFromSuperview];
+//            self.collectionView.backgroundView = nil;
+//            UITabBarController *tabBarController = nil;
+//            if (_containeeDelegate) {
+//                tabBarController = [_containeeDelegate containeeTabBarController];
+//            }
+//            else
+//                tabBarController = self.tabBarController;
+//            
+//            [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
+//            
+//        }
+//    }
+//    else
+//    {
         //use the custom loading view
         UITabBarController *tabBarController = nil;
         if (_containeeDelegate) {
@@ -207,7 +206,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
             self.collectionView.backgroundView = nil;
         }
 
-    }
+//    }
 }
 
 + (FeedCVC *)mainFeedController{
@@ -356,7 +355,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 -(BOOL)prefersStatusBarHidden{
     BOOL statusBarHidden = YES;
-    if (_feedProcessor.loading == NO) {
+    if (_feedProcessor.processorFlowType == STFlowTypeHome) {
         statusBarHidden = NO;
     }else if (_refreshControl.refreshing == YES){
         statusBarHidden = NO;
@@ -439,8 +438,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     if (_isMyProfile) {
         //a new post was uploaded/edited and the profile feed should be reloaded
         [_feedProcessor reloadProcessor];
-        [self.collectionView reloadData];
         [self.collectionView.collectionViewLayout invalidateLayout];
+        [self.collectionView reloadData];
     }
 }
 
@@ -724,8 +723,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         
-        if (_refreshControl.refreshing == YES ||
-            ([_feedProcessor processorIsAGallery] && indexPath.section == 0)) {
+        if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
             return nil;
         }
         

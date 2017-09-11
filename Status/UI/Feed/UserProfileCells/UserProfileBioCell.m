@@ -21,18 +21,16 @@ CGFloat const kBioLabelWidthOffset = 28.f;
 @implementation UserProfileBioCell
 
 -(void)configureCellForProfile:(STUserProfile *)profile{
-
-    if (profile.bio == nil) {
-        profile.bio = @"";
-    }
-    
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 3;
     paragraphStyle.alignment = NSTextAlignmentLeft;
     
     NSString *bioStr = profile.bio;
-    NSAttributedString * bioString = [[NSAttributedString alloc] initWithString:bioStr
-                                                                     attributes:@{NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:14.0f],NSParagraphStyleAttributeName : paragraphStyle}];
+    NSAttributedString * bioString = [[NSMutableAttributedString alloc] initWithString:@""];
+    if (bioStr) {
+        bioString = [[NSAttributedString alloc] initWithString:bioStr
+                                                    attributes:@{NSFontAttributeName : [UIFont fontWithName:@"ProximaNova-Regular" size:14.0f],NSParagraphStyleAttributeName : paragraphStyle}];
+    }
 
     _bioLabel.attributedText = bioString;
 

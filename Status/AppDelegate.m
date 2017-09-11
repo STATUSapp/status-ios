@@ -51,6 +51,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @interface AppDelegate()
 
+@property (nonatomic, strong) NSDate *appOpenedDate;
+
 @end
 
 @implementation AppDelegate
@@ -162,6 +164,11 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    //save the resume date
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setValue:[NSDate date] forKey:@"RESUME_DATE"];
+    [ud synchronize];
+
 //    [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
     [[STChatController sharedInstance] close];
     [[STCoreDataManager sharedManager] save];
@@ -175,6 +182,19 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    if (!_appOpenedDate) {
+        _appOpenedDate = [NSDate date];
+    }else{
+        //load the resume date
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        NSDate *resumeDate = [ud valueForKey:@"RESUME_DATE"];
+        NSTimeInterval intervalSinceNow = [resumeDate timeIntervalSinceNow] * (-1.f);
+        NSTimeInterval fiveMinutesInterval = 60 * 5;
+        //update home content if more then 5 minutes left
+        if (intervalSinceNow > fiveMinutesInterval) {
+            [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
+        }
+    }
     if ([[STInviteController sharedInstance] shouldInviteBeAvailable]) {
         [[STInviteController sharedInstance] callTheDelegate];
     }
