@@ -17,7 +17,7 @@
 #import "STNotificationsManager.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
-static CGFloat kTabBarHeight = 45.f;
+static CGFloat kTabBarHeight = 49.f;
 static CGFloat kImageInset = 4.f;
 
 @interface STTabBarViewController ()<UIGestureRecognizerDelegate>

@@ -33,6 +33,7 @@
 		0726C6D71F0228B800E787EA /* STSnackBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0726C6D61F0228B800E787EA /* STSnackBar.xib */; };
 		0726C6DA1F0228D200E787EA /* STSnackBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726C6D91F0228D200E787EA /* STSnackBar.m */; };
 		0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726C6DC1F022B0F00E787EA /* STSnackBarService.m */; };
+		07272BAF1F68FACC004A090F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07272BAE1F68FACC004A090F /* Launch Screen.storyboard */; };
 		072822EC1E899CB900DCC591 /* STTagProductsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 072822EB1E899CB900DCC591 /* STTagProductsContainer.m */; };
 		072BACB51E80FED80055B6F3 /* STGetSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */; };
 		072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */; };
@@ -346,6 +347,7 @@
 		0726C6D91F0228D200E787EA /* STSnackBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSnackBar.m; sourceTree = "<group>"; };
 		0726C6DB1F022B0F00E787EA /* STSnackBarService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSnackBarService.h; sourceTree = "<group>"; };
 		0726C6DC1F022B0F00E787EA /* STSnackBarService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSnackBarService.m; sourceTree = "<group>"; };
+		07272BAE1F68FACC004A090F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		072822EA1E899CB900DCC591 /* STTagProductsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsContainer.h; sourceTree = "<group>"; };
 		072822EB1E899CB900DCC591 /* STTagProductsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsContainer.m; sourceTree = "<group>"; };
 		072BACB31E80FED80055B6F3 /* STGetSuggestionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetSuggestionsRequest.h; sourceTree = "<group>"; };
@@ -1728,6 +1730,7 @@
 				174575B51CA95CD5006CA25F /* ExploreScene.storyboard */,
 				0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */,
 				070DFA081F15F7F80002357B /* EarningsDashboardScene.storyboard */,
+				07272BAE1F68FACC004A090F /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1969,6 +1972,7 @@
 				99B387941C82FAA2005B4D8C /* ProximaNova-Light.otf in Resources */,
 				070DFA091F15F7F80002357B /* EarningsDashboardScene.storyboard in Resources */,
 				99B387961C82FAA2005B4D8C /* ProximaNova-RegItalic.otf in Resources */,
+				07272BAF1F68FACC004A090F /* Launch Screen.storyboard in Resources */,
 				1709122A1DF87FAC00B2AF81 /* STCustomSegment.xib in Resources */,
 				99B387B71C82FAA2005B4D8C /* STNotificationBanner.xib in Resources */,
 				99B387D01C82FAA2005B4D8C /* LoginScene.storyboard in Resources */,
