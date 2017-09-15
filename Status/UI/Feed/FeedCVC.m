@@ -829,6 +829,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
             STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
             __block STPost *post = [_feedProcessor objectAtIndex:postIndex];
             if (!post.postLikedByCurrentUser) {
+                post.postLikedByCurrentUser = YES;
                 [_feedProcessor setLikeUnlikeAtIndex:postIndex
                                       withCompletion:^(NSError *error) {
                                           NSLog(@"Post liked!");
