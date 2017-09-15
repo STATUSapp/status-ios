@@ -12,8 +12,6 @@
 
 @interface UserProfileInfoCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-
 - (void)configureCellWithUserProfile:(STUserProfile *)profile;
 
 - (void)setBackButtonHidden:(BOOL)backButtonHidden;

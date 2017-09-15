@@ -26,6 +26,7 @@ CGFloat distanceLabelStandardHeight = 21.f;
 @property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editButtonConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *earningsButton;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
 @end
 
@@ -87,6 +88,11 @@ CGFloat distanceLabelStandardHeight = 21.f;
         [_followButton setTitle:@"UNFOLLOW" forState:UIControlStateHighlighted];
     }
     
+}
+
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    _profileImageView.image = nil;
 }
 
 + (CGSize)cellSize{

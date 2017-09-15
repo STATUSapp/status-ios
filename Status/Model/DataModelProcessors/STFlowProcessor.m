@@ -26,7 +26,7 @@ NSString * const kNotificationObjDownloadSuccess = @"NotificationDownloadSuccess
 NSString * const kNotificationObjUpdated = @"NotificationObjUpdated";
 NSString * const kNotificationObjAdded = @"NotificationObjAdded";
 NSString * const kNotificationObjDeleted = @"NotificationObjDeleted";
-NSString * const kNotificationShowSuggestions = @"NotificationShowSuggestion";
+//NSString * const kNotificationShowSuggestions = @"NotificationShowSuggestion";
 
 NSString * const kShowSuggestionKey = @"SUGGESTIONS_SHOWED";
 
@@ -252,10 +252,10 @@ NSString * const kGenderMen = @"male";
 - (STUserProfile *)userProfile{
     STUserProfile *userProfile = _userProfile;
     if (userProfile == nil && _userId!=nil) {
-        userProfile = [[CoreManager profilePool] getUserProfileWithId:_userId];
+        _userProfile = [[CoreManager profilePool] getUserProfileWithId:_userId];
 
     }
-    return userProfile;
+    return _userProfile;
 }
 
 - (NSString *)userId{
@@ -489,15 +489,15 @@ NSString * const kGenderMen = @"male";
             if (objects.count == 0) {
                 _noMoreObjectsToDownload = YES;
             }
-            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-            BOOL suggestionsShown = [[ud valueForKey:kShowSuggestionKey] boolValue];
-            if (weakSelf.flowType == STFlowTypeHome &&
-                suggestionsShown == NO) {
-                
-                [[CoreManager localNotificationService] postNotificationName:kNotificationShowSuggestions object:self userInfo:nil];
-                [ud setValue:@(YES) forKey:kShowSuggestionKey];
-                [ud synchronize];
-            }
+//            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+//            BOOL suggestionsShown = [[ud valueForKey:kShowSuggestionKey] boolValue];
+//            if (weakSelf.flowType == STFlowTypeHome &&
+//                suggestionsShown == NO) {
+//                
+//                [[CoreManager localNotificationService] postNotificationName:kNotificationShowSuggestions object:self userInfo:nil];
+//                [ud setValue:@(YES) forKey:kShowSuggestionKey];
+//                [ud synchronize];
+//            }
 //            if (_flowType != STFlowTypeMyGallery &&
 //                _flowType != STFlowTypeUserGallery) {
 //                [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
@@ -611,8 +611,8 @@ NSString * const kGenderMen = @"male";
 
 - (void)profileUpdated:(NSNotification *)notif{
     NSString *profileId = notif.userInfo[kUserIdKey];
-    _userProfile = [[CoreManager profilePool] getUserProfileWithId:profileId];
     if ([_userId isEqualToString:profileId]) {
+        _userProfile = [[CoreManager profilePool] getUserProfileWithId:profileId];
         for (NSString *postId in _objectIds) {
             STPost *post = [[CoreManager postsPool] getPostWithId:postId];
             post.smallPhotoUrl = _userProfile.mainImageUrl;

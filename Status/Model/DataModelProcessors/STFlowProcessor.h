@@ -14,7 +14,7 @@ extern NSString * const kNotificationObjDownloadSuccess;
 extern NSString * const kNotificationObjUpdated;
 extern NSString * const kNotificationObjDeleted;
 extern NSString * const kNotificationObjAdded;
-extern NSString * const kNotificationShowSuggestions;
+//extern NSString * const kNotificationShowSuggestions;
 extern NSString * const kNotificationFiltersChanged;
 
 extern NSString * const kTimeframeDaily;
