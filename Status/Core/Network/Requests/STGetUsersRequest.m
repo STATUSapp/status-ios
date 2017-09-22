@@ -59,11 +59,7 @@
             break;
         case STSearchControlRecent:
             apiCall = kGetRecent;
-            break;
-            
-        default:
-            apiCall = STSearchControlAll;
-            break;
+            break;            
     }
     return apiCall;
 }

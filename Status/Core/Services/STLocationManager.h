@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-typedef void (^STNewLocationBlock)();
+typedef void (^STNewLocationBlock)(void);
 
 extern NSString * const kNotificationNewLocationHasBeenUploaded;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JTi-yg-KSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JTi-yg-KSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -93,7 +93,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="57" id="XlT-8m-3eh"/>
                                                 </constraints>
-                                                <state key="normal" image="Barcode icon"/>
+                                                <state key="normal" image="Barcode icon pressed"/>
                                             </button>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-bZ-eys">
                                                 <rect key="frame" x="0.0" y="57" width="94" height="41"/>
@@ -395,7 +395,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="178" height="175"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRESSES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzV-qf-lex">
-                                                    <rect key="frame" x="16" y="8" width="146" height="159"/>
+                                                    <rect key="frame" x="0.0" y="8" width="178" height="159"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -912,7 +912,7 @@ by using one of the following methods:</string>
                                 <items>
                                     <navigationItem title="Select Brand" id="OO1-8T-eyF">
                                         <barButtonItem key="leftBarButtonItem" id="mNg-hV-6j6">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RCS-2Q-NtF">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RCS-2Q-NtF">
                                                 <rect key="frame" x="16" y="6" width="32" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="btnBack">
@@ -1017,7 +1017,7 @@ by using one of the following methods:</string>
                                 <items>
                                     <navigationItem title="Suggestions" id="d2T-mi-D3U">
                                         <barButtonItem key="leftBarButtonItem" id="rDE-8n-wNd">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G45-Jl-h7Z">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G45-Jl-h7Z">
                                                 <rect key="frame" x="16" y="6" width="32" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="btnBack">
@@ -1085,7 +1085,7 @@ by using one of the following methods:</string>
         </scene>
     </scenes>
     <resources>
-        <image name="Barcode icon" width="122" height="79"/>
+        <image name="Barcode icon pressed" width="107" height="53"/>
         <image name="Manual icon" width="32" height="48"/>
         <image name="Manual icon unpressed" width="32" height="48"/>
         <image name="Rectangle" width="32" height="33"/>
