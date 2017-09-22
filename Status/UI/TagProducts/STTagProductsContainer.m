@@ -21,6 +21,7 @@
 #import "STFacebookLoginController.h"
 
 typedef NS_ENUM(NSUInteger, STContainerSelection) {
+    STContainerSelectionBarcode,
     STContainerSelectionWizzard,
     STContainerSelectionWardrobe,
     STContainerSelectionManual,
@@ -36,10 +37,12 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     ContainerTabBarIndexCategories = 0,
     ContainerTabBarIndexProducts,
     ContainerTabBarIndexManual,
-    ContainerTabBarIndexEmptyWardrobe
+    ContainerTabBarIndexEmptyWardrobe,
+    ContainerTabBarIndexBarcode
 };
 @interface STTagProductsContainer ()<STSCustomSegmentProtocol, STTagProductsEmptyWardrobeProtocol, STTagCategoriesProtocol, STTagProductsProtocol, STTagManualProtocol, STTagCustomViewProtocol, STTagBrandsProtocol>
 
+@property (weak, nonatomic) IBOutlet STTagCustomView *barcodeView;
 @property (weak, nonatomic) IBOutlet STTagCustomView *wizzardView;
 @property (weak, nonatomic) IBOutlet STTagCustomView *wardrobeView;
 @property (weak, nonatomic) IBOutlet STTagCustomView *manualView;
@@ -69,6 +72,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _barcodeView.delegate = self;
     _wizzardView.delegate = self;
     _wardrobeView.delegate = self;
     _manualView.delegate = self;
@@ -149,7 +153,11 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 #pragma mark - Helper
 
 -(void)configureContainer{
-    if (_selectionType == STContainerSelectionManual) {
+    if (_selectionType == STContainerSelectionBarcode) {
+        _segmentHeightConstr.constant = 0.f;
+        [_containerTabBar setSelectedIndex:ContainerTabBarIndexBarcode];
+    }
+    else if (_selectionType == STContainerSelectionManual) {
         _segmentHeightConstr.constant = 0.f;
         [_containerTabBar setSelectedIndex:ContainerTabBarIndexManual];
         
@@ -228,6 +236,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 }
 
 -(void)configureTopViewsForSelectedView:(UIView *)selectedView{
+    [_barcodeView setViewSelected:(_barcodeView == selectedView)];
     [_wizzardView setViewSelected:(_wizzardView == selectedView)];
     [_wardrobeView setViewSelected:(_wardrobeView == selectedView)];
     [_manualView setViewSelected:(_manualView == selectedView)];
@@ -238,7 +247,12 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 -(void)customViewWasTapped:(UIView *)customView{
 
     [self configureTopViewsForSelectedView:customView];
-    if (customView == _wizzardView) {
+    if (customView == _barcodeView) {
+        _selectionType = STContainerSelectionBarcode;
+        _wizardSegment.hidden = YES;
+        _wardrobeSegment.hidden = YES;
+    }
+    else if (customView == _wizzardView) {
         _selectionType = STContainerSelectionWizzard;
         _wizardSegment.hidden = NO;
         _wardrobeSegment.hidden = YES;

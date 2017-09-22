@@ -16,6 +16,7 @@
 #import "FeedCVC.h"
 #import "STNotificationsManager.h"
 #import "STNavigationService.h"
+#import "STBarcodeScannerViewController.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
 static CGFloat kTabBarHeight = 49.f;
@@ -26,6 +27,7 @@ static CGFloat kImageInset = 4.f;
 @property (nonatomic, assign) NSInteger previousSelectedIndex;
 @property (nonatomic) CGRect defaultTabBarFrame;
 @property (nonatomic, strong) UINavigationController * takeAPhotoNav;
+@property (nonatomic, strong) UINavigationController * barCodeScannerNav;
 
 @end
 
@@ -126,6 +128,10 @@ static CGFloat kImageInset = 4.f;
     STChoosePhotoViewController *vc = [STChoosePhotoViewController newController];
     _takeAPhotoNav = [[UINavigationController alloc] initWithRootViewController:vc];
     _takeAPhotoNav.navigationBarHidden = YES;
+    
+    STBarcodeScannerViewController *bacCodeScannerVC = [STBarcodeScannerViewController newController];
+    _barCodeScannerNav = [[UINavigationController alloc] initWithRootViewController:bacCodeScannerVC];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -140,9 +146,16 @@ static CGFloat kImageInset = 4.f;
 
 
 - (void)presentChoosePhotoVC{
+    [self presentViewController:_barCodeScannerNav
+                       animated:YES
+                     completion:nil];
+
+    /*
     [self presentViewController:_takeAPhotoNav
                        animated:YES
                      completion:nil];
+     }
+     */
 }
 - (void)dismissChoosePhotoVC{
     [self goToPreviousSelectedIndex];

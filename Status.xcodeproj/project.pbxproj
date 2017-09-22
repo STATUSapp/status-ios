@@ -42,6 +42,7 @@
 		072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */; };
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
+		07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */; };
 		0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0755E2381E87DF140016519E /* STChoosePhotoViewController.m */; };
 		0755E23B1E882CBD0016519E /* TagProductsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */; };
 		075C52961EBDD22700174CC5 /* STTagProductsBrands.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52951EBDD22700174CC5 /* STTagProductsBrands.m */; };
@@ -364,6 +365,8 @@
 		072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreFilters.m; sourceTree = "<group>"; };
 		074FA8D61EB652600028C33E /* STTagProductsCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsCategories.h; sourceTree = "<group>"; };
 		074FA8D71EB652600028C33E /* STTagProductsCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsCategories.m; sourceTree = "<group>"; };
+		07533D841F6E91020009DDDF /* STBarcodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBarcodeScannerViewController.h; sourceTree = "<group>"; };
+		07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBarcodeScannerViewController.m; sourceTree = "<group>"; };
 		0755E2371E87DF140016519E /* STChoosePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChoosePhotoViewController.h; sourceTree = "<group>"; };
 		0755E2381E87DF140016519E /* STChoosePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChoosePhotoViewController.m; sourceTree = "<group>"; };
 		0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TagProductsScene.storyboard; sourceTree = "<group>"; };
@@ -938,6 +941,8 @@
 				075C52A41EBF4F9200174CC5 /* STTagManualViewController.m */,
 				0778115A1EB75BBE0043A2E8 /* STTagProductsManager.h */,
 				0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */,
+				07533D841F6E91020009DDDF /* STBarcodeScannerViewController.h */,
+				07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */,
 			);
 			path = TagProducts;
 			sourceTree = "<group>";
@@ -1904,7 +1909,7 @@
 		172EAE5B18B0B12D00C5637B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Andrus Cosmin";
 				TargetAttributes = {
 					172EAE6218B0B12D00C5637B = {
@@ -2133,6 +2138,7 @@
 				0717659F1FB4C70E00873728 /* STAdPost.m in Sources */,
 				99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */,
 				52DC4DC91C8D53E30064F23F /* STImagePickerService.m in Sources */,
+				07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */,
 				99B387DF1C82FAA2005B4D8C /* STEditProfileViewController.m in Sources */,
 				99B387851C82FAA2005B4D8C /* STBaseObj.m in Sources */,
 				99B387C51C82FAA2005B4D8C /* STInviteFriendsViewController.m in Sources */,
@@ -2353,14 +2359,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2400,14 +2412,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2513,14 +2531,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
