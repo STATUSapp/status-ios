@@ -14,9 +14,9 @@
 -(void)brandsShouldDownloadNextPage;
 
 @end
-
+@protocol STTagSuggestionsProtocol;
 @interface STTagProductsBrands : STWhiteNavBarViewController
-@property (nonatomic, strong) id<STTagBrandsProtocol>delegate;
+@property (nonatomic, strong) id<STTagBrandsProtocol, STTagSuggestionsProtocol>delegate;
 
 +(STTagProductsBrands *)brandsViewControllerWithDelegate:(id<STTagBrandsProtocol>)delegate;
 

@@ -51,6 +51,7 @@ static NSString *kOnlineImageName = @"online chat";
 }
 
 - (void)prepareForReuse {
+    [super prepareForReuse];
     _profileImageView.image = nil;
     _fullNameLbl.text = nil;
     _dateLbl.text = nil;

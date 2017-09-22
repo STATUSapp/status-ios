@@ -23,7 +23,7 @@
 
 @implementation STTagProductsBrands
 
-+(STTagProductsBrands *)brandsViewControllerWithDelegate:(id<STTagBrandsProtocol>)delegate{
++(STTagProductsBrands *)brandsViewControllerWithDelegate:(id<STTagBrandsProtocol, STTagSuggestionsProtocol>)delegate{
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"TagProductsScene" bundle:nil];
     STTagProductsBrands *vc = [storyBoard instantiateViewControllerWithIdentifier:@"TAG_BRANDS_VC"];
     vc.delegate = delegate;

@@ -31,7 +31,12 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #endif
 
-#define TUNEVERSION @"4.12.5"
+
+#if IDE_XCODE_8_OR_HIGHER
+#import <UserNotifications/UserNotifications.h>
+#endif
+
+#define TUNEVERSION @"4.13.4"
 
 
 @protocol TuneDelegate;
@@ -678,7 +683,7 @@
  * @param block The block of code to be executed.
  *
  */
-+ (void)onPowerHooksChanged:(void (^)()) block;
++ (void)onPowerHooksChanged:(void (^)(void)) block;
 
 #pragma mark - Deep Action API
 
@@ -739,9 +744,15 @@
 
 + (void)application:(UIApplication *)application tuneDidReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
-+ (void)application:(UIApplication *)application tuneHandleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler;
++ (void)application:(UIApplication *)application tuneHandleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)(void))completionHandler;
 
-+ (void)application:(UIApplication *)application tuneHandleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void(^)())completionHandler;
++ (void)application:(UIApplication *)application tuneHandleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void(^)(void))completionHandler;
+
++ (void)application:(UIApplication *)application tuneDidReceiveLocalNotification:(UILocalNotification *)notification;
+
+#if IDE_XCODE_8_OR_HIGHER
++ (void)userNotificationCenter:(UNUserNotificationCenter *)center tuneDidReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler;
+#endif
 
 #pragma mark - Spotlight API
 
@@ -792,7 +803,7 @@
  * @param block The block of code to be executed.
  *
  */
-+ (void)onFirstPlaylistDownloaded:(void (^)())block;
++ (void)onFirstPlaylistDownloaded:(void (^)(void))block;
 
 /** Register block for callback when the very first playlist is downloaded.
  *
@@ -818,7 +829,7 @@
  * @param timeout The amount of time in seconds to wait before executing the callback if the Playlist hasn't been downloaded yet. We recommend this is not over 5 seconds at a maximum and is over 1 second at a minimum.
  *
  */
-+ (void)onFirstPlaylistDownloaded:(void (^)())block withTimeout:(NSTimeInterval)timeout;
++ (void)onFirstPlaylistDownloaded:(void (^)(void))block withTimeout:(NSTimeInterval)timeout;
 
 #pragma mark - User in Segment API
 
@@ -908,6 +919,41 @@
                          offerId:(NSString *)targetAdvertiserOfferId
                      publisherId:(NSString *)targetAdvertiserPublisherId
                         redirect:(BOOL)shouldRedirect;
+
+#if TARGET_OS_IOS
+#pragma mark - Smartwhere Integration
+
+/** @name SmartWhere Integration */
+
+/**
+ SmartWhere Integration Opt-In
+ 
+ If SmartWhere.framework is not available a NSException is raised.
+ */
++ (void)enableSmartwhereIntegration;
+
+/**
+ Turn Off SmartWhere Integration
+ */
++ (void)disableSmartwhereIntegration;
+
+typedef enum {
+    /** Tune SDK will share event data with SmartWhere. Disabled by default. */
+    TuneSmartwhereShareEventData = 1,
+    
+    /** Tune SDK will reset configuration options. Cannot be used with other options. */
+    TuneSmartwhereResetConfiguration = 0
+    
+} TuneSmartwhereConfigurationOptions;
+
+/**
+ SmartWhere Integration Configuration
+ 
+ @param mask bitmask with SmartWhere configuration options
+ */
++ (void)configureSmartwhereIntegrationWithOptions:(NSInteger)mask;
+
+#endif
 
 
 #ifdef TUNE_USE_LOCATION

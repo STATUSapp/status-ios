@@ -40,6 +40,7 @@
 }
 
 -(void)prepareForReuse{
+    [super prepareForReuse];
     _albumTitleLbl.text = _albumPhotoNumberLbl.text = @"";
     _albumImageView.image = [UIImage imageNamed:@"placeholder imagine like screen"];
 }

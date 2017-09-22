@@ -1,0 +1,1 @@
+../../../../Tune/Tune.framework/Headers/SWTrigger.h
