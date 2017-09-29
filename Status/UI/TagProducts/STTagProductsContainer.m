@@ -19,6 +19,8 @@
 #import "STTagManualViewController.h"
 #import "STTagCustomView.h"
 #import "STFacebookLoginController.h"
+#import "STBarcodeScannerViewController.h"
+#import "STMissingProductViewController.h"
 
 typedef NS_ENUM(NSUInteger, STContainerSelection) {
     STContainerSelectionBarcode,
@@ -38,9 +40,10 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     ContainerTabBarIndexProducts,
     ContainerTabBarIndexManual,
     ContainerTabBarIndexEmptyWardrobe,
+    ContainerTabBarIndexBarcodeNotIndexed,
     ContainerTabBarIndexBarcode
 };
-@interface STTagProductsContainer ()<STSCustomSegmentProtocol, STTagProductsEmptyWardrobeProtocol, STTagCategoriesProtocol, STTagProductsProtocol, STTagManualProtocol, STTagCustomViewProtocol, STTagBrandsProtocol>
+@interface STTagProductsContainer ()<STSCustomSegmentProtocol, STTagProductsEmptyWardrobeProtocol, STTagCategoriesProtocol, STTagProductsProtocol, STTagManualProtocol, STTagCustomViewProtocol, STTagBrandsProtocol, STBarcodeScannerProtocol, STProductNotIndexedProtocol>
 
 @property (weak, nonatomic) IBOutlet STTagCustomView *barcodeView;
 @property (weak, nonatomic) IBOutlet STTagCustomView *wizzardView;
@@ -72,6 +75,9 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CGRect tabBarFrame = _containerTabBar.tabBar.frame;
+    tabBarFrame.size.height = 0.f;
+    [_containerTabBar.tabBar setFrame:tabBarFrame];
     _barcodeView.delegate = self;
     _wizzardView.delegate = self;
     _wardrobeView.delegate = self;
@@ -144,7 +150,28 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
             [self configureContainer];
         }
             break;
-
+        case STTagManagerEventSearchProducts:
+        {
+            STShopProduct *scannedProduct = [[STTagProductsManager sharedInstance].searchResult firstObject];
+            if (scannedProduct) {
+                //go to Products view controller
+            }else{
+                //go to empty search result
+                _segmentHeightConstr.constant = 0.f;
+                NSLog(@"_mainContainer.frame = %@", NSStringFromCGRect(_mainContainer.frame));
+                [_containerTabBar setSelectedIndex:ContainerTabBarIndexBarcodeNotIndexed];
+                STMissingProductViewController *vc = (STMissingProductViewController *)_containerTabBar.selectedViewController;
+                vc.delegate = self;
+                 
+//                _segmentHeightConstr.constant = 48.f;
+//                [_containerTabBar setSelectedIndex:ContainerTabBarIndexProducts];
+//                STTagProductsViewController *vc = (STTagProductsViewController *)[_containerTabBar selectedViewController];
+//                NSArray *products = [[STTagProductsManager sharedInstance] usedProducts];
+//                vc.delegate = self;
+//                [vc updateProducts:products];
+            }
+        }
+            break;
         default:
             break;
     }
@@ -155,7 +182,11 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 -(void)configureContainer{
     if (_selectionType == STContainerSelectionBarcode) {
         _segmentHeightConstr.constant = 0.f;
+        NSLog(@"_mainContainer.frame = %@", NSStringFromCGRect(_mainContainer.frame));
         [_containerTabBar setSelectedIndex:ContainerTabBarIndexBarcode];
+        STBarcodeScannerViewController *vc = (STBarcodeScannerViewController *)_containerTabBar.selectedViewController;
+        vc.delegate = self;
+
     }
     else if (_selectionType == STContainerSelectionManual) {
         _segmentHeightConstr.constant = 0.f;
@@ -242,6 +273,24 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     [_manualView setViewSelected:(_manualView == selectedView)];
 }
 
+#pragma mark - STProductNotIndexedProtocol
+
+-(void)viewDidCancel{
+    [self configureContainer];
+}
+-(void)viewDidSendInfoWithBrandName:(NSString *)brandName productName:(NSString *)productName productURK:(NSString *)productURL{
+    //TODO: call the proper API then show an alert
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:@"Thank you for helping us to index more products. Your info were sent." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+#pragma mark - STBarcodeScannerProtocol
+-(void)barcodeScannerDidScanCode:(NSString *)barcode{
+    [[STTagProductsManager sharedInstance] searchProductWithBarcodeString:barcode];
+}
 #pragma mark - STTagCustomViewProtocol
 
 -(void)customViewWasTapped:(UIView *)customView{

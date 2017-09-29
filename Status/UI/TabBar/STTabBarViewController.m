@@ -27,7 +27,6 @@ static CGFloat kImageInset = 4.f;
 @property (nonatomic, assign) NSInteger previousSelectedIndex;
 @property (nonatomic) CGRect defaultTabBarFrame;
 @property (nonatomic, strong) UINavigationController * takeAPhotoNav;
-@property (nonatomic, strong) UINavigationController * barCodeScannerNav;
 
 @end
 
@@ -129,9 +128,6 @@ static CGFloat kImageInset = 4.f;
     _takeAPhotoNav = [[UINavigationController alloc] initWithRootViewController:vc];
     _takeAPhotoNav.navigationBarHidden = YES;
     
-    STBarcodeScannerViewController *bacCodeScannerVC = [STBarcodeScannerViewController newController];
-    _barCodeScannerNav = [[UINavigationController alloc] initWithRootViewController:bacCodeScannerVC];
-    
     // Do any additional setup after loading the view.
 }
 
@@ -146,16 +142,9 @@ static CGFloat kImageInset = 4.f;
 
 
 - (void)presentChoosePhotoVC{
-    [self presentViewController:_barCodeScannerNav
-                       animated:YES
-                     completion:nil];
-
-    /*
     [self presentViewController:_takeAPhotoNav
                        animated:YES
                      completion:nil];
-     }
-     */
 }
 - (void)dismissChoosePhotoVC{
     [self goToPreviousSelectedIndex];

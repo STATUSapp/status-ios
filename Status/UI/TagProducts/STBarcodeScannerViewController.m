@@ -24,6 +24,8 @@ NSInteger const verificationCount = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:YES];
+    NSLog(@"NAV.CTRL>VCS = %@", self.navigationController.viewControllers);
     @try {
         self.captureSession = [[AVCaptureSession alloc] init];
         AVCaptureDevice *videoCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -79,16 +81,12 @@ NSInteger const verificationCount = 3;
             NSString *barcode = readableObject.stringValue;
             if ([_scannedBarcode isEqualToString:barcode]) {
                 _barcodeCount ++;
-                if (_barcodeCount == verificationCount && _barcodeAlert == nil) {
+                if (_barcodeCount == verificationCount && _scannedBarcode) {
                     NSLog(@"EAN 13 = %@", barcode);
-                    __weak STBarcodeScannerViewController *weakSelf = self;
-                    _barcodeAlert = [UIAlertController alertControllerWithTitle:@"Barcode" message:[NSString stringWithFormat:@"Scanned barcode: %@", _scannedBarcode] preferredStyle:UIAlertControllerStyleAlert];
-                    [_barcodeAlert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        weakSelf.barcodeAlert = nil;
-                        weakSelf.barcodeCount = 0;
-                        weakSelf.scannedBarcode = nil;
-                    }]];
-                    [self.parentViewController presentViewController:_barcodeAlert animated:YES completion:nil];
+                    if (_delegate && [_delegate respondsToSelector:@selector(barcodeScannerDidScanCode:)]) {
+                        [_delegate barcodeScannerDidScanCode:_scannedBarcode];
+                        _scannedBarcode = nil;
+                    }
                 }
                 
             }else{

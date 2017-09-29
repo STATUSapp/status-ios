@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol STBarcodeScannerProtocol <NSObject>
+
+-(void)barcodeScannerDidScanCode:(NSString *)barcode;
+
+@end
+
 @interface STBarcodeScannerViewController : UIViewController
 
-+ (STBarcodeScannerViewController *)newController;
+@property (nonatomic, weak) id<STBarcodeScannerProtocol>delegate;
 
 @end

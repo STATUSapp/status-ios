@@ -19,7 +19,8 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
     STTagManagerEventUsedProducts,
     STTagManagerEventBrands,
     STTagManagerEventCategoryAndBrandProducts,
-    STTagManagerEventSelectedProducts
+    STTagManagerEventSelectedProducts,
+    STTagManagerEventSearchProducts
 };
 
 @class STCatalogParentCategory;
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
 @property (nonatomic, strong, readonly) STCatalogCategory *selectedCategory;
 @property (nonatomic, strong, readonly) STBrandObj *selectedBrand;
 @property (nonatomic, strong, readonly) NSArray <STShopProduct *> *categoryAndBrandProducts;
+@property (nonatomic, strong, readonly) NSArray <STShopProduct *> *searchResult;
 
 @property (nonatomic, strong, readonly) NSMutableArray<STShopProduct *> *selectedProducts;
 
@@ -58,4 +60,6 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
 -(void)downloadUsedProductsNextPage;
 -(void)downloadCategoryAndBrandNextPage;
 -(void)downloadRootCategoryNextPage:(STCatalogParentCategory *)rootCatgory;
+
+-(void)searchProductWithBarcodeString:(NSString *)barcode;
 @end

@@ -32,6 +32,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 @property (nonatomic, strong, readwrite) STBrandObj *selectedBrand;
 @property (nonatomic, strong, readwrite) NSArray <STShopProduct *> *categoryAndBrandProducts;
 @property (nonatomic, strong, readwrite) NSMutableArray<STShopProduct *> *selectedProducts;
+@property (nonatomic, strong, readwrite) NSArray <STShopProduct *> *searchResult;
 
 @property (nonatomic, assign) NSInteger brandsPageIndex;
 @property (nonatomic, assign) NSInteger usedCategoriesPageIndex;
@@ -39,6 +40,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 @property (nonatomic, assign) NSInteger categoryAndBrondPageIndex;
 @property (nonatomic, strong) NSMutableDictionary *rootCategoryPageIndexes;
 
+@property (nonatomic, strong) NSString *scannedBarcode;
 @end
 
 @implementation STTagProductsManager
@@ -79,6 +81,8 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
     _usedProductsPageIndex = kCatalogFirstPage;
     _categoryAndBrondPageIndex = kCatalogFirstPage;
     _rootCategoryPageIndexes = nil;
+    _searchResult = nil;
+    _scannedBarcode = nil;
 }
 
 -(NSInteger)currentPageIndexForRootCategory:(STCatalogParentCategory *)rootCategory{
@@ -341,4 +345,21 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
                                    }];
 }
 
+-(void)searchProductWithBarcodeString:(NSString *)barcode{
+    //TODO: add the search API
+    if ([_scannedBarcode isEqualToString:barcode]) {
+        //ignore
+        return;
+    }
+    _searchResult = nil;
+    _scannedBarcode = barcode;
+    NSInteger randomProductsFound = (random() % 2);
+    if (randomProductsFound == 1 && _usedProducts.count > 0) {
+        NSInteger randomIndex = (random() % _usedProducts.count);
+        _searchResult = [NSArray arrayWithObject:_usedProducts[randomIndex]];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventSearchProducts)}];
+
+}
 @end
