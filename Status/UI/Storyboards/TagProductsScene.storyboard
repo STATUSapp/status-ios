@@ -664,7 +664,7 @@ by using one of the following methods:</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This product is not on STATUS app yet. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgQ-fQ-mGx">
-                                                    <rect key="frame" x="75" y="164" width="225" height="13"/>
+                                                    <rect key="frame" x="71.5" y="164" width="232" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="13" id="fhs-y8-ygQ"/>
                                                     </constraints>
@@ -673,7 +673,7 @@ by using one of the following methods:</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give us more details about the product and we'll try to index it as soon as possible." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Az-wH-wof">
-                                                    <rect key="frame" x="65.5" y="193" width="245.5" height="26"/>
+                                                    <rect key="frame" x="61" y="193" width="254" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="5Tu-Ug-C7c"/>
                                                     </constraints>
@@ -692,7 +692,7 @@ by using one of the following methods:</string>
                                                         <color key="titleColor" red="0.65490196079999996" green="0.69019607839999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onCancelPressed:" destination="EIE-IQ-2sO" eventType="touchUpInside" id="kqG-iM-I3T"/>
+                                                        <action selector="onCancelPressed:" destination="o3R-q9-lla" eventType="touchUpInside" id="rKD-oP-FnM"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -729,7 +729,7 @@ by using one of the following methods:</string>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="EIE-IQ-2sO" id="4KU-iA-rMe"/>
+                                                        <outlet property="delegate" destination="o3R-q9-lla" id="5uo-gm-lHb"/>
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="soF-OR-xDh" userLabel="Separator">
@@ -766,7 +766,7 @@ by using one of the following methods:</string>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="EIE-IQ-2sO" id="mSm-cL-Kdh"/>
+                                                        <outlet property="delegate" destination="o3R-q9-lla" id="Qau-qL-OIL"/>
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omL-SH-GJy" userLabel="Separator">
@@ -803,7 +803,7 @@ by using one of the following methods:</string>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="EIE-IQ-2sO" id="WYK-Md-mEN"/>
+                                                        <outlet property="delegate" destination="o3R-q9-lla" id="7an-Zb-hmk"/>
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yjo-yD-mHy" userLabel="Separator">
@@ -832,6 +832,11 @@ by using one of the following methods:</string>
                         </connections>
                     </tableView>
                     <size key="freeformSize" width="375" height="500"/>
+                    <connections>
+                        <outlet property="brandNameField" destination="dvl-2y-wjs" id="j8n-7X-G9e"/>
+                        <outlet property="productNameField" destination="Hed-vd-gLI" id="csR-ai-wsI"/>
+                        <outlet property="productURLField" destination="OZ6-yS-BuT" id="g95-Vk-gYZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNR-an-1la" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -865,7 +870,7 @@ by using one of the following methods:</string>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEl-Tm-imw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="409"/>
                                 <connections>
-                                    <segue destination="o3R-q9-lla" kind="embed" id="3Rb-Zd-Kos"/>
+                                    <segue destination="o3R-q9-lla" kind="embed" identifier="MISSING_PRODUCT_TVC" id="3Rb-Zd-Kos"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -954,7 +959,7 @@ by using one of the following methods:</string>
                                                             <rect key="frame" x="133" y="0.0" width="129" height="181"/>
                                                             <subviews>
                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mge-qg-Y1j">
-                                                                    <rect key="frame" x="3.5" y="8" width="125.5" height="153"/>
+                                                                    <rect key="frame" x="0.0" y="8" width="129" height="153"/>
                                                                     <state key="normal" backgroundImage="upload product photo frame "/>
                                                                     <connections>
                                                                         <action selector="uploadImagePressed:" destination="8FJ-jk-rt9" eventType="touchUpInside" id="kJz-46-Tlo"/>
@@ -968,7 +973,7 @@ by using one of the following methods:</string>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload product photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1Y-yP-eUE">
-                                                                    <rect key="frame" x="3.5" y="99" width="125.5" height="32"/>
+                                                                    <rect key="frame" x="0.0" y="99" width="129" height="32"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="32" id="bCd-G7-1Us"/>
                                                                     </constraints>

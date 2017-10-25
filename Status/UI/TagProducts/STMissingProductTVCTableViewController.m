@@ -7,8 +7,10 @@
 //
 
 #import "STMissingProductTVCTableViewController.h"
-
 @interface STMissingProductTVCTableViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *brandNameField;
+@property (weak, nonatomic) IBOutlet UITextField *productNameField;
+@property (weak, nonatomic) IBOutlet UITextField *productURLField;
 
 @end
 
@@ -32,65 +34,74 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return [super numberOfSectionsInTableView:tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return [super tableView:tableView numberOfRowsInSection:section];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
+#pragma mark - Helpers
+
+-(BOOL)validateFields{
+    NSString *errorMessage;
+    if (_brandNameField.text.length == 0) {
+        errorMessage = NSLocalizedString(@"Brand Name is required.", nil);
+    }
+    if (_productNameField.text.length == 0) {
+        errorMessage = NSLocalizedString(@"Product Name is required.", nil);
+    }
+    if (_productURLField.text.length == 0) {
+        errorMessage = NSLocalizedString(@"Product URL is required.", nil);
+    }
+    
+    if (errorMessage) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return NO;
+    }
+    
     return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+#pragma mark - IBActions
+
+- (IBAction)onCancelPressed:(id)sender {
+    //reset the fields
+    [self invalidateFields];
+    //then call the delegate
+    if (_delegate && [_delegate respondsToSelector:@selector(missingProductTVCDidCancel)]) {
+        [_delegate missingProductTVCDidCancel];
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+#pragma mark - Private
+-(void)invalidateFields{
+    //reset the fields
+    _brandNameField.text = @"";
+    _productNameField.text = @"";
+    _productURLField.text = @"";
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+#pragma mark - Public
+
+-(BOOL)validate{
+    return [self validate];
 }
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(NSString *)brandName{
+    return self.brandNameField.text;
 }
-*/
+-(NSString *)productName{
+    return self.productNameField.text;
+}
+-(NSString *)productURL{
+    return self.productNameField.text;
+}
 
 @end
