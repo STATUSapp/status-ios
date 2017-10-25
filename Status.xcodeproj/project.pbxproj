@@ -42,6 +42,7 @@
 		072BACBB1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */; };
 		072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */; };
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
+		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
 		07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */; };
 		0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0755E2381E87DF140016519E /* STChoosePhotoViewController.m */; };
@@ -366,6 +367,8 @@
 		072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STExploreFilters.xib; sourceTree = "<group>"; };
 		072FE0521F5FC4A60090F8B6 /* STExploreFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STExploreFilters.h; sourceTree = "<group>"; };
 		072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreFilters.m; sourceTree = "<group>"; };
+		073863981F9F0EC500FE13ED /* STMissingProductTVCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMissingProductTVCTableViewController.h; sourceTree = "<group>"; };
+		073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STMissingProductTVCTableViewController.m; sourceTree = "<group>"; };
 		074FA8D61EB652600028C33E /* STTagProductsCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsCategories.h; sourceTree = "<group>"; };
 		074FA8D71EB652600028C33E /* STTagProductsCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsCategories.m; sourceTree = "<group>"; };
 		07533D841F6E91020009DDDF /* STBarcodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBarcodeScannerViewController.h; sourceTree = "<group>"; };
@@ -948,6 +951,8 @@
 				07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */,
 				0726B8BF1F78D2790012A299 /* STMissingProductViewController.h */,
 				0726B8C01F78D2790012A299 /* STMissingProductViewController.m */,
+				073863981F9F0EC500FE13ED /* STMissingProductTVCTableViewController.h */,
+				073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */,
 			);
 			path = TagProducts;
 			sourceTree = "<group>";
@@ -2256,6 +2261,7 @@
 				072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */,
 				99B387C11C82FAA2005B4D8C /* STSuggestionsViewController.m in Sources */,
 				99B387591C82FAA2005B4D8C /* STGetUserProfileRequest.m in Sources */,
+				0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */,
 				99B3875F1C82FAA2005B4D8C /* STRegisterRequest.m in Sources */,
 				99B387451C82FAA2005B4D8C /* UIImage+Resize.m in Sources */,
 				99B387A71C82FAA2005B4D8C /* SRWebSocket.m in Sources */,

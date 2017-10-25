@@ -17,11 +17,14 @@
 
 @implementation STMissingProductViewController
 
+-(BOOL)hidesBottomBarWhenPushed{
+    return YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController.tabBarController.tabBar setHidden:YES];
-    NSLog(@"NAV.CTRL>VCS = %@", self.navigationController.viewControllers);
     // Do any additional setup after loading the view.
 }
 

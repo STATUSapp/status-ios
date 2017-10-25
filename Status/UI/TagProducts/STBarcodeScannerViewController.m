@@ -22,10 +22,13 @@ NSInteger const verificationCount = 3;
 
 @implementation STBarcodeScannerViewController
 
+-(BOOL)hidesBottomBarWhenPushed{
+    return YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
-    NSLog(@"NAV.CTRL>VCS = %@", self.navigationController.viewControllers);
     @try {
         self.captureSession = [[AVCaptureSession alloc] init];
         AVCaptureDevice *videoCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
