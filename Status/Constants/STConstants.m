@@ -15,7 +15,7 @@
 //NSString *const kBaseURL = @"http://api.getstatusapp.co/api/";
 //NSString *const kReachableURL = @"api.getstatusapp.co";
 
-NSString *const kBaseURL = @"https://api.getstatusapp.co/api/";
+NSString *const kBaseURL = @"https://api.getstatusapp.co/api/v1/";
 NSString *const kReachableURL = @"api.getstatusapp.co";
 
 #else
