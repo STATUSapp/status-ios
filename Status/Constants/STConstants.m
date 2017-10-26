@@ -15,12 +15,12 @@
 //NSString *const kBaseURL = @"http://api.getstatusapp.co/api/";
 //NSString *const kReachableURL = @"api.getstatusapp.co";
 
-NSString *const kBaseURL = @"http://api2.getstatusapp.co/api/v1/";
-NSString *const kReachableURL = @"api2.getstatusapp.co";
+NSString *const kBaseURL = @"https://api.getstatusapp.co/api/";
+NSString *const kReachableURL = @"api.getstatusapp.co";
 
 #else
 
-NSString *const kBaseURL = @"http://ec2-52-86-4-15.compute-1.amazonaws.com/api/";
+NSString *const kBaseURL = @"https://ec2-52-86-4-15.compute-1.amazonaws.com/api/v1/";
 NSString *const kReachableURL = @"ec2-52-86-4-15.compute-1.amazonaws.com";
 
 //NSString *const kBaseURL = @"http://ec2-52-86-4-15.compute-1.amazonaws.com/api/";

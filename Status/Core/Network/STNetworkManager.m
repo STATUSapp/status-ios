@@ -24,6 +24,9 @@
     
     self.requestSerializer = [AFHTTPRequestSerializer serializer];
 
+    //use default SSL implementation
+    self.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+
     return self;
 }
 
