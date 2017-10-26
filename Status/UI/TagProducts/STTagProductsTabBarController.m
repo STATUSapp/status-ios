@@ -24,14 +24,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+const CGFloat kBarHeight = 0.f;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWillLayoutSubviews {
+    CGRect tabFrame = self.tabBar.frame;
+    tabFrame.size.height = kBarHeight;
+    tabFrame.origin.y = self.view.frame.size.height - kBarHeight;
+    self.tabBar.frame = tabFrame;
 }
-*/
+
 
 @end

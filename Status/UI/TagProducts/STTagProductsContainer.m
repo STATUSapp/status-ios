@@ -75,9 +75,9 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGRect tabBarFrame = _containerTabBar.tabBar.frame;
-    tabBarFrame.size.height = 0.f;
-    [_containerTabBar.tabBar setFrame:tabBarFrame];
+//    CGRect tabBarFrame = _containerTabBar.tabBar.frame;
+//    tabBarFrame.size.height = 0.f;
+//    [_containerTabBar.tabBar setFrame:tabBarFrame];
     _barcodeView.delegate = self;
     _wizzardView.delegate = self;
     _wardrobeView.delegate = self;

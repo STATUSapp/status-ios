@@ -43,6 +43,7 @@
 		072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */; };
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
+		0744874D1FA1B8B4003C5404 /* STTagProductsTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0744874C1FA1B8B4003C5404 /* STTagProductsTabBarController.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
 		07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */; };
 		0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0755E2381E87DF140016519E /* STChoosePhotoViewController.m */; };
@@ -369,6 +370,8 @@
 		072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreFilters.m; sourceTree = "<group>"; };
 		073863981F9F0EC500FE13ED /* STMissingProductTVCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMissingProductTVCTableViewController.h; sourceTree = "<group>"; };
 		073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STMissingProductTVCTableViewController.m; sourceTree = "<group>"; };
+		0744874B1FA1B8B4003C5404 /* STTagProductsTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTagProductsTabBarController.h; sourceTree = "<group>"; };
+		0744874C1FA1B8B4003C5404 /* STTagProductsTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTagProductsTabBarController.m; sourceTree = "<group>"; };
 		074FA8D61EB652600028C33E /* STTagProductsCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsCategories.h; sourceTree = "<group>"; };
 		074FA8D71EB652600028C33E /* STTagProductsCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsCategories.m; sourceTree = "<group>"; };
 		07533D841F6E91020009DDDF /* STBarcodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBarcodeScannerViewController.h; sourceTree = "<group>"; };
@@ -933,6 +936,8 @@
 				0721E8A11EC4DF2000DF78D4 /* custom views */,
 				072822EA1E899CB900DCC591 /* STTagProductsContainer.h */,
 				072822EB1E899CB900DCC591 /* STTagProductsContainer.m */,
+				0744874B1FA1B8B4003C5404 /* STTagProductsTabBarController.h */,
+				0744874C1FA1B8B4003C5404 /* STTagProductsTabBarController.m */,
 				074FA8D61EB652600028C33E /* STTagProductsCategories.h */,
 				074FA8D71EB652600028C33E /* STTagProductsCategories.m */,
 				0722BEA01EBCEFFF00BE8CC2 /* STTagProductsViewController.h */,
@@ -2280,6 +2285,7 @@
 				072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */,
 				075C52A51EBF4F9200174CC5 /* STTagManualViewController.m in Sources */,
 				07B300021FB44331009316A2 /* STFacebookAdModel.m in Sources */,
+				0744874D1FA1B8B4003C5404 /* STTagProductsTabBarController.m in Sources */,
 				170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */,
 				99B387401C82FAA2005B4D8C /* NSString+MD5.m in Sources */,
 				99B387721C82FAA2005B4D8C /* STContactsManager.m in Sources */,
