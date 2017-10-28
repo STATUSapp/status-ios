@@ -166,10 +166,10 @@
             </objects>
             <point key="canvasLocation" x="959" y="489"/>
         </scene>
-        <!--Take Photo Root View Controller-->
+        <!--View Controller-->
         <scene sceneID="USH-rh-rNW">
             <objects>
-                <viewController storyboardIdentifier="TAKE_PHOTO_EMPTY_VC" id="ZfP-Yh-ZU3" customClass="STTakePhotoRootViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TAKE_PHOTO_EMPTY_VC" id="ZfP-Yh-ZU3" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="giU-vc-1hj"/>
                         <viewControllerLayoutGuide type="bottom" id="wZF-La-9fI"/>

@@ -7,7 +7,10 @@
 //
 
 #import "STMissingProductTVCTableViewController.h"
-@interface STMissingProductTVCTableViewController ()
+@interface STMissingProductTVCTableViewController ()<UITextFieldDelegate>
+{
+    NSArray *fieldsArray;
+}
 @property (weak, nonatomic) IBOutlet UITextField *brandNameField;
 @property (weak, nonatomic) IBOutlet UITextField *productNameField;
 @property (weak, nonatomic) IBOutlet UITextField *productURLField;
@@ -18,12 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    fieldsArray = @[_brandNameField, _productNameField, _productURLField];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,6 +43,24 @@
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
+#pragma mark - UITextFieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSInteger indexOfField = [fieldsArray indexOfObject:textField];
+    if (indexOfField < fieldsArray.count - 1) {
+        //go next
+        UITextField *nextField = [fieldsArray objectAtIndex:(indexOfField+1)];
+        [nextField becomeFirstResponder];
+    }else{
+        //done
+        [textField resignFirstResponder];
+        if (_delegate && [_delegate respondsToSelector:@selector(missingProductTVCDidPressSend)]) {
+            [_delegate missingProductTVCDidPressSend];
+        }
+
+    }
+    return YES;
+}
 #pragma mark - Helpers
 
 -(BOOL)validateFields{
@@ -52,11 +68,11 @@
     if (_brandNameField.text.length == 0) {
         errorMessage = NSLocalizedString(@"Brand Name is required.", nil);
     }
-    if (_productNameField.text.length == 0) {
+    if (!errorMessage && _productNameField.text.length == 0) {
         errorMessage = NSLocalizedString(@"Product Name is required.", nil);
     }
-    if (_productURLField.text.length == 0) {
-        errorMessage = NSLocalizedString(@"Product URL is required.", nil);
+    if (!errorMessage && _productURLField.text.length == 0) {
+        errorMessage = NSLocalizedString(@"Product Store Link is required.", nil);
     }
     
     if (errorMessage) {
@@ -76,8 +92,8 @@
     //reset the fields
     [self invalidateFields];
     //then call the delegate
-    if (_delegate && [_delegate respondsToSelector:@selector(missingProductTVCDidCancel)]) {
-        [_delegate missingProductTVCDidCancel];
+    if (_delegate && [_delegate respondsToSelector:@selector(missingProductTVCDidPressCancel)]) {
+        [_delegate missingProductTVCDidPressCancel];
     }
 }
 
@@ -92,7 +108,7 @@
 #pragma mark - Public
 
 -(BOOL)validate{
-    return [self validate];
+    return [self validateFields];
 }
 -(NSString *)brandName{
     return self.brandNameField.text;

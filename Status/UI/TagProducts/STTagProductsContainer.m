@@ -7,7 +7,7 @@
 //
 
 #import "STTagProductsContainer.h"
-#import "STTabBarViewController.h"
+#import "STTagProductsContainerViewController.h"
 #import "STTagProductsCategories.h"
 #import "STCustomSegment.h"
 #import "STCatalogParentCategory.h"
@@ -21,6 +21,7 @@
 #import "STFacebookLoginController.h"
 #import "STBarcodeScannerViewController.h"
 #import "STMissingProductViewController.h"
+#import "STTabBarViewController.h"
 
 typedef NS_ENUM(NSUInteger, STContainerSelection) {
     STContainerSelectionBarcode,
@@ -59,7 +60,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 
 @property (weak, nonatomic) IBOutlet UIView *customSegmentHolder;
 
-@property (strong, nonatomic) UITabBarController *containerTabBar;
+@property (strong, nonatomic) STTagProductsContainerViewController *containerViewController;
 
 @end
 
@@ -116,9 +117,8 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"CONTAINER_TAB_BAR"]) {
-        _containerTabBar = segue.destinationViewController;
-        [_containerTabBar.tabBar setHidden:YES];
+    if ([segue.identifier isEqualToString:@"CONTAINER_VIEW_CONTROLER"]) {
+        _containerViewController = segue.destinationViewController;
     }
 }
 
@@ -152,23 +152,19 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
             break;
         case STTagManagerEventSearchProducts:
         {
-            STShopProduct *scannedProduct = [[STTagProductsManager sharedInstance].searchResult firstObject];
-            if (scannedProduct) {
-                //go to Products view controller
+            if ([[[STTagProductsManager sharedInstance] searchResult] count] > 0) {
+                [_containerViewController swapToSegue:kSegueProducts];
+                STTagProductsViewController *vc = (STTagProductsViewController *)[_containerViewController currentVC];
+                NSArray *products = [[STTagProductsManager sharedInstance] searchResult];
+                vc.delegate = self;
+                [vc updateProducts:products];
+
             }else{
                 //go to empty search result
                 _segmentHeightConstr.constant = 0.f;
-                NSLog(@"_mainContainer.frame = %@", NSStringFromCGRect(_mainContainer.frame));
-                [_containerTabBar setSelectedIndex:ContainerTabBarIndexBarcodeNotIndexed];
-                STMissingProductViewController *vc = (STMissingProductViewController *)_containerTabBar.selectedViewController;
-                vc.delegate = self;
-                 
-//                _segmentHeightConstr.constant = 48.f;
-//                [_containerTabBar setSelectedIndex:ContainerTabBarIndexProducts];
-//                STTagProductsViewController *vc = (STTagProductsViewController *)[_containerTabBar selectedViewController];
-//                NSArray *products = [[STTagProductsManager sharedInstance] usedProducts];
-//                vc.delegate = self;
-//                [vc updateProducts:products];
+                [_containerViewController swapToSegue:kSegueMissing];
+                STMissingProductViewController *vc = (STMissingProductViewController *)_containerViewController.currentVC;
+                vc.delegate = self;                 
             }
         }
             break;
@@ -183,16 +179,15 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     if (_selectionType == STContainerSelectionBarcode) {
         _segmentHeightConstr.constant = 0.f;
         NSLog(@"_mainContainer.frame = %@", NSStringFromCGRect(_mainContainer.frame));
-        [_containerTabBar setSelectedIndex:ContainerTabBarIndexBarcode];
-        STBarcodeScannerViewController *vc = (STBarcodeScannerViewController *)_containerTabBar.selectedViewController;
+        [_containerViewController swapToSegue:kSegueBarcode];
+        STBarcodeScannerViewController *vc = (STBarcodeScannerViewController *)_containerViewController.currentVC;
         vc.delegate = self;
 
     }
     else if (_selectionType == STContainerSelectionManual) {
         _segmentHeightConstr.constant = 0.f;
-        [_containerTabBar setSelectedIndex:ContainerTabBarIndexManual];
-        
-        STTagManualViewController *vc = (STTagManualViewController *)_containerTabBar.selectedViewController;
+        [_containerViewController swapToSegue:kSegueManual];
+        STTagManualViewController *vc = (STTagManualViewController *)_containerViewController.currentVC;
         vc.delegate = self;
         [vc updateProducts:[STTagProductsManager sharedInstance].manualAddedProducts];
     }
@@ -201,15 +196,15 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
         NSArray <STShopProduct *> *products = [STTagProductsManager sharedInstance].usedProducts;
         if (products.count == 0) {
             _segmentHeightConstr.constant = 0.f;
-            [_containerTabBar setSelectedIndex:ContainerTabBarIndexEmptyWardrobe];
-            STTagProductsEmptyWardrobe *vc = (STTagProductsEmptyWardrobe *)[_containerTabBar selectedViewController];
+            [_containerViewController swapToSegue:kSegueEmpty];
+            STTagProductsEmptyWardrobe *vc = (STTagProductsEmptyWardrobe *)[_containerViewController currentVC];
             vc.delegate = self;
         }
         else
         {
             _segmentHeightConstr.constant = 48.f;
-            [_containerTabBar setSelectedIndex:ContainerTabBarIndexProducts];
-            STTagProductsViewController *vc = (STTagProductsViewController *)[_containerTabBar selectedViewController];
+            [_containerViewController swapToSegue:kSegueProducts];
+            STTagProductsViewController *vc = (STTagProductsViewController *)[_containerViewController currentVC];
             NSArray *products = [[STTagProductsManager sharedInstance] usedProducts];
             vc.delegate = self;
             [vc updateProducts:products];
@@ -219,7 +214,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     {
         
         _segmentHeightConstr.constant = 48.f;
-        [_containerTabBar setSelectedIndex:ContainerTabBarIndexCategories];
+        [_containerViewController swapToSegue:kSegueCategories];
         NSArray <STCatalogCategory *> *categories = nil;
         if (_selectionType == STContainerSelectionWardrobe) {
             categories = [STTagProductsManager sharedInstance].usedCategories;
@@ -230,7 +225,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
             categories = rootCategory.categories;
             
         }
-        STTagProductsCategories *vc = (STTagProductsCategories *)[_containerTabBar selectedViewController];
+        STTagProductsCategories *vc = (STTagProductsCategories *)[_containerViewController currentVC];
         vc.delegate = self;
         [vc updateCategories:categories];
     }
@@ -279,8 +274,9 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     [self configureContainer];
 }
 -(void)viewDidSendInfoWithBrandName:(NSString *)brandName productName:(NSString *)productName productURK:(NSString *)productURL{
+    [self configureContainer];
     //TODO: call the proper API then show an alert
-    
+
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:@"Thank you for helping us to index more products. Your info were sent." preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];

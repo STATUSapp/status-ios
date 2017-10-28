@@ -10,8 +10,8 @@
 
 @protocol STProductNotIndexedTVCProtocol <NSObject>
 
--(void)missingProductTVCDidCancel;
-
+-(void)missingProductTVCDidPressCancel;
+-(void)missingProductTVCDidPressSend;
 @end
 
 @interface STMissingProductTVCTableViewController : UITableViewController

@@ -355,12 +355,13 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
     _scannedBarcode = barcode;
     NSInteger randomProductsFound = (random() % 2);
     if (randomProductsFound == 1 && _usedProducts.count > 0) {
-        NSInteger randomIndex = (random() % _usedProducts.count);
-        _searchResult = [NSArray arrayWithObject:_usedProducts[randomIndex]];
+        NSInteger randomIndex = (random() % _selectedProducts.count);
+        _searchResult = [NSArray arrayWithObject:_selectedProducts[randomIndex]];
         //reset the _scannedBarcode after fetching
-        _scannedBarcode = nil;
     }
     
+    _scannedBarcode = nil;
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventSearchProducts)}];
 
 }

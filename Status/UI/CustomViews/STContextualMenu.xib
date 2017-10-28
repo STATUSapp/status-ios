@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -43,7 +44,6 @@
                     <state key="normal" title="Ask user to take a photo">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected" backgroundImage="share on facebook button pressed"/>
                     <state key="highlighted" title="Ask user to take a photo"/>
                     <connections>
                         <action selector="onAskUser:" destination="1" eventType="touchUpInside" id="qP7-r2-Zc7"/>
@@ -60,7 +60,6 @@
                     <state key="normal" title="Share on Facebook">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected" backgroundImage="share on facebook button pressed"/>
                     <state key="highlighted" title="Share on Facebook"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="DmD-4u-ilk"/>
@@ -78,7 +77,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="save to camera roll pressed"/>
                     <state key="highlighted" title="Save to Camera Roll"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="uRu-yq-qQ5"/>
@@ -96,7 +94,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="move and scale pressed"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="M7j-u2-OAi"/>
                         <action selector="onEditPost:" destination="1" eventType="touchUpInside" id="L5D-J3-ek4"/>
@@ -113,7 +110,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="delete post button pressed"/>
                     <state key="highlighted" title="Delete Post"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="5eK-kj-gNg"/>
@@ -131,7 +127,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="delete post button pressed"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="POj-D6-UK5"/>
                         <action selector="onCopyShareUrl:" destination="1" eventType="touchUpInside" id="NKn-DE-uW0"/>
@@ -148,7 +143,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="report post pressed"/>
                     <state key="highlighted" title="Report Post"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="tNe-fy-CMe"/>
@@ -166,7 +160,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="report post pressed"/>
                     <state key="highlighted" title="Cancel"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="1" eventType="touchUpInside" id="gzY-W7-S4M"/>
@@ -324,7 +317,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="delete post button pressed"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="ygf-JY-3ty" eventType="touchUpInside" id="C4I-GD-BBR"/>
                         <action selector="onCopyProfileUrl:" destination="ygf-JY-3ty" eventType="touchUpInside" id="3Sn-Ak-eOO"/>
@@ -341,7 +333,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="report post pressed"/>
                     <state key="highlighted" title="Cancel"/>
                     <connections>
                         <action selector="onCancelPressed:" destination="ygf-JY-3ty" eventType="touchUpInside" id="t4C-nr-ssz"/>
@@ -382,16 +373,6 @@
         </view>
     </objects>
     <resources>
-        <image name="delete post button pressed" width="320" height="51"/>
-        <image name="move and scale pressed" width="320" height="51"/>
-        <image name="report post pressed" width="320" height="57"/>
-        <image name="save to camera roll pressed" width="640" height="103"/>
         <image name="share button line" width="396" height="1"/>
-        <image name="share on facebook button pressed" width="320" height="50"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

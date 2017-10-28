@@ -60,11 +60,14 @@
 
 #pragma mark - STProductNotIndexedTVCProtocol
 
--(void)missingProductTVCDidCancel{
+-(void)missingProductTVCDidPressCancel{
     //call the delegate
     if (_delegate && [_delegate respondsToSelector:@selector(viewDidCancel)]) {
         [_delegate viewDidCancel];
     }
 }
 
+-(void)missingProductTVCDidPressSend{
+    [self onSendPressed:nil];
+}
 @end
