@@ -354,7 +354,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
     _searchResult = nil;
     _scannedBarcode = barcode;
     NSInteger randomProductsFound = (random() % 2);
-    if (randomProductsFound == 1 && _usedProducts.count > 0) {
+    if (randomProductsFound == 1 && _selectedProducts.count > 0) {
         NSInteger randomIndex = (random() % _selectedProducts.count);
         _searchResult = [NSArray arrayWithObject:_selectedProducts[randomIndex]];
         //reset the _scannedBarcode after fetching

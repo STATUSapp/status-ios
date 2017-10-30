@@ -36,14 +36,13 @@ typedef NS_ENUM(NSUInteger, STWardrobeSegment) {
     STWardrobeSegmentCount,
 };
 
-typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
-    ContainerTabBarIndexCategories = 0,
-    ContainerTabBarIndexProducts,
-    ContainerTabBarIndexManual,
-    ContainerTabBarIndexEmptyWardrobe,
-    ContainerTabBarIndexBarcodeNotIndexed,
-    ContainerTabBarIndexBarcode
+typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
+    STBarcodeScanStateDefault = 0,
+    STBarcodeScanStateProductNotFound,
+    STBarcodeScanStateProductFound,
 };
+
+
 @interface STTagProductsContainer ()<STSCustomSegmentProtocol, STTagProductsEmptyWardrobeProtocol, STTagCategoriesProtocol, STTagProductsProtocol, STTagManualProtocol, STTagCustomViewProtocol, STTagBrandsProtocol, STBarcodeScannerProtocol, STProductNotIndexedProtocol>
 
 @property (weak, nonatomic) IBOutlet STTagCustomView *barcodeView;
@@ -54,6 +53,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 
 @property (weak, nonatomic) IBOutlet UIView *mainContainer;
 @property (nonatomic, assign) STContainerSelection selectionType;
+@property (nonatomic, assign) STBarcodeScanState barcodeState;
 
 @property (nonatomic, strong) STCustomSegment *wizardSegment;
 @property (nonatomic, strong) STCustomSegment *wardrobeSegment;
@@ -84,6 +84,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
     _wardrobeView.delegate = self;
     _manualView.delegate = self;
     
+    _barcodeState = STBarcodeScanStateDefault;
     _selectionType = STContainerSelectionWizzard;
     [self configureTopViewsForSelectedView:_wizzardView];
 
@@ -153,6 +154,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
         case STTagManagerEventSearchProducts:
         {
             if ([[[STTagProductsManager sharedInstance] searchResult] count] > 0) {
+                _barcodeState = STBarcodeScanStateProductFound;
                 [_containerViewController swapToSegue:kSegueProducts];
                 STTagProductsViewController *vc = (STTagProductsViewController *)[_containerViewController currentVC];
                 NSArray *products = [[STTagProductsManager sharedInstance] searchResult];
@@ -161,6 +163,7 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 
             }else{
                 //go to empty search result
+                _barcodeState = STBarcodeScanStateProductNotFound;
                 _segmentHeightConstr.constant = 0.f;
                 [_containerViewController swapToSegue:kSegueMissing];
                 STMissingProductViewController *vc = (STMissingProductViewController *)_containerViewController.currentVC;
@@ -177,12 +180,13 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 
 -(void)configureContainer{
     if (_selectionType == STContainerSelectionBarcode) {
-        _segmentHeightConstr.constant = 0.f;
-        NSLog(@"_mainContainer.frame = %@", NSStringFromCGRect(_mainContainer.frame));
-        [_containerViewController swapToSegue:kSegueBarcode];
-        STBarcodeScannerViewController *vc = (STBarcodeScannerViewController *)_containerViewController.currentVC;
-        vc.delegate = self;
-
+        if (_barcodeState == STBarcodeScanStateDefault) {
+            _segmentHeightConstr.constant = 0.f;
+            NSLog(@"_mainContainer.frame = %@", NSStringFromCGRect(_mainContainer.frame));
+            [_containerViewController swapToSegue:kSegueBarcode];
+            STBarcodeScannerViewController *vc = (STBarcodeScannerViewController *)_containerViewController.currentVC;
+            vc.delegate = self;
+        }
     }
     else if (_selectionType == STContainerSelectionManual) {
         _segmentHeightConstr.constant = 0.f;
@@ -271,9 +275,11 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 #pragma mark - STProductNotIndexedProtocol
 
 -(void)viewDidCancel{
+    _barcodeState = STBarcodeScanStateDefault;
     [self configureContainer];
 }
 -(void)viewDidSendInfoWithBrandName:(NSString *)brandName productName:(NSString *)productName productURK:(NSString *)productURL{
+    _barcodeState = STBarcodeScanStateDefault;
     [self configureContainer];
     //TODO: call the proper API then show an alert
 
@@ -358,6 +364,9 @@ typedef NS_ENUM(NSUInteger, ContainerTabBarIndex) {
 #pragma mark - STTagProductsProtocol
 
 -(void)addProductsAction{
+    if (_selectionType == STContainerSelectionBarcode) {
+        _barcodeState = STBarcodeScanStateDefault;
+    }
     UIViewController *vc = [STTagProductsManager sharedInstance].rootViewController;
     if (vc) {
         [self.navigationController popToViewController:vc animated:YES];
