@@ -131,7 +131,10 @@
 
 - (NSMutableDictionary *)getDictParamsWithToken
 {
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:@{@"token":[[CoreManager networkService] getAccessToken]}];
+    NSMutableDictionary *params = [@{} mutableCopy];
+    if ([[CoreManager networkService] getAccessToken]) {
+        params = [[NSMutableDictionary alloc] initWithDictionary:@{@"token":[[CoreManager networkService] getAccessToken]}];
+    }
     return params;
 }
 

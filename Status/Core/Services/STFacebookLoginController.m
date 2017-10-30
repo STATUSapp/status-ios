@@ -141,6 +141,12 @@
 //    [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     STUserProfile *userProfile = [self userProfile];
+    if (userProfile &&
+        ![userProfile.uuid isEqualToString:userId]) {
+        //invalidate the user profile
+        [[CoreManager profilePool] removeProfiles:@[userProfile]];
+        _loggedInUserProfile = nil;
+    }
     if (userProfile == nil) {
         [STDataAccessUtils getUserProfileForUserId:_currentUserId
                                      andCompletion:^(NSArray *objects, NSError *error) {
@@ -150,6 +156,8 @@
                                          }
                                          [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
                                      }];
+    }else{
+        [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
     }
     
     //get settings from server

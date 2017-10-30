@@ -191,7 +191,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
         NSTimeInterval intervalSinceNow = [resumeDate timeIntervalSinceNow] * (-1.f);
         NSTimeInterval fiveMinutesInterval = 60 * 5;
         //update home content if more then 5 minutes left
-        if (intervalSinceNow > fiveMinutesInterval) {
+        if (intervalSinceNow > fiveMinutesInterval &&
+            ([[CoreManager networkService] getAccessToken] !=nil)) {
             [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
         }
     }

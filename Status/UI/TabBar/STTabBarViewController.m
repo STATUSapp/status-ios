@@ -201,6 +201,7 @@ static CGFloat kImageInset = 4.f;
     }
     [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedIndex:selectedIndex];
+    [self tabBar:self.tabBar didSelectItem:self.tabBar.items[selectedIndex]];
 }
 
 - (void)setSelectedViewController:(__kindof UIViewController *)selectedViewController {
