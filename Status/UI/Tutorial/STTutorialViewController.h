@@ -11,7 +11,7 @@
 @protocol STTutorialDelegate <NSObject>
 
 - (void)loginButtonPressed:(id)sender;
-
+- (void)multipleTapOnShopStyle;
 @end
 
 @interface STTutorialViewController : UIViewController

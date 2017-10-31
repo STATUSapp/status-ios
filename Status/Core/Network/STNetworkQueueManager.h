@@ -13,8 +13,10 @@
 
 @interface STNetworkQueueManager : NSObject
 
-+(STNetworkManager *)networkAPI;
+@property (nonatomic, strong, readonly) NSString *baseUrl;
 
++(STNetworkManager *)networkAPI;
+-(void)reset;
 - (NSString *)getAccessToken;
 - (void)setAccessToken:(NSString *)accessToken;
 

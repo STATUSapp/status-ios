@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JTi-yg-KSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JTi-yg-KSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Medium</string>
+        </array>
         <array key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
         </array>
@@ -335,7 +340,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="178" height="175"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRESSES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzV-qf-lex">
-                                                    <rect key="frame" x="8" y="16" width="162" height="143"/>
+                                                    <rect key="frame" x="16" y="8" width="146" height="159"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -415,7 +420,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="32k-AD-DXw">
-                                <rect key="frame" x="6" y="6" width="363" height="543"/>
+                                <rect key="frame" x="6" y="26" width="363" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="efW-ht-mUr">
                                     <size key="itemSize" width="172" height="156"/>
@@ -501,13 +506,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="closet icon" translatesAutoresizingMaskIntoConstraints="NO" id="onX-9y-WOR">
-                                <rect key="frame" x="124" y="28" width="128" height="129"/>
+                                <rect key="frame" x="124" y="48" width="128" height="129"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="onX-9y-WOR" secondAttribute="height" multiplier="249:251" id="2rR-Pd-s8F"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIe-ys-GnR">
-                                <rect key="frame" x="75" y="175" width="226" height="99"/>
+                                <rect key="frame" x="75" y="195" width="226" height="99"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="99" id="TIO-rA-0VK"/>
                                 </constraints>
@@ -517,7 +522,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB4-at-1GI">
-                                <rect key="frame" x="72" y="293" width="231" height="49"/>
+                                <rect key="frame" x="72" y="313" width="231" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="231" id="X1i-MA-lQ4"/>
                                     <constraint firstAttribute="height" constant="49" id="mjG-xy-RvM"/>
@@ -531,7 +536,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUc-Wh-GLm">
-                                <rect key="frame" x="72" y="358" width="231" height="49"/>
+                                <rect key="frame" x="72" y="378" width="231" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="231" id="2fk-eV-lGf"/>
                                     <constraint firstAttribute="height" constant="49" id="JQq-Lh-hmU"/>

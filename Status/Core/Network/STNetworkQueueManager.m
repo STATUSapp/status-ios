@@ -19,6 +19,7 @@
 @interface STNetworkQueueManager() {
     AFNetworkReachabilityManager* _reachabilityManager;
 }
+@property (nonatomic, strong, readwrite) NSString *baseUrl;
 
 @property (nonatomic, strong) NSMutableArray* requestQueue;
 @property (nonatomic, strong) NSString *accessToken;
@@ -33,12 +34,28 @@
     self = [super init];
     if (self) {
         self.requestQueue = [NSMutableArray new];
-        _networkAPI = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+        [self loadNetworkAPI];
         _keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
 
         [self loadTokenFromKeyChain];
     }
     return self;
+}
+
+-(void)loadNetworkAPI{
+    NSUserDefaults *ud = [[NSUserDefaults alloc] initWithSuiteName:@"BaseUrl"];
+    NSString *baseUrl = [ud valueForKey:@"BASE_URL"];
+    
+    if (!baseUrl) {
+        baseUrl = kBaseURL;
+    }
+    _baseUrl = baseUrl;
+    _networkAPI = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
+
+}
+
+-(void)reset{
+    [_networkAPI clearQueue];
 }
 
 +(STNetworkManager *)networkAPI{
@@ -104,7 +121,7 @@
 
 - (void)clearQueue{
     [_requestQueue removeAllObjects];
-    _networkAPI = [[STNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    [self loadNetworkAPI];
 }
 
 - (BOOL)saveQueueToDisk{

@@ -14,7 +14,7 @@
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:nil];
-    NSString *fullUrl = [NSString stringWithFormat:@"%@%@", kBaseURL, kInviteFriendsByEmail];
+    NSString *fullUrl = [NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, kInviteFriendsByEmail];
     NSURL *url = [NSURL URLWithString:fullUrl];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy

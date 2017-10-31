@@ -20,6 +20,7 @@ NSString * const kTutorialCell = @"STTutorialCell";
 }
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *multipleTapToChangeBaseUrl;
 
 @end
 
@@ -27,6 +28,11 @@ NSString * const kTutorialCell = @"STTutorialCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (_skipFirstItem) {
+        _multipleTapToChangeBaseUrl.enabled = NO;
+    }else{
+        _multipleTapToChangeBaseUrl.enabled = YES;
+    }
 }
 -(void)viewWillLayoutSubviews{
     [self buildDatasource];
@@ -162,5 +168,15 @@ NSString * const kTutorialCell = @"STTutorialCell";
     }
 }
 
+- (IBAction)onMultipleTap:(id)sender {
+    UICollectionViewCell *cell = self.collectionView.visibleCells.firstObject;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    if (indexPath.row == STTutorialShopStyle) {
+        if (_delegate && [_delegate respondsToSelector:@selector(multipleTapOnShopStyle)]) {
+            [_delegate multipleTapOnShopStyle];
+        }
+        NSLog(@"10 times tap on Shop Style");
+    }
+}
 
 @end
