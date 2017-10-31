@@ -67,7 +67,7 @@
     NSSet *removedObjects = [_objects filteredSetUsingPredicate:removePredicate];
     [matches minusSet:removedObjects];
     _objects = matches;
-    for (id object in matches) {
+    for (id object in removedObjects) {
         if ([object isKindOfClass:[STPost class]]) {
             [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];
         }
