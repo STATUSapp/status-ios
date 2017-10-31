@@ -668,7 +668,7 @@ by using one of the following methods:</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This product is not on STATUS app yet. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgQ-fQ-mGx">
-                                                    <rect key="frame" x="75" y="164" width="225" height="13"/>
+                                                    <rect key="frame" x="71.5" y="164" width="232" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="13" id="fhs-y8-ygQ"/>
                                                     </constraints>
@@ -677,7 +677,7 @@ by using one of the following methods:</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give us more details about the product and we'll try to index it as soon as possible." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Az-wH-wof">
-                                                    <rect key="frame" x="65.5" y="193" width="245.5" height="26"/>
+                                                    <rect key="frame" x="61.5" y="193" width="254" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="5Tu-Ug-C7c"/>
                                                     </constraints>
@@ -723,7 +723,7 @@ by using one of the following methods:</string>
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Brand Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dvl-2y-wjs">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Brand" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dvl-2y-wjs">
                                                     <rect key="frame" x="66" y="0.0" width="243" height="52"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="243" id="Xp5-wO-nqY"/>
@@ -760,7 +760,7 @@ by using one of the following methods:</string>
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Product Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hed-vd-gLI">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Product name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hed-vd-gLI">
                                                     <rect key="frame" x="66" y="0.0" width="243" height="52"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="52" id="25U-8D-GO0"/>
@@ -797,7 +797,7 @@ by using one of the following methods:</string>
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Product Store Link" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OZ6-yS-BuT">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Store" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OZ6-yS-BuT">
                                                     <rect key="frame" x="66" y="0.0" width="243" height="52"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="243" id="Wmf-0Q-xE2"/>
@@ -892,6 +892,9 @@ by using one of the following methods:</string>
                     <tabBarItem key="tabBarItem" title="Item" id="oYH-LR-YhW"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="sendButton" destination="nU9-Bs-z3f" id="Bxy-rc-Ojl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jJo-fl-Bx6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -963,7 +966,7 @@ by using one of the following methods:</string>
                                                             <rect key="frame" x="133" y="0.0" width="129" height="181"/>
                                                             <subviews>
                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mge-qg-Y1j">
-                                                                    <rect key="frame" x="3.5" y="8" width="125.5" height="153"/>
+                                                                    <rect key="frame" x="0.0" y="8" width="129" height="153"/>
                                                                     <state key="normal" backgroundImage="upload product photo frame "/>
                                                                     <connections>
                                                                         <action selector="uploadImagePressed:" destination="8FJ-jk-rt9" eventType="touchUpInside" id="kJz-46-Tlo"/>
@@ -977,7 +980,7 @@ by using one of the following methods:</string>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload product photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1Y-yP-eUE">
-                                                                    <rect key="frame" x="3.5" y="99" width="125.5" height="32"/>
+                                                                    <rect key="frame" x="0.0" y="99" width="129" height="32"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="32" id="bCd-G7-1Us"/>
                                                                     </constraints>

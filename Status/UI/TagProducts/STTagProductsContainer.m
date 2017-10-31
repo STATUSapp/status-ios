@@ -279,12 +279,14 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
     [self configureContainer];
 }
 -(void)viewDidSendInfoWithBrandName:(NSString *)brandName productName:(NSString *)productName productURK:(NSString *)productURL{
-    _barcodeState = STBarcodeScanStateDefault;
-    [self configureContainer];
     //TODO: call the proper API then show an alert
 
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:@"Thank you for helping us to index more products. Your info were sent." preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+    __weak STTagProductsContainer *weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thanks for the details!" message:@"We'll do our best to index the product as soon as possible." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        weakSelf.barcodeState = STBarcodeScanStateDefault;
+        [weakSelf configureContainer];
+    }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 

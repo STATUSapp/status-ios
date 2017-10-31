@@ -12,6 +12,7 @@
 
 -(void)missingProductTVCDidPressCancel;
 -(void)missingProductTVCDidPressSend;
+-(void)missingProductDetailsEdited;
 @end
 
 @interface STMissingProductTVCTableViewController : UITableViewController

@@ -12,6 +12,7 @@
 @interface STMissingProductViewController ()<STProductNotIndexedTVCProtocol>
 
 @property (nonatomic, strong) STMissingProductTVCTableViewController *childTVC;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
 @end
 
@@ -25,7 +26,7 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController.tabBarController.tabBar setHidden:YES];
-    // Do any additional setup after loading the view.
+    [self configureSendButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +34,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)configureSendButton{
+    NSString *brandName = [_childTVC brandName];
+    NSString *productName = [_childTVC productName];
+    NSString *storeUrl = [_childTVC productURL];
+    _sendButton.hidden = !(brandName.length > 0 &&
+                          productName.length > 0 &&
+                          storeUrl.length > 0);
+}
 
 #pragma mark - Navigation
 
@@ -69,5 +78,9 @@
 
 -(void)missingProductTVCDidPressSend{
     [self onSendPressed:nil];
+}
+
+-(void)missingProductDetailsEdited{
+    [self configureSendButton];
 }
 @end

@@ -61,6 +61,12 @@
     }
     return YES;
 }
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if (_delegate && [_delegate respondsToSelector:@selector(missingProductDetailsEdited)]) {
+        [_delegate missingProductDetailsEdited];
+    }
+}
 #pragma mark - Helpers
 
 -(BOOL)validateFields{
@@ -117,7 +123,7 @@
     return self.productNameField.text;
 }
 -(NSString *)productURL{
-    return self.productNameField.text;
+    return self.productURLField.text;
 }
 
 @end
