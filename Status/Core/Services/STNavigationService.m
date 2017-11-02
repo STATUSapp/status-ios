@@ -157,8 +157,7 @@
 }
 
 -(void)pushViewControllers:(NSArray <UIViewController *> *) arrayVC
-           inTabbarAtIndex:(NSInteger)index
-       keepThecurrentStack:(BOOL)keepTheStack{
+           inTabbarAtIndex:(NSInteger)index{
     [[STNavigationService appTabBar] setSelectedIndex:index];
     UINavigationController *navCtrl = (UINavigationController *)[[[STNavigationService appTabBar] viewControllers] objectAtIndex:index];
     NSMutableArray *viewControllers = [[navCtrl viewControllers] mutableCopy];

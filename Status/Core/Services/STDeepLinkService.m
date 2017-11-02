@@ -75,7 +75,7 @@ NSString * const kNonBrankLinkKey = @"+non_branch_link";
     NSArray *redirectVC = [self redirectViewControllers];
     if (redirectVC && [redirectVC count]) {
         [[CoreManager navigationService] pushViewControllers:redirectVC
-                                             inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:YES];
+                                             inTabbarAtIndex:STTabBarIndexHome];
     }
 }
 

@@ -140,7 +140,6 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
             else if (_feedProcessor.processorFlowType == STFlowTypeSinglePost)
             {
                 //set tint color for the back button
-                [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
                 self.navigationItem.title = NSLocalizedString(@"Photo", nil);
             }
         }
@@ -268,7 +267,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         NSArray *redirectVC = [[CoreManager deepLinkService] redirectViewControllers];
         if (redirectVC && [redirectVC count]) {
             [[CoreManager navigationService] pushViewControllers:redirectVC
-                                                 inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:YES];
+                                                 inTabbarAtIndex:STTabBarIndexHome];
         }
     }
     

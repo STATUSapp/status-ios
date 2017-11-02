@@ -37,8 +37,7 @@
       keepThecurrentStack:(BOOL)keepTheStack;
 
 -(void)pushViewControllers:(NSArray <UIViewController *> *) arrayVC
-           inTabbarAtIndex:(NSInteger)index
-       keepThecurrentStack:(BOOL)keepTheStack;
+           inTabbarAtIndex:(NSInteger)index;
 
 -(void)presentAlertController:(UIAlertController *)alert;
 

@@ -129,6 +129,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [[UITabBar appearance] setBackgroundColor:[UIColor clearColor]];
     
     [[UINavigationBar appearance] setBarTintColor:barColor];
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
  
