@@ -36,14 +36,21 @@
 
 - (void)configureWithProducts:(NSArray <STShopProduct *> *)products{
     _products = products;
-
-    NSMutableArray <NSIndexPath *> *indexPaths = [NSMutableArray new];
-    for (NSInteger i = 0; i< _products.count; i++) {
-        [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
-    }
-    [self.produsctsCollection.collectionViewLayout invalidateLayout];
-    [self.produsctsCollection layoutIfNeeded];
+    [self setCollectionViewDelegate:self];
+//    NSMutableArray <NSIndexPath *> *indexPaths = [NSMutableArray new];
+//    for (NSInteger i = 0; i< _products.count; i++) {
+//        [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+//    }
+    NSLog(@"Reload on Products Cell");
     [self.produsctsCollection reloadData];
+    [self.produsctsCollection.collectionViewLayout invalidateLayout];
+//    [self.produsctsCollection layoutSubviews];
+
+}
+
+- (void)setCollectionViewDelegate:(id<UICollectionViewDelegate,UICollectionViewDataSource>)delegate{
+    [self.produsctsCollection setDelegate:delegate];
+    [self.produsctsCollection setDataSource:delegate];
 }
 
 + (CGSize)cellSize{

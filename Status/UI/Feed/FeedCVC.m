@@ -384,16 +384,18 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         [_refreshControl endRefreshing];
     }
     [self configureLoadingView];
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    NSLog(@"Reload 1");
     [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
 
 //    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
 //    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 }
 
 - (void)postUpdated:(NSNotification *)notif{
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    NSLog(@"Reload 2");
     [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
 
     /*
     NSString *updatedPostId = notif.userInfo[kPostIdKey];
@@ -415,11 +417,13 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 - (void)postAdded:(NSNotification *)notif{
+    NSLog(@"Reload 3");
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
 }
 - (void)postDeleted:(NSNotification *)notif{
+    NSLog(@"Reload 4");
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
@@ -429,6 +433,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 //    if (_isMyProfile) {
         //a new post was uploaded/edited and the profile feed should be reloaded
         [_feedProcessor reloadProcessor];
+        NSLog(@"Reload 5");
         [self.collectionView reloadData];
         [self.collectionView.collectionViewLayout invalidateLayout];
 //    }
@@ -438,8 +443,9 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     if (_isMyProfile) {
         //a new post was uploaded/edited and the profile feed should be reloaded
         [_feedProcessor reloadProcessor];
-        [self.collectionView.collectionViewLayout invalidateLayout];
+        NSLog(@"Reload 6");
         [self.collectionView reloadData];
+        [self.collectionView.collectionViewLayout invalidateLayout];
     }
 }
 
@@ -770,6 +776,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         
     }
     else if ([cell isKindOfClass:[STPostShopProductsCell class]]){
+        NSLog(@"Reload Cell indexPath: %@", indexPath);
         [(STPostShopProductsCell *)cell configureWithProducts:post.shopProducts];
     }
     else if ([cell isKindOfClass:[UserProfileInfoCell class]]){
@@ -970,6 +977,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                           withCompletion:^(NSError *error) {
                               if (error == nil) {//success
                                   userProfile.isFollowedByCurrentUser = !userProfile.isFollowedByCurrentUser;
+                                  NSLog(@"Reload 7");
                                   [weakSelf.collectionView reloadData];
                                   [weakSelf.collectionView.collectionViewLayout invalidateLayout];
 
@@ -1025,8 +1033,13 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 - (IBAction)onShopButtonPressed:(id)sender {
     STPost *post = [self getCurrentPostForButton:sender];
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    NSInteger index = [self getCurrentIndexForButton:sender];
+    if ([_feedProcessor processorIsAGallery]) {
+        index ++;
+    }
+    NSIndexPath * indexPath = [NSIndexPath indexPathForItem:STPostShop inSection:index];
 
+    [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView performBatchUpdates:^{
     
         if (post.showShopProducts == NO) {
@@ -1055,15 +1068,14 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         }
         
         post.showShopProducts = !post.showShopProducts;
+        if (post.showShopProducts == NO) {
+            STPostShopProductsCell *cell = (STPostShopProductsCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            [cell setCollectionViewDelegate:nil];
+        }
 
         
     } completion:^(BOOL finished) {
         if (post.showShopProducts) {
-            NSInteger index = [self getCurrentIndexForButton:sender];
-            if ([_feedProcessor processorIsAGallery]) {
-                index ++;
-            }
-            NSIndexPath * indexPath = [NSIndexPath indexPathForItem:STPostShop inSection:index];
             //to reload the products after they were updated
             [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
             [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];

@@ -13,6 +13,7 @@
 @interface STPostShopProductsCell : UICollectionViewCell
 
 - (void)configureWithProducts:(NSArray <STShopProduct *> *)products;
+- (void)setCollectionViewDelegate:(id<UICollectionViewDelegate,UICollectionViewDataSource>)delegate;
 + (CGSize)cellSize;
 
 @end
