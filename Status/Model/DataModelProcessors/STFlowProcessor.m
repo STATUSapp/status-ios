@@ -21,6 +21,8 @@
 
 #import "STImageCacheObj.h"
 
+#define SET_POST_AS_SEEN 0
+
 NSString * const kNotificationObjectDownloadFailed = @"NotificationDownloadFailed";
 NSString * const kNotificationObjDownloadSuccess = @"NotificationDownloadSuccess";
 NSString * const kNotificationObjUpdated = @"NotificationObjUpdated";
@@ -160,7 +162,9 @@ NSString * const kGenderMen = @"male";
 //    shouldGetNextBatch = NO;
     if (shouldGetNextBatch) {
             [self getMoreData];
-        }
+    }
+
+#if SET_POST_AS_SEEN
     if (!setSeenRequired) {
         return;
     }
@@ -180,7 +184,9 @@ NSString * const kGenderMen = @"male";
                                          post.postSeen = YES;
                                      }
                                  }];
+         
     }
+#endif
 }
 
 - (void)deleteObjectAtIndex:(NSInteger)index
