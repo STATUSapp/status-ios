@@ -581,6 +581,7 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     if ([cell isKindOfClass:[STShopProductCell class]]) {
         STShopProduct *product = [_shopProducts objectAtIndex:indexPath.row];
         [(STShopProductCell *)cell configureWithShopProduct:product];
+        ((STShopProductCell *)cell).deleteButton.tag = indexPath.row;
     }
     
     return cell;

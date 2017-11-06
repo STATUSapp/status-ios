@@ -92,6 +92,8 @@ static CGFloat kImageInset = 4.f;
     [[self.tabBar.items objectAtIndex:STTabBarIndexTakeAPhoto] setSelectedImage:[[UIImage imageNamed:@"camera-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [[self.tabBar.items objectAtIndex:STTabBarIndexProfile] setSelectedImage:[[UIImage imageNamed:@"profile-selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
+    [self setActivityIcon];
+    
     for (UITabBarItem * item in self.tabBar.items) {
         [item setTitle:nil];
         item.imageInsets = UIEdgeInsetsMake(kImageInset, 0, -1 * kImageInset, 0);

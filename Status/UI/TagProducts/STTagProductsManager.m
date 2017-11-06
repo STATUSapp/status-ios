@@ -270,12 +270,13 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
                                                if (weakSelf.usedProducts) {
                                                    [usedProducts addObjectsFromArray:weakSelf.usedProducts];
                                                }
+                                               [usedProducts addObjectsFromArray:objects];
                                                weakSelf.usedProducts = [NSArray arrayWithArray:usedProducts];
                                                if ([objects count] < kCatalogDownloadPageSize) {
                                                    weakSelf.usedProductsPageIndex = kCatalogNoMorePagesIndex;
                                                    NSLog(@"Used products download STOP");
                                                }else{
-                                                   weakSelf.usedCategoriesPageIndex ++;
+                                                   weakSelf.usedProductsPageIndex ++;
                                                }
                                                [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventUsedProducts)}];
                                            }

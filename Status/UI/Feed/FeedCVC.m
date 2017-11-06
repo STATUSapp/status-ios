@@ -273,8 +273,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     
     self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.sectionHeadersPinToVisibleBounds = YES;
+//    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+//    layout.sectionHeadersPinToVisibleBounds = YES;
     
     if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
         self.collectionView.contentInset = UIEdgeInsetsMake(0.f, 0.f, self.tabBarController.tabBar.frame.size.height, 0.f);
