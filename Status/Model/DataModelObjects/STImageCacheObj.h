@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSNumber *flowType;
+@property (nonatomic, assign) BOOL downloading;
 
 + (STImageCacheObj *)imageCacheObjFromObj:(STBaseObj *)obj;
 

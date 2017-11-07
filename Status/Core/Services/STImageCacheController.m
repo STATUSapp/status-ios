@@ -15,12 +15,12 @@
 #import "STImageCacheObj.h"
 
 NSInteger const STImageDownloadSpecialPriority = -1;
+NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
 
 @interface STImageCacheController()
 
 @property (nonatomic, strong) NSMutableArray <STImageCacheObj *> *objectsArray;
 @property (nonatomic, strong) NSMutableArray *sortedFlows;
-@property (nonatomic, assign) BOOL inProgress;
 @end
 
 @implementation STImageCacheController
@@ -201,20 +201,19 @@ NSInteger const STImageDownloadSpecialPriority = -1;
     [self loadNextPhoto];
 }
 
--(void)loadNextPhoto{
-    NSLog(@"Photo for download count: %lu", (unsigned long)_objectsArray.count);
-    while (_objectsArray.count == 0) {
-        [[SDImageCache sharedImageCache] clearMemory];
-//        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
-        _inProgress = NO;
-        return;
-    }
-    if (_inProgress == YES) {
-        return;
-    }
-    _inProgress = YES;
+- (BOOL)canAddNewImageDownlod{
+    NSArray *array = [_objectsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"downloading == YES"]];
+    return [array count] < STImageDownloadmMaximumDownloadsCount;
+}
+
+- (STImageCacheObj *)firstObjectToBeDownloading{
+    NSArray *array = [_objectsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"downloading == NO"]];
+    return [array firstObject];
+
+}
+- (void)downloadImageFromObject:(STImageCacheObj *)obj {
+    obj.downloading = YES;
     __weak STImageCacheController *weakSelf = self;
-    STImageCacheObj *obj = [_objectsArray firstObject];
     
     __block NSString *fullUrlString = obj.imageUrl;
     
@@ -227,10 +226,25 @@ NSInteger const STImageDownloadSpecialPriority = -1;
                       
                       [weakSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
                       
-                      weakSelf.inProgress = NO;
                       [weakSelf loadNextPhoto];
                   }];
-    
+}
+
+-(void)loadNextPhoto{
+    NSLog(@"Photo for download count: %lu", (unsigned long)_objectsArray.count);
+    if (_objectsArray.count == 0) {
+        [[SDImageCache sharedImageCache] clearMemory];
+//        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+        return;
+    }
+
+    BOOL canAddNewImageToBeDownloaded = [self canAddNewImageDownlod];
+    STImageCacheObj *obj = [self firstObjectToBeDownloading];
+    while (canAddNewImageToBeDownloaded && obj) {
+        [self downloadImageFromObject:obj];
+        canAddNewImageToBeDownloaded = [self canAddNewImageDownlod];
+        obj = [self firstObjectToBeDownloading];
+    }
 }
 
 + (CGSize) imageSizeForUrl:(NSString *)url{
