@@ -322,6 +322,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self configureNavigationBar];
+    [[CoreManager imageCacheService] changeFlowType:_feedProcessor.processorFlowType
+                                          needsSort:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

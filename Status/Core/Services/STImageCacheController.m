@@ -14,7 +14,7 @@
 #import "STLocalNotificationService.h"
 #import "STImageCacheObj.h"
 
-NSUInteger const STImageDownloadSpecialPriority = -1;
+NSInteger const STImageDownloadSpecialPriority = -1;
 
 @interface STImageCacheController()
 
@@ -24,6 +24,15 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 @end
 
 @implementation STImageCacheController
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        //default sort
+        self.sortedFlows = [NSMutableArray arrayWithArray:@[@(STImageDownloadSpecialPriority),@(STFlowTypeHome),@(STFlowTypePopular),@(STFlowTypeRecent), @(STFlowTypeDiscoverNearby), @(STFlowTypeMyGallery), @(STFlowTypeUserGallery), @(STFlowTypeSinglePost)]];
+    }
+    return self;
+}
 
 -(void) loadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageCompletion) completion{
     
@@ -144,15 +153,19 @@ NSUInteger const STImageDownloadSpecialPriority = -1;
 }
 
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort{
-    if (_sortedFlows == nil) {
-        //default sort
-        _sortedFlows = [NSMutableArray arrayWithArray:@[@(STImageDownloadSpecialPriority),@(STFlowTypeHome),@(STFlowTypePopular),@(STFlowTypeRecent), @(STFlowTypeDiscoverNearby), @(STFlowTypeMyGallery), @(STFlowTypeUserGallery), @(STFlowTypeSinglePost)]];
+    NSInteger firstReplacebleItemIndex;
+    if ([[_sortedFlows firstObject] integerValue]!=STImageDownloadSpecialPriority) {
+        firstReplacebleItemIndex = 0;
+    }else{//get the next one
+        firstReplacebleItemIndex = 1;
     }
     
-    if ([[_sortedFlows firstObject] integerValue]!=flowType) {
+    if ([[_sortedFlows objectAtIndex:firstReplacebleItemIndex] integerValue]!=flowType) {
         [_sortedFlows removeObject:@(flowType)];
-        [_sortedFlows insertObject:@(flowType) atIndex:0];
+        [_sortedFlows insertObject:@(flowType) atIndex:firstReplacebleItemIndex];
     }
+    
+    NSLog(@"Sorted download flows: %@", _sortedFlows);
     
     if (needsSort==YES) {
         [self sortDownloadArray];
