@@ -180,13 +180,11 @@
 		99B387601C82FAA2005B4D8C /* STRepostPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386341C82FAA2005B4D8C /* STRepostPostRequest.m */; };
 		99B387611C82FAA2005B4D8C /* STSetAPNTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386361C82FAA2005B4D8C /* STSetAPNTokenRequest.m */; };
 		99B387621C82FAA2005B4D8C /* STSetPostLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386381C82FAA2005B4D8C /* STSetPostLikeRequest.m */; };
-		99B387631C82FAA2005B4D8C /* STSetPostSeenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3863A1C82FAA2005B4D8C /* STSetPostSeenRequest.m */; };
 		99B387641C82FAA2005B4D8C /* STSetUserLocationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3863C1C82FAA2005B4D8C /* STSetUserLocationRequest.m */; };
 		99B387651C82FAA2005B4D8C /* STSetUserSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3863E1C82FAA2005B4D8C /* STSetUserSettingsRequest.m */; };
 		99B387661C82FAA2005B4D8C /* STSyncContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386401C82FAA2005B4D8C /* STSyncContactsRequest.m */; };
 		99B387671C82FAA2005B4D8C /* STUnfollowUsersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386421C82FAA2005B4D8C /* STUnfollowUsersRequest.m */; };
 		99B387681C82FAA2005B4D8C /* STUnseenPostsCountRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386441C82FAA2005B4D8C /* STUnseenPostsCountRequest.m */; };
-		99B387691C82FAA2005B4D8C /* STUpdatePostCaptionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386461C82FAA2005B4D8C /* STUpdatePostCaptionRequest.m */; };
 		99B3876A1C82FAA2005B4D8C /* STUpdateUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386481C82FAA2005B4D8C /* STUpdateUserProfileRequest.m */; };
 		99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3864A1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m */; };
 		99B3876C1C82FAA2005B4D8C /* STUploadPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3864C1C82FAA2005B4D8C /* STUploadPostRequest.m */; };
@@ -617,8 +615,6 @@
 		99B386361C82FAA2005B4D8C /* STSetAPNTokenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetAPNTokenRequest.m; sourceTree = "<group>"; };
 		99B386371C82FAA2005B4D8C /* STSetPostLikeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetPostLikeRequest.h; sourceTree = "<group>"; };
 		99B386381C82FAA2005B4D8C /* STSetPostLikeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetPostLikeRequest.m; sourceTree = "<group>"; };
-		99B386391C82FAA2005B4D8C /* STSetPostSeenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetPostSeenRequest.h; sourceTree = "<group>"; };
-		99B3863A1C82FAA2005B4D8C /* STSetPostSeenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetPostSeenRequest.m; sourceTree = "<group>"; };
 		99B3863B1C82FAA2005B4D8C /* STSetUserLocationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetUserLocationRequest.h; sourceTree = "<group>"; };
 		99B3863C1C82FAA2005B4D8C /* STSetUserLocationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetUserLocationRequest.m; sourceTree = "<group>"; };
 		99B3863D1C82FAA2005B4D8C /* STSetUserSettingsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetUserSettingsRequest.h; sourceTree = "<group>"; };
@@ -629,8 +625,6 @@
 		99B386421C82FAA2005B4D8C /* STUnfollowUsersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUnfollowUsersRequest.m; sourceTree = "<group>"; };
 		99B386431C82FAA2005B4D8C /* STUnseenPostsCountRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUnseenPostsCountRequest.h; sourceTree = "<group>"; };
 		99B386441C82FAA2005B4D8C /* STUnseenPostsCountRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUnseenPostsCountRequest.m; sourceTree = "<group>"; };
-		99B386451C82FAA2005B4D8C /* STUpdatePostCaptionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdatePostCaptionRequest.h; sourceTree = "<group>"; };
-		99B386461C82FAA2005B4D8C /* STUpdatePostCaptionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdatePostCaptionRequest.m; sourceTree = "<group>"; };
 		99B386471C82FAA2005B4D8C /* STUpdateUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateUserProfileRequest.h; sourceTree = "<group>"; };
 		99B386481C82FAA2005B4D8C /* STUpdateUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateUserProfileRequest.m; sourceTree = "<group>"; };
 		99B386491C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUploadNewProfilePictureRequest.h; sourceTree = "<group>"; };
@@ -1321,8 +1315,6 @@
 				99B386361C82FAA2005B4D8C /* STSetAPNTokenRequest.m */,
 				99B386371C82FAA2005B4D8C /* STSetPostLikeRequest.h */,
 				99B386381C82FAA2005B4D8C /* STSetPostLikeRequest.m */,
-				99B386391C82FAA2005B4D8C /* STSetPostSeenRequest.h */,
-				99B3863A1C82FAA2005B4D8C /* STSetPostSeenRequest.m */,
 				99B3863B1C82FAA2005B4D8C /* STSetUserLocationRequest.h */,
 				99B3863C1C82FAA2005B4D8C /* STSetUserLocationRequest.m */,
 				99B3863D1C82FAA2005B4D8C /* STSetUserSettingsRequest.h */,
@@ -1333,8 +1325,6 @@
 				99B386421C82FAA2005B4D8C /* STUnfollowUsersRequest.m */,
 				99B386431C82FAA2005B4D8C /* STUnseenPostsCountRequest.h */,
 				99B386441C82FAA2005B4D8C /* STUnseenPostsCountRequest.m */,
-				99B386451C82FAA2005B4D8C /* STUpdatePostCaptionRequest.h */,
-				99B386461C82FAA2005B4D8C /* STUpdatePostCaptionRequest.m */,
 				99B386471C82FAA2005B4D8C /* STUpdateUserProfileRequest.h */,
 				99B386481C82FAA2005B4D8C /* STUpdateUserProfileRequest.m */,
 				99B386491C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.h */,
@@ -2108,7 +2098,6 @@
 				99B387501C82FAA2005B4D8C /* STGetNearbyProfilesRequest.m in Sources */,
 				070DFA0D1F15FA360002357B /* STEarningsViewController.m in Sources */,
 				99B387731C82FAA2005B4D8C /* STDataAccessUtils.m in Sources */,
-				99B387631C82FAA2005B4D8C /* STSetPostSeenRequest.m in Sources */,
 				170912491DF882DC00B2AF81 /* STPostDetailsCell.m in Sources */,
 				99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */,
 				17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */,
@@ -2141,7 +2130,6 @@
 				99B387761C82FAA2005B4D8C /* STIAPHelper.m in Sources */,
 				1709124A1DF882DC00B2AF81 /* STPostHeader.m in Sources */,
 				99B3874B1C82FAA2005B4D8C /* STFlowImagesRequest.m in Sources */,
-				99B387691C82FAA2005B4D8C /* STUpdatePostCaptionRequest.m in Sources */,
 				077811591EB7126B0043A2E8 /* STTagCategoryCell.m in Sources */,
 				99B387811C82FAA2005B4D8C /* STCoreDataManager.m in Sources */,
 				99B387891C82FAA2005B4D8C /* STUserProfile.m in Sources */,

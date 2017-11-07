@@ -12,7 +12,6 @@
 #import "STFacebookLoginController.h"
 #import "STConstants.h"
 #import "STFacebookHelper.h"
-#import "STUpdatePostCaptionRequest.h"
 
 #import "STUploadPostRequest.h"
 #import "UIImage+Resize.h"

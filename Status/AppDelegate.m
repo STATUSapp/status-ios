@@ -165,6 +165,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    NSLog(@"NetworkQueueStstus: %@",[[CoreManager networkService] debugDescription]);
     //save the resume date
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:[NSDate date] forKey:@"RESUME_DATE"];

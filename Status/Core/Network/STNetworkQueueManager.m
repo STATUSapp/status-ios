@@ -16,6 +16,12 @@
 #import "STNetworkManager.h"
 #import "KeychainItemWrapper.h"
 
+#ifdef DEBUG
+    #define TEST_HIT_REQUESTS 1
+#else
+    #define TEST_HIT_REQUESTS 0
+#endif
+
 @interface STNetworkQueueManager() {
     AFNetworkReachabilityManager* _reachabilityManager;
 }
@@ -25,7 +31,10 @@
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) STNetworkManager *networkAPI;
 @property (nonatomic, strong) KeychainItemWrapper *keychain;
-
+#if TEST_HIT_REQUESTS
+@property (nonatomic, strong) NSMutableDictionary *hitAPIs;
+@property (nonatomic, strong) NSMutableDictionary *errorAPIs;
+#endif
 @end
 
 @implementation STNetworkQueueManager
@@ -38,6 +47,11 @@
         _keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
 
         [self loadTokenFromKeyChain];
+        
+#if TEST_HIT_REQUESTS
+        _hitAPIs =[@{} mutableCopy];
+        _errorAPIs =[@{} mutableCopy];
+#endif
     }
     return self;
 }
@@ -179,12 +193,24 @@
 #pragma mark - Network handlers
 
 - (void)requestDidSucceed:(STBaseRequest*)request{
+#if TEST_HIT_REQUESTS
+    NSString *key = [request urlString];
+    if (![_hitAPIs valueForKey:key]) {
+        [_hitAPIs setValue:@"OK" forKey:key];
+    }
+#endif
     [_requestQueue removeObject:request];
     [self startDownload];
     [self addOrHideActivity];
 }
 
 - (void)request:(STBaseRequest*)request didFailWithError:(NSError*)error{
+#if TEST_HIT_REQUESTS
+    NSString *key = [request urlString];
+    if (![_errorAPIs valueForKey:key]) {
+        [_errorAPIs setValue:[NSString stringWithFormat:@"Error: %@", error] forKey:key];
+    }
+#endif
     [_requestQueue removeObject:request];
     
     if (request.shouldAddToQueue)
@@ -216,4 +242,13 @@
     _accessToken = nil;
 }
 
+
+-(NSString *)debugDescription{
+#if TEST_HIT_REQUESTS
+    NSLog(@"TEST REQUESTS\nSUCCESS REQUESTS (%@) \n%@", @([_hitAPIs.allKeys count]), [_hitAPIs allKeys]);
+    NSLog(@"TEST REQUESTS\nERROR REQUESTS (%@) \n%@", @([_errorAPIs.allKeys count]), [_errorAPIs allKeys]);
+
+#endif
+    return @"No debug desctiption provided";
+}
 @end

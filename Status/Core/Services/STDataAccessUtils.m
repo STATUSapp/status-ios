@@ -501,20 +501,6 @@
                                     failure:failBlock];
 }
 
-+(void)setPostSeenForPostId:(NSString *)postId
-      withCompletion:(STDataUploadCompletionBlock)completion{
-    [STSetPostSeenRequest setPostSeen:postId
-                       withCompletion:^(id response, NSError *error) {
-                           if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-                               completion(nil);
-                           }
-                           else
-                               completion([NSError errorWithDomain:@"INTERNAL_ERROR" code:110011 userInfo:nil]);
-                       } failure:^(NSError *error) {
-                           completion(error);
-                       }];
-}
-
 + (void)setPostLikeUnlikeWithPostId:(NSString *)postId
                      withCompletion:(STDataUploadCompletionBlock)completion{
     STRequestCompletionBlock completion1 = ^(id response, NSError *error){
@@ -592,28 +578,6 @@
     [STRepostPostRequest reportPostWithId:postId
                            withCompletion:completion1
                                   failure:failBlock];
-
-}
-
-+ (void)updatePostWithId:(NSString *)postId
-          withNewCaption:(NSString *)newCaption
-          withCompletion:(STDataUploadCompletionBlock)completion{
-    [STUpdatePostCaptionRequest setPostCaption:newCaption
-                                     forPostId:postId
-                                withCompletion:^(id response, NSError *error) {
-                                    if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                                        STPost *post = [[CoreManager postsPool] getPostWithId:postId];
-                                        post.caption = newCaption;
-                                        [[CoreManager postsPool] addPosts:@[post]];
-                                        completion(nil);
-                                    }
-                                    else{
-                                        completion([NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
-                                    }
-                                } failure:^(NSError *error) {
-                                    NSLog(@"Error: %@", error.debugDescription);
-                                    completion(error);
-                                }];
 
 }
 

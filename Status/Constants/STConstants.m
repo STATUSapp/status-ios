@@ -50,7 +50,6 @@ NSInteger const kCatalogDownloadPageSize = 50;
 
 NSString *const kSTAdUnitID = @"ca-app-pub-2971682460090432/5255730305";
 
-//NSString *const kGetPosts = @"get_posts2";
 NSString *const kGetPosts = @"get_posts";
 NSString *const kGetHomePosts = @"Get_Home_Posts";
 NSString *const kGetRecentPosts = @"Get_Recent_Posts";
@@ -58,11 +57,9 @@ NSString *const kLoginUser = @"login_user";
 NSString *const kRegisterUser = @"register_user";
 NSString *const kPostPhoto = @"post_photo";
 NSString *const kUpdatePost = @"update_photo";
-NSString *const kUpdatePhotoCaption = @"set_post_caption";
 NSString *const kSetPostLiked = @"set_post_like_unlike";
 NSString *const kReport_Post = @"report_post";
 NSString *const kGetUserPosts = @"get_user_posts";
-NSString *const kSetPostSeen = @"set_post_seen";
 NSString *const kGetPostLikes = @"get_post_likes";
 NSString *const kSetApnToken = @"set_apn_token";
 NSString *const kGetPost = @"get_post";

@@ -68,16 +68,11 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
          withCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload post stuff
-+(void)setPostSeenForPostId:(NSString *)postId
-             withCompletion:(STDataUploadCompletionBlock)completion;
 + (void)setPostLikeUnlikeWithPostId:(NSString *)postId
                      withCompletion:(STDataUploadCompletionBlock)completion;
 + (void)deletePostWithId:(NSString *)postId
           withCompletion:(STDataUploadCompletionBlock)completion;
 + (void)reportPostWithId:(NSString *)postId
-          withCompletion:(STDataUploadCompletionBlock)completion;
-+ (void)updatePostWithId:(NSString *)postId
-          withNewCaption:(NSString *)newCaption
           withCompletion:(STDataUploadCompletionBlock)completion;
 + (void)inviteUserToUpload:(NSString *)userID
               withUserName:(NSString *)userName
