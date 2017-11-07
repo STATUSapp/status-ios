@@ -101,11 +101,11 @@
     if ([appDel.window.rootViewController isKindOfClass:[STLoginViewController class]]) {
         return;
     }
-    
+    //dismiss the settings view presented
+    [appDel.window.rootViewController dismissViewControllerAnimated:NO completion:nil];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
     STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
     [appDel.window setRootViewController:viewController];
-    
 }
 
 - (void)presentTabBarController{
