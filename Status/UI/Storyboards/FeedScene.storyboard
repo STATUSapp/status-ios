@@ -626,7 +626,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tonight's #ootd for a Friday few beers. Hope you all have wonderfull weekend!! #excited #happy #fashion #inspiration" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66Q-V1-oBu">
-                                                    <rect key="frame" x="16" y="48" width="300" height="45.5"/>
+                                                    <rect key="frame" x="16" y="48" width="300" height="39"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                                     <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
