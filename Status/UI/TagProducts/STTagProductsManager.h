@@ -62,4 +62,5 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
 -(void)downloadRootCategoryNextPage:(STCatalogParentCategory *)rootCatgory;
 
 -(void)searchProductWithBarcodeString:(NSString *)barcode;
+-(void)resetLastScannedBarcode;
 @end

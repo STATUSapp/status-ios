@@ -17,15 +17,16 @@
 }
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
+@property (nonatomic, assign) STTagSuggestionsScreenType screenType;
 @property (nonatomic, strong) NSArray <STShopProduct*>* products;
 @end
 
 @implementation STTagSuggestions
 
-+(STTagSuggestions *)suggestionsVCWithDelegate:(id<STTagSuggestionsProtocol>)delegate{
++(STTagSuggestions *)suggestionsVCWithScreenType:(STTagSuggestionsScreenType)screenType{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TagProductsScene" bundle:nil];
     STTagSuggestions *vc = [storyboard instantiateViewControllerWithIdentifier:@"TAG_SUGGESTIONS_VC"];
-    vc.delegate = delegate;
+    vc.screenType = screenType;
     return vc;
 }
 
@@ -56,6 +57,10 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     productsVC = (STTagProductsViewController *)segue.destinationViewController;
     productsVC.delegate  = self;
+    //load search results if needed
+    if (_screenType == STTagSuggestionsScreenTypeBarcodeSearch) {
+        _products = [STTagProductsManager sharedInstance].searchResult;
+    }
     [productsVC updateProducts:_products];
 }
 
@@ -73,7 +78,11 @@
             [productsVC updateProducts:_products];
         }
             break;
-            
+        case STTagManagerEventSearchProducts:
+        {
+            _products = [STTagProductsManager sharedInstance].searchResult;
+            [productsVC updateProducts:_products];
+        }
         default:
             break;
     }
@@ -98,7 +107,9 @@
 }
 
 -(void)productsShouldDownloadNextPage{
-    [[STTagProductsManager sharedInstance] downloadCategoryAndBrandNextPage];
+    if (_screenType == STTagSuggestionsScreenTypeDefault) {
+        [[STTagProductsManager sharedInstance] downloadCategoryAndBrandNextPage];
+    }
 }
 
 @end

@@ -8,16 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "STWhiteNavBarViewController.h"
-
-@protocol STTagSuggestionsProtocol <NSObject>
-
--(void)categoryAndBrandProductsShouldDownloadNextPage;
-
-@end
-
+typedef NS_ENUM(NSUInteger, STTagSuggestionsScreenType) {
+    STTagSuggestionsScreenTypeDefault = 0,//based on brand and category
+    STTagSuggestionsScreenTypeBarcodeSearch,
+};
 @interface STTagSuggestions : STWhiteNavBarViewController
 
-@property (nonatomic, strong) id<STTagSuggestionsProtocol>delegate;
-+(STTagSuggestions *)suggestionsVCWithDelegate:(id<STTagSuggestionsProtocol>)delegate;
++(STTagSuggestions *)suggestionsVCWithScreenType:(STTagSuggestionsScreenType)screenType;
 
 @end

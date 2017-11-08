@@ -106,7 +106,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     STBrandObj *brand = _brandArray[indexPath.item];
     [[STTagProductsManager sharedInstance] updateBrand:brand];
-    STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithDelegate:_delegate];
+    STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeDefault];
     
     [self.navigationController pushViewController:vc animated:YES];
 }

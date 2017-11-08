@@ -479,11 +479,11 @@
                         <viewControllerLayoutGuide type="bottom" id="NDb-7L-h7K"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dJK-cq-XTk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="32k-AD-DXw">
-                                <rect key="frame" x="6" y="26" width="363" height="587"/>
+                                <rect key="frame" x="6" y="26" width="363" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="efW-ht-mUr">
                                     <size key="itemSize" width="172" height="156"/>
@@ -517,7 +517,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhA-1F-dCp">
-                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="555" width="375" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="29W-QJ-S5j"/>
                                 </constraints>
@@ -835,6 +835,7 @@ by using one of the following methods:</string>
                             <outlet property="delegate" destination="o3R-q9-lla" id="KXZ-tu-mia"/>
                         </connections>
                     </tableView>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="500"/>
                     <connections>
                         <outlet property="brandNameField" destination="dvl-2y-wjs" id="j8n-7X-G9e"/>
@@ -894,6 +895,7 @@ by using one of the following methods:</string>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="sendButton" destination="nU9-Bs-z3f" id="Bxy-rc-Ojl"/>
+                        <outlet property="sendButtonHeightConstr" destination="t4c-dE-blf" id="LPX-us-9SE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jJo-fl-Bx6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1330,7 +1332,7 @@ by using one of the following methods:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ef-hn-iLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="-447"/>
+            <point key="canvasLocation" x="1924" y="-431"/>
         </scene>
         <!--Barcode-->
         <scene sceneID="GRH-tf-LQR">
@@ -1377,6 +1379,6 @@ by using one of the following methods:</string>
         <image name="wizard icon upressed" width="43" height="43"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oFg-hz-UH8"/>
+        <segue reference="TqO-HL-zhL"/>
     </inferredMetricsTieBreakers>
 </document>

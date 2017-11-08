@@ -22,6 +22,7 @@
 #import "STBarcodeScannerViewController.h"
 #import "STMissingProductViewController.h"
 #import "STTabBarViewController.h"
+#import "STTagSuggestions.h"
 
 typedef NS_ENUM(NSUInteger, STContainerSelection) {
     STContainerSelectionBarcode,
@@ -154,13 +155,8 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
         case STTagManagerEventSearchProducts:
         {
             if ([[[STTagProductsManager sharedInstance] searchResult] count] > 0) {
-                _barcodeState = STBarcodeScanStateProductFound;
-                [_containerViewController swapToSegue:kSegueProducts];
-                STTagProductsViewController *vc = (STTagProductsViewController *)[_containerViewController currentVC];
-                NSArray *products = [[STTagProductsManager sharedInstance] searchResult];
-                vc.delegate = self;
-                [vc updateProducts:products];
-
+                STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeBarcodeSearch];
+                [self.navigationController pushViewController:vc animated:YES];
             }else{
                 //go to empty search result
                 _barcodeState = STBarcodeScanStateProductNotFound;
@@ -186,6 +182,17 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
             [_containerViewController swapToSegue:kSegueBarcode];
             STBarcodeScannerViewController *vc = (STBarcodeScannerViewController *)_containerViewController.currentVC;
             vc.delegate = self;
+        }else if (_barcodeState == STBarcodeScanStateProductNotFound){
+            _segmentHeightConstr.constant = 0.f;
+            [_containerViewController swapToSegue:kSegueMissing];
+            STMissingProductViewController *vc = (STMissingProductViewController *)_containerViewController.currentVC;
+            vc.delegate = self;
+        }else if (_barcodeState == STBarcodeScanStateProductFound){
+            [_containerViewController swapToSegue:kSegueProducts];
+            STTagProductsViewController *vc = (STTagProductsViewController *)[_containerViewController currentVC];
+            NSArray *products = [[STTagProductsManager sharedInstance] searchResult];
+            vc.delegate = self;
+            [vc updateProducts:products];
         }
     }
     else if (_selectionType == STContainerSelectionManual) {

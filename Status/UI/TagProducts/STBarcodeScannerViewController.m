@@ -8,6 +8,7 @@
 
 #import "STBarcodeScannerViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "STTagProductsManager.h"
 
 NSInteger const verificationCount = 3;
 
@@ -26,6 +27,10 @@ NSInteger const verificationCount = 3;
     return YES;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[STTagProductsManager sharedInstance] resetLastScannedBarcode];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];

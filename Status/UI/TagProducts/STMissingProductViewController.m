@@ -9,10 +9,13 @@
 #import "STMissingProductViewController.h"
 #import "STMissingProductTVCTableViewController.h"
 
+CGFloat const kDefaultSendButtonHeight = 48.f;
+
 @interface STMissingProductViewController ()<STProductNotIndexedTVCProtocol>
 
 @property (nonatomic, strong) STMissingProductTVCTableViewController *childTVC;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendButtonHeightConstr;
 
 @end
 
@@ -38,9 +41,11 @@
     NSString *brandName = [_childTVC brandName];
     NSString *productName = [_childTVC productName];
     NSString *storeUrl = [_childTVC productURL];
-    _sendButton.hidden = !(brandName.length > 0 &&
-                          productName.length > 0 &&
-                          storeUrl.length > 0);
+    BOOL shouldHideSendButton = !(brandName.length > 0 &&
+                                  productName.length > 0 &&
+                                  storeUrl.length > 0);
+    _sendButton.hidden = shouldHideSendButton;
+    _sendButtonHeightConstr.constant = shouldHideSendButton ? 0.f : kDefaultSendButtonHeight;
 }
 
 #pragma mark - Navigation
