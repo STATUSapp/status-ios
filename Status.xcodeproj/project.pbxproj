@@ -12,6 +12,7 @@
 		070DFA0D1F15FA360002357B /* STEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070DFA0C1F15FA360002357B /* STEarningsViewController.m */; };
 		070DFA101F15FB880002357B /* STWithDrawDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070DFA0F1F15FB880002357B /* STWithDrawDetailsViewController.m */; };
 		070F9F3818E2DB9D008556AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F9F3718E2DB9D008556AB /* Security.framework */; };
+		0717659F1FB4C70E00873728 /* STAdPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717659E1FB4C70E00873728 /* STAdPost.m */; };
 		071CA92D1F1FD34300434ABB /* STIndexPathTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 071CA92C1F1FD34300434ABB /* STIndexPathTextField.m */; };
 		071D515F1F195C1E0011ACF3 /* STEarningsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D515E1F195C1E0011ACF3 /* STEarningsCell.m */; };
 		071DDCB31F18976A00D2DE89 /* STNoEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071DDCB21F18976A00D2DE89 /* STNoEarningsViewController.m */; };
@@ -52,6 +53,8 @@
 		077811591EB7126B0043A2E8 /* STTagCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 077811581EB7126B0043A2E8 /* STTagCategoryCell.m */; };
 		0778115C1EB75BBE0043A2E8 /* STTagProductsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */; };
 		07B053F11EDE867F0045AD7B /* NSString+Links.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B053F01EDE867F0045AD7B /* NSString+Links.m */; };
+		07B300021FB44331009316A2 /* STFacebookAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B300011FB44331009316A2 /* STFacebookAdModel.m */; };
+		07B3FFFF1FB43E0A009316A2 /* STFacebookAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B3FFFE1FB43E0A009316A2 /* STFacebookAddCell.m */; };
 		07D03F581F00D27F00B5A3B8 /* STDeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D03F571F00D27F00B5A3B8 /* STDeepLinkService.m */; };
 		08F88F3E9A6987DC111E6745 /* libPods-Status.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9F74085E81B30D0D32BB3C /* libPods-Status.a */; };
 		170911F91DF87F0400B2AF81 /* NearbyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F41DF87F0400B2AF81 /* NearbyVC.m */; };
@@ -304,6 +307,8 @@
 		070DFA0E1F15FB880002357B /* STWithDrawDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWithDrawDetailsViewController.h; sourceTree = "<group>"; };
 		070DFA0F1F15FB880002357B /* STWithDrawDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWithDrawDetailsViewController.m; sourceTree = "<group>"; };
 		070F9F3718E2DB9D008556AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0717659D1FB4C70E00873728 /* STAdPost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAdPost.h; sourceTree = "<group>"; };
+		0717659E1FB4C70E00873728 /* STAdPost.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STAdPost.m; sourceTree = "<group>"; };
 		071CA92B1F1FD34300434ABB /* STIndexPathTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIndexPathTextField.h; sourceTree = "<group>"; };
 		071CA92C1F1FD34300434ABB /* STIndexPathTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIndexPathTextField.m; sourceTree = "<group>"; };
 		071D515D1F195C1E0011ACF3 /* STEarningsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEarningsCell.h; sourceTree = "<group>"; };
@@ -380,6 +385,10 @@
 		0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsManager.m; sourceTree = "<group>"; };
 		07B053EF1EDE867F0045AD7B /* NSString+Links.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Links.h"; sourceTree = "<group>"; };
 		07B053F01EDE867F0045AD7B /* NSString+Links.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Links.m"; sourceTree = "<group>"; };
+		07B300001FB44331009316A2 /* STFacebookAdModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFacebookAdModel.h; sourceTree = "<group>"; };
+		07B300011FB44331009316A2 /* STFacebookAdModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFacebookAdModel.m; sourceTree = "<group>"; };
+		07B3FFFD1FB43E0A009316A2 /* STFacebookAddCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFacebookAddCell.h; sourceTree = "<group>"; };
+		07B3FFFE1FB43E0A009316A2 /* STFacebookAddCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFacebookAddCell.m; sourceTree = "<group>"; };
 		07D03F561F00D27F00B5A3B8 /* STDeepLinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDeepLinkService.h; sourceTree = "<group>"; };
 		07D03F571F00D27F00B5A3B8 /* STDeepLinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDeepLinkService.m; sourceTree = "<group>"; };
 		170911F31DF87F0400B2AF81 /* NearbyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyVC.h; sourceTree = "<group>"; };
@@ -950,6 +959,15 @@
 			path = cells;
 			sourceTree = "<group>";
 		};
+		07B3FFFC1FB43DED009316A2 /* FacebookAd */ = {
+			isa = PBXGroup;
+			children = (
+				07B3FFFD1FB43E0A009316A2 /* STFacebookAddCell.h */,
+				07B3FFFE1FB43E0A009316A2 /* STFacebookAddCell.m */,
+			);
+			path = FacebookAd;
+			sourceTree = "<group>";
+		};
 		170911F21DF87F0400B2AF81 /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
@@ -1167,6 +1185,7 @@
 			children = (
 				1709123E1DF882DC00B2AF81 /* PostCells */,
 				1709122E1DF8827100B2AF81 /* UserProfileCells */,
+				07B3FFFC1FB43DED009316A2 /* FacebookAd */,
 				2AD97BB01C8C143300C9B3D5 /* FeedCVC.h */,
 				2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */,
 			);
@@ -1458,6 +1477,8 @@
 				99B3868C1C82FAA2005B4D8C /* STUserProfile.m */,
 				2A6D7EAE1C82FEDC00F65026 /* STPost.h */,
 				2A6D7EAF1C82FEDC00F65026 /* STPost.m */,
+				0717659D1FB4C70E00873728 /* STAdPost.h */,
+				0717659E1FB4C70E00873728 /* STAdPost.m */,
 				1787A74A1DBDD7AD006B79D4 /* STShopProduct.h */,
 				1787A74B1DBDD7AD006B79D4 /* STShopProduct.m */,
 				173A29521CA04B3E00157945 /* STNotificationObj.h */,
@@ -1472,6 +1493,8 @@
 				0722F3481F0CB8B600B78823 /* STCommission.m */,
 				070ABB171F11337000CAD9C1 /* STWithdrawDetailsObj.h */,
 				070ABB181F11337000CAD9C1 /* STWithdrawDetailsObj.m */,
+				07B300001FB44331009316A2 /* STFacebookAdModel.h */,
+				07B300011FB44331009316A2 /* STFacebookAdModel.m */,
 			);
 			path = DataModelObjects;
 			sourceTree = "<group>";
@@ -2098,6 +2121,7 @@
 				99B387501C82FAA2005B4D8C /* STGetNearbyProfilesRequest.m in Sources */,
 				070DFA0D1F15FA360002357B /* STEarningsViewController.m in Sources */,
 				99B387731C82FAA2005B4D8C /* STDataAccessUtils.m in Sources */,
+				07B3FFFF1FB43E0A009316A2 /* STFacebookAddCell.m in Sources */,
 				170912491DF882DC00B2AF81 /* STPostDetailsCell.m in Sources */,
 				99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */,
 				17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */,
@@ -2106,6 +2130,7 @@
 				99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */,
 				071DDCB31F18976A00D2DE89 /* STNoEarningsViewController.m in Sources */,
 				0722BEA21EBCEFFF00BE8CC2 /* STTagProductsViewController.m in Sources */,
+				0717659F1FB4C70E00873728 /* STAdPost.m in Sources */,
 				99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */,
 				52DC4DC91C8D53E30064F23F /* STImagePickerService.m in Sources */,
 				99B387DF1C82FAA2005B4D8C /* STEditProfileViewController.m in Sources */,
@@ -2236,6 +2261,7 @@
 				99B387461C82FAA2005B4D8C /* UIImage+RoundedCorner.m in Sources */,
 				072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */,
 				075C52A51EBF4F9200174CC5 /* STTagManualViewController.m in Sources */,
+				07B300021FB44331009316A2 /* STFacebookAdModel.m in Sources */,
 				170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */,
 				99B387401C82FAA2005B4D8C /* NSString+MD5.m in Sources */,
 				99B387721C82FAA2005B4D8C /* STContactsManager.m in Sources */,

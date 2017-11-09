@@ -638,7 +638,7 @@
                                                             <rect key="frame" x="133" y="0.0" width="129" height="181"/>
                                                             <subviews>
                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mge-qg-Y1j">
-                                                                    <rect key="frame" x="3.5" y="8" width="125.5" height="153"/>
+                                                                    <rect key="frame" x="0.0" y="8" width="129" height="153"/>
                                                                     <state key="normal" backgroundImage="upload product photo frame "/>
                                                                     <connections>
                                                                         <action selector="uploadImagePressed:" destination="8FJ-jk-rt9" eventType="touchUpInside" id="kJz-46-Tlo"/>
@@ -652,7 +652,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload product photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1Y-yP-eUE">
-                                                                    <rect key="frame" x="3.5" y="99" width="125.5" height="32"/>
+                                                                    <rect key="frame" x="0.0" y="99" width="129" height="32"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="32" id="bCd-G7-1Us"/>
                                                                     </constraints>

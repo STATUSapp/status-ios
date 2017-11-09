@@ -20,6 +20,7 @@
 #import "STNavigationService.h"
 
 #import "STImageCacheObj.h"
+#import "STAdPost.h"
 
 #define SET_POST_AS_SEEN 0
 
@@ -41,6 +42,8 @@ NSString * const kTimeframeAllTime = @"all";
 
 NSString * const kGenderWomen = @"female";
 NSString * const kGenderMen = @"male";
+
+NSInteger const kFacebookAdsTimeframe = 3;
 
 @interface STFlowProcessor ()
 {
@@ -153,7 +156,7 @@ NSString * const kGenderMen = @"male";
     if (_flowType == STFlowTypeSinglePost)
         return;
     
-    __block STPost *post = [self objectAtIndex:index];
+//    __block STPost *post = [self objectAtIndex:index];
     
 //    __weak STFlowProcessor *weakSelf = self;
     
@@ -266,6 +269,33 @@ NSString * const kGenderMen = @"male";
 
 - (NSString *)userId{
     return _userId;
+}
+
+-(NSInteger)getLastAdPostIndex{
+    STPost *post;
+    NSInteger index = _objectIds.count - 1;
+    while (!post && index >0) {
+        STPost *currentPost = [self objectAtIndex:index];
+        if ([currentPost isAdPost]) {
+            post = currentPost;
+        }else{
+            index --;
+        }
+    }
+    return index;
+}
+
+-(void)addFacebookAdsToArray{
+    NSInteger startIndex = [self getLastAdPostIndex];
+    NSInteger allObjectsCount = [_objectIds count];
+    NSInteger nextIndex = startIndex + kFacebookAdsTimeframe;
+    while (nextIndex < allObjectsCount) {
+        STAdPost *adPost = [STAdPost new];
+        [_objectIds insertObject:adPost.uuid atIndex:nextIndex];
+        [self addObjectsToObjectPool:@[adPost]];
+        nextIndex = nextIndex + kFacebookAdsTimeframe;
+        allObjectsCount ++;
+    }
 }
 #pragma mark - Actions
 
@@ -513,6 +543,7 @@ NSString * const kGenderMen = @"male";
             if (!_noMoreObjectsToDownload) {
                 [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
                 [weakSelf addObjectsToObjectPool:objects];
+                [weakSelf addFacebookAdsToArray];
             }
 
         }

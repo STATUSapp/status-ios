@@ -51,6 +51,7 @@
 
 #import "STEarningsViewController.h"
 #import <Photos/Photos.h>
+#import "STFacebookAddCell.h"
 
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
@@ -117,6 +118,7 @@ static NSString * const profileFriendsInfoCell = @"UserProfileFriendsInfoCell";
 static NSString * const profileBioCell = @"UserProfileBioCell";
 static NSString * const profileLocationCell = @"UserProfileLocationCell";
 static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
+static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (void)configureNavigationBar{
     UIViewController *currentViewController = [self.navigationController.viewControllers lastObject];
@@ -589,6 +591,18 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     }
 }
 
+-(BOOL)isAdPostAtSection:(NSInteger)section{
+    NSInteger sectionIndex = section;
+    if ([_feedProcessor processorIsAGallery] && sectionIndex > 0) {
+        //substract the first section because this is the user profile section
+        sectionIndex -- ;
+    }
+    STPost *post = [self.feedProcessor objectAtIndex:sectionIndex];
+    if ([post isAdPost]) {
+        return YES;
+    }
+    return NO;
+}
 -(NSInteger)numberOfSections{
     NSInteger sectionsCount = [_feedProcessor numberOfObjects];
     if ([_feedProcessor processorIsAGallery] && ![_feedProcessor loading]) {
@@ -607,10 +621,14 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    NSInteger numItems = STPostItemsCount;
+    NSInteger numItems = 0;
     
-    if ([_feedProcessor processorIsAGallery]) {
+    if ([_feedProcessor processorIsAGallery] && section == 0) {
         numItems = STProfileCount;
+    }else if (![self isAdPostAtSection:section]){
+        numItems = STPostItemsCount;
+    }else{
+        numItems = 1;
     }
     
     return numItems;
@@ -637,7 +655,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 
         }
     }
-    else
+    else if (![self isAdPostAtSection:indexPath.section])
     {
         switch (indexPath.row) {
             case STPostImage:
@@ -650,6 +668,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
                 return postShopCellIdentifier;
                 break;
         }
+    }else{
+        return adPostIdentifier;
     }
     
     NSAssert(YES, @"You should not be here");
@@ -700,7 +720,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         }
 
     }
-    else{
+    else if (![self isAdPostAtSection:indexPath.section]){
         NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
         STPost *post = [_feedProcessor objectAtIndex:sectionIndex];
         
@@ -722,6 +742,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
             }
                 break;
         }
+    }else{
+        NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+        STAdPost *adPost = [_feedProcessor objectAtIndex:sectionIndex];
+        [STFacebookAddCell cellSizeWithAdPost:adPost];
     }
     
     return CGSizeZero;
@@ -732,6 +756,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         
         if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
+            return nil;
+        }else if ([self isAdPostAtSection:indexPath.section]){
             return nil;
         }
         
@@ -749,6 +775,8 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
 
     if ([_feedProcessor processorIsAGallery] && section == 0) {
+        return CGSizeZero;
+    }else if ([self isAdPostAtSection:section]){
         return CGSizeZero;
     }
     return [STPostHeader headerSize];
@@ -805,6 +833,10 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
         [((UserProfileNoPhotosCell *)cell).uploadPhotoButton setTitle:title forState:UIControlStateNormal];
         [((UserProfileNoPhotosCell *)cell).uploadPhotoButton setTitle:title forState:UIControlStateSelected];
         
+    }else if ([cell isKindOfClass:[STFacebookAddCell class]]){
+        NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+        STAdPost *adPost = [_feedProcessor objectAtIndex:sectionIndex];
+        [(STFacebookAddCell *)cell configureWithAdPost:adPost];
     }
 
     return cell;

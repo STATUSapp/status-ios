@@ -107,4 +107,8 @@
 
 }
 
+-(BOOL)isAdPost{
+    return NO;
+}
+
 @end

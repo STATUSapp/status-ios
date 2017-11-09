@@ -27,4 +27,6 @@
 //local added properties
 @property (nonatomic, assign) BOOL showFullCaption;
 @property (nonatomic, assign) BOOL showShopProducts;
+
+-(BOOL)isAdPost;
 @end
