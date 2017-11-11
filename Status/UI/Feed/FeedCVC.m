@@ -50,6 +50,7 @@
 #import "STNavigationService.h"
 
 #import "STEarningsViewController.h"
+#import <Photos/Photos.h>
 
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
@@ -86,11 +87,11 @@ CGFloat const kTopButtonSize = 48.f;
     STScrollDirection _scrollingDirection;
     CGPoint _lastPanPoint;
     CGPoint _initialStartPoint;
-    NSInteger postForContextIndex;
 }
 
 @property (nonatomic, strong, readwrite) STFlowProcessor *feedProcessor;
 @property (nonatomic, strong) STFollowDataProcessor *followProcessor;
+@property (nonatomic, assign) NSInteger postForContextIndex;
 
 @property (nonatomic, strong) NSString *userName;
 
@@ -918,7 +919,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
     if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
         extendedRights = YES;
     }
-    postForContextIndex = [self getCurrentIndexForButton:sender];
+    _postForContextIndex = [self getCurrentIndexForButton:sender];
     [STContextualMenu presentViewWithDelegate:self
                          withExtendedRights:extendedRights];
 }
@@ -1110,25 +1111,25 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 -(void)contextualMenuCopyShareUrl{
-    STPost *post = [_feedProcessor objectAtIndex:postForContextIndex];
-    postForContextIndex = 0;
+    STPost *post = [_feedProcessor objectAtIndex:_postForContextIndex];
+    _postForContextIndex = 0;
     NSString *shareUrl = post.shareShortUrl;
     [self addLinkToClipboard:shareUrl];
 }
 
 -(void)contextualMenuAskUserToUpload{
-    [_feedProcessor askUserToUploadAtIndex:postForContextIndex];
-    postForContextIndex = 0;
+    [_feedProcessor askUserToUploadAtIndex:_postForContextIndex];
+    _postForContextIndex = 0;
 }
 
 -(void)contextualMenuDeletePost{
-    [_feedProcessor deletePostAtIndex:postForContextIndex];
-    postForContextIndex = 0;
+    [_feedProcessor deletePostAtIndex:_postForContextIndex];
+    _postForContextIndex = 0;
 }
 
 -(void)contextualMenuEditPost{
-    STPost *post = [_feedProcessor objectAtIndex:postForContextIndex];
-    postForContextIndex = 0;
+    STPost *post = [_feedProcessor objectAtIndex:_postForContextIndex];
+    _postForContextIndex = 0;
     if (post.mainImageDownloaded == YES) {
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
             if (origImg!=nil) {
@@ -1146,18 +1147,36 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 }
 
 -(void)contextualMenuReportPost{
-    [_feedProcessor reportPostAtIndex:postForContextIndex];
-    postForContextIndex = 0;
+    [_feedProcessor reportPostAtIndex:_postForContextIndex];
+    _postForContextIndex = 0;
 }
 
 -(void)contextualMenuSavePostLocally{
-    [_feedProcessor savePostImageLocallyAtIndex:postForContextIndex];
-    postForContextIndex = 0;
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusAuthorized) {
+        [_feedProcessor savePostImageLocallyAtIndex:_postForContextIndex];
+        _postForContextIndex = 0;
+    }else if (status == PHAuthorizationStatusNotDetermined){
+        __weak FeedCVC *weakSelf = self;
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if (status == PHAuthorizationStatusAuthorized) {
+                [weakSelf.feedProcessor savePostImageLocallyAtIndex:weakSelf.postForContextIndex];
+                weakSelf.postForContextIndex = 0;
+            }else{
+                weakSelf.postForContextIndex = 0;
+            }
+        }];
+    }else{
+        _postForContextIndex = 0;
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"You have to allow STATUS to write photos from Privacy settings." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [[CoreManager navigationService] presentAlertController:alert];
+    }
 }
 
 -(void)contextualMenuSharePostonFacebook{
-    [_feedProcessor sharePostOnfacebokAtIndex:postForContextIndex];
-    postForContextIndex = 0;
+    [_feedProcessor sharePostOnfacebokAtIndex:_postForContextIndex];
+    _postForContextIndex = 0;
     
 }
 @end

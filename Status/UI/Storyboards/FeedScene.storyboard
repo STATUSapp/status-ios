@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +26,7 @@
         <scene sceneID="gdD-po-VFS">
             <objects>
                 <collectionViewController automaticallyAdjustsScrollViewInsets="NO" id="kUw-q3-wvD" customClass="FeedCVC" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="yYF-h0-QjN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,7 +38,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileInfoCell" id="9Ay-Db-n5f" customClass="UserProfileInfoCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileInfoCell" id="9Ay-Db-n5f" customClass="UserProfileInfoCell">
                                 <rect key="frame" x="0.0" y="50" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -46,17 +46,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl" translatesAutoresizingMaskIntoConstraints="NO" id="BaU-l3-KLL">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="265" height="221"/>
                                             <gestureRecognizers/>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_photo_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="ILD-rb-6Es">
-                                            <rect key="frame" x="0.0" y="192" width="320" height="128"/>
+                                            <rect key="frame" x="0.0" y="93" width="265" height="128"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="128" id="2df-dV-hjv"/>
                                             </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-mk-gY4">
-                                            <rect key="frame" x="240" y="291" width="70" height="19"/>
+                                            <rect key="frame" x="185" y="192" width="70" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="TDV-0S-kOS"/>
                                                 <constraint firstAttribute="width" constant="70" id="uFs-78-mYG"/>
@@ -71,7 +71,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZr-mu-kjB">
-                                            <rect key="frame" x="170" y="291" width="70" height="19"/>
+                                            <rect key="frame" x="115" y="184" width="70" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="eox-1j-Gkp"/>
                                                 <constraint firstAttribute="width" constant="70" id="zbs-Pg-azD"/>
@@ -86,7 +86,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUt-6v-yge">
-                                            <rect key="frame" x="12" y="291" width="144" height="19"/>
+                                            <rect key="frame" x="12" y="192" width="89" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="5xc-Mu-FY3"/>
                                             </constraints>
@@ -109,7 +109,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q9-b9-Q0E">
-                                            <rect key="frame" x="272" y="20" width="48" height="48"/>
+                                            <rect key="frame" x="217" y="20" width="48" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="2sx-6O-dfR"/>
                                                 <constraint firstAttribute="width" constant="48" id="tvX-k2-cVZ"/>
@@ -121,7 +121,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-1y-gCh">
-                                            <rect key="frame" x="272" y="13" width="48" height="60"/>
+                                            <rect key="frame" x="217" y="13" width="48" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="taq-c8-kJ5"/>
                                                 <constraint firstAttribute="width" constant="48" id="xFd-nb-TlI"/>
@@ -132,7 +132,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="873-Uo-xMX">
-                                            <rect key="frame" x="231" y="27" width="33" height="34"/>
+                                            <rect key="frame" x="176" y="27" width="33" height="34"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="33" id="Qo9-1V-aSa"/>
                                                 <constraint firstAttribute="height" constant="34" id="RDK-bY-nQ8"/>
@@ -182,7 +182,7 @@
                                     <outlet property="settingsButton" destination="1q9-b9-Q0E" id="dhF-YA-51J"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileFriendsInfoCell" id="bbJ-ng-Ybc" customClass="UserProfileFriendsInfoCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileFriendsInfoCell" id="bbJ-ng-Ybc" customClass="UserProfileFriendsInfoCell">
                                 <rect key="frame" x="0.0" y="370" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -190,7 +190,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yr7-kg-NgQ" userLabel="Followers">
-                                            <rect key="frame" x="0.0" y="0.0" width="106" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="0.0"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3259" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Lwm-bW-Wn8">
                                                     <rect key="frame" x="1" y="11" width="100" height="17"/>
@@ -213,7 +213,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dn5-hv-ax9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="56"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="0.0"/>
                                                     <connections>
                                                         <action selector="onTapFollowers:" destination="kUw-q3-wvD" eventType="touchUpInside" id="M2Z-QP-csa"/>
                                                     </connections>
@@ -233,10 +233,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUr-Bz-xHv" userLabel="Following">
-                                            <rect key="frame" x="107" y="0.0" width="106" height="56"/>
+                                            <rect key="frame" x="107" y="0.0" width="51" height="0.0"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="405" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="s7o-eh-xBJ">
-                                                    <rect key="frame" x="1" y="11" width="100" height="17"/>
+                                                    <rect key="frame" x="1" y="11" width="45" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="0LD-fO-EB0"/>
                                                         <constraint firstAttribute="height" constant="17" id="Jzy-po-oiR"/>
@@ -251,7 +251,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="mzr-Tg-abB">
-                                                    <rect key="frame" x="2" y="25" width="100" height="17"/>
+                                                    <rect key="frame" x="2" y="25" width="45" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="DpM-Yu-SjQ"/>
                                                         <constraint firstAttribute="height" constant="17" id="cjh-pU-fgg"/>
@@ -266,7 +266,7 @@
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwR-lP-Q5V">
-                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="56"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="51" height="0.0"/>
                                                     <connections>
                                                         <action selector="onTapFollowing:" destination="kUw-q3-wvD" eventType="touchUpInside" id="0Og-u7-Wov"/>
                                                     </connections>
@@ -295,7 +295,7 @@
                                             </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9QA-fm-Ty6" userLabel="Posts">
-                                            <rect key="frame" x="214" y="0.0" width="106" height="56"/>
+                                            <rect key="frame" x="159" y="0.0" width="106" height="0.0"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="261" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="wzS-f7-FST">
                                                     <rect key="frame" x="1" y="11" width="100" height="17"/>
@@ -318,7 +318,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Io-jH-eb8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="56"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="0.0"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -358,7 +358,7 @@
                                     <outlet property="postsLabel" destination="wzS-f7-FST" id="HWI-VK-ofK"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileBioCell" id="9lJ-pS-CRA" customClass="UserProfileBioCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileBioCell" id="9lJ-pS-CRA" customClass="UserProfileBioCell">
                                 <rect key="frame" x="0.0" y="426" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -366,7 +366,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Fashion Designer.  Known for exotic prints and for creating the sand blasted look for jeans. Livin' the dream." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-qF-e7M">
-                                            <rect key="frame" x="14" y="0.0" width="292" height="70"/>
+                                            <rect key="frame" x="14" y="0.0" width="237" height="39"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -384,7 +384,7 @@
                                     <outlet property="bioLabel" destination="2eP-qF-e7M" id="CGo-qw-A0P"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileLocationCell" id="mH5-JB-O94" customClass="UserProfileLocationCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileLocationCell" id="mH5-JB-O94" customClass="UserProfileLocationCell">
                                 <rect key="frame" x="0.0" y="496" width="320" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -400,7 +400,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco, US" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Lmk-ns-6eB">
-                                            <rect key="frame" x="29" y="8" width="277" height="20"/>
+                                            <rect key="frame" x="29" y="8" width="222" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="8jD-1H-lAH"/>
                                             </constraints>
@@ -423,7 +423,7 @@
                                     <outlet property="locationPin" destination="M0i-Rg-lEj" id="SKn-2u-4Sr"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileNoPhotosCell" id="qlV-vh-foT" customClass="UserProfileNoPhotosCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileNoPhotosCell" id="qlV-vh-foT" customClass="UserProfileNoPhotosCell">
                                 <rect key="frame" x="0.0" y="532" width="320" height="304"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -431,7 +431,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gGv-JS-nqj">
-                                            <rect key="frame" x="30" y="29" width="260" height="239"/>
+                                            <rect key="frame" x="2.5" y="17" width="260" height="239"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no picture" translatesAutoresizingMaskIntoConstraints="NO" id="99V-7s-0RN">
                                                     <rect key="frame" x="74" y="0.0" width="111" height="111"/>
