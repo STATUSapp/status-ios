@@ -34,7 +34,16 @@ typedef NS_ENUM(NSUInteger, STSettingsSection) {
     STSettingsSectionLogout,
     STSettingsSectionCount
 };
-
+typedef NS_ENUM(NSUInteger, STNotificationSection) {
+    STNotificationSectionLikes = 0,
+    STNotificationSectionMessages,
+    STNotificationSectionUploadNew,
+    STNotificationSectionAFriendJoined,
+    STNotificationSectionPhotosWaiting,
+    STNotificationSectionEarnExtraLikes,
+    STNotificationSectionFollowers,
+    STNotificationSectionCount
+};
 @interface STSettingsViewController ()
 {
     FBSDKLoginButton *logoutButton;
@@ -52,6 +61,7 @@ typedef NS_ENUM(NSUInteger, STSettingsSection) {
 @property (weak, nonatomic) IBOutlet UISwitch *switchFollowers;
 
 @property (strong, nonatomic) NSDictionary * settingsDict;
+@property (strong, nonatomic) NSArray *deactivatedNotifications;
 @end
 
 @implementation STSettingsViewController
@@ -79,7 +89,7 @@ typedef NS_ENUM(NSUInteger, STSettingsSection) {
 {
     [super viewDidLoad];
     self.title = @"Settings";
-    
+    self.deactivatedNotifications = @[@(STNotificationSectionMessages), @(STNotificationSectionPhotosWaiting), @(STNotificationSectionEarnExtraLikes)];
     NSString *versionString = [[STBaseRequest new] getAppVersion];
     _versionLabel.text = [NSString stringWithFormat:@"Version %@", versionString];
     
@@ -149,16 +159,27 @@ typedef NS_ENUM(NSUInteger, STSettingsSection) {
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 5;
+    return STSettingsSectionCount;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    if (indexPath.section == STSettingsSectionNotifications) {
+        if ([_deactivatedNotifications containsObject:@(indexPath.row)]) {
+            //return 0.f to not show the row;
+            height = 0.f;
+        }
+    }
+    
+    return height;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     NSInteger numRows = 0;
     switch (section) {
         case STSettingsSectionNotifications:
-            numRows = 7;
+            numRows = STNotificationSectionCount;
             break;
         case STSettingsSectionCopyProfile:
             numRows = 1;
