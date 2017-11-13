@@ -15,6 +15,7 @@
 #import "STLocalNotificationService.h"
 #import "FeedCVC.h"
 #import "STNotificationsManager.h"
+#import "STNavigationService.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
 static CGFloat kTabBarHeight = 49.f;
@@ -176,6 +177,7 @@ static CGFloat kImageInset = 4.f;
         }
         else if (selectedItem == STTabBarIndexActivity){
             [[CoreManager notificationsService] requestRemoteNotificationAccess];
+            [[CoreManager navigationService] setBadge:0 forTabAtIndex:STTabBarIndexActivity];
         }
     }
     
