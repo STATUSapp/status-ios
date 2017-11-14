@@ -7,7 +7,6 @@
 //
 
 #import "STFacebookAdModel.h"
-#import <FBAudienceNetwork/FBAudienceNetwork.h>
 
 @interface STFacebookAdModel()<FBNativeAdDelegate>
 @property (strong, nonatomic, readwrite) FBNativeAd *nativeAd;
@@ -32,6 +31,7 @@
 
 - (void)nativeAdDidLoad:(FBNativeAd *)nativeAd{
     _adLoaded = YES;
+    [_delegate facebookAdLoaded];
 }
 
 - (void)nativeAdWillLogImpression:(FBNativeAd *)nativeAd{

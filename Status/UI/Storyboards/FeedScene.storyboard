@@ -757,7 +757,7 @@
                                     <outlet property="produsctsCollection" destination="mvl-1n-aze" id="UXA-q8-eDJ"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STFacebookAdCell" id="VsK-yb-rk3" customClass="STFacebookAddCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STFacebookAddCell" id="VsK-yb-rk3" customClass="STFacebookAddCell">
                                 <rect key="frame" x="0.0" y="1475" width="320" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -848,7 +848,6 @@
                                                         <constraint firstAttribute="bottom" secondItem="A6A-Cd-qiA" secondAttribute="bottom" id="HQG-Q6-Atv"/>
                                                         <constraint firstItem="A6A-Cd-qiA" firstAttribute="leading" secondItem="5eP-ZB-xf4" secondAttribute="leading" constant="16" id="Xx5-Qj-5pb"/>
                                                         <constraint firstAttribute="trailing" secondItem="VYl-TN-4bN" secondAttribute="trailing" constant="16" id="a3d-0g-8xK"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="c2K-9F-gfh"/>
                                                         <constraint firstAttribute="trailing" secondItem="A6A-Cd-qiA" secondAttribute="trailing" constant="16" id="cd5-ND-Vhn"/>
                                                         <constraint firstItem="D7R-pr-dBE" firstAttribute="top" secondItem="5eP-ZB-xf4" secondAttribute="top" id="cvi-H1-7nR"/>
                                                         <constraint firstItem="VYl-TN-4bN" firstAttribute="centerY" secondItem="5eP-ZB-xf4" secondAttribute="centerY" id="deE-eJ-PTY"/>
@@ -882,13 +881,11 @@
                                                 <constraint firstAttribute="trailing" secondItem="L3F-bA-Xb7" secondAttribute="trailing" id="Jhl-iy-zgL"/>
                                                 <constraint firstItem="iae-fq-9qg" firstAttribute="leading" secondItem="ldD-ym-tzW" secondAttribute="leading" id="OMj-53-kck"/>
                                                 <constraint firstItem="L3F-bA-Xb7" firstAttribute="top" secondItem="5eP-ZB-xf4" secondAttribute="bottom" id="Qul-Mp-xPF"/>
-                                                <constraint firstItem="5eP-ZB-xf4" firstAttribute="leading" secondItem="ldD-ym-tzW" secondAttribute="leading" id="VrM-d5-JD3"/>
                                                 <constraint firstAttribute="trailing" secondItem="Yw6-rc-2ky" secondAttribute="trailing" id="WGk-Zv-QuU"/>
                                                 <constraint firstAttribute="bottom" secondItem="L3F-bA-Xb7" secondAttribute="bottom" id="blW-ku-4I3"/>
                                                 <constraint firstItem="Yw6-rc-2ky" firstAttribute="top" secondItem="iae-fq-9qg" secondAttribute="bottom" id="cqy-fN-QHp"/>
                                                 <constraint firstItem="5eP-ZB-xf4" firstAttribute="leading" secondItem="ldD-ym-tzW" secondAttribute="leading" id="eFb-4u-WvA"/>
                                                 <constraint firstItem="iae-fq-9qg" firstAttribute="top" secondItem="ldD-ym-tzW" secondAttribute="top" id="fky-9j-yuN"/>
-                                                <constraint firstAttribute="trailing" secondItem="5eP-ZB-xf4" secondAttribute="trailing" id="pgc-dv-LtH"/>
                                                 <constraint firstAttribute="trailing" secondItem="5eP-ZB-xf4" secondAttribute="trailing" id="t9a-iG-dKR"/>
                                                 <constraint firstAttribute="trailing" secondItem="iae-fq-9qg" secondAttribute="trailing" id="tF0-yf-POi"/>
                                                 <constraint firstItem="5eP-ZB-xf4" firstAttribute="top" secondItem="Yw6-rc-2ky" secondAttribute="bottom" id="zzi-k8-8Wq"/>

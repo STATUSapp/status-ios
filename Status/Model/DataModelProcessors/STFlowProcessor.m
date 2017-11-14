@@ -43,8 +43,11 @@ NSString * const kTimeframeAllTime = @"all";
 NSString * const kGenderWomen = @"female";
 NSString * const kGenderMen = @"male";
 
+#if USE_PRODUCTION_SERVER
 NSInteger const kFacebookAdsTimeframe = 3;
-
+#else
+NSInteger const kFacebookAdsTimeframe = 10;
+#endif
 @interface STFlowProcessor ()
 {
 }
@@ -289,11 +292,14 @@ NSInteger const kFacebookAdsTimeframe = 3;
     NSInteger startIndex = [self getLastAdPostIndex];
     NSInteger allObjectsCount = [_objectIds count];
     NSInteger nextIndex = startIndex + kFacebookAdsTimeframe;
+    if (startIndex > 0) {
+        nextIndex+=1;
+    }
     while (nextIndex < allObjectsCount) {
         STAdPost *adPost = [STAdPost new];
         [_objectIds insertObject:adPost.uuid atIndex:nextIndex];
         [self addObjectsToObjectPool:@[adPost]];
-        nextIndex = nextIndex + kFacebookAdsTimeframe;
+        nextIndex = nextIndex+ 1 + kFacebookAdsTimeframe;
         allObjectsCount ++;
     }
 }
@@ -476,6 +482,17 @@ NSInteger const kFacebookAdsTimeframe = 3;
 //    
 //}
 
+-(NSInteger)numberOfPostWithoutAds{
+    NSInteger count = 0;
+    for (NSInteger i = 0; i< _objectIds.count; i++) {
+        STPost *post = [self objectAtIndex:i];
+        if (![post isAdPost]) {
+            count++;
+        }
+    }
+    return count;
+}
+
 -(void)addObjectsToObjectPool:(NSArray *)objects{
     if (_flowType == STFlowTypeDiscoverNearby) {
         [[CoreManager profilePool] addProfiles:objects];
@@ -485,7 +502,7 @@ NSInteger const kFacebookAdsTimeframe = 3;
 }
 
 -(void)getMoreData{
-    NSInteger offset = _objectIds.count + _numberOfDuplicates;
+    NSInteger offset = [self numberOfPostWithoutAds] + _numberOfDuplicates;
     if (_processorInvalidated == YES) {
         offset = 0;
     }

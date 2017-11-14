@@ -8,8 +8,9 @@
 
 #import "STAdPost.h"
 #import "STFacebookAdModel.h"
+#import "STLocalNotificationService.h"
 
-@interface STAdPost ()
+@interface STAdPost ()<STFacebookAdModelProtocol>
 
 @property (nonatomic, strong, readwrite) STFacebookAdModel *adModel;
 
@@ -22,11 +23,18 @@
     if (self) {
         self.uuid = [[NSUUID UUID] UUIDString];
         self.adModel = [STFacebookAdModel new];
+        self.adModel.delegate = self;
     }
     return self;
 }
 
 -(BOOL)isAdPost{
     return YES;
+}
+
+#pragma mark - STFacebookAdModelProtocol
+
+-(void)facebookAdLoaded{
+    [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:self.uuid}];
 }
 @end

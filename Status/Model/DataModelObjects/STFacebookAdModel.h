@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <FBAudienceNetwork/FBAudienceNetwork.h>
 
-@class FBNativeAd;
+@protocol STFacebookAdModelProtocol <NSObject>
+-(void)facebookAdLoaded;
+@end
 
 @interface STFacebookAdModel : NSObject
 
 @property (strong, nonatomic, readonly) FBNativeAd *nativeAd;
 @property (assign, nonatomic, readonly) BOOL adLoaded;
-
+@property (weak, nonatomic) id<STFacebookAdModelProtocol>delegate;
 @end

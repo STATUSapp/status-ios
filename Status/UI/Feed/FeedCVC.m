@@ -745,7 +745,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }else{
         NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
         STAdPost *adPost = [_feedProcessor objectAtIndex:sectionIndex];
-        [STFacebookAddCell cellSizeWithAdPost:adPost];
+        return [STFacebookAddCell cellSizeWithAdPost:adPost];
     }
     
     return CGSizeZero;
