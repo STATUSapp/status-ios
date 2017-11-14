@@ -34,7 +34,7 @@
         params[@"offset"] = weakSelf.offset;
         params[@"limit"] = @(20);
 
-        [[STNetworkQueueManager networkAPI] POST:url
+        [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                         progress:nil
                                        success:weakSelf.standardSuccessBlock
