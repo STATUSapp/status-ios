@@ -54,6 +54,9 @@
         if (shopProductsIds.count) {
             params[@"products"] = shopProductsIds;
         }
+//        else{
+//            params[@"products"] = [NSNull null];
+//        }
         
         NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [weakSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:weakSelf.postData
