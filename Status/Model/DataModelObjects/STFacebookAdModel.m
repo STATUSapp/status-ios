@@ -19,12 +19,20 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-        _nativeAd = [[FBNativeAd alloc] initWithPlacementID:@"642056059181757_1505991126121575"];
-        _nativeAd.delegate = self;
-        _nativeAd.mediaCachePolicy = FBNativeAdsCachePolicyAll;
-        [_nativeAd loadAd];
+        [self initNativeAd];
     }
     return self;
+}
+
+-(void)initNativeAd{
+    if (_nativeAd) {
+        _nativeAd.delegate = nil;
+        _nativeAd = nil;
+    }
+    _nativeAd = [[FBNativeAd alloc] initWithPlacementID:@"642056059181757_1505991126121575"];
+    _nativeAd.delegate = self;
+    _nativeAd.mediaCachePolicy = FBNativeAdsCachePolicyAll;
+    [_nativeAd loadAd];
 }
 
 #pragma mark - FBNativeAdDelegate
@@ -40,6 +48,7 @@
 
 - (void)nativeAd:(FBNativeAd *)nativeAd didFailWithError:(NSError *)error{
     NSLog(@"FBNativeAd failed: %@", error);
+    [self initNativeAd];
 }
 
 - (void)nativeAdDidClick:(FBNativeAd *)nativeAd{

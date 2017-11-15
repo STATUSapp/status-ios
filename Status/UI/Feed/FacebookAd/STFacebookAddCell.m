@@ -47,6 +47,9 @@ CGFloat const kFacebookAdCaptionHorizontalOffset = 32.f;
     
     NSString *formattedString = [NSString stringWithFormat:@"%@", adPost.adModel.nativeAd.rawBody];
     
+//    NSString *bodyString = adPost.adModel.nativeAd.body;
+//    
+//    NSLog(@"RawBody: %@\nBody:%@", formattedString, bodyString);
     if (formattedString.length == 0) {
         formattedString = @"";
     }
