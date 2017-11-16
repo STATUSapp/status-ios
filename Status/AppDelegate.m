@@ -104,7 +104,9 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
         if (!error && params) {
 //            NSDictionary *testDict = @{@"+clicked_branch_link":@(0),
 //                                       @"+is_first_session":@(0),
-//                                       @"+non_branch_link":@"getstatus://getstatusapp.co/300/26913"};
+//                                       @"+non_branch_link":@"getstatus://post/denistodirica"
+////                                       @"$deeplink_path":@"getstatus://post/denistodirica/53781"
+//                                       };
 //#ifdef DEBUG
 //            [[CoreManager deepLinkService] addParams:testDict];
 //#else

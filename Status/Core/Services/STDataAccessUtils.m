@@ -402,9 +402,7 @@
             }
             else
             {
-#ifdef DEBUG
                 NSAssert(NO, @"We should never get this case");
-#endif
             }
         }
         completion(objects, error);

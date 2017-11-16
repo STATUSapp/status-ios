@@ -160,6 +160,7 @@
            inTabbarAtIndex:(NSInteger)index{
     [[STNavigationService appTabBar] setSelectedIndex:index];
     UINavigationController *navCtrl = (UINavigationController *)[[[STNavigationService appTabBar] viewControllers] objectAtIndex:index];
+    [navCtrl popToRootViewControllerAnimated:NO];
     NSMutableArray *viewControllers = [[navCtrl viewControllers] mutableCopy];
     [viewControllers addObjectsFromArray:arrayVC];
     [navCtrl setViewControllers:viewControllers animated:YES];

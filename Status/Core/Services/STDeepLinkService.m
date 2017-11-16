@@ -13,6 +13,10 @@
 #import "FeedCVC.h"
 
 NSString * const kNonBrankLinkKey = @"+non_branch_link";
+NSString * const kDeepLinkPathKey = @"$deeplink_path";
+
+NSString * const kHostUserKey = @"user";
+NSString * const kHostPostKey = @"post";
 
 @interface STDeepLinkService()
 
@@ -30,9 +34,14 @@ NSString * const kNonBrankLinkKey = @"+non_branch_link";
     if ([[CoreManager loginService] currentUserUuid]) {
         //user logged in
         NSMutableArray *stackVC = [@[] mutableCopy];
-        NSString *redirectLink = _redirectParams[kNonBrankLinkKey];
+        NSString *redirectLink = _redirectParams[kDeepLinkPathKey];
+        if (!redirectLink) {
+            redirectLink = _redirectParams[kNonBrankLinkKey];
+        }
+        
         if (redirectLink) {
             NSURL *url = [NSURL URLWithString:redirectLink];
+            NSString *hostString = [url host];
             NSMutableArray *components = [[url pathComponents] mutableCopy];
             [components removeObject:@"/"];
             NSLog(@"scheme: %@", [url scheme]);
@@ -44,22 +53,33 @@ NSString * const kNonBrankLinkKey = @"+non_branch_link";
             if ([components count] > 0) {
                 userId = components[0];
             }
-        
+            
             NSString *postId = nil;
             if ([components count] > 1) {
                 postId = components[1];
             }
-            
-            if (userId) {
-                FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
-                profileVC.shouldAddBackButton = YES;
-                [stackVC addObject:profileVC];
-            }
-            
-            if (postId) {
-                FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postId];
-                feedCVC.shouldAddBackButton = YES;
-                [stackVC addObject:feedCVC];
+
+            if ([hostString isEqualToString:kHostUserKey]) {
+                //go to user profile
+                if (userId) {
+                    FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
+                    profileVC.shouldAddBackButton = YES;
+                    [stackVC addObject:profileVC];
+                }
+            }else if ([hostString isEqualToString:kHostPostKey]){
+                //go to user post
+                if (userId) {
+                    FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
+                    profileVC.shouldAddBackButton = YES;
+                    [stackVC addObject:profileVC];
+                }
+                
+                if (postId) {
+                    FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postId];
+                    feedCVC.shouldAddBackButton = YES;
+                    [stackVC addObject:feedCVC];
+                    
+                }
 
             }
         }
