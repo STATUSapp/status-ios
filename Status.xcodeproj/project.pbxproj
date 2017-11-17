@@ -2290,7 +2290,6 @@
 				072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */,
 				075C52A51EBF4F9200174CC5 /* STTagManualViewController.m in Sources */,
 				07B300021FB44331009316A2 /* STFacebookAdModel.m in Sources */,
-				0744874D1FA1B8B4003C5404 /* STTagProductsTabBarController.m in Sources */,
 				170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */,
 				99B387401C82FAA2005B4D8C /* NSString+MD5.m in Sources */,
 				99B387721C82FAA2005B4D8C /* STContactsManager.m in Sources */,
