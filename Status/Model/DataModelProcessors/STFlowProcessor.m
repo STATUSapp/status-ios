@@ -308,6 +308,18 @@ NSInteger const kFacebookAdsTimeframe = 10;
 - (void)setLikeUnlikeAtIndex:(NSInteger)index
               withCompletion:(STProcessorCompletionBlock)completion{
     NSString *postId = [_objectIds objectAtIndex:index];
+    STPost *post = (STPost *)[[CoreManager postsPool] getObjectWithId:postId];
+    if (![post isAdPost]) {
+        post.postLikedByCurrentUser = !post.postLikedByCurrentUser;
+        if (post.postLikedByCurrentUser) {
+            post.numberOfLikes =  @(post.numberOfLikes.integerValue+1);
+        }else{
+            post.numberOfLikes = @(post.numberOfLikes.integerValue-1);
+        }
+        [[CoreManager postsPool] addPosts:@[post]];
+    }else{
+        return;
+    }
     [STDataAccessUtils setPostLikeUnlikeWithPostId:postId
                                     withCompletion:^(NSError *error) {
                                         completion(error);

@@ -869,17 +869,12 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             
             STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
             __block STPost *post = [_feedProcessor objectAtIndex:postIndex];
+            [cell animateLikedImage];
             if (!post.postLikedByCurrentUser) {
-                post.postLikedByCurrentUser = YES;
                 [_feedProcessor setLikeUnlikeAtIndex:postIndex
                                       withCompletion:^(NSError *error) {
                                           NSLog(@"Post liked!");
-                                          [cell animateLikedImage];
                                       }];
-            }
-            else
-            {
-                [cell animateLikedImage];
             }
         }
     }
