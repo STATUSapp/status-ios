@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -60,7 +62,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKO-8Y-OvO">
-                                <rect key="frame" x="214.5" y="350.5" width="88" height="30"/>
+                                <rect key="frame" x="214.5" y="348" width="91.5" height="35"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -102,10 +104,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxJ-W2-AD9">
-                                <rect key="frame" x="0.0" y="112" width="375" height="555"/>
+                                <rect key="frame" x="0.0" y="115.5" width="375" height="551.5"/>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DC1-cu-PcH">
-                                <rect key="frame" x="125" y="82" width="125" height="25"/>
+                                <rect key="frame" x="-1" y="85.5" width="188" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="jRR-e7-ilU"/>
                                 </constraints>
@@ -122,7 +124,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GiG-yK-caX">
-                                <rect key="frame" x="250" y="82" width="125" height="25"/>
+                                <rect key="frame" x="187" y="85.5" width="188" height="25"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="EMAIL">
@@ -135,42 +137,28 @@
                                     <action selector="goToEmailInviter:" destination="uwS-Bg-oGg" eventType="touchUpInside" id="UGg-lk-lbe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZW-lr-K4w">
-                                <rect key="frame" x="0.0" y="82" width="125" height="25"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="12"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="FACEBOOK">
-                                    <color key="titleColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="goToFacebookInviter:" destination="uwS-Bg-oGg" eventType="touchUpInside" id="atk-sd-fNm"/>
-                                </connections>
-                            </button>
                             <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGT-iU-6kH">
-                                <rect key="frame" x="20" y="110.5" width="335" height="1"/>
+                                <rect key="frame" x="20" y="114.5" width="335" height="1"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="dVj-1w-JzG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A9v-8h-k7x">
-                                <rect key="frame" x="20" y="110" width="85" height="2"/>
+                                <rect key="frame" x="20" y="113.5" width="148" height="2"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="C8E-Du-WUm"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Mk-Jf-axf">
-                                <rect key="frame" x="128.5" y="40" width="118" height="20"/>
+                                <rect key="frame" x="128" y="40" width="120" height="23.5"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zjd-U5-WLI">
-                                <rect key="frame" x="325" y="35.5" width="30" height="30"/>
+                                <rect key="frame" x="325" y="37" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="ci3-iN-pkz"/>
                                     <constraint firstAttribute="height" constant="30" id="fwj-2X-Saq"/>
@@ -187,29 +175,24 @@
                             <constraint firstItem="KxJ-W2-AD9" firstAttribute="leading" secondItem="h3e-76-cBz" secondAttribute="leading" id="1GE-PY-rZL"/>
                             <constraint firstItem="GiG-yK-caX" firstAttribute="leading" secondItem="DC1-cu-PcH" secondAttribute="trailing" id="3Rz-Fa-Yc4"/>
                             <constraint firstItem="6Mk-Jf-axf" firstAttribute="top" secondItem="uj7-lD-Hlb" secondAttribute="bottom" constant="20" id="3ug-pu-eaj"/>
-                            <constraint firstItem="9ZW-lr-K4w" firstAttribute="width" secondItem="DC1-cu-PcH" secondAttribute="width" id="8ie-RW-gVf"/>
+                            <constraint firstItem="A9v-8h-k7x" firstAttribute="top" secondItem="DC1-cu-PcH" secondAttribute="bottom" constant="3" id="7xm-VJ-Ow7"/>
                             <constraint firstAttribute="trailing" secondItem="GiG-yK-caX" secondAttribute="trailing" id="AVH-Df-yEq"/>
                             <constraint firstItem="KxJ-W2-AD9" firstAttribute="top" secondItem="DC1-cu-PcH" secondAttribute="bottom" constant="5" id="Cit-11-XZE"/>
                             <constraint firstAttribute="trailing" secondItem="KxJ-W2-AD9" secondAttribute="trailing" id="G1h-Nc-w6l"/>
-                            <constraint firstItem="9ZW-lr-K4w" firstAttribute="top" secondItem="DC1-cu-PcH" secondAttribute="top" id="GQB-cg-LLX"/>
+                            <constraint firstItem="DC1-cu-PcH" firstAttribute="width" secondItem="h3e-76-cBz" secondAttribute="width" multiplier="0.5" id="G8q-PJ-n8u"/>
                             <constraint firstItem="A9v-8h-k7x" firstAttribute="width" secondItem="DC1-cu-PcH" secondAttribute="width" constant="-40" id="KY9-Qw-mgz"/>
                             <constraint firstItem="LGT-iU-6kH" firstAttribute="centerY" secondItem="A9v-8h-k7x" secondAttribute="centerY" id="N9z-4g-aaB"/>
-                            <constraint firstItem="9ZW-lr-K4w" firstAttribute="bottom" secondItem="DC1-cu-PcH" secondAttribute="bottom" id="OAA-wy-L8X"/>
                             <constraint firstItem="DC1-cu-PcH" firstAttribute="top" secondItem="uj7-lD-Hlb" secondAttribute="bottom" constant="44" id="W2H-9B-RSn"/>
                             <constraint firstItem="Zjd-U5-WLI" firstAttribute="centerY" secondItem="6Mk-Jf-axf" secondAttribute="centerY" id="aEn-WC-02V"/>
                             <constraint firstItem="DC1-cu-PcH" firstAttribute="top" secondItem="6Mk-Jf-axf" secondAttribute="bottom" constant="22" id="bp7-ZT-few"/>
                             <constraint firstItem="GiG-yK-caX" firstAttribute="bottom" secondItem="DC1-cu-PcH" secondAttribute="bottom" id="cSl-lK-aI4"/>
-                            <constraint firstItem="9ZW-lr-K4w" firstAttribute="leading" secondItem="h3e-76-cBz" secondAttribute="leading" id="f8c-T4-NJU"/>
                             <constraint firstItem="GiG-yK-caX" firstAttribute="top" secondItem="DC1-cu-PcH" secondAttribute="top" id="fpA-Oq-IhO"/>
                             <constraint firstItem="GBU-8f-mXB" firstAttribute="top" secondItem="KxJ-W2-AD9" secondAttribute="bottom" id="hbm-Mu-fHU"/>
-                            <constraint firstItem="DC1-cu-PcH" firstAttribute="leading" secondItem="9ZW-lr-K4w" secondAttribute="trailing" id="ioo-8v-Kzm"/>
                             <constraint firstItem="6Mk-Jf-axf" firstAttribute="centerX" secondItem="h3e-76-cBz" secondAttribute="centerX" id="jro-O5-6w1"/>
                             <constraint firstAttribute="trailing" secondItem="LGT-iU-6kH" secondAttribute="trailing" constant="20" id="l82-Wg-ZUr"/>
                             <constraint firstAttribute="trailing" secondItem="Zjd-U5-WLI" secondAttribute="trailing" constant="20" id="oNI-jw-3wW"/>
                             <constraint firstItem="GiG-yK-caX" firstAttribute="width" secondItem="DC1-cu-PcH" secondAttribute="width" id="pfJ-hf-oTr"/>
-                            <constraint firstItem="A9v-8h-k7x" firstAttribute="top" secondItem="9ZW-lr-K4w" secondAttribute="bottom" constant="3" id="pkD-zf-qor"/>
                             <constraint firstItem="LGT-iU-6kH" firstAttribute="leading" secondItem="h3e-76-cBz" secondAttribute="leading" constant="20" id="qZ1-bu-BUl"/>
-                            <constraint firstItem="DC1-cu-PcH" firstAttribute="centerX" secondItem="h3e-76-cBz" secondAttribute="centerX" id="u1v-bR-a8I"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -219,7 +202,6 @@
                     </view>
                     <connections>
                         <outlet property="btnEmail" destination="GiG-yK-caX" id="vdd-RJ-Puc"/>
-                        <outlet property="btnFacebook" destination="9ZW-lr-K4w" id="eOz-Df-rBt"/>
                         <outlet property="btnSMS" destination="DC1-cu-PcH" id="qeg-DH-rZa"/>
                         <outlet property="childContainer" destination="KxJ-W2-AD9" id="NhI-5i-web"/>
                         <outlet property="pageIndicatorLeading" destination="15d-Az-pxV" id="5LM-nV-ZVl"/>
@@ -270,13 +252,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzx-oU-woA">
-                                                    <rect key="frame" x="20" y="18" width="40.5" height="17"/>
+                                                    <rect key="frame" x="20" y="18" width="42" height="20"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAx-dz-DdC">
-                                                    <rect key="frame" x="20" y="40" width="36" height="15"/>
+                                                    <rect key="frame" x="20" y="43" width="37" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                     <color key="textColor" red="0.34509803921568627" green="0.34509803921568627" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -341,7 +323,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 friends selected. Invite them." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ga-S1-ZDq">
-                                <rect key="frame" x="93.5" y="594.5" width="188" height="14"/>
+                                <rect key="frame" x="91.5" y="593.5" width="192" height="16.5"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>

@@ -264,15 +264,15 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }
 }
 
--(void)promoteTheApp{
-    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
-    content.appLinkURL = [NSURL URLWithString:@"https://fb.me/905201786200515"];
-    content.appInvitePreviewImageURL = [NSURL URLWithString:@"http://api2.getstatusapp.co/fbAppInvitePreviewImage.jpeg"];
-    [FBSDKAppInviteDialog showFromViewController:nil
-                                     withContent:content
-                                        delegate:self];
-
-}
+//-(void)promoteTheApp{
+//    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+//    content.appLinkURL = [NSURL URLWithString:@"https://fb.me/905201786200515"];
+//    content.appInvitePreviewImageURL = [NSURL URLWithString:@"http://api2.getstatusapp.co/fbAppInvitePreviewImage.jpeg"];
+//    [FBSDKAppInviteDialog showFromViewController:nil
+//                                     withContent:content
+//                                        delegate:self];
+//
+//}
 
 #pragma mark - User Friends
 - (void)getMyFriendsWithCompletion:(refreshCompletion)completion {

@@ -8,15 +8,16 @@
 
 #import "STFriendsInviterViewController.h"
 #import "STSMSEmailInviterViewController.h"
-#import "STFacebookInviterViewController.h"
 #import "STContactsManager.h"
 #import "STSuggestionsViewController.h"
-
+typedef NS_ENUM(NSUInteger, STInviterChoose) {
+    STInviterChooseSMS = 0,
+    STInviterChooseEmail
+};
 @interface STFriendsInviterViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, STInvitationsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *childContainer;
 @property (weak, nonatomic) IBOutlet UIView *pageIndicatorView;
-@property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnEmail;
 @property (weak, nonatomic) IBOutlet UIButton *btnSMS;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pageIndicatorLeading;
@@ -36,19 +37,11 @@
 - (void)smsSelected {
     _btnEmail.selected = NO;
     _btnSMS.selected = YES;
-    _btnFacebook.selected = NO;
-}
-
-- (void)facebookSelected {
-    _btnEmail.selected = NO;
-    _btnSMS.selected = NO;
-    _btnFacebook.selected = YES;
 }
 
 - (void)emailSelected {
     _btnEmail.selected = YES;
     _btnSMS.selected = NO;
-    _btnFacebook.selected = NO;
 }
 
 - (IBAction)closeInviteFriends:(UIButton *)sender {
@@ -57,7 +50,7 @@
 }
 
 - (IBAction)goToSMSInviter:(id)sender {
-    [self setControllerAndIndicatorViewForIndex:1];
+    [self setControllerAndIndicatorViewForIndex:STInviterChooseSMS];
     [self smsSelected];
 }
 
@@ -88,18 +81,14 @@
     NSInteger offset = 0;
     
     switch (index) {
-        case 0:
+        case STInviterChooseSMS:
             offset = 20;
             break;
             
-        case 1:
-            offset = (self.view.frame.size.width - self.pageIndicatorView.frame.size.width) / 2;
-            break;
-            
-        case 2:
+        case STInviterChooseEmail:
             offset = self.view.frame.size.width - 20 - self.pageIndicatorView.frame.size.width;
             break;
-            
+
         default:
             offset = 0;
             break;
@@ -110,16 +99,10 @@
 
 - (IBAction)goToEmailInviter:(id)sender {
     
-    [self setControllerAndIndicatorViewForIndex:2];
+    [self setControllerAndIndicatorViewForIndex:STInviterChooseEmail];
     [self emailSelected];
 
 }
-- (IBAction)goToFacebookInviter:(id)sender {
-    
-    [self setControllerAndIndicatorViewForIndex:0];
-    [self facebookSelected];
-}
-
 
 #pragma mark - STSuggestionsDelegate
 
@@ -205,12 +188,9 @@
         
         switch (currentVCIndex) {
             case 0:
-                [self facebookSelected];
-                break;
-            case 1:
                 [self smsSelected];
                 break;
-            case 2:
+            case 1:
                 [self emailSelected];
                 break;
                 
@@ -259,8 +239,7 @@
     UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
     self.view.backgroundColor = backgroundColor;
     self.childContainer.backgroundColor = backgroundColor;
-    _viewControllers = @[[STFacebookInviterViewController newController],
-                         [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:self],
+    _viewControllers = @[[STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:self],
                          [STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeEmail delegate:self]];
         
     _pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
@@ -271,7 +250,7 @@
     _pageController.dataSource = self;
     
     [_pageController setViewControllers:@[_viewControllers.firstObject] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    [self facebookSelected];
+    [self smsSelected];
     
     
     _pageController.view.frame = self.childContainer.bounds;

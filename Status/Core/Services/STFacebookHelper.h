@@ -21,7 +21,7 @@ typedef void (^loadFBPicturesCompletion) (NSDictionary *result);
 -(void) shareImageWithImageUrl:(NSString *)imgUrl description:(NSString *)description andCompletion:(facebookCompletion) completion;
 
 //app promote
--(void)promoteTheApp;
+//-(void)promoteTheApp;
 -(void)loadUserFriendsWithCompletion:(refreshCompletion)completion;
 
 //fb native ads service

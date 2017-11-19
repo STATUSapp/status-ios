@@ -10,8 +10,7 @@
 
 typedef NS_ENUM(NSInteger, STInviteType) {
     STInviteTypeEmail = 0,
-    STInviteTypeSMS,
-    STInviteTypeFacebook
+    STInviteTypeSMS
 };
 
 @class STSMSEmailInviterViewController;

@@ -40,7 +40,7 @@
 
 
 - (IBAction)inviteFacebookFriends:(id)sender {
-    [[CoreManager facebookService] promoteTheApp];
+//    [[CoreManager facebookService] promoteTheApp];
 }
 
 - (void)didReceiveMemoryWarning {
