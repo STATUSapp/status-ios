@@ -15,7 +15,7 @@
 
 CGFloat const kFacebookAdHeaderHeight = 58.f;
 CGFloat const kFacebookAdMediaRation = 320.f/167.f;
-CGFloat const kFacebookAdCTAHeight = 36.f;
+CGFloat const kFacebookAdCTAHeight = 46.f;
 CGFloat const kFacebookAdCaptionVerticalOffset = 16.f;
 CGFloat const kFacebookAdCaptionHorizontalOffset = 32.f;
 
@@ -34,7 +34,14 @@ CGFloat const kFacebookAdCaptionHorizontalOffset = 32.f;
 -(void)configureWithAdPost:(STAdPost *)adPost{
     _headerHeightConstr.constant = kFacebookAdHeaderHeight;
     NSURL *adIconUrl = adPost.adModel.nativeAd.icon.url;
-    [_adIcon sd_setImageWithURL: adIconUrl];
+    __weak STFacebookAddCell *weakSelf = self;
+    [_adIcon sd_setImageWithURL: adIconUrl completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        CGRect rect = weakSelf.adIcon.frame;
+        weakSelf.adIcon.layer.cornerRadius = rect.size.width/2;
+        weakSelf.adIcon.layer.backgroundColor = [[UIColor clearColor] CGColor];
+        weakSelf.adIcon.layer.masksToBounds = YES;
+
+    }];
     _adTitle.text = adPost.adModel.nativeAd.title;
     NSURL *mediaUrl = adPost.adModel.nativeAd.coverImage.url;
     [_adMediaImage sd_setImageWithURL:mediaUrl];

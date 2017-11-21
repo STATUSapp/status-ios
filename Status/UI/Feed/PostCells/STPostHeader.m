@@ -28,12 +28,13 @@
     _userNameLabel.text = post.userName;
 //    BOOL currentUser = [post.userId isEqualToString:[CoreManager loginService].currentUserUuid];
 //    _messageButton.hidden = currentUser;
+    __weak STPostHeader *weakSelf = self;
     [_userThumbnail sd_setImageWithURL: [NSURL URLWithString:post.smallPhotoUrl] placeholderImage:[UIImage imageNamed:@"boy"]
                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 CGRect rect = _userThumbnail.frame;
-                                 _userThumbnail.layer.cornerRadius = rect.size.width/2;
-                                 _userThumbnail.layer.backgroundColor = [[UIColor clearColor] CGColor];
-                                 _userThumbnail.layer.masksToBounds = YES;
+                                 CGRect rect = weakSelf.userThumbnail.frame;
+                                 weakSelf.userThumbnail.layer.cornerRadius = rect.size.width/2;
+                                 weakSelf.userThumbnail.layer.backgroundColor = [[UIColor clearColor] CGColor];
+                                 weakSelf.userThumbnail.layer.masksToBounds = YES;
                              }];
 }
 

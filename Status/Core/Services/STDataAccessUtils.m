@@ -377,6 +377,26 @@
                                                  }];
 }
 
++ (void)getProductsByBarcode:(NSString *)barcodeString
+                andPageIndex:(NSInteger)pageIndex
+               andCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetProductsByBarcode getProductsByBarcode:barcodeString
+                                    andPageIndex:pageIndex
+                                   andCompletion:^(id response, NSError *error) {
+                                       
+                                       NSMutableArray *result = [@[] mutableCopy];
+                                       for (NSDictionary *dict in response) {
+                                           STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
+                                           [result addObject:shopObj];
+                                       }
+                                       
+                                       completion(result, nil);
+                                       
+                                   } failure:^(NSError *error) {
+                                       completion(nil, error);
+                                   }];
+}
+
 
 
 #pragma mark - Get Posts

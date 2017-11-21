@@ -13,6 +13,7 @@
 #import "STCatalogCategory.h"
 #import "STShopProduct.h"
 #import "STBrandObj.h"
+#import "STProductSuggestRequest.h"
 
 NSString *const kTagProductNotification = @"STTagProductNotification";
 NSString *const kTagProductUserInfoEventKey = @"notification_event";
@@ -37,6 +38,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 @property (nonatomic, assign) NSInteger brandsPageIndex;
 @property (nonatomic, assign) NSInteger usedCategoriesPageIndex;
 @property (nonatomic, assign) NSInteger usedProductsPageIndex;
+@property (nonatomic, assign) NSInteger barcodeProductsPageIndex;
 @property (nonatomic, assign) NSInteger categoryAndBrondPageIndex;
 @property (nonatomic, strong) NSMutableDictionary *rootCategoryPageIndexes;
 
@@ -79,6 +81,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
     _brandsPageIndex = kCatalogFirstPage;
     _usedCategoriesPageIndex = kCatalogFirstPage;
     _usedProductsPageIndex = kCatalogFirstPage;
+    _barcodeProductsPageIndex = kCatalogFirstPage;
     _categoryAndBrondPageIndex = kCatalogFirstPage;
     _rootCategoryPageIndexes = nil;
     _searchResult = nil;
@@ -163,6 +166,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
     _brandsPageIndex = kCatalogFirstPage;
     _usedCategoriesPageIndex = kCatalogFirstPage;
     _usedProductsPageIndex = kCatalogFirstPage;
+    _barcodeProductsPageIndex = kCatalogFirstPage;
     _categoryAndBrondPageIndex = kCatalogFirstPage;
     _rootCategoryPageIndexes = nil;
     [self downloadRootCatgories];
@@ -288,6 +292,36 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 
 }
 
+-(void)downloadBarcodeProducts{
+    if (_barcodeProductsPageIndex == kCatalogNoMorePagesIndex) {
+        NSLog(@"No more used products to be downloaded");
+        return;
+    }
+    __weak STTagProductsManager *weakSelf = self;
+    [STDataAccessUtils getUsedSuggestionsForCategory:nil
+                                        andPageIndex:_barcodeProductsPageIndex
+                                       andCompletion:^(NSArray *objects, NSError *error) {
+                                           if (!error) {
+                                               NSLog(@"Received objects: %@", objects);
+                                               NSMutableArray *usedProducts = [NSMutableArray new];
+                                               if (weakSelf.searchResult) {
+                                                   [usedProducts addObjectsFromArray:weakSelf.searchResult];
+                                               }
+                                               [usedProducts addObjectsFromArray:objects];
+                                               weakSelf.searchResult = [NSArray arrayWithArray:usedProducts];
+                                               if ([objects count] < kCatalogDownloadPageSize) {
+                                                   weakSelf.barcodeProductsPageIndex = kCatalogNoMorePagesIndex;
+                                                   NSLog(@"Used products download STOP");
+                                               }else{
+                                                   weakSelf.barcodeProductsPageIndex ++;
+                                               }
+                                               [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventSearchProducts)}];
+                                           }
+                                       }];
+    
+}
+
+
 -(void)downloadBrands{
     if (_brandsPageIndex == kCatalogNoMorePagesIndex) {
         NSLog(@"No more brands to be downloaded!");
@@ -346,21 +380,39 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 }
 
 -(void)searchProductWithBarcodeString:(NSString *)barcode{
-    //TODO: add the search API
     if ([_scannedBarcode isEqualToString:barcode]) {
         //ignore
         return;
     }
     _searchResult = nil;
     _scannedBarcode = barcode;
-    NSInteger randomProductsFound = (random() % 2);
-    if (randomProductsFound == 1 && _usedProducts.count > 0) {
-        NSInteger randomIndex = (random() % _usedProducts.count);
-        _searchResult = [NSArray arrayWithObject:_usedProducts[randomIndex]];
-        //reset the _scannedBarcode after fetching
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventSearchProducts)}];
+    _barcodeProductsPageIndex = kCatalogFirstPage;
+    [self downloadBarcodeProducts];
+//    NSInteger randomProductsFound = (random() % 2);
+//    if (randomProductsFound == 1 && _usedProducts.count > 0) {
+//        NSInteger randomIndex = (random() % _usedProducts.count);
+//        _searchResult = [NSArray arrayWithObject:_usedProducts[randomIndex]];
+//        //reset the _scannedBarcode after fetching
+//    }
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventSearchProducts)}];
+//
+}
 
+-(void)sendSuggestionWithBrand:(NSString *)brand
+                   productName:(NSString *)productName
+                         store:(NSString *)store{
+    if (_scannedBarcode) {
+        [STProductSuggestRequest suggestProductWithBarcode:_scannedBarcode
+                                                     brand:brand
+                                               productName:productName
+                                                     store:store
+                                             andCompletion:^(id response, NSError *error) {
+                                                 NSLog(@"Send suggestion success: %@", @(error==nil));
+                                             } failure:^(NSError *error) {
+                                                 NSLog(@"Send suggestion Error: %@", error.debugDescription);
+                                             }];
+        [self resetLastScannedBarcode];
+    }
 }
 
 -(void)resetLastScannedBarcode{

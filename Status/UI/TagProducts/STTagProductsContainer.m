@@ -86,8 +86,8 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
     _manualView.delegate = self;
     
     _barcodeState = STBarcodeScanStateDefault;
-    _selectionType = STContainerSelectionWizzard;
-    [self configureTopViewsForSelectedView:_wizzardView];
+    _selectionType = STContainerSelectionBarcode;
+    [self configureTopViewsForSelectedView:_barcodeView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(tagProductsNotification:) name:kTagProductNotification object:nil];
@@ -106,7 +106,7 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
+//    [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -154,7 +154,9 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
             break;
         case STTagManagerEventSearchProducts:
         {
-            if ([[[STTagProductsManager sharedInstance] searchResult] count] > 0) {
+            NSArray *searchResult = [[STTagProductsManager sharedInstance] searchResult];
+            searchResult = nil;
+            if ([searchResult count] > 0) {
                 STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeBarcodeSearch];
                 [self.navigationController pushViewController:vc animated:YES];
             }else{
@@ -286,8 +288,9 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
     [self configureContainer];
 }
 -(void)viewDidSendInfoWithBrandName:(NSString *)brandName productName:(NSString *)productName productURK:(NSString *)productURL{
-    //TODO: call the proper API then show an alert
-
+    [[STTagProductsManager sharedInstance] sendSuggestionWithBrand:brandName
+                                                       productName:productName
+                                                             store:productURL];
     __weak STTagProductsContainer *weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thanks for the details!" message:@"We'll do our best to index the product as soon as possible." preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

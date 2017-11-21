@@ -37,6 +37,7 @@
 #import "STGetSuggestionsRequest.h"
 #import "STGetUsedSuggestionsRequest.h"
 #import "STGetUsedCatalogCategoriesRequest.h"
+#import "STGetProductsByBarcode.h"
 #import "STUserCommissionsRequest.h"
 #import "STUserWithDrawnDetailsRequest.h"
 

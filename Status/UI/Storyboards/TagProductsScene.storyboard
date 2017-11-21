@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JTi-yg-KSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JTi-yg-KSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -422,7 +422,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="178" height="175"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRESSES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzV-qf-lex">
-                                                    <rect key="frame" x="16" y="28" width="146" height="139"/>
+                                                    <rect key="frame" x="8" y="16" width="162" height="143"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -646,7 +646,7 @@ by using one of the following methods:</string>
         <scene sceneID="Lrx-L7-ucf">
             <objects>
                 <tableViewController id="o3R-q9-lla" customClass="STMissingProductTVCTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="1YU-UB-tGj">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="1YU-UB-tGj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -661,14 +661,14 @@ by using one of the following methods:</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_product_found" translatesAutoresizingMaskIntoConstraints="NO" id="Zlr-b8-wbR">
-                                                    <rect key="frame" x="125" y="15" width="125" height="125"/>
+                                                    <rect key="frame" x="125" y="18" width="125" height="125"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="125" id="W02-Bt-U0g"/>
                                                         <constraint firstAttribute="width" constant="125" id="af4-qs-Pjg"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This product is not on STATUS app yet. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgQ-fQ-mGx">
-                                                    <rect key="frame" x="71.5" y="164" width="232" height="13"/>
+                                                    <rect key="frame" x="75" y="167" width="225" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="13" id="fhs-y8-ygQ"/>
                                                     </constraints>
@@ -677,7 +677,7 @@ by using one of the following methods:</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give us more details about the product and we'll try to index it as soon as possible." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Az-wH-wof">
-                                                    <rect key="frame" x="61.5" y="193" width="254" height="26"/>
+                                                    <rect key="frame" x="65" y="196" width="245.5" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="5Tu-Ug-C7c"/>
                                                     </constraints>
@@ -872,7 +872,7 @@ by using one of the following methods:</string>
                                     <action selector="onSendPressed:" destination="EIE-IQ-2sO" eventType="touchUpInside" id="CbQ-Lo-Wja"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEl-Tm-imw">
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEl-Tm-imw">
                                 <rect key="frame" x="0.0" y="20" width="375" height="586"/>
                                 <connections>
                                     <segue destination="o3R-q9-lla" kind="embed" identifier="MISSING_PRODUCT_TVC" id="3Rb-Zd-Kos"/>
@@ -894,6 +894,7 @@ by using one of the following methods:</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="containerBottomConstr" destination="2io-1j-5LO" id="bQi-Xx-gR3"/>
                         <outlet property="sendButton" destination="nU9-Bs-z3f" id="Bxy-rc-Ojl"/>
                         <outlet property="sendButtonHeightConstr" destination="t4c-dE-blf" id="LPX-us-9SE"/>
                     </connections>
@@ -968,7 +969,7 @@ by using one of the following methods:</string>
                                                             <rect key="frame" x="133" y="0.0" width="129" height="181"/>
                                                             <subviews>
                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mge-qg-Y1j">
-                                                                    <rect key="frame" x="0.0" y="8" width="129" height="153"/>
+                                                                    <rect key="frame" x="3.5" y="8" width="125.5" height="153"/>
                                                                     <state key="normal" backgroundImage="upload product photo frame "/>
                                                                     <connections>
                                                                         <action selector="uploadImagePressed:" destination="8FJ-jk-rt9" eventType="touchUpInside" id="kJz-46-Tlo"/>
@@ -982,7 +983,7 @@ by using one of the following methods:</string>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload product photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1Y-yP-eUE">
-                                                                    <rect key="frame" x="0.0" y="99" width="129" height="32"/>
+                                                                    <rect key="frame" x="3.5" y="99" width="125.5" height="32"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="32" id="bCd-G7-1Us"/>
                                                                     </constraints>

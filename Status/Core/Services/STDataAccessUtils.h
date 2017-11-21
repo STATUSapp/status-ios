@@ -101,6 +101,9 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
 + (void)getUsedSuggestionsForCategory:(NSString *)categoryId
                          andPageIndex:(NSInteger)pageIndex
                         andCompletion:(STDataAccessCompletionBlock)completion;
++ (void)getProductsByBarcode:(NSString *)barcodeString
+                andPageIndex:(NSInteger)pageIndex
+               andCompletion:(STDataAccessCompletionBlock)completion;
 
 //commissions
 + (void)getUserCommissionsWithCompletion:(STDataAccessCompletionBlock)completion;

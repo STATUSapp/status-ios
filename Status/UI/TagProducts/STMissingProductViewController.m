@@ -10,12 +10,14 @@
 #import "STMissingProductTVCTableViewController.h"
 
 CGFloat const kDefaultSendButtonHeight = 48.f;
+CGFloat const kDefaultContainerBottomConstr = 13.f;
 
 @interface STMissingProductViewController ()<STProductNotIndexedTVCProtocol>
 
 @property (nonatomic, strong) STMissingProductTVCTableViewController *childTVC;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendButtonHeightConstr;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerBottomConstr;
 
 @end
 
@@ -29,6 +31,17 @@ CGFloat const kDefaultSendButtonHeight = 48.f;
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController.tabBarController.tabBar setHidden:YES];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
+
     [self configureSendButton];
 }
 
@@ -37,6 +50,9 @@ CGFloat const kDefaultSendButtonHeight = 48.f;
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 -(void)configureSendButton{
     NSString *brandName = [_childTVC brandName];
     NSString *productName = [_childTVC productName];
@@ -46,6 +62,38 @@ CGFloat const kDefaultSendButtonHeight = 48.f;
                                   storeUrl.length > 0);
     _sendButton.hidden = shouldHideSendButton;
     _sendButtonHeightConstr.constant = shouldHideSendButton ? 0.f : kDefaultSendButtonHeight;
+}
+
+#pragma mark - Notifications
+
+- (void)keyboardWillHide:(NSNotification *)notification{
+    _containerBottomConstr.constant = kDefaultContainerBottomConstr;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [self.view layoutIfNeeded];
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    [_childTVC scrollToTheBottom];
+    NSDictionary* userInfo = [notification userInfo];
+    
+    // get the size of the keyboard
+//    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+//    CGFloat remainingHeight = keyboardSize.height;
+//    remainingHeight = remainingHeight - _sendButtonHeightConstr.constant;
+//    remainingHeight = remainingHeight - kDefaultContainerBottomConstr;
+//    _containerBottomConstr.constant = remainingHeight;
+//    
+//    [UIView animateWithDuration:0.33 animations:^{
+//        [self.view layoutIfNeeded];
+//    } completion:^(BOOL finished) {
+//    }];
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationBeginsFromCurrentState:YES];
+//    [self.view layoutIfNeeded];
+//    [UIView commitAnimations];
 }
 
 #pragma mark - Navigation

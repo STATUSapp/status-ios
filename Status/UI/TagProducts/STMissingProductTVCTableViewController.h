@@ -24,5 +24,5 @@
 -(NSString *)productName;
 -(NSString *)productURL;
 -(void)invalidateFields;
-
+-(void)scrollToTheBottom;
 @end

@@ -778,7 +778,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lynlee Poston Poston" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwk-zm-Evc">
-                                                            <rect key="frame" x="54" y="17" width="170" height="24"/>
+                                                            <rect key="frame" x="54" y="17" width="176" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="ZV2-ou-gIW"/>
                                                             </constraints>
@@ -787,9 +787,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsored" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMm-oq-QYg">
-                                                            <rect key="frame" x="230" y="20.5" width="82" height="17"/>
+                                                            <rect key="frame" x="236" y="20.5" width="68" height="17"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="82" id="5kr-W5-mle"/>
+                                                                <constraint firstAttribute="width" constant="68" id="5kr-W5-mle"/>
                                                                 <constraint firstAttribute="height" constant="17" id="Yqs-VI-dFR"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
@@ -802,7 +802,7 @@
                                                         <constraint firstItem="aMm-oq-QYg" firstAttribute="centerY" secondItem="iae-fq-9qg" secondAttribute="centerY" id="4ks-vS-762"/>
                                                         <constraint firstItem="8Op-2w-y6R" firstAttribute="leading" secondItem="iae-fq-9qg" secondAttribute="leading" constant="16" id="6eb-TM-VaI"/>
                                                         <constraint firstItem="Pwk-zm-Evc" firstAttribute="centerY" secondItem="iae-fq-9qg" secondAttribute="centerY" id="EsC-j3-E7q"/>
-                                                        <constraint firstAttribute="trailing" secondItem="aMm-oq-QYg" secondAttribute="trailing" constant="8" id="FLM-Jq-p4I"/>
+                                                        <constraint firstAttribute="trailing" secondItem="aMm-oq-QYg" secondAttribute="trailing" constant="16" id="FLM-Jq-p4I"/>
                                                         <constraint firstAttribute="height" constant="58" id="G8s-Q8-roB"/>
                                                         <constraint firstItem="Pwk-zm-Evc" firstAttribute="leading" secondItem="8Op-2w-y6R" secondAttribute="trailing" constant="6" id="HrX-Cq-NVF"/>
                                                         <constraint firstItem="8Op-2w-y6R" firstAttribute="centerY" secondItem="iae-fq-9qg" secondAttribute="centerY" id="Txo-Mx-xyd"/>
@@ -816,25 +816,25 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5eP-ZB-xf4" userLabel="LearnMoreView">
-                                                    <rect key="frame" x="0.0" y="225" width="320" height="36"/>
+                                                    <rect key="frame" x="0.0" y="225" width="320" height="46"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6A-Cd-qiA" userLabel="SeparatorView">
-                                                            <rect key="frame" x="16" y="35" width="288" height="1"/>
-                                                            <color key="backgroundColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <rect key="frame" x="16" y="45" width="288" height="1"/>
+                                                            <color key="backgroundColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="Tw4-Wa-Tlm"/>
                                                             </constraints>
                                                         </view>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange arrow" translatesAutoresizingMaskIntoConstraints="NO" id="VYl-TN-4bN">
-                                                            <rect key="frame" x="298" y="13" width="6" height="10"/>
+                                                            <rect key="frame" x="298" y="18" width="6" height="10"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="10" id="j5I-0f-ce5"/>
                                                                 <constraint firstAttribute="width" constant="6" id="muh-G1-DM3"/>
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7R-pr-dBE">
-                                                            <rect key="frame" x="16" y="0.0" width="274" height="36"/>
-                                                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
+                                                            <rect key="frame" x="16" y="0.0" width="274" height="46"/>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="17"/>
                                                             <state key="normal" title="Call To Action">
                                                                 <color key="titleColor" red="0.9137254901960784" green="0.42745098039215684" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
@@ -851,14 +851,14 @@
                                                         <constraint firstAttribute="trailing" secondItem="A6A-Cd-qiA" secondAttribute="trailing" constant="16" id="cd5-ND-Vhn"/>
                                                         <constraint firstItem="D7R-pr-dBE" firstAttribute="top" secondItem="5eP-ZB-xf4" secondAttribute="top" id="cvi-H1-7nR"/>
                                                         <constraint firstItem="VYl-TN-4bN" firstAttribute="centerY" secondItem="5eP-ZB-xf4" secondAttribute="centerY" id="deE-eJ-PTY"/>
-                                                        <constraint firstAttribute="height" constant="36" id="oUc-Ep-kqK"/>
+                                                        <constraint firstAttribute="height" constant="46" id="oUc-Ep-kqK"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L3F-bA-Xb7" userLabel="CaptionView">
-                                                    <rect key="frame" x="0.0" y="261" width="320" height="89"/>
+                                                    <rect key="frame" x="0.0" y="271" width="320" height="79"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnL-Hw-O5s">
-                                                            <rect key="frame" x="16" y="8" width="288" height="73"/>
+                                                            <rect key="frame" x="16" y="8" width="288" height="63"/>
                                                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
                                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1133,7 +1133,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3wi-O5-QRK">
-                        <rect key="frame" x="0.0" y="20" width="320" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
