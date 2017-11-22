@@ -54,6 +54,10 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
                 gender:(NSString *)gender
                 offset:(NSInteger)offset
         withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getPostsForFlow:(STFlowType)flowType
+               hashTag:(NSString *)hashtag
+                offset:(NSInteger)offset
+        withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getNearbyPostsWithOffset:(NSInteger)offset
                  withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getPostsForUserId:(NSString *)userId

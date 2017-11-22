@@ -366,7 +366,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Fashion Designer.  Known for exotic prints and for creating the sand blasted look for jeans. Livin' the dream." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-qF-e7M">
-                                            <rect key="frame" x="14" y="0.0" width="237" height="45.5"/>
+                                            <rect key="frame" x="14" y="0.0" width="237" height="39"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -625,12 +625,6 @@
                                                         <action selector="onLikesPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="3jw-g4-mps"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tonight's #ootd for a Friday few beers. Hope you all have wonderfull weekend!! #excited #happy #fashion #inspiration" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66Q-V1-oBu">
-                                                    <rect key="frame" x="16" y="48" width="300" height="45.5"/>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
-                                                    <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 MINUTES AGO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55i-3q-z8Z">
                                                     <rect key="frame" x="16" y="86" width="296" height="14"/>
                                                     <constraints>
@@ -641,15 +635,24 @@
                                                     <color key="textColor" red="0.61176470588235299" green="0.61176470588235299" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tonight's #ootd for a Friday few beers. Hope you all have wonderfull weekend!! #excited #happy #fashion #inspiration" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Buj-pA-aiK">
+                                                    <rect key="frame" x="12" y="40" width="305" height="48"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="kUw-q3-wvD" id="OFu-Ra-VPS"/>
+                                                    </connections>
+                                                </textView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="66Q-V1-oBu" secondAttribute="trailing" constant="4" id="B4j-pW-y9S"/>
-                                                <constraint firstItem="66Q-V1-oBu" firstAttribute="top" secondItem="gGu-OS-7ep" secondAttribute="bottom" id="MQL-ST-jBI"/>
+                                                <constraint firstAttribute="trailing" secondItem="Buj-pA-aiK" secondAttribute="trailing" constant="3" id="BTa-wV-lrW"/>
+                                                <constraint firstItem="Buj-pA-aiK" firstAttribute="leading" secondItem="X4G-YK-o5W" secondAttribute="leading" constant="12" id="NaP-3d-FDe"/>
                                                 <constraint firstItem="gGu-OS-7ep" firstAttribute="leading" secondItem="X4G-YK-o5W" secondAttribute="leading" constant="16" id="QNb-0Z-kav"/>
-                                                <constraint firstItem="66Q-V1-oBu" firstAttribute="leading" secondItem="X4G-YK-o5W" secondAttribute="leading" constant="16" id="X8L-ln-2DZ"/>
-                                                <constraint firstItem="55i-3q-z8Z" firstAttribute="top" relation="lessThanOrEqual" secondItem="66Q-V1-oBu" secondAttribute="bottom" constant="16" id="ejb-ef-bqC"/>
+                                                <constraint firstItem="Buj-pA-aiK" firstAttribute="top" secondItem="gGu-OS-7ep" secondAttribute="bottom" constant="-8" id="kgx-ag-q42"/>
                                                 <constraint firstAttribute="bottom" secondItem="55i-3q-z8Z" secondAttribute="bottom" constant="20" id="qtS-Qs-GiN"/>
+                                                <constraint firstItem="55i-3q-z8Z" firstAttribute="top" secondItem="Buj-pA-aiK" secondAttribute="bottom" constant="-2" id="t2o-Uj-RlT"/>
                                                 <constraint firstItem="gGu-OS-7ep" firstAttribute="top" secondItem="X4G-YK-o5W" secondAttribute="top" constant="4" id="x57-28-0U2"/>
                                                 <constraint firstItem="55i-3q-z8Z" firstAttribute="leading" secondItem="X4G-YK-o5W" secondAttribute="leading" constant="16" id="zX1-ie-G9l"/>
                                             </constraints>
@@ -665,7 +668,7 @@
                                 <size key="customSize" width="320" height="120"/>
                                 <connections>
                                     <outlet property="postDateLabel" destination="55i-3q-z8Z" id="tq1-LC-TbI"/>
-                                    <outlet property="postDescriptionLabel" destination="66Q-V1-oBu" id="Viz-Nx-k4M"/>
+                                    <outlet property="postDescriptionTextView" destination="Buj-pA-aiK" id="r0X-Ny-UIQ"/>
                                     <outlet property="postLikesButton" destination="gGu-OS-7ep" id="32S-lU-xph"/>
                                 </connections>
                             </collectionViewCell>

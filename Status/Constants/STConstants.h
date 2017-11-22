@@ -48,6 +48,7 @@ typedef NS_ENUM(NSUInteger,STFlowType){
     STFlowTypeSinglePost,
     STFlowTypePopular,
     STFlowTypeRecent,
+    STFlowTypeHasttag
 };
 
 typedef NS_ENUM(NSUInteger, STInterstitialType){
@@ -114,6 +115,7 @@ extern NSInteger const kCatalogDownloadPageSize;
 extern NSString *const kGetPosts;
 extern NSString *const kGetHomePosts;
 extern NSString *const kGetRecentPosts;
+extern NSString *const kGetPostsByHashTag;
 extern NSString *const kLoginUser;
 extern NSString *const kRegisterUser;
 extern NSString *const kPostPhoto;

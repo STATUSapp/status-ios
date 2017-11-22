@@ -113,6 +113,7 @@
             //here is where we should add more notifications
             if ([obj isKindOfClass:[STPost class]]) {
                 [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
+                [(STPost *)obj resetCaptionAndHashtags];
             }
             else if ([obj isKindOfClass:[STUserProfile class]]){
                 [[CoreManager localNotificationService] postNotificationName:STProfilePoolObjectUpdatedNotification object:nil userInfo:@{kUserIdKey:obj.uuid}];

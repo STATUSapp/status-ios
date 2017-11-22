@@ -29,7 +29,7 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     self = [super init];
     if (self) {
         //default sort
-        self.sortedFlows = [NSMutableArray arrayWithArray:@[@(STImageDownloadSpecialPriority),@(STFlowTypeHome),@(STFlowTypePopular),@(STFlowTypeRecent), @(STFlowTypeDiscoverNearby), @(STFlowTypeMyGallery), @(STFlowTypeUserGallery), @(STFlowTypeSinglePost)]];
+        self.sortedFlows = [NSMutableArray arrayWithArray:@[@(STImageDownloadSpecialPriority),@(STFlowTypeHome),@(STFlowTypePopular),@(STFlowTypeRecent), @(STFlowTypeHasttag), @(STFlowTypeMyGallery), @(STFlowTypeUserGallery), @(STFlowTypeSinglePost)]];
     }
     return self;
 }

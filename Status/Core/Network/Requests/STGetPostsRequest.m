@@ -25,6 +25,24 @@
 
 + (void)getPostsWithOffset:(NSInteger)offset
                   flowType:(NSInteger)flowType
+                   hashtag:(NSString *)hashtag
+            withCompletion:(STRequestCompletionBlock)completion
+                   failure:(STRequestFailureBlock)failure{
+    
+    STGetPostsRequest *request = [STGetPostsRequest new];
+    request.completionBlock = completion;
+    request.failureBlock = failure;
+    request.executionBlock = [request _getExecutionBlock];
+    request.retryCount = 0;
+    request.offset = offset;
+    request.flowType = flowType;
+    request.hashtag = hashtag;
+    [[CoreManager networkService] addToQueueTop:request];
+}
+
+
++ (void)getPostsWithOffset:(NSInteger)offset
+                  flowType:(NSInteger)flowType
                  timeFrame:(NSString *)timeframe
                     gender:(NSString *)gender
             withCompletion:(STRequestCompletionBlock)completion
@@ -66,7 +84,9 @@
                 params[@"gender"] = [NSNumber numberWithBool:FALSE];
             }
         }
-        
+        if (weakSelf.flowType == STFlowTypeHasttag) {
+            params[@"hashtag"] = weakSelf.hashtag;
+        }
         NSLog(@"Params: %@", params);
         
         [[STNetworkQueueManager networkAPI] GET:url
@@ -84,9 +104,11 @@
     NSString *url = kGetPosts;
     if (self.flowType == STFlowTypeRecent) {
         url = kGetRecentPosts;
-    }
-    else if (self.flowType == STFlowTypeHome)
+    }else if (self.flowType == STFlowTypeHome){
         url = kGetHomePosts;
+    }else if (self.flowType == STFlowTypeHasttag){
+        url = kGetPostsByHashTag;
+    }
     return url;
 }
 @end

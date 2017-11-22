@@ -30,6 +30,14 @@
 #import "STImageCacheController.h"
 #import "STShopProduct.h"
 #import "STPostsPool.h"
+#import "NSString+HashTags.h"
+
+@interface STPost()
+
+@property (nonatomic, strong) NSAttributedString *attributesString;
+@property (nonatomic, strong, readwrite) NSArray *hashtagRangeArray;
+
+@end
 
 @implementation STPost
 + (instancetype)postWithDict:(NSDictionary *)postDict {
@@ -109,6 +117,72 @@
 
 -(BOOL)isAdPost{
     return NO;
+}
+
+- (NSAttributedString *)formattedCaptionString{
+    if (!_attributesString) {
+        NSString *formattedString = [NSString stringWithFormat:@"%@\n%@", _userName, _caption];
+        NSInteger nameLengh = [_userName length];
+        
+        if (_caption.length == 0) {
+            formattedString = @"";
+            nameLengh = 0;
+        }
+        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:formattedString];
+        NSMutableAttributedString *mutableAttrString = [attributedString mutableCopy];
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [paragraphStyle setLineSpacing: 3.0f];
+        
+        NSDictionary *nameAttributes = @{
+                                         NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Semibold" size:14.0],
+                                         NSForegroundColorAttributeName:[UIColor colorWithRed:26.f/255.f
+                                                                                        green:26.f/255.f
+                                                                                         blue:26.f/255.f
+                                                                                        alpha:1.f],
+                                         NSParagraphStyleAttributeName: paragraphStyle
+                                         };
+        [mutableAttrString addAttributes:nameAttributes range:NSMakeRange(0, nameLengh)];
+        
+        NSDictionary *attributes = @{
+                                     NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Regular" size:14.0],
+                                     NSForegroundColorAttributeName:[UIColor colorWithRed:26.f/255.f
+                                                                                    green:26.f/255.f
+                                                                                     blue:26.f/255.f
+                                                                                    alpha:1.f],
+                                     NSParagraphStyleAttributeName: paragraphStyle
+                                     };
+        NSDictionary *hashTagAttributes = @{
+                                            NSForegroundColorAttributeName: [UIColor colorWithRed:56.f/255.f
+                                                                                            green:117.f/255.f
+                                                                                             blue:242.f/255.f
+                                                                                            alpha:1.f]};
+        
+        [mutableAttrString addAttributes:attributes range:NSMakeRange(nameLengh, attributedString.length - nameLengh)];
+        
+        NSArray *hasTags = [formattedString hashTags];
+        NSMutableArray *ranges = [@[] mutableCopy];
+        for (NSString *hash in hasTags) {
+            NSRange range = [formattedString rangeOfString:hash];
+            [ranges addObject:NSStringFromRange(range)];
+            [mutableAttrString addAttributes:hashTagAttributes range:range];
+            [mutableAttrString addAttribute:NSLinkAttributeName value:@"hashtag" range:range];
+
+        }
+        
+        _hashtagRangeArray = [NSArray arrayWithArray:ranges];
+        _attributesString = [[NSAttributedString alloc] initWithAttributedString:mutableAttrString];
+    }
+    return _attributesString;
+}
+
+-(void)resetCaptionAndHashtags{
+    _hashtagRangeArray = nil;
+    _attributesString = nil;
+}
+
+-(NSString *)hasttagForRange:(NSRange )range{
+    return [[_attributesString attributedSubstringFromRange:range] string];
 }
 
 @end

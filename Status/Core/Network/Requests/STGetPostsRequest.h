@@ -14,6 +14,8 @@
 //only for popular flow
 @property(nonatomic, strong) NSString *timeframe;
 @property(nonatomic, strong) NSString *gender;
+//only for hashtag flow
+@property(nonatomic, strong) NSString *hashtag;
 
 + (void)getPostsWithOffset:(NSInteger)offset
                   flowType:(NSInteger)flowType
@@ -26,5 +28,9 @@
                     gender:(NSString *)gender
             withCompletion:(STRequestCompletionBlock)completion
                    failure:(STRequestFailureBlock)failure;
-
++ (void)getPostsWithOffset:(NSInteger)offset
+                  flowType:(NSInteger)flowType
+                   hashtag:(NSString *)hashtag
+            withCompletion:(STRequestCompletionBlock)completion
+                   failure:(STRequestFailureBlock)failure;
 @end

@@ -128,6 +128,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     BOOL navBarHidden = YES;
     
     if ((_feedProcessor.processorFlowType == STFlowTypeHome ||
+         _feedProcessor.processorFlowType == STFlowTypeHasttag ||
         _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
         navBarHidden = NO;
         }else if (_refreshControl.refreshing == YES &&
@@ -144,6 +145,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             {
                 //set tint color for the back button
                 self.navigationItem.title = NSLocalizedString(@"Photo", nil);
+            }else if (_feedProcessor.processorFlowType == STFlowTypeHasttag){
+                self.navigationItem.title = _feedProcessor.hashtag;
             }
         }
     }
@@ -499,8 +502,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     return sectionIndex;
 }
 
--(NSInteger)getCurrentIndexForButton:(UIButton *)button{
-    NSInteger index = button.tag;
+-(NSInteger)getCurrentIndexForView:(UIView *)view{
+    NSInteger index = view.tag;
     if ([_feedProcessor processorIsAGallery]) {
         //substract the first section
         index --;
@@ -513,7 +516,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         return nil;
     }
     STPost *post = nil;
-    NSInteger index = [self getCurrentIndexForButton:button];
+    NSInteger index = [self getCurrentIndexForView:button];
     if (index!=NSNotFound) {
         post = [_feedProcessor objectAtIndex:index];
     }
@@ -576,6 +579,26 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (void)containerStartedScrolling {
     self.collectionView.scrollEnabled = NO;
+}
+
+#pragma mark - UItextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
+{
+    NSInteger index = [self getCurrentIndexForView:textView];
+    STPost *post = [_feedProcessor objectAtIndex:index];
+    if ([URL.absoluteString isEqualToString:@"hashtag"]) {
+        NSString *hashtag = [post hasttagForRange:characterRange];
+        if (![self.feedProcessor.hashtag isEqualToString:hashtag]) {
+            if (hashtag && hashtag.length) {
+                NSLog(@"didTapHashTag: %@", hashtag);
+                STFlowProcessor *hashtagProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeHasttag hashtag:hashtag];
+                FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:hashtagProcessor];
+                vc.shouldAddBackButton = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }
+    }
+    return NO;
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -882,7 +905,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (IBAction)onLikePressed:(id)sender {
     [(UIButton *)sender setUserInteractionEnabled:NO];
-    NSInteger index = [self getCurrentIndexForButton:sender];
+    NSInteger index = [self getCurrentIndexForView:sender];
     [_feedProcessor setLikeUnlikeAtIndex:index
                           withCompletion:^(NSError *error) {
                               NSLog(@"Post liked!");
@@ -946,7 +969,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
         extendedRights = YES;
     }
-    _postForContextIndex = [self getCurrentIndexForButton:sender];
+    _postForContextIndex = [self getCurrentIndexForView:sender];
     [STContextualMenu presentViewWithDelegate:self
                          withExtendedRights:extendedRights];
 }
@@ -1062,7 +1085,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (IBAction)onShopButtonPressed:(id)sender {
     STPost *post = [self getCurrentPostForButton:sender];
-    NSInteger index = [self getCurrentIndexForButton:sender];
+    NSInteger index = [self getCurrentIndexForView:sender];
     if ([_feedProcessor processorIsAGallery]) {
         index ++;
     }

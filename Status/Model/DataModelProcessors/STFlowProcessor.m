@@ -67,6 +67,8 @@ NSInteger const kFacebookAdsTimeframe = 10;
 
 @property (nonatomic, strong, readwrite) NSString *timeframeFilter;
 @property (nonatomic, strong, readwrite) NSString *genderFilter;
+
+@property (nonatomic, strong, readwrite) NSString *hashtag;
 @end
 
 @implementation STFlowProcessor
@@ -89,8 +91,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
         }
         if (flowType == STFlowTypeHome ||
             flowType == STFlowTypePopular||
-            flowType == STFlowTypeRecent ||
-            flowType == STFlowTypeDiscoverNearby) {
+            flowType == STFlowTypeRecent) {
             [self getMoreData];
         }
         
@@ -119,6 +120,15 @@ NSInteger const kFacebookAdsTimeframe = 10;
     return self;
 }
 
+- (instancetype)initWithFlowType:(STFlowType)flowType
+                         hashtag:(NSString *)hashtag{
+    self = [self initWithFlowType:flowType];
+    if (self) {
+        self.hashtag = hashtag;
+        [self getMoreData];
+    }
+    return self;
+}
 #pragma makr - Interface Methods
 
 - (void)registerForUpdates{
@@ -605,6 +615,14 @@ NSInteger const kFacebookAdsTimeframe = 10;
                                 withCompletion:completion];
             break;
         }
+        case STFlowTypeHasttag:
+        {
+            [STDataAccessUtils getPostsForFlow:_flowType
+                                       hashTag:_hashtag
+                                        offset:offset
+                                withCompletion:completion];
+        }
+            break;
         case STFlowTypeDiscoverNearby: {
             
             [STDataAccessUtils getNearbyPostsWithOffset:offset

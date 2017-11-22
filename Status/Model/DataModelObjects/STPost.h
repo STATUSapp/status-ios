@@ -27,6 +27,11 @@
 //local added properties
 @property (nonatomic, assign) BOOL showFullCaption;
 @property (nonatomic, assign) BOOL showShopProducts;
+@property (nonatomic, strong, readonly) NSArray *hashtagRangeArray;
 
 -(BOOL)isAdPost;
+
+-(void)resetCaptionAndHashtags;
+- (NSAttributedString *)formattedCaptionString;
+-(NSString *)hasttagForRange:(NSRange )range;
 @end

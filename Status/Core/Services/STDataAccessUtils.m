@@ -452,6 +452,20 @@
 }
 
 +(void)getPostsForFlow:(STFlowType)flowType
+               hashTag:(NSString *)hashtag
+                offset:(NSInteger)offset
+        withCompletion:(STDataAccessCompletionBlock)completion{
+    STRequestCompletionBlock responseCompletion = [self postsDefaultHandlerWithCompletion:completion];
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STGetPostsRequest getPostsWithOffset:offset
+                                 flowType:flowType
+                                  hashtag:hashtag
+                           withCompletion:responseCompletion
+                                  failure:failBlock];
+    
+}
+
++(void)getPostsForFlow:(STFlowType)flowType
              timeframe:(NSString *)timeframe
                 gender:(NSString *)gender
                 offset:(NSInteger)offset

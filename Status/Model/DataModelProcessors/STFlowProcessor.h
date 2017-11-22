@@ -32,12 +32,15 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
 @property (nonatomic, strong, readonly) NSString *timeframeFilter;
 @property (nonatomic, strong, readonly) NSString *genderFilter;
 
+@property (nonatomic, strong, readonly) NSString *hashtag;
+
 - (instancetype)initWithFlowType:(STFlowType)flowType;
 - (instancetype)initWithFlowType:(STFlowType)flowType
                          userId:(NSString *)userId;
 - (instancetype)initWithFlowType:(STFlowType)flowType
                          postId:(NSString *)postId;
-
+- (instancetype)initWithFlowType:(STFlowType)flowType
+                         hashtag:(NSString *)hashtag;
 
 //methods
 - (NSInteger)numberOfObjects;
