@@ -41,7 +41,11 @@ CGFloat const kDefaultContainerBottomConstr = 13.f;
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:self.view.window];
     [self configureSendButton];
 }
 
@@ -74,26 +78,30 @@ CGFloat const kDefaultContainerBottomConstr = 13.f;
     [UIView commitAnimations];
 }
 
+- (void)keyboardDidShow:(NSNotification *)notification{
+    [_childTVC scrollToTheBottom];
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    [_childTVC scrollToTheBottom];
     NSDictionary* userInfo = [notification userInfo];
     
     // get the size of the keyboard
-//    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-//    CGFloat remainingHeight = keyboardSize.height;
-//    remainingHeight = remainingHeight - _sendButtonHeightConstr.constant;
-//    remainingHeight = remainingHeight - kDefaultContainerBottomConstr;
-//    _containerBottomConstr.constant = remainingHeight;
-//    
-//    [UIView animateWithDuration:0.33 animations:^{
-//        [self.view layoutIfNeeded];
-//    } completion:^(BOOL finished) {
-//    }];
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationBeginsFromCurrentState:YES];
-//    [self.view layoutIfNeeded];
-//    [UIView commitAnimations];
+    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    CGFloat remainingHeight = keyboardSize.height;
+    remainingHeight = remainingHeight - _sendButtonHeightConstr.constant;
+    remainingHeight = remainingHeight - kDefaultContainerBottomConstr;
+    _containerBottomConstr.constant = remainingHeight;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [_childTVC scrollToTheBottom];
+    }];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [self.view layoutIfNeeded];
+    [UIView commitAnimations];
 }
 
 #pragma mark - Navigation

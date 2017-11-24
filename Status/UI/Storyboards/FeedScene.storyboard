@@ -366,7 +366,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Fashion Designer.  Known for exotic prints and for creating the sand blasted look for jeans. Livin' the dream." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-qF-e7M">
-                                            <rect key="frame" x="14" y="0.0" width="237" height="39"/>
+                                            <rect key="frame" x="14" y="0.0" width="237" height="45.5"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -781,7 +781,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lynlee Poston Poston" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwk-zm-Evc">
-                                                            <rect key="frame" x="54" y="17" width="176" height="24"/>
+                                                            <rect key="frame" x="54" y="17" width="175" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="ZV2-ou-gIW"/>
                                                             </constraints>
@@ -790,9 +790,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsored" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMm-oq-QYg">
-                                                            <rect key="frame" x="236" y="20.5" width="68" height="17"/>
+                                                            <rect key="frame" x="235" y="20.5" width="69" height="17"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="68" id="5kr-W5-mle"/>
+                                                                <constraint firstAttribute="width" constant="69" id="5kr-W5-mle"/>
                                                                 <constraint firstAttribute="height" constant="17" id="Yqs-VI-dFR"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
@@ -829,14 +829,14 @@
                                                             </constraints>
                                                         </view>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange arrow" translatesAutoresizingMaskIntoConstraints="NO" id="VYl-TN-4bN">
-                                                            <rect key="frame" x="298" y="18" width="6" height="10"/>
+                                                            <rect key="frame" x="295" y="15" width="9" height="16"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="10" id="j5I-0f-ce5"/>
-                                                                <constraint firstAttribute="width" constant="6" id="muh-G1-DM3"/>
+                                                                <constraint firstAttribute="height" constant="16" id="j5I-0f-ce5"/>
+                                                                <constraint firstAttribute="width" constant="9" id="muh-G1-DM3"/>
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7R-pr-dBE">
-                                                            <rect key="frame" x="16" y="0.0" width="274" height="46"/>
+                                                            <rect key="frame" x="16" y="0.0" width="271" height="46"/>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="17"/>
                                                             <state key="normal" title="Call To Action">
                                                                 <color key="titleColor" red="0.9137254901960784" green="0.42745098039215684" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
@@ -1171,7 +1171,7 @@
         <image name="more button" width="34" height="33"/>
         <image name="more-icon" width="16" height="3"/>
         <image name="no picture" width="111" height="111"/>
-        <image name="orange arrow" width="6" height="10"/>
+        <image name="orange arrow" width="12" height="21"/>
         <image name="settings_btn" width="32" height="32"/>
         <image name="settings_btn_pressed" width="32" height="32"/>
         <image name="shop" width="13" height="17"/>

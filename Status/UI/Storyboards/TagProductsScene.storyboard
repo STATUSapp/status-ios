@@ -93,7 +93,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="57" id="XlT-8m-3eh"/>
                                                 </constraints>
-                                                <state key="normal" image="Barcode icon pressed"/>
+                                                <state key="normal" image="Barcode icon unpressed"/>
+                                                <state key="selected" image="Barcode icon pressed"/>
+                                                <state key="highlighted" image="Barcode icon pressed"/>
                                             </button>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-bZ-eys">
                                                 <rect key="frame" x="0.0" y="57" width="94" height="41"/>
@@ -677,7 +679,7 @@ by using one of the following methods:</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give us more details about the product and we'll try to index it as soon as possible." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Az-wH-wof">
-                                                    <rect key="frame" x="61" y="196" width="254" height="26"/>
+                                                    <rect key="frame" x="61.5" y="196" width="254" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="5Tu-Ug-C7c"/>
                                                     </constraints>
@@ -1359,6 +1361,7 @@ by using one of the following methods:</string>
     </scenes>
     <resources>
         <image name="Barcode icon pressed" width="75" height="37"/>
+        <image name="Barcode icon unpressed" width="75" height="37"/>
         <image name="Manual icon" width="32" height="48"/>
         <image name="Manual icon unpressed" width="32" height="48"/>
         <image name="Rectangle" width="32" height="33"/>

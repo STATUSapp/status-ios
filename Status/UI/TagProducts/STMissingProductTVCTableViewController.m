@@ -75,12 +75,12 @@
 
 #pragma mark - Helpers
 -(void)scrollToTheBottom{
-    CGPoint bottomOffset = CGPointMake(0, self.tableView.contentSize.height);
-    [self.tableView setContentOffset:bottomOffset animated:YES];
+//    CGPoint bottomOffset = CGPointMake(0, self.tableView.contentSize.height);
+//    [self.tableView setContentOffset:bottomOffset animated:YES];
 
-//    NSInteger maxSection = [self numberOfSectionsInTableView:self.tableView];
-//    NSInteger maxIndexInSection = [self tableView:self.tableView numberOfRowsInSection:maxSection - 1];
-//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:maxIndexInSection - 1 inSection:maxSection - 1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    NSInteger maxSection = [self numberOfSectionsInTableView:self.tableView];
+    NSInteger maxIndexInSection = [self tableView:self.tableView numberOfRowsInSection:maxSection - 1];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:maxIndexInSection - 1 inSection:maxSection - 1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 -(BOOL)validateFields{
     NSString *errorMessage;
