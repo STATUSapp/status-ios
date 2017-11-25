@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EFD-wZ-5HD">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EFD-wZ-5HD">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,23 +14,16 @@
         <scene sceneID="SMM-WH-H1h">
             <objects>
                 <viewController autoresizesArchivedViewToFullSize="NO" id="EFD-wZ-5HD" customClass="LaunchViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Pol-OS-XId"/>
-                        <viewControllerLayoutGuide type="bottom" id="bH3-Ez-mCk"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8wr-st-HV7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMw-b4-lOj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="1Fq-EK-Izk"/>
-                                </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKa-lu-qWv">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1rR-Nt-FBk"/>
                                 </constraints>
@@ -36,7 +31,7 @@
                                 <items>
                                     <navigationItem id="ndt-36-37x">
                                         <view key="titleView" contentMode="scaleToFill" id="hiX-fM-gsR">
-                                            <rect key="frame" x="132.5" y="13.5" width="110" height="17"/>
+                                            <rect key="frame" x="132.66666666666666" y="13.666666666666664" width="110" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo status home screen" translatesAutoresizingMaskIntoConstraints="NO" id="7bB-Lt-ny2">
@@ -50,27 +45,26 @@
                                 </items>
                             </navigationBar>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSb-0F-7mY">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="729" width="375" height="83"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="Pxx-z6-hah"/>
-                                </constraints>
                                 <items/>
                                 <color key="barTintColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tabBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="oSb-0F-7mY" firstAttribute="leading" secondItem="8wr-st-HV7" secondAttribute="leading" id="6bw-EM-pZQ"/>
-                            <constraint firstAttribute="trailing" secondItem="oSb-0F-7mY" secondAttribute="trailing" id="6d4-Wp-UgZ"/>
-                            <constraint firstAttribute="trailing" secondItem="sKa-lu-qWv" secondAttribute="trailing" id="Eht-00-vpP"/>
-                            <constraint firstItem="bH3-Ez-mCk" firstAttribute="top" secondItem="oSb-0F-7mY" secondAttribute="bottom" id="SSk-8z-bxJ"/>
-                            <constraint firstItem="TMw-b4-lOj" firstAttribute="leading" secondItem="8wr-st-HV7" secondAttribute="leading" id="dEn-c0-f4j"/>
-                            <constraint firstItem="sKa-lu-qWv" firstAttribute="top" secondItem="TMw-b4-lOj" secondAttribute="bottom" id="e7C-Fl-qxY"/>
+                            <constraint firstItem="oSb-0F-7mY" firstAttribute="leading" secondItem="faG-24-z3B" secondAttribute="leading" id="6bw-EM-pZQ"/>
+                            <constraint firstItem="faG-24-z3B" firstAttribute="trailing" secondItem="oSb-0F-7mY" secondAttribute="trailing" id="6d4-Wp-UgZ"/>
+                            <constraint firstItem="sKa-lu-qWv" firstAttribute="top" secondItem="faG-24-z3B" secondAttribute="top" id="7mG-xG-pkV"/>
+                            <constraint firstItem="faG-24-z3B" firstAttribute="trailing" secondItem="sKa-lu-qWv" secondAttribute="trailing" id="Eht-00-vpP"/>
+                            <constraint firstItem="sKa-lu-qWv" firstAttribute="top" secondItem="TMw-b4-lOj" secondAttribute="bottom" id="F5A-d2-pNf"/>
+                            <constraint firstItem="TMw-b4-lOj" firstAttribute="leading" secondItem="faG-24-z3B" secondAttribute="leading" id="dEn-c0-f4j"/>
                             <constraint firstItem="TMw-b4-lOj" firstAttribute="top" secondItem="8wr-st-HV7" secondAttribute="top" id="eG1-XD-XbS"/>
-                            <constraint firstItem="sKa-lu-qWv" firstAttribute="leading" secondItem="8wr-st-HV7" secondAttribute="leading" id="i2A-Yv-SCa"/>
-                            <constraint firstAttribute="trailing" secondItem="TMw-b4-lOj" secondAttribute="trailing" id="r24-fI-jDJ"/>
+                            <constraint firstItem="sKa-lu-qWv" firstAttribute="leading" secondItem="faG-24-z3B" secondAttribute="leading" id="i2A-Yv-SCa"/>
+                            <constraint firstItem="faG-24-z3B" firstAttribute="trailing" secondItem="TMw-b4-lOj" secondAttribute="trailing" id="r24-fI-jDJ"/>
+                            <constraint firstAttribute="bottom" secondItem="oSb-0F-7mY" secondAttribute="bottom" id="vjK-W9-2be"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="faG-24-z3B"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>

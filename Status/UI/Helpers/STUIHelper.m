@@ -33,6 +33,8 @@
         if([UIScreen mainScreen].bounds.size.height == 736.0){
             //iPhone retina-5.5 inch screen(iPhone 6 plus)
             imageName = @"splash1242x2208";
+        }else if ([UIScreen mainScreen].bounds.size.height == 812.0){
+            imageName = @"splash1125x2436";
         }
     }
     
