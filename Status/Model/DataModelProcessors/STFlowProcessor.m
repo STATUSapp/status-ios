@@ -43,7 +43,7 @@ NSString * const kTimeframeAllTime = @"all";
 NSString * const kGenderWomen = @"female";
 NSString * const kGenderMen = @"male";
 
-#if USE_PRODUCTION_SERVER
+#ifdef DEBUG
 NSInteger const kFacebookAdsTimeframe = 3;
 #else
 NSInteger const kFacebookAdsTimeframe = 10;
