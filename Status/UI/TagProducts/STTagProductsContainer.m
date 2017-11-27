@@ -86,8 +86,8 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
     _manualView.delegate = self;
     
     _barcodeState = STBarcodeScanStateDefault;
-    _selectionType = STContainerSelectionBarcode;
-    [self configureTopViewsForSelectedView:_barcodeView];
+    _selectionType = STContainerSelectionWizzard;
+    [self configureTopViewsForSelectedView:_wizzardView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(tagProductsNotification:) name:kTagProductNotification object:nil];
