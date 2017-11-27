@@ -104,6 +104,9 @@ CGFloat const kTopButtonSize = 48.f;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingViewImage;
 @property (strong, nonatomic) IBOutlet UIView *noDataView;
 @property (strong, nonatomic) IBOutlet UIView *navBarLogoView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *earningsBarButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *optionsBarButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *settingsBarButton;
 
 @end
 
@@ -120,33 +123,43 @@ static NSString * const profileLocationCell = @"UserProfileLocationCell";
 static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
+//-(UIEdgeInsets)additionalSafeAreaInsets{
+//    return UIEdgeInsetsMake(-40.f, 0, 0, 0);
+//}
+
 - (void)configureNavigationBar{
     UIViewController *currentViewController = [self.navigationController.viewControllers lastObject];
     if (self != currentViewController) {
         return;
     }
+//    BOOL navBarHidden = NO;
     BOOL navBarHidden = YES;
-    
     if ((_feedProcessor.processorFlowType == STFlowTypeHome ||
          _feedProcessor.processorFlowType == STFlowTypeHasttag ||
-        _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
+         _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
         navBarHidden = NO;
-        }else if (_refreshControl.refreshing == YES &&
-                  _feedProcessor.processorFlowType == STFlowTypeHome){
-            navBarHidden = NO;
-        }
+    }else if (_refreshControl.refreshing == YES &&
+              _feedProcessor.processorFlowType == STFlowTypeHome){
+        navBarHidden = NO;
+    }
 
     if (navBarHidden == NO) {
         if (self == currentViewController) {
-            if (_feedProcessor.processorFlowType == STFlowTypeHome) {
+            if (_feedProcessor.processorFlowType == STFlowTypeHome){
                 self.navigationItem.titleView = _navBarLogoView;
+            }
+            else if (_feedProcessor.processorFlowType == STFlowTypeMyGallery) {
+                self.navigationItem.titleView = _navBarLogoView;
+                self.navigationItem.rightBarButtonItems = @[_settingsBarButton,_earningsBarButton];
             }
             else if (_feedProcessor.processorFlowType == STFlowTypeSinglePost)
             {
-                //set tint color for the back button
                 self.navigationItem.title = NSLocalizedString(@"Photo", nil);
             }else if (_feedProcessor.processorFlowType == STFlowTypeHasttag){
                 self.navigationItem.title = _feedProcessor.hashtag;
+            }else if (_feedProcessor.processorFlowType == STFlowTypeUserGallery){
+                self.navigationItem.title = [self userName];
+                self.navigationItem.rightBarButtonItems = @[_optionsBarButton];
             }
         }
     }
@@ -268,6 +281,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"self.collectionView.constraints = %@", self.collectionView.contentInsetAdjustmentBehavior);
     
     if (self.feedProcessor.processorFlowType == STFlowTypeHome) {
         NSArray *redirectVC = [[CoreManager deepLinkService] redirectViewControllers];

@@ -367,7 +367,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Fashion Designer.  Known for exotic prints and for creating the sand blasted look for jeans. Livin' the dream." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-qF-e7M">
-                                            <rect key="frame" x="14" y="0.0" width="237" height="45.5"/>
+                                            <rect key="frame" x="14" y="0.0" width="237" height="39"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -999,10 +999,13 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="earningsBarButton" destination="zDl-7S-gYy" id="qz9-O7-yuH"/>
                         <outlet property="loadingView" destination="JqY-Wn-ru7" id="Oxu-rv-VEA"/>
                         <outlet property="loadingViewImage" destination="SUQ-Ff-C4q" id="9cQ-sq-c0g"/>
                         <outlet property="navBarLogoView" destination="C51-kd-Pdl" id="aOt-jP-F5w"/>
                         <outlet property="noDataView" destination="iCq-M5-6oM" id="GDv-xz-eba"/>
+                        <outlet property="optionsBarButton" destination="DDi-05-m7k" id="xHE-Sv-yAh"/>
+                        <outlet property="settingsBarButton" destination="xiR-4U-3hh" id="5Sv-8T-vgo"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OFn-Gk-snp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1105,12 +1108,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo status home screen" translatesAutoresizingMaskIntoConstraints="NO" id="OMH-OK-q2A">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo status home screen" translatesAutoresizingMaskIntoConstraints="NO" id="OMH-OK-q2A">
                             <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="OMH-OK-q2A" firstAttribute="trailing" secondItem="bO5-eC-TIl" secondAttribute="trailing" id="5Lc-Wh-3JZ"/>
+                        <constraint firstItem="OMH-OK-q2A" firstAttribute="top" secondItem="bO5-eC-TIl" secondAttribute="top" id="Ccn-Vg-Ahe"/>
+                        <constraint firstItem="OMH-OK-q2A" firstAttribute="leading" secondItem="bO5-eC-TIl" secondAttribute="leading" id="cIo-Yw-rts"/>
+                        <constraint firstItem="OMH-OK-q2A" firstAttribute="bottom" secondItem="bO5-eC-TIl" secondAttribute="bottom" id="iwC-wT-N3a"/>
+                    </constraints>
                     <viewLayoutGuide key="safeArea" id="bO5-eC-TIl"/>
                 </view>
                 <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="AxN-ZE-6dH">
@@ -1118,6 +1126,36 @@
                         <action selector="onDoubleTap:" destination="kUw-q3-wvD" id="NOc-8k-7kn"/>
                     </connections>
                 </tapGestureRecognizer>
+                <barButtonItem width="48" style="plain" id="zDl-7S-gYy" userLabel="Earnings Bar Button">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gjl-q7-rV2">
+                        <rect key="frame" x="313" y="7" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="Earnings Icon" backgroundImage="circle"/>
+                        <connections>
+                            <segue destination="FUp-UQ-PVI" kind="show" id="SJw-WL-3J2"/>
+                        </connections>
+                    </button>
+                </barButtonItem>
+                <barButtonItem width="48" style="plain" id="DDi-05-m7k" userLabel="Options Bar Button">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8QA-di-KEe">
+                        <rect key="frame" x="313" y="7" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="more button"/>
+                        <connections>
+                            <action selector="onProfileOptionsPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="7jL-eM-otw"/>
+                        </connections>
+                    </button>
+                </barButtonItem>
+                <barButtonItem width="48" style="plain" id="xiR-4U-3hh" userLabel="Settings Bar Button">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gmy-RO-D1F">
+                        <rect key="frame" x="313" y="7" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="settings_btn"/>
+                        <connections>
+                            <action selector="onSettingsButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="ZUO-Mi-2oZ"/>
+                        </connections>
+                    </button>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1209.5999999999999" y="1175.7121439280361"/>
         </scene>
@@ -1183,4 +1221,7 @@
         <image name="splashscreen" width="375" height="667"/>
         <image name="user_photo_gradient" width="375" height="151"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="SJw-WL-3J2"/>
+    </inferredMetricsTieBreakers>
 </document>

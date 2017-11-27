@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,21 +15,21 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZa-99-Kjv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zla-NS-JT0">
-                                <rect key="frame" x="0.0" y="729" width="375" height="83"/>
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items/>
                                 <color key="barTintColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tabBar>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xoh-pc-Mgx">
-                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="aOW-P7-lUL"/>
                                 </constraints>
@@ -37,15 +37,20 @@
                                 <items>
                                     <navigationItem id="o1T-Wq-Y1H">
                                         <view key="titleView" contentMode="scaleToFill" id="0Zn-ab-py3">
-                                            <rect key="frame" x="187.66666666666666" y="22" width="0.0" height="0.0"/>
+                                            <rect key="frame" x="132.5" y="13.5" width="110" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo status home screen" translatesAutoresizingMaskIntoConstraints="NO" id="Xq6-7o-QLD">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo status home screen" translatesAutoresizingMaskIntoConstraints="NO" id="Xq6-7o-QLD">
                                                     <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Xq6-7o-QLD" secondAttribute="trailing" id="Lnc-5l-CMT"/>
+                                                <constraint firstItem="Xq6-7o-QLD" firstAttribute="leading" secondItem="0Zn-ab-py3" secondAttribute="leading" id="PUu-P3-E29"/>
+                                                <constraint firstAttribute="bottom" secondItem="Xq6-7o-QLD" secondAttribute="bottom" id="ZC1-QQ-ZAd"/>
+                                                <constraint firstItem="Xq6-7o-QLD" firstAttribute="top" secondItem="0Zn-ab-py3" secondAttribute="top" id="hQ6-6b-gVa"/>
+                                            </constraints>
                                         </view>
                                     </navigationItem>
                                 </items>
