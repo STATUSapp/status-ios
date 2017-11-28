@@ -114,6 +114,7 @@
 
 -(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
     if (error!=nil) {
+        //TODO: add log here
         _currentUserId = nil;
     }
     else
@@ -190,14 +191,21 @@
 }
 
 -(void) loginOrRegister{
-    if ([[CoreManager networkService] canSendLoginOrRegisterRequest]==FALSE)
+    if ([[CoreManager networkService] canSendLoginOrRegisterRequest]==FALSE){
+        //TODO: add log here
         return;
+    }
     
     if([[FBSDKAccessToken currentAccessToken] tokenString]==nil){
+        //TODO: add log here
         return;
     }
     [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         
+        if (error!=nil) {
+            //TODO: add log here
+            return ;
+        }
         __weak STFacebookLoginController *weakSelf = self;
         __block NSMutableDictionary *userInfo = [NSMutableDictionary new];
 
@@ -209,6 +217,7 @@
             }
             else
             {
+                //TODO: add log here
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong with the registration." preferredStyle:UIAlertControllerStyleAlert];
                 [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
                 [[CoreManager navigationService] presentAlertController:alert];
@@ -216,6 +225,7 @@
         };
         
         STRequestFailureBlock failBlock = ^(NSError *error){
+            //TODO: add log here
             NSLog(@"Error: %@", error.debugDescription);
         };
         
@@ -232,6 +242,7 @@
             }
             else
             {
+                //TODO: add log here
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong on login." preferredStyle:UIAlertControllerStyleAlert];
                 [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
                 [[CoreManager navigationService] presentAlertController:alert];

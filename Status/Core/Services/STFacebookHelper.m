@@ -182,6 +182,9 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
         [loginManager logInWithReadPermissions:deniedPermissions
                             fromViewController:nil
                                        handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                           if (error!=nil) {
+                                               //TODO: add log here
+                                           }
             [self requestForExtendedInfoWithCompletion:completion];
             
         }];
@@ -198,8 +201,10 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
         if (!error) {
             completion(result);
         }
-        else
+        else{
+            //TODO: add log here
             completion(nil);
+        }
         
     }];
 }
