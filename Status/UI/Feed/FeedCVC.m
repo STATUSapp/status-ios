@@ -594,7 +594,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                 STFlowProcessor *hashtagProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeHasttag hashtag:hashtag];
                 FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:hashtagProcessor];
                 vc.shouldAddBackButton = YES;
-                [self.navigationController pushViewController:vc animated:YES];
+                UINavigationController *navCtrl = (UINavigationController *)[[[STNavigationService appTabBar] viewControllers] objectAtIndex:self.tabBarController.selectedIndex];
+                [navCtrl pushViewController:vc animated:YES];
             }
         }
     }

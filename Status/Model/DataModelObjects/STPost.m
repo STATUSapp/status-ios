@@ -152,11 +152,11 @@
                                                                                     alpha:1.f],
                                      NSParagraphStyleAttributeName: paragraphStyle
                                      };
-        NSDictionary *hashTagAttributes = @{
-                                            NSForegroundColorAttributeName: [UIColor colorWithRed:56.f/255.f
-                                                                                            green:117.f/255.f
-                                                                                             blue:242.f/255.f
-                                                                                            alpha:1.f]};
+//        NSDictionary *hashTagAttributes = @{
+//                                            NSForegroundColorAttributeName: [UIColor colorWithRed:56.f/255.f
+//                                                                                            green:117.f/255.f
+//                                                                                             blue:242.f/255.f
+//                                                                                            alpha:1.f]};
         
         [mutableAttrString addAttributes:attributes range:NSMakeRange(nameLengh, attributedString.length - nameLengh)];
         
@@ -165,8 +165,8 @@
         for (NSString *hash in hasTags) {
             NSRange range = [formattedString rangeOfString:hash];
             [ranges addObject:NSStringFromRange(range)];
-            [mutableAttrString addAttributes:hashTagAttributes range:range];
             [mutableAttrString addAttribute:NSLinkAttributeName value:@"hashtag" range:range];
+//            [mutableAttrString addAttributes:hashTagAttributes range:range];
 
         }
         

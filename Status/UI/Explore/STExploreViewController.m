@@ -285,6 +285,11 @@ const CGFloat kFiltersDefaultHeight = 41.f;
 
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 -(BOOL)extendedLayoutIncludesOpaqueBars{
     return YES;
 }

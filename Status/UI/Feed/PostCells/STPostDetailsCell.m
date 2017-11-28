@@ -32,7 +32,12 @@ CGFloat const kDefaultTextWidthDelta = 20.f;
     
     _postDescriptionTextView.attributedText = [post formattedCaptionString];
     _postDescriptionTextView.editable = NO;
-
+    NSDictionary *hashTagAttributes = @{
+                                        NSForegroundColorAttributeName: [UIColor colorWithRed:56.f/255.f
+                                                                                        green:117.f/255.f
+                                                                                         blue:242.f/255.f
+                                                                                        alpha:1.f]};
+    _postDescriptionTextView.linkTextAttributes = hashTagAttributes;
     if (post.postDate)
         _postDateLabel.text = [[NSDate timeAgoFromDate:post.postDate] uppercaseString];
     else
