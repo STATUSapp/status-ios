@@ -45,6 +45,7 @@
 		072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */; };
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
+		0738B71C1FCF72C500468658 /* ContainerFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0738B71B1FCF72C500468658 /* ContainerFeedVC.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
 		07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */; };
 		0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0755E2381E87DF140016519E /* STChoosePhotoViewController.m */; };
@@ -377,6 +378,8 @@
 		072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreFilters.m; sourceTree = "<group>"; };
 		073863981F9F0EC500FE13ED /* STMissingProductTVCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMissingProductTVCTableViewController.h; sourceTree = "<group>"; };
 		073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STMissingProductTVCTableViewController.m; sourceTree = "<group>"; };
+		0738B71A1FCF72C500468658 /* ContainerFeedVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainerFeedVC.h; sourceTree = "<group>"; };
+		0738B71B1FCF72C500468658 /* ContainerFeedVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContainerFeedVC.m; sourceTree = "<group>"; };
 		074FA8D61EB652600028C33E /* STTagProductsCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsCategories.h; sourceTree = "<group>"; };
 		074FA8D71EB652600028C33E /* STTagProductsCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsCategories.m; sourceTree = "<group>"; };
 		07533D841F6E91020009DDDF /* STBarcodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBarcodeScannerViewController.h; sourceTree = "<group>"; };
@@ -1219,6 +1222,8 @@
 				07B3FFFC1FB43DED009316A2 /* FacebookAd */,
 				2AD97BB01C8C143300C9B3D5 /* FeedCVC.h */,
 				2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */,
+				0738B71A1FCF72C500468658 /* ContainerFeedVC.h */,
+				0738B71B1FCF72C500468658 /* ContainerFeedVC.m */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -2149,6 +2154,7 @@
 				170912231DF87F5C00B2AF81 /* STNotificationsViewController.m in Sources */,
 				17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */,
 				17648B9A1E50F49F00D9C428 /* STBrandObj.m in Sources */,
+				0738B71C1FCF72C500468658 /* ContainerFeedVC.m in Sources */,
 				99B387511C82FAA2005B4D8C /* STGetNotificationsCountRequest.m in Sources */,
 				99B387D71C82FAA2005B4D8C /* STAlbumImagesViewController.m in Sources */,
 				99B387B21C82FAA2005B4D8C /* STContextualMenu.m in Sources */,

@@ -14,6 +14,7 @@
 #import "STExploreViewController.h"
 #import "STLocalNotificationService.h"
 #import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 #import "STNotificationsManager.h"
 #import "STNavigationService.h"
 #import "STBarcodeScannerViewController.h"
@@ -71,7 +72,7 @@ static CGFloat kImageInset = 4.f;
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
     
     // add my profile
-    FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:[[CoreManager loginService] currentUserUuid] andUserName:nil];
+    ContainerFeedVC *profileVC = [ContainerFeedVC tabProfileController];
     UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
 
     profileNav.navigationBarHidden = YES;

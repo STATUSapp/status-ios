@@ -53,6 +53,8 @@
 #import <Photos/Photos.h>
 #import "STFacebookAddCell.h"
 
+#import "ContainerFeedVC.h"
+
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
     STScrollDirectionNone = 0,
@@ -94,9 +96,9 @@ CGFloat const kTopButtonSize = 48.f;
 @property (nonatomic, strong) STFollowDataProcessor *followProcessor;
 @property (nonatomic, assign) NSInteger postForContextIndex;
 
-@property (nonatomic, strong) NSString *userName;
+@property (nonatomic, strong, readwrite) NSString *userName;
 
-@property (nonatomic, assign) BOOL isMyProfile;
+@property (nonatomic, assign, readwrite) BOOL isMyProfile;
 
 @property (nonatomic, strong) STLoadingView *customLoadingView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -226,6 +228,11 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 + (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor{
+    if (processor.processorFlowType == STFlowTypeMyGallery ||
+        processor.processorFlowType == STFlowTypeUserGallery) {
+        NSAssert(NO, @"Gallery feeds should be used with ContainerFeedVC because of iPhone X support");
+        return nil;
+    }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
     UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
@@ -245,26 +252,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     
     return feedCVC;
 }
-
-+ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId
-                                andUserName:(NSString *)userName{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
-    FeedCVC *feedCVC = [[navController viewControllers] firstObject];
-    feedCVC.userName = userName;
-    BOOL userIsMe = [[CoreManager loginService].currentUserUuid isEqualToString:userId];
-    STFlowType flowType = userIsMe ? STFlowTypeMyGallery : STFlowTypeUserGallery;
-
-    STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:flowType userId:userId];
-    feedCVC.feedProcessor = feedProcessor;
-    
-    if ([[feedProcessor userId] isEqualToString:[CoreManager loginService].currentUserUuid]) {
-        feedCVC.isMyProfile = YES;
-    }
-    
-    return feedCVC;
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -493,6 +480,16 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     
 }
 #pragma mark - Helpers
+-(void)setFeedProcessor:(STFlowProcessor *)feedProcessor{
+    _feedProcessor = feedProcessor;
+}
+-(void)setUserName:(NSString *)userName{
+    _userName = userName;
+}
+-(void)setIsMyProfile:(BOOL)isMyProfile{
+    _isMyProfile = isMyProfile;
+}
+
 - (NSInteger)postIndexFromIndexPath:(NSIndexPath *)indexPath{
     NSInteger sectionIndex = indexPath.section;
     if ([_feedProcessor processorIsAGallery] && sectionIndex > 0) {
@@ -941,8 +938,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     
     STPost *post = [self getCurrentPostForButton:sender];
     
-    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:post.userId andUserName:post.userName];
-    feedCVC.shouldAddBackButton = YES;
+    ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:post.userId andUserName:post.userName];
     [self.navigationController pushViewController:feedCVC animated:YES];
 
 }

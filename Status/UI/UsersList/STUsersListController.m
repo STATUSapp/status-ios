@@ -15,7 +15,7 @@
 #import "STChatController.h"
 #import "UIImageView+WebCache.h"
 #import "FeedCVC.h"
-
+#import "ContainerFeedVC.h"
 #import "STDataAccessUtils.h"
 #import "STDataModelObjects.h"
 #import "STFollowDataProcessor.h"
@@ -204,8 +204,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         
     STListUser *lu = [_dataSource objectAtIndex:indexPath.row];
-    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:lu.uuid andUserName:lu.userName];
-    feedCVC.shouldAddBackButton = YES;
+    ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:lu.uuid andUserName:lu.userName];
     [self.navigationController pushViewController:feedCVC animated:YES];
 }
 

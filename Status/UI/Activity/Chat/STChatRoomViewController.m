@@ -21,7 +21,7 @@
 #import "Message.h"
 #import "STNetworkQueueManager.h"
 #import "UIImageView+WebCache.h"
-#import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 #import "STTabBarViewController.h"
 
 #import "STGetUserInfoRequest.h"
@@ -312,9 +312,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         return;
     }
     
-    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_user.uuid andUserName:nil];
-    feedCVC.shouldAddBackButton = YES;
-
+    ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:_user.uuid andUserName:nil];
     [self.navigationController pushViewController:feedCVC animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {

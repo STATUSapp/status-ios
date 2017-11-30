@@ -1117,6 +1117,38 @@
             </objects>
             <point key="canvasLocation" x="1209.5999999999999" y="1175.7121439280361"/>
         </scene>
+        <!--Container FeedVC-->
+        <scene sceneID="l4H-C4-Cx6">
+            <objects>
+                <viewController id="mEy-bf-3EZ" customClass="ContainerFeedVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EWq-ZX-5f9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z40-jA-8Ds">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="kUw-q3-wvD" kind="embed" id="S8P-yo-uCn"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="z40-jA-8Ds" firstAttribute="leading" secondItem="Coy-Dk-2oT" secondAttribute="leading" id="0vS-Z2-9GH"/>
+                            <constraint firstItem="z40-jA-8Ds" firstAttribute="bottom" secondItem="Coy-Dk-2oT" secondAttribute="bottom" id="Upx-eE-qB3"/>
+                            <constraint firstItem="z40-jA-8Ds" firstAttribute="top" secondItem="EWq-ZX-5f9" secondAttribute="top" id="W7n-Io-5oL"/>
+                            <constraint firstItem="z40-jA-8Ds" firstAttribute="trailing" secondItem="Coy-Dk-2oT" secondAttribute="trailing" id="ybY-U8-oVb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Coy-Dk-2oT"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MRu-oG-dFM"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MiM-eH-cEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1253.5999999999999" y="1924.5877061469266"/>
+        </scene>
         <!--EarningsDashboardScene-->
         <scene sceneID="Rqj-5J-qsW">
             <objects>
@@ -1151,6 +1183,26 @@
             </objects>
             <point key="canvasLocation" x="225" y="1176"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qcf-gI-uj7">
+            <objects>
+                <navigationController storyboardIdentifier="CONTAINER_FEED_NAV" automaticallyAdjustsScrollViewInsets="NO" id="OSl-hl-nSA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="msI-go-wPP">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mEy-bf-3EZ" kind="relationship" relationship="rootViewController" id="4pD-y3-qeZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZBu-i3-mI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="268" y="1926"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Earnings Icon" width="18" height="17"/>
@@ -1179,4 +1231,8 @@
         <image name="splashscreen" width="375" height="667"/>
         <image name="user_photo_gradient" width="375" height="151"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="SJw-WL-3J2"/>
+        <segue reference="S8P-yo-uCn"/>
+    </inferredMetricsTieBreakers>
 </document>

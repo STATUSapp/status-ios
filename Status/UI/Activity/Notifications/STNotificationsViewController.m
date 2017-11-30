@@ -31,6 +31,7 @@
 #import "STFollowDataProcessor.h"
 #import "STListUser.h"
 #import "STLocalNotificationService.h"
+#import "ContainerFeedVC.h"
 
 const float kNoNotifHeight = 24.f;
 
@@ -224,8 +225,7 @@ const float kNoNotifHeight = 24.f;
         default:
         {
             
-            FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:no.userId andUserName:nil];
-            feedCVC.shouldAddBackButton = YES;
+            ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:no.userId andUserName:nil];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
@@ -250,8 +250,7 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeInvite:
         {
             
-            FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:no.userId andUserName:nil];
-            feedCVC.shouldAddBackButton = YES;
+            ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:no.userId andUserName:nil];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;

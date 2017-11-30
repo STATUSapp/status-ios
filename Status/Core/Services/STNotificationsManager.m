@@ -8,6 +8,7 @@
 
 #import "STNotificationsManager.h"
 #import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 #import "STChatController.h"
 #import "STChatRoomViewController.h"
 #import "STNetworkQueueManager.h"
@@ -255,8 +256,7 @@
     else
         userId = userIdentifier;
     
-    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
-    feedCVC.shouldAddBackButton = YES;
+    ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:userId andUserName:nil];
     [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
     
     [self dismissCurrentBanner];
