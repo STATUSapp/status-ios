@@ -21,26 +21,13 @@ CGFloat distanceLabelStandardHeight = 21.f;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIButton *messageEditButton;
 @property (weak, nonatomic) IBOutlet UIButton *nameAndAgeButton;
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
-@property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editButtonConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *followButtonConstr;
-@property (weak, nonatomic) IBOutlet UIButton *earningsButton;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
 @end
 
 @implementation UserProfileInfoCell
-
-- (void)setBackButtonHidden:(BOOL)backButtonHidden{
-    _backButton.hidden = backButtonHidden;
-}
-
-- (void)setSettingsButtonHidden:(BOOL)settingsButtonHidden{
-    _settingsButton.hidden = settingsButtonHidden;
-    _optionsButton.hidden = !settingsButtonHidden;
-}
 
 - (void)configureCellWithUserProfile:(STUserProfile *)profile{
     
@@ -57,8 +44,6 @@ CGFloat distanceLabelStandardHeight = 21.f;
         _messageEditButton.enabled = YES;
         _editButtonConstraint.constant = 70.f;
         _followButtonConstr.constant = 0.f;
-        _earningsButton.hidden = !profile.isInfluencer;
-
     }
     else
     {
@@ -67,8 +52,6 @@ CGFloat distanceLabelStandardHeight = 21.f;
         _messageEditButton.hidden = YES;
         _editButtonConstraint.constant = 0.f;
         _followButtonConstr.constant = 70.f;
-        _earningsButton.hidden = YES;
-
     }
     
     NSString *age = @"";

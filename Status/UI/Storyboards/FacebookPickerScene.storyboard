@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="LDN-eB-n2p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LDN-eB-n2p">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,10 +19,6 @@
         <scene sceneID="xMq-9t-K50">
             <objects>
                 <viewController storyboardIdentifier="STFacebookAlbumsViewController" id="LDN-eB-n2p" customClass="STFacebookAlbumsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VrU-RS-8JA"/>
-                        <viewControllerLayoutGuide type="bottom" id="psJ-RG-3Io"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aak-JQ-btt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -89,11 +87,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="X8q-u1-3Fm" firstAttribute="leading" secondItem="aak-JQ-btt" secondAttribute="leading" id="Tll-f6-0w8"/>
-                            <constraint firstAttribute="trailing" secondItem="X8q-u1-3Fm" secondAttribute="trailing" id="d3J-78-eqy"/>
-                            <constraint firstItem="psJ-RG-3Io" firstAttribute="top" secondItem="X8q-u1-3Fm" secondAttribute="bottom" id="efD-lX-7H3"/>
-                            <constraint firstItem="X8q-u1-3Fm" firstAttribute="top" secondItem="VrU-RS-8JA" secondAttribute="bottom" id="w8n-eD-DhK"/>
+                            <constraint firstItem="X8q-u1-3Fm" firstAttribute="leading" secondItem="FCt-WD-4cG" secondAttribute="leading" id="Tll-f6-0w8"/>
+                            <constraint firstItem="FCt-WD-4cG" firstAttribute="trailing" secondItem="X8q-u1-3Fm" secondAttribute="trailing" id="d3J-78-eqy"/>
+                            <constraint firstItem="FCt-WD-4cG" firstAttribute="bottom" secondItem="X8q-u1-3Fm" secondAttribute="bottom" id="efD-lX-7H3"/>
+                            <constraint firstItem="X8q-u1-3Fm" firstAttribute="top" secondItem="FCt-WD-4cG" secondAttribute="top" id="w8n-eD-DhK"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="FCt-WD-4cG"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
@@ -118,10 +117,6 @@
         <scene sceneID="AgE-nc-SCW">
             <objects>
                 <viewController storyboardIdentifier="FACEBOOK_ALBUM_PHOTOS_VC" id="vdN-d4-oIH" customClass="STAlbumImagesViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="f0y-gw-Luf"/>
-                        <viewControllerLayoutGuide type="bottom" id="xCF-q3-aky"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LQ9-EZ-vLY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -200,13 +195,14 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XdV-u7-jML" firstAttribute="top" secondItem="ctW-rj-RcX" secondAttribute="bottom" id="DxR-mD-7tP"/>
-                            <constraint firstItem="XdV-u7-jML" firstAttribute="leading" secondItem="LQ9-EZ-vLY" secondAttribute="leading" id="JkH-MF-b6g"/>
-                            <constraint firstAttribute="trailing" secondItem="XdV-u7-jML" secondAttribute="trailing" id="Sbe-TP-rKL"/>
-                            <constraint firstItem="xCF-q3-aky" firstAttribute="top" secondItem="XdV-u7-jML" secondAttribute="bottom" id="fuW-aR-Ik3"/>
-                            <constraint firstItem="ctW-rj-RcX" firstAttribute="leading" secondItem="LQ9-EZ-vLY" secondAttribute="leading" id="r6e-6A-fx5"/>
-                            <constraint firstAttribute="trailing" secondItem="ctW-rj-RcX" secondAttribute="trailing" id="tiF-Ig-2zY"/>
-                            <constraint firstItem="ctW-rj-RcX" firstAttribute="top" secondItem="f0y-gw-Luf" secondAttribute="bottom" id="uYp-vO-VQU"/>
+                            <constraint firstItem="XdV-u7-jML" firstAttribute="leading" secondItem="lBy-Nt-EyO" secondAttribute="leading" id="JkH-MF-b6g"/>
+                            <constraint firstItem="lBy-Nt-EyO" firstAttribute="trailing" secondItem="XdV-u7-jML" secondAttribute="trailing" id="Sbe-TP-rKL"/>
+                            <constraint firstItem="lBy-Nt-EyO" firstAttribute="bottom" secondItem="XdV-u7-jML" secondAttribute="bottom" id="fuW-aR-Ik3"/>
+                            <constraint firstItem="ctW-rj-RcX" firstAttribute="leading" secondItem="lBy-Nt-EyO" secondAttribute="leading" id="r6e-6A-fx5"/>
+                            <constraint firstItem="lBy-Nt-EyO" firstAttribute="trailing" secondItem="ctW-rj-RcX" secondAttribute="trailing" id="tiF-Ig-2zY"/>
+                            <constraint firstItem="ctW-rj-RcX" firstAttribute="top" secondItem="lBy-Nt-EyO" secondAttribute="top" id="uYp-vO-VQU"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="lBy-Nt-EyO"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Photos" id="h6G-y9-Bh5"/>
@@ -229,9 +225,4 @@
         <image name="btnBackPressed" width="32" height="32"/>
         <image name="placeholder imagine like screen" width="41" height="41"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

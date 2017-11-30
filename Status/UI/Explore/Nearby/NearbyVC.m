@@ -228,7 +228,6 @@ static NSString * const nearbyCell = @"STNearbyCell";
     STUserProfile *userProfile = [_feedProcessor objectAtIndex:indexPath.row];
     
     FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:userProfile.uuid andUserName:userProfile.fullName];
-    feedCVC.shouldAddBackButton = YES;
     
     [self.navigationController pushViewController:feedCVC animated:YES];
 }

@@ -14,9 +14,5 @@
 
 - (void)configureCellWithUserProfile:(STUserProfile *)profile;
 
-- (void)setBackButtonHidden:(BOOL)backButtonHidden;
-
-- (void)setSettingsButtonHidden:(BOOL)settingsButtonHidden;
-
 + (CGSize)cellSize;
 @end

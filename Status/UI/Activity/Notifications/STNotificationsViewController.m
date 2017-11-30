@@ -90,6 +90,7 @@ const float kNoNotifHeight = 24.f;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
     [self getNotificationsFromServer];
 }
 
@@ -225,7 +226,6 @@ const float kNoNotifHeight = 24.f;
         {
             
             FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:no.userId andUserName:nil];
-            feedCVC.shouldAddBackButton = YES;
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
@@ -243,7 +243,6 @@ const float kNoNotifHeight = 24.f;
         {
             
             FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:no.postId];
-            feedCVC.shouldAddBackButton = YES;
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
@@ -251,7 +250,6 @@ const float kNoNotifHeight = 24.f;
         {
             
             FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:no.userId andUserName:nil];
-            feedCVC.shouldAddBackButton = YES;
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;

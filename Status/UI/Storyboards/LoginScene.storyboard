@@ -79,7 +79,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xk7-KW-QWA">
-                                <rect key="frame" x="335" y="20" width="40" height="40"/>
+                                <rect key="frame" x="335" y="44" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Zaf-5p-2Sv"/>
                                     <constraint firstAttribute="width" constant="40" id="dMm-pM-hPw"/>
@@ -101,13 +101,16 @@
                             <constraint firstItem="EbR-UD-m5s" firstAttribute="leading" secondItem="Nc9-lr-hey" secondAttribute="leading" id="Ofn-4G-et8"/>
                             <constraint firstItem="EbR-UD-m5s" firstAttribute="top" secondItem="jOy-aB-kAb" secondAttribute="top" id="QLZ-sC-qoK"/>
                             <constraint firstItem="Nc9-lr-hey" firstAttribute="trailing" secondItem="xk7-KW-QWA" secondAttribute="trailing" id="QyE-jD-QwG"/>
-                            <constraint firstItem="xk7-KW-QWA" firstAttribute="top" secondItem="jOy-aB-kAb" secondAttribute="top" constant="20" id="V2x-hy-cy6"/>
                             <constraint firstItem="Nc9-lr-hey" firstAttribute="trailing" secondItem="EbR-UD-m5s" secondAttribute="trailing" id="anm-XY-wRK"/>
+                            <constraint firstItem="xk7-KW-QWA" firstAttribute="top" secondItem="Nc9-lr-hey" secondAttribute="top" id="jQL-HZ-Fc5"/>
                             <constraint firstItem="0no-l7-3Ou" firstAttribute="leading" secondItem="Nc9-lr-hey" secondAttribute="leading" id="scj-1n-DKY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nc9-lr-hey"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="splashScreen" destination="EbR-UD-m5s" id="bwB-DR-YJa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hFw-Lw-SJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

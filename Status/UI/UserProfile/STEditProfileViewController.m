@@ -32,6 +32,7 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden = YES;
     [self.navigationBar setBackgroundImage:[UIImage new]
                              forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.shadowImage = [UIImage new];

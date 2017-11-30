@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,10 +19,6 @@
         <scene sceneID="hLp-la-GhL">
             <objects>
                 <viewController storyboardIdentifier="EXPLORE_VC" id="HQ8-I7-Gpq" customClass="STExploreViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="223-CW-Zk3"/>
-                        <viewControllerLayoutGuide type="bottom" id="VGZ-aY-7Ry"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vmR-yF-ypr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,17 +44,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="BXa-Uo-21L" firstAttribute="leading" secondItem="vmR-yF-ypr" secondAttribute="leading" id="1yE-az-3Fd"/>
-                            <constraint firstAttribute="trailing" secondItem="Wwt-xD-IZb" secondAttribute="trailing" id="8aK-FB-7ZB"/>
+                            <constraint firstItem="BXa-Uo-21L" firstAttribute="leading" secondItem="AVA-qF-xDy" secondAttribute="leading" id="1yE-az-3Fd"/>
+                            <constraint firstItem="AVA-qF-xDy" firstAttribute="trailing" secondItem="Wwt-xD-IZb" secondAttribute="trailing" id="8aK-FB-7ZB"/>
                             <constraint firstItem="Wwt-xD-IZb" firstAttribute="top" secondItem="W9Y-UF-Heh" secondAttribute="bottom" id="9RK-xe-St6"/>
-                            <constraint firstItem="Wwt-xD-IZb" firstAttribute="leading" secondItem="vmR-yF-ypr" secondAttribute="leading" id="AQW-hd-WBF"/>
-                            <constraint firstAttribute="trailing" secondItem="BXa-Uo-21L" secondAttribute="trailing" id="C9j-wF-RhV"/>
-                            <constraint firstAttribute="trailing" secondItem="W9Y-UF-Heh" secondAttribute="trailing" id="MFV-vX-Ndg"/>
+                            <constraint firstItem="Wwt-xD-IZb" firstAttribute="leading" secondItem="AVA-qF-xDy" secondAttribute="leading" id="AQW-hd-WBF"/>
+                            <constraint firstItem="AVA-qF-xDy" firstAttribute="trailing" secondItem="BXa-Uo-21L" secondAttribute="trailing" id="C9j-wF-RhV"/>
+                            <constraint firstItem="AVA-qF-xDy" firstAttribute="trailing" secondItem="W9Y-UF-Heh" secondAttribute="trailing" id="MFV-vX-Ndg"/>
                             <constraint firstItem="BXa-Uo-21L" firstAttribute="top" secondItem="Wwt-xD-IZb" secondAttribute="bottom" id="OJu-eg-E6C"/>
-                            <constraint firstItem="VGZ-aY-7Ry" firstAttribute="top" secondItem="BXa-Uo-21L" secondAttribute="bottom" id="W69-oy-RTc"/>
-                            <constraint firstItem="W9Y-UF-Heh" firstAttribute="leading" secondItem="vmR-yF-ypr" secondAttribute="leading" id="g0h-px-CCs"/>
-                            <constraint firstItem="W9Y-UF-Heh" firstAttribute="top" secondItem="223-CW-Zk3" secondAttribute="bottom" id="zBI-F7-Ex5"/>
+                            <constraint firstItem="AVA-qF-xDy" firstAttribute="bottom" secondItem="BXa-Uo-21L" secondAttribute="bottom" id="W69-oy-RTc"/>
+                            <constraint firstItem="W9Y-UF-Heh" firstAttribute="leading" secondItem="AVA-qF-xDy" secondAttribute="leading" id="g0h-px-CCs"/>
+                            <constraint firstItem="W9Y-UF-Heh" firstAttribute="top" secondItem="AVA-qF-xDy" secondAttribute="top" id="zBI-F7-Ex5"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="AVA-qF-xDy"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="3aA-gw-7M6">
@@ -80,10 +78,6 @@
         <scene sceneID="Avv-vj-ss6">
             <objects>
                 <viewController storyboardIdentifier="NEARBY_VC" id="rmj-DE-0EB" customClass="NearbyVC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="53s-0h-Bfi"/>
-                        <viewControllerLayoutGuide type="bottom" id="Sqn-oo-cb5"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="o6i-1e-65I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,11 +159,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GZv-5V-mDV" firstAttribute="leading" secondItem="o6i-1e-65I" secondAttribute="leading" constant="8" id="1pc-CA-RHM"/>
+                            <constraint firstItem="GZv-5V-mDV" firstAttribute="leading" secondItem="ltB-hm-mAi" secondAttribute="leading" constant="8" id="1pc-CA-RHM"/>
                             <constraint firstItem="GZv-5V-mDV" firstAttribute="top" secondItem="o6i-1e-65I" secondAttribute="top" id="4Ae-Bp-NFZ"/>
-                            <constraint firstAttribute="trailing" secondItem="GZv-5V-mDV" secondAttribute="trailing" constant="8" id="5E2-JC-4a0"/>
-                            <constraint firstItem="Sqn-oo-cb5" firstAttribute="top" secondItem="GZv-5V-mDV" secondAttribute="bottom" id="XrZ-Fg-hpj"/>
+                            <constraint firstItem="ltB-hm-mAi" firstAttribute="trailing" secondItem="GZv-5V-mDV" secondAttribute="trailing" constant="8" id="5E2-JC-4a0"/>
+                            <constraint firstItem="ltB-hm-mAi" firstAttribute="bottom" secondItem="GZv-5V-mDV" secondAttribute="bottom" id="XrZ-Fg-hpj"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="ltB-hm-mAi"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="GZv-5V-mDV" id="2Kv-7a-LMd"/>
@@ -201,6 +196,7 @@
                         <constraint firstItem="ibv-2A-QsP" firstAttribute="leading" secondItem="bdD-BS-lcj" secondAttribute="leading" id="xVV-hx-oOm"/>
                         <constraint firstAttribute="trailing" secondItem="ibv-2A-QsP" secondAttribute="trailing" id="yfh-DE-Ftg"/>
                     </constraints>
+                    <viewLayoutGuide key="safeArea" id="jfa-jR-YDI"/>
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gya-gB-hZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

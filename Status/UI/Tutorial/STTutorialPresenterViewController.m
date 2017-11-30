@@ -10,6 +10,7 @@
 #import "STTutorialViewController.h"
 
 @interface STTutorialPresenterViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *splashScreen;
 
 @end
 
@@ -23,7 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _splashScreen.image = [STUIHelper splashImageWithLogo:NO];
+
 }
 
 - (void)didReceiveMemoryWarning {

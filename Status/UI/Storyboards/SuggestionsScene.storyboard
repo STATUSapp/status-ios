@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9tD-K9-lvq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9tD-K9-lvq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -23,16 +25,12 @@
         <scene sceneID="oMw-el-nkF">
             <objects>
                 <viewController autoresizesArchivedViewToFullSize="NO" id="9tD-K9-lvq" customClass="STSuggestionsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wHB-He-kwl"/>
-                        <viewControllerLayoutGuide type="bottom" id="lmE-nN-L72"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="il2-pe-ut0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DlM-O0-VOt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BN9-l9-Sch">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -82,7 +80,7 @@
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vJn-4p-jYU">
-                                <rect key="frame" x="0.0" y="60" width="375" height="519"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="499"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -103,7 +101,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Isac Madalin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="gXY-Hf-BKr">
-                                                    <rect key="frame" x="78" y="7" width="92.5" height="67"/>
+                                                    <rect key="frame" x="78" y="7" width="96.5" height="67"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                     <color key="textColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -202,26 +200,27 @@
                         </subviews>
                         <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UU6-8t-06w" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="0Uv-U1-zJ4"/>
-                            <constraint firstAttribute="trailing" secondItem="vJn-4p-jYU" secondAttribute="trailing" id="1XO-EF-v8S"/>
-                            <constraint firstItem="5KH-7I-Y7C" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="3q7-Xb-frQ"/>
-                            <constraint firstItem="vJn-4p-jYU" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="7Wp-7m-WrO"/>
+                            <constraint firstItem="UU6-8t-06w" firstAttribute="leading" secondItem="S0Q-Jt-BTB" secondAttribute="leading" id="0Uv-U1-zJ4"/>
+                            <constraint firstItem="S0Q-Jt-BTB" firstAttribute="trailing" secondItem="vJn-4p-jYU" secondAttribute="trailing" id="1XO-EF-v8S"/>
+                            <constraint firstItem="5KH-7I-Y7C" firstAttribute="leading" secondItem="S0Q-Jt-BTB" secondAttribute="leading" id="3q7-Xb-frQ"/>
+                            <constraint firstItem="vJn-4p-jYU" firstAttribute="leading" secondItem="S0Q-Jt-BTB" secondAttribute="leading" id="7Wp-7m-WrO"/>
                             <constraint firstItem="vJn-4p-jYU" firstAttribute="top" secondItem="DlM-O0-VOt" secondAttribute="bottom" id="J0d-XK-NGp"/>
-                            <constraint firstAttribute="trailing" secondItem="oqW-TE-qXz" secondAttribute="trailing" id="MvO-Mo-JsH"/>
-                            <constraint firstAttribute="trailing" secondItem="UU6-8t-06w" secondAttribute="trailing" id="OCt-ze-izB"/>
-                            <constraint firstAttribute="trailing" secondItem="5KH-7I-Y7C" secondAttribute="trailing" id="WDb-8h-HfR"/>
-                            <constraint firstAttribute="trailing" secondItem="DlM-O0-VOt" secondAttribute="trailing" id="aYN-vg-FHz"/>
-                            <constraint firstItem="DlM-O0-VOt" firstAttribute="top" secondItem="wHB-He-kwl" secondAttribute="bottom" id="bZB-t9-wBG"/>
-                            <constraint firstItem="lmE-nN-L72" firstAttribute="top" secondItem="vJn-4p-jYU" secondAttribute="bottom" constant="88" id="c1w-Gl-8Hk"/>
+                            <constraint firstItem="S0Q-Jt-BTB" firstAttribute="trailing" secondItem="oqW-TE-qXz" secondAttribute="trailing" id="MvO-Mo-JsH"/>
+                            <constraint firstItem="S0Q-Jt-BTB" firstAttribute="trailing" secondItem="UU6-8t-06w" secondAttribute="trailing" id="OCt-ze-izB"/>
+                            <constraint firstItem="S0Q-Jt-BTB" firstAttribute="trailing" secondItem="5KH-7I-Y7C" secondAttribute="trailing" id="WDb-8h-HfR"/>
+                            <constraint firstItem="S0Q-Jt-BTB" firstAttribute="trailing" secondItem="DlM-O0-VOt" secondAttribute="trailing" id="aYN-vg-FHz"/>
+                            <constraint firstItem="DlM-O0-VOt" firstAttribute="top" secondItem="S0Q-Jt-BTB" secondAttribute="top" id="bZB-t9-wBG"/>
+                            <constraint firstItem="S0Q-Jt-BTB" firstAttribute="bottom" secondItem="vJn-4p-jYU" secondAttribute="bottom" constant="88" id="c1w-Gl-8Hk"/>
                             <constraint firstItem="oqW-TE-qXz" firstAttribute="centerX" secondItem="5KH-7I-Y7C" secondAttribute="centerX" id="hII-4P-7Hh"/>
                             <constraint firstItem="oqW-TE-qXz" firstAttribute="top" secondItem="5KH-7I-Y7C" secondAttribute="top" id="ifa-Mt-Iiz"/>
-                            <constraint firstItem="oqW-TE-qXz" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="kCH-9F-eOR"/>
+                            <constraint firstItem="oqW-TE-qXz" firstAttribute="leading" secondItem="S0Q-Jt-BTB" secondAttribute="leading" id="kCH-9F-eOR"/>
                             <constraint firstItem="UU6-8t-06w" firstAttribute="top" secondItem="5KH-7I-Y7C" secondAttribute="bottom" id="mtO-Rh-CyD"/>
-                            <constraint firstItem="lmE-nN-L72" firstAttribute="top" secondItem="UU6-8t-06w" secondAttribute="bottom" id="nh0-k0-mHn"/>
-                            <constraint firstItem="DlM-O0-VOt" firstAttribute="leading" secondItem="il2-pe-ut0" secondAttribute="leading" id="o3j-3O-edn"/>
+                            <constraint firstItem="S0Q-Jt-BTB" firstAttribute="bottom" secondItem="UU6-8t-06w" secondAttribute="bottom" id="nh0-k0-mHn"/>
+                            <constraint firstItem="DlM-O0-VOt" firstAttribute="leading" secondItem="S0Q-Jt-BTB" secondAttribute="leading" id="o3j-3O-edn"/>
                             <constraint firstItem="oqW-TE-qXz" firstAttribute="bottom" secondItem="5KH-7I-Y7C" secondAttribute="bottom" id="rIw-uR-T02"/>
                             <constraint firstItem="oqW-TE-qXz" firstAttribute="centerY" secondItem="5KH-7I-Y7C" secondAttribute="centerY" id="s5w-zZ-5GO"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="S0Q-Jt-BTB"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>

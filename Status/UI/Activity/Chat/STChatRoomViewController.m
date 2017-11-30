@@ -313,7 +313,6 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     }
     
     FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:_user.uuid andUserName:nil];
-    feedCVC.shouldAddBackButton = YES;
 
     [self.navigationController pushViewController:feedCVC animated:YES];
 }

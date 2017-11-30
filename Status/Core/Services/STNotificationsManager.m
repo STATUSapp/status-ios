@@ -256,7 +256,6 @@
         userId = userIdentifier;
     
     FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
-    feedCVC.shouldAddBackButton = YES;
     [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
     
     [self dismissCurrentBanner];

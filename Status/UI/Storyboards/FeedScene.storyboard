@@ -46,18 +46,18 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl" translatesAutoresizingMaskIntoConstraints="NO" id="BaU-l3-KLL">
-                                            <rect key="frame" x="0.0" y="0.0" width="265" height="221"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="girl" translatesAutoresizingMaskIntoConstraints="NO" id="BaU-l3-KLL">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                             <gestureRecognizers/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_photo_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="ILD-rb-6Es">
-                                            <rect key="frame" x="0.0" y="93" width="265" height="128"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="user_photo_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="ILD-rb-6Es">
+                                            <rect key="frame" x="0.0" y="192" width="320" height="128"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="128" id="2df-dV-hjv"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-mk-gY4">
-                                            <rect key="frame" x="185" y="192" width="70" height="19"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-mk-gY4">
+                                            <rect key="frame" x="240" y="291" width="70" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="TDV-0S-kOS"/>
                                                 <constraint firstAttribute="width" constant="70" id="uFs-78-mYG"/>
@@ -71,8 +71,8 @@
                                                 <action selector="onMessageEditButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="Xdh-wP-Ms1"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZr-mu-kjB">
-                                            <rect key="frame" x="115" y="184" width="70" height="19"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZr-mu-kjB">
+                                            <rect key="frame" x="170" y="283" width="70" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="eox-1j-Gkp"/>
                                                 <constraint firstAttribute="width" constant="70" id="zbs-Pg-azD"/>
@@ -86,8 +86,8 @@
                                                 <action selector="onTapFollowUser:" destination="kUw-q3-wvD" eventType="touchUpInside" id="sGd-Lk-v0S"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUt-6v-yge">
-                                            <rect key="frame" x="12" y="192" width="89" height="19"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUt-6v-yge">
+                                            <rect key="frame" x="12" y="291" width="144" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="5xc-Mu-FY3"/>
                                             </constraints>
@@ -97,90 +97,32 @@
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qac-IY-t25">
-                                            <rect key="frame" x="0.0" y="20" width="48" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="78o-Kt-cob"/>
-                                                <constraint firstAttribute="width" constant="48" id="Xjp-zv-4wu"/>
-                                            </constraints>
-                                            <state key="normal" image="btnBack"/>
-                                            <state key="highlighted" image="btnBackPressed"/>
-                                            <connections>
-                                                <action selector="onBackButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="ULU-XR-431"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q9-b9-Q0E">
-                                            <rect key="frame" x="217" y="20" width="48" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="2sx-6O-dfR"/>
-                                                <constraint firstAttribute="width" constant="48" id="tvX-k2-cVZ"/>
-                                            </constraints>
-                                            <state key="normal" image="settings_btn"/>
-                                            <state key="highlighted" image="settings_btn_pressed"/>
-                                            <connections>
-                                                <action selector="onSettingsButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="No1-qc-hcL"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-1y-gCh">
-                                            <rect key="frame" x="217" y="13" width="48" height="60"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="60" id="taq-c8-kJ5"/>
-                                                <constraint firstAttribute="width" constant="48" id="xFd-nb-TlI"/>
-                                            </constraints>
-                                            <state key="normal" image="more button"/>
-                                            <connections>
-                                                <action selector="onProfileOptionsPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="Vrm-Br-eTg"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="873-Uo-xMX">
-                                            <rect key="frame" x="176" y="27" width="33" height="34"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="33" id="Qo9-1V-aSa"/>
-                                                <constraint firstAttribute="height" constant="34" id="RDK-bY-nQ8"/>
-                                            </constraints>
-                                            <state key="normal" image="Earnings Icon" backgroundImage="circle"/>
-                                            <connections>
-                                                <segue destination="FUp-UQ-PVI" kind="show" identifier="EARNINGS_SEGUE_ID" id="qFn-l9-qXK"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="1q9-b9-Q0E" secondAttribute="trailing" id="323-Iq-yMZ"/>
                                     <constraint firstItem="ILD-rb-6Es" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" id="4qG-xi-382"/>
                                     <constraint firstItem="BaU-l3-KLL" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" id="5co-OH-Jk0"/>
                                     <constraint firstItem="hUt-6v-yge" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" constant="12" id="AnS-bv-KCX"/>
                                     <constraint firstAttribute="bottom" secondItem="hUt-6v-yge" secondAttribute="bottom" constant="10" id="FOy-NY-IyB"/>
-                                    <constraint firstItem="873-Uo-xMX" firstAttribute="centerY" secondItem="1q9-b9-Q0E" secondAttribute="centerY" id="GXc-8u-27D"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="dZr-mu-kjB" secondAttribute="bottom" constant="10" id="HBF-EO-UIg"/>
                                     <constraint firstAttribute="trailing" secondItem="wKb-mk-gY4" secondAttribute="trailing" constant="10" id="J4O-LC-2el"/>
-                                    <constraint firstAttribute="trailing" secondItem="YHG-1y-gCh" secondAttribute="trailing" id="JGs-9n-YtM"/>
-                                    <constraint firstItem="qac-IY-t25" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" id="LD9-NC-mww"/>
                                     <constraint firstAttribute="bottom" secondItem="ILD-rb-6Es" secondAttribute="bottom" id="M6m-5N-xyg"/>
                                     <constraint firstItem="wKb-mk-gY4" firstAttribute="leading" secondItem="dZr-mu-kjB" secondAttribute="trailing" id="MOe-1I-XLd"/>
                                     <constraint firstItem="dZr-mu-kjB" firstAttribute="leading" secondItem="hUt-6v-yge" secondAttribute="trailing" constant="14" id="e6A-eU-F3n"/>
-                                    <constraint firstItem="YHG-1y-gCh" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" constant="13" id="fge-tk-g5W"/>
-                                    <constraint firstItem="YHG-1y-gCh" firstAttribute="leading" secondItem="873-Uo-xMX" secondAttribute="trailing" constant="8" id="hob-vN-FVy"/>
                                     <constraint firstAttribute="bottom" secondItem="wKb-mk-gY4" secondAttribute="bottom" constant="10" id="lXs-pO-e1P"/>
                                     <constraint firstAttribute="trailing" secondItem="BaU-l3-KLL" secondAttribute="trailing" id="nNg-cb-2qt"/>
-                                    <constraint firstItem="qac-IY-t25" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" constant="20" id="ofM-83-4Xc"/>
-                                    <constraint firstItem="1q9-b9-Q0E" firstAttribute="top" secondItem="9Ay-Db-n5f" secondAttribute="top" constant="20" id="sDI-sS-nmI"/>
                                     <constraint firstAttribute="trailing" secondItem="ILD-rb-6Es" secondAttribute="trailing" id="wUe-VS-AFb"/>
                                     <constraint firstAttribute="bottom" secondItem="BaU-l3-KLL" secondAttribute="bottom" id="wfu-Ry-0ed"/>
                                     <constraint firstItem="BaU-l3-KLL" firstAttribute="leading" secondItem="9Ay-Db-n5f" secondAttribute="leading" id="xcN-j2-93Z"/>
                                 </constraints>
                                 <size key="customSize" width="320" height="320"/>
                                 <connections>
-                                    <outlet property="backButton" destination="qac-IY-t25" id="RwW-aO-mmc"/>
-                                    <outlet property="earningsButton" destination="873-Uo-xMX" id="hbg-Ts-Rjp"/>
                                     <outlet property="editButtonConstraint" destination="uFs-78-mYG" id="Tne-RA-b3F"/>
                                     <outlet property="followButton" destination="dZr-mu-kjB" id="E8l-zA-gFm"/>
                                     <outlet property="followButtonConstr" destination="zbs-Pg-azD" id="O0h-fx-Y3A"/>
                                     <outlet property="messageEditButton" destination="wKb-mk-gY4" id="bdE-Ip-17i"/>
                                     <outlet property="nameAndAgeButton" destination="hUt-6v-yge" id="3ri-5e-4cJ"/>
-                                    <outlet property="optionsButton" destination="YHG-1y-gCh" id="LvC-KS-Zp4"/>
                                     <outlet property="profileImageView" destination="BaU-l3-KLL" id="JGd-o6-DAS"/>
-                                    <outlet property="settingsButton" destination="1q9-b9-Q0E" id="dhF-YA-51J"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileFriendsInfoCell" id="bbJ-ng-Ybc" customClass="UserProfileFriendsInfoCell">
@@ -366,8 +308,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Fashion Designer.  Known for exotic prints and for creating the sand blasted look for jeans. Livin' the dream." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-qF-e7M">
-                                            <rect key="frame" x="14" y="0.0" width="237" height="39"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Fashion Designer.  Known for exotic prints and for creating the sand blasted look for jeans. Livin' the dream." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-qF-e7M">
+                                            <rect key="frame" x="14" y="0.0" width="237" height="45.5"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -999,13 +941,13 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
-                        <outlet property="earningsBarButton" destination="zDl-7S-gYy" id="qz9-O7-yuH"/>
+                        <outlet property="earningsBarButton" destination="gDW-8d-RPt" id="mzK-Jg-dYv"/>
                         <outlet property="loadingView" destination="JqY-Wn-ru7" id="Oxu-rv-VEA"/>
                         <outlet property="loadingViewImage" destination="SUQ-Ff-C4q" id="9cQ-sq-c0g"/>
                         <outlet property="navBarLogoView" destination="C51-kd-Pdl" id="aOt-jP-F5w"/>
                         <outlet property="noDataView" destination="iCq-M5-6oM" id="GDv-xz-eba"/>
-                        <outlet property="optionsBarButton" destination="DDi-05-m7k" id="xHE-Sv-yAh"/>
-                        <outlet property="settingsBarButton" destination="xiR-4U-3hh" id="5Sv-8T-vgo"/>
+                        <outlet property="optionsBarButton" destination="wzU-3a-IFG" id="780-6S-zWi"/>
+                        <outlet property="settingsBarButton" destination="0Xg-Ow-vIL" id="xrn-7a-90t"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OFn-Gk-snp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1121,41 +1063,56 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="bO5-eC-TIl"/>
                 </view>
+                <barButtonItem id="gDW-8d-RPt" userLabel="EarningsButtonItem">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ycd-V0-SuD">
+                        <rect key="frame" x="16" y="6" width="32" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <state key="normal" image="revenue icon">
+                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" image="revenue icon pressed"/>
+                        <state key="highlighted" image="revenue icon pressed"/>
+                        <connections>
+                            <segue destination="FUp-UQ-PVI" kind="show" id="emi-7t-lSD"/>
+                        </connections>
+                    </button>
+                </barButtonItem>
+                <barButtonItem id="0Xg-Ow-vIL" userLabel="SettingsButtonItem">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vme-lp-KCb">
+                        <rect key="frame" x="16" y="6" width="32" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <state key="normal" image="settings icon">
+                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" image="settings icon pressed"/>
+                        <state key="highlighted" image="settings icon pressed"/>
+                        <connections>
+                            <action selector="onSettingsButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="Mmm-vK-zqP"/>
+                        </connections>
+                    </button>
+                </barButtonItem>
+                <barButtonItem id="wzU-3a-IFG" userLabel="OptionsButtonItem">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cqt-hF-BPM">
+                        <rect key="frame" x="16" y="6" width="32" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <state key="normal" image="options button">
+                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" image="options button pressed"/>
+                        <state key="highlighted" image="options button pressed"/>
+                        <connections>
+                            <action selector="onProfileOptionsPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="wuC-lb-xTy"/>
+                        </connections>
+                    </button>
+                </barButtonItem>
                 <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="AxN-ZE-6dH">
                     <connections>
                         <action selector="onDoubleTap:" destination="kUw-q3-wvD" id="NOc-8k-7kn"/>
                     </connections>
                 </tapGestureRecognizer>
-                <barButtonItem width="48" style="plain" id="zDl-7S-gYy" userLabel="Earnings Bar Button">
-                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gjl-q7-rV2">
-                        <rect key="frame" x="313" y="7" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="Earnings Icon" backgroundImage="circle"/>
-                        <connections>
-                            <segue destination="FUp-UQ-PVI" kind="show" id="SJw-WL-3J2"/>
-                        </connections>
-                    </button>
-                </barButtonItem>
-                <barButtonItem width="48" style="plain" id="DDi-05-m7k" userLabel="Options Bar Button">
-                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8QA-di-KEe">
-                        <rect key="frame" x="313" y="7" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="more button"/>
-                        <connections>
-                            <action selector="onProfileOptionsPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="7jL-eM-otw"/>
-                        </connections>
-                    </button>
-                </barButtonItem>
-                <barButtonItem width="48" style="plain" id="xiR-4U-3hh" userLabel="Settings Bar Button">
-                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gmy-RO-D1F">
-                        <rect key="frame" x="313" y="7" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="settings_btn"/>
-                        <connections>
-                            <action selector="onSettingsButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="ZUO-Mi-2oZ"/>
-                        </connections>
-                    </button>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1209.5999999999999" y="1175.7121439280361"/>
         </scene>
@@ -1195,12 +1152,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Earnings Icon" width="18" height="17"/>
         <image name="base" width="36" height="36"/>
         <image name="base_pressed" width="36" height="36"/>
-        <image name="btnBack" width="32" height="32"/>
-        <image name="btnBackPressed" width="32" height="32"/>
-        <image name="circle" width="33" height="34"/>
         <image name="down shaddow" width="414" height="97"/>
         <image name="follow frame " width="14" height="38"/>
         <image name="girl" width="246" height="246"/>
@@ -1210,18 +1163,18 @@
         <image name="location-icon" width="10" height="14"/>
         <image name="logo status home screen" width="110" height="17"/>
         <image name="message_background" width="6" height="19"/>
-        <image name="more button" width="34" height="33"/>
         <image name="more-icon" width="16" height="3"/>
         <image name="no picture" width="111" height="111"/>
+        <image name="options button" width="16" height="3"/>
+        <image name="options button pressed" width="16" height="3"/>
         <image name="orange arrow" width="9" height="16"/>
-        <image name="settings_btn" width="32" height="32"/>
-        <image name="settings_btn_pressed" width="32" height="32"/>
+        <image name="revenue icon" width="19" height="19"/>
+        <image name="revenue icon pressed" width="19" height="19"/>
+        <image name="settings icon" width="19" height="18"/>
+        <image name="settings icon pressed" width="19" height="18"/>
         <image name="shop" width="13" height="17"/>
         <image name="shop_pressed" width="13" height="17"/>
         <image name="splashscreen" width="375" height="667"/>
         <image name="user_photo_gradient" width="375" height="151"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="SJw-WL-3J2"/>
-    </inferredMetricsTieBreakers>
 </document>

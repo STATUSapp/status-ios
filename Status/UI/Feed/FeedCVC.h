@@ -21,7 +21,6 @@
 
 + (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor;
 
-@property (nonatomic, assign) BOOL shouldAddBackButton;
 @property (nonatomic, strong, readonly) STFlowProcessor *feedProcessor;
 @property (nonatomic, weak) id<STSideBySideContaineeProtocol> containeeDelegate;
 

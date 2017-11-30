@@ -132,16 +132,16 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     if (self != currentViewController) {
         return;
     }
-//    BOOL navBarHidden = NO;
-    BOOL navBarHidden = YES;
-    if ((_feedProcessor.processorFlowType == STFlowTypeHome ||
-         _feedProcessor.processorFlowType == STFlowTypeHasttag ||
-         _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
-        navBarHidden = NO;
-    }else if (_refreshControl.refreshing == YES &&
-              _feedProcessor.processorFlowType == STFlowTypeHome){
-        navBarHidden = NO;
-    }
+    BOOL navBarHidden = NO;
+//    BOOL navBarHidden = YES;
+//    if ((_feedProcessor.processorFlowType == STFlowTypeHome ||
+//         _feedProcessor.processorFlowType == STFlowTypeHasttag ||
+//         _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
+//        navBarHidden = NO;
+//    }else if (_refreshControl.refreshing == YES &&
+//              _feedProcessor.processorFlowType == STFlowTypeHome){
+//        navBarHidden = NO;
+//    }
 
     if (navBarHidden == NO) {
         if (self == currentViewController) {
@@ -149,8 +149,13 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                 self.navigationItem.titleView = _navBarLogoView;
             }
             else if (_feedProcessor.processorFlowType == STFlowTypeMyGallery) {
-                self.navigationItem.titleView = _navBarLogoView;
-                self.navigationItem.rightBarButtonItems = @[_settingsBarButton,_earningsBarButton];
+                self.navigationItem.title = [_feedProcessor.userProfile fullName];
+                if (_feedProcessor.userProfile.isInfluencer) {
+                    self.navigationItem.leftBarButtonItems = @[_earningsBarButton];
+                }else{
+                    self.navigationItem.leftBarButtonItems = nil;
+                }
+                self.navigationItem.rightBarButtonItems = @[_settingsBarButton];
             }
             else if (_feedProcessor.processorFlowType == STFlowTypeSinglePost)
             {
@@ -158,7 +163,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             }else if (_feedProcessor.processorFlowType == STFlowTypeHasttag){
                 self.navigationItem.title = _feedProcessor.hashtag;
             }else if (_feedProcessor.processorFlowType == STFlowTypeUserGallery){
-                self.navigationItem.title = [self userName];
+                self.navigationItem.title = [_feedProcessor.userProfile fullName];
                 self.navigationItem.rightBarButtonItems = @[_optionsBarButton];
             }
         }
@@ -244,7 +249,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     FeedCVC *feedCVC = [[navController viewControllers] firstObject];
     
     feedCVC.feedProcessor = processor;
-    feedCVC.shouldAddBackButton = YES;
     return feedCVC;
 }
 
@@ -281,9 +285,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"self.collectionView.constraints = %@", self.collectionView.contentInsetAdjustmentBehavior);
-    
+    self.navigationController.hidesBarsOnSwipe = YES;
     if (self.feedProcessor.processorFlowType == STFlowTypeHome) {
         NSArray *redirectVC = [[CoreManager deepLinkService] redirectViewControllers];
         if (redirectVC && [redirectVC count]) {
@@ -330,10 +332,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self configureLoadingView];
-    
-    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, 30.f);
-    
-    _refreshControl = [[UIRefreshControl alloc] initWithFrame:rect];
+    CGRect refreshFrame = CGRectMake(0, 0, self.view.frame.size.width, 30.f);
+    _refreshControl = [[UIRefreshControl alloc] initWithFrame:refreshFrame];
 //    _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull down to refresh"];
     [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
     
@@ -376,23 +376,20 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 -(BOOL)prefersStatusBarHidden{
-    BOOL statusBarHidden = YES;
-    if (_feedProcessor.processorFlowType == STFlowTypeHome) {
-        statusBarHidden = NO;
-    }else if (_refreshControl.refreshing == YES){
-        statusBarHidden = NO;
-    }
-
-    return statusBarHidden;
+    return NO;
+//    BOOL statusBarHidden = YES;
+//    if (_feedProcessor.processorFlowType == STFlowTypeHome) {
+//        statusBarHidden = NO;
+//    }else if (_refreshControl.refreshing == YES){
+//        statusBarHidden = NO;
+//    }
+//
+//    return statusBarHidden;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    if (_feedProcessor.processorFlowType == STFlowTypeHome) {
-        return UIStatusBarStyleDefault;
-    }
-    
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 -(void)dealloc{
@@ -608,7 +605,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                 NSLog(@"didTapHashTag: %@", hashtag);
                 STFlowProcessor *hashtagProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeHasttag hashtag:hashtag];
                 FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:hashtagProcessor];
-                vc.shouldAddBackButton = YES;
                 UINavigationController *navCtrl = (UINavigationController *)[[[STNavigationService appTabBar] viewControllers] objectAtIndex:self.tabBarController.selectedIndex];
                 [navCtrl pushViewController:vc animated:YES];
             }
@@ -850,9 +846,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }
     else if ([cell isKindOfClass:[UserProfileInfoCell class]]){
         [(UserProfileInfoCell *)cell configureCellWithUserProfile:[_feedProcessor userProfile]];
-        [(UserProfileInfoCell *)cell setBackButtonHidden:!_shouldAddBackButton];
-        [(UserProfileInfoCell *)cell setSettingsButtonHidden:!_isMyProfile];
-        
     }
     else if ([cell isKindOfClass:[UserProfileFriendsInfoCell class]]){
         [(UserProfileFriendsInfoCell *)cell configureForProfile:[_feedProcessor userProfile]];
@@ -957,7 +950,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     STPost *post = [self getCurrentPostForButton:sender];
     
     FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:post.userId andUserName:post.userName];
-    feedCVC.shouldAddBackButton = YES;
     [self.navigationController pushViewController:feedCVC animated:YES];
 
 }

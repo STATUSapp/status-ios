@@ -63,20 +63,17 @@ NSString * const kHostPostKey = @"post";
                 //go to user profile
                 if (userId) {
                     FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
-                    profileVC.shouldAddBackButton = YES;
                     [stackVC addObject:profileVC];
                 }
             }else if ([hostString isEqualToString:kHostPostKey]){
                 //go to user post
                 if (userId) {
                     FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
-                    profileVC.shouldAddBackButton = YES;
                     [stackVC addObject:profileVC];
                 }
                 
                 if (postId) {
                     FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postId];
-                    feedCVC.shouldAddBackButton = YES;
                     [stackVC addObject:feedCVC];
                     
                 }
