@@ -244,6 +244,10 @@ extern NSString *const kNotificationSessionExpired;
 extern NSString *const kNotificationFacebokDidLogin ;
 extern NSString *const kNotificationFacebokDidLogout ;
 
+#pragma mark - snack bar action notification
+
+extern NSString *const kNotificationSnackBarAction;
+extern NSString *const kNotificationSnackBarActionTypeKey;
 
 extern NSString *const kChatMinimumVersion;
 

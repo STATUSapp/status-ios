@@ -17,6 +17,8 @@
 #import "STNotificationsManager.h"
 #import "STNavigationService.h"
 #import "STBarcodeScannerViewController.h"
+#import "STSnackBarWithActionService.h"
+#import "STLoginViewController.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
 static CGFloat kTabBarHeight = 49.f;
@@ -127,8 +129,10 @@ static CGFloat kImageInset = 4.f;
     STChoosePhotoViewController *vc = [STChoosePhotoViewController newController];
     _takeAPhotoNav = [[UINavigationController alloc] initWithRootViewController:vc];
     _takeAPhotoNav.navigationBarHidden = YES;
-    
-    // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(snackBarAction:)
+                                                 name:kNotificationSnackBarAction
+                                               object:nil];
 }
 
 -(void)setNavigationBarHeight:(CGFloat)height{
@@ -153,6 +157,22 @@ static CGFloat kImageInset = 4.f;
 }
 
 
+#pragma mark - UINotifications
+
+-(void)snackBarAction:(NSNotification *)notification{
+    STSnackWithActionBarType type = [notification.userInfo[kNotificationSnackBarActionTypeKey] integerValue];
+    if (type == STSnackWithActionBarTypeGuestMode) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
+        STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+        viewController.showCloseButton = YES;
+        [self presentViewController:viewController
+                           animated:YES
+                         completion:^{
+                             
+                         }];
+    }
+}
+
 #pragma mark - Helper
 
 -(void)configureNavControllerToHandleSwipeToBackGesture:(UINavigationController *)navController{
@@ -163,6 +183,9 @@ static CGFloat kImageInset = 4.f;
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
+    if ([[CoreManager loginService] isGuestUser]) {
+        return;
+    }
     NSUInteger selectedItem = [[tabBar items] indexOfObject:item];
     
     if (selectedItem == STTabBarIndexTakeAPhoto) {

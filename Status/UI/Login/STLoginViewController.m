@@ -18,6 +18,7 @@
 //NSInteger const kLoginButtonTag = 121;
 
 @interface STLoginViewController ()<STTutorialDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *splashBackground;
 @property (weak, nonatomic) IBOutlet UIButton *fBLoginButton;
 
@@ -46,6 +47,7 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     _splashBackground.image = [STUIHelper splashImageWithLogo:NO];
+    _closeButton.hidden = !_showCloseButton;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -107,6 +109,9 @@
     FBSDKLoginButton *loginButton = [[CoreManager loginService] facebookLoginButton];
     [loginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 
+}
+- (IBAction)onCloseButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - NSNotifications
 - (void)userDidLoggedIn{

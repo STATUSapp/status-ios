@@ -29,9 +29,15 @@
     UIImage *image = [STUIHelper splashImageWithLogo:YES];
     _launchImage.image = image;
     
-    if ([CoreManager shouldLogin])
-        [[CoreManager navigationService] presentLoginScreen];
-    [[CoreManager loginService] startLoginIfPossible];
+//    if ([CoreManager shouldLogin])
+//        [[CoreManager navigationService] presentLoginScreen];
+    BOOL shouldLogin = [CoreManager shouldLogin];
+    BOOL isGuestUser = [[CoreManager loginService] isGuestUser];
+    if (shouldLogin || isGuestUser){
+        [[CoreManager loginService] loginAsGuest];
+    }else{
+        [[CoreManager loginService] startLoginIfPossible];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

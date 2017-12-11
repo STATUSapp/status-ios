@@ -52,6 +52,7 @@
 #import "STEarningsViewController.h"
 #import <Photos/Photos.h>
 #import "STFacebookAddCell.h"
+#import "STSnackBarWithActionService.h"
 
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
@@ -394,6 +395,14 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(BOOL)canDoAction{
+    if ([[CoreManager loginService] isGuestUser]) {
+        [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Notifications
@@ -888,6 +897,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 -(IBAction)onDoubleTap:(id)sender{
+    if (![self canDoAction]){
+        return;
+    }
     CGPoint tappedPoint = [sender locationInView:self.collectionView];
     NSIndexPath *tappedCellPath = [self.collectionView indexPathForItemAtPoint:tappedPoint];
     if ([_feedProcessor processorIsAGallery] && tappedCellPath.section == 0) {
@@ -913,6 +925,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 - (IBAction)onLikePressed:(id)sender {
+    if (![self canDoAction]){
+        return;
+    }
     [(UIButton *)sender setUserInteractionEnabled:NO];
     NSInteger index = [self getCurrentIndexForView:sender];
     [_feedProcessor setLikeUnlikeAtIndex:index
@@ -965,6 +980,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 }
 - (IBAction)onLikesPressed:(id)sender {
+    if (![self canDoAction]){
+        return;
+    }
     STPost *post = [self getCurrentPostForButton:sender];
     STUsersListController *viewController = [STUsersListController newControllerWithUserId:post.userId postID:post.uuid andType:UsersListControllerTypeLikes];
     
@@ -972,6 +990,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 }
 - (IBAction)onMorePressed:(id)sender {
+    if (![self canDoAction]){
+        return;
+    }
     STPost *post = [self getCurrentPostForButton:sender];
     BOOL extendedRights = NO;
     if ([post.userId isEqualToString:[CoreManager loginService].currentUserUuid]) {
@@ -1000,6 +1021,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)onProfileOptionsPressed:(id)sender {
+    if (![self canDoAction]){
+        return;
+    }
     [STContextualMenu presentProfileViewWithDelegate:self];
 
 }
@@ -1012,19 +1036,27 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 - (IBAction)onTapFollowing:(id)sender {
+    if (![self canDoAction]){
+        return;
+    }
     STUsersListController * newVC = [STUsersListController newControllerWithUserId:[_feedProcessor userId]
                                                                             postID:nil andType:UsersListControllerTypeFollowing];
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
 - (IBAction)onTapFollowers:(id)sender {
+    if (![self canDoAction]){
+        return;
+    }
     STUsersListController * newVC = [STUsersListController newControllerWithUserId:[_feedProcessor userId]
                                                                             postID:nil andType:UsersListControllerTypeFollowers];
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
 - (IBAction)onTapFollowUser:(UIButton *)followBtn {
-    
+    if (![self canDoAction]){
+        return;
+    }
     __block STUserProfile *userProfile = [_feedProcessor userProfile];
     STListUser *listUser = [userProfile listUserFromProfile];
     _followProcessor = [[STFollowDataProcessor alloc] initWithUsers:@[listUser]];

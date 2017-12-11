@@ -6,9 +6,9 @@
 //  Copyright © 2017 Andrus Cosmin. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "STSnackBarBaseService.h"
 
-@interface STSnackBarService : NSObject
+@interface STSnackBarService : STSnackBarBaseService
 
 -(void)showSnackBarWithMessage:(NSString *)message;
 

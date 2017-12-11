@@ -42,7 +42,7 @@
 #import "STNavigationService.h"
 #import "BadgeService.h"
 #import "STDeepLinkService.h"
-
+#import "STSnackBarWithActionService.h"
 #import "STWhiteNavBarViewController.h"
 
 #import "Branch.h"
@@ -300,4 +300,15 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
     return barColor;
 }
+
+#pragma mark - UITabBarControllerDelegate
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    STTabBarIndex index = [tabBarController.viewControllers indexOfObject:viewController];
+    if (index != STTabBarIndexExplore && [[CoreManager loginService] isGuestUser]) {
+        [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
+        return NO;
+    }
+    return YES;
+}
+
 @end

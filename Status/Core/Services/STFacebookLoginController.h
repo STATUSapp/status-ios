@@ -22,4 +22,7 @@ typedef void (^facebookCompletion)(id result, NSError *error);
 - (STUserProfile *)userProfile;
 - (void)startLoginIfPossible;
 
+//guest user
+-(void)loginAsGuest;
+-(BOOL)isGuestUser;
 @end

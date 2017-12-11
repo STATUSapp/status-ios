@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NGw-zI-bIO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NGw-zI-bIO">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,14 +36,29 @@
                                     <segue destination="91j-x6-xGm" kind="embed" id="wMN-vK-mIu"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="re2-Fh-J26">
+                                <rect key="frame" x="335" y="44" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="33S-W5-8ss"/>
+                                    <constraint firstAttribute="height" constant="40" id="tYu-H7-mvO"/>
+                                </constraints>
+                                <state key="normal" image="x menu STAUS">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCloseButtonPressed:" destination="NGw-zI-bIO" eventType="touchUpInside" id="Ud8-Na-pRt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="QJ2-Wg-uHO" firstAttribute="leading" secondItem="n35-de-tTH" secondAttribute="leading" id="1xr-Ih-or7"/>
                             <constraint firstItem="n35-de-tTH" firstAttribute="trailing" secondItem="oGC-Ih-RnU" secondAttribute="trailing" id="3GA-dv-Srx"/>
+                            <constraint firstItem="re2-Fh-J26" firstAttribute="top" secondItem="n35-de-tTH" secondAttribute="top" id="INM-97-HFJ"/>
                             <constraint firstItem="oGC-Ih-RnU" firstAttribute="leading" secondItem="n35-de-tTH" secondAttribute="leading" id="X61-PE-a2I"/>
                             <constraint firstAttribute="bottom" secondItem="oGC-Ih-RnU" secondAttribute="bottom" id="bnZ-jG-8wx"/>
                             <constraint firstItem="oGC-Ih-RnU" firstAttribute="top" secondItem="khT-Yw-sWu" secondAttribute="top" id="jbq-hc-R1K"/>
+                            <constraint firstItem="re2-Fh-J26" firstAttribute="trailing" secondItem="n35-de-tTH" secondAttribute="trailing" id="q0D-04-Lnd"/>
                             <constraint firstItem="QJ2-Wg-uHO" firstAttribute="top" secondItem="n35-de-tTH" secondAttribute="top" id="rlW-Up-S21"/>
                             <constraint firstItem="n35-de-tTH" firstAttribute="bottom" secondItem="QJ2-Wg-uHO" secondAttribute="bottom" id="vW3-pT-FOd"/>
                             <constraint firstItem="n35-de-tTH" firstAttribute="trailing" secondItem="QJ2-Wg-uHO" secondAttribute="trailing" id="xfp-q2-sPL"/>
@@ -54,6 +69,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="closeButton" destination="re2-Fh-J26" id="QEr-ZR-6Zb"/>
                         <outlet property="splashBackground" destination="oGC-Ih-RnU" id="Y6i-R5-dKL"/>
                     </connections>
                 </viewController>
@@ -302,6 +318,6 @@ Popular, Nearby and Recent.</string>
         <image name="x menu STAUS" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XN1-aR-jDG"/>
+        <segue reference="wMN-vK-mIu"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -112,6 +112,7 @@
     NSLog(@"Tabbar Controller presented");
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     STTabBarViewController * tabBar = [STTabBarViewController newController];
+    tabBar.delegate = appDel;
     [appDel.window setRootViewController:tabBar];
 }
 

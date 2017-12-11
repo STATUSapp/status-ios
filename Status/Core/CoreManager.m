@@ -25,6 +25,7 @@
 #import "BadgeService.h"
 #import "STDeepLinkService.h"
 #import "STSnackBarService.h"
+#import "STSnackBarWithActionService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -45,6 +46,7 @@
 @property (nonatomic, strong) BadgeService *badgeService;
 @property (nonatomic, strong) STDeepLinkService *deepLinkService;
 @property (nonatomic, strong) STSnackBarService *snackBarService;
+@property (nonatomic, strong) STSnackBarWithActionService *snackWithActionService;
 
 @end
 
@@ -81,7 +83,7 @@
         _badgeService = [BadgeService new];
         _deepLinkService = [STDeepLinkService new];
         _snackBarService = [STSnackBarService new];
-        
+        _snackWithActionService = [STSnackBarWithActionService new];
     }
     return self;
 }
@@ -93,7 +95,7 @@
 }
 
 + (BOOL)loggedIn{
-    return [[CoreManager sharedInstance] loggedIn];
+    return [[CoreManager sharedInstance] loggedIn] && ![[CoreManager sharedInstance] isGuestUser];
 }
 
 + (STPostsPool *)postsPool {
@@ -169,6 +171,9 @@
     return [[CoreManager sharedInstance] snackBarService];
 }
 
++(STSnackBarWithActionService *)snackWithActionService{
+    return [[CoreManager sharedInstance] snackWithActionService];
+}
 #pragma mark - Private implementation
 
 - (BOOL)shouldLogin {
@@ -178,6 +183,10 @@
 - (BOOL)loggedIn{
     NSString *accessToken = [_networkService getAccessToken];
     return (accessToken!=nil && accessToken.length > 0);
+}
+
+- (BOOL)isGuestUser{
+    return [_loginService isGuestUser];
 }
 
 @end

@@ -9,4 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface STLoginViewController : UIViewController
+
+@property (nonatomic, assign) BOOL showCloseButton;
 @end

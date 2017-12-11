@@ -184,7 +184,10 @@ NSString *const kNotificationSessionExpired = @"NotificationSessionExpired";
 NSString *const kNotificationFacebokDidLogin = @"NotificationFacebokDidLogin";
 NSString *const kNotificationFacebokDidLogout = @"NotificationFacebokDidLogout";
 
+#pragma mark - snack bar action notification
 
+NSString *const kNotificationSnackBarAction = @"NotificationSnackBarAction";
+NSString *const kNotificationSnackBarActionTypeKey = @"NotificationSnackBarActionTypeKey";
 NSString *const kChatMinimumVersion = @"1.0.4";
 
 

@@ -105,6 +105,52 @@
     return _loggedInUserProfile;
 }
 
+#pragma mark - Guest User
+- (NSDictionary *)newGuestPayload{
+    NSDate *nowDate = [NSDate date];
+    NSString *facebookId = [NSString stringWithFormat:@"%0.f", nowDate.timeIntervalSince1970];
+    NSString *email = [NSString stringWithFormat:@"ios_guest_%@@@guest.com", facebookId];
+    NSMutableDictionary *result = [@{} mutableCopy];
+    result[@"email"] = email;
+    result[@"facebook_image_link"] = @"";
+    result[@"fb_token"] = @"";
+    result[@"phone_number"] = @"";
+    result[@"full_name"] = @"Guest";
+    result[@"birthday"] = @"";
+    result[@"facebook_id"] = facebookId;
+    result[@"gender"] = @"other";
+    result[@"bio"] = @"";
+    result[@"location"] = @"";
+    return result;
+}
+
+-(BOOL)isGuestUser{
+    if (_fetchedUserData) {
+        NSString *email = _fetchedUserData[@"email"];
+        return [email containsString:@"ios_guest"];
+    }
+    return YES;
+}
+
+-(NSDictionary *)loadGuestUser{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSDictionary *guestUser = [ud valueForKey:@"GUEST_USER_PAYLOAD"];
+    if (guestUser.allKeys.count == 0) {
+        guestUser = [self newGuestPayload];
+        [ud setValue:guestUser forKey:@"GUEST_USER_PAYLOAD"];
+        [ud synchronize];
+    }
+    return guestUser;
+}
+
+-(void)loginAsGuest{
+    if (![self canLoginOrRegister]) {
+        return;
+    }
+    NSDictionary *userInfo = [self loadGuestUser];
+    [self sendLoginOrregisterRequest:userInfo];
+}
+
 #pragma mark - Facebook DelegatesFyou
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
@@ -190,15 +236,22 @@
 
 }
 
--(void) loginOrRegister{
+-(BOOL)canLoginOrRegister{
     if ([[CoreManager networkService] canSendLoginOrRegisterRequest]==FALSE){
         //TODO: add log here
-        return;
+        return NO;
     }
     
+    return YES;
+}
+
+-(void) loginOrRegister{
+    if (![self canLoginOrRegister]) {
+        return;
+    }
     if([[FBSDKAccessToken currentAccessToken] tokenString]==nil){
         //TODO: add log here
-        return;
+        return ;
     }
     [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         
@@ -206,48 +259,8 @@
             //TODO: add log here
             return ;
         }
-        __weak STFacebookLoginController *weakSelf = self;
         __block NSMutableDictionary *userInfo = [NSMutableDictionary new];
-
-        STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
-            if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-                [weakSelf measureRegister];
-                [weakSelf setUpEnvironment:response andUserInfo:userInfo];
-                [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidRegister object:nil userInfo:nil];
-            }
-            else
-            {
-                //TODO: add log here
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong with the registration." preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-                [[CoreManager navigationService] presentAlertController:alert];
-            }
-        };
         
-        STRequestFailureBlock failBlock = ^(NSError *error){
-            //TODO: add log here
-            NSLog(@"Error: %@", error.debugDescription);
-        };
-        
-        STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
-            if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
-               
-                [STRegisterRequest registerWithUserInfo:userInfo
-                                         withCompletion:registerCompletion
-                                                failure:failBlock];
-            }
-            else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
-                [weakSelf setTrackerAsExistingUser];
-                [weakSelf setUpEnvironment:response andUserInfo:userInfo];
-            }
-            else
-            {
-                //TODO: add log here
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong on login." preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-                [[CoreManager navigationService] presentAlertController:alert];
-            }
-        };
         NSString *userFbId = [[FBSDKAccessToken currentAccessToken] userID];
         
         userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
@@ -272,15 +285,57 @@
             if (info[@"about"]!=nil) {
                 userInfo[@"bio"] = info[@"about"];
             }
-            _fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
-            [STLoginRequest loginWithUserInfo:userInfo
-                               withCompletion:loginCompletion
-                                      failure:failBlock];
-            
+            [self sendLoginOrregisterRequest:userInfo];
         }];
     }];
+}
 
+-(void)sendLoginOrregisterRequest:(NSDictionary *)userInfo{
+    __weak STFacebookLoginController *weakSelf = self;
+    _fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
+    STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
+            [weakSelf measureRegister];
+            [weakSelf setUpEnvironment:response andUserInfo:userInfo];
+            [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidRegister object:nil userInfo:nil];
+        }
+        else
+        {
+            //TODO: add log here
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong with the registration." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [[CoreManager navigationService] presentAlertController:alert];
+        }
+    };
     
+    STRequestFailureBlock failBlock = ^(NSError *error){
+        //TODO: add log here
+        NSLog(@"Error: %@", error.debugDescription);
+    };
+
+    STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
+        if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
+            
+            [STRegisterRequest registerWithUserInfo:userInfo
+                                     withCompletion:registerCompletion
+                                            failure:failBlock];
+        }
+        else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
+            [weakSelf setTrackerAsExistingUser];
+            [weakSelf setUpEnvironment:response andUserInfo:userInfo];
+        }
+        else
+        {
+            //TODO: add log here
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong on login." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [[CoreManager navigationService] presentAlertController:alert];
+        }
+    };
+
+    [STLoginRequest loginWithUserInfo:userInfo
+                       withCompletion:loginCompletion
+                              failure:failBlock];
 }
 
 - (void)setTrackerAsExistingUser {
