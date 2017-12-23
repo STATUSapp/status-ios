@@ -39,7 +39,7 @@ const float kNoNotifHeight = 24.f;
     UIImage *timeIconImage;
     
 }
-@property (weak, nonatomic) IBOutlet UILabel *noNotifLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noNotificationViewHeightConstr;
 @property (weak, nonatomic) IBOutlet UITableView *notificationTable;
 @property (strong, nonatomic) UITapGestureRecognizer * tapOnRow;
 @property (nonatomic, strong) STFollowDataProcessor *followProcessor;
@@ -70,7 +70,6 @@ const float kNoNotifHeight = 24.f;
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor clearColor];
     timeIconImage =  [[UIImage imageNamed:@"chat time icon"] resizedImage:CGSizeMake(10.f, 10.f) interpolationQuality:kCGInterpolationMedium];
     // add gesture recognizer to use instead of didSelectRowAtIndexPath
     _tapOnRow = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -111,14 +110,18 @@ const float kNoNotifHeight = 24.f;
             [weakSelf.refreshControl endRefreshing];
         }
         if (!error) {
-            BOOL shouldShowPlaceholder = _notificationDataSource.count > 0;
-            weakSelf.noNotifLabel.hidden = shouldShowPlaceholder;
-            weakSelf.notificationTable.hidden = !shouldShowPlaceholder;
+            BOOL shouldShowPlaceholder = _notificationDataSource.count == 0;
+            if (shouldShowPlaceholder) {
+                weakSelf.noNotificationViewHeightConstr.constant = weakSelf.view.frame.size.height;
+            }else{
+                weakSelf.noNotificationViewHeightConstr.constant = 0;
+            }
+            weakSelf.notificationTable.hidden = shouldShowPlaceholder;
             [weakSelf.notificationTable reloadData];
         }
         else
         {
-            weakSelf.noNotifLabel.hidden = NO;
+            weakSelf.noNotificationViewHeightConstr.constant = weakSelf.view.frame.size.height;
             weakSelf.notificationTable.hidden = YES;
         }
     }];
@@ -139,8 +142,14 @@ const float kNoNotifHeight = 24.f;
     return UIStatusBarStyleDefault;
 }
 
+#pragma mark - IBAction
+
 - (IBAction)onClickback:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)onStartExploringPressed:(id)sender {
+    [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexExplore
+                                               popToRootVC:YES];
 }
 
 #pragma mark - Hook Methods

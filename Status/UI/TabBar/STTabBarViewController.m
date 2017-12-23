@@ -133,6 +133,7 @@ static CGFloat kImageInset = 4.f;
                                              selector:@selector(snackBarAction:)
                                                  name:kNotificationSnackBarAction
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationFacebokDidLogout object:nil];
 }
 
 -(void)setNavigationBarHeight:(CGFloat)height{
@@ -162,18 +163,27 @@ static CGFloat kImageInset = 4.f;
 -(void)snackBarAction:(NSNotification *)notification{
     STSnackWithActionBarType type = [notification.userInfo[kNotificationSnackBarActionTypeKey] integerValue];
     if (type == STSnackWithActionBarTypeGuestMode) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
-        STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
-        viewController.showCloseButton = YES;
-        [self presentViewController:viewController
-                           animated:YES
-                         completion:^{
-                             
-                         }];
+        [self presentLoginVC];
     }
 }
 
+-(void)userDidLoggedOut{
+    [self.selectedViewController dismissViewControllerAnimated:NO completion:nil];
+    [self setSelectedIndex:STTabBarIndexExplore];
+    [self presentLoginVC];
+}
 #pragma mark - Helper
+
+- (void)presentLoginVC{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
+    STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    viewController.showCloseButton = YES;
+    [self presentViewController:viewController
+                       animated:YES
+                     completion:^{
+                         
+                     }];
+}
 
 -(void)configureNavControllerToHandleSwipeToBackGesture:(UINavigationController *)navController{
     navController.interactivePopGestureRecognizer.delegate =self;

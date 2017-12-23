@@ -90,8 +90,10 @@
     if ([FBSDKAccessToken currentAccessToken]) {
         [self loginOrRegister];
     }
-    else
+    else{
         [self logout];
+        [self loginAsGuest];
+    }
 }
 
 - (STUserProfile *)userProfile{
@@ -226,7 +228,7 @@
     STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==200){
             NSLog(@"APN Token deleted.");
-            [[CoreManager networkService] deleteAccessToken];
+//            [[CoreManager networkService] deleteAccessToken];
         }
         else  NSLog(@"APN token NOT deleted.");
     };
