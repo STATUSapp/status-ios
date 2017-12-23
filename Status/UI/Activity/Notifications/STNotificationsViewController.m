@@ -90,6 +90,7 @@ const float kNoNotifHeight = 24.f;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    self.navigationController.hidesBarsOnSwipe = NO;
     [self getNotificationsFromServer];
 }
 
