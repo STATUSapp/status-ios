@@ -48,7 +48,7 @@
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary | UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary /*| UIImagePickerControllerSourceTypeSavedPhotosAlbum*/;
     [vc presentViewController:imagePicker animated:YES completion:nil];
     
 }
