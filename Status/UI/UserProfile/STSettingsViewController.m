@@ -189,7 +189,7 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
             numRows = 2;
             break;
         case STSettingsSectionLikeAdds:
-            numRows = 3;
+            numRows = 4;
             break;
         case STSettingsSectionLogout:
             numRows = 1;
@@ -214,6 +214,12 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 }
 - (IBAction)onTapRateUsInAppstore:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_REVIEW_URL_STRING]];
+}
+- (IBAction)onTapFollowUsOnInstagram:(id)sender {
+    NSURL *instagramURL = [NSURL URLWithString:@"https://www.instagram.com/statusapp/"];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        [[UIApplication sharedApplication] openURL:instagramURL];
+    }
 }
 
 - (IBAction)onTapInviteFriends:(id)sender {
