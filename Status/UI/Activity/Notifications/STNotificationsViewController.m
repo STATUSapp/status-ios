@@ -85,6 +85,13 @@ const float kNoNotifHeight = 24.f;
     [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
     
     [self.notificationTable addSubview:_refreshControl];
+    [_refreshControl beginRefreshing];
+    _noNotificationViewHeightConstr.constant = 0.f;
+    _notificationTable.hidden = NO;
+    [_notificationTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    [self.view layoutIfNeeded];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -107,6 +114,7 @@ const float kNoNotifHeight = 24.f;
     
     [STDataAccessUtils getNotificationsWithCompletion:^(NSArray *objects, NSError *error) {
         weakSelf.notificationDataSource = [NSArray arrayWithArray:objects];
+        [weakSelf.notificationTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         if (weakSelf.refreshControl.refreshing) {
             [weakSelf.refreshControl endRefreshing];
         }
