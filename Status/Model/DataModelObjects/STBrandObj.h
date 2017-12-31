@@ -12,4 +12,5 @@
 
 + (STBrandObj *)brandObjFromDict:(NSDictionary *)dict;
 
+@property (nonatomic, strong, readonly) NSString *brandName;
 @end

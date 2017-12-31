@@ -27,6 +27,7 @@
 @class STDeepLinkService;
 @class STSnackBarService;
 @class STSnackBarWithActionService;
+@class STCoreDataManager;
 
 @interface CoreManager : NSObject
 
@@ -52,5 +53,6 @@
 + (STDeepLinkService *)deepLinkService;
 + (STSnackBarService *)snackBarService;
 + (STSnackBarWithActionService *)snackWithActionService;
++ (STCoreDataManager *)coreDataService;
 
 @end

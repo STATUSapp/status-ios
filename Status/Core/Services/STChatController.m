@@ -23,6 +23,7 @@
 #import "CreateDataModelHelper.h"
 #import "STLocalNotificationService.h"
 #import "BadgeService.h"
+#import "STCoreDataMessageSync.h"
 
 NSString *const kFirstChatVersion = @"1.0.4";
 
@@ -371,16 +372,14 @@ NSString *const kFirstChatVersion = @"1.0.4";
     if (seen == NO) {
         [[CoreManager badgeService] adjustUnreadMessages:1];
     }
-    [[STCoreDataManager sharedManager] synchronizeAsyncCoreDataEntity:@"Message"
-                                                             withData:resultDict
-                                                        andCompletion:^(BOOL success, id returnObject) {
-                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                if (seen == NO && received && message[@"notification_info"]!=nil) {
-                                                                    [[CoreManager notificationsService] handleInAppMessageNotification:message];
-                                                                }
-                                                            });
+    [[STCoreDataMessageSync new] synchronizeAsyncCoreDataFromData:resultDict withCompletion:^(NSError *error, NSManagedObject *object) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (seen == NO && received && message[@"notification_info"]!=nil) {
+                [[CoreManager notificationsService] handleInAppMessageNotification:message];
+            }
+        });
 
-                                                        }];
+    }];
 }
 
 #pragma mark -Helpers

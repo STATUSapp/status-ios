@@ -224,7 +224,7 @@
     [[CoreManager locationService] stopLocationUpdates];
     [[CoreManager locationService] setLatestLocation:nil];
     [[CoreManager imageCacheService] cleanTemporaryFolder];
-    [[STCoreDataManager sharedManager] cleanLocalDataBase];
+    [[CoreManager coreDataService] cleanLocalDataBase];
     STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==200){
             NSLog(@"APN Token deleted.");

@@ -11,24 +11,15 @@
 
 //Block Defines
 typedef void (^CompletionBlock)(BOOL success, id returnObject);
-typedef void (^UpdateBlock)(id dbObject,id updateData);
 typedef void (^ParameterBlock)(NSFetchRequest* requestToBeParametered);
-typedef void (^AddParameterBlock)(id returnObject, NSManagedObjectContext* managedObjectContext);
 
-@class SLTableRelationshipManager;
-
-@interface STCoreDataManager : NSObject{
-    
-    SLTableRelationshipManager* _tableRelationshipsManager;
-}
+@interface STCoreDataManager : NSObject
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 //Methods
-
-+ (STCoreDataManager*)sharedManager;
 
 /**
  * Create new managed object context for temporary data
@@ -71,17 +62,5 @@ typedef void (^AddParameterBlock)(id returnObject, NSManagedObjectContext* manag
  * Init and clean local database
  */
 - (void)cleanLocalDataBase;
-
-/**
- * Used as an abstract method of update-ing any object from db
- * @param addBlock ... make operations with the objects after is insertion in the db
- * @param entityName ... the CoreData entity(table) that we wish to update
- * @param serverData ... the data from server in JSON format
- * @param andCompletion 
- */
-- (void)synchronizeAsyncCoreDataEntity:(NSString*)entityName
-                              withData:(NSDictionary*)serverData
-                         andCompletion:(CompletionBlock)completion;
-
 
 @end

@@ -339,8 +339,8 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Delete Conversation" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (weakSelf.roomId){
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", weakSelf.roomId];
-            [[STCoreDataManager sharedManager] deleteAllObjectsFromTable:@"Message" withPredicate:predicate];
-            [[STCoreDataManager sharedManager] save];
+            [[CoreManager coreDataService] deleteAllObjectsFromTable:@"Message" withPredicate:predicate];
+            [[CoreManager coreDataService] save];
         }
     }]];
     
@@ -540,7 +540,7 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     _chatController.rechabilityDelegate = nil;
     if(_roomId){
         [_chatController leaveRoom:_roomId];
-        [[STCoreDataManager sharedManager] save];
+        [[CoreManager coreDataService] save];
     }
 }
 

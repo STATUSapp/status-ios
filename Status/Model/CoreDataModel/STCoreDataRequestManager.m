@@ -32,7 +32,7 @@ NSString *const kCDRChangeType = @"change_type";
     return [self fetchRequestWithEntityName:entityName
                      withSectionNameKeyPath:sectionNameKeyPath
                            ofFetchBatchSize:batchSize
-                     inManagedObjectContext:[[STCoreDataManager sharedManager] managedObjectContext]
+                     inManagedObjectContext:[[CoreManager coreDataService] managedObjectContext]
                                forTableView:tableView];
 }
 
@@ -42,7 +42,7 @@ NSString *const kCDRChangeType = @"change_type";
                                    inManagedObjectContext:(NSManagedObjectContext*)moc
                                              forTableView:(UITableView*)tableView{
     
-    _managedObjContext = moc?moc:[[STCoreDataManager sharedManager] getNewManagedObjectContext];
+    _managedObjContext = moc?moc:[[CoreManager coreDataService] getNewManagedObjectContext];
     
     if (tableView && ![tableView isKindOfClass:[UITableView class]]) {
         NSLog(@"Error!");

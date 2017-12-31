@@ -711,7 +711,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Silviu Burlacu 12345" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ijF-HU-uXA" customClass="STTapAnimationLabel">
-                                                    <rect key="frame" x="68" y="26.5" width="251" height="13"/>
+                                                    <rect key="frame" x="68" y="27" width="251" height="13"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1080,7 +1080,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXM-E5-SdM">
-                                        <rect key="frame" x="118" y="83.5" width="139" height="87"/>
+                                        <rect key="frame" x="118" y="84" width="139" height="87"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="aQC-Wy-Vgz"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="dAQ-NZ-fHK"/>

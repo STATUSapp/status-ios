@@ -13,11 +13,12 @@
 #import "STTagProductsManager.h"
 #import "STTabBarViewController.h"
 #import "STTagSuggestions.h"
+#import "STTagBrandSection.h"
 
-@interface STTagProductsBrands ()
+@interface STTagProductsBrands ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) NSArray<STBrandObj *>*brandArray;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray<STTagBrandSection *>*sectionArray;
 
 @end
 
@@ -33,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(brandsWereUpdated:) name:kTagProductNotification object:nil];
+    self.sectionArray = [@[] mutableCopy];
     [self reloadScreen];
 }
 
@@ -56,8 +58,23 @@
 }
 
 -(void)reloadScreen{
-    _brandArray = [STTagProductsManager sharedInstance].brands;
-    [_collectionView reloadData];
+    self.sectionArray = [@[] mutableCopy];
+    NSArray *indexArray = [self.sectionArray valueForKey:@"sectionName"];
+    for (STBrandObj *brandObj in [STTagProductsManager sharedInstance].brands) {
+        NSString *indexStringOfBrand = [brandObj.brandName substringToIndex:1];
+        NSInteger indexOfBrand = [indexArray indexOfObject:indexStringOfBrand];
+        if (indexOfBrand == NSNotFound) {
+            //add new section
+            STTagBrandSection *newSection = [[STTagBrandSection alloc] initWithObject:brandObj];
+            [self.sectionArray addObject:newSection];
+            indexArray = [self.sectionArray valueForKey:@"sectionName"];
+        }else{
+            //add object into section
+            STTagBrandSection *section = [self.sectionArray objectAtIndex:indexOfBrand];
+            [section addObjectToItems:brandObj];
+        }
+    }
+    [_tableView reloadData];
 }
 
 #pragma mark - UINotifications
@@ -74,49 +91,67 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - UICollectionView delegate
-
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
+-(STBrandObj *)brandObjectForIndexPath:(NSIndexPath *)indexPath{
+    STTagBrandSection *section = [self.sectionArray objectAtIndex:indexPath.section];
+    STBrandObj *brand = [section.sectionItems objectAtIndex:indexPath.row];
+    return brand;
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    STTagBrandCell *cell = (STTagBrandCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"STTagBrandCell" forIndexPath:indexPath];
-    
-    STBrandObj *brand = _brandArray[indexPath.item];
-    
-    [cell.brandImage sd_setImageWithURL:[NSURL URLWithString:brand.mainImageUrl] placeholderImage:nil];
-    
+#pragma mark - UITableViewDelegate
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return [self.sectionArray count];
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:section];
+    return [sectionObj.sectionItems count];
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    STBrandObj *brandObj = [self brandObjectForIndexPath:indexPath];
+    STTagBrandCell *cell = (STTagBrandCell *)[tableView dequeueReusableCellWithIdentifier:@"STTagBrandCell"];
+    cell.nameLabel.text = brandObj.brandName;
     return cell;
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [_brandArray count];
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60.f;
 }
 
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    CGFloat itemWidth = (collectionView.frame.size.width - 6.f)/2.f;
-    CGSize itemSize = CGSizeMake(itemWidth, itemWidth * 0.73);
-    
-    return itemSize;
-}
-
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    STBrandObj *brand = _brandArray[indexPath.item];
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    STBrandObj *brand = [self brandObjectForIndexPath:indexPath];
     [[STTagProductsManager sharedInstance] updateBrand:brand];
     STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeDefault];
     
     [self.navigationController pushViewController:vc animated:YES];
+
 }
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(nonnull UICollectionViewCell *)cell forItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    if (indexPath.item == _brandArray.count - 1) {//the last item
+-(void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if (indexPath.section == _sectionArray.count - 1) {//the last section
         if (_delegate && [_delegate respondsToSelector:@selector(brandsShouldDownloadNextPage)]) {
             [_delegate brandsShouldDownloadNextPage];
         }
     }
+
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:section];
+    return sectionObj.sectionName;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 30.f;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
+    NSArray *indexArray = [self.sectionArray valueForKey:@"sectionName"];
+    return [indexArray indexOfObject:title];
+}
+
+- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    NSArray *indexArray = [self.sectionArray valueForKey:@"sectionName"];
+    return indexArray;
+}
 @end

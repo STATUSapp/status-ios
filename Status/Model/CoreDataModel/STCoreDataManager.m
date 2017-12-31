@@ -19,21 +19,7 @@ NSString* const kSqliteFileName = @"Status.sqlite";
 //Set the name of the sqlite file in which CoreData will persist information
 
 @implementation STCoreDataManager{
-    dispatch_queue_t _async_queries_queue;
-    
-    NSArray *_arrDateKeys;
-}
-
-static STCoreDataManager* _coreDataManager = nil;
-
-+ (STCoreDataManager*)sharedManager
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-         _coreDataManager = [[STCoreDataManager alloc] init];
-    });
-
-    return _coreDataManager;
+    dispatch_queue_t _async_queries_queue;    
 }
 
 - (id)init
@@ -208,54 +194,6 @@ static STCoreDataManager* _coreDataManager = nil;
     id managedObject = nil;
     managedObject = [NSEntityDescription insertNewObjectForEntityForName:tableName inManagedObjectContext:managedObjectContext];
     return managedObject;
-}
-
-#pragma mark - Update data
-
-- (void)synchronizeAsyncCoreDataEntity:(NSString*)entityName
-                              withData:(NSDictionary*)serverData
-                         andCompletion:(CompletionBlock)completion{
-    //We create a new managed object context from our main, we update it async, then we merge the changes into our main M.O.C
-    // Create a new managed object context
-    // Set its persistent store coordinator
-    NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
-    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
-    
-    STCoreDataRequestManager *messageManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"uuid like %@", [CreateDataModelHelper validStringIdentifierFromValue:serverData[@"id"]]] sectionNameKeyPath:nil delegate:nil andTableView:nil];
-    
-    Message *message = [[messageManager allObjects] lastObject];
-    if (message==nil) {
-        [newMoc performBlock:^{
-            Message *insertedValue = [self insertDataForTableName:entityName inObjectContext:newMoc];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-            NSDate* date = [dateFormatter dateFromString:serverData[@"date"]];
-            insertedValue.date = date;
-            insertedValue.message = serverData[@"message"];
-            insertedValue.received = serverData[@"received"];
-            insertedValue.roomID = serverData[@"roomID"];
-            insertedValue.seen = serverData[@"seen"];
-            insertedValue.userId = [CreateDataModelHelper validStringIdentifierFromValue:serverData[@"userId"]];
-            insertedValue.uuid = [CreateDataModelHelper validStringIdentifierFromValue: serverData[@"id"]];
-            
-            NSError *error = nil;
-            [newMoc save:&error];
-            
-            if (error) {
-                NSLog(@"synchronizeAsyncCoreDataEntity error: %@",error);
-                if (completion) {
-                    completion(NO,error);
-                }
-            }
-            else {
-                if (completion) {
-                    completion(YES,newMoc);
-                }
-            }
-            
-        }];
-    }
 }
 
 #pragma mark -  Update data helpers

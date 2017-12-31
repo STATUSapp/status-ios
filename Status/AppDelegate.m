@@ -154,7 +154,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *upgraded = [ud valueForKey:@"upgradeDBV1.0.7"];
     if (upgraded == nil) {
-        [[STCoreDataManager sharedManager] cleanLocalDataBase];
+        [[CoreManager coreDataService] cleanLocalDataBase];
         [ud setValue:@"YES" forKey:@"upgradeDBV1.0.7"];
         [ud synchronize];
     }
@@ -175,7 +175,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 //    [NSObject cancelPreviousPerformRequestsWithTarget:[STLocationManager sharedInstance] selector:@selector(restartLocationManager) object:nil];
     [[STChatController sharedInstance] close];
-    [[STCoreDataManager sharedManager] save];
+    [[CoreManager coreDataService] save];
     //[[STLocationManager sharedInstance] startLocationUpdates];
 }
 
@@ -216,7 +216,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [[STChatController sharedInstance] close];
-    [[STCoreDataManager sharedManager] save];
+    [[CoreManager coreDataService] save];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

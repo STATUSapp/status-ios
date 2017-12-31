@@ -26,6 +26,7 @@
 #import "STDeepLinkService.h"
 #import "STSnackBarService.h"
 #import "STSnackBarWithActionService.h"
+#import "STCoreDataManager.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -47,6 +48,7 @@
 @property (nonatomic, strong) STDeepLinkService *deepLinkService;
 @property (nonatomic, strong) STSnackBarService *snackBarService;
 @property (nonatomic, strong) STSnackBarWithActionService *snackWithActionService;
+@property (nonatomic, strong) STCoreDataManager *coreDataService;
 
 @end
 
@@ -84,6 +86,7 @@
         _deepLinkService = [STDeepLinkService new];
         _snackBarService = [STSnackBarService new];
         _snackWithActionService = [STSnackBarWithActionService new];
+        _coreDataService = [STCoreDataManager new];
     }
     return self;
 }
@@ -173,6 +176,10 @@
 
 +(STSnackBarWithActionService *)snackWithActionService{
     return [[CoreManager sharedInstance] snackWithActionService];
+}
+
++(STCoreDataManager *)coreDataService{
+    return [[CoreManager sharedInstance] coreDataService];
 }
 #pragma mark - Private implementation
 

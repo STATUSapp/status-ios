@@ -31,6 +31,8 @@
 		0722F3431F0CB2A500B78823 /* STUserCommissionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722F3421F0CB2A500B78823 /* STUserCommissionsRequest.m */; };
 		0722F3461F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722F3451F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m */; };
 		0722F3491F0CB8B600B78823 /* STCommission.m in Sources */ = {isa = PBXBuildFile; fileRef = 0722F3481F0CB8B600B78823 /* STCommission.m */; };
+		07234AD81FF69339000C335A /* STTagBrandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07234AD71FF69339000C335A /* STTagBrandCell.m */; };
+		07234ADC1FF69692000C335A /* STTagBrandSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 07234ADB1FF69692000C335A /* STTagBrandSection.m */; };
 		072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */ = {isa = PBXBuildFile; fileRef = 072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */; };
 		07269B681F04201F0041D355 /* STEditProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07269B671F04201F0041D355 /* STEditProfileTVC.m */; };
 		0726B8C11F78D2790012A299 /* STMissingProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726B8C01F78D2790012A299 /* STMissingProductViewController.m */; };
@@ -42,6 +44,8 @@
 		072BACB51E80FED80055B6F3 /* STGetSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */; };
 		072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */; };
 		072BACBB1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */; };
+		072DBBCD1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBCC1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m */; };
+		072DBBD01FF8FF3400DFA8F0 /* STCoreDataMessageSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBCF1FF8FF3400DFA8F0 /* STCoreDataMessageSync.m */; };
 		072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */; };
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
@@ -52,7 +56,6 @@
 		075991A81FC36C9F00CF89C0 /* STGetProductsByBarcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 075991A71FC36C9F00CF89C0 /* STGetProductsByBarcode.m */; };
 		075991AB1FC414D600CF89C0 /* STProductSuggestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 075991AA1FC414D600CF89C0 /* STProductSuggestRequest.m */; };
 		075C52961EBDD22700174CC5 /* STTagProductsBrands.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52951EBDD22700174CC5 /* STTagProductsBrands.m */; };
-		075C52991EBDD25000174CC5 /* STTagBrandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52981EBDD25000174CC5 /* STTagBrandCell.m */; };
 		075C529C1EBDE13100174CC5 /* STTagSuggestions.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C529B1EBDE13100174CC5 /* STTagSuggestions.m */; };
 		075C529F1EBF4E1200174CC5 /* STTagManualProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C529E1EBF4E1200174CC5 /* STTagManualProductCell.m */; };
 		075C52A21EBF4E2F00174CC5 /* STTagAddProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52A11EBF4E2F00174CC5 /* STTagAddProductCell.m */; };
@@ -356,6 +359,10 @@
 		0722F3451F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserWithDrawnDetailsRequest.m; sourceTree = "<group>"; };
 		0722F3471F0CB8B600B78823 /* STCommission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCommission.h; sourceTree = "<group>"; };
 		0722F3481F0CB8B600B78823 /* STCommission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCommission.m; sourceTree = "<group>"; };
+		07234AD61FF69339000C335A /* STTagBrandCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTagBrandCell.h; sourceTree = "<group>"; };
+		07234AD71FF69339000C335A /* STTagBrandCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTagBrandCell.m; sourceTree = "<group>"; };
+		07234ADA1FF69692000C335A /* STTagBrandSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTagBrandSection.h; sourceTree = "<group>"; };
+		07234ADB1FF69692000C335A /* STTagBrandSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTagBrandSection.m; sourceTree = "<group>"; };
 		072443AC1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsEmptyWardrobe.h; sourceTree = "<group>"; };
 		072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsEmptyWardrobe.m; sourceTree = "<group>"; };
 		07269B661F04201F0041D355 /* STEditProfileTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditProfileTVC.h; sourceTree = "<group>"; };
@@ -376,6 +383,10 @@
 		072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUsedSuggestionsRequest.m; sourceTree = "<group>"; };
 		072BACB91E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetUsedCatalogCategoriesRequest.h; sourceTree = "<group>"; };
 		072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetUsedCatalogCategoriesRequest.m; sourceTree = "<group>"; };
+		072DBBCB1FF8F3B800DFA8F0 /* STCoreDataBaseSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCoreDataBaseSync.h; sourceTree = "<group>"; };
+		072DBBCC1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCoreDataBaseSync.m; sourceTree = "<group>"; };
+		072DBBCE1FF8FF3400DFA8F0 /* STCoreDataMessageSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCoreDataMessageSync.h; sourceTree = "<group>"; };
+		072DBBCF1FF8FF3400DFA8F0 /* STCoreDataMessageSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCoreDataMessageSync.m; sourceTree = "<group>"; };
 		072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STExploreFilters.xib; sourceTree = "<group>"; };
 		072FE0521F5FC4A60090F8B6 /* STExploreFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STExploreFilters.h; sourceTree = "<group>"; };
 		072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreFilters.m; sourceTree = "<group>"; };
@@ -394,8 +405,6 @@
 		075991AA1FC414D600CF89C0 /* STProductSuggestRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STProductSuggestRequest.m; sourceTree = "<group>"; };
 		075C52941EBDD22700174CC5 /* STTagProductsBrands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsBrands.h; sourceTree = "<group>"; };
 		075C52951EBDD22700174CC5 /* STTagProductsBrands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsBrands.m; sourceTree = "<group>"; };
-		075C52971EBDD25000174CC5 /* STTagBrandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagBrandCell.h; sourceTree = "<group>"; };
-		075C52981EBDD25000174CC5 /* STTagBrandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagBrandCell.m; sourceTree = "<group>"; };
 		075C529A1EBDE13100174CC5 /* STTagSuggestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagSuggestions.h; sourceTree = "<group>"; };
 		075C529B1EBDE13100174CC5 /* STTagSuggestions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagSuggestions.m; sourceTree = "<group>"; };
 		075C529D1EBF4E1200174CC5 /* STTagManualProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagManualProductCell.h; sourceTree = "<group>"; };
@@ -950,11 +959,21 @@
 			path = UIAppearanceContainers;
 			sourceTree = "<group>";
 		};
+		07234AD91FF69649000C335A /* view models */ = {
+			isa = PBXGroup;
+			children = (
+				07234ADA1FF69692000C335A /* STTagBrandSection.h */,
+				07234ADB1FF69692000C335A /* STTagBrandSection.m */,
+			);
+			path = "view models";
+			sourceTree = "<group>";
+		};
 		072822E91E899C8500DCC591 /* TagProducts */ = {
 			isa = PBXGroup;
 			children = (
 				077811561EB712290043A2E8 /* cells */,
 				0721E8A11EC4DF2000DF78D4 /* custom views */,
+				07234AD91FF69649000C335A /* view models */,
 				072822EA1E899CB900DCC591 /* STTagProductsContainer.h */,
 				072822EB1E899CB900DCC591 /* STTagProductsContainer.m */,
 				072143B51FA264D70009C6E9 /* STTagProductsContainerViewController.h */,
@@ -985,6 +1004,17 @@
 			path = TagProducts;
 			sourceTree = "<group>";
 		};
+		072DBBCA1FF8F38000DFA8F0 /* STCoreDataSync */ = {
+			isa = PBXGroup;
+			children = (
+				072DBBCB1FF8F3B800DFA8F0 /* STCoreDataBaseSync.h */,
+				072DBBCC1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m */,
+				072DBBCE1FF8FF3400DFA8F0 /* STCoreDataMessageSync.h */,
+				072DBBCF1FF8FF3400DFA8F0 /* STCoreDataMessageSync.m */,
+			);
+			path = STCoreDataSync;
+			sourceTree = "<group>";
+		};
 		077811561EB712290043A2E8 /* cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -992,8 +1022,8 @@
 				077811581EB7126B0043A2E8 /* STTagCategoryCell.m */,
 				0722BE9D1EBCEFC100BE8CC2 /* STTagProductCell.h */,
 				0722BE9E1EBCEFC100BE8CC2 /* STTagProductCell.m */,
-				075C52971EBDD25000174CC5 /* STTagBrandCell.h */,
-				075C52981EBDD25000174CC5 /* STTagBrandCell.m */,
+				07234AD61FF69339000C335A /* STTagBrandCell.h */,
+				07234AD71FF69339000C335A /* STTagBrandCell.m */,
 				075C529D1EBF4E1200174CC5 /* STTagManualProductCell.h */,
 				075C529E1EBF4E1200174CC5 /* STTagManualProductCell.m */,
 				075C52A01EBF4E2F00174CC5 /* STTagAddProductCell.h */,
@@ -1503,6 +1533,7 @@
 				99B3867C1C82FAA2005B4D8C /* STCoreDataRequestManager.m */,
 				99B3867D1C82FAA2005B4D8C /* STDAOEngine.h */,
 				99B3867E1C82FAA2005B4D8C /* STDAOEngine.m */,
+				072DBBCA1FF8F38000DFA8F0 /* STCoreDataSync */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -2202,6 +2233,7 @@
 				99B3875E1C82FAA2005B4D8C /* STLoginRequest.m in Sources */,
 				0721585B1F1A4B47001481B0 /* STWithdrawDetailsCVC.m in Sources */,
 				170AE3BD1DF60F9D00859C8E /* STTutorialStartCell.m in Sources */,
+				07234ADC1FF69692000C335A /* STTagBrandSection.m in Sources */,
 				99B387441C82FAA2005B4D8C /* UIImage+ImageEffects.m in Sources */,
 				17648B911E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m in Sources */,
 				99B387DC1C82FAA2005B4D8C /* STTutorialCell.m in Sources */,
@@ -2313,7 +2345,6 @@
 				170912291DF87FAC00B2AF81 /* STCustomSegment.m in Sources */,
 				0722F3461F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m in Sources */,
 				99B387D61C82FAA2005B4D8C /* STFacebookAlbumCell.m in Sources */,
-				075C52991EBDD25000174CC5 /* STTagBrandCell.m in Sources */,
 				99B3876D1C82FAA2005B4D8C /* STBaseRequest.m in Sources */,
 				99B3876F1C82FAA2005B4D8C /* STNetworkQueueManager.m in Sources */,
 				99B387701C82FAA2005B4D8C /* KeychainItemWrapper.m in Sources */,
@@ -2323,6 +2354,7 @@
 				99B387461C82FAA2005B4D8C /* UIImage+RoundedCorner.m in Sources */,
 				072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */,
 				075C52A51EBF4F9200174CC5 /* STTagManualViewController.m in Sources */,
+				072DBBD01FF8FF3400DFA8F0 /* STCoreDataMessageSync.m in Sources */,
 				07B300021FB44331009316A2 /* STFacebookAdModel.m in Sources */,
 				170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */,
 				99B387401C82FAA2005B4D8C /* NSString+MD5.m in Sources */,
@@ -2342,9 +2374,11 @@
 				0722F3491F0CB8B600B78823 /* STCommission.m in Sources */,
 				170912211DF87F5C00B2AF81 /* STNotificationCell.m in Sources */,
 				07B053F11EDE867F0045AD7B /* NSString+Links.m in Sources */,
+				07234AD81FF69339000C335A /* STTagBrandCell.m in Sources */,
 				99B387D81C82FAA2005B4D8C /* STFacebookAlbumsViewController.m in Sources */,
 				99B387A31C82FAA2005B4D8C /* main.m in Sources */,
 				1709124D1DF882DC00B2AF81 /* STShopProductCell.m in Sources */,
+				072DBBCD1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m in Sources */,
 				99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */,
 				173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */,
 				99B3877F1C82FAA2005B4D8C /* Message.m in Sources */,

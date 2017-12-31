@@ -2,14 +2,13 @@
 //  STTagBrandCell.h
 //  Status
 //
-//  Created by Cosmin Andrus on 06/05/2017.
+//  Created by Cosmin Andrus on 29/12/2017.
 //  Copyright © 2017 Andrus Cosmin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface STTagBrandCell : UICollectionViewCell
-
-@property (nonatomic, weak) IBOutlet UIImageView *brandImage;
+@interface STTagBrandCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
