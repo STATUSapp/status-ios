@@ -181,7 +181,7 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
         
         return header;
     }
-    return nil;
+    return [[UICollectionReusableView alloc] initWithFrame:CGRectZero];
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{

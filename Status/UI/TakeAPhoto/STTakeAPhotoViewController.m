@@ -123,6 +123,7 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 

@@ -19,6 +19,12 @@
                                                  delegate:(id<SLCoreDataRequestManagerDelegate>)rmDelegate
                                              andTableView:(UITableView*)tableView;
 
+- (STCoreDataRequestManager*)fetchRequestManagerForEntity:(NSString*)entityName
+                                           sortDescritors:(NSArray*)sortDescriptors
+                                                predicate:(NSPredicate*)predicate
+                                       sectionNameKeyPath:(NSString*)sectionNameKeyPath
+                                                 delegate:(id<SLCoreDataRequestManagerDelegate>)rmDelegate
+                                   inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
 

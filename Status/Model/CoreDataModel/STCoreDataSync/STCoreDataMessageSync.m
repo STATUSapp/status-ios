@@ -7,15 +7,16 @@
 //
 
 #import "STCoreDataMessageSync.h"
-#import "Message.h"
+#import "Message+CoreDataClass.h"
 
 @implementation STCoreDataMessageSync
 
--(Message *)fetchObjectForUuid:(NSString *)objectuuid{
+-(Message *)fetchObjectForUuid:(NSString *)objectuuid
+                             inContext:(NSManagedObjectContext *)context{
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
-    STCoreDataRequestManager *messageManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Message" sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"uuid like %@", objectuuid] sectionNameKeyPath:nil delegate:nil andTableView:nil];
+    STCoreDataRequestManager *rqm = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:[self entityName] sortDescritors:@[sd1] predicate:[NSPredicate predicateWithFormat:@"uuid like %@", objectuuid] sectionNameKeyPath:nil delegate:nil inManagedObjectContext:context];
     
-    Message *message = [[messageManager allObjects] lastObject];
+    Message *message = [[rqm allObjects] lastObject];
     return message;
 
 }

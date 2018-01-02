@@ -12,8 +12,8 @@
 #import "STCatalogParentCategory.h"
 #import "STCatalogCategory.h"
 #import "STShopProduct.h"
-#import "STBrandObj.h"
 #import "STProductSuggestRequest.h"
+#import "STSyncService.h"
 
 NSString *const kTagProductNotification = @"STTagProductNotification";
 NSString *const kTagProductUserInfoEventKey = @"notification_event";
@@ -27,15 +27,13 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 @property (nonatomic, strong, readwrite) NSArray <STCatalogParentCategory *> *rootCategories;
 @property (nonatomic, strong, readwrite) NSArray <STCatalogCategory *> *usedCategories;
 @property (nonatomic, strong, readwrite) NSArray <STShopProduct *> *usedProducts;
-@property (nonatomic, strong, readwrite) NSArray <STBrandObj *> *brands;
 
 @property (nonatomic, strong, readwrite) STCatalogCategory *selectedCategory;
-@property (nonatomic, strong, readwrite) STBrandObj *selectedBrand;
+@property (nonatomic, strong, readwrite) NSString *selectedBrandId;
 @property (nonatomic, strong, readwrite) NSArray <STShopProduct *> *categoryAndBrandProducts;
 @property (nonatomic, strong, readwrite) NSMutableArray<STShopProduct *> *selectedProducts;
 @property (nonatomic, strong, readwrite) NSArray <STShopProduct *> *searchResult;
 
-@property (nonatomic, assign) NSInteger brandsPageIndex;
 @property (nonatomic, assign) NSInteger usedCategoriesPageIndex;
 @property (nonatomic, assign) NSInteger usedProductsPageIndex;
 @property (nonatomic, assign) NSInteger barcodeProductsPageIndex;
@@ -59,26 +57,28 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 
 -(void)updateCategory:(STCatalogCategory *)category{
     _selectedCategory = category;
-    _selectedBrand = nil;
+    _selectedBrandId = nil;
     _categoryAndBrandProducts = nil;
     _categoryAndBrondPageIndex = kCatalogFirstPage;
 }
 
--(void)updateBrand:(STBrandObj *)brand{
-    _selectedBrand = brand;
-    _categoryAndBrondPageIndex = kCatalogFirstPage;
-    if (_selectedBrand && _selectedCategory) {
-        [self downloadProductsForCategoryAndBrand];
+-(void)updateBrandId:(NSString *)brandId{
+    if (![_selectedBrandId isEqualToString:brandId]) {
+        _selectedBrandId = brandId;
+        _categoryAndBrandProducts = nil;
+        _categoryAndBrondPageIndex = kCatalogFirstPage;
+        if (_selectedBrandId && _selectedCategory) {
+            [self downloadProductsForCategoryAndBrand];
+        }
     }
 }
 
 -(void)resetManager{
-    _selectedBrand = nil;
+    _selectedBrandId = nil;
     _selectedCategory = nil;
     _categoryAndBrandProducts = nil;
     _rootViewController = nil;
     _selectedProducts = nil;
-    _brandsPageIndex = kCatalogFirstPage;
     _usedCategoriesPageIndex = kCatalogFirstPage;
     _usedProductsPageIndex = kCatalogFirstPage;
     _barcodeProductsPageIndex = kCatalogFirstPage;
@@ -163,7 +163,6 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 }
 
 -(void)startDownload{
-    _brandsPageIndex = kCatalogFirstPage;
     _usedCategoriesPageIndex = kCatalogFirstPage;
     _usedProductsPageIndex = kCatalogFirstPage;
     _barcodeProductsPageIndex = kCatalogFirstPage;
@@ -172,10 +171,6 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
     [self downloadRootCatgories];
     [self downloadUsedCategories];
     [self downloadUsedProducts];
-    [self downloadBrands];
-}
-
--(void)downloadBrandsNextPage{
     [self downloadBrands];
 }
 
@@ -323,42 +318,18 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
 
 
 -(void)downloadBrands{
-    if (_brandsPageIndex == kCatalogNoMorePagesIndex) {
-        NSLog(@"No more brands to be downloaded!");
-        return;
-    }
-    __weak STTagProductsManager *weakSelf = self;
-    STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error) {
-        if (!error) {
-            NSMutableArray *brands = [NSMutableArray new];
-            if (weakSelf.brands) {
-                [brands addObjectsFromArray:weakSelf.brands];
-            }
-            [brands addObjectsFromArray:objects];
-            weakSelf.brands = [NSArray arrayWithArray:brands];
-            if ([objects count] < kCatalogDownloadPageSize) {
-                NSLog(@"Brands download STOP");
-                weakSelf.brandsPageIndex = kCatalogNoMorePagesIndex;
-            }else{
-                weakSelf.brandsPageIndex ++;
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:kTagProductNotification object:nil userInfo:@{kTagProductUserInfoEventKey:@(STTagManagerEventBrands)}];
-        }
-    };
-
-        [STDataAccessUtils getBrandsEntitiesForPageNumber:_brandsPageIndex
-                                           withCompletion:completion];
+    [[CoreManager syncService] syncBrands];
 }
 
 -(void)downloadProductsForCategoryAndBrand{
     if (_categoryAndBrondPageIndex == kCatalogNoMorePagesIndex) {
-        NSLog(@"No more product to be downloaded for category: %@ and brand: %@", _selectedCategory.uuid, _selectedBrand.uuid);
+        NSLog(@"No more product to be downloaded for category: %@ and brand: %@", _selectedCategory.uuid, _selectedBrandId);
         return;
     }
     __weak STTagProductsManager *weakSelf = self;
 
     [STDataAccessUtils getSuggestionsForCategory:_selectedCategory.uuid
-                                        andBrand:_selectedBrand.uuid
+                                        andBrand:_selectedBrandId
                                     andPageIndex:_categoryAndBrondPageIndex
                                    andCompletion:^(NSArray *objects, NSError *error) {
                                        if (!error) {
@@ -369,7 +340,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
                                            [products addObjectsFromArray:objects];
                                            weakSelf.categoryAndBrandProducts = [NSArray arrayWithArray:products];
                                            if ([objects count] < kCatalogDownloadPageSize) {
-                                               NSLog(@"Products for categopry: %@ and brand: %@ STOP", _selectedCategory.uuid, _selectedBrand.uuid);
+                                               NSLog(@"Products for categopry: %@ and brand: %@ STOP", _selectedCategory.uuid, _selectedBrandId);
                                                weakSelf.categoryAndBrondPageIndex = kCatalogNoMorePagesIndex;
                                            }else{
                                                weakSelf.categoryAndBrondPageIndex ++;

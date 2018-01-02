@@ -37,7 +37,7 @@ NSInteger const kHTTPErrorNoConnection = 447;
 
 NSInteger const kPostsLimit = 15;
 NSInteger const kStartLoadOffset = 5;
-NSInteger const kCatalogDownloadPageSize = 8;
+NSInteger const kCatalogDownloadPageSize = 50;
 
 #else
 

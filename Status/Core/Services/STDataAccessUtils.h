@@ -96,8 +96,6 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
                                  withCompletion:(STDataAccessCompletionBlock)completion;
 + (void)getUsedCatalogCategoriesAtPageIndex:(NSInteger)pageIndex
                              withCompletion:(STDataAccessCompletionBlock)completion;
-+ (void)getBrandsEntitiesForPageNumber:(NSInteger) pageNumber
-                        withCompletion:(STDataAccessCompletionBlock)completion;
 + (void)getSuggestionsForCategory:(NSString *)categoryId
                          andBrand:(NSString *)brandId
                      andPageIndex:(NSInteger)pageIndex

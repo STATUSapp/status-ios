@@ -110,7 +110,7 @@ NSString *const kCDRChangeType = @"change_type";
     return [self.fetchedResultsController fetchedObjects];
 }
 
-- (NSArray*)sections{
+- (NSArray<id<NSFetchedResultsSectionInfo>>*)sections{
     return self.fetchedResultsController.sections;
 }
 

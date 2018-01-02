@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
 };
 
 
-@interface STTagProductsContainer ()<STSCustomSegmentProtocol, STTagProductsEmptyWardrobeProtocol, STTagCategoriesProtocol, STTagProductsProtocol, STTagManualProtocol, STTagCustomViewProtocol, STTagBrandsProtocol, STBarcodeScannerProtocol, STProductNotIndexedProtocol>
+@interface STTagProductsContainer ()<STSCustomSegmentProtocol, STTagProductsEmptyWardrobeProtocol, STTagCategoriesProtocol, STTagProductsProtocol, STTagManualProtocol, STTagCustomViewProtocol, STBarcodeScannerProtocol, STProductNotIndexedProtocol>
 
 @property (weak, nonatomic) IBOutlet STTagCustomView *barcodeView;
 @property (weak, nonatomic) IBOutlet STTagCustomView *wizzardView;
@@ -101,6 +101,7 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.hidesBarsOnSwipe = NO;
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
 }
 
@@ -351,7 +352,7 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
 -(void)categoryWasSelected:(STCatalogCategory *)category{
  
     [[STTagProductsManager sharedInstance] updateCategory:category];
-    STTagProductsBrands *vc = [STTagProductsBrands brandsViewControllerWithDelegate:self];
+    STTagProductsBrands *vc = [STTagProductsBrands brandsViewController];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -365,12 +366,6 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
         [[STTagProductsManager sharedInstance] downloadRootCategoryNextPage:rootCategory];        
     }
 
-}
-
-#pragma mark - STTagBrandsProtocol
-
--(void)brandsShouldDownloadNextPage{
-    [[STTagProductsManager sharedInstance] downloadBrandsNextPage];
 }
 
 #pragma mark - STTagProductsProtocol

@@ -7,18 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class STBrandObj;
+@class Brand;
 
 @interface STTagBrandSection : NSObject
 
 @property (nonatomic, strong, readonly) NSString *sectionName;
-@property (nonatomic, strong, readonly) NSArray<STBrandObj *>*sectionItems;
+@property (nonatomic, strong, readonly) NSArray<Brand *>*sectionItems;
 
--(instancetype)initWithObject:(STBrandObj *)object;
--(instancetype)initWithObjects:(NSArray <STBrandObj *> *)objects;
+-(instancetype)initWithSectionName:(NSString *)sectionName;
 
--(void)addObjectToItems:(STBrandObj *)object;
--(void)addObjectsToItems:(NSArray <STBrandObj *> *)objects;
+-(instancetype)initWithObject:(Brand *)object;
+-(instancetype)initWithObjects:(NSArray <Brand *> *)objects;
+
+-(void)addObjectToItems:(Brand *)object;
+-(void)addObjectsToItems:(NSArray <Brand *> *)objects;
 
 @end

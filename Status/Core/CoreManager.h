@@ -28,6 +28,7 @@
 @class STSnackBarService;
 @class STSnackBarWithActionService;
 @class STCoreDataManager;
+@class STSyncService;
 
 @interface CoreManager : NSObject
 
@@ -54,5 +55,6 @@
 + (STSnackBarService *)snackBarService;
 + (STSnackBarWithActionService *)snackWithActionService;
 + (STCoreDataManager *)coreDataService;
++ (STSyncService *)syncService;
 
 @end

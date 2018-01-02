@@ -10,5 +10,6 @@
 
 @interface STTagBrandCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @end

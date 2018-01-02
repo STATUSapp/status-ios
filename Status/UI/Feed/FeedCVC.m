@@ -343,6 +343,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.hidesBarsOnSwipe = YES;
     [self configureNavigationBar];
     [[CoreManager imageCacheService] changeFlowType:_feedProcessor.processorFlowType
                                           needsSort:YES];
@@ -800,9 +801,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         
         if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
-            return nil;
+            return [[UICollectionReusableView alloc] initWithFrame:CGRectZero];
         }else if ([self isAdPostAtSection:indexPath.section]){
-            return nil;
+            return [[UICollectionReusableView alloc] initWithFrame:CGRectZero];
         }
         
         NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
@@ -813,7 +814,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         return header;
     }
     
-    return nil;
+    return [[UICollectionReusableView alloc] initWithFrame:CGRectZero];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{

@@ -27,6 +27,7 @@
 #import "STSnackBarService.h"
 #import "STSnackBarWithActionService.h"
 #import "STCoreDataManager.h"
+#import "STSyncService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -49,6 +50,7 @@
 @property (nonatomic, strong) STSnackBarService *snackBarService;
 @property (nonatomic, strong) STSnackBarWithActionService *snackWithActionService;
 @property (nonatomic, strong) STCoreDataManager *coreDataService;
+@property (nonatomic, strong) STSyncService *syncService;
 
 @end
 
@@ -87,6 +89,8 @@
         _snackBarService = [STSnackBarService new];
         _snackWithActionService = [STSnackBarWithActionService new];
         _coreDataService = [STCoreDataManager new];
+        _syncService = [STSyncService new];
+        
     }
     return self;
 }
@@ -181,6 +185,10 @@
 +(STCoreDataManager *)coreDataService{
     return [[CoreManager sharedInstance] coreDataService];
 }
++(STSyncService *)syncService{
+    return [[CoreManager sharedInstance] syncService];
+}
+
 #pragma mark - Private implementation
 
 - (BOOL)shouldLogin {

@@ -67,4 +67,33 @@ static STDAOEngine *g_sharedManager = nil;
     
 }
 
+- (STCoreDataRequestManager*)fetchRequestManagerForEntity:(NSString*)entityName
+                                           sortDescritors:(NSArray*)sortDescriptors
+                                                predicate:(NSPredicate*)predicate
+                                       sectionNameKeyPath:(NSString*)sectionNameKeyPath
+                                                 delegate:(id<SLCoreDataRequestManagerDelegate>)rmDelegate
+                                   inManagedObjectContext:(NSManagedObjectContext *)context{
+    
+    STCoreDataRequestManager* resultsCDRequestManager = [[STCoreDataRequestManager alloc] init];
+    if (rmDelegate) {
+        [resultsCDRequestManager addToDelegatesArray:rmDelegate];
+    }
+    
+    resultsCDRequestManager.shouldNotifyInsertDelete = YES;
+    resultsCDRequestManager.sortDescriptors = sortDescriptors;
+    resultsCDRequestManager.predicate = predicate;
+    
+    [resultsCDRequestManager fetchRequestWithEntityName:entityName
+                                 withSectionNameKeyPath:sectionNameKeyPath
+                                       ofFetchBatchSize:0
+                                 inManagedObjectContext:context
+                                           forTableView:nil];
+    
+    
+    
+    return resultsCDRequestManager;
+    
+}
+
+
 @end

@@ -60,6 +60,8 @@
     //load search results if needed
     if (_screenType == STTagSuggestionsScreenTypeBarcodeSearch) {
         _products = [STTagProductsManager sharedInstance].searchResult;
+    }else if (_screenType == STTagSuggestionsScreenTypeDefault){
+        _products = [STTagProductsManager sharedInstance].categoryAndBrandProducts;
     }
     [productsVC updateProducts:_products];
 }

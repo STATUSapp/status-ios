@@ -372,7 +372,7 @@ NSString *const kFirstChatVersion = @"1.0.4";
     if (seen == NO) {
         [[CoreManager badgeService] adjustUnreadMessages:1];
     }
-    [[STCoreDataMessageSync new] synchronizeAsyncCoreDataFromData:resultDict withCompletion:^(NSError *error, NSManagedObject *object) {
+    [[STCoreDataMessageSync new] synchronizeAsyncCoreDataFromData:@[resultDict] withCompletion:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (seen == NO && received && message[@"notification_info"]!=nil) {
                 [[CoreManager notificationsService] handleInAppMessageNotification:message];

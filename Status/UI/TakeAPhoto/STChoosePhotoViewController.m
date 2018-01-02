@@ -64,11 +64,13 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [_customSegment selectSegmentIndex:STChoosePhotoBottomOptionFacebook];
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 

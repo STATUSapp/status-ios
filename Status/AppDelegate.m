@@ -46,6 +46,7 @@
 #import "STWhiteNavBarViewController.h"
 
 #import "Branch.h"
+#import "STSyncService.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
@@ -79,7 +80,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 //    [Crashlytics startWithAPIKey:@"b4369a0a1dca4a6745a3905bf41aa6964c863da1"];
     [Crashlytics startWithAPIKey:@"93e0064668657d3332278aaa1ed765b8f48c6ad6"];
     [self cleanLocalDBIfNeeded];
-    
+    [[CoreManager syncService] syncBrands];
     [Appirater setAppId:APP_STORE_ID];
     [Appirater setDaysUntilPrompt:7];
     [Appirater setUsesUntilPrompt:10];
@@ -163,6 +164,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 {
     [[CoreManager navigationService] resetTabBarStacks];
     [[STChatController sharedInstance] leaveCurrentRoom];
+    [[CoreManager coreDataService] save];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

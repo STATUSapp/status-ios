@@ -1163,16 +1163,15 @@ by using one of the following methods:</string>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4lF-Fy-OrD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4lF-Fy-OrD">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="STTagBrandCell" rowHeight="60" id="yGW-DR-X6t" customClass="STTagBrandCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yGW-DR-X6t" id="1wZ-yF-ZDV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zED-Uq-pwk">
@@ -1181,15 +1180,26 @@ by using one of the following methods:</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCO-mz-A3c" userLabel="SeparatorView">
+                                                    <rect key="frame" x="16" y="59" width="359" height="1"/>
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="cRk-p9-56q"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="zED-Uq-pwk" secondAttribute="trailing" constant="16" id="1hz-FE-Luc"/>
+                                                <constraint firstAttribute="trailing" secondItem="RCO-mz-A3c" secondAttribute="trailing" id="4zN-Qe-Hya"/>
+                                                <constraint firstAttribute="bottom" secondItem="RCO-mz-A3c" secondAttribute="bottom" id="DCB-eF-Yak"/>
                                                 <constraint firstItem="zED-Uq-pwk" firstAttribute="leading" secondItem="1wZ-yF-ZDV" secondAttribute="leading" constant="16" id="uYa-vh-P86"/>
+                                                <constraint firstItem="RCO-mz-A3c" firstAttribute="leading" secondItem="1wZ-yF-ZDV" secondAttribute="leading" constant="16" id="vFd-Sd-Qpb"/>
                                                 <constraint firstItem="zED-Uq-pwk" firstAttribute="centerY" secondItem="1wZ-yF-ZDV" secondAttribute="centerY" id="zrI-Es-9lw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="zED-Uq-pwk" id="MKe-u1-OVp"/>
+                                            <outlet property="separatorView" destination="RCO-mz-A3c" id="UJJ-bH-Nic"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

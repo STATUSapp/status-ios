@@ -14,7 +14,6 @@
 #import "STPost.h"
 #import "STCatalogParentCategory.h"
 #import "STCatalogCategory.h"
-#import "STBrandObj.h"
 #import "STShopProduct.h"
 #import "STUserProfile.h"
 #import "STConversationUser.h"
@@ -312,27 +311,6 @@
                                                                 completion(nil, error);
                                                                 
                                                             }];
-}
-
-
-+ (void)getBrandsEntitiesForPageNumber:(NSInteger) pageNumber
-                        withCompletion:(STDataAccessCompletionBlock)completion{
-    [STGetBrandsRequest getBrandsEntitiesForPage:pageNumber
-                                  withCompletion:^(id response, NSError *error) {
-        
-        NSMutableArray *result = [@[] mutableCopy];
-        for (NSDictionary *dict in response) {
-            STBrandObj *brandObj = [STBrandObj brandObjFromDict:dict];
-            [result addObject:brandObj];
-        }
-        
-        completion(result, nil);
-        
-    } failure:^(NSError *error) {
-        completion(nil, error);
-        
-    }];
-    
 }
 
 + (void)getSuggestionsForCategory:(NSString *)categoryId
@@ -777,7 +755,11 @@ withCompletion:(STDataUploadCompletionBlock)completion{
         if (!error && [response count]) {
             withdrawDetailsObj = [STWithdrawDetailsObj withdrawDetailsObjWithDictionary:response];
         }
-        completion(@[withdrawDetailsObj], error);
+        if (withdrawDetailsObj) {
+            completion(@[withdrawDetailsObj], error);
+        }else{
+            completion(nil, error);
+        }
 
     } failure:^(NSError *error) {
         completion(nil, error);

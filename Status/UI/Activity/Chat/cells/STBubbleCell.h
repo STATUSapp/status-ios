@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Message.h"
+#import "Message+CoreDataClass.h"
 #import "UITableView+SPXRevealAdditions.h"
 
 @interface STBubbleCell : UITableViewCell

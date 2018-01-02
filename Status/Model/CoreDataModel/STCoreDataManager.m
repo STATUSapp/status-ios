@@ -7,7 +7,7 @@
 //
 
 #import "STCoreDataManager.h"
-#import "Message.h"
+#import "Message+CoreDataClass.h"
 #import "STDAOEngine.h"
 #import "CreateDataModelHelper.h"
 
@@ -18,6 +18,16 @@ NSString* const kSqliteFileName = @"Status.sqlite";
 
 //Set the name of the sqlite file in which CoreData will persist information
 
+@interface STCoreDataManager ()
+
+@property (strong, nonatomic) NSManagedObjectContext *privateContext;
+
+@property (strong, nonatomic, readwrite) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic, readwrite) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic, readwrite) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@end
+
 @implementation STCoreDataManager{
     dispatch_queue_t _async_queries_queue;    
 }
@@ -27,7 +37,7 @@ NSString* const kSqliteFileName = @"Status.sqlite";
     self = [super init];
     if (self) {
         
-        [self managedObjectContext];
+        [self initializeCoreData];
         _async_queries_queue = dispatch_queue_create("com.status.async_queries_queue", NULL);
     }
     return self;
@@ -35,66 +45,39 @@ NSString* const kSqliteFileName = @"Status.sqlite";
 
 #pragma mark - Core Data stack
 
-// Returns the managed object context for the application.
-// If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
-- (NSManagedObjectContext *)managedObjectContext
+- (void)initializeCoreData
 {
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-    return _managedObjectContext;
-}
-
-// Returns the managed object model for the application.
-// If the model doesn't already exist, it is created from the application's model.
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
+    if ([self managedObjectContext]) return;
     
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kCoreDataModelFileName withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
+    NSAssert(_managedObjectModel, @"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
 
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    // Returns the persistent store coordinator for the application. If the coordinator doesn't already exist, it is created and the application's store added to it.
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kSqliteFileName];
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSAssert(_persistentStoreCoordinator, @"Failed to initialize coordinator");
     
-    NSError *error;
-    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
-                              NSInferMappingModelAutomaticallyOption:@YES};
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil
-                                                             URL:storeURL options:options error:&error]) {
-        NSLog(@"Error 1:%@, %@", error, [error userInfo]);
-        error = nil;
-        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:&error];
-        if (error) {
-            NSLog(@"Error deleting old db file:%@, %@", error, [error userInfo]);
-        }
-        error = nil;
-        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-            NSLog(@"Error 2:%@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
+    [self setManagedObjectContext:[[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType]];
     
-    return _persistentStoreCoordinator;
+    [self setPrivateContext:[[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType]];
+    [[self privateContext] setPersistentStoreCoordinator:_persistentStoreCoordinator];
+    [[self managedObjectContext] setParentContext:[self privateContext]];
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSPersistentStoreCoordinator *psc = [[self privateContext] persistentStoreCoordinator];
+        NSMutableDictionary *options = [NSMutableDictionary dictionary];
+        options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
+        options[NSInferMappingModelAutomaticallyOption] = @YES;
+        options[NSSQLitePragmasOption] = @{ @"journal_mode":@"DELETE" };
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        NSURL *storeURL = [documentsURL URLByAppendingPathComponent:kSqliteFileName];
+        
+        NSError *error = nil;
+        BOOL result = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
+        NSAssert(result, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
+//    });
 }
-
 
 #pragma mark -
 #pragma mark - Delete data
@@ -113,7 +96,7 @@ NSString* const kSqliteFileName = @"Status.sqlite";
     
     _persistentStoreCoordinator = nil;
     
-    [self managedObjectContext];
+    [self initializeCoreData];
 }
 
 - (void)deleteAllObjectsFromTable:(NSString *)tableName withPredicate:(NSPredicate*)predicate{
@@ -198,11 +181,20 @@ NSString* const kSqliteFileName = @"Status.sqlite";
 
 #pragma mark -  Update data helpers
 
-- (void)save{
-    NSError *error = nil;
-    [self.managedObjectContext save:&error];
+- (void)save;
+{
+    if (![[self privateContext] hasChanges] && ![[self managedObjectContext] hasChanges]) return;
     
-    if (error) NSLog(@"Could not save changes to database: %@",error);
+    [[self managedObjectContext] performBlockAndWait:^{
+        NSError *error = nil;
+        
+        NSAssert([[self managedObjectContext] save:&error], @"Failed to save main context: %@\n%@", [error localizedDescription], [error userInfo]);
+        
+        [[self privateContext] performBlock:^{
+            NSError *privateError = nil;
+            NSAssert([[self privateContext] save:&privateError], @"Error saving private context: %@\n%@", [privateError localizedDescription], [privateError userInfo]);
+        }];
+    }];
 }
 
 #pragma mark - Get a managed object context

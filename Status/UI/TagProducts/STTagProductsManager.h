@@ -17,7 +17,6 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
     STTagManagerEventRootCategoriesUpdated,
     STTagManagerEventUsedCategories,
     STTagManagerEventUsedProducts,
-    STTagManagerEventBrands,
     STTagManagerEventCategoryAndBrandProducts,
     STTagManagerEventSelectedProducts,
     STTagManagerEventSearchProducts
@@ -26,16 +25,14 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
 @class STCatalogParentCategory;
 @class STCatalogCategory;
 @class STShopProduct;
-@class STBrandObj;
 
 @interface STTagProductsManager : NSObject
 
 @property (nonatomic, strong, readonly) NSArray <STCatalogParentCategory *> *rootCategories;
 @property (nonatomic, strong, readonly) NSArray <STCatalogCategory *> *usedCategories;
 @property (nonatomic, strong, readonly) NSArray <STShopProduct *> *usedProducts;
-@property (nonatomic, strong, readonly) NSArray <STBrandObj *> *brands;
 @property (nonatomic, strong, readonly) STCatalogCategory *selectedCategory;
-@property (nonatomic, strong, readonly) STBrandObj *selectedBrand;
+@property (nonatomic, strong, readonly) NSString *selectedBrandId;
 @property (nonatomic, strong, readonly) NSArray <STShopProduct *> *categoryAndBrandProducts;
 @property (nonatomic, strong, readonly) NSArray <STShopProduct *> *searchResult;
 
@@ -48,14 +45,13 @@ typedef NS_ENUM(NSUInteger, STTagManagerEvent) {
 
 -(void)startDownload;
 -(void)updateCategory:(STCatalogCategory *)category;
--(void)updateBrand:(STBrandObj *)brand;
+-(void)updateBrandId:(NSString *)brandId;
 -(void)resetManager;
 -(void)processProduct:(STShopProduct *)product;
 -(BOOL)isProductSelected:(STShopProduct *)product;
 -(BOOL)rootCategoriesDownloaded;
 -(NSArray <STShopProduct *> *)manualAddedProducts;
 
--(void)downloadBrandsNextPage;
 -(void)downloadUsedCategoriesNextPage;
 -(void)downloadUsedProductsNextPage;
 -(void)downloadCategoryAndBrandNextPage;

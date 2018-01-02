@@ -18,7 +18,7 @@
 #import "STCoreDataRequestManager.h"
 #import "STDAOEngine.h"
 #import "STCoreDataManager.h"
-#import "Message.h"
+#import "Message+CoreDataClass.h"
 #import "STNetworkQueueManager.h"
 #import "UIImageView+WebCache.h"
 #import "FeedCVC.h"

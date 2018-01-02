@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Xcode 4.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Brand" representedClassName="Brand" syncable="YES">
+        <attribute name="image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="indexString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Message" representedClassName="Message" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" defaultDateTimeInterval="-960559200" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" defaultDateTimeInterval="-960559200" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="received" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="received" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="roomID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sectionDate" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
-        <attribute name="seen" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="seen" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Message" positionX="187" positionY="-495" width="128" height="163"/>
+        <element name="Message" positionX="-1089" positionY="-1296" width="128" height="163"/>
+        <element name="Brand" positionX="-920" positionY="-1296" width="128" height="103"/>
     </elements>
 </model>

@@ -11,11 +11,11 @@
 #import "STDAOEngine.h"
 #import "CreateDataModelHelper.h"
 
-typedef void (^syncCompletion)(NSError *error, NSManagedObject *object);
+typedef void (^syncCompletion)(NSError *error);
 
 @interface STCoreDataBaseSync : NSObject
 
-- (void)synchronizeAsyncCoreDataFromData:(NSDictionary*)serverData
+- (void)synchronizeAsyncCoreDataFromData:(NSArray*)serverData
                           withCompletion:(syncCompletion)completion;
 
 

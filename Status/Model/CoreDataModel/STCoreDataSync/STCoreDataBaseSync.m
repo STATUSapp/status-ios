@@ -16,53 +16,44 @@
     return [[CoreManager coreDataService] getNewManagedObjectContext];
 }
 
-- (void)synchronizeAsyncCoreDataFromData:(NSDictionary*)serverData
+- (void)synchronizeAsyncCoreDataFromData:(NSArray*)serverData
                           withCompletion:(syncCompletion)completion{
     //We create a new managed object context from our main, we update it async, then we merge the changes into our main M.O.C
     // Create a new managed object context
     // Set its persistent store coordinator
     NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
-    NSManagedObject *fetchObject = [self fetchObjectForUuid:[CreateDataModelHelper validStringIdentifierFromValue:serverData[@"id"]]];
-    
-    if (fetchObject==nil) {
-        //insert
-        [newMoc performBlock:^{
-            NSManagedObject *insertedValue = [[CoreManager coreDataService] insertDataForTableName:[self entityName] inObjectContext:newMoc];
-            [self configureManagedObject:insertedValue
-                                withData:serverData];
-            NSError *error = nil;
-            [newMoc save:&error];
+    [newMoc performBlock:^{
+        for (NSDictionary *itemDict in serverData) {
+            NSManagedObject *fetchObject = [self fetchObjectForUuid:[CreateDataModelHelper validStringIdentifierFromValue:itemDict[@"id"]] inContext:newMoc];
             
-            if (error) {
-                NSLog(@"synchronizeAsyncCoreDataEntity error: %@",error);
+            if (fetchObject==nil) {
+                //insert
+                NSManagedObject *insertedValue = [[CoreManager coreDataService] insertDataForTableName:[self entityName] inObjectContext:newMoc];
+                [self configureManagedObject:insertedValue
+                                    withData:itemDict];
+            }else{
+                //update
+                [self configureManagedObject:fetchObject
+                                    withData:itemDict];
             }
-            if (completion) {
-                completion(error, insertedValue);
-            }
-        }];
-    }else{
-        //update
-        [newMoc performBlock:^{
-            [self configureManagedObject:fetchObject
-                                withData:serverData];
-            NSError *error = nil;
-            [newMoc save:&error];
-            
-            if (error) {
-                NSLog(@"synchronizeAsyncCoreDataEntity error: %@",error);
-            }
-            if (completion) {
-                completion(error, fetchObject);
-            }
-        }];
-
-    }
+        }
+        NSError *error = nil;
+        [newMoc save:&error];
+        
+        if (error) {
+            NSLog(@"synchronizeAsyncCoreDataEntity error: %@",error);
+        }
+        if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 #pragma mark - Hook methods
 
--(NSManagedObject *)fetchObjectForUuid:(NSString *)objectuuid{
-    NSAssert(NO, @"This method \"fetchObjectForUuid:\" should be implemented in subclasess");
+-(NSManagedObject *)fetchObjectForUuid:(NSString *)objectuuid
+                             inContext:(NSManagedObjectContext *)context{
+    NSAssert(NO, @"This method \"fetchObjectForUuid:inContext:\" should be implemented in subclasess");
     return nil;
 }
 

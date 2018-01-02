@@ -40,12 +40,23 @@
 		0726C6DA1F0228D200E787EA /* STSnackBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726C6D91F0228D200E787EA /* STSnackBar.m */; };
 		0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726C6DC1F022B0F00E787EA /* STSnackBarService.m */; };
 		07272BAF1F68FACC004A090F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07272BAE1F68FACC004A090F /* Launch Screen.storyboard */; };
+		0727A6231FFBB5E10040F349 /* STSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0727A6221FFBB5E10040F349 /* STSectionView.m */; };
+		0727A6251FFBB5F30040F349 /* STSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0727A6241FFBB5F30040F349 /* STSectionView.xib */; };
 		072822EC1E899CB900DCC591 /* STTagProductsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 072822EB1E899CB900DCC591 /* STTagProductsContainer.m */; };
 		072BACB51E80FED80055B6F3 /* STGetSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB41E80FED80055B6F3 /* STGetSuggestionsRequest.m */; };
 		072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACB71E81012D0055B6F3 /* STGetUsedSuggestionsRequest.m */; };
 		072BACBB1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */; };
 		072DBBCD1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBCC1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m */; };
 		072DBBD01FF8FF3400DFA8F0 /* STCoreDataMessageSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBCF1FF8FF3400DFA8F0 /* STCoreDataMessageSync.m */; };
+		072DBBDA1FF9161600DFA8F0 /* Message+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBD41FF9161600DFA8F0 /* Message+CoreDataClass.m */; };
+		072DBBDB1FF9161600DFA8F0 /* Message+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBD51FF9161600DFA8F0 /* Message+CoreDataProperties.m */; };
+		072DBBDC1FF9161700DFA8F0 /* Brand+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBD81FF9161600DFA8F0 /* Brand+CoreDataClass.m */; };
+		072DBBDD1FF9161700DFA8F0 /* Brand+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBD91FF9161600DFA8F0 /* Brand+CoreDataProperties.m */; };
+		072DBBE01FF916F900DFA8F0 /* STCoreDataBrandSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBDF1FF916F900DFA8F0 /* STCoreDataBrandSync.m */; };
+		072DBBE31FF91A0000DFA8F0 /* NSString+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBE21FF91A0000DFA8F0 /* NSString+Letters.m */; };
+		072DBBE71FF9202E00DFA8F0 /* STSyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBE61FF9202E00DFA8F0 /* STSyncService.m */; };
+		072DBBEA1FF9208700DFA8F0 /* STSyncBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBE91FF9208700DFA8F0 /* STSyncBaseObject.m */; };
+		072DBBED1FF9279E00DFA8F0 /* STSyncBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBEC1FF9279E00DFA8F0 /* STSyncBrand.m */; };
 		072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */; };
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
@@ -123,7 +134,6 @@
 		17648B911E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B901E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m */; };
 		17648B941E50F1F200D9C428 /* STCatalogCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B931E50F1F200D9C428 /* STCatalogCategory.m */; };
 		17648B971E50F39400D9C428 /* STGetBrandsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B961E50F39400D9C428 /* STGetBrandsRequest.m */; };
-		17648B9A1E50F49F00D9C428 /* STBrandObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17648B991E50F49F00D9C428 /* STBrandObj.m */; };
 		1774583B1928C48E005B994B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1774583A1928C48E005B994B /* CoreLocation.framework */; };
 		1780AC781DEAEA3E007A5689 /* STExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1780AC771DEAEA3E007A5689 /* STExploreViewController.m */; };
 		1787A74C1DBDD7AD006B79D4 /* STShopProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 1787A74B1DBDD7AD006B79D4 /* STShopProduct.m */; };
@@ -220,7 +230,6 @@
 		99B3877A1C82FAA2005B4D8C /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3866A1C82FAA2005B4D8C /* STLocationManager.m */; };
 		99B3877C1C82FAA2005B4D8C /* STNativeAdsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */; };
 		99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */; };
-		99B3877F1C82FAA2005B4D8C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386761C82FAA2005B4D8C /* Message.m */; };
 		99B387801C82FAA2005B4D8C /* StatusDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 99B386771C82FAA2005B4D8C /* StatusDM.xcdatamodeld */; };
 		99B387811C82FAA2005B4D8C /* STCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3867A1C82FAA2005B4D8C /* STCoreDataManager.m */; };
 		99B387821C82FAA2005B4D8C /* STCoreDataRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3867C1C82FAA2005B4D8C /* STCoreDataRequestManager.m */; };
@@ -375,6 +384,9 @@
 		0726C6DB1F022B0F00E787EA /* STSnackBarService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSnackBarService.h; sourceTree = "<group>"; };
 		0726C6DC1F022B0F00E787EA /* STSnackBarService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSnackBarService.m; sourceTree = "<group>"; };
 		07272BAE1F68FACC004A090F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		0727A6211FFBB5E10040F349 /* STSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSectionView.h; sourceTree = "<group>"; };
+		0727A6221FFBB5E10040F349 /* STSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSectionView.m; sourceTree = "<group>"; };
+		0727A6241FFBB5F30040F349 /* STSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = STSectionView.xib; sourceTree = "<group>"; };
 		072822EA1E899CB900DCC591 /* STTagProductsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsContainer.h; sourceTree = "<group>"; };
 		072822EB1E899CB900DCC591 /* STTagProductsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsContainer.m; sourceTree = "<group>"; };
 		072BACB31E80FED80055B6F3 /* STGetSuggestionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetSuggestionsRequest.h; sourceTree = "<group>"; };
@@ -387,6 +399,24 @@
 		072DBBCC1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCoreDataBaseSync.m; sourceTree = "<group>"; };
 		072DBBCE1FF8FF3400DFA8F0 /* STCoreDataMessageSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCoreDataMessageSync.h; sourceTree = "<group>"; };
 		072DBBCF1FF8FF3400DFA8F0 /* STCoreDataMessageSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCoreDataMessageSync.m; sourceTree = "<group>"; };
+		072DBBD21FF9161600DFA8F0 /* Message+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Message+CoreDataProperties.h"; sourceTree = "<group>"; };
+		072DBBD31FF9161600DFA8F0 /* Message+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Message+CoreDataClass.h"; sourceTree = "<group>"; };
+		072DBBD41FF9161600DFA8F0 /* Message+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Message+CoreDataClass.m"; sourceTree = "<group>"; };
+		072DBBD51FF9161600DFA8F0 /* Message+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Message+CoreDataProperties.m"; sourceTree = "<group>"; };
+		072DBBD61FF9161600DFA8F0 /* Brand+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Brand+CoreDataProperties.h"; sourceTree = "<group>"; };
+		072DBBD71FF9161600DFA8F0 /* Brand+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Brand+CoreDataClass.h"; sourceTree = "<group>"; };
+		072DBBD81FF9161600DFA8F0 /* Brand+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Brand+CoreDataClass.m"; sourceTree = "<group>"; };
+		072DBBD91FF9161600DFA8F0 /* Brand+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Brand+CoreDataProperties.m"; sourceTree = "<group>"; };
+		072DBBDE1FF916F900DFA8F0 /* STCoreDataBrandSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCoreDataBrandSync.h; sourceTree = "<group>"; };
+		072DBBDF1FF916F900DFA8F0 /* STCoreDataBrandSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCoreDataBrandSync.m; sourceTree = "<group>"; };
+		072DBBE11FF91A0000DFA8F0 /* NSString+Letters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Letters.h"; sourceTree = "<group>"; };
+		072DBBE21FF91A0000DFA8F0 /* NSString+Letters.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Letters.m"; sourceTree = "<group>"; };
+		072DBBE51FF9202E00DFA8F0 /* STSyncService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSyncService.h; sourceTree = "<group>"; };
+		072DBBE61FF9202E00DFA8F0 /* STSyncService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncService.m; sourceTree = "<group>"; };
+		072DBBE81FF9208700DFA8F0 /* STSyncBaseObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSyncBaseObject.h; sourceTree = "<group>"; };
+		072DBBE91FF9208700DFA8F0 /* STSyncBaseObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncBaseObject.m; sourceTree = "<group>"; };
+		072DBBEB1FF9279E00DFA8F0 /* STSyncBrand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSyncBrand.h; sourceTree = "<group>"; };
+		072DBBEC1FF9279E00DFA8F0 /* STSyncBrand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncBrand.m; sourceTree = "<group>"; };
 		072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STExploreFilters.xib; sourceTree = "<group>"; };
 		072FE0521F5FC4A60090F8B6 /* STExploreFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STExploreFilters.h; sourceTree = "<group>"; };
 		072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreFilters.m; sourceTree = "<group>"; };
@@ -534,8 +564,6 @@
 		17648B931E50F1F200D9C428 /* STCatalogCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCatalogCategory.m; sourceTree = "<group>"; };
 		17648B951E50F39400D9C428 /* STGetBrandsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGetBrandsRequest.h; sourceTree = "<group>"; };
 		17648B961E50F39400D9C428 /* STGetBrandsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGetBrandsRequest.m; sourceTree = "<group>"; };
-		17648B981E50F49F00D9C428 /* STBrandObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBrandObj.h; sourceTree = "<group>"; };
-		17648B991E50F49F00D9C428 /* STBrandObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBrandObj.m; sourceTree = "<group>"; };
 		1774583A1928C48E005B994B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1780AC761DEAEA3E007A5689 /* STExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STExploreViewController.h; sourceTree = "<group>"; };
 		1780AC771DEAEA3E007A5689 /* STExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreViewController.m; sourceTree = "<group>"; };
@@ -713,8 +741,6 @@
 		99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNativeAdsController.m; sourceTree = "<group>"; };
 		99B386711C82FAA2005B4D8C /* STUpdateToNewerVersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateToNewerVersionController.h; sourceTree = "<group>"; };
 		99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateToNewerVersionController.m; sourceTree = "<group>"; };
-		99B386751C82FAA2005B4D8C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		99B386761C82FAA2005B4D8C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		99B386781C82FAA2005B4D8C /* StatusDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StatusDM.xcdatamodel; sourceTree = "<group>"; };
 		99B386791C82FAA2005B4D8C /* STCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCoreDataManager.h; sourceTree = "<group>"; };
 		99B3867A1C82FAA2005B4D8C /* STCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCoreDataManager.m; sourceTree = "<group>"; };
@@ -1011,8 +1037,38 @@
 				072DBBCC1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m */,
 				072DBBCE1FF8FF3400DFA8F0 /* STCoreDataMessageSync.h */,
 				072DBBCF1FF8FF3400DFA8F0 /* STCoreDataMessageSync.m */,
+				072DBBDE1FF916F900DFA8F0 /* STCoreDataBrandSync.h */,
+				072DBBDF1FF916F900DFA8F0 /* STCoreDataBrandSync.m */,
 			);
 			path = STCoreDataSync;
+			sourceTree = "<group>";
+		};
+		072DBBD11FF915B600DFA8F0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				072DBBD21FF9161600DFA8F0 /* Message+CoreDataProperties.h */,
+				072DBBD31FF9161600DFA8F0 /* Message+CoreDataClass.h */,
+				072DBBD41FF9161600DFA8F0 /* Message+CoreDataClass.m */,
+				072DBBD51FF9161600DFA8F0 /* Message+CoreDataProperties.m */,
+				072DBBD61FF9161600DFA8F0 /* Brand+CoreDataProperties.h */,
+				072DBBD71FF9161600DFA8F0 /* Brand+CoreDataClass.h */,
+				072DBBD81FF9161600DFA8F0 /* Brand+CoreDataClass.m */,
+				072DBBD91FF9161600DFA8F0 /* Brand+CoreDataProperties.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		072DBBE41FF91F7A00DFA8F0 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				072DBBE51FF9202E00DFA8F0 /* STSyncService.h */,
+				072DBBE61FF9202E00DFA8F0 /* STSyncService.m */,
+				072DBBE81FF9208700DFA8F0 /* STSyncBaseObject.h */,
+				072DBBE91FF9208700DFA8F0 /* STSyncBaseObject.m */,
+				072DBBEB1FF9279E00DFA8F0 /* STSyncBrand.h */,
+				072DBBEC1FF9279E00DFA8F0 /* STSyncBrand.m */,
+			);
+			path = Sync;
 			sourceTree = "<group>";
 		};
 		077811561EB712290043A2E8 /* cells */ = {
@@ -1299,6 +1355,8 @@
 				17FE2B5B1DDAE4B200EB4EFF /* NSString+HashTags.m */,
 				99B385F11C82FAA2005B4D8C /* NSString+VersionComparison.h */,
 				99B385F21C82FAA2005B4D8C /* NSString+VersionComparison.m */,
+				072DBBE11FF91A0000DFA8F0 /* NSString+Letters.h */,
+				072DBBE21FF91A0000DFA8F0 /* NSString+Letters.m */,
 				99B385F31C82FAA2005B4D8C /* UIImage+Alpha.h */,
 				99B385F41C82FAA2005B4D8C /* UIImage+Alpha.m */,
 				99B385F51C82FAA2005B4D8C /* UIImage+FixedOrientation.h */,
@@ -1335,6 +1393,7 @@
 				99B387E41C830082005B4D8C /* CoreManager.m */,
 				99B386051C82FAA2005B4D8C /* Network */,
 				99B386541C82FAA2005B4D8C /* Services */,
+				072DBBE41FF91F7A00DFA8F0 /* Sync */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1524,8 +1583,7 @@
 		99B386741C82FAA2005B4D8C /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				99B386751C82FAA2005B4D8C /* Message.h */,
-				99B386761C82FAA2005B4D8C /* Message.m */,
+				072DBBD11FF915B600DFA8F0 /* Models */,
 				99B386771C82FAA2005B4D8C /* StatusDM.xcdatamodeld */,
 				99B386791C82FAA2005B4D8C /* STCoreDataManager.h */,
 				99B3867A1C82FAA2005B4D8C /* STCoreDataManager.m */,
@@ -1570,8 +1628,6 @@
 				17648B8D1E50DBF400D9C428 /* STCatalogParentCategory.m */,
 				17648B921E50F1F200D9C428 /* STCatalogCategory.h */,
 				17648B931E50F1F200D9C428 /* STCatalogCategory.m */,
-				17648B981E50F49F00D9C428 /* STBrandObj.h */,
-				17648B991E50F49F00D9C428 /* STBrandObj.m */,
 				0722F3471F0CB8B600B78823 /* STCommission.h */,
 				0722F3481F0CB8B600B78823 /* STCommission.m */,
 				070ABB171F11337000CAD9C1 /* STWithdrawDetailsObj.h */,
@@ -1744,6 +1800,9 @@
 				07DB7DB41FD48C46001FEF25 /* STSnackWithActionBar.h */,
 				07DB7DB51FD48C46001FEF25 /* STSnackWithActionBar.m */,
 				07DB7DB71FD48C5D001FEF25 /* STSnackWithActionBar.xib */,
+				0727A6211FFBB5E10040F349 /* STSectionView.h */,
+				0727A6221FFBB5E10040F349 /* STSectionView.m */,
+				0727A6241FFBB5F30040F349 /* STSectionView.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -2084,6 +2143,7 @@
 				99B387CD1C82FAA2005B4D8C /* ChatScene.storyboard in Resources */,
 				99B3878F1C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg in Resources */,
 				17AC8ECF1E11192B002D213E /* STLoadingView.xib in Resources */,
+				0727A6251FFBB5F30040F349 /* STSectionView.xib in Resources */,
 				2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */,
 				99B387911C82FAA2005B4D8C /* ProximaNova-Bold.otf in Resources */,
 			);
@@ -2200,7 +2260,6 @@
 				99B3875D1C82FAA2005B4D8C /* STInviteUserToUploadRequest.m in Sources */,
 				170912231DF87F5C00B2AF81 /* STNotificationsViewController.m in Sources */,
 				17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */,
-				17648B9A1E50F49F00D9C428 /* STBrandObj.m in Sources */,
 				99B387511C82FAA2005B4D8C /* STGetNotificationsCountRequest.m in Sources */,
 				99B387D71C82FAA2005B4D8C /* STAlbumImagesViewController.m in Sources */,
 				99B387B21C82FAA2005B4D8C /* STContextualMenu.m in Sources */,
@@ -2213,6 +2272,7 @@
 				99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */,
 				17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */,
 				0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */,
+				072DBBE31FF91A0000DFA8F0 /* NSString+Letters.m in Sources */,
 				99B387D51C82FAA2005B4D8C /* STAlbumImageCell.m in Sources */,
 				99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */,
 				071DDCB31F18976A00D2DE89 /* STNoEarningsViewController.m in Sources */,
@@ -2222,14 +2282,17 @@
 				52DC4DC91C8D53E30064F23F /* STImagePickerService.m in Sources */,
 				07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */,
 				99B387DF1C82FAA2005B4D8C /* STEditProfileViewController.m in Sources */,
+				072DBBE01FF916F900DFA8F0 /* STCoreDataBrandSync.m in Sources */,
 				99B387851C82FAA2005B4D8C /* STBaseObj.m in Sources */,
 				99B387C51C82FAA2005B4D8C /* STInviteFriendsViewController.m in Sources */,
+				072DBBDD1FF9161700DFA8F0 /* Brand+CoreDataProperties.m in Sources */,
 				99B387C41C82FAA2005B4D8C /* STInviteFriendCell.m in Sources */,
 				170912241DF87F5C00B2AF81 /* STSmartNotificationCell.m in Sources */,
 				17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */,
 				075C529F1EBF4E1200174CC5 /* STTagManualProductCell.m in Sources */,
 				1709123B1DF8827100B2AF81 /* UserProfileInfoCell.m in Sources */,
 				1709123A1DF8827100B2AF81 /* UserProfileFriendsInfoCell.m in Sources */,
+				072DBBE71FF9202E00DFA8F0 /* STSyncService.m in Sources */,
 				99B3875E1C82FAA2005B4D8C /* STLoginRequest.m in Sources */,
 				0721585B1F1A4B47001481B0 /* STWithdrawDetailsCVC.m in Sources */,
 				170AE3BD1DF60F9D00859C8E /* STTutorialStartCell.m in Sources */,
@@ -2239,8 +2302,10 @@
 				99B387DC1C82FAA2005B4D8C /* STTutorialCell.m in Sources */,
 				99B387B81C82FAA2005B4D8C /* STTapAnimationLabel.m in Sources */,
 				072158551F1A49BF001481B0 /* STWithdrawDetailsHeader.m in Sources */,
+				072DBBDA1FF9161600DFA8F0 /* Message+CoreDataClass.m in Sources */,
 				07D03F581F00D27F00B5A3B8 /* STDeepLinkService.m in Sources */,
 				0726B8C11F78D2790012A299 /* STMissingProductViewController.m in Sources */,
+				0727A6231FFBB5E10040F349 /* STSectionView.m in Sources */,
 				99B387801C82FAA2005B4D8C /* StatusDM.xcdatamodeld in Sources */,
 				99B387761C82FAA2005B4D8C /* STIAPHelper.m in Sources */,
 				1709124A1DF882DC00B2AF81 /* STPostHeader.m in Sources */,
@@ -2266,6 +2331,7 @@
 				99B387E01C82FAA2005B4D8C /* STSettingsViewController.m in Sources */,
 				07DB7DB61FD48C46001FEF25 /* STSnackWithActionBar.m in Sources */,
 				99B3874D1C82FAA2005B4D8C /* STGetChatUrlAndPortRequest.m in Sources */,
+				072DBBDB1FF9161600DFA8F0 /* Message+CoreDataProperties.m in Sources */,
 				17DF47351C9974700053F633 /* STLocalNotificationService.m in Sources */,
 				0721E8A41EC4DF6D00DF78D4 /* STTagCustomView.m in Sources */,
 				170912581DF8848300B2AF81 /* STRemoveAdsViewController.m in Sources */,
@@ -2328,6 +2394,7 @@
 				170912531DF883FC00B2AF81 /* STUserListCell.m in Sources */,
 				2A119DF71C832182001C17DB /* STFlowProcessor.m in Sources */,
 				17648B851E50977200D9C428 /* STShopProductsUploader.m in Sources */,
+				072DBBEA1FF9208700DFA8F0 /* STSyncBaseObject.m in Sources */,
 				076B91ED1FDD7F28006B7E91 /* STSnackBarWithActionService.m in Sources */,
 				2AC777791C83A5CC00DAA273 /* LaunchViewController.m in Sources */,
 				2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */,
@@ -2348,6 +2415,7 @@
 				99B3876D1C82FAA2005B4D8C /* STBaseRequest.m in Sources */,
 				99B3876F1C82FAA2005B4D8C /* STNetworkQueueManager.m in Sources */,
 				99B387701C82FAA2005B4D8C /* KeychainItemWrapper.m in Sources */,
+				072DBBED1FF9279E00DFA8F0 /* STSyncBrand.m in Sources */,
 				071D515F1F195C1E0011ACF3 /* STEarningsCell.m in Sources */,
 				072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */,
 				2A1D66831C8472D400633D87 /* STUIHelper.m in Sources */,
@@ -2381,9 +2449,9 @@
 				072DBBCD1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m in Sources */,
 				99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */,
 				173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */,
-				99B3877F1C82FAA2005B4D8C /* Message.m in Sources */,
 				076B91F01FDD821C006B7E91 /* STSnackBarBaseService.m in Sources */,
 				075991A81FC36C9F00CF89C0 /* STGetProductsByBarcode.m in Sources */,
+				072DBBDC1FF9161700DFA8F0 /* Brand+CoreDataClass.m in Sources */,
 				072143B71FA264D70009C6E9 /* STTagProductsContainerViewController.m in Sources */,
 				071CA92D1F1FD34300434ABB /* STIndexPathTextField.m in Sources */,
 				0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */,

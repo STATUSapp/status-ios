@@ -40,7 +40,7 @@ extern NSString *const kCDRChangeType;
 - (void)performFetch;
 
 //Accessors
-- (NSArray*)sections;
+- (NSArray<id<NSFetchedResultsSectionInfo>>*)sections;
 - (NSUInteger)numberOfSections;
 - (id)objectAtIndexPath:(NSIndexPath*)indexPath;
 - (NSUInteger)numberOfObjectsInSection:(NSInteger) section;
