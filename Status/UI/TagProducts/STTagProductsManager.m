@@ -67,7 +67,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
         _selectedBrandId = brandId;
         _categoryAndBrandProducts = nil;
         _categoryAndBrondPageIndex = kCatalogFirstPage;
-        if (_selectedBrandId && _selectedCategory) {
+        if (_selectedCategory) {
             [self downloadProductsForCategoryAndBrand];
         }
     }

@@ -1160,6 +1160,20 @@ by using one of the following methods:</string>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" id="uXq-rm-0NJ">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="elJ-Of-WV0">
+                                                <rect key="frame" x="311" y="0.0" width="48" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="next_btn">
+                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="selected" image="next_btn_pressed"/>
+                                                <state key="highlighted" image="next_btn_pressed"/>
+                                                <connections>
+                                                    <action selector="onNextPressed:" destination="QxW-4w-uII" eventType="touchUpInside" id="0e1-rV-9lM"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -1333,6 +1347,8 @@ by using one of the following methods:</string>
         <image name="btnBackPressed" width="32" height="32"/>
         <image name="closet icon" width="249" height="251"/>
         <image name="delete icon " width="14" height="14"/>
+        <image name="next_btn" width="32" height="32"/>
+        <image name="next_btn_pressed" width="32" height="32"/>
         <image name="no_product_found" width="250" height="250"/>
         <image name="orange-base-0" width="481" height="72"/>
         <image name="remove product icon " width="15" height="15"/>

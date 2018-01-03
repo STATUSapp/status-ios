@@ -91,6 +91,13 @@
 -(IBAction)onBackPressed:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)onNextPressed:(id)sender {
+    [[STTagProductsManager sharedInstance] updateBrandId:nil];
+    STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeDefault];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
 
 -(Brand *)brandObjectForIndexPath:(NSIndexPath *)indexPath{
     STTagBrandSection *section = [self.sectionArray objectAtIndex:indexPath.section];
@@ -128,6 +135,7 @@
     STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeDefault];
     
     [self.navigationController pushViewController:vc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
 }
 

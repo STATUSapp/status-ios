@@ -34,7 +34,11 @@
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"category_id"] = weakSelf.categoryId;
-        params[@"brand_id"] = weakSelf.brandId;
+        if (weakSelf.brandId) {
+            params[@"brand_id"] = weakSelf.brandId;
+        }else{
+            params[@"brand_id"] = [NSNull null];
+        }
         params[@"pageSize"] = @(kCatalogDownloadPageSize);
         params[@"page"] = @(weakSelf.pageIndex);
         
