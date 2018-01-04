@@ -18,12 +18,18 @@
 #import "NSString+Letters.h"
 #import "STSectionView.h"
 
-@interface STTagProductsBrands ()<UITableViewDelegate, UITableViewDataSource, SLCoreDataRequestManagerDelegate>
+@interface STTagProductsBrands ()<UITableViewDelegate, UITableViewDataSource, SLCoreDataRequestManagerDelegate>{
+    CGRect keyboardBounds;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray<STTagBrandSection *>*sectionArray;
+@property (nonatomic, strong) NSMutableArray<STTagBrandSection *>*displaySectionArray;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarHeightConstr;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstr;
 @property (nonatomic, strong) STCoreDataRequestManager *currentManager;
-
+@property (nonatomic, strong) NSString *searchText;
 @end
 
 @implementation STTagProductsBrands
@@ -39,10 +45,20 @@
     self.tableView.sectionIndexColor = [UIColor blackColor];
     self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     self.sectionArray = [@[] mutableCopy];
+    self.displaySectionArray = [@[] mutableCopy];
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"indexString" ascending:YES];
     NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Brand" sortDescritors:@[sd1, sd2] predicate:nil sectionNameKeyPath:@"indexString" delegate:self andTableView:nil];
-    NSLog(@"_currentManager = %@", _currentManager);
+    _searchBarHeightConstr.constant = 0;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 -(void)dealloc{
@@ -66,6 +82,7 @@
 
 -(void)reloadScreenWithCDRM:(STCoreDataRequestManager *)cdrm{
     self.sectionArray = [@[] mutableCopy];
+    self.displaySectionArray = [@[] mutableCopy];
     NSMutableArray *indexArray = [NSMutableArray arrayWithArray:[NSString allCapsLetters]];
     [indexArray addObject:@"#"];
     
@@ -83,7 +100,58 @@
         [self.sectionArray addObject:newSection];
 
     }
+    [self filterOutSections];
     [_tableView reloadData];
+}
+
+#pragma mark - Keyboard Notifications
+
+-(void) keyboardWillShow:(NSNotification *)note{
+    // get keyboard size and loctaion
+    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+    
+    // Need to translate the bounds to account for rotation.
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+    _bottomConstr.constant = keyboardBounds.size.height;
+    // animations settings
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(animationShowStopped)];
+    [UIView setAnimationDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    [UIView setAnimationCurve:[note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [self.view layoutIfNeeded];
+    [UIView commitAnimations];
+    
+}
+
+-(void) animationShowStopped{
+    /*
+    [UIView animateWithDuration:0.1 animations:^{
+        [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+        
+    }];
+    _bottomConstr.constant = keyboardBounds.size.height;
+     */
+    
+}
+
+-(void) keyboardWillHide:(NSNotification *)note{
+    // get a rect for the textView frame
+    CGRect containerFrame = self.view.frame;
+    containerFrame.origin.y = self.view.bounds.size.height - containerFrame.size.height;
+    
+    _bottomConstr.constant = 0;
+
+    [UIView beginAnimations:nil context:NULL];
+    //    [UIView setAnimationDelegate:self];
+    //    [UIView setAnimationDidStopSelector:@selector(animationHideStopped)];
+    [UIView setAnimationDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    [UIView setAnimationCurve:[note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [self.view layoutIfNeeded];
+    [UIView commitAnimations];
+    
 }
 
 #pragma mark - IBActions
@@ -100,7 +168,7 @@
 }
 
 -(Brand *)brandObjectForIndexPath:(NSIndexPath *)indexPath{
-    STTagBrandSection *section = [self.sectionArray objectAtIndex:indexPath.section];
+    STTagBrandSection *section = [self.displaySectionArray objectAtIndex:indexPath.section];
     Brand *brand = [section.sectionItems objectAtIndex:indexPath.row];
     return brand;
 }
@@ -108,15 +176,15 @@
 #pragma mark - UITableViewDelegate
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self.sectionArray count];
+    return [self.displaySectionArray count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:section];
+    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
     return [sectionObj.sectionItems count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:indexPath.section];
+    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:indexPath.section];
     BOOL lastItem = (indexPath.row == sectionObj.sectionItems.count - 1);
     Brand *brandObj = [self brandObjectForIndexPath:indexPath];
     STTagBrandCell *cell = (STTagBrandCell *)[tableView dequeueReusableCellWithIdentifier:@"STTagBrandCell"];
@@ -140,7 +208,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:section];
+    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
     if ([sectionObj.sectionItems count] == 0) {
         return nil;
     }
@@ -150,7 +218,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:section];
+    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
     if ([sectionObj.sectionItems count] == 0) {
         return 0.f;
     }
@@ -158,17 +226,100 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
-    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:index];
+    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:index];
     if (sectionObj.sectionItems.count == 0) {
         return NSNotFound;
     }
-    NSArray *indexArray = [self.sectionArray valueForKey:@"sectionName"];
+    NSArray *indexArray = [self.displaySectionArray valueForKey:@"sectionName"];
     return [indexArray indexOfObject:title];
 }
 
 - (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
-    NSArray *indexArray = [self.sectionArray valueForKey:@"sectionName"];
+    NSArray *indexArray = [self.displaySectionArray valueForKey:@"sectionName"];
     return indexArray;
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"scrollView.contentOffset = %@", NSStringFromCGPoint(scrollView.contentOffset));
+    if (scrollView.contentOffset.y < 0) {
+        if (_searchBarHeightConstr.constant == 0) {
+            [self onDownSwipe:nil];
+        }
+    }
+}
+
+#pragma mark - IBActions
+
+- (IBAction)onDownSwipe:(id)sender {
+    _searchBarHeightConstr.constant = 44.f;
+    [UIView animateWithDuration:0.33f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+
+}
+- (IBAction)onUpSwipe:(id)sender {
+    if (_searchText.length > 0) {
+        return;
+    }
+    _searchBarHeightConstr.constant = 0;
+    [UIView animateWithDuration:0.33f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+#pragma mark - UISearchBar delegate method
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+    [_searchBar setShowsCancelButton:NO animated:YES];
+}
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    _searchBar.text = nil;
+    _searchText = nil;
+    [self filterOutSections];
+    [searchBar resignFirstResponder];
+    [_searchBar setShowsCancelButton:NO animated:YES];
+    [self.tableView reloadData];
+    
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    [self searchForText:searchBar.text];
+}
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    //hack to enable search button from the beggining
+    [_searchBar setShowsCancelButton:YES animated:YES];
+    UITextField *searchBarTextField = nil;
+    for (UIView *mainview in _searchBar.subviews)
+    {
+        for (UIView *subview in mainview.subviews) {
+            if ([subview isKindOfClass:[UITextField class]])
+            {
+                searchBarTextField = (UITextField *)subview;
+                break;
+            }
+            
+        }
+    }
+    searchBarTextField.enablesReturnKeyAutomatically = NO;
+}
+
+#pragma mark - Helpers
+-(void)searchForText:(NSString *)text{
+    _searchText = text;
+    [self filterOutSections];
+    [self.tableView reloadData];
+}
+
+-(void)filterOutSections{
+    if (_searchText.length == 0) {
+        _displaySectionArray = [NSMutableArray arrayWithArray:_sectionArray];
+    }else{
+        _displaySectionArray = [@[] mutableCopy];
+        for (STTagBrandSection *section in _sectionArray) {
+            [_displaySectionArray addObject:[section copyAndFilterObject:_searchText]];
+        }
+    }
 }
 
 #pragma mark - SLCoreDataRequestManagerDelegate

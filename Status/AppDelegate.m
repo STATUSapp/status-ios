@@ -147,6 +147,10 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[STWhiteNavBarViewController class]]] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
 
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[STWhiteNavBarViewController class]]] setShadowImage:[[UIImage alloc] init]];
+    
+//    [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setDefaultTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Regular" size:16]}];
+    [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setBackgroundColor:[UIColor colorWithRed:237.f/255.f green:237.f/255.f blue:239.f/255.f alpha:1.f]];
+    [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setFont:[UIFont fontWithName:@"ProximaNova-Regular" size:16]];
 
 }
 

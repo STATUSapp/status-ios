@@ -19,6 +19,8 @@
 -(instancetype)initWithObject:(Brand *)object;
 -(instancetype)initWithObjects:(NSArray <Brand *> *)objects;
 
+-(instancetype)copyAndFilterObject:(NSString *)filterString;
+
 -(void)addObjectToItems:(Brand *)object;
 -(void)addObjectsToItems:(NSArray <Brand *> *)objects;
 

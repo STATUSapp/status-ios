@@ -49,6 +49,17 @@
     return self;
 }
 
+-(instancetype)copyAndFilterObject:(NSString *)filterString{
+    STTagBrandSection *section = [[STTagBrandSection alloc] initWithSectionName:self.sectionName];
+    NSArray *filteredItems = [self.sectionItems filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Brand *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return [evaluatedObject.name containsString:filterString];
+    }]];
+    if (filteredItems.count > 0) {
+        [section addObjectsToItems:filteredItems];
+    }
+    return section;
+}
+
 -(void)addObjectToItems:(Brand *)object{
     if (!object) {
         NSAssert(NO, @"Add NULL object is not supported");

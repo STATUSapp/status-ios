@@ -1178,7 +1178,7 @@ by using one of the following methods:</string>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4lF-Fy-OrD">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="STTagBrandCell" rowHeight="60" id="yGW-DR-X6t" customClass="STTagBrandCell">
@@ -1222,28 +1222,65 @@ by using one of the following methods:</string>
                                     <outlet property="delegate" destination="QxW-4w-uII" id="vbG-Jg-Ad1"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Brand" showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIn-ke-f78">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="mca-FC-SOI"/>
+                                </constraints>
+                                <color key="tintColor" red="0.4941176471" green="0.4941176471" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="name"/>
+                                <connections>
+                                    <outlet property="delegate" destination="QxW-4w-uII" id="wUd-z0-d8X"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nHA-hK-XHi" firstAttribute="leading" secondItem="Qot-Tx-nzh" secondAttribute="leading" id="4Ou-Rh-ktf"/>
+                            <constraint firstItem="JIn-ke-f78" firstAttribute="top" secondItem="nHA-hK-XHi" secondAttribute="bottom" id="89W-C8-8UC"/>
                             <constraint firstItem="nHA-hK-XHi" firstAttribute="top" secondItem="Qot-Tx-nzh" secondAttribute="top" id="9PM-xZ-XDK"/>
-                            <constraint firstItem="4lF-Fy-OrD" firstAttribute="top" secondItem="nHA-hK-XHi" secondAttribute="bottom" id="PnQ-z6-dGE"/>
+                            <constraint firstItem="4lF-Fy-OrD" firstAttribute="top" secondItem="JIn-ke-f78" secondAttribute="bottom" id="JIx-4C-hAP"/>
+                            <constraint firstItem="JIn-ke-f78" firstAttribute="leading" secondItem="Qot-Tx-nzh" secondAttribute="leading" id="Jsm-lo-qoL"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="trailing" secondItem="Qot-Tx-nzh" secondAttribute="trailing" id="e7U-wj-9iu"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="bottom" secondItem="Qot-Tx-nzh" secondAttribute="bottom" id="fME-KC-DSX"/>
                             <constraint firstItem="Qot-Tx-nzh" firstAttribute="trailing" secondItem="nHA-hK-XHi" secondAttribute="trailing" id="fOf-DP-JNG"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="leading" secondItem="Qot-Tx-nzh" secondAttribute="leading" id="tLT-xs-ikm"/>
+                            <constraint firstItem="JIn-ke-f78" firstAttribute="trailing" secondItem="Qot-Tx-nzh" secondAttribute="trailing" id="xv3-x1-4a0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qot-Tx-nzh"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="vca-aX-qEZ" appends="YES" id="i4s-RN-F8M"/>
+                            <outletCollection property="gestureRecognizers" destination="xtw-oI-Cd7" appends="YES" id="GqI-uH-xAX"/>
+                        </connections>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barHeightConstraint" destination="prq-54-mNY" id="BGJ-3e-w0G"/>
+                        <outlet property="bottomConstr" destination="fME-KC-DSX" id="sAy-p9-01A"/>
                         <outlet property="leftButton" destination="RCS-2Q-NtF" id="1WF-f3-p4F"/>
                         <outlet property="navigationBar" destination="nHA-hK-XHi" id="1d2-lO-mm5"/>
+                        <outlet property="searchBar" destination="JIn-ke-f78" id="E6L-hY-B8h"/>
+                        <outlet property="searchBarHeightConstr" destination="mca-FC-SOI" id="qNB-1h-hoU"/>
                         <outlet property="tableView" destination="4lF-Fy-OrD" id="Ti9-ex-5fN"/>
                     </connections>
                 </viewController>
+                <swipeGestureRecognizer direction="up" id="xtw-oI-Cd7" userLabel="UpSwipe">
+                    <connections>
+                        <action selector="onUpSwipe:" destination="QxW-4w-uII" id="9CN-cE-RHk"/>
+                        <outlet property="delegate" destination="QxW-4w-uII" id="RNf-UQ-cvQ"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="vca-aX-qEZ" userLabel="DownSwipe">
+                    <connections>
+                        <action selector="onDownSwipe:" destination="QxW-4w-uII" id="q3f-0b-F9x"/>
+                        <outlet property="delegate" destination="QxW-4w-uII" id="lbd-cA-Li1"/>
+                    </connections>
+                </swipeGestureRecognizer>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHR-MV-UZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1876" y="-1146.4767616191905"/>
