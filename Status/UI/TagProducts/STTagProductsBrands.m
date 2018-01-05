@@ -50,6 +50,7 @@
     NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Brand" sortDescritors:@[sd1, sd2] predicate:nil sectionNameKeyPath:@"indexString" delegate:self andTableView:nil];
     _searchBarHeightConstr.constant = 0;
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -112,7 +113,7 @@
     
     // Need to translate the bounds to account for rotation.
     keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
-    _bottomConstr.constant = keyboardBounds.size.height;
+    _bottomConstr.constant = -1.f * keyboardBounds.size.height;
     // animations settings
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelegate:self];
@@ -126,13 +127,13 @@
 }
 
 -(void) animationShowStopped{
-    /*
-    [UIView animateWithDuration:0.1 animations:^{
-        [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
-        
-    }];
-    _bottomConstr.constant = keyboardBounds.size.height;
-     */
+    
+//    [UIView animateWithDuration:0.1 animations:^{
+//        [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+//
+//    }];
+    _bottomConstr.constant = -1.f * keyboardBounds.size.height;
+    
     
 }
 
@@ -173,23 +174,46 @@
     return brand;
 }
 
+-(BOOL)checkNoBrandFound{
+    if (_searchText.length > 0) {
+        for (STTagBrandSection *section in _displaySectionArray) {
+            if (section.sectionItems.count > 0) {
+                return NO;
+            }
+        }
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - UITableViewDelegate
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if ([self checkNoBrandFound]) {
+        return 1;
+    }
     return [self.displaySectionArray count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if ([self checkNoBrandFound]) {
+        return 1;
+    }
     STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
     return [sectionObj.sectionItems count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:indexPath.section];
-    BOOL lastItem = (indexPath.row == sectionObj.sectionItems.count - 1);
-    Brand *brandObj = [self brandObjectForIndexPath:indexPath];
     STTagBrandCell *cell = (STTagBrandCell *)[tableView dequeueReusableCellWithIdentifier:@"STTagBrandCell"];
-    cell.nameLabel.text = brandObj.name;
-    cell.separatorView.hidden = lastItem;
+    if ([self checkNoBrandFound]) {
+        [cell setNoBrandFound];
+    }else{
+        STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:indexPath.section];
+        BOOL lastItem = (indexPath.row == sectionObj.sectionItems.count - 1);
+        Brand *brandObj = [self brandObjectForIndexPath:indexPath];
+        cell.nameLabel.text = brandObj.name;
+        cell.separatorView.hidden = lastItem;
+        
+    }
     return cell;
 }
 
@@ -198,6 +222,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self checkNoBrandFound])
+        return;
     Brand *brand = [self brandObjectForIndexPath:indexPath];
     [[STTagProductsManager sharedInstance] updateBrandId:brand.uuid];
     STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeDefault];
@@ -208,6 +234,8 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if ([self checkNoBrandFound])
+        return nil;
     STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
     if ([sectionObj.sectionItems count] == 0) {
         return nil;
@@ -218,6 +246,9 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if ([self checkNoBrandFound])
+        return 0.f;
+    
     STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
     if ([sectionObj.sectionItems count] == 0) {
         return 0.f;
@@ -240,7 +271,6 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"scrollView.contentOffset = %@", NSStringFromCGPoint(scrollView.contentOffset));
     if (scrollView.contentOffset.y < 0) {
         if (_searchBarHeightConstr.constant == 0) {
             [self onDownSwipe:nil];

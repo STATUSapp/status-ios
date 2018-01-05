@@ -14,4 +14,6 @@
 
 -(void)sync;
 -(NSUserDefaults *)lastCheckUserDefaults;
+-(void)resetLastCheck;
+
 @end

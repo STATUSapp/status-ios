@@ -12,4 +12,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
+-(void)setNoBrandFound;
 @end

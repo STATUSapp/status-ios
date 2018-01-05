@@ -77,4 +77,10 @@
     [ud setValue:[NSDate date] forKey:@"BRANDS_LAST_CHECK"];
     [ud synchronize];
 }
+-(void)resetLastCheck{
+    NSUserDefaults *ud = [self lastCheckUserDefaults];
+    [ud setValue:nil forKey:@"BRANDS_LAST_CHECK"];
+    [ud synchronize];
+
+}
 @end

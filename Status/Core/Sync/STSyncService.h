@@ -11,5 +11,6 @@
 @interface STSyncService : NSObject
 
 -(void)syncBrands;
+-(void)resetBrandsLastCheck;
 
 @end

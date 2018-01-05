@@ -1246,7 +1246,7 @@ by using one of the following methods:</string>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="top" secondItem="JIn-ke-f78" secondAttribute="bottom" id="JIx-4C-hAP"/>
                             <constraint firstItem="JIn-ke-f78" firstAttribute="leading" secondItem="Qot-Tx-nzh" secondAttribute="leading" id="Jsm-lo-qoL"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="trailing" secondItem="Qot-Tx-nzh" secondAttribute="trailing" id="e7U-wj-9iu"/>
-                            <constraint firstItem="4lF-Fy-OrD" firstAttribute="bottom" secondItem="Qot-Tx-nzh" secondAttribute="bottom" id="fME-KC-DSX"/>
+                            <constraint firstItem="4lF-Fy-OrD" firstAttribute="bottom" secondItem="Adz-ev-Sg1" secondAttribute="bottom" id="fME-KC-DSX"/>
                             <constraint firstItem="Qot-Tx-nzh" firstAttribute="trailing" secondItem="nHA-hK-XHi" secondAttribute="trailing" id="fOf-DP-JNG"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="leading" secondItem="Qot-Tx-nzh" secondAttribute="leading" id="tLT-xs-ikm"/>
                             <constraint firstItem="JIn-ke-f78" firstAttribute="trailing" secondItem="Qot-Tx-nzh" secondAttribute="trailing" id="xv3-x1-4a0"/>

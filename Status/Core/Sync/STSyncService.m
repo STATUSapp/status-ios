@@ -23,4 +23,7 @@
     }
     [_brandSync sync];
 }
+-(void)resetBrandsLastCheck{
+    [_brandSync resetLastCheck];
+}
 @end
