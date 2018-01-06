@@ -99,10 +99,10 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.hidesBarsOnSwipe = NO;
+    self.navigationController.navigationBarHidden = NO;
     _accountStore = [[ACAccountStore alloc] init];
     _accountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-
-    self.navigationController.navigationBarHidden = YES;
     [self configureImageViewWithImageData:_imgData];
     [[STTagProductsManager sharedInstance] startDownload];
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SAT-Cy-3oJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8Zh-2P-vmn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,53 +22,14 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Earnings View Controller-->
+        <!--Earnings-->
         <scene sceneID="NPf-sC-UKS">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="SAT-Cy-3oJ" customClass="STEarningsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EARNINGS_VC" extendedLayoutIncludesOpaqueBars="YES" id="SAT-Cy-3oJ" customClass="STEarningsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yiF-u3-nDg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3AG-ag-b0q">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Kh6-kX-QdU"/>
-                                </constraints>
-                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Earnings" id="C5I-s5-kAE">
-                                        <barButtonItem key="leftBarButtonItem" id="W7d-AG-R6R">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tng-VF-LUW">
-                                                <rect key="frame" x="16" y="6" width="32" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="btnBack">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="btnBackPressed"/>
-                                                <state key="highlighted" image="btnBackPressed"/>
-                                                <connections>
-                                                    <action selector="onBackButtonPressed:" destination="SAT-Cy-3oJ" eventType="touchUpInside" id="nix-LB-une"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" id="ew1-dp-MbI">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vfZ-MA-Rrq">
-                                                <rect key="frame" x="325" y="5.5" width="34" height="33"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="more button"/>
-                                                <connections>
-                                                    <segue destination="9Hz-KJ-ZiK" kind="show" id="Pjm-f9-lvz"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZQ-Xl-bot">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
@@ -159,7 +120,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shF-m0-kYd">
-                                                                            <rect key="frame" x="74" y="0.0" width="26" height="21"/>
+                                                                            <rect key="frame" x="75" y="0.0" width="25" height="21"/>
                                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                                                             <color key="textColor" red="0.24705882352941178" green="0.84313725490196079" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -349,35 +310,41 @@
                         <constraints>
                             <constraint firstItem="HZQ-Xl-bot" firstAttribute="leading" secondItem="nYc-tm-ehV" secondAttribute="leading" id="6Ac-83-YOg"/>
                             <constraint firstItem="nYc-tm-ehV" firstAttribute="trailing" secondItem="HZQ-Xl-bot" secondAttribute="trailing" id="A5K-US-iFJ"/>
-                            <constraint firstItem="HZQ-Xl-bot" firstAttribute="top" secondItem="3AG-ag-b0q" secondAttribute="bottom" id="BxY-qm-UXL"/>
+                            <constraint firstItem="HZQ-Xl-bot" firstAttribute="top" secondItem="nYc-tm-ehV" secondAttribute="top" id="MlN-GV-Fsz"/>
+                            <constraint firstItem="YVZ-Pc-R8e" firstAttribute="top" secondItem="nYc-tm-ehV" secondAttribute="top" id="OUG-UB-0x0"/>
                             <constraint firstItem="YVZ-Pc-R8e" firstAttribute="leading" secondItem="nYc-tm-ehV" secondAttribute="leading" id="Oxb-qP-RsY"/>
                             <constraint firstItem="nYc-tm-ehV" firstAttribute="trailing" secondItem="YVZ-Pc-R8e" secondAttribute="trailing" id="YOr-AC-3DO"/>
-                            <constraint firstItem="3AG-ag-b0q" firstAttribute="top" secondItem="nYc-tm-ehV" secondAttribute="top" id="bdT-3L-9c0"/>
-                            <constraint firstItem="YVZ-Pc-R8e" firstAttribute="top" secondItem="3AG-ag-b0q" secondAttribute="bottom" id="etp-ch-S3r"/>
                             <constraint firstItem="nYc-tm-ehV" firstAttribute="bottom" secondItem="YVZ-Pc-R8e" secondAttribute="bottom" id="fBC-EQ-Dph"/>
-                            <constraint firstItem="nYc-tm-ehV" firstAttribute="trailing" secondItem="3AG-ag-b0q" secondAttribute="trailing" id="fGN-m8-IbK"/>
-                            <constraint firstItem="3AG-ag-b0q" firstAttribute="leading" secondItem="nYc-tm-ehV" secondAttribute="leading" id="oGp-jE-NxK"/>
                             <constraint firstItem="nYc-tm-ehV" firstAttribute="bottom" secondItem="HZQ-Xl-bot" secondAttribute="bottom" id="tp1-JF-lNb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nYc-tm-ehV"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ou0-J4-kYh"/>
+                    <navigationItem key="navigationItem" title="Earnings" id="ou0-J4-kYh">
+                        <barButtonItem key="backBarButtonItem" title="    " id="rBj-he-KVe"/>
+                        <barButtonItem key="rightBarButtonItem" id="ew1-dp-MbI">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vfZ-MA-Rrq">
+                                <rect key="frame" x="325" y="5.5" width="34" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="more button"/>
+                                <connections>
+                                    <segue destination="9Hz-KJ-ZiK" kind="show" id="Pjm-f9-lvz"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="barHeightConstraint" destination="Kh6-kX-QdU" id="bXQ-V6-Bhl"/>
                         <outlet property="collectionView" destination="JHL-eB-Uq3" id="SCk-Pe-YpA"/>
                         <outlet property="commissionsView" destination="YVZ-Pc-R8e" id="kJR-AX-urf"/>
-                        <outlet property="leftButton" destination="Tng-VF-LUW" id="VQU-Zp-Nay"/>
-                        <outlet property="navigationBar" destination="3AG-ag-b0q" id="mPg-Fg-rje"/>
                         <outlet property="noEarningsYetView" destination="HZQ-Xl-bot" id="q8l-fN-udE"/>
                         <outlet property="withdrawButtonHeightConstr" destination="TE8-O7-cTR" id="mGc-Ah-NTl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QCd-m9-Jq0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="836" y="66.11694152923539"/>
+            <point key="canvasLocation" x="1175.2" y="66.11694152923539"/>
         </scene>
-        <!--With Draw Details View Controller-->
+        <!--Withdraw Details-->
         <scene sceneID="o2s-OC-BWQ">
             <objects>
                 <viewController autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="9Hz-KJ-ZiK" customClass="STWithDrawDetailsViewController" sceneMemberID="viewController">
@@ -385,35 +352,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Anf-zW-eSJ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="rIN-YE-uih"/>
-                                </constraints>
-                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Withdraw Details" id="fqJ-Lz-Tce">
-                                        <barButtonItem key="leftBarButtonItem" id="v2v-0I-VxI">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dAK-85-2CN">
-                                                <rect key="frame" x="16" y="6" width="32" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="btnBack">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="btnBackPressed"/>
-                                                <state key="highlighted" image="btnBackPressed"/>
-                                                <connections>
-                                                    <action selector="onBackButtonPressed:" destination="9Hz-KJ-ZiK" eventType="touchUpInside" id="BZq-u9-mZA"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogY-rb-cPk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="555"/>
                                 <connections>
@@ -438,27 +376,22 @@
                         <constraints>
                             <constraint firstItem="ogY-rb-cPk" firstAttribute="leading" secondItem="8Nl-vx-1NR" secondAttribute="leading" id="53J-M9-v0m"/>
                             <constraint firstItem="8Nl-vx-1NR" firstAttribute="trailing" secondItem="Kde-FI-4ge" secondAttribute="trailing" id="5BG-Gk-Vsh"/>
+                            <constraint firstItem="ogY-rb-cPk" firstAttribute="top" secondItem="8Nl-vx-1NR" secondAttribute="top" id="8bD-3p-shF"/>
                             <constraint firstItem="Kde-FI-4ge" firstAttribute="leading" secondItem="8Nl-vx-1NR" secondAttribute="leading" id="CUZ-3W-ONS"/>
-                            <constraint firstItem="ogY-rb-cPk" firstAttribute="top" secondItem="Anf-zW-eSJ" secondAttribute="bottom" id="L9V-Lg-vUv"/>
-                            <constraint firstItem="Anf-zW-eSJ" firstAttribute="top" secondItem="8Nl-vx-1NR" secondAttribute="top" id="WbU-hi-1Ui"/>
                             <constraint firstItem="8Nl-vx-1NR" firstAttribute="trailing" secondItem="ogY-rb-cPk" secondAttribute="trailing" id="cyM-3F-zyo"/>
                             <constraint firstItem="Kde-FI-4ge" firstAttribute="top" secondItem="ogY-rb-cPk" secondAttribute="bottom" id="dsI-0y-do2"/>
-                            <constraint firstItem="Anf-zW-eSJ" firstAttribute="leading" secondItem="8Nl-vx-1NR" secondAttribute="leading" id="enZ-7H-KRP"/>
                             <constraint firstItem="8Nl-vx-1NR" firstAttribute="bottom" secondItem="Kde-FI-4ge" secondAttribute="bottom" id="hZo-fR-HwV"/>
-                            <constraint firstItem="8Nl-vx-1NR" firstAttribute="trailing" secondItem="Anf-zW-eSJ" secondAttribute="trailing" id="lqx-M1-ctc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Nl-vx-1NR"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Withdraw Details" id="R2g-tI-yUH"/>
                     <connections>
-                        <outlet property="barHeightConstraint" destination="rIN-YE-uih" id="5kB-FQ-qVt"/>
-                        <outlet property="leftButton" destination="dAK-85-2CN" id="BGU-rD-DwC"/>
-                        <outlet property="navigationBar" destination="Anf-zW-eSJ" id="m6K-Hi-jL8"/>
                         <outlet property="saveButtonHeightConstr" destination="x8E-XS-vy0" id="FWW-3s-jFv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNM-4w-glz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1669.5999999999999" y="65.217391304347828"/>
+            <point key="canvasLocation" x="2008.8" y="65.217391304347828"/>
         </scene>
         <!--Withdraw DetailsCVC-->
         <scene sceneID="s84-xL-k1K">
@@ -587,7 +520,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTg-bX-ggr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2485.5999999999999" y="68.815592203898049"/>
+            <point key="canvasLocation" x="2824.8000000000002" y="68.815592203898049"/>
         </scene>
         <!--No Earnings View Controller-->
         <scene sceneID="IKo-y9-J9E">
@@ -598,7 +531,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5W-W5-5BV">
-                                <rect key="frame" x="36" y="139" width="304" height="175"/>
+                                <rect key="frame" x="36" y="138.5" width="304" height="175"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="No earnings icon" translatesAutoresizingMaskIntoConstraints="NO" id="XDh-Wq-Bc2">
                                         <rect key="frame" x="95" y="9" width="106" height="106"/>
@@ -630,11 +563,27 @@
             </objects>
             <point key="canvasLocation" x="836" y="834"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qEC-ID-9xx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Zh-2P-vmn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q0V-CW-lzK">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SAT-Cy-3oJ" kind="relationship" relationship="rootViewController" id="t7u-ds-bYQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="apD-hy-phG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="258" y="65"/>
+        </scene>
     </scenes>
     <resources>
         <image name="No earnings icon" width="106" height="106"/>
-        <image name="btnBack" width="32" height="32"/>
-        <image name="btnBackPressed" width="32" height="32"/>
         <image name="more button" width="34" height="33"/>
         <image name="orange-base-0" width="481" height="72"/>
     </resources>

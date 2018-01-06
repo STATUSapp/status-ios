@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "STMoveScaleViewController.h"
-#import "STWhiteNavBarViewController.h"
 @class STPost;
 
 typedef NS_ENUM(NSUInteger,STShareControllerType){
@@ -16,7 +15,7 @@ typedef NS_ENUM(NSUInteger,STShareControllerType){
     STShareControllerAddPost,
     STShareControllerEditInfo
 };
-@interface STSharePhotoViewController : STWhiteNavBarViewController
+@interface STSharePhotoViewController : UIViewController
 @property (nonatomic, strong) NSData *imgData;
 @property (nonatomic, strong) STPost *post;
 @property (nonatomic) STShareControllerType controllerType;

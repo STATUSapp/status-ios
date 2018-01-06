@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wse-I9-cvx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Edit Profile View Controller-->
+        <!--Edit Profile-->
         <scene sceneID="ijb-dA-ZEL">
             <objects>
                 <viewController storyboardIdentifier="STEditProfileViewController" id="DwW-bD-kyz" customClass="STEditProfileViewController" sceneMemberID="viewController">
@@ -23,51 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9x7-cE-rqA">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="FfQ-bb-rC3"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Edit Profile" id="xie-0A-RZW">
-                                        <barButtonItem key="leftBarButtonItem" id="zdN-gX-05w">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fr1-x3-qeQ">
-                                                <rect key="frame" x="16" y="6" width="32" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="btnBack">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="btnBackPressed"/>
-                                                <state key="highlighted" image="btnBackPressed"/>
-                                                <connections>
-                                                    <action selector="onTapClose:" destination="DwW-bD-kyz" eventType="touchUpInside" id="Nga-9J-dZy"/>
-                                                </connections>
-                                            </button>
-                                            <connections>
-                                                <action selector="onTapClose:" destination="DwW-bD-kyz" id="EJe-WZ-XDo"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" id="GhD-ZK-Cef">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="R6q-WD-Jpk">
-                                                <rect key="frame" x="320" y="6.5" width="39" height="31"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
-                                                <state key="normal" title="Done">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onTapSave:" destination="DwW-bD-kyz" eventType="touchUpInside" id="Q2t-Em-1cC"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eum-Tm-Xic">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -78,24 +33,19 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eum-Tm-Xic" firstAttribute="top" secondItem="9x7-cE-rqA" secondAttribute="bottom" id="IVG-BG-vdt"/>
-                            <constraint firstItem="9x7-cE-rqA" firstAttribute="top" secondItem="N3Y-5f-jBf" secondAttribute="top" id="JdF-Im-iS2"/>
                             <constraint firstItem="N3Y-5f-jBf" firstAttribute="bottom" secondItem="eum-Tm-Xic" secondAttribute="bottom" id="ZEa-NG-M8g"/>
-                            <constraint firstItem="9x7-cE-rqA" firstAttribute="leading" secondItem="N3Y-5f-jBf" secondAttribute="leading" id="cgs-kk-mpb"/>
                             <constraint firstItem="N3Y-5f-jBf" firstAttribute="trailing" secondItem="eum-Tm-Xic" secondAttribute="trailing" id="gQg-s6-GPk"/>
                             <constraint firstItem="eum-Tm-Xic" firstAttribute="leading" secondItem="N3Y-5f-jBf" secondAttribute="leading" id="hd5-Bo-p4q"/>
-                            <constraint firstItem="N3Y-5f-jBf" firstAttribute="trailing" secondItem="9x7-cE-rqA" secondAttribute="trailing" id="kk2-bB-kjT"/>
+                            <constraint firstItem="eum-Tm-Xic" firstAttribute="top" secondItem="N3Y-5f-jBf" secondAttribute="top" id="r2x-Lx-4Ul"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N3Y-5f-jBf"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="uCs-0b-Bjd"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <outlet property="navigationBar" destination="9x7-cE-rqA" id="d4u-mE-ASG"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ia9-vr-cwS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="237.59999999999999" y="-1311.0944527736133"/>
+            <point key="canvasLocation" x="576.79999999999995" y="-1311.0944527736133"/>
         </scene>
         <!--Edit ProfileTVC-->
         <scene sceneID="2pY-oe-UIc">
@@ -340,7 +290,25 @@
                     </connections>
                 </pickerView>
             </objects>
-            <point key="canvasLocation" x="1001.6" y="-1312.4437781109445"/>
+            <point key="canvasLocation" x="1340.8" y="-1312.4437781109445"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nBj-Ms-Gla">
+            <objects>
+                <navigationController storyboardIdentifier="EDIT_PROFILE_NAV" automaticallyAdjustsScrollViewInsets="NO" id="wse-I9-cvx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d2w-ha-ESi">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DwW-bD-kyz" kind="relationship" relationship="rootViewController" id="mQQ-6E-DMV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nQi-Zj-WcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-166" y="-1311"/>
         </scene>
     </scenes>
     <resources>
@@ -348,8 +316,6 @@
         <image name="Mask" width="69" height="69"/>
         <image name="User Name icon" width="16" height="18"/>
         <image name="User link icon" width="14" height="17"/>
-        <image name="btnBack" width="32" height="32"/>
-        <image name="btnBackPressed" width="32" height="32"/>
         <image name="gender icon" width="16" height="18"/>
     </resources>
 </document>

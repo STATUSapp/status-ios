@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STWhiteNavBarViewController.h"
 
-@interface STAlbumImagesViewController : STWhiteNavBarViewController
+@interface STAlbumImagesViewController : UIViewController
 @property (nonatomic, strong) NSString *albumId;
 @property (nonatomic, strong) NSString *albumTitle;
 

@@ -66,8 +66,7 @@
         default:
             break;
     }
-    
-    [self setNavigationTitle:title];
+    self.title = title;
 }
 
 - (void)getDataSource {
@@ -129,7 +128,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.hidesBarsOnSwipe = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

@@ -44,7 +44,9 @@
     [super viewDidLoad];
 
     if (_albumTitle) {
-        [self setNavigationTitle:_albumTitle];
+        self.title = _albumTitle;
+    }else{
+        self.title = @"Photos";
     }
     _dataSource = [NSMutableArray array];
     __weak STAlbumImagesViewController *weakSelf = self;
@@ -123,11 +125,6 @@
     layoutWidth = layoutWidth - 6.f;
     
     return CGSizeMake(layoutWidth/4.f, layoutWidth/4.f);
-}
-
-#pragma mark - IBACTIONS
-- (IBAction)onBackButtonPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JTi-yg-KSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R7e-6k-OTh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -25,7 +25,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Tag Products Container-->
+        <!--Tag Products-->
         <scene sceneID="Dbr-LD-0Gr">
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" id="JTi-yg-KSI" customClass="STTagProductsContainer" sceneMemberID="viewController">
@@ -33,35 +33,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2O5-1y-c6G">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Pjq-Pa-Lfg"/>
-                                </constraints>
-                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Tag Products" id="GTc-LV-NZ3">
-                                        <barButtonItem key="leftBarButtonItem" id="ymC-Xc-2lp">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cjU-FH-YTa">
-                                                <rect key="frame" x="16" y="6" width="32" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="btnBack">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="btnBackPressed"/>
-                                                <state key="highlighted" image="btnBackPressed"/>
-                                                <connections>
-                                                    <action selector="onBackPressed:" destination="JTi-yg-KSI" eventType="touchUpInside" id="0qv-9j-Rt5"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ka-Iu-9xo">
                                 <rect key="frame" x="0.0" y="64" width="375" height="100"/>
                                 <subviews>
@@ -322,31 +293,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tAP-ma-UR0" firstAttribute="trailing" secondItem="1Ka-Iu-9xo" secondAttribute="trailing" id="DP4-2T-5Ff"/>
-                            <constraint firstItem="tAP-ma-UR0" firstAttribute="trailing" secondItem="2O5-1y-c6G" secondAttribute="trailing" id="Prn-ex-A3L"/>
-                            <constraint firstItem="2O5-1y-c6G" firstAttribute="top" secondItem="tAP-ma-UR0" secondAttribute="top" id="QXs-uv-xlC"/>
                             <constraint firstItem="tAP-ma-UR0" firstAttribute="bottom" secondItem="KIf-1D-x1X" secondAttribute="bottom" id="Qz7-wi-tzP"/>
                             <constraint firstItem="KIf-1D-x1X" firstAttribute="leading" secondItem="tAP-ma-UR0" secondAttribute="leading" id="TEs-ac-jdu"/>
                             <constraint firstItem="tAP-ma-UR0" firstAttribute="trailing" secondItem="DZ9-aO-VUQ" secondAttribute="trailing" id="V1k-ae-ef4"/>
                             <constraint firstItem="DZ9-aO-VUQ" firstAttribute="leading" secondItem="tAP-ma-UR0" secondAttribute="leading" id="XNC-7K-GxD"/>
                             <constraint firstItem="KIf-1D-x1X" firstAttribute="top" secondItem="DZ9-aO-VUQ" secondAttribute="bottom" id="eOs-j4-8Pw"/>
-                            <constraint firstItem="2O5-1y-c6G" firstAttribute="leading" secondItem="tAP-ma-UR0" secondAttribute="leading" id="fH5-mY-DZ7"/>
                             <constraint firstItem="1Ka-Iu-9xo" firstAttribute="leading" secondItem="tAP-ma-UR0" secondAttribute="leading" id="geE-yK-vPp"/>
                             <constraint firstItem="DZ9-aO-VUQ" firstAttribute="top" secondItem="1Ka-Iu-9xo" secondAttribute="bottom" id="h26-Cx-vD5"/>
                             <constraint firstItem="tAP-ma-UR0" firstAttribute="trailing" secondItem="KIf-1D-x1X" secondAttribute="trailing" id="iVK-ho-F0R"/>
-                            <constraint firstItem="1Ka-Iu-9xo" firstAttribute="top" secondItem="2O5-1y-c6G" secondAttribute="bottom" id="ztw-iz-lEd"/>
+                            <constraint firstItem="1Ka-Iu-9xo" firstAttribute="top" secondItem="tAP-ma-UR0" secondAttribute="top" id="r7x-2Y-WO5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tAP-ma-UR0"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Tag Products" id="XKs-LP-wDo">
+                        <barButtonItem key="backBarButtonItem" title="    " id="XO4-E4-utV"/>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="barHeightConstraint" destination="Pjq-Pa-Lfg" id="nH1-xi-Hpk"/>
                         <outlet property="barcodeView" destination="9GA-9T-B1g" id="IRt-ui-f3V"/>
                         <outlet property="customSegmentHolder" destination="DZ9-aO-VUQ" id="clj-1K-7JH"/>
-                        <outlet property="leftButton" destination="cjU-FH-YTa" id="tm7-8O-tGs"/>
                         <outlet property="mainContainer" destination="KIf-1D-x1X" id="fyM-4O-EyW"/>
                         <outlet property="manualView" destination="UOJ-9i-goY" id="E4O-xf-bcC"/>
-                        <outlet property="navigationBar" destination="2O5-1y-c6G" id="ZMi-fd-FHv"/>
                         <outlet property="segmentHeightConstr" destination="odW-bL-8eZ" id="crh-ub-dYz"/>
                         <outlet property="wardrobeView" destination="EWn-ou-YNb" id="6Zk-T0-Ovk"/>
                         <outlet property="wizzardView" destination="Kr6-1Y-UX5" id="XGv-Wx-wq4"/>
@@ -354,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nSl-00-mgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1442" y="-197"/>
+            <point key="canvasLocation" x="-1230.5" y="-197.5"/>
         </scene>
         <!--Tag Products Container View Controller-->
         <scene sceneID="LzE-fZ-i6g">
@@ -377,7 +345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AgR-1h-hNd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-498" y="-197"/>
+            <point key="canvasLocation" x="-286.5" y="-197.5"/>
         </scene>
         <!--Categories-->
         <scene sceneID="O4y-2A-Vsx">
@@ -455,7 +423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pxf-Uk-ei9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1150" y="-197"/>
+            <point key="canvasLocation" x="1361.5" y="-197.5"/>
         </scene>
         <!--Products-->
         <scene sceneID="TAc-6R-t8K">
@@ -534,7 +502,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCK-hL-e8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="310"/>
+            <point key="canvasLocation" x="2302" y="385"/>
         </scene>
         <!--Empty-->
         <scene sceneID="llW-yg-CDg">
@@ -1126,7 +1094,7 @@ by using one of the following methods:</string>
             </objects>
             <point key="canvasLocation" x="1182" y="730"/>
         </scene>
-        <!--Tag Products Brands-->
+        <!--Select Brand-->
         <scene sceneID="Gji-ox-tUT">
             <objects>
                 <viewController storyboardIdentifier="TAG_BRANDS_VC" extendedLayoutIncludesOpaqueBars="YES" id="QxW-4w-uII" customClass="STTagProductsBrands" sceneMemberID="viewController">
@@ -1134,49 +1102,6 @@ by using one of the following methods:</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHA-hK-XHi">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="prq-54-mNY"/>
-                                </constraints>
-                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Select Brand" id="OO1-8T-eyF">
-                                        <barButtonItem key="leftBarButtonItem" id="mNg-hV-6j6">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RCS-2Q-NtF">
-                                                <rect key="frame" x="16" y="6" width="32" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="btnBack">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="btnBackPressed"/>
-                                                <state key="highlighted" image="btnBackPressed"/>
-                                                <connections>
-                                                    <action selector="onBackPressed:" destination="QxW-4w-uII" eventType="touchUpInside" id="4WP-4k-Ntc"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" id="uXq-rm-0NJ">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="elJ-Of-WV0">
-                                                <rect key="frame" x="311" y="0.0" width="48" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="next_btn">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="next_btn_pressed"/>
-                                                <state key="highlighted" image="next_btn_pressed"/>
-                                                <connections>
-                                                    <action selector="onNextPressed:" destination="QxW-4w-uII" eventType="touchUpInside" id="0e1-rV-9lM"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4lF-Fy-OrD">
                                 <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1240,16 +1165,13 @@ by using one of the following methods:</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nHA-hK-XHi" firstAttribute="leading" secondItem="Qot-Tx-nzh" secondAttribute="leading" id="4Ou-Rh-ktf"/>
-                            <constraint firstItem="JIn-ke-f78" firstAttribute="top" secondItem="nHA-hK-XHi" secondAttribute="bottom" id="89W-C8-8UC"/>
-                            <constraint firstItem="nHA-hK-XHi" firstAttribute="top" secondItem="Qot-Tx-nzh" secondAttribute="top" id="9PM-xZ-XDK"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="top" secondItem="JIn-ke-f78" secondAttribute="bottom" id="JIx-4C-hAP"/>
                             <constraint firstItem="JIn-ke-f78" firstAttribute="leading" secondItem="Qot-Tx-nzh" secondAttribute="leading" id="Jsm-lo-qoL"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="trailing" secondItem="Qot-Tx-nzh" secondAttribute="trailing" id="e7U-wj-9iu"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="bottom" secondItem="Adz-ev-Sg1" secondAttribute="bottom" id="fME-KC-DSX"/>
-                            <constraint firstItem="Qot-Tx-nzh" firstAttribute="trailing" secondItem="nHA-hK-XHi" secondAttribute="trailing" id="fOf-DP-JNG"/>
                             <constraint firstItem="4lF-Fy-OrD" firstAttribute="leading" secondItem="Qot-Tx-nzh" secondAttribute="leading" id="tLT-xs-ikm"/>
                             <constraint firstItem="JIn-ke-f78" firstAttribute="trailing" secondItem="Qot-Tx-nzh" secondAttribute="trailing" id="xv3-x1-4a0"/>
+                            <constraint firstItem="JIn-ke-f78" firstAttribute="top" secondItem="Qot-Tx-nzh" secondAttribute="top" id="yj6-Mn-8Lo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qot-Tx-nzh"/>
                         <connections>
@@ -1257,13 +1179,27 @@ by using one of the following methods:</string>
                             <outletCollection property="gestureRecognizers" destination="xtw-oI-Cd7" appends="YES" id="GqI-uH-xAX"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" title="Select Brand" id="kII-Yv-b1i">
+                        <barButtonItem key="backBarButtonItem" title="    " id="9YB-Al-S1p"/>
+                        <barButtonItem key="rightBarButtonItem" id="N8u-c0-ivZ">
+                            <inset key="largeContentSizeImageInsets" minX="1" minY="0.0" maxX="1" maxY="0.0"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ToT-iy-6D4">
+                                <rect key="frame" x="276" y="5" width="83" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onNextPressed:" destination="QxW-4w-uII" eventType="touchUpInside" id="WgN-mF-2tw"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="barHeightConstraint" destination="prq-54-mNY" id="BGJ-3e-w0G"/>
                         <outlet property="bottomConstr" destination="fME-KC-DSX" id="sAy-p9-01A"/>
-                        <outlet property="leftButton" destination="RCS-2Q-NtF" id="1WF-f3-p4F"/>
-                        <outlet property="navigationBar" destination="nHA-hK-XHi" id="1d2-lO-mm5"/>
                         <outlet property="searchBar" destination="JIn-ke-f78" id="E6L-hY-B8h"/>
                         <outlet property="searchBarHeightConstr" destination="mca-FC-SOI" id="qNB-1h-hoU"/>
                         <outlet property="tableView" destination="4lF-Fy-OrD" id="Ti9-ex-5fN"/>
@@ -1283,9 +1219,9 @@ by using one of the following methods:</string>
                 </swipeGestureRecognizer>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHR-MV-UZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="-1146.4767616191905"/>
+            <point key="canvasLocation" x="2612.5" y="-1148.5"/>
         </scene>
-        <!--Tag Suggestions-->
+        <!--Suggestions-->
         <scene sceneID="Irb-ve-9jD">
             <objects>
                 <viewController storyboardIdentifier="TAG_SUGGESTIONS_VC" extendedLayoutIncludesOpaqueBars="YES" id="v0h-4j-m9z" customClass="STTagSuggestions" sceneMemberID="viewController">
@@ -1293,35 +1229,6 @@ by using one of the following methods:</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="318-Gd-3Dv">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="MTA-7P-Z1b"/>
-                                </constraints>
-                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Suggestions" id="d2T-mi-D3U">
-                                        <barButtonItem key="leftBarButtonItem" id="rDE-8n-wNd">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G45-Jl-h7Z">
-                                                <rect key="frame" x="16" y="6" width="32" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="btnBack">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="btnBackPressed"/>
-                                                <state key="highlighted" image="btnBackPressed"/>
-                                                <connections>
-                                                    <action selector="onBackPressed:" destination="v0h-4j-m9z" eventType="touchUpInside" id="OXI-Jk-wRN"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSz-gK-MyT">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
@@ -1331,28 +1238,25 @@ by using one of the following methods:</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fSz-gK-MyT" firstAttribute="top" secondItem="318-Gd-3Dv" secondAttribute="bottom" id="691-om-zJv"/>
                             <constraint firstItem="fSz-gK-MyT" firstAttribute="leading" secondItem="9zI-Mz-RxH" secondAttribute="leading" id="7yD-y3-su5"/>
-                            <constraint firstItem="318-Gd-3Dv" firstAttribute="leading" secondItem="9zI-Mz-RxH" secondAttribute="leading" id="Jfs-Uz-qng"/>
-                            <constraint firstItem="9zI-Mz-RxH" firstAttribute="trailing" secondItem="318-Gd-3Dv" secondAttribute="trailing" id="Nha-lM-y9V"/>
-                            <constraint firstItem="318-Gd-3Dv" firstAttribute="top" secondItem="9zI-Mz-RxH" secondAttribute="top" id="aL3-5d-j1q"/>
                             <constraint firstItem="9zI-Mz-RxH" firstAttribute="trailing" secondItem="fSz-gK-MyT" secondAttribute="trailing" id="bFV-29-Muk"/>
+                            <constraint firstItem="fSz-gK-MyT" firstAttribute="top" secondItem="9zI-Mz-RxH" secondAttribute="top" id="cPi-Un-4PI"/>
                             <constraint firstItem="9zI-Mz-RxH" firstAttribute="bottom" secondItem="fSz-gK-MyT" secondAttribute="bottom" id="tYd-Ss-ln4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9zI-Mz-RxH"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Suggestions" id="kfs-2v-no7">
+                        <barButtonItem key="backBarButtonItem" title="    " id="X2H-f5-C28"/>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="barHeightConstraint" destination="MTA-7P-Z1b" id="ThQ-Tf-dNA"/>
                         <outlet property="containerView" destination="fSz-gK-MyT" id="ePr-ja-e62"/>
-                        <outlet property="leftButton" destination="G45-Jl-h7Z" id="jNM-pF-8CV"/>
-                        <outlet property="navigationBar" destination="318-Gd-3Dv" id="b0s-cc-N9q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ef-hn-iLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1924" y="-431"/>
+            <point key="canvasLocation" x="2559.5" y="-431.5"/>
         </scene>
         <!--Barcode-->
         <scene sceneID="GRH-tf-LQR">
@@ -1370,7 +1274,61 @@ by using one of the following methods:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gzo-du-JHa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="457" y="-822"/>
+            <point key="canvasLocation" x="668.5" y="-822.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="q24-2r-lK5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R7e-6k-OTh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Lzs-JV-4kE">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JTi-yg-KSI" kind="relationship" relationship="rootViewController" id="OUv-72-eUx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEa-EA-6si" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2132" y="-198"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="APA-Ee-KPE">
+            <objects>
+                <navigationController storyboardIdentifier="SELECT_BRAND_NAV" automaticallyAdjustsScrollViewInsets="NO" id="zK2-TC-pCI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8e7-pl-zPL">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QxW-4w-uII" kind="relationship" relationship="rootViewController" id="N0c-Eu-6kh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bnK-ck-ZaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2011" y="-1149"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rxd-eI-CGI">
+            <objects>
+                <navigationController storyboardIdentifier="SUGGESTIONS_NAV" automaticallyAdjustsScrollViewInsets="NO" id="wjN-Ka-kjs" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sEY-KY-uQe">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="v0h-4j-m9z" kind="relationship" relationship="rootViewController" id="7Bz-bI-bgT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QQ9-Ck-trp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2011" y="-432"/>
         </scene>
     </scenes>
     <resources>
@@ -1380,12 +1338,8 @@ by using one of the following methods:</string>
         <image name="Manual icon unpressed" width="32" height="48"/>
         <image name="Rectangle" width="32" height="33"/>
         <image name="add product icon " width="21" height="21"/>
-        <image name="btnBack" width="32" height="32"/>
-        <image name="btnBackPressed" width="32" height="32"/>
         <image name="closet icon" width="249" height="251"/>
         <image name="delete icon " width="14" height="14"/>
-        <image name="next_btn" width="32" height="32"/>
-        <image name="next_btn_pressed" width="32" height="32"/>
         <image name="no_product_found" width="250" height="250"/>
         <image name="orange-base-0" width="481" height="72"/>
         <image name="remove product icon " width="15" height="15"/>

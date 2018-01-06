@@ -42,7 +42,8 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
     [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
     
     [self.collectionView addSubview:_refreshControl];
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO];
+self.navigationController.hidesBarsOnSwipe = NO;
     [self getCommissionsFromServer];
 }
 
@@ -182,10 +183,6 @@ typedef NS_ENUM(NSUInteger, STEarningsSection) {
 }
 
 #pragma mark - IBActions
-- (IBAction)onBackButtonPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (IBAction)onWithDrawPressed:(id)sender {
     __weak STEarningsViewController *weakSelf = self;
     [STDataAccessUtils withdrawCommissionsWithCompletion:^(NSError *error) {

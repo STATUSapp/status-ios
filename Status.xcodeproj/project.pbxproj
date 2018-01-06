@@ -165,7 +165,7 @@
 		2AD97BAD1C8C133B00C9B3D5 /* FeedScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */; };
 		2AD97BB21C8C143300C9B3D5 /* FeedCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */; };
 		31E9B4D918B554440059EA73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9B4D818B554440059EA73 /* QuartzCore.framework */; };
-		52466BE51C89D52000EEAA2B /* TakeAPhoto.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52466BE41C89D52000EEAA2B /* TakeAPhoto.storyboard */; };
+		52466BE51C89D52000EEAA2B /* SelectPhoto.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52466BE41C89D52000EEAA2B /* SelectPhoto.storyboard */; };
 		52DC4DC91C8D53E30064F23F /* STImagePickerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC4DC81C8D53E30064F23F /* STImagePickerService.m */; };
 		52DC4DCD1C8D87F00064F23F /* UIAlertController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC4DCC1C8D87F00064F23F /* UIAlertController+Additions.m */; };
 		9901E4971B6D99E50064223C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9901E4961B6D99E50064223C /* CoreMotion.framework */; };
@@ -306,7 +306,6 @@
 		99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387E81C8302AD005B4D8C /* STTabBarViewController.m */; };
 		99B387EC1C8324E0005B4D8C /* STPostsPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387EB1C8324E0005B4D8C /* STPostsPool.m */; };
 		99B387F41C833D20005B4D8C /* STATUSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387F31C833D20005B4D8C /* STATUSTests.m */; };
-		99B387FE1C838FA8005B4D8C /* STTakeAPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */; };
 		CD532FD119B9A44B009B1445 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD019B9A44B009B1445 /* Accounts.framework */; };
 		CD532FD319B9A451009B1445 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD532FD219B9A451009B1445 /* Social.framework */; };
 /* End PBXBuildFile section */
@@ -611,7 +610,7 @@
 		2AD97BB01C8C143300C9B3D5 /* FeedCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCVC.h; sourceTree = "<group>"; };
 		2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCVC.m; sourceTree = "<group>"; };
 		31E9B4D818B554440059EA73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		52466BE41C89D52000EEAA2B /* TakeAPhoto.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TakeAPhoto.storyboard; sourceTree = "<group>"; };
+		52466BE41C89D52000EEAA2B /* SelectPhoto.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SelectPhoto.storyboard; sourceTree = "<group>"; };
 		52DC4DC71C8D53E30064F23F /* STImagePickerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImagePickerService.h; sourceTree = "<group>"; };
 		52DC4DC81C8D53E30064F23F /* STImagePickerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImagePickerService.m; sourceTree = "<group>"; };
 		52DC4DCB1C8D87F00064F23F /* UIAlertController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Additions.h"; sourceTree = "<group>"; };
@@ -867,8 +866,6 @@
 		99B387F11C833D20005B4D8C /* STATUSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STATUSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99B387F31C833D20005B4D8C /* STATUSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STATUSTests.m; sourceTree = "<group>"; };
 		99B387F51C833D20005B4D8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		99B387FC1C838FA8005B4D8C /* STTakeAPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTakeAPhotoViewController.h; sourceTree = "<group>"; };
-		99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTakeAPhotoViewController.m; sourceTree = "<group>"; };
 		B924462CB8195E82ECA5304D /* Pods-Status.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status.release.xcconfig"; path = "Pods/Target Support Files/Pods-Status/Pods-Status.release.xcconfig"; sourceTree = "<group>"; };
 		CD532FD019B9A44B009B1445 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CD532FD219B9A451009B1445 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -1883,7 +1880,7 @@
 				99B387171C82FAA2005B4D8C /* SuggestionsScene.storyboard */,
 				99B387181C82FAA2005B4D8C /* UserProfile.storyboard */,
 				2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */,
-				52466BE41C89D52000EEAA2B /* TakeAPhoto.storyboard */,
+				52466BE41C89D52000EEAA2B /* SelectPhoto.storyboard */,
 				2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */,
 				174575B51CA95CD5006CA25F /* ExploreScene.storyboard */,
 				0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */,
@@ -1898,8 +1895,6 @@
 			children = (
 				99B3871C1C82FAA2005B4D8C /* FacebookAlbumPicker */,
 				99B387261C82FAA2005B4D8C /* ScaleMoveZoomShare */,
-				99B387FC1C838FA8005B4D8C /* STTakeAPhotoViewController.h */,
-				99B387FD1C838FA8005B4D8C /* STTakeAPhotoViewController.m */,
 				0755E2371E87DF140016519E /* STChoosePhotoViewController.h */,
 				0755E2381E87DF140016519E /* STChoosePhotoViewController.m */,
 			);
@@ -2103,7 +2098,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52466BE51C89D52000EEAA2B /* TakeAPhoto.storyboard in Resources */,
+				52466BE51C89D52000EEAA2B /* SelectPhoto.storyboard in Resources */,
 				99B3879D1C82FAA2005B4D8C /* ProximaNovaCond-Regular.otf in Resources */,
 				99B387B31C82FAA2005B4D8C /* STContextualMenu.xib in Resources */,
 				99B3879B1C82FAA2005B4D8C /* ProximaNovaCond-Light.otf in Resources */,
@@ -2251,7 +2246,6 @@
 				1709123C1DF8827100B2AF81 /* UserProfileLocationCell.m in Sources */,
 				99B387651C82FAA2005B4D8C /* STSetUserSettingsRequest.m in Sources */,
 				99B387881C82FAA2005B4D8C /* STSuggestedUser.m in Sources */,
-				99B387FE1C838FA8005B4D8C /* STTakeAPhotoViewController.m in Sources */,
 				99B387621C82FAA2005B4D8C /* STSetPostLikeRequest.m in Sources */,
 				17FE2B5C1DDAE4B200EB4EFF /* NSString+HashTags.m in Sources */,
 				0778115C1EB75BBE0043A2E8 /* STTagProductsManager.m in Sources */,

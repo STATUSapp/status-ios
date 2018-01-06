@@ -18,7 +18,6 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 @interface STEditProfileViewController ()
 //@property (weak, nonatomic) IBOutlet UILabel *counterLabel;
 @property (nonatomic, strong) STUserProfile *formUserProfile;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, strong) STEditProfileTVC *childViewController;
 @end
 
@@ -32,11 +31,8 @@ const NSInteger kDefaultValueForTopConstraint = 26;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = YES;
-    [self.navigationBar setBackgroundImage:[UIImage new]
-                             forBarMetrics:UIBarMetricsDefault];
-    self.navigationBar.shadowImage = [UIImage new];
-    self.navigationBar.translucent = YES;
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.hidesBarsOnSwipe = NO;
 }
 
 - (void)didReceiveMemoryWarning {

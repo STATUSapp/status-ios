@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STWhiteNavBarViewController.h"
 
-@interface STChoosePhotoViewController : STWhiteNavBarViewController
-
-+(instancetype)newController;
+@interface STChoosePhotoViewController : UIViewController
 
 @end

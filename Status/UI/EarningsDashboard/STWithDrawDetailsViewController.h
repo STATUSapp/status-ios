@@ -6,8 +6,8 @@
 //  Copyright © 2017 Andrus Cosmin. All rights reserved.
 //
 
-#import "STWhiteNavBarViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface STWithDrawDetailsViewController : STWhiteNavBarViewController
+@interface STWithDrawDetailsViewController : UIViewController
 
 @end

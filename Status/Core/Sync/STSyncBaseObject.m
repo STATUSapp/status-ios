@@ -35,4 +35,8 @@
     return;
 
 }
+-(void)resetLastCheck{
+    NSAssert(NO, @"This method \"resetLastCheck\" should be implemented by the subclasses");
+    return;
+}
 @end

@@ -35,10 +35,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     _dataSource = [NSMutableArray new];
     
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     [self loadDataSource];
@@ -58,18 +56,6 @@
             [_dataSource addObjectsFromArray:newObjects];
             
             [weakSelf.tableView reloadData];
-            
-            //activate this for animation
-            /*
-             NSUInteger resultsSize = [_dataSource count];
-
-            NSMutableArray *arrayWithIndexPaths = [NSMutableArray array];
-            
-            for (NSUInteger i = resultsSize; i < resultsSize + newObjects.count; i++)
-                [arrayWithIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-
-            [weakSelf.tableView insertRowsAtIndexPaths:arrayWithIndexPaths withRowAnimation:UITableViewRowAnimationFade];
-             */
         }
     }];
 }
@@ -78,9 +64,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-- (IBAction)onClickCancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDelegate
@@ -105,12 +88,18 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    STAlbumImagesViewController *destVC = [STAlbumImagesViewController newController];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    NSLog(@"Sender: %@", sender);
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    STAlbumImagesViewController *destVC = segue.destinationViewController;
     NSDictionary *album = _dataSource[indexPath.row];
     NSString *albumId = album[@"id"];
     destVC.albumId = albumId;
     destVC.albumTitle = album[@"name"];
-    [self.parentViewController.navigationController pushViewController:destVC animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+
 }
 @end

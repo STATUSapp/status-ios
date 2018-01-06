@@ -1018,9 +1018,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     [_feedProcessor handleBigCameraButtonActionWithUserName:up.fullName];
 }
 
-- (IBAction)onBackButtonPressed:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 - (IBAction)onProfileOptionsPressed:(id)sender {
     if (![self canDoAction]){
         return;
@@ -1224,7 +1221,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     if (post.mainImageDownloaded == YES) {
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
             if (origImg!=nil) {
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:nil];
                 STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
                 viewController.imgData = UIImageJPEGRepresentation(origImg, 1.f);
                 viewController.post = post;

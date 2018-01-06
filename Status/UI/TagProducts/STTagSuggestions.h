@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STWhiteNavBarViewController.h"
 typedef NS_ENUM(NSUInteger, STTagSuggestionsScreenType) {
     STTagSuggestionsScreenTypeDefault = 0,//based on brand and category
     STTagSuggestionsScreenTypeBarcodeSearch,
 };
-@interface STTagSuggestions : STWhiteNavBarViewController
+@interface STTagSuggestions : UIViewController
 
 +(STTagSuggestions *)suggestionsVCWithScreenType:(STTagSuggestionsScreenType)screenType;
 

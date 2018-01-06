@@ -21,7 +21,6 @@
 #import "STInviteController.h"
 #import "STChatController.h"
 #import "STConversationsListViewController.h"
-#import "STFacebookAlbumsViewController.h"
 
 #import "STCoreDataManager.h"
 #import <Crashlytics/Crashlytics.h>

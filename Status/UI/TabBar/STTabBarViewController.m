@@ -60,11 +60,11 @@ static CGFloat kImageInset = 4.f;
     exploreNavCtrl.navigationBarHidden = YES;
     
     // add take a photo
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TakeAPhoto" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:nil];
     
     UIViewController *takeAPhotoVC = [storyboard instantiateViewControllerWithIdentifier:@"TAKE_PHOTO_EMPTY_VC"];
     UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
-    takePhotoNav.navigationBarHidden = YES;
+//    takePhotoNav.navigationBarHidden = YES;
     
     // add message / notifications
     STNotificationsViewController * notifAndChatVC = [STNotificationsViewController newController];
@@ -126,9 +126,8 @@ static CGFloat kImageInset = 4.f;
     [super viewDidLoad];
     [self setNavigationBarHeight:kTabBarHeight];
     _defaultTabBarFrame = self.tabBar.frame;
-    STChoosePhotoViewController *vc = [STChoosePhotoViewController newController];
-    _takeAPhotoNav = [[UINavigationController alloc] initWithRootViewController:vc];
-    _takeAPhotoNav.navigationBarHidden = YES;
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:[NSBundle mainBundle]];
+    _takeAPhotoNav = [storyboard instantiateInitialViewController];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(snackBarAction:)
                                                  name:kNotificationSnackBarAction

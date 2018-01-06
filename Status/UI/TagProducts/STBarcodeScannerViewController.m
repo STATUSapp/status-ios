@@ -33,7 +33,6 @@ NSInteger const verificationCount = 3;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
     @try {
         self.captureSession = [[AVCaptureSession alloc] init];
         AVCaptureDevice *videoCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];

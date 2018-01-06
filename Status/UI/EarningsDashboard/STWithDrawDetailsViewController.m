@@ -48,9 +48,6 @@
 
 #pragma mark - IBActions
 
-- (IBAction)onBackButtonPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 - (IBAction)onSaveButtonPressed:(id)sender {
     [_childVC save];
 }

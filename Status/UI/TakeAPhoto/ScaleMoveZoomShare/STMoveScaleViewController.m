@@ -28,7 +28,7 @@
 + (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing andPost:(STPost *)post {
     // here, no compressing should be done, because it might be a cropping after this
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:nil];
     STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
     viewController.currentImg = img;
     viewController.post = post;
@@ -123,8 +123,7 @@
     [self centerScrollViewContents];
 }
 
-#pragma mark IBACTIONS
-- (IBAction)onUseBtnPressed:(id)sender {
+-(UIImage *)croppedAndCompressedImage{
     UIImage *croppedImg = [self croppedImage];
     
     // after cropping, we should do optimization
@@ -137,27 +136,33 @@
             croppedImg = [croppedImg resizedImage:newImgSize interpolationQuality:kCGInterpolationHigh];
         }
     }
-    
-    if (_delegate == nil) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-        viewController.imgData = UIImageJPEGRepresentation(croppedImg, 1.f);
-        viewController.post = _post;
-        viewController.controllerType =STShareControllerAddPost;
-        [self.navigationController pushViewController:viewController animated:YES];
-    }
-    else
+    return croppedImg;
+}
+
+#pragma mark IBACTIONS
+- (IBAction)onUseBtnPressed:(id)sender {
+    if (_delegate != nil)
     {
         if ([_delegate respondsToSelector:@selector(postImageWasChanged:)]) {
-            [_delegate postImageWasChanged:croppedImg];
+            UIImage *image = [self croppedAndCompressedImage];
+            [_delegate postImageWasChanged:image];
         }
         [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self performSegueWithIdentifier:@"editInfoSegue" sender:sender];
     }
 }
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    STSharePhotoViewController *viewController = (STSharePhotoViewController *)segue.destinationViewController;
+    UIImage *image = [self croppedAndCompressedImage];
+    viewController.imgData = UIImageJPEGRepresentation(image, 1.f);
+    viewController.post = _post;
+    viewController.controllerType =STShareControllerAddPost;
+}
 #pragma mark Helpers
 -(UIImage *)croppedImage{
     CGRect visibleRect;

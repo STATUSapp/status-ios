@@ -70,7 +70,7 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
 +(instancetype)newController{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TagProductsScene"
                                                          bundle:nil];
-    STTagProductsContainer *vc = [storyboard instantiateInitialViewController];
+    STTagProductsContainer *vc = (STTagProductsContainer *)[(UINavigationController *)[storyboard instantiateInitialViewController] topViewController];
     
     return vc;
 }
@@ -102,6 +102,7 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.hidesBarsOnSwipe = NO;
+    self.navigationController.navigationBarHidden = NO;
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
 }
 

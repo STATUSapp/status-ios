@@ -1074,7 +1074,7 @@
                         <state key="selected" image="revenue icon pressed"/>
                         <state key="highlighted" image="revenue icon pressed"/>
                         <connections>
-                            <segue destination="FUp-UQ-PVI" kind="show" id="emi-7t-lSD"/>
+                            <segue destination="FUp-UQ-PVI" kind="show" id="x5a-5h-nZL"/>
                         </connections>
                     </button>
                 </barButtonItem>
@@ -1116,10 +1116,10 @@
             </objects>
             <point key="canvasLocation" x="1209.5999999999999" y="1175.7121439280361"/>
         </scene>
-        <!--EarningsDashboardScene-->
+        <!--EARNINGS_VC-->
         <scene sceneID="Rqj-5J-qsW">
             <objects>
-                <viewControllerPlaceholder storyboardName="EarningsDashboardScene" id="FUp-UQ-PVI" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="EarningsDashboardScene" referencedIdentifier="EARNINGS_VC" id="FUp-UQ-PVI" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AgL-bY-svs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1926" y="1176"/>

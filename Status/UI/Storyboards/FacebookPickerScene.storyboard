@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LDN-eB-n2p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Qt-jf-P95">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,14 +24,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="X8q-u1-3Fm">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FBAlbumCell" rowHeight="73" id="Ksc-gH-hPC" customClass="STFacebookAlbumCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FBAlbumCell" rowHeight="73" id="Ksc-gH-hPC" customClass="STFacebookAlbumCell">
                                         <rect key="frame" x="0.0" y="22" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ksc-gH-hPC" id="Kq1-PI-rDY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder imagine like screen" translatesAutoresizingMaskIntoConstraints="NO" id="xx7-nr-MKh">
@@ -42,7 +42,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GI9-Dm-zGw">
-                                                    <rect key="frame" x="88" y="14.5" width="287" height="44"/>
+                                                    <rect key="frame" x="88" y="14.5" width="254" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Photos of Me" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCv-Hm-pwq">
                                                             <rect key="frame" x="0.0" y="2" width="236" height="21"/>
@@ -76,6 +76,7 @@
                                             <outlet property="albumImageView" destination="xx7-nr-MKh" id="tpr-go-3YR"/>
                                             <outlet property="albumPhotoNumberLbl" destination="CQV-Gi-t9x" id="A0Z-Ob-9qr"/>
                                             <outlet property="albumTitleLbl" destination="CCv-Hm-pwq" id="0PA-Wd-8ve"/>
+                                            <segue destination="vdN-d4-oIH" kind="push" id="zgL-l2-23k"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -94,16 +95,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FCt-WD-4cG"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Albums" id="LrW-V7-ZEm">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Vwv-1Y-x44">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="onClickCancel:" destination="LDN-eB-n2p" id="lh2-4X-eAS"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Albums" id="aAj-QH-lT5"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="X8q-u1-3Fm" id="TL9-gm-c4R"/>
@@ -111,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G3f-kj-iFz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="443.5" y="-105.5"/>
+            <point key="canvasLocation" x="867.5" y="-105.5"/>
         </scene>
         <!--Photos-->
         <scene sceneID="AgE-nc-SCW">
@@ -160,69 +154,48 @@
                                     <outlet property="delegate" destination="vdN-d4-oIH" id="564-2a-4fh"/>
                                 </connections>
                             </collectionView>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctW-rj-RcX">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="SEG-gc-jAW"/>
-                                </constraints>
-                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem id="Qie-8m-RIs">
-                                        <barButtonItem key="leftBarButtonItem" id="LYJ-OI-0RJ">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="96A-to-NIt">
-                                                <rect key="frame" x="16" y="6" width="32" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" image="btnBack">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="btnBackPressed"/>
-                                                <state key="highlighted" image="btnBackPressed"/>
-                                                <connections>
-                                                    <action selector="onBackButtonPressed:" destination="vdN-d4-oIH" eventType="touchUpInside" id="BuR-eB-Sed"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="XdV-u7-jML" firstAttribute="top" secondItem="ctW-rj-RcX" secondAttribute="bottom" id="DxR-mD-7tP"/>
+                            <constraint firstItem="XdV-u7-jML" firstAttribute="top" secondItem="lBy-Nt-EyO" secondAttribute="top" id="EFl-05-XVv"/>
                             <constraint firstItem="XdV-u7-jML" firstAttribute="leading" secondItem="lBy-Nt-EyO" secondAttribute="leading" id="JkH-MF-b6g"/>
                             <constraint firstItem="lBy-Nt-EyO" firstAttribute="trailing" secondItem="XdV-u7-jML" secondAttribute="trailing" id="Sbe-TP-rKL"/>
                             <constraint firstItem="lBy-Nt-EyO" firstAttribute="bottom" secondItem="XdV-u7-jML" secondAttribute="bottom" id="fuW-aR-Ik3"/>
-                            <constraint firstItem="ctW-rj-RcX" firstAttribute="leading" secondItem="lBy-Nt-EyO" secondAttribute="leading" id="r6e-6A-fx5"/>
-                            <constraint firstItem="lBy-Nt-EyO" firstAttribute="trailing" secondItem="ctW-rj-RcX" secondAttribute="trailing" id="tiF-Ig-2zY"/>
-                            <constraint firstItem="ctW-rj-RcX" firstAttribute="top" secondItem="lBy-Nt-EyO" secondAttribute="top" id="uYp-vO-VQU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lBy-Nt-EyO"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" title="Photos" id="h6G-y9-Bh5"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="barHeightConstraint" destination="SEG-gc-jAW" id="VYG-pM-Wka"/>
                         <outlet property="collectionView" destination="XdV-u7-jML" id="miB-5X-Rou"/>
-                        <outlet property="leftButton" destination="96A-to-NIt" id="dpw-g7-OFm"/>
-                        <outlet property="navigationBar" destination="ctW-rj-RcX" id="XoC-GT-0Yo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDw-m4-wU2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="992.5" y="-104.5"/>
+            <point key="canvasLocation" x="1416.5" y="-104.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QdO-B1-8Kq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Qt-jf-P95" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KWP-Xa-E3v">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="LDN-eB-n2p" kind="relationship" relationship="rootViewController" id="w3b-61-1XY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TId-iz-wnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="343" y="-106"/>
         </scene>
     </scenes>
     <resources>
-        <image name="btnBack" width="32" height="32"/>
-        <image name="btnBackPressed" width="32" height="32"/>
         <image name="placeholder imagine like screen" width="41" height="41"/>
     </resources>
 </document>

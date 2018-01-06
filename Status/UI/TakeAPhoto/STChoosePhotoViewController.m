@@ -13,7 +13,6 @@
 #import "STMoveScaleViewController.h"
 #import "STImagePickerService.h"
 #import "STTabBarViewController.h"
-#import "STFacebookAlbumsViewController.h"
 
 typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     STChoosePhotoBottomOptionFacebook = 0,
@@ -24,20 +23,12 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 
 @interface STChoosePhotoViewController ()<STSCustomSegmentProtocol>
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomDistanceConstr;
 @property (nonatomic, strong) STCustomSegment *customSegment;
 @property (weak, nonatomic) IBOutlet UIView *bottomActionView;
 
 @end
 
 @implementation STChoosePhotoViewController
-
-+(instancetype)newController{
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TakeAPhoto" bundle:[NSBundle mainBundle]];
-    STChoosePhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"STChoosePhotoViewController"];
-    return vc;
-
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

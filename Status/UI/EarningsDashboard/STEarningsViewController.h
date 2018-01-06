@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrus Cosmin. All rights reserved.
 //
 
-#import "STWhiteNavBarViewController.h"
-@interface STEarningsViewController : STWhiteNavBarViewController
+#import <UIKit/UIKit.h>
+@interface STEarningsViewController : UIViewController
 
 @end
