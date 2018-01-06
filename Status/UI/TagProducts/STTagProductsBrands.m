@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstr;
 @property (nonatomic, strong) STCoreDataRequestManager *currentManager;
 @property (nonatomic, strong) NSString *searchText;
+@property (nonatomic, assign) BOOL checkNoBrandFound;
 @end
 
 @implementation STTagProductsBrands
@@ -174,7 +175,7 @@
     return brand;
 }
 
--(BOOL)checkNoBrandFound{
+-(BOOL)updateNoBrandFound{
     if (_searchText.length > 0) {
         for (STTagBrandSection *section in _displaySectionArray) {
             if (section.sectionItems.count > 0) {
@@ -350,6 +351,7 @@
             [_displaySectionArray addObject:[section copyAndFilterObject:_searchText]];
         }
     }
+    _checkNoBrandFound = [self updateNoBrandFound];
 }
 
 #pragma mark - SLCoreDataRequestManagerDelegate
