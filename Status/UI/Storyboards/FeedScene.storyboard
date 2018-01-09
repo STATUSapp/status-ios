@@ -23,7 +23,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--FeedCVC-->
+        <!--Feed-->
         <scene sceneID="gdD-po-VFS">
             <objects>
                 <collectionViewController automaticallyAdjustsScrollViewInsets="NO" id="kUw-q3-wvD" customClass="FeedCVC" sceneMemberID="viewController">
@@ -933,8 +933,8 @@
                         </connections>
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="MOr-Sp-1ba">
-                        <barButtonItem key="backBarButtonItem" title="             " id="LHp-yh-kQH"/>
+                    <navigationItem key="navigationItem" title="Feed" id="MOr-Sp-1ba">
+                        <barButtonItem key="backBarButtonItem" title="    " id="kb5-fN-GQV"/>
                     </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>

@@ -46,6 +46,7 @@
 
 #import "Branch.h"
 #import "STSyncService.h"
+#import "UIImage+Assets.h"
 
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
@@ -78,7 +79,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     }
 //    [Crashlytics startWithAPIKey:@"b4369a0a1dca4a6745a3905bf41aa6964c863da1"];
     [Crashlytics startWithAPIKey:@"93e0064668657d3332278aaa1ed765b8f48c6ad6"];
-    [[CoreManager syncService] syncBrands];
     [Appirater setAppId:APP_STORE_ID];
     [Appirater setDaysUntilPrompt:7];
     [Appirater setUsesUntilPrompt:10];
@@ -149,7 +149,11 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 //    [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setDefaultTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Regular" size:16]}];
     [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setBackgroundColor:[UIColor colorWithRed:237.f/255.f green:237.f/255.f blue:239.f/255.f alpha:1.f]];
     [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setFont:[UIFont fontWithName:@"ProximaNova-Regular" size:16]];
-
+    
+    UIImage *alignedImage = [UIImage backButtonImage];
+    [[UINavigationBar appearance] setBackIndicatorImage:alignedImage];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:alignedImage];
+    [[UINavigationBar appearance] setBackIndicatorImage:alignedImage];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -180,6 +184,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [[CoreManager syncService] syncBrands];
     if (!_appOpenedDate) {
         _appOpenedDate = [NSDate date];
     }else{

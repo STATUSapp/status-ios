@@ -13,6 +13,7 @@
 #import "STMoveScaleViewController.h"
 #import "STImagePickerService.h"
 #import "STTabBarViewController.h"
+#import "UIImage+Assets.h"
 
 typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     STChoosePhotoBottomOptionFacebook = 0,
@@ -51,6 +52,10 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
                                              selector:@selector(facebookPickerDidChooseImage:)
                                                  name:STFacebookPickerNotification
                                                object:nil];
+    
+    UIImage *alignedImage = [UIImage backButtonImage];
+    [self.navigationItem.leftBarButtonItem setImage:alignedImage];
+
 
 }
 

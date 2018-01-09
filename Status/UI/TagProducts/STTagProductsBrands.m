@@ -25,7 +25,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray<STTagBrandSection *>*sectionArray;
-@property (nonatomic, strong) NSMutableArray<STTagBrandSection *>*displaySectionArray;
+@property (nonatomic, strong) NSArray *initialBrandsArray;
+@property (nonatomic, strong) NSArray *searchDisplayArray;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarHeightConstr;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstr;
 @property (nonatomic, strong) STCoreDataRequestManager *currentManager;
@@ -43,14 +45,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [_searchBar setShowsCancelButton:NO animated:NO];
     self.tableView.sectionIndexColor = [UIColor blackColor];
     self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     self.sectionArray = [@[] mutableCopy];
-    self.displaySectionArray = [@[] mutableCopy];
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"indexString" ascending:YES];
     NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Brand" sortDescritors:@[sd1, sd2] predicate:nil sectionNameKeyPath:@"indexString" delegate:self andTableView:nil];
-    _searchBarHeightConstr.constant = 0;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -84,7 +85,10 @@
 
 -(void)reloadScreenWithCDRM:(STCoreDataRequestManager *)cdrm{
     self.sectionArray = [@[] mutableCopy];
-    self.displaySectionArray = [@[] mutableCopy];
+    self.initialBrandsArray = [cdrm.allObjects sortedArrayUsingComparator:^NSComparisonResult(Brand *obj1, Brand *obj2) {
+        return [obj1.name compare:obj2.name];
+    }];
+    self.searchDisplayArray = @[];
     NSMutableArray *indexArray = [NSMutableArray arrayWithArray:[NSString allCapsLetters]];
     [indexArray addObject:@"#"];
     
@@ -170,45 +174,55 @@
 }
 
 -(Brand *)brandObjectForIndexPath:(NSIndexPath *)indexPath{
-    STTagBrandSection *section = [self.displaySectionArray objectAtIndex:indexPath.section];
+    STTagBrandSection *section = [self.sectionArray objectAtIndex:indexPath.section];
     Brand *brand = [section.sectionItems objectAtIndex:indexPath.row];
     return brand;
 }
 
 -(BOOL)updateNoBrandFound{
     if (_searchText.length > 0) {
-        for (STTagBrandSection *section in _displaySectionArray) {
-            if (section.sectionItems.count > 0) {
-                return NO;
-            }
-        }
-        return YES;
+        return _searchDisplayArray.count == 0;
     }
     return NO;
 }
 
+-(BOOL)searchResults{
+    return _searchText.length > 0;
+}
 #pragma mark - UITableViewDelegate
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([self checkNoBrandFound]) {
         return 1;
     }
-    return [self.displaySectionArray count];
+    if ([self searchResults]) {
+        return 1;
+    }
+    return [self.sectionArray count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ([self checkNoBrandFound]) {
         return 1;
     }
-    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
+    if ([self searchResults]) {
+        return _searchDisplayArray.count;
+    }
+
+    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:section];
     return [sectionObj.sectionItems count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     STTagBrandCell *cell = (STTagBrandCell *)[tableView dequeueReusableCellWithIdentifier:@"STTagBrandCell"];
     if ([self checkNoBrandFound]) {
         [cell setNoBrandFound];
+    }else if([self searchResults]){
+        BOOL lastItem = (indexPath.row == self.searchDisplayArray.count - 1);
+        Brand *brandObj = [self.searchDisplayArray objectAtIndex:indexPath.row];
+        cell.nameLabel.text = brandObj.name;
+        cell.separatorView.hidden = lastItem;
     }else{
-        STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:indexPath.section];
+        STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:indexPath.section];
         BOOL lastItem = (indexPath.row == sectionObj.sectionItems.count - 1);
         Brand *brandObj = [self brandObjectForIndexPath:indexPath];
         cell.nameLabel.text = brandObj.name;
@@ -223,21 +237,27 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self checkNoBrandFound])
         return;
-    Brand *brand = [self brandObjectForIndexPath:indexPath];
+    Brand *brand;
+    if ([self searchResults]) {
+        brand = [self.searchDisplayArray objectAtIndex:indexPath.row];
+    }else{
+        brand = [self brandObjectForIndexPath:indexPath];
+    }
     [[STTagProductsManager sharedInstance] updateBrandId:brand.uuid];
     STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeDefault];
-    
     [self.navigationController pushViewController:vc animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if ([self checkNoBrandFound])
         return nil;
-    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
+    if ([self searchResults]) {
+        return nil;
+    }
+    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:section];
     if ([sectionObj.sectionItems count] == 0) {
         return nil;
     }
@@ -249,8 +269,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if ([self checkNoBrandFound])
         return 0.f;
-    
-    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:section];
+    if ([self searchResults]) {
+        return 0.f;
+    }
+    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:section];
     if ([sectionObj.sectionItems count] == 0) {
         return 0.f;
     }
@@ -258,16 +280,22 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
-    STTagBrandSection *sectionObj = [self.displaySectionArray objectAtIndex:index];
+    if ([self searchResults]) {
+        return NSNotFound;
+    }
+    STTagBrandSection *sectionObj = [self.sectionArray objectAtIndex:index];
     if (sectionObj.sectionItems.count == 0) {
         return NSNotFound;
     }
-    NSArray *indexArray = [self.displaySectionArray valueForKey:@"sectionName"];
+    NSArray *indexArray = [self.sectionArray valueForKey:@"sectionName"];
     return [indexArray indexOfObject:title];
 }
 
 - (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
-    NSArray *indexArray = [self.displaySectionArray valueForKey:@"sectionName"];
+    if ([self searchResults]) {
+        return nil;
+    }
+    NSArray *indexArray = [self.sectionArray valueForKey:@"sectionName"];
     return indexArray;
 }
 
@@ -344,12 +372,17 @@
 
 -(void)filterOutSections{
     if (_searchText.length == 0) {
-        _displaySectionArray = [NSMutableArray arrayWithArray:_sectionArray];
+        _searchDisplayArray = @[];
     }else{
-        _displaySectionArray = [@[] mutableCopy];
-        for (STTagBrandSection *section in _sectionArray) {
-            [_displaySectionArray addObject:[section copyAndFilterObject:_searchText]];
-        }
+        NSArray *filteredArray = [_initialBrandsArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Brand *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+            return [evaluatedObject.name containsString:_searchText];
+        }]];
+        
+        _searchDisplayArray = [filteredArray sortedArrayUsingComparator:^NSComparisonResult(Brand *obj1, Brand *obj2) {
+            NSRange rangeObj1 = [obj1.name rangeOfString:_searchText];
+            NSRange rangeObj2 = [obj2.name rangeOfString:_searchText];
+            return [@(rangeObj1.location) compare:@(rangeObj2.location)];
+        }];
     }
     _checkNoBrandFound = [self updateNoBrandFound];
 }

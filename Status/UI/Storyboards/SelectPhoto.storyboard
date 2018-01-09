@@ -63,10 +63,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Select Photo" id="K4a-gA-wlP">
                         <barButtonItem key="backBarButtonItem" title="    " id="He4-5m-mPO"/>
-                        <barButtonItem key="leftBarButtonItem" id="fR0-gd-QPv">
+                        <barButtonItem key="leftBarButtonItem" width="50" id="fR0-gd-QPv">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wvd-Ky-Ed6">
                                 <rect key="frame" x="16" y="9.5" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="icons8-back"/>
                                 <connections>
                                     <action selector="onBackButtonPressed:" destination="0BU-W2-Z8i" eventType="touchUpInside" id="TaK-Z1-L44"/>

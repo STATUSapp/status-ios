@@ -325,7 +325,9 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vfZ-MA-Rrq">
                                 <rect key="frame" x="325" y="5.5" width="34" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="more button"/>
+                                <state key="normal" image="options button"/>
+                                <state key="selected" image="options button pressed"/>
+                                <state key="highlighted" image="options button pressed"/>
                                 <connections>
                                     <segue destination="9Hz-KJ-ZiK" kind="show" id="Pjm-f9-lvz"/>
                                 </connections>
@@ -584,7 +586,8 @@
     </scenes>
     <resources>
         <image name="No earnings icon" width="106" height="106"/>
-        <image name="more button" width="34" height="33"/>
+        <image name="options button" width="16" height="3"/>
+        <image name="options button pressed" width="16" height="3"/>
         <image name="orange-base-0" width="481" height="72"/>
     </resources>
 </document>
