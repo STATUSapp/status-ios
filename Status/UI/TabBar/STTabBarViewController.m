@@ -126,8 +126,7 @@ static CGFloat kImageInset = 4.f;
     [super viewDidLoad];
     [self setNavigationBarHeight:kTabBarHeight];
     _defaultTabBarFrame = self.tabBar.frame;
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:[NSBundle mainBundle]];
-    _takeAPhotoNav = [storyboard instantiateInitialViewController];
+    [self instatiateSelectPhotoFlow];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(snackBarAction:)
                                                  name:kNotificationSnackBarAction
@@ -135,6 +134,14 @@ static CGFloat kImageInset = 4.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationFacebokDidLogout object:nil];
 }
 
+-(void)instatiateSelectPhotoFlow{
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:[NSBundle mainBundle]];
+    UIViewController *emptyVC = [storyboard instantiateViewControllerWithIdentifier:@"TAKE_PHOTO_EMPTY_VC"];
+    _takeAPhotoNav = [storyboard instantiateInitialViewController];
+    NSMutableArray *vcArray = [NSMutableArray arrayWithArray:_takeAPhotoNav.viewControllers];
+    [vcArray insertObject:emptyVC atIndex:0];
+    [_takeAPhotoNav setViewControllers:vcArray];
+}
 -(void)setNavigationBarHeight:(CGFloat)height{
     CGRect tabRect = self.tabBar.frame;
     CGFloat initialHeight = tabRect.size.height;
@@ -152,6 +159,7 @@ static CGFloat kImageInset = 4.f;
 }
 - (void)dismissChoosePhotoVC{
     [self goToPreviousSelectedIndex];
+    [self instatiateSelectPhotoFlow];
     [self dismissViewControllerAnimated:YES
                              completion:nil];
 }

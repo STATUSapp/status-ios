@@ -52,10 +52,10 @@ NSString* const kSqliteFileName = @"Status.sqlite";
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kCoreDataModelFileName withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     NSAssert(_managedObjectModel, @"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
-
+    NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSAssert(_persistentStoreCoordinator, @"Failed to initialize coordinator");
-    
+    NSLog(@"Failed to initialize coordinator");
     [self setManagedObjectContext:[[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType]];
     
     [self setPrivateContext:[[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType]];
@@ -68,7 +68,7 @@ NSString* const kSqliteFileName = @"Status.sqlite";
         options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
         options[NSInferMappingModelAutomaticallyOption] = @YES;
         options[NSSQLitePragmasOption] = @{ @"journal_mode":@"DELETE" };
-        
+    
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
         NSURL *storeURL = [documentsURL URLByAppendingPathComponent:kSqliteFileName];
@@ -76,6 +76,7 @@ NSString* const kSqliteFileName = @"Status.sqlite";
         NSError *error = nil;
         BOOL result = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
         NSAssert(result, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
+    NSLog(@"RESULT: %@\nError initializing PSC: %@\n%@",@(result), [error localizedDescription], [error userInfo]);
 //    });
 }
 
@@ -187,12 +188,14 @@ NSString* const kSqliteFileName = @"Status.sqlite";
     
     [[self managedObjectContext] performBlockAndWait:^{
         NSError *error = nil;
-        
-        NSAssert([[self managedObjectContext] save:&error], @"Failed to save main context: %@\n%@", [error localizedDescription], [error userInfo]);
-        
+        __block BOOL result = [[self managedObjectContext] save:&error];
+        NSAssert(result, @"Failed to save main context: %@\n%@", [error localizedDescription], [error userInfo]);
+        NSLog(@"RESULT: %@\nFailed to save main context: %@\n%@", @(result), [error localizedDescription], [error userInfo]);
         [[self privateContext] performBlock:^{
             NSError *privateError = nil;
-            NSAssert([[self privateContext] save:&privateError], @"Error saving private context: %@\n%@", [privateError localizedDescription], [privateError userInfo]);
+            result = [[self privateContext] save:&privateError];
+            NSAssert(result, @"Error saving private context: %@\n%@", [privateError localizedDescription], [privateError userInfo]);
+            NSLog(@"RESULT: %@\nError saving private context: %@\n%@", @(result), [privateError localizedDescription], [privateError userInfo]);
         }];
     }];
 }

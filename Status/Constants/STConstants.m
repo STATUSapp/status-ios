@@ -99,6 +99,7 @@ NSString *const kGetSuggestions = @"catalog/products/all";
 NSString *const kGetUsedSuggestions = @"catalog/products/used";
 NSString *const kGetProductsByBarcode = @"catalog/products/by_barcode";
 NSString *const kProductSuggest = @"catalog/products/suggest";
+NSString *const kGetBrandsWithProducts = @"catalog/categoryBrands";
 NSString *const kUserCommissions = @"users/commissions";
 NSString *const kUserWithdrawnDetails = @"users/details";
 NSString *const kUserWithdrawnUpdateDetails = @"users/details/update";

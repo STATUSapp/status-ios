@@ -63,17 +63,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Select Photo" id="K4a-gA-wlP">
                         <barButtonItem key="backBarButtonItem" title="    " id="He4-5m-mPO"/>
-                        <barButtonItem key="leftBarButtonItem" width="50" id="fR0-gd-QPv">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wvd-Ky-Ed6">
-                                <rect key="frame" x="16" y="9.5" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="imageEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="icons8-back"/>
-                                <connections>
-                                    <action selector="onBackButtonPressed:" destination="0BU-W2-Z8i" eventType="touchUpInside" id="TaK-Z1-L44"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -95,7 +84,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="05c-Gu-hUC"/>
                     </view>
-                    <navigationItem key="navigationItem" id="0CV-CA-Edx"/>
+                    <navigationItem key="navigationItem" id="0CV-CA-Edx">
+                        <barButtonItem key="backBarButtonItem" title="    " id="WOq-lT-B5j"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLR-6k-GaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -599,7 +590,6 @@
         <image name="add product icon " width="21" height="21"/>
         <image name="fb pressed" width="22" height="21"/>
         <image name="fb unpressed" width="22" height="21"/>
-        <image name="icons8-back" width="25" height="25"/>
         <image name="orange-base-0" width="481" height="72"/>
         <image name="remove product icon " width="15" height="15"/>
         <image name="tag ptoducts icon " width="16" height="22"/>

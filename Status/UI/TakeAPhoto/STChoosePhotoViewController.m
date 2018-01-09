@@ -70,6 +70,14 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
+-(void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (!parent){
+        [[CoreManager navigationService] dismissChoosePhotoVC];
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+}
+
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -95,19 +103,14 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     
     STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:image shouldCompress:NO andPost:nil];
     
-    NSArray *viewControllers = @[[self.navigationController.viewControllers firstObject], moveScaleVC];
+    
+    NSMutableArray *viewControllers = [self.navigationController.viewControllers mutableCopy];
+    [viewControllers removeLastObject];
+    [viewControllers addObject:moveScaleVC];
     
     [self.navigationController setViewControllers:viewControllers animated:YES];
     
 }
-
-
-#pragma mark - IBACTIONS
-
-- (IBAction)onBackButtonPressed:(id)sender {
-    [[CoreManager navigationService] dismissChoosePhotoVC];
-}
-
 
 #pragma mark - STCustomSegmentProtocol
 

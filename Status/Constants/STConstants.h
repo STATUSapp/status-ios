@@ -157,6 +157,7 @@ extern NSString *const kGetCatalogParentCategories;
 extern NSString *const kGetCatalofCategories;
 extern NSString *const kGetUsedCatalofCategories;
 extern NSString *const kGetBrands;
+extern NSString *const kGetBrandsWithProducts;
 extern NSString *const kGetSuggestions;
 extern NSString *const kGetUsedSuggestions;
 extern NSString *const kGetProductsByBarcode;

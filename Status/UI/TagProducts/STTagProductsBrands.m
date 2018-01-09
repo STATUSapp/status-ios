@@ -17,6 +17,8 @@
 #import "STDAOEngine.h"
 #import "NSString+Letters.h"
 #import "STSectionView.h"
+#import "STGetBrandsWithProducts.h"
+#import "STCatalogCategory.h"
 
 @interface STTagProductsBrands ()<UITableViewDelegate, UITableViewDataSource, SLCoreDataRequestManagerDelegate>{
     CGRect keyboardBounds;
@@ -33,6 +35,8 @@
 @property (nonatomic, strong) STCoreDataRequestManager *currentManager;
 @property (nonatomic, strong) NSString *searchText;
 @property (nonatomic, assign) BOOL checkNoBrandFound;
+@property (nonatomic, strong) NSArray *validBrandIdArray;
+
 @end
 
 @implementation STTagProductsBrands
@@ -45,6 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self fetchForValidBrands];
     [_searchBar setShowsCancelButton:NO animated:NO];
     self.tableView.sectionIndexColor = [UIColor blackColor];
     self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
@@ -83,11 +88,37 @@
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
+-(void)fetchForValidBrands{
+    NSString *categoryId = [STTagProductsManager sharedInstance].selectedCategory.uuid;
+    __weak STTagProductsBrands *weakSelf = self;
+    [STGetBrandsWithProducts getBrandsWithProductsForCategoryId:categoryId withCompletion:^(id response, NSError *error) {
+        weakSelf.validBrandIdArray = response;
+        [weakSelf reloadScreenWithCDRM:weakSelf.currentManager];
+        
+    } failure:^(NSError *error) {
+        NSLog(@"Error fetching for valida brands: %@", error);
+    }];
+}
+
+- (NSArray *)filterForValidBrandsArray:(NSArray *)oldArray{
+    if (_validBrandIdArray.count == 0) {
+        return oldArray;
+    }
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Brand *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return [_validBrandIdArray containsObject:@(evaluatedObject.uuid.integerValue)];
+    }];
+    NSArray *filteredArray = [oldArray filteredArrayUsingPredicate:predicate];
+    return filteredArray;
+}
+
 -(void)reloadScreenWithCDRM:(STCoreDataRequestManager *)cdrm{
     self.sectionArray = [@[] mutableCopy];
     self.initialBrandsArray = [cdrm.allObjects sortedArrayUsingComparator:^NSComparisonResult(Brand *obj1, Brand *obj2) {
         return [obj1.name compare:obj2.name];
     }];
+    self.initialBrandsArray = [self filterForValidBrandsArray:self.initialBrandsArray];
+
+
     self.searchDisplayArray = @[];
     NSMutableArray *indexArray = [NSMutableArray arrayWithArray:[NSString allCapsLetters]];
     [indexArray addObject:@"#"];
@@ -101,7 +132,12 @@
             newSection = [[STTagBrandSection alloc] initWithSectionName:indexString];
         }else{
             id<NSFetchedResultsSectionInfo> section = [cdrm.sections objectAtIndex:sectionIndex];
-            newSection = [[STTagBrandSection alloc] initWithObjects:section.objects];
+            NSArray *validBrands = [self filterForValidBrandsArray:section.objects];
+            if (validBrands.count > 0) {
+                newSection = [[STTagBrandSection alloc] initWithObjects:validBrands];
+            }else{
+                newSection = [[STTagBrandSection alloc] initWithSectionName:indexString];
+            }
         }
         [self.sectionArray addObject:newSection];
 
