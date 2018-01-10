@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DGActivityIndicatorView.h"
 
 @interface STTagProductCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
+@property (weak, nonatomic) IBOutlet DGActivityIndicatorView *loadingView;
 
 @end

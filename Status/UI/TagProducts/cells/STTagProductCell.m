@@ -10,6 +10,13 @@
 
 @implementation STTagProductCell
 
+-(void)awakeFromNib{
+    [super awakeFromNib];
+    _loadingView.tintColor = [UIColor blackColor];
+    _loadingView.type = DGActivityIndicatorAnimationTypeBallClipRotate;
+    [_loadingView startAnimating];
+}
+
 -(void)setSelected:(BOOL)selected{
     
     if (selected == YES) {

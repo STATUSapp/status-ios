@@ -57,8 +57,11 @@
     STTagProductCell *cell = (STTagProductCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"STTagProductCell" forIndexPath:indexPath];
     
     STShopProduct *tagProduct = _products[indexPath.item];
-    
-    [cell.productImage sd_setImageWithURL:[NSURL URLWithString:tagProduct.mainImageUrl] placeholderImage:nil];
+    __weak STTagProductCell *weakCell = cell;
+    [cell.loadingView startAnimating];
+    [cell.productImage sd_setImageWithURL:[NSURL URLWithString:tagProduct.mainImageUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [weakCell.loadingView stopAnimating];
+    }];
     
     [cell setSelected:[[STTagProductsManager sharedInstance] isProductSelected:tagProduct]];
     

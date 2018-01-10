@@ -10,15 +10,17 @@
 #import "STTabBarViewController.h"
 #import "STTagProductsViewController.h"
 #import "STTagProductsManager.h"
+#import "STLoadingView.h"
 
 @interface STTagSuggestions ()<STTagProductsProtocol>
 {
     STTagProductsViewController *productsVC;
 }
 @property (weak, nonatomic) IBOutlet UIView *containerView;
-
+@property (strong, nonatomic) STLoadingView *customLoadingView;
 @property (nonatomic, assign) STTagSuggestionsScreenType screenType;
 @property (nonatomic, strong) NSArray <STShopProduct*>* products;
+
 @end
 
 @implementation STTagSuggestions
@@ -54,6 +56,17 @@
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
+-(void)setScreenLoading:(BOOL)loading{
+    if (!_customLoadingView) {
+        self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
+    }
+    if (loading) {
+        [self.view addSubview:_customLoadingView];
+    }else{
+        [_customLoadingView removeFromSuperview];
+    }
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     productsVC = (STTagProductsViewController *)segue.destinationViewController;
     productsVC.delegate  = self;
@@ -64,6 +77,7 @@
         _products = [STTagProductsManager sharedInstance].categoryAndBrandProducts;
     }
     [productsVC updateProducts:_products];
+    [self setScreenLoading:(_products.count == 0)];
 }
 
 #pragma mark - NSNotification
@@ -78,12 +92,14 @@
         {
             _products = [STTagProductsManager sharedInstance].categoryAndBrandProducts;
             [productsVC updateProducts:_products];
+            [self setScreenLoading:NO];
         }
             break;
         case STTagManagerEventSearchProducts:
         {
             _products = [STTagProductsManager sharedInstance].searchResult;
             [productsVC updateProducts:_products];
+            [self setScreenLoading:NO];
         }
         default:
             break;

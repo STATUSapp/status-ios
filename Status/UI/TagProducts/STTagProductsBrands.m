@@ -19,6 +19,7 @@
 #import "STSectionView.h"
 #import "STGetBrandsWithProducts.h"
 #import "STCatalogCategory.h"
+#import "STLoadingView.h"
 
 @interface STTagProductsBrands ()<UITableViewDelegate, UITableViewDataSource, SLCoreDataRequestManagerDelegate>{
     CGRect keyboardBounds;
@@ -26,17 +27,17 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong) NSMutableArray<STTagBrandSection *>*sectionArray;
-@property (nonatomic, strong) NSArray *initialBrandsArray;
-@property (nonatomic, strong) NSArray *searchDisplayArray;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarHeightConstr;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstr;
+@property (strong, nonatomic) STLoadingView *customLoadingView;
 @property (nonatomic, strong) STCoreDataRequestManager *currentManager;
 @property (nonatomic, strong) NSString *searchText;
 @property (nonatomic, assign) BOOL checkNoBrandFound;
 @property (nonatomic, strong) NSArray *validBrandIdArray;
-
+@property (nonatomic, strong) NSMutableArray<STTagBrandSection *>*sectionArray;
+@property (nonatomic, strong) NSArray *initialBrandsArray;
+@property (nonatomic, strong) NSArray *searchDisplayArray;
+@property (nonatomic, assign) BOOL validBrandsLoaded;
 @end
 
 @implementation STTagProductsBrands
@@ -49,14 +50,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
+    _validBrandsLoaded = NO;
+    _searchBarHeightConstr.constant = 0.f;
+    [self updateLoadingScreen];
     [self fetchForValidBrands];
+    [self updateLoadingScreen];
     [_searchBar setShowsCancelButton:NO animated:NO];
     self.tableView.sectionIndexColor = [UIColor blackColor];
     self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     self.sectionArray = [@[] mutableCopy];
-    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"indexString" ascending:YES];
-    NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Brand" sortDescritors:@[sd1, sd2] predicate:nil sectionNameKeyPath:@"indexString" delegate:self andTableView:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -88,15 +91,43 @@
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
+-(void)setRequestManager{
+    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"indexString" ascending:YES];
+    NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    _currentManager = [[STDAOEngine sharedManager] fetchRequestManagerForEntity:@"Brand" sortDescritors:@[sd1, sd2] predicate:nil sectionNameKeyPath:@"indexString" delegate:self andTableView:nil];
+}
+
+-(void)updateLoadingScreen{
+    if (_validBrandsLoaded) {
+        [self.tableView.backgroundView removeFromSuperview];
+        self.tableView.backgroundView = nil;
+    }
+    else
+    {
+        [self.tableView.backgroundView removeFromSuperview];
+        self.tableView.backgroundView = _customLoadingView;
+    }
+}
+
+-(void)setUpScreenAfterLoading{
+    [self onDownSwipe:nil];
+    [self updateLoadingScreen];
+    [self setRequestManager];
+    [self reloadScreenWithCDRM:self.currentManager];
+}
+
 -(void)fetchForValidBrands{
     NSString *categoryId = [STTagProductsManager sharedInstance].selectedCategory.uuid;
     __weak STTagProductsBrands *weakSelf = self;
     [STGetBrandsWithProducts getBrandsWithProductsForCategoryId:categoryId withCompletion:^(id response, NSError *error) {
+        weakSelf.validBrandsLoaded = YES;
         weakSelf.validBrandIdArray = response;
-        [weakSelf reloadScreenWithCDRM:weakSelf.currentManager];
+        [weakSelf setUpScreenAfterLoading];
         
     } failure:^(NSError *error) {
         NSLog(@"Error fetching for valida brands: %@", error);
+        weakSelf.validBrandsLoaded = YES;
+        [weakSelf setUpScreenAfterLoading];
     }];
 }
 

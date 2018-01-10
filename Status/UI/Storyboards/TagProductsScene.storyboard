@@ -454,10 +454,23 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="172" height="222"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <view clipsSubviews="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="j3V-a4-85q" customClass="DGActivityIndicatorView">
+                                                    <rect key="frame" x="36" y="61" width="100" height="100"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="V2K-Oz-ZVT"/>
+                                                        <constraint firstAttribute="width" constant="100" id="bUu-zR-rlh"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="j3V-a4-85q" firstAttribute="centerX" secondItem="SD9-vH-x2D" secondAttribute="centerX" id="Jgv-or-w9R"/>
+                                            <constraint firstItem="j3V-a4-85q" firstAttribute="centerY" secondItem="SD9-vH-x2D" secondAttribute="centerY" id="vPD-n5-a7E"/>
+                                        </constraints>
                                         <size key="customSize" width="172" height="222"/>
                                         <connections>
+                                            <outlet property="loadingView" destination="j3V-a4-85q" id="BuJ-jw-7qn"/>
                                             <outlet property="productImage" destination="eek-dQ-nn8" id="drm-Q9-rc2"/>
                                         </connections>
                                     </collectionViewCell>
@@ -1219,7 +1232,7 @@ by using one of the following methods:</string>
                 </swipeGestureRecognizer>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHR-MV-UZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2612.5" y="-1148.5"/>
+            <point key="canvasLocation" x="2764" y="-1149"/>
         </scene>
         <!--Suggestions-->
         <scene sceneID="Irb-ve-9jD">
@@ -1256,7 +1269,7 @@ by using one of the following methods:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ef-hn-iLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2559.5" y="-431.5"/>
+            <point key="canvasLocation" x="2820" y="-432"/>
         </scene>
         <!--Barcode-->
         <scene sceneID="GRH-tf-LQR">

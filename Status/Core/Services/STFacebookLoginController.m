@@ -158,6 +158,7 @@
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
     [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogout object:nil userInfo:nil];
     [self logout];
+    [self loginAsGuest];
 }
 
 -(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
