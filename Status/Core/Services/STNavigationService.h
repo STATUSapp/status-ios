@@ -12,8 +12,6 @@
 
 @interface STNavigationService : NSObject
 
-- (void)presentLoginScreen;
-- (void)presentTabBarController;
 - (void)resetTabBarStacks;
 
 -(void)setBadge:(NSInteger)badge

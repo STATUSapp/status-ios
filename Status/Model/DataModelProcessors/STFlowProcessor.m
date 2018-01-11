@@ -137,7 +137,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postImageWasEdited:) name:STPostImageWasEdited object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:STPostPoolNewObjectNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdated:) name:STProfilePoolObjectUpdatedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flowShouldBeReloaded:) name:kNotificationUserDidLoggedIn object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flowShouldBeReloaded:) name:kNotificationUserDidLoggedIn object:nil];
 }
 
 -(NSInteger)numberOfObjects{
@@ -666,9 +666,9 @@ NSInteger const kFacebookAdsTimeframe = 10;
 
 #pragma mark - Notifications
 
--(void)flowShouldBeReloaded:(NSNotification *)notification{
-    [self reloadProcessor];
-}
+//-(void)flowShouldBeReloaded:(NSNotification *)notification{
+//    [self reloadProcessor];
+//}
 
 -(void)filtersChanged:(NSNotification *)notification{
     NSDictionary *userInfo = notification.userInfo;

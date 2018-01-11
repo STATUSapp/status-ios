@@ -23,6 +23,5 @@ typedef void (^facebookCompletion)(id result, NSError *error);
 - (void)startLoginIfPossible;
 
 //guest user
--(void)loginAsGuest;
 -(BOOL)isGuestUser;
 @end

@@ -15,7 +15,7 @@
 - (void)setActivityIcon;
 
 - (void)dismissChoosePhotoVC;
-
+- (void)presentLoginVCAnimated:(BOOL)animated;
 - (void)setTabBarHidden:(BOOL)tabBarHidden;
 - (void)setTabBarFrame:(CGRect)rect;
 

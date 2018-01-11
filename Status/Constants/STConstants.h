@@ -212,6 +212,7 @@ extern NSString *const kImageSizeKey;
 extern NSString *const kOffsetKey;
 extern NSString *const kSelectedTabBarKey;
 extern NSString *const kAnimatedTabBarKey;
+extern NSString *const kManualLogoutKey;
 
 #pragma mark - Invite Friends
 
@@ -236,7 +237,6 @@ extern NSString *const STNotificationsFollowersKey;
 #pragma mark - Login Constants
 
 extern NSString *const kNotificationUserDidLoggedIn;
-extern NSString *const kNotificationUserDidRegister;
 extern NSString *const kNotificationUserDidLoggedOut;
 extern NSString *const kNotificationSessionExpired;
 

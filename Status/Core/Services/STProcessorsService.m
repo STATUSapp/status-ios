@@ -26,10 +26,20 @@
                          @(STFlowTypePopular),
                          @(STFlowTypeRecent)];
         _processorsArray = [NSMutableArray new];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
+
     }
     return self;
 }
-    
+
+#pragma mark -UINotifications
+-(void)userDidLoggedIn{
+    //reload all the processors
+    for (STFlowProcessor *fp in _processorsArray) {
+        [fp reloadProcessor];
+    }
+}
+
 -(STFlowProcessor *)getProcessorWithType:(STFlowType)type{
     if (![allowedTypes containsObject:@(type)]) {
 #ifdef DEBUG
@@ -53,4 +63,5 @@
     
     return resultProcessor;
 }
+
 @end

@@ -32,9 +32,7 @@
     self = [super init];
     if (self) {
                 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn:) name:kNotificationUserDidLoggedIn object:nil];
     }
     return self;
 }
@@ -108,12 +106,15 @@
     [appDel.window setRootViewController:viewController];
 }
 
-- (void)presentTabBarController{
+- (void)presentTabBarControllerWithLoginOnTop:(BOOL)showLoginOnTop{
     NSLog(@"Tabbar Controller presented");
     AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
     STTabBarViewController * tabBar = [STTabBarViewController newController];
     tabBar.delegate = appDel;
     [appDel.window setRootViewController:tabBar];
+    if (showLoginOnTop) {
+        [tabBar presentLoginVCAnimated:NO];
+    }
 }
 
 - (void)resetTabBarStacks{
@@ -131,17 +132,10 @@
 }
 
 #pragma mark - NSNOtifications
-- (void)userDidLoggedIn{
-    [self presentTabBarController];
+- (void)userDidLoggedIn:(NSNotification *)notification{
+    BOOL manualLogout = [notification.userInfo[kManualLogoutKey] boolValue];
+    [self presentTabBarControllerWithLoginOnTop:manualLogout];
 }
-
-- (void)userDidRegister{
-    [self presentTabBarController];
-}
-
-//- (void)userDidLoggedOut{
-//    [self presentLoginScreen];
-//}
 
 #pragma mark - Helpers
 

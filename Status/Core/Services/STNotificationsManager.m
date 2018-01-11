@@ -39,7 +39,6 @@
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn) name:kNotificationUserDidLoggedIn object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidRegister) name:kNotificationUserDidRegister object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationUserDidLoggedOut object:nil];
     }
     
@@ -267,10 +266,6 @@
 
 - (void)userDidLoggedIn{
     [self handleLastNotification];
-    [[CoreManager badgeService] startService];
-}
-
-- (void)userDidRegister{
     [[CoreManager badgeService] startService];
 }
 

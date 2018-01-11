@@ -164,29 +164,33 @@ static CGFloat kImageInset = 4.f;
                              completion:nil];
 }
 
-
 #pragma mark - UINotifications
 
 -(void)snackBarAction:(NSNotification *)notification{
     STSnackWithActionBarType type = [notification.userInfo[kNotificationSnackBarActionTypeKey] integerValue];
     if (type == STSnackWithActionBarTypeGuestMode) {
-        [self presentLoginVC];
+        [self presentLoginVCAnimated:YES];
     }
 }
 
 -(void)userDidLoggedOut{
     [self.selectedViewController dismissViewControllerAnimated:NO completion:nil];
     [self setSelectedIndex:STTabBarIndexExplore];
-    [self presentLoginVC];
+    [self presentLoginVCAnimated:YES];
 }
 #pragma mark - Helper
 
-- (void)presentLoginVC{
+-(STLoginViewController *)loginVC{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
     STLoginViewController *viewController = (STLoginViewController *) [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
     viewController.showCloseButton = YES;
+    return viewController;
+}
+
+- (void)presentLoginVCAnimated:(BOOL)animated{
+    STLoginViewController *viewController = [self loginVC];
     [self presentViewController:viewController
-                       animated:YES
+                       animated:animated
                      completion:^{
                          
                      }];

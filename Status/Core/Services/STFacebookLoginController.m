@@ -44,6 +44,8 @@
 @property (nonatomic, strong) NSDictionary *fetchedUserData;
 @property (nonatomic, strong) STUserProfile *loggedInUserProfile;
 
+@property (nonatomic, assign) BOOL manualLogout;
+
 @end
 
 @implementation STFacebookLoginController
@@ -51,6 +53,7 @@
 -(id)init{
     self = [super init];
     if (self) {
+        self.manualLogout = NO;
     }
     return self;
 }
@@ -91,6 +94,7 @@
         [self loginOrRegister];
     }
     else{
+        self.manualLogout = NO;
         [self logout];
         [self loginAsGuest];
     }
@@ -157,6 +161,7 @@
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
     [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogout object:nil userInfo:nil];
+    self.manualLogout = YES;
     [self logout];
     [self loginAsGuest];
 }
@@ -187,27 +192,31 @@
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
     [[CoreManager locationService] startLocationUpdates];
     NSString *userId = [CreateDataModelHelper validStringIdentifierFromValue:response[@"user_id"]];
+    STUserProfile *userProfile = [self userProfile];
+    if (userProfile ||
+        ![userProfile.uuid isEqualToString:userId]) {
+        //invalidate the user profile
+        if (userProfile) {
+            [[CoreManager profilePool] removeProfiles:@[userProfile]];
+        }
+        _loggedInUserProfile = nil;
+    }
     self.currentUserId = userId;
 //    [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
-    STUserProfile *userProfile = [self userProfile];
-    if (userProfile &&
-        ![userProfile.uuid isEqualToString:userId]) {
-        //invalidate the user profile
-        [[CoreManager profilePool] removeProfiles:@[userProfile]];
-        _loggedInUserProfile = nil;
-    }
-    if (userProfile == nil) {
+    if (_loggedInUserProfile == nil) {
         [STDataAccessUtils getUserProfileForUserId:_currentUserId
                                      andCompletion:^(NSArray *objects, NSError *error) {
                                          _loggedInUserProfile = [objects firstObject];
                                          if (_loggedInUserProfile) {
                                              [[CoreManager profilePool] addProfiles:@[_loggedInUserProfile]];
                                          }
-                                         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
+                                         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:@{kManualLogoutKey:@(self.manualLogout)}];
+                                         self.manualLogout = NO;
                                      }];
     }else{
-        [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:nil];
+        [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:@{kManualLogoutKey:@(self.manualLogout)}];
+        self.manualLogout = NO;
     }
     
     //get settings from server
@@ -299,7 +308,6 @@
         if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
             [weakSelf measureRegister];
             [weakSelf setUpEnvironment:response andUserInfo:userInfo];
-            [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidRegister object:nil userInfo:nil];
         }
         else
         {

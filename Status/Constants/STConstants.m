@@ -150,6 +150,7 @@ NSString *const kImageSizeKey = @"image_size_key";
 NSString *const kOffsetKey = @"offset_key";
 NSString *const kSelectedTabBarKey = @"selected_index";
 NSString *const kAnimatedTabBarKey = @"animated";
+NSString *const kManualLogoutKey = @"manual_logout_key";
 
 #pragma mark - Invite Friends
 
@@ -176,7 +177,6 @@ NSString *const STNotificationsFollowersKey = @"notifications_new_follower";
 #pragma mark - Login Constants
 
 NSString *const kNotificationUserDidLoggedIn = @"NotificationUserDidLoggedIn";
-NSString *const kNotificationUserDidRegister = @"NotificationUserDidRegister";
 NSString *const kNotificationUserDidLoggedOut = @"NotificationUserDidLoggedOut";
 NSString *const kNotificationSessionExpired = @"NotificationSessionExpired";
 
