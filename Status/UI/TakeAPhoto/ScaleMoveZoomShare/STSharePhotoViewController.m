@@ -132,7 +132,6 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 }
 
 -(void)updateProductsCollection{
-    [self.productsCollection reloadData];
     if (_shopProducts.count > 0) {
         _tagProductsViewHeightConstr.constant = 0;
         _tagProductsCollectionHeightConstr.constant = [STShopProductCell cellSize].height + 6;
@@ -142,6 +141,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
         _tagProductsViewHeightConstr.constant = kTagProductsViewDefaultHeight;
         _tagProductsCollectionHeightConstr.constant = 0.f;
     }
+    [self.productsCollection reloadData];
+    [self.productsCollection.collectionViewLayout invalidateLayout];
+    [self.view layoutIfNeeded];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -552,7 +554,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return [STShopProductCell cellSize];
+    CGSize size = [STShopProductCell cellSize];
+    NSLog(@"Product size: %@", NSStringFromCGSize(size));
+    return size;
 
 }
 

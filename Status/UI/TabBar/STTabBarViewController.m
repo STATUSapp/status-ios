@@ -69,14 +69,14 @@ static CGFloat kImageInset = 4.f;
     // add message / notifications
     STNotificationsViewController * notifAndChatVC = [STNotificationsViewController newController];
     UINavigationController * notifChatNav = [[UINavigationController alloc] initWithRootViewController:notifAndChatVC];
-    notifChatNav.navigationBarHidden = YES;
+//    notifChatNav.navigationBarHidden = NO;
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
     
     // add my profile
     FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:[[CoreManager loginService] currentUserUuid] andUserName:nil];
     UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
 
-    profileNav.navigationBarHidden = YES;
+//    profileNav.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:profileNav];
     
     [tabBarControllers insertObject:homeNavCtrl atIndex:STTabBarIndexHome];

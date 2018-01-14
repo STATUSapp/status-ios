@@ -117,6 +117,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
+    self.window.backgroundColor = [AppDelegate navigationBarDefaultColor];
+
     return YES;
 
 }
@@ -132,7 +134,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     [[UINavigationBar appearance] setBarTintColor:barColor];
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
+    [[UINavigationBar appearance] setBackgroundColor:barColor];
  
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[STWhiteNavBarViewController class]]] setBarTintColor:[UIColor whiteColor]];
     

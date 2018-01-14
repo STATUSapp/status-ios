@@ -69,7 +69,9 @@ const float kNoNotifHeight = 24.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.navigationController.hidesBarsOnSwipe = YES;
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationItem.title = @"ACTIVITY";
     timeIconImage =  [[UIImage imageNamed:@"chat time icon"] resizedImage:CGSizeMake(10.f, 10.f) interpolationQuality:kCGInterpolationMedium];
     // add gesture recognizer to use instead of didSelectRowAtIndexPath
     _tapOnRow = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -96,8 +98,6 @@ const float kNoNotifHeight = 24.f;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-    self.navigationController.hidesBarsOnSwipe = NO;
     [self getNotificationsFromServer];
 }
 
@@ -315,8 +315,13 @@ const float kNoNotifHeight = 24.f;
         // normal notifications (user generated notifications)
         cell = (STNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
         STNotificationCell *actualCell = (STNotificationCell *)cell;
-        [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:no.userThumbnail] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [actualCell.userImg maskImage:image];
+        UIImage *placeholder = [UIImage imageNamed:[no genderImageNameForGender:no.userGender]];
+        [actualCell.userImg sd_setImageWithURL:[NSURL URLWithString:no.userThumbnail]
+                              placeholderImage:placeholder
+                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                         if (image) {
+                                             [actualCell.userImg maskImage:image];
+                                         }
         }];
         if (notificationType!=STNotificationTypeGotFollowed) {
             [actualCell.postImg sd_setImageWithURL:[NSURL URLWithString:no.postPhotoUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

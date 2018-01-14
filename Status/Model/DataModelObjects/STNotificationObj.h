@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *userThumbnail;
+@property (nonatomic, assign) STProfileGender userGender;
 
 +(STNotificationObj *)notificationObjFromDict:(NSDictionary *)dict;
 

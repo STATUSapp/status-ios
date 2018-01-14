@@ -32,6 +32,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <viewLayoutGuide key="safeArea" id="Pm0-Tb-VTu"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="knr-t8-3Sm">
                             <size key="itemSize" width="320" height="480"/>
                             <size key="headerReferenceSize" width="50" height="50"/>

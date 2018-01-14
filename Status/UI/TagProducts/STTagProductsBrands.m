@@ -313,6 +313,7 @@
     }else{
         brand = [self brandObjectForIndexPath:indexPath];
     }
+    NSLog(@"Selelected brand: %@", brand.uuid);
     [[STTagProductsManager sharedInstance] updateBrandId:brand.uuid];
     STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeDefault];
     [self.navigationController pushViewController:vc animated:YES];

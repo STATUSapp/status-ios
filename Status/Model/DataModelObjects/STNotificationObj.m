@@ -30,6 +30,8 @@
     no.userName = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"user_name"];
     no.userThumbnail = [CreateDataModelHelper validObjectFromDict:no.infoDict forKey:@"user_photo_link"];
     no.followed = [no.infoDict[@"followed_by_current_user"] boolValue];
+    no.userGender = [no genderFromString:no.infoDict[@"user_gender"]];
+    
     return no;
     
 }
@@ -41,6 +43,7 @@
     lu.uuid = self.userId;
     lu.userName = self.userName;
     lu.thumbnail = self.userThumbnail;
+    lu.gender = self.userGender;
     
     return lu;
     

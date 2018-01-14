@@ -20,6 +20,7 @@
 #import "STDataModelObjects.h"
 #import "STFollowDataProcessor.h"
 #import "STLocalNotificationService.h"
+#import "UIImageView+Mask.h"
 
 @interface STUsersListController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -176,7 +177,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     STListUser *lu = [_dataSource objectAtIndex:indexPath.row];
     STUserListCell *cell = (STUserListCell *)[tableView dequeueReusableCellWithIdentifier:@"STUserListCell"];
-    [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:lu.thumbnail] placeholderImage:[UIImage imageNamed:[lu genderImage]]];
+    [cell.userPhoto sd_setImageWithURL:[NSURL URLWithString:lu.thumbnail] placeholderImage:[UIImage imageNamed:[lu genderImage]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            [cell.userPhoto maskImage:image];
+        }
+    }];
    
     cell.userName.text = lu.userName;
 //    cell.chatButton.tag = cell.followBtn.tag = indexPath.row;

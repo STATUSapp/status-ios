@@ -53,6 +53,7 @@
 #import <Photos/Photos.h>
 #import "STFacebookAddCell.h"
 #import "STSnackBarWithActionService.h"
+#import "AppDelegate.h"
 
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
@@ -125,7 +126,7 @@ static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 //-(UIEdgeInsets)additionalSafeAreaInsets{
-//    return UIEdgeInsetsMake(-40.f, 0, 0, 0);
+//    return UIEdgeInsetsMake(20.f, 0, 0, 0);
 //}
 
 - (void)configureNavigationBar{
@@ -134,16 +135,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         return;
     }
     BOOL navBarHidden = NO;
-//    BOOL navBarHidden = YES;
-//    if ((_feedProcessor.processorFlowType == STFlowTypeHome ||
-//         _feedProcessor.processorFlowType == STFlowTypeHasttag ||
-//         _feedProcessor.processorFlowType ==  STFlowTypeSinglePost)) {
-//        navBarHidden = NO;
-//    }else if (_refreshControl.refreshing == YES &&
-//              _feedProcessor.processorFlowType == STFlowTypeHome){
-//        navBarHidden = NO;
-//    }
-
     if (navBarHidden == NO) {
         if (self == currentViewController) {
             if (_feedProcessor.processorFlowType == STFlowTypeHome){
@@ -175,62 +166,27 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 - (void)configureLoadingView{
-
+    
     [self configureNavigationBar];
     
-//    if ([_feedProcessor processorFlowType] == STFlowTypeHome) {
-//        //use the standard loading for initial state
-//        if (_feedProcessor.loading && _refreshControl.refreshing == NO) {
-//            _loadingViewImage.image = [STUIHelper splashImageWithLogo:YES];
-//            [self.collectionView.backgroundView removeFromSuperview];
-//            self.collectionView.backgroundView = _loadingView;
-//            UITabBarController *tabBarController = nil;
-//            if (_containeeDelegate) {
-//                tabBarController = [_containeeDelegate containeeTabBarController];
-//            }
-//            else
-//                tabBarController = self.tabBarController;
-//            
-//            [((STTabBarViewController *)tabBarController) setTabBarHidden:YES];
-//        }
-//        else
-//        {
-//            [self.collectionView.backgroundView removeFromSuperview];
-//            self.collectionView.backgroundView = nil;
-//            UITabBarController *tabBarController = nil;
-//            if (_containeeDelegate) {
-//                tabBarController = [_containeeDelegate containeeTabBarController];
-//            }
-//            else
-//                tabBarController = self.tabBarController;
-//            
-//            [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
-//            
-//        }
-//    }
-//    else
-//    {
-        //use the custom loading view
-        UITabBarController *tabBarController = nil;
-        if (_containeeDelegate) {
-            tabBarController = [_containeeDelegate containeeTabBarController];
-        }
-        else
-            tabBarController = self.tabBarController;
-        
-        [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
-
-        if (_feedProcessor.loading) {
-            [self.collectionView.backgroundView removeFromSuperview];
-            self.collectionView.backgroundView = _customLoadingView;
-        }
-        else
-        {
-            [self.collectionView.backgroundView removeFromSuperview];
-            self.collectionView.backgroundView = nil;
-        }
-
-//    }
+    UITabBarController *tabBarController = nil;
+    if (_containeeDelegate) {
+        tabBarController = [_containeeDelegate containeeTabBarController];
+    }
+    else
+        tabBarController = self.tabBarController;
+    
+    [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
+    
+    if (_feedProcessor.loading) {
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = _customLoadingView;
+    }
+    else
+    {
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = nil;
+    }
 }
 
 + (FeedCVC *)mainFeedController{
@@ -300,9 +256,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 //    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
 //    layout.sectionHeadersPinToVisibleBounds = YES;
     
-    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
-        self.collectionView.contentInset = UIEdgeInsetsMake(0.f, 0.f, self.tabBarController.tabBar.frame.size.height, 0.f);
-    }
+//    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
+//        self.collectionView.contentInset = UIEdgeInsetsMake(20.f, 0.f, self.tabBarController.tabBar.frame.size.height, 0.f);
+//    }
     
     CGRect tabBarFrame = self.tabBarController.tabBar.frame;
     _initialStartPoint = tabBarFrame.origin;
