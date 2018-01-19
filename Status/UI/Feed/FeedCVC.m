@@ -7,6 +7,7 @@
 //
 
 #import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 #import "STFlowProcessor.h"
 #import "STPost.h"
 #import "STShopProduct.h"
@@ -93,10 +94,10 @@ CGFloat const kTopButtonSize = 48.f;
 }
 
 @property (nonatomic, strong, readwrite) STFlowProcessor *feedProcessor;
+@property (nonatomic, strong, readwrite) NSString *userName;
+
 @property (nonatomic, strong) STFollowDataProcessor *followProcessor;
 @property (nonatomic, assign) NSInteger postForContextIndex;
-
-@property (nonatomic, strong) NSString *userName;
 
 @property (nonatomic, assign) BOOL isMyProfile;
 
@@ -105,10 +106,6 @@ CGFloat const kTopButtonSize = 48.f;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingViewImage;
 @property (strong, nonatomic) IBOutlet UIView *noDataView;
-@property (strong, nonatomic) IBOutlet UIView *navBarLogoView;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *earningsBarButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *optionsBarButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *settingsBarButton;
 
 @end
 
@@ -125,81 +122,6 @@ static NSString * const profileLocationCell = @"UserProfileLocationCell";
 static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
-//-(UIEdgeInsets)additionalSafeAreaInsets{
-//    return UIEdgeInsetsMake(20.f, 0, 0, 0);
-//}
-
-- (void)configureNavigationBar{
-    UIViewController *currentViewController = [self.navigationController.viewControllers lastObject];
-    if (self != currentViewController) {
-        return;
-    }
-    BOOL navBarHidden = NO;
-    if (navBarHidden == NO) {
-        if (self == currentViewController) {
-            if (_feedProcessor.processorFlowType == STFlowTypeHome){
-                self.navigationItem.titleView = _navBarLogoView;
-            }
-            else if (_feedProcessor.processorFlowType == STFlowTypeMyGallery) {
-                self.navigationItem.title = [_feedProcessor.userProfile fullName];
-                if (_feedProcessor.userProfile.isInfluencer) {
-                    self.navigationItem.leftBarButtonItems = @[_earningsBarButton];
-                }else{
-                    self.navigationItem.leftBarButtonItems = nil;
-                }
-                self.navigationItem.rightBarButtonItems = @[_settingsBarButton];
-            }
-            else if (_feedProcessor.processorFlowType == STFlowTypeSinglePost)
-            {
-                self.navigationItem.title = NSLocalizedString(@"Photo", nil);
-            }else if (_feedProcessor.processorFlowType == STFlowTypeHasttag){
-                self.navigationItem.title = _feedProcessor.hashtag;
-            }else if (_feedProcessor.processorFlowType == STFlowTypeUserGallery){
-                self.navigationItem.title = [_feedProcessor.userProfile fullName];
-                self.navigationItem.rightBarButtonItems = @[_optionsBarButton];
-            }
-        }
-    }
-
-    [self setNeedsStatusBarAppearanceUpdate];
-    [self.navigationController setNavigationBarHidden:navBarHidden animated:YES];
-}
-
-- (void)configureLoadingView{
-    
-    [self configureNavigationBar];
-    
-    UITabBarController *tabBarController = nil;
-    if (_containeeDelegate) {
-        tabBarController = [_containeeDelegate containeeTabBarController];
-    }
-    else
-        tabBarController = self.tabBarController;
-    
-    [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
-    
-    if (_feedProcessor.loading) {
-        [self.collectionView.backgroundView removeFromSuperview];
-        self.collectionView.backgroundView = _customLoadingView;
-    }
-    else
-    {
-        [self.collectionView.backgroundView removeFromSuperview];
-        self.collectionView.backgroundView = nil;
-    }
-}
-
-+ (FeedCVC *)mainFeedController{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
-    FeedCVC *feedCVC = [[navController viewControllers] firstObject];
-    
-    STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeHome];
-    feedCVC.feedProcessor = feedProcessor;
-    
-    return feedCVC;
-}
-
 + (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
     UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
@@ -208,57 +130,13 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     feedCVC.feedProcessor = processor;
     return feedCVC;
 }
-
-+ (FeedCVC *)singleFeedControllerWithPostId:(NSString *)postId{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
-    FeedCVC *feedCVC = [[navController viewControllers] firstObject];
-    
-    STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeSinglePost postId:postId];
-    feedCVC.feedProcessor = feedProcessor;
-    
-    return feedCVC;
-}
-
-+ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId
-                                andUserName:(NSString *)userName{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
-    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"FEED_CVC_NAV"];
-    FeedCVC *feedCVC = [[navController viewControllers] firstObject];
-    feedCVC.userName = userName;
-    BOOL userIsMe = [[CoreManager loginService].currentUserUuid isEqualToString:userId];
-    STFlowType flowType = userIsMe ? STFlowTypeMyGallery : STFlowTypeUserGallery;
-
-    STFlowProcessor *feedProcessor = [[STFlowProcessor alloc] initWithFlowType:flowType userId:userId];
-    feedCVC.feedProcessor = feedProcessor;
-    
-    if ([[feedProcessor userId] isEqualToString:[CoreManager loginService].currentUserUuid]) {
-        feedCVC.isMyProfile = YES;
-    }
-    
-    return feedCVC;
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.hidesBarsOnSwipe = YES;
-    if (self.feedProcessor.processorFlowType == STFlowTypeHome) {
-        NSArray *redirectVC = [[CoreManager deepLinkService] redirectViewControllers];
-        if (redirectVC && [redirectVC count]) {
-            [[CoreManager navigationService] pushViewControllers:redirectVC
-                                                 inTabbarAtIndex:STTabBarIndexHome];
-        }
+    if ([[_feedProcessor userId] isEqualToString:[CoreManager loginService].currentUserUuid]) {
+        _isMyProfile = YES;
     }
-    
+
     self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-//    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-//    layout.sectionHeadersPinToVisibleBounds = YES;
-    
-//    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
-//        self.collectionView.contentInset = UIEdgeInsetsMake(20.f, 0.f, self.tabBarController.tabBar.frame.size.height, 0.f);
-//    }
     
     CGRect tabBarFrame = self.tabBarController.tabBar.frame;
     _initialStartPoint = tabBarFrame.origin;
@@ -267,7 +145,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationObjUpdated object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationObjDeleted object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:kNotificationObjAdded object:_feedProcessor];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuggestions:) name: kNotificationShowSuggestions object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldGoToTop:) name:STNotificationShouldGoToTop object:nil];
 
     if (_feedProcessor.processorFlowType == STFlowTypeHome) {
@@ -291,7 +168,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     [self configureLoadingView];
     CGRect refreshFrame = CGRectMake(0, 0, self.view.frame.size.width, 30.f);
     _refreshControl = [[UIRefreshControl alloc] initWithFrame:refreshFrame];
-//    _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull down to refresh"];
     [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
     
     [self.collectionView addSubview:_refreshControl];
@@ -299,10 +175,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.hidesBarsOnSwipe = YES;
-    [self configureNavigationBar];
-    [[CoreManager imageCacheService] changeFlowType:_feedProcessor.processorFlowType
-                                          needsSort:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -329,37 +201,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     // Dispose of any resources that can be recreated.
 }
 
--(BOOL)extendedLayoutIncludesOpaqueBars{
-    return YES;
-}
-
--(BOOL)prefersStatusBarHidden{
-    return NO;
-//    BOOL statusBarHidden = YES;
-//    if (_feedProcessor.processorFlowType == STFlowTypeHome) {
-//        statusBarHidden = NO;
-//    }else if (_refreshControl.refreshing == YES){
-//        statusBarHidden = NO;
-//    }
-//
-//    return statusBarHidden;
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleDefault;
-}
-
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
--(BOOL)canDoAction{
-    if ([[CoreManager loginService] isGuestUser]) {
-        [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
-        return NO;
-    }
-    return YES;
 }
 
 #pragma mark - Notifications
@@ -369,76 +212,39 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         [_refreshControl endRefreshing];
     }
     [self configureLoadingView];
-    NSLog(@"Reload 1");
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
-
-//    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[_feedProcessor currentOffset] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 }
 
 - (void)postUpdated:(NSNotification *)notif{
-    NSLog(@"Reload 2");
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
-
-    /*
-    NSString *updatedPostId = notif.userInfo[kPostIdKey];
-    NSArray *visibleIndexPath = [self.collectionView indexPathsForVisibleItems];
-    NSMutableArray *visiblePosts = [NSMutableArray new];
-    for (NSIndexPath *indexPath in visibleIndexPath) {
-        NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
-        STPost *post = [_feedProcessor objectAtIndex:sectionIndex];
-
-        if (![visiblePosts containsObject:post.uuid]) {
-            [visiblePosts addObject:post.uuid];
-        }
-    }
-    if ([visiblePosts containsObject:updatedPostId]) {
-        [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
-        [self.collectionView.collectionViewLayout invalidateLayout];
-    }
-    */
 }
 
 - (void)postAdded:(NSNotification *)notif{
-    NSLog(@"Reload 3");
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
 }
 - (void)postDeleted:(NSNotification *)notif{
-    NSLog(@"Reload 4");
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
 }
 
 - (void)homeFeedShouldBeReloaded:(NSNotification *)notif{
-//    if (_isMyProfile) {
-        //a new post was uploaded/edited and the profile feed should be reloaded
-        [_feedProcessor reloadProcessor];
-        NSLog(@"Reload 5");
-        [self.collectionView reloadData];
-        [self.collectionView.collectionViewLayout invalidateLayout];
-//    }
+    [_feedProcessor reloadProcessor];
+    [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (void)myProfileFeedShouldBeReloaded:(NSNotification *)notif{
     if (_isMyProfile) {
         //a new post was uploaded/edited and the profile feed should be reloaded
         [_feedProcessor reloadProcessor];
-        NSLog(@"Reload 6");
         [self.collectionView reloadData];
         [self.collectionView.collectionViewLayout invalidateLayout];
     }
-}
-
-
-- (void)showSuggestions:(NSNotification *)notif{
-    STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
-    [self.navigationController presentViewController:[[UINavigationController alloc ]initWithRootViewController:vc] animated:NO completion:nil];
-
 }
 
 - (void) shouldGoToTop:(NSNotification *)notif{
@@ -470,7 +276,63 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }
     
 }
+
+#pragma mark - Public
+
+-(void)setUserName:(NSString *)userName{
+    _userName = userName;
+}
+
+-(void)setFeedProcessor:(STFlowProcessor *)feedProcessor{
+    _feedProcessor = feedProcessor;
+}
+
+- (void)onProfileOptionsPressed:(id)sender {
+    if (![self canDoAction]){
+        return;
+    }
+    [STContextualMenu presentProfileViewWithDelegate:self];
+}
+
 #pragma mark - Helpers
+- (void)showSuggestions:(NSNotification *)notif{
+    STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
+    [self.delegate presentViewController:[[UINavigationController alloc ]initWithRootViewController:vc] animated:NO];
+    
+}
+
+- (void)configureLoadingView{
+    
+    [self.delegate configureNavigationBar];
+    
+    UITabBarController *tabBarController = nil;
+    if (_containeeDelegate) {
+        tabBarController = [_containeeDelegate containeeTabBarController];
+    }
+    else
+        tabBarController = self.tabBarController;
+    
+    [((STTabBarViewController *)tabBarController) setTabBarHidden:NO];
+    
+    if (_feedProcessor.loading) {
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = _customLoadingView;
+    }
+    else
+    {
+        [self.collectionView.backgroundView removeFromSuperview];
+        self.collectionView.backgroundView = nil;
+    }
+}
+
+-(BOOL)canDoAction{
+    if ([[CoreManager loginService] isGuestUser]) {
+        [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
+        return NO;
+    }
+    return YES;
+}
+
 - (NSInteger)postIndexFromIndexPath:(NSIndexPath *)indexPath{
     NSInteger sectionIndex = indexPath.section;
     if ([_feedProcessor processorIsAGallery] && sectionIndex > 0) {
@@ -521,7 +383,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     _lastPanPoint = scrollView.contentOffset;
 }
 
-
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
 //    CGPoint scrollPosition = scrollView.contentOffset;
 //    CGFloat offset = 0.f;
@@ -570,9 +431,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             if (hashtag && hashtag.length) {
                 NSLog(@"didTapHashTag: %@", hashtag);
                 STFlowProcessor *hashtagProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeHasttag hashtag:hashtag];
-                FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:hashtagProcessor];
-                UINavigationController *navCtrl = (UINavigationController *)[[[STNavigationService appTabBar] viewControllers] objectAtIndex:self.tabBarController.selectedIndex];
-                [navCtrl pushViewController:vc animated:YES];
+                ContainerFeedVC *vc = [ContainerFeedVC feedControllerWithFlowProcessor:hashtagProcessor];
+                [self.delegate pushViewController:vc animated:YES];
             }
         }
     }
@@ -807,7 +667,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         
     }
     else if ([cell isKindOfClass:[STPostShopProductsCell class]]){
-        NSLog(@"Reload Cell indexPath: %@", indexPath);
         [(STPostShopProductsCell *)cell configureWithProducts:post.shopProducts];
     }
     else if ([cell isKindOfClass:[UserProfileInfoCell class]]){
@@ -846,9 +705,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     NSLog(@"Value changed: %@", @(sender.refreshing));
     if (_feedProcessor.loading == NO) {
         [_feedProcessor reloadProcessor];
-//        [self configureLoadingView];
-//        [self.collectionView reloadData];
-//        [self.collectionView.collectionViewLayout invalidateLayout];
     }
     
 }
@@ -893,26 +749,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                               [(UIButton *)sender setUserInteractionEnabled:YES];
                           }];
 }
-//- (IBAction)onMessagePressed:(id)sender {
-//    
-//    STPost *post = [self getCurrentPostForButton:sender];
-//
-//    if ([post.userId isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
-//        [[[UIAlertView alloc] initWithTitle:@"" message:@"You cannot chat with yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-//        return;
-//    }
-//    STListUser *lu = (STListUser *)[[CoreManager usersPool] getUserWithId:post.userId];
-//    if (!lu) {
-//       lu = [STListUser new];
-//        lu.uuid = post.userId;
-//        lu.userName = post.userName;
-//        lu.thumbnail = post.smallPhotoUrl;
-//    }
-//    
-//    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
-//    [self.navigationController pushViewController:viewController animated:YES];
-//
-//}
+
 - (IBAction)onNamePressed:(id)sender {
     if (![_feedProcessor canGoToUserProfile]) {
         //is already in user profile
@@ -921,8 +758,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     
     STPost *post = [self getCurrentPostForButton:sender];
     
-    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:post.userId andUserName:post.userName];
-    [self.navigationController pushViewController:feedCVC animated:YES];
+    ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:post.userId andUserName:post.userName];
+    [self.delegate pushViewController:feedCVC animated:YES];
 
 }
 - (IBAction)onSeeMorePressed:(id)sender {
@@ -943,7 +780,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     STPost *post = [self getCurrentPostForButton:sender];
     STUsersListController *viewController = [STUsersListController newControllerWithUserId:post.userId postID:post.uuid andType:UsersListControllerTypeLikes];
     
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.delegate pushViewController:viewController animated:YES];
 
 }
 - (IBAction)onMorePressed:(id)sender {
@@ -974,28 +811,13 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     [_feedProcessor handleBigCameraButtonActionWithUserName:up.fullName];
 }
 
-- (IBAction)onProfileOptionsPressed:(id)sender {
-    if (![self canDoAction]){
-        return;
-    }
-    [STContextualMenu presentProfileViewWithDelegate:self];
-
-}
-
-- (IBAction)onSettingsButtonPressed:(id)sender{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STSettingsViewController * settingsCtrl = [storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([STSettingsViewController class])];
-    UINavigationController   * setttingsNav = [[UINavigationController alloc] initWithRootViewController:settingsCtrl];
-    [self presentViewController: setttingsNav animated:YES completion:nil];
-}
-
 - (IBAction)onTapFollowing:(id)sender {
     if (![self canDoAction]){
         return;
     }
     STUsersListController * newVC = [STUsersListController newControllerWithUserId:[_feedProcessor userId]
                                                                             postID:nil andType:UsersListControllerTypeFollowing];
-    [self.navigationController pushViewController:newVC animated:YES];
+    [self.delegate pushViewController:newVC animated:YES];
 }
 
 - (IBAction)onTapFollowers:(id)sender {
@@ -1004,7 +826,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }
     STUsersListController * newVC = [STUsersListController newControllerWithUserId:[_feedProcessor userId]
                                                                             postID:nil andType:UsersListControllerTypeFollowers];
-    [self.navigationController pushViewController:newVC animated:YES];
+    [self.delegate pushViewController:newVC animated:YES];
 }
 
 - (IBAction)onTapFollowUser:(UIButton *)followBtn {
@@ -1023,7 +845,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                           withCompletion:^(NSError *error) {
                               if (error == nil) {//success
                                   userProfile.isFollowedByCurrentUser = !userProfile.isFollowedByCurrentUser;
-                                  NSLog(@"Reload 7");
                                   [weakSelf.collectionView reloadData];
                                   [weakSelf.collectionView.collectionViewLayout invalidateLayout];
 
@@ -1031,30 +852,17 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                           }];
 }
 
-//- (IBAction)onTapSendMessageToUser:(id)sender {
-//    
-//    STListUser *lu = [[_feedProcessor userProfile] listUserFromProfile];
-//    STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
-//    [self.navigationController pushViewController:viewController animated:YES];
-//}
-
 - (IBAction)onMessageEditButtonPressed:(id)sender{
     if (_isMyProfile) {
         //go to Edit Profile
         [self onTapEditUserProfile:nil];
-    }
-    else
-    {
-        //go to Message to User
-//        [self onTapSendMessageToUser:nil];
-        
     }
 }
 
 - (IBAction)onTapEditUserProfile:(id)sender {
     STEditProfileViewController * editVC = [STEditProfileViewController newController];
     editVC.userProfile = [_feedProcessor userProfile];
-    [self.navigationController pushViewController:editVC animated:YES];
+    [self.delegate pushViewController:editVC animated:YES];
 }
 
 
@@ -1071,7 +879,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:message preferredStyle:UIAlertControllerStyleAlert];
             
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-            [self.navigationController presentViewController:alert animated:YES completion:nil];
+            [self.delegate presentViewController:alert animated:YES];
         }
     };
     [STInviteUserToUploadRequest inviteUserToUpload:userId withCompletion:completion failure:nil];
@@ -1182,7 +990,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                 viewController.imgData = UIImageJPEGRepresentation(origImg, 1.f);
                 viewController.post = post;
                 viewController.controllerType = STShareControllerEditInfo;
-                [self.navigationController pushViewController:viewController animated:YES];
+                [self.delegate pushViewController:viewController animated:YES];
             }
             
         }];

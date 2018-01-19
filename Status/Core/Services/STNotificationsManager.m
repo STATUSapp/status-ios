@@ -7,7 +7,7 @@
 //
 
 #import "STNotificationsManager.h"
-#import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 #import "STChatController.h"
 #import "STChatRoomViewController.h"
 #import "STNetworkQueueManager.h"
@@ -212,7 +212,7 @@
         case STNotificationTypeLike:
         {
             NSString *postID = _currentBanner.notificationInfo[@"post_id"];
-            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postID];
+            ContainerFeedVC *feedCVC = [ContainerFeedVC singleFeedControllerWithPostId:postID];
             
             [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
         }
@@ -254,7 +254,7 @@
     else
         userId = userIdentifier;
     
-    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
+    ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:userId andUserName:nil];
     [[CoreManager navigationService] pushViewController:feedCVC inTabbarAtIndex:STTabBarIndexHome keepThecurrentStack:NO];
     
     [self dismissCurrentBanner];

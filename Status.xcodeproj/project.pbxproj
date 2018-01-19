@@ -62,10 +62,13 @@
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		07311BA12003FA1E0031F261 /* UIImage+Assets.m in Sources */ = {isa = PBXBuildFile; fileRef = 07311BA02003FA1E0031F261 /* UIImage+Assets.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
+		0748751A20112F9E005E6CFD /* SettingsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0748751920112F9E005E6CFD /* SettingsScene.storyboard */; };
+		0748751D2011541D005E6CFD /* STCustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0748751C2011541D005E6CFD /* STCustomTitleView.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
 		07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */; };
 		0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0755E2381E87DF140016519E /* STChoosePhotoViewController.m */; };
 		0755E23B1E882CBD0016519E /* TagProductsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */; };
+		07582B65200BFBE200C5185D /* ContainerFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07582B64200BFBE200C5185D /* ContainerFeedVC.m */; };
 		075991A81FC36C9F00CF89C0 /* STGetProductsByBarcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 075991A71FC36C9F00CF89C0 /* STGetProductsByBarcode.m */; };
 		075991AB1FC414D600CF89C0 /* STProductSuggestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 075991AA1FC414D600CF89C0 /* STProductSuggestRequest.m */; };
 		075C52961EBDD22700174CC5 /* STTagProductsBrands.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52951EBDD22700174CC5 /* STTagProductsBrands.m */; };
@@ -427,6 +430,9 @@
 		07311BA02003FA1E0031F261 /* UIImage+Assets.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Assets.m"; sourceTree = "<group>"; };
 		073863981F9F0EC500FE13ED /* STMissingProductTVCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMissingProductTVCTableViewController.h; sourceTree = "<group>"; };
 		073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STMissingProductTVCTableViewController.m; sourceTree = "<group>"; };
+		0748751920112F9E005E6CFD /* SettingsScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsScene.storyboard; sourceTree = "<group>"; };
+		0748751B2011541D005E6CFD /* STCustomTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCustomTitleView.h; sourceTree = "<group>"; };
+		0748751C2011541D005E6CFD /* STCustomTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCustomTitleView.m; sourceTree = "<group>"; };
 		074FA8D61EB652600028C33E /* STTagProductsCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsCategories.h; sourceTree = "<group>"; };
 		074FA8D71EB652600028C33E /* STTagProductsCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsCategories.m; sourceTree = "<group>"; };
 		07533D841F6E91020009DDDF /* STBarcodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBarcodeScannerViewController.h; sourceTree = "<group>"; };
@@ -434,6 +440,8 @@
 		0755E2371E87DF140016519E /* STChoosePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChoosePhotoViewController.h; sourceTree = "<group>"; };
 		0755E2381E87DF140016519E /* STChoosePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChoosePhotoViewController.m; sourceTree = "<group>"; };
 		0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TagProductsScene.storyboard; sourceTree = "<group>"; };
+		07582B63200BFBE100C5185D /* ContainerFeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerFeedVC.h; sourceTree = "<group>"; };
+		07582B64200BFBE200C5185D /* ContainerFeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerFeedVC.m; sourceTree = "<group>"; };
 		075991A61FC36C9F00CF89C0 /* STGetProductsByBarcode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STGetProductsByBarcode.h; sourceTree = "<group>"; };
 		075991A71FC36C9F00CF89C0 /* STGetProductsByBarcode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STGetProductsByBarcode.m; sourceTree = "<group>"; };
 		075991A91FC414D600CF89C0 /* STProductSuggestRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STProductSuggestRequest.h; sourceTree = "<group>"; };
@@ -940,6 +948,8 @@
 			children = (
 				071CA92B1F1FD34300434ABB /* STIndexPathTextField.h */,
 				071CA92C1F1FD34300434ABB /* STIndexPathTextField.m */,
+				0748751B2011541D005E6CFD /* STCustomTitleView.h */,
+				0748751C2011541D005E6CFD /* STCustomTitleView.m */,
 			);
 			path = CustomUIElements;
 			sourceTree = "<group>";
@@ -1320,6 +1330,8 @@
 				07B3FFFC1FB43DED009316A2 /* FacebookAd */,
 				2AD97BB01C8C143300C9B3D5 /* FeedCVC.h */,
 				2AD97BB11C8C143300C9B3D5 /* FeedCVC.m */,
+				07582B63200BFBE100C5185D /* ContainerFeedVC.h */,
+				07582B64200BFBE200C5185D /* ContainerFeedVC.m */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1783,10 +1795,10 @@
 			isa = PBXGroup;
 			children = (
 				071CA92A1F1FD31D00434ABB /* CustomUIElements */,
-				99B386D01C82FAA2005B4D8C /* CustomActivities */,
 				99B386D51C82FAA2005B4D8C /* STContextualMenu.h */,
 				99B386D61C82FAA2005B4D8C /* STContextualMenu.m */,
 				99B386D71C82FAA2005B4D8C /* STContextualMenu.xib */,
+				99B386D01C82FAA2005B4D8C /* CustomActivities */,
 				99B386DB1C82FAA2005B4D8C /* STNotificationBanner.h */,
 				99B386DC1C82FAA2005B4D8C /* STNotificationBanner.m */,
 				99B386DD1C82FAA2005B4D8C /* STNotificationBanner.xib */,
@@ -1892,6 +1904,7 @@
 				2AC7777A1C83A65200DAA273 /* LaunchScene.storyboard */,
 				52466BE41C89D52000EEAA2B /* SelectPhoto.storyboard */,
 				2AD97BAC1C8C133B00C9B3D5 /* FeedScene.storyboard */,
+				0748751920112F9E005E6CFD /* SettingsScene.storyboard */,
 				174575B51CA95CD5006CA25F /* ExploreScene.storyboard */,
 				0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */,
 				070DFA081F15F7F80002357B /* EarningsDashboardScene.storyboard */,
@@ -2110,6 +2123,7 @@
 			files = (
 				52466BE51C89D52000EEAA2B /* SelectPhoto.storyboard in Resources */,
 				99B3879D1C82FAA2005B4D8C /* ProximaNovaCond-Regular.otf in Resources */,
+				0748751A20112F9E005E6CFD /* SettingsScene.storyboard in Resources */,
 				99B387B31C82FAA2005B4D8C /* STContextualMenu.xib in Resources */,
 				99B3879B1C82FAA2005B4D8C /* ProximaNovaCond-Light.otf in Resources */,
 				072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */,
@@ -2261,6 +2275,7 @@
 				0778115C1EB75BBE0043A2E8 /* STTagProductsManager.m in Sources */,
 				99B387661C82FAA2005B4D8C /* STSyncContactsRequest.m in Sources */,
 				99B387531C82FAA2005B4D8C /* STGetPostDetailsRequest.m in Sources */,
+				0748751D2011541D005E6CFD /* STCustomTitleView.m in Sources */,
 				99B3875D1C82FAA2005B4D8C /* STInviteUserToUploadRequest.m in Sources */,
 				170912231DF87F5C00B2AF81 /* STNotificationsViewController.m in Sources */,
 				17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */,
@@ -2477,6 +2492,7 @@
 				170911F91DF87F0400B2AF81 /* NearbyVC.m in Sources */,
 				175204451CAAC84200C55170 /* SmallFeedCell.m in Sources */,
 				170912541DF883FC00B2AF81 /* STUsersListController.m in Sources */,
+				07582B65200BFBE200C5185D /* ContainerFeedVC.m in Sources */,
 				99B387471C82FAA2005B4D8C /* UIImageView+Mask.m in Sources */,
 				99B3877C1C82FAA2005B4D8C /* STNativeAdsController.m in Sources */,
 				072143BA1FA2F6FE0009C6E9 /* STTagProductsContainerSegue.m in Sources */,

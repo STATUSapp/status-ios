@@ -12,7 +12,7 @@
 #import "STNearbyCell.h"
 #import "STListUser.h"
 #import "STChatRoomViewController.h"
-#import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 #import "STNearbyCollectionLayout.h"
 #import "STTabBarViewController.h"
 #import "STLoadingView.h"
@@ -227,7 +227,7 @@ static NSString * const nearbyCell = @"STNearbyCell";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     STUserProfile *userProfile = [_feedProcessor objectAtIndex:indexPath.row];
     
-    FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:userProfile.uuid andUserName:userProfile.fullName];
+    ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:userProfile.uuid andUserName:userProfile.fullName];
     
     [self.navigationController pushViewController:feedCVC animated:YES];
 }

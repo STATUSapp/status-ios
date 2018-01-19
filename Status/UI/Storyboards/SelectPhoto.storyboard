@@ -24,24 +24,24 @@
             <objects>
                 <viewController storyboardIdentifier="STChoosePhotoViewController" extendedLayoutIncludesOpaqueBars="YES" id="0BU-W2-Z8i" customClass="STChoosePhotoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5uR-br-fjM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwi-UX-gzZ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="558"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="558"/>
                                 <connections>
                                     <segue destination="spR-Cs-q33" kind="embed" id="z9p-ND-sjB"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRf-iH-enc">
-                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="558" width="375" height="45"/>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="5Jr-OX-1kN"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DW1-r6-eOk" userLabel="Under Safe Area View">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="603" width="375" height="0.0"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -61,6 +61,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1RV-oZ-0OI"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Select Photo" id="K4a-gA-wlP">
                         <barButtonItem key="backBarButtonItem" title="    " id="He4-5m-mPO"/>
                     </navigationItem>

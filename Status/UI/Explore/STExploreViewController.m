@@ -12,6 +12,7 @@
 #import "CoreManager.h"
 #import "STProcessorsService.h"
 #import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 #import "NearbyVC.h"
 #import "STExploreFilters.h"
 
@@ -24,7 +25,7 @@ typedef NS_ENUM(NSUInteger, STExploreFlow) {
 
 const CGFloat kFiltersDefaultHeight = 41.f;
 
-@interface STExploreViewController ()<STSCustomSegmentProtocol, UIPageViewControllerDelegate, UIPageViewControllerDataSource, STSideBySideContaineeProtocol, STExploreFiltersProtocol>
+@interface STExploreViewController ()<STSCustomSegmentProtocol, UIPageViewControllerDelegate, UIPageViewControllerDataSource, STSideBySideContaineeProtocol, STExploreFiltersProtocol, ContainerFeedCVCProtocol>
 @property (weak, nonatomic) IBOutlet UIView *topViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *filtersViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -247,6 +248,7 @@ const CGFloat kFiltersDefaultHeight = 41.f;
         
         FeedCVC *vc = [FeedCVC feedControllerWithFlowProcessor:feedProcessor];
         vc.containeeDelegate = self;
+        vc.delegate = self;
         [viewControllers addObject:vc];
     }
     
@@ -320,6 +322,23 @@ const CGFloat kFiltersDefaultHeight = 41.f;
 -(UITabBarController *)containeeTabBarController{
     return self.tabBarController;
 }
+
+#pragma mark - ContainerFeedCVCProtocol
+
+-(void)configureNavigationBar{
+    
+}
+-(void)pushViewController:(UIViewController *)vc
+                 animated:(BOOL)animated{
+    [self.navigationController pushViewController:vc animated:animated];
+}
+-(void)presentViewController:(UIViewController *)viewController
+                    animated:(BOOL)animated{
+    [self.navigationController presentViewController:viewController
+                                            animated:YES
+                                          completion:nil];
+}
+
 #pragma mark - UIPageViewController Delegate and Datasource
 
 

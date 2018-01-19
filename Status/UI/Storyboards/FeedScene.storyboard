@@ -942,13 +942,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
-                        <outlet property="earningsBarButton" destination="gDW-8d-RPt" id="mzK-Jg-dYv"/>
                         <outlet property="loadingView" destination="JqY-Wn-ru7" id="Oxu-rv-VEA"/>
                         <outlet property="loadingViewImage" destination="SUQ-Ff-C4q" id="9cQ-sq-c0g"/>
-                        <outlet property="navBarLogoView" destination="C51-kd-Pdl" id="aOt-jP-F5w"/>
                         <outlet property="noDataView" destination="iCq-M5-6oM" id="GDv-xz-eba"/>
-                        <outlet property="optionsBarButton" destination="wzU-3a-IFG" id="780-6S-zWi"/>
-                        <outlet property="settingsBarButton" destination="0Xg-Ow-vIL" id="xrn-7a-90t"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OFn-Gk-snp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1047,25 +1043,51 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="Pkn-hQ-jsj"/>
                 </view>
-                <view contentMode="scaleToFill" id="C51-kd-Pdl" userLabel="TabBarLogo">
-                    <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo status home screen" translatesAutoresizingMaskIntoConstraints="NO" id="OMH-OK-q2A">
-                            <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="OMH-OK-q2A" firstAttribute="trailing" secondItem="bO5-eC-TIl" secondAttribute="trailing" id="5Lc-Wh-3JZ"/>
-                        <constraint firstItem="OMH-OK-q2A" firstAttribute="top" secondItem="bO5-eC-TIl" secondAttribute="top" id="Ccn-Vg-Ahe"/>
-                        <constraint firstItem="OMH-OK-q2A" firstAttribute="leading" secondItem="bO5-eC-TIl" secondAttribute="leading" id="cIo-Yw-rts"/>
-                        <constraint firstItem="OMH-OK-q2A" firstAttribute="bottom" secondItem="bO5-eC-TIl" secondAttribute="bottom" id="iwC-wT-N3a"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="bO5-eC-TIl"/>
-                </view>
-                <barButtonItem id="gDW-8d-RPt" userLabel="EarningsButtonItem">
-                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ycd-V0-SuD">
+                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="AxN-ZE-6dH">
+                    <connections>
+                        <action selector="onDoubleTap:" destination="kUw-q3-wvD" id="NOc-8k-7kn"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1209.5999999999999" y="1175.7121439280361"/>
+        </scene>
+        <!--Container FeedVC-->
+        <scene sceneID="I1T-yH-Xhm">
+            <objects>
+                <viewController storyboardIdentifier="CONTAINER_FEED_VC" id="TEe-Dh-eY8" customClass="ContainerFeedVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yz1-HT-CzT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ou8-JF-tEk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <connections>
+                                    <segue destination="kUw-q3-wvD" kind="embed" identifier="EMBEDED_FEED" id="adP-gg-Uf6"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ou8-JF-tEk" firstAttribute="bottom" secondItem="AJC-lH-BXF" secondAttribute="bottom" id="6Lu-Fi-m4W"/>
+                            <constraint firstItem="Ou8-JF-tEk" firstAttribute="trailing" secondItem="AJC-lH-BXF" secondAttribute="trailing" id="Icx-EV-0AQ"/>
+                            <constraint firstItem="Ou8-JF-tEk" firstAttribute="leading" secondItem="AJC-lH-BXF" secondAttribute="leading" id="TgJ-ms-TQ5"/>
+                            <constraint firstItem="Ou8-JF-tEk" firstAttribute="top" secondItem="AJC-lH-BXF" secondAttribute="top" id="oJ2-VR-DJH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="AJC-lH-BXF"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="hZw-yo-FgZ">
+                        <barButtonItem key="backBarButtonItem" title="    " id="L1c-Cs-ukB"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="earningsBarButton" destination="fzO-mV-fIG" id="Kf5-0c-3ZD"/>
+                        <outlet property="navBarLogoView" destination="6jm-uR-Onf" id="qqz-Sd-qUi"/>
+                        <outlet property="optionsBarButton" destination="RiF-rR-uOE" id="mVn-qF-SRr"/>
+                        <outlet property="settingsBarButton" destination="EQP-S5-QDz" id="Vt5-nC-ONC"/>
+                    </connections>
+                </viewController>
+                <barButtonItem id="fzO-mV-fIG" userLabel="EarningsButtonItem">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="khL-68-ORb">
                         <rect key="frame" x="16" y="6" width="32" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1075,27 +1097,12 @@
                         <state key="selected" image="revenue icon pressed"/>
                         <state key="highlighted" image="revenue icon pressed"/>
                         <connections>
-                            <segue destination="FUp-UQ-PVI" kind="show" id="x5a-5h-nZL"/>
+                            <segue destination="FUp-UQ-PVI" kind="show" id="pEt-Hm-g6n"/>
                         </connections>
                     </button>
                 </barButtonItem>
-                <barButtonItem id="0Xg-Ow-vIL" userLabel="SettingsButtonItem">
-                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vme-lp-KCb">
-                        <rect key="frame" x="16" y="6" width="32" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <state key="normal" image="settings icon">
-                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                        <state key="selected" image="settings icon pressed"/>
-                        <state key="highlighted" image="settings icon pressed"/>
-                        <connections>
-                            <action selector="onSettingsButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="Mmm-vK-zqP"/>
-                        </connections>
-                    </button>
-                </barButtonItem>
-                <barButtonItem id="wzU-3a-IFG" userLabel="OptionsButtonItem">
-                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cqt-hF-BPM">
+                <barButtonItem id="RiF-rR-uOE" userLabel="OptionsButtonItem">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="v31-ed-rkx">
                         <rect key="frame" x="16" y="6" width="32" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1105,17 +1112,44 @@
                         <state key="selected" image="options button pressed"/>
                         <state key="highlighted" image="options button pressed"/>
                         <connections>
-                            <action selector="onProfileOptionsPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="wuC-lb-xTy"/>
+                            <action selector="onOptionButtonPressed:" destination="TEe-Dh-eY8" eventType="touchUpInside" id="7lc-6U-XvK"/>
                         </connections>
                     </button>
                 </barButtonItem>
-                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="AxN-ZE-6dH">
-                    <connections>
-                        <action selector="onDoubleTap:" destination="kUw-q3-wvD" id="NOc-8k-7kn"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6jm-uR-Onf" userLabel="TabBarLogo" customClass="STCustomTitleView" customModule="STATUS" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo status home screen" translatesAutoresizingMaskIntoConstraints="NO" id="dlA-C3-x6y">
+                            <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="dlA-C3-x6y" firstAttribute="leading" secondItem="6jm-uR-Onf" secondAttribute="leading" id="3Rf-eH-O3D"/>
+                        <constraint firstItem="dlA-C3-x6y" firstAttribute="top" secondItem="6jm-uR-Onf" secondAttribute="top" id="4UT-Fx-OPQ"/>
+                        <constraint firstItem="dlA-C3-x6y" firstAttribute="trailing" secondItem="6jm-uR-Onf" secondAttribute="trailing" id="Xes-RD-epr"/>
+                        <constraint firstItem="dlA-C3-x6y" firstAttribute="bottom" secondItem="6jm-uR-Onf" secondAttribute="bottom" id="dnG-Al-HcA"/>
+                    </constraints>
+                </view>
+                <barButtonItem id="EQP-S5-QDz" userLabel="SettingsButtonItem">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="agy-Pi-Vou">
+                        <rect key="frame" x="16" y="6" width="32" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <state key="normal" image="settings icon">
+                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" image="settings icon pressed"/>
+                        <state key="highlighted" image="settings icon pressed"/>
+                        <connections>
+                            <segue destination="Miz-Nu-K8Z" kind="presentation" modalTransitionStyle="coverVertical" id="2tY-w6-jNl"/>
+                        </connections>
+                    </button>
+                </barButtonItem>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6SS-fv-XS2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1209.5999999999999" y="1175.7121439280361"/>
+            <point key="canvasLocation" x="1254" y="1907"/>
         </scene>
         <!--EARNINGS_VC-->
         <scene sceneID="Rqj-5J-qsW">
@@ -1123,7 +1157,15 @@
                 <viewControllerPlaceholder storyboardName="EarningsDashboardScene" referencedIdentifier="EARNINGS_VC" id="FUp-UQ-PVI" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AgL-bY-svs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="1176"/>
+            <point key="canvasLocation" x="1872" y="1789"/>
+        </scene>
+        <!--SettingsScene-->
+        <scene sceneID="pEm-Ri-bKq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsScene" id="Miz-Nu-K8Z" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fox-sJ-fJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1870" y="1936"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oVb-IP-pWb">
@@ -1150,6 +1192,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8W-SN-brJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="225" y="1176"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DjJ-ra-MfH">
+            <objects>
+                <navigationController storyboardIdentifier="CONTAINER_FEED_NAV" automaticallyAdjustsScrollViewInsets="NO" id="QMF-2Y-GIC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mLg-vT-RWj">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="TEe-Dh-eY8" kind="relationship" relationship="rootViewController" id="HSI-iA-dfQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5v0-Ky-kkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="225" y="1907"/>
         </scene>
     </scenes>
     <resources>
@@ -1178,4 +1238,7 @@
         <image name="splashscreen" width="375" height="667"/>
         <image name="user_photo_gradient" width="375" height="151"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="adP-gg-Uf6"/>
+    </inferredMetricsTieBreakers>
 </document>

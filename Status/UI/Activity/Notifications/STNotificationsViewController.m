@@ -23,7 +23,7 @@
 
 #import "NSString+MD5.h"
 
-#import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 #import "STNavigationService.h"
 #import "STNotificationsManager.h"
 #import "STDataAccessUtils.h"
@@ -243,7 +243,7 @@ const float kNoNotifHeight = 24.f;
         default:
         {
             
-            FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:no.userId andUserName:nil];
+            ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:no.userId andUserName:nil];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
@@ -260,14 +260,14 @@ const float kNoNotifHeight = 24.f;
         case STNotificationTypeUploaded:
         {
             
-            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:no.postId];
+            ContainerFeedVC *feedCVC = [ContainerFeedVC singleFeedControllerWithPostId:no.postId];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
         case STNotificationTypeInvite:
         {
             
-            FeedCVC *feedCVC = [FeedCVC galleryFeedControllerForUserId:no.userId andUserName:nil];
+            ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:no.userId andUserName:nil];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;
@@ -294,7 +294,7 @@ const float kNoNotifHeight = 24.f;
         default:
         {
             
-            FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:no.userId];
+            ContainerFeedVC *feedCVC = [ContainerFeedVC singleFeedControllerWithPostId:no.userId];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
             break;

@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SDh-oR-1d9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Settings View Controller-->
+        <scene sceneID="2qp-3v-OuB">
+            <objects>
+                <tableViewController storyboardIdentifier="STSettingsViewController" id="HjB-Rw-tZR" customClass="STSettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="znh-zh-sik">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="i6Q-KN-BlJ">
+                            <rect key="frame" x="0.0" y="805.5" width="375" height="105"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0.8" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="bq2-2j-aKF">
+                                    <rect key="frame" x="141" y="78" width="93.5" height="17"/>
+                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoSettings" translatesAutoresizingMaskIntoConstraints="NO" id="quE-Ug-spk">
+                                    <rect key="frame" x="159" y="8" width="57" height="62"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.93778896329999994" green="0.93737530710000005" blue="0.94972246890000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="centerX" secondItem="quE-Ug-spk" secondAttribute="centerX" id="HKC-fv-OdR"/>
+                                <constraint firstItem="bq2-2j-aKF" firstAttribute="centerX" secondItem="quE-Ug-spk" secondAttribute="centerX" id="YlU-7I-pAl"/>
+                                <constraint firstItem="quE-Ug-spk" firstAttribute="top" secondItem="i6Q-KN-BlJ" secondAttribute="top" constant="8" id="mVS-z3-7fs"/>
+                                <constraint firstItem="bq2-2j-aKF" firstAttribute="top" secondItem="quE-Ug-spk" secondAttribute="bottom" constant="8" id="yD3-Aq-04d"/>
+                            </constraints>
+                        </view>
+                        <sections>
+                            <tableViewSection headerTitle="Notifications" id="aQi-m9-2cP">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TJ1-7S-2X4">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TJ1-7S-2X4" id="eNQ-Ny-gMi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="1IY-FU-h1d">
+                                                    <rect key="frame" x="35" y="12.5" width="41" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yFC-IN-uuG">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onTapLikeSwitch:" destination="HjB-Rw-tZR" eventType="valueChanged" id="Xp9-0l-lda"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="yFC-IN-uuG" secondAttribute="trailing" constant="8" id="ae6-Su-HvH"/>
+                                                <constraint firstAttribute="centerY" secondItem="yFC-IN-uuG" secondAttribute="centerY" id="iEd-a9-WEi"/>
+                                                <constraint firstAttribute="centerY" secondItem="1IY-FU-h1d" secondAttribute="centerY" id="jeZ-z2-oQo"/>
+                                                <constraint firstItem="1IY-FU-h1d" firstAttribute="leading" secondItem="eNQ-Ny-gMi" secondAttribute="leading" constant="35" id="xcI-LK-PPK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vuw-nE-i5U">
+                                        <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vuw-nE-i5U" id="19d-sY-Cdt">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ZMi-Bb-gqb">
+                                                    <rect key="frame" x="35" y="12.5" width="80" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bha-dc-jv8">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onTapMessagesSwitch:" destination="HjB-Rw-tZR" eventType="valueChanged" id="z8a-16-Fcc"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Bha-dc-jv8" secondAttribute="trailing" constant="8" id="3WJ-sU-g56"/>
+                                                <constraint firstAttribute="centerY" secondItem="Bha-dc-jv8" secondAttribute="centerY" id="7Xs-Gg-16Q"/>
+                                                <constraint firstAttribute="centerY" secondItem="ZMi-Bb-gqb" secondAttribute="centerY" id="8z8-sv-Qv2"/>
+                                                <constraint firstItem="ZMi-Bb-gqb" firstAttribute="leading" secondItem="19d-sY-Cdt" secondAttribute="leading" constant="35" id="dTS-Km-lYd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="JMq-4v-c1c">
+                                        <rect key="frame" x="0.0" y="143.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JMq-4v-c1c" id="HPE-dP-Rt4">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload a new photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="FVb-fH-Dlw">
+                                                    <rect key="frame" x="35" y="12.5" width="160.5" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BZy-iN-Laa">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onTapUploadNewPhotoSwitch:" destination="HjB-Rw-tZR" eventType="valueChanged" id="cuE-mc-dxD"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="BZy-iN-Laa" secondAttribute="centerY" id="8Th-Ei-ZOC"/>
+                                                <constraint firstAttribute="centerY" secondItem="FVb-fH-Dlw" secondAttribute="centerY" id="TVW-oj-cXh"/>
+                                                <constraint firstAttribute="trailing" secondItem="BZy-iN-Laa" secondAttribute="trailing" constant="8" id="eye-1o-Q1I"/>
+                                                <constraint firstItem="FVb-fH-Dlw" firstAttribute="leading" secondItem="HPE-dP-Rt4" secondAttribute="leading" constant="35" id="xWH-m4-RYB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="WdW-b2-Zoe">
+                                        <rect key="frame" x="0.0" y="187.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WdW-b2-Zoe" id="u1j-db-qoV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A friend joins STATUS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-V9-RwJ">
+                                                    <rect key="frame" x="35" y="12.5" width="172" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hHG-0w-ikV">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onTapFriendJoinsStatusSwitch:" destination="HjB-Rw-tZR" eventType="valueChanged" id="ZYc-C0-S8v"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="ipe-V9-RwJ" secondAttribute="centerY" id="bm8-EI-mac"/>
+                                                <constraint firstAttribute="centerY" secondItem="hHG-0w-ikV" secondAttribute="centerY" id="cOo-oi-efz"/>
+                                                <constraint firstAttribute="trailing" secondItem="hHG-0w-ikV" secondAttribute="trailing" constant="8" id="icH-ub-LWj"/>
+                                                <constraint firstItem="ipe-V9-RwJ" firstAttribute="leading" secondItem="u1j-db-qoV" secondAttribute="leading" constant="35" id="qDR-N8-4Te"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9aV-xs-lOq">
+                                        <rect key="frame" x="0.0" y="231.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9aV-xs-lOq" id="nOD-GH-Wkv">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos waiting for you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="PVm-BL-T5h">
+                                                    <rect key="frame" x="35" y="12.5" width="176" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6vj-ky-x2Q">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onTapPhotosWaitingSwitch:" destination="HjB-Rw-tZR" eventType="valueChanged" id="Vt0-Yk-2dY"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="6vj-ky-x2Q" secondAttribute="centerY" id="09R-xO-eE4"/>
+                                                <constraint firstItem="PVm-BL-T5h" firstAttribute="leading" secondItem="nOD-GH-Wkv" secondAttribute="leading" constant="35" id="XQp-bx-38M"/>
+                                                <constraint firstAttribute="centerY" secondItem="PVm-BL-T5h" secondAttribute="centerY" id="b9O-MG-dUs"/>
+                                                <constraint firstAttribute="trailing" secondItem="6vj-ky-x2Q" secondAttribute="trailing" constant="8" id="bgr-bC-RqP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ZqU-dC-2dd">
+                                        <rect key="frame" x="0.0" y="275.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZqU-dC-2dd" id="g0k-Op-442">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earn extra likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="7ra-SY-7Ea">
+                                                    <rect key="frame" x="35" y="12.5" width="120.5" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SnE-TV-SIf">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onTapExtraLikesSwitch:" destination="HjB-Rw-tZR" eventType="valueChanged" id="AON-xr-MUs"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="SnE-TV-SIf" secondAttribute="centerY" id="DF9-yl-kWL"/>
+                                                <constraint firstItem="7ra-SY-7Ea" firstAttribute="leading" secondItem="g0k-Op-442" secondAttribute="leading" constant="35" id="JgO-G6-Fa0"/>
+                                                <constraint firstAttribute="centerY" secondItem="7ra-SY-7Ea" secondAttribute="centerY" id="WTw-pR-0uP"/>
+                                                <constraint firstAttribute="trailing" secondItem="SnE-TV-SIf" secondAttribute="trailing" constant="8" id="ibH-LG-Kkb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0hG-gE-iQY">
+                                        <rect key="frame" x="0.0" y="319.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0hG-gE-iQY" id="N9P-0T-Hhd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="IwF-1B-zKT">
+                                                    <rect key="frame" x="35" y="12.5" width="76.5" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qHM-qx-4Cw">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onTapFollowersSwitch:" destination="HjB-Rw-tZR" eventType="valueChanged" id="cSn-NK-WxQ"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="IwF-1B-zKT" secondAttribute="centerY" id="5T5-bL-DX9"/>
+                                                <constraint firstAttribute="centerY" secondItem="qHM-qx-4Cw" secondAttribute="centerY" id="hro-Sz-eJd"/>
+                                                <constraint firstAttribute="trailing" secondItem="qHM-qx-4Cw" secondAttribute="trailing" constant="8" id="lrV-ch-BEp"/>
+                                                <constraint firstItem="IwF-1B-zKT" firstAttribute="leading" secondItem="N9P-0T-Hhd" secondAttribute="leading" constant="35" id="tet-UZ-qJZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="nKX-XZ-l3h">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="O46-Q9-OBe">
+                                        <rect key="frame" x="0.0" y="383.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O46-Q9-OBe" id="2YI-dX-beh">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy Profile URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="8v8-4D-OH1">
+                                                    <rect key="frame" x="35" y="13" width="320" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="vTI-nS-R6E"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bfi-OU-IzL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <connections>
+                                                        <action selector="onCopyProfilePressed:" destination="HjB-Rw-tZR" eventType="touchUpInside" id="auZ-3A-Jfx"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Bfi-OU-IzL" secondAttribute="bottom" id="1za-nZ-D4L"/>
+                                                <constraint firstItem="8v8-4D-OH1" firstAttribute="leading" secondItem="2YI-dX-beh" secondAttribute="leading" constant="35" id="F3b-VH-2xx"/>
+                                                <constraint firstItem="8v8-4D-OH1" firstAttribute="centerY" secondItem="2YI-dX-beh" secondAttribute="centerY" id="Hga-iU-3aS"/>
+                                                <constraint firstAttribute="trailing" secondItem="8v8-4D-OH1" secondAttribute="trailing" constant="20" id="TuP-tS-Auo"/>
+                                                <constraint firstItem="Bfi-OU-IzL" firstAttribute="leading" secondItem="2YI-dX-beh" secondAttribute="leading" id="fQo-gq-gc1"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bfi-OU-IzL" secondAttribute="trailing" id="h0W-Rs-eEC"/>
+                                                <constraint firstItem="Bfi-OU-IzL" firstAttribute="top" secondItem="2YI-dX-beh" secondAttribute="top" id="lKR-Cm-Gri"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="oCC-q3-ADt">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kqy-fW-5dF">
+                                        <rect key="frame" x="0.0" y="447.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kqy-fW-5dF" id="bGZ-EI-bdB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ZQe-hk-VkN" userLabel="Invite Friends">
+                                                    <rect key="frame" x="35" y="13.5" width="106" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktB-tm-AE4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapInviteFriends:" destination="HjB-Rw-tZR" eventType="touchUpInside" id="ePA-GD-Fjg"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="ktB-tm-AE4" secondAttribute="bottom" id="0jJ-Su-QnT"/>
+                                                <constraint firstAttribute="trailing" secondItem="ktB-tm-AE4" secondAttribute="trailing" id="3rc-cb-5lW"/>
+                                                <constraint firstAttribute="centerY" secondItem="ZQe-hk-VkN" secondAttribute="centerY" constant="-1" id="LRd-0K-ZyO"/>
+                                                <constraint firstItem="ktB-tm-AE4" firstAttribute="top" secondItem="bGZ-EI-bdB" secondAttribute="top" id="Pn2-eQ-GEx"/>
+                                                <constraint firstItem="ktB-tm-AE4" firstAttribute="leading" secondItem="bGZ-EI-bdB" secondAttribute="leading" id="mNs-Ae-dyJ"/>
+                                                <constraint firstItem="ZQe-hk-VkN" firstAttribute="leading" secondItem="bGZ-EI-bdB" secondAttribute="leading" constant="35" id="tgW-xr-SFd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yJW-OL-k7H">
+                                        <rect key="frame" x="0.0" y="491.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yJW-OL-k7H" id="pwa-QH-SFI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People you should follow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Xrp-Jm-NCC">
+                                                    <rect key="frame" x="35" y="13.5" width="198.5" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ju7-Gq-ZG3">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapFollowPeople:" destination="HjB-Rw-tZR" eventType="touchUpInside" id="Fev-hD-LbN"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Ju7-Gq-ZG3" secondAttribute="trailing" id="7gr-9G-Mc6"/>
+                                                <constraint firstItem="Ju7-Gq-ZG3" firstAttribute="leading" secondItem="pwa-QH-SFI" secondAttribute="leading" id="BJ7-p7-bu7"/>
+                                                <constraint firstItem="Xrp-Jm-NCC" firstAttribute="leading" secondItem="pwa-QH-SFI" secondAttribute="leading" constant="35" id="GAJ-cY-uVd"/>
+                                                <constraint firstAttribute="centerY" secondItem="Xrp-Jm-NCC" secondAttribute="centerY" constant="-1" id="TxA-Q9-z6a"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ju7-Gq-ZG3" secondAttribute="bottom" id="rs6-zr-fZI"/>
+                                                <constraint firstItem="Ju7-Gq-ZG3" firstAttribute="top" secondItem="pwa-QH-SFI" secondAttribute="top" id="wyw-4w-lxh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="d1s-8g-H2q">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zx9-n5-kXw">
+                                        <rect key="frame" x="0.0" y="555.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zx9-n5-kXw" id="Vox-uR-6Pg">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate Us in Appstore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="a22-tU-424">
+                                                    <rect key="frame" x="35" y="13.5" width="157" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2Y-08-C1e">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapRateUsInAppstore:" destination="HjB-Rw-tZR" eventType="touchUpInside" id="5ge-2v-Z4d"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="a22-tU-424" firstAttribute="leading" secondItem="Vox-uR-6Pg" secondAttribute="leading" constant="35" id="7tL-oh-VaF"/>
+                                                <constraint firstAttribute="trailing" secondItem="C2Y-08-C1e" secondAttribute="trailing" id="D3Y-sv-l6n"/>
+                                                <constraint firstItem="C2Y-08-C1e" firstAttribute="leading" secondItem="Vox-uR-6Pg" secondAttribute="leading" id="DAc-cG-7Qs"/>
+                                                <constraint firstAttribute="bottom" secondItem="C2Y-08-C1e" secondAttribute="bottom" id="USb-yK-IzG"/>
+                                                <constraint firstAttribute="centerY" secondItem="a22-tU-424" secondAttribute="centerY" constant="-1" id="WpL-EH-BGG"/>
+                                                <constraint firstItem="C2Y-08-C1e" firstAttribute="top" secondItem="Vox-uR-6Pg" secondAttribute="top" id="gAD-Ep-5ha"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ZlY-yK-Aya">
+                                        <rect key="frame" x="0.0" y="599.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZlY-yK-Aya" id="3by-6J-onD">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow Us on Instagram" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="omW-uK-WN3">
+                                                    <rect key="frame" x="35" y="13.5" width="185" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhj-2d-S9c">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapFollowUsOnInstagram:" destination="HjB-Rw-tZR" eventType="touchUpInside" id="pia-Gg-Rhb"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Rhj-2d-S9c" firstAttribute="top" secondItem="3by-6J-onD" secondAttribute="top" id="36X-KY-OLJ"/>
+                                                <constraint firstAttribute="centerY" secondItem="omW-uK-WN3" secondAttribute="centerY" constant="-1" id="Jel-qx-qxW"/>
+                                                <constraint firstItem="omW-uK-WN3" firstAttribute="leading" secondItem="3by-6J-onD" secondAttribute="leading" constant="35" id="OA8-Fd-cid"/>
+                                                <constraint firstAttribute="bottom" secondItem="Rhj-2d-S9c" secondAttribute="bottom" id="OLG-fD-ybM"/>
+                                                <constraint firstItem="Rhj-2d-S9c" firstAttribute="leading" secondItem="3by-6J-onD" secondAttribute="leading" id="nP6-Tw-BLZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rhj-2d-S9c" secondAttribute="trailing" id="xy2-pn-Tia"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ule-ku-CH0">
+                                        <rect key="frame" x="0.0" y="643.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ule-ku-CH0" id="2Hy-QD-mBC">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like Us on Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="9Iv-fV-Jw7">
+                                                    <rect key="frame" x="35" y="13.5" width="166.5" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAi-hH-vV6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapLikeUsOnFacebook:" destination="HjB-Rw-tZR" eventType="touchUpInside" id="NfQ-QC-Zeq"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="tAi-hH-vV6" secondAttribute="trailing" id="35L-Mq-hd7"/>
+                                                <constraint firstAttribute="centerY" secondItem="9Iv-fV-Jw7" secondAttribute="centerY" constant="-1" id="4AZ-iC-Gxq"/>
+                                                <constraint firstItem="9Iv-fV-Jw7" firstAttribute="leading" secondItem="2Hy-QD-mBC" secondAttribute="leading" constant="35" id="D0o-Ju-otp"/>
+                                                <constraint firstAttribute="bottom" secondItem="tAi-hH-vV6" secondAttribute="bottom" id="Mdc-vT-eLP"/>
+                                                <constraint firstItem="tAi-hH-vV6" firstAttribute="top" secondItem="2Hy-QD-mBC" secondAttribute="top" id="Ro8-gp-cbN"/>
+                                                <constraint firstItem="tAi-hH-vV6" firstAttribute="leading" secondItem="2Hy-QD-mBC" secondAttribute="leading" id="nM4-ol-fkh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3nQ-Wk-lI7">
+                                        <rect key="frame" x="0.0" y="687.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3nQ-Wk-lI7" id="ZlY-Xw-Ywc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How It Works" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Ztb-uW-chN">
+                                                    <rect key="frame" x="35" y="13.5" width="104.5" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWS-p6-1lM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onHowItWorksPressed:" destination="HjB-Rw-tZR" eventType="touchUpInside" id="w7v-eF-1bn"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="mWS-p6-1lM" secondAttribute="bottom" id="1NB-Ld-RUQ"/>
+                                                <constraint firstItem="Ztb-uW-chN" firstAttribute="leading" secondItem="ZlY-Xw-Ywc" secondAttribute="leading" constant="35" id="MSa-Ej-CiC"/>
+                                                <constraint firstItem="mWS-p6-1lM" firstAttribute="leading" secondItem="ZlY-Xw-Ywc" secondAttribute="leading" id="fTf-Hw-0vY"/>
+                                                <constraint firstAttribute="centerY" secondItem="Ztb-uW-chN" secondAttribute="centerY" constant="-1" id="p3O-iy-OcZ"/>
+                                                <constraint firstItem="mWS-p6-1lM" firstAttribute="top" secondItem="ZlY-Xw-Ywc" secondAttribute="top" id="q02-Iw-6af"/>
+                                                <constraint firstAttribute="trailing" secondItem="mWS-p6-1lM" secondAttribute="trailing" id="wPh-QU-oRS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="CAy-5F-beI">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="HjG-Tx-Oi8">
+                                        <rect key="frame" x="0.0" y="751.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HjG-Tx-Oi8" id="C64-mY-DIp">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="9d8-Bv-kND">
+                                                    <rect key="frame" x="160" y="12.5" width="55" height="18"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhg-Ap-WSy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onTapLogout:" destination="HjB-Rw-tZR" eventType="touchUpInside" id="xiI-J1-dUg"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Bhg-Ap-WSy" firstAttribute="top" secondItem="C64-mY-DIp" secondAttribute="top" id="30p-u9-NON"/>
+                                                <constraint firstAttribute="bottom" secondItem="Bhg-Ap-WSy" secondAttribute="bottom" id="KYp-gx-v74"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bhg-Ap-WSy" secondAttribute="trailing" id="LEV-Ya-Wh9"/>
+                                                <constraint firstItem="Bhg-Ap-WSy" firstAttribute="leading" secondItem="C64-mY-DIp" secondAttribute="leading" id="N4d-xT-N18"/>
+                                                <constraint firstAttribute="centerY" secondItem="9d8-Bv-kND" secondAttribute="centerY" id="lsO-Vl-fjF"/>
+                                                <constraint firstAttribute="centerX" secondItem="9d8-Bv-kND" secondAttribute="centerX" id="uZV-Ze-rpx"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="HjB-Rw-tZR" id="Y4C-oH-m6m"/>
+                            <outlet property="delegate" destination="HjB-Rw-tZR" id="mBF-Ag-2BW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="wHl-Pk-ury"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="logoutCell" destination="HjG-Tx-Oi8" id="OXa-5V-fnV"/>
+                        <outlet property="switchExtraLikes" destination="SnE-TV-SIf" id="8Wo-GJ-fwB"/>
+                        <outlet property="switchFollowers" destination="qHM-qx-4Cw" id="44y-9S-wfi"/>
+                        <outlet property="switchFriendJoinsStatus" destination="hHG-0w-ikV" id="mCC-Gs-rq3"/>
+                        <outlet property="switchLikes" destination="yFC-IN-uuG" id="nZf-1i-QgJ"/>
+                        <outlet property="switchMessages" destination="Bha-dc-jv8" id="Eb4-TN-8Xv"/>
+                        <outlet property="switchPhotosWaiting" destination="6vj-ky-x2Q" id="ibq-As-nAm"/>
+                        <outlet property="switchUploadPhoto" destination="BZy-iN-Laa" id="H8u-jh-Ssc"/>
+                        <outlet property="versionLabel" destination="bq2-2j-aKF" id="D5e-Jx-Ifo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ccx-Oa-Rdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2192.5" y="1444.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cxY-WA-PSp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SDh-oR-1d9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RO4-gw-LlZ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HjB-Rw-tZR" kind="relationship" relationship="rootViewController" id="Rer-CE-Vqb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QQT-Vx-qeT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1289" y="1444"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logoSettings" width="57" height="62"/>
+    </resources>
+</document>

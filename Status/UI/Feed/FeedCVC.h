@@ -12,16 +12,28 @@
 
 @class STFlowProcessor;
 
-@interface FeedCVC : UICollectionViewController<STSideBySideContainerProtocol>
+@protocol ContainerFeedCVCProtocol
 
-+ (FeedCVC *)mainFeedController;
-+ (FeedCVC *)singleFeedControllerWithPostId:(NSString *)postId;
-+ (FeedCVC *)galleryFeedControllerForUserId:(NSString *)userId
-                                andUserName:(NSString *)userName;
+@required
+-(void)configureNavigationBar;
+-(void)pushViewController:(UIViewController *)vc
+                 animated:(BOOL)animated;
+-(void)presentViewController:(UIViewController *)viewController
+                    animated:(BOOL)animated;
+@end
+
+@interface FeedCVC : UICollectionViewController<STSideBySideContainerProtocol>
 
 + (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor;
 
-@property (nonatomic, strong, readonly) STFlowProcessor *feedProcessor;
 @property (nonatomic, weak) id<STSideBySideContaineeProtocol> containeeDelegate;
+@property (nonatomic, weak) id<ContainerFeedCVCProtocol>delegate;
+
+@property (nonatomic, strong, readonly) STFlowProcessor *feedProcessor;
+@property (nonatomic, strong, readonly) NSString *userName;
+
+-(void)setFeedProcessor:(STFlowProcessor *)feedProcessor;
+-(void)setUserName:(NSString *)userName;
+- (void)onProfileOptionsPressed:(id)sender;
 
 @end

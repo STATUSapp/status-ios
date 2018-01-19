@@ -10,7 +10,7 @@
 #import "STFacebookLoginController.h"
 #import "STNavigationService.h"
 
-#import "FeedCVC.h"
+#import "ContainerFeedVC.h"
 
 NSString * const kNonBrankLinkKey = @"+non_branch_link";
 NSString * const kDeepLinkPathKey = @"$deeplink_path";
@@ -62,18 +62,18 @@ NSString * const kHostPostKey = @"post";
             if ([hostString isEqualToString:kHostUserKey]) {
                 //go to user profile
                 if (userId) {
-                    FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
+                    ContainerFeedVC *profileVC = [ContainerFeedVC galleryFeedControllerForUserId:userId andUserName:nil];
                     [stackVC addObject:profileVC];
                 }
             }else if ([hostString isEqualToString:kHostPostKey]){
                 //go to user post
                 if (userId) {
-                    FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:userId andUserName:nil];
+                    ContainerFeedVC *profileVC = [ContainerFeedVC galleryFeedControllerForUserId:userId andUserName:nil];
                     [stackVC addObject:profileVC];
                 }
                 
                 if (postId) {
-                    FeedCVC *feedCVC = [FeedCVC singleFeedControllerWithPostId:postId];
+                    ContainerFeedVC *feedCVC = [ContainerFeedVC singleFeedControllerWithPostId:postId];
                     [stackVC addObject:feedCVC];
                     
                 }

@@ -13,12 +13,12 @@
 #import "STFacebookLoginController.h"
 #import "STExploreViewController.h"
 #import "STLocalNotificationService.h"
-#import "FeedCVC.h"
 #import "STNotificationsManager.h"
 #import "STNavigationService.h"
 #import "STBarcodeScannerViewController.h"
 #import "STSnackBarWithActionService.h"
 #import "STLoginViewController.h"
+#import "ContainerFeedVC.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
 static CGFloat kTabBarHeight = 49.f;
@@ -49,9 +49,8 @@ static CGFloat kImageInset = 4.f;
     
     NSMutableArray *tabBarControllers = [NSMutableArray new];
     // add home flow
-    FeedCVC *homeVc = [FeedCVC mainFeedController];
+    ContainerFeedVC *homeVc = [ContainerFeedVC homeFeedController];
     UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:homeVc];
-//    homeNavCtrl.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:homeNavCtrl];
     
     // add explore flow
@@ -73,7 +72,7 @@ static CGFloat kImageInset = 4.f;
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
     
     // add my profile
-    FeedCVC *profileVC = [FeedCVC galleryFeedControllerForUserId:[[CoreManager loginService] currentUserUuid] andUserName:nil];
+    ContainerFeedVC *profileVC = [ContainerFeedVC tabProfileController];
     UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
 
 //    profileNav.navigationBarHidden = YES;
