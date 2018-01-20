@@ -16,6 +16,8 @@ typedef void (^loadPostImageCompletion)(UIImage *origImg);
 typedef void (^loadBlurPostCompletion) (UIImage *bluredImg);
 typedef void (^downloadImageComp)(NSString *downloadedImage);
 typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded, CGSize downloadedImageSize);
+typedef void (^cachedImageCompletion)(BOOL cached);
+
 @interface STImageCacheController : NSObject
 
 @property(nonatomic, strong) NSString *photoDownloadBaseUrl;
@@ -26,6 +28,6 @@ typedef void (^loadImageComp)(NSString *downloadedImage, BOOL downloaded, CGSize
 -(void)startImageDownloadForNewFlowType:(STFlowType)flowType andDataSource:(NSArray <STImageCacheObj *>*)newObjects;
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort;
 
-+ (BOOL) imageDownloadedForUrl:(NSString *)url;
++ (void) imageDownloadedForUrl:(NSString *)url completion:(cachedImageCompletion)completion;
 + (CGSize) imageSizeForUrl:(NSString *)url;
 @end

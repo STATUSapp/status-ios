@@ -84,7 +84,11 @@
     _username = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"username"];
     //super properties
     self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"] stringByReplacingHttpWithHttps];
-    self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
+    
+    __weak STUserProfile *weakSelf = self;
+    [STImageCacheController imageDownloadedForUrl:self.mainImageUrl completion:^(BOOL cached) {
+        weakSelf.mainImageDownloaded = cached;
+    }];
     self.imageSize = CGSizeZero;
     _gender = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"gender"];
     if (!_gender) {

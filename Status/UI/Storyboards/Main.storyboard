@@ -659,7 +659,7 @@
         <!--Navigation Controller-->
         <scene sceneID="vrs-RG-bf2">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8cw-ig-jdd" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="notificationScene_NAV" automaticallyAdjustsScrollViewInsets="NO" id="8cw-ig-jdd" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nDa-vj-tVO">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
