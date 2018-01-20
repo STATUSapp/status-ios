@@ -69,7 +69,7 @@ const float kNoNotifHeight = 24.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.hidesBarsOnSwipe = YES;
+    self.navigationController.hidesBarsOnTap = NO;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"ACTIVITY";
     timeIconImage =  [[UIImage imageNamed:@"chat time icon"] resizedImage:CGSizeMake(10.f, 10.f) interpolationQuality:kCGInterpolationMedium];
@@ -98,6 +98,8 @@ const float kNoNotifHeight = 24.f;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.hidesBarsOnSwipe = NO;
+    self.navigationController.navigationBarHidden = NO;
     [self getNotificationsFromServer];
 }
 

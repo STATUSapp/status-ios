@@ -127,7 +127,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     UIColor *barColor = [AppDelegate navigationBarDefaultColor];
     
-    [[UITabBar appearance] setBarTintColor:barColor];
+    [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setTranslucent:NO];
     [[UITabBar appearance] setBackgroundColor:[UIColor clearColor]];
     

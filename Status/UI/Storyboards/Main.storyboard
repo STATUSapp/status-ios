@@ -271,7 +271,7 @@
                                 <viewLayoutGuide key="safeArea" id="E95-lI-zbo"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="wg6-nK-aEd" firstAttribute="trailing" secondItem="xdO-5s-HlL" secondAttribute="trailing" id="2XH-UX-frr"/>
                             <constraint firstItem="xdO-5s-HlL" firstAttribute="bottom" secondItem="fEo-fq-kyk" secondAttribute="bottom" id="8Jq-4i-g4d"/>
