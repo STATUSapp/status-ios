@@ -67,14 +67,15 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     
     NSArray *filteredArray = [_objectsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl like %@", imageFullLink]];
     
-    [sdManager diskImageExistsForURL:[NSURL URLWithString:imageFullLink] completion:^(BOOL isInCache) {
+    __weak STImageCacheController *weakSelf = self;
+    [sdManager cachedImageExistsForURL:[NSURL URLWithString:imageFullLink] completion:^(BOOL isInCache) {
         
         if (!isInCache) {
             if (imageFullLink && filteredArray.count == 0){
                 STImageCacheObj *obj = [STImageCacheObj new];
                 obj.imageUrl = imageFullLink;
                 obj.flowType = @(STImageDownloadSpecialPriority);
-                [self startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[obj]];
+                [weakSelf startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[obj]];
             }
             completion(nil);
         }else{
@@ -121,30 +122,7 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
 
 }
 
-//-(NSString *) getImageCachePath:(BOOL)forFacebook{
-//    
-//    NSString *documentsDirectory = NSTemporaryDirectory();//[paths objectAtIndex:0];
-//    NSString *imageCachePath = [documentsDirectory stringByAppendingPathComponent:(forFacebook == YES)?@"/FacebookImageCache":@"/ImageCache"];
-//    
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:imageCachePath]){
-//        NSError *error = nil;
-//        [[NSFileManager defaultManager] createDirectoryAtPath:imageCachePath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
-//    }
-//    
-//    return imageCachePath;
-//}
-
-
 -(void) cleanTemporaryFolder{
-//    NSString *tmpPath = [self getImageCachePath:NO];
-//    NSError *error = nil;
-//    NSFileManager *fm = [NSFileManager defaultManager];
-//    for (NSString *file in [fm contentsOfDirectoryAtPath:tmpPath error:&error]) {
-//        BOOL success = [fm removeItemAtPath:[tmpPath stringByAppendingPathComponent:file] error:&error];
-//        if (!success || error) {
-//            NSLog(@"Delete has failed");
-//        }
-//    }
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
         NSLog(@"Local stored images was cleared!");
     }];
@@ -187,19 +165,20 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     //sort the flows - move the current to the top
     
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+    __weak STImageCacheController *weakSelf = self;
     for (STImageCacheObj *obj in newObjects) {
-        [sdManager diskImageExistsForURL:[NSURL URLWithString:obj.imageUrl] completion:^(BOOL isInCache) {
+        [sdManager cachedImageExistsForURL:[NSURL URLWithString:obj.imageUrl] completion:^(BOOL isInCache) {
             if (!isInCache) {
                 STImageCacheObj *objToAdd = obj;
                 objToAdd.flowType = @(flowType);
-                [_objectsArray addObject:objToAdd];
+                [weakSelf.objectsArray addObject:objToAdd];
             }
-            [self sortDownloadArray];
-            [self loadNextPhoto];
+            if ([newObjects lastObject] == obj) {
+                [weakSelf sortDownloadArray];
+                [weakSelf loadNextPhoto];
+            }
         }];
     }
-    [self sortDownloadArray];
-    [self loadNextPhoto];
 }
 
 - (BOOL)canAddNewImageDownlod{
@@ -267,7 +246,7 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     }
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     
-    [sdManager diskImageExistsForURL:[NSURL URLWithString:url] completion:^(BOOL isInCache) {
+    [sdManager cachedImageExistsForURL:[NSURL URLWithString:url] completion:^(BOOL isInCache) {
         if (isInCache) {
             [sdManager loadImageWithURL:[NSURL URLWithString:url] options:SDWebImageHighPriority progress:nil
                               completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
