@@ -36,7 +36,10 @@
     if (!self.mainImageUrl) {
         self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image"] stringByReplacingHttpWithHttps];
     }
-    self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
+    __weak STShopProduct *weakSelf = self;
+    [STImageCacheController imageDownloadedForUrl:self.mainImageUrl completion:^(BOOL cached) {
+        weakSelf.mainImageDownloaded = cached;
+    }];
     self.imageSize = CGSizeZero;
     
 }

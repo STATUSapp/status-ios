@@ -41,17 +41,17 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     }
     
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
-    [sdManager downloadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                              if (error!=nil) {
-                                  NSLog(@"Error downloading image: %@", error.debugDescription);
-                                  completion(nil);
-                              }
-                              else if(finished)
-                                  completion(image);
-                              else
-                                  completion(nil);
-                          }];
+    [sdManager loadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
+                      completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                          if (error!=nil) {
+                              NSLog(@"Error downloading image: %@", error.debugDescription);
+                              completion(nil);
+                          }
+                          else if(finished)
+                              completion(image);
+                          else
+                              completion(nil);
+                      }];
     
 
 }
@@ -67,23 +67,24 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     
     NSArray *filteredArray = [_objectsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl like %@", imageFullLink]];
     
-    if (![sdManager diskImageExistsForURL:[NSURL URLWithString:imageFullLink]]) {
-        if (imageFullLink && filteredArray.count == 0){
-            STImageCacheObj *obj = [STImageCacheObj new];
-            obj.imageUrl = imageFullLink;
-            obj.flowType = @(STImageDownloadSpecialPriority);
-            [self startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[obj]];
-        }
-        completion(nil);
-    }
-    else
-    {
-        [sdManager downloadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
-                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+    __weak STImageCacheController *weakSelf = self;
+    [sdManager cachedImageExistsForURL:[NSURL URLWithString:imageFullLink] completion:^(BOOL isInCache) {
+        
+        if (!isInCache) {
+            if (imageFullLink && filteredArray.count == 0){
+                STImageCacheObj *obj = [STImageCacheObj new];
+                obj.imageUrl = imageFullLink;
+                obj.flowType = @(STImageDownloadSpecialPriority);
+                [weakSelf startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[obj]];
+            }
+            completion(nil);
+        }else{
+            [sdManager loadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
+                              completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
                                   if (error!=nil) {
                                       NSLog(@"Error loading image from disk: %@", error.debugDescription);
                                       completion(nil);
-
+                                      
                                   }
                                   else if (finished==YES){
                                       if (completion!=nil) {
@@ -92,12 +93,9 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
                                   }
                                   else
                                       completion(nil);
-                                  
                               }];
-
-    }
-    
-    
+        }
+    }];
 }
 
 -(void) downloadImageWithName:(NSString *) imageFullLink andCompletion:(loadImageComp) completion{
@@ -107,49 +105,27 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     }
     
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
-    [sdManager downloadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
-                                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                                      if (error!=nil) {
-                                                          NSLog(@"Error downloading image: %@", error.debugDescription);
-                                                          completion(imageFullLink, NO, CGSizeZero);
-                                                      }
-                                                      else if(finished)
-                                                      {
-                                                          completion(imageFullLink,YES, image.size);
-                                                          
-                                                      }
-                                                      else
-                                                          completion(imageFullLink,NO, CGSizeZero);
-                                                  }];
+    [sdManager loadImageWithURL:[NSURL URLWithString:imageFullLink] options:SDWebImageHighPriority progress:nil
+                      completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                          if (error!=nil) {
+                              NSLog(@"Error downloading image: %@", error.debugDescription);
+                              completion(imageFullLink, NO, CGSizeZero);
+                          }
+                          else if(finished)
+                          {
+                              completion(imageFullLink,YES, image.size);
+                              
+                          }
+                          else
+                              completion(imageFullLink,NO, CGSizeZero);
+                      }];
 
 }
 
-//-(NSString *) getImageCachePath:(BOOL)forFacebook{
-//    
-//    NSString *documentsDirectory = NSTemporaryDirectory();//[paths objectAtIndex:0];
-//    NSString *imageCachePath = [documentsDirectory stringByAppendingPathComponent:(forFacebook == YES)?@"/FacebookImageCache":@"/ImageCache"];
-//    
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:imageCachePath]){
-//        NSError *error = nil;
-//        [[NSFileManager defaultManager] createDirectoryAtPath:imageCachePath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
-//    }
-//    
-//    return imageCachePath;
-//}
-
-
 -(void) cleanTemporaryFolder{
-//    NSString *tmpPath = [self getImageCachePath:NO];
-//    NSError *error = nil;
-//    NSFileManager *fm = [NSFileManager defaultManager];
-//    for (NSString *file in [fm contentsOfDirectoryAtPath:tmpPath error:&error]) {
-//        BOOL success = [fm removeItemAtPath:[tmpPath stringByAppendingPathComponent:file] error:&error];
-//        if (!success || error) {
-//            NSLog(@"Delete has failed");
-//        }
-//    }
-    
-    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+        NSLog(@"Local stored images was cleared!");
+    }];
 }
 
 -(void)changeFlowType:(STFlowType) flowType needsSort:(BOOL)needsSort{
@@ -189,16 +165,20 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     //sort the flows - move the current to the top
     
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+    __weak STImageCacheController *weakSelf = self;
     for (STImageCacheObj *obj in newObjects) {
-        if (![sdManager diskImageExistsForURL:[NSURL URLWithString:obj.imageUrl]]) {
-            STImageCacheObj *objToAdd = obj;
-            objToAdd.flowType = @(flowType);
-            [_objectsArray addObject:objToAdd];
-        }
-        
+        [sdManager cachedImageExistsForURL:[NSURL URLWithString:obj.imageUrl] completion:^(BOOL isInCache) {
+            if (!isInCache) {
+                STImageCacheObj *objToAdd = obj;
+                objToAdd.flowType = @(flowType);
+                [weakSelf.objectsArray addObject:objToAdd];
+            }
+            if ([newObjects lastObject] == obj) {
+                [weakSelf sortDownloadArray];
+                [weakSelf loadNextPhoto];
+            }
+        }];
     }
-    [self sortDownloadArray];
-    [self loadNextPhoto];
 }
 
 - (BOOL)canAddNewImageDownlod{
@@ -259,17 +239,17 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     return CGSizeZero;
 }
 
-+ (BOOL) imageDownloadedForUrl:(NSString *)url{
-    if (!url)
-        return NO;
-    
++ (void) imageDownloadedForUrl:(NSString *)url completion:(cachedImageCompletion)completion{
+    if (!url){
+        completion(NO);
+        return;
+    }
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     
-    BOOL cacheImageExists = [sdManager diskImageExistsForURL:[NSURL URLWithString:url]];
-    
-    if (cacheImageExists) {
-        [sdManager downloadImageWithURL:[NSURL URLWithString:url] options:SDWebImageHighPriority progress:nil
-                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+    [sdManager cachedImageExistsForURL:[NSURL URLWithString:url] completion:^(BOOL isInCache) {
+        if (isInCache) {
+            [sdManager loadImageWithURL:[NSURL URLWithString:url] options:SDWebImageHighPriority progress:nil
+                              completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
                                   if (error!=nil) {
                                       NSLog(@"Error downloading image: %@", error.debugDescription);
                                   }
@@ -278,10 +258,9 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
                                       [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:url, kImageSizeKey:NSStringFromCGSize(image.size)}];
                                   }
                               }];
-
-
-    }
-    return cacheImageExists;
+        }
+        completion(isInCache);
+    }];
 }
 
 @end

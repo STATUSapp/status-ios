@@ -71,7 +71,10 @@
 
     //super properties
     self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"full_photo_link"] stringByReplacingHttpWithHttps];
-    self.mainImageDownloaded = [STImageCacheController imageDownloadedForUrl:self.mainImageUrl];
+    __weak STPost *weakSelf = self;
+    [STImageCacheController imageDownloadedForUrl:self.mainImageUrl completion:^(BOOL cached) {
+        weakSelf.mainImageDownloaded = cached;
+    }];
     self.imageSize = [STImageCacheController imageSizeForUrl:self.mainImageUrl];
     
 //#ifdef DEBUG

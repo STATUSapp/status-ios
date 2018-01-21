@@ -74,7 +74,7 @@ NSString* const kSqliteFileName = @"Status.sqlite";
         NSURL *storeURL = [documentsURL URLByAppendingPathComponent:kSqliteFileName];
         
         NSError *error = nil;
-        BOOL result = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
+        BOOL result = ([psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]!=nil);
         NSAssert(result, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
     NSLog(@"RESULT: %@\nError initializing PSC: %@\n%@",@(result), [error localizedDescription], [error userInfo]);
 //    });
