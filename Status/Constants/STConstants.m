@@ -141,7 +141,7 @@ NSString *const STNotificationSelectChatScreen = @"STSelectChatScreenNotificatio
 
 #pragma mark - Notification User Info Keys
 
-NSString *const kPostIdKey = @"_key_post_id";
+NSString *const kPostIdKey = @"key_post_id";
 NSString *const kImageKey = @"key_image";
 NSString *const kImageUrlKey = @"key_image_url";
 NSString *const kFlowTypeKey = @"flow_type_key";

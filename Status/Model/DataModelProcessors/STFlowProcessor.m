@@ -140,6 +140,10 @@ NSInteger const kFacebookAdsTimeframe = 10;
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flowShouldBeReloaded:) name:kNotificationUserDidLoggedIn object:nil];
 }
 
+- (NSArray *)allObjectIds{
+    return _objectIds;
+}
+
 -(NSInteger)numberOfObjects{
     return _objectIds.count;
 }

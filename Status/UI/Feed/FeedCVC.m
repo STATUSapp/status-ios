@@ -217,16 +217,44 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 - (void)postUpdated:(NSNotification *)notif{
-    [self.collectionView reloadData];
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    NSLog(@"Post updated user info: %@", notif.userInfo);
+    NSArray *allObjectsArray = [_feedProcessor allObjectIds];
+    if (allObjectsArray.count > 0) {
+        NSString *updatedObjectId = notif.userInfo[kPostIdKey];
+        NSArray *indexPaths = [self.collectionView indexPathsForVisibleItems];
+        NSIndexSet *updatedIndexSet;
+        for (NSIndexPath *indexPath in indexPaths) {
+            NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+            NSString *objectIdForSection = [allObjectsArray objectAtIndex:sectionIndex];
+            if ([updatedObjectId isEqualToString:objectIdForSection]) {
+                updatedIndexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
+                break;
+            }
+        }
+        if (updatedIndexSet) {
+            [self.collectionView reloadSections:updatedIndexSet];
+            [self.collectionView.collectionViewLayout invalidateLayout];
+        }else{
+//            [self.collectionView reloadData];
+//            [self.collectionView.collectionViewLayout invalidateLayout];
+        }
+    }
+
+//    [self.collectionView performBatchUpdates:^{
+//
+//    } completion:^(BOOL finished) {
+//
+//    }];
 }
 
 - (void)postAdded:(NSNotification *)notif{
+//    NSLog(@"Post added user info: %@", notif.userInfo);
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
 }
 - (void)postDeleted:(NSNotification *)notif{
+//    NSLog(@"Post deleted user info: %@", notif.userInfo);
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
@@ -587,7 +615,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         
         switch (indexPath.row) {
             case STPostImage:
+            {
                 return [STPostImageCell celSizeForPost:post];
+            }
                 break;
             case STPostDescription:
             {

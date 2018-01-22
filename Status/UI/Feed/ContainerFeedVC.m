@@ -132,7 +132,7 @@
     if (self != currentViewController) {
         return;
     }
-    BOOL navBarHidden = NO;
+    BOOL navBarHidden = self.navigationController.navigationBarHidden;
     if (navBarHidden == NO) {
         if (self == currentViewController) {
             if (_feedProcessor.processorFlowType == STFlowTypeHome){

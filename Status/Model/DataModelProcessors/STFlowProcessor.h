@@ -43,6 +43,7 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
                          hashtag:(NSString *)hashtag;
 
 //methods
+- (NSArray *)allObjectIds;
 - (NSInteger)numberOfObjects;
 - (id)objectAtIndex:(NSInteger)index;
 - (void)processObjectAtIndex:(NSInteger)index
