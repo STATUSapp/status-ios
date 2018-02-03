@@ -27,7 +27,6 @@ static CGFloat kImageInset = 4.f;
 @interface STTabBarViewController ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) NSInteger previousSelectedIndex;
-@property (nonatomic) CGRect defaultTabBarFrame;
 @property (nonatomic, strong) UINavigationController * takeAPhotoNav;
 
 @end
@@ -124,13 +123,15 @@ static CGFloat kImageInset = 4.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigationBarHeight:kTabBarHeight];
-    _defaultTabBarFrame = self.tabBar.frame;
     [self instatiateSelectPhotoFlow];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(snackBarAction:)
                                                  name:kNotificationSnackBarAction
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationFacebokDidLogout object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarFrameChanged:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
+    
 }
 
 -(void)instatiateSelectPhotoFlow{
@@ -176,6 +177,11 @@ static CGFloat kImageInset = 4.f;
     [self.selectedViewController dismissViewControllerAnimated:NO completion:nil];
     [self setSelectedIndex:STTabBarIndexExplore];
     [self presentLoginVCAnimated:YES];
+}
+
+-(void)statusBarFrameChanged:(NSNotification *)notification{
+    NSLog(@"statusBarFrameChanged: %@", notification.userInfo);
+    NSLog(@"status bar frame: %@", NSStringFromCGRect([UIApplication sharedApplication].statusBarFrame));
 }
 #pragma mark - Helper
 
@@ -253,7 +259,6 @@ static CGFloat kImageInset = 4.f;
     if (selectedIndex != STTabBarIndexTakeAPhoto) {
         _previousSelectedIndex = selectedIndex;
     }
-    [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedIndex:selectedIndex];
     [self tabBar:self.tabBar didSelectItem:self.tabBar.items[selectedIndex]];
 }
@@ -263,7 +268,6 @@ static CGFloat kImageInset = 4.f;
     if (selectedIndex != STTabBarIndexTakeAPhoto) {
         _previousSelectedIndex = selectedIndex;
     }
-    [self setTabBarFrame:_defaultTabBarFrame];
     [super setSelectedViewController:selectedViewController];
 }
 

@@ -41,7 +41,7 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 }
 
 -(void)prepareForReuse{
-    _postImage.image = nil;
+//    _postImage.image = nil;
     _blurEffectView.hidden = NO;
     _likeImageAnimationInProgress = NO;
     [self setBottomItemsHidden:YES];

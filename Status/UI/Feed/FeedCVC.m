@@ -90,7 +90,6 @@ CGFloat const kTopButtonSize = 48.f;
     BOOL _tabBarHidden;
     STScrollDirection _scrollingDirection;
     CGPoint _lastPanPoint;
-    CGPoint _initialStartPoint;
 }
 
 @property (nonatomic, strong, readwrite) STFlowProcessor *feedProcessor;
@@ -138,9 +137,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
     self.customLoadingView = [STLoadingView loadingViewWithSize:self.view.frame.size];
     
-    CGRect tabBarFrame = self.tabBarController.tabBar.frame;
-    _initialStartPoint = tabBarFrame.origin;
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processorLoaded) name:kNotificationObjDownloadSuccess object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:kNotificationObjUpdated object:_feedProcessor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:kNotificationObjDeleted object:_feedProcessor];
@@ -186,7 +182,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         
         [UIView animateWithDuration:1.f/duration animations:^{
             CGRect tabBarFrame = self.tabBarController.tabBar.frame;
-            tabBarFrame.origin.y = _initialStartPoint.y;
+            tabBarFrame.origin.y = tabBarFrame.origin.y - tabBarFrame.size.height;
             [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
             
         } completion:^(BOOL finished) {
@@ -222,22 +218,27 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     if (allObjectsArray.count > 0) {
         NSString *updatedObjectId = notif.userInfo[kPostIdKey];
         NSArray *indexPaths = [self.collectionView indexPathsForVisibleItems];
-        NSIndexSet *updatedIndexSet;
         for (NSIndexPath *indexPath in indexPaths) {
-            NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
-            NSString *objectIdForSection = [allObjectsArray objectAtIndex:sectionIndex];
-            if ([updatedObjectId isEqualToString:objectIdForSection]) {
-                updatedIndexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
-                break;
-            }
+            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+            [self uodateUIForCell:cell indexPath:indexPath];
         }
-        if (updatedIndexSet) {
-            [self.collectionView reloadSections:updatedIndexSet];
-            [self.collectionView.collectionViewLayout invalidateLayout];
-        }else{
-//            [self.collectionView reloadData];
+
+//        NSIndexSet *updatedIndexSet;
+//        for (NSIndexPath *indexPath in indexPaths) {
+//            NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+//            NSString *objectIdForSection = [allObjectsArray objectAtIndex:sectionIndex];
+//            if ([updatedObjectId isEqualToString:objectIdForSection]) {
+//                updatedIndexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
+//                break;
+//            }
+//        }
+//        if (updatedIndexSet) {
+//            [self.collectionView reloadSections:updatedIndexSet];
 //            [self.collectionView.collectionViewLayout invalidateLayout];
-        }
+//        }else{
+////            [self.collectionView reloadData];
+////            [self.collectionView.collectionViewLayout invalidateLayout];
+//        }
     }
 
 //    [self.collectionView performBatchUpdates:^{
@@ -425,14 +426,14 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         CGFloat yPoints = [[UIScreen mainScreen] bounds].size.height;
         CGFloat velocityY = fabs([scrollView.panGestureRecognizer velocityInView:self.view].y);
         NSTimeInterval duration = yPoints / velocityY;
-        
+        _tabBarHidden = NO;
+
         [UIView animateWithDuration:1.f/duration animations:^{
             CGRect tabBarFrame = self.tabBarController.tabBar.frame;
-            tabBarFrame.origin.y = _initialStartPoint.y;
+            tabBarFrame.origin.y = tabBarFrame.origin.y - tabBarFrame.size.height;
             [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
             
         } completion:^(BOOL finished) {
-            _tabBarHidden = NO;
             _scrollingDirection = STScrollDirectionNone;
         }];
     }
@@ -673,17 +674,12 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     return [STPostHeader headerSize];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UICollectionViewCell *cell = nil;
-    NSString *identifier = [self identifierForIndexPath:indexPath];
-    cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-
+- (void)uodateUIForCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath * _Nonnull)indexPath {
     NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
     STPost *post = nil;
     if ([_feedProcessor numberOfObjects]) {
         post = [_feedProcessor objectAtIndex:sectionIndex];
-
+        
     }
     
     if ([cell isKindOfClass:[STPostImageCell class]]) {
@@ -725,6 +721,15 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         STAdPost *adPost = [_feedProcessor objectAtIndex:sectionIndex];
         [(STFacebookAddCell *)cell configureWithAdPost:adPost];
     }
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = nil;
+    NSString *identifier = [self identifierForIndexPath:indexPath];
+    cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+
+    [self uodateUIForCell:cell indexPath:indexPath];
 
     return cell;
 }
@@ -926,11 +931,10 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView performBatchUpdates:^{
     
-        if (post.showShopProducts == NO) {
+        if (_tabBarHidden == NO && post.showShopProducts == NO) {
             [UIView animateWithDuration:1.f animations:^{
                 
                 CGRect tabBarFrame = self.tabBarController.tabBar.frame;
-                _initialStartPoint = tabBarFrame.origin;
                 tabBarFrame.origin.y = tabBarFrame.origin.y + tabBarFrame.size.height;
                 [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
                 
@@ -938,12 +942,12 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                 _tabBarHidden = YES;
             }];
         }
-        else
+        else if(_tabBarHidden == YES && post.showShopProducts == YES)
         {
             [UIView animateWithDuration:1.f animations:^{
                 
                 CGRect tabBarFrame = self.tabBarController.tabBar.frame;
-                tabBarFrame.origin.y = _initialStartPoint.y;
+                tabBarFrame.origin.y = tabBarFrame.origin.y - tabBarFrame.size.height;
                 [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
                 
             } completion:^(BOOL finished) {
