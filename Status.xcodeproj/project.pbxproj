@@ -285,7 +285,6 @@
 		99B387C21C82FAA2005B4D8C /* STFacebookInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386FA1C82FAA2005B4D8C /* STFacebookInviterViewController.m */; };
 		99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386FC1C82FAA2005B4D8C /* STFriendsInviterViewController.m */; };
 		99B387C41C82FAA2005B4D8C /* STInviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386FE1C82FAA2005B4D8C /* STInviteFriendCell.m */; };
-		99B387C51C82FAA2005B4D8C /* STInviteFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387001C82FAA2005B4D8C /* STInviteFriendsViewController.m */; };
 		99B387C61C82FAA2005B4D8C /* STSMSEmailInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387021C82FAA2005B4D8C /* STSMSEmailInviterViewController.m */; };
 		99B387C71C82FAA2005B4D8C /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387051C82FAA2005B4D8C /* STLoginViewController.m */; };
 		99B387CD1C82FAA2005B4D8C /* ChatScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99B387121C82FAA2005B4D8C /* ChatScene.storyboard */; };
@@ -834,8 +833,6 @@
 		99B386FC1C82FAA2005B4D8C /* STFriendsInviterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFriendsInviterViewController.m; sourceTree = "<group>"; };
 		99B386FD1C82FAA2005B4D8C /* STInviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInviteFriendCell.h; sourceTree = "<group>"; };
 		99B386FE1C82FAA2005B4D8C /* STInviteFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInviteFriendCell.m; sourceTree = "<group>"; };
-		99B386FF1C82FAA2005B4D8C /* STInviteFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInviteFriendsViewController.h; sourceTree = "<group>"; };
-		99B387001C82FAA2005B4D8C /* STInviteFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInviteFriendsViewController.m; sourceTree = "<group>"; };
 		99B387011C82FAA2005B4D8C /* STSMSEmailInviterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSMSEmailInviterViewController.h; sourceTree = "<group>"; };
 		99B387021C82FAA2005B4D8C /* STSMSEmailInviterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSMSEmailInviterViewController.m; sourceTree = "<group>"; };
 		99B387041C82FAA2005B4D8C /* STLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoginViewController.h; sourceTree = "<group>"; };
@@ -1874,8 +1871,6 @@
 				99B386FC1C82FAA2005B4D8C /* STFriendsInviterViewController.m */,
 				99B386FD1C82FAA2005B4D8C /* STInviteFriendCell.h */,
 				99B386FE1C82FAA2005B4D8C /* STInviteFriendCell.m */,
-				99B386FF1C82FAA2005B4D8C /* STInviteFriendsViewController.h */,
-				99B387001C82FAA2005B4D8C /* STInviteFriendsViewController.m */,
 				99B387011C82FAA2005B4D8C /* STSMSEmailInviterViewController.h */,
 				99B387021C82FAA2005B4D8C /* STSMSEmailInviterViewController.m */,
 			);
@@ -2303,7 +2298,6 @@
 				99B387DF1C82FAA2005B4D8C /* STEditProfileViewController.m in Sources */,
 				072DBBE01FF916F900DFA8F0 /* STCoreDataBrandSync.m in Sources */,
 				99B387851C82FAA2005B4D8C /* STBaseObj.m in Sources */,
-				99B387C51C82FAA2005B4D8C /* STInviteFriendsViewController.m in Sources */,
 				072DBBDD1FF9161700DFA8F0 /* Brand+CoreDataProperties.m in Sources */,
 				99B387C41C82FAA2005B4D8C /* STInviteFriendCell.m in Sources */,
 				170912241DF87F5C00B2AF81 /* STSmartNotificationCell.m in Sources */,
@@ -2646,7 +2640,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Denis Todirica (8S6JU5VCZC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3VYJECFUTG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2682,7 +2676,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3VYJECFUTG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2765,7 +2759,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Denis Todirica (3VYJECFUTG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3VYJECFUTG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

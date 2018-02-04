@@ -11,6 +11,7 @@
 #import "STUserProfilePool.h"
 #import "STEditProfileTVC.h"
 #import "STLocalNotificationService.h"
+#import "STTabBarViewController.h"
 
 const NSInteger kMaxNumberOfCharacters = 150;
 const NSInteger kDefaultValueForTopConstraint = 26;
@@ -33,6 +34,17 @@ const NSInteger kDefaultValueForTopConstraint = 26;
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.hidesBarsOnSwipe = NO;
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {

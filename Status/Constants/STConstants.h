@@ -214,11 +214,6 @@ extern NSString *const kSelectedTabBarKey;
 extern NSString *const kAnimatedTabBarKey;
 extern NSString *const kManualLogoutKey;
 
-#pragma mark - Invite Friends
-
-extern NSString *const STInviteText;
-extern NSString *const STInviteLink;
-
 #pragma mark - Numeric constants
 
 extern NSInteger const STMaximumSizeInBytesForUpload;

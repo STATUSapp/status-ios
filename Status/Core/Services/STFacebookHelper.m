@@ -209,17 +209,19 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }];
 }
 
-- (void)postImageWithDescription:(NSString *)description imgUrl:(NSString *)imgUrl completion:(facebookCompletion)completion {
+- (void)postImageWithDescription:(NSString *)description
+                          imgUrl:(NSString *)imgUrl
+                        deepLink:(NSString *)deepLink
+                      completion:(facebookCompletion)completion {
     NSString * descriptionString = description.length ? description : @"what's YOUR status?";
+    NSString * deepLinkString = deepLink.length ? deepLink : @"http://getstatusapp.co/";
     
     NSDictionary *dictPrivacy = [NSDictionary dictionaryWithObjectsAndKeys:@"CUSTOM",@"value", @"ALL_FRIENDS", @"friends", nil];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"%@ via %@", descriptionString, STInviteLink] ,@"caption",
+                                   [NSString stringWithFormat:@"%@ via %@", descriptionString, deepLinkString] ,@"caption",
                                    [self stringFromDict:dictPrivacy],@"privacy",
                                    @"STATUS", @"title",
-                                   descriptionString, @"description",
-                                   @"http://getstatusapp.co/",@"link",
                                    imgUrl, @"url",
                                    nil];
     
@@ -231,7 +233,10 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }];
 }
 
--(void) shareImageWithImageUrl:(NSString *)imgUrl description:(NSString *)description andCompletion:(facebookCompletion) completion{
+-(void) shareImageWithImageUrl:(NSString *)imgUrl
+                   description:(NSString *)description
+                      deepLink:(NSString *)deepLink
+                 andCompletion:(facebookCompletion) completion{
     [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (error!=nil) {
             completion(nil, error);
@@ -246,11 +251,17 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                         completion(nil, error);
                     }
                     else
-                        [self postImageWithDescription:description imgUrl:imgUrl completion:completion];
+                        [self postImageWithDescription:description
+                                                imgUrl:imgUrl
+                                              deepLink:deepLink
+                                            completion:completion];
                 }];
             }
             else
-                [self postImageWithDescription:description imgUrl:imgUrl completion:completion];
+                [self postImageWithDescription:description
+                                        imgUrl:imgUrl
+                                      deepLink:deepLink
+                                    completion:completion];
         }
     }];
 }

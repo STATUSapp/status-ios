@@ -50,21 +50,15 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tagProductsViewHeightConstr;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tagProductsCollectionHeightConstr;
 
-@property (strong, nonatomic) ACAccountStore * accountStore;
-@property (strong, nonatomic) ACAccountType * accountType;
-
 @property (weak, nonatomic) IBOutlet UILabel *writeCaptionPlaceholder;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 
 @property (assign, nonatomic) BOOL shouldPostToFacebook;
-@property (assign, nonatomic)BOOL shouldPostToTwitter;
 
 @property (assign, nonatomic)BOOL donePostingToFacebook;
-@property (assign, nonatomic)BOOL donePostingToTwitter;
 
 @property (strong, nonatomic)NSError *fbError;
-@property (strong, nonatomic)NSError *twitterError;
 
 @property (strong, nonatomic) UIImage *changedImage;
 
@@ -101,15 +95,9 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     [super viewDidLoad];
     self.navigationController.hidesBarsOnSwipe = NO;
     self.navigationController.navigationBarHidden = NO;
-    _accountStore = [[ACAccountStore alloc] init];
-    _accountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [self configureImageViewWithImageData:_imgData];
     [[STTagProductsManager sharedInstance] startDownload];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(appplicationIsActive:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(tagProductsNotification:) name:kTagProductNotification object:nil];
 
@@ -154,37 +142,6 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [(STTabBarViewController *)self.tabBarController setTabBarHidden:NO];
-}
-
-
-- (void)appplicationIsActive:(NSNotification *)notification {
-    NSLog(@"Application Did Become Active");
-    __weak STSharePhotoViewController * weakSelf = self;
-    if (_shouldPostToTwitter) {
-        [self getTwitterAccountWithCompletion:^void(BOOL result) {
-            if (result == NO) {
-                weakSelf.shouldPostToTwitter = NO;
-                weakSelf.twitterButton.selected = NO;
-            }
-        }];
-    }
-}
-
-
-- (void)getTwitterAccountWithCompletion:(void (^)(BOOL))completion{
-    __weak STSharePhotoViewController * weakSelf = self;
-    [_accountStore requestAccessToAccountsWithType:_accountType
-                                           options:nil
-                                        completion:^(BOOL granted, NSError *error)
-     {
-         BOOL twitterAccountAvailable = NO;
-         if (granted == YES){
-             twitterAccountAvailable = ([weakSelf.accountStore accountsWithAccountType:weakSelf.accountType].count > 0);
-         }
-         dispatch_async(dispatch_get_main_queue(), ^{
-             completion(twitterAccountAvailable);
-         });
-     }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -245,27 +202,6 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
     _shouldPostToFacebook = btn.selected;
 }
 
-- (IBAction)onClickTwitter:(id)sender {
-    if (_shouldPostToTwitter == YES) {
-        _shouldPostToTwitter = NO;
-        UIButton *btn = (UIButton *) sender;
-        btn.selected = NO;
-    }
-    else
-    {
-        __weak STSharePhotoViewController * weakSelf = self;
-        [self getTwitterAccountWithCompletion:^(BOOL result) {
-            if (result) {
-                weakSelf.shouldPostToTwitter = YES;
-                weakSelf.twitterButton.selected = YES;
-            } else {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Twitter issue" message:@"In order to post to Twitter you have to setup an account in your device's settings and grant access to STATUS app." preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-                [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
-            }
-        }];
-    }
-}
 - (IBAction)onDeleteProductPressed:(id)sender {
     NSInteger buttonTag = ((UIButton *)sender).tag;
     STShopProduct *product = [_shopProducts objectAtIndex:buttonTag];
@@ -290,13 +226,12 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
                                 weakSelf.shareButton.enabled = TRUE;
                                 if (!error) {
                                     STPost *post = [objects firstObject];
-                                    if (weakSelf.shouldPostToFacebook==YES ||
-                                        weakSelf.shouldPostToTwitter == YES) {
-                                        [weakSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl];
+                                    if (weakSelf.shouldPostToFacebook==YES ) {
+                                        [weakSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl deepLink:post.shareShortUrl];
                                     }
                                     else
                                     {
-                                        [weakSelf callTheDelegateIfNeededForPostId:post.uuid];
+                                        [weakSelf showMessagesAndCallDelegatesForPostId:post.uuid];
                                     }
 
                                 }
@@ -336,128 +271,39 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
 
 #pragma mark - Helper
 
-- (void)startPostingWithPostId:(NSString *)postId andImageUrl:(NSString *)imageUrl{
+- (void)startPostingWithPostId:(NSString *)postId
+                   andImageUrl:(NSString *)imageUrl
+                      deepLink:(NSString *)deepLink{
     if (_shouldPostToFacebook) {
-        [self postCurrentPhotoToFacebookWithPostId:postId andImageUrl:imageUrl];
+        [self postCurrentPhotoToFacebookWithPostId:postId
+                                       andImageUrl:imageUrl
+                                          deepLink:deepLink];
     }
-    
-    if (_shouldPostToTwitter) {
-        [self postCurrentPhotoToTwitterWithPostId:postId];
-    }
-
 }
-- (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId andImageUrl:(NSString *)imageUrl {
+- (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId
+                                 andImageUrl:(NSString *)imageUrl
+                                    deepLink:(NSString *)deepLink{
     __weak STSharePhotoViewController *weakSelf = self;
-    [[CoreManager facebookService] shareImageWithImageUrl:imageUrl description:_captiontextView.text andCompletion:^(id result, NSError *error) {
+    [[CoreManager facebookService] shareImageWithImageUrl:imageUrl
+                                              description:_captiontextView.text
+                                                 deepLink:deepLink
+                                            andCompletion:^(id result, NSError *error) {
         weakSelf.donePostingToFacebook = YES;
         if (error) {
             weakSelf.fbError = error;
         }
-        [weakSelf callTheDelegateIfNeededForPostId:postId];
+        [weakSelf showMessagesAndCallDelegatesForPostId:postId];
     }];
 }
-
-- (void)postCurrentPhotoToTwitterWithPostId:(NSString *)postId {
-    NSString * status;
-    
-    if (_captiontextView.text.length) {
-        status = _captiontextView.text;
-    } else {
-        status = [NSString stringWithFormat:@"what's YOUR status? via %@",STInviteLink];
-    }
-    
-    UIImage * imgToPost = [UIImage imageWithData:self.imgData];
-    
-    [self twitterAccountPostImage:imgToPost withStatus:status andPostId:postId];
-    
-}
-
-
-- (void)twitterAccountPostImage:(UIImage *)image withStatus:(NSString *)status andPostId:(NSString *)postId
-{
-    __weak STSharePhotoViewController *weakSelf = self;
-    ACAccountType *twitterType =
-    [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    
-    SLRequestHandler requestHandler =
-    ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        weakSelf.donePostingToTwitter = YES;
-        if (responseData) {
-            NSInteger statusCode = urlResponse.statusCode;
-            if (statusCode >= 200 && statusCode < 300) {
-                NSDictionary *postResponseData =
-                [NSJSONSerialization JSONObjectWithData:responseData
-                                                options:NSJSONReadingMutableContainers
-                                                  error:NULL];
-                NSLog(@"[SUCCESS!] Created Tweet with ID: %@", postResponseData[@"id_str"]);
-            }
-            else {
-                weakSelf.twitterError = [NSError errorWithDomain:@"com.twiter.post" code:statusCode userInfo:nil];
-                NSLog(@"[ERROR] Server responded: status code %ld %@", (long)statusCode,
-                      [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
-            }
-        }
-        else {
-            weakSelf.twitterError = error;
-            NSLog(@"[ERROR] An error occurred while posting: %@", [error localizedDescription]);
-        }
-        [weakSelf callTheDelegateIfNeededForPostId:postId];
-    };
-    
-    ACAccountStoreRequestAccessCompletionHandler accountStoreHandler =
-    ^(BOOL granted, NSError *error) {
-        if (granted) {
-            NSArray *accounts = [self.accountStore accountsWithAccountType:twitterType];
-            NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"
-                          @"/1.1/statuses/update_with_media.json"];
-            NSDictionary *params = @{@"status" : status};
-            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                    requestMethod:SLRequestMethodPOST
-                                                              URL:url
-                                                       parameters:params];
-            NSData *imageData = UIImageJPEGRepresentation(image, 1.f);
-            [request addMultipartData:imageData
-                             withName:@"media[]"
-                                 type:@"image/jpeg"
-                             filename:@"image.jpg"];
-            [request setAccount:[accounts lastObject]];
-            [request performRequestWithHandler:requestHandler];
-        }
-        else {
-            weakSelf.donePostingToTwitter = YES;
-            weakSelf.twitterError = error;
-            [weakSelf callTheDelegateIfNeededForPostId:postId];
-            NSLog(@"[ERROR] An error occurred while asking for user authorization: %@",
-                  [error localizedDescription]);
-        }
-    };
-    
-    [self.accountStore requestAccessToAccountsWithType:twitterType
-                                               options:NULL
-                                            completion:accountStoreHandler];
-}
-
 
 - (void)showMessagesAndCallDelegatesForPostId:(NSString *)postId {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *alertTitle = nil;
         NSString *alertMessage = nil;
-        if (_fbError !=nil || _twitterError !=nil) {
-            if (_fbError!=nil && _twitterError !=nil) {
-                alertTitle = @"Warning";
-                alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook and Twitter.";
-            }
-            else if (_fbError!=nil){
-                alertTitle = @"Warning";
-                alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
-            }
-            else if (_twitterError!=nil){
-                alertTitle = @"Warning";
-                alertMessage = @"Your photo was posted on STATUS, but not shared on Twitter.";
-            }
-        }
-        else
-        {
+        if (_fbError!=nil){
+            alertTitle = @"Warning";
+            alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
+        }else{
             alertTitle = @"Success";
             alertMessage = @"Your photo was posted on STATUS";
         }
@@ -478,27 +324,6 @@ typedef NS_ENUM(NSUInteger, TagProductSection) {
             [[CoreManager localNotificationService] postNotificationName:STPostNewImageUploaded object:nil userInfo:@{kPostIdKey:postId}];
     });
 
-}
-
--(void)callTheDelegateIfNeededForPostId:(NSString *)postId{
-    
-    if (_shouldPostToFacebook == YES && _donePostingToFacebook == YES) {
-        if (_shouldPostToTwitter == YES && _donePostingToTwitter == NO) {
-            return;
-        }
-        else
-            [self showMessagesAndCallDelegatesForPostId:postId];
-    }
-    else if (_shouldPostToTwitter == YES && _donePostingToTwitter == YES){
-        if (_shouldPostToFacebook == YES && _donePostingToFacebook == NO) {
-            return;
-        }
-        else
-            [self showMessagesAndCallDelegatesForPostId:postId];
-    }
-    else
-        [self showMessagesAndCallDelegatesForPostId:postId];
-    
 }
 
 -(void)showErrorAlert{

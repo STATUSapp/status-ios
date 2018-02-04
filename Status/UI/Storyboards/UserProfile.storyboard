@@ -13,29 +13,48 @@
         <array key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
         </array>
+        <array key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Edit Profile-->
         <scene sceneID="ijb-dA-ZEL">
             <objects>
-                <viewController storyboardIdentifier="STEditProfileViewController" id="DwW-bD-kyz" customClass="STEditProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="STEditProfileViewController" extendedLayoutIncludesOpaqueBars="YES" id="DwW-bD-kyz" customClass="STEditProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ey5-pI-G7P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eum-Tm-Xic">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="555"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="DGt-YI-1b1" kind="embed" identifier="USER_PROFILE_TVC" id="HdE-Ge-Tks"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRS-G0-53E">
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Khz-Tr-LJZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
+                                <state key="normal" title="SAVE" backgroundImage="orange-base-0">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapSave:" destination="DwW-bD-kyz" eventType="touchUpInside" id="lK3-1l-rIM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="N3Y-5f-jBf" firstAttribute="bottom" secondItem="eum-Tm-Xic" secondAttribute="bottom" id="ZEa-NG-M8g"/>
+                            <constraint firstItem="PRS-G0-53E" firstAttribute="trailing" secondItem="N3Y-5f-jBf" secondAttribute="trailing" id="2Qb-Nu-gQA"/>
+                            <constraint firstItem="PRS-G0-53E" firstAttribute="leading" secondItem="N3Y-5f-jBf" secondAttribute="leading" id="aJC-to-mbl"/>
                             <constraint firstItem="N3Y-5f-jBf" firstAttribute="trailing" secondItem="eum-Tm-Xic" secondAttribute="trailing" id="gQg-s6-GPk"/>
+                            <constraint firstItem="PRS-G0-53E" firstAttribute="top" secondItem="eum-Tm-Xic" secondAttribute="bottom" id="hZG-9z-Sn6"/>
                             <constraint firstItem="eum-Tm-Xic" firstAttribute="leading" secondItem="N3Y-5f-jBf" secondAttribute="leading" id="hd5-Bo-p4q"/>
+                            <constraint firstItem="PRS-G0-53E" firstAttribute="bottom" secondItem="N3Y-5f-jBf" secondAttribute="bottom" id="jOi-Sz-0cL"/>
                             <constraint firstItem="eum-Tm-Xic" firstAttribute="top" secondItem="N3Y-5f-jBf" secondAttribute="top" id="r2x-Lx-4Ul"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N3Y-5f-jBf"/>
@@ -317,5 +336,6 @@
         <image name="User Name icon" width="16" height="18"/>
         <image name="User link icon" width="14" height="17"/>
         <image name="gender icon" width="16" height="18"/>
+        <image name="orange-base-0" width="481" height="72"/>
     </resources>
 </document>

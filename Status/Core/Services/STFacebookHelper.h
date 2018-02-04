@@ -18,7 +18,10 @@ typedef void (^loadFBPicturesCompletion) (NSDictionary *result);
 -(void)loadAlbumsWithRefreshBlock:(refreshCompletion)refreshCompletion;
 -(void)loadPhotosForAlbum:(NSString *)albumId withRefreshBlock:(refreshCompletion)refreshCompletion;
 -(void)getUserExtendedInfoWithCompletion:(void (^)(NSDictionary *info))completion;
--(void) shareImageWithImageUrl:(NSString *)imgUrl description:(NSString *)description andCompletion:(facebookCompletion) completion;
+-(void) shareImageWithImageUrl:(NSString *)imgUrl
+                   description:(NSString *)description
+                      deepLink:(NSString *)deepLink
+                 andCompletion:(facebookCompletion) completion;
 
 //app promote
 //-(void)promoteTheApp;

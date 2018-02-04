@@ -431,7 +431,9 @@ NSInteger const kFacebookAdsTimeframe = 10;
 
 - (void)sharePostOnfacebokAtIndex:(NSInteger)index{
     STPost *post = [self objectAtIndex:index];
-    [[CoreManager facebookService] shareImageWithImageUrl:post.mainImageUrl description:nil
+    [[CoreManager facebookService] shareImageWithImageUrl:post.mainImageUrl
+                                              description:post.caption
+                                                 deepLink:post.shareShortUrl
                                             andCompletion:^(id result, NSError *error) {
                                                 NSString *titleAlert = nil;
                                                 NSString *messageAlert = nil;
