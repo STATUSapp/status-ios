@@ -20,6 +20,9 @@
 @property (strong, nonatomic) STLoadingView *customLoadingView;
 @property (nonatomic, assign) STTagSuggestionsScreenType screenType;
 @property (nonatomic, strong) NSArray <STShopProduct*>* products;
+@property (nonatomic, copy) STTagSuggestionsCompletion completion;
+
+@property (nonatomic, strong) STShopProduct *similarSelectedShopProduct;
 
 @end
 
@@ -32,8 +35,19 @@
     return vc;
 }
 
++(STTagSuggestions *)similarProductsScreenWithProducts:(NSArray <STShopProduct *> *)similarProducts andSelectedProduct:(STShopProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion{
+    STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeSimilarProducts];
+    vc.products = similarProducts;
+    vc.similarSelectedShopProduct = selectedProduct;
+    vc.completion = completion;
+    return vc;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
+        self.title = NSLocalizedString(@"Similar", nil);
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(tagProductsNotification:) name:kTagProductNotification object:nil];
 }
@@ -116,12 +130,17 @@
 #pragma mark STTagProductProtocol
 
 -(void)addProductsAction{
-    UIViewController *vc = [STTagProductsManager sharedInstance].rootViewController;
-    if (vc) {
-        [self.navigationController popToViewController:vc animated:YES];
+    if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
+        self.completion(_similarSelectedShopProduct);
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        UIViewController *vc = [STTagProductsManager sharedInstance].rootViewController;
+        if (vc) {
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+        else
+            NSLog(@"The root vc should not be nil in this case");
     }
-    else
-        NSLog(@"The root vc should not be nil in this case");
 }
 
 -(void)productsShouldDownloadNextPage{
@@ -130,4 +149,40 @@
     }
 }
 
+-(BOOL)isProductSelected:(STShopProduct *)product{
+    if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
+        return (product == _similarSelectedShopProduct);
+    }
+    return [[STTagProductsManager sharedInstance] isProductSelected:product];
+}
+
+-(void)selectProduct:(STShopProduct *)product{
+    if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
+        _similarSelectedShopProduct = product;
+    }else{
+        [[STTagProductsManager sharedInstance] processProduct:product];
+    }
+}
+
+-(NSInteger)selectedProductCount{
+    if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
+        return _similarSelectedShopProduct!=nil ? 1:0;
+    }else{
+        return [STTagProductsManager sharedInstance].selectedProducts.count;
+    }
+}
+
+-(NSString *)bottomActionString{
+    if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
+        return NSLocalizedString(@"CHANGE PRODUCT", nil);
+    }else{
+        NSInteger selectedProductsCount = [self selectedProductCount];
+        
+        if (selectedProductsCount == 1) {
+            return NSLocalizedString(@"ADD PRODUCT", nil);
+        }else{
+            return NSLocalizedString(@"ADD PRODUCTS", nil);
+        }
+    }
+}
 @end

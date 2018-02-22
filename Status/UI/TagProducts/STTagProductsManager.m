@@ -79,6 +79,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
     _categoryAndBrandProducts = nil;
     _rootViewController = nil;
     _selectedProducts = nil;
+    _usedProducts = nil;
     _usedCategoriesPageIndex = kCatalogFirstPage;
     _usedProductsPageIndex = kCatalogFirstPage;
     _barcodeProductsPageIndex = kCatalogFirstPage;

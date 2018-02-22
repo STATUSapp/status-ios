@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self updateBottomView];
     // Do any additional setup after loading the view.
 }
 
@@ -63,7 +64,7 @@
         [weakCell.loadingView stopAnimating];
     }];
     
-    [cell setSelected:[[STTagProductsManager sharedInstance] isProductSelected:tagProduct]];
+    [cell setSelected:[_delegate isProductSelected:tagProduct]];
     
     return cell;
 }
@@ -83,7 +84,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     STShopProduct *tagProduct = _products[indexPath.item];
-    [[STTagProductsManager sharedInstance] processProduct:tagProduct];
+    [_delegate selectProduct:tagProduct];
 
     [self.collectionView reloadData];
     [self updateBottomView];
@@ -92,31 +93,22 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(nonnull UICollectionViewCell *)cell forItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
     if (indexPath.item == _products.count - 1) {//the last item
-        if (_delegate && [_delegate respondsToSelector:@selector(productsShouldDownloadNextPage)]) {
-            [_delegate productsShouldDownloadNextPage];
-        }
+        [_delegate productsShouldDownloadNextPage];
     }
 }
 
 
 -(void)updateBottomView{
-    NSInteger selectedProductsCount = [STTagProductsManager sharedInstance].selectedProducts.count;
+    NSInteger selectedProductsCount = [_delegate selectedProductCount];
     
     if (selectedProductsCount == 0) {
         _addProductHeightConstr.constant = 0;
-    }
-    else
-    {
+    }else{
         _addProductHeightConstr.constant = 44.f;
-        
-        if (selectedProductsCount == 1) {
-            [_addProductButton setTitle:NSLocalizedString(@"ADD PRODUCT", nil) forState:UIControlStateNormal];
-        }
-        else
-        {
-            [_addProductButton setTitle:NSLocalizedString(@"ADD PRODUCTS", nil) forState:UIControlStateNormal];
-        }
+        [_addProductButton setTitle:[_delegate bottomActionString] forState:UIControlStateNormal];
     }
+    
+    [self.view layoutIfNeeded];
 }
 
 @end

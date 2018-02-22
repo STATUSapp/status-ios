@@ -35,6 +35,7 @@
 		07234AD81FF69339000C335A /* STTagBrandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07234AD71FF69339000C335A /* STTagBrandCell.m */; };
 		07234ADC1FF69692000C335A /* STTagBrandSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 07234ADB1FF69692000C335A /* STTagBrandSection.m */; };
 		072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */ = {isa = PBXBuildFile; fileRef = 072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */; };
+		0725158120336E4500992BFB /* STSharePhotoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0725158020336E4500992BFB /* STSharePhotoTVC.m */; };
 		07269B681F04201F0041D355 /* STEditProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07269B671F04201F0041D355 /* STEditProfileTVC.m */; };
 		0726B8C11F78D2790012A299 /* STMissingProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726B8C01F78D2790012A299 /* STMissingProductViewController.m */; };
 		0726C6D71F0228B800E787EA /* STSnackBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0726C6D61F0228B800E787EA /* STSnackBar.xib */; };
@@ -76,6 +77,7 @@
 		075C529F1EBF4E1200174CC5 /* STTagManualProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C529E1EBF4E1200174CC5 /* STTagManualProductCell.m */; };
 		075C52A21EBF4E2F00174CC5 /* STTagAddProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52A11EBF4E2F00174CC5 /* STTagAddProductCell.m */; };
 		075C52A51EBF4F9200174CC5 /* STTagManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52A41EBF4F9200174CC5 /* STTagManualViewController.m */; };
+		075E6ED920324B14007C3457 /* STDetailedShopProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075E6ED820324B14007C3457 /* STDetailedShopProductCell.m */; };
 		076B91ED1FDD7F28006B7E91 /* STSnackBarWithActionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B91EC1FDD7F28006B7E91 /* STSnackBarWithActionService.m */; };
 		076B91F01FDD821C006B7E91 /* STSnackBarBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B91EF1FDD821C006B7E91 /* STSnackBarBaseService.m */; };
 		077811591EB7126B0043A2E8 /* STTagCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 077811581EB7126B0043A2E8 /* STTagCategoryCell.m */; };
@@ -379,6 +381,9 @@
 		07234ADB1FF69692000C335A /* STTagBrandSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTagBrandSection.m; sourceTree = "<group>"; };
 		072443AC1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsEmptyWardrobe.h; sourceTree = "<group>"; };
 		072443AD1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsEmptyWardrobe.m; sourceTree = "<group>"; };
+		0725157F20336E4500992BFB /* STSharePhotoTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSharePhotoTVC.h; sourceTree = "<group>"; };
+		0725158020336E4500992BFB /* STSharePhotoTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSharePhotoTVC.m; sourceTree = "<group>"; };
+		072515822033982100992BFB /* STSharePhotoHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSharePhotoHeader.h; sourceTree = "<group>"; };
 		07269B661F04201F0041D355 /* STEditProfileTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEditProfileTVC.h; sourceTree = "<group>"; };
 		07269B671F04201F0041D355 /* STEditProfileTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEditProfileTVC.m; sourceTree = "<group>"; };
 		0726B8BF1F78D2790012A299 /* STMissingProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMissingProductViewController.h; sourceTree = "<group>"; };
@@ -455,6 +460,8 @@
 		075C52A11EBF4E2F00174CC5 /* STTagAddProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagAddProductCell.m; sourceTree = "<group>"; };
 		075C52A31EBF4F9200174CC5 /* STTagManualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagManualViewController.h; sourceTree = "<group>"; };
 		075C52A41EBF4F9200174CC5 /* STTagManualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagManualViewController.m; sourceTree = "<group>"; };
+		075E6ED720324B14007C3457 /* STDetailedShopProductCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDetailedShopProductCell.h; sourceTree = "<group>"; };
+		075E6ED820324B14007C3457 /* STDetailedShopProductCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDetailedShopProductCell.m; sourceTree = "<group>"; };
 		076B91EB1FDD7F28006B7E91 /* STSnackBarWithActionService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSnackBarWithActionService.h; sourceTree = "<group>"; };
 		076B91EC1FDD7F28006B7E91 /* STSnackBarWithActionService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSnackBarWithActionService.m; sourceTree = "<group>"; };
 		076B91EE1FDD821C006B7E91 /* STSnackBarBaseService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSnackBarBaseService.h; sourceTree = "<group>"; };
@@ -1204,6 +1211,8 @@
 				170912461DF882DC00B2AF81 /* STPostShopProductsCell.m */,
 				170912471DF882DC00B2AF81 /* STShopProductCell.h */,
 				170912481DF882DC00B2AF81 /* STShopProductCell.m */,
+				075E6ED720324B14007C3457 /* STDetailedShopProductCell.h */,
+				075E6ED820324B14007C3457 /* STDetailedShopProductCell.m */,
 			);
 			path = PostCells;
 			sourceTree = "<group>";
@@ -1947,8 +1956,11 @@
 			children = (
 				99B387271C82FAA2005B4D8C /* STMoveScaleViewController.h */,
 				99B387281C82FAA2005B4D8C /* STMoveScaleViewController.m */,
+				072515822033982100992BFB /* STSharePhotoHeader.h */,
 				99B387291C82FAA2005B4D8C /* STSharePhotoViewController.h */,
 				99B3872A1C82FAA2005B4D8C /* STSharePhotoViewController.m */,
+				0725157F20336E4500992BFB /* STSharePhotoTVC.h */,
+				0725158020336E4500992BFB /* STSharePhotoTVC.m */,
 				99B3872B1C82FAA2005B4D8C /* STZoomablePostViewController.h */,
 				99B3872C1C82FAA2005B4D8C /* STZoomablePostViewController.m */,
 			);
@@ -2319,6 +2331,7 @@
 				07D03F581F00D27F00B5A3B8 /* STDeepLinkService.m in Sources */,
 				0726B8C11F78D2790012A299 /* STMissingProductViewController.m in Sources */,
 				0727A6231FFBB5E10040F349 /* STSectionView.m in Sources */,
+				0725158120336E4500992BFB /* STSharePhotoTVC.m in Sources */,
 				99B387801C82FAA2005B4D8C /* StatusDM.xcdatamodeld in Sources */,
 				99B387761C82FAA2005B4D8C /* STIAPHelper.m in Sources */,
 				1709124A1DF882DC00B2AF81 /* STPostHeader.m in Sources */,
@@ -2376,6 +2389,7 @@
 				170911FB1DF87F0400B2AF81 /* STNearbyCollectionLayout.m in Sources */,
 				17648B881E50993F00D9C428 /* STUploadShopProduct.m in Sources */,
 				99B387A51C82FAA2005B4D8C /* HPGrowingTextView.m in Sources */,
+				075E6ED920324B14007C3457 /* STDetailedShopProductCell.m in Sources */,
 				17648B8E1E50DBF400D9C428 /* STCatalogParentCategory.m in Sources */,
 				99B387421C82FAA2005B4D8C /* UIImage+Alpha.m in Sources */,
 				99B3876C1C82FAA2005B4D8C /* STUploadPostRequest.m in Sources */,

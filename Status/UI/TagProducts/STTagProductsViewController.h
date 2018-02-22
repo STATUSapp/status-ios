@@ -7,16 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class STShopProduct;
 
 @protocol STTagProductsProtocol <NSObject>
 
+@required
 -(void)addProductsAction;
 -(void)productsShouldDownloadNextPage;
+-(BOOL)isProductSelected:(STShopProduct *)product;
+-(void)selectProduct:(STShopProduct *)product;
+-(NSInteger)selectedProductCount;
+-(NSString *)bottomActionString;
 
 @end
 
-@class STShopProduct;
 
 @interface STTagProductsViewController : UIViewController
 

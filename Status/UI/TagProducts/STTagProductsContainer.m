@@ -388,7 +388,27 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
     [[STTagProductsManager sharedInstance] downloadUsedProductsNextPage];
 }
 
+-(BOOL)isProductSelected:(STShopProduct *)product{
+    return [[STTagProductsManager sharedInstance] isProductSelected:product];
+}
 
+-(void)selectProduct:(STShopProduct *)product{
+    [[STTagProductsManager sharedInstance] processProduct:product];
+}
+
+-(NSInteger)selectedProductCount{
+    return [STTagProductsManager sharedInstance].selectedProducts.count;
+}
+
+-(NSString *)bottomActionString{
+    NSInteger selectedProductsCount = [self selectedProductCount];
+    
+    if (selectedProductsCount == 1) {
+        return NSLocalizedString(@"ADD PRODUCT", nil);
+    }else{
+        return NSLocalizedString(@"ADD PRODUCTS", nil);
+    }
+}
 #pragma mark - STTagProductsEmptyWardrobeProtocol
 
 -(void)wizzardOptionSelected{

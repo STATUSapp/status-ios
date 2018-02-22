@@ -11,7 +11,6 @@
 @class STShopProduct;
 
 @interface STShopProductCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 + (CGSize)cellSize;
 - (void)configureWithShopProduct:(STShopProduct *)shopProduct;

@@ -41,12 +41,25 @@
         weakSelf.mainImageDownloaded = cached;
     }];
     self.imageSize = CGSizeZero;
-    
+ 
+    //TODO: AUTO - parse proper data from BE
+    self.brandName = @"ASOS";
+    self.productName = @"Skinny Buffalo Check";
+    self.productPrice = @(149.99);
 }
 
 -(BOOL)isEqual:(STShopProduct *)object{
     return [self.uuid isEqualToString:object.uuid] ||
     [self.mainImageUrl isEqualToString:object.mainImageUrl];
+}
+
+-(NSString *)productPriceString{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
+    numberFormatter.locale = [NSLocale currentLocale];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.usesGroupingSeparator = YES;
+    NSString *text = [NSString stringWithFormat:@"%@ lei", [numberFormatter stringFromNumber:self.productPrice]];
+    return text;
 }
 
 @end

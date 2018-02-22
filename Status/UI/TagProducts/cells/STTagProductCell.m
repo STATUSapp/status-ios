@@ -7,6 +7,14 @@
 //
 
 #import "STTagProductCell.h"
+#import "STShopProduct.h"
+
+@interface STTagProductCell ()
+@property (weak, nonatomic) IBOutlet UILabel *brandNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *productPrice;
+
+@end
 
 @implementation STTagProductCell
 
@@ -41,6 +49,12 @@
         self.layer.borderWidth = 0.0f;
     }
     
+}
+
+-(void)configureWithProduct:(STShopProduct *)product{
+    _brandNameLabel.text = product.brandName;
+    _productNameLabel.text = product.productName;
+    _productPrice.text = [product productPriceString];
 }
 
 @end

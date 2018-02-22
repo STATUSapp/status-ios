@@ -8,13 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "STMoveScaleViewController.h"
+#import "STSharePhotoHeader.h"
+
 @class STPost;
 
-typedef NS_ENUM(NSUInteger,STShareControllerType){
-    STShareControllerNotDefined = 0,
-    STShareControllerAddPost,
-    STShareControllerEditInfo
-};
 @interface STSharePhotoViewController : UIViewController
 @property (nonatomic, strong) NSData *imgData;
 @property (nonatomic, strong) STPost *post;

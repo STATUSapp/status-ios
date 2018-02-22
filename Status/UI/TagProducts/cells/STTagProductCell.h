@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DGActivityIndicatorView.h"
 
+@class STShopProduct;
+
 @interface STTagProductCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
 @property (weak, nonatomic) IBOutlet DGActivityIndicatorView *loadingView;
+
+-(void)configureWithProduct:(STShopProduct *)product;
 
 @end
