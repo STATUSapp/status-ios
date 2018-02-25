@@ -176,7 +176,8 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger numRows = 1;
+    NSInteger numRows = [super tableView:tableView numberOfRowsInSection:section];
+
     switch (section) {
         case STSharePhotoSectionSuggestedProductsHeader:
         case STSharePhotoSectionSuggestedProducts:
@@ -195,9 +196,6 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
             break;
         case STSharePhotoSectionShareFacebook:
             numRows = (_controllerType == STShareControllerEditInfo) ? 0 : 2;
-            break;
-        default:
-            numRows = 1;
             break;
     }
     return numRows;
