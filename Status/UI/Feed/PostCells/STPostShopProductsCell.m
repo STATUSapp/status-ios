@@ -8,7 +8,7 @@
 
 #import "STPostShopProductsCell.h"
 #import "STShopProduct.h"
-#import "STShopProductCell.h"
+#import "STDetailedShopProductCell.h"
 
 @interface STPostShopProductsCell ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -55,7 +55,7 @@
 
 + (CGSize)cellSize{
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    CGSize size = [STShopProductCell cellSize];
+    CGSize size = [STDetailedShopProductCell cellSize];
     size.height = roundf(size.height + 32.f);
     size.width = roundf(screenSize.width);
     return size;
@@ -73,7 +73,7 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return [STShopProductCell cellSize];
+    return [STDetailedShopProductCell cellSize];
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -87,8 +87,8 @@
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *identifier = @"STShopProductCell";
-    STShopProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    NSString *identifier = @"STDetailedShopProductCell";
+    STDetailedShopProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     STShopProduct *product = [_products objectAtIndex:indexPath.row];
     [cell configureWithShopProduct:product];
     

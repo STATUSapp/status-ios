@@ -14,6 +14,7 @@
 #import "STMoveScaleViewController.h"
 #import "STDetailedShopProductCell.h"
 #import "STTagSuggestions.h"
+#import "STImageSuggestionsService.h"
 
 static NSInteger const  kMaxCaptionLenght = 250;
 
@@ -76,16 +77,16 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
         for (STShopProduct *sp in _post.shopProducts) {
             [[STTagProductsManager sharedInstance] processProduct:sp];
         }
-        //TODO: remove this mock
-        _suggestionsLoaded = NO;
-        _suggesteProducts = [NSMutableArray array];
     }
     else{
         _captiontextView.text = @"";
         _shopProducts = @[];
-        //TODO: get suggested products data from server
-        _suggestionsLoaded = NO;
-        _suggesteProducts = [NSMutableArray array];
+        __weak STSharePhotoTVC *weakSelf = self;
+        [[CoreManager imageSuggestionsService] setSuggestionsCompletionBlock:^(NSArray *objects) {
+            weakSelf.suggestionsLoaded = YES;
+            weakSelf.suggesteProducts = [NSMutableArray arrayWithArray:objects];
+            [weakSelf updateProductsCollection];
+        }];
     }
     
     _captiontextView.delegate = self;
@@ -145,7 +146,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 - (IBAction)onTapViewSimilarButton:(id)sender {
     NSInteger buttonTag = ((UIButton *)sender).tag;
     STShopProduct *currentProduct = [_shopProducts objectAtIndex:buttonTag];
-    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithProducts:[STTagProductsManager sharedInstance].usedProducts andSelectedProduct:nil withCompletion:^(STShopProduct *selectedProduct) {
+    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STShopProduct *selectedProduct) {
         [[STTagProductsManager sharedInstance] processProduct:currentProduct];
         [[STTagProductsManager sharedInstance] processProduct:selectedProduct];
     }];
@@ -155,7 +156,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 - (IBAction)onTapViewSimilarSuggestedProductButton:(id)sender {
     NSInteger buttonTag = ((UIButton *)sender).tag;
     STShopProduct *currentProduct = [_suggesteProducts objectAtIndex:buttonTag];
-    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithProducts:[STTagProductsManager sharedInstance].usedProducts andSelectedProduct:currentProduct withCompletion:^(STShopProduct *selectedProduct) {
+    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STShopProduct *selectedProduct) {
         [_suggesteProducts replaceObjectAtIndex:buttonTag withObject:selectedProduct];
         [self.suggestedProductsCollection reloadData];
     }];
@@ -249,14 +250,6 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
         case STTagManagerEventSelectedProducts:
         {
             _shopProducts = [NSArray arrayWithArray:[STTagProductsManager sharedInstance].selectedProducts];
-            [self updateProductsCollection];
-        }
-            break;
-        case STTagManagerEventUsedProducts:
-        {
-            //TODO: remove this mock
-            _suggestionsLoaded = YES;
-            _suggesteProducts = [NSMutableArray arrayWithArray:[STTagProductsManager sharedInstance].usedProducts];
             [self updateProductsCollection];
         }
             break;

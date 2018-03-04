@@ -14,6 +14,7 @@
 #import "STNavigationService.h"
 #import "FeedCVC.h"
 #import "STTabBarViewController.h"
+#import "STImageSuggestionsService.h"
 
 @interface STMoveScaleViewController ()<UIScrollViewDelegate>
 {
@@ -26,8 +27,10 @@
 @implementation STMoveScaleViewController
 
 + (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing andPost:(STPost *)post {
-    // here, no compressing should be done, because it might be a cropping after this
+    //start the image suggestions service
+    [[CoreManager imageSuggestionsService] startServiceWithImage:img];
     
+    // here, no compressing should be done, because it might be a cropping after this
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:nil];
     STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
     viewController.currentImg = img;

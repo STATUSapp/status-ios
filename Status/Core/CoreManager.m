@@ -28,6 +28,7 @@
 #import "STSnackBarWithActionService.h"
 #import "STCoreDataManager.h"
 #import "STSyncService.h"
+#import "STImageSuggestionsService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -51,7 +52,7 @@
 @property (nonatomic, strong) STSnackBarWithActionService *snackWithActionService;
 @property (nonatomic, strong) STCoreDataManager *coreDataService;
 @property (nonatomic, strong) STSyncService *syncService;
-
+@property (nonatomic, strong) STImageSuggestionsService *imageSuggestionsService;
 @end
 
 @implementation CoreManager
@@ -90,6 +91,7 @@
         _snackWithActionService = [STSnackBarWithActionService new];
         _coreDataService = [STCoreDataManager new];
         _syncService = [STSyncService new];
+        _imageSuggestionsService = [STImageSuggestionsService new];
         
     }
     return self;
@@ -189,6 +191,9 @@
     return [[CoreManager sharedInstance] syncService];
 }
 
++(STImageSuggestionsService *)imageSuggestionsService{
+    return [[CoreManager sharedInstance] imageSuggestionsService];
+}
 #pragma mark - Private implementation
 
 - (BOOL)shouldLogin {

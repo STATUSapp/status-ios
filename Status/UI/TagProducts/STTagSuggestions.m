@@ -11,11 +11,11 @@
 #import "STTagProductsViewController.h"
 #import "STTagProductsManager.h"
 #import "STLoadingView.h"
+#import "STImageSuggestionsService.h"
 
 @interface STTagSuggestions ()<STTagProductsProtocol>
-{
-    STTagProductsViewController *productsVC;
-}
+
+@property (nonatomic, strong) STTagProductsViewController *productsVC;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) STLoadingView *customLoadingView;
 @property (nonatomic, assign) STTagSuggestionsScreenType screenType;
@@ -35,9 +35,8 @@
     return vc;
 }
 
-+(STTagSuggestions *)similarProductsScreenWithProducts:(NSArray <STShopProduct *> *)similarProducts andSelectedProduct:(STShopProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion{
++(STTagSuggestions *)similarProductsScreenWithSelectedProduct:(STShopProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion{
     STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeSimilarProducts];
-    vc.products = similarProducts;
     vc.similarSelectedShopProduct = selectedProduct;
     vc.completion = completion;
     return vc;
@@ -47,6 +46,13 @@
     [super viewDidLoad];
     if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
         self.title = NSLocalizedString(@"Similar", nil);
+        __weak STTagSuggestions *weakSelf = self;
+        [[CoreManager imageSuggestionsService] setSimilarCompletionBlock:^(NSArray *objects) {
+            weakSelf.products = objects;
+            [weakSelf.productsVC updateProducts:objects];
+            [self setScreenLoading:NO];
+
+        } forProduct:_similarSelectedShopProduct];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(tagProductsNotification:) name:kTagProductNotification object:nil];
@@ -82,15 +88,15 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    productsVC = (STTagProductsViewController *)segue.destinationViewController;
-    productsVC.delegate  = self;
+    _productsVC = (STTagProductsViewController *)segue.destinationViewController;
+    _productsVC.delegate  = self;
     //load search results if needed
     if (_screenType == STTagSuggestionsScreenTypeBarcodeSearch) {
         _products = [STTagProductsManager sharedInstance].searchResult;
     }else if (_screenType == STTagSuggestionsScreenTypeDefault){
         _products = [STTagProductsManager sharedInstance].categoryAndBrandProducts;
     }
-    [productsVC updateProducts:_products];
+    [_productsVC updateProducts:_products];
     [self setScreenLoading:(_products.count == 0)];
 }
 
@@ -105,14 +111,14 @@
         case STTagManagerEventCategoryAndBrandProducts:
         {
             _products = [STTagProductsManager sharedInstance].categoryAndBrandProducts;
-            [productsVC updateProducts:_products];
+            [_productsVC updateProducts:_products];
             [self setScreenLoading:NO];
         }
             break;
         case STTagManagerEventSearchProducts:
         {
             _products = [STTagProductsManager sharedInstance].searchResult;
-            [productsVC updateProducts:_products];
+            [_productsVC updateProducts:_products];
             [self setScreenLoading:NO];
         }
         default:

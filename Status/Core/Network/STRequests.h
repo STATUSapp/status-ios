@@ -40,6 +40,8 @@
 #import "STGetProductsByBarcode.h"
 #import "STUserCommissionsRequest.h"
 #import "STUserWithDrawnDetailsRequest.h"
+#import "STGetImageSuggestionsRequest.h"
+#import "STGetSimilarProductsRequest.h"
 
 #endif
 

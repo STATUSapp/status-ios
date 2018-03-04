@@ -71,6 +71,12 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
        withShopProducts:(NSArray <STShopProduct *> *) shopProducts
          withCompletion:(STDataAccessCompletionBlock)completion;
 
+//suggestion products
++(void)getSuggestedProductsWithId:(NSString *)suggestionsId
+                   withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getSimilarProductsWithId:(NSString *)productsId
+                 withCompletion:(STDataAccessCompletionBlock)completion;
+
 //upload post stuff
 + (void)setPostLikeUnlikeWithPostId:(NSString *)postId
                      withCompletion:(STDataUploadCompletionBlock)completion;

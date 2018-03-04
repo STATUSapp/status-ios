@@ -103,6 +103,10 @@ NSString *const kGetBrandsWithProducts = @"catalog/categoryBrands";
 NSString *const kUserCommissions = @"users/commissions";
 NSString *const kUserWithdrawnDetails = @"users/details";
 NSString *const kUserWithdrawnUpdateDetails = @"users/details/update";
+//TODO: change this when the API will be ready
+NSString *const kImageForSugegstions = @"blabla1";
+NSString *const kGetImageSuggestions = @"blabla2";
+NSString *const kGetSimilarProducts = @"blabla3";
 
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";

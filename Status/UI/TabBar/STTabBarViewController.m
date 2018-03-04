@@ -122,7 +122,7 @@ static CGFloat kImageInset = 4.f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarHeight:kTabBarHeight];
+//    [self setNavigationBarHeight:kTabBarHeight];
     [self instatiateSelectPhotoFlow];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(snackBarAction:)

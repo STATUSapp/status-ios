@@ -59,6 +59,7 @@ typedef NS_ENUM(NSUInteger, STInterstitialType){
 
 typedef NS_ENUM(NSUInteger,STWebservicesCodes){
     STWebservicesSuccesCod=200,
+    STWebservicesCodesPartialContent = 206,
     STWebservicesNeedRegistrationCod=404,
     STWebservicesFounded = 302,
     STWebservicesUnprocessableEntity = 422
@@ -165,6 +166,9 @@ extern NSString *const kProductSuggest;
 extern NSString *const kUserCommissions;
 extern NSString *const kUserWithdrawnDetails;
 extern NSString *const kUserWithdrawnUpdateDetails;
+extern NSString *const kImageForSugegstions;
+extern NSString *const kGetImageSuggestions;
+extern NSString *const kGetSimilarProducts;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

@@ -680,6 +680,58 @@ withCompletion:(STDataUploadCompletionBlock)completion{
     }];
 }
 
+#pragma mark - Suggested Products
+
++(void)getSuggestedProductsWithId:(NSString *)suggestionsId
+                   withCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetImageSuggestionsRequest getImageSuggestionsForId:suggestionsId
+                                             andCompletion:^(id response, NSError *error) {
+                                                 if (!error) {
+                                                     if ([response[@"status_code"] integerValue] == STWebservicesCodesPartialContent) {
+                                                         NSError *error = [NSError errorWithDomain:@"image.suggestions.error" code:STWebservicesCodesPartialContent userInfo:nil];
+                                                         completion(nil, error);
+                                                     }else{
+                                                         NSMutableArray *result = [@[] mutableCopy];
+                                                         for (NSDictionary *dict in response) {
+                                                             STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
+                                                             [result addObject:shopObj];
+                                                         }
+                                                         completion(result, nil);
+                                                     }
+                                                 }else{
+                                                     completion(nil, error);
+                                                 }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"STGetImageSuggestionsRequest error : %@", error.debugDescription);
+        completion(nil, error);
+    }];
+
+}
+
++(void)getSimilarProductsWithId:(NSString *)productsId
+                withCompletion:(STDataAccessCompletionBlock)completion{
+    
+    [STGetSimilarProductsRequest getSimilarProductsForProductId:productsId
+                                                  andCompletion:^(id response, NSError *error) {
+                                                      if (!error) {
+                                                          NSMutableArray *result = [@[] mutableCopy];
+                                                          for (NSDictionary *dict in response) {
+                                                              STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
+                                                              [result addObject:shopObj];
+                                                          }
+                                                          completion(result, nil);
+                                                      }else{
+                                                          completion(nil, error);
+                                                      }
+
+                                                  } failure:^(NSError *error) {
+                                                      NSLog(@"STGetSimilarProductsRequest error : %@", error.debugDescription);
+                                                      completion(nil, error);
+                                                  }];
+}
+
+
 #pragma mark - Notifications
 
 + (void)getNotificationsWithCompletion:(STDataAccessCompletionBlock)completion{

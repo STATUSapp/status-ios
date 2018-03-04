@@ -67,6 +67,10 @@
 		0748751D2011541D005E6CFD /* STCustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0748751C2011541D005E6CFD /* STCustomTitleView.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
 		07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */; };
+		07552B2D204743B0005F4542 /* STUploadImageForSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 07552B2C204743B0005F4542 /* STUploadImageForSuggestionsRequest.m */; };
+		07552B30204743D0005F4542 /* STGetImageSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 07552B2F204743D0005F4542 /* STGetImageSuggestionsRequest.m */; };
+		07552B33204743F2005F4542 /* STGetSimilarProductsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 07552B32204743F2005F4542 /* STGetSimilarProductsRequest.m */; };
+		07552B3620474912005F4542 /* STImageSuggestionsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 07552B3520474912005F4542 /* STImageSuggestionsService.m */; };
 		0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0755E2381E87DF140016519E /* STChoosePhotoViewController.m */; };
 		0755E23B1E882CBD0016519E /* TagProductsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */; };
 		07582B65200BFBE200C5185D /* ContainerFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07582B64200BFBE200C5185D /* ContainerFeedVC.m */; };
@@ -441,6 +445,14 @@
 		074FA8D71EB652600028C33E /* STTagProductsCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsCategories.m; sourceTree = "<group>"; };
 		07533D841F6E91020009DDDF /* STBarcodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBarcodeScannerViewController.h; sourceTree = "<group>"; };
 		07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBarcodeScannerViewController.m; sourceTree = "<group>"; };
+		07552B2B204743B0005F4542 /* STUploadImageForSuggestionsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STUploadImageForSuggestionsRequest.h; sourceTree = "<group>"; };
+		07552B2C204743B0005F4542 /* STUploadImageForSuggestionsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STUploadImageForSuggestionsRequest.m; sourceTree = "<group>"; };
+		07552B2E204743D0005F4542 /* STGetImageSuggestionsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STGetImageSuggestionsRequest.h; sourceTree = "<group>"; };
+		07552B2F204743D0005F4542 /* STGetImageSuggestionsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STGetImageSuggestionsRequest.m; sourceTree = "<group>"; };
+		07552B31204743F2005F4542 /* STGetSimilarProductsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STGetSimilarProductsRequest.h; sourceTree = "<group>"; };
+		07552B32204743F2005F4542 /* STGetSimilarProductsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STGetSimilarProductsRequest.m; sourceTree = "<group>"; };
+		07552B3420474912005F4542 /* STImageSuggestionsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STImageSuggestionsService.h; sourceTree = "<group>"; };
+		07552B3520474912005F4542 /* STImageSuggestionsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STImageSuggestionsService.m; sourceTree = "<group>"; };
 		0755E2371E87DF140016519E /* STChoosePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChoosePhotoViewController.h; sourceTree = "<group>"; };
 		0755E2381E87DF140016519E /* STChoosePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChoosePhotoViewController.m; sourceTree = "<group>"; };
 		0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TagProductsScene.storyboard; sourceTree = "<group>"; };
@@ -1529,6 +1541,12 @@
 				0722F3451F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m */,
 				075991A61FC36C9F00CF89C0 /* STGetProductsByBarcode.h */,
 				075991A71FC36C9F00CF89C0 /* STGetProductsByBarcode.m */,
+				07552B2B204743B0005F4542 /* STUploadImageForSuggestionsRequest.h */,
+				07552B2C204743B0005F4542 /* STUploadImageForSuggestionsRequest.m */,
+				07552B2E204743D0005F4542 /* STGetImageSuggestionsRequest.h */,
+				07552B2F204743D0005F4542 /* STGetImageSuggestionsRequest.m */,
+				07552B31204743F2005F4542 /* STGetSimilarProductsRequest.h */,
+				07552B32204743F2005F4542 /* STGetSimilarProductsRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1591,6 +1609,8 @@
 				0726C6DC1F022B0F00E787EA /* STSnackBarService.m */,
 				076B91EB1FDD7F28006B7E91 /* STSnackBarWithActionService.h */,
 				076B91EC1FDD7F28006B7E91 /* STSnackBarWithActionService.m */,
+				07552B3420474912005F4542 /* STImageSuggestionsService.h */,
+				07552B3520474912005F4542 /* STImageSuggestionsService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2348,6 +2368,7 @@
 				07269B681F04201F0041D355 /* STEditProfileTVC.m in Sources */,
 				0722BE9F1EBCEFC100BE8CC2 /* STTagProductCell.m in Sources */,
 				99B387561C82FAA2005B4D8C /* STGetSuggestUsersRequest.m in Sources */,
+				07552B2D204743B0005F4542 /* STUploadImageForSuggestionsRequest.m in Sources */,
 				99B387DB1C82FAA2005B4D8C /* STZoomablePostViewController.m in Sources */,
 				99B3874A1C82FAA2005B4D8C /* STDeletePostRequest.m in Sources */,
 				99B387791C82FAA2005B4D8C /* STInviteController.m in Sources */,
@@ -2366,6 +2387,7 @@
 				99B387521C82FAA2005B4D8C /* STGetNotificationsRequest.m in Sources */,
 				171936C31C848604002C0202 /* STNavigationService.m in Sources */,
 				99B387E91C8302AD005B4D8C /* STTabBarViewController.m in Sources */,
+				07552B33204743F2005F4542 /* STGetSimilarProductsRequest.m in Sources */,
 				071FD6B51F237B300070F965 /* STEarningsTotalCell.m in Sources */,
 				075991AB1FC414D600CF89C0 /* STProductSuggestRequest.m in Sources */,
 				99B3875A1C82FAA2005B4D8C /* STGetUserSettingsRequest.m in Sources */,
@@ -2416,6 +2438,7 @@
 				17232F191CFC50F300280B6B /* BadgeService.m in Sources */,
 				174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */,
 				99B387DD1C82FAA2005B4D8C /* STTutorialPresenterViewController.m in Sources */,
+				07552B3620474912005F4542 /* STImageSuggestionsService.m in Sources */,
 				99B3873E1C82FAA2005B4D8C /* NSDate+Additions.m in Sources */,
 				99B387491C82FAA2005B4D8C /* STConstants.m in Sources */,
 				99B387481C82FAA2005B4D8C /* UIImageView+TouchesEffects.m in Sources */,
@@ -2484,6 +2507,7 @@
 				072143B71FA264D70009C6E9 /* STTagProductsContainerViewController.m in Sources */,
 				071CA92D1F1FD34300434ABB /* STIndexPathTextField.m in Sources */,
 				0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */,
+				07552B30204743D0005F4542 /* STGetImageSuggestionsRequest.m in Sources */,
 				1709124C1DF882DC00B2AF81 /* STPostShopProductsCell.m in Sources */,
 				072158621F1A4F3B001481B0 /* STWDInputViewModel.m in Sources */,
 				52DC4DCD1C8D87F00064F23F /* UIAlertController+Additions.m in Sources */,

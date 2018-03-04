@@ -23,6 +23,6 @@ typedef void (^STTagSuggestionsCompletion)(STShopProduct *selectedProduct);
 
 +(STTagSuggestions *)suggestionsVCWithScreenType:(STTagSuggestionsScreenType)screenType;
 
-+(STTagSuggestions *)similarProductsScreenWithProducts:(NSArray <STShopProduct *> *)similarProducts andSelectedProduct:(STShopProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion;
++(STTagSuggestions *)similarProductsScreenWithSelectedProduct:(STShopProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion;
 
 @end

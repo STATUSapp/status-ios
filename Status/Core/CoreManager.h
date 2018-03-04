@@ -29,6 +29,7 @@
 @class STSnackBarWithActionService;
 @class STCoreDataManager;
 @class STSyncService;
+@class STImageSuggestionsService;
 
 @interface CoreManager : NSObject
 
@@ -56,5 +57,6 @@
 + (STSnackBarWithActionService *)snackWithActionService;
 + (STCoreDataManager *)coreDataService;
 + (STSyncService *)syncService;
++ (STImageSuggestionsService *)imageSuggestionsService;
 
 @end
