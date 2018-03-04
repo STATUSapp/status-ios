@@ -944,6 +944,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         }
         else if(_tabBarHidden == YES && post.showShopProducts == YES)
         {
+            _tabBarHidden = NO;
             [UIView animateWithDuration:1.f animations:^{
                 
                 CGRect tabBarFrame = self.tabBarController.tabBar.frame;
@@ -951,7 +952,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                 [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
                 
             } completion:^(BOOL finished) {
-                _tabBarHidden = NO;
             }];
         }
         
