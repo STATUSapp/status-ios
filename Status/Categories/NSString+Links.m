@@ -22,4 +22,13 @@
     return self;
 }
 
+-(NSString *)stringByAddingHttp{
+    NSRange httpRange = [self rangeOfString:@"http"];
+    if (httpRange.location == NSNotFound) {
+        return [@"https://" stringByAppendingString:self];
+    }
+    return self;
+}
+
+
 @end

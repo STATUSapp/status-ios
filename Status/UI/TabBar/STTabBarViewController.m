@@ -245,8 +245,7 @@ static CGFloat kImageInset = 4.f;
 
 - (void)setTabBarFrame:(CGRect)rect
 {
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    if (screenSize.height == 812.0f){
+    if (IS_IPHONE_X){
         NSLog(@"iPhone X, don't mess up the beatifull layout");
         return;
     }

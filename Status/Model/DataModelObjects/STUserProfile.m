@@ -80,7 +80,8 @@
     _followersCount = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followersCount"] integerValue];
     _followingCount = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followingCount"] integerValue];
     _isFollowedByCurrentUser = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"followed_by_current_user"] boolValue];
-    _profileShareUrl = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"short_url"];
+    NSString *shortUrl = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"short_url"];
+    _profileShareUrl = [shortUrl stringByAddingHttp];
     _username = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"username"];
     //super properties
     self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"] stringByReplacingHttpWithHttps];

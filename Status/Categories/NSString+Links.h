@@ -11,5 +11,6 @@
 @interface NSString (Links)
 
 -(NSString *)stringByReplacingHttpWithHttps;
+-(NSString *)stringByAddingHttp;
 
 @end

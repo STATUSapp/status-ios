@@ -65,7 +65,8 @@
     _userId = [CreateDataModelHelper validStringIdentifierFromValue:self.infoDict[@"user_id"]];
     _userName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_name"];
     _postSeen = [self.infoDict[@"post_seen"] boolValue];
-    _shareShortUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"short_url"];
+    NSString *shortUrl = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"short_url"];
+    _shareShortUrl = [shortUrl stringByAddingHttp];
     
     self.shopProducts = @[];
 
@@ -113,7 +114,7 @@
     }
     else{
         _showFullCaption = NO;
-        _showShopProducts = NO;
+        _showShopProducts = (self.shopProducts.count > 0);
     }
 
 }
