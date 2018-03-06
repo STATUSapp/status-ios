@@ -18,12 +18,15 @@
 @implementation STShopProductCell
 
 + (CGSize)cellSize{
+    //this is a dinamic computation
     CGSize size = [UIScreen mainScreen].bounds.size;
-    
+    if (IS_IPHONE_6_OR_MORE) {
+        size = CGSizeMake(375.f, 667.f);
+    }
+
     //TODO: CA - replace this magic numbers
     CGFloat height = roundf(size.height * 0.23);
     CGFloat width = roundf(height * 0.75);
-    
     return CGSizeMake(width, height);
 }
 
