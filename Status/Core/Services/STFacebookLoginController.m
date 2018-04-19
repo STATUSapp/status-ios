@@ -61,7 +61,7 @@
 - (FBSDKLoginButton *)facebookLoginButton{
     FBSDKLoginButton *_loginButton = [FBSDKLoginButton new];
     _loginButton.defaultAudience = FBSDKDefaultAudienceEveryone;
-    _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday",@"user_about_me", @"user_location",@"user_photos"];
+    _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday", @"user_location",@"user_photos"];
     _loginButton.publishPermissions = @[@"publish_actions"];
     
     _loginButton.delegate = self;
@@ -265,7 +265,7 @@
         return ;
     }
     [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        
+
         if (error!=nil) {
             //TODO: add log here
             return ;

@@ -169,7 +169,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 }
 
 - (void)getUserExtendedInfoWithCompletion:(void (^)(NSDictionary *info))completion {
-    NSArray *requiredPermissions = @[@"user_birthday",@"email",@"user_about_me"];
+    NSArray *requiredPermissions = @[@"user_birthday",@"email"];
     NSArray *acceptedPermissions = [[[FBSDKAccessToken currentAccessToken] permissions] allObjects];
     NSMutableArray *deniedPermissions = [NSMutableArray new];
     for (NSString *permission in requiredPermissions){

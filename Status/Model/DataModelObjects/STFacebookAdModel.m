@@ -48,7 +48,7 @@
 
 - (void)nativeAd:(FBNativeAd *)nativeAd didFailWithError:(NSError *)error{
     NSLog(@"FBNativeAd failed: %@", error);
-    [self initNativeAd];
+//    [self initNativeAd];
 }
 
 - (void)nativeAdDidClick:(FBNativeAd *)nativeAd{

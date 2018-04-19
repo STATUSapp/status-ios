@@ -103,9 +103,16 @@ static FBSDKAccessToken *g_currentAccessToken;
 + (void)refreshCurrentAccessToken:(FBSDKGraphRequestHandler)completionHandler
 {
   if ([FBSDKAccessToken currentAccessToken]) {
-    FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
-    [FBSDKGraphRequestPiggybackManager addRefreshPiggyback:connection permissionHandler:completionHandler];
-    [connection start];
+      NSTimeInterval timeInterval = [[FBSDKAccessToken currentAccessToken].expirationDate timeIntervalSinceNow];
+      if (timeInterval>0) {
+          if (completionHandler) {
+              completionHandler(nil, nil, nil);
+          }
+      }else{
+          FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
+          [FBSDKGraphRequestPiggybackManager addRefreshPiggyback:connection permissionHandler:completionHandler];
+          [connection start];
+      }
   } else {
     if (completionHandler) {
       completionHandler(nil, nil, [FBSDKError errorWithCode:FBSDKAccessTokenRequiredErrorCode message:@"No current access token to refresh"]);
