@@ -36,6 +36,7 @@
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"category_id"] = weakSelf.categoryId;
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

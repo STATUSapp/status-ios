@@ -355,7 +355,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 -(BOOL)canDoAction{
-    if ([[CoreManager loginService] isGuestUser]) {
+    if ([CoreManager isGuestUser]) {
         [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
         return NO;
     }

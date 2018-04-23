@@ -104,7 +104,8 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
 }
 
 - (void)startLocationUpdates{
-    if ([CoreManager loggedIn]) {
+    if ([CoreManager loggedIn] &&
+        ![CoreManager isGuestUser]) {
         [_locationManager startUpdatingLocation];
     }
 }

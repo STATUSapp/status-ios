@@ -80,7 +80,8 @@ NSString * const kBadgeCountNotificationsKey = @"kBadgeCountNotificationsKey";
 
 -(void)checkForNotificationNumber{
     __weak BadgeService *weakSelf = self;
-    if ([CoreManager loggedIn]) {
+    if ([CoreManager loggedIn] &&
+        ![CoreManager isGuestUser]) {
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 dispatch_async(dispatch_get_main_queue(), ^{

@@ -43,6 +43,7 @@
         else
             contactsDict[@"facebookFriends"] = @[];
         params[@"contacts"] = contactsDict;
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                         progress:nil

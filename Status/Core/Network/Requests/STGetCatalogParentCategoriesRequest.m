@@ -28,7 +28,7 @@
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"pageSize"] = @(kCatalogDownloadPageSize);
         params[@"page"] = @(1);
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

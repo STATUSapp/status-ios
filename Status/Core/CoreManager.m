@@ -102,7 +102,11 @@
 }
 
 + (BOOL)loggedIn{
-    return [[CoreManager sharedInstance] loggedIn] && ![[CoreManager sharedInstance] isGuestUser];
+    return [[CoreManager sharedInstance] loggedIn];
+}
+
++ (BOOL)isGuestUser{
+    return [[CoreManager sharedInstance] isGuestUser];
 }
 
 + (STPostsPool *)postsPool {

@@ -33,7 +33,7 @@
         if (weakSelf.shopProduct.productUrl) {
             params[@"link"] = weakSelf.shopProduct.productUrl;
         }
-        
+        weakSelf.params = params;
         NSData *imageData = UIImageJPEGRepresentation(weakSelf.shopProduct.localImage, 1.f);
         
         NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [weakSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

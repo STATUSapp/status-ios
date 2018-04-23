@@ -205,14 +205,15 @@
 //    [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     if (_loggedInUserProfile == nil) {
+        __weak STFacebookLoginController *weakSelf=self;
         [STDataAccessUtils getUserProfileForUserId:_currentUserId
                                      andCompletion:^(NSArray *objects, NSError *error) {
-                                         _loggedInUserProfile = [objects firstObject];
-                                         if (_loggedInUserProfile) {
-                                             [[CoreManager profilePool] addProfiles:@[_loggedInUserProfile]];
+                                         weakSelf.loggedInUserProfile = [objects firstObject];
+                                         if (weakSelf.loggedInUserProfile) {
+                                             [[CoreManager profilePool] addProfiles:@[weakSelf.loggedInUserProfile]];
                                          }
-                                         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:@{kManualLogoutKey:@(self.manualLogout)}];
-                                         self.manualLogout = NO;
+                                         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:@{kManualLogoutKey:@(weakSelf.manualLogout)}];
+                                         weakSelf.manualLogout = NO;
                                      }];
     }else{
         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:@{kManualLogoutKey:@(self.manualLogout)}];
@@ -256,6 +257,38 @@
     return YES;
 }
 
+- (void)buildLoginRegisterParams {
+    __block NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    
+    NSString *userFbId = [[FBSDKAccessToken currentAccessToken] userID];
+    
+    userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
+    userInfo[@"facebook_id"] = userFbId;
+    
+    __weak STFacebookLoginController *weskSelf = self;
+    [[CoreManager facebookService] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
+        if (info[@"birthday"]) {
+            userInfo[@"birthday"] = [NSDate birthdayStringFromFacebookBirthday:info[@"birthday"]];
+        }
+        if (info[@"email"]) {
+            userInfo[@"email"] = info[@"email"];
+        }
+        if (info[@"picture"][@"data"][@"url"]) {
+            userInfo[@"facebook_image_link"] = info[@"picture"][@"data"][@"url"];
+        }
+        if (info[@"name"]!=nil){
+            userInfo[@"full_name"] = info[@"name"];
+        }
+        if (info[@"gender"]!=nil) {
+            userInfo[@"gender"] = info[@"gender"];
+        }
+        if (info[@"about"]!=nil) {
+            userInfo[@"bio"] = info[@"about"];
+        }
+        [weskSelf sendLoginOrregisterRequest:userInfo];
+    }];
+}
+
 -(void) loginOrRegister{
     if (![self canLoginOrRegister]) {
         return;
@@ -264,41 +297,21 @@
         //TODO: add log here
         return ;
     }
-    [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-
-        if (error!=nil) {
-            //TODO: add log here
-            return ;
-        }
-        __block NSMutableDictionary *userInfo = [NSMutableDictionary new];
-        
-        NSString *userFbId = [[FBSDKAccessToken currentAccessToken] userID];
-        
-        userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
-        userInfo[@"facebook_id"] = userFbId;
-
-        [[CoreManager facebookService] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
-            if (info[@"birthday"]) {
-                userInfo[@"birthday"] = [NSDate birthdayStringFromFacebookBirthday:info[@"birthday"]];
+    NSTimeInterval timeInterval = [[FBSDKAccessToken currentAccessToken].expirationDate timeIntervalSinceNow];
+    if (timeInterval>0) {
+        [self buildLoginRegisterParams];
+    }else{
+        __weak STFacebookLoginController *weakSelf;
+        [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+            
+            if (error!=nil) {
+                //TODO: add log here
+                return ;
             }
-            if (info[@"email"]) {
-                userInfo[@"email"] = info[@"email"];
-            }
-            if (info[@"picture"][@"data"][@"url"]) {
-                userInfo[@"facebook_image_link"] = info[@"picture"][@"data"][@"url"];
-            }
-            if (info[@"name"]!=nil){
-                userInfo[@"full_name"] = info[@"name"];
-            }
-            if (info[@"gender"]!=nil) {
-                userInfo[@"gender"] = info[@"gender"];
-            }
-            if (info[@"about"]!=nil) {
-                userInfo[@"bio"] = info[@"about"];
-            }
-            [self sendLoginOrregisterRequest:userInfo];
+            [weakSelf buildLoginRegisterParams];
         }];
-    }];
+    }
+
 }
 
 -(void)sendLoginOrregisterRequest:(NSDictionary *)userInfo{

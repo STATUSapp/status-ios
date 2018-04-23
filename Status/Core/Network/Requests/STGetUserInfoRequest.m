@@ -29,7 +29,7 @@
         NSString *url = [self urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"user_id"] = weakSelf.userId;
-
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                    parameters:params
                                        progress:nil

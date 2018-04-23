@@ -32,7 +32,7 @@
         NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:weakSelf.userInfo];
         params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
         params[@"app_version"] = [self getAppVersion];
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                         progress:nil

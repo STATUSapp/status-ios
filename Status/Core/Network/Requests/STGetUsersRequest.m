@@ -38,6 +38,7 @@
         if (weakSelf.searchText && weakSelf.searchText.length) {
             params[@"search"] = weakSelf.searchText;
         }
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil

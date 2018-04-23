@@ -35,7 +35,7 @@
         params[@"root_category_id"] = weakSelf.parentCategoryId;
         params[@"pageSize"] = @(kCatalogDownloadPageSize);
         params[@"page"] = @(weakSelf.pageIndex);
-        NSLog(@"CATALOG PARAMS: %@", params);
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

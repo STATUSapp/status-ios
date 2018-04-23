@@ -76,6 +76,7 @@
 		075C529F1EBF4E1200174CC5 /* STTagManualProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C529E1EBF4E1200174CC5 /* STTagManualProductCell.m */; };
 		075C52A21EBF4E2F00174CC5 /* STTagAddProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52A11EBF4E2F00174CC5 /* STTagAddProductCell.m */; };
 		075C52A51EBF4F9200174CC5 /* STTagManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52A41EBF4F9200174CC5 /* STTagManualViewController.m */; };
+		0764B374208A840B00064D7C /* STSendLogsReguest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0764B373208A840B00064D7C /* STSendLogsReguest.m */; };
 		076B91ED1FDD7F28006B7E91 /* STSnackBarWithActionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B91EC1FDD7F28006B7E91 /* STSnackBarWithActionService.m */; };
 		076B91F01FDD821C006B7E91 /* STSnackBarBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B91EF1FDD821C006B7E91 /* STSnackBarBaseService.m */; };
 		077811591EB7126B0043A2E8 /* STTagCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 077811581EB7126B0043A2E8 /* STTagCategoryCell.m */; };
@@ -455,6 +456,8 @@
 		075C52A11EBF4E2F00174CC5 /* STTagAddProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagAddProductCell.m; sourceTree = "<group>"; };
 		075C52A31EBF4F9200174CC5 /* STTagManualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagManualViewController.h; sourceTree = "<group>"; };
 		075C52A41EBF4F9200174CC5 /* STTagManualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagManualViewController.m; sourceTree = "<group>"; };
+		0764B372208A840B00064D7C /* STSendLogsReguest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSendLogsReguest.h; sourceTree = "<group>"; };
+		0764B373208A840B00064D7C /* STSendLogsReguest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSendLogsReguest.m; sourceTree = "<group>"; };
 		076B91EB1FDD7F28006B7E91 /* STSnackBarWithActionService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSnackBarWithActionService.h; sourceTree = "<group>"; };
 		076B91EC1FDD7F28006B7E91 /* STSnackBarWithActionService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSnackBarWithActionService.m; sourceTree = "<group>"; };
 		076B91EE1FDD821C006B7E91 /* STSnackBarBaseService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSnackBarBaseService.h; sourceTree = "<group>"; };
@@ -1520,6 +1523,8 @@
 				0722F3451F0CB50B00B78823 /* STUserWithDrawnDetailsRequest.m */,
 				075991A61FC36C9F00CF89C0 /* STGetProductsByBarcode.h */,
 				075991A71FC36C9F00CF89C0 /* STGetProductsByBarcode.m */,
+				0764B372208A840B00064D7C /* STSendLogsReguest.h */,
+				0764B373208A840B00064D7C /* STSendLogsReguest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -2364,6 +2369,7 @@
 				170AE3C01DF618D200859C8E /* STTutorialModel.m in Sources */,
 				99B387611C82FAA2005B4D8C /* STSetAPNTokenRequest.m in Sources */,
 				99B3873F1C82FAA2005B4D8C /* NSIndexPath+Additions.m in Sources */,
+				0764B374208A840B00064D7C /* STSendLogsReguest.m in Sources */,
 				99B3874E1C82FAA2005B4D8C /* STGetFollowersRequest.m in Sources */,
 				99B3877A1C82FAA2005B4D8C /* STLocationManager.m in Sources */,
 				1709121B1DF87F5C00B2AF81 /* STMessageReceivedCell.m in Sources */,

@@ -265,7 +265,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if ([CoreManager loggedIn]) {
+    if ([CoreManager loggedIn] &&
+        ![CoreManager isGuestUser]) {
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod)  NSLog(@"APN Token set.");
             else  NSLog(@"APN token NOT set.");
@@ -305,7 +306,7 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 #pragma mark - UITabBarControllerDelegate
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     STTabBarIndex index = [tabBarController.viewControllers indexOfObject:viewController];
-    if (index != STTabBarIndexExplore && [[CoreManager loginService] isGuestUser]) {
+    if (index != STTabBarIndexExplore && [CoreManager isGuestUser]) {
         [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
         return NO;
     }

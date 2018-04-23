@@ -166,6 +166,7 @@ extern NSString *const kProductSuggest;
 extern NSString *const kUserCommissions;
 extern NSString *const kUserWithdrawnDetails;
 extern NSString *const kUserWithdrawnUpdateDetails;
+extern NSString *const kSendLogs;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

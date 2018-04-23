@@ -25,6 +25,7 @@ static int const kBCRequestRetryCount = 0;
 
 @property (nonatomic,assign) int retryCount;
 @property (nonatomic,strong) NSDictionary *returnAttributes;
+@property (nonatomic, strong) NSDictionary *params;
 
 @property (nonatomic,copy) STRequestExecutionBlock executionBlock;
 @property (nonatomic,copy) STRequestCompletionBlock completionBlock;

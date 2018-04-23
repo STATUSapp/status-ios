@@ -68,7 +68,7 @@
         return;
     }
     
-    if (![CoreManager loggedIn] || [STNavigationService appTabBar] == nil) {
+    if (![CoreManager loggedIn] || [CoreManager isGuestUser] || [STNavigationService appTabBar] == nil) {
         //wait for the login to be performed and after handle the notification
         _lastNotification = notif;
         return;

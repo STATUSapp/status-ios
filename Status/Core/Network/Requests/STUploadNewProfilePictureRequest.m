@@ -28,7 +28,7 @@
     STRequestExecutionBlock executionBlock = ^{
         
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-
+        weakSelf.params = params;
         NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [weakSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:weakSelf.pictureData
                                         name:@"image"

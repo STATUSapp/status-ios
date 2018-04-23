@@ -30,7 +30,7 @@
         NSString *url = [self urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"apn_token"] = weakSelf.apnToken;
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
                                    parameters:params
                                         progress:nil
