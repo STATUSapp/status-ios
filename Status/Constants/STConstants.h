@@ -172,6 +172,9 @@ extern NSString *const kGetImageSuggestions;
 extern NSString *const kGetSimilarProducts;
 extern NSString *const kSendLogs;
 
+extern NSString *const kAPIKey;
+extern NSString *const kErrorCodeKey;
+
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;
 

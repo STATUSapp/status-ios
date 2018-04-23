@@ -109,6 +109,9 @@ NSString *const kGetImageSuggestions = @"blabla2";
 NSString *const kGetSimilarProducts = @"blabla3";
 NSString *const kSendLogs = @"__log";
 
+NSString *const kAPIKey = @"API";
+NSString *const kErrorCodeKey = @"error_code";
+
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";
 

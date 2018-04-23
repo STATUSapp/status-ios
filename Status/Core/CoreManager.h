@@ -30,6 +30,7 @@
 @class STCoreDataManager;
 @class STSyncService;
 @class STImageSuggestionsService;
+@class STLoggerService;
 
 @interface CoreManager : NSObject
 
@@ -59,5 +60,6 @@
 + (STCoreDataManager *)coreDataService;
 + (STSyncService *)syncService;
 + (STImageSuggestionsService *)imageSuggestionsService;
++ (STLoggerService *)loggerService;
 
 @end

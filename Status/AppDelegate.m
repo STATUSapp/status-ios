@@ -48,6 +48,8 @@
 #import "STSyncService.h"
 #import "UIImage+Assets.h"
 
+#import "STLoggerService.h"
+
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @interface AppDelegate()
@@ -119,6 +121,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     self.window.backgroundColor = [AppDelegate navigationBarDefaultColor];
 
+    [[CoreManager loggerService] startUpload];
+    
     return YES;
 
 }
@@ -218,6 +222,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 {
     [[STChatController sharedInstance] close];
     [[CoreManager coreDataService] save];
+    [[CoreManager loggerService] saveLogsToDisk];
+    
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

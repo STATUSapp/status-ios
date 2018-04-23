@@ -29,6 +29,7 @@
 #import "STCoreDataManager.h"
 #import "STSyncService.h"
 #import "STImageSuggestionsService.h"
+#import "STLoggerService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -53,6 +54,8 @@
 @property (nonatomic, strong) STCoreDataManager *coreDataService;
 @property (nonatomic, strong) STSyncService *syncService;
 @property (nonatomic, strong) STImageSuggestionsService *imageSuggestionsService;
+@property (nonatomic, strong) STLoggerService *loggerService;
+
 @end
 
 @implementation CoreManager
@@ -92,6 +95,7 @@
         _coreDataService = [STCoreDataManager new];
         _syncService = [STSyncService new];
         _imageSuggestionsService = [STImageSuggestionsService new];
+        _loggerService = [STLoggerService new];
         
     }
     return self;
@@ -197,6 +201,10 @@
 
 +(STImageSuggestionsService *)imageSuggestionsService{
     return [[CoreManager sharedInstance] imageSuggestionsService];
+}
+
++(STLoggerService *)loggerService{
+    return [[CoreManager sharedInstance] loggerService];
 }
 #pragma mark - Private implementation
 
