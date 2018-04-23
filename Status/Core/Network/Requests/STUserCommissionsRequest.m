@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, STUserCommission) {
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        weakSelf.params = params;
         if (weakSelf.requestType == STUserCommissionGet) {
             [[STNetworkQueueManager networkAPI] GET:url
                                          parameters:params

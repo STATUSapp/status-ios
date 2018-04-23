@@ -32,7 +32,7 @@
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"value"] = @(weakSelf.value);
         params[@"key"] = weakSelf.key;
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
                                    parameters:params
                                         progress:nil

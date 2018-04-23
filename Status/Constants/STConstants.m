@@ -107,6 +107,7 @@ NSString *const kUserWithdrawnUpdateDetails = @"users/details/update";
 NSString *const kImageForSugegstions = @"blabla1";
 NSString *const kGetImageSuggestions = @"blabla2";
 NSString *const kGetSimilarProducts = @"blabla3";
+NSString *const kSendLogs = @"__log";
 
 NSString *const kMATAdvertiserID = @"21414";
 NSString *const kMATConversionKey = @"9b85f596c75ed11ac4dd72cd8a392ca8";

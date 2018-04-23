@@ -169,7 +169,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 }
 
 - (void)getUserExtendedInfoWithCompletion:(void (^)(NSDictionary *info))completion {
-    NSArray *requiredPermissions = @[@"user_birthday",@"email",@"user_about_me"];
+    NSArray *requiredPermissions = @[@"user_birthday",@"email"];
     NSArray *acceptedPermissions = [[[FBSDKAccessToken currentAccessToken] permissions] allObjects];
     NSMutableArray *deniedPermissions = [NSMutableArray new];
     for (NSString *permission in requiredPermissions){
@@ -198,13 +198,15 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me?fields=birthday,email,picture.type(large),name,gender,about"
                                                                    parameters:nil];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            completion(result);
-        }
-        else{
-            //TODO: add log here
-            completion(nil);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error) {
+                completion(result);
+            }
+            else{
+                //TODO: add log here
+                completion(nil);
+            }
+        });
         
     }];
 }

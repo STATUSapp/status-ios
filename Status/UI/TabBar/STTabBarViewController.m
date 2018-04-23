@@ -209,7 +209,7 @@ static CGFloat kImageInset = 4.f;
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    if ([[CoreManager loginService] isGuestUser]) {
+    if ([CoreManager isGuestUser]) {
         return;
     }
     NSUInteger selectedItem = [[tabBar items] indexOfObject:item];

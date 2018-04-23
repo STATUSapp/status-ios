@@ -35,6 +35,7 @@
 
 + (BOOL)shouldLogin;
 + (BOOL)loggedIn;
++ (BOOL)isGuestUser;
 
 + (STPostsPool *)postsPool;
 + (STLocationManager *)locationService;

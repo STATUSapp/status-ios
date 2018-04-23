@@ -33,7 +33,7 @@
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"offset"] = weakSelf.offset;
         params[@"limit"] = @(20);
-
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                         progress:nil

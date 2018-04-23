@@ -55,6 +55,7 @@ typedef NS_ENUM(NSUInteger, STUserWithdrawnDetails) {
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         if (weakSelf.requestType == STUserWithdrawnDetailsGet) {
+            weakSelf.params = params;
             [[STNetworkQueueManager networkAPI] GET:url
                                          parameters:params
                                            progress:nil
@@ -107,7 +108,7 @@ typedef NS_ENUM(NSUInteger, STUserWithdrawnDetails) {
                 [params setObject:weakSelf.withdrawObj.iban
                            forKey:@"iban"];
             }
-            
+            weakSelf.params = params;
             [[STNetworkQueueManager networkAPI] POST:url
                                           parameters:params
                                             progress:nil

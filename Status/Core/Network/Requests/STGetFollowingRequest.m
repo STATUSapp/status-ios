@@ -33,7 +33,7 @@
         params[@"offset"] = weakSelf.offset;
         params[@"limit"] = @(100);
         params[@"user_id"] = weakSelf.userID;
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil

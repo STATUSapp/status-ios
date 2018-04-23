@@ -30,7 +30,7 @@
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
         params[@"ids"] = [[weakSelf.users valueForKey:@"uuid"] componentsJoinedByString:@","];
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                         progress:nil

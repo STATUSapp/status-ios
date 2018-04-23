@@ -109,7 +109,8 @@ const float kNoNotifHeight = 24.f;
 }
 
 -(void) getNotificationsFromServer{
-    if (![CoreManager loggedIn]) {
+    if (![CoreManager loggedIn] ||
+        [CoreManager isGuestUser]) {
         return;
     }
     __weak STNotificationsViewController *weakSelf = self;

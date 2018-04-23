@@ -8,6 +8,7 @@
 
 
 #import "STBaseRequest.h"
+#import "STSendLogsReguest.h"
 
 @implementation STBaseRequest
 
@@ -48,13 +49,27 @@
     self.executionBlock();
 }
 
+- (void)sendLogsToServerWithError:(NSError *)error{
+    if (![self isKindOfClass:[STSendLogsReguest class]]) {
+        NSMutableDictionary *params = [@{} mutableCopy];
+        [params addEntriesFromDictionary:self.params];
+        [params setValue:@(error.code) forKey:@"error_code"];
+        [params setValue:[self urlString] forKey:@"API"];
+        [STSendLogsReguest sendLogs:params
+                      andCompletion:^(id response, NSError *error) {
+                          NSLog(@"Logs sent to server");
+                      } failure:^(NSError *error) {
+                          NSLog(@"Failed to send logs: %@", error);
+                      }];
+    }
+}
 - (void) requestFailedWithError:(NSError*)error{
     
     self.shouldAddToQueue = YES;
     
     self.retryCount--;
     if (self.retryCount <= 0) self.shouldAddToQueue = NO;
-    
+    [self sendLogsToServerWithError:error];
     [[CoreManager networkService] request:self didFailWithError:error];
 }
 

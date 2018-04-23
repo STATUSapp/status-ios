@@ -47,7 +47,7 @@
         params[@"brand"] = weakSelf.brand;
         params[@"product_name"] = weakSelf.productName;
         params[@"store"] = weakSelf.store;
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
                                      parameters:params
                                        progress:nil

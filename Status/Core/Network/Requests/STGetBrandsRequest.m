@@ -38,6 +38,7 @@
         params[@"pageSize"] = @(kCatalogDownloadPageSize);
         params[@"page"] = @(weakSelf.pageIndex);
 //        params[@"search"] = @"";
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil

@@ -56,7 +56,7 @@
         }
         
         NSString *url = [weakSelf urlString];
-        
+        weakSelf.params = paramsDict;
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:paramsDict
                                         progress:nil

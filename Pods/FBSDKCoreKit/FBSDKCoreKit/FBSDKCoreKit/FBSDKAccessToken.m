@@ -103,9 +103,9 @@ static FBSDKAccessToken *g_currentAccessToken;
 + (void)refreshCurrentAccessToken:(FBSDKGraphRequestHandler)completionHandler
 {
   if ([FBSDKAccessToken currentAccessToken]) {
-    FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
-    [FBSDKGraphRequestPiggybackManager addRefreshPiggyback:connection permissionHandler:completionHandler];
-    [connection start];
+      FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
+      [FBSDKGraphRequestPiggybackManager addRefreshPiggyback:connection permissionHandler:completionHandler];
+      [connection start];
   } else {
     if (completionHandler) {
       completionHandler(nil, nil, [FBSDKError errorWithCode:FBSDKAccessTokenRequiredErrorCode message:@"No current access token to refresh"]);

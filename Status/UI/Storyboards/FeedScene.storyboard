@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -469,25 +469,25 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph3-BZ-jbg">
-                                                    <rect key="frame" x="16" y="268" width="36" height="36"/>
+                                                    <rect key="frame" x="16" y="262" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="36" id="TBa-OY-a9y"/>
+                                                        <constraint firstAttribute="width" constant="50" id="TBa-OY-a9y"/>
                                                         <constraint firstAttribute="width" secondItem="ph3-BZ-jbg" secondAttribute="height" multiplier="1:1" id="hb4-Bz-UW5"/>
                                                     </constraints>
-                                                    <state key="normal" image="like" backgroundImage="base"/>
-                                                    <state key="selected" image="like_pressed" backgroundImage="base_pressed"/>
+                                                    <state key="normal" image="Like unpressed"/>
+                                                    <state key="selected" image="Like pressed"/>
                                                     <connections>
                                                         <action selector="onLikePressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="WHI-LA-loC"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qps-UM-Jij">
-                                                    <rect key="frame" x="268" y="268" width="36" height="36"/>
+                                                    <rect key="frame" x="254" y="262" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="36" id="UaR-mv-BuL"/>
-                                                        <constraint firstAttribute="height" constant="36" id="Xgu-rb-K92"/>
+                                                        <constraint firstAttribute="width" constant="50" id="UaR-mv-BuL"/>
+                                                        <constraint firstAttribute="height" constant="50" id="Xgu-rb-K92"/>
                                                     </constraints>
-                                                    <state key="normal" image="shop" backgroundImage="base"/>
-                                                    <state key="selected" image="shop_pressed" backgroundImage="base_pressed"/>
+                                                    <state key="normal" image="Shop unpressed"/>
+                                                    <state key="selected" image="Shop pressed"/>
                                                     <connections>
                                                         <action selector="onShopButtonPressed:" destination="kUw-q3-wvD" eventType="touchUpInside" id="Gyj-Dn-e0I"/>
                                                     </connections>
@@ -503,8 +503,8 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="qna-OC-2fZ" firstAttribute="centerX" secondItem="7YZ-cc-HDN" secondAttribute="centerX" id="2i2-DC-qcC"/>
-                                                <constraint firstAttribute="bottom" secondItem="ph3-BZ-jbg" secondAttribute="bottom" constant="16" id="3Z0-fW-6bl"/>
-                                                <constraint firstAttribute="bottom" secondItem="qps-UM-Jij" secondAttribute="bottom" constant="16" id="3fA-qx-sRg"/>
+                                                <constraint firstAttribute="bottom" secondItem="ph3-BZ-jbg" secondAttribute="bottom" constant="8" id="3Z0-fW-6bl"/>
+                                                <constraint firstAttribute="bottom" secondItem="qps-UM-Jij" secondAttribute="bottom" constant="8" id="3fA-qx-sRg"/>
                                                 <constraint firstItem="JNO-sK-ezf" firstAttribute="top" secondItem="7YZ-cc-HDN" secondAttribute="top" id="8bo-xw-91l"/>
                                                 <constraint firstAttribute="trailing" secondItem="LY4-gv-Dq1" secondAttribute="trailing" id="BaL-SC-4Q7"/>
                                                 <constraint firstAttribute="bottom" secondItem="Nv4-We-BjT" secondAttribute="bottom" id="CcA-X7-91h"/>
@@ -1261,14 +1261,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="base" width="36" height="36"/>
-        <image name="base_pressed" width="36" height="36"/>
+        <image name="Like pressed" width="36" height="36"/>
+        <image name="Like unpressed" width="36" height="36"/>
+        <image name="Shop pressed" width="36" height="36"/>
+        <image name="Shop unpressed" width="36" height="36"/>
         <image name="down shaddow" width="414" height="97"/>
         <image name="follow frame " width="14" height="38"/>
         <image name="girl" width="246" height="246"/>
         <image name="like" width="15" height="13"/>
         <image name="like icon" width="70" height="63"/>
-        <image name="like_pressed" width="15" height="13"/>
         <image name="location-icon" width="10" height="14"/>
         <image name="logo status home screen" width="110" height="17"/>
         <image name="message_background" width="6" height="19"/>
@@ -1281,8 +1282,6 @@
         <image name="revenue icon pressed" width="19" height="19"/>
         <image name="settings icon" width="19" height="18"/>
         <image name="settings icon pressed" width="19" height="18"/>
-        <image name="shop" width="13" height="17"/>
-        <image name="shop_pressed" width="13" height="17"/>
         <image name="splashscreen" width="375" height="667"/>
         <image name="user_photo_gradient" width="375" height="151"/>
     </resources>

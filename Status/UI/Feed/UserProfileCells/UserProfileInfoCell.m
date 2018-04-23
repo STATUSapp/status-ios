@@ -60,9 +60,9 @@ CGFloat distanceLabelStandardHeight = 21.f;
         
     }
     NSString *nameString = profile.fullName.length > 0?profile.fullName:profile.firstname;
-    NSString *nameAndAgeString = [NSString stringWithFormat:@"%@%@%@",nameString,age.length>0?@", ":@"", age];
-    [_nameAndAgeButton setTitle:nameAndAgeString forState:UIControlStateNormal];
-    [_nameAndAgeButton setTitle:nameAndAgeString forState:UIControlStateHighlighted];
+//    NSString *nameAndAgeString = [NSString stringWithFormat:@"%@%@%@",nameString,age.length>0?@", ":@"", age];
+    [_nameAndAgeButton setTitle:nameString forState:UIControlStateNormal];
+    [_nameAndAgeButton setTitle:nameString forState:UIControlStateHighlighted];
     
     if (!profile.isFollowedByCurrentUser) {
         [_followButton setTitle:@"FOLLOW" forState:UIControlStateNormal];

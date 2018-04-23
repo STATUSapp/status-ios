@@ -93,7 +93,7 @@ CGFloat const kFacebookAdCaptionHorizontalOffset = 32.f;
 }
 
 +(CGSize)cellSizeWithAdPost:(STAdPost *)adPost{
-//    if (adPost.adModel.adLoaded) {
+    if (adPost.adModel.adLoaded) {
         CGSize screenSize = [[UIScreen mainScreen] bounds].size;
         NSAttributedString *formattedString = [STFacebookAddCell formattedCaptionStringForPostCaption:adPost];
         CGRect paragraphRect =
@@ -103,7 +103,7 @@ CGFloat const kFacebookAdCaptionHorizontalOffset = 32.f;
         CGFloat mediaHeight = screenSize.width / kFacebookAdMediaRation;
         CGFloat height = kFacebookAdHeaderHeight + mediaHeight + kFacebookAdCTAHeight + kFacebookAdCaptionVerticalOffset + paragraphRect.size.height;
         return CGSizeMake(screenSize.width, height+1);
-//    }
-//    return CGSizeZero;
+    }
+    return CGSizeZero;
 }
 @end

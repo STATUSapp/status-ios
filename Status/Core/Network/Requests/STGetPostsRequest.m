@@ -68,6 +68,7 @@
         
         NSString *url = [self urlString];
         NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+
         params[@"limit"] = @(kPostsLimit);
         params[@"offset"] = @(weakSelf.offset);
         
@@ -87,8 +88,7 @@
         if (weakSelf.flowType == STFlowTypeHasttag) {
             params[@"hashtag"] = weakSelf.hashtag;
         }
-        NSLog(@"Params: %@", params);
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil

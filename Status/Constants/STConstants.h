@@ -170,6 +170,7 @@ extern NSString *const kUserWithdrawnUpdateDetails;
 extern NSString *const kImageForSugegstions;
 extern NSString *const kGetImageSuggestions;
 extern NSString *const kGetSimilarProducts;
+extern NSString *const kSendLogs;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

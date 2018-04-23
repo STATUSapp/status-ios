@@ -30,7 +30,7 @@
         CLLocationCoordinate2D coord = [CoreManager locationService].latestLocation.coordinate;
         params[@"lat"] = @(coord.latitude);
         params[@"lng"] = @(coord.longitude);
-        
+        weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
                                     parameters:params
                                         progress:nil
