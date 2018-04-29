@@ -16,5 +16,5 @@
 - (void)configureForSection:(NSInteger)sectionIndex;
 + (CGSize)celSizeForPost:(STPost *)post;
 -(void) animateLikedImage;
-
+-(void)animateShopButton;
 @end

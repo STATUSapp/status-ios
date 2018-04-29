@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "STImageCacheController.h"
 #import "DGActivityIndicatorView.h"
+#import "UIView+AnimatedZoom.h"
 
 CGFloat likeAnimationDuration = 0.9f;
 CGFloat likeAnimationZoomInProportion = 1.f/4.f;
@@ -73,6 +74,10 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 - (void)configureForSection:(NSInteger)sectionIndex{
     _postLikeButton.tag = sectionIndex;
     _postShopButton.tag = sectionIndex;
+}
+
+-(void)animateShopButton{
+    [self.postShopButton animateZoom:1.1];
 }
 
 -(void) animateLikedImage{

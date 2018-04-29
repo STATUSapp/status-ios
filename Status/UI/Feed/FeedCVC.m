@@ -734,6 +734,18 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     return cell;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
+        return;
+    }
+    
+    if (indexPath.item == STPostImage) {
+        STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        [cell animateShopButton];
+    }
+}
+
 #pragma mark - IBACtions
 
 -(void)refreshControlChanged:(UIRefreshControl*)sender{

@@ -1091,7 +1091,7 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="Pkn-hQ-jsj"/>
                 </view>
-                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="AxN-ZE-6dH">
+                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="AxN-ZE-6dH" userLabel="Double Tap Gesture Recognizer">
                     <connections>
                         <action selector="onDoubleTap:" destination="kUw-q3-wvD" id="NOc-8k-7kn"/>
                     </connections>

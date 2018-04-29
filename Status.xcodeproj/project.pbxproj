@@ -64,6 +64,7 @@
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		07311BA12003FA1E0031F261 /* UIImage+Assets.m in Sources */ = {isa = PBXBuildFile; fileRef = 07311BA02003FA1E0031F261 /* UIImage+Assets.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
+		073C72AB209649EC00B283B1 /* UIView+AnimatedZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */; };
 		0748751A20112F9E005E6CFD /* SettingsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0748751920112F9E005E6CFD /* SettingsScene.storyboard */; };
 		0748751D2011541D005E6CFD /* STCustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0748751C2011541D005E6CFD /* STCustomTitleView.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
@@ -443,6 +444,8 @@
 		07311BA02003FA1E0031F261 /* UIImage+Assets.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Assets.m"; sourceTree = "<group>"; };
 		073863981F9F0EC500FE13ED /* STMissingProductTVCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMissingProductTVCTableViewController.h; sourceTree = "<group>"; };
 		073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STMissingProductTVCTableViewController.m; sourceTree = "<group>"; };
+		073C72A9209649EC00B283B1 /* UIView+AnimatedZoom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimatedZoom.h"; sourceTree = "<group>"; };
+		073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimatedZoom.m"; sourceTree = "<group>"; };
 		0748751920112F9E005E6CFD /* SettingsScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsScene.storyboard; sourceTree = "<group>"; };
 		0748751B2011541D005E6CFD /* STCustomTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCustomTitleView.h; sourceTree = "<group>"; };
 		0748751C2011541D005E6CFD /* STCustomTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCustomTitleView.m; sourceTree = "<group>"; };
@@ -1423,6 +1426,8 @@
 				99B386001C82FAA2005B4D8C /* UIImageView+TouchesEffects.m */,
 				17B587401C9ABAF3006AC7BD /* UIViewController+Snapshot.h */,
 				17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */,
+				073C72A9209649EC00B283B1 /* UIView+AnimatedZoom.h */,
+				073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -2412,6 +2417,7 @@
 				072DBBDD1FF9161700DFA8F0 /* Brand+CoreDataProperties.m in Sources */,
 				99B387C41C82FAA2005B4D8C /* STInviteFriendCell.m in Sources */,
 				170912241DF87F5C00B2AF81 /* STSmartNotificationCell.m in Sources */,
+				073C72AB209649EC00B283B1 /* UIView+AnimatedZoom.m in Sources */,
 				17F4F28C1C96E5F800D53EC1 /* STUsersPool.m in Sources */,
 				075C529F1EBF4E1200174CC5 /* STTagManualProductCell.m in Sources */,
 				1709123B1DF8827100B2AF81 /* UserProfileInfoCell.m in Sources */,
