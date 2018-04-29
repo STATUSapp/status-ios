@@ -10,6 +10,11 @@
 
 @interface STLoggerService : NSObject
 
+-(instancetype)initWithSuiteName:(NSString *)suiteName;
+
+@property (nonatomic, strong, readonly) NSMutableArray *logArray;
+@property (nonatomic, assign, readonly) BOOL inProgress;
+
 -(void)sendLogs:(NSDictionary *)logs;
 -(void)saveLogsToDisk;
 -(void)startUpload;

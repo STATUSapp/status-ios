@@ -34,7 +34,7 @@
     STRequestExecutionBlock executionBlock = ^{
         NSString *url = [weakSelf urlString];
         NSMutableDictionary *logs = [@{} mutableCopy];
-        [logs addEntriesFromDictionary:[self defatltLogsiOS]];
+        [logs addEntriesFromDictionary:[self defaultLogsiOS]];
         [logs addEntriesFromDictionary:weakSelf.logs];
         NSMutableDictionary *params = [@{} mutableCopy];
         params[@"content"] = logs;
@@ -51,7 +51,7 @@
     return kSendLogs;
 }
 
--(NSDictionary *)defatltLogsiOS{
+- (NSDictionary *)defaultLogsiOS{
     return @{@"platform": @"iOS",
              @"version": [self getAppVersion]
              };

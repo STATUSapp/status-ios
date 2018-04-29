@@ -20,5 +20,9 @@ pod 'Tune'
 pod 'DGActivityIndicatorView'
 pod 'Branch'
 
+target 'STATUSTests' do
+      pod 'OCMock'
+  end
+
 end
 

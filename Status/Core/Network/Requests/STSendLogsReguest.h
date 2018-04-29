@@ -12,4 +12,5 @@
 + (void)sendLogs:(NSDictionary *)logs
    andCompletion:(STRequestCompletionBlock)completion
          failure:(STRequestFailureBlock)failure;
+
 @end

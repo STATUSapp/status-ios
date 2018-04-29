@@ -19,7 +19,7 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-        [self initNativeAd];
+//        [self initNativeAd];
     }
     return self;
 }
