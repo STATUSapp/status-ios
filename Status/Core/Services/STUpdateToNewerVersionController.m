@@ -38,6 +38,7 @@ static STUpdateToNewerVersionController *_sharedManager = nil;
     
     NSURL * url = [NSURL URLWithString:@"https://itunes.apple.com/lookup?id=841855995"];
     
+    __weak STUpdateToNewerVersionController *weakSelf = self;
     NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url
                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                         if(error == nil)
@@ -46,18 +47,18 @@ static STUpdateToNewerVersionController *_sharedManager = nil;
                                                             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &errorJson];
                                                             NSString *appVersion = [[STBaseRequest new] getAppVersion];
                                                             NSString *appStoreVersion = [responseDict[@"results"] firstObject][@"version"];
-                                                            if (![appStoreVersion isEqualToString:appVersion] && _newerVersionAlert==nil) {
-                                                                _newerVersionAlert = [UIAlertController alertControllerWithTitle:@"A new version of Get STATUS is available on Appstore!\n\nWhat's new:" message:[responseDict[@"results"] firstObject][@"releaseNotes"] preferredStyle:UIAlertControllerStyleAlert];
+                                                            if (![appStoreVersion isEqualToString:appVersion] && weakSelf.newerVersionAlert==nil) {
+                                                                weakSelf.newerVersionAlert = [UIAlertController alertControllerWithTitle:@"A new version of Get STATUS is available on Appstore!\n\nWhat's new:" message:[responseDict[@"results"] firstObject][@"releaseNotes"] preferredStyle:UIAlertControllerStyleAlert];
                                                                 
-                                                                [_newerVersionAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                                                                [weakSelf.newerVersionAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
                                                                 
-                                                                [_newerVersionAlert addAction:[UIAlertAction actionWithTitle:@"Download" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                                                                    _newerVersionAlert = nil;
+                                                                [weakSelf.newerVersionAlert addAction:[UIAlertAction actionWithTitle:@"Download" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                                                    weakSelf.newerVersionAlert = nil;
                                                                         NSString *iTunesLink = @"https://itunes.apple.com/us/app/apple-store/id841855995?mt=8";
                                                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
                                                                 }]];
                                                                 
-                                                                [[CoreManager navigationService] presentAlertController:_newerVersionAlert];
+                                                                [[CoreManager navigationService] presentAlertController:weakSelf.newerVersionAlert];
                                                             }
                                                         }
                                                         

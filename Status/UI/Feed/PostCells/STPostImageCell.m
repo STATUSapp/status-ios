@@ -55,10 +55,11 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 - (void) configureCellWithPost:(STPost *)post{
     if (post.mainImageDownloaded) {
         [self setBottomItemsHidden:NO];
+        __weak STPostImageCell *weakSelf = self;
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
-            [_activityIndicator stopAnimating];
-            _blurEffectView.hidden = YES;
-            _postImage.image = origImg;
+            [weakSelf.activityIndicator stopAnimating];
+            weakSelf.blurEffectView.hidden = YES;
+            weakSelf.postImage.image = origImg;
         }];
     }
     else
@@ -100,17 +101,17 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
                      animations:^{
                          [self.contentView layoutIfNeeded];
                      } completion:^(BOOL finished) {
-                         _linkedImageWidthConstr.constant = 70.f;
+                         weakSelf.linkedImageWidthConstr.constant = 70.f;
                          [UIView animateWithDuration:zoomOutDuration
                                                delay:0.f
                                              options:UIViewAnimationOptionBeginFromCurrentState
                                           animations:^{
                                               [self.contentView layoutIfNeeded];
-                                              _likedImage.alpha = 0.7;
+                                              weakSelf.likedImage.alpha = 0.7;
 
                                           } completion:^(BOOL finished) {
                                               weakSelf.likeImageAnimationInProgress = NO;
-                                              _likedImage.hidden = YES;
+                                              weakSelf.likedImage.hidden = YES;
                                           }];
                      }];
 }

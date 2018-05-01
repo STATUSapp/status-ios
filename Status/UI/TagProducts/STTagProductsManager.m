@@ -341,7 +341,7 @@ NSInteger const kCatalogNoMorePagesIndex = -1;
                                            [products addObjectsFromArray:objects];
                                            weakSelf.categoryAndBrandProducts = [NSArray arrayWithArray:products];
                                            if ([objects count] < kCatalogDownloadPageSize) {
-                                               NSLog(@"Products for categopry: %@ and brand: %@ STOP", _selectedCategory.uuid, _selectedBrandId);
+                                               NSLog(@"Products for categopry: %@ and brand: %@ STOP", weakSelf.selectedCategory.uuid, weakSelf.selectedBrandId);
                                                weakSelf.categoryAndBrondPageIndex = kCatalogNoMorePagesIndex;
                                            }else{
                                                weakSelf.categoryAndBrondPageIndex ++;

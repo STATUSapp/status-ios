@@ -12,12 +12,12 @@
 
 
 @interface STRemoveAdsViewController (){
-    NSArray * _products;
-    SKProduct * _removeAdsProduct;
 }
 @property (weak, nonatomic) IBOutlet UIButton *removeAdsBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIButton *restorePurchaseBtn;
+@property (strong, nonatomic) NSArray * products;
+@property (strong, nonatomic) SKProduct * removeAdsProduct;
 
 
 @end
@@ -96,13 +96,13 @@
     __weak STRemoveAdsViewController *weakSelf = self;
     [[CoreManager IAPService] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         if (success) {
-            _products = products;
-            _removeAdsProduct = _products.count ? _products.firstObject : nil;
+            weakSelf.products = products;
+            weakSelf.removeAdsProduct = weakSelf.products.count ? weakSelf.products.firstObject : nil;
             weakSelf.removeAdsBtn.enabled = YES;
             weakSelf.restorePurchaseBtn.enabled = YES;
         }
         
-        if (!success || _removeAdsProduct == nil) {
+        if (!success || weakSelf.removeAdsProduct == nil) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Something went wrong..." message:@"Tap to dismiss." preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
             [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];

@@ -80,11 +80,12 @@
 -(void)multipleTapOnShopStyle{
     //show change base url alert
     
+    __weak STLoginViewController *weakSelf = self;
     _alertController = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     
     [_alertController addTextFieldWithConfigurationHandler:nil];
     [_alertController addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UITextField *tf = [_alertController.textFields firstObject];
+        UITextField *tf = [weakSelf.alertController.textFields firstObject];
         NSString *newBaseUrl = tf.text;
         if (newBaseUrl) {
             NSUserDefaults *ud = [[NSUserDefaults alloc] initWithSuiteName:@"BaseUrl"];

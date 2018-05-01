@@ -134,10 +134,11 @@
 }
 
 - (void)showMessagesAndCallDelegatesForPostId:(NSString *)postId {
+    __weak STSharePhotoViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *alertTitle = nil;
         NSString *alertMessage = nil;
-        if (_fbError!=nil){
+        if (weakSelf.fbError!=nil){
             alertTitle = @"Warning";
             alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
         }else{

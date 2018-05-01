@@ -86,9 +86,9 @@ NSString * const kBadgeCountNotificationsKey = @"kBadgeCountNotificationsKey";
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     weakSelf.unreadNotifications = response[@"count"];
-                    [[CoreManager localNotificationService] postNotificationName:kBadgeCountChangedNotification object:nil userInfo:@{kBadgeCountNotificationsKey:_unreadNotifications}];
+                    [[CoreManager localNotificationService] postNotificationName:kBadgeCountChangedNotification object:nil userInfo:@{kBadgeCountNotificationsKey:weakSelf.unreadNotifications}];
                     [[CoreManager navigationService] showActivityIconOnTabBar];
-                    [[CoreManager navigationService] setBadge:_unreadNotifications.integerValue forTabAtIndex:STTabBarIndexActivity];
+                    [[CoreManager navigationService] setBadge:weakSelf.unreadNotifications.integerValue forTabAtIndex:STTabBarIndexActivity];
 
 
                 });

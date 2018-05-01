@@ -87,8 +87,6 @@ CGFloat const kTopButtonSize = 48.f;
 @interface FeedCVC ()<STContextualMenuDelegate>
 {
     CGPoint _start;
-    BOOL _tabBarHidden;
-    STScrollDirection _scrollingDirection;
     CGPoint _lastPanPoint;
 }
 
@@ -102,9 +100,12 @@ CGFloat const kTopButtonSize = 48.f;
 
 @property (nonatomic, strong) STLoadingView *customLoadingView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingViewImage;
-@property (strong, nonatomic) IBOutlet UIView *noDataView;
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
+
+@property (nonatomic, assign) BOOL tabBarHidden;
+@property (nonatomic, assign) STScrollDirection scrollingDirection;
 
 @end
 
@@ -180,14 +181,15 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         CGFloat velocityY = 1.f;
         NSTimeInterval duration = yPoints / velocityY;
         
+        __weak FeedCVC *weakSelf = self;
         [UIView animateWithDuration:1.f/duration animations:^{
             CGRect tabBarFrame = self.tabBarController.tabBar.frame;
             tabBarFrame.origin.y = tabBarFrame.origin.y - tabBarFrame.size.height;
             [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
             
         } completion:^(BOOL finished) {
-            _tabBarHidden = NO;
-            _scrollingDirection = STScrollDirectionNone;
+            weakSelf.tabBarHidden = NO;
+            weakSelf.scrollingDirection = STScrollDirectionNone;
         }];
     }
 }

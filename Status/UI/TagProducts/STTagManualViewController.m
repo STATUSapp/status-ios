@@ -224,7 +224,7 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
     [picker dismissViewControllerAnimated:YES completion:^{
         if (weakSelf.addPhotoIndex!=NSNotFound) {
             UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-            STShopProduct *product = _products[weakSelf.addPhotoIndex];
+            STShopProduct *product = weakSelf.products[weakSelf.addPhotoIndex];
             product.localImage = img;
             [weakSelf.collectionView reloadData];
         }

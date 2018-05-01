@@ -81,7 +81,7 @@
                 } else {
                     [weakSelf.dataSource addObjectsFromArray:objects];
                 }
-                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:_dataSource];
+                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:weakSelf.dataSource];
                 [weakSelf.tableView reloadData];
             }];
         }
@@ -93,7 +93,7 @@
                 } else {
                     [weakSelf.dataSource addObjectsFromArray:objects];
                 }
-                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:_dataSource];
+                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:weakSelf.dataSource];
                 [weakSelf.tableView reloadData];
             }];
         }
@@ -105,7 +105,7 @@
                 } else {
                     [weakSelf.dataSource addObjectsFromArray:objects];
                 }
-                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:_dataSource];
+                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:weakSelf.dataSource];
                 [weakSelf.tableView reloadData];
             }];
         }

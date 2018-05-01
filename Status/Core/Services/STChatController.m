@@ -31,8 +31,9 @@ NSString *const kFirstChatVersion = @"1.0.4";
     SRWebSocket *_webSocket;
     AFNetworkReachabilityManager* _reachabilityManager;
     NSTimer *_pingTimer;
-    BOOL _chatLoadingParameters;
 }
+
+@property (nonatomic, assign) BOOL chatLoadingParameters;
 
 @end
 
@@ -86,17 +87,18 @@ NSString *const kFirstChatVersion = @"1.0.4";
     if (_chatSocketUrl==nil ||_chatPort == -1) {
         if (_chatLoadingParameters == NO) {
             _chatLoadingParameters = YES;
+            __weak STChatController *weakSelf = self;
             [STGetChatUrlAndPortRequest getReconnectInfoWithCompletion:^(id response, NSError *error) {
-                _chatLoadingParameters = NO;
+                weakSelf.chatLoadingParameters = NO;
                 if ([response[@"status_code"] integerValue] == 200) {
-                    _chatSocketUrl = response[@"hostname"];
-                    _chatPort = [response[@"port"] integerValue];
+                    weakSelf.chatSocketUrl = response[@"hostname"];
+                    weakSelf.chatPort = [response[@"port"] integerValue];
                     [self connectChat];
                     
                 }
                 
             } failure:^(NSError *error) {
-                _chatLoadingParameters = NO;
+                weakSelf.chatLoadingParameters = NO;
                 NSLog(@"Get chat reconnect params failed : %@", error);
             }];
         }

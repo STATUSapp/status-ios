@@ -26,9 +26,9 @@
 
 @interface STNotificationsManager()<STNotificationBannerDelegate>{
     NSDictionary *_lastNotification;
-    NSTimer *_dismissTimer;
-    STNotificationBanner *_currentBanner;
 }
+@property(nonatomic, strong) NSTimer *dismissTimer;
+@property(nonatomic, strong) STNotificationBanner *currentBanner;
 
 @end
 
@@ -174,11 +174,12 @@
     rect.origin.y = 0;
     _currentBanner = banner;
     
+    __weak STNotificationsManager *weakSelf = self;
     [UIView animateWithDuration:0.25 animations:^{
-        _currentBanner.frame = rect;
+        weakSelf.currentBanner.frame = rect;
         
     } completion:^(BOOL finished) {
-        _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(dismissCurrentBanner) userInfo:nil repeats:NO];
+        weakSelf.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(dismissCurrentBanner) userInfo:nil repeats:NO];
 
     }];
 

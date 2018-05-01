@@ -122,7 +122,7 @@ const float kNoNotifHeight = 24.f;
             [weakSelf.refreshControl endRefreshing];
         }
         if (!error) {
-            BOOL shouldShowPlaceholder = _notificationDataSource.count == 0;
+            BOOL shouldShowPlaceholder = weakSelf.notificationDataSource.count == 0;
             if (shouldShowPlaceholder) {
                 weakSelf.noNotificationViewHeightConstr.constant = weakSelf.view.frame.size.height;
             }else{

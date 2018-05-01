@@ -97,6 +97,7 @@
 }
 
 -(void) syncContactsWithTheServer{
+    __weak STContactsManager *weakSelf = self;
     [[CoreManager facebookService] loadUserFriendsWithCompletion:^(NSArray *newObjects) {
         NSLog(@"Final array %@", newObjects);
         NSArray *fbData = [NSArray arrayWithArray:newObjects];
@@ -106,7 +107,7 @@
             [facebookFriends addObject:serverDict];
         }
         NSMutableArray *contactsEmails = [NSMutableArray new];
-        for (STAddressBookContact *adrContact in _allContacts) {
+        for (STAddressBookContact *adrContact in weakSelf.allContacts) {
             if ([[adrContact hasEmails] boolValue] == YES) {
                 for (NSString *email in adrContact.emails) {
                     NSDictionary *dict = @{@"email": email};

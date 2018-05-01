@@ -135,8 +135,9 @@
     if (_validBrandIdArray.count == 0) {
         return oldArray;
     }
+    __weak STTagProductsBrands *weakSelf = self;
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Brand *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [_validBrandIdArray containsObject:@(evaluatedObject.uuid.integerValue)];
+        return [weakSelf.validBrandIdArray containsObject:@(evaluatedObject.uuid.integerValue)];
     }];
     NSArray *filteredArray = [oldArray filteredArrayUsingPredicate:predicate];
     return filteredArray;
@@ -442,13 +443,14 @@
     if (_searchText.length == 0) {
         _searchDisplayArray = @[];
     }else{
+        __weak STTagProductsBrands *weakSelf = self;
         NSArray *filteredArray = [_initialBrandsArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Brand *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-            return [evaluatedObject.name containsString:_searchText];
+            return [evaluatedObject.name containsString:weakSelf.searchText];
         }]];
         
         _searchDisplayArray = [filteredArray sortedArrayUsingComparator:^NSComparisonResult(Brand *obj1, Brand *obj2) {
-            NSRange rangeObj1 = [obj1.name rangeOfString:_searchText];
-            NSRange rangeObj2 = [obj2.name rangeOfString:_searchText];
+            NSRange rangeObj1 = [obj1.name rangeOfString:weakSelf.searchText];
+            NSRange rangeObj2 = [obj2.name rangeOfString:weakSelf.searchText];
             return [@(rangeObj1.location) compare:@(rangeObj2.location)];
         }];
     }

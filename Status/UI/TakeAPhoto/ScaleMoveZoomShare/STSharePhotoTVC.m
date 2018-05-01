@@ -156,8 +156,9 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 - (IBAction)onTapViewSimilarSuggestedProductButton:(id)sender {
     NSInteger buttonTag = ((UIButton *)sender).tag;
     STShopProduct *currentProduct = [_suggesteProducts objectAtIndex:buttonTag];
+    __weak STSharePhotoTVC *weakSelf = self;
     STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STShopProduct *selectedProduct) {
-        [_suggesteProducts replaceObjectAtIndex:buttonTag withObject:selectedProduct];
+        [weakSelf.suggesteProducts replaceObjectAtIndex:buttonTag withObject:selectedProduct];
         [self.suggestedProductsCollection reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];

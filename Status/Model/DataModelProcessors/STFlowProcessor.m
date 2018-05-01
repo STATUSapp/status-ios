@@ -545,8 +545,8 @@ NSInteger const kFacebookAdsTimeframe = 10;
     __weak STFlowProcessor *weakSelf = self;
     STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error){
         if (error) {
-            _processorInvalidated = NO;
-            if (_flowType == STFlowTypeDiscoverNearby &&
+            weakSelf.processorInvalidated = NO;
+            if (weakSelf.flowType == STFlowTypeDiscoverNearby &&
                 [error.domain isEqualToString:@"LOCATION_MISSING_ERROR"] &&
                 error.code == 404) {
                 //user has no location force an update
@@ -568,7 +568,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
             [weakSelf resetProcessorPropertiesIfNeeded];
             weakSelf.loaded = YES;
             if (objects.count == 0) {
-                _noMoreObjectsToDownload = YES;
+                weakSelf.noMoreObjectsToDownload = YES;
             }
 //            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
 //            BOOL suggestionsShown = [[ud valueForKey:kShowSuggestionKey] boolValue];
@@ -585,7 +585,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
 //                [weakSelf addObjectsToObjectPool:objects];
 //            }
             
-            if (!_noMoreObjectsToDownload) {
+            if (!weakSelf.noMoreObjectsToDownload) {
                 [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
                 [weakSelf addObjectsToObjectPool:objects];
                 [weakSelf addFacebookAdsToArray];
@@ -598,7 +598,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
             STImageCacheObj *obj = [STImageCacheObj imageCacheObjFromObj:ob];
             [objToDownload addObject:obj];
         }
-        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:objToDownload];
+        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:weakSelf.flowType andDataSource:objToDownload];
         
         //        }
     };
@@ -643,11 +643,11 @@ NSInteger const kFacebookAdsTimeframe = 10;
                 userProfile == nil) {
                 [STDataAccessUtils getUserProfileForUserId:_userId
                                              andCompletion:^(NSArray *objects, NSError *error) {
-                                                 _userProfile = [objects firstObject];
-                                                 if (_userProfile) {
-                                                     [[CoreManager profilePool] addProfiles:@[_userProfile]];
+                                                 weakSelf.userProfile = [objects firstObject];
+                                                 if (weakSelf.userProfile) {
+                                                     [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
                                                      
-                                                     [STDataAccessUtils getPostsForUserId:_userId
+                                                     [STDataAccessUtils getPostsForUserId:weakSelf.userId
                                                                                    offset:offset
                                                                            withCompletion:completion];
                                                  }

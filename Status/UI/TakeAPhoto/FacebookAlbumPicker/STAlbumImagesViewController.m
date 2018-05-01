@@ -16,9 +16,10 @@
 #import "STLocalNotificationService.h"
 @interface STAlbumImagesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
-    NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) NSMutableArray *dataSource;
+
 @end
 
 @implementation STAlbumImagesViewController
@@ -55,8 +56,8 @@
                      if (newObjects.count>0) {
                          
                          [weakSelf.collectionView performBatchUpdates:^{
-                             NSUInteger resultsSize = [_dataSource count];
-                             [_dataSource addObjectsFromArray:newObjects];
+                             NSUInteger resultsSize = [weakSelf.dataSource count];
+                             [weakSelf.dataSource addObjectsFromArray:newObjects];
 
                              NSMutableArray *arrayWithIndexPaths = [NSMutableArray array];
                              

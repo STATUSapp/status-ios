@@ -22,13 +22,7 @@ static NSString * followAllTitle = @"FOLLOW ALL";
 static NSString * followThemTitle = @"FOLLOW THEM";
 
 @interface STSuggestionsViewController()<UITableViewDataSource, UITableViewDelegate>
-{
-    NSMutableArray *_suggestedPeople;
-    NSMutableArray *_suggestedFriends;
-    
-    STFollowDataProcessor *_followPeopleProcessor;
-    STFollowDataProcessor *_followFriendsProcessor;    
-}
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *followAllBtn;
 @property (weak, nonatomic) IBOutlet UILabel *lblInvitePeople;
@@ -38,6 +32,12 @@ static NSString * followThemTitle = @"FOLLOW THEM";
 
 @property (assign, nonatomic) NSInteger kSuggestedFriendsSection;
 @property (assign, nonatomic) NSInteger kSuggestedPeopleSection;
+
+@property (strong, nonatomic) NSMutableArray *suggestedPeople;
+@property (strong, nonatomic) NSMutableArray *suggestedFriends;
+
+@property (strong, nonatomic) STFollowDataProcessor *followPeopleProcessor;
+@property (strong, nonatomic) STFollowDataProcessor *followFriendsProcessor;
 
 @end
 
@@ -52,28 +52,30 @@ static NSString * followThemTitle = @"FOLLOW THEM";
 }
 
 -(void)loadSuggestedPeople{
+    __weak STSuggestionsViewController *weakSelf = self;
     [STDataAccessUtils getSuggestUsersForFollowType:STFollowTypePeople
                                          withOffset:@(0)
                                       andCompletion:^(NSArray *objects, NSError *error) {
                                           if (error==nil) {
-                                              [_suggestedPeople addObjectsFromArray:objects];
-                                              _followPeopleProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
-                                              if (_suggestedPeople.count > 0 ) {
-                                                  [_tableView reloadData];
+                                              [weakSelf.suggestedPeople addObjectsFromArray:objects];
+                                              weakSelf.followPeopleProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
+                                              if (weakSelf.suggestedPeople.count > 0 ) {
+                                                  [weakSelf.tableView reloadData];
                                               }
                                           }
                                       }];
 }
 
 -(void)loadSuggestedFriends{
+    __weak STSuggestionsViewController *weakSelf = self;
     [STDataAccessUtils getSuggestUsersForFollowType:STFollowTypeFriends
                                          withOffset:@(0)
                                       andCompletion:^(NSArray *objects, NSError *error) {
                                           if (error==nil) {
-                                              [_suggestedFriends addObjectsFromArray:objects];
-                                              _followFriendsProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
-                                              if (_suggestedFriends.count > 0 ) {
-                                                  [_tableView reloadData];
+                                              [weakSelf.suggestedFriends addObjectsFromArray:objects];
+                                              weakSelf.followFriendsProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
+                                              if (weakSelf.suggestedFriends.count > 0 ) {
+                                                  [weakSelf.tableView reloadData];
                                               }
                                           }
                                       }];
@@ -253,15 +255,13 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     
 }
 - (IBAction)onArrowPressed:(id)sender {
-    
-    __weak typeof(self) weakSelf = self;
-    
     if ([[self allSuggestions] count] == 0) {
         [self closeFlow];
     }
     else{
+        __weak STSuggestionsViewController *weakSelf = self;
         [_followPeopleProcessor uploadDataToServer:_suggestedPeople withCompletion:^(NSError *error) {
-            [_followFriendsProcessor uploadDataToServer:_suggestedFriends withCompletion:^(NSError *error) {
+            [weakSelf.followFriendsProcessor uploadDataToServer:weakSelf.suggestedFriends withCompletion:^(NSError *error) {
                 [weakSelf closeFlow];
                 [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
             }];
@@ -357,9 +357,10 @@ static NSString * followThemTitle = @"FOLLOW THEM";
         [_btnFollowAll setTitle:followAllTitle forState:UIControlStateNormal];
     }
     
+    __weak STSuggestionsViewController *weakSelf = self;
     [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
         [self.view layoutIfNeeded];
-        _lblInvitePeople.hidden = selectionsNumber == 0 ;
+        weakSelf.lblInvitePeople.hidden = selectionsNumber == 0 ;
     }];
     
 }

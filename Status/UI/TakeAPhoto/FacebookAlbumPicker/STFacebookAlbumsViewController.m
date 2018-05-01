@@ -16,9 +16,10 @@
 
 @interface STFacebookAlbumsViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataSource;
+
 @end
 
 @implementation STFacebookAlbumsViewController
@@ -53,7 +54,7 @@
     [[CoreManager facebookService] loadAlbumsWithRefreshBlock:^(NSArray *newObjects) {
         if (newObjects.count>0) {
             
-            [_dataSource addObjectsFromArray:newObjects];
+            [weakSelf.dataSource addObjectsFromArray:newObjects];
             
             [weakSelf.tableView reloadData];
         }
