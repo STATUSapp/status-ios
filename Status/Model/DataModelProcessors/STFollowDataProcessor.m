@@ -44,9 +44,10 @@
     __weak STFollowDataProcessor *weakSelf = self;
     [STDataAccessUtils followUsers:unfollowUsersShouldFollow
                     withCompletion:^(NSError *error) {
+                        __strong STFollowDataProcessor *strongSelf = weakSelf;
                         NSLog(@"Error follow: %@", error.debugDescription);
                         NSMutableSet *uncheckedUsersToUnfollow = [NSMutableSet setWithSet:[suggestedUsersSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 0"]]];
-                        [uncheckedUsersToUnfollow minusSet:weakSelf.unfollowedUsers];
+                        [uncheckedUsersToUnfollow minusSet:strongSelf.unfollowedUsers];
                         NSArray *followUsersShouldUnfollow = [uncheckedUsersToUnfollow allObjects];
                         
                         [STDataAccessUtils unfollowUsers:followUsersShouldUnfollow withCompletion:^(NSError *error) {

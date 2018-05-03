@@ -28,19 +28,20 @@
 {
     __weak STGetCatalogCategoriesRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-//        NSString *url = [NSString stringWithFormat:@"%@/%@", [weakSelf urlString], weakSelf.parentCategoryId];
-        NSString *url = [weakSelf urlString];
+        
+        __strong STGetCatalogCategoriesRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
 
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"root_category_id"] = weakSelf.parentCategoryId;
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"root_category_id"] = strongSelf.parentCategoryId;
         params[@"pageSize"] = @(kCatalogDownloadPageSize);
-        params[@"page"] = @(weakSelf.pageIndex);
-        weakSelf.params = params;
+        params[@"page"] = @(strongSelf.pageIndex);
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

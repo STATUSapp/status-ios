@@ -69,9 +69,10 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
     
     [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:^(BOOL finished) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.pageIndicatorLeading.constant =  offset;
+            __strong STFriendsInviterViewController *strongSelf = weakSelf;
+            strongSelf.pageIndicatorLeading.constant =  offset;
             [UIView animateWithDuration:0.35 animations:^{
-                [weakSelf.view layoutIfNeeded];
+                [strongSelf.view layoutIfNeeded];
             }];
         });
     }];
@@ -125,10 +126,12 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
     } else {
         [_pageController setViewControllers:@[[_viewControllers objectAtIndex:controllerIndex + 1]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         
+        __weak STFriendsInviterViewController *weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.pageIndicatorLeading.constant =  (controllerIndex + 1) * self.pageIndicatorView.frame.size.width;
+            __strong STFriendsInviterViewController *strongSelf = weakSelf;
+            strongSelf.pageIndicatorLeading.constant =  (controllerIndex + 1) * strongSelf.pageIndicatorView.frame.size.width;
             [UIView animateWithDuration:0.35 animations:^{
-                [self.view layoutIfNeeded];
+                [strongSelf.view layoutIfNeeded];
             }];
         });
 
@@ -200,8 +203,10 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
         
         _pageIndicatorLeading.constant = [self offsetForIndex:currentVCIndex];
         
+        __weak STFriendsInviterViewController *weakSelf = self;
         [UIView animateWithDuration:0.35 animations:^{
-            [self.view layoutIfNeeded];
+            __strong STFriendsInviterViewController *strongSelf = weakSelf;
+            [strongSelf.view layoutIfNeeded];
         }];
     }
     

@@ -38,7 +38,8 @@
     }
     __weak STShopProduct *weakSelf = self;
     [STImageCacheController imageDownloadedForUrl:self.mainImageUrl completion:^(BOOL cached) {
-        weakSelf.mainImageDownloaded = cached;
+        __strong STShopProduct *strongSelf = weakSelf;
+        strongSelf.mainImageDownloaded = cached;
     }];
     self.imageSize = CGSizeZero;
  

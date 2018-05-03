@@ -197,8 +197,9 @@ CGFloat const kSeparatorHeight = 20.f;
         __weak STCustomSegment *weakSelf = self;
         [UIView animateWithDuration:0.33f
                          animations:^{
-                             weakSelf.selectionLeadingConstr.constant = leading;
-                             [self layoutIfNeeded];
+                             __strong STCustomSegment *strongSelf = weakSelf;
+                             strongSelf.selectionLeadingConstr.constant = leading;
+                             [strongSelf layoutIfNeeded];
                          }];
     }
     

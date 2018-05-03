@@ -85,7 +85,8 @@
     
     [_alertController addTextFieldWithConfigurationHandler:nil];
     [_alertController addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UITextField *tf = [weakSelf.alertController.textFields firstObject];
+        __strong STLoginViewController *strongSelf = weakSelf;
+        UITextField *tf = [strongSelf.alertController.textFields firstObject];
         NSString *newBaseUrl = tf.text;
         if (newBaseUrl) {
             NSUserDefaults *ud = [[NSUserDefaults alloc] initWithSuiteName:@"BaseUrl"];

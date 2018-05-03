@@ -61,7 +61,8 @@
     __weak STTagProductCell *weakCell = cell;
     [cell.loadingView startAnimating];
     [cell.productImage sd_setImageWithURL:[NSURL URLWithString:tagProduct.mainImageUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [weakCell.loadingView stopAnimating];
+        __strong STTagProductCell *strongCell = weakCell;
+        [strongCell.loadingView stopAnimating];
     }];
     
     [cell setSelected:[_delegate isProductSelected:tagProduct]];

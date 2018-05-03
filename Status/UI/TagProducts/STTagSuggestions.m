@@ -48,9 +48,10 @@
         self.title = NSLocalizedString(@"Similar", nil);
         __weak STTagSuggestions *weakSelf = self;
         [[CoreManager imageSuggestionsService] setSimilarCompletionBlock:^(NSArray *objects) {
-            weakSelf.products = objects;
-            [weakSelf.productsVC updateProducts:objects];
-            [self setScreenLoading:NO];
+            __strong STTagSuggestions *strongSelf = weakSelf;
+            strongSelf.products = objects;
+            [strongSelf.productsVC updateProducts:objects];
+            [strongSelf setScreenLoading:NO];
 
         } forProduct:_similarSelectedShopProduct];
     }

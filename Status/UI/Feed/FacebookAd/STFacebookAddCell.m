@@ -36,10 +36,11 @@ CGFloat const kFacebookAdCaptionHorizontalOffset = 32.f;
     NSURL *adIconUrl = adPost.adModel.nativeAd.icon.url;
     __weak STFacebookAddCell *weakSelf = self;
     [_adIcon sd_setImageWithURL: adIconUrl completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        CGRect rect = weakSelf.adIcon.frame;
-        weakSelf.adIcon.layer.cornerRadius = rect.size.width/2;
-        weakSelf.adIcon.layer.backgroundColor = [[UIColor clearColor] CGColor];
-        weakSelf.adIcon.layer.masksToBounds = YES;
+        __strong STFacebookAddCell *strongSelf = weakSelf;
+        CGRect rect = strongSelf.adIcon.frame;
+        strongSelf.adIcon.layer.cornerRadius = rect.size.width/2;
+        strongSelf.adIcon.layer.backgroundColor = [[UIColor clearColor] CGColor];
+        strongSelf.adIcon.layer.masksToBounds = YES;
 
     }];
     _adTitle.text = adPost.adModel.nativeAd.title;

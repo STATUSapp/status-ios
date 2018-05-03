@@ -66,34 +66,35 @@
     __weak STGetPostsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        __strong STGetPostsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
 
         params[@"limit"] = @(kPostsLimit);
-        params[@"offset"] = @(weakSelf.offset);
+        params[@"offset"] = @(strongSelf.offset);
         
         //filters for popular flow
-        if (weakSelf.flowType == STFlowTypePopular ||
-            weakSelf.flowType == STFlowTypeRecent) {
-            if (weakSelf.timeframe) {
-                params[@"timeframe"] = weakSelf.timeframe;
+        if (strongSelf.flowType == STFlowTypePopular ||
+            strongSelf.flowType == STFlowTypeRecent) {
+            if (strongSelf.timeframe) {
+                params[@"timeframe"] = strongSelf.timeframe;
             }
-            if (weakSelf.gender) {
-                params[@"gender"] = weakSelf.gender;
+            if (strongSelf.gender) {
+                params[@"gender"] = strongSelf.gender;
             }
             else{
                 params[@"gender"] = [NSNumber numberWithBool:FALSE];
             }
         }
-        if (weakSelf.flowType == STFlowTypeHasttag) {
-            params[@"hashtag"] = weakSelf.hashtag;
+        if (strongSelf.flowType == STFlowTypeHasttag) {
+            params[@"hashtag"] = strongSelf.hashtag;
         }
-        weakSelf.params = params;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                       success:strongSelf.standardSuccessBlock
+                                       failure:strongSelf.standardErrorBlock];
         
     };
     

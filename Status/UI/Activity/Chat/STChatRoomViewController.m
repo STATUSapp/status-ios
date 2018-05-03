@@ -89,9 +89,10 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     __weak STChatRoomViewController *weakSelf = self;
     
     [_userImg sd_setImageWithURL:[NSURL URLWithString:photoLink] placeholderImage:[UIImage imageNamed:[_user genderImage]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        weakSelf.userImage = image;
-        [weakSelf.tableView reloadData];
-        [weakSelf.userImg maskImage:weakSelf.userImage];
+        __strong STChatRoomViewController *strongSelf = weakSelf;
+        strongSelf.userImage = image;
+        [strongSelf.tableView reloadData];
+        [strongSelf.userImg maskImage:strongSelf.userImage];
     }];
 }
 
@@ -114,9 +115,10 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     if (_user.userName == nil) {//notification, need fetch
         __weak STChatRoomViewController *weakSelf = self;
         [STDataAccessUtils getUserDataForUserId:_user.uuid withCompletion:^(NSArray *objects, NSError *error) {
+            __strong STChatRoomViewController *strongSelf = weakSelf;
             if (!error) {
-                weakSelf.user = [objects firstObject];
-                [weakSelf loadUserInfo];
+                strongSelf.user = [objects firstObject];
+                [strongSelf loadUserInfo];
                 
             }
             else{
@@ -223,7 +225,8 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     
     __weak STChatRoomViewController *weakSelf = self;
     [UIView animateWithDuration:0.1 animations:^{
-        [weakSelf.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+        __strong STChatRoomViewController *strongSelf = weakSelf;
+        [strongSelf.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
 
     }];
     _bottomTextViewConstraint.constant = keyboardBounds.size.height;
@@ -257,9 +260,10 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     r.origin.y += diff;
     __weak STChatRoomViewController *weakSelf = self;
     [UIView animateWithDuration:0.25 animations:^{
-        weakSelf.heightConstraint.constant = height + TEXT_VIEW_OFFSET;
-        if ([[_currentManager allObjects] count]>0) {
-            [weakSelf.tableView scrollToRowAtIndexPath:[weakSelf.currentManager indexPathForObject:[[weakSelf.currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        __strong STChatRoomViewController *strongSelf = weakSelf;
+        strongSelf.heightConstraint.constant = height + TEXT_VIEW_OFFSET;
+        if ([[strongSelf.currentManager allObjects] count]>0) {
+            [strongSelf.tableView scrollToRowAtIndexPath:[strongSelf.currentManager indexPathForObject:[[strongSelf.currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
     }];
 	 
@@ -332,15 +336,17 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Block User" message:@"Are you sure do you want to block this user?" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
         [alert addAction:[UIAlertAction actionWithTitle:@"Block" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [weakSelf.chatController blockUserWithId:weakSelf.user.uuid];
+            __strong STChatRoomViewController *strongSelf = weakSelf;
+            [strongSelf.chatController blockUserWithId:strongSelf.user.uuid];
         }]];
         
         [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Delete Conversation" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (weakSelf.roomId){
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", weakSelf.roomId];
+        __strong STChatRoomViewController *strongSelf = weakSelf;
+        if (strongSelf.roomId){
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", strongSelf.roomId];
             [[CoreManager coreDataService] deleteAllObjectsFromTable:@"Message" withPredicate:predicate];
             [[CoreManager coreDataService] save];
         }
@@ -419,7 +425,8 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         __weak STChatRoomViewController *weakSelf = self;
         statusAlert = [UIAlertController alertControllerWithTitle:@"Chat" message:message preferredStyle:UIAlertControllerStyleAlert];
         [statusAlert addAction:[UIAlertAction actionWithTitle:@"GO BACK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            __strong STChatRoomViewController *strongSelf = weakSelf;
+            [strongSelf.navigationController popViewControllerAnimated:YES];
         }]];
         [self.navigationController presentViewController:statusAlert animated:YES completion:nil];
     }

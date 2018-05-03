@@ -52,11 +52,12 @@
 {
     __weak STFacebookAlbumsViewController *weakSelf = self;
     [[CoreManager facebookService] loadAlbumsWithRefreshBlock:^(NSArray *newObjects) {
+        __strong STFacebookAlbumsViewController *strongSelf = weakSelf;
         if (newObjects.count>0) {
             
-            [weakSelf.dataSource addObjectsFromArray:newObjects];
+            [strongSelf.dataSource addObjectsFromArray:newObjects];
             
-            [weakSelf.tableView reloadData];
+            [strongSelf.tableView reloadData];
         }
     }];
 }

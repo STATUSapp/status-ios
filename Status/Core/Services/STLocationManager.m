@@ -80,14 +80,15 @@ NSString * const kNotificationNewLocationHasBeenUploaded = @"NotificationNewLoca
 -(void)sendLocationToServer{
     __weak STLocationManager *weakSelf = self;
     STRequestCompletionBlock completion = ^(id response, NSError *error){
+        __strong STLocationManager *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-            NSLog(@"Set User Location: %@", weakSelf.latestLocation);
-            if (weakSelf.newLocationBlock != nil) {
-                weakSelf.newLocationBlock();
-                weakSelf.newLocationBlock = nil;
+            NSLog(@"Set User Location: %@", strongSelf.latestLocation);
+            if (strongSelf.newLocationBlock != nil) {
+                strongSelf.newLocationBlock();
+                strongSelf.newLocationBlock = nil;
             }
-            if (weakSelf.updateForced) {
-                weakSelf.updateForced = NO;
+            if (strongSelf.updateForced) {
+                strongSelf.updateForced = NO;
                 [[CoreManager localNotificationService] postNotificationName:kNotificationNewLocationHasBeenUploaded
                                                                     object:nil userInfo:nil];
             }

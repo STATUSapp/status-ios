@@ -120,14 +120,16 @@
     NSString *categoryId = [STTagProductsManager sharedInstance].selectedCategory.uuid;
     __weak STTagProductsBrands *weakSelf = self;
     [STGetBrandsWithProducts getBrandsWithProductsForCategoryId:categoryId withCompletion:^(id response, NSError *error) {
-        weakSelf.validBrandsLoaded = YES;
-        weakSelf.validBrandIdArray = response;
-        [weakSelf setUpScreenAfterLoading];
+        __strong STTagProductsBrands *strongSelf = weakSelf;
+        strongSelf.validBrandsLoaded = YES;
+        strongSelf.validBrandIdArray = response;
+        [strongSelf setUpScreenAfterLoading];
         
     } failure:^(NSError *error) {
+        __strong STTagProductsBrands *strongSelf = weakSelf;
         NSLog(@"Error fetching for valida brands: %@", error);
-        weakSelf.validBrandsLoaded = YES;
-        [weakSelf setUpScreenAfterLoading];
+        strongSelf.validBrandsLoaded = YES;
+        [strongSelf setUpScreenAfterLoading];
     }];
 }
 
@@ -200,14 +202,7 @@
 }
 
 -(void) animationShowStopped{
-    
-//    [UIView animateWithDuration:0.1 animations:^{
-//        [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
-//
-//    }];
     _bottomConstr.constant = -1.f * keyboardBounds.size.height;
-    
-    
 }
 
 -(void) keyboardWillHide:(NSNotification *)note{
@@ -380,8 +375,10 @@
 
 - (IBAction)onDownSwipe:(id)sender {
     _searchBarHeightConstr.constant = 44.f;
+    __weak STTagProductsBrands *weakSelf = self;
     [UIView animateWithDuration:0.33f animations:^{
-        [self.view layoutIfNeeded];
+        __strong STTagProductsBrands *strongSelf = weakSelf;
+        [strongSelf.view layoutIfNeeded];
     }];
 
 }
@@ -390,8 +387,10 @@
         return;
     }
     _searchBarHeightConstr.constant = 0;
+    __weak STTagProductsBrands *weakSelf = self;
     [UIView animateWithDuration:0.33f animations:^{
-        [self.view layoutIfNeeded];
+        __strong STTagProductsBrands *strongSelf = weakSelf;
+        [strongSelf.view layoutIfNeeded];
     }];
 }
 

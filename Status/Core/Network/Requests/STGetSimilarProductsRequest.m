@@ -32,16 +32,19 @@
 {
     __weak STGetSimilarProductsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        if (weakSelf.productId) {
-            params[@"product_id"] = weakSelf.productId;
+        
+        __strong STGetSimilarProductsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        if (strongSelf.productId) {
+            params[@"product_id"] = strongSelf.productId;
         }
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

@@ -139,10 +139,12 @@
 #pragma mark - Notifications
 
 -(void)imageWasSavedLocally:(NSNotification *)notif{
+    __weak STBasePool *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
+        __strong STBasePool *strongSelf = weakSelf;
         NSString *fullUrl = notif.userInfo[kImageUrlKey];
         CGSize imageSize = CGSizeFromString(notif.userInfo[kImageSizeKey]);
-        STBaseObj *updatedObj = [self objectForUrl:fullUrl];
+        STBaseObj *updatedObj = [strongSelf objectForUrl:fullUrl];
         if (updatedObj) {
             updatedObj.mainImageDownloaded = YES;
             updatedObj.imageSize = imageSize;

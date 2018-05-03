@@ -249,8 +249,9 @@ static NSString * inviteThemTitle = @"INVITE THEM";
     }
     __weak STSMSEmailInviterViewController *weakSelf = self;
     [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
-        [self.view layoutIfNeeded];
-        weakSelf.lblInvitePeople.hidden = weakSelf.selectionsNumber == 0 ;
+        __strong STSMSEmailInviterViewController *strongSelf = weakSelf;
+        [strongSelf.view layoutIfNeeded];
+        strongSelf.lblInvitePeople.hidden = strongSelf.selectionsNumber == 0 ;
     }];
 
 }

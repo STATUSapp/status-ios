@@ -83,9 +83,10 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
         _shopProducts = @[];
         __weak STSharePhotoTVC *weakSelf = self;
         [[CoreManager imageSuggestionsService] setSuggestionsCompletionBlock:^(NSArray *objects) {
-            weakSelf.suggestionsLoaded = YES;
-            weakSelf.suggesteProducts = [NSMutableArray arrayWithArray:objects];
-            [weakSelf updateProductsCollection];
+            __strong STSharePhotoTVC *strongSelf = weakSelf;
+            strongSelf.suggestionsLoaded = YES;
+            strongSelf.suggesteProducts = [NSMutableArray arrayWithArray:objects];
+            [strongSelf updateProductsCollection];
         }];
     }
     
@@ -158,8 +159,9 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     STShopProduct *currentProduct = [_suggesteProducts objectAtIndex:buttonTag];
     __weak STSharePhotoTVC *weakSelf = self;
     STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STShopProduct *selectedProduct) {
-        [weakSelf.suggesteProducts replaceObjectAtIndex:buttonTag withObject:selectedProduct];
-        [self.suggestedProductsCollection reloadData];
+        __strong STSharePhotoTVC *strongSelf = weakSelf;
+        [strongSelf.suggesteProducts replaceObjectAtIndex:buttonTag withObject:selectedProduct];
+        [strongSelf.suggestedProductsCollection reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }

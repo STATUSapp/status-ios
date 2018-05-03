@@ -196,9 +196,7 @@ static CGFloat kImageInset = 4.f;
     STLoginViewController *viewController = [self loginVC];
     [self presentViewController:viewController
                        animated:animated
-                     completion:^{
-                         
-                     }];
+                     completion:nil];
 }
 
 -(void)configureNavControllerToHandleSwipeToBackGesture:(UINavigationController *)navController{

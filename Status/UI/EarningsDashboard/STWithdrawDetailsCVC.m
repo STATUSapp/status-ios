@@ -55,18 +55,14 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
     [super viewDidLoad];
     __weak STWithdrawDetailsCVC *weakSelf = self;
     [STDataAccessUtils getUserWithdrawDetailsWithCompletion:^(NSArray *objects, NSError *error) {
+        __strong STWithdrawDetailsCVC *strongSelf = weakSelf;
         if ([objects count]) {
-            weakSelf.withdrawDetailsObj = [objects firstObject];
+            strongSelf.withdrawDetailsObj = [objects firstObject];
             //no data saved yet
-            if (!weakSelf.withdrawDetailsObj) {
-                weakSelf.withdrawDetailsObj = [STWithdrawDetailsObj new];
+            if (!strongSelf.withdrawDetailsObj) {
+                strongSelf.withdrawDetailsObj = [STWithdrawDetailsObj new];
             }
-            
-//#ifdef DEBUG
-//            weakSelf.withdrawDetailsObj = [STWithdrawDetailsObj mockObject];
-//#endif
-            
-            [weakSelf buildViewModels];
+            [strongSelf buildViewModels];
         }
     }];
 }
@@ -241,21 +237,22 @@ static NSString * const headerIdentifier = @"STWithdrawDetailsHeader";
     STWDInputViewModel *ibanInput = companySectionVM.inputs[STCompanyDetailsItemIBAN];
     savedObject.iban = ibanInput.inputValue;
     
+    __weak STWithdrawDetailsCVC *weakSelf = self;
     [STDataAccessUtils postUserWithdrawDetails:savedObject
                                 withCompletion:^(NSError *error) {
                                     NSLog(@"Error: %@", error);
+                                    __strong STWithdrawDetailsCVC *strongSelf = weakSelf;
 
-                                    __weak STWithdrawDetailsCVC *weakSelf = self;
                                     UIAlertController *alert = nil;
                                     NSString *alertMessage = nil;
                                     NSString *extraMessage = nil;
                                     if (!error) {
                                         alertMessage = @"Your withdraw details were saved.";
-                                        [weakSelf.parentViewController.navigationController popViewControllerAnimated:YES];
+                                        [strongSelf.parentViewController.navigationController popViewControllerAnimated:YES];
                                     }else{
                                         alertMessage = @"Your withdraw details were not saved.";
                                         if (error.code == STWebservicesUnprocessableEntity) {
-                                            extraMessage = [weakSelf requiredFieldsFromError:error];
+                                            extraMessage = [strongSelf requiredFieldsFromError:error];
                                         }
                                     }
                                     

@@ -57,9 +57,10 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
         [self setBottomItemsHidden:NO];
         __weak STPostImageCell *weakSelf = self;
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
-            [weakSelf.activityIndicator stopAnimating];
-            weakSelf.blurEffectView.hidden = YES;
-            weakSelf.postImage.image = origImg;
+            __strong STPostImageCell *strongSelf = weakSelf;
+            [strongSelf.activityIndicator stopAnimating];
+            strongSelf.blurEffectView.hidden = YES;
+            strongSelf.postImage.image = origImg;
         }];
     }
     else
@@ -99,19 +100,21 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
                           delay:0.f
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
-                         [self.contentView layoutIfNeeded];
+                         __strong STPostImageCell *strongSelf = weakSelf;
+                         [strongSelf.contentView layoutIfNeeded];
                      } completion:^(BOOL finished) {
-                         weakSelf.linkedImageWidthConstr.constant = 70.f;
+                         __strong STPostImageCell *strongSelf = weakSelf;
+                         strongSelf.linkedImageWidthConstr.constant = 70.f;
                          [UIView animateWithDuration:zoomOutDuration
                                                delay:0.f
                                              options:UIViewAnimationOptionBeginFromCurrentState
                                           animations:^{
-                                              [self.contentView layoutIfNeeded];
-                                              weakSelf.likedImage.alpha = 0.7;
+                                              [strongSelf.contentView layoutIfNeeded];
+                                              strongSelf.likedImage.alpha = 0.7;
 
                                           } completion:^(BOOL finished) {
-                                              weakSelf.likeImageAnimationInProgress = NO;
-                                              weakSelf.likedImage.hidden = YES;
+                                              strongSelf.likeImageAnimationInProgress = NO;
+                                              strongSelf.likedImage.hidden = YES;
                                           }];
                      }];
 }

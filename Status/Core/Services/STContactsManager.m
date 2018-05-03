@@ -75,8 +75,9 @@
         __weak STContactsManager *weakSelf = self;
         [_contactStore requestAccessForEntityType:CNEntityTypeContacts
                                 completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                    __strong STContactsManager *strongSelf = weakSelf;
                                     if (granted) {
-                                        [weakSelf fetchAllContacts];
+                                        [strongSelf fetchAllContacts];
                                     }
                                 }];
 
@@ -100,6 +101,7 @@
     __weak STContactsManager *weakSelf = self;
     [[CoreManager facebookService] loadUserFriendsWithCompletion:^(NSArray *newObjects) {
         NSLog(@"Final array %@", newObjects);
+        __strong STContactsManager *strongSelf = weakSelf;
         NSArray *fbData = [NSArray arrayWithArray:newObjects];
         NSMutableArray *facebookFriends = [NSMutableArray new];
         for (NSDictionary *dict in fbData) {
@@ -107,7 +109,7 @@
             [facebookFriends addObject:serverDict];
         }
         NSMutableArray *contactsEmails = [NSMutableArray new];
-        for (STAddressBookContact *adrContact in weakSelf.allContacts) {
+        for (STAddressBookContact *adrContact in strongSelf.allContacts) {
             if ([[adrContact hasEmails] boolValue] == YES) {
                 for (NSString *email in adrContact.emails) {
                     NSDictionary *dict = @{@"email": email};

@@ -52,68 +52,70 @@ typedef NS_ENUM(NSUInteger, STUserWithdrawnDetails) {
 {
     __weak STUserWithDrawnDetailsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        if (weakSelf.requestType == STUserWithdrawnDetailsGet) {
-            weakSelf.params = params;
+        
+        __strong STUserWithDrawnDetailsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        if (strongSelf.requestType == STUserWithdrawnDetailsGet) {
+            strongSelf.params = params;
             [[STNetworkQueueManager networkAPI] GET:url
                                          parameters:params
                                            progress:nil
-                                            success:weakSelf.standardSuccessBlock
-                                            failure:weakSelf.standardErrorBlock];
+                                            success:strongSelf.standardSuccessBlock
+                                            failure:strongSelf.standardErrorBlock];
         }
         else
         {
-            if (weakSelf.withdrawObj.firstname) {
-                [params setObject:weakSelf.withdrawObj.firstname
+            if (strongSelf.withdrawObj.firstname) {
+                [params setObject:strongSelf.withdrawObj.firstname
                            forKey:@"firstname"];
             }
-            if (weakSelf.withdrawObj.lastname) {
-                [params setObject:weakSelf.withdrawObj.lastname
+            if (strongSelf.withdrawObj.lastname) {
+                [params setObject:strongSelf.withdrawObj.lastname
                            forKey:@"lastname"];
             }
-            if (weakSelf.withdrawObj.email) {
-                [params setObject:weakSelf.withdrawObj.email
+            if (strongSelf.withdrawObj.email) {
+                [params setObject:strongSelf.withdrawObj.email
                            forKey:@"email"];
             }
-            if (weakSelf.withdrawObj.phone_number) {
-                [params setObject:weakSelf.withdrawObj.phone_number
+            if (strongSelf.withdrawObj.phone_number) {
+                [params setObject:strongSelf.withdrawObj.phone_number
                            forKey:@"phone_number"];
             }
-            if (weakSelf.withdrawObj.company) {
-                [params setObject:weakSelf.withdrawObj.company
+            if (strongSelf.withdrawObj.company) {
+                [params setObject:strongSelf.withdrawObj.company
                            forKey:@"company"];
             }
-            if (weakSelf.withdrawObj.vat_number) {
-                [params setObject:weakSelf.withdrawObj.vat_number
+            if (strongSelf.withdrawObj.vat_number) {
+                [params setObject:strongSelf.withdrawObj.vat_number
                            forKey:@"vat_number"];
             }
-            if (weakSelf.withdrawObj.register_number) {
-                [params setObject:weakSelf.withdrawObj.register_number
+            if (strongSelf.withdrawObj.register_number) {
+                [params setObject:strongSelf.withdrawObj.register_number
                            forKey:@"register_number"];
             }
-            if (weakSelf.withdrawObj.country) {
-                [params setObject:weakSelf.withdrawObj.country
+            if (strongSelf.withdrawObj.country) {
+                [params setObject:strongSelf.withdrawObj.country
                            forKey:@"country"];
             }
-            if (weakSelf.withdrawObj.city) {
-                [params setObject:weakSelf.withdrawObj.city
+            if (strongSelf.withdrawObj.city) {
+                [params setObject:strongSelf.withdrawObj.city
                            forKey:@"city"];
             }
-            if (weakSelf.withdrawObj.address) {
-                [params setObject:weakSelf.withdrawObj.address
+            if (strongSelf.withdrawObj.address) {
+                [params setObject:strongSelf.withdrawObj.address
                            forKey:@"address"];
             }
-            if (weakSelf.withdrawObj.iban) {
-                [params setObject:weakSelf.withdrawObj.iban
+            if (strongSelf.withdrawObj.iban) {
+                [params setObject:strongSelf.withdrawObj.iban
                            forKey:@"iban"];
             }
-            weakSelf.params = params;
+            strongSelf.params = params;
             [[STNetworkQueueManager networkAPI] POST:url
                                           parameters:params
                                             progress:nil
-                                             success:weakSelf.standardSuccessBlock
-                                             failure:weakSelf.standardErrorBlock];
+                                             success:strongSelf.standardSuccessBlock
+                                             failure:strongSelf.standardErrorBlock];
         }
     };
     return executionBlock;

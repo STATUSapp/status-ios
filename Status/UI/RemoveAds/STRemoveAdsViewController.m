@@ -65,12 +65,13 @@
     NSString * productIdentifier = notification.object;
     __weak STRemoveAdsViewController *weakSelf = self;
     [_products enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
+        __strong STRemoveAdsViewController *strongSelf = weakSelf;
         if ([product.productIdentifier isEqualToString:productIdentifier]) {
-            [weakSelf dismissController:nil];
+            [strongSelf dismissController:nil];
             
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congratulations" message:@"You have now an ads free STATUS app" preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-            [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
+            [strongSelf.navigationController presentViewController:alert animated:YES completion:nil];
         }
     }];
     
@@ -95,11 +96,12 @@
     _products = nil;
     __weak STRemoveAdsViewController *weakSelf = self;
     [[CoreManager IAPService] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+        __strong STRemoveAdsViewController *strongSelf = weakSelf;
         if (success) {
-            weakSelf.products = products;
-            weakSelf.removeAdsProduct = weakSelf.products.count ? weakSelf.products.firstObject : nil;
-            weakSelf.removeAdsBtn.enabled = YES;
-            weakSelf.restorePurchaseBtn.enabled = YES;
+            strongSelf.products = products;
+            strongSelf.removeAdsProduct = strongSelf.products.count ? strongSelf.products.firstObject : nil;
+            strongSelf.removeAdsBtn.enabled = YES;
+            strongSelf.restorePurchaseBtn.enabled = YES;
         }
         
         if (!success || weakSelf.removeAdsProduct == nil) {

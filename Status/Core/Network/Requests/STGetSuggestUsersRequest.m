@@ -29,16 +29,17 @@
     __weak STGetSuggestUsersRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"offset"] = weakSelf.offset;
+        __strong STGetSuggestUsersRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"offset"] = strongSelf.offset;
         params[@"limit"] = @(20);
-        weakSelf.params = params;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                         progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                       success:strongSelf.standardSuccessBlock
+                                       failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

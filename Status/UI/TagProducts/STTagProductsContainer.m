@@ -296,8 +296,9 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
     __weak STTagProductsContainer *weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thanks for the details!" message:@"We'll do our best to index the product as soon as possible." preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        weakSelf.barcodeState = STBarcodeScanStateDefault;
-        [weakSelf configureContainer];
+        __strong STTagProductsContainer *strongSelf = weakSelf;
+        strongSelf.barcodeState = STBarcodeScanStateDefault;
+        [strongSelf configureContainer];
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }

@@ -25,17 +25,18 @@
 {
     __weak STSetUserLocationRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        __strong STSetUserLocationRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         CLLocationCoordinate2D coord = [CoreManager locationService].latestLocation.coordinate;
         params[@"lat"] = @(coord.latitude);
         params[@"lng"] = @(coord.longitude);
-        weakSelf.params = params;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
-                                    parameters:params
+                                      parameters:params
                                         progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
     };
 
     return executionBlock;

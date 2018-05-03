@@ -36,17 +36,18 @@
     __weak STUploadPostRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        if (weakSelf.postId) {
-            params[@"post_id"] = weakSelf.postId;
+        __strong STUploadPostRequest *strongSelf = weakSelf;
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        if (strongSelf.postId) {
+            params[@"post_id"] = strongSelf.postId;
         }
         
-        if (weakSelf.caption) {
-            params[@"caption"] = weakSelf.caption;
+        if (strongSelf.caption) {
+            params[@"caption"] = strongSelf.caption;
         }
         
         NSMutableArray *shopProductsIds = [@[] mutableCopy];
-        for (STShopProduct *sp in weakSelf.shopProducts) {
+        for (STShopProduct *sp in strongSelf.shopProducts) {
             if (sp.uuid) {
                 [shopProductsIds addObject:sp.uuid];
             }
@@ -54,31 +55,30 @@
         if (shopProductsIds.count) {
             params[@"products"] = shopProductsIds;
         }
-        weakSelf.params = params;
-        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [weakSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            [formData appendPartWithFileData:weakSelf.postData
+        strongSelf.params = params;
+        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [strongSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [formData appendPartWithFileData:strongSelf.postData
                                         name:@"image"
                                     fileName:@"image.jpg"
                                     mimeType:@"image/jpg"];
         } error:nil];
         
-        __block STUploadPostRequest *blockWeakSelf = weakSelf;
         NSURLSessionUploadTask *uploadTask = [[STNetworkQueueManager networkAPI]
                                               uploadTaskWithStreamedRequest:request
                                               progress:nil
                                               completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                                  [[CoreManager networkService] removeFromQueue:blockWeakSelf];
+                                                  [[CoreManager networkService] removeFromQueue:strongSelf];
                                                   
                                                   if (error) {
                                                       NSLog(@"Error: %@", error);
-                                                      if (blockWeakSelf.failureBlock) {
-                                                          blockWeakSelf.failureBlock(error);
+                                                      if (strongSelf.failureBlock) {
+                                                          strongSelf.failureBlock(error);
                                                       }
                                                       
                                                   } else {
-                                                      [[CoreManager networkService] requestDidSucceed:blockWeakSelf];
-                                                      if (blockWeakSelf.completionBlock) {
-                                                          blockWeakSelf.completionBlock(responseObject,nil);
+                                                      [[CoreManager networkService] requestDidSucceed:strongSelf];
+                                                      if (strongSelf.completionBlock) {
+                                                          strongSelf.completionBlock(responseObject,nil);
                                                       }
                                                   }
                                               }];

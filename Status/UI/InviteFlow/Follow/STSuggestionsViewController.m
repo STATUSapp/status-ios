@@ -56,11 +56,12 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     [STDataAccessUtils getSuggestUsersForFollowType:STFollowTypePeople
                                          withOffset:@(0)
                                       andCompletion:^(NSArray *objects, NSError *error) {
+                                          __strong STSuggestionsViewController *strongSelf = weakSelf;
                                           if (error==nil) {
-                                              [weakSelf.suggestedPeople addObjectsFromArray:objects];
-                                              weakSelf.followPeopleProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
-                                              if (weakSelf.suggestedPeople.count > 0 ) {
-                                                  [weakSelf.tableView reloadData];
+                                              [strongSelf.suggestedPeople addObjectsFromArray:objects];
+                                              strongSelf.followPeopleProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
+                                              if (strongSelf.suggestedPeople.count > 0 ) {
+                                                  [strongSelf.tableView reloadData];
                                               }
                                           }
                                       }];
@@ -71,11 +72,12 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     [STDataAccessUtils getSuggestUsersForFollowType:STFollowTypeFriends
                                          withOffset:@(0)
                                       andCompletion:^(NSArray *objects, NSError *error) {
+                                          __strong STSuggestionsViewController *strongSelf = weakSelf;
                                           if (error==nil) {
-                                              [weakSelf.suggestedFriends addObjectsFromArray:objects];
-                                              weakSelf.followFriendsProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
-                                              if (weakSelf.suggestedFriends.count > 0 ) {
-                                                  [weakSelf.tableView reloadData];
+                                              [strongSelf.suggestedFriends addObjectsFromArray:objects];
+                                              strongSelf.followFriendsProcessor = [[STFollowDataProcessor alloc] initWithUsers:objects];
+                                              if (strongSelf.suggestedFriends.count > 0 ) {
+                                                  [strongSelf.tableView reloadData];
                                               }
                                           }
                                       }];
@@ -261,8 +263,9 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     else{
         __weak STSuggestionsViewController *weakSelf = self;
         [_followPeopleProcessor uploadDataToServer:_suggestedPeople withCompletion:^(NSError *error) {
-            [weakSelf.followFriendsProcessor uploadDataToServer:weakSelf.suggestedFriends withCompletion:^(NSError *error) {
-                [weakSelf closeFlow];
+            __strong STSuggestionsViewController *strongSelf = weakSelf;
+            [strongSelf.followFriendsProcessor uploadDataToServer:strongSelf.suggestedFriends withCompletion:^(NSError *error) {
+                [strongSelf closeFlow];
                 [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
             }];
         }];
@@ -359,8 +362,9 @@ static NSString * followThemTitle = @"FOLLOW THEM";
     
     __weak STSuggestionsViewController *weakSelf = self;
     [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
-        [self.view layoutIfNeeded];
-        weakSelf.lblInvitePeople.hidden = selectionsNumber == 0 ;
+        __strong STSuggestionsViewController *strongSelf = weakSelf;
+        [strongSelf.view layoutIfNeeded];
+        strongSelf.lblInvitePeople.hidden = selectionsNumber == 0 ;
     }];
     
 }

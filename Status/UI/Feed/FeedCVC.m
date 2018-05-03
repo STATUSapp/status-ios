@@ -183,13 +183,15 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         
         __weak FeedCVC *weakSelf = self;
         [UIView animateWithDuration:1.f/duration animations:^{
-            CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+            __strong FeedCVC *strongSelf = weakSelf;
+            CGRect tabBarFrame = strongSelf.tabBarController.tabBar.frame;
             tabBarFrame.origin.y = tabBarFrame.origin.y - tabBarFrame.size.height;
-            [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
+            [((STTabBarViewController *)strongSelf.tabBarController) setTabBarFrame:tabBarFrame];
             
         } completion:^(BOOL finished) {
-            weakSelf.tabBarHidden = NO;
-            weakSelf.scrollingDirection = STScrollDirectionNone;
+            __strong FeedCVC *strongSelf = weakSelf;
+            strongSelf.tabBarHidden = NO;
+            strongSelf.scrollingDirection = STScrollDirectionNone;
         }];
     }
 }
@@ -224,30 +226,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
             [self uodateUIForCell:cell indexPath:indexPath];
         }
-
-//        NSIndexSet *updatedIndexSet;
-//        for (NSIndexPath *indexPath in indexPaths) {
-//            NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
-//            NSString *objectIdForSection = [allObjectsArray objectAtIndex:sectionIndex];
-//            if ([updatedObjectId isEqualToString:objectIdForSection]) {
-//                updatedIndexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
-//                break;
-//            }
-//        }
-//        if (updatedIndexSet) {
-//            [self.collectionView reloadSections:updatedIndexSet];
-//            [self.collectionView.collectionViewLayout invalidateLayout];
-//        }else{
-////            [self.collectionView reloadData];
-////            [self.collectionView.collectionViewLayout invalidateLayout];
-//        }
     }
-
-//    [self.collectionView performBatchUpdates:^{
-//
-//    } completion:^(BOOL finished) {
-//
-//    }];
 }
 
 - (void)postAdded:(NSNotification *)notif{
@@ -430,13 +409,16 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         NSTimeInterval duration = yPoints / velocityY;
         _tabBarHidden = NO;
 
+        __weak FeedCVC *weakSelf = self;
         [UIView animateWithDuration:1.f/duration animations:^{
-            CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+            __strong FeedCVC *strongSelf = weakSelf;
+            CGRect tabBarFrame = strongSelf.tabBarController.tabBar.frame;
             tabBarFrame.origin.y = tabBarFrame.origin.y - tabBarFrame.size.height;
-            [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
+            [((STTabBarViewController *)strongSelf.tabBarController) setTabBarFrame:tabBarFrame];
             
         } completion:^(BOOL finished) {
-            _scrollingDirection = STScrollDirectionNone;
+            __strong FeedCVC *strongSelf = weakSelf;
+            strongSelf.scrollingDirection = STScrollDirectionNone;
         }];
     }
 }
@@ -815,9 +797,11 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     STPost *post = [self getCurrentPostForButton:sender];
     
     [UIView setAnimationsEnabled:NO];
+    __weak FeedCVC *weakSelf = self;
     [self.collectionView performBatchUpdates:^{
+        __strong FeedCVC *strongSelf = weakSelf;
         post.showFullCaption = !post.showFullCaption;
-        [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+        [strongSelf.collectionView reloadItemsAtIndexPaths:[strongSelf.collectionView indexPathsForVisibleItems]];
         [UIView setAnimationsEnabled:YES];
     } completion:nil];
 
@@ -848,9 +832,11 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 - (IBAction)onShadowPressed:(id)sender {
     STPost *post = [self getCurrentPostForButton:sender];
     [UIView setAnimationsEnabled:NO];
+    __weak FeedCVC *weakSelf = self;
     [self.collectionView performBatchUpdates:^{
+        __strong FeedCVC *strongSelf = weakSelf;
         post.showFullCaption = !post.showFullCaption;
-        [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+        [strongSelf.collectionView reloadItemsAtIndexPaths:[strongSelf.collectionView indexPathsForVisibleItems]];
         [UIView setAnimationsEnabled:YES];
     } completion:nil];
 }
@@ -893,9 +879,10 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     [_followProcessor uploadDataToServer:@[listUser]
                           withCompletion:^(NSError *error) {
                               if (error == nil) {//success
+                                  __strong FeedCVC *strongSelf = weakSelf;
                                   userProfile.isFollowedByCurrentUser = !userProfile.isFollowedByCurrentUser;
-                                  [weakSelf.collectionView reloadData];
-                                  [weakSelf.collectionView.collectionViewLayout invalidateLayout];
+                                  [strongSelf.collectionView reloadData];
+                                  [strongSelf.collectionView.collectionViewLayout invalidateLayout];
 
                               }
                           }];
@@ -921,14 +908,16 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     NSString * name = [NSString stringWithFormat:@"%@", userProfile.fullName];
     NSString * userId = [NSString stringWithFormat:@"%@", userProfile.uuid];
     
+    __weak FeedCVC *weakSelf;
     STRequestCompletionBlock completion = ^(id response, NSError *error){
+        __strong FeedCVC *strongSelf = weakSelf;
         NSInteger statusCode = [response[@"status_code"] integerValue];
         if (statusCode ==STWebservicesSuccesCod || statusCode == STWebservicesFounded) {
             NSString *message = [NSString stringWithFormat:@"Congrats, you%@ asked %@ to take a photo.We'll announce you when his new photo is on STATUS.",statusCode == STWebservicesSuccesCod?@"":@" already", name];
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:message preferredStyle:UIAlertControllerStyleAlert];
             
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-            [self.delegate presentViewController:alert animated:YES];
+            [strongSelf.delegate presentViewController:alert animated:YES];
         }
     };
     [STInviteUserToUploadRequest inviteUserToUpload:userId withCompletion:completion failure:nil];
@@ -943,30 +932,30 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     NSIndexPath * indexPath = [NSIndexPath indexPathForItem:STPostShop inSection:index];
 
     [self.collectionView.collectionViewLayout invalidateLayout];
+    __weak FeedCVC *weakSelf = self;
     [self.collectionView performBatchUpdates:^{
-    
-        if (_tabBarHidden == NO && post.showShopProducts == NO) {
+        __strong FeedCVC *strongSelf = weakSelf;
+        if (strongSelf.tabBarHidden == NO && post.showShopProducts == NO) {
             [UIView animateWithDuration:1.f animations:^{
                 
-                CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+                CGRect tabBarFrame = strongSelf.tabBarController.tabBar.frame;
                 tabBarFrame.origin.y = tabBarFrame.origin.y + tabBarFrame.size.height;
-                [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
+                [((STTabBarViewController *)strongSelf.tabBarController) setTabBarFrame:tabBarFrame];
                 
             } completion:^(BOOL finished) {
-                _tabBarHidden = YES;
+                strongSelf.tabBarHidden = YES;
             }];
         }
-        else if(_tabBarHidden == YES && post.showShopProducts == YES)
+        else if(strongSelf.tabBarHidden == YES && post.showShopProducts == YES)
         {
-            _tabBarHidden = NO;
+            strongSelf.tabBarHidden = NO;
             [UIView animateWithDuration:1.f animations:^{
                 
-                CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+                CGRect tabBarFrame = strongSelf.tabBarController.tabBar.frame;
                 tabBarFrame.origin.y = tabBarFrame.origin.y - tabBarFrame.size.height;
-                [((STTabBarViewController *)self.tabBarController) setTabBarFrame:tabBarFrame];
+                [((STTabBarViewController *)strongSelf.tabBarController) setTabBarFrame:tabBarFrame];
                 
-            } completion:^(BOOL finished) {
-            }];
+            } completion:nil];
         }
         
         post.showShopProducts = !post.showShopProducts;
@@ -977,10 +966,11 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
         
     } completion:^(BOOL finished) {
+        __strong FeedCVC *strongSelf = weakSelf;
         if (post.showShopProducts) {
             //to reload the products after they were updated
-            [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
-            [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+            [strongSelf.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+            [strongSelf.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
         }
 
     }];
@@ -1031,14 +1021,16 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     STPost *post = [_feedProcessor objectAtIndex:_postForContextIndex];
     _postForContextIndex = 0;
     if (post.mainImageDownloaded == YES) {
+        __weak FeedCVC *weakSelf = self;
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
+            __strong FeedCVC *strongSelf = weakSelf;
             if (origImg!=nil) {
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:nil];
                 STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
                 viewController.imgData = UIImageJPEGRepresentation(origImg, 1.f);
                 viewController.post = post;
                 viewController.controllerType = STShareControllerEditInfo;
-                [self.delegate pushViewController:viewController animated:YES];
+                [strongSelf.delegate pushViewController:viewController animated:YES];
             }
             
         }];
@@ -1059,11 +1051,12 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }else if (status == PHAuthorizationStatusNotDetermined){
         __weak FeedCVC *weakSelf = self;
         [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            __strong FeedCVC *strongSelf = weakSelf;
             if (status == PHAuthorizationStatusAuthorized) {
-                [weakSelf.feedProcessor savePostImageLocallyAtIndex:weakSelf.postForContextIndex];
-                weakSelf.postForContextIndex = 0;
+                [strongSelf.feedProcessor savePostImageLocallyAtIndex:strongSelf.postForContextIndex];
+                strongSelf.postForContextIndex = 0;
             }else{
-                weakSelf.postForContextIndex = 0;
+                strongSelf.postForContextIndex = 0;
             }
         }];
     }else{

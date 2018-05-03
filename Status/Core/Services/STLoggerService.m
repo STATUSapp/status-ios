@@ -74,9 +74,11 @@
     __weak STLoggerService *weakSelf = self;
     [STSendLogsReguest sendLogs:log
                   andCompletion:^(id response, NSError *error) {
-                      [weakSelf handleResponse:error forLog:log];
+                      __strong STLoggerService *strongSelf = weakSelf;
+                      [strongSelf handleResponse:error forLog:log];
                   } failure:^(NSError *error) {
-                      [weakSelf handleResponse:error forLog:log];
+                      __strong STLoggerService *strongSelf = weakSelf;
+                      [strongSelf handleResponse:error forLog:log];
                   }];
 }
 

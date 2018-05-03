@@ -29,17 +29,18 @@
     __weak STGetUserPostsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        __strong STGetUserPostsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         params[@"limit"] = @(kPostsLimit);
-        params[@"offset"] = @(weakSelf.offset);
-        params[@"user_id"] = weakSelf.userId;
-        weakSelf.params = params;
+        params[@"offset"] = @(strongSelf.offset);
+        params[@"user_id"] = strongSelf.userId;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                       success:strongSelf.standardSuccessBlock
+                                       failure:strongSelf.standardErrorBlock];
     };
     
     return executionBlock;

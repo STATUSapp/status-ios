@@ -232,9 +232,10 @@
                                        searchString:_searchTextString
                                          fromOffset:newOffset == YES?offset:0
                                       andCompletion:^(NSArray *objects, NSError *error) {
-                                          weakSelf.loadMoreButton.enabled = YES;
-                                          weakSelf.loadMoreButton = nil;
-                                          [weakSelf saveNewDataAndReload:objects isNewOffset:newOffset];
+                                          __strong STConversationsListViewController *strongSelf = weakSelf;
+                                          strongSelf.loadMoreButton.enabled = YES;
+                                          strongSelf.loadMoreButton = nil;
+                                          [strongSelf saveNewDataAndReload:objects isNewOffset:newOffset];
                                       }];
 }
 
@@ -296,14 +297,18 @@
 }
 - (IBAction)onSwipeUp:(id)sender {
     _searchBarHeightContraint.constant = 0;
+    __weak STConversationsListViewController *weakSelf = self;
     [UIView animateWithDuration:0.33f animations:^{
-        [self.view layoutIfNeeded];
+        __strong STConversationsListViewController *strongSelf = weakSelf;
+        [strongSelf.view layoutIfNeeded];
     }];
 }
 - (IBAction)onSwipeDown:(id)sender {
     _searchBarHeightContraint.constant = 44.f;
+    __weak STConversationsListViewController *weakSelf = self;
     [UIView animateWithDuration:0.33f animations:^{
-        [self.view layoutIfNeeded];
+        __strong STConversationsListViewController *strongSelf = weakSelf;
+        [strongSelf.view layoutIfNeeded];
     }];
 }
 

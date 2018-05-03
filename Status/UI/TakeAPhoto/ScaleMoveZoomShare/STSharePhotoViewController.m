@@ -90,15 +90,16 @@
                             withNewCaption:postCaptionString
                           withShopProducts:postShopProducts
                             withCompletion:^(NSArray *objects, NSError *error) {
-                                weakSelf.shareButton.enabled = TRUE;
+                                __strong STSharePhotoViewController *strongSelf = weakSelf;
+                                strongSelf.shareButton.enabled = TRUE;
                                 if (!error) {
                                     STPost *post = [objects firstObject];
                                     if (postShouldBePostedOnFacebook==YES ) {
-                                        [weakSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl deepLink:post.shareShortUrl];
+                                        [strongSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl deepLink:post.shareShortUrl];
                                     }
                                     else
                                     {
-                                        [weakSelf showMessagesAndCallDelegatesForPostId:post.uuid];
+                                        [strongSelf showMessagesAndCallDelegatesForPostId:post.uuid];
                                     }
 
                                 }
@@ -125,20 +126,22 @@
                                               description:[_childTVC postCaptionString]
                                                  deepLink:deepLink
                                             andCompletion:^(id result, NSError *error) {
-        weakSelf.donePostingToFacebook = YES;
-        if (error) {
-            weakSelf.fbError = error;
-        }
-        [weakSelf showMessagesAndCallDelegatesForPostId:postId];
-    }];
+                                                __strong STSharePhotoViewController *strongSelf = weakSelf;
+                                                strongSelf.donePostingToFacebook = YES;
+                                                if (error) {
+                                                    strongSelf.fbError = error;
+                                                }
+                                                [strongSelf showMessagesAndCallDelegatesForPostId:postId];
+                                            }];
 }
 
 - (void)showMessagesAndCallDelegatesForPostId:(NSString *)postId {
     __weak STSharePhotoViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
+        __strong STSharePhotoViewController *strongSelf = weakSelf;
         NSString *alertTitle = nil;
         NSString *alertMessage = nil;
-        if (weakSelf.fbError!=nil){
+        if (strongSelf.fbError!=nil){
             alertTitle = @"Warning";
             alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
         }else{
@@ -146,16 +149,15 @@
             alertMessage = @"Your photo was posted on STATUS";
         }
         if (alertMessage!=nil) {
-            __weak STSharePhotoViewController *weakSelf = self;
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                [strongSelf.navigationController popToRootViewControllerAnimated:YES];
                 [[CoreManager navigationService] dismissChoosePhotoVC];
 
             }]];
-            [self.navigationController presentViewController:alert animated:YES completion:nil];
+            [strongSelf.navigationController presentViewController:alert animated:YES completion:nil];
         }
-        if ([_post.uuid isEqualToString:postId]) {
+        if ([strongSelf.post.uuid isEqualToString:postId]) {
             [[CoreManager localNotificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
         }
         else

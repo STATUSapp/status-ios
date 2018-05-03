@@ -30,20 +30,22 @@
 {
     __weak STGetUsersRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [self urlString];
+        
+        __strong STGetUsersRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
         NSInteger limit = 20;
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         params[@"limit"] = @(limit);
-        params[@"offset"] = @(weakSelf.offset);
-        if (weakSelf.searchText && weakSelf.searchText.length) {
-            params[@"search"] = weakSelf.searchText;
+        params[@"offset"] = @(strongSelf.offset);
+        if (strongSelf.searchText && strongSelf.searchText.length) {
+            params[@"search"] = strongSelf.searchText;
         }
-        weakSelf.params = params;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                       success:strongSelf.standardSuccessBlock
+                                       failure:strongSelf.standardErrorBlock];
     };
 
     return executionBlock;

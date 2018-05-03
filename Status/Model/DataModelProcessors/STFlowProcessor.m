@@ -173,40 +173,11 @@ NSInteger const kFacebookAdsTimeframe = 10;
     if (_flowType == STFlowTypeSinglePost)
         return;
     
-//    __block STPost *post = [self objectAtIndex:index];
-    
-//    __weak STFlowProcessor *weakSelf = self;
-    
-        NSInteger offsetRemaining = self.objectIds.count - index;
-        BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && index!=0;
-//    shouldGetNextBatch = NO;
+    NSInteger offsetRemaining = self.objectIds.count - index;
+    BOOL shouldGetNextBatch = (offsetRemaining == kStartLoadOffset) && index!=0;
     if (shouldGetNextBatch) {
-            [self getMoreData];
+        [self getMoreData];
     }
-
-#if SET_POST_AS_SEEN
-    if (!setSeenRequired) {
-        return;
-    }
-    
-    if (/*self.flowType == STFlowTypePopular ||
-        self.flowType == STFlowTypeRecent ||*/
-        self.flowType == STFlowTypeHome) {
-
-        if (post.postSeen == TRUE) {
-            return;
-        }
-        
-        [STDataAccessUtils setPostSeenForPostId:post.uuid
-                                 withCompletion:^(NSError *error) {
-                                     if (error==nil) {
-                                         STPost *post = [self objectAtIndex:index];
-                                         post.postSeen = YES;
-                                     }
-                                 }];
-         
-    }
-#endif
 }
 
 - (void)deleteObjectAtIndex:(NSInteger)index
@@ -348,9 +319,6 @@ NSInteger const kFacebookAdsTimeframe = 10;
         }
         case STFlowTypeUserGallery:{
             [STDataAccessUtils inviteUserToUpload:_userId withUserName:userName withCompletion:^(NSError *error) {
-//                if (!error) {
-//                    [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexHome popToRootVC:YES];
-//                }
             }];
             break;
         }
@@ -380,12 +348,14 @@ NSInteger const kFacebookAdsTimeframe = 10;
                                                                    message:@"Are you sure you want to delete this post?"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        weakSelf.postIdToDelete = nil;
+        __strong STFlowProcessor *strongSelf = weakSelf;
+        strongSelf.postIdToDelete = nil;
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [STDataAccessUtils deletePostWithId:weakSelf.postIdToDelete withCompletion:^(NSError *error) {
-            weakSelf.postIdToDelete = nil;
+        __strong STFlowProcessor *strongSelf = weakSelf;
+
+        [STDataAccessUtils deletePostWithId:strongSelf.postIdToDelete withCompletion:^(NSError *error) {
+            strongSelf.postIdToDelete = nil;
             if (error == nil) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Your post was deleted."
                                                                                message:nil
@@ -423,7 +393,8 @@ NSInteger const kFacebookAdsTimeframe = 10;
         __weak STFlowProcessor *weakSelf = self;
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl
                                             withPostCompletion:^(UIImage *origImg) {
-                                                UIImageWriteToSavedPhotosAlbum(origImg, weakSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
+                                                __strong STFlowProcessor *strongSelf = weakSelf;
+                                                UIImageWriteToSavedPhotosAlbum(origImg, strongSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
                                                 
                                             }];
     }
@@ -544,63 +515,47 @@ NSInteger const kFacebookAdsTimeframe = 10;
 
     __weak STFlowProcessor *weakSelf = self;
     STDataAccessCompletionBlock completion = ^(NSArray *objects, NSError *error){
+        __strong STFlowProcessor *strongSelf = weakSelf;
         if (error) {
-            weakSelf.processorInvalidated = NO;
-            if (weakSelf.flowType == STFlowTypeDiscoverNearby &&
+            strongSelf.processorInvalidated = NO;
+            if (strongSelf.flowType == STFlowTypeDiscoverNearby &&
                 [error.domain isEqualToString:@"LOCATION_MISSING_ERROR"] &&
                 error.code == 404) {
                 //user has no location force an update
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLocationHasBeenUploaded) name:kNotificationNewLocationHasBeenUploaded object:nil];
+                [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(newLocationHasBeenUploaded) name:kNotificationNewLocationHasBeenUploaded object:nil];
                 [[CoreManager locationService] forceLocationToUpdate];
             }
             else
             {
-                weakSelf.loaded = YES;
+                strongSelf.loaded = YES;
                 //handle error
                 [[CoreManager localNotificationService] postNotificationName:kNotificationObjectDownloadFailed
-                                                                 object:self
+                                                                 object:strongSelf
                                                                userInfo:nil];
             }
 
         }
         else
         {
-            [weakSelf resetProcessorPropertiesIfNeeded];
-            weakSelf.loaded = YES;
+            [strongSelf resetProcessorPropertiesIfNeeded];
+            strongSelf.loaded = YES;
             if (objects.count == 0) {
-                weakSelf.noMoreObjectsToDownload = YES;
+                strongSelf.noMoreObjectsToDownload = YES;
             }
-//            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-//            BOOL suggestionsShown = [[ud valueForKey:kShowSuggestionKey] boolValue];
-//            if (weakSelf.flowType == STFlowTypeHome &&
-//                suggestionsShown == NO) {
-//                
-//                [[CoreManager localNotificationService] postNotificationName:kNotificationShowSuggestions object:self userInfo:nil];
-//                [ud setValue:@(YES) forKey:kShowSuggestionKey];
-//                [ud synchronize];
-//            }
-//            if (_flowType != STFlowTypeMyGallery &&
-//                _flowType != STFlowTypeUserGallery) {
-//                [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
-//                [weakSelf addObjectsToObjectPool:objects];
-//            }
-            
-            if (!weakSelf.noMoreObjectsToDownload) {
-                [weakSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
-                [weakSelf addObjectsToObjectPool:objects];
-                [weakSelf addFacebookAdsToArray];
+            if (!strongSelf.noMoreObjectsToDownload) {
+                [strongSelf updatePostIdsWithNewArray:[objects valueForKey:@"uuid"]];
+                [strongSelf addObjectsToObjectPool:objects];
+                [strongSelf addFacebookAdsToArray];
             }
 
         }
-        [[CoreManager localNotificationService] postNotificationName:kNotificationObjDownloadSuccess object:self userInfo:nil];
+        [[CoreManager localNotificationService] postNotificationName:kNotificationObjDownloadSuccess object:strongSelf userInfo:nil];
         NSMutableArray *objToDownload = [NSMutableArray new];
         for (id ob in objects) {
             STImageCacheObj *obj = [STImageCacheObj imageCacheObjFromObj:ob];
             [objToDownload addObject:obj];
         }
-        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:weakSelf.flowType andDataSource:objToDownload];
-        
-        //        }
+        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:strongSelf.flowType andDataSource:objToDownload];
     };
     switch (_flowType) {
         case STFlowTypePopular:
@@ -643,11 +598,12 @@ NSInteger const kFacebookAdsTimeframe = 10;
                 userProfile == nil) {
                 [STDataAccessUtils getUserProfileForUserId:_userId
                                              andCompletion:^(NSArray *objects, NSError *error) {
-                                                 weakSelf.userProfile = [objects firstObject];
-                                                 if (weakSelf.userProfile) {
-                                                     [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
+                                                 __strong STFlowProcessor *strongSelf = weakSelf;
+                                                 strongSelf.userProfile = [objects firstObject];
+                                                 if (strongSelf.userProfile) {
+                                                     [[CoreManager profilePool] addProfiles:@[strongSelf.userProfile]];
                                                      
-                                                     [STDataAccessUtils getPostsForUserId:weakSelf.userId
+                                                     [STDataAccessUtils getPostsForUserId:strongSelf.userId
                                                                                    offset:offset
                                                                            withCompletion:completion];
                                                  }
