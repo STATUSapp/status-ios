@@ -136,12 +136,10 @@
 }
 
 - (void)showMessagesAndCallDelegatesForPostId:(NSString *)postId {
-    __weak STSharePhotoViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        __strong STSharePhotoViewController *strongSelf = weakSelf;
         NSString *alertTitle = nil;
         NSString *alertMessage = nil;
-        if (strongSelf.fbError!=nil){
+        if (self.fbError!=nil){
             alertTitle = @"Warning";
             alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
         }else{
@@ -151,13 +149,13 @@
         if (alertMessage!=nil) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController popToRootViewControllerAnimated:YES];
                 [[CoreManager navigationService] dismissChoosePhotoVC];
 
             }]];
-            [strongSelf.navigationController presentViewController:alert animated:YES completion:nil];
+            [self.navigationController presentViewController:alert animated:YES completion:nil];
         }
-        if ([strongSelf.post.uuid isEqualToString:postId]) {
+        if ([self.post.uuid isEqualToString:postId]) {
             [[CoreManager localNotificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
         }
         else

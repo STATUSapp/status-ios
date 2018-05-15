@@ -149,10 +149,8 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
 }
 
 -(void)sortDownloadArray{
-    __weak STImageCacheController *weakSelf = self;
     [_objectsArray sortUsingComparator:^NSComparisonResult(STImageCacheObj *obj1, STImageCacheObj *obj2) {
-        __strong STImageCacheController *strongSelf = weakSelf;
-        return [@([strongSelf.sortedFlows indexOfObject:obj1.flowType]) compare:@([strongSelf.sortedFlows indexOfObject:obj2.flowType])];
+        return [@([self.sortedFlows indexOfObject:obj1.flowType]) compare:@([self.sortedFlows indexOfObject:obj2.flowType])];
     }];
     
 }

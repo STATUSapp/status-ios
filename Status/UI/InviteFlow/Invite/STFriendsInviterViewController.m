@@ -68,13 +68,11 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
     UIPageViewControllerNavigationDirection direction = index > currentVCIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
     [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:^(BOOL finished) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __strong STFriendsInviterViewController *strongSelf = weakSelf;
-            strongSelf.pageIndicatorLeading.constant =  offset;
-            [UIView animateWithDuration:0.35 animations:^{
-                [strongSelf.view layoutIfNeeded];
-            }];
-        });
+        __strong STFriendsInviterViewController *strongSelf = weakSelf;
+        strongSelf.pageIndicatorLeading.constant =  offset;
+        [UIView animateWithDuration:0.35 animations:^{
+            [strongSelf.view layoutIfNeeded];
+        }];
     }];
 }
 
@@ -126,15 +124,11 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
     } else {
         [_pageController setViewControllers:@[[_viewControllers objectAtIndex:controllerIndex + 1]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         
-        __weak STFriendsInviterViewController *weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __strong STFriendsInviterViewController *strongSelf = weakSelf;
-            strongSelf.pageIndicatorLeading.constant =  (controllerIndex + 1) * strongSelf.pageIndicatorView.frame.size.width;
-            [UIView animateWithDuration:0.35 animations:^{
-                [strongSelf.view layoutIfNeeded];
-            }];
-        });
-
+        self.pageIndicatorLeading.constant =  (controllerIndex + 1) * self.pageIndicatorView.frame.size.width;
+        [UIView animateWithDuration:0.35 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+        
     }
 }
 
@@ -203,10 +197,8 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
         
         _pageIndicatorLeading.constant = [self offsetForIndex:currentVCIndex];
         
-        __weak STFriendsInviterViewController *weakSelf = self;
         [UIView animateWithDuration:0.35 animations:^{
-            __strong STFriendsInviterViewController *strongSelf = weakSelf;
-            [strongSelf.view layoutIfNeeded];
+            [self.view layoutIfNeeded];
         }];
     }
     

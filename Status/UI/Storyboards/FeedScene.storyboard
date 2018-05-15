@@ -401,7 +401,7 @@
                                                         <constraint firstAttribute="height" constant="46" id="QuC-o9-y1H"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
-                                                    <state key="normal" title="Upload your first photo" backgroundImage="follow frame ">
+                                                    <state key="normal" title="Upload your first photo" backgroundImage="follow frame">
                                                         <color key="titleColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
@@ -1031,7 +1031,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUJ-KI-2bB">
                                     <rect key="frame" x="50" y="203" width="220" height="46"/>
                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
-                                    <state key="normal" title="People you should follow" backgroundImage="follow frame ">
+                                    <state key="normal" title="People you should follow" backgroundImage="follow frame">
                                         <color key="titleColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
@@ -1266,7 +1266,7 @@
         <image name="Shop pressed" width="36" height="36"/>
         <image name="Shop unpressed" width="36" height="36"/>
         <image name="down shaddow" width="414" height="97"/>
-        <image name="follow frame " width="14" height="38"/>
+        <image name="follow frame" width="14" height="38"/>
         <image name="girl" width="246" height="246"/>
         <image name="like" width="15" height="13"/>
         <image name="like icon" width="70" height="63"/>

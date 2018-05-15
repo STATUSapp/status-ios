@@ -247,11 +247,9 @@ static NSString * inviteThemTitle = @"INVITE THEM";
     }else {
         [_btnInviteAll setTitle:inviteAllTitle forState:UIControlStateNormal];
     }
-    __weak STSMSEmailInviterViewController *weakSelf = self;
     [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
-        __strong STSMSEmailInviterViewController *strongSelf = weakSelf;
-        [strongSelf.view layoutIfNeeded];
-        strongSelf.lblInvitePeople.hidden = strongSelf.selectionsNumber == 0 ;
+        [self.view layoutIfNeeded];
+        self.lblInvitePeople.hidden = self.selectionsNumber == 0 ;
     }];
 
 }

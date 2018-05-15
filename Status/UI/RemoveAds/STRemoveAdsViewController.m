@@ -63,15 +63,13 @@
 - (void)productPurchased:(NSNotification *)notification {
     
     NSString * productIdentifier = notification.object;
-    __weak STRemoveAdsViewController *weakSelf = self;
     [_products enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
-        __strong STRemoveAdsViewController *strongSelf = weakSelf;
         if ([product.productIdentifier isEqualToString:productIdentifier]) {
-            [strongSelf dismissController:nil];
+            [self dismissController:nil];
             
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congratulations" message:@"You have now an ads free STATUS app" preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-            [strongSelf.navigationController presentViewController:alert animated:YES completion:nil];
+            [self.navigationController presentViewController:alert animated:YES completion:nil];
         }
     }];
     

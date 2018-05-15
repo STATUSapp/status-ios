@@ -55,12 +55,10 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 - (void) configureCellWithPost:(STPost *)post{
     if (post.mainImageDownloaded) {
         [self setBottomItemsHidden:NO];
-        __weak STPostImageCell *weakSelf = self;
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
-            __strong STPostImageCell *strongSelf = weakSelf;
-            [strongSelf.activityIndicator stopAnimating];
-            strongSelf.blurEffectView.hidden = YES;
-            strongSelf.postImage.image = origImg;
+            [self.activityIndicator stopAnimating];
+            self.blurEffectView.hidden = YES;
+            self.postImage.image = origImg;
         }];
     }
     else
@@ -93,28 +91,25 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     [self.contentView layoutIfNeeded];
     _linkedImageWidthConstr.constant = 80.f;
     _likeImageAnimationInProgress = YES;
-    __weak STPostImageCell *weakSelf = self;
     CGFloat zoomInDuration = likeAnimationZoomInProportion * likeAnimationDuration;
     CGFloat zoomOutDuration = (1.f - likeAnimationZoomInProportion)/likeAnimationDuration;
     [UIView animateWithDuration:zoomInDuration
                           delay:0.f
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
-                         __strong STPostImageCell *strongSelf = weakSelf;
-                         [strongSelf.contentView layoutIfNeeded];
+                         [self.contentView layoutIfNeeded];
                      } completion:^(BOOL finished) {
-                         __strong STPostImageCell *strongSelf = weakSelf;
-                         strongSelf.linkedImageWidthConstr.constant = 70.f;
+                         self.linkedImageWidthConstr.constant = 70.f;
                          [UIView animateWithDuration:zoomOutDuration
                                                delay:0.f
                                              options:UIViewAnimationOptionBeginFromCurrentState
                                           animations:^{
-                                              [strongSelf.contentView layoutIfNeeded];
-                                              strongSelf.likedImage.alpha = 0.7;
+                                              [self.contentView layoutIfNeeded];
+                                              self.likedImage.alpha = 0.7;
 
                                           } completion:^(BOOL finished) {
-                                              strongSelf.likeImageAnimationInProgress = NO;
-                                              strongSelf.likedImage.hidden = YES;
+                                              self.likeImageAnimationInProgress = NO;
+                                              self.likedImage.hidden = YES;
                                           }];
                      }];
 }

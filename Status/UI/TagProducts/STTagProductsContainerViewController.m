@@ -62,17 +62,15 @@ NSString *const kSegueManual = @"SEGUE_MANUAL";
     [fromViewController willMoveToParentViewController:nil];
     [self addChildViewController:toViewController];
     if (fromViewController) {
-        __weak STTagProductsContainerViewController *weakSelf = self;
         [self transitionFromViewController:fromViewController
                           toViewController:toViewController
                                   duration:0.0
                                    options:UIViewAnimationOptionTransitionNone
                                 animations:nil
                                 completion:^(BOOL finished) {
-                                    __strong STTagProductsContainerViewController *strongSelf = weakSelf;
-                                    [strongSelf.view addSubview:toViewController.view];
+                                    [self.view addSubview:toViewController.view];
                                     [fromViewController removeFromParentViewController];
-                                    [toViewController didMoveToParentViewController:strongSelf];
+                                    [toViewController didMoveToParentViewController:self];
                                 }];
     }
     else{

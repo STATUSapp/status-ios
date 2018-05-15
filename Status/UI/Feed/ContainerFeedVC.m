@@ -75,7 +75,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.hidesBarsOnSwipe = YES;
+//    self.navigationController.hidesBarsOnSwipe = YES;
     if (self.feedProcessor.processorFlowType == STFlowTypeHome) {
         NSArray *redirectVC = [[CoreManager deepLinkService] redirectViewControllers];
         if (redirectVC && [redirectVC count]) {
@@ -96,6 +96,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc{
+    NSLog(@"Dealloc called on ContainerFeedVC");
 }
 
 -(BOOL)extendedLayoutIncludesOpaqueBars{
@@ -169,8 +173,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"EMBEDED_FEED"]) {
         _childFeedCVC = (FeedCVC *)segue.destinationViewController;
-        [_childFeedCVC setUserName:_userName];
-        [_childFeedCVC setFeedProcessor:_feedProcessor];
+        [_childFeedCVC setUserName:self.userName];
+        [_childFeedCVC setFeedProcessor:self.feedProcessor];
         [_childFeedCVC setDelegate:self];
     }
 }

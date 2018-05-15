@@ -93,13 +93,10 @@ CGFloat const kDefaultContainerBottomConstr = 13.f;
     remainingHeight = remainingHeight - kDefaultContainerBottomConstr;
     _containerBottomConstr.constant = remainingHeight;
     
-    __weak STMissingProductViewController *weakSelf = self;
     [UIView animateWithDuration:0.25 animations:^{
-        __strong STMissingProductViewController *strongSelf = weakSelf;
-        [strongSelf.view layoutIfNeeded];
+        [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        __strong STMissingProductViewController *strongSelf = weakSelf;
-        [strongSelf.childTVC scrollToTheBottom];
+        [self.childTVC scrollToTheBottom];
     }];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];

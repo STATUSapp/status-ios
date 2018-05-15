@@ -343,19 +343,15 @@ NSInteger const kFacebookAdsTimeframe = 10;
 - (void)deletePostAtIndex:(NSInteger)index{
     STPost *post = [self objectAtIndex:index];
     _postIdToDelete = post.uuid;
-    __weak STFlowProcessor *weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Post"
                                                                    message:@"Are you sure you want to delete this post?"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        __strong STFlowProcessor *strongSelf = weakSelf;
-        strongSelf.postIdToDelete = nil;
+        self.postIdToDelete = nil;
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        __strong STFlowProcessor *strongSelf = weakSelf;
-
-        [STDataAccessUtils deletePostWithId:strongSelf.postIdToDelete withCompletion:^(NSError *error) {
-            strongSelf.postIdToDelete = nil;
+        [STDataAccessUtils deletePostWithId:self.postIdToDelete withCompletion:^(NSError *error) {
+            self.postIdToDelete = nil;
             if (error == nil) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Your post was deleted."
                                                                                message:nil
@@ -721,6 +717,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
 }
 
 -(void)dealloc{
+    NSLog(@"Dealloc on Flow Processor");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

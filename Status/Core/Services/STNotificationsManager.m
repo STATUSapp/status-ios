@@ -174,14 +174,11 @@
     rect.origin.y = 0;
     _currentBanner = banner;
     
-    __weak STNotificationsManager *weakSelf = self;
     [UIView animateWithDuration:0.25 animations:^{
-        __strong STNotificationsManager *strongSelf = weakSelf;
-        strongSelf.currentBanner.frame = rect;
+        self.currentBanner.frame = rect;
         
     } completion:^(BOOL finished) {
-        __strong STNotificationsManager *strongSelf = weakSelf;
-        strongSelf.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:5.f target:strongSelf selector:@selector(dismissCurrentBanner) userInfo:nil repeats:NO];
+        self.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(dismissCurrentBanner) userInfo:nil repeats:NO];
 
     }];
 
@@ -197,14 +194,11 @@
 -(void)dismissCurrentBanner{
     CGRect rect = _currentBanner.frame;
     rect.origin.y = -rect.size.height;
-    __weak STNotificationsManager *weakSelf = self;
     [UIView animateWithDuration:0.25 animations:^{
-        __strong STNotificationsManager *strongSelf = weakSelf;
-        strongSelf.currentBanner.frame = rect;
+        self.currentBanner.frame = rect;
         
     } completion:^(BOOL finished) {
-        __strong STNotificationsManager *strongSelf = weakSelf;
-        [strongSelf removeBanner];
+        [self removeBanner];
     }];
     
 }

@@ -165,7 +165,6 @@
 #pragma mark - IBAction
 
 - (IBAction)onChangeProfileImagePressed:(id)sender {
-    __weak STEditProfileTVC *weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Photos"
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -173,14 +172,12 @@
                                             handler:nil]];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [alert addAction:[UIAlertAction actionWithTitle:@"Take a Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            __strong STEditProfileTVC *strongSelf = weakSelf;
-            [strongSelf presentImagePickerForType:UIImagePickerControllerSourceTypeCamera];
+            [self presentImagePickerForType:UIImagePickerControllerSourceTypeCamera];
         }]];
         
     }
     [alert addAction:[UIAlertAction actionWithTitle:@"Open Camera Roll" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        __strong STEditProfileTVC *strongSelf = weakSelf;
-        [strongSelf presentImagePickerForType:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+        [self presentImagePickerForType:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum];
         
     }]];
     
@@ -199,13 +196,13 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    __weak STEditProfileTVC *weakSelf = self;
     [picker dismissViewControllerAnimated:YES completion:^{
-        __strong STEditProfileTVC *strongSelf = weakSelf;
+        __weak STEditProfileTVC *weakSelf = self;
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         
         NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
         [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
+            __strong STEditProfileTVC *strongSelf = weakSelf;
             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                 strongSelf.userProfile.mainImageUrl = [response[@"user_photo"] stringByReplacingHttpWithHttps];
                 [[CoreManager profilePool] addProfiles:@[strongSelf.userProfile]];
@@ -219,6 +216,7 @@
                 [strongSelf showPhotoErrorAlert];
             }
         } failure:^(NSError *error) {
+            __strong STEditProfileTVC *strongSelf = weakSelf;
             NSLog(@"Error uploading new profile photo: %@", error.description);
             [strongSelf showPhotoErrorAlert];
             

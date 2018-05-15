@@ -375,10 +375,8 @@
 
 - (IBAction)onDownSwipe:(id)sender {
     _searchBarHeightConstr.constant = 44.f;
-    __weak STTagProductsBrands *weakSelf = self;
     [UIView animateWithDuration:0.33f animations:^{
-        __strong STTagProductsBrands *strongSelf = weakSelf;
-        [strongSelf.view layoutIfNeeded];
+        [self.view layoutIfNeeded];
     }];
 
 }
@@ -387,10 +385,8 @@
         return;
     }
     _searchBarHeightConstr.constant = 0;
-    __weak STTagProductsBrands *weakSelf = self;
     [UIView animateWithDuration:0.33f animations:^{
-        __strong STTagProductsBrands *strongSelf = weakSelf;
-        [strongSelf.view layoutIfNeeded];
+        [self.view layoutIfNeeded];
     }];
 }
 

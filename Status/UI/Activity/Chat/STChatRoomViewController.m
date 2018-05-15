@@ -223,10 +223,8 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 
 -(void) animationShowStopped{
     
-    __weak STChatRoomViewController *weakSelf = self;
     [UIView animateWithDuration:0.1 animations:^{
-        __strong STChatRoomViewController *strongSelf = weakSelf;
-        [strongSelf.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+        [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
 
     }];
     _bottomTextViewConstraint.constant = keyboardBounds.size.height;
@@ -258,12 +256,10 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     CGRect r = _containerView.frame;
     r.size.height -= diff;
     r.origin.y += diff;
-    __weak STChatRoomViewController *weakSelf = self;
     [UIView animateWithDuration:0.25 animations:^{
-        __strong STChatRoomViewController *strongSelf = weakSelf;
-        strongSelf.heightConstraint.constant = height + TEXT_VIEW_OFFSET;
-        if ([[strongSelf.currentManager allObjects] count]>0) {
-            [strongSelf.tableView scrollToRowAtIndexPath:[strongSelf.currentManager indexPathForObject:[[strongSelf.currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        self.heightConstraint.constant = height + TEXT_VIEW_OFFSET;
+        if ([[self.currentManager allObjects] count]>0) {
+            [self.tableView scrollToRowAtIndexPath:[self.currentManager indexPathForObject:[[self.currentManager allObjects] lastObject]] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
     }];
 	 
@@ -323,9 +319,6 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
     [self.navigationController pushViewController:feedCVC animated:YES];
 }
 - (IBAction)onClickDelete:(id)sender {
-   
-    __weak STChatRoomViewController *weakSelf = self;
-
     actionSheet = [UIAlertController alertControllerWithTitle:nil
                                                       message:nil
                                                preferredStyle:UIAlertControllerStyleActionSheet];
@@ -336,17 +329,15 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Block User" message:@"Are you sure do you want to block this user?" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
         [alert addAction:[UIAlertAction actionWithTitle:@"Block" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            __strong STChatRoomViewController *strongSelf = weakSelf;
-            [strongSelf.chatController blockUserWithId:strongSelf.user.uuid];
+            [self.chatController blockUserWithId:self.user.uuid];
         }]];
         
-        [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
+        [self.navigationController presentViewController:alert animated:YES completion:nil];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Delete Conversation" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        __strong STChatRoomViewController *strongSelf = weakSelf;
-        if (strongSelf.roomId){
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", strongSelf.roomId];
+        if (self.roomId){
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomID like %@", self.roomId];
             [[CoreManager coreDataService] deleteAllObjectsFromTable:@"Message" withPredicate:predicate];
             [[CoreManager coreDataService] save];
         }
@@ -422,11 +413,9 @@ static CGFloat const TEXT_VIEW_OFFSET = 18.f;
 
 -(void)showStatusAlertWithMessage:(NSString *)message{
     if (statusAlert==nil && [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
-        __weak STChatRoomViewController *weakSelf = self;
         statusAlert = [UIAlertController alertControllerWithTitle:@"Chat" message:message preferredStyle:UIAlertControllerStyleAlert];
         [statusAlert addAction:[UIAlertAction actionWithTitle:@"GO BACK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            __strong STChatRoomViewController *strongSelf = weakSelf;
-            [strongSelf.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
         }]];
         [self.navigationController presentViewController:statusAlert animated:YES completion:nil];
     }

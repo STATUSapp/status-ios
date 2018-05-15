@@ -297,18 +297,14 @@
 }
 - (IBAction)onSwipeUp:(id)sender {
     _searchBarHeightContraint.constant = 0;
-    __weak STConversationsListViewController *weakSelf = self;
     [UIView animateWithDuration:0.33f animations:^{
-        __strong STConversationsListViewController *strongSelf = weakSelf;
-        [strongSelf.view layoutIfNeeded];
+        [self.view layoutIfNeeded];
     }];
 }
 - (IBAction)onSwipeDown:(id)sender {
     _searchBarHeightContraint.constant = 44.f;
-    __weak STConversationsListViewController *weakSelf = self;
     [UIView animateWithDuration:0.33f animations:^{
-        __strong STConversationsListViewController *strongSelf = weakSelf;
-        [strongSelf.view layoutIfNeeded];
+        [self.view layoutIfNeeded];
     }];
 }
 

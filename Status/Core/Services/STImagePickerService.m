@@ -112,12 +112,10 @@
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    __weak STImagePickerService *weakSelf = self;
     [picker dismissViewControllerAnimated:YES completion:^{
-        __strong STImagePickerService *strongSelf = weakSelf;
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
         UIImage *fixedOrientationImage = [img fixOrientation];
-        [strongSelf callCompletion:fixedOrientationImage shouldBeCompressed:YES];
+        [self callCompletion:fixedOrientationImage shouldBeCompressed:YES];
     }];
     
 }
@@ -125,11 +123,9 @@
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     NSLog(@"self.navigationController.viewControllers =  %@", _viewController.navigationController.presentedViewController);
     if (![_viewController.presentedViewController isBeingDismissed]){
-        __weak STImagePickerService *weakSelf = self;
         [_viewController.presentedViewController dismissViewControllerAnimated:YES completion:^{
-            __strong STImagePickerService *strongSelf = weakSelf;
             UIImage *image = notif.userInfo[kImageKey];
-            [strongSelf callCompletion:image shouldBeCompressed:NO];
+            [self callCompletion:image shouldBeCompressed:NO];
         }];
     }
 }

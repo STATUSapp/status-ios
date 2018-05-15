@@ -194,12 +194,10 @@ CGFloat const kSeparatorHeight = 20.f;
     else
     {
         CGFloat leading = (button.tag - kButtonTagOffset) * [self buttonWidth] + ([self usedViewMargins] / 2.f);
-        __weak STCustomSegment *weakSelf = self;
         [UIView animateWithDuration:0.33f
                          animations:^{
-                             __strong STCustomSegment *strongSelf = weakSelf;
-                             strongSelf.selectionLeadingConstr.constant = leading;
-                             [strongSelf layoutIfNeeded];
+                             self.selectionLeadingConstr.constant = leading;
+                             [self layoutIfNeeded];
                          }];
     }
     

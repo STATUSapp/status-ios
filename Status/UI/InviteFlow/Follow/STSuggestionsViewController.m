@@ -360,11 +360,9 @@ static NSString * followThemTitle = @"FOLLOW THEM";
         [_btnFollowAll setTitle:followAllTitle forState:UIControlStateNormal];
     }
     
-    __weak STSuggestionsViewController *weakSelf = self;
     [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
-        __strong STSuggestionsViewController *strongSelf = weakSelf;
-        [strongSelf.view layoutIfNeeded];
-        strongSelf.lblInvitePeople.hidden = selectionsNumber == 0 ;
+        [self.view layoutIfNeeded];
+        self.lblInvitePeople.hidden = selectionsNumber == 0 ;
     }];
     
 }
