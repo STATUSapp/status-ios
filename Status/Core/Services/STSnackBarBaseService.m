@@ -32,12 +32,11 @@
 }
 
 -(void)hideSnackBar{
-    __weak STSnackBarBaseService *weakSelf = self;
     [UIView animateWithDuration:0.33 animations:^{
-        weakSelf.snackBar.alpha = 0.f;
+        self.snackBar.alpha = 0.f;
     } completion:^(BOOL finished) {
-        [weakSelf.snackBar removeFromSuperview];
-        weakSelf.snackBar.alpha = 1.f;
+        [self.snackBar removeFromSuperview];
+        self.snackBar.alpha = 1.f;
     }];
 }
 @end

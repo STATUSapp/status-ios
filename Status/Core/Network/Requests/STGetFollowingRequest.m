@@ -28,17 +28,18 @@
     __weak STGetFollowingRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"offset"] = weakSelf.offset;
+        __strong STGetFollowingRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"offset"] = strongSelf.offset;
         params[@"limit"] = @(100);
-        params[@"user_id"] = weakSelf.userID;
-        weakSelf.params = params;
+        params[@"user_id"] = strongSelf.userID;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                       success:strongSelf.standardSuccessBlock
+                                       failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

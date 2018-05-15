@@ -99,10 +99,11 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
     _settingsDict = [[NSUserDefaults standardUserDefaults] objectForKey:STSettingsDictKey];
     __weak STSettingsViewController * weakSelf = self;
     STRequestCompletionBlock completion = ^(id response, NSError *error){
+        __strong STSettingsViewController *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-            weakSelf.settingsDict = response[@"data"];
-            [[NSUserDefaults standardUserDefaults] setObject:weakSelf.settingsDict forKey:STSettingsDictKey];
-            [weakSelf configureSwitches];
+            strongSelf.settingsDict = response[@"data"];
+            [[NSUserDefaults standardUserDefaults] setObject:strongSelf.settingsDict forKey:STSettingsDictKey];
+            [strongSelf configureSwitches];
 
         }
     };
@@ -284,18 +285,18 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 }
 
 - (void)setSetting:(NSString *)setting fromSwitch:(UISwitch *)sender {
-    __weak UISwitch * weakSender = sender;
     __weak STSettingsViewController * weakSelf = self;
     STRequestCompletionBlock completion = ^(id response, NSError *error){
+        __strong STSettingsViewController *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-            [[NSUserDefaults standardUserDefaults] setObject:[weakSelf getNewSettingsDict] forKey:STSettingsDictKey];
+            [[NSUserDefaults standardUserDefaults] setObject:[strongSelf getNewSettingsDict] forKey:STSettingsDictKey];
             
         }
     };
     STRequestFailureBlock failBlock = ^(NSError *error){
-        [weakSender setOn:!sender.isOn];
+        [sender setOn:!sender.isOn];
     };
-    [STSetUserSettingsRequest setSettingsValue:weakSender.isOn forKey:setting withCompletion:completion failure:failBlock];
+    [STSetUserSettingsRequest setSettingsValue:sender.isOn forKey:setting withCompletion:completion failure:failBlock];
 }
 
 @end

@@ -116,25 +116,26 @@ const float kNoNotifHeight = 24.f;
     __weak STNotificationsViewController *weakSelf = self;
     
     [STDataAccessUtils getNotificationsWithCompletion:^(NSArray *objects, NSError *error) {
-        weakSelf.notificationDataSource = [NSArray arrayWithArray:objects];
-        [weakSelf.notificationTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        if (weakSelf.refreshControl.refreshing) {
-            [weakSelf.refreshControl endRefreshing];
+        __strong STNotificationsViewController *strongSelf = weakSelf;
+        strongSelf.notificationDataSource = [NSArray arrayWithArray:objects];
+        [strongSelf.notificationTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        if (strongSelf.refreshControl.refreshing) {
+            [strongSelf.refreshControl endRefreshing];
         }
         if (!error) {
-            BOOL shouldShowPlaceholder = _notificationDataSource.count == 0;
+            BOOL shouldShowPlaceholder = strongSelf.notificationDataSource.count == 0;
             if (shouldShowPlaceholder) {
-                weakSelf.noNotificationViewHeightConstr.constant = weakSelf.view.frame.size.height;
+                strongSelf.noNotificationViewHeightConstr.constant = strongSelf.view.frame.size.height;
             }else{
-                weakSelf.noNotificationViewHeightConstr.constant = 0;
+                strongSelf.noNotificationViewHeightConstr.constant = 0;
             }
-            weakSelf.notificationTable.hidden = shouldShowPlaceholder;
-            [weakSelf.notificationTable reloadData];
+            strongSelf.notificationTable.hidden = shouldShowPlaceholder;
+            [strongSelf.notificationTable reloadData];
         }
         else
         {
-            weakSelf.noNotificationViewHeightConstr.constant = weakSelf.view.frame.size.height;
-            weakSelf.notificationTable.hidden = YES;
+            strongSelf.noNotificationViewHeightConstr.constant = strongSelf.view.frame.size.height;
+            strongSelf.notificationTable.hidden = YES;
         }
     }];
 }
@@ -285,9 +286,10 @@ const float kNoNotifHeight = 24.f;
             
             [_followProcessor uploadDataToServer:@[listUser]
                                   withCompletion:^(NSError *error) {
+                                      __strong STNotificationsViewController *strongSelf = weakSelf;
                                       if (error == nil) {//success
                                           no.followed = !no.followed;
-                                          [weakSelf.notificationTable reloadData];
+                                          [strongSelf.notificationTable reloadData];
                                           [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
                                       }
                                   }];

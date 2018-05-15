@@ -27,15 +27,16 @@
     __weak STSetAPNTokenRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"apn_token"] = weakSelf.apnToken;
-        weakSelf.params = params;
+        __strong STSetAPNTokenRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"apn_token"] = strongSelf.apnToken;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
-                                   parameters:params
+                                      parameters:params
                                         progress:nil
-                                      success:weakSelf.standardSuccessBlock
-                                      failure:weakSelf.standardErrorBlock];
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

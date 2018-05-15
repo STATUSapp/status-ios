@@ -66,8 +66,9 @@ self.navigationController.hidesBarsOnSwipe = NO;
 -(void)getCommissionsFromServer{
     __weak STEarningsViewController *weakSelf = self;
     [STDataAccessUtils getUserCommissionsWithCompletion:^(NSArray *objects, NSError *error) {
-        weakSelf.commissionsArray = [NSMutableArray arrayWithArray:objects];
-        [weakSelf reloadScreen];
+        __strong STEarningsViewController *strongSelf = weakSelf;
+        strongSelf.commissionsArray = [NSMutableArray arrayWithArray:objects];
+        [strongSelf reloadScreen];
     }];
 }
 
@@ -186,12 +187,13 @@ self.navigationController.hidesBarsOnSwipe = NO;
 - (IBAction)onWithDrawPressed:(id)sender {
     __weak STEarningsViewController *weakSelf = self;
     [STDataAccessUtils withdrawCommissionsWithCompletion:^(NSError *error) {
+        __strong STEarningsViewController *strongSelf = weakSelf;
         NSLog(@"Commissions were withrawn : %@", error);
         UIAlertController *alert = nil;
         NSString *alertMessage = nil;
         if (!error) {
             alertMessage = @"Your commissions were withdrawn.";
-            [weakSelf getCommissionsFromServer];
+            [strongSelf getCommissionsFromServer];
         }else{
             alertMessage = @"Your commissions were not withdrawn. Try again later.";
         }

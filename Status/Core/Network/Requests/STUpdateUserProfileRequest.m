@@ -35,33 +35,34 @@
     __weak STUpdateUserProfileRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSMutableDictionary * paramsDict = [weakSelf getDictParamsWithToken];
-        if (weakSelf.userProfile.firstname) {
-            paramsDict[@"firstname"] = weakSelf.userProfile.firstname;
+        __strong STUpdateUserProfileRequest *strongSelf = weakSelf;
+        NSMutableDictionary * paramsDict = [strongSelf getDictParamsWithToken];
+        if (strongSelf.userProfile.firstname) {
+            paramsDict[@"firstname"] = strongSelf.userProfile.firstname;
         }
-        if (weakSelf.userProfile.lastName) {
-            paramsDict[@"lastname"] = weakSelf.userProfile.lastName;
+        if (strongSelf.userProfile.lastName) {
+            paramsDict[@"lastname"] = strongSelf.userProfile.lastName;
         }
-        if (weakSelf.userProfile.fullName) {
-            paramsDict[@"fullname"] = weakSelf.userProfile.fullName;
+        if (strongSelf.userProfile.fullName) {
+            paramsDict[@"fullname"] = strongSelf.userProfile.fullName;
         }
-        if (weakSelf.userProfile.bio) {
-            paramsDict[@"bio"] = weakSelf.userProfile.bio;
+        if (strongSelf.userProfile.bio) {
+            paramsDict[@"bio"] = strongSelf.userProfile.bio;
         }
-        if (weakSelf.userProfile.username) {
-            paramsDict[@"username"] = weakSelf.userProfile.username;
+        if (strongSelf.userProfile.username) {
+            paramsDict[@"username"] = strongSelf.userProfile.username;
         }
-        if (weakSelf.userProfile.gender) {
-            paramsDict[@"gender"] = weakSelf.userProfile.gender;
+        if (strongSelf.userProfile.gender) {
+            paramsDict[@"gender"] = strongSelf.userProfile.gender;
         }
         
-        NSString *url = [weakSelf urlString];
-        weakSelf.params = paramsDict;
+        NSString *url = [strongSelf urlString];
+        strongSelf.params = paramsDict;
         [[STNetworkQueueManager networkAPI] POST:url
-                                    parameters:paramsDict
+                                      parameters:paramsDict
                                         progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

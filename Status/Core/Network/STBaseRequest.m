@@ -19,25 +19,27 @@
         __weak STBaseRequest *weakSelf = self;
         
         self.failureBlock = ^(NSError *error){
-            [weakSelf requestFailedWithError: error];
+            __strong STBaseRequest *strongSelf = weakSelf;
+            [strongSelf requestFailedWithError: error];
         };
         
         self.standardSuccessBlock = ^(NSURLSessionDataTask *task, id responseObject) {
-            weakSelf.returnAttributes = responseObject;
+            __strong STBaseRequest *strongSelf = weakSelf;
+            strongSelf.returnAttributes = responseObject;
             
-            if (weakSelf.completionBlock) {
-                weakSelf.completionBlock(weakSelf.returnAttributes,nil);
+            if (strongSelf.completionBlock) {
+                strongSelf.completionBlock(strongSelf.returnAttributes,nil);
             }
             
-            [[CoreManager networkService] requestDidSucceed:weakSelf];
-            
+            [[CoreManager networkService] requestDidSucceed:strongSelf];
         };
         
         self.standardErrorBlock = ^(NSURLSessionDataTask *task, NSError *error) {
             //check error code for network errors
-            NSError* err = [weakSelf translateToHTTPError:task error:error];
+            __strong STBaseRequest *strongSelf = weakSelf;
+            NSError* err = [strongSelf translateToHTTPError:task error:error];
             if (error.code != NSURLErrorCancelled) {
-                [weakSelf failRequestWithError:err];
+                [strongSelf failRequestWithError:err];
             }
             
         };
@@ -85,7 +87,10 @@
     self = [super init];
     if (self) {
         __weak STBaseRequest *weakSelf = self;
-        self.failureBlock = ^(NSError *error){ [weakSelf requestFailedWithError: error];};
+        self.failureBlock = ^(NSError *error){
+            __strong STBaseRequest *strongSelf = weakSelf;
+            [strongSelf requestFailedWithError: error];
+        };
         self.retryCount = [aDecoder decodeIntForKey:@"retryCount"];
         _timeStamp = [aDecoder decodeObjectForKey:@"timeStamp"];
     }

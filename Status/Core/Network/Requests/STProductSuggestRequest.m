@@ -41,18 +41,20 @@
 {
     __weak STProductSuggestRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"barcode"] = weakSelf.barcodeString;
-        params[@"brand"] = weakSelf.brand;
-        params[@"product_name"] = weakSelf.productName;
-        params[@"store"] = weakSelf.store;
+        
+        __strong STProductSuggestRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"barcode"] = strongSelf.barcodeString;
+        params[@"brand"] = strongSelf.brand;
+        params[@"product_name"] = strongSelf.productName;
+        params[@"store"] = strongSelf.store;
         weakSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

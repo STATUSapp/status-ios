@@ -69,13 +69,13 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     
     __weak STImageCacheController *weakSelf = self;
     [sdManager cachedImageExistsForURL:[NSURL URLWithString:imageFullLink] completion:^(BOOL isInCache) {
-        
+        __strong STImageCacheController *strongSelf = weakSelf;
         if (!isInCache) {
             if (imageFullLink && filteredArray.count == 0){
                 STImageCacheObj *obj = [STImageCacheObj new];
                 obj.imageUrl = imageFullLink;
                 obj.flowType = @(STImageDownloadSpecialPriority);
-                [weakSelf startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[obj]];
+                [strongSelf startImageDownloadForNewFlowType:STImageDownloadSpecialPriority andDataSource:@[obj]];
             }
             completion(nil);
         }else{
@@ -150,7 +150,7 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
 
 -(void)sortDownloadArray{
     [_objectsArray sortUsingComparator:^NSComparisonResult(STImageCacheObj *obj1, STImageCacheObj *obj2) {
-        return [@([_sortedFlows indexOfObject:obj1.flowType]) compare:@([_sortedFlows indexOfObject:obj2.flowType])];
+        return [@([self.sortedFlows indexOfObject:obj1.flowType]) compare:@([self.sortedFlows indexOfObject:obj2.flowType])];
     }];
     
 }
@@ -167,15 +167,16 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     __weak STImageCacheController *weakSelf = self;
     for (STImageCacheObj *obj in newObjects) {
+        __strong STImageCacheController *strongSelf = weakSelf;
         [sdManager cachedImageExistsForURL:[NSURL URLWithString:obj.imageUrl] completion:^(BOOL isInCache) {
             if (!isInCache) {
                 STImageCacheObj *objToAdd = obj;
                 objToAdd.flowType = @(flowType);
-                [weakSelf.objectsArray addObject:objToAdd];
+                [strongSelf.objectsArray addObject:objToAdd];
             }
             if ([newObjects lastObject] == obj) {
-                [weakSelf sortDownloadArray];
-                [weakSelf loadNextPhoto];
+                [strongSelf sortDownloadArray];
+                [strongSelf loadNextPhoto];
             }
         }];
     }
@@ -199,14 +200,14 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
     
     [self downloadImageWithName:fullUrlString
                   andCompletion:^(NSString *downloadedImage, BOOL downloaded, CGSize downloadedImageSize) {
-                      
+                      __strong STImageCacheController *strongSelf = weakSelf;
                       if (downloaded==YES) {
                           [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString, kImageSizeKey:NSStringFromCGSize(downloadedImageSize)}];
                       }
                       
-                      [weakSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
+                      [strongSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
                       
-                      [weakSelf loadNextPhoto];
+                      [strongSelf loadNextPhoto];
                   }];
 }
 

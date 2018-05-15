@@ -126,7 +126,6 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
 - (IBAction)uploadImagePressed:(id)sender {
     
     _addPhotoIndex = ((UIButton *)sender).tag;
-    __weak STTagManualViewController *weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:@"Photos"
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -134,12 +133,12 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [alert addAction:[UIAlertAction actionWithTitle:@"Take a photo"
                                                   style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                                                      [weakSelf presentPhotoPickerForType:UIImagePickerControllerSourceTypeCamera];
+                                                      [self presentPhotoPickerForType:UIImagePickerControllerSourceTypeCamera];
                                                   }]];
     }
     [alert addAction:[UIAlertAction actionWithTitle:@"Open Camera Roll"
                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                                                  [weakSelf presentPhotoPickerForType:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+                                                  [self presentPhotoPickerForType:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum];
                                               }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
@@ -220,13 +219,12 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
 #pragma mark UIImagePicker delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    __weak STTagManualViewController *weakSelf = self;
     [picker dismissViewControllerAnimated:YES completion:^{
-        if (weakSelf.addPhotoIndex!=NSNotFound) {
+        if (self.addPhotoIndex!=NSNotFound) {
             UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-            STShopProduct *product = _products[weakSelf.addPhotoIndex];
+            STShopProduct *product = self.products[self.addPhotoIndex];
             product.localImage = img;
-            [weakSelf.collectionView reloadData];
+            [self.collectionView reloadData];
         }
     }];
 }

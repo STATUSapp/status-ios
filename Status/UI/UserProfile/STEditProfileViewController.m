@@ -61,32 +61,33 @@ const NSInteger kDefaultValueForTopConstraint = 26;
     __weak STEditProfileViewController * weakSelf = self;
     [STUpdateUserProfileRequest updateUserProfileWithProfile:_formUserProfile
                                               withCompletion:^(id response, NSError *error) {
-                                                  
+                                                  __strong STEditProfileViewController *strongSelf = weakSelf;
                                                   if (!error) {
-                                                      weakSelf.userProfile.profileShareUrl = response[@"short_url"];
-                                                      [[CoreManager profilePool] addProfiles:@[weakSelf.formUserProfile]];
+                                                      strongSelf.userProfile.profileShareUrl = response[@"short_url"];
+                                                      [[CoreManager profilePool] addProfiles:@[strongSelf.formUserProfile]];
                                                       UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Update Profile" message:@"Success!" preferredStyle:UIAlertControllerStyleAlert];
                                                       
                                                       [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
                                                       
-                                                      [weakSelf.navigationController popViewControllerAnimated:YES];
+                                                      [strongSelf.navigationController popViewControllerAnimated:YES];
                                                       
-                                                      [weakSelf.navigationController presentViewController:alert animated:YES completion:nil];
+                                                      [strongSelf.navigationController presentViewController:alert animated:YES completion:nil];
                                                   }
                                                   else
                                                   {
                                                       NSLog(@"%@", error.debugDescription);
-                                                      [weakSelf showProfileErrorAlert];
+                                                      [strongSelf showProfileErrorAlert];
                                                   }
                                                   
                                               }
                                                      failure:^(NSError *error) {
+                                                         __strong STEditProfileViewController *strongSelf = weakSelf;
                                                          NSLog(@"%@", error.debugDescription);
                                                          if (error.code == STWebservicesUnprocessableEntity) {
-                                                             [weakSelf showUsernameTakenAlert];
+                                                             [strongSelf showUsernameTakenAlert];
                                                          }
                                                          else
-                                                             [weakSelf showProfileErrorAlert];
+                                                             [strongSelf showProfileErrorAlert];
                                                          
                                                      }];
 }

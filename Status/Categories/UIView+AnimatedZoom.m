@@ -21,8 +21,7 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.5f animations:^{
             self.transform = CGAffineTransformMakeScale(1.0,1.0);
-        } completion:^(BOOL finished) {
-        }];
+        } completion:nil];
     }];
 }
 

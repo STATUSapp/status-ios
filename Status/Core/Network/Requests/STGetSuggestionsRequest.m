@@ -31,22 +31,24 @@
 {
     __weak STGetSuggestionsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"category_id"] = weakSelf.categoryId;
-        if (weakSelf.brandId) {
-            params[@"brand_id"] = weakSelf.brandId;
+        
+        __strong STGetSuggestionsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"category_id"] = strongSelf.categoryId;
+        if (strongSelf.brandId) {
+            params[@"brand_id"] = strongSelf.brandId;
         }else{
             params[@"brand_id"] = [NSNull null];
         }
         params[@"pageSize"] = @(kCatalogDownloadPageSize);
-        params[@"page"] = @(weakSelf.pageIndex);
-        weakSelf.params = params;
+        params[@"page"] = @(strongSelf.pageIndex);
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

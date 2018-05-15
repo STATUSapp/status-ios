@@ -48,4 +48,7 @@
     return @"#";
 }
 
+-(void)dealloc{
+    NSLog(@"Core data brand sync dealoc");
+}
 @end

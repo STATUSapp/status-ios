@@ -28,19 +28,21 @@
 {
     __weak STGetUsedSuggestionsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        if (weakSelf.categoryId) {
-            params[@"category_id"] = weakSelf.categoryId;
+        
+        __strong STGetUsedSuggestionsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        if (strongSelf.categoryId) {
+            params[@"category_id"] = strongSelf.categoryId;
         }
         params[@"pageSize"] = @(kCatalogDownloadPageSize);
-        params[@"page"] = @(weakSelf.pageIndex);
-        weakSelf.params = params;
+        params[@"page"] = @(strongSelf.pageIndex);
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

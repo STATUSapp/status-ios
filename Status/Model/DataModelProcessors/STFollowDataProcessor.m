@@ -11,10 +11,11 @@
 #import "STUserProfile.h"
 #import "STUserProfilePool.h"
 
-@interface STFollowDataProcessor(){
-    NSSet *_followedUsers;
-    NSSet *_unfollowedUsers;
-}
+@interface STFollowDataProcessor()
+
+@property(nonatomic, strong) NSSet *followedUsers;
+@property(nonatomic, strong) NSSet *unfollowedUsers;
+
 
 @end
 
@@ -40,11 +41,13 @@
     NSMutableSet *checkedUsersToFollow = [NSMutableSet setWithSet:[suggestedUsersSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 1"]]];
     [checkedUsersToFollow minusSet:_followedUsers];
     NSArray *unfollowUsersShouldFollow = [checkedUsersToFollow allObjects];
+    __weak STFollowDataProcessor *weakSelf = self;
     [STDataAccessUtils followUsers:unfollowUsersShouldFollow
                     withCompletion:^(NSError *error) {
+                        __strong STFollowDataProcessor *strongSelf = weakSelf;
                         NSLog(@"Error follow: %@", error.debugDescription);
                         NSMutableSet *uncheckedUsersToUnfollow = [NSMutableSet setWithSet:[suggestedUsersSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 0"]]];
-                        [uncheckedUsersToUnfollow minusSet:_unfollowedUsers];
+                        [uncheckedUsersToUnfollow minusSet:strongSelf.unfollowedUsers];
                         NSArray *followUsersShouldUnfollow = [uncheckedUsersToUnfollow allObjects];
                         
                         [STDataAccessUtils unfollowUsers:followUsersShouldUnfollow withCompletion:^(NSError *error) {

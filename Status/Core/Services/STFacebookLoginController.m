@@ -208,12 +208,13 @@
         __weak STFacebookLoginController *weakSelf=self;
         [STDataAccessUtils getUserProfileForUserId:_currentUserId
                                      andCompletion:^(NSArray *objects, NSError *error) {
-                                         weakSelf.loggedInUserProfile = [objects firstObject];
-                                         if (weakSelf.loggedInUserProfile) {
-                                             [[CoreManager profilePool] addProfiles:@[weakSelf.loggedInUserProfile]];
+                                         __strong STFacebookLoginController *strongSelf = weakSelf;
+                                         strongSelf.loggedInUserProfile = [objects firstObject];
+                                         if (strongSelf.loggedInUserProfile) {
+                                             [[CoreManager profilePool] addProfiles:@[strongSelf.loggedInUserProfile]];
                                          }
-                                         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:@{kManualLogoutKey:@(weakSelf.manualLogout)}];
-                                         weakSelf.manualLogout = NO;
+                                         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:@{kManualLogoutKey:@(strongSelf.manualLogout)}];
+                                         strongSelf.manualLogout = NO;
                                      }];
     }else{
         [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedIn object:nil userInfo:@{kManualLogoutKey:@(self.manualLogout)}];
@@ -265,8 +266,9 @@
     userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
     userInfo[@"facebook_id"] = userFbId;
     
-    __weak STFacebookLoginController *weskSelf = self;
+    __weak STFacebookLoginController *weakSelf = self;
     [[CoreManager facebookService] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
+        __strong STFacebookLoginController *strongSelf = weakSelf;
         if (info[@"birthday"]) {
             userInfo[@"birthday"] = [NSDate birthdayStringFromFacebookBirthday:info[@"birthday"]];
         }
@@ -285,7 +287,7 @@
         if (info[@"about"]!=nil) {
             userInfo[@"bio"] = info[@"about"];
         }
-        [weskSelf sendLoginOrregisterRequest:userInfo];
+        [strongSelf sendLoginOrregisterRequest:userInfo];
     }];
 }
 
@@ -303,12 +305,12 @@
     }else{
         __weak STFacebookLoginController *weakSelf;
         [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-            
+            __strong STFacebookLoginController *strongSelf = weakSelf;
             if (error!=nil) {
                 //TODO: add log here
                 return ;
             }
-            [weakSelf buildLoginRegisterParams];
+            [strongSelf buildLoginRegisterParams];
         }];
     }
 
@@ -318,9 +320,10 @@
     __weak STFacebookLoginController *weakSelf = self;
     _fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
     STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
+        __strong STFacebookLoginController *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
-            [weakSelf measureRegister];
-            [weakSelf setUpEnvironment:response andUserInfo:userInfo];
+            [strongSelf measureRegister];
+            [strongSelf setUpEnvironment:response andUserInfo:userInfo];
         }
         else
         {
@@ -337,6 +340,7 @@
     };
 
     STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
+        __strong STFacebookLoginController *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
             
             [STRegisterRequest registerWithUserInfo:userInfo
@@ -344,8 +348,8 @@
                                             failure:failBlock];
         }
         else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
-            [weakSelf setTrackerAsExistingUser];
-            [weakSelf setUpEnvironment:response andUserInfo:userInfo];
+            [strongSelf setTrackerAsExistingUser];
+            [strongSelf setUpEnvironment:response andUserInfo:userInfo];
         }
         else
         {

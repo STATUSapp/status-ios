@@ -27,15 +27,16 @@
     __weak STSetPostLikeRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"post_id"] = weakSelf.postId;
-        weakSelf.params = params;
+        __strong STSetPostLikeRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"post_id"] = strongSelf.postId;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
-                                   parameters:params
+                                      parameters:params
                                         progress:nil
-                                      success:weakSelf.standardSuccessBlock
-                                      failure:weakSelf.standardErrorBlock];
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
         
     };
     

@@ -47,23 +47,25 @@ typedef NS_ENUM(NSUInteger, STUserCommission) {
 {
     __weak STUserCommissionsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        weakSelf.params = params;
-        if (weakSelf.requestType == STUserCommissionGet) {
+        
+        __strong STUserCommissionsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        strongSelf.params = params;
+        if (strongSelf.requestType == STUserCommissionGet) {
             [[STNetworkQueueManager networkAPI] GET:url
                                          parameters:params
                                            progress:nil
-                                            success:weakSelf.standardSuccessBlock
-                                            failure:weakSelf.standardErrorBlock];
+                                            success:strongSelf.standardSuccessBlock
+                                            failure:strongSelf.standardErrorBlock];
         }
         else
         {
             [[STNetworkQueueManager networkAPI] POST:url
                                           parameters:params
                                             progress:nil
-                                             success:weakSelf.standardSuccessBlock
-                                             failure:weakSelf.standardErrorBlock];
+                                             success:strongSelf.standardSuccessBlock
+                                             failure:strongSelf.standardErrorBlock];
         }
     };
     return executionBlock;

@@ -27,16 +27,17 @@
     __weak STGetNearbyProfilesRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        __strong STGetNearbyProfilesRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         params[@"limit"] = @(kPostsLimit);
-        params[@"offset"] = @(weakSelf.offset);
-        weakSelf.params = params;
+        params[@"offset"] = @(strongSelf.offset);
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                       success:strongSelf.standardSuccessBlock
+                                       failure:strongSelf.standardErrorBlock];
     };
     
     return executionBlock;

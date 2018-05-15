@@ -247,10 +247,9 @@ static NSString * inviteThemTitle = @"INVITE THEM";
     }else {
         [_btnInviteAll setTitle:inviteAllTitle forState:UIControlStateNormal];
     }
-    
     [UIView animateWithDuration: animated? 0.35 : 0 animations:^{
         [self.view layoutIfNeeded];
-        _lblInvitePeople.hidden = _selectionsNumber == 0 ;
+        self.lblInvitePeople.hidden = self.selectionsNumber == 0 ;
     }];
 
 }

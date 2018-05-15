@@ -42,15 +42,17 @@ NSTimeInterval const kTimerInterval = 3.0;
     NSData *imageData = UIImageJPEGRepresentation(image, 1.f);
     __weak STImageSuggestionsService *weakSelf = self;
     [STUploadImageForSuggestionsRequest uploadImageForSuggestionsWithData:imageData withCompletion:^(id response, NSError *error) {
+        __strong STImageSuggestionsService *strongSelf = weakSelf;
         if (!error) {
-            weakSelf.suggestionsId = response[@"suggestions_id"];
-            [weakSelf setUpTimer];
+            strongSelf.suggestionsId = response[@"suggestions_id"];
+            [strongSelf setUpTimer];
         }else{
-            [weakSelf clearService];
+            [strongSelf clearService];
         }
         
     } failure:^(NSError *error) {
-        [weakSelf clearService];
+        __strong STImageSuggestionsService *strongSelf = weakSelf;
+        [strongSelf clearService];
     }];
     
 }
@@ -122,20 +124,21 @@ NSTimeInterval const kTimerInterval = 3.0;
 -(void)timerMethod:(id)sender{
     __weak STImageSuggestionsService *weakSelf = self;
     [STDataAccessUtils getSuggestedProductsWithId:self.suggestionsId withCompletion:^(NSArray *objects, NSError *error) {
+        __strong STImageSuggestionsService *strongSelf = weakSelf;
         if(error){
             if (error.code == STWebservicesCodesPartialContent) {
                 //do nothing, try again later
             }
         }else{
-            [[NSNotificationCenter defaultCenter] removeObserver:weakSelf];
-            weakSelf.suggestedProductsLoaded = YES;
-            weakSelf.suggestedProducts = objects;
-            if (weakSelf.suggesstedCompletion) {
-                weakSelf.suggesstedCompletion(objects);
+            [[NSNotificationCenter defaultCenter] removeObserver:strongSelf];
+            strongSelf.suggestedProductsLoaded = YES;
+            strongSelf.suggestedProducts = objects;
+            if (strongSelf.suggesstedCompletion) {
+                strongSelf.suggesstedCompletion(objects);
             }
-            [weakSelf.timer invalidate];
-            weakSelf.timer = nil;
-            [weakSelf startSimilarProductsDownload];
+            [strongSelf.timer invalidate];
+            strongSelf.timer = nil;
+            [strongSelf startSimilarProductsDownload];
         }
     }];
 }
@@ -143,11 +146,12 @@ NSTimeInterval const kTimerInterval = 3.0;
 - (void)downloadSimilarForProduct:(STShopProduct *)sp {
     __weak STImageSuggestionsService *weakSelf = self;
     [STDataAccessUtils getSimilarProductsWithId:sp.uuid withCompletion:^(NSArray *objects, NSError *error) {
+        __strong STImageSuggestionsService *strongSelf = weakSelf;
         if (objects!=nil) {
-            [weakSelf.similarProducts setValue:objects forKey:sp.uuid];
-            if ([weakSelf.similarProductId isEqualToString:sp.uuid]) {
-                if (weakSelf.similarCompletion) {
-                    weakSelf.similarCompletion(objects);
+            [strongSelf.similarProducts setValue:objects forKey:sp.uuid];
+            if ([strongSelf.similarProductId isEqualToString:sp.uuid]) {
+                if (strongSelf.similarCompletion) {
+                    strongSelf.similarCompletion(objects);
                 }
             }
         }

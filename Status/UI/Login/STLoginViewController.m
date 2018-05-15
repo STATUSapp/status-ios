@@ -84,7 +84,7 @@
     
     [_alertController addTextFieldWithConfigurationHandler:nil];
     [_alertController addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UITextField *tf = [_alertController.textFields firstObject];
+        UITextField *tf = [self.alertController.textFields firstObject];
         NSString *newBaseUrl = tf.text;
         if (newBaseUrl) {
             NSUserDefaults *ud = [[NSUserDefaults alloc] initWithSuiteName:@"BaseUrl"];

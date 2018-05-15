@@ -22,18 +22,20 @@
     // Create a new managed object context
     // Set its persistent store coordinator
     NSManagedObjectContext *newMoc = [self getNewManagedObjectContext];
+    __weak STCoreDataBaseSync *weakSelf = self;
     [newMoc performBlock:^{
+        __strong STCoreDataBaseSync *strongSelf = weakSelf;
         for (NSDictionary *itemDict in serverData) {
-            NSManagedObject *fetchObject = [self fetchObjectForUuid:[CreateDataModelHelper validStringIdentifierFromValue:itemDict[@"id"]] inContext:newMoc];
+            NSManagedObject *fetchObject = [strongSelf fetchObjectForUuid:[CreateDataModelHelper validStringIdentifierFromValue:itemDict[@"id"]] inContext:newMoc];
             
             if (fetchObject==nil) {
                 //insert
-                NSManagedObject *insertedValue = [[CoreManager coreDataService] insertDataForTableName:[self entityName] inObjectContext:newMoc];
-                [self configureManagedObject:insertedValue
+                NSManagedObject *insertedValue = [[CoreManager coreDataService] insertDataForTableName:[strongSelf entityName] inObjectContext:newMoc];
+                [strongSelf configureManagedObject:insertedValue
                                     withData:itemDict];
             }else{
                 //update
-                [self configureManagedObject:fetchObject
+                [strongSelf configureManagedObject:fetchObject
                                     withData:itemDict];
             }
         }

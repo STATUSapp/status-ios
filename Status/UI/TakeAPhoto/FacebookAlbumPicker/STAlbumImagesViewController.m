@@ -16,9 +16,10 @@
 #import "STLocalNotificationService.h"
 @interface STAlbumImagesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
-    NSMutableArray *_dataSource;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) NSMutableArray *dataSource;
+
 @end
 
 @implementation STAlbumImagesViewController
@@ -52,18 +53,19 @@
     __weak STAlbumImagesViewController *weakSelf = self;
     [[CoreManager facebookService] loadPhotosForAlbum:_albumId
                  withRefreshBlock:^(NSArray *newObjects) {
+                     __strong STAlbumImagesViewController *strongSelf = weakSelf;
                      if (newObjects.count>0) {
                          
-                         [weakSelf.collectionView performBatchUpdates:^{
-                             NSUInteger resultsSize = [_dataSource count];
-                             [_dataSource addObjectsFromArray:newObjects];
+                         [strongSelf.collectionView performBatchUpdates:^{
+                             NSUInteger resultsSize = [strongSelf.dataSource count];
+                             [strongSelf.dataSource addObjectsFromArray:newObjects];
 
                              NSMutableArray *arrayWithIndexPaths = [NSMutableArray array];
                              
                              for (NSUInteger i = resultsSize; i < resultsSize + newObjects.count; i++)
                                  [arrayWithIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
                              
-                             [self.collectionView insertItemsAtIndexPaths:arrayWithIndexPaths];
+                             [strongSelf.collectionView insertItemsAtIndexPaths:arrayWithIndexPaths];
 
                          } completion:nil];
                      }

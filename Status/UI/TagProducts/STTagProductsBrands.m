@@ -120,14 +120,16 @@
     NSString *categoryId = [STTagProductsManager sharedInstance].selectedCategory.uuid;
     __weak STTagProductsBrands *weakSelf = self;
     [STGetBrandsWithProducts getBrandsWithProductsForCategoryId:categoryId withCompletion:^(id response, NSError *error) {
-        weakSelf.validBrandsLoaded = YES;
-        weakSelf.validBrandIdArray = response;
-        [weakSelf setUpScreenAfterLoading];
+        __strong STTagProductsBrands *strongSelf = weakSelf;
+        strongSelf.validBrandsLoaded = YES;
+        strongSelf.validBrandIdArray = response;
+        [strongSelf setUpScreenAfterLoading];
         
     } failure:^(NSError *error) {
+        __strong STTagProductsBrands *strongSelf = weakSelf;
         NSLog(@"Error fetching for valida brands: %@", error);
-        weakSelf.validBrandsLoaded = YES;
-        [weakSelf setUpScreenAfterLoading];
+        strongSelf.validBrandsLoaded = YES;
+        [strongSelf setUpScreenAfterLoading];
     }];
 }
 
@@ -135,8 +137,9 @@
     if (_validBrandIdArray.count == 0) {
         return oldArray;
     }
+    __weak STTagProductsBrands *weakSelf = self;
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Brand *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [_validBrandIdArray containsObject:@(evaluatedObject.uuid.integerValue)];
+        return [weakSelf.validBrandIdArray containsObject:@(evaluatedObject.uuid.integerValue)];
     }];
     NSArray *filteredArray = [oldArray filteredArrayUsingPredicate:predicate];
     return filteredArray;
@@ -199,14 +202,7 @@
 }
 
 -(void) animationShowStopped{
-    
-//    [UIView animateWithDuration:0.1 animations:^{
-//        [_tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
-//
-//    }];
     _bottomConstr.constant = -1.f * keyboardBounds.size.height;
-    
-    
 }
 
 -(void) keyboardWillHide:(NSNotification *)note{
@@ -442,13 +438,14 @@
     if (_searchText.length == 0) {
         _searchDisplayArray = @[];
     }else{
+        __weak STTagProductsBrands *weakSelf = self;
         NSArray *filteredArray = [_initialBrandsArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Brand *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-            return [evaluatedObject.name containsString:_searchText];
+            return [evaluatedObject.name containsString:weakSelf.searchText];
         }]];
         
         _searchDisplayArray = [filteredArray sortedArrayUsingComparator:^NSComparisonResult(Brand *obj1, Brand *obj2) {
-            NSRange rangeObj1 = [obj1.name rangeOfString:_searchText];
-            NSRange rangeObj2 = [obj2.name rangeOfString:_searchText];
+            NSRange rangeObj1 = [obj1.name rangeOfString:weakSelf.searchText];
+            NSRange rangeObj2 = [obj2.name rangeOfString:weakSelf.searchText];
             return [@(rangeObj1.location) compare:@(rangeObj2.location)];
         }];
     }

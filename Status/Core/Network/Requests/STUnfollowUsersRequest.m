@@ -27,15 +27,16 @@
     __weak STUnfollowUsersRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"ids"] = [[weakSelf.users valueForKey:@"uuid"] componentsJoinedByString:@","];
-        weakSelf.params = params;
+        __strong STUnfollowUsersRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"ids"] = [[strongSelf.users valueForKey:@"uuid"] componentsJoinedByString:@","];
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
-                                    parameters:params
+                                      parameters:params
                                         progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }
