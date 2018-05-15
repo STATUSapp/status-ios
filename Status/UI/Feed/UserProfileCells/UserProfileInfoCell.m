@@ -54,11 +54,11 @@ CGFloat distanceLabelStandardHeight = 21.f;
         _followButtonConstr.constant = 70.f;
     }
     
-    NSString *age = @"";
-    if (profile.birthday) {
-        age = [NSDate yearsFromDate:profile.birthday];
-        
-    }
+//    NSString *age = @"";
+//    if (profile.birthday) {
+//        age = [NSDate yearsFromDate:profile.birthday];
+//        
+//    }
     NSString *nameString = profile.fullName.length > 0?profile.fullName:profile.firstname;
 //    NSString *nameAndAgeString = [NSString stringWithFormat:@"%@%@%@",nameString,age.length>0?@", ":@"", age];
     [_nameAndAgeButton setTitle:nameString forState:UIControlStateNormal];

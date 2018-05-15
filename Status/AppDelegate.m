@@ -228,23 +228,21 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 }
 
 // Respond to URI scheme links
--(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
     
-    BOOL branchHandled = [[Branch getInstance] application:application
+    BOOL branchHandled = [[Branch getInstance] application:app
                                                    openURL:url
-                                         sourceApplication:sourceApplication
-                                                annotation:annotation];
+                                                   options:options];
     
     if (!branchHandled) {
-        BOOL tuneHandled = [Tune handleOpenURL:url
-                             sourceApplication:sourceApplication];
+        BOOL tuneHandled = [Tune handleOpenURL:url options:options];
         if (!tuneHandled) {
-            return [[FBSDKApplicationDelegate sharedInstance] application:application
+            return [[FBSDKApplicationDelegate sharedInstance] application:app
                                                                   openURL:url
-                                                        sourceApplication:sourceApplication
-                                                               annotation:annotation];
+                                                                  options:options];
         }
-
+        
     }
     return NO;
 }

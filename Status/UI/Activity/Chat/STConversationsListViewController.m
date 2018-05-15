@@ -232,9 +232,10 @@
                                        searchString:_searchTextString
                                          fromOffset:newOffset == YES?offset:0
                                       andCompletion:^(NSArray *objects, NSError *error) {
-                                          weakSelf.loadMoreButton.enabled = YES;
-                                          weakSelf.loadMoreButton = nil;
-                                          [weakSelf saveNewDataAndReload:objects isNewOffset:newOffset];
+                                          __strong STConversationsListViewController *strongSelf = weakSelf;
+                                          strongSelf.loadMoreButton.enabled = YES;
+                                          strongSelf.loadMoreButton = nil;
+                                          [strongSelf saveNewDataAndReload:objects isNewOffset:newOffset];
                                       }];
 }
 

@@ -88,7 +88,8 @@
     
     __weak STUserProfile *weakSelf = self;
     [STImageCacheController imageDownloadedForUrl:self.mainImageUrl completion:^(BOOL cached) {
-        weakSelf.mainImageDownloaded = cached;
+        __strong STUserProfile *strongSelf = weakSelf;
+        strongSelf.mainImageDownloaded = cached;
     }];
     self.imageSize = CGSizeZero;
     _gender = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"gender"];

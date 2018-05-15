@@ -31,8 +31,9 @@ NSString *const kFirstChatVersion = @"1.0.4";
     SRWebSocket *_webSocket;
     AFNetworkReachabilityManager* _reachabilityManager;
     NSTimer *_pingTimer;
-    BOOL _chatLoadingParameters;
 }
+
+@property (nonatomic, assign) BOOL chatLoadingParameters;
 
 @end
 
@@ -86,17 +87,20 @@ NSString *const kFirstChatVersion = @"1.0.4";
     if (_chatSocketUrl==nil ||_chatPort == -1) {
         if (_chatLoadingParameters == NO) {
             _chatLoadingParameters = YES;
+            __weak STChatController *weakSelf = self;
             [STGetChatUrlAndPortRequest getReconnectInfoWithCompletion:^(id response, NSError *error) {
-                _chatLoadingParameters = NO;
+                __strong STChatController *strongSelf = weakSelf;
+                strongSelf.chatLoadingParameters = NO;
                 if ([response[@"status_code"] integerValue] == 200) {
-                    _chatSocketUrl = response[@"hostname"];
-                    _chatPort = [response[@"port"] integerValue];
-                    [self connectChat];
+                    strongSelf.chatSocketUrl = response[@"hostname"];
+                    strongSelf.chatPort = [response[@"port"] integerValue];
+                    [strongSelf connectChat];
                     
                 }
                 
             } failure:^(NSError *error) {
-                _chatLoadingParameters = NO;
+                __strong STChatController *strongSelf = weakSelf;
+                strongSelf.chatLoadingParameters = NO;
                 NSLog(@"Get chat reconnect params failed : %@", error);
             }];
         }
@@ -410,29 +414,30 @@ NSString *const kFirstChatVersion = @"1.0.4";
     //pentru notificari atunci cand se schimba statusul:
     __weak STChatController *weakSelf = self;
     [_reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        __strong STChatController *strongSelf = weakSelf;
         switch (status) {
             case AFNetworkReachabilityStatusNotReachable: {
                 NSLog(@"No Internet Connection");
-                weakSelf.connectionStatus = STConnectionStatusOff;
-                [weakSelf.rechabilityDelegate networkOff];
+                strongSelf.connectionStatus = STConnectionStatusOff;
+                [strongSelf.rechabilityDelegate networkOff];
                 break;
             }
             case AFNetworkReachabilityStatusReachableViaWiFi: {
                 NSLog(@"WIFI");
-                weakSelf.connectionStatus = STConnectionStatusOn;
-                [weakSelf.rechabilityDelegate networkOn];
+                strongSelf.connectionStatus = STConnectionStatusOn;
+                [strongSelf.rechabilityDelegate networkOn];
                 break;
             }
             case AFNetworkReachabilityStatusReachableViaWWAN: {
                 NSLog(@"3G");
-                weakSelf.connectionStatus = STConnectionStatusOn;
-                [weakSelf.rechabilityDelegate networkOn];
+                strongSelf.connectionStatus = STConnectionStatusOn;
+                [strongSelf.rechabilityDelegate networkOn];
                 break;
             }
             default:{
                 NSLog(@"Unknown network status");
-                weakSelf.connectionStatus = STConnectionStatusOff;
-                [weakSelf.rechabilityDelegate networkOff];
+                strongSelf.connectionStatus = STConnectionStatusOff;
+                [strongSelf.rechabilityDelegate networkOff];
                 break;
             }
         }

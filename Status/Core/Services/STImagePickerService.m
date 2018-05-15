@@ -17,7 +17,7 @@
 
 @property (nonatomic, copy) imagePickerCompletion completion;
 @property (nonatomic, weak) UIViewController * viewController;
-
+@property (nonatomic, strong) FBSDKLoginManager *loginManager;
 @end
 
 @implementation STImagePickerService
@@ -55,10 +55,13 @@
 - (void)launchFacebookPickerFromController:(UIViewController *)vc {
     
     _viewController = vc;
-    
+    if (!_loginManager) {
+        _loginManager = [[FBSDKLoginManager alloc] init];
+    }
     __weak STImagePickerService * weakSelf = self;
     
     [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        __strong STImagePickerService *strongSelf = weakSelf;
         if (error != nil) {
             
             [UIAlertController presentAlertControllerInViewController:vc title:@"Error" message:@"There was a problem with facebook at this time. Please try again later." andDismissButtonTitle:@"OK"];
@@ -67,23 +70,22 @@
         {
             if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"user_photos"]) {
                 
-                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-                [loginManager logInWithReadPermissions:@[@"user_photos"]
+                [strongSelf.loginManager logInWithReadPermissions:@[@"user_photos"]
                                     fromViewController:nil
                                                handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                                    if (!error) {
-                                                       [self presentFacebookPickerScene];
+                                                       [strongSelf presentFacebookPickerScene];
                                                    }
                                                    else
                                                    {
-                                                                   [UIAlertController presentAlertControllerInViewController:weakSelf.viewController title:@"Error" message:@"There was a problem with facebook at this time. Please try again later." andDismissButtonTitle:@"OK"];
+                                                                   [UIAlertController presentAlertControllerInViewController:strongSelf.viewController title:@"Error" message:@"There was a problem with facebook at this time. Please try again later." andDismissButtonTitle:@"OK"];
                                                    }
                                                    
                                                }];
                 
             }
             else
-                [self presentFacebookPickerScene];
+                [strongSelf presentFacebookPickerScene];
         }
     }];
     
@@ -110,7 +112,6 @@
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
         UIImage *fixedOrientationImage = [img fixOrientation];
@@ -121,11 +122,12 @@
 
 -(void)facebookPickerDidChooseImage:(NSNotification *)notif{
     NSLog(@"self.navigationController.viewControllers =  %@", _viewController.navigationController.presentedViewController);
-    if (![_viewController.presentedViewController isBeingDismissed])
+    if (![_viewController.presentedViewController isBeingDismissed]){
         [_viewController.presentedViewController dismissViewControllerAnimated:YES completion:^{
             UIImage *image = notif.userInfo[kImageKey];
             [self callCompletion:image shouldBeCompressed:NO];
         }];
+    }
 }
 
 @end

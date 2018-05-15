@@ -47,11 +47,12 @@
 //    _counterLabel.text = [NSString stringWithFormat:@"%lu/%ld characters", (unsigned long)[_txtViewBio.text length], (long)kMaxNumberOfCharacters];
     __weak STEditProfileTVC *weakSelf = self;
     [[CoreManager imageCacheService] loadImageWithName:profile.mainImageUrl andCompletion:^(UIImage *img) {
+        __strong STEditProfileTVC *strongSelf = weakSelf;
         if (img) {
-            weakSelf.profileImage.image = img;
+            strongSelf.profileImage.image = img;
         }
         else
-            weakSelf.profileImage.image = [UIImage imageNamed:@"Mask"];
+            strongSelf.profileImage.image = [UIImage imageNamed:@"Mask"];
     }];
 }
 
@@ -164,7 +165,6 @@
 #pragma mark - IBAction
 
 - (IBAction)onChangeProfileImagePressed:(id)sender {
-    __weak STEditProfileTVC *weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Photos"
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -172,12 +172,12 @@
                                             handler:nil]];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [alert addAction:[UIAlertAction actionWithTitle:@"Take a Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [weakSelf presentImagePickerForType:UIImagePickerControllerSourceTypeCamera];
+            [self presentImagePickerForType:UIImagePickerControllerSourceTypeCamera];
         }]];
         
     }
     [alert addAction:[UIAlertAction actionWithTitle:@"Open Camera Roll" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf presentImagePickerForType:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+        [self presentImagePickerForType:UIImagePickerControllerSourceTypePhotoLibrary|UIImagePickerControllerSourceTypeSavedPhotosAlbum];
         
     }]];
     
@@ -196,27 +196,29 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    __weak STEditProfileTVC *weakSelf = self;
     [picker dismissViewControllerAnimated:YES completion:^{
+        __weak STEditProfileTVC *weakSelf = self;
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         
         NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
         [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
+            __strong STEditProfileTVC *strongSelf = weakSelf;
             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
-                weakSelf.userProfile.mainImageUrl = [response[@"user_photo"] stringByReplacingHttpWithHttps];
-                [[CoreManager profilePool] addProfiles:@[weakSelf.userProfile]];
+                strongSelf.userProfile.mainImageUrl = [response[@"user_photo"] stringByReplacingHttpWithHttps];
+                [[CoreManager profilePool] addProfiles:@[strongSelf.userProfile]];
                 [[CoreManager imageCacheService] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
-                    weakSelf.profileImage.image = img;
+                    strongSelf.profileImage.image = img;
                 }];
             }
             else
             {
                 NSLog(@"Response: %@", response);
-                [self showPhotoErrorAlert];
+                [strongSelf showPhotoErrorAlert];
             }
         } failure:^(NSError *error) {
+            __strong STEditProfileTVC *strongSelf = weakSelf;
             NSLog(@"Error uploading new profile photo: %@", error.description);
-            [self showPhotoErrorAlert];
+            [strongSelf showPhotoErrorAlert];
             
         }];
     }];

@@ -66,7 +66,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     loaderCompletion __block nextBlock;
     __weak STFacebookHelper *weakSelf = self;
     nextBlock = [startBlock = ^(NSString *nextLink){
-        
+        __strong STFacebookHelper *strongSelf = weakSelf;
         NSLog(@"Next Link: %@", nextLink);
         
         [[[FBSDKGraphRequest alloc]
@@ -89,7 +89,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                          }
                      }
                  }
-                 [weakSelf loadFBCoverPicturesWithIds:[coverIds valueForKey:@"id"] withLoadFbCompletion:^(NSDictionary *resultAlbum) {
+                 [strongSelf loadFBCoverPicturesWithIds:[coverIds valueForKey:@"id"] withLoadFbCompletion:^(NSDictionary *resultAlbum) {
                      for (NSString *coverId in [resultAlbum allKeys]) {
                          NSMutableDictionary *dict = nil;
                          for (NSDictionary *album in newObjects) {
@@ -129,28 +129,6 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     startBlock(kGetAlbumsGraph);
 }
 
-//+(void)loadPermissionsWithBlock:(refreshCompletion)refreshCompletion{
-//    
-//    [[[FBSDKGraphRequest alloc]
-//      initWithGraphPath:@"me/permissions"
-//      parameters: nil
-//      HTTPMethod:@"GET"]
-//     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-//         if (!error) {
-//             NSMutableArray *permissions = [NSMutableArray new];
-//             for(NSDictionary *perm in result[@"data"])
-//             {
-//                 if ([perm[@"status"] isEqualToString:@"granted"]) {
-//                     [permissions addObject:perm[@"permission"]];
-//                 }
-//             }
-//             refreshCompletion([NSArray arrayWithArray:permissions]);
-//         }
-//         else
-//             refreshCompletion(nil);
-//     }];
-//}
-
 -(void) loadFBCoverPicturesWithIds:(NSArray *)coverIds withLoadFbCompletion:(loadFBPicturesCompletion)completion{
     if (coverIds.count == 0) {
         completion(nil);
@@ -179,13 +157,16 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }
     if ([deniedPermissions count]>0) {
         FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+        __weak STFacebookHelper *weakSelf = self;
         [loginManager logInWithReadPermissions:deniedPermissions
                             fromViewController:nil
                                        handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                           __strong STFacebookHelper *strongSelf = weakSelf;
                                            if (error!=nil) {
                                                //TODO: add log here
                                            }
-            [self requestForExtendedInfoWithCompletion:completion];
+
+            [strongSelf requestForExtendedInfoWithCompletion:completion];
             
         }];
     }
@@ -239,7 +220,9 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                    description:(NSString *)description
                       deepLink:(NSString *)deepLink
                  andCompletion:(facebookCompletion) completion{
+    __weak STFacebookHelper *weakSelf = self;
     [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        __strong STFacebookHelper *strongSelf = weakSelf;
         if (error!=nil) {
             completion(nil, error);
         }
@@ -249,21 +232,21 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                 FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
                 [loginManager logInWithPublishPermissions:@[@"publish_actions"]
                                        fromViewController:nil handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                    if (error!=nil) {
-                        completion(nil, error);
-                    }
-                    else
-                        [self postImageWithDescription:description
-                                                imgUrl:imgUrl
-                                              deepLink:deepLink
-                                            completion:completion];
-                }];
+                                           if (error!=nil) {
+                                               completion(nil, error);
+                                           }
+                                           else
+                                               [strongSelf postImageWithDescription:description
+                                                                             imgUrl:imgUrl
+                                                                           deepLink:deepLink
+                                                                         completion:completion];
+                                       }];
             }
             else
-                [self postImageWithDescription:description
-                                        imgUrl:imgUrl
-                                      deepLink:deepLink
-                                    completion:completion];
+                [strongSelf postImageWithDescription:description
+                                              imgUrl:imgUrl
+                                            deepLink:deepLink
+                                          completion:completion];
         }
     }];
 }
@@ -328,10 +311,12 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     if(![[[[FBSDKAccessToken currentAccessToken] permissions] allObjects] containsObject:@"user_friends"])
     {
         FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+        __weak STFacebookHelper *weakSelf = self;
         [loginManager logInWithReadPermissions:@[@"user_friends"]
                             fromViewController:nil
                                        handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                           [self getMyFriendsWithCompletion:completion];
+                                           __strong STFacebookHelper *strongSelf = weakSelf;
+                                           [strongSelf getMyFriendsWithCompletion:completion];
                                        }];
         
     }

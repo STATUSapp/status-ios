@@ -29,26 +29,27 @@
     __weak STSyncContactsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        __strong STSyncContactsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         NSMutableDictionary *contactsDict = [NSMutableDictionary new];
-        if (weakSelf.localContacts) {
-            contactsDict[@"emails"] = weakSelf.localContacts;
+        if (strongSelf.localContacts) {
+            contactsDict[@"emails"] = strongSelf.localContacts;
         }
         else
             contactsDict[@"emails"] = @[];
-        if (weakSelf.facebookFriends) {
-            contactsDict[@"facebookFriends"] = weakSelf.facebookFriends;
+        if (strongSelf.facebookFriends) {
+            contactsDict[@"facebookFriends"] = strongSelf.facebookFriends;
         }
         else
             contactsDict[@"facebookFriends"] = @[];
         params[@"contacts"] = contactsDict;
-        weakSelf.params = params;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
-                                    parameters:params
+                                      parameters:params
                                         progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

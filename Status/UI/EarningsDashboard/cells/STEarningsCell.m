@@ -32,10 +32,9 @@
 }
 
 -(void) configurCellWithCommissionObj:(STCommission *)commissionObj{
-    __weak STEarningsCell *weakSelf = self;
     [_productImageView sd_setImageWithURL:[NSURL URLWithString:commissionObj.mainImageUrl] placeholderImage:[UIImage imageNamed:@"Item image"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        weakSelf.productImageView.layer.cornerRadius = 3.f;
-        weakSelf.productImageView.layer.masksToBounds = YES;
+        self.productImageView.layer.cornerRadius = 3.f;
+        self.productImageView.layer.masksToBounds = YES;
     }];
     _productNameLabel.text = commissionObj.productName;
     _productBrandNameLabel.text = commissionObj.productBrandName;

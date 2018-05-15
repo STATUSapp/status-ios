@@ -33,15 +33,17 @@
 {
     __weak STGetBrandsWithProducts *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"category_id"] = weakSelf.categoryId;
-        weakSelf.params = params;
+        
+        __strong STGetBrandsWithProducts *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"category_id"] = strongSelf.categoryId;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

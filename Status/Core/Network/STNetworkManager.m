@@ -41,10 +41,12 @@
     [[self operationQueue] cancelAllOperations];
     [self invalidateSessionCancelingTasks:YES];
 
+    __weak STNetworkManager *weakSelf = self;
     [[self session] getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-        [self cancelTasksInArray:dataTasks];
-        [self cancelTasksInArray:uploadTasks];
-        [self cancelTasksInArray:downloadTasks];
+        __strong STNetworkManager *strongSelf = weakSelf;
+        [strongSelf cancelTasksInArray:dataTasks];
+        [strongSelf cancelTasksInArray:uploadTasks];
+        [strongSelf cancelTasksInArray:downloadTasks];
     }];
     [[CoreManager networkService] clearQueue];
 

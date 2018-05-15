@@ -68,12 +68,11 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
     UIPageViewControllerNavigationDirection direction = index > currentVCIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
     [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:^(BOOL finished) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.pageIndicatorLeading.constant =  offset;
-            [UIView animateWithDuration:0.35 animations:^{
-                [weakSelf.view layoutIfNeeded];
-            }];
-        });
+        __strong STFriendsInviterViewController *strongSelf = weakSelf;
+        strongSelf.pageIndicatorLeading.constant =  offset;
+        [UIView animateWithDuration:0.35 animations:^{
+            [strongSelf.view layoutIfNeeded];
+        }];
     }];
 }
 
@@ -125,13 +124,11 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
     } else {
         [_pageController setViewControllers:@[[_viewControllers objectAtIndex:controllerIndex + 1]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.pageIndicatorLeading.constant =  (controllerIndex + 1) * self.pageIndicatorView.frame.size.width;
-            [UIView animateWithDuration:0.35 animations:^{
-                [self.view layoutIfNeeded];
-            }];
-        });
-
+        self.pageIndicatorLeading.constant =  (controllerIndex + 1) * self.pageIndicatorView.frame.size.width;
+        [UIView animateWithDuration:0.35 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+        
     }
 }
 

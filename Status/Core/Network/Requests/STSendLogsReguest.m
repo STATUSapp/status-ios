@@ -32,17 +32,19 @@
 {
     __weak STSendLogsReguest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
+        
+        __strong STSendLogsReguest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
         NSMutableDictionary *logs = [@{} mutableCopy];
-        [logs addEntriesFromDictionary:[self defaultLogsiOS]];
-        [logs addEntriesFromDictionary:weakSelf.logs];
+        [logs addEntriesFromDictionary:[strongSelf defaultLogsiOS]];
+        [logs addEntriesFromDictionary:strongSelf.logs];
         NSMutableDictionary *params = [@{} mutableCopy];
         params[@"content"] = logs;
         [[STNetworkQueueManager networkAPI] POST:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

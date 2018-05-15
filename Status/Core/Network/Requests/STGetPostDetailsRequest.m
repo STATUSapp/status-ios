@@ -27,15 +27,16 @@
     __weak STGetPostDetailsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [self urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"post_id"] = weakSelf.postId;
-        weakSelf.params = params;
+        __strong STGetPostDetailsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"post_id"] = strongSelf.postId;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
                                        progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                       success:strongSelf.standardSuccessBlock
+                                       failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

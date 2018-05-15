@@ -62,22 +62,20 @@ NSString* const kSqliteFileName = @"Status.sqlite";
     [[self privateContext] setPersistentStoreCoordinator:_persistentStoreCoordinator];
     [[self managedObjectContext] setParentContext:[self privateContext]];
     
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSPersistentStoreCoordinator *psc = [[self privateContext] persistentStoreCoordinator];
-        NSMutableDictionary *options = [NSMutableDictionary dictionary];
-        options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
-        options[NSInferMappingModelAutomaticallyOption] = @YES;
-        options[NSSQLitePragmasOption] = @{ @"journal_mode":@"DELETE" };
+    NSPersistentStoreCoordinator *psc = [[self privateContext] persistentStoreCoordinator];
+    NSMutableDictionary *options = [NSMutableDictionary dictionary];
+    options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
+    options[NSInferMappingModelAutomaticallyOption] = @YES;
+    options[NSSQLitePragmasOption] = @{ @"journal_mode":@"DELETE" };
     
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        NSURL *storeURL = [documentsURL URLByAppendingPathComponent:kSqliteFileName];
-        
-        NSError *error = nil;
-        BOOL result = ([psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]!=nil);
-        NSAssert(result, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *storeURL = [documentsURL URLByAppendingPathComponent:kSqliteFileName];
+    
+    NSError *error = nil;
+    BOOL result = ([psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]!=nil);
+    NSAssert(result, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
     NSLog(@"RESULT: %@\nError initializing PSC: %@\n%@",@(result), [error localizedDescription], [error userInfo]);
-//    });
 }
 
 #pragma mark -
@@ -131,13 +129,14 @@ NSString* const kSqliteFileName = @"Status.sqlite";
 
 - (void)fetchDataAsyncWithParameterBlock:(ParameterBlock)parameterBlock andTableName:(NSString*)tableName andCompletion:(CompletionBlock)completionBlock{
     
+    __weak STCoreDataManager *weakSelf = self;
     dispatch_async(_async_queries_queue, ^{
-        
+        __strong STCoreDataManager *strongSelf = weakSelf;
         // Create a new managed object context
         // Set its persistent store coordinator
-        NSArray *array = [self fetchDataWithParameterBlock:^(NSFetchRequest *requestToBeParametered) {
+        NSArray *array = [strongSelf fetchDataWithParameterBlock:^(NSFetchRequest *requestToBeParametered) {
             parameterBlock(requestToBeParametered);
-        } andTableName:tableName inObjectContext:self.managedObjectContext];
+        } andTableName:tableName inObjectContext:strongSelf.managedObjectContext];
         
         if (array.count > 0)
             completionBlock(YES,array);
@@ -185,15 +184,16 @@ NSString* const kSqliteFileName = @"Status.sqlite";
 - (void)save;
 {
     if (![[self privateContext] hasChanges] && ![[self managedObjectContext] hasChanges]) return;
-    
+    __weak STCoreDataManager *weakSelf = self;
     [[self managedObjectContext] performBlockAndWait:^{
+        __strong STCoreDataManager *strongSelf = weakSelf;
         NSError *error = nil;
-        __block BOOL result = [[self managedObjectContext] save:&error];
+        __block BOOL result = [[strongSelf managedObjectContext] save:&error];
         NSAssert(result, @"Failed to save main context: %@\n%@", [error localizedDescription], [error userInfo]);
         NSLog(@"RESULT: %@\nFailed to save main context: %@\n%@", @(result), [error localizedDescription], [error userInfo]);
-        [[self privateContext] performBlock:^{
+        [[strongSelf privateContext] performBlock:^{
             NSError *privateError = nil;
-            result = [[self privateContext] save:&privateError];
+            result = [[strongSelf privateContext] save:&privateError];
             NSAssert(result, @"Error saving private context: %@\n%@", [privateError localizedDescription], [privateError userInfo]);
             NSLog(@"RESULT: %@\nError saving private context: %@\n%@", @(result), [privateError localizedDescription], [privateError userInfo]);
         }];

@@ -24,16 +24,18 @@
 {
     __weak STGetCatalogParentCategoriesRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
+        
+        __strong STGetCatalogParentCategoriesRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         params[@"pageSize"] = @(kCatalogDownloadPageSize);
         params[@"page"] = @(1);
-        weakSelf.params = params;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

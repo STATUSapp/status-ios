@@ -32,16 +32,19 @@
 {
     __weak STGetImageSuggestionsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        if (weakSelf.suggestionsId) {
-            params[@"suggestions_id"] = weakSelf.suggestionsId;
-        }        
+        
+        __strong STGetImageSuggestionsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        if (strongSelf.suggestionsId) {
+            params[@"suggestions_id"] = strongSelf.suggestionsId;
+        }
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                      parameters:params
                                        progress:nil
-                                        success:weakSelf.standardSuccessBlock
-                                        failure:weakSelf.standardErrorBlock];
+                                        success:strongSelf.standardSuccessBlock
+                                        failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

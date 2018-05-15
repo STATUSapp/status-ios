@@ -96,7 +96,7 @@ CGFloat const kDefaultContainerBottomConstr = 13.f;
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [_childTVC scrollToTheBottom];
+        [self.childTVC scrollToTheBottom];
     }];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];

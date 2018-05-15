@@ -34,31 +34,31 @@
     __weak STUploadImageForSuggestionsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [weakSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            [formData appendPartWithFileData:weakSelf.imageData
+        __strong STUploadImageForSuggestionsRequest *strongSelf = weakSelf;
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [strongSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [formData appendPartWithFileData:strongSelf.imageData
                                         name:@"image"
                                     fileName:@"image.jpg"
                                     mimeType:@"image/jpg"];
         } error:nil];
         
-        __block STUploadImageForSuggestionsRequest *blockWeakSelf = weakSelf;
         NSURLSessionUploadTask *uploadTask = [[STNetworkQueueManager networkAPI]
                                               uploadTaskWithStreamedRequest:request
                                               progress:nil
                                               completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                                  [[CoreManager networkService] removeFromQueue:blockWeakSelf];
+                                                  [[CoreManager networkService] removeFromQueue:strongSelf];
                                                   
                                                   if (error) {
                                                       NSLog(@"Error: %@", error);
-                                                      if (blockWeakSelf.failureBlock) {
-                                                          blockWeakSelf.failureBlock(error);
+                                                      if (strongSelf.failureBlock) {
+                                                          strongSelf.failureBlock(error);
                                                       }
                                                       
                                                   } else {
-                                                      [[CoreManager networkService] requestDidSucceed:blockWeakSelf];
-                                                      if (blockWeakSelf.completionBlock) {
-                                                          blockWeakSelf.completionBlock(responseObject,nil);
+                                                      [[CoreManager networkService] requestDidSucceed:strongSelf];
+                                                      if (strongSelf.completionBlock) {
+                                                          strongSelf.completionBlock(responseObject,nil);
                                                       }
                                                   }
                                               }];

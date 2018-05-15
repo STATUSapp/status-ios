@@ -157,7 +157,6 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
         case STTagManagerEventSearchProducts:
         {
             NSArray *searchResult = [[STTagProductsManager sharedInstance] searchResult];
-            searchResult = nil;
             if ([searchResult count] > 0) {
                 STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeBarcodeSearch];
                 [self.navigationController pushViewController:vc animated:YES];
@@ -293,11 +292,10 @@ typedef NS_ENUM(NSUInteger, STBarcodeScanState) {
     [[STTagProductsManager sharedInstance] sendSuggestionWithBrand:brandName
                                                        productName:productName
                                                              store:productURL];
-    __weak STTagProductsContainer *weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thanks for the details!" message:@"We'll do our best to index the product as soon as possible." preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        weakSelf.barcodeState = STBarcodeScanStateDefault;
-        [weakSelf configureContainer];
+        self.barcodeState = STBarcodeScanStateDefault;
+        [self configureContainer];
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }

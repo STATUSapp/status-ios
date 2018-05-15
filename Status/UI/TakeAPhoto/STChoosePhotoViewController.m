@@ -184,12 +184,13 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     
     __weak STChoosePhotoViewController * weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
+        __strong STChoosePhotoViewController *strongSelf = weakSelf;
         if (img) {
             STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage andPost:nil];
-            [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
+            [strongSelf.navigationController pushViewController:moveScaleVC animated:YES];
         }
         else
-            [weakSelf.customSegment selectSegmentIndex:STChoosePhotoBottomOptionFacebook];
+            [strongSelf.customSegment selectSegmentIndex:STChoosePhotoBottomOptionFacebook];
     };
     
     [[CoreManager imagePickerService] takeCameraPictureFromController:self withCompletion:completion];
@@ -198,9 +199,9 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 - (void)uploadPhotoFromLibrary{
     __weak STChoosePhotoViewController * weakSelf = self;
     imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
-        
+        __strong STChoosePhotoViewController *strongSelf = weakSelf;
         STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage andPost:nil];
-        [weakSelf.navigationController pushViewController:moveScaleVC animated:YES];
+        [strongSelf.navigationController pushViewController:moveScaleVC animated:YES];
     };
     
     [[CoreManager imagePickerService] launchLibraryPickerFromController:self withCompletion:completion];

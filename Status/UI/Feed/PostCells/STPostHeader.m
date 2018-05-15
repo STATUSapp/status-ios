@@ -26,15 +26,12 @@
 
 - (void)configureCellWithPost:(STPost *)post{
     _userNameLabel.text = post.userName;
-//    BOOL currentUser = [post.userId isEqualToString:[CoreManager loginService].currentUserUuid];
-//    _messageButton.hidden = currentUser;
-    __weak STPostHeader *weakSelf = self;
     [_userThumbnail sd_setImageWithURL: [NSURL URLWithString:post.smallPhotoUrl] placeholderImage:[UIImage imageNamed:@"boy"]
                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 CGRect rect = weakSelf.userThumbnail.frame;
-                                 weakSelf.userThumbnail.layer.cornerRadius = rect.size.width/2;
-                                 weakSelf.userThumbnail.layer.backgroundColor = [[UIColor clearColor] CGColor];
-                                 weakSelf.userThumbnail.layer.masksToBounds = YES;
+                                 CGRect rect = self.userThumbnail.frame;
+                                 self.userThumbnail.layer.cornerRadius = rect.size.width/2;
+                                 self.userThumbnail.layer.backgroundColor = [[UIColor clearColor] CGColor];
+                                 self.userThumbnail.layer.masksToBounds = YES;
                              }];
 }
 

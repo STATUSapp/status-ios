@@ -38,7 +38,7 @@
             __block STShopProduct *blockSP = sp;
             [STUploadShopProduct uploadShopProduct:sp
                                     withCompletion:^(id response, NSError *error) {
-                                        
+                                        __strong STShopProductsUploader *strongSelf = weakSelf;
                                         if (!error) {
                                             NSDictionary *uploadedItem = [response firstObject];
                                             blockSP.uuid = [uploadedItem[@"id"] stringValue];
@@ -49,19 +49,20 @@
                                         else
                                             shopProductsNotUploaded ++;
                                         
-                                        if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
-                                            if (weakSelf.completion) {
-                                                weakSelf.completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
+                                        if ([strongSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
+                                            if (strongSelf.completion) {
+                                                strongSelf.completion(strongSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
                                             }
                                         }
                                         
                                         
                                         
                                     } failure:^(NSError *error) {
+                                        __strong STShopProductsUploader *strongSelf = weakSelf;
                                         shopProductsNotUploaded ++;
-                                        if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
-                                            if (_completion) {
-                                                _completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
+                                        if ([strongSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
+                                            if (strongSelf.completion) {
+                                                strongSelf.completion(strongSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
                                             }
                                         }
                                         
@@ -69,12 +70,11 @@
         }
     }
     
-    if ([weakSelf.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
+    if ([self.shopProducts count] == shopProductsNotUploaded + shopProductsWithId) {
         if (_completion) {
-            _completion(weakSelf.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
+            _completion(self.shopProducts, shopProductsNotUploaded == 0 ? ShopProductsUploadStatusComplete:ShopProductsUploadStatusIncomplete);
         }
     }
-
 }
 
 @end

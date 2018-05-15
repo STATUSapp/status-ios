@@ -27,17 +27,17 @@
     __weak STRegisterRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        NSString *url = [self urlString];
-                
-        NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:weakSelf.userInfo];
-        params[@"timezone"] = [self getTimeZoneOffsetFromGMT];
-        params[@"app_version"] = [self getAppVersion];
-        weakSelf.params = params;
+        __strong STRegisterRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:strongSelf.userInfo];
+        params[@"timezone"] = [strongSelf getTimeZoneOffsetFromGMT];
+        params[@"app_version"] = [strongSelf getAppVersion];
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
-                                    parameters:params
+                                      parameters:params
                                         progress:nil
-                                       success:weakSelf.standardSuccessBlock
-                                       failure:weakSelf.standardErrorBlock];
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
         
     };
     

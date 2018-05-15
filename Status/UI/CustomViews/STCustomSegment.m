@@ -194,10 +194,9 @@ CGFloat const kSeparatorHeight = 20.f;
     else
     {
         CGFloat leading = (button.tag - kButtonTagOffset) * [self buttonWidth] + ([self usedViewMargins] / 2.f);
-        
         [UIView animateWithDuration:0.33f
                          animations:^{
-                             _selectionLeadingConstr.constant = leading;
+                             self.selectionLeadingConstr.constant = leading;
                              [self layoutIfNeeded];
                          }];
     }

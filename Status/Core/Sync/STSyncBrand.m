@@ -13,6 +13,8 @@
 
 @interface STSyncBrand()
 
+@property (nonatomic, strong) STCoreDataBrandSync *coreDataBrandSync;
+
 @end
 
 @implementation STSyncBrand
@@ -43,23 +45,22 @@
 }
 
 -(void)downloadPages{
+    if (!_coreDataBrandSync) {
+        _coreDataBrandSync = [STCoreDataBrandSync new];
+    }
     __weak STSyncBrand *weakSelf = self;
     [STGetBrandsRequest getBrandsEntitiesForPage:self.pageIndex
                                   withCompletion:^(id response, NSError *error) {
                                       if (!error) {
-                                          [[STCoreDataBrandSync new] synchronizeAsyncCoreDataFromData:response withCompletion:^(NSError *error) {
+                                          __strong STSyncBrand *strongSelf = weakSelf;
+                                          [strongSelf.coreDataBrandSync synchronizeAsyncCoreDataFromData:response withCompletion:^(NSError *error) {
                                               [[CoreManager coreDataService] save];
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   if ([response count] < kCatalogDownloadPageSize) {
-                                                      [weakSelf setLastCheck];
+                                                      [strongSelf setLastCheck];
                                                   }else{
-                                                      weakSelf.pageIndex ++;
-                                                      //#ifdef DEBUG
-                                                      //                                              if (weakSelf.pageIndex == 5) {
-                                                      //                                                  return ;
-                                                      //                                              }
-                                                      //#endif
-                                                      [weakSelf downloadPages];
+                                                      strongSelf.pageIndex ++;
+                                                      [strongSelf downloadPages];
                                                   }
                                                   NSLog(@"Brands Synced with error: %@", error);
                                               });

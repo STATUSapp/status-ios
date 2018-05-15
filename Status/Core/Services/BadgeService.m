@@ -85,32 +85,17 @@ NSString * const kBadgeCountNotificationsKey = @"kBadgeCountNotificationsKey";
         STRequestCompletionBlock completion = ^(id response, NSError *error){
             if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    weakSelf.unreadNotifications = response[@"count"];
-                    [[CoreManager localNotificationService] postNotificationName:kBadgeCountChangedNotification object:nil userInfo:@{kBadgeCountNotificationsKey:_unreadNotifications}];
+                    __strong BadgeService *strongSelf = weakSelf;
+                    strongSelf.unreadNotifications = response[@"count"];
+                    [[CoreManager localNotificationService] postNotificationName:kBadgeCountChangedNotification object:nil userInfo:@{kBadgeCountNotificationsKey:strongSelf.unreadNotifications}];
                     [[CoreManager navigationService] showActivityIconOnTabBar];
-                    [[CoreManager navigationService] setBadge:_unreadNotifications.integerValue forTabAtIndex:STTabBarIndexActivity];
+                    [[CoreManager navigationService] setBadge:strongSelf.unreadNotifications.integerValue forTabAtIndex:STTabBarIndexActivity];
 
 
                 });
             }
         };
         [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
-        
-//        
-//        [STUnseenPostsCountRequest getUnseenCountersWithCompletion:^(id response, NSError *error) {
-//            if ([response[@"status_code"] integerValue] == 200) {
-//                NSInteger unseenHomePosts = [response[@"unseenHomePosts"] integerValue];
-//                NSInteger unseenPopularPosts = [response[@"unseenPopularPosts"] integerValue];
-//                NSInteger unseenRecentPosts = [response[@"unseenRecentPosts"] integerValue];
-//                
-//                [[CoreManager navigationService] setBadge:unseenHomePosts forTabAtIndex:STTabBarIndexHome];
-//                
-//                [[CoreManager navigationService] setBadge:unseenPopularPosts + unseenRecentPosts forTabAtIndex:STTabBarIndexExplore];
-//            }
-//        } failure:^(NSError *error) {
-//            NSLog(@"Load counters error: %@", error);
-//        }];
-        
     }
 }
 

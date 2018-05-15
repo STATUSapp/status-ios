@@ -56,9 +56,9 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     if (post.mainImageDownloaded) {
         [self setBottomItemsHidden:NO];
         [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
-            [_activityIndicator stopAnimating];
-            _blurEffectView.hidden = YES;
-            _postImage.image = origImg;
+            [self.activityIndicator stopAnimating];
+            self.blurEffectView.hidden = YES;
+            self.postImage.image = origImg;
         }];
     }
     else
@@ -91,7 +91,6 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     [self.contentView layoutIfNeeded];
     _linkedImageWidthConstr.constant = 80.f;
     _likeImageAnimationInProgress = YES;
-    __weak STPostImageCell *weakSelf = self;
     CGFloat zoomInDuration = likeAnimationZoomInProportion * likeAnimationDuration;
     CGFloat zoomOutDuration = (1.f - likeAnimationZoomInProportion)/likeAnimationDuration;
     [UIView animateWithDuration:zoomInDuration
@@ -100,17 +99,17 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
                      animations:^{
                          [self.contentView layoutIfNeeded];
                      } completion:^(BOOL finished) {
-                         _linkedImageWidthConstr.constant = 70.f;
+                         self.linkedImageWidthConstr.constant = 70.f;
                          [UIView animateWithDuration:zoomOutDuration
                                                delay:0.f
                                              options:UIViewAnimationOptionBeginFromCurrentState
                                           animations:^{
                                               [self.contentView layoutIfNeeded];
-                                              _likedImage.alpha = 0.7;
+                                              self.likedImage.alpha = 0.7;
 
                                           } completion:^(BOOL finished) {
-                                              weakSelf.likeImageAnimationInProgress = NO;
-                                              _likedImage.hidden = YES;
+                                              self.likeImageAnimationInProgress = NO;
+                                              self.likedImage.hidden = YES;
                                           }];
                      }];
 }

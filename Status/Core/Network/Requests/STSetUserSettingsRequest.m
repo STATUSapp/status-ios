@@ -28,16 +28,18 @@
 {
     __weak STSetUserSettingsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
-        NSString *url = [weakSelf urlString];
-        NSMutableDictionary *params = [weakSelf getDictParamsWithToken];
-        params[@"value"] = @(weakSelf.value);
-        params[@"key"] = weakSelf.key;
-        weakSelf.params = params;
+        
+        __strong STSetUserSettingsRequest *strongSelf = weakSelf;
+        NSString *url = [strongSelf urlString];
+        NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"value"] = @(strongSelf.value);
+        params[@"key"] = strongSelf.key;
+        strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] POST:url
-                                   parameters:params
+                                      parameters:params
                                         progress:nil
-                                      success:weakSelf.standardSuccessBlock
-                                      failure:weakSelf.standardErrorBlock];
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }

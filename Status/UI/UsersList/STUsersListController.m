@@ -75,38 +75,40 @@
     switch (self.controllerType) {
         case UsersListControllerTypeFollowers:{
             [STDataAccessUtils getFollowersForUserId:_userId offset:@(_dataSource.count) withCompletion:^(NSArray *objects, NSError *error) {
-                
-                if (weakSelf.dataSource == nil) {
-                    weakSelf.dataSource = [NSMutableArray arrayWithArray:objects];
+                __strong STUsersListController *strongSelf = weakSelf;
+                if (strongSelf.dataSource == nil) {
+                    strongSelf.dataSource = [NSMutableArray arrayWithArray:objects];
                 } else {
-                    [weakSelf.dataSource addObjectsFromArray:objects];
+                    [strongSelf.dataSource addObjectsFromArray:objects];
                 }
-                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:_dataSource];
-                [weakSelf.tableView reloadData];
+                strongSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:strongSelf.dataSource];
+                [strongSelf.tableView reloadData];
             }];
         }
             break;
         case UsersListControllerTypeFollowing:{
             [STDataAccessUtils getFollowingForUserId:_userId offset:@(_dataSource.count) withCompletion:^(NSArray *objects, NSError *error) {
-                if (weakSelf.dataSource == nil) {
-                    weakSelf.dataSource = [NSMutableArray arrayWithArray:objects];
+                __strong STUsersListController *strongSelf = weakSelf;
+                if (strongSelf.dataSource == nil) {
+                    strongSelf.dataSource = [NSMutableArray arrayWithArray:objects];
                 } else {
-                    [weakSelf.dataSource addObjectsFromArray:objects];
+                    [strongSelf.dataSource addObjectsFromArray:objects];
                 }
-                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:_dataSource];
-                [weakSelf.tableView reloadData];
+                strongSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:strongSelf.dataSource];
+                [strongSelf.tableView reloadData];
             }];
         }
             break;
         case UsersListControllerTypeLikes:{
             [STDataAccessUtils getLikesForPostId:_postId withCompletion:^(NSArray *objects, NSError *error) {
-                if (weakSelf.dataSource == nil) {
-                    weakSelf.dataSource = [NSMutableArray arrayWithArray:objects];
+                __strong STUsersListController *strongSelf = weakSelf;
+                if (strongSelf.dataSource == nil) {
+                    strongSelf.dataSource = [NSMutableArray arrayWithArray:objects];
                 } else {
-                    [weakSelf.dataSource addObjectsFromArray:objects];
+                    [strongSelf.dataSource addObjectsFromArray:objects];
                 }
-                weakSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:_dataSource];
-                [weakSelf.tableView reloadData];
+                strongSelf.dataProcessor = [[STFollowDataProcessor alloc] initWithUsers:strongSelf.dataSource];
+                [strongSelf.tableView reloadData];
             }];
         }
             break;

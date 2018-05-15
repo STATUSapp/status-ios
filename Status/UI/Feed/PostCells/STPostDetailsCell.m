@@ -17,14 +17,11 @@ CGFloat const kDefaultTextWidthDelta = 20.f;
 @property (weak, nonatomic) IBOutlet UIButton *postLikesButton;
 @property (weak, nonatomic) IBOutlet UILabel *postDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *postDescriptionTextView;
-
-@property (nonatomic, strong) STPost *post;
 @end
 
 @implementation STPostDetailsCell
 
 - (void) configureCellWithPost:(STPost *)post{
-    _post = post;
     [_postLikesButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ likes", nil), post.numberOfLikes] forState:UIControlStateNormal];
     //add the space between title and image
     _postLikesButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, 10.f, 0.f, 0.f);

@@ -65,7 +65,7 @@ static NSString *kOnlineImageName = @"online chat";
 -(void)configureCellWithConversationUser:(STConversationUser *)cu{
     NSString *imageUrl = cu.thumbnail;
     [_profileImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [_profileImageView maskImage:image];
+        [self.profileImageView maskImage:image];
     }];
     NSString *lastMessage = cu.lastMessage;
     _lastMessageLbl.text = lastMessage;

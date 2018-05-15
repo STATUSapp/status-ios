@@ -21,7 +21,7 @@
 #import "ContainerFeedVC.h"
 
 static NSString * storyboardIdentifier = @"tabBarController";
-static CGFloat kTabBarHeight = 49.f;
+//static CGFloat kTabBarHeight = 49.f;
 static CGFloat kImageInset = 4.f;
 
 @interface STTabBarViewController ()<UIGestureRecognizerDelegate>
@@ -196,9 +196,7 @@ static CGFloat kImageInset = 4.f;
     STLoginViewController *viewController = [self loginVC];
     [self presentViewController:viewController
                        animated:animated
-                     completion:^{
-                         
-                     }];
+                     completion:nil];
 }
 
 -(void)configureNavControllerToHandleSwipeToBackGesture:(UINavigationController *)navController{
