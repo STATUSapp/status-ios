@@ -6,20 +6,14 @@
 //  Copyright © 2016 Andrus Cosmin. All rights reserved.
 //
 
-#import "STBaseObj.h"
+#import "STProductBase.h"
 
-@interface STShopProduct : STBaseObj
-
-@property (nonatomic, strong) NSString *productUrl;
-@property (nonatomic, strong) NSString *brandName;
-@property (nonatomic, strong) NSString *productName;
-@property (nonatomic, strong) NSNumber *productPrice;
+@interface STShopProduct : STProductBase
 
 //this will exists only for client-added products
 @property (nonatomic, strong) UIImage *localImage;
 
 + (instancetype)shopProductWithDict:(NSDictionary *)postDict;
 
--(NSString *)productPriceString;
 
 @end

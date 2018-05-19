@@ -16,6 +16,7 @@
                withData:(NSData*)postData
              andCaption:(NSString *)caption
            shopProducts:(NSArray <STShopProduct *> *)shopProducts
+       alreadyPublished:(BOOL)alreadyPublished
          withCompletion:(STRequestCompletionBlock)completion
                 failure:(STRequestFailureBlock)failure{
     
@@ -28,6 +29,7 @@
     request.caption = caption;
     request.postData = postData;
     request.shopProducts = shopProducts;
+    request.alreadyPublished = alreadyPublished;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -54,6 +56,9 @@
         }
         if (shopProductsIds.count) {
             params[@"products"] = shopProductsIds;
+        }
+        if (strongSelf.alreadyPublished == NO) {
+            params[@"publish"] = @(YES);
         }
         strongSelf.params = params;
         NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [strongSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

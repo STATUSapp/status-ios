@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class STShopProduct;
+@class STSuggestedProduct;
 
 typedef NS_ENUM(NSUInteger, STTagSuggestionsScreenType) {
     STTagSuggestionsScreenTypeDefault = 0,//based on brand and category
@@ -16,13 +17,13 @@ typedef NS_ENUM(NSUInteger, STTagSuggestionsScreenType) {
     STTagSuggestionsScreenTypeSimilarProducts
 };
 
-typedef void (^STTagSuggestionsCompletion)(STShopProduct *selectedProduct);
+typedef void (^STTagSuggestionsCompletion)(STSuggestedProduct *selectedProduct);
 
 
 @interface STTagSuggestions : UIViewController
 
 +(STTagSuggestions *)suggestionsVCWithScreenType:(STTagSuggestionsScreenType)screenType;
 
-+(STTagSuggestions *)similarProductsScreenWithSelectedProduct:(STShopProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion;
++(STTagSuggestions *)similarProductsScreenWithSelectedProduct:(STSuggestedProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion;
 
 @end

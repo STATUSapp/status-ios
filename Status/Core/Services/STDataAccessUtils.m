@@ -24,6 +24,7 @@
 #import "STNavigationService.h"
 #import "STCommission.h"
 #import "STWithdrawDetailsObj.h"
+#import "STSuggestedProduct.h"
 
 @implementation STDataAccessUtils
 
@@ -591,12 +592,26 @@
 
 }
 
-+ (void)editPpostWithId:(NSString *)postId
-           withNewImageData:(NSData *)imageData
-         withNewCaption:(NSString *)newCaption
-       withShopProducts:(NSArray <STShopProduct *> *) shopProducts
-         withCompletion:(STDataAccessCompletionBlock)completion{
++ (void)commitPostWithId:(NSString *)postId
+        withNewImageData:(NSData *)imageData
+          withNewCaption:(NSString *)newCaption
+        withShopProducts:(NSArray <STShopProduct *> *) shopProducts
+          withCompletion:(STDataAccessCompletionBlock)completion{
+    [self uploadPostWithId:postId
+          withNewImageData:imageData
+            withNewCaption:newCaption
+          withShopProducts:shopProducts
+          publishedAlready:NO
+            withCompletion:completion];
+}
 
++ (void)uploadPostWithId:(NSString *)postId
+        withNewImageData:(NSData *)imageData
+          withNewCaption:(NSString *)newCaption
+        withShopProducts:(NSArray <STShopProduct *> *) shopProducts
+        publishedAlready:(BOOL)plublishedAlready
+          withCompletion:(STDataAccessCompletionBlock)completion{
+    
     //check if all the shop products have a valid uuid
     //if not, upload all the shop_products, obtain an id and then upload the post
     STRequestCompletionBlock completion1 = ^(id response, NSError *error){
@@ -636,7 +651,7 @@
         [[CoreManager navigationService] presentAlertController:alert];
         completion(nil,error);
     };
-
+    
     
     shopProductsCompletion shopProductCompletion = ^(NSArray<STShopProduct *> *shopProds, ShopProductsUploadStatus status) {
         if (status == ShopProductsUploadStatusComplete) {
@@ -644,6 +659,7 @@
                                         withData:imageData
                                       andCaption:newCaption
                                     shopProducts:shopProds
+                                alreadyPublished:plublishedAlready
                                   withCompletion:completion1
                                          failure:failBlock];
         }
@@ -653,9 +669,21 @@
     
     [[STShopProductsUploader new] uploadShopProducts:shopProducts
                                       withCompletion:shopProductCompletion];
+}
 
-    
 
++ (void)editPostWithId:(NSString *)postId
+           withNewImageData:(NSData *)imageData
+         withNewCaption:(NSString *)newCaption
+       withShopProducts:(NSArray <STShopProduct *> *) shopProducts
+         withCompletion:(STDataAccessCompletionBlock)completion{
+
+    [self uploadPostWithId:postId
+          withNewImageData:imageData
+            withNewCaption:newCaption
+          withShopProducts:shopProducts
+          publishedAlready:YES
+            withCompletion:completion];
 }
 
 + (void)inviteUserToUpload:(NSString *)userID
@@ -682,19 +710,20 @@ withCompletion:(STDataUploadCompletionBlock)completion{
 
 #pragma mark - Suggested Products
 
-+(void)getSuggestedProductsWithId:(NSString *)suggestionsId
-                   withCompletion:(STDataAccessCompletionBlock)completion{
-    [STGetImageSuggestionsRequest getImageSuggestionsForId:suggestionsId
-                                             andCompletion:^(id response, NSError *error) {
++(void)getSuggestedProductsWithPostId:(NSString *)postId
+                       withCompletion:(STDataAccessCompletionBlock)completion{
+    [STGetImageSuggestionsRequest getPostSuggestionsForId:postId
+                                            andCompletion:^(id response, NSError *error) {
                                                  if (!error) {
-                                                     if ([response[@"status_code"] integerValue] == STWebservicesCodesPartialContent) {
+                                                     NSString *suggestionStatus = response[@"suggestions_status"];
+                                                     if ([suggestionStatus isEqualToString:@"working"]) {
                                                          NSError *error = [NSError errorWithDomain:@"image.suggestions.error" code:STWebservicesCodesPartialContent userInfo:nil];
                                                          completion(nil, error);
-                                                     }else{
+                                                     }else if([suggestionStatus isEqualToString:@"complete"]){
                                                          NSMutableArray *result = [@[] mutableCopy];
-                                                         for (NSDictionary *dict in response) {
-                                                             STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
-                                                             [result addObject:shopObj];
+                                                         for (NSDictionary *dict in response[@"products"]) {
+                                                             STSuggestedProduct *suggetionObj = [STSuggestedProduct suggestedProductWithDict:dict];
+                                                             [result addObject:suggetionObj];
                                                          }
                                                          completion(result, nil);
                                                      }
@@ -709,15 +738,17 @@ withCompletion:(STDataUploadCompletionBlock)completion{
 
 }
 
-+(void)getSimilarProductsWithId:(NSString *)productsId
++(void)getSimilarProductsWithPostId:(NSString *)postId
+                       suggestionId:(NSString *)suggestionId
                 withCompletion:(STDataAccessCompletionBlock)completion{
     
-    [STGetSimilarProductsRequest getSimilarProductsForProductId:productsId
+    [STGetSimilarProductsRequest getSimilarProductsForPostId:postId
+                                                suggestionId:suggestionId
                                                   andCompletion:^(id response, NSError *error) {
                                                       if (!error) {
                                                           NSMutableArray *result = [@[] mutableCopy];
-                                                          for (NSDictionary *dict in response) {
-                                                              STShopProduct *shopObj = [STShopProduct shopProductWithDict:dict];
+                                                          for (NSDictionary *dict in response[@"products"]) {
+                                                              STSuggestedProduct *shopObj = [STSuggestedProduct suggestedProductWithDict:dict];
                                                               [result addObject:shopObj];
                                                           }
                                                           completion(result, nil);
@@ -731,6 +762,25 @@ withCompletion:(STDataUploadCompletionBlock)completion{
                                                   }];
 }
 
++(void)transformSuggestionWithPostId:(NSString *)postId
+                        suggestionId:(NSString *)suggestionId
+                      withCompletion:(STDataAccessCompletionBlock)completion{
+    [STTransformSuggestionRequest transformSuggestedProductId:suggestionId
+                                                    forPostId:postId
+                                                andCompletion:^(id response, NSError *error) {
+                                                    if (!error) {
+                                                        STShopProduct *incompleteSP = [STShopProduct new];
+                                                        incompleteSP.uuid = response[@"product_id"];
+                                                        completion(@[incompleteSP], nil);
+                                                    }else{
+                                                        completion(nil, error);
+                                                    }
+                                                    
+                                                } failure:^(NSError *error) {
+                                                    NSLog(@"STTransformSuggestionRequest error : %@", error.debugDescription);
+                                                    completion(nil, error);
+                                                }];
+}
 
 #pragma mark - Notifications
 

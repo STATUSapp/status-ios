@@ -23,8 +23,9 @@ NSString *const kReachableURL = @"getstatus.co";
 
 #else
 
-NSString *const kBaseURL = @"https://ec2-52-86-4-15.compute-1.amazonaws.com/api/v1/";
-NSString *const kReachableURL = @"ec2-52-86-4-15.compute-1.amazonaws.com";
+NSString *const kBaseURL = @"http://139.59.128.34/api/v1/";
+NSString *const kReachableURL = @"139.59.128.34";
+
 
 //NSString *const kBaseURL = @"http://ec2-52-86-4-15.compute-1.amazonaws.com/api/";
 //NSString *const kReachableURL = @"ec2-52-86-4-15.compute-1.amazonaws.com";
@@ -104,9 +105,9 @@ NSString *const kUserCommissions = @"users/commissions";
 NSString *const kUserWithdrawnDetails = @"users/details";
 NSString *const kUserWithdrawnUpdateDetails = @"users/details/update";
 //TODO: change this when the API will be ready
-NSString *const kImageForSugegstions = @"blabla1";
-NSString *const kGetImageSuggestions = @"blabla2";
-NSString *const kGetSimilarProducts = @"blabla3";
+NSString *const kGetImageSuggestions = @"get_post_suggestions";
+NSString *const kGetSimilarProducts = @"get_post_similar_suggestions";
+NSString *const kTransformSuggestion = @"transform_post_suggestion";
 NSString *const kSendLogs = @"__log";
 
 NSString *const kAPIKey = @"API";

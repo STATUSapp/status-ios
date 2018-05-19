@@ -10,21 +10,21 @@
 
 @interface STGetImageSuggestionsRequest()
 
-@property (nonatomic, strong) NSString *suggestionsId;
+@property (nonatomic, strong) NSString *postId;
 
 @end
 
 @implementation STGetImageSuggestionsRequest
-+ (void)getImageSuggestionsForId:(NSString *)suggestionsId
-                   andCompletion:(STRequestCompletionBlock)completion
-                         failure:(STRequestFailureBlock)failure{
++ (void)getPostSuggestionsForId:(NSString *)postId
+                  andCompletion:(STRequestCompletionBlock)completion
+                        failure:(STRequestFailureBlock)failure{
     
     STGetImageSuggestionsRequest *request = [STGetImageSuggestionsRequest new];
     request.completionBlock = completion;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
-    request.suggestionsId = suggestionsId;
+    request.postId = postId;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -36,8 +36,8 @@
         __strong STGetImageSuggestionsRequest *strongSelf = weakSelf;
         NSString *url = [strongSelf urlString];
         NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
-        if (strongSelf.suggestionsId) {
-            params[@"suggestions_id"] = strongSelf.suggestionsId;
+        if (strongSelf.postId) {
+            params[@"post_id"] = strongSelf.postId;
         }
         strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url

@@ -385,7 +385,7 @@
                                                                                             <constraint firstAttribute="height" constant="44" id="QUk-t9-cvR"/>
                                                                                         </constraints>
                                                                                         <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="15"/>
-                                                                                        <state key="normal" image="remove product icon "/>
+                                                                                        <state key="normal" image="remove product icon"/>
                                                                                         <connections>
                                                                                             <action selector="onDeleteSuggestedProductPressed:" destination="z5M-dX-Msi" eventType="touchUpInside" id="Hc3-6T-vG8"/>
                                                                                         </connections>
@@ -516,21 +516,70 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="n3O-0F-NH2">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="240" id="hWf-9o-Nr5">
+                                        <rect key="frame" x="0.0" y="456" width="375" height="240"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hWf-9o-Nr5" id="CUr-d6-m2Y">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfi-rj-BxK" userLabel="separator2">
+                                                    <rect key="frame" x="0.0" y="239" width="375" height="1"/>
+                                                    <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="XgD-pJ-qcT"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNz-g0-Db9" userLabel="Loading View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="239"/>
+                                                    <subviews>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Rn9-Ai-l6B">
+                                                            <rect key="frame" x="169" y="101" width="37" height="37"/>
+                                                            <color key="tintColor" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="37" id="N0g-lP-3oF"/>
+                                                                <constraint firstAttribute="width" constant="37" id="kg6-sY-Jgu"/>
+                                                            </constraints>
+                                                            <color key="color" red="0.1176470588" green="0.12549019610000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Rn9-Ai-l6B" firstAttribute="centerX" secondItem="uNz-g0-Db9" secondAttribute="centerX" id="IG1-QW-eZp"/>
+                                                        <constraint firstItem="Rn9-Ai-l6B" firstAttribute="centerY" secondItem="uNz-g0-Db9" secondAttribute="centerY" id="vac-TT-DZt"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="uNz-g0-Db9" firstAttribute="leading" secondItem="CUr-d6-m2Y" secondAttribute="leading" id="0hx-Uf-Qqv"/>
+                                                <constraint firstItem="Hfi-rj-BxK" firstAttribute="top" secondItem="uNz-g0-Db9" secondAttribute="bottom" id="27e-v4-cSV"/>
+                                                <constraint firstItem="Hfi-rj-BxK" firstAttribute="leading" secondItem="CUr-d6-m2Y" secondAttribute="leading" id="5Sy-kO-gQ5"/>
+                                                <constraint firstAttribute="trailing" secondItem="Hfi-rj-BxK" secondAttribute="trailing" id="7Hx-V6-NV9"/>
+                                                <constraint firstItem="uNz-g0-Db9" firstAttribute="top" secondItem="CUr-d6-m2Y" secondAttribute="top" id="M7y-qQ-PD8"/>
+                                                <constraint firstAttribute="bottom" secondItem="Hfi-rj-BxK" secondAttribute="bottom" id="g1S-TT-eJA"/>
+                                                <constraint firstAttribute="trailing" secondItem="uNz-g0-Db9" secondAttribute="trailing" id="seF-Yi-qpP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="NeY-90-UaL">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="10" id="94S-57-E1k">
-                                        <rect key="frame" x="0.0" y="456" width="375" height="10"/>
+                                        <rect key="frame" x="0.0" y="696" width="375" height="10"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="94S-57-E1k" id="IDq-N3-wkr">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="10"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="9.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="ykb-vq-BlN">
-                                        <rect key="frame" x="0.0" y="466" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="706" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ykb-vq-BlN" id="qVl-ht-Kes">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8c-DB-MVy">
@@ -583,10 +632,10 @@
                             <tableViewSection id="DhU-vJ-sU8">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="240" id="Q6i-D3-p3Y">
-                                        <rect key="frame" x="0.0" y="510" width="375" height="240"/>
+                                        <rect key="frame" x="0.0" y="750" width="375" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q6i-D3-p3Y" id="GJd-Fl-YqL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="239.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HdK-FN-zGW" userLabel="separator2">
@@ -629,7 +678,7 @@
                                                                                             <constraint firstAttribute="width" constant="44" id="axU-dW-qNl"/>
                                                                                         </constraints>
                                                                                         <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="15"/>
-                                                                                        <state key="normal" image="remove product icon "/>
+                                                                                        <state key="normal" image="remove product icon"/>
                                                                                         <connections>
                                                                                             <action selector="onDeleteProductPressed:" destination="z5M-dX-Msi" eventType="touchUpInside" id="VW7-5U-pJz"/>
                                                                                         </connections>
@@ -637,16 +686,6 @@
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sxt-XK-C2G">
                                                                                         <rect key="frame" x="0.0" y="178" width="125" height="54"/>
                                                                                         <subviews>
-                                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uR-Na-OvU">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="125" height="54"/>
-                                                                                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
-                                                                                                <state key="normal" title="View Similar">
-                                                                                                    <color key="titleColor" red="0.98823529409999999" green="0.3294117647" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                                </state>
-                                                                                                <connections>
-                                                                                                    <action selector="onTapViewSimilarButton:" destination="z5M-dX-Msi" eventType="touchUpInside" id="eXt-rU-vw1"/>
-                                                                                                </connections>
-                                                                                            </button>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASOS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcK-dj-2wL">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="15"/>
                                                                                                 <constraints>
@@ -674,17 +713,13 @@
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
-                                                                                            <constraint firstItem="1uR-Na-OvU" firstAttribute="top" secondItem="Sxt-XK-C2G" secondAttribute="top" id="4wA-2V-Him"/>
                                                                                             <constraint firstItem="goZ-cp-Rd5" firstAttribute="leading" secondItem="Sxt-XK-C2G" secondAttribute="leading" id="AJr-vY-cCJ"/>
                                                                                             <constraint firstItem="tbM-uQ-ViR" firstAttribute="leading" secondItem="Sxt-XK-C2G" secondAttribute="leading" id="Dm0-5P-Ulc"/>
-                                                                                            <constraint firstItem="1uR-Na-OvU" firstAttribute="leading" secondItem="Sxt-XK-C2G" secondAttribute="leading" id="TdU-ZB-cVF"/>
                                                                                             <constraint firstAttribute="trailing" secondItem="lcK-dj-2wL" secondAttribute="trailing" id="XjB-vp-1bp"/>
                                                                                             <constraint firstAttribute="trailing" secondItem="tbM-uQ-ViR" secondAttribute="trailing" id="YyO-Ad-vZS"/>
                                                                                             <constraint firstAttribute="height" constant="54" id="ceW-Nd-Lxv"/>
-                                                                                            <constraint firstAttribute="trailing" secondItem="1uR-Na-OvU" secondAttribute="trailing" id="dMM-FT-Wwn"/>
                                                                                             <constraint firstItem="goZ-cp-Rd5" firstAttribute="top" secondItem="tbM-uQ-ViR" secondAttribute="bottom" id="ddf-e2-exM"/>
                                                                                             <constraint firstItem="lcK-dj-2wL" firstAttribute="top" secondItem="Sxt-XK-C2G" secondAttribute="top" id="eGx-gu-eAA"/>
-                                                                                            <constraint firstAttribute="bottom" secondItem="1uR-Na-OvU" secondAttribute="bottom" id="h7j-gT-Kxr"/>
                                                                                             <constraint firstItem="tbM-uQ-ViR" firstAttribute="top" secondItem="lcK-dj-2wL" secondAttribute="bottom" id="k8Y-0j-DYj"/>
                                                                                             <constraint firstAttribute="trailing" secondItem="goZ-cp-Rd5" secondAttribute="trailing" id="ooq-hb-Y9e"/>
                                                                                             <constraint firstItem="lcK-dj-2wL" firstAttribute="leading" secondItem="Sxt-XK-C2G" secondAttribute="leading" id="q8m-VQ-N7M"/>
@@ -719,7 +754,6 @@
                                                                         <outlet property="productImage" destination="UCu-9m-kTP" id="vQN-ar-I46"/>
                                                                         <outlet property="productNameLabel" destination="tbM-uQ-ViR" id="bGt-28-ve7"/>
                                                                         <outlet property="productPriceLabel" destination="goZ-cp-Rd5" id="m8B-Yg-Acf"/>
-                                                                        <outlet property="viewSimilarButton" destination="1uR-Na-OvU" id="jSv-h9-Z6R"/>
                                                                     </connections>
                                                                 </collectionViewCell>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STAddProductCell" id="wfs-QH-rMC">
@@ -737,7 +771,7 @@
                                                                                         <subviews>
                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-Eo-7EA">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="167"/>
-                                                                                                <state key="normal" backgroundImage="upload product photo frame "/>
+                                                                                                <state key="normal" backgroundImage="upload product photo frame"/>
                                                                                             </button>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKU-vx-DSf">
                                                                                                 <rect key="frame" x="0.0" y="51.5" width="125" height="64"/>
@@ -748,7 +782,7 @@
                                                                                                             <constraint firstAttribute="width" constant="44" id="0ug-nX-STO"/>
                                                                                                             <constraint firstAttribute="height" constant="44" id="Mjw-xj-5Tl"/>
                                                                                                         </constraints>
-                                                                                                        <state key="normal" image="add product icon "/>
+                                                                                                        <state key="normal" image="add product icon"/>
                                                                                                     </button>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Products" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBO-AK-sdn">
                                                                                                         <rect key="frame" x="11" y="39" width="104" height="21"/>
@@ -843,7 +877,7 @@
                             <tableViewSection id="Kk0-ZU-SBG">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="10" id="8Nn-f2-yLS">
-                                        <rect key="frame" x="0.0" y="750" width="375" height="10"/>
+                                        <rect key="frame" x="0.0" y="990" width="375" height="10"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Nn-f2-yLS" id="8AM-wS-2KO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="9.5"/>
@@ -851,7 +885,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="6RR-lc-w29">
-                                        <rect key="frame" x="0.0" y="760" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1000" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6RR-lc-w29" id="fg8-4q-l7Y">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -966,11 +1000,11 @@
     </scenes>
     <resources>
         <image name="Suggested Products icon" width="20" height="20"/>
-        <image name="add product icon " width="21" height="21"/>
+        <image name="add product icon" width="21" height="21"/>
         <image name="fb pressed" width="22" height="21"/>
         <image name="fb unpressed" width="22" height="21"/>
         <image name="orange-base-0" width="481" height="72"/>
-        <image name="remove product icon " width="15" height="15"/>
-        <image name="upload product photo frame " width="15" height="16"/>
+        <image name="remove product icon" width="15" height="15"/>
+        <image name="upload product photo frame" width="15" height="16"/>
     </resources>
 </document>

@@ -28,6 +28,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     STSharePhotoSectionImageAndCaption = 0,
     STSharePhotoSectionSuggestedProductsHeader,
     STSharePhotoSectionSuggestedProducts,
+    STSharePhotoSectionSuggestedLoading,
     STSharePhotoSectionTagProductsHeader,
     STSharePhotoSectionTaggedProducts,
     STSharePhotoSectionShareFacebook
@@ -44,7 +45,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 
 //initialized with the post.shopProducts if exists and then new items can be added/removed
 @property (nonatomic, strong) NSArray <STShopProduct *> *shopProducts;
-@property (nonatomic, strong) NSMutableArray <STShopProduct *> *suggesteProducts;
+@property (nonatomic, strong) NSMutableArray <STSuggestedProduct *> *suggesteProducts;
 
 @property (strong, nonatomic) UIImage *changedImage;
 @property (assign, nonatomic) BOOL shouldPostToFacebook;
@@ -127,8 +128,9 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 }
 - (IBAction)onDeleteSuggestedProductPressed:(id)sender {
     NSInteger buttonTag = ((UIButton *)sender).tag;
-    STShopProduct *product = [_suggesteProducts objectAtIndex:buttonTag];
+    STSuggestedProduct *product = [_suggesteProducts objectAtIndex:buttonTag];
     [_suggesteProducts removeObject:product];
+    [[CoreManager imageSuggestionsService] removeSuggestion:product];
     [self.tableView reloadData];
     [_suggestedProductsCollection reloadData];
 }
@@ -145,22 +147,23 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     
 }
 - (IBAction)onTapViewSimilarButton:(id)sender {
-    NSInteger buttonTag = ((UIButton *)sender).tag;
-    STShopProduct *currentProduct = [_shopProducts objectAtIndex:buttonTag];
-    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STShopProduct *selectedProduct) {
-        [[STTagProductsManager sharedInstance] processProduct:currentProduct];
-        [[STTagProductsManager sharedInstance] processProduct:selectedProduct];
-    }];
-    [self.navigationController pushViewController:vc animated:YES];
+//    NSInteger buttonTag = ((UIButton *)sender).tag;
+//    STShopProduct *currentProduct = [_shopProducts objectAtIndex:buttonTag];
+//    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STProductBase *selectedProduct) {
+//        [[STTagProductsManager sharedInstance] processProduct:currentProduct];
+//        [[STTagProductsManager sharedInstance] processProduct:selectedProduct];
+//    }];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)onTapViewSimilarSuggestedProductButton:(id)sender {
     NSInteger buttonTag = ((UIButton *)sender).tag;
-    STShopProduct *currentProduct = [_suggesteProducts objectAtIndex:buttonTag];
+    STSuggestedProduct *currentProduct = [_suggesteProducts objectAtIndex:buttonTag];
     __weak STSharePhotoTVC *weakSelf = self;
-    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STShopProduct *selectedProduct) {
+    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STSuggestedProduct *selectedProduct) {
         __strong STSharePhotoTVC *strongSelf = weakSelf;
         [strongSelf.suggesteProducts replaceObjectAtIndex:buttonTag withObject:selectedProduct];
+        [[CoreManager imageSuggestionsService] changeBaseSuggestion:currentProduct withSuggestion:selectedProduct];
         [strongSelf.suggestedProductsCollection reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
@@ -184,12 +187,34 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 
     switch (section) {
         case STSharePhotoSectionSuggestedProductsHeader:
-        case STSharePhotoSectionSuggestedProducts:
         {
             if (_post != nil) {
                 numRows = 0;
             }else{
                 if (_suggestionsLoaded && _suggesteProducts.count == 0) {
+                    numRows = 0;
+                }
+            }
+        }
+            break;
+        case STSharePhotoSectionSuggestedProducts:
+        {
+            if (_post != nil) {
+                numRows = 0;
+            }else{
+                if (_suggestionsLoaded == NO ||
+                    (_suggestionsLoaded && _suggesteProducts.count == 0)) {
+                    numRows = 0;
+                }
+            }
+        }
+            break;
+        case STSharePhotoSectionSuggestedLoading:
+        {
+            if (_post != nil) {
+                numRows = 0;
+            }else{
+                if (_suggestionsLoaded == YES) {
                     numRows = 0;
                 }
             }
@@ -347,8 +372,8 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
             STShopProduct *product = [_shopProducts objectAtIndex:indexPath.row];
             [(STDetailedShopProductCell *)cell configureWithShopProduct:product];
         }else if (collectionView == _suggestedProductsCollection){
-            STShopProduct *product = [_suggesteProducts objectAtIndex:indexPath.row];
-            [(STDetailedShopProductCell *)cell configureWithShopProduct:product];
+            STSuggestedProduct *product = [_suggesteProducts objectAtIndex:indexPath.row];
+            [(STDetailedShopProductCell *)cell configureWithSuggestedProduct:product];
         }
         [((STDetailedShopProductCell *)cell) setTag:indexPath.row];
     }

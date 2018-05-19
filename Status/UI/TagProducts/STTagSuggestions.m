@@ -12,6 +12,9 @@
 #import "STTagProductsManager.h"
 #import "STLoadingView.h"
 #import "STImageSuggestionsService.h"
+#import "STProductBase.h"
+#import "STSuggestedProduct.h"
+#import "STShopProduct.h"
 
 @interface STTagSuggestions ()<STTagProductsProtocol>
 
@@ -22,7 +25,7 @@
 @property (nonatomic, strong) NSArray <STShopProduct*>* products;
 @property (nonatomic, copy) STTagSuggestionsCompletion completion;
 
-@property (nonatomic, strong) STShopProduct *similarSelectedShopProduct;
+@property (nonatomic, strong) STSuggestedProduct *similarSelectedShopProduct;
 
 @end
 
@@ -35,7 +38,7 @@
     return vc;
 }
 
-+(STTagSuggestions *)similarProductsScreenWithSelectedProduct:(STShopProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion{
++(STTagSuggestions *)similarProductsScreenWithSelectedProduct:(STSuggestedProduct *)selectedProduct withCompletion:(STTagSuggestionsCompletion)completion{
     STTagSuggestions *vc = [STTagSuggestions suggestionsVCWithScreenType:STTagSuggestionsScreenTypeSimilarProducts];
     vc.similarSelectedShopProduct = selectedProduct;
     vc.completion = completion;
@@ -158,14 +161,14 @@
 
 -(BOOL)isProductSelected:(STShopProduct *)product{
     if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
-        return (product == _similarSelectedShopProduct);
+        return [product isEqual:_similarSelectedShopProduct];
     }
     return [[STTagProductsManager sharedInstance] isProductSelected:product];
 }
 
 -(void)selectProduct:(STShopProduct *)product{
     if (_screenType == STTagSuggestionsScreenTypeSimilarProducts) {
-        _similarSelectedShopProduct = product;
+        _similarSelectedShopProduct = (STSuggestedProduct *)product;
     }else{
         [[STTagProductsManager sharedInstance] processProduct:product];
     }
