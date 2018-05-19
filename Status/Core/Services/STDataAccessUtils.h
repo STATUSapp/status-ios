@@ -65,17 +65,26 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
           withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getPostWithPostId:(NSString *)postId
           withCompletion:(STDataAccessCompletionBlock)completion;
-+ (void)editPpostWithId:(NSString *)postId
-       withNewImageData:(NSData *)imageData
-         withNewCaption:(NSString *)newCaption
-       withShopProducts:(NSArray <STShopProduct *> *) shopProducts
-         withCompletion:(STDataAccessCompletionBlock)completion;
++ (void)commitPostWithId:(NSString *)postId
+        withNewImageData:(NSData *)imageData
+          withNewCaption:(NSString *)newCaption
+        withShopProducts:(NSArray <STShopProduct *> *) shopProducts
+          withCompletion:(STDataAccessCompletionBlock)completion;
++ (void)editPostWithId:(NSString *)postId
+      withNewImageData:(NSData *)imageData
+        withNewCaption:(NSString *)newCaption
+      withShopProducts:(NSArray <STShopProduct *> *) shopProducts
+        withCompletion:(STDataAccessCompletionBlock)completion;
 
 //suggestion products
-+(void)getSuggestedProductsWithId:(NSString *)suggestionsId
-                   withCompletion:(STDataAccessCompletionBlock)completion;
-+(void)getSimilarProductsWithId:(NSString *)productsId
-                 withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getSuggestedProductsWithPostId:(NSString *)postId
+                       withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getSimilarProductsWithPostId:(NSString *)postId
+                       suggestionId:(NSString *)suggestionId
+                     withCompletion:(STDataAccessCompletionBlock)completion;
++(void)transformSuggestionWithPostId:(NSString *)postId
+                        suggestionId:(NSString *)suggestionId
+                      withCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload post stuff
 + (void)setPostLikeUnlikeWithPostId:(NSString *)postId

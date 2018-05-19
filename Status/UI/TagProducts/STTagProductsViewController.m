@@ -66,7 +66,7 @@
     }];
     
     [cell setSelected:[_delegate isProductSelected:tagProduct]];
-    
+    [cell configureWithProduct:tagProduct];
     return cell;
 }
 
@@ -97,7 +97,6 @@
         [_delegate productsShouldDownloadNextPage];
     }
 }
-
 
 -(void)updateBottomView{
     NSInteger selectedProductsCount = [_delegate selectedProductCount];

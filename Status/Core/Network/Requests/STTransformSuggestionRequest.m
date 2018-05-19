@@ -1,43 +1,41 @@
 //
-//  STGetSimilarProductsRequest.m
+//  STTransformSuggestionRequest.m
 //  Status
 //
-//  Created by Cosmin Andrus on 28/02/2018.
+//  Created by Cosmin Andrus on 18/05/2018.
 //  Copyright © 2018 Andrus Cosmin. All rights reserved.
 //
 
-#import "STGetSimilarProductsRequest.h"
+#import "STTransformSuggestionRequest.h"
 
-@interface STGetSimilarProductsRequest ()
+@interface STTransformSuggestionRequest ()
 
-@property (nonatomic, strong) NSString *postId;
 @property (nonatomic, strong) NSString *suggestionId;
-
-
+@property (nonatomic, strong) NSString *postId;
 @end
 
-@implementation STGetSimilarProductsRequest
-+ (void)getSimilarProductsForPostId:(NSString *)postId
-                       suggestionId:(NSString *)suggestionId
+@implementation STTransformSuggestionRequest
++ (void)transformSuggestedProductId:(NSString *)suggestionId
+                          forPostId:(NSString *)postId
                       andCompletion:(STRequestCompletionBlock)completion
                             failure:(STRequestFailureBlock)failure{
     
-    STGetSimilarProductsRequest *request = [STGetSimilarProductsRequest new];
+    STTransformSuggestionRequest *request = [STTransformSuggestionRequest new];
     request.completionBlock = completion;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
-    request.postId = postId;
     request.suggestionId = suggestionId;
+    request.postId = postId;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
 {
-    __weak STGetSimilarProductsRequest *weakSelf = self;
+    __weak STTransformSuggestionRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        __strong STGetSimilarProductsRequest *strongSelf = weakSelf;
+        __strong STTransformSuggestionRequest *strongSelf = weakSelf;
         NSString *url = [strongSelf urlString];
         NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         if (strongSelf.postId) {
@@ -46,19 +44,19 @@
         if (strongSelf.suggestionId) {
             params[@"suggestion_id"] = strongSelf.suggestionId;
         }
-
+        
         strongSelf.params = params;
-        [[STNetworkQueueManager networkAPI] GET:url
-                                     parameters:params
-                                       progress:nil
-                                        success:strongSelf.standardSuccessBlock
-                                        failure:strongSelf.standardErrorBlock];
+        [[STNetworkQueueManager networkAPI] POST:url
+                                      parameters:params
+                                        progress:nil
+                                         success:strongSelf.standardSuccessBlock
+                                         failure:strongSelf.standardErrorBlock];
     };
     return executionBlock;
 }
 
 -(NSString *)urlString{
-    return kGetSimilarProducts;
+    return kTransformSuggestion;
 }
 
 @end

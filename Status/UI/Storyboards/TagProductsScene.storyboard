@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R7e-6k-OTh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R7e-6k-OTh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -13,10 +13,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-            <string>HelveticaNeue-Medium</string>
-        </array>
         <array key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
         </array>
@@ -584,7 +580,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIe-ys-GnR">
-                                <rect key="frame" x="75" y="183" width="226" height="99"/>
+                                <rect key="frame" x="75.5" y="183" width="225.5" height="99"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="99" id="TIO-rA-0VK"/>
                                 </constraints>
@@ -948,7 +944,7 @@ by using one of the following methods:</string>
                                                                         <constraint firstAttribute="width" constant="44" id="gBY-Qt-UdF"/>
                                                                     </constraints>
                                                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="15"/>
-                                                                    <state key="normal" image="remove product icon "/>
+                                                                    <state key="normal" image="remove product icon"/>
                                                                     <connections>
                                                                         <action selector="deleteImagePressed:" destination="8FJ-jk-rt9" eventType="touchUpInside" id="XqS-hU-o4S"/>
                                                                     </connections>
@@ -970,12 +966,12 @@ by using one of the following methods:</string>
                                                             <subviews>
                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mge-qg-Y1j">
                                                                     <rect key="frame" x="3.5" y="8" width="125.5" height="153"/>
-                                                                    <state key="normal" backgroundImage="upload product photo frame "/>
+                                                                    <state key="normal" backgroundImage="upload product photo frame"/>
                                                                     <connections>
                                                                         <action selector="uploadImagePressed:" destination="8FJ-jk-rt9" eventType="touchUpInside" id="kJz-46-Tlo"/>
                                                                     </connections>
                                                                 </button>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload product photo placeholder " translatesAutoresizingMaskIntoConstraints="NO" id="6zL-eL-54G">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload product photo placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="6zL-eL-54G">
                                                                     <rect key="frame" x="33" y="26" width="62" height="62"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="62" id="Oqo-8g-J1L"/>
@@ -1016,7 +1012,7 @@ by using one of the following methods:</string>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="11"/>
                                                             <inset key="imageEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="2"/>
-                                                            <state key="normal" title="Delete" image="delete icon ">
+                                                            <state key="normal" title="Delete" image="delete icon">
                                                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -1105,7 +1101,7 @@ by using one of the following methods:</string>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
                                                     <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="Add Product" image="add product icon ">
+                                                    <state key="normal" title="Add Product" image="add product icon">
                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -1402,14 +1398,14 @@ by using one of the following methods:</string>
         <image name="Manual icon" width="32" height="48"/>
         <image name="Manual icon unpressed" width="32" height="48"/>
         <image name="Rectangle" width="32" height="33"/>
-        <image name="add product icon " width="21" height="21"/>
+        <image name="add product icon" width="21" height="21"/>
         <image name="closet icon" width="249" height="251"/>
-        <image name="delete icon " width="14" height="14"/>
+        <image name="delete icon" width="14" height="14"/>
         <image name="no_product_found" width="250" height="250"/>
         <image name="orange-base-0" width="481" height="72"/>
-        <image name="remove product icon " width="15" height="15"/>
-        <image name="upload product photo frame " width="15" height="16"/>
-        <image name="upload product photo placeholder " width="62" height="62"/>
+        <image name="remove product icon" width="15" height="15"/>
+        <image name="upload product photo frame" width="15" height="16"/>
+        <image name="upload product photo placeholder" width="62" height="62"/>
         <image name="wardrobe" width="57" height="37"/>
         <image name="wardrobe unpressed" width="57" height="37"/>
         <image name="wizard icon" width="43" height="43"/>

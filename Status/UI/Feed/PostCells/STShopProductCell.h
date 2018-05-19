@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class STShopProduct;
+@class STSuggestedProduct;
 
 @interface STShopProductCell : UICollectionViewCell
 
 + (CGSize)cellSize;
 - (void)configureWithShopProduct:(STShopProduct *)shopProduct;
+- (void)configureWithSuggestedProduct:(STSuggestedProduct *)suggestedProduct;
 
 @end

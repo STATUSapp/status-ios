@@ -17,6 +17,7 @@
 
 #import "STNavigationService.h"
 #import "STSharePhotoTVC.h"
+#import "STImageSuggestionsService.h"
 
 @interface STSharePhotoViewController (){
 }
@@ -74,36 +75,50 @@
 }
 #pragma mark IBACTIONS
 
+- (void)handleError:(NSError *)error post:(STPost *)post strongSelf:(STSharePhotoViewController *)strongSelf {
+    strongSelf.shareButton.enabled = TRUE;
+    if (!error) {
+        if ([strongSelf.childTVC postShouldBePostedOnFacebook]==YES ) {
+            [strongSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl deepLink:post.shareShortUrl];
+        }
+        else
+        {
+            [strongSelf showMessagesAndCallDelegatesForPostId:post.uuid];
+        }
+        
+    }
+}
+
 - (IBAction)onClickShare:(id)sender {
     _shareButton.enabled = FALSE;
     __weak STSharePhotoViewController *weakSelf = self;
+    NSString *postCaptionString = [_childTVC postCaptionString];
+    NSArray *postShopProducts = [_childTVC postShopProducts];
+    NSData *postImageData = [_childTVC postImageData];
+
+    [[CoreManager imageSuggestionsService] setSuggestionsCompletionBlock:nil];
+    if (_controllerType == STShareControllerAddPost &&
+        [[CoreManager imageSuggestionsService] canCommitCurrentPost]) {
+        [[CoreManager imageSuggestionsService] commitCurrentPostWithCaption:postCaptionString
+                                                                  imageData:postImageData shopProducts:postShopProducts completion:^(NSError *error, NSArray *objects) {
+                                                                      __strong STSharePhotoViewController *strongSelf = weakSelf;
+                                                                      STPost *post = [objects firstObject];
+                                                                      [self handleError:error post:post strongSelf:strongSelf];
+        }];
+    }else{
+        [STDataAccessUtils editPostWithId:_post.uuid
+                         withNewImageData:postImageData
+                           withNewCaption:postCaptionString
+                         withShopProducts:postShopProducts
+                           withCompletion:^(NSArray *objects, NSError *error) {
+                               __strong STSharePhotoViewController *strongSelf = weakSelf;
+                               STPost *post = [objects firstObject];
+                               [self handleError:error post:post strongSelf:strongSelf];
+                           }];
+    }
     if (_controllerType == STShareControllerAddPost ||
         _controllerType == STShareControllerEditInfo) {
         
-        NSData *postImageData = [_childTVC postImageData];
-        NSString *postCaptionString = [_childTVC postCaptionString];
-        NSArray *postShopProducts = [_childTVC postShopProducts];
-        BOOL postShouldBePostedOnFacebook = [_childTVC postShouldBePostedOnFacebook];
-        
-        [STDataAccessUtils editPpostWithId:_post.uuid
-                          withNewImageData:postImageData
-                            withNewCaption:postCaptionString
-                          withShopProducts:postShopProducts
-                            withCompletion:^(NSArray *objects, NSError *error) {
-                                __strong STSharePhotoViewController *strongSelf = weakSelf;
-                                strongSelf.shareButton.enabled = TRUE;
-                                if (!error) {
-                                    STPost *post = [objects firstObject];
-                                    if (postShouldBePostedOnFacebook==YES ) {
-                                        [strongSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl deepLink:post.shareShortUrl];
-                                    }
-                                    else
-                                    {
-                                        [strongSelf showMessagesAndCallDelegatesForPostId:post.uuid];
-                                    }
-
-                                }
-                            }];
     }
 }
 

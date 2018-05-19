@@ -12,5 +12,6 @@
 
 + (CGSize)cellSize;
 - (void)configureWithShopProduct:(STShopProduct *)shopProduct;
+- (void)configureWithSuggestedProduct:(STSuggestedProduct *)suggestedProduct;
 - (void)setTag:(NSInteger)tag;
 @end

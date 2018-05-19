@@ -9,6 +9,7 @@
 #import "STShopProductCell.h"
 #import "STShopProduct.h"
 #import "UIImageView+WebCache.h"
+#import "STSuggestedProduct.h"
 
 @interface STShopProductCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
@@ -37,6 +38,10 @@
     else{
         [_productImage sd_setImageWithURL:[NSURL URLWithString:shopProduct.mainImageUrl]];
     }
+}
+
+- (void)configureWithSuggestedProduct:(STSuggestedProduct *)suggestedProduct{
+    [_productImage sd_setImageWithURL:[NSURL URLWithString:suggestedProduct.mainImageUrl]];
 }
 
 -(void)awakeFromNib{

@@ -36,6 +36,9 @@
         
         __strong STUploadImageForSuggestionsRequest *strongSelf = weakSelf;
         NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
+        params[@"suggestions"] = @(YES);
+        params[@"pending"] = @(YES);
+        
         NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [strongSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:strongSelf.imageData
                                         name:@"image"
@@ -71,8 +74,7 @@
 }
 
 -(NSString *)urlString{
-    return kImageForSugegstions;
+    return kPostPhoto;
 }
-
 
 @end

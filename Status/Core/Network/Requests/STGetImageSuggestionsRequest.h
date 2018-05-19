@@ -10,8 +10,8 @@
 
 @interface STGetImageSuggestionsRequest : STBaseRequest
 
-+ (void)getImageSuggestionsForId:(NSString *)suggestionsId
-                   andCompletion:(STRequestCompletionBlock)completion
-                         failure:(STRequestFailureBlock)failure;
++ (void)getPostSuggestionsForId:(NSString *)postId
+                  andCompletion:(STRequestCompletionBlock)completion
+                        failure:(STRequestFailureBlock)failure;
 
 @end

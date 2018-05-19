@@ -70,9 +70,6 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
     [_pageController setViewControllers:@[_viewControllers[index]] direction:direction animated:YES completion:^(BOOL finished) {
         __strong STFriendsInviterViewController *strongSelf = weakSelf;
         strongSelf.pageIndicatorLeading.constant =  offset;
-        [UIView animateWithDuration:0.35 animations:^{
-            [strongSelf.view layoutIfNeeded];
-        }];
     }];
 }
 

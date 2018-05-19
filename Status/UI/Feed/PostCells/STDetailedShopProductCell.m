@@ -8,6 +8,7 @@
 
 #import "STDetailedShopProductCell.h"
 #import "STShopProduct.h"
+#import "STSuggestedProduct.h"
 
 CGFloat const kBottomViewDefaultHeight = 65.f;
 
@@ -37,6 +38,18 @@ CGFloat const kBottomViewDefaultHeight = 65.f;
     numberFormatter.usesGroupingSeparator = YES;
     self.productPriceLabel.text = [shopProduct productPriceString];
 }
+
+- (void)configureWithSuggestedProduct:(STSuggestedProduct *)suggestedProduct{
+    [super configureWithSuggestedProduct:suggestedProduct];
+    self.productBrandNameLabel.text = suggestedProduct.brandName;
+    self.productNameLabel.text = suggestedProduct.productName;
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
+    numberFormatter.locale = [NSLocale currentLocale];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.usesGroupingSeparator = YES;
+    self.productPriceLabel.text = [suggestedProduct productPriceString];
+}
+
 
 -(void)setTag:(NSInteger)tag{
     _deleteButton.tag = _viewSimilarButton.tag = tag;
