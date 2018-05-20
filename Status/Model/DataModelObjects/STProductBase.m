@@ -25,9 +25,22 @@
         strongSelf.mainImageDownloaded = cached;
     }];
     self.imageSize = CGSizeZero;
+    self.brandName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"brand"];
+    self.productName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"name"];
+    NSString *priceAsString = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"price"];
+    if (priceAsString.length == 0) {
+        self.productPrice = nil;
+    }else{
+        self.productPrice = @([priceAsString integerValue]);
+    }
+    self.productPriceCurrency = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"currency"];
+
 }
 
 -(NSString *)productPriceString{
+    if (!self.productPrice) {
+        return @"";
+    }
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
     numberFormatter.locale = [NSLocale currentLocale];
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;

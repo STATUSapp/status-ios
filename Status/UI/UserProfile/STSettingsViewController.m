@@ -25,12 +25,14 @@
 #import "STIAPHelper.h"
 #import "STUserProfilePool.h"
 #import "STSnackBarService.h"
+#import "STDeleteAccountRequest.h"
 
 typedef NS_ENUM(NSUInteger, STSettingsSection) {
     STSettingsSectionNotifications = 0,
     STSettingsSectionCopyProfile,
     STSettingsSectionInviteFlow,
     STSettingsSectionLikeAdds,
+    STSettingsSectionDeleteAccount,
     STSettingsSectionLogout,
     STSettingsSectionCount
 };
@@ -192,6 +194,9 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
         case STSettingsSectionLikeAdds:
             numRows = 4;
             break;
+        case STSettingsSectionDeleteAccount:
+            numRows = 1;
+            break;
         case STSettingsSectionLogout:
             numRows = 1;
             break;
@@ -284,6 +289,28 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)onDeleteAccountPressed:(id)sender {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warning!", nil)
+                                message:NSLocalizedString(@"\nAre you sure you want to delete your account?\n\n If you delete your account all your posts, likes, followers and other related data will be permanently deleted.", nil) preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [STDeleteAccountRequest deleteAccountWithCompletion:^(id response, NSError *error) {
+            if (!error) {
+                if ([response[@"status_core"] integerValue] == STWebservicesSuccesCod) {
+                    [[CoreManager loginService] logoutManually];
+                }
+            }else{
+                [self showFailAlert];
+            }
+        } failure:^(NSError *error) {
+            [self showFailAlert];
+        }];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDefault handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)setSetting:(NSString *)setting fromSwitch:(UISwitch *)sender {
     __weak STSettingsViewController * weakSelf = self;
     STRequestCompletionBlock completion = ^(id response, NSError *error){
@@ -297,6 +324,13 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
         [sender setOn:!sender.isOn];
     };
     [STSetUserSettingsRequest setSettingsValue:sender.isOn forKey:setting withCompletion:completion failure:failBlock];
+}
+
+- (void)showFailAlert {
+    UIAlertController *failAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                                       message:NSLocalizedString(@"An error occured during the delete process. Please try again later.", nil) preferredStyle:UIAlertControllerStyleAlert];
+    [failAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:failAlert animated:YES completion:nil];
 }
 
 @end

@@ -6,43 +6,44 @@
 //  Copyright © 2018 Andrus Cosmin. All rights reserved.
 //
 
-#import "STTransformSuggestionRequest.h"
+#import "STTransformSuggestionsRequest.h"
+#import "STSuggestedProduct.h"
 
-@interface STTransformSuggestionRequest ()
+@interface STTransformSuggestionsRequest ()
 
-@property (nonatomic, strong) NSString *suggestionId;
+@property (nonatomic, strong) NSArray <STSuggestedProduct *> *suggestions;
 @property (nonatomic, strong) NSString *postId;
 @end
 
-@implementation STTransformSuggestionRequest
-+ (void)transformSuggestedProductId:(NSString *)suggestionId
-                          forPostId:(NSString *)postId
-                      andCompletion:(STRequestCompletionBlock)completion
-                            failure:(STRequestFailureBlock)failure{
+@implementation STTransformSuggestionsRequest
++ (void)transformSuggestions:(NSArray<STSuggestedProduct *> *)suggestions
+                   forPostId:(NSString *)postId
+               andCompletion:(STRequestCompletionBlock)completion
+                     failure:(STRequestFailureBlock)failure{
     
-    STTransformSuggestionRequest *request = [STTransformSuggestionRequest new];
+    STTransformSuggestionsRequest *request = [STTransformSuggestionsRequest new];
     request.completionBlock = completion;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
-    request.suggestionId = suggestionId;
+    request.suggestions = suggestions;
     request.postId = postId;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
 - (STRequestExecutionBlock) _getExecutionBlock
 {
-    __weak STTransformSuggestionRequest *weakSelf = self;
+    __weak STTransformSuggestionsRequest *weakSelf = self;
     STRequestExecutionBlock executionBlock = ^{
         
-        __strong STTransformSuggestionRequest *strongSelf = weakSelf;
+        __strong STTransformSuggestionsRequest *strongSelf = weakSelf;
         NSString *url = [strongSelf urlString];
         NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         if (strongSelf.postId) {
             params[@"post_id"] = strongSelf.postId;
         }
-        if (strongSelf.suggestionId) {
-            params[@"suggestion_id"] = strongSelf.suggestionId;
+        if (strongSelf.suggestions) {
+            params[@"suggestion_ids"] = [strongSelf.suggestions valueForKey:@"uuid"];
         }
         
         strongSelf.params = params;
@@ -56,7 +57,7 @@
 }
 
 -(NSString *)urlString{
-    return kTransformSuggestion;
+    return kTransformSuggestions;
 }
 
 @end

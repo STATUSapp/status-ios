@@ -159,11 +159,15 @@
 
 #pragma mark - Facebook DelegatesFyou
 
--(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
+- (void)logoutManually {
     [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogout object:nil userInfo:nil];
     self.manualLogout = YES;
     [self logout];
     [self loginAsGuest];
+}
+
+-(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
+    [self logoutManually];
 }
 
 -(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{

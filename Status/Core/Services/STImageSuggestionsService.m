@@ -87,19 +87,12 @@ NSTimeInterval const kTimerInterval = 5.0;
 
 -(void)transformSuggestionsIntoProducts:(STImageSuggestionsServiceCompletion)completion{
     __block NSMutableArray <STShopProduct *> *transformedObjects = [@[] mutableCopy];
-    __block NSInteger possibleTransformations = self.suggestedProducts.count;
-    for (STSuggestedProduct *sp in self.suggestedProducts) {
-        [STDataAccessUtils transformSuggestionWithPostId:self.postId
-                                            suggestionId:sp.uuid
-                                          withCompletion:^(NSArray *objects, NSError *error) {
-                                              NSLog(@"Transformation status: %@", error);
-                                              possibleTransformations --;
-                                              [transformedObjects addObjectsFromArray:objects];
-                                              if (possibleTransformations == 0) {
-                                                  completion(transformedObjects);
-                                              }
-                                          }];
-    }
+    [STDataAccessUtils transformSuggestionWithPostId:self.postId
+                                         suggestions:self.suggestedProducts                                      withCompletion:^(NSArray *objects, NSError *error) {
+                                             NSLog(@"Transformation status: %@", error);
+                                             [transformedObjects addObjectsFromArray:objects];
+                                             completion(transformedObjects);
+                                         }];
 }
 
 -(void)setSuggestionsCompletionBlock:(STImageSuggestionsServiceCompletion)completion{

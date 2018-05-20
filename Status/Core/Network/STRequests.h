@@ -42,7 +42,7 @@
 #import "STUserWithDrawnDetailsRequest.h"
 #import "STGetImageSuggestionsRequest.h"
 #import "STGetSimilarProductsRequest.h"
-#import "STTransformSuggestionRequest.h"
+#import "STTransformSuggestionsRequest.h"
 
 #endif
 

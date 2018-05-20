@@ -10,7 +10,7 @@
 #import "STShopProduct.h"
 #import "STSuggestedProduct.h"
 
-CGFloat const kBottomViewDefaultHeight = 65.f;
+CGFloat const kBottomViewDefaultHeight = 70.f;
 
 @interface STDetailedShopProductCell ()
 @property (weak, nonatomic) IBOutlet UILabel *productBrandNameLabel;
@@ -32,10 +32,6 @@ CGFloat const kBottomViewDefaultHeight = 65.f;
     [super configureWithShopProduct:shopProduct];
     self.productBrandNameLabel.text = shopProduct.brandName;
     self.productNameLabel.text = shopProduct.productName;
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
-    numberFormatter.locale = [NSLocale currentLocale];
-    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    numberFormatter.usesGroupingSeparator = YES;
     self.productPriceLabel.text = [shopProduct productPriceString];
 }
 

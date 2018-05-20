@@ -127,9 +127,7 @@ static CGFloat kImageInset = 4.f;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(snackBarAction:)
                                                  name:kNotificationSnackBarAction
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedOut) name:kNotificationFacebokDidLogout object:nil];
-    
+                                               object:nil];    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarFrameChanged:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
     
 }
@@ -171,12 +169,6 @@ static CGFloat kImageInset = 4.f;
     if (type == STSnackWithActionBarTypeGuestMode) {
         [self presentLoginVCAnimated:YES];
     }
-}
-
--(void)userDidLoggedOut{
-    [self.selectedViewController dismissViewControllerAnimated:NO completion:nil];
-    [self setSelectedIndex:STTabBarIndexExplore];
-    [self presentLoginVCAnimated:YES];
 }
 
 -(void)statusBarFrameChanged:(NSNotification *)notification{

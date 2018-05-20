@@ -27,10 +27,7 @@
     [super viewDidLoad];
     
     UIImage *image = [STUIHelper splashImageWithLogo:YES];
-    _launchImage.image = image;
-    
-//    if ([CoreManager shouldLogin])
-//        [[CoreManager navigationService] presentLoginScreen];
+    _launchImage.image = image;    
     [[CoreManager loginService] startLoginIfPossible];
 }
 
