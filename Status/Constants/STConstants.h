@@ -169,7 +169,8 @@ extern NSString *const kUserWithdrawnDetails;
 extern NSString *const kUserWithdrawnUpdateDetails;
 extern NSString *const kGetImageSuggestions;
 extern NSString *const kGetSimilarProducts;
-extern NSString *const kTransformSuggestion;
+extern NSString *const kTransformSuggestions;
+extern NSString *const kDeleteAccount;
 extern NSString *const kSendLogs;
 
 extern NSString *const kAPIKey;

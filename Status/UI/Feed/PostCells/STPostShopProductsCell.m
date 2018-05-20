@@ -78,8 +78,11 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     STShopProduct *product = [_products objectAtIndex:indexPath.row];
-//    NSURL *url = [NSURL URLWithString:[product.productUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     NSURL *url = [NSURL URLWithString:product.productUrl];
+    if (!url) {
+        url = [NSURL URLWithString:[product.productUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+        
+    }
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         [[UIApplication sharedApplication] openURL:url];
     }

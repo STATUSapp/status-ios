@@ -83,7 +83,7 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
                        suggestionId:(NSString *)suggestionId
                      withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)transformSuggestionWithPostId:(NSString *)postId
-                        suggestionId:(NSString *)suggestionId
+                         suggestions:(NSArray <STSuggestedProduct *> *)suggestions
                       withCompletion:(STDataAccessCompletionBlock)completion;
 
 //upload post stuff

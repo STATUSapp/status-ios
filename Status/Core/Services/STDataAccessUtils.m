@@ -763,23 +763,28 @@ withCompletion:(STDataUploadCompletionBlock)completion{
 }
 
 +(void)transformSuggestionWithPostId:(NSString *)postId
-                        suggestionId:(NSString *)suggestionId
+                         suggestions:(NSArray <STSuggestedProduct *> *)suggestions
                       withCompletion:(STDataAccessCompletionBlock)completion{
-    [STTransformSuggestionRequest transformSuggestedProductId:suggestionId
-                                                    forPostId:postId
-                                                andCompletion:^(id response, NSError *error) {
-                                                    if (!error) {
-                                                        STShopProduct *incompleteSP = [STShopProduct new];
-                                                        incompleteSP.uuid = response[@"product_id"];
-                                                        completion(@[incompleteSP], nil);
-                                                    }else{
-                                                        completion(nil, error);
-                                                    }
-                                                    
-                                                } failure:^(NSError *error) {
-                                                    NSLog(@"STTransformSuggestionRequest error : %@", error.debugDescription);
-                                                    completion(nil, error);
-                                                }];
+    [STTransformSuggestionsRequest transformSuggestions:suggestions
+                                              forPostId:postId
+                                          andCompletion:^(id response, NSError *error) {
+                                              if (!error) {
+                                                  NSMutableArray *objects = [@[] mutableCopy];
+                                                  NSArray *productIds = response[@"product_ids"];
+                                                  for (NSString *productId in productIds) {
+                                                      STShopProduct *incompleteSP = [STShopProduct new];
+                                                      incompleteSP.uuid = productId;
+                                                      [objects addObject:incompleteSP];
+                                                  }
+                                                  completion(objects, nil);
+                                              }else{
+                                                  completion(nil, error);
+                                              }
+                                              
+                                          } failure:^(NSError *error) {
+                                              NSLog(@"STTransformSuggestionRequest error : %@", error.debugDescription);
+                                              completion(nil, error);
+                                          }];
 }
 
 #pragma mark - Notifications

@@ -74,21 +74,20 @@
         return;
     }
     if ([notif[@"user_info"][@"notification_type"] integerValue] == STNotificationTypeChatMessage) {
-        return;
         _lastNotification = nil;
-        NSDictionary *userInfo = notif[@"user_info"];
-        STListUser *lu = [STListUser new];
-        lu.uuid = userInfo[@"user_id"];        
-        if (lu.uuid == nil) {
-            NSLog(@"Error from notification: user_id = nil");
-            return;
-        }
-        
-        STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
-        [[CoreManager navigationService] goToChat];
-        [[CoreManager navigationService] pushViewController:viewController
-                                            inTabbarAtIndex:STTabBarIndexActivity
-                                        keepThecurrentStack:NO];
+//        NSDictionary *userInfo = notif[@"user_info"];
+//        STListUser *lu = [STListUser new];
+//        lu.uuid = userInfo[@"user_id"];        
+//        if (lu.uuid == nil) {
+//            NSLog(@"Error from notification: user_id = nil");
+//            return;
+//        }
+//        
+//        STChatRoomViewController *viewController = [STChatRoomViewController roomWithUser:lu];
+//        [[CoreManager navigationService] goToChat];
+//        [[CoreManager navigationService] pushViewController:viewController
+//                                            inTabbarAtIndex:STTabBarIndexActivity
+//                                        keepThecurrentStack:NO];
     }
     else
     {   _lastNotification = nil;
@@ -265,8 +264,10 @@
 }
 
 - (void)userDidLoggedIn{
-    [self handleLastNotification];
-    [[CoreManager badgeService] startService];
+    if (![CoreManager isGuestUser]) {
+        [self handleLastNotification];
+        [[CoreManager badgeService] startService];
+    }
 }
 
 - (void)userDidLoggedOut{

@@ -19,12 +19,7 @@
 
 -(void)setup{
     [super setup];
-    self.productType = STProductTypeSuggested;
-    self.brandName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"brand"];
-    self.productName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"name"];
-    self.productPrice = @([[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"price"] integerValue]);
-    self.productPriceCurrency = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"currency"];
-    
+    self.productType = STProductTypeSuggested;    
 }
 
 @end

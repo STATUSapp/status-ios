@@ -29,13 +29,6 @@
 -(void)setup{
     [super setup];
     self.productType = STProductTypeShop;
-    
-    //TODO: AUTO - parse proper data from BE
-    self.brandName = @"ASOS";
-    self.productName = @"Skinny Buffalo Check";
-    self.productPrice = @(149.99);
-    self.productPriceCurrency = @"$";
-
 }
 
 @end

@@ -78,7 +78,7 @@
     
     
     CGFloat itemWidth = ([[UIScreen mainScreen] bounds].size.width - 18.f)/2.f;
-    CGSize itemSize = CGSizeMake(itemWidth, itemWidth * 1.29);
+    CGSize itemSize = CGSizeMake(itemWidth, (itemWidth * 1.29 + 45.f + 11.f));
     
     return itemSize;
 }

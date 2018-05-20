@@ -21,6 +21,7 @@ typedef void (^facebookCompletion)(id result, NSError *error);
 - (STProfileGender)currentUserGender;
 - (STUserProfile *)userProfile;
 - (void)startLoginIfPossible;
+- (void)logoutManually;
 
 //guest user
 -(BOOL)isGuestUser;
