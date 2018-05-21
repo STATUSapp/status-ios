@@ -9,7 +9,13 @@
 #import <Foundation/Foundation.h>
 @class STSuggestedProduct;
 @class STShopProduct;
-
+typedef NS_ENUM(NSUInteger, STSuggestionsStatus) {
+    STSuggestionsStatusLoading = 0,
+    STSuggestionsStatusLoadedWithError,
+    STSuggestionsStatusLoadedNoProducts,
+    STSuggestionsStatusLoaded,
+    STSuggestionsStatusCount
+};
 typedef void (^STImageSuggestionsServiceCompletion)(NSArray *objects);
 typedef void (^STImageSuggestionsCommitCompletion)(NSError *error, NSArray *objects);
 
@@ -31,4 +37,7 @@ typedef void (^STImageSuggestionsCommitCompletion)(NSError *error, NSArray *obje
 -(void)changeBaseSuggestion:(STSuggestedProduct *)baseSuggestion
              withSuggestion:(STSuggestedProduct *)suggestion;
 -(void)removeSuggestion:(STSuggestedProduct *)suggestion;
+-(STSuggestionsStatus)getServiceStatus;
+-(void)changePostImage:(UIImage *)newPostImage;
+-(void)retry;
 @end

@@ -157,6 +157,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }
     
     if ([_feedProcessor loading] == NO) {
+        [_feedProcessor reloadProcessor];
         [self.collectionView setContentOffset:CGPointZero animated:NO];
     }
     

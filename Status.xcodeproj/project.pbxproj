@@ -69,6 +69,7 @@
 		073998FD20AE1570003FA09C /* STProductBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FC20AE1570003FA09C /* STProductBase.m */; };
 		0739990020AE16FC003FA09C /* STSuggestedProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FF20AE16FB003FA09C /* STSuggestedProduct.m */; };
 		073C72AB209649EC00B283B1 /* UIView+AnimatedZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */; };
+		0740883A20B3624A00C4FB37 /* STLoadingSuggestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0740883920B3624A00C4FB37 /* STLoadingSuggestionCell.m */; };
 		0748751A20112F9E005E6CFD /* SettingsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0748751920112F9E005E6CFD /* SettingsScene.storyboard */; };
 		0748751D2011541D005E6CFD /* STCustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0748751C2011541D005E6CFD /* STCustomTitleView.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
@@ -458,6 +459,8 @@
 		073998FF20AE16FB003FA09C /* STSuggestedProduct.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSuggestedProduct.m; sourceTree = "<group>"; };
 		073C72A9209649EC00B283B1 /* UIView+AnimatedZoom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimatedZoom.h"; sourceTree = "<group>"; };
 		073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimatedZoom.m"; sourceTree = "<group>"; };
+		0740883820B3624A00C4FB37 /* STLoadingSuggestionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLoadingSuggestionCell.h; sourceTree = "<group>"; };
+		0740883920B3624A00C4FB37 /* STLoadingSuggestionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STLoadingSuggestionCell.m; sourceTree = "<group>"; };
 		0748751920112F9E005E6CFD /* SettingsScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsScene.storyboard; sourceTree = "<group>"; };
 		0748751B2011541D005E6CFD /* STCustomTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCustomTitleView.h; sourceTree = "<group>"; };
 		0748751C2011541D005E6CFD /* STCustomTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCustomTitleView.m; sourceTree = "<group>"; };
@@ -2025,6 +2028,8 @@
 				99B3872A1C82FAA2005B4D8C /* STSharePhotoViewController.m */,
 				0725157F20336E4500992BFB /* STSharePhotoTVC.h */,
 				0725158020336E4500992BFB /* STSharePhotoTVC.m */,
+				0740883820B3624A00C4FB37 /* STLoadingSuggestionCell.h */,
+				0740883920B3624A00C4FB37 /* STLoadingSuggestionCell.m */,
 				99B3872B1C82FAA2005B4D8C /* STZoomablePostViewController.h */,
 				99B3872C1C82FAA2005B4D8C /* STZoomablePostViewController.m */,
 			);
@@ -2454,6 +2459,7 @@
 				99B387B81C82FAA2005B4D8C /* STTapAnimationLabel.m in Sources */,
 				072158551F1A49BF001481B0 /* STWithdrawDetailsHeader.m in Sources */,
 				072DBBDA1FF9161600DFA8F0 /* Message+CoreDataClass.m in Sources */,
+				0740883A20B3624A00C4FB37 /* STLoadingSuggestionCell.m in Sources */,
 				07D03F581F00D27F00B5A3B8 /* STDeepLinkService.m in Sources */,
 				0726B8C11F78D2790012A299 /* STMissingProductViewController.m in Sources */,
 				0727A6231FFBB5E10040F349 /* STSectionView.m in Sources */,

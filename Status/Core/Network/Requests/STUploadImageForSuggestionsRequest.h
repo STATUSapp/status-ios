@@ -11,6 +11,7 @@
 @interface STUploadImageForSuggestionsRequest : STBaseRequest
 
 + (void)uploadImageForSuggestionsWithData:(NSData*)imageData
+                                forPostId:(NSString *)postId
                            withCompletion:(STRequestCompletionBlock)completion
                                   failure:(STRequestFailureBlock)failure;
 @end

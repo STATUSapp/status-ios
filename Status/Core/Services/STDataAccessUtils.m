@@ -616,9 +616,6 @@
     //if not, upload all the shop_products, obtain an id and then upload the post
     STRequestCompletionBlock completion1 = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
-            
-            [[CoreManager localNotificationService] postNotificationName:STMyProfileFlowShouldBeReloadedNotification object:nil userInfo:nil];
-            
             NSString * postUuid = postId;
             if(postId == nil)
                 postUuid = response[@"post_id"];
@@ -627,6 +624,7 @@
                                   withCompletion:^(NSArray *objects, NSError *error) {
                                       if (!error) {
                                           [[CoreManager postsPool] addPosts:objects];
+                                          [[CoreManager localNotificationService] postNotificationName:STMyProfileFlowShouldBeReloadedNotification object:nil userInfo:nil];
                                           completion(objects, nil);
                                       }
                                       else
