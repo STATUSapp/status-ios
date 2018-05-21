@@ -11,12 +11,14 @@
 @interface STUploadImageForSuggestionsRequest ()
 
 @property (nonatomic, strong) NSData *imageData;
+@property (nonatomic, strong) NSString *postId;
 
 @end
 
 @implementation STUploadImageForSuggestionsRequest
 
 + (void)uploadImageForSuggestionsWithData:(NSData*)imageData
+                                forPostId:(NSString *)postId
                            withCompletion:(STRequestCompletionBlock)completion
                                   failure:(STRequestFailureBlock)failure{
     
@@ -26,6 +28,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.imageData = imageData;
+    request.postId = postId;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -38,7 +41,9 @@
         NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
         params[@"suggestions"] = @(YES);
         params[@"pending"] = @(YES);
-        
+        if (strongSelf.postId) {
+            params[@"post_id"] = strongSelf.postId;
+        }
         NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", [CoreManager networkService].baseUrl, [strongSelf urlString]] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:strongSelf.imageData
                                         name:@"image"
@@ -74,7 +79,7 @@
 }
 
 -(NSString *)urlString{
-    return kPostPhoto;
+    return _postId == nil?kPostPhoto:kUpdatePost;
 }
 
 @end

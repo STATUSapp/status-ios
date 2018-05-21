@@ -15,6 +15,7 @@
 #import "STDetailedShopProductCell.h"
 #import "STTagSuggestions.h"
 #import "STImageSuggestionsService.h"
+#import "STLoadingSuggestionCell.h"
 
 static NSInteger const  kMaxCaptionLenght = 250;
 
@@ -28,7 +29,6 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     STSharePhotoSectionImageAndCaption = 0,
     STSharePhotoSectionSuggestedProductsHeader,
     STSharePhotoSectionSuggestedProducts,
-    STSharePhotoSectionSuggestedLoading,
     STSharePhotoSectionTagProductsHeader,
     STSharePhotoSectionTaggedProducts,
     STSharePhotoSectionShareFacebook
@@ -42,6 +42,9 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 @property (weak, nonatomic) IBOutlet UICollectionView *productsCollection;
 @property (weak, nonatomic) IBOutlet UILabel *writeCaptionPlaceholder;
 @property (weak, nonatomic) IBOutlet UICollectionView *suggestedProductsCollection;
+@property (weak, nonatomic) IBOutlet UIView *noProductsFoundView;
+@property (weak, nonatomic) IBOutlet UIView *suggestionsSeparator;
+@property (weak, nonatomic) IBOutlet UIButton *retryButton;
 
 //initialized with the post.shopProducts if exists and then new items can be added/removed
 @property (nonatomic, strong) NSArray <STShopProduct *> *shopProducts;
@@ -55,6 +58,16 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 
 @implementation STSharePhotoTVC
 
+- (void)setupImageSuggestionsCompletion {
+    __weak STSharePhotoTVC *weakSelf = self;
+    [[CoreManager imageSuggestionsService] setSuggestionsCompletionBlock:^(NSArray *objects) {
+        __strong STSharePhotoTVC *strongSelf = weakSelf;
+        strongSelf.suggestionsLoaded = YES;
+        strongSelf.suggesteProducts = [NSMutableArray arrayWithArray:objects];
+        [strongSelf updateProductsCollection];
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
@@ -64,6 +77,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 //        self.tableView.scrollEnabled = YES;
 //    }
 
+    [[CoreManager imageSuggestionsService] changePostImage:[UIImage imageWithData:_imgData]];
     [self configureImageViewWithImageData:_imgData];
 
     [[STTagProductsManager sharedInstance] startDownload];
@@ -82,13 +96,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     else{
         _captiontextView.text = @"";
         _shopProducts = @[];
-        __weak STSharePhotoTVC *weakSelf = self;
-        [[CoreManager imageSuggestionsService] setSuggestionsCompletionBlock:^(NSArray *objects) {
-            __strong STSharePhotoTVC *strongSelf = weakSelf;
-            strongSelf.suggestionsLoaded = YES;
-            strongSelf.suggesteProducts = [NSMutableArray arrayWithArray:objects];
-            [strongSelf updateProductsCollection];
-        }];
+        [self setupImageSuggestionsCompletion];
     }
     
     _captiontextView.delegate = self;
@@ -155,6 +163,11 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 //    }];
 //    [self.navigationController pushViewController:vc animated:YES];
 }
+- (IBAction)onRetryButtonPressed:(id)sender {
+    [[CoreManager imageSuggestionsService] retry];
+    [self setupImageSuggestionsCompletion];
+    [self.tableView reloadData];
+}
 
 - (IBAction)onTapViewSimilarSuggestedProductButton:(id)sender {
     NSInteger buttonTag = ((UIButton *)sender).tag;
@@ -179,21 +192,26 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    STSuggestionsStatus suggestionsStatus = [[CoreManager imageSuggestionsService] getServiceStatus];
+    if (suggestionsStatus == STSuggestionsStatusLoadedNoProducts ||
+        suggestionsStatus == STSuggestionsStatusLoadedWithError) {
+        _noProductsFoundView.hidden = NO;
+        _retryButton.hidden = !(suggestionsStatus == STSuggestionsStatusLoadedWithError);
+    }else{
+        _noProductsFoundView.hidden = YES;
+    }
     return [super numberOfSectionsInTableView:tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger numRows = [super tableView:tableView numberOfRowsInSection:section];
 
+    STSuggestionsStatus suggestionsStatus = [[CoreManager imageSuggestionsService] getServiceStatus];
     switch (section) {
         case STSharePhotoSectionSuggestedProductsHeader:
         {
             if (_post != nil) {
                 numRows = 0;
-            }else{
-                if (_suggestionsLoaded && _suggesteProducts.count == 0) {
-                    numRows = 0;
-                }
             }
         }
             break;
@@ -202,19 +220,8 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
             if (_post != nil) {
                 numRows = 0;
             }else{
-                if (_suggestionsLoaded == NO ||
-                    (_suggestionsLoaded && _suggesteProducts.count == 0)) {
-                    numRows = 0;
-                }
-            }
-        }
-            break;
-        case STSharePhotoSectionSuggestedLoading:
-        {
-            if (_post != nil) {
-                numRows = 0;
-            }else{
-                if (_suggestionsLoaded == YES) {
+                if (suggestionsStatus == STSuggestionsStatusLoadedNoProducts||
+                    suggestionsStatus == STSuggestionsStatusLoadedWithError) {
                     numRows = 0;
                 }
             }
@@ -265,6 +272,9 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     [self.productsCollection.collectionViewLayout invalidateLayout];
     [self.suggestedProductsCollection reloadData];
     [self.suggestedProductsCollection.collectionViewLayout invalidateLayout];
+    STSuggestionsStatus suggestionsStatus = [[CoreManager imageSuggestionsService] getServiceStatus];
+    self.suggestionsSeparator.hidden = !(suggestionsStatus == STSuggestionsStatusLoadedWithError ||
+                                        suggestionsStatus == STSuggestionsStatusLoadedNoProducts);
     [self.view layoutIfNeeded];
 }
 
@@ -329,7 +339,12 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
         }
     }else if (collectionView == _suggestedProductsCollection){
         if (section == TagProductSectionProducts) {
-            return [_suggesteProducts count];
+            STSuggestionsStatus suggestionStatus = [[CoreManager imageSuggestionsService] getServiceStatus];
+            if (suggestionStatus == STSuggestionsStatusLoading) {
+                return 3;//three placeholders
+            }else if (suggestionStatus == STSuggestionsStatusLoaded){
+                return [_suggesteProducts count];
+            }
         }
         else if (section == TagProductSectionAddProduct){
             return 0;
@@ -353,12 +368,22 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     }
 }
 
--(NSString *)identifierForIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == TagProductSectionProducts) {
-        return @"STDetailedShopProductCell";
-    }
-    else if (indexPath.section == TagProductSectionAddProduct){
-        return @"STAddProductCell";
+-(NSString *)identifierForIndexPath:(NSIndexPath *)indexPath
+                  andCollectionView:(UICollectionView *)collectionView{
+    if (collectionView == _productsCollection) {
+        if (indexPath.section == TagProductSectionProducts) {
+            return @"STDetailedShopProductCell";
+        }
+        else if (indexPath.section == TagProductSectionAddProduct){
+            return @"STAddProductCell";
+        }
+    }else if (collectionView == _suggestedProductsCollection){
+        STSuggestionsStatus sugestionsStatus = [[CoreManager imageSuggestionsService] getServiceStatus];
+        if (sugestionsStatus == STSuggestionsStatusLoading) {
+            return @"STLoadingSuggestionCell";
+        }else if (sugestionsStatus == STSuggestionsStatusLoaded){
+            return @"STDetailedShopProductCell";
+        }
     }
     
     return @"";
@@ -366,7 +391,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self identifierForIndexPath:indexPath] forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self identifierForIndexPath:indexPath andCollectionView:collectionView] forIndexPath:indexPath];
     if ([cell isKindOfClass:[STDetailedShopProductCell class]]) {
         if (collectionView == _productsCollection) {
             STShopProduct *product = [_shopProducts objectAtIndex:indexPath.row];
@@ -376,6 +401,8 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
             [(STDetailedShopProductCell *)cell configureWithSuggestedProduct:product];
         }
         [((STDetailedShopProductCell *)cell) setTag:indexPath.row];
+    }else if ([cell isKindOfClass:[STLoadingSuggestionCell class]]){
+        [((STLoadingSuggestionCell *)cell).activityIndicator startAnimating];
     }
     
     return cell;

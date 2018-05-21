@@ -680,7 +680,7 @@ by using one of the following methods:</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give us more details about the product and we'll try to index it as soon as possible." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Az-wH-wof">
-                                                    <rect key="frame" x="65" y="196" width="245.5" height="26"/>
+                                                    <rect key="frame" x="65.5" y="196" width="245.5" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="5Tu-Ug-C7c"/>
                                                     </constraints>

@@ -10,7 +10,7 @@
 #import "STSuggestedProduct.h"
 #import "STUploadImageForSuggestionsRequest.h"
 #import "STDataAccessUtils.h"
-NSTimeInterval const kTimerInterval = 5.0;
+NSTimeInterval const kTimerInterval = 3.0;
 
 @interface STImageSuggestionsService ()
 
@@ -22,7 +22,8 @@ NSTimeInterval const kTimerInterval = 5.0;
 @property (nonatomic, copy) STImageSuggestionsServiceCompletion similarCompletion;
 @property (nonatomic, strong) NSString *similarProductId;
 @property (nonatomic, strong) NSString *postId;
-@property (nonatomic, strong)NSData *imageData;
+@property (nonatomic, strong) NSError *loadingError;
+@property (nonatomic, strong) UIImage *postImage;
 
 @end
 
@@ -31,18 +32,24 @@ NSTimeInterval const kTimerInterval = 5.0;
 #pragma mark - Public
 
 -(void)startServiceWithImage:(UIImage *)image{
+    [self startServiceWithImage:image forPostId:nil];
+}
+
+-(void)startServiceWithImage:(UIImage *)image forPostId:(NSString *)postId{
     [self clearService];
-    
+    self.postId = postId;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-
     
-    self.imageData = UIImageJPEGRepresentation(image, 1.f);
+    self.loadingError = nil;
+    self.postImage = image;
+    NSData *imageData = UIImageJPEGRepresentation(self.postImage, 0.0);
     __weak STImageSuggestionsService *weakSelf = self;
-    [STUploadImageForSuggestionsRequest uploadImageForSuggestionsWithData:self.imageData withCompletion:^(id response, NSError *error) {
+    [STUploadImageForSuggestionsRequest uploadImageForSuggestionsWithData:imageData forPostId:self.postId withCompletion:^(id response, NSError *error) {
         __strong STImageSuggestionsService *strongSelf = weakSelf;
+        strongSelf.loadingError = error;
         if (!error) {
             strongSelf.postId = response[@"post_id"];
             [strongSelf setUpTimer];
@@ -55,6 +62,7 @@ NSTimeInterval const kTimerInterval = 5.0;
     } failure:^(NSError *error) {
         NSLog(@"Error on STUploadImageForSuggestionsRequest %@", error.debugDescription);
         __strong STImageSuggestionsService *strongSelf = weakSelf;
+        strongSelf.loadingError = error;
         [strongSelf addSuggestions:nil];
         [strongSelf clearService];
     }];
@@ -140,9 +148,35 @@ NSTimeInterval const kTimerInterval = 5.0;
     [self.suggestedProducts removeObject:suggestion];
 }
 
+-(STSuggestionsStatus)getServiceStatus{
+    if (_suggestedProductsLoaded) {
+        if (_loadingError) {
+            return STSuggestionsStatusLoadedWithError;
+        }else{
+            if (_suggestedProducts.count == 0) {
+                return STSuggestionsStatusLoadedNoProducts;
+            }else
+                return STSuggestionsStatusLoaded;
+        }
+    }
+    return STSuggestionsStatusLoading;
+}
+
+-(void)retry{
+    STSuggestionsStatus suggestionsStatus = [self getServiceStatus];
+    if (suggestionsStatus == STSuggestionsStatusLoadedWithError) {
+        [self startServiceWithImage:self.postImage forPostId:self.postId];
+    }
+}
+
+-(void)changePostImage:(UIImage *)newPostImage{
+    self.postImage = newPostImage;
+}
+
 -(void)clearService{
     [self.timer invalidate];
     self.timer = nil;
+    self.loadingError = nil;
     self.suggestedProductsLoaded = NO;
     self.postId = nil;
     self.suggestedProducts = nil;
@@ -202,6 +236,7 @@ NSTimeInterval const kTimerInterval = 5.0;
     __weak STImageSuggestionsService *weakSelf = self;
     [STDataAccessUtils getSuggestedProductsWithPostId:self.postId withCompletion:^(NSArray<STSuggestedProduct *> *objects, NSError *error) {
         __strong STImageSuggestionsService *strongSelf = weakSelf;
+        strongSelf.loadingError = error;
         if(error){
             if (error.code == STWebservicesCodesPartialContent) {
                 //do nothing, try again later
