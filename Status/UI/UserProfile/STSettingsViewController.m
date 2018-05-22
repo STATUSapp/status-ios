@@ -79,7 +79,6 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -91,7 +90,6 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 {
     [super viewDidLoad];
     self.title = @"Settings";
-    self.navigationController.navigationBarHidden = YES;
     self.deactivatedNotifications = @[@(STNotificationSectionMessages), @(STNotificationSectionPhotosWaiting), @(STNotificationSectionEarnExtraLikes)];
     NSString *versionString = [[STBaseRequest new] getAppVersion];
     _versionLabel.text = [NSString stringWithFormat:@"Version %@", versionString];
@@ -229,14 +227,14 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 }
 
 - (IBAction)onTapInviteFriends:(id)sender {
-    STFriendsInviterViewController * inviteFriendsVC = [STFriendsInviterViewController newController];
-    [self.navigationController pushViewController:inviteFriendsVC animated:NO];
+    UINavigationController * navVC = [STFriendsInviterViewController newController];
+    [self.navigationController presentViewController:navVC animated:YES completion:nil];
 
 }
 
 - (IBAction)onTapFollowPeople:(id)sender {
-    STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithFollowType:STFollowTypeFriendsAndPeople];
-    [self.navigationController pushViewController:suggestionsVC animated:YES];
+    UINavigationController * suggestionsNav = [STSuggestionsViewController instatiateWithFollowType:STFollowTypeFriendsAndPeople];
+    [self.navigationController presentViewController:suggestionsNav animated:YES completion:nil];
 }
 
 - (IBAction)onTapLikeUsOnFacebook:(id)sender {

@@ -297,7 +297,6 @@
 		99B387B81C82FAA2005B4D8C /* STTapAnimationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386DF1C82FAA2005B4D8C /* STTapAnimationLabel.m */; };
 		99B387C01C82FAA2005B4D8C /* STSuggestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386F51C82FAA2005B4D8C /* STSuggestionCell.m */; };
 		99B387C11C82FAA2005B4D8C /* STSuggestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386F71C82FAA2005B4D8C /* STSuggestionsViewController.m */; };
-		99B387C21C82FAA2005B4D8C /* STFacebookInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386FA1C82FAA2005B4D8C /* STFacebookInviterViewController.m */; };
 		99B387C31C82FAA2005B4D8C /* STFriendsInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386FC1C82FAA2005B4D8C /* STFriendsInviterViewController.m */; };
 		99B387C41C82FAA2005B4D8C /* STInviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386FE1C82FAA2005B4D8C /* STInviteFriendCell.m */; };
 		99B387C61C82FAA2005B4D8C /* STSMSEmailInviterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B387021C82FAA2005B4D8C /* STSMSEmailInviterViewController.m */; };
@@ -876,8 +875,6 @@
 		99B386F51C82FAA2005B4D8C /* STSuggestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSuggestionCell.m; sourceTree = "<group>"; };
 		99B386F61C82FAA2005B4D8C /* STSuggestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSuggestionsViewController.h; sourceTree = "<group>"; };
 		99B386F71C82FAA2005B4D8C /* STSuggestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSuggestionsViewController.m; sourceTree = "<group>"; };
-		99B386F91C82FAA2005B4D8C /* STFacebookInviterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookInviterViewController.h; sourceTree = "<group>"; };
-		99B386FA1C82FAA2005B4D8C /* STFacebookInviterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookInviterViewController.m; sourceTree = "<group>"; };
 		99B386FB1C82FAA2005B4D8C /* STFriendsInviterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFriendsInviterViewController.h; sourceTree = "<group>"; };
 		99B386FC1C82FAA2005B4D8C /* STFriendsInviterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFriendsInviterViewController.m; sourceTree = "<group>"; };
 		99B386FD1C82FAA2005B4D8C /* STInviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInviteFriendCell.h; sourceTree = "<group>"; };
@@ -1941,8 +1938,6 @@
 		99B386F81C82FAA2005B4D8C /* Invite */ = {
 			isa = PBXGroup;
 			children = (
-				99B386F91C82FAA2005B4D8C /* STFacebookInviterViewController.h */,
-				99B386FA1C82FAA2005B4D8C /* STFacebookInviterViewController.m */,
 				99B386FB1C82FAA2005B4D8C /* STFriendsInviterViewController.h */,
 				99B386FC1C82FAA2005B4D8C /* STFriendsInviterViewController.m */,
 				99B386FD1C82FAA2005B4D8C /* STInviteFriendCell.h */,
@@ -2635,7 +2630,6 @@
 				99B387D91C82FAA2005B4D8C /* STMoveScaleViewController.m in Sources */,
 				1709121A1DF87F5C00B2AF81 /* STConversationCell.m in Sources */,
 				072822EC1E899CB900DCC591 /* STTagProductsContainer.m in Sources */,
-				99B387C21C82FAA2005B4D8C /* STFacebookInviterViewController.m in Sources */,
 				99B3874F1C82FAA2005B4D8C /* STGetFollowingRequest.m in Sources */,
 				170911F91DF87F0400B2AF81 /* NearbyVC.m in Sources */,
 				175204451CAAC84200C55170 /* SmallFeedCell.m in Sources */,

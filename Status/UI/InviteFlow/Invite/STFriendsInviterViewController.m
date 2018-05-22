@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
 }
 
 - (IBAction)closeInviteFriends:(UIButton *)sender {
-    STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithFollowType:STFollowTypeFriendsAndPeople];
+    STSuggestionsViewController * suggestionsVC = [[[STSuggestionsViewController instatiateWithFollowType:STFollowTypeFriendsAndPeople] viewControllers] firstObject];
     [self.navigationController pushViewController:suggestionsVC animated:true];
 }
 
@@ -116,7 +116,7 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
     }
     
     if (controllerIndex == _viewControllers.count - 1) {
-        STSuggestionsViewController * suggestionsVC = [STSuggestionsViewController instatiateWithFollowType:STFollowTypeFriendsAndPeople];
+        STSuggestionsViewController * suggestionsVC = [[[STSuggestionsViewController instatiateWithFollowType:STFollowTypeFriendsAndPeople] viewControllers] firstObject];
         [self.navigationController pushViewController:suggestionsVC animated:true];
     } else {
         [_pageController setViewControllers:@[[_viewControllers objectAtIndex:controllerIndex + 1]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
@@ -218,19 +218,17 @@ typedef NS_ENUM(NSUInteger, STInviterChoose) {
 
 #pragma mark - Lifecycle
 
-+ (STFriendsInviterViewController *)newController {
-    UIViewController * friendsInviter = [[UIStoryboard storyboardWithName:@"Invite" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:NSStringFromClass([STFriendsInviterViewController class])];
-    return (STFriendsInviterViewController *)friendsInviter;
++ (UINavigationController *)newController {
+    UINavigationController * friendsInviterNav = [[UIStoryboard storyboardWithName:@"Invite" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    return friendsInviterNav;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self.navigationController setNavigationBarHidden:YES];
-    
+    // Do any additional setup after loading the view.    
     [[CoreManager contactsService] updateContactsList];
     
-    UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
+    UIColor * backgroundColor = [UIColor whiteColor];
     self.view.backgroundColor = backgroundColor;
     self.childContainer.backgroundColor = backgroundColor;
     _viewControllers = @[[STSMSEmailInviterViewController newControllerWithInviteType:STInviteTypeSMS delegate:self],

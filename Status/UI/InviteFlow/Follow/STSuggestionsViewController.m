@@ -43,11 +43,12 @@ static NSString * followThemTitle = @"FOLLOW THEM";
 
 @implementation STSuggestionsViewController
 
-+(STSuggestionsViewController *)instatiateWithFollowType:(STFollowType)followType{
++(UINavigationController *)instatiateWithFollowType:(STFollowType)followType{
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SuggestionsScene" bundle:nil];
-    STSuggestionsViewController *vc = (STSuggestionsViewController *)[storyBoard instantiateInitialViewController];
+    UINavigationController *vcNav = (UINavigationController *)[storyBoard instantiateInitialViewController];
+    STSuggestionsViewController *vc = [[vcNav viewControllers] firstObject];
     vc.followType = followType;
-    return vc;
+    return vcNav;
 
 }
 
@@ -85,7 +86,6 @@ static NSString * followThemTitle = @"FOLLOW THEM";
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
     
     _suggestedPeople = [NSMutableArray new];
     _suggestedFriends = [NSMutableArray new];
@@ -208,10 +208,10 @@ static NSString * followThemTitle = @"FOLLOW THEM";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 27.f)];
-    view.backgroundColor = [UIColor colorWithRed:71.f/255.f green:72.f/255.f blue:76.f/255.f alpha:1.f];
+    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
     UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 27.f)];
-    titlelable.textColor = [UIColor colorWithRed:160.f/255.f green:161.f/255.f blue:162.f/255.f alpha:1.f];
+    titlelable.textColor = [UIColor blackColor];
     titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:10];
     NSString *titleString = @"";
     switch (_followType) {

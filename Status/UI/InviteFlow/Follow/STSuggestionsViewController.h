@@ -13,6 +13,6 @@
 @interface STSuggestionsViewController : UIViewController
 
 @property (nonatomic) STFollowType followType;
-+(STSuggestionsViewController *)instatiateWithFollowType:(STFollowType)followType;
++(UINavigationController *)instatiateWithFollowType:(STFollowType)followType;
 
 @end
