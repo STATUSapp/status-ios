@@ -75,7 +75,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.hidesBarsOnSwipe = YES;
     if (self.feedProcessor.processorFlowType == STFlowTypeHome) {
         NSArray *redirectVC = [[CoreManager deepLinkService] redirectViewControllers];
         if (redirectVC && [redirectVC count]) {
@@ -88,7 +87,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.hidesBarsOnSwipe = YES;
+    //deactivate this as it causes a leak on iOS 11
+    self.navigationController.hidesBarsOnSwipe = NO;
     [self configureTheNavigationBar];
     [[CoreManager imageCacheService] changeFlowType:_feedProcessor.processorFlowType
                                           needsSort:YES];
@@ -131,40 +131,47 @@
 
 
 #pragma mark - Helpers
+- (NSString *)getFullName {
+    NSString *fullName = [_feedProcessor.userProfile fullName];
+    if (!fullName) {
+        fullName = self.userName;
+    }
+    return fullName;
+}
+
 - (void)configureTheNavigationBar{
     UIViewController *currentViewController = [self.navigationController.viewControllers lastObject];
     if (self != currentViewController) {
         return;
     }
-    BOOL navBarHidden = self.navigationController.navigationBarHidden;
-    if (navBarHidden == NO) {
-        if (self == currentViewController) {
-            if (_feedProcessor.processorFlowType == STFlowTypeHome){
-                self.navigationItem.titleView = _navBarLogoView;
+    if (self == currentViewController) {
+        if (_feedProcessor.processorFlowType == STFlowTypeHome){
+            self.navigationItem.titleView = _navBarLogoView;
+        }
+        else if (_feedProcessor.processorFlowType == STFlowTypeMyGallery) {
+            NSString * fullName = [self getFullName];
+            self.navigationItem.title = fullName;
+            if (_feedProcessor.userProfile.isInfluencer) {
+                self.navigationItem.leftBarButtonItems = @[_earningsBarButton];
+            }else{
+                self.navigationItem.leftBarButtonItems = nil;
             }
-            else if (_feedProcessor.processorFlowType == STFlowTypeMyGallery) {
-                self.navigationItem.title = [_feedProcessor.userProfile fullName];
-                if (_feedProcessor.userProfile.isInfluencer) {
-                    self.navigationItem.leftBarButtonItems = @[_earningsBarButton];
-                }else{
-                    self.navigationItem.leftBarButtonItems = nil;
-                }
-                self.navigationItem.rightBarButtonItems = @[_settingsBarButton];
-            }
-            else if (_feedProcessor.processorFlowType == STFlowTypeSinglePost)
-            {
-                self.navigationItem.title = NSLocalizedString(@"Photo", nil);
-            }else if (_feedProcessor.processorFlowType == STFlowTypeHasttag){
-                self.navigationItem.title = _feedProcessor.hashtag;
-            }else if (_feedProcessor.processorFlowType == STFlowTypeUserGallery){
-                self.navigationItem.title = [_feedProcessor.userProfile fullName];
-                self.navigationItem.rightBarButtonItems = @[_optionsBarButton];
-            }
+            self.navigationItem.rightBarButtonItems = @[_settingsBarButton];
+        }
+        else if (_feedProcessor.processorFlowType == STFlowTypeSinglePost)
+        {
+            self.navigationItem.title = NSLocalizedString(@"Photo", nil);
+        }else if (_feedProcessor.processorFlowType == STFlowTypeHasttag){
+            self.navigationItem.title = _feedProcessor.hashtag;
+        }else if (_feedProcessor.processorFlowType == STFlowTypeUserGallery){
+            NSString * fullName = [self getFullName];
+            self.navigationItem.title = fullName;
+            self.navigationItem.rightBarButtonItems = @[_optionsBarButton];
         }
     }
-    
+
     [self setNeedsStatusBarAppearanceUpdate];
-    [self.navigationController setNavigationBarHidden:navBarHidden animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 

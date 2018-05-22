@@ -305,8 +305,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 #pragma mark - Helpers
 - (void)showSuggestions:(NSNotification *)notif{
-    STFriendsInviterViewController * vc = [STFriendsInviterViewController newController];
-    [self.delegate presentViewController:[[UINavigationController alloc ]initWithRootViewController:vc] animated:NO];
+    UINavigationController * navVC = [STFriendsInviterViewController newController];
+    [self.delegate presentViewController:navVC animated:NO];
     
 }
 

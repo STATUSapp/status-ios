@@ -62,19 +62,16 @@ static CGFloat kImageInset = 4.f;
     
     UIViewController *takeAPhotoVC = [storyboard instantiateViewControllerWithIdentifier:@"TAKE_PHOTO_EMPTY_VC"];
     UINavigationController * takePhotoNav = [[UINavigationController alloc] initWithRootViewController:takeAPhotoVC];
-//    takePhotoNav.navigationBarHidden = YES;
     
     // add message / notifications
     STNotificationsViewController * notifAndChatVC = [STNotificationsViewController newController];
     UINavigationController * notifChatNav = [[UINavigationController alloc] initWithRootViewController:notifAndChatVC];
-//    notifChatNav.navigationBarHidden = NO;
     [self configureNavControllerToHandleSwipeToBackGesture:notifChatNav];
     
     // add my profile
     ContainerFeedVC *profileVC = [ContainerFeedVC tabProfileController];
     UINavigationController   * profileNav = [[UINavigationController alloc] initWithRootViewController:profileVC];
 
-//    profileNav.navigationBarHidden = YES;
     [self configureNavControllerToHandleSwipeToBackGesture:profileNav];
     
     [tabBarControllers insertObject:homeNavCtrl atIndex:STTabBarIndexHome];

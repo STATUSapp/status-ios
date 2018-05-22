@@ -193,10 +193,10 @@ static NSString * inviteThemTitle = @"INVITE THEM";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 25.f)];
-    view.backgroundColor = [UIColor colorWithRed:71.f/255.f green:72.f/255.f blue:76.f/255.f alpha:1.f];
+    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 25.f)];
-    titlelable.textColor = [UIColor colorWithRed:160.f/255.f green:161.f/255.f blue:162.f/255.f alpha:1.f];
+    titlelable.textColor = [UIColor blackColor];
     titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:12];
     NSString *titleString = [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
     titlelable.text = titleString;
@@ -305,7 +305,7 @@ static NSString * inviteThemTitle = @"INVITE THEM";
     _dataProcessor = [[STContactsDataProcessor alloc] initWithType: self.inviteType == STInviteTypeEmail ? STContactsProcessorTypeEmails : STContactsProcessorTypePhones];
     [self.tableView reloadData];
     
-    UIColor * backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:47.0f/255.0f blue:50.0f/255.0f alpha:1];
+    UIColor * backgroundColor = [UIColor whiteColor];
     self.view.backgroundColor = backgroundColor;
     self.tableView.backgroundColor = backgroundColor;
     

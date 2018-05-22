@@ -10,6 +10,6 @@
 
 @interface STFriendsInviterViewController : UIViewController
 
-+ (STFriendsInviterViewController *)newController;
++ (UINavigationController *)newController;
 
 @end
