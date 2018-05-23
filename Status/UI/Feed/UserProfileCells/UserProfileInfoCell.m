@@ -13,17 +13,11 @@
 #import "STFacebookLoginController.h"
 #import "NSString+VersionComparison.h"
 #import "UIImageView+WebCache.h"
-
-CGFloat distanceLabelWidthPadding = 30.f;
-CGFloat distanceLabelStandardHeight = 21.f;
+#import "UIImageView+Mask.h"
 
 @interface UserProfileInfoCell() 
-@property (weak, nonatomic) IBOutlet UIButton *followButton;
-@property (weak, nonatomic) IBOutlet UIButton *messageEditButton;
-@property (weak, nonatomic) IBOutlet UIButton *nameAndAgeButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *editButtonConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *followButtonConstr;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UIButton *bottomButton;
 
 @end
 
@@ -31,49 +25,45 @@ CGFloat distanceLabelStandardHeight = 21.f;
 
 - (void)configureCellWithUserProfile:(STUserProfile *)profile{
     
+    __weak UserProfileInfoCell *weakSelf = self;
     [_profileImageView sd_setImageWithURL:[NSURL URLWithString:profile.mainImageUrl] placeholderImage:[UIImage imageNamed:[profile genderImage]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (error) {
-            
+        if (!error) {
+            __strong UserProfileInfoCell *strongSelf = weakSelf;
+            [strongSelf.profileImageView maskImage:image];
         }
     }];
-    
+    STProfileButtonTag buttonTag = 0;
     if ([profile.uuid isEqualToString:[CoreManager loginService].currentUserUuid]) {
-        _followButton.hidden = YES;
-        [_messageEditButton setTitle:@"EDIT" forState:UIControlStateNormal];
-        [_messageEditButton setTitle:@"EDIT" forState:UIControlStateHighlighted];
-        _messageEditButton.enabled = YES;
-        _editButtonConstraint.constant = 70.f;
-        _followButtonConstr.constant = 0.f;
+        buttonTag = STProfileButtonTagEdit;
+    }else{
+        if (profile.isFollowedByCurrentUser) {
+            buttonTag = STProfileButtonTagFollowing;
+        }else{
+            buttonTag = STProfileButtonTagFollow;
+        }
     }
-    else
-    {
-        _followButton.hidden = NO;
-        _messageEditButton.enabled = NO;
-        _messageEditButton.hidden = YES;
-        _editButtonConstraint.constant = 0.f;
-        _followButtonConstr.constant = 70.f;
+    [self setProfileButtonForTag:buttonTag];
+}
+
+-(void)setProfileButtonForTag:(STProfileButtonTag)tag{
+    _bottomButton.tag = tag;
+    NSString *imageName = nil;
+    switch (tag) {
+        case STProfileButtonTagEdit:
+            imageName = @"profile_edit";
+            break;
+        case STProfileButtonTagFollow:
+            imageName = @"profile_follow";
+            break;
+        case STProfileButtonTagFollowing:
+            imageName = @"profile_following";
+            break;
+
+        default:
+            break;
     }
-    
-//    NSString *age = @"";
-//    if (profile.birthday) {
-//        age = [NSDate yearsFromDate:profile.birthday];
-//        
-//    }
-    NSString *nameString = profile.fullName.length > 0?profile.fullName:profile.firstname;
-//    NSString *nameAndAgeString = [NSString stringWithFormat:@"%@%@%@",nameString,age.length>0?@", ":@"", age];
-    [_nameAndAgeButton setTitle:nameString forState:UIControlStateNormal];
-    [_nameAndAgeButton setTitle:nameString forState:UIControlStateHighlighted];
-    
-    if (!profile.isFollowedByCurrentUser) {
-        [_followButton setTitle:@"FOLLOW" forState:UIControlStateNormal];
-        [_followButton setTitle:@"FOLLOW" forState:UIControlStateHighlighted];
-    }
-    else
-    {
-        [_followButton setTitle:@"UNFOLLOW" forState:UIControlStateNormal];
-        [_followButton setTitle:@"UNFOLLOW" forState:UIControlStateHighlighted];
-    }
-    
+    UIImage *image = [UIImage imageNamed:imageName];
+    [_bottomButton setImage:image forState:UIControlStateNormal];
 }
 
 -(void)prepareForReuse{
@@ -84,7 +74,7 @@ CGFloat distanceLabelStandardHeight = 21.f;
 + (CGSize)cellSize{
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     
-    return CGSizeMake(screenSize.width, screenSize.width);
+    return CGSizeMake(screenSize.width, 253.f);
 }
 
 @end

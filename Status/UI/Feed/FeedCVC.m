@@ -883,19 +883,20 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                           }];
 }
 
-- (IBAction)onMessageEditButtonPressed:(id)sender{
-    if (_isMyProfile) {
-        //go to Edit Profile
-        [self onTapEditUserProfile:nil];
-    }
-}
-
 - (IBAction)onTapEditUserProfile:(id)sender {
     STEditProfileViewController * editVC = [STEditProfileViewController newController];
     editVC.userProfile = [_feedProcessor userProfile];
     [self.delegate pushViewController:editVC animated:YES];
 }
 
+
+-(IBAction)onProfileButtonPressed:(UIButton *)sender{
+    if (sender.tag == STProfileButtonTagEdit) {
+        [self onTapEditUserProfile:sender];
+    }else{
+        [self onTapFollowUser:sender];
+    }
+}
 
 - (void)inviteUserToUpload{
     
