@@ -48,9 +48,11 @@
 -(void)setProfileButtonForTag:(STProfileButtonTag)tag{
     _bottomButton.tag = tag;
     NSString *imageName = nil;
+    NSString *pressedImageName = nil;
     switch (tag) {
         case STProfileButtonTagEdit:
             imageName = @"profile_edit";
+            pressedImageName = @"profile_edit_pressed";
             break;
         case STProfileButtonTagFollow:
             imageName = @"profile_follow";
@@ -64,6 +66,12 @@
     }
     UIImage *image = [UIImage imageNamed:imageName];
     [_bottomButton setImage:image forState:UIControlStateNormal];
+    if (pressedImageName) {
+        UIImage *pressedImage = [UIImage imageNamed:pressedImageName];
+        [_bottomButton setImage:pressedImage forState:UIControlStateHighlighted];
+    }else{
+        [_bottomButton setImage:nil forState:UIControlStateHighlighted];
+    }
 }
 
 -(void)prepareForReuse{

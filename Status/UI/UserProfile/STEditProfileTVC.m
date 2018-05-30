@@ -10,6 +10,7 @@
 #import "STImageCacheController.h"
 #import "STUploadNewProfilePictureRequest.h"
 #import "STUserProfilePool.h"
+#import "UIImageView+Mask.h"
 
 @interface STEditProfileTVC ()<UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldName;
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) NSArray *textFieldsOrder;
 @property (nonatomic, strong) NSArray *genderDatasourceArray;
 
+@property (nonatomic, assign) BOOL imagePickerPresented;
 @end
 
 @implementation STEditProfileTVC
@@ -49,10 +51,10 @@
     [[CoreManager imageCacheService] loadImageWithName:profile.mainImageUrl andCompletion:^(UIImage *img) {
         __strong STEditProfileTVC *strongSelf = weakSelf;
         if (img) {
-            strongSelf.profileImage.image = img;
+            [strongSelf.profileImage maskImage:img];
         }
         else
-            strongSelf.profileImage.image = [UIImage imageNamed:@"Mask"];
+            [strongSelf.profileImage maskImage:[UIImage imageNamed:@"Mask"]];
     }];
 }
 
@@ -187,17 +189,22 @@
 }
 
 -(void)presentImagePickerForType:(UIImagePickerControllerSourceType)type{
+    
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.sourceType = type;
     [imagePicker setAllowsEditing:YES];
-    [self.parentViewController presentViewController:imagePicker animated:YES completion:nil];
+    [self.parentViewController presentViewController:imagePicker animated:YES completion:^{
+        self.imagePickerPresented = YES;
+    }];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+
     [picker dismissViewControllerAnimated:YES completion:^{
         __weak STEditProfileTVC *weakSelf = self;
+        self.imagePickerPresented = NO;
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         
         NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
@@ -207,7 +214,7 @@
                 strongSelf.userProfile.mainImageUrl = [response[@"user_photo"] stringByReplacingHttpWithHttps];
                 [[CoreManager profilePool] addProfiles:@[strongSelf.userProfile]];
                 [[CoreManager imageCacheService] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
-                    strongSelf.profileImage.image = img;
+                    [strongSelf.profileImage maskImage:img];
                 }];
             }
             else
@@ -272,5 +279,87 @@
     }
     return 2;
 }
+
+//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    if (self.imagePickerPresented== YES && [navigationController.viewControllers count] == 2) {
+//        [self addMaskToView:viewController.view];
+////        UIImage *circleMaskImage = [self circleMaskImage];
+////        CGRect properRect = [self getCenteredFrame];
+////        UIImageView *imageView = [[UIImageView alloc] initWithFrame:properRect];
+////        [imageView setImage:circleMaskImage];
+////        imageView.userInteractionEnabled = NO;
+////        imageView.opaque = YES;
+////        [[viewController.view.subviews objectAtIndex:1] addSubview:imageView];
+////        [[viewController.view.subviews objectAtIndex:1] sendSubviewToBack:imageView];
+//    }
+//}
+//
+//-(void)addMaskToView:(UIView *)view{
+//    UIColor *circleColor = [UIColor clearColor];
+//    UIColor *maskColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+//    CGFloat screenWidth = [self.view bounds].size.width;
+//    CGFloat screenHeight = [self.view bounds].size.height;
+//    CGRect circleRect = [self getCenteredFrame];
+//    CAShapeLayer *circleLayer = [CAShapeLayer layer];
+//    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:circleRect];
+//    circlePath.usesEvenOddFillRule = YES;
+//    circleLayer.path = [circlePath CGPath];
+//    circleLayer.fillColor = circleColor.CGColor;
+//    CAShapeLayer *sqareLayer = [CAShapeLayer layer];
+//    UIBezierPath *squarePath = [UIBezierPath bezierPathWithRoundedRect:circleRect cornerRadius:0];
+//    [squarePath appendPath:circlePath];
+//    squarePath.usesEvenOddFillRule = YES;
+//    sqareLayer.path = [squarePath CGPath];
+//    sqareLayer.fillColor = maskColor.CGColor;
+//    
+//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, screenWidth, screenHeight) cornerRadius:0];
+//    [maskPath appendPath:squarePath];
+//    maskPath.usesEvenOddFillRule = YES;
+//    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+//    maskLayer.path = maskPath.CGPath;
+//    maskLayer.fillRule = kCAFillRuleEvenOdd;
+//    maskLayer.fillColor = [UIColor clearColor].CGColor;
+//    [maskLayer setMasksToBounds:NO];
+//    [view.layer addSublayer:maskLayer];
+//    
+//}
+//
+//-(CGRect) getCenteredFrame{
+//    CGFloat screenHeight = [[UIApplication sharedApplication].keyWindow bounds].size.height;
+//    CGFloat screenWidth = [[UIApplication sharedApplication].keyWindow bounds].size.width;
+//    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+//    
+//    return CGRectMake(0, (screenHeight - screenWidth - statusBarHeight)/2 + statusBarHeight, screenWidth, screenWidth);
+//}
+//
+//- (UIImage *)circleMaskImage{
+//    UIColor *circleColor = [UIColor clearColor];
+//    UIColor *maskColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+//    CGFloat screenWidth = [self.view bounds].size.width;
+//    CGRect rect = CGRectMake(0.0, 0.0, screenWidth, screenWidth);
+//    CAShapeLayer *circleLayer = [CAShapeLayer layer];
+//    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:rect];
+//    circlePath.usesEvenOddFillRule = YES;
+//    circleLayer.path = [circlePath CGPath];
+//    circleLayer.fillColor = circleColor.CGColor;
+//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:0];
+//    [maskPath appendPath:circlePath];
+//    maskPath.usesEvenOddFillRule = YES;
+//    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+//    maskLayer.path = maskPath.CGPath;
+//    maskLayer.fillRule = kCAFillRuleEvenOdd;
+//    maskLayer.fillColor = maskColor.CGColor;
+//    [maskLayer setMasksToBounds:NO];
+//    
+//    //export uiimage
+//    UIGraphicsBeginImageContext(rect.size);
+//    [maskLayer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    return outputImage;
+//
+//}
 
 @end

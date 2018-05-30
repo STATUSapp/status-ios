@@ -294,7 +294,7 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [STDeleteAccountRequest deleteAccountWithCompletion:^(id response, NSError *error) {
             if (!error) {
-                if ([response[@"status_core"] integerValue] == STWebservicesSuccesCod) {
+                if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                     [[CoreManager loginService] logoutManually];
                 }
             }else{
