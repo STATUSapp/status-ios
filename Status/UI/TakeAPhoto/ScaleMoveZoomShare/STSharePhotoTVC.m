@@ -17,7 +17,7 @@
 #import "STImageSuggestionsService.h"
 #import "STLoadingSuggestionCell.h"
 
-static NSInteger const  kMaxCaptionLenght = 250;
+static NSInteger const  kMaxCaptionLenght = 1000;
 
 typedef NS_ENUM(NSUInteger, TagProductSection) {
     TagProductSectionProducts = 0,

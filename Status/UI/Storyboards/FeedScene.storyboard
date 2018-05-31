@@ -40,7 +40,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileInfoCell" id="9Ay-Db-n5f" customClass="UserProfileInfoCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileInfoCell" id="9Ay-Db-n5f" customClass="UserProfileInfoCell">
                                 <rect key="frame" x="0.0" y="50" width="320" height="253"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -48,7 +48,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl" translatesAutoresizingMaskIntoConstraints="NO" id="BaU-l3-KLL">
-                                            <rect key="frame" x="68" y="34.5" width="184" height="184"/>
+                                            <rect key="frame" x="68" y="2.5" width="184" height="184"/>
                                             <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="184" id="RA0-fr-GxY"/>
@@ -56,7 +56,7 @@
                                             </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ix7-2t-5f3">
-                                            <rect key="frame" x="130" y="184.5" width="60" height="60"/>
+                                            <rect key="frame" x="130" y="152.5" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="b1f-76-ZHZ"/>
                                                 <constraint firstAttribute="width" constant="60" id="xzl-NF-QJW"/>
@@ -80,7 +80,7 @@
                                     <outlet property="profileImageView" destination="BaU-l3-KLL" id="JGd-o6-DAS"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileFriendsInfoCell" id="bbJ-ng-Ybc" customClass="UserProfileFriendsInfoCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileFriendsInfoCell" id="bbJ-ng-Ybc" customClass="UserProfileFriendsInfoCell">
                                 <rect key="frame" x="0.0" y="303" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -88,7 +88,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yr7-kg-NgQ" userLabel="Followers">
-                                            <rect key="frame" x="0.0" y="0.0" width="106" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="0.0"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3259" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Lwm-bW-Wn8">
                                                     <rect key="frame" x="1" y="11" width="100" height="17"/>
@@ -111,7 +111,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dn5-hv-ax9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="56"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="0.0"/>
                                                     <connections>
                                                         <action selector="onTapFollowers:" destination="kUw-q3-wvD" eventType="touchUpInside" id="M2Z-QP-csa"/>
                                                     </connections>
@@ -131,7 +131,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUr-Bz-xHv" userLabel="Following">
-                                            <rect key="frame" x="107" y="0.0" width="106" height="56"/>
+                                            <rect key="frame" x="107" y="0.0" width="106" height="0.0"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="405" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="s7o-eh-xBJ">
                                                     <rect key="frame" x="1" y="11" width="100" height="17"/>
@@ -164,7 +164,7 @@
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwR-lP-Q5V">
-                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="56"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="0.0"/>
                                                     <connections>
                                                         <action selector="onTapFollowing:" destination="kUw-q3-wvD" eventType="touchUpInside" id="0Og-u7-Wov"/>
                                                     </connections>
@@ -193,7 +193,7 @@
                                             </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9QA-fm-Ty6" userLabel="Posts">
-                                            <rect key="frame" x="214" y="0.0" width="106" height="56"/>
+                                            <rect key="frame" x="214" y="0.0" width="106" height="0.0"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="261" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="wzS-f7-FST">
                                                     <rect key="frame" x="1" y="11" width="100" height="17"/>
@@ -216,7 +216,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Io-jH-eb8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="56"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="0.0"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -256,7 +256,7 @@
                                     <outlet property="postsLabel" destination="wzS-f7-FST" id="HWI-VK-ofK"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileBioCell" id="9lJ-pS-CRA" customClass="UserProfileBioCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileBioCell" id="9lJ-pS-CRA" customClass="UserProfileBioCell">
                                 <rect key="frame" x="0.0" y="359" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -264,7 +264,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Fashion Designer.  Known for exotic prints and for creating the sand blasted look for jeans. Livin' the dream." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-qF-e7M">
-                                            <rect key="frame" x="14" y="0.0" width="292" height="62"/>
+                                            <rect key="frame" x="14" y="0.0" width="292" height="39"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -282,7 +282,7 @@
                                     <outlet property="bioLabel" destination="2eP-qF-e7M" id="CGo-qw-A0P"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileLocationCell" id="mH5-JB-O94" customClass="UserProfileLocationCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileLocationCell" id="mH5-JB-O94" customClass="UserProfileLocationCell">
                                 <rect key="frame" x="0.0" y="429" width="320" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -321,7 +321,7 @@
                                     <outlet property="locationPin" destination="M0i-Rg-lEj" id="SKn-2u-4Sr"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserProfileNoPhotosCell" id="qlV-vh-foT" customClass="UserProfileNoPhotosCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UserProfileNoPhotosCell" id="qlV-vh-foT" customClass="UserProfileNoPhotosCell">
                                 <rect key="frame" x="0.0" y="465" width="320" height="304"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -874,7 +874,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lynlee Poston" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Krd-rO-Lp5">
-                                            <rect key="frame" x="64" y="13" width="107" height="24"/>
+                                            <rect key="frame" x="64" y="13" width="208" height="24"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="17"/>
                                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -890,7 +890,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9D-5K-yxO">
-                                            <rect key="frame" x="0.0" y="0.0" width="171" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <connections>
@@ -903,6 +903,7 @@
                                     <constraints>
                                         <constraint firstItem="T9D-5K-yxO" firstAttribute="trailing" secondItem="Krd-rO-Lp5" secondAttribute="trailing" id="0be-tn-ubo"/>
                                         <constraint firstAttribute="bottom" secondItem="Krd-rO-Lp5" secondAttribute="bottom" constant="13" id="5ZH-CF-aXR"/>
+                                        <constraint firstItem="5ZQ-Lg-qgX" firstAttribute="leading" secondItem="Krd-rO-Lp5" secondAttribute="trailing" constant="-16" id="87W-Bc-SP6"/>
                                         <constraint firstItem="5ZQ-Lg-qgX" firstAttribute="top" secondItem="oTk-gY-wK2" secondAttribute="top" id="PGt-V2-OHE"/>
                                         <constraint firstItem="T9D-5K-yxO" firstAttribute="top" secondItem="oTk-gY-wK2" secondAttribute="top" id="QbM-0W-G1A"/>
                                         <constraint firstItem="A8X-qW-qFT" firstAttribute="leading" secondItem="oTk-gY-wK2" secondAttribute="leading" constant="16" id="X0U-pD-wy8"/>

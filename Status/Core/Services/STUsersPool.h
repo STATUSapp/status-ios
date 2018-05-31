@@ -14,6 +14,7 @@
 
 - (void)addUsers:(NSArray <STSuggestedUser * > *)users;
 - (STSuggestedUser *)getUserWithId:(NSString *)userId;
+- (NSArray *)getUsersForIds:(NSArray<NSString *> *)idArray;
 - (NSArray <STSuggestedUser *> *)getAllUsers;
 - (void)clearAllUsers;
 - (void)removeUsers:(NSArray <STSuggestedUser * > *)users;

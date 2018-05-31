@@ -29,6 +29,9 @@
     return (STSuggestedUser *)[super getObjectWithId:userId];
 }
 
+- (NSArray *)getUsersForIds:(NSArray<NSString *> *)idArray{
+    return [super getObjecstWithIds:idArray];
+}
 - (NSArray <STSuggestedUser *> *)getAllUsers{
     return (NSArray<STSuggestedUser *> *)[super getAllObjects];
 }

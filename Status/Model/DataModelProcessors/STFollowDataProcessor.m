@@ -10,6 +10,8 @@
 #import "STFacebookLoginController.h"
 #import "STUserProfile.h"
 #import "STUserProfilePool.h"
+#import "STUsersPool.h"
+#import "STListUser.h"
 
 @interface STFollowDataProcessor()
 
@@ -44,6 +46,12 @@
     __weak STFollowDataProcessor *weakSelf = self;
     [STDataAccessUtils followUsers:unfollowUsersShouldFollow
                     withCompletion:^(NSError *error) {
+                        if (error == nil) {
+                            NSArray *uuidArray = [unfollowUsersShouldFollow valueForKey:@"uuid"];
+                            NSMutableArray <STSuggestedUser *> *allUsers = [[[CoreManager usersPool] getUsersForIds:uuidArray] mutableCopy];
+                            [allUsers setValue:@(YES) forKey:@"followedByCurrentUser"];
+                            [[CoreManager usersPool] addUsers:allUsers];
+                        }
                         __strong STFollowDataProcessor *strongSelf = weakSelf;
                         NSLog(@"Error follow: %@", error.debugDescription);
                         NSMutableSet *uncheckedUsersToUnfollow = [NSMutableSet setWithSet:[suggestedUsersSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"followedByCurrentUser == 0"]]];
@@ -51,6 +59,12 @@
                         NSArray *followUsersShouldUnfollow = [uncheckedUsersToUnfollow allObjects];
                         
                         [STDataAccessUtils unfollowUsers:followUsersShouldUnfollow withCompletion:^(NSError *error) {
+                            if (error == nil) {
+                                NSArray *uuidArray = [followUsersShouldUnfollow valueForKey:@"uuid"];
+                                NSMutableArray <STSuggestedUser *> *allUsers = [[[CoreManager usersPool] getUsersForIds:uuidArray] mutableCopy];
+                                [allUsers setValue:@(NO) forKey:@"followedByCurrentUser"];
+                                [[CoreManager usersPool] addUsers:allUsers];
+                            }
                             NSLog(@"Error unfollow: %@", error.debugDescription);
                             
                             NSString *loggedInUserId = [[CoreManager loginService] currentUserUuid];
@@ -60,7 +74,15 @@
                                                                  STUserProfile *userProfile = [objects firstObject];
                                                                  if (userProfile) {
                                                                      [[CoreManager profilePool] addProfiles:@[userProfile]];
-                                                                     
+                                                                     STSuggestedUser *lu = [[CoreManager usersPool] getUserWithId:userProfile.uuid];
+                                                                     if (lu) {
+                                                                         lu.followedByCurrentUser = @(userProfile.isFollowedByCurrentUser);
+                                                                         lu.userName = userProfile.fullName;
+                                                                         lu.thumbnail = userProfile.mainImageUrl;
+                                                                         lu.gender = userProfile.profileGender;
+
+                                                                         [[CoreManager usersPool] addUsers:@[lu]];
+                                                                     }
                                                                  }
                                                                  
                                                                  if(completion) completion(error);
