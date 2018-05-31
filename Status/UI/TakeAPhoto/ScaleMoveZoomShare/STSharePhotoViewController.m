@@ -47,6 +47,9 @@
     [super viewDidLoad];
     self.navigationController.hidesBarsOnSwipe = NO;
     self.navigationController.navigationBarHidden = NO;
+    if (_controllerType == STShareControllerEditInfo) {
+        [_shareButton setTitle:NSLocalizedString(@"DONE", nil) forState:UIControlStateNormal];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{

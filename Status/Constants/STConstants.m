@@ -138,6 +138,7 @@ NSString *const STPostPoolObjectDeletedNotification = @"STPostPoolObjectDeletedN
 NSString *const STProfilePoolObjectUpdatedNotification = @"STProfilePoolObjectUpdatedNotification";
 NSString *const STProfilePoolNewObjectNotification = @"STProfilePoolNewObjectNotification";
 NSString *const STProfilePoolObjectDeletedNotification = @"STProfilePoolObjectDeletedNotification";
+NSString *const STUserPoolObjectUpdatedNotification = @"STUserPoolObjectUpdatedNotification";
 
 NSString *const STPostNewImageUploaded = @"STPostNewImageUploaded";
 NSString *const STPostImageWasEdited = @"STPostImageWasEdited";

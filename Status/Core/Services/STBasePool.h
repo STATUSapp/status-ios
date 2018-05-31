@@ -14,6 +14,7 @@
 
 - (void)addObjects:(NSArray <STBaseObj * > *)objects;
 - (STBaseObj *)getObjectWithId:(NSString *)objectsId;
+- (NSArray <STBaseObj *> *)getObjecstWithIds:(NSArray <NSString *> *)objectsIds;
 - (NSArray <STBaseObj *> *)getAllObjects;
 - (void)clearAllObjects;
 - (void)removeObjects:(NSArray <STBaseObj * > *)objects;

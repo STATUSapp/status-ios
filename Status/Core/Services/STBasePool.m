@@ -10,12 +10,13 @@
 #import "STBaseObj.h"
 #import "STPost.h"
 #import "STUserProfile.h"
+#import "STSuggestedUser.h"
 
 #import "STLocalNotificationService.h"
 
 @interface STBasePool ()
 
-@property (nonatomic, strong) NSMutableSet <STBaseObj *> * objects;
+@property (nonatomic, strong) NSMutableDictionary <NSString *, STBaseObj *> * objects;
 
 @end
 
@@ -24,7 +25,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _objects = [NSMutableSet set];
+        _objects = [@{} mutableCopy];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
     }
     return self;
@@ -39,14 +40,23 @@
 
 }
 - (STBaseObj *)getObjectWithId:(NSString *)objectsId{
-    NSPredicate * predicate = [NSPredicate predicateWithBlock:^BOOL(STBaseObj *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [evaluatedObject.uuid isEqualToString:objectsId];
-    }];
-    return [_objects filteredSetUsingPredicate:predicate].anyObject;
+    return [_objects valueForKey:objectsId];
 
 }
+
+- (NSArray <STBaseObj *> *)getObjecstWithIds:(NSArray <NSString *> *)objectsIds{
+    NSMutableArray <STBaseObj *> *result = [@[] mutableCopy];
+    for (NSString *uuid in objectsIds) {
+        STBaseObj *obj = [self getObjectWithId:uuid];
+        if (obj) {
+            [result addObject:obj];
+        }
+    }
+    return result;
+}
+
 - (NSArray <STBaseObj *> *)getAllObjects{
-    return _objects.allObjects;
+    return [_objects allValues];
 }
 - (void)clearAllObjects{
     [_objects removeAllObjects];
@@ -60,13 +70,8 @@
     [self removeObjectsWithIDs:objectsIDs];
 }
 - (void)removeObjectsWithIDs:(NSArray <NSString * > *)uuids{
-    NSPredicate * removePredicate = [NSPredicate predicateWithBlock:^BOOL(STBaseObj *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [uuids containsObject:evaluatedObject.uuid];
-    }];
-    NSMutableSet *matches =[NSMutableSet setWithSet:_objects];
-    NSSet *removedObjects = [_objects filteredSetUsingPredicate:removePredicate];
-    [matches minusSet:removedObjects];
-    _objects = matches;
+    NSSet *removedObjects = [NSSet setWithArray:[self getObjecstWithIds:uuids]];
+    [_objects removeObjectsForKeys:uuids];
     for (id object in removedObjects) {
         if ([object isKindOfClass:[STPost class]]) {
             [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectDeletedNotification object:nil userInfo:@{kPostIdKey:((STPost *)object).uuid}];
@@ -79,12 +84,7 @@
 }
 
 - (STBaseObj *)randomObject {
-    NSSet *downloadedSet = [self.objects filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageDownloaded == YES"]];
-    if (downloadedSet.count == 0) {
-        return nil;
-    }
-    
-    return downloadedSet.anyObject;
+    return [NSSet setWithArray:[_objects allValues]].anyObject;
 }
 
 - (STBaseObj *)objectForUrl:(NSString *)url{
@@ -97,30 +97,13 @@
 #pragma mark - Private methods
 
 - (void)addOrUpdateObject:(STBaseObj *)obj {
-    NSPredicate * removePreviousInstancesOfPostPredicate = [NSPredicate predicateWithBlock:^BOOL(STBaseObj *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ![evaluatedObject.uuid isEqualToString:obj.uuid];
-    }];
-    
-    NSInteger countBeforeFilter = _objects.count;
-    [_objects filterUsingPredicate:removePreviousInstancesOfPostPredicate];
-    NSInteger countAfterFilter = _objects.count;
-    [_objects addObject:obj];
+    NSInteger countBeforeInsert = _objects.allKeys.count;
+    [_objects setValue:obj forKey:obj.uuid];
+    NSInteger countAfterInsert = _objects.count;
 
-    if (countBeforeFilter > 0) {
+    if (countAfterInsert > 0) {
         
-        if (countBeforeFilter>countAfterFilter) {
-            //there was an update
-            //here is where we should add more notifications
-            if ([obj isKindOfClass:[STPost class]]) {
-                [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
-                [(STPost *)obj resetCaptionAndHashtags];
-            }
-            else if ([obj isKindOfClass:[STUserProfile class]]){
-                [[CoreManager localNotificationService] postNotificationName:STProfilePoolObjectUpdatedNotification object:nil userInfo:@{kUserIdKey:obj.uuid}];
-            }
-        }
-        
-        else if (countBeforeFilter == countAfterFilter){
+        if (countBeforeInsert<countAfterInsert) {
             //new object added
             //here is where we should add more notifications
             if ([obj isKindOfClass:[STPost class]]) {
@@ -130,7 +113,20 @@
                 }
             }
             else if ([obj isKindOfClass:[STUserProfile class]]) {
-                    [[CoreManager localNotificationService] postNotificationName:STProfilePoolNewObjectNotification object:nil userInfo:@{kUserIdKey:obj.uuid}];
+                [[CoreManager localNotificationService] postNotificationName:STProfilePoolNewObjectNotification object:nil userInfo:@{kUserIdKey:obj.uuid}];
+            }
+        }
+        else if (countBeforeInsert == countAfterInsert){
+            //there was an update
+            //here is where we should add more notifications
+            if ([obj isKindOfClass:[STPost class]]) {
+                [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:obj.uuid}];
+                [(STPost *)obj resetCaptionAndHashtags];
+            }
+            else if ([obj isKindOfClass:[STUserProfile class]]){
+                [[CoreManager localNotificationService] postNotificationName:STProfilePoolObjectUpdatedNotification object:nil userInfo:@{kUserIdKey:obj.uuid}];
+            }else if ([obj isKindOfClass:[STSuggestedUser class]]){
+                [[CoreManager localNotificationService] postNotificationName:STUserPoolObjectUpdatedNotification object:nil userInfo:@{kUserIdKey:obj.uuid}];
             }
         }
     }

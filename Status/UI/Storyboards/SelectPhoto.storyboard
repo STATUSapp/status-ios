@@ -690,7 +690,7 @@
                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
                                                     <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="Tag Products" image="Suggested Products icon">
+                                                    <state key="normal" title="Tag Products" image="tag ptoducts icon">
                                                         <color key="titleColor" red="0.4941176471" green="0.4941176471" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -1110,6 +1110,7 @@
         <image name="fb unpressed" width="22" height="21"/>
         <image name="orange-base-0" width="481" height="72"/>
         <image name="remove product icon" width="15" height="15"/>
+        <image name="tag ptoducts icon" width="16" height="22"/>
         <image name="upload product photo frame" width="15" height="16"/>
     </resources>
 </document>

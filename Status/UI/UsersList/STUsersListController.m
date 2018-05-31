@@ -126,7 +126,8 @@
     [self setTitleLabel];
     [self getDataSource];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userWasUpdated:) name:STUserPoolObjectUpdatedNotification object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -137,6 +138,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [_dataProcessor uploadDataToServer:_dataSource
                         withCompletion:^(NSError *error) {
                             [[CoreManager localNotificationService] postNotificationName:STHomeFlowShouldBeReloadedNotification object:nil userInfo:nil];
@@ -152,6 +154,11 @@
     _tableView.delegate = nil;
 }
 
+#pragma mark - Notifications
+
+- (void)userWasUpdated:(NSNotification *)notification{
+    [self.tableView reloadData];
+}
 #pragma mark - IBActions
 - (IBAction)onClickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
