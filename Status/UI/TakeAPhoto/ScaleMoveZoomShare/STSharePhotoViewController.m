@@ -154,32 +154,33 @@
 }
 
 - (void)showMessagesAndCallDelegatesForPostId:(NSString *)postId {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *alertTitle = nil;
-        NSString *alertMessage = nil;
-        if (self.fbError!=nil){
-            alertTitle = @"Warning";
-            alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
-        }else{
-            alertTitle = @"Success";
-            alertMessage = @"Your photo was posted on STATUS";
-        }
-        if (alertMessage!=nil) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                [[CoreManager navigationService] dismissChoosePhotoVC];
-
-            }]];
-            [self.navigationController presentViewController:alert animated:YES completion:nil];
-        }
-        if ([self.post.uuid isEqualToString:postId]) {
-            [[CoreManager localNotificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
-        }
-        else
+    if (_controllerType == STShareControllerEditInfo) {
+        [[CoreManager localNotificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[CoreManager navigationService] dismissChoosePhotoVC];
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *alertTitle = nil;
+            NSString *alertMessage = nil;
+            if (self.fbError!=nil){
+                alertTitle = @"Warning";
+                alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
+            }else{
+                alertTitle = @"Success";
+                alertMessage = @"Your photo was posted on STATUS";
+            }
+            if (alertMessage!=nil) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [[CoreManager navigationService] dismissChoosePhotoVC];
+                    
+                }]];
+                [self.navigationController presentViewController:alert animated:YES completion:nil];
+            }
             [[CoreManager localNotificationService] postNotificationName:STPostNewImageUploaded object:nil userInfo:@{kPostIdKey:postId}];
-    });
-
+        });
+    }
 }
 
 -(void)showErrorAlert{
