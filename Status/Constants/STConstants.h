@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define USE_PRODUCTION_SERVER 1
+#define USE_PRODUCTION_SERVER 0
+
 #define APP_STORE_ID          @"841855995"
 #define APP_URL_STRING        @"itms-apps://itunes.apple.com/app/id841855995"
 #define APP_REVIEW_URL_STRING @"https://itunes.apple.com/us/app/appName/id841855995?mt=8&action=write-review"

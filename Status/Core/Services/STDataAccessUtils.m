@@ -823,6 +823,8 @@ withCompletion:(STDataUploadCompletionBlock)completion{
                                           [objects addObject:up];
 
                                           completion(objects, error);
+                                      }else{
+                                          completion(@[], nil);
                                       }
                                   }failure:failBlock];
 
