@@ -56,7 +56,7 @@
 + (CGSize)cellSize{
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGSize size = [STDetailedShopProductCell cellSize];
-    size.height = roundf(size.height);
+    size.height = roundf(size.height+ 6.f);
     size.width = roundf(screenSize.width);
     return size;
 }
