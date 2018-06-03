@@ -37,7 +37,7 @@
         __strong STGetBrandsRequest *strongSelf = weakSelf;
         NSString *url = [strongSelf urlString];
         NSMutableDictionary *params = [strongSelf getDictParamsWithToken];
-        params[@"pageSize"] = @(kCatalogDownloadPageSize);
+        params[@"pageSize"] = @(kCatalogBrandsPageSize);
         params[@"page"] = @(strongSelf.pageIndex);
         strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
