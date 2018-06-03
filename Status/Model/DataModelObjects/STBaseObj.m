@@ -34,10 +34,12 @@
 - (STProfileGender)genderFromString:(NSString *)genderString{
     STProfileGender gender = STProfileGenderOther;
     
-    if ([genderString isEqualToString:@"female"]) {
+    NSString *genderStringLowercase = [genderString lowercaseString];
+    
+    if ([genderStringLowercase isEqualToString:@"female"]) {
         gender = STProfileGenderFemale;
     }
-    else if ([genderString isEqualToString:@"male"]){
+    else if ([genderStringLowercase isEqualToString:@"male"]){
         gender = STProfileGenderMale;
     }
     

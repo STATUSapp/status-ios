@@ -20,6 +20,9 @@
 @implementation STSyncBrand
 
 -(BOOL)canSyncNow{
+    if (![CoreManager loggedIn]) {
+        return NO;
+    }
     NSUserDefaults *ud = [self lastCheckUserDefaults];
     NSDate *lastCheck = [ud valueForKey:@"BRANDS_LAST_CHECK"];
     if (!lastCheck) {

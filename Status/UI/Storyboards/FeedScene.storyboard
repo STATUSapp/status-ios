@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -571,14 +571,14 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STPostShopProductsCell" id="7CW-CG-oqC" customClass="STPostShopProductsCell">
-                                <rect key="frame" x="0.0" y="1209" width="320" height="264"/>
+                                <rect key="frame" x="0.0" y="1209" width="320" height="248"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="264"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ouP-HI-HY7">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="264"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvl-1n-aze">
                                                     <rect key="frame" x="0.0" y="16" width="320" height="232"/>
@@ -601,10 +601,10 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="125" height="232"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vcR-qL-2MB">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="125" height="167"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="125" height="177"/>
                                                                             </imageView>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIG-bL-aW3">
-                                                                                <rect key="frame" x="0.0" y="178" width="125" height="54"/>
+                                                                                <rect key="frame" x="0.0" y="188" width="125" height="44"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASOS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciX-w7-tVq">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="125" height="15"/>
@@ -635,7 +635,7 @@
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="trailing" secondItem="un3-0f-v7A" secondAttribute="trailing" id="519-J9-3bn"/>
                                                                                     <constraint firstItem="hfE-rT-qQk" firstAttribute="top" secondItem="ciX-w7-tVq" secondAttribute="bottom" id="BDq-1z-hSU"/>
-                                                                                    <constraint firstAttribute="height" constant="54" id="OAZ-QR-t0K"/>
+                                                                                    <constraint firstAttribute="height" constant="44" id="OAZ-QR-t0K"/>
                                                                                     <constraint firstItem="un3-0f-v7A" firstAttribute="leading" secondItem="gIG-bL-aW3" secondAttribute="leading" id="QS2-wH-CI6"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="ciX-w7-tVq" secondAttribute="trailing" id="S0d-NG-0yX"/>
                                                                                     <constraint firstItem="un3-0f-v7A" firstAttribute="top" secondItem="hfE-rT-qQk" secondAttribute="bottom" id="goU-Lo-WxE"/>
@@ -686,9 +686,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="mvl-1n-aze" firstAttribute="height" secondItem="ouP-HI-HY7" secondAttribute="height" priority="750" constant="-32" id="Etx-YD-Cfx"/>
+                                                <constraint firstItem="mvl-1n-aze" firstAttribute="height" secondItem="ouP-HI-HY7" secondAttribute="height" priority="750" constant="-16" id="Etx-YD-Cfx"/>
                                                 <constraint firstAttribute="trailing" secondItem="mvl-1n-aze" secondAttribute="trailing" id="I8e-BL-Z7G"/>
-                                                <constraint firstItem="mvl-1n-aze" firstAttribute="centerY" secondItem="ouP-HI-HY7" secondAttribute="centerY" id="Sba-QW-EPp"/>
+                                                <constraint firstAttribute="bottom" secondItem="mvl-1n-aze" secondAttribute="bottom" id="LYT-KI-rUF"/>
                                                 <constraint firstItem="mvl-1n-aze" firstAttribute="leading" secondItem="ouP-HI-HY7" secondAttribute="leading" id="u1T-6B-XdW"/>
                                             </constraints>
                                         </view>
@@ -701,13 +701,13 @@
                                     <constraint firstAttribute="bottom" secondItem="ouP-HI-HY7" secondAttribute="bottom" id="Xoi-TS-arM"/>
                                     <constraint firstItem="ouP-HI-HY7" firstAttribute="leading" secondItem="7CW-CG-oqC" secondAttribute="leading" id="hY4-54-nWX"/>
                                 </constraints>
-                                <size key="customSize" width="320" height="264"/>
+                                <size key="customSize" width="320" height="248"/>
                                 <connections>
                                     <outlet property="produsctsCollection" destination="mvl-1n-aze" id="UXA-q8-eDJ"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STFacebookAddCell" id="VsK-yb-rk3" customClass="STFacebookAddCell">
-                                <rect key="frame" x="0.0" y="1473" width="320" height="350"/>
+                                <rect key="frame" x="0.0" y="1457" width="320" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>

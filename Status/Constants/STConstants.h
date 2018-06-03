@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define USE_PRODUCTION_SERVER 0
+#define USE_PRODUCTION_SERVER 1
 
 #define APP_STORE_ID          @"841855995"
 #define APP_URL_STRING        @"itms-apps://itunes.apple.com/app/id841855995"
@@ -114,6 +114,7 @@ extern NSInteger const kHTTPErrorNoConnection;
 extern NSInteger const kPostsLimit;
 extern NSInteger const kStartLoadOffset;
 extern NSInteger const kCatalogDownloadPageSize;
+extern NSInteger const kCatalogBrandsPageSize;
 
 extern NSString *const kGetPosts;
 extern NSString *const kGetHomePosts;
