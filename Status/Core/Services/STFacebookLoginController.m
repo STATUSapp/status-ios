@@ -62,7 +62,7 @@
     FBSDKLoginButton *_loginButton = [FBSDKLoginButton new];
     _loginButton.defaultAudience = FBSDKDefaultAudienceEveryone;
     _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday", @"user_location",@"user_photos"];
-    _loginButton.publishPermissions = @[@"publish_actions"];
+//    _loginButton.publishPermissions = @[@"publish_actions"];
     
     _loginButton.delegate = self;
     
