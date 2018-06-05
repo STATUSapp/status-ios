@@ -64,7 +64,9 @@ const NSInteger kDefaultValueForTopConstraint = 26;
                                                   __strong STEditProfileViewController *strongSelf = weakSelf;
                                                   if (!error) {
                                                       strongSelf.userProfile.profileShareUrl = response[@"short_url"];
-                                                      [[CoreManager profilePool] addProfiles:@[strongSelf.formUserProfile]];
+                                                      if (strongSelf.formUserProfile) {
+                                                          [[CoreManager profilePool] addProfiles:@[strongSelf.formUserProfile]];
+                                                      }
                                                       UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Update Profile" message:@"Success!" preferredStyle:UIAlertControllerStyleAlert];
                                                       
                                                       [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];

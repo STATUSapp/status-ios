@@ -66,6 +66,7 @@
 		07311BA12003FA1E0031F261 /* UIImage+Assets.m in Sources */ = {isa = PBXBuildFile; fileRef = 07311BA02003FA1E0031F261 /* UIImage+Assets.m */; };
 		0736222420B191F700092DB1 /* STDeleteAccountRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0736222320B191F700092DB1 /* STDeleteAccountRequest.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
+		073912E120C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 073912E020C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m */; };
 		073998FD20AE1570003FA09C /* STProductBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FC20AE1570003FA09C /* STProductBase.m */; };
 		0739990020AE16FC003FA09C /* STSuggestedProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FF20AE16FB003FA09C /* STSuggestedProduct.m */; };
 		073C72AB209649EC00B283B1 /* UIView+AnimatedZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */; };
@@ -452,6 +453,8 @@
 		0736222320B191F700092DB1 /* STDeleteAccountRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDeleteAccountRequest.m; sourceTree = "<group>"; };
 		073863981F9F0EC500FE13ED /* STMissingProductTVCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMissingProductTVCTableViewController.h; sourceTree = "<group>"; };
 		073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STMissingProductTVCTableViewController.m; sourceTree = "<group>"; };
+		073912DF20C5CFBE005E4AE8 /* UICollectionViewCell+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewCell+Additions.h"; sourceTree = "<group>"; };
+		073912E020C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewCell+Additions.m"; sourceTree = "<group>"; };
 		073998FB20AE1570003FA09C /* STProductBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STProductBase.h; sourceTree = "<group>"; };
 		073998FC20AE1570003FA09C /* STProductBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STProductBase.m; sourceTree = "<group>"; };
 		073998FE20AE16FB003FA09C /* STSuggestedProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSuggestedProduct.h; sourceTree = "<group>"; };
@@ -1404,6 +1407,8 @@
 		99B385EA1C82FAA2005B4D8C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				073912DF20C5CFBE005E4AE8 /* UICollectionViewCell+Additions.h */,
+				073912E020C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m */,
 				52DC4DCB1C8D87F00064F23F /* UIAlertController+Additions.h */,
 				52DC4DCC1C8D87F00064F23F /* UIAlertController+Additions.m */,
 				99B385EB1C82FAA2005B4D8C /* NSDate+Additions.h */,
@@ -2625,6 +2630,7 @@
 				99B387E51C830082005B4D8C /* CoreManager.m in Sources */,
 				99B387551C82FAA2005B4D8C /* STGetPostsRequest.m in Sources */,
 				99B387431C82FAA2005B4D8C /* UIImage+FixedOrientation.m in Sources */,
+				073912E120C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m in Sources */,
 				072158581F1A49E0001481B0 /* STWithdrawDetailsInputCell.m in Sources */,
 				170912191DF87F5C00B2AF81 /* STBubbleCell.m in Sources */,
 				99B387D91C82FAA2005B4D8C /* STMoveScaleViewController.m in Sources */,

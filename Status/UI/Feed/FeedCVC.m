@@ -55,6 +55,7 @@
 #import "STFacebookAddCell.h"
 #import "STSnackBarWithActionService.h"
 #import "AppDelegate.h"
+#import "UICollectionViewCell+Additions.h"
 
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
@@ -564,29 +565,30 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    CGSize cellSize = CGSizeZero;
     if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
         switch (indexPath.row) {
             case STProfileInfo:
-                return [UserProfileInfoCell cellSize];
+                cellSize = [UserProfileInfoCell cellSize];
                 break;
             case STProfileFriendsInfo:
             {
-                return [UserProfileFriendsInfoCell cellSize];
+                cellSize = [UserProfileFriendsInfoCell cellSize];
             }
                 break;
             case STProfileBio:
             {
-                return [UserProfileBioCell cellSizeForProfile:[_feedProcessor userProfile]];
+                cellSize = [UserProfileBioCell cellSizeForProfile:[_feedProcessor userProfile]];
             }
                 break;
             case STProfileLocation:
             {
-                return [UserProfileLocationCell cellSizeForProfile:[_feedProcessor userProfile]];
+                cellSize = [UserProfileLocationCell cellSizeForProfile:[_feedProcessor userProfile]];
             }
                 break;
             case STProfileNoPhotos:
             {
-                return [UserProfileNoPhotosCell cellSizeForNumberOfPhotos:[_feedProcessor numberOfObjects]];
+                cellSize = [UserProfileNoPhotosCell cellSizeForNumberOfPhotos:[_feedProcessor numberOfObjects]];
             }
                 break;
 
@@ -600,30 +602,28 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         switch (indexPath.row) {
             case STPostImage:
             {
-                return [STPostImageCell celSizeForPost:post];
+                cellSize = [STPostImageCell celSizeForPost:post];
             }
                 break;
             case STPostDescription:
             {
-                return [STPostDetailsCell cellSizeForPost:post];
+                cellSize = [STPostDetailsCell cellSizeForPost:post];
             }
                 break;
             case STPostShop:
             {
-                if (post.showShopProducts == NO)
-                    return CGSizeZero;
-                else
-                    return [STPostShopProductsCell cellSize];
+                if (post.showShopProducts == YES)
+                    cellSize = [STPostShopProductsCell cellSize];
             }
                 break;
         }
     }else{
         NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
         STAdPost *adPost = [_feedProcessor objectAtIndex:sectionIndex];
-        return [STFacebookAddCell cellSizeWithAdPost:adPost];
+        cellSize = [STFacebookAddCell cellSizeWithAdPost:adPost];
     }
     
-    return CGSizeZero;
+    return [UICollectionViewCell acceptedSizeFromSize:cellSize];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
@@ -865,22 +865,23 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }
     __block STUserProfile *userProfile = [_feedProcessor userProfile];
     STListUser *listUser = [userProfile listUserFromProfile];
-    _followProcessor = [[STFollowDataProcessor alloc] initWithUsers:@[listUser]];
-    
-    listUser.followedByCurrentUser = @(![listUser.followedByCurrentUser boolValue]);
-    
-    __weak FeedCVC * weakSelf = self;
-
-    [_followProcessor uploadDataToServer:@[listUser]
-                          withCompletion:^(NSError *error) {
-                              if (error == nil) {//success
-                                  __strong FeedCVC *strongSelf = weakSelf;
-                                  userProfile.isFollowedByCurrentUser = !userProfile.isFollowedByCurrentUser;
-                                  [strongSelf.collectionView reloadData];
-                                  [strongSelf.collectionView.collectionViewLayout invalidateLayout];
-
-                              }
-                          }];
+    if (listUser) {
+        _followProcessor = [[STFollowDataProcessor alloc] initWithUsers:@[listUser]];
+        listUser.followedByCurrentUser = @(![listUser.followedByCurrentUser boolValue]);
+        
+        __weak FeedCVC * weakSelf = self;
+        
+        [_followProcessor uploadDataToServer:@[listUser]
+                              withCompletion:^(NSError *error) {
+                                  if (error == nil) {//success
+                                      __strong FeedCVC *strongSelf = weakSelf;
+                                      userProfile.isFollowedByCurrentUser = !userProfile.isFollowedByCurrentUser;
+                                      [strongSelf.collectionView reloadData];
+                                      [strongSelf.collectionView.collectionViewLayout invalidateLayout];
+                                      
+                                  }
+                              }];
+    }
 }
 
 - (IBAction)onTapEditUserProfile:(id)sender {

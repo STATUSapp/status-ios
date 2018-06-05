@@ -9,6 +9,7 @@
 #import "STPostShopProductsCell.h"
 #import "STShopProduct.h"
 #import "STDetailedShopProductCell.h"
+#import "UICollectionViewCell+Additions.h"
 
 @interface STPostShopProductsCell ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -28,10 +29,6 @@
 
 -(void)awakeFromNib{
     [super awakeFromNib];
-}
-
--(CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return [STShopProductCell cellSize];
 }
 
 - (void)configureWithProducts:(NSArray <STShopProduct *> *)products{
@@ -56,7 +53,7 @@
 + (CGSize)cellSize{
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGSize size = [STDetailedShopProductCell cellSize];
-    size.height = roundf(size.height+ 6.f);
+    size.height = roundf(size.height+ 16.f);
     size.width = roundf(screenSize.width);
     return size;
 }
@@ -72,8 +69,8 @@
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return [STDetailedShopProductCell cellSize];
+    CGSize size = [STDetailedShopProductCell cellSize];
+    return [UICollectionViewCell acceptedSizeFromSize:size];
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

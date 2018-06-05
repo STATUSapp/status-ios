@@ -16,6 +16,7 @@
 #import "STTagSuggestions.h"
 #import "STImageSuggestionsService.h"
 #import "STLoadingSuggestionCell.h"
+#import "UICollectionViewCell+Additions.h"
 
 static NSInteger const  kMaxCaptionLenght = 1000;
 
@@ -357,7 +358,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CGSize size = [STDetailedShopProductCell cellSize];
-    return size;
+    return [UICollectionViewCell acceptedSizeFromSize:size];
     
 }
 
