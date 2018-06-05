@@ -39,7 +39,7 @@
 -(NSString *)indexStringFromName:(NSString *)name{
     NSArray *letters = [NSString allCapsLetters];
     NSString *firstNameLetter = @"";
-    if (name) {
+    if (name && [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length >=1) {
         firstNameLetter = [name substringToIndex:1];
     }
     if ([letters containsObject:firstNameLetter]) {

@@ -212,7 +212,9 @@
             __strong STEditProfileTVC *strongSelf = weakSelf;
             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
                 strongSelf.userProfile.mainImageUrl = [response[@"user_photo"] stringByReplacingHttpWithHttps];
-                [[CoreManager profilePool] addProfiles:@[strongSelf.userProfile]];
+                if (strongSelf.userProfile) {
+                    [[CoreManager profilePool] addProfiles:@[strongSelf.userProfile]];
+                }
                 [[CoreManager imageCacheService] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
                     [strongSelf.profileImage maskImage:img];
                 }];

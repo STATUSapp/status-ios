@@ -13,6 +13,7 @@
 #import "STCommission.h"
 #import "STTabBarViewController.h"
 #import "STNavigationService.h"
+#import "UICollectionViewCell+Additions.h"
 
 typedef NS_ENUM(NSUInteger, STEarningsSection) {
     STEarningsSectionCommissions,
@@ -180,7 +181,7 @@ self.navigationController.hidesBarsOnSwipe = NO;
         cellSize = CGSizeMake([[UIScreen mainScreen] bounds].size.width, 30.f);
     }
     
-    return cellSize;
+    return [UICollectionViewCell acceptedSizeFromSize:cellSize];
 }
 
 #pragma mark - IBActions
