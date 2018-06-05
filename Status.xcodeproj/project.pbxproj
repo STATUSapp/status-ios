@@ -2268,7 +2268,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Status-STATUSTests/Pods-Status-STATUSTests-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/Appirater/Appirater.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/Appirater/Appirater.bundle",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -2286,9 +2286,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Status/Pods-Status-frameworks.sh",
+				"${PODS_ROOT}/Tune/Tune.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tune.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2332,9 +2335,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Status-STATUSTests/Pods-Status-STATUSTests-frameworks.sh",
+				"${PODS_ROOT}/Tune/Tune.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tune.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2348,7 +2354,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Status/Pods-Status-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/Appirater/Appirater.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/Appirater/Appirater.bundle",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
