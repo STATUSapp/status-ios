@@ -11,11 +11,19 @@
 #import <FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKAppInviteContent.h>
 #import <FBSDKShareKit/FBSDKAppInviteDialog.h>
+#import <FBSDKShareKit/FBSDKShareLinkContent.h>
+#import <FBSDKShareKit/FBSDKShareDialog.h>
+#import <FBSDKShareKit/FBSDKHashtag.h>
+#import <FBSDKShareKit/FBSDKSharePhotoContent.h>
+#import <FBSDKShareKit/FBSDKSharePhoto.h>
+
+#import "STNavigationService.h"
+#import "STImageCacheController.h"
 
 NSString *const kGetAlbumsGraph = @"/me/albums?fields=name,count,cover_photo,id";
 NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 
-@interface STFacebookHelper()<FBSDKAppInviteDialogDelegate>
+@interface STFacebookHelper()<FBSDKAppInviteDialogDelegate, FBSDKSharingDelegate>
 @property (nonatomic, strong) STNativeAdsController *fbNativeAdService;
 @end
 
@@ -192,63 +200,21 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }];
 }
 
-- (void)postImageWithDescription:(NSString *)description
-                          imgUrl:(NSString *)imgUrl
-                        deepLink:(NSString *)deepLink
-                      completion:(facebookCompletion)completion {
-    NSString * descriptionString = description.length ? description : @"what's YOUR status?";
-    NSString * deepLinkString = deepLink.length ? deepLink : @"http://getstatusapp.co/";
-    
-    NSDictionary *dictPrivacy = [NSDictionary dictionaryWithObjectsAndKeys:@"CUSTOM",@"value", @"ALL_FRIENDS", @"friends", nil];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"%@ via %@", descriptionString, deepLinkString] ,@"caption",
-                                   [self stringFromDict:dictPrivacy],@"privacy",
-                                   @"STATUS", @"title",
-                                   imgUrl, @"url",
-                                   nil];
-    
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me/photos"
-                                                                   parameters:params
-                                                                   HTTPMethod:@"POST"];
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        completion(result, error);
-    }];
-}
+-(void)shareImageFromLink:(NSString *)imageLink{
+    [[CoreManager imageCacheService] loadImageWithName:imageLink
+                                         andCompletion:^(UIImage *img) {
+                                             FBSDKHashtag *hashtag = [FBSDKHashtag hashtagWithString:@"#STATUSapp"];
+                                             UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
+                                             FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImage:img userGenerated:NO];
+                                             FBSDKSharePhotoContent *contentPhoto = [[FBSDKSharePhotoContent alloc] init];
+                                             contentPhoto.photos = @[photo];
+                                             contentPhoto.hashtag = hashtag;
+                                             FBSDKShareDialog *dialog = [FBSDKShareDialog showFromViewController:viewController
+                                                            withContent:contentPhoto
+                                                                delegate:self];
+                                             dialog.mode = FBSDKShareDialogModeNative;
+                                         }];
 
--(void) shareImageWithImageUrl:(NSString *)imgUrl
-                   description:(NSString *)description
-                      deepLink:(NSString *)deepLink
-                 andCompletion:(facebookCompletion) completion{
-    __weak STFacebookHelper *weakSelf = self;
-    [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        __strong STFacebookHelper *strongSelf = weakSelf;
-        if (error!=nil) {
-            completion(nil, error);
-        }
-        else
-        {
-            if (![[[FBSDKAccessToken currentAccessToken] permissions] containsObject:@"publish_actions"]) {
-                FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-                [loginManager logInWithPublishPermissions:@[@"publish_actions"]
-                                       fromViewController:nil handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                           if (error!=nil) {
-                                               completion(nil, error);
-                                           }
-                                           else
-                                               [strongSelf postImageWithDescription:description
-                                                                             imgUrl:imgUrl
-                                                                           deepLink:deepLink
-                                                                         completion:completion];
-                                       }];
-            }
-            else
-                [strongSelf postImageWithDescription:description
-                                              imgUrl:imgUrl
-                                            deepLink:deepLink
-                                          completion:completion];
-        }
-    }];
 }
 
 -(NSString *) stringFromDict:(NSDictionary *) dict{
@@ -329,6 +295,20 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 }
 -(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error{
     NSLog(@"Result error: %@", error);
+}
+
+#pragma mark - FBSDKSharingDelegate
+
+-(void)sharerDidCancel:(id<FBSDKSharing>)sharer{
+    NSLog(@"Share canceled");
+}
+
+-(void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error{
+    NSLog(@"Share failed with error: %@", error.description);
+}
+
+-(void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results{
+    NSLog(@"Share complete with results: %@", results);
 }
 
 #pragma mark - FB Native Ads
