@@ -94,6 +94,10 @@ NSTimeInterval const kTimerInterval = 3.0;
 }
 
 -(void)transformSuggestionsIntoProducts:(STImageSuggestionsServiceCompletion)completion{
+    if (self.suggestedProducts.count == 0) {
+        completion(@[]);
+        return;
+    }
     __block NSMutableArray <STShopProduct *> *transformedObjects = [@[] mutableCopy];
     [STDataAccessUtils transformSuggestionWithPostId:self.postId
                                          suggestions:self.suggestedProducts                                      withCompletion:^(NSArray *objects, NSError *error) {

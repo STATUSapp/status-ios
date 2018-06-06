@@ -502,7 +502,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }else if (![self isAdPostAtSection:section]){
         numItems = STPostItemsCount;
     }else{
-        numItems = 1;
+        numItems = 0;
     }
     
     return numItems;

@@ -110,14 +110,15 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
                           if (error!=nil) {
                               NSLog(@"Error downloading image: %@", error.debugDescription);
                               completion(imageFullLink, NO, CGSizeZero);
-                          }
-                          else if(finished)
-                          {
+                          }else if(finished){
                               completion(imageFullLink,YES, image.size);
-                              
+                          }else{
+                              if (image) {
+                                  completion(imageFullLink,NO, image.size);
+                              }else{
+                                  completion(imageFullLink,NO, CGSizeZero);
+                              }
                           }
-                          else
-                              completion(imageFullLink,NO, CGSizeZero);
                       }];
 
 }
@@ -162,8 +163,6 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
         _objectsArray = [NSMutableArray new];
     }
     
-    //sort the flows - move the current to the top
-    
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     __weak STImageCacheController *weakSelf = self;
     for (STImageCacheObj *obj in newObjects) {
@@ -203,6 +202,8 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
                       __strong STImageCacheController *strongSelf = weakSelf;
                       if (downloaded==YES) {
                           [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString, kImageSizeKey:NSStringFromCGSize(downloadedImageSize)}];
+                      }else{
+                          NSLog(@"Image not downloaded: %@", fullUrlString);
                       }
                       
                       [strongSelf.objectsArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"imageUrl != %@", downloadedImage]];
@@ -214,7 +215,7 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
 -(void)loadNextPhoto{
     NSLog(@"Photo for download count: %lu", (unsigned long)_objectsArray.count);
     if (_objectsArray.count == 0) {
-        [[SDImageCache sharedImageCache] clearMemory];
+//        [[SDImageCache sharedImageCache] clearMemory];
 //        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
         return;
     }

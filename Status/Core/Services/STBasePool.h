@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+typedef NS_ENUM(NSUInteger, STPoolType) {
+    STPoolTypeNotDefined = 0,
+    STPoolTypePosts,
+    STPoolTypeUsers,
+    STPoolTypeProfiles
+};
 @class STBaseObj;
 
 @interface STBasePool : NSObject
@@ -20,4 +25,6 @@
 - (void)removeObjects:(NSArray <STBaseObj * > *)objects;
 - (void)removeObjectsWithIDs:(NSArray <NSString * > *)uuids;
 
+//hook methods
+-(STPoolType)poolType;
 @end

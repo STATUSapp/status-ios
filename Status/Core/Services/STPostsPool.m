@@ -51,6 +51,11 @@
     return (STPost *)[super getObjectWithId:postId];
 }
 
+-(STPoolType)poolType{
+    return STPoolTypePosts;
+}
+
+
 - (STPost *)randomPost {
 
     NSArray *allObjects = [[self getAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageDownloaded == YES AND mainImageUrl != nil"]];

@@ -48,4 +48,9 @@
     [super removeObjectsWithIDs:uuids];
 }
 
+-(STPoolType)poolType{
+    return STPoolTypeUsers;
+}
+
+
 @end
