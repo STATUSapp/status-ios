@@ -18,14 +18,11 @@
 #import "STNavigationService.h"
 #import "STSharePhotoTVC.h"
 #import "STImageSuggestionsService.h"
+#import "STSnackBarService.h"
 
 @interface STSharePhotoViewController (){
 }
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
-
-@property (assign, nonatomic)BOOL donePostingToFacebook;
-
-@property (strong, nonatomic)NSError *fbError;
 
 @property (strong, nonatomic) STSharePhotoTVC *childTVC;
 
@@ -82,13 +79,10 @@
     strongSelf.shareButton.enabled = TRUE;
     if (!error) {
         if ([strongSelf.childTVC postShouldBePostedOnFacebook]==YES ) {
-            [strongSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl deepLink:post.shareShortUrl];
+            [strongSelf startPostingWithPostId:post.uuid andImageUrl:post.mainImageUrl];
+        }else{
+            [strongSelf showMessagesAndDismissForPostId:post.uuid];
         }
-        else
-        {
-            [strongSelf showMessagesAndCallDelegatesForPostId:post.uuid];
-        }
-        
     }
 }
 
@@ -128,58 +122,28 @@
 #pragma mark - Helper
 
 - (void)startPostingWithPostId:(NSString *)postId
-                   andImageUrl:(NSString *)imageUrl
-                      deepLink:(NSString *)deepLink{
+                   andImageUrl:(NSString *)imageUrl{
     if ([_childTVC postShouldBePostedOnFacebook]) {
         [self postCurrentPhotoToFacebookWithPostId:postId
-                                       andImageUrl:imageUrl
-                                          deepLink:deepLink];
+                                       andImageUrl:imageUrl];
     }
 }
 - (void)postCurrentPhotoToFacebookWithPostId:(NSString *)postId
-                                 andImageUrl:(NSString *)imageUrl
-                                    deepLink:(NSString *)deepLink{
-    __weak STSharePhotoViewController *weakSelf = self;
-    [[CoreManager facebookService] shareImageWithImageUrl:imageUrl
-                                              description:[_childTVC postCaptionString]
-                                                 deepLink:deepLink
-                                            andCompletion:^(id result, NSError *error) {
-                                                __strong STSharePhotoViewController *strongSelf = weakSelf;
-                                                strongSelf.donePostingToFacebook = YES;
-                                                if (error) {
-                                                    strongSelf.fbError = error;
-                                                }
-                                                [strongSelf showMessagesAndCallDelegatesForPostId:postId];
-                                            }];
+                                 andImageUrl:(NSString *)imageUrl{
+    [[CoreManager facebookService] shareImageFromLink:imageUrl];
+    [self showMessagesAndDismissForPostId:postId];
 }
 
-- (void)showMessagesAndCallDelegatesForPostId:(NSString *)postId {
+- (void)showMessagesAndDismissForPostId:(NSString *)postId {
     if (_controllerType == STShareControllerEditInfo) {
         [[CoreManager localNotificationService] postNotificationName:STPostImageWasEdited object:nil userInfo:@{kPostIdKey:postId}];
         [self.navigationController popToRootViewControllerAnimated:YES];
         [[CoreManager navigationService] dismissChoosePhotoVC];
     }else{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *alertTitle = nil;
-            NSString *alertMessage = nil;
-            if (self.fbError!=nil){
-                alertTitle = @"Warning";
-                alertMessage = @"Your photo was posted on STATUS, but not shared on Facebook. You can try sharing it on Facebook from your profile.";
-            }else{
-                alertTitle = @"Success";
-                alertMessage = @"Your photo was posted on STATUS";
-            }
-            if (alertMessage!=nil) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                    [[CoreManager navigationService] dismissChoosePhotoVC];
-                    
-                }]];
-                [self.navigationController presentViewController:alert animated:YES completion:nil];
-            }
-            [[CoreManager localNotificationService] postNotificationName:STPostNewImageUploaded object:nil userInfo:@{kPostIdKey:postId}];
-        });
+        [[CoreManager snackBarService] showSnackBarWithMessage:@"Your photo was posted on STATUS."];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[CoreManager navigationService] dismissChoosePhotoVC];
+        [[CoreManager localNotificationService] postNotificationName:STPostNewImageUploaded object:nil userInfo:@{kPostIdKey:postId}];
     }
 }
 

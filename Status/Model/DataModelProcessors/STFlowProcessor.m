@@ -398,27 +398,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
 
 - (void)sharePostOnfacebokAtIndex:(NSInteger)index{
     STPost *post = [self objectAtIndex:index];
-    [[CoreManager facebookService] shareImageWithImageUrl:post.mainImageUrl
-                                              description:post.caption
-                                                 deepLink:post.shareShortUrl
-                                            andCompletion:^(id result, NSError *error) {
-                                                NSString *titleAlert = nil;
-                                                NSString *messageAlert = nil;
-                                                if(error==nil){
-                                                    titleAlert = @"Success";
-                                                    messageAlert =@"Your photo was posted.";
-                                                }
-                                                else{
-                                                    titleAlert = @"Error";
-                                                    messageAlert = @"Something went wrong. You can try again later.";
-                                                }
-                                                UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleAlert message:messageAlert preferredStyle:UIAlertControllerStyleAlert];
-                                                
-                                                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-                                                [[CoreManager navigationService] presentAlertController:alert];
-
-                                            }];
-
+    [[CoreManager facebookService] shareImageFromLink:post.mainImageUrl];
 }
 
 #pragma mark - Internal Helpers
