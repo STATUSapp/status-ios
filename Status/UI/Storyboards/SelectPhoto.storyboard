@@ -330,16 +330,16 @@
                                                     </state>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z74-55-Wra">
-                                                    <rect key="frame" x="189" y="1" width="186" height="42"/>
+                                                    <rect key="frame" x="192" y="1" width="183" height="42"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No products found." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNV-gZ-Y8P">
-                                                            <rect key="frame" x="0.0" y="0.0" width="138" height="42"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No products found." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNV-gZ-Y8P">
+                                                            <rect key="frame" x="0.0" y="0.0" width="135" height="42"/>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ynd-Tp-VSD">
-                                                            <rect key="frame" x="142" y="0.0" width="44" height="42"/>
+                                                            <rect key="frame" x="139" y="0.0" width="44" height="42"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="44" id="JFY-3g-fHv"/>
                                                             </constraints>
@@ -356,7 +356,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="CNV-gZ-Y8P" secondAttribute="bottom" id="35r-tu-nDF"/>
                                                         <constraint firstItem="CNV-gZ-Y8P" firstAttribute="top" secondItem="Z74-55-Wra" secondAttribute="top" id="Mjs-gW-xTt"/>
-                                                        <constraint firstAttribute="width" constant="186" id="PbH-77-fWT"/>
                                                         <constraint firstAttribute="trailing" secondItem="ynd-Tp-VSD" secondAttribute="trailing" id="Sh8-nq-ydM"/>
                                                         <constraint firstItem="ynd-Tp-VSD" firstAttribute="leading" secondItem="CNV-gZ-Y8P" secondAttribute="trailing" constant="4" id="hkB-QD-9Lw"/>
                                                         <constraint firstItem="CNV-gZ-Y8P" firstAttribute="leading" secondItem="Z74-55-Wra" secondAttribute="leading" id="iQ9-Mb-9d3"/>
@@ -370,6 +369,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="M2m-fh-MgO" secondAttribute="bottom" id="42O-Z0-G7N"/>
                                                 <constraint firstAttribute="trailing" secondItem="Z74-55-Wra" secondAttribute="trailing" id="6fw-Df-CgJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="u6n-lI-tJc" secondAttribute="bottom" id="9hl-Md-0mi"/>
+                                                <constraint firstItem="Z74-55-Wra" firstAttribute="leading" secondItem="AZu-ND-yh5" secondAttribute="leading" constant="192" id="Fd0-Yy-Gi8"/>
                                                 <constraint firstItem="86w-qu-lzP" firstAttribute="leading" secondItem="AZu-ND-yh5" secondAttribute="leading" id="IOU-wU-Wyk"/>
                                                 <constraint firstAttribute="trailing" secondItem="86w-qu-lzP" secondAttribute="trailing" id="LZL-0x-Wxc"/>
                                                 <constraint firstAttribute="trailing" secondItem="u6n-lI-tJc" secondAttribute="trailing" id="aso-BV-96Y"/>
@@ -1067,6 +1067,7 @@
                         <outlet property="noProductsFoundView" destination="Z74-55-Wra" id="I7W-xK-31c"/>
                         <outlet property="productsCollection" destination="BkX-Yl-oky" id="CSk-6w-gq6"/>
                         <outlet property="retryButton" destination="ynd-Tp-VSD" id="5aG-Gq-9KM"/>
+                        <outlet property="retryButtonWidthConstr" destination="JFY-3g-fHv" id="ejn-Z0-4M9"/>
                         <outlet property="sharedImageView" destination="TQm-PC-EpX" id="XjY-vt-fit"/>
                         <outlet property="suggestedProductsCollection" destination="xTV-7i-dSq" id="oCV-87-mnS"/>
                         <outlet property="suggestionsSeparator" destination="u6n-lI-tJc" id="sTj-Xv-Znw"/>

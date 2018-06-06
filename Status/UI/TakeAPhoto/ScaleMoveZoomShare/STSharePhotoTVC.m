@@ -46,6 +46,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 @property (weak, nonatomic) IBOutlet UIView *noProductsFoundView;
 @property (weak, nonatomic) IBOutlet UIView *suggestionsSeparator;
 @property (weak, nonatomic) IBOutlet UIButton *retryButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *retryButtonWidthConstr;
 
 //initialized with the post.shopProducts if exists and then new items can be added/removed
 @property (nonatomic, strong) NSArray <STShopProduct *> *shopProducts;
@@ -197,7 +198,13 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     if (suggestionsStatus == STSuggestionsStatusLoadedNoProducts ||
         suggestionsStatus == STSuggestionsStatusLoadedWithError) {
         _noProductsFoundView.hidden = NO;
-        _retryButton.hidden = !(suggestionsStatus == STSuggestionsStatusLoadedWithError);
+        if (suggestionsStatus == STSuggestionsStatusLoadedWithError) {
+            _retryButton.hidden = NO;
+            _retryButtonWidthConstr.constant = 44.f;
+        }else if (suggestionsStatus == STSuggestionsStatusLoadedNoProducts){
+            _retryButton.hidden = YES;
+            _retryButtonWidthConstr.constant = 0;
+        }
     }else{
         _noProductsFoundView.hidden = YES;
     }

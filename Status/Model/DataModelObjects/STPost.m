@@ -79,22 +79,7 @@
     }];
     self.imageSize = [STImageCacheController imageSizeForUrl:self.mainImageUrl];
     
-//#ifdef DEBUG
-//    self.userName = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-//    self.caption = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor vitae eros imperdiet placerat. Integer lacinia quam elit, et ultrices dui scelerisque ultricies. Vestibulum quis ultrices enim, vitae blandit turpis. In in lorem lacus. Integer malesuada nisl rhoncus elit dignissim placerat. Praesent ut dui fermentum, condimentum lacus ac, rhoncus quam. Cras eget neque sed sapien facilisis maximus. Quisque leo tortor, tempus a maximus ut, interdum vel risus.";
-//#endif
-    
     NSArray *products = self.infoDict[@"shop_style_products"];
-//#ifdef DEBUG
-//    NSMutableArray *mockProducts = [NSMutableArray new];
-//    NSInteger productsCount = [self.uuid integerValue] % 10;
-//    for (int i =0; i<productsCount; i++) {
-//        NSDictionary *product = @{@"link": @"http://www.emag.ro/",
-//                         @"image": @"http://is4.barenecessities.com/is/image/BareNecessities/le945_almond1?$Main375x440$"};
-//        [mockProducts addObject:product];
-//    }
-//    products = [NSArray arrayWithArray:mockProducts];
-//#endif
     if (products && products.count) {
         NSMutableArray *productsArray = [NSMutableArray new];
         

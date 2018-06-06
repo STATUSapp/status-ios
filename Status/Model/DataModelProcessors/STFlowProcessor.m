@@ -418,44 +418,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
     if (sheetArray.count > 0) {
         [_objectIds addObjectsFromArray:sheetArray];
     }
-    
-    //remove loading mock object
-//    STPost *loadingObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForLoading];
-//    if (loadingObject) {
-//        [_objectIds removeObject:loadingObject.uuid];
-//    }
-
-//    if (_flowType!=STFlowTypeDiscoverNearby) {
-//        //add mock posts at the end of the list
-//        [self addMockObjects];
-//    }
-    
 }
-
-//-(void)addMockObjects{
-//    STBaseObj *nothingToDisplayObject = [[CoreManager postsPool] getPostWithId:kObjectUuidForNothingToDisplay];
-//    if (!nothingToDisplayObject) {
-//        nothingToDisplayObject = [STBaseObj mockObjNothingToDisplay];
-//        [self addObjectsToObjectPool:@[nothingToDisplayObject]];
-//    }
-//    else
-//        [_objectIds removeObject:nothingToDisplayObject.uuid];
-//    
-//    if (_objectIds.count == 0)
-//    {
-//        if(_flowType == STFlowTypeMyGallery||
-//           _flowType == STFlowTypeUserGallery) {
-//            [_objectIds addObject:nothingToDisplayObject.uuid];
-//        }
-//    }
-//    else
-//    {
-//        if(_flowType == STFlowTypeMyGallery||
-//           _flowType == STFlowTypeUserGallery) {
-//        }
-//    }
-//    
-//}
 
 -(NSInteger)numberOfPostWithoutAds{
     NSInteger count = 0;

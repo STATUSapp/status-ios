@@ -44,4 +44,8 @@
     [super removeObjectsWithIDs:uuids];
 }
 
+-(STPoolType)poolType{
+    return STPoolTypeProfiles;
+}
+
 @end
