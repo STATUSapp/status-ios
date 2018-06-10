@@ -10,7 +10,7 @@
 #import "STSuggestedProduct.h"
 #import "STUploadImageForSuggestionsRequest.h"
 #import "STDataAccessUtils.h"
-NSTimeInterval const kTimerInterval = 3.0;
+NSTimeInterval const kTimerInterval = 3.f;
 
 @interface STImageSuggestionsService ()
 
@@ -24,6 +24,7 @@ NSTimeInterval const kTimerInterval = 3.0;
 @property (nonatomic, strong) NSString *postId;
 @property (nonatomic, strong) NSError *loadingError;
 @property (nonatomic, strong) UIImage *postImage;
+@property (nonatomic, assign) BOOL lastRequestCompleted;
 
 @end
 
@@ -178,6 +179,7 @@ NSTimeInterval const kTimerInterval = 3.0;
 }
 
 -(void)clearService{
+    _lastRequestCompleted = YES;
     [self.timer invalidate];
     self.timer = nil;
     self.loadingError = nil;
@@ -187,6 +189,13 @@ NSTimeInterval const kTimerInterval = 3.0;
     self.suggesstedCompletion = nil;
     self.similarCompletion = nil;
     [self saveSuggestionsId];
+}
+
+-(CGFloat)temporaryProgressValue{
+    return 0.9f;
+}
+-(NSTimeInterval)temporaryProgressTimeframe{
+    return 10.f;
 }
 
 #pragma mark - UINotifications
@@ -236,24 +245,28 @@ NSTimeInterval const kTimerInterval = 3.0;
 }
 
 -(void)timerMethod:(id)sender{
-    NSLog(@"Send get suggested request for post_id %@", self.postId);
-    __weak STImageSuggestionsService *weakSelf = self;
-    [STDataAccessUtils getSuggestedProductsWithPostId:self.postId withCompletion:^(NSArray<STSuggestedProduct *> *objects, NSError *error) {
-        __strong STImageSuggestionsService *strongSelf = weakSelf;
-        strongSelf.loadingError = error;
-        if(error){
-            if (error.code == STWebservicesCodesPartialContent) {
-                //do nothing, try again later
+    if (self.lastRequestCompleted == YES) {
+        self.lastRequestCompleted = NO;
+        NSLog(@"Send get suggested request for post_id %@", self.postId);
+        __weak STImageSuggestionsService *weakSelf = self;
+        [STDataAccessUtils getSuggestedProductsWithPostId:self.postId withCompletion:^(NSArray<STSuggestedProduct *> *objects, NSError *error) {
+            __strong STImageSuggestionsService *strongSelf = weakSelf;
+            strongSelf.loadingError = error;
+            strongSelf.lastRequestCompleted = YES;
+            if(error){
+                if (error.code == STWebservicesCodesPartialContent) {
+                    //do nothing, try again later
+                }
+            }else{
+                NSLog(@"Received suggestions: %@", objects);
+                [[NSNotificationCenter defaultCenter] removeObserver:strongSelf];
+                [strongSelf addSuggestions:objects];
+                [strongSelf.timer invalidate];
+                strongSelf.timer = nil;
+                [strongSelf startSimilarProductsDownload];
             }
-        }else{
-            NSLog(@"Received suggestions: %@", objects);
-            [[NSNotificationCenter defaultCenter] removeObserver:strongSelf];
-            [strongSelf addSuggestions:objects];
-            [strongSelf.timer invalidate];
-            strongSelf.timer = nil;
-            [strongSelf startSimilarProductsDownload];
-        }
-    }];
+        }];
+    }
 }
 
 - (void)downloadSimilarForProduct:(STSuggestedProduct *)sp {

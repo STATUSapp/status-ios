@@ -40,4 +40,8 @@ typedef void (^STImageSuggestionsCommitCompletion)(NSError *error, NSArray *obje
 -(STSuggestionsStatus)getServiceStatus;
 -(void)changePostImage:(UIImage *)newPostImage;
 -(void)retry;
+
+-(CGFloat)temporaryProgressValue;
+-(NSTimeInterval)temporaryProgressTimeframe;
+
 @end
