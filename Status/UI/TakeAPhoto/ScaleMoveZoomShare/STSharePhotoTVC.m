@@ -47,6 +47,7 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 @property (weak, nonatomic) IBOutlet UIView *suggestionsSeparator;
 @property (weak, nonatomic) IBOutlet UIButton *retryButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *retryButtonWidthConstr;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *suggestionsLoadingWidthConstr;
 
 //initialized with the post.shopProducts if exists and then new items can be added/removed
 @property (nonatomic, strong) NSArray <STShopProduct *> *shopProducts;
@@ -67,18 +68,39 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
         strongSelf.suggestionsLoaded = YES;
         strongSelf.suggesteProducts = [NSMutableArray arrayWithArray:objects];
         [strongSelf updateProductsCollection];
+        CGFloat temporaryLoadingValue = strongSelf.view.frame.size.width;
+        strongSelf.suggestionsLoadingWidthConstr.constant = temporaryLoadingValue;
+        
+        [UIView animateWithDuration:1.f animations:^{
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            strongSelf.suggestionsLoadingWidthConstr.constant = 0;
+            [UIView animateWithDuration:0.f animations:^{
+                [self.view layoutIfNeeded];
+            }];
+        }];
     }];
+}
+
+- (void)startLoadingAnimation {
+
+    NSTimeInterval duration = [[CoreManager imageSuggestionsService] temporaryProgressTimeframe];
+    CGFloat ratio = [[CoreManager imageSuggestionsService] temporaryProgressValue];
+    CGFloat temporaryLoadingValue = self.view.frame.size.width * ratio;
+    self.suggestionsLoadingWidthConstr.constant = 0.f;
+    [UIView animateWithDuration:0.f animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.suggestionsLoadingWidthConstr.constant = temporaryLoadingValue;
+        [UIView animateWithDuration:duration animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }];
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
-//        self.tableView.scrollEnabled = NO;
-//    }
-//    else {
-//        self.tableView.scrollEnabled = YES;
-//    }
-
     [[CoreManager imageSuggestionsService] changePostImage:[UIImage imageWithData:_imgData]];
     [self configureImageViewWithImageData:_imgData];
 
@@ -105,6 +127,8 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
     _writeCaptionPlaceholder.hidden = _captiontextView.text.length>0;
 
     [self updateProductsCollection];
+    
+    [self startLoadingAnimation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -168,6 +192,8 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 - (IBAction)onRetryButtonPressed:(id)sender {
     [[CoreManager imageSuggestionsService] retry];
     [self setupImageSuggestionsCompletion];
+    [self startLoadingAnimation];
+
     [self.tableView reloadData];
 }
 
