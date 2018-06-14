@@ -13,7 +13,7 @@
 #import "STNetworkQueueManager.h"
 #import "STNotificationsViewController.h"
 #import "STNotificationBanner.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STNotificationsViewController.h"
 #import "STImageCacheController.h"
 

@@ -18,7 +18,7 @@
 #import "STTagProductsBrands.h"
 #import "STTagManualViewController.h"
 #import "STTagCustomView.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STBarcodeScannerViewController.h"
 #import "STMissingProductViewController.h"
 #import "STTabBarViewController.h"

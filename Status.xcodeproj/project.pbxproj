@@ -61,6 +61,8 @@
 		072DBBE71FF9202E00DFA8F0 /* STSyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBE61FF9202E00DFA8F0 /* STSyncService.m */; };
 		072DBBEA1FF9208700DFA8F0 /* STSyncBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBE91FF9208700DFA8F0 /* STSyncBaseObject.m */; };
 		072DBBED1FF9279E00DFA8F0 /* STSyncBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBEC1FF9279E00DFA8F0 /* STSyncBrand.m */; };
+		072F4D8C20CEF7A300991BA5 /* STLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 072F4D8B20CEF7A300991BA5 /* STLoginView.m */; };
+		072F4D8E20CEF7BE00991BA5 /* STLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072F4D8D20CEF7BE00991BA5 /* STLoginView.xib */; };
 		072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */; };
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		07311BA12003FA1E0031F261 /* UIImage+Assets.m in Sources */ = {isa = PBXBuildFile; fileRef = 07311BA02003FA1E0031F261 /* UIImage+Assets.m */; };
@@ -244,7 +246,7 @@
 		99B387721C82FAA2005B4D8C /* STContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3865A1C82FAA2005B4D8C /* STContactsManager.m */; };
 		99B387731C82FAA2005B4D8C /* STDataAccessUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3865C1C82FAA2005B4D8C /* STDataAccessUtils.m */; };
 		99B387741C82FAA2005B4D8C /* STFacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */; };
-		99B387751C82FAA2005B4D8C /* STFacebookLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386601C82FAA2005B4D8C /* STFacebookLoginController.m */; };
+		99B387751C82FAA2005B4D8C /* STLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386601C82FAA2005B4D8C /* STLoginService.m */; };
 		99B387761C82FAA2005B4D8C /* STIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386621C82FAA2005B4D8C /* STIAPHelper.m */; };
 		99B387771C82FAA2005B4D8C /* STImageCacheController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386641C82FAA2005B4D8C /* STImageCacheController.m */; };
 		99B387791C82FAA2005B4D8C /* STInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386681C82FAA2005B4D8C /* STInviteController.m */; };
@@ -444,6 +446,9 @@
 		072DBBE91FF9208700DFA8F0 /* STSyncBaseObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncBaseObject.m; sourceTree = "<group>"; };
 		072DBBEB1FF9279E00DFA8F0 /* STSyncBrand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSyncBrand.h; sourceTree = "<group>"; };
 		072DBBEC1FF9279E00DFA8F0 /* STSyncBrand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncBrand.m; sourceTree = "<group>"; };
+		072F4D8A20CEF7A300991BA5 /* STLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLoginView.h; sourceTree = "<group>"; };
+		072F4D8B20CEF7A300991BA5 /* STLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STLoginView.m; sourceTree = "<group>"; };
+		072F4D8D20CEF7BE00991BA5 /* STLoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = STLoginView.xib; sourceTree = "<group>"; };
 		072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STExploreFilters.xib; sourceTree = "<group>"; };
 		072FE0521F5FC4A60090F8B6 /* STExploreFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STExploreFilters.h; sourceTree = "<group>"; };
 		072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreFilters.m; sourceTree = "<group>"; };
@@ -790,8 +795,8 @@
 		99B3865C1C82FAA2005B4D8C /* STDataAccessUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataAccessUtils.m; sourceTree = "<group>"; };
 		99B3865D1C82FAA2005B4D8C /* STFacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookHelper.h; sourceTree = "<group>"; };
 		99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookHelper.m; sourceTree = "<group>"; };
-		99B3865F1C82FAA2005B4D8C /* STFacebookLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFacebookLoginController.h; sourceTree = "<group>"; };
-		99B386601C82FAA2005B4D8C /* STFacebookLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFacebookLoginController.m; sourceTree = "<group>"; };
+		99B3865F1C82FAA2005B4D8C /* STLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoginService.h; sourceTree = "<group>"; };
+		99B386601C82FAA2005B4D8C /* STLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginService.m; sourceTree = "<group>"; };
 		99B386611C82FAA2005B4D8C /* STIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIAPHelper.h; sourceTree = "<group>"; };
 		99B386621C82FAA2005B4D8C /* STIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIAPHelper.m; sourceTree = "<group>"; };
 		99B386631C82FAA2005B4D8C /* STImageCacheController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImageCacheController.h; sourceTree = "<group>"; };
@@ -1609,8 +1614,8 @@
 				99B386681C82FAA2005B4D8C /* STInviteController.m */,
 				99B386711C82FAA2005B4D8C /* STUpdateToNewerVersionController.h */,
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
-				99B3865F1C82FAA2005B4D8C /* STFacebookLoginController.h */,
-				99B386601C82FAA2005B4D8C /* STFacebookLoginController.m */,
+				99B3865F1C82FAA2005B4D8C /* STLoginService.h */,
+				99B386601C82FAA2005B4D8C /* STLoginService.m */,
 				99B386631C82FAA2005B4D8C /* STImageCacheController.h */,
 				99B386641C82FAA2005B4D8C /* STImageCacheController.m */,
 				99B3865D1C82FAA2005B4D8C /* STFacebookHelper.h */,
@@ -1897,6 +1902,9 @@
 				0727A6211FFBB5E10040F349 /* STSectionView.h */,
 				0727A6221FFBB5E10040F349 /* STSectionView.m */,
 				0727A6241FFBB5F30040F349 /* STSectionView.xib */,
+				072F4D8A20CEF7A300991BA5 /* STLoginView.h */,
+				072F4D8B20CEF7A300991BA5 /* STLoginView.m */,
+				072F4D8D20CEF7BE00991BA5 /* STLoginView.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -2244,6 +2252,7 @@
 				174575B61CA95CD5006CA25F /* ExploreScene.storyboard in Resources */,
 				99B387CD1C82FAA2005B4D8C /* ChatScene.storyboard in Resources */,
 				99B3878F1C82FAA2005B4D8C /* Proxima Nova Fonts Collection.jpg in Resources */,
+				072F4D8E20CEF7BE00991BA5 /* STLoginView.xib in Resources */,
 				17AC8ECF1E11192B002D213E /* STLoadingView.xib in Resources */,
 				0727A6251FFBB5F30040F349 /* STSectionView.xib in Resources */,
 				2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */,
@@ -2546,7 +2555,7 @@
 				99B387B61C82FAA2005B4D8C /* STNotificationBanner.m in Sources */,
 				99B387831C82FAA2005B4D8C /* STDAOEngine.m in Sources */,
 				170912391DF8827100B2AF81 /* UserProfileBioCell.m in Sources */,
-				99B387751C82FAA2005B4D8C /* STFacebookLoginController.m in Sources */,
+				99B387751C82FAA2005B4D8C /* STLoginService.m in Sources */,
 				1787A74C1DBDD7AD006B79D4 /* STShopProduct.m in Sources */,
 				99B387771C82FAA2005B4D8C /* STImageCacheController.m in Sources */,
 				99B3876A1C82FAA2005B4D8C /* STUpdateUserProfileRequest.m in Sources */,
@@ -2628,6 +2637,7 @@
 				072DBBDC1FF9161700DFA8F0 /* Brand+CoreDataClass.m in Sources */,
 				072143B71FA264D70009C6E9 /* STTagProductsContainerViewController.m in Sources */,
 				071CA92D1F1FD34300434ABB /* STIndexPathTextField.m in Sources */,
+				072F4D8C20CEF7A300991BA5 /* STLoginView.m in Sources */,
 				0726C6DD1F022B0F00E787EA /* STSnackBarService.m in Sources */,
 				07552B30204743D0005F4542 /* STGetImageSuggestionsRequest.m in Sources */,
 				1709124C1DF882DC00B2AF81 /* STPostShopProductsCell.m in Sources */,

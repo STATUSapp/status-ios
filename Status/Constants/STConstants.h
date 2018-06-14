@@ -177,6 +177,7 @@ extern NSString *const kSendLogs;
 
 extern NSString *const kAPIKey;
 extern NSString *const kErrorCodeKey;
+extern NSString *const kImageLinkKey;
 
 extern NSString *const kMATAdvertiserID;
 extern NSString *const kMATConversionKey;

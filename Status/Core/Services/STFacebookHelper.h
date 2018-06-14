@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STNativeAdsController.h"
 
 typedef void (^loaderCompletion) (NSString *nextLink);

@@ -13,7 +13,7 @@
 #import "STSmartNotificationCell.h"
 #import "STImageCacheController.h"
 #import "AppDelegate.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Mask.h"
 #import "NSDate+Additions.h"

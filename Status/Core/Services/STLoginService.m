@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Andrus Cosmin. All rights reserved.
 //
 
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STConstants.h"
 #import "KeychainItemWrapper.h"
 #import "STImageCacheController.h"
@@ -38,22 +38,24 @@
 #import "STNavigationService.h"
 #import "STDataAccessUtils.h"
 
-@interface STFacebookLoginController ()<FBSDKLoginButtonDelegate>
+@interface STLoginService ()<FBSDKLoginButtonDelegate>
 
 @property (nonatomic, strong) NSString *currentUserId;
 @property (nonatomic, strong) NSDictionary *fetchedUserData;
 @property (nonatomic, strong) STUserProfile *loggedInUserProfile;
 
 @property (nonatomic, assign) BOOL manualLogout;
+@property (nonatomic, strong, readwrite) STLoginView *loginView;
 
 @end
 
-@implementation STFacebookLoginController
+@implementation STLoginService
 
 -(id)init{
     self = [super init];
     if (self) {
         self.manualLogout = NO;
+        self.loginView = [STLoginView loginViewWithDelegate:self];
     }
     return self;
 }
@@ -156,7 +158,7 @@
     [self sendLoginOrregisterRequest:userInfo];
 }
 
-#pragma mark - Facebook DelegatesFyou
+#pragma mark - Facebook Delegate
 
 - (void)logoutManually {
     [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogout object:nil userInfo:nil];
@@ -208,10 +210,10 @@
 //    [[STChatController sharedInstance] forceReconnect];
     [self setUpCrashlyticsForUserId:userId andEmail:userInfo[@"email"] andUserName:userInfo[@"full_name"]];
     if (_loggedInUserProfile == nil) {
-        __weak STFacebookLoginController *weakSelf=self;
+        __weak STLoginService *weakSelf=self;
         [STDataAccessUtils getUserProfileForUserId:_currentUserId
                                      andCompletion:^(NSArray *objects, NSError *error) {
-                                         __strong STFacebookLoginController *strongSelf = weakSelf;
+                                         __strong STLoginService *strongSelf = weakSelf;
                                          strongSelf.loggedInUserProfile = [objects firstObject];
                                          if (strongSelf.loggedInUserProfile) {
                                              [[CoreManager profilePool] addProfiles:@[strongSelf.loggedInUserProfile]];
@@ -263,34 +265,39 @@
 
 - (void)buildLoginRegisterParams {
     __block NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    
-    NSString *userFbId = [[FBSDKAccessToken currentAccessToken] userID];
-    
-    userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
-    userInfo[@"facebook_id"] = userFbId;
-    
-    __weak STFacebookLoginController *weakSelf = self;
+    __weak STLoginService *weakSelf = self;
     [[CoreManager facebookService] getUserExtendedInfoWithCompletion:^(NSDictionary *info) {
-        __strong STFacebookLoginController *strongSelf = weakSelf;
-        if (info[@"birthday"]) {
-            userInfo[@"birthday"] = [NSDate birthdayStringFromFacebookBirthday:info[@"birthday"]];
+        if (info == nil) {
+            //an error or cancel happened
+            //show and alert
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong with Facebook login. Please try again later." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [[CoreManager navigationService] presentAlertController:alert];            
+        }else{
+            __strong STLoginService *strongSelf = weakSelf;
+            NSString *userFbId = [[FBSDKAccessToken currentAccessToken] userID];
+            userInfo[@"fb_token"] = [[FBSDKAccessToken currentAccessToken] tokenString];
+            userInfo[@"facebook_id"] = userFbId;
+            if (info[@"birthday"]) {
+                userInfo[@"birthday"] = [NSDate birthdayStringFromFacebookBirthday:info[@"birthday"]];
+            }
+            if (info[@"email"]) {
+                userInfo[@"email"] = info[@"email"];
+            }
+            if (info[@"picture"][@"data"][@"url"]) {
+                userInfo[@"facebook_image_link"] = info[@"picture"][@"data"][@"url"];
+            }
+            if (info[@"name"]!=nil){
+                userInfo[@"full_name"] = info[@"name"];
+            }
+            if (info[@"gender"]!=nil) {
+                userInfo[@"gender"] = info[@"gender"];
+            }
+            if (info[@"about"]!=nil) {
+                userInfo[@"bio"] = info[@"about"];
+            }
+            [strongSelf sendLoginOrregisterRequest:userInfo];
         }
-        if (info[@"email"]) {
-            userInfo[@"email"] = info[@"email"];
-        }
-        if (info[@"picture"][@"data"][@"url"]) {
-            userInfo[@"facebook_image_link"] = info[@"picture"][@"data"][@"url"];
-        }
-        if (info[@"name"]!=nil){
-            userInfo[@"full_name"] = info[@"name"];
-        }
-        if (info[@"gender"]!=nil) {
-            userInfo[@"gender"] = info[@"gender"];
-        }
-        if (info[@"about"]!=nil) {
-            userInfo[@"bio"] = info[@"about"];
-        }
-        [strongSelf sendLoginOrregisterRequest:userInfo];
     }];
 }
 
@@ -306,9 +313,9 @@
     if (timeInterval>0) {
         [self buildLoginRegisterParams];
     }else{
-        __weak STFacebookLoginController *weakSelf;
+        __weak STLoginService *weakSelf;
         [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-            __strong STFacebookLoginController *strongSelf = weakSelf;
+            __strong STLoginService *strongSelf = weakSelf;
             if (error!=nil) {
                 //TODO: add log here
                 return ;
@@ -320,10 +327,10 @@
 }
 
 -(void)sendLoginOrregisterRequest:(NSDictionary *)userInfo{
-    __weak STFacebookLoginController *weakSelf = self;
+    __weak STLoginService *weakSelf = self;
     _fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
     STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
-        __strong STFacebookLoginController *strongSelf = weakSelf;
+        __strong STLoginService *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
             [strongSelf measureRegister];
             [strongSelf setUpEnvironment:response andUserInfo:userInfo];
@@ -343,7 +350,7 @@
     };
 
     STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
-        __strong STFacebookLoginController *strongSelf = weakSelf;
+        __strong STLoginService *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue]==STWebservicesNeedRegistrationCod) {
             
             [STRegisterRequest registerWithUserInfo:userInfo
@@ -390,4 +397,24 @@
 
 }
 
+#pragma mark - STLoginViewDelegate <NSObject>
+
+- (void)loginViewDidSelectFacebook{
+    NSLog(@"facebook button pressed");
+    [self initiateFacebookLogin];
+//    [self.facebookLoginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+- (void)loginViewDidSelectInstagram{
+    NSLog(@"instagram button pressed");
+    [self initiateInstagramLogin];
+}
+
+- (void)initiateFacebookLogin{
+    [self buildLoginRegisterParams];
+    
+}
+
+- (void)initiateInstagramLogin{
+    
+}
 @end

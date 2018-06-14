@@ -11,7 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Mask.h"
 #import "CoreManager.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 
 @interface STPostHeader ()
 @property (weak, nonatomic) IBOutlet UIImageView *userThumbnail;

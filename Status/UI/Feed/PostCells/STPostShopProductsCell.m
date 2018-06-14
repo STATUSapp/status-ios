@@ -50,6 +50,10 @@
     [self.produsctsCollection setDataSource:delegate];
 }
 
+-(void)dealloc{
+    [self setCollectionViewDelegate:nil];
+}
+
 + (CGSize)cellSize{
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGSize size = [STDetailedShopProductCell cellSize];

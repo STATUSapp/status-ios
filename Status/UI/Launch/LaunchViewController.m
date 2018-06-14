@@ -8,7 +8,7 @@
 
 #import "LaunchViewController.h"
 #import "STNavigationService.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 
 @interface LaunchViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;

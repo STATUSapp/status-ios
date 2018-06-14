@@ -117,7 +117,9 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 + (CGSize)celSizeForPost:(STPost *)post{
     CGSize size = [UIScreen mainScreen].bounds.size;
 
-    if (!post.mainImageDownloaded) {
+    if (!post.mainImageDownloaded ||
+        post.imageSize.height == 0||
+        post.imageSize.width == 0) {
         return CGSizeMake(size.width, size.width);
     }
     

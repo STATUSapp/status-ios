@@ -10,7 +10,7 @@
 #import "STConversationCell.h"
 #import "STNetworkQueueManager.h"
 #import "STChatRoomViewController.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STChatController.h"
 #import "STImageCacheController.h"
 #import "UIImageView+Mask.h"
