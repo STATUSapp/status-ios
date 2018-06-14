@@ -13,6 +13,7 @@
 #import "SDImageCache.h"
 #import "STLocalNotificationService.h"
 #import "STImageCacheObj.h"
+#import "STLoggerService.h"
 
 NSInteger const STImageDownloadSpecialPriority = -1;
 NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
@@ -203,6 +204,10 @@ NSInteger const STImageDownloadmMaximumDownloadsCount = 5;
                       if (downloaded==YES) {
                           [[CoreManager localNotificationService] postNotificationName:STLoadImageNotification object:nil userInfo:@{kImageUrlKey:fullUrlString, kImageSizeKey:NSStringFromCGSize(downloadedImageSize)}];
                       }else{
+                          
+                          NSMutableDictionary *params = [@{} mutableCopy];
+                          [params setValue:fullUrlString forKey:kImageLinkKey];
+                          [[CoreManager loggerService] sendLogs:params];
                           NSLog(@"Image not downloaded: %@", fullUrlString);
                       }
                       

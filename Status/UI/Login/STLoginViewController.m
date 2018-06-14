@@ -9,7 +9,7 @@
 #import "STLoginViewController.h"
 #import "STImageCacheController.h"
 #import "STConstants.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STNetworkQueueManager.h"
 #import <FBSDKLoginKit.h>
 #import <MediaPlayer/MediaPlayer.h>

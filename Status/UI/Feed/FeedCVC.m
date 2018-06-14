@@ -22,7 +22,7 @@
 #import "UserProfileFriendsInfoCell.h"
 #import "UserProfileNoPhotosCell.h"
 
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STChatRoomViewController.h"
 #import "STMoveScaleViewController.h"
 #import "STSharePhotoViewController.h"
@@ -337,7 +337,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 -(BOOL)canDoAction{
     if ([CoreManager isGuestUser]) {
-        [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
+        [[CoreManager navigationService] presentLoginView];
+//        [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
         return NO;
     }
     return YES;

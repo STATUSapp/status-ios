@@ -8,7 +8,7 @@
 
 #import "STSettingsViewController.h"
 #import "STRemoveAdsViewController.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import <FBSDKLoginKit.h>
 #import "AppDelegate.h"
 

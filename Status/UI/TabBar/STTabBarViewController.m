@@ -10,7 +10,7 @@
 #import "STSettingsViewController.h"
 #import "STChoosePhotoViewController.h"
 #import "STNotificationsViewController.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STExploreViewController.h"
 #import "STLocalNotificationService.h"
 #import "STNotificationsManager.h"

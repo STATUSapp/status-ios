@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "STNetworkQueueManager.h"
 #import "STConstants.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STImageCacheController.h"
 #import "STLocationManager.h"
 #import "STIAPHelper.h"
@@ -311,7 +311,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     STTabBarIndex index = [tabBarController.viewControllers indexOfObject:viewController];
     if (index != STTabBarIndexExplore && [CoreManager isGuestUser]) {
-        [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
+        [[CoreManager navigationService] presentLoginView];
+//        [[CoreManager snackWithActionService] showSnackBarWithType:STSnackWithActionBarTypeGuestMode];
         return NO;
     }
     return YES;

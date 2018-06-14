@@ -7,10 +7,9 @@
 //
 
 #import "UserProfileInfoCell.h"
-#import "STUserProfile.h"
 #import "NSDate+Additions.h"
 #import "STLocationManager.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "NSString+VersionComparison.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Mask.h"
@@ -32,8 +31,8 @@
             [strongSelf.profileImageView maskImage:image];
         }
     }];
-    STProfileButtonTag buttonTag = 0;
-    if ([profile.uuid isEqualToString:[CoreManager loginService].currentUserUuid]) {
+    STProfileButtonTag buttonTag = 0;    
+    if ([profile.uuid isEqualToString:[[CoreManager loginService] currentUserUuid]]) {
         buttonTag = STProfileButtonTagEdit;
     }else{
         if (profile.isFollowedByCurrentUser) {

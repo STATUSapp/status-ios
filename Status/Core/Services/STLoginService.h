@@ -10,9 +10,12 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "STUserProfile.h"
+#import "STLoginView.h"
 
 typedef void (^facebookCompletion)(id result, NSError *error);
-@interface STFacebookLoginController : NSObject
+@interface STLoginService : NSObject <STLoginViewDelegate>
+
+@property (nonatomic, strong, readonly) STLoginView *loginView;
 
 - (FBSDKLoginButton *)facebookLoginButton;
 

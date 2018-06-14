@@ -7,7 +7,7 @@
 //
 
 #import "STFollowDataProcessor.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STUserProfile.h"
 #import "STUserProfilePool.h"
 #import "STUsersPool.h"

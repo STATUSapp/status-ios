@@ -42,4 +42,5 @@
 + (UIViewController *)viewControllerForSelectedTab;
 
 + (STTabBarViewController *)appTabBar;
+- (void)presentLoginView;
 @end

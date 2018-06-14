@@ -10,7 +10,7 @@
 #import "STContactsManager.h"
 #import "STAddressBookContact.h"
 #import "STInviteFriendsByEmailRequest.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STNavigationService.h"
 
 @interface STContactsDataProcessor()

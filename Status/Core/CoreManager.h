@@ -12,7 +12,7 @@
 @class STLocationManager;
 @class STNetworkQueueManager;
 @class STNavigationService;
-@class STFacebookLoginController;
+@class STLoginService;
 @class STImageCacheController;
 @class STFacebookHelper;
 @class STIAPHelper;
@@ -42,7 +42,7 @@
 + (STLocationManager *)locationService;
 + (STNetworkQueueManager *)networkService;
 + (STNavigationService *)navigationService;
-+ (STFacebookLoginController *)loginService;
++ (STLoginService *)loginService;
 + (STImageCacheController *)imageCacheService;
 + (STFacebookHelper *)facebookService;
 + (STIAPHelper *)IAPService;
@@ -61,5 +61,4 @@
 + (STSyncService *)syncService;
 + (STImageSuggestionsService *)imageSuggestionsService;
 + (STLoggerService *)loggerService;
-
 @end

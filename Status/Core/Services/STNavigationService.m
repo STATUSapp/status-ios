@@ -22,6 +22,7 @@
 #import "STImageCacheController.h"
 #import "STSharePhotoViewController.h"
 #import "STLocalNotificationService.h"
+#import "STLoginService.h"
 
 @interface STNavigationService ()
 
@@ -31,7 +32,6 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-                
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoggedIn:) name:kNotificationUserDidLoggedIn object:nil];
     }
     return self;
@@ -101,10 +101,24 @@
     tabBar.delegate = appDel;
     [appDel.window setRootViewController:tabBar];
     if (showLoginOnTop) {
-        [tabBar presentLoginVCAnimated:NO];
+//        [tabBar presentLoginVCAnimated:NO];
+        [self presentLoginView];
     }
 }
 
+- (void)presentLoginView{
+    AppDelegate *appDel=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    UIView *loginView = [appDel.window viewWithTag:kLoginViewTag];
+    if (loginView) {
+        //already on screen, do nothing
+    }else{
+        STLoginView *loginView = [CoreManager loginService].loginView;
+        [appDel.window addSubview:loginView];
+        [appDel.window bringSubviewToFront:loginView];
+        [loginView animateIn];
+    }
+
+}
 - (void)resetTabBarStacks{
     //TODO: dev_1_2 should we reset some nav controller?
 }
@@ -153,10 +167,9 @@
 -(void)presentAlertController:(UIAlertController *)alert{
     STTabBarViewController *tbc = [STNavigationService appTabBar];
     UINavigationController *navCtrl = (UINavigationController *)[[tbc viewControllers] objectAtIndex:tbc.selectedIndex];
-    
-    [navCtrl.visibleViewController presentViewController:alert
-                                                animated:YES
-                                              completion:nil];
+    [navCtrl presentViewController:alert
+                          animated:YES
+                        completion:nil];
 }
 
 + (UIViewController *)viewControllerForSelectedTab{

@@ -155,7 +155,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 }
 
 - (void)getUserExtendedInfoWithCompletion:(void (^)(NSDictionary *info))completion {
-    NSArray *requiredPermissions = @[@"user_birthday",@"email"];
+    NSArray *requiredPermissions = @[@"public_profile", @"email",@"user_birthday", @"user_location",@"user_photos"];
     NSArray *acceptedPermissions = [[[FBSDKAccessToken currentAccessToken] permissions] allObjects];
     NSMutableArray *deniedPermissions = [NSMutableArray new];
     for (NSString *permission in requiredPermissions){
@@ -169,13 +169,18 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
         [loginManager logInWithReadPermissions:deniedPermissions
                             fromViewController:nil
                                        handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                           __strong STFacebookHelper *strongSelf = weakSelf;
-                                           if (error!=nil) {
-                                               //TODO: add log here
-                                           }
+                                           if (error) {
+                                               completion(nil);
+                                               
+                                           }else{
+                                               if (result.isCancelled) {
+                                                   completion(nil);
+                                               }else{
+                                                   __strong STFacebookHelper *strongSelf = weakSelf;
+                                                   [strongSelf requestForExtendedInfoWithCompletion:completion];
 
-            [strongSelf requestForExtendedInfoWithCompletion:completion];
-            
+                                               }
+                                           }
         }];
     }
     else
@@ -190,8 +195,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) {
                 completion(result);
-            }
-            else{
+            }else{
                 //TODO: add log here
                 completion(nil);
             }

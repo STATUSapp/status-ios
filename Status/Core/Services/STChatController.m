@@ -10,7 +10,7 @@
 #import "SRWebSocket.h"
 #import "STConstants.h"
 #import "STNetworkQueueManager.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STCoreDataManager.h"
 #import "STDAOEngine.h"
 #import "STNotificationsManager.h"

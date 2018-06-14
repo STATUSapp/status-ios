@@ -7,7 +7,7 @@
 //
 
 #import "STDeepLinkService.h"
-#import "STFacebookLoginController.h"
+#import "STLoginService.h"
 #import "STNavigationService.h"
 
 #import "ContainerFeedVC.h"
