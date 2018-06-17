@@ -12,7 +12,6 @@
 #import "STChatRoomViewController.h"
 #import "STLoginService.h"
 #import "STChatController.h"
-#import "STImageCacheController.h"
 #import "UIImageView+Mask.h"
 #import "UIImageView+WebCache.h"
 

@@ -8,6 +8,7 @@
 
 #import "STSuggestionCell.h"
 #import "STSuggestedUser.h"
+#import "UIImageView+WebCache.h"
 
 @interface STSuggestionCell ()
 
@@ -26,6 +27,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    [_userImageView sd_cancelCurrentAnimationImagesLoad];
 }
 
 -(void)configureCellWithSuggestedUser:(STSuggestedUser *)su isLastInSection:(BOOL)lastInSection{

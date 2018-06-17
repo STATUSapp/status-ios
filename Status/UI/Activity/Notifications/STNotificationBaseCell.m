@@ -7,6 +7,7 @@
 //
 
 #import "STNotificationBaseCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation STNotificationBaseCell
 
@@ -21,4 +22,8 @@
     // Configure the view for the selected state
 }
 
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    [_userImg sd_cancelCurrentAnimationImagesLoad];
+}
 @end

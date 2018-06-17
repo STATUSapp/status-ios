@@ -18,7 +18,6 @@
     //TODO: make this consistent with the server
     commission.uuid = [dict[@"id"] stringValue];
     commission.mainImageUrl = dict[@"product"][@"image_url"];
-    commission.mainImageDownloaded = NO;
     commission.productName = dict[@"product"][@"name"];
     commission.productBrandName = [NSString stringWithFormat:@"%@",dict[@"product"][@"brand_name"]];
     commission.commissionDate = [NSDate dateFromServerDateTime:dict[@"date_add"]];

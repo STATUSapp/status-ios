@@ -8,7 +8,7 @@
 
 #import "STNotificationBanner.h"
 #import "UIImageView+WebCache.h"
-#import "STImageCacheController.h"
+#import "STNetworkQueueManager.h"
 
 @implementation STNotificationBanner
 
@@ -36,7 +36,7 @@
 - (void)configureBanner {
     NSString *urlString = _notificationInfo[@"photo"];
     if (urlString!=nil && [urlString rangeOfString:@"http"].location==NSNotFound) {
-        urlString = [NSString stringWithFormat:@"%@%@",[CoreManager imageCacheService].photoDownloadBaseUrl, _notificationInfo[@"photo"]];
+        urlString = [NSString stringWithFormat:@"%@%@",[CoreManager networkService].photoDownloadBaseUrl, _notificationInfo[@"photo"]];
     }
     [_profileImage sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"placeholder notifications screen"]];
     _messageText.attributedText = [[NSAttributedString alloc]initWithString:@""];

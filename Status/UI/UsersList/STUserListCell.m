@@ -7,6 +7,7 @@
 //
 
 #import "STUserListCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation STUserListCell
 
@@ -19,4 +20,8 @@
     return self;
 }
 
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    [_userPhoto sd_cancelCurrentAnimationImagesLoad];
+}
 @end

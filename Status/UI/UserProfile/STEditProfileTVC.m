@@ -7,10 +7,10 @@
 //
 
 #import "STEditProfileTVC.h"
-#import "STImageCacheController.h"
 #import "STUploadNewProfilePictureRequest.h"
 #import "STUserProfilePool.h"
 #import "UIImageView+Mask.h"
+#import "SDWebImageManager.h"
 
 @interface STEditProfileTVC ()<UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldName;
@@ -48,14 +48,23 @@
     _txtFieldGender.text = [profile genderString];
 //    _counterLabel.text = [NSString stringWithFormat:@"%lu/%ld characters", (unsigned long)[_txtViewBio.text length], (long)kMaxNumberOfCharacters];
     __weak STEditProfileTVC *weakSelf = self;
-    [[CoreManager imageCacheService] loadImageWithName:profile.mainImageUrl andCompletion:^(UIImage *img) {
-        __strong STEditProfileTVC *strongSelf = weakSelf;
-        if (img) {
-            [strongSelf.profileImage maskImage:img];
-        }
-        else
-            [strongSelf.profileImage maskImage:[UIImage imageNamed:@"Mask"]];
-    }];
+    SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+    [sdManager loadImageWithURL:[NSURL URLWithString:profile.mainImageUrl]
+                        options:SDWebImageHighPriority
+                       progress:nil
+                      completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                          __strong STEditProfileTVC *strongSelf = weakSelf;
+                          if (error!=nil) {
+                              NSLog(@"Error downloading image: %@", error.debugDescription);
+                              [strongSelf.profileImage maskImage:[UIImage imageNamed:@"Mask"]];
+                          }
+                          else if(finished){
+                              UIImage *newImg = image;
+                              [strongSelf.profileImage maskImage:newImg];
+                          }else{
+                              [strongSelf.profileImage maskImage:[UIImage imageNamed:@"Mask"]];
+                          }
+                      }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -206,7 +215,7 @@
         __weak STEditProfileTVC *weakSelf = self;
         self.imagePickerPresented = NO;
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-        
+        [self.profileImage maskImage:img];
         NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
         [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
             __strong STEditProfileTVC *strongSelf = weakSelf;
@@ -215,9 +224,6 @@
                 if (strongSelf.userProfile) {
                     [[CoreManager profilePool] addProfiles:@[strongSelf.userProfile]];
                 }
-                [[CoreManager imageCacheService] loadImageWithName:response[@"user_photo"] andCompletion:^(UIImage *img) {
-                    [strongSelf.profileImage maskImage:img];
-                }];
             }
             else
             {

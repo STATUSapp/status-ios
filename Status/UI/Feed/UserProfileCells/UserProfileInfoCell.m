@@ -75,6 +75,7 @@
 
 -(void)prepareForReuse{
     [super prepareForReuse];
+    [_profileImageView sd_cancelCurrentAnimationImagesLoad];
     _profileImageView.image = nil;
 }
 

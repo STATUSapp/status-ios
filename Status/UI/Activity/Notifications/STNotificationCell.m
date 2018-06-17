@@ -8,6 +8,7 @@
 
 #import "STNotificationCell.h"
 #import "UIImageView+TouchesEffects.h"
+#import "UIImageView+WebCache.h"
 
 @interface STNotificationCell()
 
@@ -50,6 +51,7 @@
 
 -(void)prepareForReuse{
     [super prepareForReuse];
+    [_postImg sd_cancelCurrentAnimationImagesLoad];
 }
 
 @end

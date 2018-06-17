@@ -9,7 +9,6 @@
 #import "STLoginService.h"
 #import "STConstants.h"
 #import "KeychainItemWrapper.h"
-#import "STImageCacheController.h"
 #import "AppDelegate.h"
 #import "STLocationManager.h"
 #import "STChatController.h"
@@ -39,6 +38,7 @@
 #import "STInstagramLoginService.h"
 #import "FBSDKLoginManager.h"
 #import <WebKit/WebKit.h>
+#import "SDImageCache.h"
 
 @interface STLoginService ()
 
@@ -205,7 +205,7 @@
 
 - (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
     [CoreManager networkService].accessToken = response[@"token"];
-    [CoreManager imageCacheService].photoDownloadBaseUrl = response[@"baseUrlStorage"];
+    [CoreManager networkService].photoDownloadBaseUrl = response[@"baseUrlStorage"];
     [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
     [[CoreManager locationService] startLocationUpdates];
@@ -247,12 +247,14 @@
     [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedOut object:nil userInfo:nil];
     _fetchedUserData = nil;
     [FBSDKProfile setCurrentProfile:nil];
-
+    
     [self clearLoginType];
     self.lastLoginType = STLoginRequestTypeFacebook;
     
     //invalidate the cache
-    [[CoreManager imageCacheService] cleanTemporaryFolder];
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+        NSLog(@"Local stored images was cleared!");
+    }];
 
     NSSet *websiteDataTypes = [NSSet setWithArray:@[WKWebsiteDataTypeCookies]];
     NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];

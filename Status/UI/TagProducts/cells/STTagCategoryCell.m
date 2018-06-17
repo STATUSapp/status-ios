@@ -7,7 +7,11 @@
 //
 
 #import "STTagCategoryCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation STTagCategoryCell
-
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    [_categoryImage sd_cancelCurrentAnimationImagesLoad];
+}
 @end

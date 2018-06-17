@@ -7,7 +7,6 @@
 //
 
 #import "STZoomablePostViewController.h"
-#import "STImageCacheController.h"
 
 @interface STZoomablePostViewController ()<UIScrollViewDelegate>
 {

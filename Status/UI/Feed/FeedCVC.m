@@ -36,7 +36,6 @@
 #import "STUsersPool.h"
 #import "STPostsPool.h"
 #import "STContextualMenu.h"
-#import "STImageCacheController.h"
 #import "STFollowDataProcessor.h"
 #import "STLoadingView.h"
 
@@ -56,6 +55,8 @@
 #import "STSnackBarWithActionService.h"
 #import "AppDelegate.h"
 #import "UICollectionViewCell+Additions.h"
+
+#import "SDWebImageManager.h"
 
 typedef NS_ENUM(NSInteger, STScrollDirection)
 {
@@ -212,8 +213,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         [_refreshControl endRefreshing];
     }
     [self configureLoadingView];
-    [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
 }
 
 - (void)postUpdated:(NSNotification *)notif{
@@ -231,29 +232,29 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (void)postAdded:(NSNotification *)notif{
 //    NSLog(@"Post added user info: %@", notif.userInfo);
-    [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
 
 }
 - (void)postDeleted:(NSNotification *)notif{
 //    NSLog(@"Post deleted user info: %@", notif.userInfo);
-    [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
 
 }
 
 - (void)homeFeedShouldBeReloaded:(NSNotification *)notif{
     [_feedProcessor reloadProcessor];
-    [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
 }
 
 - (void)myProfileFeedShouldBeReloaded:(NSNotification *)notif{
     if (_isMyProfile) {
         //a new post was uploaded/edited and the profile feed should be reloaded
         [_feedProcessor reloadProcessor];
-        [self.collectionView reloadData];
         [self.collectionView.collectionViewLayout invalidateLayout];
+        [self.collectionView reloadData];
     }
 }
 
@@ -623,7 +624,6 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         STAdPost *adPost = [_feedProcessor objectAtIndex:sectionIndex];
         cellSize = [STFacebookAddCell cellSizeWithAdPost:adPost];
     }
-    
     return [UICollectionViewCell acceptedSizeFromSize:cellSize];
 }
 
@@ -877,8 +877,8 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                                   if (error == nil) {//success
                                       __strong FeedCVC *strongSelf = weakSelf;
                                       userProfile.isFollowedByCurrentUser = !userProfile.isFollowedByCurrentUser;
-                                      [strongSelf.collectionView reloadData];
                                       [strongSelf.collectionView.collectionViewLayout invalidateLayout];
+                                      [strongSelf.collectionView reloadData];
                                       
                                   }
                               }];
@@ -1015,22 +1015,25 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 -(void)contextualMenuEditPost{
     STPost *post = [_feedProcessor objectAtIndex:_postForContextIndex];
     _postForContextIndex = 0;
-    if (post.mainImageDownloaded == YES) {
-        __weak FeedCVC *weakSelf = self;
-        [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
-            __strong FeedCVC *strongSelf = weakSelf;
-            if (origImg!=nil) {
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:nil];
-                STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
-                viewController.imgData = UIImageJPEGRepresentation(origImg, 1.f);
-                viewController.post = post;
-                viewController.controllerType = STShareControllerEditInfo;
-                [strongSelf.delegate pushViewController:viewController animated:YES];
-            }
-            
-        }];
-    }
-
+    __weak FeedCVC *weakSelf = self;
+    SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+    [sdManager loadImageWithURL:[NSURL URLWithString:post.mainImageUrl]
+                        options:SDWebImageHighPriority
+                       progress:nil
+                      completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                          if (error!=nil) {
+                              NSLog(@"Error downloading image: %@", error.debugDescription);
+                          }
+                          else if(finished){
+                              __strong FeedCVC *strongSelf = weakSelf;
+                              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SelectPhoto" bundle:nil];
+                              STSharePhotoViewController *viewController = (STSharePhotoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"shareScene"];
+                              viewController.imgData = UIImageJPEGRepresentation(image, 1.f);
+                              viewController.post = post;
+                              viewController.controllerType = STShareControllerEditInfo;
+                              [strongSelf.delegate pushViewController:viewController animated:YES];
+                          }
+                      }];
 }
 
 -(void)contextualMenuReportPost{

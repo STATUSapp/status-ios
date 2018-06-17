@@ -7,7 +7,6 @@
 //
 
 #import "STLoginViewController.h"
-#import "STImageCacheController.h"
 #import "STConstants.h"
 #import "STLoginService.h"
 #import "STNetworkQueueManager.h"

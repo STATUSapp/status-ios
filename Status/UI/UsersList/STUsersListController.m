@@ -9,7 +9,6 @@
 #import "STUsersListController.h"
 #import "STNetworkQueueManager.h"
 #import "STUserListCell.h"
-#import "STImageCacheController.h"
 #import "STLoginService.h"
 #import "STChatRoomViewController.h"
 #import "STChatController.h"

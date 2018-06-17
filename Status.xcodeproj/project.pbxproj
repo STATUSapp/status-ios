@@ -101,6 +101,7 @@
 		076B91F01FDD821C006B7E91 /* STSnackBarBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B91EF1FDD821C006B7E91 /* STSnackBarBaseService.m */; };
 		077811591EB7126B0043A2E8 /* STTagCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 077811581EB7126B0043A2E8 /* STTagCategoryCell.m */; };
 		0778115C1EB75BBE0043A2E8 /* STTagProductsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */; };
+		078EEF8A20DC4D6400D6FE00 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078EEF8920DC4D6400D6FE00 /* Default-568h@2x.png */; };
 		07A9B649208E66020064D549 /* STLoggerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A9B648208E66020064D549 /* STLoggerService.m */; };
 		07B053F11EDE867F0045AD7B /* NSString+Links.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B053F01EDE867F0045AD7B /* NSString+Links.m */; };
 		07B300021FB44331009316A2 /* STFacebookAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B300011FB44331009316A2 /* STFacebookAdModel.m */; };
@@ -171,7 +172,6 @@
 		17AC8ED21E111954002D213E /* STLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AC8ED11E111954002D213E /* STLoadingView.m */; };
 		17B1B5B518BA49F30079661B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B5B418BA49F30079661B /* MessageUI.framework */; };
 		17B587421C9ABAF3006AC7BD /* UIViewController+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */; };
-		17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */; };
 		17D8C6771CAD3D9C0046D04F /* SmallTheEndFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D8C6761CAD3D9C0046D04F /* SmallTheEndFeedCell.m */; };
 		17DF47351C9974700053F633 /* STLocalNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF47341C9974700053F633 /* STLocalNotificationService.m */; };
 		17F4F2891C96DED500D53EC1 /* STBasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F4F2881C96DED500D53EC1 /* STBasePool.m */; };
@@ -251,7 +251,6 @@
 		99B387741C82FAA2005B4D8C /* STFacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */; };
 		99B387751C82FAA2005B4D8C /* STLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386601C82FAA2005B4D8C /* STLoginService.m */; };
 		99B387761C82FAA2005B4D8C /* STIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386621C82FAA2005B4D8C /* STIAPHelper.m */; };
-		99B387771C82FAA2005B4D8C /* STImageCacheController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386641C82FAA2005B4D8C /* STImageCacheController.m */; };
 		99B387791C82FAA2005B4D8C /* STInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B386681C82FAA2005B4D8C /* STInviteController.m */; };
 		99B3877A1C82FAA2005B4D8C /* STLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3866A1C82FAA2005B4D8C /* STLocationManager.m */; };
 		99B3877C1C82FAA2005B4D8C /* STNativeAdsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3866E1C82FAA2005B4D8C /* STNativeAdsController.m */; };
@@ -526,6 +525,7 @@
 		077811581EB7126B0043A2E8 /* STTagCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagCategoryCell.m; sourceTree = "<group>"; };
 		0778115A1EB75BBE0043A2E8 /* STTagProductsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsManager.h; sourceTree = "<group>"; };
 		0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsManager.m; sourceTree = "<group>"; };
+		078EEF8920DC4D6400D6FE00 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		07A9B647208E66020064D549 /* STLoggerService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLoggerService.h; sourceTree = "<group>"; };
 		07A9B648208E66020064D549 /* STLoggerService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STLoggerService.m; sourceTree = "<group>"; };
 		07B053EF1EDE867F0045AD7B /* NSString+Links.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Links.h"; sourceTree = "<group>"; };
@@ -655,8 +655,6 @@
 		17B1B5B418BA49F30079661B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		17B587401C9ABAF3006AC7BD /* UIViewController+Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Snapshot.h"; sourceTree = "<group>"; };
 		17B587411C9ABAF3006AC7BD /* UIViewController+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Snapshot.m"; sourceTree = "<group>"; };
-		17B587431C9ABEE5006AC7BD /* STImageCacheObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImageCacheObj.h; sourceTree = "<group>"; };
-		17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImageCacheObj.m; sourceTree = "<group>"; };
 		17D8C6751CAD3D9C0046D04F /* SmallTheEndFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallTheEndFeedCell.h; sourceTree = "<group>"; };
 		17D8C6761CAD3D9C0046D04F /* SmallTheEndFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallTheEndFeedCell.m; sourceTree = "<group>"; };
 		17DF47331C9974700053F633 /* STLocalNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocalNotificationService.h; sourceTree = "<group>"; };
@@ -808,8 +806,6 @@
 		99B386601C82FAA2005B4D8C /* STLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginService.m; sourceTree = "<group>"; };
 		99B386611C82FAA2005B4D8C /* STIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIAPHelper.h; sourceTree = "<group>"; };
 		99B386621C82FAA2005B4D8C /* STIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIAPHelper.m; sourceTree = "<group>"; };
-		99B386631C82FAA2005B4D8C /* STImageCacheController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STImageCacheController.h; sourceTree = "<group>"; };
-		99B386641C82FAA2005B4D8C /* STImageCacheController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STImageCacheController.m; sourceTree = "<group>"; };
 		99B386671C82FAA2005B4D8C /* STInviteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInviteController.h; sourceTree = "<group>"; };
 		99B386681C82FAA2005B4D8C /* STInviteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInviteController.m; sourceTree = "<group>"; };
 		99B386691C82FAA2005B4D8C /* STLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocationManager.h; sourceTree = "<group>"; };
@@ -1298,6 +1294,7 @@
 		172EAE5A18B0B12D00C5637B = {
 			isa = PBXGroup;
 			children = (
+				078EEF8920DC4D6400D6FE00 /* Default-568h@2x.png */,
 				99B385E71C82FAA2005B4D8C /* Status */,
 				99B387F21C833D20005B4D8C /* STATUSTests */,
 				172EAE6418B0B12E00C5637B /* Products */,
@@ -1627,8 +1624,6 @@
 				99B386721C82FAA2005B4D8C /* STUpdateToNewerVersionController.m */,
 				99B3865F1C82FAA2005B4D8C /* STLoginService.h */,
 				99B386601C82FAA2005B4D8C /* STLoginService.m */,
-				99B386631C82FAA2005B4D8C /* STImageCacheController.h */,
-				99B386641C82FAA2005B4D8C /* STImageCacheController.m */,
 				99B3865D1C82FAA2005B4D8C /* STFacebookHelper.h */,
 				99B3865E1C82FAA2005B4D8C /* STFacebookHelper.m */,
 				99B3866D1C82FAA2005B4D8C /* STNativeAdsController.h */,
@@ -1714,8 +1709,6 @@
 				99B386841C82FAA2005B4D8C /* STDataModelObjects.h */,
 				99B386851C82FAA2005B4D8C /* STFlowTemplate.h */,
 				99B386861C82FAA2005B4D8C /* STFlowTemplate.m */,
-				17B587431C9ABEE5006AC7BD /* STImageCacheObj.h */,
-				17B587441C9ABEE5006AC7BD /* STImageCacheObj.m */,
 				99B386871C82FAA2005B4D8C /* STListUser.h */,
 				99B386881C82FAA2005B4D8C /* STListUser.m */,
 				99B386891C82FAA2005B4D8C /* STSuggestedUser.h */,
@@ -2244,6 +2237,7 @@
 				99B387A11C82FAA2005B4D8C /* Images.xcassets in Resources */,
 				0755E23B1E882CBD0016519E /* TagProductsScene.storyboard in Resources */,
 				99B387901C82FAA2005B4D8C /* ProximaNova-Black.otf in Resources */,
+				078EEF8A20DC4D6400D6FE00 /* Default-568h@2x.png in Resources */,
 				99B387931C82FAA2005B4D8C /* ProximaNova-Extrabold.otf in Resources */,
 				99B3879A1C82FAA2005B4D8C /* ProximaNova-SemiboldItalic.otf in Resources */,
 				99B3879F1C82FAA2005B4D8C /* ProximaNovaCond-Semibold.otf in Resources */,
@@ -2454,7 +2448,6 @@
 				07B3FFFF1FB43E0A009316A2 /* STFacebookAddCell.m in Sources */,
 				170912491DF882DC00B2AF81 /* STPostDetailsCell.m in Sources */,
 				99B3877E1C82FAA2005B4D8C /* STUpdateToNewerVersionController.m in Sources */,
-				17B587451C9ABEE5006AC7BD /* STImageCacheObj.m in Sources */,
 				0755E2391E87DF140016519E /* STChoosePhotoViewController.m in Sources */,
 				07A9B649208E66020064D549 /* STLoggerService.m in Sources */,
 				072DBBE31FF91A0000DFA8F0 /* NSString+Letters.m in Sources */,
@@ -2573,7 +2566,6 @@
 				170912391DF8827100B2AF81 /* UserProfileBioCell.m in Sources */,
 				99B387751C82FAA2005B4D8C /* STLoginService.m in Sources */,
 				1787A74C1DBDD7AD006B79D4 /* STShopProduct.m in Sources */,
-				99B387771C82FAA2005B4D8C /* STImageCacheController.m in Sources */,
 				99B3876A1C82FAA2005B4D8C /* STUpdateUserProfileRequest.m in Sources */,
 				1709121C1DF87F5C00B2AF81 /* STMessageSendCell.m in Sources */,
 				1780AC781DEAEA3E007A5689 /* STExploreViewController.m in Sources */,

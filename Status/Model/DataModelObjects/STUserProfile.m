@@ -8,7 +8,6 @@
 
 #import "STUserProfile.h"
 #import "NSDate+Additions.h"
-#import "STImageCacheController.h"
 #import "STListUser.h"
 
 @implementation STUserProfile
@@ -41,7 +40,6 @@
     userProfile.profileShareUrl = profile.profileShareUrl;
     userProfile.username = profile.username;
     userProfile.mainImageUrl = profile.mainImageUrl;
-    userProfile.mainImageDownloaded = profile.mainImageDownloaded;
     userProfile.imageSize = profile.imageSize;
     userProfile.gender = profile.gender;
     userProfile.profileGender = profile.profileGender;
@@ -86,12 +84,12 @@
     //super properties
     self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:userDict forKey:@"user_photo"] stringByReplacingHttpWithHttps];
     
-    __weak STUserProfile *weakSelf = self;
-    [STImageCacheController imageDownloadedForUrl:self.mainImageUrl completion:^(BOOL cached) {
-        __strong STUserProfile *strongSelf = weakSelf;
-        strongSelf.mainImageDownloaded = cached;
-    }];
-    self.imageSize = CGSizeZero;
+    CGFloat imageHeight = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_image_height"] doubleValue];
+    CGFloat imageWidth = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_image_width"] doubleValue];
+    CGFloat imageRatio = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"user_image_ratio"] doubleValue];
+    [self saveDimentionsWithImageHeight:imageHeight
+                             imageRatio:imageRatio
+                             imageWidth:imageWidth];
     _gender = [CreateDataModelHelper validObjectFromDict:userDict forKey:@"gender"];
     if (!_gender) {
         _gender = @"other";
