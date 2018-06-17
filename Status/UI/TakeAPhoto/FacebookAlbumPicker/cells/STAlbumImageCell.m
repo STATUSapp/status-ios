@@ -7,11 +7,12 @@
 //
 
 #import "STAlbumImageCell.h"
-#import "STImageCacheController.h"
+#import "UIImageView+WebCache.h"
 
 @implementation STAlbumImageCell
 
 -(void)prepareForReuse{
     _albumImageView.image = [UIImage imageNamed:@"placeholder imagine like screen"];
+    [_albumImageView sd_cancelCurrentAnimationImagesLoad];
 }
 @end

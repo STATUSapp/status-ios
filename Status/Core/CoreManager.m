@@ -12,7 +12,6 @@
 #import "STNetworkQueueManager.h"
 #import "STNavigationService.h"
 #import "STLoginService.h"
-#import "STImageCacheController.h"
 #import "STFacebookHelper.h"
 #import "STIAPHelper.h"
 #import "STContactsManager.h"
@@ -40,7 +39,6 @@
 @property (nonatomic, strong) STNetworkQueueManager *networkService;
 @property (nonatomic, strong) STNavigationService *navigationService;
 @property (nonatomic, strong) STLoginService *loginService;
-@property (nonatomic, strong) STImageCacheController *imageCacheService;
 @property (nonatomic, strong) STFacebookHelper *facebookService;
 @property (nonatomic, strong) STIAPHelper *IAPService;
 @property (nonatomic, strong) STContactsManager *contactsService;
@@ -80,7 +78,6 @@
         _networkService = [STNetworkQueueManager new];
         _navigationService = [STNavigationService new];
         _loginService = [STLoginService new];
-        _imageCacheService = [STImageCacheController new];
         _facebookService = [STFacebookHelper new];
         _IAPService = [STIAPHelper new];
         _contactsService = [STContactsManager new];
@@ -137,10 +134,6 @@
 
 + (STLoginService *)loginService{
     return [[CoreManager sharedInstance] loginService];
-}
-
-+ (STImageCacheController *)imageCacheService{
-    return [[CoreManager sharedInstance] imageCacheService];
 }
 
 + (STFacebookHelper *)facebookService{

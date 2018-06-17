@@ -9,7 +9,6 @@
 #import "STFacebookAlbumsViewController.h"
 #import "STFacebookAlbumCell.h"
 #import "STAlbumImagesViewController.h"
-#import "STImageCacheController.h"
 #import "STFacebookHelper.h"
 #import "UIImageView+WebCache.h"
 #import "STNavigationService.h"

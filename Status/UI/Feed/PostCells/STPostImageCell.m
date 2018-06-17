@@ -9,7 +9,6 @@
 #import "STPostImageCell.h"
 #import "STPost.h"
 #import "UIImageView+WebCache.h"
-#import "STImageCacheController.h"
 #import "DGActivityIndicatorView.h"
 #import "UIView+AnimatedZoom.h"
 
@@ -42,10 +41,10 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 }
 
 -(void)prepareForReuse{
-//    _postImage.image = nil;
     _blurEffectView.hidden = NO;
     _likeImageAnimationInProgress = NO;
     [self setBottomItemsHidden:YES];
+    [self.postImage sd_cancelCurrentAnimationImagesLoad];
     
 }
 
@@ -53,18 +52,19 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     _postLikeButton.hidden = _postShopButton.hidden = _downShadow.hidden = hidded;
 }
 - (void) configureCellWithPost:(STPost *)post{
-    if (post.mainImageDownloaded) {
-        [self setBottomItemsHidden:NO];
-        [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl withPostCompletion:^(UIImage *origImg) {
-            [self.activityIndicator stopAnimating];
-            self.blurEffectView.hidden = YES;
-            self.postImage.image = origImg;
-        }];
-    }
-    else
-    {
-        [self setBottomItemsHidden:NO];
-    }
+    [self setBottomItemsHidden:NO];
+    __weak typeof(self) weakSelf = self;
+    [self.postImage sd_setImageWithURL:[NSURL URLWithString:post.mainImageUrl]
+                      placeholderImage:nil
+                               options:SDWebImageRetryFailed
+                             completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                                   if (image) {
+                                       __strong typeof(weakSelf) strongSelf = weakSelf;
+                                       [strongSelf.activityIndicator stopAnimating];
+                                       strongSelf.blurEffectView.hidden = YES;
+                                       strongSelf.postImage.image = image;
+                                   }
+                               }];
     _postLikeButton.selected = post.postLikedByCurrentUser;
     _postShopButton.hidden = (post.shopProducts.count == 0);
     _postShopButton.selected = post.showShopProducts;
@@ -116,18 +116,8 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 
 + (CGSize)celSizeForPost:(STPost *)post{
     CGSize size = [UIScreen mainScreen].bounds.size;
-
-    if (!post.mainImageDownloaded ||
-        post.imageSize.height == 0||
-        post.imageSize.width == 0) {
-        return CGSizeMake(size.width, size.width);
-    }
-    
-    CGFloat shrinkFactor = size.width/post.imageSize.width;
-    CGFloat inflatedHeight = post.imageSize.height * shrinkFactor;
-    if (inflatedHeight < 0) {
-        inflatedHeight = 0;
-    }
+    CGFloat shrinkFactor = [post.imageRatio doubleValue];
+    CGFloat inflatedHeight = size.width * (1.f/shrinkFactor);
     return CGSizeMake(size.width, inflatedHeight);
     
 }

@@ -28,6 +28,7 @@ CGFloat const kMessageBottomWidth = 37.f;
 @implementation STNearbyCell
 
 -(void)prepareForReuse{
+    [_profileImage sd_cancelCurrentAnimationImagesLoad];
     _profileImage.image = nil;
     _profileName.text = @"";
 }

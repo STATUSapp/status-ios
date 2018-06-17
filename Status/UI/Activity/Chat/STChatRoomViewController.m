@@ -11,7 +11,6 @@
 #import "STMessageSendCell.h"
 #import "HPGrowingTextView.h"
 #import "UIImageView+Mask.h"
-#import "STImageCacheController.h"
 #import "STChatController.h"
 #import "STLoginService.h"
 #import "AppDelegate.h"

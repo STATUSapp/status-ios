@@ -8,7 +8,6 @@
 
 #import "STAlbumImagesViewController.h"
 #import "STAlbumImageCell.h"
-#import "STImageCacheController.h"
 #import "STSharePhotoViewController.h"
 #import "STFacebookHelper.h"
 #import "UIImage+ImageEffects.h"
@@ -109,11 +108,19 @@
     NSLog(@"%@", _dataSource[indexPath.row]);
     NSString *fullImageLink = _dataSource[indexPath.row][@"source"];
     
-    [[CoreManager imageCacheService] loadImageWithName:fullImageLink andCompletion:^(UIImage *img) {
-        UIImage *newImg = img;//[img imageWithBlurBackground];
-        [[CoreManager localNotificationService] postNotificationName:STFacebookPickerNotification object:nil userInfo:@{kImageKey:newImg}];
-    }];
-    
+    SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+    [sdManager loadImageWithURL:[NSURL URLWithString:fullImageLink]
+                        options:SDWebImageHighPriority
+                       progress:nil
+                      completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                          if (error!=nil) {
+                              NSLog(@"Error downloading image: %@", error.debugDescription);
+                          }
+                          else if(finished){
+                              UIImage *newImg = image;
+                              [[CoreManager localNotificationService] postNotificationName:STFacebookPickerNotification object:nil userInfo:@{kImageKey:newImg}];
+                          }
+                      }];
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

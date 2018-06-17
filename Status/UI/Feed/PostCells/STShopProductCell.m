@@ -44,6 +44,10 @@
     [_productImage sd_setImageWithURL:[NSURL URLWithString:suggestedProduct.mainImageUrl]];
 }
 
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    [_productImage sd_cancelCurrentAnimationImagesLoad];
+}
 -(void)awakeFromNib{
     [super awakeFromNib];
     [_productImage.layer setBorderColor:[[UIColor colorWithRed:225.f/255.f

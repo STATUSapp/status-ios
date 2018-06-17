@@ -12,7 +12,6 @@
 #import "FeedCVC.h"
 #import "STDeepLinkService.h"
 #import "STNavigationService.h"
-#import "STImageCacheController.h"
 
 @interface ContainerFeedVC ()<ContainerFeedCVCProtocol, UIGestureRecognizerDelegate>
 
@@ -90,8 +89,6 @@
     //deactivate this as it causes a leak on iOS 11
     self.navigationController.hidesBarsOnSwipe = NO;
     [self configureTheNavigationBar];
-    [[CoreManager imageCacheService] changeFlowType:_feedProcessor.processorFlowType
-                                          needsSort:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

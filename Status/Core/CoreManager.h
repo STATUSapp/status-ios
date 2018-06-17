@@ -13,7 +13,6 @@
 @class STNetworkQueueManager;
 @class STNavigationService;
 @class STLoginService;
-@class STImageCacheController;
 @class STFacebookHelper;
 @class STIAPHelper;
 @class STContactsManager;
@@ -44,7 +43,6 @@
 + (STNetworkQueueManager *)networkService;
 + (STNavigationService *)navigationService;
 + (STLoginService *)loginService;
-+ (STImageCacheController *)imageCacheService;
 + (STFacebookHelper *)facebookService;
 + (STIAPHelper *)IAPService;
 + (STContactsManager *)contactsService;

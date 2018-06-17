@@ -15,7 +15,6 @@
 #import "STNotificationBanner.h"
 #import "STLoginService.h"
 #import "STNotificationsViewController.h"
-#import "STImageCacheController.h"
 
 #import "STListUser.h"
 #import "STNavigationService.h"

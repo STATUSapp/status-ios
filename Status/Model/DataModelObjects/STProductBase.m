@@ -7,7 +7,6 @@
 //
 
 #import "STProductBase.h"
-#import "STImageCacheController.h"
 
 @implementation STProductBase
 
@@ -19,12 +18,12 @@
     if (!self.mainImageUrl) {
         self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"image"] stringByReplacingHttpWithHttps];
     }
-    __weak STProductBase *weakSelf = self;
-    [STImageCacheController imageDownloadedForUrl:self.mainImageUrl completion:^(BOOL cached) {
-        __strong STProductBase *strongSelf = weakSelf;
-        strongSelf.mainImageDownloaded = cached;
-    }];
-    self.imageSize = CGSizeZero;
+    CGFloat imageHeight = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"product_image_height"] doubleValue];
+    CGFloat imageWidth = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"product_image_width"] doubleValue];
+    CGFloat imageRatio = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"product_image_ratio"] doubleValue];
+    [self saveDimentionsWithImageHeight:imageHeight
+                             imageRatio:imageRatio
+                             imageWidth:imageWidth];
     self.brandName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"brand"];
     self.productName = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"name"];
     NSString *priceAsString = [CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"price"];

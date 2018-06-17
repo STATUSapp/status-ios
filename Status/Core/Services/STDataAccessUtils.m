@@ -25,8 +25,6 @@
 #import "STCommission.h"
 #import "STWithdrawDetailsObj.h"
 #import "STSuggestedProduct.h"
-#import "STImageCacheObj.h"
-#import "STImageCacheController.h"
 
 @implementation STDataAccessUtils
 
@@ -626,11 +624,6 @@
                                   withCompletion:^(NSArray *objects, NSError *error) {
                                       if (!error) {
                                           [[CoreManager postsPool] addPosts:objects];
-                                          STPost *post = [objects firstObject];
-                                          if (post) {
-                                              STImageCacheObj *objToDownload = [STImageCacheObj imageCacheObjFromObj:post];
-                                              [[CoreManager imageCacheService] startImageDownloadForNewFlowType:STFlowTypeMyGallery andDataSource:@[objToDownload]];
-                                          }
                                           [[CoreManager localNotificationService] postNotificationName:STMyProfileFlowShouldBeReloadedNotification object:nil userInfo:nil];
                                           completion(objects, nil);
                                       }

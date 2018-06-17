@@ -31,6 +31,11 @@ CGFloat const kFacebookAdCaptionHorizontalOffset = 32.f;
 
 @implementation STFacebookAddCell
 
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    [_adIcon sd_cancelCurrentAnimationImagesLoad];
+    [_adMediaImage sd_cancelCurrentAnimationImagesLoad];
+}
 -(void)configureWithAdPost:(STAdPost *)adPost{
     _headerHeightConstr.constant = kFacebookAdHeaderHeight;
     NSURL *adIconUrl = adPost.adModel.nativeAd.icon.url;

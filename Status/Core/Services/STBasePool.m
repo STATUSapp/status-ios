@@ -26,7 +26,6 @@
     self = [super init];
     if (self) {
         _objects = [@{} mutableCopy];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageWasSavedLocally:) name:STLoadImageNotification object:nil];
     }
     return self;
 }
@@ -133,34 +132,6 @@
 }
 
 #pragma mark - Notifications
-
--(void)imageWasSavedLocally:(NSNotification *)notif{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *fullUrl = notif.userInfo[kImageUrlKey];
-        CGSize imageSize = CGSizeFromString(notif.userInfo[kImageSizeKey]);
-        STBaseObj *updatedObj = [self objectForUrl:fullUrl];
-        if (CGSizeEqualToSize(imageSize, CGSizeZero)) {
-            NSLog(@"Debug this");
-        }
-        
-        if (updatedObj) {
-            updatedObj.mainImageDownloaded = YES;
-            updatedObj.imageSize = imageSize;
-            STPoolType type = [self poolType];
-            BOOL isPostImage = [fullUrl containsString:@"/posts/"];
-            if (isPostImage && type == STPoolTypePosts) {
-                [[CoreManager localNotificationService] postNotificationName:STPostPoolObjectUpdatedNotification object:nil userInfo:@{kPostIdKey:updatedObj.uuid}];
-            }
-        }else{
-            STPoolType type = [self poolType];
-            BOOL isPostImage = [fullUrl containsString:@"/posts/"];
-            if (isPostImage && type == STPoolTypePosts) {
-                NSLog(@"Post image not found: %@", fullUrl);
-            }
-        }
-    });
-}
-
 -(STPoolType)poolType{
     NSAssert(NO, @"poolType not implemented");
     return STPoolTypeNotDefined;

@@ -14,12 +14,11 @@
 #import "CoreManager.h"
 #import "STPostsPool.h"
 #import "STUserProfilePool.h"
-#import "STImageCacheController.h"
 #import "STFacebookHelper.h"
 #import "STLocalNotificationService.h"
 #import "STNavigationService.h"
+#import "SDWebImageManager.h"
 
-#import "STImageCacheObj.h"
 #import "STAdPost.h"
 
 #define SET_POST_AS_SEEN 0
@@ -134,7 +133,6 @@ NSInteger const kFacebookAdsTimeframe = 10;
 - (void)registerForUpdates{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdated:) name:STPostPoolObjectUpdatedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeleted:) name:STPostPoolObjectDeletedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postImageWasEdited:) name:STPostImageWasEdited object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postAdded:) name:STPostPoolNewObjectNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdated:) name:STProfilePoolObjectUpdatedNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flowShouldBeReloaded:) name:kNotificationUserDidLoggedIn object:nil];
@@ -385,15 +383,20 @@ NSInteger const kFacebookAdsTimeframe = 10;
 
 - (void)savePostImageLocallyAtIndex:(NSInteger)index{
     STPost *post = [self objectAtIndex:index];
-    if (post.mainImageDownloaded) {
-        __weak STFlowProcessor *weakSelf = self;
-        [[CoreManager imageCacheService] loadPostImageWithName:post.mainImageUrl
-                                            withPostCompletion:^(UIImage *origImg) {
-                                                __strong STFlowProcessor *strongSelf = weakSelf;
-                                                UIImageWriteToSavedPhotosAlbum(origImg, strongSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
-                                                
-                                            }];
-    }
+    __weak STFlowProcessor *weakSelf = self;
+    SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+    [sdManager loadImageWithURL:[NSURL URLWithString:post.mainImageUrl]
+                        options:SDWebImageHighPriority
+                       progress:nil
+                      completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                          if (error!=nil) {
+                              NSLog(@"Error downloading image: %@", error.debugDescription);
+                          }
+                          else if(finished){
+                              __strong STFlowProcessor *strongSelf = weakSelf;
+                              UIImageWriteToSavedPhotosAlbum(image, strongSelf, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
+                          }
+                      }];
 }
 
 - (void)sharePostOnfacebokAtIndex:(NSInteger)index{
@@ -489,12 +492,6 @@ NSInteger const kFacebookAdsTimeframe = 10;
 
         }
         [[CoreManager localNotificationService] postNotificationName:kNotificationObjDownloadSuccess object:strongSelf userInfo:nil];
-        NSMutableArray *objToDownload = [NSMutableArray new];
-        for (id ob in objects) {
-            STImageCacheObj *obj = [STImageCacheObj imageCacheObjFromObj:ob];
-            [objToDownload addObject:obj];
-        }
-        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:strongSelf.flowType andDataSource:objToDownload];
     };
     switch (_flowType) {
         case STFlowTypePopular:
@@ -579,16 +576,6 @@ NSInteger const kFacebookAdsTimeframe = 10;
         _genderFilter = userInfo[@"gender"];
         [self reloadProcessor];
     }
-}
-
-- (void)postImageWasEdited:(NSNotification *)notif{
-    NSString *postId = notif.userInfo[kPostIdKey];
-    if ([_objectIds containsObject:postId]) {
-        STPost *post = [[CoreManager postsPool] getPostWithId:postId];
-        STImageCacheObj *objToDownload = [STImageCacheObj imageCacheObjFromObj:post];
-        [[CoreManager imageCacheService] startImageDownloadForNewFlowType:_flowType andDataSource:@[objToDownload]];
-    }
-
 }
 
 - (void)postUpdated:(NSNotification *)notif{

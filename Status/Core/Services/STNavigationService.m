@@ -19,7 +19,6 @@
 #import "STPost.h"
 #import "STFlowTemplate.h"
 #import "STPostsPool.h"
-#import "STImageCacheController.h"
 #import "STSharePhotoViewController.h"
 #import "STLocalNotificationService.h"
 #import "STLoginService.h"

@@ -18,7 +18,7 @@
 #import <FBSDKShareKit/FBSDKSharePhoto.h>
 
 #import "STNavigationService.h"
-#import "STImageCacheController.h"
+#import "SDWebImageManager.h"
 
 NSString *const kGetAlbumsGraph = @"/me/albums?fields=name,count,cover_photo,id";
 NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
@@ -205,20 +205,27 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 }
 
 -(void)shareImageFromLink:(NSString *)imageLink{
-    [[CoreManager imageCacheService] loadImageWithName:imageLink
-                                         andCompletion:^(UIImage *img) {
-                                             FBSDKHashtag *hashtag = [FBSDKHashtag hashtagWithString:@"#STATUSapp"];
-                                             UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
-                                             FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImage:img userGenerated:NO];
-                                             FBSDKSharePhotoContent *contentPhoto = [[FBSDKSharePhotoContent alloc] init];
-                                             contentPhoto.photos = @[photo];
-                                             contentPhoto.hashtag = hashtag;
-                                             FBSDKShareDialog *dialog = [FBSDKShareDialog showFromViewController:viewController
-                                                            withContent:contentPhoto
-                                                                delegate:self];
-                                             dialog.mode = FBSDKShareDialogModeNative;
-                                         }];
-
+    SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+    [sdManager loadImageWithURL:[NSURL URLWithString:imageLink]
+                        options:SDWebImageHighPriority
+                       progress:nil
+                      completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                          if (error!=nil) {
+                              NSLog(@"Error downloading image: %@", error.debugDescription);
+                          }
+                          else if(finished){
+                              FBSDKHashtag *hashtag = [FBSDKHashtag hashtagWithString:@"#STATUSapp"];
+                              UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
+                              FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImage:image userGenerated:NO];
+                              FBSDKSharePhotoContent *contentPhoto = [[FBSDKSharePhotoContent alloc] init];
+                              contentPhoto.photos = @[photo];
+                              contentPhoto.hashtag = hashtag;
+                              FBSDKShareDialog *dialog = [FBSDKShareDialog showFromViewController:viewController
+                                                                                      withContent:contentPhoto
+                                                                                         delegate:self];
+                              dialog.mode = FBSDKShareDialogModeNative;
+                          }
+                      }];
 }
 
 -(NSString *) stringFromDict:(NSDictionary *) dict{

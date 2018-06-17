@@ -11,7 +11,6 @@
 #import "STConstants.h"
 #import "STNotificationCell.h"
 #import "STSmartNotificationCell.h"
-#import "STImageCacheController.h"
 #import "AppDelegate.h"
 #import "STLoginService.h"
 #import "UIImageView+WebCache.h"

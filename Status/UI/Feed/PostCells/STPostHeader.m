@@ -45,6 +45,7 @@
 -(void)prepareForReuse{
     [super prepareForReuse];
     _userNameLabel.text = @"";
+    [_userThumbnail sd_cancelCurrentAnimationImagesLoad];
     _userThumbnail.image = nil;
 }
 

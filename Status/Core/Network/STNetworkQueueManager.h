@@ -14,6 +14,7 @@
 @interface STNetworkQueueManager : NSObject
 
 @property (nonatomic, strong, readonly) NSString *baseUrl;
+@property (nonatomic, strong, readonly) NSString *photoDownloadBaseUrl;
 
 +(STNetworkManager *)networkAPI;
 -(void)reset;
@@ -42,4 +43,5 @@
 - (void)deleteAccessToken;
 - (void)loadTokenFromKeyChain;
 
+- (void)setPhotoDownloadBaseUrl:(NSString *)photoDownloadBaseUrl;
 @end

@@ -8,6 +8,7 @@
 
 #import "STTagProductCell.h"
 #import "STShopProduct.h"
+#import "UIImageView+WebCache.h"
 
 @interface STTagProductCell ()
 @property (weak, nonatomic) IBOutlet UILabel *brandNameLabel;
@@ -25,6 +26,10 @@
     [_loadingView startAnimating];
 }
 
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    [_productImage sd_cancelCurrentAnimationImagesLoad];
+}
 -(void)setSelected:(BOOL)selected{
     
     if (selected == YES) {

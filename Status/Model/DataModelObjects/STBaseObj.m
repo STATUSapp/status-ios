@@ -46,4 +46,25 @@
     return gender;
 }
 
+- (void)saveDimentionsWithImageHeight:(CGFloat)imageHeight
+                           imageRatio:(CGFloat)imageRatio
+                           imageWidth:(CGFloat)imageWidth {
+    if (imageWidth > 0 &&
+        imageHeight > 0) {
+        self.imageSize = CGSizeMake(imageWidth, imageHeight);
+    }else{
+        self.imageSize = CGSizeZero;
+    }
+    if (imageRatio == 0) {
+        if (imageWidth > 0 &&
+            imageHeight > 0) {
+            self.imageRatio = @(imageWidth/imageHeight);
+        }else{
+            self.imageRatio = @(0);
+        }
+    }else{
+        self.imageRatio = @(imageRatio);
+    }
+}
+
 @end

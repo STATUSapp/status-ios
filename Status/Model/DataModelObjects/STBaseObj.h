@@ -25,10 +25,13 @@ typedef NS_ENUM(NSUInteger, STProfileGender) {
 @property(nonatomic, strong) NSString *uuid;
 @property(nonatomic, strong) NSString *appVersion;
 
-@property (nonatomic, assign) BOOL mainImageDownloaded;
-@property (nonatomic, assign) CGSize imageSize;//the full image size
+@property (nonatomic, assign) CGSize imageSize;
+@property (nonatomic, strong) NSNumber *imageRatio;
 @property (nonatomic, strong) NSString * mainImageUrl;
 
 - (NSString *)genderImageNameForGender:(STProfileGender)gender;
 - (STProfileGender)genderFromString:(NSString *)genderString;
+- (void)saveDimentionsWithImageHeight:(CGFloat)imageHeight
+                           imageRatio:(CGFloat)imageRatio
+                           imageWidth:(CGFloat)imageWidth;
 @end

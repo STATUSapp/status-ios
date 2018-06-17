@@ -29,6 +29,7 @@
 -(void)prepareForReuse{
     _productImageView.layer.cornerRadius = 0.f;
     _productImageView.image = [UIImage imageNamed:@"Item image"];
+    [_productImageView sd_cancelCurrentAnimationImagesLoad];
 }
 
 -(void) configurCellWithCommissionObj:(STCommission *)commissionObj{

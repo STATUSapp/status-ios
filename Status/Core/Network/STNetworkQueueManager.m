@@ -242,6 +242,9 @@
     _accessToken = nil;
 }
 
+- (void)setPhotoDownloadBaseUrl:(NSString *)photoDownloadBaseUrl{
+    _photoDownloadBaseUrl = photoDownloadBaseUrl;
+}
 
 -(NSString *)debugDescription{
 #if TEST_HIT_REQUESTS

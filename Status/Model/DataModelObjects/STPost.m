@@ -27,7 +27,6 @@
 
 #import "STPost.h"
 #import "NSDate+Additions.h"
-#import "STImageCacheController.h"
 #import "STShopProduct.h"
 #import "STPostsPool.h"
 #import "NSString+HashTags.h"
@@ -72,13 +71,12 @@
 
     //super properties
     self.mainImageUrl = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"full_photo_link"] stringByReplacingHttpWithHttps];
-    __weak STPost *weakSelf = self;
-    [STImageCacheController imageDownloadedForUrl:self.mainImageUrl completion:^(BOOL cached) {
-        __strong STPost *strongSelf = weakSelf;
-        strongSelf.mainImageDownloaded = cached;
-    }];
-    self.imageSize = [STImageCacheController imageSizeForUrl:self.mainImageUrl];
-    
+    CGFloat imageHeight = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"post_image_height"] doubleValue];
+    CGFloat imageWidth = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"post_image_width"] doubleValue];
+    CGFloat imageRatio = [[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"post_image_ratio"] doubleValue];
+    [self saveDimentionsWithImageHeight:imageHeight
+                             imageRatio:imageRatio
+                             imageWidth:imageWidth];
     NSArray *products = self.infoDict[@"shop_style_products"];
     if (products && products.count) {
         NSMutableArray *productsArray = [NSMutableArray new];

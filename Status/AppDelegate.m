@@ -10,7 +10,6 @@
 #import "STNetworkQueueManager.h"
 #import "STConstants.h"
 #import "STLoginService.h"
-#import "STImageCacheController.h"
 #import "STLocationManager.h"
 #import "STIAPHelper.h"
 #import "STChatRoomViewController.h"
