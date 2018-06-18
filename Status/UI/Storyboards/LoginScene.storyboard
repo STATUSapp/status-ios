@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NGw-zI-bIO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NGw-zI-bIO">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -150,73 +150,15 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STTutorialStartCell" id="qJ6-Qg-Nx4" customClass="STTutorialStartCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STTutorialCell" id="lvO-jz-rPi" customClass="STTutorialCell">
                                         <rect key="frame" x="0.0" y="-17" width="375" height="667"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="STATUS-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ef8-k8-fl0">
-                                                    <rect key="frame" x="74" y="0.0" width="228" height="233"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="228" id="nGI-6D-HLn"/>
-                                                        <constraint firstAttribute="height" constant="233" id="q6e-I4-rCB"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We will never post anything on your  Facebook without your permission." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="5kA-V8-qEw">
-                                                    <rect key="frame" x="76" y="602" width="223" height="28"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="223" id="27T-KR-aEY"/>
-                                                        <constraint firstAttribute="height" constant="28" id="Nq7-6D-blc"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpJ-sB-bK6">
-                                                    <rect key="frame" x="62" y="518" width="252" height="74"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="252" id="6Mq-gn-jnu"/>
-                                                        <constraint firstAttribute="height" constant="74" id="bSL-Kp-RNa"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="17"/>
-                                                    <inset key="titleEdgeInsets" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="-20" minY="-2" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" image="fb-icon" backgroundImage="fb-login-base"/>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="onLoginButtonPressed:" destination="91j-x6-xGm" eventType="touchUpInside" id="1Sg-et-yiC"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </view>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottomMargin" secondItem="5kA-V8-qEw" secondAttribute="bottom" constant="29" id="Eir-h8-XsL"/>
-                                            <constraint firstItem="XpJ-sB-bK6" firstAttribute="centerX" secondItem="qJ6-Qg-Nx4" secondAttribute="centerX" id="R7s-xw-8wD"/>
-                                            <constraint firstItem="5kA-V8-qEw" firstAttribute="top" secondItem="XpJ-sB-bK6" secondAttribute="bottom" constant="10" id="iud-FC-Z6K"/>
-                                            <constraint firstItem="5kA-V8-qEw" firstAttribute="centerX" secondItem="qJ6-Qg-Nx4" secondAttribute="centerX" id="oev-aA-17o"/>
-                                            <constraint firstItem="Ef8-k8-fl0" firstAttribute="centerX" secondItem="qJ6-Qg-Nx4" secondAttribute="centerX" id="sHd-dH-jAu"/>
-                                            <constraint firstItem="Ef8-k8-fl0" firstAttribute="top" secondItem="qJ6-Qg-Nx4" secondAttribute="top" id="xpq-Mg-a2U"/>
-                                        </constraints>
-                                        <size key="customSize" width="375" height="667"/>
-                                        <connections>
-                                            <outlet property="facebookLoginButton" destination="XpJ-sB-bK6" id="Pm4-sy-qna"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STTutorialCell" id="lvO-jz-rPi" customClass="STTutorialCell">
-                                        <rect key="frame" x="375" y="-17" width="375" height="667"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCOVER" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="MyJ-vf-F5e">
-                                                    <rect key="frame" x="0.0" y="78" width="375" height="21"/>
+                                                    <rect key="frame" x="0.0" y="86" width="375" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="W2N-Qi-Tyy"/>
                                                         <constraint firstAttribute="width" constant="375" id="o2p-cm-vSz"/>
@@ -226,7 +168,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="dyE-jO-Ay7">
-                                                    <rect key="frame" x="0.0" y="111" width="375" height="42"/>
+                                                    <rect key="frame" x="0.0" y="119" width="375" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="375" id="F1c-OG-ijA"/>
                                                         <constraint firstAttribute="height" constant="42" id="na6-2S-dtO"/>
@@ -239,7 +181,7 @@ Popular, Nearby and Recent.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial_discover" translatesAutoresizingMaskIntoConstraints="NO" id="FMJ-86-bl0">
-                                                    <rect key="frame" x="55" y="168" width="265" height="438"/>
+                                                    <rect key="frame" x="55" y="176" width="265" height="456"/>
                                                     <gestureRecognizers/>
                                                     <connections>
                                                         <outletCollection property="gestureRecognizers" destination="eaw-Cp-NJc" appends="YES" id="f36-9t-acE"/>
@@ -308,16 +250,93 @@ Popular, Nearby and Recent.</string>
             </objects>
             <point key="canvasLocation" x="1274.5" y="148.5"/>
         </scene>
+        <!--Login with Instagram-->
+        <scene sceneID="Ly6-zd-XhK">
+            <objects>
+                <viewController id="fO8-R4-NFX" customClass="STInstagramLoginViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z7I-rM-QHB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="c1d-vt-buV"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Login with Instagram" id="xlp-iX-qdn">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="K9Z-xM-Ubz">
+                            <connections>
+                                <action selector="onCloseButtonPressed:" destination="fO8-R4-NFX" id="DU3-Kh-Fzz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fXS-zb-Ywe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1213.5" y="1887"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4aD-9T-27c">
+            <objects>
+                <viewController id="08t-4F-LUX" customClass="STGDPRViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cDO-mS-PHb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="GM8-Qo-HdU"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yJ9-Gx-2Ca">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="dRn-0a-9hy">
+                            <connections>
+                                <action selector="onClosePressed:" destination="08t-4F-LUX" id="D7q-Kp-ued"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jtu-sN-cKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1213.5" y="2842"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Nts-1y-p9t">
+            <objects>
+                <navigationController storyboardIdentifier="INSTA_LOGIN_NAV" automaticallyAdjustsScrollViewInsets="NO" id="v2L-tP-OJv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uAG-51-joL">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fO8-R4-NFX" kind="relationship" relationship="rootViewController" id="AkB-9y-5tM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a2P-GI-9cb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="624.5" y="1887"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="r7m-bc-FKr">
+            <objects>
+                <navigationController storyboardIdentifier="GDPR_NAV" automaticallyAdjustsScrollViewInsets="NO" id="3nM-NO-xKV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kVK-jL-ydb">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="08t-4F-LUX" kind="relationship" relationship="rootViewController" id="zmd-fk-jsF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AK8-zn-EiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="625" y="2842"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="STATUS-logo" width="228" height="233"/>
-        <image name="fb-icon" width="8" height="15"/>
-        <image name="fb-login-base" width="244" height="69"/>
         <image name="splashscreen" width="413" height="736"/>
         <image name="tutorial_discover" width="265" height="472"/>
         <image name="x menu STAUS" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wMN-vK-mIu"/>
+        <segue reference="XN1-aR-jDG"/>
     </inferredMetricsTieBreakers>
 </document>

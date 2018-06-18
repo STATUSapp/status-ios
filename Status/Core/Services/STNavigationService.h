@@ -43,4 +43,5 @@
 
 + (STTabBarViewController *)appTabBar;
 - (void)presentLoginView;
+- (void)presentInstagramLogin;
 @end

@@ -73,10 +73,6 @@
 
 #pragma mark - STTutorialDelegate
 
--(void)loginButtonPressed:(id)sender{
-    [self onFacebookButtonPressed:sender];
-}
-
 -(void)multipleTapOnShopStyle{
     //show change base url alert
     
@@ -105,11 +101,6 @@
     
 }
 #pragma mark - IBActions
-- (IBAction)onFacebookButtonPressed:(id)sender {
-    FBSDKLoginButton *loginButton = [[CoreManager loginService] facebookLoginButton];
-    [loginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-
-}
 - (IBAction)onCloseButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -69,12 +69,16 @@
 		0736222420B191F700092DB1 /* STDeleteAccountRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0736222320B191F700092DB1 /* STDeleteAccountRequest.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
 		073912E120C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 073912E020C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m */; };
+		073945CF20D62ABD006E1F19 /* STInstagramLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 073945CE20D62ABD006E1F19 /* STInstagramLoginService.m */; };
+		073945D220D62C32006E1F19 /* STInstagramClientTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 073945D120D62C32006E1F19 /* STInstagramClientTokenRequest.m */; };
+		073945D520D645E6006E1F19 /* STInstagramLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073945D420D645E6006E1F19 /* STInstagramLoginViewController.m */; };
 		073998FD20AE1570003FA09C /* STProductBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FC20AE1570003FA09C /* STProductBase.m */; };
 		0739990020AE16FC003FA09C /* STSuggestedProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FF20AE16FB003FA09C /* STSuggestedProduct.m */; };
 		073C72AB209649EC00B283B1 /* UIView+AnimatedZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */; };
 		0740883A20B3624A00C4FB37 /* STLoadingSuggestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0740883920B3624A00C4FB37 /* STLoadingSuggestionCell.m */; };
 		0748751A20112F9E005E6CFD /* SettingsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0748751920112F9E005E6CFD /* SettingsScene.storyboard */; };
 		0748751D2011541D005E6CFD /* STCustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0748751C2011541D005E6CFD /* STCustomTitleView.m */; };
+		074BFD6E20D83C4100347941 /* STGDPRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 074BFD6D20D83C4100347941 /* STGDPRViewController.m */; };
 		074FA8D81EB652600028C33E /* STTagProductsCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 074FA8D71EB652600028C33E /* STTagProductsCategories.m */; };
 		07533D861F6E91020009DDDF /* STBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07533D851F6E91020009DDDF /* STBarcodeScannerViewController.m */; };
 		07552B2D204743B0005F4542 /* STUploadImageForSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 07552B2C204743B0005F4542 /* STUploadImageForSuggestionsRequest.m */; };
@@ -137,7 +141,6 @@
 		170912541DF883FC00B2AF81 /* STUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170912521DF883FC00B2AF81 /* STUsersListController.m */; };
 		170912581DF8848300B2AF81 /* STRemoveAdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170912571DF8848300B2AF81 /* STRemoveAdsViewController.m */; };
 		1709E63B1E224EF40076068A /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1709E63A1E224EF40076068A /* Contacts.framework */; };
-		170AE3BD1DF60F9D00859C8E /* STTutorialStartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 170AE3BC1DF60F9D00859C8E /* STTutorialStartCell.m */; };
 		170AE3C01DF618D200859C8E /* STTutorialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 170AE3BF1DF618D200859C8E /* STTutorialModel.m */; };
 		171936C31C848604002C0202 /* STNavigationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 171936C21C848604002C0202 /* STNavigationService.m */; };
 		17232F191CFC50F300280B6B /* BadgeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17232F181CFC50F300280B6B /* BadgeService.m */; };
@@ -460,6 +463,12 @@
 		073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STMissingProductTVCTableViewController.m; sourceTree = "<group>"; };
 		073912DF20C5CFBE005E4AE8 /* UICollectionViewCell+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewCell+Additions.h"; sourceTree = "<group>"; };
 		073912E020C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewCell+Additions.m"; sourceTree = "<group>"; };
+		073945CD20D62ABD006E1F19 /* STInstagramLoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STInstagramLoginService.h; sourceTree = "<group>"; };
+		073945CE20D62ABD006E1F19 /* STInstagramLoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STInstagramLoginService.m; sourceTree = "<group>"; };
+		073945D020D62C32006E1F19 /* STInstagramClientTokenRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STInstagramClientTokenRequest.h; sourceTree = "<group>"; };
+		073945D120D62C32006E1F19 /* STInstagramClientTokenRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STInstagramClientTokenRequest.m; sourceTree = "<group>"; };
+		073945D320D645E6006E1F19 /* STInstagramLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STInstagramLoginViewController.h; sourceTree = "<group>"; };
+		073945D420D645E6006E1F19 /* STInstagramLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STInstagramLoginViewController.m; sourceTree = "<group>"; };
 		073998FB20AE1570003FA09C /* STProductBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STProductBase.h; sourceTree = "<group>"; };
 		073998FC20AE1570003FA09C /* STProductBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STProductBase.m; sourceTree = "<group>"; };
 		073998FE20AE16FB003FA09C /* STSuggestedProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSuggestedProduct.h; sourceTree = "<group>"; };
@@ -471,6 +480,8 @@
 		0748751920112F9E005E6CFD /* SettingsScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsScene.storyboard; sourceTree = "<group>"; };
 		0748751B2011541D005E6CFD /* STCustomTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCustomTitleView.h; sourceTree = "<group>"; };
 		0748751C2011541D005E6CFD /* STCustomTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCustomTitleView.m; sourceTree = "<group>"; };
+		074BFD6C20D83C4100347941 /* STGDPRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STGDPRViewController.h; sourceTree = "<group>"; };
+		074BFD6D20D83C4100347941 /* STGDPRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STGDPRViewController.m; sourceTree = "<group>"; };
 		074FA8D61EB652600028C33E /* STTagProductsCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsCategories.h; sourceTree = "<group>"; };
 		074FA8D71EB652600028C33E /* STTagProductsCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsCategories.m; sourceTree = "<group>"; };
 		07533D841F6E91020009DDDF /* STBarcodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBarcodeScannerViewController.h; sourceTree = "<group>"; };
@@ -590,8 +601,6 @@
 		170912561DF8848300B2AF81 /* STRemoveAdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STRemoveAdsViewController.h; sourceTree = "<group>"; };
 		170912571DF8848300B2AF81 /* STRemoveAdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STRemoveAdsViewController.m; sourceTree = "<group>"; };
 		1709E63A1E224EF40076068A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
-		170AE3BB1DF60F9D00859C8E /* STTutorialStartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialStartCell.h; sourceTree = "<group>"; };
-		170AE3BC1DF60F9D00859C8E /* STTutorialStartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialStartCell.m; sourceTree = "<group>"; };
 		170AE3BE1DF618D200859C8E /* STTutorialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTutorialModel.h; sourceTree = "<group>"; };
 		170AE3BF1DF618D200859C8E /* STTutorialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTutorialModel.m; sourceTree = "<group>"; };
 		171936C11C848604002C0202 /* STNavigationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNavigationService.h; sourceTree = "<group>"; };
@@ -1595,6 +1604,8 @@
 				0736222320B191F700092DB1 /* STDeleteAccountRequest.m */,
 				0764B372208A840B00064D7C /* STSendLogsReguest.h */,
 				0764B373208A840B00064D7C /* STSendLogsReguest.m */,
+				073945D020D62C32006E1F19 /* STInstagramClientTokenRequest.h */,
+				073945D120D62C32006E1F19 /* STInstagramClientTokenRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1661,6 +1672,8 @@
 				07552B3520474912005F4542 /* STImageSuggestionsService.m */,
 				07A9B647208E66020064D549 /* STLoggerService.h */,
 				07A9B648208E66020064D549 /* STLoggerService.m */,
+				073945CD20D62ABD006E1F19 /* STInstagramLoginService.h */,
+				073945CE20D62ABD006E1F19 /* STInstagramLoginService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1966,6 +1979,10 @@
 			children = (
 				99B387041C82FAA2005B4D8C /* STLoginViewController.h */,
 				99B387051C82FAA2005B4D8C /* STLoginViewController.m */,
+				073945D320D645E6006E1F19 /* STInstagramLoginViewController.h */,
+				073945D420D645E6006E1F19 /* STInstagramLoginViewController.m */,
+				074BFD6C20D83C4100347941 /* STGDPRViewController.h */,
+				074BFD6D20D83C4100347941 /* STGDPRViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2051,8 +2068,6 @@
 				99B3872F1C82FAA2005B4D8C /* STTutorialCell.m */,
 				170AE3BE1DF618D200859C8E /* STTutorialModel.h */,
 				170AE3BF1DF618D200859C8E /* STTutorialModel.m */,
-				170AE3BB1DF60F9D00859C8E /* STTutorialStartCell.h */,
-				170AE3BC1DF60F9D00859C8E /* STTutorialStartCell.m */,
 				99B387301C82FAA2005B4D8C /* STTutorialPresenterViewController.h */,
 				99B387311C82FAA2005B4D8C /* STTutorialPresenterViewController.m */,
 				99B387321C82FAA2005B4D8C /* STTutorialViewController.h */,
@@ -2466,7 +2481,6 @@
 				072DBBE71FF9202E00DFA8F0 /* STSyncService.m in Sources */,
 				99B3875E1C82FAA2005B4D8C /* STLoginRequest.m in Sources */,
 				0721585B1F1A4B47001481B0 /* STWithdrawDetailsCVC.m in Sources */,
-				170AE3BD1DF60F9D00859C8E /* STTutorialStartCell.m in Sources */,
 				07234ADC1FF69692000C335A /* STTagBrandSection.m in Sources */,
 				99B387441C82FAA2005B4D8C /* UIImage+ImageEffects.m in Sources */,
 				17648B911E50F05D00D9C428 /* STGetCatalogCategoriesRequest.m in Sources */,
@@ -2524,6 +2538,7 @@
 				99B387541C82FAA2005B4D8C /* STGetPostLikesRequest.m in Sources */,
 				99B387601C82FAA2005B4D8C /* STRepostPostRequest.m in Sources */,
 				2A6D7EB01C82FEDC00F65026 /* STPost.m in Sources */,
+				073945CF20D62ABD006E1F19 /* STInstagramLoginService.m in Sources */,
 				170AE3C01DF618D200859C8E /* STTutorialModel.m in Sources */,
 				99B387611C82FAA2005B4D8C /* STSetAPNTokenRequest.m in Sources */,
 				99B3873F1C82FAA2005B4D8C /* NSIndexPath+Additions.m in Sources */,
@@ -2540,6 +2555,7 @@
 				170911FB1DF87F0400B2AF81 /* STNearbyCollectionLayout.m in Sources */,
 				17648B881E50993F00D9C428 /* STUploadShopProduct.m in Sources */,
 				99B387A51C82FAA2005B4D8C /* HPGrowingTextView.m in Sources */,
+				073945D520D645E6006E1F19 /* STInstagramLoginViewController.m in Sources */,
 				075E6ED920324B14007C3457 /* STDetailedShopProductCell.m in Sources */,
 				17648B8E1E50DBF400D9C428 /* STCatalogParentCategory.m in Sources */,
 				99B387421C82FAA2005B4D8C /* UIImage+Alpha.m in Sources */,
@@ -2567,6 +2583,7 @@
 				17232F191CFC50F300280B6B /* BadgeService.m in Sources */,
 				174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */,
 				99B387DD1C82FAA2005B4D8C /* STTutorialPresenterViewController.m in Sources */,
+				074BFD6E20D83C4100347941 /* STGDPRViewController.m in Sources */,
 				07552B3620474912005F4542 /* STImageSuggestionsService.m in Sources */,
 				99B3873E1C82FAA2005B4D8C /* NSDate+Additions.m in Sources */,
 				99B387491C82FAA2005B4D8C /* STConstants.m in Sources */,
@@ -2643,6 +2660,7 @@
 				1709124C1DF882DC00B2AF81 /* STPostShopProductsCell.m in Sources */,
 				072158621F1A4F3B001481B0 /* STWDInputViewModel.m in Sources */,
 				52DC4DCD1C8D87F00064F23F /* UIAlertController+Additions.m in Sources */,
+				073945D220D62C32006E1F19 /* STInstagramClientTokenRequest.m in Sources */,
 				99B387E51C830082005B4D8C /* CoreManager.m in Sources */,
 				99B387551C82FAA2005B4D8C /* STGetPostsRequest.m in Sources */,
 				99B387431C82FAA2005B4D8C /* UIImage+FixedOrientation.m in Sources */,

@@ -10,8 +10,9 @@
 
 @implementation STLoginRequest
 + (void)loginWithUserInfo:(NSDictionary*)userInfo
-                           withCompletion:(STRequestCompletionBlock)completion
-                                  failure:(STRequestFailureBlock)failure{
+                loginType:(STLoginRequestType)loginType
+           withCompletion:(STRequestCompletionBlock)completion
+                  failure:(STRequestFailureBlock)failure{
     
     STLoginRequest *request = [STLoginRequest new];
     request.completionBlock = completion;
@@ -19,6 +20,7 @@
     request.executionBlock = [request _getExecutionBlock];
     request.retryCount = 0;
     request.userInfo = userInfo;
+    request.loginType = loginType;
     [[CoreManager networkService] addToQueueTop:request];
 }
 
@@ -44,6 +46,10 @@
 }
 
 -(NSString *)urlString{
-    return kLoginUser;
+    if (self.loginType == STLoginRequestTypeFacebook) {
+        return kLoginUser;
+    }else{
+        return kInstagramLogin;
+    }
 }
 @end

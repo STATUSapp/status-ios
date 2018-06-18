@@ -19,11 +19,13 @@
 //NSString *const kReachableURL = @"api.getstatusapp.co";
 
 NSString *const kBaseURL = @"https://getstatus.co/api/v1/";
+NSString *const kNoApiBaseURL = @"https://getstatus.co/";
 NSString *const kReachableURL = @"getstatus.co";
 
 #else
 
 NSString *const kBaseURL = @"http://139.59.128.34/api/v1/";
+NSString *const kNoApiBaseURL = @"http://139.59.128.34/";
 NSString *const kReachableURL = @"139.59.128.34";
 //NSString *const kBaseURL = @"http://10.49.100.81:8000/api/v1/";
 //NSString *const kReachableURL = @"10.49.100.81";
@@ -60,6 +62,7 @@ NSString *const kGetHomePosts = @"Get_Home_Posts";
 NSString *const kGetRecentPosts = @"Get_Recent_Posts";
 NSString *const kGetPostsByHashTag = @"get_posts_by_hashtag";
 NSString *const kLoginUser = @"login_user";
+NSString *const kInstagramLogin = @"instagram_login";
 NSString *const kRegisterUser = @"register_user";
 NSString *const kPostPhoto = @"post_photo";
 NSString *const kUpdatePost = @"update_photo";
@@ -114,6 +117,7 @@ NSString *const kGetSimilarProducts = @"get_post_similar_suggestions";
 NSString *const kTransformSuggestions = @"transform_post_suggestions";
 NSString *const kDeleteAccount = @"delete_profile";
 NSString *const kSendLogs = @"__log";
+NSString *const kGetInstagramClientToken = @"get_instagram_client_token";
 
 NSString *const kAPIKey = @"API";
 NSString *const kErrorCodeKey = @"error_code";

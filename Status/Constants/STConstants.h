@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define USE_PRODUCTION_SERVER 1
+#define USE_PRODUCTION_SERVER 0
 
 #define APP_STORE_ID          @"841855995"
 #define APP_URL_STRING        @"itms-apps://itunes.apple.com/app/id841855995"
@@ -106,6 +106,7 @@ typedef NS_ENUM(NSUInteger, STUserStatus){
 #pragma mark - Constant Strings
 
 extern NSString *const kBaseURL;
+extern NSString *const kNoApiBaseURL;
 extern NSString *const kReachableURL;
 
 extern NSString *const kSTAdUnitID;
@@ -121,6 +122,7 @@ extern NSString *const kGetHomePosts;
 extern NSString *const kGetRecentPosts;
 extern NSString *const kGetPostsByHashTag;
 extern NSString *const kLoginUser;
+extern NSString *const kInstagramLogin;
 extern NSString *const kRegisterUser;
 extern NSString *const kPostPhoto;
 extern NSString *const kSetPostLiked;
@@ -174,6 +176,7 @@ extern NSString *const kGetSimilarProducts;
 extern NSString *const kTransformSuggestions;
 extern NSString *const kDeleteAccount;
 extern NSString *const kSendLogs;
+extern NSString *const kGetInstagramClientToken;
 
 extern NSString *const kAPIKey;
 extern NSString *const kErrorCodeKey;
