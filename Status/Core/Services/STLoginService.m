@@ -26,7 +26,6 @@
 #import "STFacebookHelper.h"
 #import "NSDate+Additions.h"
 
-#import <FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "CreateDataModelHelper.h"
@@ -37,8 +36,11 @@
 #import "STUserProfilePool.h"
 #import "STNavigationService.h"
 #import "STDataAccessUtils.h"
+#import "STInstagramLoginService.h"
+#import "FBSDKLoginManager.h"
+#import <WebKit/WebKit.h>
 
-@interface STLoginService ()<FBSDKLoginButtonDelegate>
+@interface STLoginService ()
 
 @property (nonatomic, strong) NSString *currentUserId;
 @property (nonatomic, strong) NSDictionary *fetchedUserData;
@@ -47,6 +49,7 @@
 @property (nonatomic, assign) BOOL manualLogout;
 @property (nonatomic, strong, readwrite) STLoginView *loginView;
 
+@property (nonatomic, assign) STLoginRequestType lastLoginType;
 @end
 
 @implementation STLoginService
@@ -54,21 +57,11 @@
 -(id)init{
     self = [super init];
     if (self) {
-        self.manualLogout = NO;
-        self.loginView = [STLoginView loginViewWithDelegate:self];
+        _manualLogout = NO;
+        _loginView = [STLoginView loginViewWithDelegate:self];
+        _lastLoginType = [self loadLastLoginType];
     }
     return self;
-}
-
-- (FBSDKLoginButton *)facebookLoginButton{
-    FBSDKLoginButton *_loginButton = [FBSDKLoginButton new];
-    _loginButton.defaultAudience = FBSDKDefaultAudienceEveryone;
-    _loginButton.readPermissions = @[@"public_profile", @"email",@"user_birthday", @"user_location",@"user_photos"];
-    
-    _loginButton.delegate = self;
-    
-    return _loginButton;
-
 }
 
 - (NSString *)currentUserUuid{
@@ -91,14 +84,25 @@
 }
 
 - (void)startLoginIfPossible {
-    if ([FBSDKAccessToken currentAccessToken]) {
-        [self loginOrRegister];
-    }
-    else{
+    
+    if (_lastLoginType == STLoginRequestTypeFacebook &&
+        [FBSDKAccessToken currentAccessToken]) {
+        [self initiateFacebookLogin];
+    }else if (_lastLoginType == STLoginRequestTypeInstagram &&
+              [CoreManager instagramLoginService].clientInstagramToken){
+        [self initiateInstagramLogin];
+    }else{
         self.manualLogout = NO;
         [self logout];
         [self loginAsGuest];
     }
+}
+
+- (void)logoutManually {
+    [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogout object:nil userInfo:nil];
+    self.manualLogout = YES;
+    [self logout];
+    [self loginAsGuest];
 }
 
 - (STUserProfile *)userProfile{
@@ -132,11 +136,17 @@
 }
 
 -(BOOL)isGuestUser{
-    if (_fetchedUserData) {
-        NSString *email = _fetchedUserData[@"email"];
-        return [email containsString:@"ios_guest"];
+    if (self.lastLoginType == STLoginRequestTypeInstagram) {
+        return NO;
+    }else{
+        if (_fetchedUserData) {
+            NSString *email = _fetchedUserData[@"email"];
+            if (email) {
+                return [email containsString:@"ios_guest"];
+            }
+        }
+        return YES;
     }
-    return YES;
 }
 
 -(NSDictionary *)loadGuestUser{
@@ -155,34 +165,37 @@
         return;
     }
     NSDictionary *userInfo = [self loadGuestUser];
-    [self sendLoginOrregisterRequest:userInfo];
+    [self sendLoginOrregisterRequest:userInfo loginType:STLoginRequestTypeFacebook];
 }
 
-#pragma mark - Facebook Delegate
-
-- (void)logoutManually {
-    [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogout object:nil userInfo:nil];
-    self.manualLogout = YES;
-    [self logout];
-    [self loginAsGuest];
+#pragma mark - Last Login Type
+- (void)saveLastLoginType:(STLoginRequestType)loginType{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setValue:@(loginType) forKey:@"LAST_LOGIN_SUCCESS"];
+    [ud synchronize];
 }
 
--(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
-    [self logoutManually];
-}
-
--(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
-    if (error!=nil) {
-        //TODO: add log here
-        _currentUserId = nil;
+- (STLoginRequestType)loadLastLoginType{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSNumber *result = [ud valueForKey:@"LAST_LOGIN_SUCCESS"];
+    STLoginRequestType lastloginType;
+    if (!result) {
+        //assume Facebook Login since before 2.8 version was not any other other option
+        lastloginType = STLoginRequestTypeFacebook;
+    }else{
+        lastloginType = [result integerValue];
     }
-    else
-    {
-        [[CoreManager localNotificationService] postNotificationName:kNotificationFacebokDidLogin object:nil userInfo:nil];
-        [self loginOrRegister];
-        
-    }
+    
+    return lastloginType;
 }
+
+- (void)clearLoginType{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setValue:nil forKey:@"LAST_LOGIN_SUCCESS"];
+
+}
+
+#pragma mark - General Helpers
 
 - (void)setUpCrashlyticsForUserId:(NSString *)userId andEmail:(NSString *)email andUserName:(NSString *)userName{
     [[Crashlytics sharedInstance] setUserIdentifier:userId];
@@ -233,14 +246,42 @@
 -(void)logout{
     [[CoreManager localNotificationService] postNotificationName:kNotificationUserDidLoggedOut object:nil userInfo:nil];
     _fetchedUserData = nil;
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [FBSDKAccessToken setCurrentAccessToken:nil];
     [FBSDKProfile setCurrentProfile:nil];
-    //            [weakSelf presentLoginScene];
-    [NSObject cancelPreviousPerformRequestsWithTarget:[CoreManager locationService] selector:@selector(restartLocationManager) object:nil];
-    [[CoreManager locationService] stopLocationUpdates];
-    [[CoreManager locationService] setLatestLocation:nil];
+
+    [self clearLoginType];
+    self.lastLoginType = STLoginRequestTypeFacebook;
+    
+    //invalidate the cache
     [[CoreManager imageCacheService] cleanTemporaryFolder];
+
+    //invalidate the cookies
+    WKWebsiteDataStore *dateStore = [WKWebsiteDataStore defaultDataStore];
+    [dateStore fetchDataRecordsOfTypes:[WKWebsiteDataStore allWebsiteDataTypes]
+                     completionHandler:^(NSArray<WKWebsiteDataRecord *> * __nonnull records) {
+                         for (WKWebsiteDataRecord *record  in records)
+                         {
+                             NSLog(@"Cookie record = %@", record.displayName);
+                             if ( [record.displayName containsString:@"facebook"]||
+                                 [record.displayName containsString:@"instagram"] ||
+                                 [record.displayName containsString:kReachableURL])
+                             {
+                                 [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:record.dataTypes
+                                                                           forDataRecords:@[record]
+                                                                        completionHandler:^{
+                                                                            NSLog(@"Cookies for %@ deleted successfully",record.displayName);
+                                                                        }];
+                             }
+                         }
+                     }];
+    //clear instagram data
+    [[CoreManager instagramLoginService] clearService];
+    
+    //clear facebook data
+    FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+    [loginManager logOut];
+    [FBSDKAccessToken setCurrentAccessToken:nil];
+
+    //delete APNS token
     STRequestCompletionBlock completion = ^(id response, NSError *error){
         if ([response[@"status_code"] integerValue]==200){
             NSLog(@"APN Token deleted.");
@@ -249,9 +290,9 @@
         else  NSLog(@"APN token NOT deleted.");
     };
     [STSetAPNTokenRequest setAPNToken:@"" withCompletion:completion failure:nil];
-    
-    [[STChatController sharedInstance] close];
 
+    //close chat socket
+    [[STChatController sharedInstance] close];
 }
 
 -(BOOL)canLoginOrRegister{
@@ -296,43 +337,26 @@
             if (info[@"about"]!=nil) {
                 userInfo[@"bio"] = info[@"about"];
             }
-            [strongSelf sendLoginOrregisterRequest:userInfo];
+            [strongSelf sendLoginOrregisterRequest:userInfo loginType:STLoginRequestTypeFacebook];
         }
     }];
 }
 
--(void) loginOrRegister{
-    if (![self canLoginOrRegister]) {
-        return;
-    }
-    if([[FBSDKAccessToken currentAccessToken] tokenString]==nil){
-        //TODO: add log here
-        return ;
-    }
-    NSTimeInterval timeInterval = [[FBSDKAccessToken currentAccessToken].expirationDate timeIntervalSinceNow];
-    if (timeInterval>0) {
-        [self buildLoginRegisterParams];
-    }else{
-        __weak STLoginService *weakSelf;
-        [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-            __strong STLoginService *strongSelf = weakSelf;
-            if (error!=nil) {
-                //TODO: add log here
-                return ;
-            }
-            [strongSelf buildLoginRegisterParams];
-        }];
-    }
-
+- (void)showSomethingWrongAlertOnLogin {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong on login." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [[CoreManager navigationService] presentAlertController:alert];
 }
 
--(void)sendLoginOrregisterRequest:(NSDictionary *)userInfo{
+-(void)sendLoginOrregisterRequest:(NSDictionary *)userInfo
+                        loginType:(STLoginRequestType)loginType{
     __weak STLoginService *weakSelf = self;
     _fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
     STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
         __strong STLoginService *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
             [strongSelf measureRegister];
+            strongSelf.lastLoginType = loginType;
             [strongSelf setUpEnvironment:response andUserInfo:userInfo];
         }
         else
@@ -346,7 +370,9 @@
     
     STRequestFailureBlock failBlock = ^(NSError *error){
         //TODO: add log here
+        __strong STLoginService *strongSelf = weakSelf;
         NSLog(@"Error: %@", error.debugDescription);
+        [strongSelf showSomethingWrongAlertOnLogin];
     };
 
     STRequestCompletionBlock loginCompletion = ^(id response, NSError *error){
@@ -359,18 +385,22 @@
         }
         else if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod){
             [strongSelf setTrackerAsExistingUser];
+            strongSelf.lastLoginType = loginType;
+            [strongSelf saveLastLoginType:loginType];
+            if (loginType == STLoginRequestTypeInstagram) {
+                [[CoreManager instagramLoginService] commitInstagramClientToken];
+            }
             [strongSelf setUpEnvironment:response andUserInfo:userInfo];
         }
         else
         {
             //TODO: add log here
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wrong on login." preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-            [[CoreManager navigationService] presentAlertController:alert];
+            [strongSelf showSomethingWrongAlertOnLogin];
         }
     };
 
     [STLoginRequest loginWithUserInfo:userInfo
+                            loginType:loginType
                        withCompletion:loginCompletion
                               failure:failBlock];
 }
@@ -402,19 +432,48 @@
 - (void)loginViewDidSelectFacebook{
     NSLog(@"facebook button pressed");
     [self initiateFacebookLogin];
-//    [self.facebookLoginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 - (void)loginViewDidSelectInstagram{
     NSLog(@"instagram button pressed");
     [self initiateInstagramLogin];
 }
 
+#pragma mark - Facebook Login Helpers
+
 - (void)initiateFacebookLogin{
+    if (![self canLoginOrRegister]) {
+        return;
+    }
     [self buildLoginRegisterParams];
-    
 }
 
+#pragma mark - Instagram Login Helpers
 - (void)initiateInstagramLogin{
-    
+    if (![self canLoginOrRegister]) {
+        return;
+    }
+    __weak STLoginService *weakSelf = self;
+    [[CoreManager instagramLoginService] startLoginWithCompletion:^(NSError *error) {
+        __strong STLoginService *strongSelf = weakSelf;
+        if (!error) {
+            NSString *instaClientToken = [CoreManager instagramLoginService].clientInstagramToken;
+            if (!instaClientToken) {
+                //show alert
+                [strongSelf showSomethingWrongAlertOnLogin];
+            }else{
+                [strongSelf loginWithInstagramInfo];
+            }
+        }else{
+            //show alert
+            NSLog(@"Error: %@", error);
+            [strongSelf showSomethingWrongAlertOnLogin];
+        }
+    }];
 }
+
+- (void)loginWithInstagramInfo {
+    NSDictionary *userInfo = @{@"instagram_client_token":[CoreManager instagramLoginService].clientInstagramToken};
+    [self sendLoginOrregisterRequest:userInfo loginType:STLoginRequestTypeInstagram];
+}
+
 @end

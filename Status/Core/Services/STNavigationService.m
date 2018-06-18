@@ -117,7 +117,13 @@
         [appDel.window bringSubviewToFront:loginView];
         [loginView animateIn];
     }
+}
 
+- (void)presentInstagramLogin{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginScene" bundle:nil];
+    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"INSTA_LOGIN_NAV"];
+    UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
+    [viewController presentViewController:navController animated:YES completion:nil];
 }
 - (void)resetTabBarStacks{
     //TODO: dev_1_2 should we reset some nav controller?

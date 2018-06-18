@@ -217,7 +217,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 - (void)postUpdated:(NSNotification *)notif{
-    NSLog(@"Post updated user info: %@", notif.userInfo);
+//    NSLog(@"Post updated user info: %@", notif.userInfo);
     NSArray *allObjectsArray = [_feedProcessor allObjectIds];
     if (allObjectsArray.count > 0) {
 //        NSString *updatedObjectId = notif.userInfo[kPostIdKey];

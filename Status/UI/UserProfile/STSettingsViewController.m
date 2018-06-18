@@ -47,9 +47,6 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
     STNotificationSectionCount
 };
 @interface STSettingsViewController ()
-{
-    FBSDKLoginButton *logoutButton;
-}
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
@@ -108,10 +105,6 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
         }
     };
 
-    logoutButton = [[CoreManager loginService] facebookLoginButton];
-    [logoutButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    logoutButton.hidden = YES;
-    [_logoutCell addSubview:logoutButton];
     [STGetUserSettingsRequest getUserSettingsWithCompletion:completion failure:nil];
     [self configureSwitches];
 }
@@ -214,7 +207,12 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 }
 
 - (IBAction)onTapLogout:(id)sender {
-    [self fireFbLoginView];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Logout from STATUS?", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [[CoreManager loginService] logoutManually];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 - (IBAction)onTapRateUsInAppstore:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_REVIEW_URL_STRING]];
@@ -245,11 +243,6 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/getSTATUSapp"]];
     }
 }
-
--(void)fireFbLoginView{
-    [logoutButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-}
-
 
 - (IBAction)onTapLikeSwitch:(UISwitch *)sender {
     [self setSetting:STNotificationsLikesKey fromSwitch:sender];

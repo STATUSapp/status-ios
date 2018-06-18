@@ -7,6 +7,8 @@
 //
 
 #import "STLoginView.h"
+#import "STNavigationService.h"
+#import "STGDPRViewController.h"
 
 NSInteger const kLoginViewTag = 1001;
 CGFloat const kLoginButtonViewDefaultHeight = 397.f;
@@ -68,7 +70,20 @@ CGFloat const kAnimationDuration = 0.25f;
     self.frame = rect;
     self.topConstraint.constant = screenSize.height;
     self.shadowView.alpha = 0.f;
+    self.agrementLabel.attributedText = [self bottomString];
     [self layoutIfNeeded];
+}
+
+- (NSAttributedString *)bottomString{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"By signing up, you confirm that you agree to\nour Terms of Use and have read and\nunderstood our Privacy Policy." attributes:@{
+                                                                                                                                                                                                                                     NSFontAttributeName: [UIFont fontWithName:@"ProximaNova-Regular" size: 12.0f],
+                                                                                                                                                                                                                                     NSForegroundColorAttributeName: [UIColor colorWithWhite:194.0f / 255.0f alpha:1.0f],
+                                                                                                                                                                                                                                     NSKernAttributeName: @(-0.3)
+                                                                                                                                                                                                                                     }];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:140.0f / 255.0f alpha:1.0f] range:NSMakeRange(49, 12)];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:140.0f / 255.0f alpha:1.0f] range:NSMakeRange(95, 14)];
+    
+    return attributedString;
 }
 #pragma mark - IBActions
 
@@ -85,6 +100,18 @@ CGFloat const kAnimationDuration = 0.25f;
     if (self.delegate && [self.delegate respondsToSelector:@selector(loginViewDidSelectInstagram)]) {
         [self.delegate loginViewDidSelectInstagram];
     }
+    [self onCloseButtonPressed:nil];
+}
+- (IBAction)onTermsOfUsePressed:(id)sender {
+    UINavigationController *navCtrl = [STGDPRViewController GDPRControllerWithType:STGDPRTypeTermsOfUse];
+    UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
+    [viewController presentViewController:navCtrl animated:YES completion:nil];
+    [self onCloseButtonPressed:nil];
+}
+- (IBAction)onPrivacyPolicyPressed:(id)sender {
+    UINavigationController *navCtrl = [STGDPRViewController GDPRControllerWithType:STGDPRTypePrivacyPolicy];
+    UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
+    [viewController presentViewController:navCtrl animated:YES completion:nil];
     [self onCloseButtonPressed:nil];
 }
 

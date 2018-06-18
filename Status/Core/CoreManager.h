@@ -31,6 +31,7 @@
 @class STSyncService;
 @class STImageSuggestionsService;
 @class STLoggerService;
+@class STInstagramLoginService;
 
 @interface CoreManager : NSObject
 
@@ -61,4 +62,6 @@
 + (STSyncService *)syncService;
 + (STImageSuggestionsService *)imageSuggestionsService;
 + (STLoggerService *)loggerService;
++ (STInstagramLoginService *)instagramLoginService;
+
 @end

@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, STTutorial) {
-    STTutorialLogin = 0,
-    STTutorialDiscover,
+    STTutorialDiscover = 0,
     STTutorialShopStyle,
     STTutorialTagProducts,
     STTutorialShareOutfit,

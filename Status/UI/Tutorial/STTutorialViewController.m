@@ -8,10 +8,8 @@
 
 #import "STTutorialViewController.h"
 #import "STTutorialCell.h"
-#import "STTutorialStartCell.h"
 #import "STTutorialModel.h"
 
-NSString * const kTutorialStartCell = @"STTutorialStartCell";
 NSString * const kTutorialCell = @"STTutorialCell";
 
 @interface STTutorialViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
@@ -62,9 +60,6 @@ NSString * const kTutorialCell = @"STTutorialCell";
         NSString *imageName = nil;
         
         switch (i) {
-            case STTutorialLogin:
-                //nothing to do here
-                break;
             case STTutorialDiscover:
             {
                 title = @"DISCOVER";
@@ -117,11 +112,7 @@ NSString * const kTutorialCell = @"STTutorialCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(NSString *)identifierForTutorialModel:(STTutorialModel *)model{
-    if (model.type == STTutorialLogin) {
-        return kTutorialStartCell;
-    }
-    
+-(NSString *)identifierForTutorialModel:(STTutorialModel *)model{    
     return kTutorialCell;
 }
 #pragma mark - UICollectionViewDataSource
@@ -140,9 +131,7 @@ NSString * const kTutorialCell = @"STTutorialCell";
         STTutorialCell *theCell = (STTutorialCell *)cell;
         [theCell configureWithModel:model];
     }
-    else if ([cell isKindOfClass:[STTutorialStartCell class]]){
-        [(STTutorialStartCell *)cell configureCell];
-    }
+
     return cell;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -161,12 +150,6 @@ NSString * const kTutorialCell = @"STTutorialCell";
 }
 
 #pragma mark - IBAction
-
-- (IBAction)onLoginButtonPressed:(id)sender {
-    if (_delegate && [_delegate respondsToSelector:@selector(loginButtonPressed:)]) {
-        [_delegate loginButtonPressed:sender];
-    }
-}
 
 - (IBAction)onMultipleTap:(id)sender {
     UICollectionViewCell *cell = self.collectionView.visibleCells.firstObject;
