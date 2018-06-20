@@ -409,7 +409,7 @@ NSInteger const kFacebookAdsTimeframe = 10;
     
     for (NSString *postId in array) {
         if ([_objectIds containsObject:postId]) {
-            NSLog(@"Duplicate found");
+//            NSLog(@"Duplicate found");
             [sheetArray removeObject:postId];
             _numberOfDuplicates++;
         }

@@ -21,18 +21,72 @@
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
     _webView = [[WKWebView alloc] initWithFrame:self.view.frame];
-    _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
-    _webView.translatesAutoresizingMaskIntoConstraints = YES;
-    [self.view addSubview:_webView];
+    _webView.allowsBackForwardNavigationGestures = YES;
+    self.view = _webView;
+//    [self.view addSubview:_webView];
+//    _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
+//    _webView.translatesAutoresizingMaskIntoConstraints = NO;
+
+//    [self.view addConstraints:
+//     @[
+//       [NSLayoutConstraint constraintWithItem:self.webView
+//                                    attribute:NSLayoutAttributeTop
+//                                    relatedBy:NSLayoutRelationEqual
+//                                       toItem:self.view
+//                                    attribute:NSLayoutAttributeTop
+//                                   multiplier:1.0
+//                                     constant:0.0],
+//
+//       [NSLayoutConstraint constraintWithItem:self.webView
+//                                    attribute:NSLayoutAttributeBottom
+//                                    relatedBy:NSLayoutRelationEqual
+//                                       toItem:self.view
+//                                    attribute:NSLayoutAttributeBottom
+//                                   multiplier:1.0
+//                                     constant:0.0],
+//
+//       [NSLayoutConstraint constraintWithItem:self.webView
+//                                    attribute:NSLayoutAttributeLeading
+//                                    relatedBy:NSLayoutRelationEqual
+//                                       toItem:self.view
+//                                    attribute:NSLayoutAttributeLeading
+//                                   multiplier:1.0
+//                                     constant:0.0],
+//
+//       [NSLayoutConstraint constraintWithItem:self.webView
+//                                    attribute:NSLayoutAttributeTrailing
+//                                    relatedBy:NSLayoutRelationEqual
+//                                       toItem:self.view
+//                                    attribute:NSLayoutAttributeTrailing
+//                                   multiplier:1.0
+//                                     constant:0.0],
+//       ]];
+
     NSURL *instagramURL = [[CoreManager instagramLoginService] getInstagramOauthURL];
     if (instagramURL) {
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
-        NSURLRequest *request = [NSURLRequest requestWithURL:instagramURL];
+        NSURLRequest *request = [NSURLRequest requestWithURL:instagramURL];;
         [_webView loadRequest:request];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
     }
+    
+    if (@available(iOS 11.0, *)) {
+        [self.webView.configuration.websiteDataStore.httpCookieStore getAllCookies:^(NSArray<NSHTTPCookie *> * _Nonnull arrCookies) {
+            
+            for (NSHTTPCookie *cookie in arrCookies) {
+                NSLog(@"Cookie: \n%@ \n\n", cookie);
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
+        NSArray *cookieStore = NSHTTPCookieStorage.sharedHTTPCookieStorage.cookies;
+        for (NSHTTPCookie *cookie in cookieStore) {
+            NSLog(@"Cookie: \n%@ \n\n", cookie);
+        }
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

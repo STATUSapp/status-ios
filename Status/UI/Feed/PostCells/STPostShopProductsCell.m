@@ -38,7 +38,6 @@
 //    for (NSInteger i = 0; i< _products.count; i++) {
 //        [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
 //    }
-    NSLog(@"Reload on Products Cell");
     [self.produsctsCollection reloadData];
     [self.produsctsCollection.collectionViewLayout invalidateLayout];
 //    [self.produsctsCollection layoutSubviews];

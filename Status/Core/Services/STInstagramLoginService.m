@@ -50,13 +50,16 @@ NSInteger const kClientCancelLoginCode = 10002;
                     [[CoreManager navigationService]presentInstagramLogin];
                     
                 }else{
+                    strongSelf.clientInstagramToken = nil;
                     strongSelf.completion([NSError errorWithDomain:kInstagramErrorDomain code:kNoClientTokenReceivedCode userInfo:nil]);
                 }
             }else{
+                strongSelf.clientInstagramToken = nil;
                 strongSelf.completion(error);
             }
         } failure:^(NSError *error) {
             __strong STInstagramLoginService *strongSelf = weakSelf;
+            strongSelf.clientInstagramToken = nil;
             strongSelf.completion(error);
         }];
     }
@@ -78,6 +81,7 @@ NSInteger const kClientCancelLoginCode = 10002;
     }else{
         //error
         NSError *error = [NSError errorWithDomain:kInstagramErrorDomain code:statusCode userInfo:nil];
+        self.clientInstagramToken = nil;
         self.completion(error);
     }
 }

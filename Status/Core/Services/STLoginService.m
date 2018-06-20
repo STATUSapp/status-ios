@@ -254,6 +254,14 @@
     //invalidate the cache
     [[CoreManager imageCacheService] cleanTemporaryFolder];
 
+    NSSet *websiteDataTypes = [NSSet setWithArray:@[WKWebsiteDataTypeCookies]];
+    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes
+                                               modifiedSince:dateFrom
+                                           completionHandler:^{
+                                               
+                                           }];
+
     //invalidate the cookies
     WKWebsiteDataStore *dateStore = [WKWebsiteDataStore defaultDataStore];
     [dateStore fetchDataRecordsOfTypes:[WKWebsiteDataStore allWebsiteDataTypes]
@@ -261,16 +269,17 @@
                          for (WKWebsiteDataRecord *record  in records)
                          {
                              NSLog(@"Cookie record = %@", record.displayName);
-                             if ( [record.displayName containsString:@"facebook"]||
-                                 [record.displayName containsString:@"instagram"] ||
-                                 [record.displayName containsString:kReachableURL])
-                             {
-                                 [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:record.dataTypes
-                                                                           forDataRecords:@[record]
-                                                                        completionHandler:^{
-                                                                            NSLog(@"Cookies for %@ deleted successfully",record.displayName);
-                                                                        }];
-                             }
+                             [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:record.dataTypes
+                                                                       forDataRecords:@[record]
+                                                                    completionHandler:^{
+                                                                        NSLog(@"Cookies for %@ deleted successfully",record.displayName);
+                                                                    }];
+
+//                             if ( [record.displayName containsString:@"facebook"]||
+//                                 [record.displayName containsString:@"instagram"] ||
+//                                 [record.displayName containsString:kReachableURL])
+//                             {
+//                             }
                          }
                      }];
     //clear instagram data
@@ -372,6 +381,9 @@
         //TODO: add log here
         __strong STLoginService *strongSelf = weakSelf;
         NSLog(@"Error: %@", error.debugDescription);
+        if (loginType == STLoginRequestTypeInstagram) {
+            [strongSelf invalidateInstagramService];
+        }
         [strongSelf showSomethingWrongAlertOnLogin];
     };
 
@@ -394,8 +406,10 @@
         }
         else
         {
-            //TODO: add log here
             [strongSelf showSomethingWrongAlertOnLogin];
+            if (loginType == STLoginRequestTypeInstagram) {
+                [strongSelf invalidateInstagramService];
+            }
         }
     };
 
@@ -464,9 +478,13 @@
                 [strongSelf loginWithInstagramInfo];
             }
         }else{
-            //show alert
             NSLog(@"Error: %@", error);
-            [strongSelf showSomethingWrongAlertOnLogin];
+            if (error.code == kClientCancelLoginCode) {
+                [self invalidateInstagramService];
+            }else{
+                //show alert
+                [strongSelf showSomethingWrongAlertOnLogin];
+            }
         }
     }];
 }
@@ -476,4 +494,7 @@
     [self sendLoginOrregisterRequest:userInfo loginType:STLoginRequestTypeInstagram];
 }
 
+- (void)invalidateInstagramService{
+    [[CoreManager instagramLoginService] clearService];
+}
 @end
