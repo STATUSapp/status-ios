@@ -11,6 +11,7 @@
 #import "STUserProfilePool.h"
 #import "UIImageView+Mask.h"
 #import "SDWebImageManager.h"
+#import "STImageResizeService.h"
 
 @interface STEditProfileTVC ()<UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldName;
@@ -216,7 +217,8 @@
         self.imagePickerPresented = NO;
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         [self.profileImage maskImage:img];
-        NSData *imageData = UIImageJPEGRepresentation(img, 1.f);
+        UIImage *resizedImage = [[CoreManager imageResizeService] resizeImage:img forUseType:STImageUseTypeUploadProfile];
+        NSData *imageData = UIImageJPEGRepresentation(resizedImage, 1.f);
         [STUploadNewProfilePictureRequest uploadProfilePicture:imageData withCompletion:^(id response, NSError *error) {
             __strong STEditProfileTVC *strongSelf = weakSelf;
             if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {

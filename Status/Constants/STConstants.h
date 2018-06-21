@@ -233,8 +233,6 @@ extern NSString *const kManualLogoutKey;
 
 #pragma mark - Numeric constants
 
-extern NSInteger const STMaximumSizeInBytesForUpload;
-
 #pragma mark - Settings
 
 extern NSString *const STSettingsDictKey;

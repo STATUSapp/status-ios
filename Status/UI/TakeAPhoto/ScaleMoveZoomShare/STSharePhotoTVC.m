@@ -170,24 +170,8 @@ typedef NS_ENUM(NSUInteger, STSharePhotoSection) {
 }
 
 - (IBAction)onTapPicture:(id)sender {
-    UIImage *image = [UIImage imageWithData:_imgData];
-    if (_changedImage) {
-        image = _changedImage;
-    }
-    STMoveScaleViewController *vc = [STMoveScaleViewController newControllerForImage:image shouldCompress:NO andPost:_post];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    
 }
 - (IBAction)onTapViewSimilarButton:(id)sender {
-//    NSInteger buttonTag = ((UIButton *)sender).tag;
-//    STShopProduct *currentProduct = [_shopProducts objectAtIndex:buttonTag];
-//    STTagSuggestions *vc = [STTagSuggestions similarProductsScreenWithSelectedProduct:currentProduct withCompletion:^(STProductBase *selectedProduct) {
-//        [[STTagProductsManager sharedInstance] processProduct:currentProduct];
-//        [[STTagProductsManager sharedInstance] processProduct:selectedProduct];
-//    }];
-//    [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)onRetryButtonPressed:(id)sender {
     [[CoreManager imageSuggestionsService] retry];

@@ -13,6 +13,7 @@
 #import "STTagAddProductCell.h"
 
 #import "STTagProductsManager.h"
+#import "STImageResizeService.h"
 
 typedef NS_ENUM(NSUInteger, STTagManualSection) {
     STTagManualSectionProducts = 0,
@@ -222,8 +223,9 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
     [picker dismissViewControllerAnimated:YES completion:^{
         if (self.addPhotoIndex!=NSNotFound) {
             UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+            UIImage *resizedImage = [[CoreManager imageResizeService] resizeImage:img forUseType:STImageUseTypeUploadProduct];
             STShopProduct *product = self.products[self.addPhotoIndex];
-            product.localImage = img;
+            product.localImage = resizedImage;
             [self.collectionView reloadData];
         }
     }];

@@ -30,6 +30,7 @@
 #import "STImageSuggestionsService.h"
 #import "STLoggerService.h"
 #import "STInstagramLoginService.h"
+#import "STImageResizeService.h"
 
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
@@ -55,7 +56,7 @@
 @property (nonatomic, strong) STImageSuggestionsService *imageSuggestionsService;
 @property (nonatomic, strong) STLoggerService *loggerService;
 @property (nonatomic, strong) STInstagramLoginService *instagramLoginService;
-
+@property (nonatomic, strong) STImageResizeService *imageResizeService;
 @end
 
 @implementation CoreManager
@@ -96,6 +97,7 @@
         _imageSuggestionsService = [STImageSuggestionsService new];
         _loggerService = [STLoggerService new];
         _instagramLoginService = [STInstagramLoginService new];
+        _imageResizeService = [STImageResizeService new];
         
     }
     return self;
@@ -205,6 +207,10 @@
 
 + (STInstagramLoginService *)instagramLoginService{
     return [[CoreManager sharedInstance] instagramLoginService];
+}
+
++(STImageResizeService *)imageResizeService{
+    return [[CoreManager sharedInstance] imageResizeService];
 }
 
 #pragma mark - Private implementation

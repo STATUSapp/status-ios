@@ -92,12 +92,12 @@
     NSString *postCaptionString = [_childTVC postCaptionString];
     NSArray *postShopProducts = [_childTVC postShopProducts];
     NSData *postImageData = [_childTVC postImageData];
-
+    UIImage *postImage = [UIImage imageWithData:postImageData];
     [[CoreManager imageSuggestionsService] setSuggestionsCompletionBlock:nil];
     if (_controllerType == STShareControllerAddPost &&
         [[CoreManager imageSuggestionsService] canCommitCurrentPost]) {
         [[CoreManager imageSuggestionsService] commitCurrentPostWithCaption:postCaptionString
-                                                                  imageData:postImageData shopProducts:postShopProducts completion:^(NSError *error, NSArray *objects) {
+                                                                  image:postImage shopProducts:postShopProducts completion:^(NSError *error, NSArray *objects) {
                                                                       __strong STSharePhotoViewController *strongSelf = weakSelf;
                                                                       STPost *post = [objects firstObject];
                                                                       [self handleError:error post:post strongSelf:strongSelf];

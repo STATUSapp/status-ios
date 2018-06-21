@@ -26,7 +26,8 @@
 
 @implementation STMoveScaleViewController
 
-+ (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing andPost:(STPost *)post {
++ (instancetype)newControllerForImage:(UIImage *)img
+                              andPost:(STPost *)post {
     //start the image suggestions service
     [[CoreManager imageSuggestionsService] startServiceWithImage:img];
     
@@ -35,7 +36,6 @@
     STMoveScaleViewController *viewController = (STMoveScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"STMoveScaleViewController"];
     viewController.currentImg = img;
     viewController.post = post;
-    viewController.shouldCompress = compressing;
     
     return viewController;
 }
@@ -126,28 +126,12 @@
     [self centerScrollViewContents];
 }
 
--(UIImage *)croppedAndCompressedImage{
-    UIImage *croppedImg = [self croppedImage];
-    
-    // after cropping, we should do optimization
-    if (_shouldCompress == YES) {
-        NSUInteger imgSizeInBytes = [croppedImg calculatedSizeInBytes];
-        if (imgSizeInBytes > STMaximumSizeInBytesForUpload) {
-            CGFloat compressRatio = (CGFloat)STMaximumSizeInBytesForUpload / (CGFloat)imgSizeInBytes;
-            compressRatio = sqrtf(compressRatio);
-            CGSize newImgSize = CGSizeMake(compressRatio * croppedImg.size.width, compressRatio * croppedImg.size.height);
-            croppedImg = [croppedImg resizedImage:newImgSize interpolationQuality:kCGInterpolationHigh];
-        }
-    }
-    return croppedImg;
-}
-
 #pragma mark IBACTIONS
 - (IBAction)onUseBtnPressed:(id)sender {
     if (_delegate != nil)
     {
         if ([_delegate respondsToSelector:@selector(postImageWasChanged:)]) {
-            UIImage *image = [self croppedAndCompressedImage];
+            UIImage *image = [self croppedImage];
             [_delegate postImageWasChanged:image];
         }
         [self.navigationController popViewControllerAnimated:YES];
@@ -161,7 +145,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     STSharePhotoViewController *viewController = (STSharePhotoViewController *)segue.destinationViewController;
-    UIImage *image = [self croppedAndCompressedImage];
+    UIImage *image = [self croppedImage];
     viewController.imgData = UIImageJPEGRepresentation(image, 1.f);
     viewController.post = _post;
     viewController.controllerType =STShareControllerAddPost;
