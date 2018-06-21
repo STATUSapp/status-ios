@@ -10,6 +10,8 @@
 #import "STSuggestedProduct.h"
 #import "STUploadImageForSuggestionsRequest.h"
 #import "STDataAccessUtils.h"
+#import "STImageResizeService.h"
+
 NSTimeInterval const kTimerInterval = 3.f;
 
 @interface STImageSuggestionsService ()
@@ -45,7 +47,8 @@ NSTimeInterval const kTimerInterval = 3.f;
                                              selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     self.loadingError = nil;
-    self.postImage = image;
+    UIImage *resizedImage = [[CoreManager imageResizeService] resizeImage:image forUseType:STImageUseTypeUploadPost];
+    self.postImage = resizedImage;
     NSData *imageData = UIImageJPEGRepresentation(self.postImage, 0.0);
     __weak STImageSuggestionsService *weakSelf = self;
     [STUploadImageForSuggestionsRequest uploadImageForSuggestionsWithData:imageData forPostId:self.postId withCompletion:^(id response, NSError *error) {
@@ -74,7 +77,7 @@ NSTimeInterval const kTimerInterval = 3.f;
     return self.postId!=nil;
 }
 -(void)commitCurrentPostWithCaption:(NSString *)caption
-                          imageData:(NSData *)imageData
+                              image:(UIImage *)image
                        shopProducts:(NSArray<STShopProduct *> *)shopProducts
                          completion:(STImageSuggestionsCommitCompletion)completion{
     
@@ -83,6 +86,9 @@ NSTimeInterval const kTimerInterval = 3.f;
         [allShopProducts addObjectsFromArray:shopProducts];
         [allShopProducts addObjectsFromArray:objects];
         
+        UIImage *resizedImage = [[CoreManager imageResizeService] resizeImage:image forUseType:STImageUseTypeUploadPost];
+        
+        NSData *imageData = UIImageJPEGRepresentation(resizedImage, 1.f);
         [STDataAccessUtils commitPostWithId:self.postId
                            withNewImageData:imageData
                              withNewCaption:caption

@@ -38,7 +38,7 @@
         [UIAlertController presentAlertControllerInViewController:vc title:@"Error" message:@"Your device has no camera." andDismissButtonTitle:@"OK"];
         _completion = nil;
         _viewController = nil;
-        completion(nil, NO);
+        completion(nil);
     }
     
 }
@@ -103,11 +103,11 @@
 
 #pragma mark - UIImagePickerController delegate methods
 
-- (void)callCompletion:(UIImage *)fixedOrientationImage shouldBeCompressed:(BOOL) shouldBeCompressed{
+- (void)callCompletion:(UIImage *)fixedOrientationImage{
     _viewController = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (_completion) {
-        _completion(fixedOrientationImage, shouldBeCompressed);
+        _completion(fixedOrientationImage);
     }
 }
 
@@ -115,7 +115,7 @@
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
         UIImage *fixedOrientationImage = [img fixOrientation];
-        [self callCompletion:fixedOrientationImage shouldBeCompressed:YES];
+        [self callCompletion:fixedOrientationImage];
     }];
     
 }
@@ -125,7 +125,7 @@
     if (![_viewController.presentedViewController isBeingDismissed]){
         [_viewController.presentedViewController dismissViewControllerAnimated:YES completion:^{
             UIImage *image = notif.userInfo[kImageKey];
-            [self callCompletion:image shouldBeCompressed:NO];
+            [self callCompletion:image];
         }];
     }
 }

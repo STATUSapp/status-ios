@@ -19,9 +19,9 @@
 @interface STMoveScaleViewController : UIViewController
 @property (nonatomic, strong) UIImage *currentImg;
 @property (nonatomic, strong) STPost *post;
-@property (nonatomic, assign) BOOL shouldCompress;
 @property (nonatomic, weak) id<STMoveAndScaleProtocol>delegate;
 
-+ (instancetype)newControllerForImage:(UIImage *)img shouldCompress:(BOOL)compressing andPost:(STPost *)post;
++ (instancetype)newControllerForImage:(UIImage *)img
+                              andPost:(STPost *)post;
 
 @end

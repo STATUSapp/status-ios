@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^imagePickerCompletion)(UIImage *img, BOOL shouldCompressImage);
+typedef void (^imagePickerCompletion)(UIImage *img);
 
 @interface STImagePickerService : NSObject
 

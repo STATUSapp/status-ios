@@ -102,6 +102,7 @@
 		077811591EB7126B0043A2E8 /* STTagCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 077811581EB7126B0043A2E8 /* STTagCategoryCell.m */; };
 		0778115C1EB75BBE0043A2E8 /* STTagProductsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */; };
 		078EEF8A20DC4D6400D6FE00 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078EEF8920DC4D6400D6FE00 /* Default-568h@2x.png */; };
+		078EEF8820DC3B4200D6FE00 /* STImageResizeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 078EEF8720DC3B4200D6FE00 /* STImageResizeService.m */; };
 		07A9B649208E66020064D549 /* STLoggerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A9B648208E66020064D549 /* STLoggerService.m */; };
 		07B053F11EDE867F0045AD7B /* NSString+Links.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B053F01EDE867F0045AD7B /* NSString+Links.m */; };
 		07B300021FB44331009316A2 /* STFacebookAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B300011FB44331009316A2 /* STFacebookAdModel.m */; };
@@ -526,6 +527,8 @@
 		0778115A1EB75BBE0043A2E8 /* STTagProductsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTagProductsManager.h; sourceTree = "<group>"; };
 		0778115B1EB75BBE0043A2E8 /* STTagProductsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagProductsManager.m; sourceTree = "<group>"; };
 		078EEF8920DC4D6400D6FE00 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		078EEF8620DC3B4200D6FE00 /* STImageResizeService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STImageResizeService.h; sourceTree = "<group>"; };
+		078EEF8720DC3B4200D6FE00 /* STImageResizeService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STImageResizeService.m; sourceTree = "<group>"; };
 		07A9B647208E66020064D549 /* STLoggerService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLoggerService.h; sourceTree = "<group>"; };
 		07A9B648208E66020064D549 /* STLoggerService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STLoggerService.m; sourceTree = "<group>"; };
 		07B053EF1EDE867F0045AD7B /* NSString+Links.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Links.h"; sourceTree = "<group>"; };
@@ -1669,6 +1672,8 @@
 				07A9B648208E66020064D549 /* STLoggerService.m */,
 				073945CD20D62ABD006E1F19 /* STInstagramLoginService.h */,
 				073945CE20D62ABD006E1F19 /* STInstagramLoginService.m */,
+				078EEF8620DC3B4200D6FE00 /* STImageResizeService.h */,
+				078EEF8720DC3B4200D6FE00 /* STImageResizeService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2553,6 +2558,7 @@
 				17648B8E1E50DBF400D9C428 /* STCatalogParentCategory.m in Sources */,
 				99B387421C82FAA2005B4D8C /* UIImage+Alpha.m in Sources */,
 				99B3876C1C82FAA2005B4D8C /* STUploadPostRequest.m in Sources */,
+				078EEF8820DC3B4200D6FE00 /* STImageResizeService.m in Sources */,
 				1709121F1DF87F5C00B2AF81 /* STConversationsListViewController.m in Sources */,
 				07311BA12003FA1E0031F261 /* UIImage+Assets.m in Sources */,
 				99B387DA1C82FAA2005B4D8C /* STSharePhotoViewController.m in Sources */,

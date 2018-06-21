@@ -174,9 +174,6 @@ NSString *const kManualLogoutKey = @"manual_logout_key";
 
 #pragma mark - Numeric constants
 
-NSInteger const STMaximumSizeInBytesForUpload = 3145728;  // 3 MB
-
-
 #pragma mark - Settings
 
 NSString *const STSettingsDictKey = @"STSettingsDictKey";

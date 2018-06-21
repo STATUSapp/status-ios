@@ -101,7 +101,7 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
     
     UIImage *image = notif.userInfo[kImageKey];
     
-    STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:image shouldCompress:NO andPost:nil];
+    STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:image andPost:nil];
     
     
     NSMutableArray *viewControllers = [self.navigationController.viewControllers mutableCopy];
@@ -183,10 +183,10 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 - (void)takeAPhotoWithCamera{
     
     __weak STChoosePhotoViewController * weakSelf = self;
-    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
+    imagePickerCompletion completion = ^(UIImage *img){
         __strong STChoosePhotoViewController *strongSelf = weakSelf;
         if (img) {
-            STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage andPost:nil];
+            STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img andPost:nil];
             [strongSelf.navigationController pushViewController:moveScaleVC animated:YES];
         }
         else
@@ -198,9 +198,9 @@ typedef NS_ENUM(NSUInteger, STChoosePhotoBottomOption) {
 
 - (void)uploadPhotoFromLibrary{
     __weak STChoosePhotoViewController * weakSelf = self;
-    imagePickerCompletion completion = ^(UIImage *img, BOOL shouldCompressImage){
+    imagePickerCompletion completion = ^(UIImage *img){
         __strong STChoosePhotoViewController *strongSelf = weakSelf;
-        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img shouldCompress:shouldCompressImage andPost:nil];
+        STMoveScaleViewController * moveScaleVC = [STMoveScaleViewController newControllerForImage:img andPost:nil];
         [strongSelf.navigationController pushViewController:moveScaleVC animated:YES];
     };
     

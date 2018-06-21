@@ -26,7 +26,7 @@ typedef void (^STImageSuggestionsCommitCompletion)(NSError *error, NSArray *obje
 -(void)startServiceWithImage:(UIImage *)image;
 -(BOOL)canCommitCurrentPost;
 -(void)commitCurrentPostWithCaption:(NSString *)caption
-                          imageData:(NSData *)imageData
+                              image:(UIImage *)image
                        shopProducts:(NSArray<STShopProduct *> *)shopProducts
                          completion:(STImageSuggestionsCommitCompletion)completion;
 
