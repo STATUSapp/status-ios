@@ -251,6 +251,10 @@ typedef void (^data_callback)(SRWebSocket *webSocket,  NSData *data);
 
 static __strong NSData *CRLFCRLF;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wimplicit-retain-self"
+#pragma clang diagnostic ignored "-Wunused-result"
+
 + (void)initialize;
 {
     CRLFCRLF = [[NSData alloc] initWithBytes:"\r\n\r\n" length:4];
@@ -1763,4 +1767,5 @@ static NSRunLoop *networkRunLoop = nil;
     return _runLoop;
 }
 
+#pragma clang diagnostic pop
 @end
