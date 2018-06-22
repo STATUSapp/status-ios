@@ -51,6 +51,9 @@
 @dynamic placeholder;
 @dynamic placeholderColor;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wimplicit-retain-self"
+
 // having initwithcoder allows us to use HPGrowingTextView in a Nib. -- aob, 9/2011
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -661,6 +664,7 @@
 	}
 }
 
-
+#pragma clang diagnostic pop
 
 @end
+
