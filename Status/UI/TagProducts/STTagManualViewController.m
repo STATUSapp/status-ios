@@ -266,9 +266,11 @@ typedef NS_ENUM(NSUInteger, STTagManualSection) {
 -(void)textViewDidEndEditing:(UITextView *)textView{
     NSIndexPath *currentCellIndexPath = [NSIndexPath indexPathForItem:textView.tag inSection:STTagManualSectionProducts];
     STTagManualProductCell *currentCell = (STTagManualProductCell *)[_collectionView cellForItemAtIndexPath:currentCellIndexPath];
-    STShopProduct *product = _products[currentCellIndexPath.item];
-    product.productUrl = textView.text;
-    [currentCell setTextViewWithString:product.productUrl];
+    if (currentCellIndexPath.item < _products.count) {
+        STShopProduct *product = _products[currentCellIndexPath.item];
+        product.productUrl = textView.text;
+        [currentCell setTextViewWithString:product.productUrl];
+    }
     currentTextView = nil;
 }
 
