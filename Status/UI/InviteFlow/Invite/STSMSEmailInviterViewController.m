@@ -27,13 +27,13 @@ static NSString * inviteThemTitle = @"INVITE THEM";
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *btnInviteAll;
 
-@property (strong, nonatomic) NSMutableArray<STAddressBookContact *> * results;
+@property (strong, nonatomic) NSArray<STAddressBookContact *> * results;
 @property (assign, nonatomic) BOOL isSearching;
 
 @property (assign, nonatomic) NSInteger selectionsNumber;
 
-@property (strong, nonatomic) NSMutableDictionary * sections;
-
+@property (strong, nonatomic) NSDictionary<NSString *, NSArray<STAddressBookContact *> *> * sections;
+@property (strong, nonatomic) NSArray <NSString *> *sortedSectionName;
 
 @end
 
@@ -43,19 +43,21 @@ static NSString * inviteThemTitle = @"INVITE THEM";
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
-    _results = [NSMutableArray array];
+    NSMutableArray <STAddressBookContact *>*results = [NSMutableArray array];
     for (STAddressBookContact * contact in _dataProcessor.items) {
         if ([contact.fullName.lowercaseString rangeOfString:searchText.lowercaseString].location != NSNotFound) {
-            [_results addObject:contact];
+            [results addObject:contact];
         }
     }
+    self.results = results;
     _isSearching = [searchText isEqualToString:@""] ? NO : YES;
-    
+    [self computeSections];
     [self.tableView reloadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     _isSearching = NO;
+    [self computeSections];
     [self.view endEditing:YES];
     [self.tableView reloadData];
 }
@@ -113,46 +115,15 @@ static NSString * inviteThemTitle = @"INVITE THEM";
 
 
 #pragma mark - UITableViewDelegate DataSource
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    BOOL found;
-    
-    self.sections = [NSMutableDictionary dictionary];
-    
-    NSArray * dataSource = _isSearching ? _results : _dataProcessor.items;
-    
-    for (STAddressBookContact * contact in dataSource) {
-        NSString * firstLetter = [contact.fullName substringToIndex:1];
-        found = NO;
-        
-        for (NSString * str in self.sections.allKeys) {
-            if ([str isEqualToString:firstLetter]) {
-                found = YES;
-            }
-        }
-        
-        if (!found) {
-            [self.sections setValue:[NSMutableArray array] forKey:firstLetter];
-        }
-    }
-    
-    for (STAddressBookContact * contact in dataSource)
-    {
-        [[self.sections objectForKey:[contact.fullName substringToIndex:1]] addObject:contact];
-    }
-    
-    // Sort each section array
-    for (NSString *key in [self.sections allKeys])
-    {
-        [[self.sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]]];
-    }
-    
-    return self.sections.allKeys.count;
+    return self.sortedSectionName.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
+    
+    NSString *sectionName = self.sortedSectionName[section];
+    NSArray <STAddressBookContact *> *sectionItems = self.sections[sectionName];
+    return [sectionItems count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -163,7 +134,9 @@ static NSString * inviteThemTitle = @"INVITE THEM";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     STInviteFriendCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
-    STAddressBookContact * contact = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    NSString *sectionName = self.sortedSectionName[indexPath.section];
+    NSArray <STAddressBookContact *> *sectionItems = self.sections[sectionName];
+    STAddressBookContact * contact = [sectionItems objectAtIndex:indexPath.row];
     
     
     NSInteger numberOfRowsInSection = [self tableView:tableView numberOfRowsInSection:indexPath.section];
@@ -174,8 +147,10 @@ static NSString * inviteThemTitle = @"INVITE THEM";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    STAddressBookContact * contact =  [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    
+    NSString *sectionName = self.sortedSectionName[indexPath.section];
+    NSArray <STAddressBookContact *> *sectionItems = self.sections[sectionName];
+    STAddressBookContact * contact = [sectionItems objectAtIndex:indexPath.row];
+
     if (contact.selected.boolValue == YES) {
         contact.selected = @(NO);
     } else {
@@ -198,8 +173,8 @@ static NSString * inviteThemTitle = @"INVITE THEM";
     UILabel *titlelable = [[UILabel alloc] initWithFrame:CGRectMake(20.f,0.f, view.frame.size.width, 25.f)];
     titlelable.textColor = [UIColor blackColor];
     titlelable.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:12];
-    NSString *titleString = [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    titlelable.text = titleString;
+    NSString *sectionName = self.sortedSectionName[section];
+    titlelable.text = sectionName;
     [view addSubview:titlelable];
     return view;
 }
@@ -252,6 +227,34 @@ static NSString * inviteThemTitle = @"INVITE THEM";
         self.lblInvitePeople.hidden = self.selectionsNumber == 0 ;
     }];
 
+}
+
+- (void)computeSections {
+    NSMutableDictionary<NSString *, NSArray<STAddressBookContact *> *> *result = [NSMutableDictionary new];
+    
+    NSArray * dataSource = _isSearching ? _results : _dataProcessor.items;
+    
+    //add each contact into a specific section based on first letter
+    for (STAddressBookContact * contact in dataSource){
+        if (contact.fullName.length > 0) {
+            NSString *firstLetter = [contact.fullName substringToIndex:1];
+            NSMutableArray<STAddressBookContact *> *sectionItems = [NSMutableArray new];
+            [sectionItems addObjectsFromArray:[result objectForKey:firstLetter]];
+            [sectionItems addObject:contact];
+            [result setObject:sectionItems forKey:firstLetter];
+        }
+    }
+    
+    // Sort each section array
+    NSMutableDictionary<NSString*, NSArray<STAddressBookContact *> *> *sortedResult = [NSMutableDictionary new];
+    for (NSString *key in result){
+        NSArray <STAddressBookContact *> *sectinItems = [result objectForKey:key];
+        NSArray <STAddressBookContact *> *sortedArray = [sectinItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]]];
+        [sortedResult setObject:sortedArray forKey:key];
+    }
+    
+    self.sections = sortedResult;
+    self.sortedSectionName = [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
 - (void)resetSelections {
@@ -310,7 +313,7 @@ static NSString * inviteThemTitle = @"INVITE THEM";
     self.tableView.backgroundColor = backgroundColor;
     
     [self resetSelections];
-    
+    [self computeSections];
     _searchBar.delegate = self;
     _searchBar.barTintColor = backgroundColor;
     _searchBar.tintColor = backgroundColor;
