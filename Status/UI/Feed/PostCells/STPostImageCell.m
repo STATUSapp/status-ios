@@ -45,7 +45,7 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     _likeImageAnimationInProgress = NO;
     [self setBottomItemsHidden:YES];
     [self.postImage sd_cancelCurrentAnimationImagesLoad];
-    
+    [self.activityIndicator startAnimating];
 }
 
 -(void)setBottomItemsHidden:(BOOL)hidded{
@@ -56,13 +56,18 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     __weak typeof(self) weakSelf = self;
     [self.postImage sd_setImageWithURL:[NSURL URLWithString:post.mainImageUrl]
                       placeholderImage:nil
-                               options:SDWebImageRetryFailed
+                               options:SDWebImageAvoidAutoSetImage
                              completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                                    if (image) {
                                        __strong typeof(weakSelf) strongSelf = weakSelf;
                                        [strongSelf.activityIndicator stopAnimating];
                                        strongSelf.blurEffectView.hidden = YES;
-                                       strongSelf.postImage.image = image;
+                                       [UIView transitionWithView:strongSelf.postImage
+                                                         duration:0.2f
+                                                          options:UIViewAnimationOptionTransitionCrossDissolve
+                                                       animations:^{
+                                                           strongSelf.postImage.image = image;
+                                                       } completion:nil];
                                    }
                                }];
     _postLikeButton.selected = post.postLikedByCurrentUser;
@@ -117,6 +122,9 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 + (CGSize)celSizeForPost:(STPost *)post{
     CGSize size = [UIScreen mainScreen].bounds.size;
     CGFloat shrinkFactor = [post.imageRatio doubleValue];
+    if (shrinkFactor == 0) {
+        return CGSizeZero;
+    }
     CGFloat inflatedHeight = size.width * (1.f/shrinkFactor);
     return CGSizeMake(size.width, inflatedHeight);
     

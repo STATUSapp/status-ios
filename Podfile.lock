@@ -36,9 +36,9 @@ PODS:
   - FBSDKShareKit (4.33.0):
     - FBSDKCoreKit (~> 4.33.0)
   - OCMock (3.4.1)
-  - SDWebImage (4.4.0):
-    - SDWebImage/Core (= 4.4.0)
-  - SDWebImage/Core (4.4.0)
+  - SDWebImage (4.4.1):
+    - SDWebImage/Core (= 4.4.1)
+  - SDWebImage/Core (4.4.1)
   - Tune (5.1.1)
 
 DEPENDENCIES:
@@ -70,7 +70,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 88cb456349cfb3b554427ce4f8b43729d85dfb40
   FBSDKShareKit: 1869cb24db2cea90666a50cb9d568deb38e2d16e
   OCMock: 2cd0716969bab32a2283ff3a46fd26a8c8b4c5e3
-  SDWebImage: b534502786e43dde36dfcaee89356fe6df30e203
+  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   Tune: ade14f9855a2cf19a21a298da6783f0f16ad9ac5
 
 PODFILE CHECKSUM: 61842ec650140817ebfa52d96562a189884e1414
