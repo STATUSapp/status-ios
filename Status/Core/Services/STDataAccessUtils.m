@@ -396,7 +396,11 @@
             if (dataArray) {
                 for (NSDictionary *dict in dataArray) {
                     STPost *post = [STPost postWithDict:dict];
-                    [objects addObject:post];
+                    if ([post.imageRatio floatValue] > 0.f) {
+                        [objects addObject:post];
+                    }else{
+                        NSLog(@"Ignored post: %@", post.mainImageUrl);
+                    }
                 }
             }
             else
