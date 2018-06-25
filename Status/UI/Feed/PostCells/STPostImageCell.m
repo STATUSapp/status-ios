@@ -56,7 +56,7 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     __weak typeof(self) weakSelf = self;
     [self.postImage sd_setImageWithURL:[NSURL URLWithString:post.mainImageUrl]
                       placeholderImage:nil
-                               options:SDWebImageAvoidAutoSetImage
+                               options:SDWebImageProgressiveDownload
                              completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                                    if (image) {
                                        __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -123,7 +123,7 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     CGSize size = [UIScreen mainScreen].bounds.size;
     CGFloat shrinkFactor = [post.imageRatio doubleValue];
     if (shrinkFactor == 0) {
-        return CGSizeZero;
+        return CGSizeMake(size.width, 0.f);
     }
     CGFloat inflatedHeight = size.width * (1.f/shrinkFactor);
     return CGSizeMake(size.width, inflatedHeight);

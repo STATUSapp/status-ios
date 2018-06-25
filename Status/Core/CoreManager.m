@@ -32,6 +32,8 @@
 #import "STInstagramLoginService.h"
 #import "STImageResizeService.h"
 
+#import "SDWebImageManager.h"
+
 @interface CoreManager ()
 @property (nonatomic, strong) STPostsPool * postsPool;
 @property (nonatomic, strong) STUsersPool *usersPool;
@@ -98,7 +100,9 @@
         _loggerService = [STLoggerService new];
         _instagramLoginService = [STInstagramLoginService new];
         _imageResizeService = [STImageResizeService new];
-        
+        [SDWebImageManager sharedManager].imageCache.config.shouldDecompressImages = NO;
+        [SDWebImageDownloader sharedDownloader].shouldDecompressImages = NO;
+        [SDWebImageManager sharedManager].imageDownloader.maxConcurrentDownloads = 6;
     }
     return self;
 }
