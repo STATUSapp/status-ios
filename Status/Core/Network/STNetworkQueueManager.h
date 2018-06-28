@@ -28,9 +28,6 @@
 - (void)addToQueueTop:(STBaseRequest*)request;
 - (void)removeFromQueue:(STBaseRequest*)request;
 - (void)clearQueue;
-- (void)loadQueueFromDisk;
-- (BOOL)saveQueueToDisk;
-- (void)deleteQueueFileFromDisk;
 
 - (BOOL)canSendLoginOrRegisterRequest;
 
@@ -41,7 +38,6 @@
 - (BOOL)isConnectionWorking;
 
 - (void)deleteAccessToken;
-- (void)loadTokenFromKeyChain;
 
 - (void)setPhotoDownloadBaseUrl:(NSString *)photoDownloadBaseUrl;
 @end

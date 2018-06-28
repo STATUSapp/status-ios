@@ -75,6 +75,7 @@
 		073945D520D645E6006E1F19 /* STInstagramLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073945D420D645E6006E1F19 /* STInstagramLoginViewController.m */; };
 		073998FD20AE1570003FA09C /* STProductBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FC20AE1570003FA09C /* STProductBase.m */; };
 		0739990020AE16FC003FA09C /* STSuggestedProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FF20AE16FB003FA09C /* STSuggestedProduct.m */; };
+		073B07C620E4272C009577A0 /* STNetworkQueueManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 073B07C520E4272C009577A0 /* STNetworkQueueManagerTests.m */; };
 		073C72AB209649EC00B283B1 /* UIView+AnimatedZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */; };
 		0740883A20B3624A00C4FB37 /* STLoadingSuggestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0740883920B3624A00C4FB37 /* STLoadingSuggestionCell.m */; };
 		0748751A20112F9E005E6CFD /* SettingsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0748751920112F9E005E6CFD /* SettingsScene.storyboard */; };
@@ -475,6 +476,7 @@
 		073998FC20AE1570003FA09C /* STProductBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STProductBase.m; sourceTree = "<group>"; };
 		073998FE20AE16FB003FA09C /* STSuggestedProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSuggestedProduct.h; sourceTree = "<group>"; };
 		073998FF20AE16FB003FA09C /* STSuggestedProduct.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSuggestedProduct.m; sourceTree = "<group>"; };
+		073B07C520E4272C009577A0 /* STNetworkQueueManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNetworkQueueManagerTests.m; sourceTree = "<group>"; };
 		073C72A9209649EC00B283B1 /* UIView+AnimatedZoom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimatedZoom.h"; sourceTree = "<group>"; };
 		073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimatedZoom.m"; sourceTree = "<group>"; };
 		0740883820B3624A00C4FB37 /* STLoadingSuggestionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLoadingSuggestionCell.h; sourceTree = "<group>"; };
@@ -2104,6 +2106,7 @@
 				99B387F31C833D20005B4D8C /* STPostPoolTests.m */,
 				070F7FEE208E753C006E8D79 /* STLoggerServiceTests.m */,
 				072CA72720E214CF00A15FCE /* ImageDownloadTests.m */,
+				073B07C520E4272C009577A0 /* STNetworkQueueManagerTests.m */,
 				99B387F51C833D20005B4D8C /* Info.plist */,
 			);
 			path = STATUSTests;
@@ -2696,6 +2699,7 @@
 				070F7FEF208E753C006E8D79 /* STLoggerServiceTests.m in Sources */,
 				99B387F41C833D20005B4D8C /* STPostPoolTests.m in Sources */,
 				072CA72820E214CF00A15FCE /* ImageDownloadTests.m in Sources */,
+				073B07C620E4272C009577A0 /* STNetworkQueueManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

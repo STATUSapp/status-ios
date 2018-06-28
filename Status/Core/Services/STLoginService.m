@@ -205,7 +205,7 @@
 
 - (void)setUpEnvironment:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo{
     [CoreManager networkService].accessToken = response[@"token"];
-    [CoreManager networkService].photoDownloadBaseUrl = response[@"baseUrlStorage"];
+    [[CoreManager networkService] setPhotoDownloadBaseUrl:response[@"baseUrlStorage"]];
     [STChatController sharedInstance].chatSocketUrl = response[@"hostnameChat"];
     [STChatController sharedInstance].chatPort = [response[@"portChat"] integerValue];
     [[CoreManager locationService] startLocationUpdates];
