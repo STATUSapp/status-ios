@@ -27,8 +27,11 @@
     [super viewDidLoad];
     
     UIImage *image = [STUIHelper splashImageWithLogo:YES];
-    _launchImage.image = image;    
-    [[CoreManager loginService] startLoginIfPossible];
+    _launchImage.image = image;
+
+    if (![CoreManager testingMode]) {
+        [[CoreManager loginService] startLoginIfPossible];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
