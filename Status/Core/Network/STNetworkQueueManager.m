@@ -29,7 +29,7 @@ NSInteger const kMaxConcurentDownloads = 5;
 }
 @property (nonatomic, strong, readwrite) NSString *baseUrl;
 
-@property (nonatomic, strong) NSMutableArray* requestQueue;
+@property (nonatomic, strong, readwrite) NSMutableArray* requestQueue;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) STNetworkManager *networkAPI;
 @property (nonatomic, strong) KeychainItemWrapper *keychain;
@@ -89,11 +89,6 @@ NSInteger const kMaxConcurentDownloads = 5;
 
 - (NSString *)getAccessToken{
     return _accessToken;
-}
-
-#pragma mark - utils methods
-- (NSString *)applicationDocumentsDirectory {
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 #pragma mark - queue operation

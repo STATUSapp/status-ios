@@ -121,6 +121,12 @@
     return [[CoreManager sharedInstance] isGuestUser];
 }
 
++ (BOOL)testingMode{
+    if([[[NSProcessInfo processInfo] arguments] containsObject:@"STATUS-TESTING"])
+        return YES;
+    return NO;
+}
+
 + (STPostsPool *)postsPool {
     return [[CoreManager sharedInstance] postsPool];
 }
