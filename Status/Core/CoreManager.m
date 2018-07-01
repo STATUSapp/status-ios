@@ -31,6 +31,7 @@
 #import "STLoggerService.h"
 #import "STInstagramLoginService.h"
 #import "STImageResizeService.h"
+#import "STResetBaseUrlService.h"
 
 #import "SDWebImageManager.h"
 
@@ -59,6 +60,8 @@
 @property (nonatomic, strong) STLoggerService *loggerService;
 @property (nonatomic, strong) STInstagramLoginService *instagramLoginService;
 @property (nonatomic, strong) STImageResizeService *imageResizeService;
+@property (nonatomic, strong) STResetBaseUrlService *resetBaseUrlService;
+
 @end
 
 @implementation CoreManager
@@ -100,6 +103,8 @@
         _loggerService = [STLoggerService new];
         _instagramLoginService = [STInstagramLoginService new];
         _imageResizeService = [STImageResizeService new];
+        _resetBaseUrlService = [STResetBaseUrlService new];
+        
         [SDWebImageManager sharedManager].imageCache.config.shouldDecompressImages = NO;
         [SDWebImageDownloader sharedDownloader].shouldDecompressImages = NO;
         [SDWebImageManager sharedManager].imageDownloader.maxConcurrentDownloads = 6;
@@ -213,8 +218,12 @@
     return [[CoreManager sharedInstance] instagramLoginService];
 }
 
-+(STImageResizeService *)imageResizeService{
++ (STImageResizeService *)imageResizeService{
     return [[CoreManager sharedInstance] imageResizeService];
+}
+
++ (STResetBaseUrlService *)resetBaseUrlService{
+    return [[CoreManager sharedInstance] resetBaseUrlService];
 }
 
 #pragma mark - Private implementation

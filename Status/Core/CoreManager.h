@@ -32,6 +32,7 @@
 @class STLoggerService;
 @class STInstagramLoginService;
 @class STImageResizeService;
+@class STResetBaseUrlService;
 
 @interface CoreManager : NSObject
 
@@ -63,4 +64,6 @@
 + (STLoggerService *)loggerService;
 + (STInstagramLoginService *)instagramLoginService;
 + (STImageResizeService *)imageResizeService;
++ (STResetBaseUrlService *)resetBaseUrlService;
+
 @end

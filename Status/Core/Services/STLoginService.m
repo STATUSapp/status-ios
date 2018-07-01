@@ -362,13 +362,13 @@
 -(void)sendLoginOrregisterRequest:(NSDictionary *)userInfo
                         loginType:(STLoginRequestType)loginType{
     __weak STLoginService *weakSelf = self;
-    _fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
     STRequestCompletionBlock registerCompletion = ^(id response, NSError *error){
         __strong STLoginService *strongSelf = weakSelf;
         if ([response[@"status_code"] integerValue] ==STWebservicesSuccesCod) {
             [strongSelf measureRegister];
             strongSelf.lastLoginType = loginType;
             [strongSelf setUpEnvironment:response andUserInfo:userInfo];
+            strongSelf.fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
         }
         else
         {
@@ -405,6 +405,7 @@
                 [[CoreManager instagramLoginService] commitInstagramClientToken];
             }
             [strongSelf setUpEnvironment:response andUserInfo:userInfo];
+            strongSelf.fetchedUserData = [NSDictionary dictionaryWithDictionary:userInfo];
         }
         else
         {

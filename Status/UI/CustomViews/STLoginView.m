@@ -9,6 +9,7 @@
 #import "STLoginView.h"
 #import "STNavigationService.h"
 #import "STGDPRViewController.h"
+#import "STResetBaseUrlService.h"
 
 NSInteger const kLoginViewTag = 1001;
 CGFloat const kLoginButtonViewDefaultHeight = 397.f;
@@ -112,6 +113,14 @@ CGFloat const kAnimationDuration = 0.25f;
     UINavigationController *navCtrl = [STGDPRViewController GDPRControllerWithType:STGDPRTypePrivacyPolicy];
     UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
     [viewController presentViewController:navCtrl animated:YES completion:nil];
+    [self onCloseButtonPressed:nil];
+}
+- (IBAction)onMultipleTouch:(id)sender {
+    NSLog(@"onMultipleTouch");
+    //show change base url alert
+    UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
+    UIAlertController *alertController = [[CoreManager resetBaseUrlService] resetBaseUrlAlert];
+    [viewController presentViewController:alertController animated:YES completion:nil];
     [self onCloseButtonPressed:nil];
 }
 
