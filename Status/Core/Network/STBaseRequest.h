@@ -33,9 +33,9 @@ static int const kBCRequestRetryCount = 0;
 @property (nonatomic, copy) STRequestStandardSuccessBlock standardSuccessBlock;
 @property (nonatomic, copy) STRequestStandardErrorBlock standardErrorBlock;
 @property (nonatomic, copy) NSNumber *timeStamp;
-
-@property (nonatomic,assign) BOOL shouldAddToQueue;
-
+@property (nonatomic, assign, readonly) BOOL inProgress;
+@property (nonatomic, assign) BOOL shouldAddToQueue;
+@property (nonatomic, assign) BOOL authentication;
 //Methods
 - (void)retry;
 - (void)requestFailedWithError:(NSError*)error;

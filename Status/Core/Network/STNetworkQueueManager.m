@@ -22,12 +22,14 @@
     #define TEST_HIT_REQUESTS 0
 #endif
 
+NSInteger const kMaxConcurentDownloads = 5;
+
 @interface STNetworkQueueManager() {
     AFNetworkReachabilityManager* _reachabilityManager;
 }
 @property (nonatomic, strong, readwrite) NSString *baseUrl;
 
-@property (nonatomic, strong) NSMutableArray* requestQueue;
+@property (nonatomic, strong, readwrite) NSMutableArray* requestQueue;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) STNetworkManager *networkAPI;
 @property (nonatomic, strong) KeychainItemWrapper *keychain;
@@ -45,9 +47,9 @@
         self.requestQueue = [NSMutableArray new];
         [self loadNetworkAPI];
         _keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"STUserAuthToken" accessGroup:nil];
+        _accessToken = [_keychain objectForKey:(__bridge id)(kSecValueData)];
+        NSLog(@"Loaded Access Token: %@",_accessToken);
 
-        [self loadTokenFromKeyChain];
-        
 #if TEST_HIT_REQUESTS
         _hitAPIs =[@{} mutableCopy];
         _errorAPIs =[@{} mutableCopy];
@@ -89,44 +91,55 @@
     return _accessToken;
 }
 
-#pragma mark - utils methods
-- (NSString *)applicationDocumentsDirectory {
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-}
-
 #pragma mark - queue operation
 - (void)startDownload{
-    if (_requestQueue.count > 0){
-        [_requestQueue[0] retry];
+    NSArray *authenticationArray = [self authenticationArray];
+    if (authenticationArray.count > 0) {
+        [authenticationArray[0] retry];
+    }else{
+        NSInteger inProgressRequestsCount = [self numberOfInProgressRequests];
+        NSArray *notStartedArray = [self notStartedRequests];
+        while (inProgressRequestsCount < kMaxConcurentDownloads && notStartedArray.count > 0) {
+            [notStartedArray[0] retry];
+            inProgressRequestsCount = [self numberOfInProgressRequests];
+            notStartedArray = [self notStartedRequests];
+        }
     }
-    
+}
+
+- (NSInteger)numberOfInProgressRequests{
+    NSArray *inProgressArray = [self.requestQueue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"inProgress == 1"]];
+    return inProgressArray.count;
+}
+
+- (NSArray *)notStartedRequests{
+    NSArray *notStartedArray = [self.requestQueue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"inProgress == 0"]];
+    return notStartedArray;
 }
 
 #pragma mark - Queue handlers
 
-- (void)addToQueue:(STBaseRequest*)request{
+- (void)addToQueue:(STBaseRequest*)request
+             onTop:(BOOL)onTop{
     
-    [_requestQueue addObject:request];
-    if (_requestQueue.count == 1 && [self isConnectionWorking]){
-        [_requestQueue[0] retry];
-    } else if (![self isConnectionWorking]){
-        [_requestQueue removeObject:request];
+    if (![self isConnectionWorking]){
         request.failureBlock([NSError errorWithDomain:@"Error" code:kHTTPErrorNoConnection userInfo:nil]);
+    }else{
+        if (onTop) {
+            [_requestQueue insertObject:request atIndex:0];
+        }else{
+            [_requestQueue addObject:request];
+        }
+        [self startDownload];
     }
-    
+}
+
+- (void)addToQueue:(STBaseRequest*)request{
+    [self addToQueue:request onTop:NO];
 }
 
 - (void)addToQueueTop:(STBaseRequest*)request{
-    
-    [_requestQueue insertObject:request atIndex:0];
-    if (_requestQueue.count == 1 && [self isConnectionWorking]){
-        [_requestQueue[0] retry];
-    } else if (![self isConnectionWorking]){
-        
-        [_requestQueue removeObject:request];
-        request.completionBlock(nil,[NSError errorWithDomain:@"Error" code:kHTTPErrorNoConnection userInfo:nil]);
-    }
-    
+    [self addToQueue:request onTop:YES];
 }
 
 - (void)removeFromQueue:(STBaseRequest*)request{
@@ -138,46 +151,16 @@
     [self loadNetworkAPI];
 }
 
-- (BOOL)saveQueueToDisk{
-    
-    NSMutableArray *subQueue = [[_requestQueue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isPost = YES"]] mutableCopy];
-    
-    NSString* fileName = [NSString stringWithFormat:@"%@/pendingRequests.plist", [self applicationDocumentsDirectory]];
-    return [NSKeyedArchiver archiveRootObject:subQueue toFile:fileName];
-}
+- (NSArray<STBaseRequest *> *)authenticationArray{
+    NSArray *authenticationArray = [self.requestQueue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"authentication == 1"]];
 
-- (void)loadQueueFromDisk{
-    NSString* fileName = [NSString stringWithFormat:@"%@/pendingRequests.plist", [self applicationDocumentsDirectory]];
-    NSMutableArray* savedReqQueue = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-    if (savedReqQueue) {
-        _requestQueue = savedReqQueue;
-    }
-    else {
-        _requestQueue = [NSMutableArray new];
-    }
-    
-    [self deleteQueueFileFromDisk];
-    [self startDownload];
-}
-
-- (void)deleteQueueFileFromDisk
-{
-    NSString* fileName = [NSString stringWithFormat:@"%@/pendingRequests.plist", [self applicationDocumentsDirectory]];
-    [[NSFileManager defaultManager] removeItemAtPath:fileName error:nil];
+    return authenticationArray;
 }
 
 - (BOOL)canSendLoginOrRegisterRequest{
-    BOOL result = YES;
-    for (STBaseRequest *request in _requestQueue) {
-        if ([request isKindOfClass:[STLoginRequest class]] ||
-            [request isKindOfClass:[STRegisterRequest class]]) {
-            result = NO;
-            break;
-        }
-    }
-    return result;
+    NSArray *authenticationArray = [self authenticationArray];
+    return authenticationArray.count == 0;
 }
-
 
 - (void)addOrHideActivity{
     
@@ -199,7 +182,7 @@
         [_hitAPIs setValue:@"OK" forKey:key];
     }
 #endif
-    [_requestQueue removeObject:request];
+    [self removeFromQueue:request];
     [self startDownload];
     [self addOrHideActivity];
 }
@@ -211,29 +194,22 @@
         [_errorAPIs setValue:[NSString stringWithFormat:@"Error: %@", error] forKey:key];
     }
 #endif
-    [_requestQueue removeObject:request];
-    
+    [self removeFromQueue:request];
     if (request.shouldAddToQueue)
-        [_requestQueue addObject:request];
+        [self addToQueue:request onTop:YES];
     
     [self addOrHideActivity];
     //First check reachability
     if ([self isConnectionWorking]) {
         [self startDownload];
-    } else
-    {
-        [_requestQueue removeObject:request];
+    } else{
+        [self removeFromQueue:request];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }
 }
 
 - (BOOL)isConnectionWorking {
     return [STChatController sharedInstance].connectionStatus != STConnectionStatusOff;
-}
-
--(void)loadTokenFromKeyChain {
-    _accessToken = [_keychain objectForKey:(__bridge id)(kSecValueData)];
-    NSLog(@"Loaded Access Token: %@",_accessToken);
 }
 
 -(void)deleteAccessToken {

@@ -189,7 +189,6 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [[CoreManager syncService] syncBrands];
     if (!_appOpenedDate) {
         _appOpenedDate = [NSDate date];
     }else{
