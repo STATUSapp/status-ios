@@ -93,12 +93,17 @@ NSInteger const kMaxConcurentDownloads = 5;
 
 #pragma mark - queue operation
 - (void)startDownload{
-    NSInteger inProgressRequestsCount = [self numberOfInProgressRequests];
-    NSArray *notStartedArray = [self notStartedRequests];
-    while (inProgressRequestsCount <= kMaxConcurentDownloads && notStartedArray.count > 0) {
-        [notStartedArray[0] retry];
-        inProgressRequestsCount = [self numberOfInProgressRequests];
-        notStartedArray = [self notStartedRequests];
+    NSArray *authenticationArray = [self authenticationArray];
+    if (authenticationArray.count > 0) {
+        [authenticationArray[0] retry];
+    }else{
+        NSInteger inProgressRequestsCount = [self numberOfInProgressRequests];
+        NSArray *notStartedArray = [self notStartedRequests];
+        while (inProgressRequestsCount < kMaxConcurentDownloads && notStartedArray.count > 0) {
+            [notStartedArray[0] retry];
+            inProgressRequestsCount = [self numberOfInProgressRequests];
+            notStartedArray = [self notStartedRequests];
+        }
     }
 }
 
@@ -146,18 +151,16 @@ NSInteger const kMaxConcurentDownloads = 5;
     [self loadNetworkAPI];
 }
 
-- (BOOL)canSendLoginOrRegisterRequest{
-    BOOL result = YES;
-    for (STBaseRequest *request in _requestQueue) {
-        if ([request isKindOfClass:[STLoginRequest class]] ||
-            [request isKindOfClass:[STRegisterRequest class]]) {
-            result = NO;
-            break;
-        }
-    }
-    return result;
+- (NSArray<STBaseRequest *> *)authenticationArray{
+    NSArray *authenticationArray = [self.requestQueue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"authentication == 1"]];
+
+    return authenticationArray;
 }
 
+- (BOOL)canSendLoginOrRegisterRequest{
+    NSArray *authenticationArray = [self authenticationArray];
+    return authenticationArray.count == 0;
+}
 
 - (void)addOrHideActivity{
     

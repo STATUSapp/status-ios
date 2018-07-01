@@ -21,6 +21,7 @@
     if (self) {
         self.retryCount = kBCRequestRetryCount;
         self.inProgress = NO;
+        self.authentication = NO;
         __weak STBaseRequest *weakSelf = self;
         
         self.failureBlock = ^(NSError *error){
