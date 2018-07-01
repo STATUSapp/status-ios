@@ -98,6 +98,17 @@
     
     NSMutableArray<STBaseRequest *> *requestsArray = [NSMutableArray new];
     
+    //5 seconds
+    STLoginRequest *loginRequest = [STLoginRequest new];
+    loginRequest.authentication = YES;
+    [requestsArray addObject:loginRequest];
+
+    //5 seconds
+    STRegisterRequest *registerRequest = [STRegisterRequest new];
+    registerRequest.authentication = YES;
+    [requestsArray addObject:registerRequest];
+
+    //5 seconds
     STDeletePostRequest *deletePostRequest = [STDeletePostRequest new];
     [requestsArray addObject:deletePostRequest];
     
@@ -113,6 +124,7 @@
     STGetFollowingRequest *getFollowingRequest = [STGetFollowingRequest new];
     [requestsArray addObject:getFollowingRequest];
     
+    //5 seconds
     STGetPostsRequest *getPostsRequest = [STGetPostsRequest new];
     [requestsArray addObject:getPostsRequest];
 
@@ -128,6 +140,7 @@
     STGetBrandsRequest *getBrandsRequest4 = [STGetBrandsRequest new];
     [requestsArray addObject:getBrandsRequest4];
 
+    //5 seconds
     STGetBrandsRequest *getBrandsRequest5 = [STGetBrandsRequest new];
     [requestsArray addObject:getBrandsRequest5];
 //
@@ -153,7 +166,7 @@
 
         [self.networkQueueMock addToQueue:request];
     }
-    [self waitForExpectations:@[expectation] timeout:16];
+    [self waitForExpectations:@[expectation] timeout:26];
     
     XCTAssertTrue(self.networkQueueMock.requestQueue.count == 0, @"At the end all requests should have been finished");
 

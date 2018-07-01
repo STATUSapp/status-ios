@@ -14,6 +14,7 @@
                   failure:(STRequestFailureBlock)failure{
     
     STRegisterRequest *request = [STRegisterRequest new];
+    request.authentication = YES;
     request.completionBlock = completion;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];
