@@ -128,6 +128,9 @@
     STGetBrandsRequest *getBrandsRequest4 = [STGetBrandsRequest new];
     [requestsArray addObject:getBrandsRequest4];
 
+    STGetBrandsRequest *getBrandsRequest5 = [STGetBrandsRequest new];
+    [requestsArray addObject:getBrandsRequest5];
+//
     NSInteger numberOfSeconds = 5;
     int64_t delta = numberOfSeconds * NSEC_PER_SEC;
     BOOL isLastObject = NO;
@@ -150,7 +153,7 @@
 
         [self.networkQueueMock addToQueue:request];
     }
-    [self waitForExpectations:@[expectation] timeout:21];
+    [self waitForExpectations:@[expectation] timeout:16];
     
     XCTAssertTrue(self.networkQueueMock.requestQueue.count == 0, @"At the end all requests should have been finished");
 
