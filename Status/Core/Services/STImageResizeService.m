@@ -36,6 +36,9 @@
         case STImageUseTypeUploadPost:
             result = 1500.f;
             break;
+        case STImageUseTypeUploadForSuggestions:
+            result = 500.f;
+            break;
         case STImageUseTypeUploadProfile:
             result = 720.f;
             break;

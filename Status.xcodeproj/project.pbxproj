@@ -51,6 +51,7 @@
 		072BACBB1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072BACBA1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m */; };
 		072CA72820E214CF00A15FCE /* ImageDownloadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 072CA72720E214CF00A15FCE /* ImageDownloadTests.m */; };
 		072CE2D820AF6E10002CE462 /* STTransformSuggestionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 072CE2D720AF6E10002CE462 /* STTransformSuggestionsRequest.m */; };
+		072D986120E8A7CC00F537CA /* STResetBaseUrlService.m in Sources */ = {isa = PBXBuildFile; fileRef = 072D986020E8A7CC00F537CA /* STResetBaseUrlService.m */; };
 		072DBBCD1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBCC1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m */; };
 		072DBBD01FF8FF3400DFA8F0 /* STCoreDataMessageSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBCF1FF8FF3400DFA8F0 /* STCoreDataMessageSync.m */; };
 		072DBBDA1FF9161600DFA8F0 /* Message+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBD41FF9161600DFA8F0 /* Message+CoreDataClass.m */; };
@@ -429,6 +430,8 @@
 		072CA72720E214CF00A15FCE /* ImageDownloadTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageDownloadTests.m; path = StatusTests/ImageDownloadTests.m; sourceTree = SOURCE_ROOT; };
 		072CE2D620AF6E10002CE462 /* STTransformSuggestionsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTransformSuggestionsRequest.h; sourceTree = "<group>"; };
 		072CE2D720AF6E10002CE462 /* STTransformSuggestionsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTransformSuggestionsRequest.m; sourceTree = "<group>"; };
+		072D985F20E8A7CC00F537CA /* STResetBaseUrlService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STResetBaseUrlService.h; sourceTree = "<group>"; };
+		072D986020E8A7CC00F537CA /* STResetBaseUrlService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STResetBaseUrlService.m; sourceTree = "<group>"; };
 		072DBBCB1FF8F3B800DFA8F0 /* STCoreDataBaseSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCoreDataBaseSync.h; sourceTree = "<group>"; };
 		072DBBCC1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCoreDataBaseSync.m; sourceTree = "<group>"; };
 		072DBBCE1FF8FF3400DFA8F0 /* STCoreDataMessageSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCoreDataMessageSync.h; sourceTree = "<group>"; };
@@ -1676,6 +1679,8 @@
 				073945CE20D62ABD006E1F19 /* STInstagramLoginService.m */,
 				078EEF8620DC3B4200D6FE00 /* STImageResizeService.h */,
 				078EEF8720DC3B4200D6FE00 /* STImageResizeService.m */,
+				072D985F20E8A7CC00F537CA /* STResetBaseUrlService.h */,
+				072D986020E8A7CC00F537CA /* STResetBaseUrlService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2650,6 +2655,7 @@
 				1709124D1DF882DC00B2AF81 /* STShopProductCell.m in Sources */,
 				072DBBCD1FF8F3B800DFA8F0 /* STCoreDataBaseSync.m in Sources */,
 				99B3876B1C82FAA2005B4D8C /* STUploadNewProfilePictureRequest.m in Sources */,
+				072D986120E8A7CC00F537CA /* STResetBaseUrlService.m in Sources */,
 				173A29541CA04B3E00157945 /* STNotificationObj.m in Sources */,
 				076B91F01FDD821C006B7E91 /* STSnackBarBaseService.m in Sources */,
 				075991A81FC36C9F00CF89C0 /* STGetProductsByBarcode.m in Sources */,

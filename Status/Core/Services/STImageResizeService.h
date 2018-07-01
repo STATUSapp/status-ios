@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(NSUInteger, STImageUseType) {
     STImageUseTypeUploadPost = 0,
+    STImageUseTypeUploadForSuggestions, 
     STImageUseTypeUploadProfile,
     STImageUseTypeUploadProduct
 };

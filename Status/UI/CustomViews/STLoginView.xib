@@ -150,8 +150,10 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oe-YH-nyh">
                     <rect key="frame" x="0.0" y="20" width="375" height="250"/>
+                    <gestureRecognizers/>
                     <connections>
                         <action selector="onCloseButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Hxw-mL-Qkv"/>
+                        <outletCollection property="gestureRecognizers" destination="Yg5-gu-2iw" appends="YES" id="NdZ-TS-BIq"/>
                     </connections>
                 </button>
             </subviews>
@@ -181,6 +183,11 @@
             </connections>
             <point key="canvasLocation" x="47.5" y="151.5"/>
         </view>
+        <tapGestureRecognizer numberOfTapsRequired="10" id="Yg5-gu-2iw">
+            <connections>
+                <action selector="onMultipleTouch:" destination="iN0-l3-epB" id="JzT-Cb-luJ"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="closeIcon" width="12" height="12"/>

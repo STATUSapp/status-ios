@@ -47,7 +47,7 @@ NSTimeInterval const kTimerInterval = 3.f;
                                              selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     self.loadingError = nil;
-    UIImage *resizedImage = [[CoreManager imageResizeService] resizeImage:image forUseType:STImageUseTypeUploadPost];
+    UIImage *resizedImage = [[CoreManager imageResizeService] resizeImage:image forUseType:STImageUseTypeUploadForSuggestions];
     self.postImage = resizedImage;
     NSData *imageData = UIImageJPEGRepresentation(self.postImage, 0.0);
     __weak STImageSuggestionsService *weakSelf = self;

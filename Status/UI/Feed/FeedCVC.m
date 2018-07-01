@@ -171,6 +171,9 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
     
     [self.collectionView addSubview:_refreshControl];
+    //added in order to make a refresh when placeholder is in place
+    self.collectionView.alwaysBounceVertical = YES;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{

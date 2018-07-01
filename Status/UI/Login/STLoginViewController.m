@@ -9,10 +9,10 @@
 #import "STLoginViewController.h"
 #import "STConstants.h"
 #import "STLoginService.h"
-#import "STNetworkQueueManager.h"
 #import <FBSDKLoginKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "STTutorialViewController.h"
+#import "STResetBaseUrlService.h"
 
 //NSInteger const kLoginButtonTag = 121;
 
@@ -20,8 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *splashBackground;
 @property (weak, nonatomic) IBOutlet UIButton *fBLoginButton;
-
-@property (nonatomic, strong) UIAlertController *alertController;
 
 @end
 
@@ -74,29 +72,8 @@
 
 -(void)multipleTapOnShopStyle{
     //show change base url alert
-    
-    _alertController = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [_alertController addTextFieldWithConfigurationHandler:nil];
-    [_alertController addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UITextField *tf = [self.alertController.textFields firstObject];
-        NSString *newBaseUrl = tf.text;
-        if (newBaseUrl) {
-            NSUserDefaults *ud = [[NSUserDefaults alloc] initWithSuiteName:@"BaseUrl"];
-            [ud setValue:newBaseUrl forKey:@"BASE_URL"];
-            [ud synchronize];
-            [[CoreManager networkService] reset];
-        }
-    }]];
-    [_alertController addAction:[UIAlertAction actionWithTitle:@"Reset" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSUserDefaults *ud = [[NSUserDefaults alloc] initWithSuiteName:@"BaseUrl"];
-        [ud setValue:kBaseURL forKey:@"BASE_URL"];
-        [ud synchronize];
-        [[CoreManager networkService] reset];
-
-    }]];
-    
-    [self presentViewController:_alertController animated:YES completion:nil];
+    UIAlertController *alertController = [[CoreManager resetBaseUrlService] resetBaseUrlAlert];
+    [self presentViewController:alertController animated:YES completion:nil];
     
 }
 #pragma mark - IBActions
