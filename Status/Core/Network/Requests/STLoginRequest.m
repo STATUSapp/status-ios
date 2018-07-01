@@ -9,12 +9,14 @@
 #import "STLoginRequest.h"
 
 @implementation STLoginRequest
+
 + (void)loginWithUserInfo:(NSDictionary*)userInfo
                 loginType:(STLoginRequestType)loginType
            withCompletion:(STRequestCompletionBlock)completion
                   failure:(STRequestFailureBlock)failure{
     
     STLoginRequest *request = [STLoginRequest new];
+    request.authentication = YES;
     request.completionBlock = completion;
     request.failureBlock = failure;
     request.executionBlock = [request _getExecutionBlock];

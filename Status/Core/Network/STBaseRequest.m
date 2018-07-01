@@ -10,12 +10,18 @@
 #import "STBaseRequest.h"
 #import "STLoggerService.h"
 
+@interface STBaseRequest ()
+@property (nonatomic, assign, readwrite) BOOL inProgress;
+@end
+
 @implementation STBaseRequest
 
 - (id)init{
     self = [super init];
     if (self) {
         self.retryCount = kBCRequestRetryCount;
+        self.inProgress = NO;
+        self.authentication = NO;
         __weak STBaseRequest *weakSelf = self;
         
         self.failureBlock = ^(NSError *error){
@@ -48,7 +54,10 @@
 }
 
 - (void)retry{
-    self.executionBlock();
+    if (self.inProgress == NO) {
+        self.inProgress = YES;
+        self.executionBlock();
+    }
 }
 
 - (void)sendLogsToServerWithError:(NSError *)error{

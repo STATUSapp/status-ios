@@ -212,13 +212,6 @@ NSString* const kSqliteFileName = @"Status.sqlite";
 
 }
 
-#pragma mark - Application's Documents directory
-
-// Returns the URL to the application's Documents directory.
-- (NSURL *)applicationDocumentsDirectory{
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
 #pragma mark - Object Version Check
 -(BOOL)hasObjectVersionForDBObject:(id) objectFromDB
                       serverObject:(id)objectFromServer
