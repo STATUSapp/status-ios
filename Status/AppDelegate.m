@@ -49,6 +49,8 @@
 
 #import "STLoggerService.h"
 
+#import "SDWebImageManager.h"
+
 static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 
 @interface AppDelegate()
@@ -60,7 +62,11 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
+{
+    SDWebImageManager *sharedManager = [SDWebImageManager sharedManager];
+    [sharedManager.imageDownloader setMaxConcurrentDownloads:5];
+    [sharedManager.imageDownloader setShouldDecompressImages:NO];
+    
     // setup Mobile App Tracker
     
     // Account Configuration info - must be set
