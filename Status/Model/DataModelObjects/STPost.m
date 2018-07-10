@@ -36,6 +36,10 @@
 @property (nonatomic, strong) NSAttributedString *attributesString;
 @property (nonatomic, strong, readwrite) NSArray *hashtagRangeArray;
 
+@property (nonatomic, strong, readwrite) STTopBase *dailyTop;
+@property (nonatomic, strong, readwrite) STTopBase *weeklyTop;
+@property (nonatomic, strong, readwrite) STTopBase *monthlyTop;
+
 @end
 
 @implementation STPost
@@ -100,7 +104,10 @@
         _showFullCaption = NO;
         _showShopProducts = (self.shopProducts.count > 0);
     }
-
+    
+    self.dailyTop = [STTopBase dailyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"daily_top"]];
+    self.weeklyTop = [STTopBase weeklyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"weekly_top"]];
+    self.monthlyTop = [STTopBase monthlyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"monthly_top"]];
 }
 
 -(BOOL)isAdPost{
@@ -171,6 +178,25 @@
 
 -(NSString *)hasttagForRange:(NSRange )range{
     return [[_attributesString attributedSubstringFromRange:range] string];
+}
+
+-(STTopBase *)bestOfTops{
+    NSMutableArray <STTopBase *> *ranks = [NSMutableArray new];
+    
+    if (self.dailyTop) {
+        [ranks addObject:self.dailyTop];
+    }
+    if (self.weeklyTop) {
+        [ranks addObject:self.weeklyTop];
+    }
+    if (self.monthlyTop) {
+        [ranks addObject:self.monthlyTop];
+    }
+    [ranks sortUsingComparator:^NSComparisonResult(STTopBase *obj1, STTopBase *obj2) {
+        return [obj1 compare:obj2];
+    }];
+
+    return [ranks firstObject];
 }
 
 @end
