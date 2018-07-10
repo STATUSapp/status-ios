@@ -77,6 +77,7 @@
 		073998FD20AE1570003FA09C /* STProductBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FC20AE1570003FA09C /* STProductBase.m */; };
 		0739990020AE16FC003FA09C /* STSuggestedProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 073998FF20AE16FB003FA09C /* STSuggestedProduct.m */; };
 		073B07C620E4272C009577A0 /* STNetworkQueueManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 073B07C520E4272C009577A0 /* STNetworkQueueManagerTests.m */; };
+		073B8C4520F16B0F005B415C /* STTopBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 073B8C4420F16B0F005B415C /* STTopBase.m */; };
 		073C72AB209649EC00B283B1 /* UIView+AnimatedZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */; };
 		0740883A20B3624A00C4FB37 /* STLoadingSuggestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0740883920B3624A00C4FB37 /* STLoadingSuggestionCell.m */; };
 		0748751A20112F9E005E6CFD /* SettingsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0748751920112F9E005E6CFD /* SettingsScene.storyboard */; };
@@ -480,6 +481,8 @@
 		073998FE20AE16FB003FA09C /* STSuggestedProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSuggestedProduct.h; sourceTree = "<group>"; };
 		073998FF20AE16FB003FA09C /* STSuggestedProduct.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSuggestedProduct.m; sourceTree = "<group>"; };
 		073B07C520E4272C009577A0 /* STNetworkQueueManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNetworkQueueManagerTests.m; sourceTree = "<group>"; };
+		073B8C4320F16B0F005B415C /* STTopBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTopBase.h; sourceTree = "<group>"; };
+		073B8C4420F16B0F005B415C /* STTopBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTopBase.m; sourceTree = "<group>"; };
 		073C72A9209649EC00B283B1 /* UIView+AnimatedZoom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimatedZoom.h"; sourceTree = "<group>"; };
 		073C72AA209649EC00B283B1 /* UIView+AnimatedZoom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimatedZoom.m"; sourceTree = "<group>"; };
 		0740883820B3624A00C4FB37 /* STLoadingSuggestionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLoadingSuggestionCell.h; sourceTree = "<group>"; };
@@ -1731,6 +1734,8 @@
 				173A29501C9FF64500157945 /* STConversationUser.m */,
 				99B3868B1C82FAA2005B4D8C /* STUserProfile.h */,
 				99B3868C1C82FAA2005B4D8C /* STUserProfile.m */,
+				073B8C4320F16B0F005B415C /* STTopBase.h */,
+				073B8C4420F16B0F005B415C /* STTopBase.m */,
 				2A6D7EAE1C82FEDC00F65026 /* STPost.h */,
 				2A6D7EAF1C82FEDC00F65026 /* STPost.m */,
 				0717659D1FB4C70E00873728 /* STAdPost.h */,
@@ -2513,6 +2518,7 @@
 				1709123D1DF8827100B2AF81 /* UserProfileNoPhotosCell.m in Sources */,
 				17648B8B1E50DA0C00D9C428 /* STGetCatalogParentCategoriesRequest.m in Sources */,
 				0722C01B1ECE4AFE00A15E08 /* STWhiteNavBarViewController.m in Sources */,
+				073B8C4520F16B0F005B415C /* STTopBase.m in Sources */,
 				17648B941E50F1F200D9C428 /* STCatalogCategory.m in Sources */,
 				99B387C71C82FAA2005B4D8C /* STLoginViewController.m in Sources */,
 				070ABB191F11337000CAD9C1 /* STWithdrawDetailsObj.m in Sources */,

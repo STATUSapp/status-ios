@@ -7,6 +7,7 @@
 //
 
 #import "STBaseObj.h"
+#import "STTopBase.h"
 
 @interface STPost : STBaseObj
 + (instancetype)postWithDict:(NSDictionary *)postDict;
@@ -24,6 +25,10 @@
 @property (nonatomic, strong) NSArray *shopProducts;
 @property (nonatomic, strong) NSString *shareShortUrl;
 
+@property (nonatomic, strong, readonly) STTopBase *dailyTop;
+@property (nonatomic, strong, readonly) STTopBase *weeklyTop;
+@property (nonatomic, strong, readonly) STTopBase *monthlyTop;
+
 //local added properties
 @property (nonatomic, assign) BOOL showFullCaption;
 @property (nonatomic, assign) BOOL showShopProducts;
@@ -34,4 +39,5 @@
 -(void)resetCaptionAndHashtags;
 - (NSAttributedString *)formattedCaptionString;
 -(NSString *)hasttagForRange:(NSRange )range;
+-(STTopBase *)bestOfTops;
 @end
