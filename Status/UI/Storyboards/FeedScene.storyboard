@@ -406,16 +406,6 @@
                                                 <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4o5-gr-l8x">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="#1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gV-0c-nLx">
-                                                            <rect key="frame" x="16" y="12" width="34" height="34"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
                                                 </view>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNO-sK-ezf">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
@@ -433,7 +423,7 @@
                                                         <constraint firstAttribute="height" constant="100" id="mCT-5q-Ltf"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjC-Up-5mu">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FjC-Up-5mu">
                                                     <rect key="frame" x="16" y="12" width="34" height="34"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -516,10 +506,63 @@
                                     <outlet property="postImage" destination="LY4-gv-Dq1" id="dFK-NT-Hb9"/>
                                     <outlet property="postLikeButton" destination="ph3-BZ-jbg" id="FsC-ZP-F9H"/>
                                     <outlet property="postShopButton" destination="qps-UM-Jij" id="uXt-2P-fxG"/>
+                                    <outlet property="topBadge" destination="FjC-Up-5mu" id="bzv-7v-TYH"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STTopCell" id="A79-Lu-g9P" customClass="STTopCell">
+                                <rect key="frame" x="0.0" y="1089" width="320" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Fa-Llv">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="m8p-Ak-9Mj">
+                                                    <rect key="frame" x="16" y="5" width="20" height="20"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="8WA-pN-JcW"/>
+                                                        <constraint firstAttribute="height" constant="20" id="Tfk-fl-18o"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No.1 in Top Best Dressed people weekly (11/17.06.2018)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDU-Ts-oGb">
+                                                    <rect key="frame" x="40" y="5" width="276" height="32"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="kDU-Ts-oGb" secondAttribute="bottom" id="B46-2V-ogS"/>
+                                                <constraint firstItem="kDU-Ts-oGb" firstAttribute="leading" secondItem="m8p-Ak-9Mj" secondAttribute="trailing" constant="4" id="RDt-I4-AKo"/>
+                                                <constraint firstItem="m8p-Ak-9Mj" firstAttribute="top" secondItem="4bo-Fa-Llv" secondAttribute="top" constant="5" id="SO9-80-MPQ"/>
+                                                <constraint firstItem="m8p-Ak-9Mj" firstAttribute="leading" secondItem="4bo-Fa-Llv" secondAttribute="leading" constant="16" id="VSb-Dv-pZQ"/>
+                                                <constraint firstItem="kDU-Ts-oGb" firstAttribute="top" secondItem="4bo-Fa-Llv" secondAttribute="top" constant="5" id="m1F-sC-Upw"/>
+                                                <constraint firstAttribute="trailing" secondItem="kDU-Ts-oGb" secondAttribute="trailing" constant="4" id="p0K-yW-ZzT"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="4bo-Fa-Llv" secondAttribute="bottom" id="BOf-Y9-o9b"/>
+                                    <constraint firstItem="4bo-Fa-Llv" firstAttribute="leading" secondItem="A79-Lu-g9P" secondAttribute="leading" id="Jv6-oD-8s1"/>
+                                    <constraint firstItem="4bo-Fa-Llv" firstAttribute="top" secondItem="A79-Lu-g9P" secondAttribute="top" id="TZj-k4-fwj"/>
+                                    <constraint firstAttribute="trailing" secondItem="4bo-Fa-Llv" secondAttribute="trailing" id="U01-IM-pqA"/>
+                                </constraints>
+                                <size key="customSize" width="320" height="37"/>
+                                <connections>
+                                    <outlet property="topBadge" destination="m8p-Ak-9Mj" id="pSd-EI-cbW"/>
+                                    <outlet property="topDetail" destination="kDU-Ts-oGb" id="UPn-4d-xPy"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STPostDetailsCell" id="FQx-X6-2sZ" customClass="STPostDetailsCell">
-                                <rect key="frame" x="0.0" y="1089" width="320" height="120"/>
+                                <rect key="frame" x="0.0" y="1126" width="320" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
@@ -591,7 +634,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STPostShopProductsCell" id="7CW-CG-oqC" customClass="STPostShopProductsCell">
-                                <rect key="frame" x="0.0" y="1209" width="320" height="248"/>
+                                <rect key="frame" x="0.0" y="1246" width="320" height="248"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
@@ -727,7 +770,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STFacebookAddCell" id="VsK-yb-rk3" customClass="STFacebookAddCell">
-                                <rect key="frame" x="0.0" y="1457" width="320" height="350"/>
+                                <rect key="frame" x="0.0" y="1494" width="320" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>

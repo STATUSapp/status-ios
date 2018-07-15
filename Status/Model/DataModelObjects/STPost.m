@@ -108,6 +108,10 @@
     self.dailyTop = [STTopBase dailyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"daily_top"]];
     self.weeklyTop = [STTopBase weeklyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"weekly_top"]];
     self.monthlyTop = [STTopBase monthlyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"monthly_top"]];
+    
+    self.dailyTop = [STTopBase mockDailyTop];
+    self.weeklyTop = [STTopBase mockWeeklyTop];
+    self.monthlyTop = [STTopBase mockMonthlyTop];
 }
 
 -(BOOL)isAdPost{
@@ -192,6 +196,7 @@
     if (self.monthlyTop) {
         [ranks addObject:self.monthlyTop];
     }
+    NSLog(@"Top ranks: %@", [ranks valueForKey:@"rank"]);
     [ranks sortUsingComparator:^NSComparisonResult(STTopBase *obj1, STTopBase *obj2) {
         return [obj1 compare:obj2];
     }];

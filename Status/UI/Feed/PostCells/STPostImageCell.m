@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "DGActivityIndicatorView.h"
 #import "UIView+AnimatedZoom.h"
+#import "UILabel+TopRanking.h"
 
 CGFloat likeAnimationDuration = 0.9f;
 CGFloat likeAnimationZoomInProportion = 1.f/4.f;
@@ -26,6 +27,7 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 @property (weak, nonatomic) IBOutlet UIImageView *likedImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *linkedImageWidthConstr;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *linkButtonWidthConstr;
+@property (weak, nonatomic) IBOutlet UILabel *topBadge;
 
 @property (assign, nonatomic) BOOL likeImageAnimationInProgress;
 @end
@@ -53,6 +55,8 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 }
 - (void) configureCellWithPost:(STPost *)post{
     [self setBottomItemsHidden:NO];
+    STTopBase *relevantTop = [post bestOfTops];
+    [self.topBadge configureWithTop:relevantTop];
     __weak typeof(self) weakSelf = self;
     [self.postImage sd_setImageWithURL:[NSURL URLWithString:post.mainImageUrl]
                       placeholderImage:nil

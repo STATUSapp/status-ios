@@ -21,10 +21,17 @@ typedef NS_ENUM(NSUInteger, STTopType) {
 @property (nonatomic, assign, readonly) STTopType type;
 @property (nonatomic, strong, readonly) NSDictionary *userInfo;
 
--(NSComparisonResult)compare:(STTopBase *)otherTop;
+- (NSComparisonResult)compare:(STTopBase *)otherTop;
+-( UIColor *)topColor;
+- (NSString *)rankString;
+- (NSAttributedString *)topDetails;
 
 + (STTopBase *)dailyTopWithInfo:(NSDictionary *)dailyInfo;
 + (STTopBase *)weeklyTopWithInfo:(NSDictionary *)weeklyInfo;
 + (STTopBase *)monthlyTopWithInfo:(NSDictionary *)monthlyInfo;
+
++ (STTopBase *)mockDailyTop;
++ (STTopBase *)mockWeeklyTop;
++ (STTopBase *)mockMonthlyTop;
 
 @end
