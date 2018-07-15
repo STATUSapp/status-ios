@@ -55,6 +55,7 @@
 #import "STSnackBarWithActionService.h"
 #import "AppDelegate.h"
 #import "UICollectionViewCell+Additions.h"
+#import "STTopCell.h"
 
 #import "SDWebImageManager.h"
 
@@ -69,6 +70,9 @@ typedef NS_ENUM(NSInteger, STPostItems)
 {
     STPostImage = 0,
     STPostShop,
+    STPostTopDaily,
+    STPostTopWeekly,
+    STPostTopMonthly,
     STPostDescription,
     STPostItemsCount
 };
@@ -115,6 +119,7 @@ CGFloat const kTopButtonSize = 48.f;
 
 static NSString * const postHeaderIdentifier = @"STPostHeader";
 static NSString * const postImageCellIdentifier = @"STPostImageCell";
+static NSString * const postTopCellIdentifier = @"STTopCell";
 static NSString * const postDetailsCellIdentifier = @"STPostDetailsCell";
 static NSString * const postShopCellIdentifier = @"STPostShopProductsCell";
 static NSString * const profileInfoCell = @"UserProfileInfoCell";
@@ -546,6 +551,11 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             case STPostShop:
                 return postShopCellIdentifier;
                 break;
+            case STPostTopDaily:
+            case STPostTopWeekly:
+            case STPostTopMonthly:
+                return postTopCellIdentifier;
+                break;
         }
     }else{
         return adPostIdentifier;
@@ -621,6 +631,29 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
                     cellSize = [STPostShopProductsCell cellSize];
             }
                 break;
+            case STPostTopDaily:{
+                if (post.dailyTop) {
+                    cellSize = [STTopCell cellSize];
+                }else
+                    cellSize = CGSizeZero;
+            }
+                break;
+            case STPostTopWeekly:{
+                if (post.weeklyTop) {
+                    cellSize = [STTopCell cellSize];
+                }else
+                    cellSize = CGSizeZero;
+
+            }
+                break;
+            case STPostTopMonthly:{
+                if (post.monthlyTop) {
+                    cellSize = [STTopCell cellSize];
+                }else
+                    cellSize = CGSizeZero;
+            }
+                break;
+            
         }
     }else{
         NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
@@ -673,8 +706,17 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         [(STPostImageCell *)cell configureCellWithPost:post];
         [(STPostImageCell *)cell configureForSection:indexPath.section];
         
-    }
-    else if ([cell isKindOfClass:[STPostDetailsCell class]]){
+    }else if ([cell isKindOfClass:[STTopCell class]]){
+        STTopBase *top = nil;
+        if (indexPath.item == STPostTopDaily) {
+            top = post.dailyTop;
+        }else if (indexPath.item == STPostTopWeekly){
+            top = post.weeklyTop;
+        }else if (indexPath.item == STPostTopMonthly){
+            top = post.monthlyTop;
+        }
+        [(STTopCell *)cell configureWithTop:top];
+    }else if ([cell isKindOfClass:[STPostDetailsCell class]]){
         [(STPostDetailsCell *)cell configureCellWithPost:post];
         [(STPostDetailsCell *)cell configureForSection:indexPath.section];
         
@@ -730,6 +772,14 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     if (indexPath.item == STPostImage) {
         STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         [cell animateShopButton];
+    }else if (indexPath.item == STPostTopDaily){
+        NSLog(@"Go to daily top");
+        
+    }else if (indexPath.item == STPostTopWeekly){
+        NSLog(@"Go to weekly top");
+        
+    }else if (indexPath.item == STPostTopMonthly){
+        NSLog(@"Go to monthly top");
     }
 }
 
