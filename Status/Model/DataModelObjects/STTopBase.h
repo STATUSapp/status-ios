@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger, STTopType) {
 @property (nonatomic, strong, readonly) NSDate *startDate;
 @property (nonatomic, strong, readonly) NSDate *endDate;
 @property (nonatomic, assign, readonly) STTopType type;
+@property (nonatomic, strong, readonly) NSNumber *likesCount;
 @property (nonatomic, strong, readonly) NSDictionary *userInfo;
 
 - (NSComparisonResult)compare:(STTopBase *)otherTop;
@@ -29,6 +30,12 @@ typedef NS_ENUM(NSUInteger, STTopType) {
 + (STTopBase *)dailyTopWithInfo:(NSDictionary *)dailyInfo;
 + (STTopBase *)weeklyTopWithInfo:(NSDictionary *)weeklyInfo;
 + (STTopBase *)monthlyTopWithInfo:(NSDictionary *)monthlyInfo;
++ (UIColor *)topOneBorderColor;
++ (CGFloat)topOneBorderWidth;
++ (UIColor *)topTwoBorderColor;
++ (CGFloat)topTwoBorderWidth;
++ (UIColor *)topThreeBorderColor;
++ (CGFloat)topThreeBorderWidth;
 
 + (STTopBase *)mockDailyTop;
 + (STTopBase *)mockWeeklyTop;

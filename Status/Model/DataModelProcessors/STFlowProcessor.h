@@ -34,6 +34,8 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
 
 @property (nonatomic, strong, readonly) NSString *hashtag;
 
+@property (nonatomic, strong, readonly) NSString *topId;
+
 - (instancetype)initWithFlowType:(STFlowType)flowType;
 - (instancetype)initWithFlowType:(STFlowType)flowType
                          userId:(NSString *)userId;
@@ -41,6 +43,8 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
                          postId:(NSString *)postId;
 - (instancetype)initWithFlowType:(STFlowType)flowType
                          hashtag:(NSString *)hashtag;
+- (instancetype)initWithFlowType:(STFlowType)flowType
+                           topId:(NSString *)topId;
 
 //methods
 - (NSArray *)allObjectIds;
@@ -59,7 +63,7 @@ typedef void (^STProcessorCompletionBlock)(NSError *error);
 - (STUserProfile *)userProfile;
 - (NSString *)userId;
 - (BOOL)processorIsAGallery;
-
+- (BOOL)processorIsTop;
 -(STFlowType)processorFlowType;
 
 //actions

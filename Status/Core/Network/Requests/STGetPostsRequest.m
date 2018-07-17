@@ -40,6 +40,23 @@
     [[CoreManager networkService] addToQueueTop:request];
 }
 
++ (void)getPostsWithOffset:(NSInteger)offset
+                  flowType:(NSInteger)flowType
+                     topId:(NSString *)topId
+            withCompletion:(STRequestCompletionBlock)completion
+                   failure:(STRequestFailureBlock)failure{
+    
+    STGetPostsRequest *request = [STGetPostsRequest new];
+    request.completionBlock = completion;
+    request.failureBlock = failure;
+    request.executionBlock = [request _getExecutionBlock];
+    request.retryCount = 0;
+    request.offset = offset;
+    request.flowType = flowType;
+    request.topId = topId;
+    [[CoreManager networkService] addToQueueTop:request];
+}
+
 
 + (void)getPostsWithOffset:(NSInteger)offset
                   flowType:(NSInteger)flowType
@@ -89,6 +106,10 @@
         if (strongSelf.flowType == STFlowTypeHasttag) {
             params[@"hashtag"] = strongSelf.hashtag;
         }
+        
+//        if (strongSelf.flowType == STFlowTypeTop) {
+//            params[@"top_id"] = strongSelf.topId;
+//        }
         strongSelf.params = params;
         [[STNetworkQueueManager networkAPI] GET:url
                                     parameters:params
@@ -109,7 +130,9 @@
         url = kGetHomePosts;
     }else if (self.flowType == STFlowTypeHasttag){
         url = kGetPostsByHashTag;
-    }
+    }/*else if (self.flowType == STFlowTypeTop){
+        url = kGetPostsByTop;
+    }*/
     return url;
 }
 @end

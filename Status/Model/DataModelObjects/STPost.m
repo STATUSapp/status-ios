@@ -204,4 +204,22 @@
     return [ranks firstObject];
 }
 
+-(STTopBase *)topForTopId:(NSString *)topId{
+    if (topId == nil) {
+//        return nil;
+        return [self bestOfTops];
+    }
+    if ([self.dailyTop.topId isEqualToString:topId]) {
+        return self.dailyTop;
+    }
+    if ([self.weeklyTop.topId isEqualToString:topId]) {
+        return self.weeklyTop;
+    }
+    if ([self.monthlyTop.topId isEqualToString:topId]) {
+        return self.monthlyTop;
+    }
+//    return nil;
+    return [self bestOfTops];
+}
+
 @end

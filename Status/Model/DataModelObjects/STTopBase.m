@@ -16,6 +16,7 @@
 @property (nonatomic, strong, readwrite) NSDate *startDate;
 @property (nonatomic, strong, readwrite) NSDate *endDate;
 @property (nonatomic, assign, readwrite) STTopType type;
+@property (nonatomic, strong, readwrite) NSNumber *likesCount;
 @property (nonatomic, strong, readwrite) NSDictionary *userInfo;
 
 @end
@@ -28,6 +29,7 @@
         _userInfo = userInfo;
         _topId = userInfo[@"top_id"];
         _rank = userInfo[@"rank"];
+        _likesCount = userInfo[@"likes_count"];
         _startDate = [NSDate dateFromServerDateTime:userInfo[@"top_start_date"]];
         _endDate = [NSDate dateFromServerDateTime:userInfo[@"top_end_date"]];
     }
@@ -155,6 +157,40 @@
     return result;
 }
 
++ (UIColor *)topOneBorderColor{
+    return [UIColor colorWithRed:254.f/255.f
+                           green:89.f/255.f
+                            blue:0.f/255.f
+                           alpha:1.f];
+}
+
++ (CGFloat)topOneBorderWidth{
+    return 5.f;
+}
+
++ (UIColor *)topTwoBorderColor{
+    return [UIColor colorWithRed:255.f/255.f
+                           green:114.f/255.f
+                            blue:39.f/255.f
+                           alpha:1.f];
+}
+
++ (CGFloat)topTwoBorderWidth{
+    return 4.f;
+}
+
++ (UIColor *)topThreeBorderColor{
+    return [UIColor colorWithRed:255.f/255.f
+                           green:141.f/255.f
+                            blue:39.f/255.f
+                           alpha:1.f];
+}
+
++ (CGFloat)topThreeBorderWidth{
+    return 4.f;
+}
+
+
 + (STTopBase *)mockDailyTop{
     NSInteger mockRank = [STTopBase mockRank];
     if (mockRank%2 == 0) {
@@ -163,6 +199,7 @@
     STTopBase *top = [STTopBase new];
     top.type = STTopTypeDaily;
     top.rank = @(mockRank);
+    top.likesCount = @(mockRank*2);
     top.startDate = [NSDate date];
     return top;
 }
@@ -174,6 +211,7 @@
     STTopBase *top = [STTopBase new];
     top.type = STTopTypeWeekly;
     top.rank = @(mockRank);
+    top.likesCount = @(mockRank*2);
     top.startDate = [[NSDate date] dateByAddingTimeInterval:(-1) * 3600 * 24 * 7];
     top.endDate = [NSDate date];
     return top;
@@ -186,6 +224,7 @@
     STTopBase *top = [STTopBase new];
     top.type = STTopTypeMonthly;
     top.rank = @(mockRank);
+    top.likesCount = @(mockRank*2);
     top.startDate = [NSDate date];
     return top;
 }

@@ -56,6 +56,7 @@
 #import "AppDelegate.h"
 #import "UICollectionViewCell+Additions.h"
 #import "STTopCell.h"
+#import "STTopHeaderCell.h"
 
 #import "SDWebImageManager.h"
 
@@ -128,6 +129,7 @@ static NSString * const profileBioCell = @"UserProfileBioCell";
 static NSString * const profileLocationCell = @"UserProfileLocationCell";
 static NSString * const profileNoPhotosCell = @"UserProfileNoPhotosCell";
 static NSString * const adPostIdentifier = @"STFacebookAddCell";
+static NSString * const topHeaderCellIdentifier = @"STTopHeaderCell";
 
 + (FeedCVC *)feedControllerWithFlowProcessor:(STFlowProcessor *)processor{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FeedScene" bundle:nil];
@@ -355,7 +357,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (NSInteger)postIndexFromIndexPath:(NSIndexPath *)indexPath{
     NSInteger sectionIndex = indexPath.section;
-    if ([_feedProcessor processorIsAGallery] && sectionIndex > 0) {
+    if ([self firstSectionIsNotAPost] && sectionIndex > 0) {
         //substract the first section because this is the user profile section
         sectionIndex -- ;
     }
@@ -364,7 +366,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 -(NSInteger)getCurrentIndexForView:(UIView *)view{
     NSInteger index = view.tag;
-    if ([_feedProcessor processorIsAGallery]) {
+    if ([self firstSectionIsNotAPost]) {
         //substract the first section
         index --;
     }
@@ -382,6 +384,10 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }
     
     return post;
+}
+
+- (BOOL)firstSectionIsNotAPost{
+    return ([_feedProcessor processorIsAGallery] || [_feedProcessor processorIsTop]);
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -477,7 +483,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 -(BOOL)isAdPostAtSection:(NSInteger)section{
     NSInteger sectionIndex = section;
-    if ([_feedProcessor processorIsAGallery] && sectionIndex > 0) {
+    if ([self firstSectionIsNotAPost] && sectionIndex > 0) {
         //substract the first section because this is the user profile section
         sectionIndex -- ;
     }
@@ -489,7 +495,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 -(NSInteger)numberOfSections{
     NSInteger sectionsCount = [_feedProcessor numberOfObjects];
-    if ([_feedProcessor processorIsAGallery] && ![_feedProcessor loading]) {
+    if ([self firstSectionIsNotAPost] && ![_feedProcessor loading]) {
         //add one more section at the top
         sectionsCount ++;
     }
@@ -507,8 +513,12 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     
     NSInteger numItems = 0;
     
-    if ([_feedProcessor processorIsAGallery] && section == 0) {
-        numItems = STProfileCount;
+    if ([self firstSectionIsNotAPost] && section == 0){
+        if ([_feedProcessor processorIsAGallery]) {
+            numItems = STProfileCount;
+        }else if ([_feedProcessor processorIsTop]){
+            numItems = 1;
+        }
     }else if (![self isAdPostAtSection:section]){
         numItems = STPostItemsCount;
     }else{
@@ -519,24 +529,27 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 }
 
 -(NSString *)identifierForIndexPath:(NSIndexPath *)indexPath{
-    if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
-        switch (indexPath.row) {
-            case STProfileInfo:
-                return  profileInfoCell;
-                break;
-            case STProfileFriendsInfo:
-                return profileFriendsInfoCell;
-                break;
-            case STProfileBio:
-                return profileBioCell;
-                break;
-            case STProfileLocation:
-                return profileLocationCell;
-                break;
-            case STProfileNoPhotos:
-                return profileNoPhotosCell;
-                break;
-
+    if ([self firstSectionIsNotAPost] && indexPath.section == 0) {
+        if ([_feedProcessor processorIsAGallery]) {
+            switch (indexPath.row) {
+                case STProfileInfo:
+                    return  profileInfoCell;
+                    break;
+                case STProfileFriendsInfo:
+                    return profileFriendsInfoCell;
+                    break;
+                case STProfileBio:
+                    return profileBioCell;
+                    break;
+                case STProfileLocation:
+                    return profileLocationCell;
+                    break;
+                case STProfileNoPhotos:
+                    return profileNoPhotosCell;
+                    break;
+            }
+        }else if ([_feedProcessor processorIsTop]){
+            return topHeaderCellIdentifier;
         }
     }
     else if (![self isAdPostAtSection:indexPath.section])
@@ -581,34 +594,37 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CGSize cellSize = CGSizeZero;
-    if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
-        switch (indexPath.row) {
-            case STProfileInfo:
-                cellSize = [UserProfileInfoCell cellSize];
-                break;
-            case STProfileFriendsInfo:
-            {
-                cellSize = [UserProfileFriendsInfoCell cellSize];
+    if ([self firstSectionIsNotAPost] && indexPath.section == 0) {
+        if ([_feedProcessor processorIsAGallery]) {
+            switch (indexPath.row) {
+                case STProfileInfo:
+                    cellSize = [UserProfileInfoCell cellSize];
+                    break;
+                case STProfileFriendsInfo:
+                {
+                    cellSize = [UserProfileFriendsInfoCell cellSize];
+                }
+                    break;
+                case STProfileBio:
+                {
+                    cellSize = [UserProfileBioCell cellSizeForProfile:[_feedProcessor userProfile]];
+                }
+                    break;
+                case STProfileLocation:
+                {
+                    cellSize = [UserProfileLocationCell cellSizeForProfile:[_feedProcessor userProfile]];
+                }
+                    break;
+                case STProfileNoPhotos:
+                {
+                    cellSize = [UserProfileNoPhotosCell cellSizeForNumberOfPhotos:[_feedProcessor numberOfObjects]];
+                }
+                    break;
+                    
             }
-                break;
-            case STProfileBio:
-            {
-                cellSize = [UserProfileBioCell cellSizeForProfile:[_feedProcessor userProfile]];
-            }
-                break;
-            case STProfileLocation:
-            {
-                cellSize = [UserProfileLocationCell cellSizeForProfile:[_feedProcessor userProfile]];
-            }
-                break;
-            case STProfileNoPhotos:
-            {
-                cellSize = [UserProfileNoPhotosCell cellSizeForNumberOfPhotos:[_feedProcessor numberOfObjects]];
-            }
-                break;
-
+        }else if ([_feedProcessor processorIsTop]){
+            cellSize = [STTopHeaderCell cellSize];
         }
-
     }
     else if (![self isAdPostAtSection:indexPath.section]){
         NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
@@ -632,14 +648,14 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             }
                 break;
             case STPostTopDaily:{
-                if (post.dailyTop) {
+                if (![_feedProcessor processorIsTop] && post.dailyTop) {
                     cellSize = [STTopCell cellSize];
                 }else
                     cellSize = CGSizeZero;
             }
                 break;
             case STPostTopWeekly:{
-                if (post.weeklyTop) {
+                if (![_feedProcessor processorIsTop] && post.weeklyTop) {
                     cellSize = [STTopCell cellSize];
                 }else
                     cellSize = CGSizeZero;
@@ -647,7 +663,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
             }
                 break;
             case STPostTopMonthly:{
-                if (post.monthlyTop) {
+                if (![_feedProcessor processorIsTop] && post.monthlyTop) {
                     cellSize = [STTopCell cellSize];
                 }else
                     cellSize = CGSizeZero;
@@ -667,7 +683,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         
-        if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
+        if ([self firstSectionIsNotAPost] && indexPath.section == 0) {
             return [[UICollectionReusableView alloc] initWithFrame:CGRectZero];
         }else if ([self isAdPostAtSection:indexPath.section]){
             return [[UICollectionReusableView alloc] initWithFrame:CGRectZero];
@@ -686,8 +702,12 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
 
-    if ([_feedProcessor processorIsAGallery] && section == 0) {
-        return CGSizeZero;
+    if ([self firstSectionIsNotAPost] && section == 0) {
+        if ([_feedProcessor processorIsAGallery]) {
+            return CGSizeZero;
+        }else if ([_feedProcessor processorIsTop]){
+            return CGSizeZero;
+        }
     }else if ([self isAdPostAtSection:section]){
         return CGSizeZero;
     }
@@ -749,6 +769,13 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
         NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
         STAdPost *adPost = [_feedProcessor objectAtIndex:sectionIndex];
         [(STFacebookAddCell *)cell configureWithAdPost:adPost];
+    }else if ([cell isKindOfClass:[STTopHeaderCell class]]){
+        STPost *topOnePost = [_feedProcessor objectAtIndex:0];
+        STPost *topTwoPost = [_feedProcessor objectAtIndex:1];
+        STPost *topThreePost = [_feedProcessor objectAtIndex:2];
+        NSString *topId = _feedProcessor.topId;
+        topId = [[NSUUID UUID] UUIDString];
+        [(STTopHeaderCell *)cell configureWithPosts:@[topOnePost, topTwoPost, topThreePost] topId:topId];
     }
 }
 
@@ -765,22 +792,37 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
 
-    if ([_feedProcessor processorIsAGallery] && indexPath.section == 0) {
+    if ([self firstSectionIsNotAPost] && indexPath.section == 0) {
         return;
     }
     
+    NSInteger sectionIndex = [self postIndexFromIndexPath:indexPath];
+    STPost *post = nil;
+    if ([_feedProcessor numberOfObjects]) {
+        post = [_feedProcessor objectAtIndex:sectionIndex];
+    }
+    NSString *topId;
     if (indexPath.item == STPostImage) {
         STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         [cell animateShopButton];
     }else if (indexPath.item == STPostTopDaily){
         NSLog(@"Go to daily top");
+        topId = post.dailyTop.topId;
         
     }else if (indexPath.item == STPostTopWeekly){
         NSLog(@"Go to weekly top");
+        topId = post.weeklyTop.topId;
         
     }else if (indexPath.item == STPostTopMonthly){
         NSLog(@"Go to monthly top");
+        topId = post.monthlyTop.topId;
     }
+    
+//    if (topId) {
+        STFlowProcessor *topProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeTop topId:topId];
+        ContainerFeedVC *vc = [ContainerFeedVC feedControllerWithFlowProcessor:topProcessor];
+        [self.delegate pushViewController:vc animated:YES];
+//    }
 }
 
 #pragma mark - IBACtions
@@ -799,7 +841,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
     }
     CGPoint tappedPoint = [sender locationInView:self.collectionView];
     NSIndexPath *tappedCellPath = [self.collectionView indexPathForItemAtPoint:tappedPoint];
-    if ([_feedProcessor processorIsAGallery] && tappedCellPath.section == 0) {
+    if ([self firstSectionIsNotAPost] && tappedCellPath.section == 0) {
         return;
     }
     
@@ -977,7 +1019,7 @@ static NSString * const adPostIdentifier = @"STFacebookAddCell";
 - (IBAction)onShopButtonPressed:(id)sender {
     STPost *post = [self getCurrentPostForButton:sender];
     NSInteger index = [self getCurrentIndexForView:sender];
-    if ([_feedProcessor processorIsAGallery]) {
+    if ([self firstSectionIsNotAPost]) {
         index ++;
     }
     NSIndexPath * indexPath = [NSIndexPath indexPathForItem:STPostShop inSection:index];

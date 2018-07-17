@@ -116,6 +116,7 @@
 		07DA575A20FBE34B00C4457E /* STTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DA575920FBE34B00C4457E /* STTopCell.m */; };
 		07DB7DB61FD48C46001FEF25 /* STSnackWithActionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB7DB51FD48C46001FEF25 /* STSnackWithActionBar.m */; };
 		07DB7DB81FD48C5D001FEF25 /* STSnackWithActionBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07DB7DB71FD48C5D001FEF25 /* STSnackWithActionBar.xib */; };
+		07F1A81320FD4B51007EA5C0 /* STTopHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F1A81220FD4B51007EA5C0 /* STTopHeaderCell.m */; };
 		08F88F3E9A6987DC111E6745 /* libPods-Status.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9F74085E81B30D0D32BB3C /* libPods-Status.a */; };
 		170911F91DF87F0400B2AF81 /* NearbyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F41DF87F0400B2AF81 /* NearbyVC.m */; };
 		170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 170911F61DF87F0400B2AF81 /* STNearbyCell.m */; };
@@ -558,6 +559,8 @@
 		07DB7DB41FD48C46001FEF25 /* STSnackWithActionBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSnackWithActionBar.h; sourceTree = "<group>"; };
 		07DB7DB51FD48C46001FEF25 /* STSnackWithActionBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSnackWithActionBar.m; sourceTree = "<group>"; };
 		07DB7DB71FD48C5D001FEF25 /* STSnackWithActionBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = STSnackWithActionBar.xib; sourceTree = "<group>"; };
+		07F1A81120FD4B51007EA5C0 /* STTopHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTopHeaderCell.h; sourceTree = "<group>"; };
+		07F1A81220FD4B51007EA5C0 /* STTopHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTopHeaderCell.m; sourceTree = "<group>"; };
 		0EB2DC70BCD64C2D9972B8D7 /* Pods-Status-STATUSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status-STATUSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Status-STATUSTests/Pods-Status-STATUSTests.release.xcconfig"; sourceTree = "<group>"; };
 		170911F31DF87F0400B2AF81 /* NearbyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyVC.h; sourceTree = "<group>"; };
 		170911F41DF87F0400B2AF81 /* NearbyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyVC.m; sourceTree = "<group>"; };
@@ -1187,6 +1190,15 @@
 			path = FacebookAd;
 			sourceTree = "<group>";
 		};
+		07F1A81020FD4B30007EA5C0 /* TopHeaderCells */ = {
+			isa = PBXGroup;
+			children = (
+				07F1A81120FD4B51007EA5C0 /* STTopHeaderCell.h */,
+				07F1A81220FD4B51007EA5C0 /* STTopHeaderCell.m */,
+			);
+			path = TopHeaderCells;
+			sourceTree = "<group>";
+		};
 		170911F21DF87F0400B2AF81 /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
@@ -1408,6 +1420,7 @@
 		2AD97BAE1C8C141E00C9B3D5 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				07F1A81020FD4B30007EA5C0 /* TopHeaderCells */,
 				1709123E1DF882DC00B2AF81 /* PostCells */,
 				1709122E1DF8827100B2AF81 /* UserProfileCells */,
 				07B3FFFC1FB43DED009316A2 /* FacebookAd */,
@@ -2629,6 +2642,7 @@
 				072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */,
 				99B387C11C82FAA2005B4D8C /* STSuggestionsViewController.m in Sources */,
 				99B387591C82FAA2005B4D8C /* STGetUserProfileRequest.m in Sources */,
+				07F1A81320FD4B51007EA5C0 /* STTopHeaderCell.m in Sources */,
 				0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */,
 				99B3875F1C82FAA2005B4D8C /* STRegisterRequest.m in Sources */,
 				99B387451C82FAA2005B4D8C /* UIImage+Resize.m in Sources */,

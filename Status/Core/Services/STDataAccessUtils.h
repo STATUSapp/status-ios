@@ -58,6 +58,10 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
                hashTag:(NSString *)hashtag
                 offset:(NSInteger)offset
         withCompletion:(STDataAccessCompletionBlock)completion;
++(void)getPostsForFlow:(STFlowType)flowType
+                 topId:(NSString *)topId
+                offset:(NSInteger)offset
+        withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getNearbyPostsWithOffset:(NSInteger)offset
                  withCompletion:(STDataAccessCompletionBlock)completion;
 +(void)getPostsForUserId:(NSString *)userId

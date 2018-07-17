@@ -16,6 +16,8 @@
 @property(nonatomic, strong) NSString *gender;
 //only for hashtag flow
 @property(nonatomic, strong) NSString *hashtag;
+//only for top flow
+@property(nonatomic, strong) NSString *topId;
 
 + (void)getPostsWithOffset:(NSInteger)offset
                   flowType:(NSInteger)flowType
@@ -31,6 +33,11 @@
 + (void)getPostsWithOffset:(NSInteger)offset
                   flowType:(NSInteger)flowType
                    hashtag:(NSString *)hashtag
+            withCompletion:(STRequestCompletionBlock)completion
+                   failure:(STRequestFailureBlock)failure;
++ (void)getPostsWithOffset:(NSInteger)offset
+                  flowType:(NSInteger)flowType
+                     topId:(NSString *)topId
             withCompletion:(STRequestCompletionBlock)completion
                    failure:(STRequestFailureBlock)failure;
 @end

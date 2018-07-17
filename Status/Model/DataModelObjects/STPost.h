@@ -40,4 +40,5 @@
 - (NSAttributedString *)formattedCaptionString;
 -(NSString *)hasttagForRange:(NSRange )range;
 -(STTopBase *)bestOfTops;
+-(STTopBase *)topForTopId:(NSString *)topId;
 @end

@@ -50,7 +50,8 @@ typedef NS_ENUM(NSUInteger,STFlowType){
     STFlowTypeSinglePost,
     STFlowTypePopular,
     STFlowTypeRecent,
-    STFlowTypeHasttag
+    STFlowTypeHasttag,
+    STFlowTypeTop
 };
 
 typedef NS_ENUM(NSUInteger, STInterstitialType){
@@ -121,6 +122,7 @@ extern NSString *const kGetPosts;
 extern NSString *const kGetHomePosts;
 extern NSString *const kGetRecentPosts;
 extern NSString *const kGetPostsByHashTag;
+extern NSString *const kGetPostsByTop;
 extern NSString *const kLoginUser;
 extern NSString *const kInstagramLogin;
 extern NSString *const kRegisterUser;
