@@ -164,6 +164,8 @@
             NSString * fullName = [self getFullName];
             self.navigationItem.title = fullName;
             self.navigationItem.rightBarButtonItems = @[_optionsBarButton];
+        }else if (_feedProcessor.processorFlowType ==  STFlowTypeTop){
+            self.navigationItem.title = NSLocalizedString(@"Top Best Dressed People", nil);
         }
     }
 

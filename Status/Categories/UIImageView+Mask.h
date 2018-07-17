@@ -11,4 +11,8 @@
 @interface UIImageView (Mask)
 
 -(void)maskImage:(UIImage *)image;
+-(void)topOneMask;
+-(void)topTwoMask;
+-(void)topThreeMask;
+
 @end

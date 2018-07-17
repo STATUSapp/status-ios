@@ -68,6 +68,8 @@ NSInteger const kFacebookAdsTimeframe = 10;
 @property (nonatomic, strong, readwrite) NSString *genderFilter;
 
 @property (nonatomic, strong, readwrite) NSString *hashtag;
+
+@property (nonatomic, strong, readwrite) NSString *topId;
 @end
 
 @implementation STFlowProcessor
@@ -124,6 +126,16 @@ NSInteger const kFacebookAdsTimeframe = 10;
     self = [self initWithFlowType:flowType];
     if (self) {
         self.hashtag = hashtag;
+        [self getMoreData];
+    }
+    return self;
+}
+
+- (instancetype)initWithFlowType:(STFlowType)flowType
+                           topId:(NSString *)topId{
+    self = [self initWithFlowType:flowType];
+    if (self) {
+        self.topId = topId;
         [self getMoreData];
     }
     return self;
@@ -231,6 +243,10 @@ NSInteger const kFacebookAdsTimeframe = 10;
 - (BOOL)processorIsAGallery{
     return (_flowType == STFlowTypeUserGallery ||
             _flowType == STFlowTypeMyGallery);
+}
+
+- (BOOL)processorIsTop{
+    return _flowType == STFlowTypeTop;
 }
 
 - (void)setCurrentOffset:(NSInteger)offset{
@@ -516,6 +532,14 @@ NSInteger const kFacebookAdsTimeframe = 10;
         {
             [STDataAccessUtils getPostsForFlow:_flowType
                                        hashTag:_hashtag
+                                        offset:offset
+                                withCompletion:completion];
+        }
+            break;
+        case STFlowTypeTop:
+        {
+            [STDataAccessUtils getPostsForFlow:self.flowType
+                                         topId:self.topId
                                         offset:offset
                                 withCompletion:completion];
         }

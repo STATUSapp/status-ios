@@ -56,7 +56,12 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
 - (void) configureCellWithPost:(STPost *)post{
     [self setBottomItemsHidden:NO];
     STTopBase *relevantTop = [post bestOfTops];
-    [self.topBadge configureWithTop:relevantTop];
+    if (relevantTop!=nil) {
+        self.topBadge.hidden = NO;
+        [self.topBadge configureWithTop:relevantTop];
+    }else{
+        self.topBadge.hidden = YES;
+    }
     __weak typeof(self) weakSelf = self;
     [self.postImage sd_setImageWithURL:[NSURL URLWithString:post.mainImageUrl]
                       placeholderImage:nil
