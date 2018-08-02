@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, STTopType) {
-    STTopTypeDaily = 0,
+    STTopTypeUndefined = 0,
+    STTopTypeDaily,
     STTopTypeWeekly,
     STTopTypeMonthly,
 };
