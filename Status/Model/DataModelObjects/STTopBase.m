@@ -27,11 +27,11 @@
     self = [super init];
     if (self) {
         _userInfo = userInfo;
-        _topId = userInfo[@"top_id"];
-        _rank = userInfo[@"rank"];
-        _likesCount = userInfo[@"likes_count"];
-        _startDate = [NSDate dateFromServerDateTime:userInfo[@"top_start_date"]];
-        _endDate = [NSDate dateFromServerDateTime:userInfo[@"top_end_date"]];
+        _topId = [userInfo[@"top_id"] stringValue];
+        _rank = userInfo[@"position"];
+        _likesCount = userInfo[@"number_of_likes"];
+        _startDate = [NSDate dateFromServerDate:userInfo[@"started_at"]];
+        _endDate = [NSDate dateFromServerDate:userInfo[@"ended_at"]];
     }
     return self;
 }
@@ -71,7 +71,7 @@
 }
 
 - (UIColor *)topColor{
-    UIColor *result = [UIColor clearColor];
+    UIColor *result;
     switch (self.type) {
         case STTopTypeDaily:{
             result = [UIColor blackColor];
@@ -90,6 +90,9 @@
                                       blue:1.f/255.f
                                      alpha:1.f];
         }
+            break;
+        default:
+            result = [UIColor clearColor];
             break;
     }
     return result;
@@ -150,6 +153,10 @@
             topType  = @"monthly";
             topDate = [monthlyDateFormatter stringFromDate:self.startDate];
         }
+            break;
+        default:
+            topType = @"";
+            topDate = @"";
             break;
     }
     

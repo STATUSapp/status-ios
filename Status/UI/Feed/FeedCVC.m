@@ -774,7 +774,6 @@ static NSString * const topHeaderCellIdentifier = @"STTopHeaderCell";
         STPost *topTwoPost = [_feedProcessor objectAtIndex:1];
         STPost *topThreePost = [_feedProcessor objectAtIndex:2];
         NSString *topId = _feedProcessor.topId;
-        topId = [[NSUUID UUID] UUIDString];
         [(STTopHeaderCell *)cell configureWithPosts:@[topOnePost, topTwoPost, topThreePost] topId:topId];
     }
 }
@@ -818,11 +817,11 @@ static NSString * const topHeaderCellIdentifier = @"STTopHeaderCell";
         topId = post.monthlyTop.topId;
     }
     
-//    if (topId) {
+    if (topId) {
         STFlowProcessor *topProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeTop topId:topId];
         ContainerFeedVC *vc = [ContainerFeedVC feedControllerWithFlowProcessor:topProcessor];
         [self.delegate pushViewController:vc animated:YES];
-//    }
+    }
 }
 
 #pragma mark - IBACtions

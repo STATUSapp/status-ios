@@ -105,13 +105,38 @@
         _showShopProducts = (self.shopProducts.count > 0);
     }
     
-    self.dailyTop = [STTopBase dailyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"daily_top"]];
-    self.weeklyTop = [STTopBase weeklyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"weekly_top"]];
-    self.monthlyTop = [STTopBase monthlyTopWithInfo:[CreateDataModelHelper validObjectFromDict:self.infoDict forKey:@"monthly_top"]];
+//    self.dailyTop = [STTopBase mockDailyTop];
+//    self.weeklyTop = [STTopBase mockWeeklyTop];
+//    self.monthlyTop = [STTopBase mockMonthlyTop];
     
-    self.dailyTop = [STTopBase mockDailyTop];
-    self.weeklyTop = [STTopBase mockWeeklyTop];
-    self.monthlyTop = [STTopBase mockMonthlyTop];
+    NSArray *tops = self.infoDict[@"tops"];
+    if ([tops count] > 0) {
+        [self configureTops:tops];
+    }
+}
+
+-(void)configureTops:(NSArray *)tops{
+    NSLog(@"Tops: %@", tops);
+    for (NSDictionary *top in tops) {
+        STTopType type = [top[@"type"] integerValue];
+        switch (type) {
+            case STTopTypeDaily:{
+                self.dailyTop = [STTopBase dailyTopWithInfo:top];
+            }
+                break;
+            case STTopTypeWeekly:{
+                self.weeklyTop = [STTopBase weeklyTopWithInfo:top];
+            }
+                break;
+            case STTopTypeMonthly:{
+                self.monthlyTop = [STTopBase monthlyTopWithInfo:top];
+            }
+                break;
+            default:
+                NSAssert(NO, @"Top not recognized: %@", top);
+                break;
+        }
+    }
 }
 
 -(BOOL)isAdPost{

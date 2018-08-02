@@ -65,7 +65,7 @@ CGFloat likeAnimationZoomInProportion = 1.f/4.f;
     __weak typeof(self) weakSelf = self;
     [self.postImage sd_setImageWithURL:[NSURL URLWithString:post.mainImageUrl]
                       placeholderImage:nil
-                               options:SDWebImageProgressiveDownload
+                               options:SDWebImageHighPriority
                              completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                                    if (image) {
                                        __strong typeof(weakSelf) strongSelf = weakSelf;
