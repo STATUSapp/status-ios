@@ -725,6 +725,29 @@ withCompletion:(STDataUploadCompletionBlock)completion{
     }];
 }
 
+#pragma mark - Tops
+
++(void)getTopPostForPostId:(NSString *)postId
+                     topId:(NSString *)topId
+                completion:(STDataAccessCompletionBlock)completion{
+    STRequestFailureBlock failBlock = [self postsDefaultErrorHandlerWithCompletion:completion];
+    [STGetTopPost getTopPostForPostId:postId
+                             andTopId:topId
+                       withCompletion:^(id response, NSError *error) {
+                           if (!error) {
+                               NSMutableArray *objects = [NSMutableArray new];
+                               if ([response[@"status_code"] integerValue] == STWebservicesSuccesCod) {
+                                   STPost *post = [STPost postWithDict:response[@"data"]];
+                                   [objects addObject:post];
+                                   completion(objects, nil);
+                               }else{
+                                   completion(@[], [NSError errorWithDomain:@"com.status.error" code:11011 userInfo:nil]);
+                               }
+                           }
+                       } failure:failBlock];
+
+}
+
 #pragma mark - Suggested Products
 
 +(void)getSuggestedProductsWithPostId:(NSString *)postId

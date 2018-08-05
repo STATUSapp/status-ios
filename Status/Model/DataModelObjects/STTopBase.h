@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, STTopType) {
 + (STTopBase *)dailyTopWithInfo:(NSDictionary *)dailyInfo;
 + (STTopBase *)weeklyTopWithInfo:(NSDictionary *)weeklyInfo;
 + (STTopBase *)monthlyTopWithInfo:(NSDictionary *)monthlyInfo;
++ (STTopBase *)topWithInfo:(NSDictionary *)info;
 + (UIColor *)topOneBorderColor;
 + (CGFloat)topOneBorderWidth;
 + (UIColor *)topTwoBorderColor;

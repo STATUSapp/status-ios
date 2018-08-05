@@ -93,7 +93,7 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 {
     [super viewDidLoad];
     self.title = @"Settings";
-    self.deactivatedNotifications = @[@(STNotificationSectionMessages), @(STNotificationSectionPhotosWaiting), @(STNotificationSectionEarnExtraLikes)];
+    self.deactivatedNotifications = @[@(STNotificationSectionMessages), @(STNotificationSectionPhotosWaiting), @(STNotificationSectionEarnExtraLikes), @(STNotificationSectionHintTBDP)];
     NSString *versionString = [[STBaseRequest new] getAppVersion];
     _versionLabel.text = [NSString stringWithFormat:@"Version %@", versionString];
     

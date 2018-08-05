@@ -132,6 +132,7 @@ extern NSString *const kUpdatePost;
 extern NSString *const kReport_Post;
 extern NSString *const kGetUserPosts;
 extern NSString *const kGetPostLikes;
+extern NSString *const kGetTopPost;
 extern NSString *const kSetApnToken;
 extern NSString *const kGetPost;
 extern NSString *const kGetNotifications;

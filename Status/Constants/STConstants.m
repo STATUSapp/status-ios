@@ -71,6 +71,7 @@ NSString *const kSetPostLiked = @"set_post_like_unlike";
 NSString *const kReport_Post = @"report_post";
 NSString *const kGetUserPosts = @"get_user_posts";
 NSString *const kGetPostLikes = @"get_post_likes";
+NSString *const kGetTopPost = @"get_top_post";
 NSString *const kSetApnToken = @"set_apn_token";
 NSString *const kGetPost = @"get_post";
 NSString *const kGetNotifications = @"get_notifications";

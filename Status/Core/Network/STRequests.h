@@ -43,6 +43,7 @@
 #import "STGetImageSuggestionsRequest.h"
 #import "STGetSimilarProductsRequest.h"
 #import "STTransformSuggestionsRequest.h"
+#import "STGetTopPost.h"
 
 #endif
 
