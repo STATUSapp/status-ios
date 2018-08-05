@@ -232,6 +232,9 @@ extern NSString *const kOffsetKey;
 extern NSString *const kSelectedTabBarKey;
 extern NSString *const kAnimatedTabBarKey;
 extern NSString *const kManualLogoutKey;
+extern NSString *const STNotificationsTBDPKey;
+extern NSString *const STNotificationsHintTBDPKey;
+extern NSString *const STNotificationsSharePostTBDPKey;
 
 #pragma mark - Numeric constants
 

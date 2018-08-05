@@ -185,6 +185,9 @@ NSString *const STNotificationsFriendJoinStatusKey = @"notifications_a_friend_jo
 NSString *const STNotificationsPhotosWaitingKey = @"notifications_photos_waiting_for_you";
 NSString *const STNotificationsExtraLikesKey = @"notifications_earn_extra_likes";
 NSString *const STNotificationsFollowersKey = @"notifications_new_follower";
+NSString *const STNotificationsTBDPKey = @"notifications_top_main";
+NSString *const STNotificationsHintTBDPKey = @"notifications_top_hint";
+NSString *const STNotificationsSharePostTBDPKey = @"notifications_top_share";
 
 #pragma mark - Login Constants
 
