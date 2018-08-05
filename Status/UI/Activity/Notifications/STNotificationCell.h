@@ -15,10 +15,10 @@ typedef NS_ENUM(NSInteger, STNotificationRegionType){
     STNotificationRegionTypePostRelated
 };
 
+@class STNotificationObj;
 @interface STNotificationCell : STNotificationBaseCell
-@property (weak, nonatomic) IBOutlet UIImageView *postImg;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightImageWidthConstraint;
 
 - (STNotificationRegionType)regionForPointOfTap:(CGPoint)pointOfTap;
+-(void)configureWithNotificationObject:(STNotificationObj *)notificationObj;
 
 @end

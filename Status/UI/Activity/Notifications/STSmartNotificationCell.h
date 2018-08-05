@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "STNotificationBaseCell.h"
 
-@interface STSmartNotificationCell : STNotificationBaseCell
+@class STNotificationObj;
 
+@interface STSmartNotificationCell : STNotificationBaseCell
+-(void)configureWithNotificationObject:(STNotificationObj *)notification;
 @end

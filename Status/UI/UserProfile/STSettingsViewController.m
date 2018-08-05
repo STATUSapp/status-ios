@@ -44,6 +44,9 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
     STNotificationSectionPhotosWaiting,
     STNotificationSectionEarnExtraLikes,
     STNotificationSectionFollowers,
+    STNotificationSectionTBDP,
+    STNotificationSectionHintTBDP,
+    STNotificationSectionSharePostTBDP,
     STNotificationSectionCount
 };
 @interface STSettingsViewController ()
@@ -58,6 +61,9 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 @property (weak, nonatomic) IBOutlet UISwitch *switchPhotosWaiting;
 @property (weak, nonatomic) IBOutlet UISwitch *switchExtraLikes;
 @property (weak, nonatomic) IBOutlet UISwitch *switchFollowers;
+@property (weak, nonatomic) IBOutlet UISwitch *switchTBDP;
+@property (weak, nonatomic) IBOutlet UISwitch *switchHintTBDP;
+@property (weak, nonatomic) IBOutlet UISwitch *switchSharePostTBDP;
 
 @property (strong, nonatomic) NSDictionary * settingsDict;
 @property (strong, nonatomic) NSArray *deactivatedNotifications;
@@ -117,6 +123,10 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
     [_switchPhotosWaiting setOn:[[_settingsDict valueForKey:STNotificationsPhotosWaitingKey] boolValue]];
     [_switchExtraLikes setOn:[[_settingsDict valueForKey:STNotificationsExtraLikesKey] boolValue]];
     [_switchFollowers setOn:[[_settingsDict valueForKey:STNotificationsFollowersKey] boolValue]];
+    [_switchTBDP setOn:[[_settingsDict valueForKey:STNotificationsTBDPKey] boolValue]];
+    [_switchHintTBDP setOn:[[_settingsDict valueForKey:STNotificationsHintTBDPKey] boolValue]];
+    [_switchSharePostTBDP setOn:[[_settingsDict valueForKey:STNotificationsSharePostTBDPKey] boolValue]];
+
 }
 
 - (NSDictionary *)getNewSettingsDict {
@@ -126,7 +136,11 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
              STNotificationsFriendJoinStatusKey : [NSNumber numberWithBool:_switchFriendJoinsStatus.isOn],
              STNotificationsPhotosWaitingKey : [NSNumber numberWithBool:_switchPhotosWaiting.isOn],
              STNotificationsExtraLikesKey : [NSNumber numberWithBool:_switchExtraLikes.isOn],
-             STNotificationsFollowersKey : @(_switchFollowers.isOn)};
+             STNotificationsFollowersKey : @(_switchFollowers.isOn),
+             STNotificationsTBDPKey : @(_switchTBDP.isOn),
+             STNotificationsHintTBDPKey : @(_switchHintTBDP.isOn),
+             STNotificationsSharePostTBDPKey : @(_switchSharePostTBDP.isOn)
+             };
 }
 
 - (void)didReceiveMemoryWarning
@@ -265,6 +279,15 @@ typedef NS_ENUM(NSUInteger, STNotificationSection) {
 }
 - (IBAction)onTapFollowersSwitch:(id)sender {
     [self setSetting:STNotificationsFollowersKey fromSwitch:sender];
+}
+- (IBAction)onTapTBDP:(id)sender {
+    [self setSetting:STNotificationsTBDPKey fromSwitch:sender];
+}
+- (IBAction)onTapHintTBDP:(id)sender {
+    [self setSetting:STNotificationsHintTBDPKey fromSwitch:sender];
+}
+- (IBAction)onTapSharePostTBDP:(id)sender {
+    [self setSetting:STNotificationsSharePostTBDPKey fromSwitch:sender];
 }
 
 - (IBAction)onHowItWorksPressed:(id)sender {
