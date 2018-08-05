@@ -80,6 +80,11 @@ typedef void (^STDataUploadCompletionBlock)(NSError *error);
       withShopProducts:(NSArray <STShopProduct *> *) shopProducts
         withCompletion:(STDataAccessCompletionBlock)completion;
 
+//tops
++(void)getTopPostForPostId:(NSString *)postId
+                     topId:(NSString *)topId
+                completion:(STDataAccessCompletionBlock)completion;
+
 //suggestion products
 +(void)getSuggestedProductsWithPostId:(NSString *)postId
                        withCompletion:(STDataAccessCompletionBlock)completion;

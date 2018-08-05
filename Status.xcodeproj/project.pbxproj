@@ -100,6 +100,7 @@
 		075C52A21EBF4E2F00174CC5 /* STTagAddProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52A11EBF4E2F00174CC5 /* STTagAddProductCell.m */; };
 		075C52A51EBF4F9200174CC5 /* STTagManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C52A41EBF4F9200174CC5 /* STTagManualViewController.m */; };
 		075E6ED920324B14007C3457 /* STDetailedShopProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 075E6ED820324B14007C3457 /* STDetailedShopProductCell.m */; };
+		07649D942116F16A006C17D7 /* STGetTopPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 07649D932116F16A006C17D7 /* STGetTopPost.m */; };
 		0764B374208A840B00064D7C /* STSendLogsReguest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0764B373208A840B00064D7C /* STSendLogsReguest.m */; };
 		0767FD2820FB3889001ABD4B /* UILabel+TopRanking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0767FD2720FB3889001ABD4B /* UILabel+TopRanking.m */; };
 		076B91ED1FDD7F28006B7E91 /* STSnackBarWithActionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B91EC1FDD7F28006B7E91 /* STSnackBarWithActionService.m */; };
@@ -528,6 +529,8 @@
 		075C52A41EBF4F9200174CC5 /* STTagManualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTagManualViewController.m; sourceTree = "<group>"; };
 		075E6ED720324B14007C3457 /* STDetailedShopProductCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDetailedShopProductCell.h; sourceTree = "<group>"; };
 		075E6ED820324B14007C3457 /* STDetailedShopProductCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDetailedShopProductCell.m; sourceTree = "<group>"; };
+		07649D922116F16A006C17D7 /* STGetTopPost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STGetTopPost.h; sourceTree = "<group>"; };
+		07649D932116F16A006C17D7 /* STGetTopPost.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STGetTopPost.m; sourceTree = "<group>"; };
 		0764B372208A840B00064D7C /* STSendLogsReguest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSendLogsReguest.h; sourceTree = "<group>"; };
 		0764B373208A840B00064D7C /* STSendLogsReguest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSendLogsReguest.m; sourceTree = "<group>"; };
 		0767FD2620FB3889001ABD4B /* UILabel+TopRanking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+TopRanking.h"; sourceTree = "<group>"; };
@@ -1559,6 +1562,8 @@
 				99B3861C1C82FAA2005B4D8C /* STGetPostLikesRequest.m */,
 				99B3861D1C82FAA2005B4D8C /* STGetPostsRequest.h */,
 				99B3861E1C82FAA2005B4D8C /* STGetPostsRequest.m */,
+				07649D922116F16A006C17D7 /* STGetTopPost.h */,
+				07649D932116F16A006C17D7 /* STGetTopPost.m */,
 				99B3861F1C82FAA2005B4D8C /* STGetSuggestUsersRequest.h */,
 				99B386201C82FAA2005B4D8C /* STGetSuggestUsersRequest.m */,
 				99B386211C82FAA2005B4D8C /* STGetUserInfoRequest.h */,
@@ -2667,6 +2672,7 @@
 				170911FA1DF87F0400B2AF81 /* STNearbyCell.m in Sources */,
 				99B387401C82FAA2005B4D8C /* NSString+MD5.m in Sources */,
 				99B387721C82FAA2005B4D8C /* STContactsManager.m in Sources */,
+				07649D942116F16A006C17D7 /* STGetTopPost.m in Sources */,
 				0721CC5A200559E60071E86F /* STGetBrandsWithProducts.m in Sources */,
 				072BACBB1E81024A0055B6F3 /* STGetUsedCatalogCategoriesRequest.m in Sources */,
 				99B387C01C82FAA2005B4D8C /* STSuggestionCell.m in Sources */,

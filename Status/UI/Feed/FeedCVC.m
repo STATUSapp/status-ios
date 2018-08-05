@@ -851,6 +851,16 @@ static NSString * const topHeaderCellIdentifier = @"STTopHeaderCell";
             
             STPostImageCell *cell = (STPostImageCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
             __block STPost *post = [_feedProcessor objectAtIndex:postIndex];
+#ifdef DEBUG
+            STTopBase *top = [post bestOfTops];
+            if (top) {
+                [STDataAccessUtils getTopPostForPostId:post.uuid
+                                                 topId:top.topId
+                                            completion:^(NSArray *objects, NSError *error) {
+                                                NSLog(@"Top loaded: %@", objects);
+                                            }];
+            }
+#endif
             [cell animateLikedImage];
             if (!post.postLikedByCurrentUser) {
                 [_feedProcessor setLikeUnlikeAtIndex:postIndex

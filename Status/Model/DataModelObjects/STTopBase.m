@@ -40,6 +40,15 @@
     return [self.rank compare:otherTop.rank];
 }
 
++ (STTopBase *)topWithInfo:(NSDictionary *)info{
+    if (!info) {
+        return nil;
+    }
+    STTopBase *topObj = [[STTopBase alloc] initWithInfo:info];
+    topObj.type = [info[@"type"] integerValue];
+    return topObj;
+
+}
 + (STTopBase *)dailyTopWithInfo:(NSDictionary *)dailyInfo{
     if (!dailyInfo) {
         return nil;
