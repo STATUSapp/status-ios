@@ -11,30 +11,35 @@
 #import "STTopBase.h"
 
 CGFloat const kBorderRadius = 0.04;
-CGFloat const kFontSizeProportion = 0.47;
+CGFloat const kFontSizeProportion = 0.4;
 
 @implementation UILabel (TopRanking)
 
 - (void)configureWithTop:(STTopBase *)top{
-    CGRect rect = self.frame;
     NSString *rankString = [top rankString];
     UIColor *topColor = [top topColor];
+    [self configureWithRankString:rankString
+                         topColor:topColor];
+}
+
+- (void)configureWithRankString:(NSString *)rankString
+                       topColor:(UIColor *)color{
+    CGRect rect = self.frame;
     CGFloat fontSize = rect.size.width * kFontSizeProportion;
     fontSize = fontSize - (CGFloat)rankString.length;
     UIFont *font = [UIFont fontWithName:self.font.fontName
                                    size:fontSize];
     self.font = font;
     self.text = rankString;
-    self.textColor = topColor;
+    self.textColor = color;
     
     self.layer.cornerRadius = rect.size.width/2.f;
     self.layer.backgroundColor = [[UIColor clearColor] CGColor];
     
-    self.layer.borderColor = [topColor CGColor];
+    self.layer.borderColor = [color CGColor];
     self.layer.borderWidth = kBorderRadius * self.frame.size.width;
     
     self.layer.masksToBounds = YES;
-    
 }
 
 @end

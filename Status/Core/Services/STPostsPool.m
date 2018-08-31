@@ -58,7 +58,7 @@
 
 - (STPost *)randomPost {
 
-    NSArray *allObjects = [[self getAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageDownloaded == YES AND mainImageUrl != nil"]];
+    NSArray *allObjects = [[self getAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageUrl != nil"]];
     if (allObjects.count == 0) {
         return nil;
     }
@@ -70,6 +70,35 @@
         randomPost = [allObjects objectAtIndex:randomIndex];
     }
     return randomPost;
+}
+
+- (NSArray <STPost *> *)randomPostsForAllTops{
+    NSArray *allObjects = [[self getAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mainImageUrl != nil"]];
+    STPost *postDailyTop = nil;
+    STPost *postWeeklyTop = nil;
+    STPost *postMonthlyTop = nil;
+    
+    for (STPost *post in allObjects) {
+        if (post.dailyTop != nil && postDailyTop == nil) {
+            postDailyTop = post;
+            continue;
+        }
+        if (post.weeklyTop != nil && postWeeklyTop == nil) {
+            postWeeklyTop = post;
+            continue;
+        }
+        if (post.monthlyTop != nil && postMonthlyTop == nil) {
+            postMonthlyTop = post;
+            continue;
+        }
+        if (postDailyTop!=nil &&
+            postWeeklyTop !=nil &&
+            postMonthlyTop !=nil) {
+            break;
+        }
+    }
+    
+    return @[postDailyTop, postWeeklyTop, postMonthlyTop];
 }
 
 #pragma mark - Private methods

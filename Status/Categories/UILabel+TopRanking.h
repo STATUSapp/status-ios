@@ -13,5 +13,7 @@
 @interface UILabel (TopRanking)
 
 - (void)configureWithTop:(STTopBase *)top;
+- (void)configureWithRankString:(NSString *)rankString
+                       topColor:(UIColor *)color;
 
 @end
