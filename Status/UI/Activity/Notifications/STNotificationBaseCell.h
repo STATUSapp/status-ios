@@ -13,4 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userImg;
 @property (weak, nonatomic) IBOutlet STTapAnimationLabel *messageLbl;
 
+- (NSAttributedString *)detailsStringForFullMessage:(NSString *)fullMessage
+                                          actorName:(NSString *)actorName
+                                   notificationDate:(NSDate *)notificationDate;
 @end

@@ -11,6 +11,8 @@
 #import "STConstants.h"
 #import "STNotificationCell.h"
 #import "STSmartNotificationCell.h"
+#import "STTopNotificationCell.h"
+#import "STMyTopNotificationCell.h"
 #import "AppDelegate.h"
 #import "STLoginService.h"
 #import "UIImageView+WebCache.h"
@@ -31,6 +33,8 @@
 #import "STListUser.h"
 #import "STLocalNotificationService.h"
 
+#import "STFlowProcessor.h"
+
 const float kNoNotifHeight = 24.f;
 
 @interface STNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
@@ -44,6 +48,9 @@ const float kNoNotifHeight = 24.f;
 @property (nonatomic, strong) STFollowDataProcessor *followProcessor;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray *notificationDataSource;
+
+@property (nonatomic, strong) NSArray <NSNumber *> *smartNotifications;
+@property (nonatomic, strong) NSArray <NSNumber *> *topNotifications;
 
 @end
 
@@ -68,6 +75,9 @@ const float kNoNotifHeight = 24.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.smartNotifications = [STNotificationObj smartNotifications];
+    self.topNotifications = [STNotificationObj topNotifications];
+    
     self.navigationController.hidesBarsOnTap = NO;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"ACTIVITY";
@@ -192,25 +202,10 @@ const float kNoNotifHeight = 24.f;
         return;
     }
     
-    STNotificationCell * cell = (STNotificationCell *)[self.notificationTable cellForRowAtIndexPath:indexPathOfSelectedRow];
-    CGPoint pointOfTapInCell = [_tapOnRow locationInView:cell.contentView];
-    if ([cell isKindOfClass:[STNotificationCell class]]) {
-        switch ([cell regionForPointOfTap:pointOfTapInCell]) {
-            case STNotificationRegionTypeUserRelated:
-                [self onTapUserNameOrUserProfilePictureAtIndexPath:indexPathOfSelectedRow];
-                break;
-            case STNotificationRegionTypePostRelated:
-                [self onTapPostPictureAtIndexPath:indexPathOfSelectedRow];
-                break;
-                
-            default:
-                break;
-        }
-    }
-    else if ([cell isKindOfClass:[STSmartNotificationCell class]]){
-        STNotificationObj *no = _notificationDataSource[indexPathOfSelectedRow.row];
-        STNotificationType notificationType = no.type;
-        
+    STNotificationObj *no = _notificationDataSource[indexPathOfSelectedRow.row];
+    STNotificationType notificationType = no.type;
+
+    if ([self.smartNotifications containsObject:@(notificationType)]) {
         switch (notificationType) {
             case STNotificationTypePhotosWaiting:
                 //go to main feed
@@ -225,12 +220,49 @@ const float kNoNotifHeight = 24.f;
             case STNotificationType5DaysUploadNewPhoto:
             {
                 [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakeAPhoto popToRootVC:YES];
-
+                
             }
                 break;
             default:
                 break;
         }
+        
+    }else if ([self.topNotifications containsObject:@(notificationType)]){
+        if (notificationType == STNotificationTypeTop) {
+            //get the top_id and present the top feed
+            NSString *topId = no.topId;
+            if (topId) {
+                STFlowProcessor *topProcessor = [[STFlowProcessor alloc] initWithFlowType:STFlowTypeTop topId:topId];
+                ContainerFeedVC *vc = [ContainerFeedVC feedControllerWithFlowProcessor:topProcessor];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else if (notificationType == STNotificationTypeYourTop){
+            STMyTopNotificationCell * cell = (STMyTopNotificationCell *)[self.notificationTable cellForRowAtIndexPath:indexPathOfSelectedRow];
+            CGPoint pointOfTapInCell = [_tapOnRow locationInView:cell.contentView];
+            STMyNotificationRegionType tapType = [cell regionForPointOfTap:pointOfTapInCell];
+            if (tapType == STMyNotificationRegionTypePostRelated) {
+                [self onTapPostPictureAtIndexPath:indexPathOfSelectedRow];
+            }else{
+                NSLog(@"go to share top screen");
+                //TODO: go to share top screen
+            }
+
+        }
+    }else{
+        STNotificationCell * cell = (STNotificationCell *)[self.notificationTable cellForRowAtIndexPath:indexPathOfSelectedRow];
+        CGPoint pointOfTapInCell = [_tapOnRow locationInView:cell.contentView];
+        switch ([cell regionForPointOfTap:pointOfTapInCell]) {
+            case STNotificationRegionTypeUserRelated:
+                [self onTapUserNameOrUserProfilePictureAtIndexPath:indexPathOfSelectedRow];
+                break;
+            case STNotificationRegionTypePostRelated:
+                [self onTapPostPictureAtIndexPath:indexPathOfSelectedRow];
+                break;
+                
+            default:
+                break;
+        }
+
     }
 }
 
@@ -238,14 +270,12 @@ const float kNoNotifHeight = 24.f;
     STNotificationObj *no = [_notificationDataSource objectAtIndex:indexPath.row];
     STNotificationType notifType = no.type;
     
-    
     switch (notifType) {
         case STNotificationTypeInvite:
             [[CoreManager navigationService] switchToTabBarAtIndex:STTabBarIndexTakeAPhoto popToRootVC:YES];
             break;
         default:
         {
-            
             ContainerFeedVC *feedCVC = [ContainerFeedVC galleryFeedControllerForUserId:no.userId andUserName:nil];
             [self.navigationController pushViewController:feedCVC animated:YES];
         }
@@ -261,6 +291,7 @@ const float kNoNotifHeight = 24.f;
     switch (notifType) {
         case STNotificationTypeLike:
         case STNotificationTypeUploaded:
+        case STNotificationTypeYourTop:
         {
             
             ContainerFeedVC *feedCVC = [ContainerFeedVC singleFeedControllerWithPostId:no.postId];
@@ -312,17 +343,28 @@ const float kNoNotifHeight = 24.f;
     STNotificationType notificationType = no.type;
     STNotificationBaseCell *cell = nil;
 
-    if (notificationType < STNotificationTypeChatMessage || notificationType == STNotificationTypeGotFollowed) {
+    if ([self.smartNotifications containsObject:@(notificationType)]) {
+        //smart notifications, generated by server
+        cell = (STSmartNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"smartNotificationCell"];
+        STSmartNotificationCell *actualCell = (STSmartNotificationCell *)cell;
+        [actualCell configureWithNotificationObject:no];
+    }else if ([self.topNotifications containsObject:@(notificationType)]){
+        //top notifications, generated by server
+        if (notificationType == STNotificationTypeYourTop) {
+            cell = (STMyTopNotificationCell *)[self.notificationTable dequeueReusableCellWithIdentifier:@"myTopNotificationCell"];
+            [(STMyTopNotificationCell *)cell configureWithNotificationObject:no];
+
+        }else{
+            cell = (STTopNotificationCell *)[self.notificationTable dequeueReusableCellWithIdentifier:@"topNotificationCell"];
+            [(STTopNotificationCell *)cell configureWithNotificationObject:no];
+        }
+
+    }else{
         // normal notifications (user generated notifications)
         cell = (STNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
         STNotificationCell *actualCell = (STNotificationCell *)cell;
         [actualCell configureWithNotificationObject:no];
-    }
-    else
-    {   //smart notifications, generated by server
-        cell = (STSmartNotificationCell *)[tableView dequeueReusableCellWithIdentifier:@"smartNotificationCell"];
-        STSmartNotificationCell *actualCell = (STSmartNotificationCell *)cell;
-        [actualCell configureWithNotificationObject:no];
+
     }
     return cell;
 
@@ -334,35 +376,6 @@ const float kNoNotifHeight = 24.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-}
-
-#pragma mark - Helper
-
--(NSString *) getNotificationTypeStringForType:(STNotificationType)type{
-    NSString *str = @"";
-    switch (type) {
-        case STNotificationTypeLike:
-            str = @"likes your photo.";
-            break;
-        case STNotificationTypeInvite:
-            str = @"asked you to upload a photo.";
-            break;
-        case STNotificationTypeUploaded:
-            str = @"uploaded a photo.";
-            break;
-        case STNotificationTypeGotFollowed:
-            str = @"is following you.";
-            break;
-        default:
-#ifdef DEBUG
-            str = @"CHANGE THIS MOCKUP TEXT.";
-#else
-            str = @"likes your photo.";
-#endif
-            break;
-    }
-    
-    return str;
 }
 
 #pragma mark - UIGestureRecognizer delegate method

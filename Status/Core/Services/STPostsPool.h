@@ -19,5 +19,6 @@
 - (void)removePosts:(NSArray <STPost * > *)posts;
 - (void)removePostsWithIDs:(NSArray <NSString * > *)uuids;
 - (STPost *)randomPost;
+- (NSArray <STPost *> *)randomPostsForAllTops;
 
 @end

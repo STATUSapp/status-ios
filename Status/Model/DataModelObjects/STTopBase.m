@@ -209,9 +209,6 @@
 
 + (STTopBase *)mockDailyTop{
     NSInteger mockRank = [STTopBase mockRank];
-    if (mockRank%2 == 0) {
-        return nil;
-    }
     STTopBase *top = [STTopBase new];
     top.type = STTopTypeDaily;
     top.rank = @(mockRank);
@@ -221,9 +218,6 @@
 }
 + (STTopBase *)mockWeeklyTop{
     NSInteger mockRank = [STTopBase mockRank];
-    if (mockRank%2 == 0) {
-        return nil;
-    }
     STTopBase *top = [STTopBase new];
     top.type = STTopTypeWeekly;
     top.rank = @(mockRank);
@@ -234,9 +228,6 @@
 }
 + (STTopBase *)mockMonthlyTop{
     NSInteger mockRank = [STTopBase mockRank];
-    if (mockRank%2 == 0) {
-        return nil;
-    }
     STTopBase *top = [STTopBase new];
     top.type = STTopTypeMonthly;
     top.rank = @(mockRank);

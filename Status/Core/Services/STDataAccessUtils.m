@@ -838,6 +838,7 @@ withCompletion:(STDataUploadCompletionBlock)completion{
                 STNotificationObj *no = [STNotificationObj notificationObjFromDict:dict];
                 [objects addObject:no];
             }
+            [objects addObjectsFromArray:[STNotificationObj topMockNotifications]];
             completion(objects, nil);
         }
         else
