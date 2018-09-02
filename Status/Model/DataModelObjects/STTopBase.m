@@ -111,6 +111,25 @@
     return [NSString stringWithFormat:@"#%ld", (long)self.rank.integerValue];
 }
 
+- (NSString *)topTypeString{
+    NSString *result = nil;
+    switch (self.type) {
+        case STTopTypeDaily:
+            result = @"today";
+            break;
+        case STTopTypeWeekly:
+            result = @"weekly";
+            break;
+        case STTopTypeMonthly:
+            result = @"monthly";
+            break;
+
+        default:
+            break;
+    }
+    return result;
+}
+
 - (NSAttributedString *)topDetails{
     NSString *rankNumberString = [self rankNumberString];
     NSString *topTypeAndDate = [self topTypeAndDate];

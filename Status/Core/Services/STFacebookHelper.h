@@ -19,6 +19,7 @@ typedef void (^loadFBPicturesCompletion) (NSDictionary *result);
 -(void)loadPhotosForAlbum:(NSString *)albumId withRefreshBlock:(refreshCompletion)refreshCompletion;
 -(void)getUserExtendedInfoWithCompletion:(void (^)(NSDictionary *info))completion;
 -(void)shareImageFromLink:(NSString *)imageLink;
+-(void)shareTopImage:(UIImage * _Nullable)topImage;
 
 //app promote
 //-(void)promoteTheApp;

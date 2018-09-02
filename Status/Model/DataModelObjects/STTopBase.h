@@ -27,6 +27,7 @@ typedef NS_ENUM(NSUInteger, STTopType) {
 -( UIColor *)topColor;
 - (NSString *)rankString;
 - (NSAttributedString *)topDetails;
+- (NSString *)topTypeString;
 
 + (STTopBase *)dailyTopWithInfo:(NSDictionary *)dailyInfo;
 + (STTopBase *)weeklyTopWithInfo:(NSDictionary *)weeklyInfo;

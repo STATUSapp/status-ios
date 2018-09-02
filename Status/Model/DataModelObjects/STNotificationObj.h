@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSString *postPhotoUrl;
+@property (nonatomic, assign) CGSize postImageSize;
+@property (nonatomic, strong) NSNumber *postImageRatio;
 @property (nonatomic, strong) NSString *postId;
 @property (nonatomic, assign) BOOL seen;
 @property (nonatomic, assign) STNotificationType type;
@@ -23,6 +25,8 @@
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *userThumbnail;
+@property (nonatomic, assign) CGSize userImageSize;
+@property (nonatomic, strong) NSNumber *userImageRatio;
 @property (nonatomic, assign) STProfileGender userGender;
 @property (nonatomic, strong) STTopBase *top;
 @property (nonatomic, strong) NSString *topId;
