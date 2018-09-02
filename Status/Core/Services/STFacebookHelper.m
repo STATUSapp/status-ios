@@ -204,6 +204,27 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }];
 }
 
+-(void)shareTopImage:(UIImage * _Nullable)topImage{
+    [self shareImage:topImage withHashTag:@"#STATUSappTopBestDressedPeople"];
+}
+
+- (void)shareImage:(UIImage * _Nullable)image
+       withHashTag:(NSString *) hashtagString{
+    FBSDKHashtag *hashtag = [FBSDKHashtag hashtagWithString:hashtagString];
+    UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
+    if ([viewController presentedViewController]) {
+        viewController = [viewController presentedViewController];
+    }
+    FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImage:image userGenerated:NO];
+    FBSDKSharePhotoContent *contentPhoto = [[FBSDKSharePhotoContent alloc] init];
+    contentPhoto.photos = @[photo];
+    contentPhoto.hashtag = hashtag;
+    FBSDKShareDialog *dialog = [FBSDKShareDialog showFromViewController:viewController
+                                                            withContent:contentPhoto
+                                                               delegate:self];
+    dialog.mode = FBSDKShareDialogModeNative;
+}
+
 -(void)shareImageFromLink:(NSString *)imageLink{
     SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
     [sdManager loadImageWithURL:[NSURL URLWithString:imageLink]
@@ -214,16 +235,7 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                               NSLog(@"Error downloading image: %@", error.debugDescription);
                           }
                           else if(finished){
-                              FBSDKHashtag *hashtag = [FBSDKHashtag hashtagWithString:@"#STATUSapp"];
-                              UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
-                              FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImage:image userGenerated:NO];
-                              FBSDKSharePhotoContent *contentPhoto = [[FBSDKSharePhotoContent alloc] init];
-                              contentPhoto.photos = @[photo];
-                              contentPhoto.hashtag = hashtag;
-                              FBSDKShareDialog *dialog = [FBSDKShareDialog showFromViewController:viewController
-                                                                                      withContent:contentPhoto
-                                                                                         delegate:self];
-                              dialog.mode = FBSDKShareDialogModeNative;
+                              [self shareImage:image withHashTag:@"#STATUSapp"];
                           }
                       }];
 }

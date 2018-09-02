@@ -97,8 +97,17 @@
             break;
         }
     }
-    
-    return @[postDailyTop, postWeeklyTop, postMonthlyTop];
+    NSMutableArray *result = [NSMutableArray new];
+    if (postDailyTop) {
+        [result addObject:postDailyTop];
+    }
+    if (postWeeklyTop) {
+        [result addObject:postWeeklyTop];
+    }
+    if (postMonthlyTop) {
+        [result addObject:postMonthlyTop];
+    }
+    return result;
 }
 
 #pragma mark - Private methods

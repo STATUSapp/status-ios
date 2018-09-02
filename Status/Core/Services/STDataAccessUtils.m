@@ -834,7 +834,15 @@ withCompletion:(STDataUploadCompletionBlock)completion{
         if ([response[@"status_code"] integerValue]==STWebservicesSuccesCod) {
             
             NSMutableArray *objects = [NSMutableArray new];
-            for (NSDictionary *dict in response[@"data"]) {
+            NSArray *responseObjects;
+            //temporary fix to get array in array objects
+            id firstObject = [response[@"data"] firstObject];
+            if ([firstObject isKindOfClass:[NSDictionary class]]) {
+                responseObjects = response[@"data"];
+            }else if ([firstObject isKindOfClass:[NSArray class]]){
+                responseObjects = [response[@"data"] firstObject];
+            }
+            for (NSDictionary *dict in responseObjects) {
                 STNotificationObj *no = [STNotificationObj notificationObjFromDict:dict];
                 [objects addObject:no];
             }

@@ -40,77 +40,112 @@
 
 +(NSArray<STNotificationObj *> *)topMockNotifications{
     NSArray *postWithTops = [[CoreManager postsPool] randomPostsForAllTops];
-    STPost *postDaily = postWithTops[0];
-    STPost *postWeekly = postWithTops[1];
-    STPost *postMonthly = postWithTops[2];
+    STPost *postDaily = nil;
+    STPost *postWeekly = nil;
+    STPost *postMonthly = nil;
 
-    STNotificationObj *topTodayMock = [STNotificationObj new];
-    topTodayMock.uuid = [[NSUUID UUID] UUIDString];
-    topTodayMock.appVersion = @"2.9";
-    topTodayMock.date = [NSDate date];
-    topTodayMock.message = @"Top Best Dressed people today";
-    topTodayMock.seen = NO;
-    topTodayMock.type = STNotificationTypeTop;
-    topTodayMock.userName = @"Top Best Dressed";
-    topTodayMock.topId = postDaily.dailyTop.topId;
+    for (STPost *post in postWithTops) {
+        NSInteger index = [postWithTops indexOfObject:post];
+        if (index == 0) {
+            postDaily = post;
+        }
+        if (index == 1) {
+            postWeekly = post;
+        }
+        if (index == 2) {
+            postMonthly = post;
+        }
+    }
     
-    STNotificationObj *topWeekMock = [STNotificationObj new];
-    topWeekMock.uuid = [[NSUUID UUID] UUIDString];
-    topWeekMock.appVersion = @"2.9";
-    topWeekMock.date = [NSDate date];
-    topWeekMock.message = @"Top Best Dressed people weekly";
-    topWeekMock.seen = NO;
-    topWeekMock.type = STNotificationTypeTop;
-    topWeekMock.userName = @"Top Best Dressed";
-    topWeekMock.topId = postWeekly.weeklyTop.topId;
+    NSMutableArray *result = [NSMutableArray new];
 
-    STNotificationObj *topMonthlyMock = [STNotificationObj new];
-    topMonthlyMock.uuid = [[NSUUID UUID] UUIDString];
-    topMonthlyMock.appVersion = @"2.9";
-    topMonthlyMock.date = [NSDate date];
-    topMonthlyMock.message = @"Top Best Dressed people today";
-    topMonthlyMock.seen = NO;
-    topMonthlyMock.type = STNotificationTypeTop;
-    topMonthlyMock.userName = @"Top Best Dressed";
-    topMonthlyMock.topId = postMonthly.monthlyTop.topId;
+    if (postDaily) {
+        STNotificationObj *topTodayMock = [STNotificationObj new];
+        topTodayMock.uuid = [[NSUUID UUID] UUIDString];
+        topTodayMock.appVersion = @"2.9";
+        topTodayMock.date = [NSDate date];
+        topTodayMock.message = @"Top Best Dressed people today";
+        topTodayMock.seen = NO;
+        topTodayMock.type = STNotificationTypeTop;
+        topTodayMock.userName = @"Top Best Dressed";
+        topTodayMock.topId = postDaily.dailyTop.topId;
+        
+        STNotificationObj *yourDailyTopMock = [STNotificationObj new];
+        yourDailyTopMock.uuid = [[NSUUID UUID] UUIDString];
+        yourDailyTopMock.appVersion = @"2.9";
+        yourDailyTopMock.date = [NSDate date];
+        yourDailyTopMock.top = postDaily.dailyTop;
+        yourDailyTopMock.message = [NSString stringWithFormat:@"Big congrats! You are number %@ in Top Best Dressed people today", yourDailyTopMock.top.rank];
+        yourDailyTopMock.seen = NO;
+        yourDailyTopMock.type = STNotificationTypeShareTop;
+        yourDailyTopMock.userName = @"Top Best Dressed";
+        yourDailyTopMock.postPhotoUrl = postDaily.mainImageUrl;
+        yourDailyTopMock.postId = postDaily.uuid;
+
+        [result addObject:topTodayMock];
+        [result addObject:yourDailyTopMock];
+    }
     
-    STNotificationObj *yourDailyTopMock = [STNotificationObj new];
-    yourDailyTopMock.uuid = [[NSUUID UUID] UUIDString];
-    yourDailyTopMock.appVersion = @"2.9";
-    yourDailyTopMock.date = [NSDate date];
-    yourDailyTopMock.top = postDaily.dailyTop;
-    yourDailyTopMock.message = [NSString stringWithFormat:@"Big congrats! You are number %@ in Top Best Dressed people today", yourDailyTopMock.top.rank];
-    yourDailyTopMock.seen = NO;
-    yourDailyTopMock.type = STNotificationTypeYourTop;
-    yourDailyTopMock.userName = @"Top Best Dressed";
-    yourDailyTopMock.postPhotoUrl = postDaily.mainImageUrl;
-    yourDailyTopMock.postId = postDaily.uuid;
+    if (postWeekly) {
+        STNotificationObj *topWeekMock = [STNotificationObj new];
+        topWeekMock.uuid = [[NSUUID UUID] UUIDString];
+        topWeekMock.appVersion = @"2.9";
+        topWeekMock.date = [NSDate date];
+        topWeekMock.message = @"Top Best Dressed people weekly";
+        topWeekMock.seen = NO;
+        topWeekMock.type = STNotificationTypeTop;
+        topWeekMock.userName = @"Top Best Dressed";
+        topWeekMock.topId = postWeekly.weeklyTop.topId;
+        
+        STNotificationObj *yourWeeklyTopMock = [STNotificationObj new];
+        yourWeeklyTopMock.uuid = [[NSUUID UUID] UUIDString];
+        yourWeeklyTopMock.appVersion = @"2.9";
+        yourWeeklyTopMock.date = [NSDate date];
+        yourWeeklyTopMock.top = postWeekly.weeklyTop;
+        yourWeeklyTopMock.message = [NSString stringWithFormat:@"Big congrats! You are number %@ in Top Best Dressed people weekly", yourWeeklyTopMock.top.rank];
+        yourWeeklyTopMock.seen = NO;
+        yourWeeklyTopMock.type = STNotificationTypeShareTop;
+        yourWeeklyTopMock.userName = @"Top Best Dressed";
+        yourWeeklyTopMock.postPhotoUrl = postWeekly.mainImageUrl;
+        yourWeeklyTopMock.postId = postWeekly.uuid;
+
+        [result addObject:topWeekMock];
+        [result addObject:yourWeeklyTopMock];
+
+    }
+
+    if (postMonthly) {
+        STNotificationObj *topMonthlyMock = [STNotificationObj new];
+        topMonthlyMock.uuid = [[NSUUID UUID] UUIDString];
+        topMonthlyMock.appVersion = @"2.9";
+        topMonthlyMock.date = [NSDate date];
+        topMonthlyMock.message = @"Top Best Dressed people monthly";
+        topMonthlyMock.seen = NO;
+        topMonthlyMock.type = STNotificationTypeTop;
+        topMonthlyMock.userName = @"Top Best Dressed";
+        topMonthlyMock.topId = postMonthly.monthlyTop.topId;
+        
+        STNotificationObj *yourMonthlyTopMock = [STNotificationObj new];
+        yourMonthlyTopMock.uuid = [[NSUUID UUID] UUIDString];
+        yourMonthlyTopMock.appVersion = @"2.9";
+        yourMonthlyTopMock.date = [NSDate date];
+        yourMonthlyTopMock.top = postMonthly.monthlyTop;
+        yourMonthlyTopMock.message = [NSString stringWithFormat:@"Big congrats! You are number %@ in Top Best Dressed people monthly", yourMonthlyTopMock.top.rank];
+        yourMonthlyTopMock.seen = NO;
+        yourMonthlyTopMock.type = STNotificationTypeShareTop;
+        yourMonthlyTopMock.userName = @"Top Best Dressed";
+        yourMonthlyTopMock.postPhotoUrl = postMonthly.mainImageUrl;
+        yourMonthlyTopMock.postId = postMonthly.uuid;
+
+        [result addObject:topMonthlyMock];
+        [result addObject:yourMonthlyTopMock];
+
+    }
     
-    STNotificationObj *yourWeeklyTopMock = [STNotificationObj new];
-    yourWeeklyTopMock.uuid = [[NSUUID UUID] UUIDString];
-    yourWeeklyTopMock.appVersion = @"2.9";
-    yourWeeklyTopMock.date = [NSDate date];
-    yourWeeklyTopMock.top = postWeekly.weeklyTop;
-    yourWeeklyTopMock.message = [NSString stringWithFormat:@"Big congrats! You are number %@ in Top Best Dressed people today", yourWeeklyTopMock.top.rank];
-    yourWeeklyTopMock.seen = NO;
-    yourWeeklyTopMock.type = STNotificationTypeYourTop;
-    yourWeeklyTopMock.userName = @"Top Best Dressed";
-    yourWeeklyTopMock.postPhotoUrl = postWeekly.mainImageUrl;
-    yourWeeklyTopMock.postId = postWeekly.uuid;
+    
 
-    STNotificationObj *yourMonthlyTopMock = [STNotificationObj new];
-    yourMonthlyTopMock.uuid = [[NSUUID UUID] UUIDString];
-    yourMonthlyTopMock.appVersion = @"2.9";
-    yourMonthlyTopMock.date = [NSDate date];
-    yourMonthlyTopMock.top = postMonthly.monthlyTop;
-    yourMonthlyTopMock.message = [NSString stringWithFormat:@"Big congrats! You are number %@ in Top Best Dressed people today", yourMonthlyTopMock.top.rank];
-    yourMonthlyTopMock.seen = NO;
-    yourMonthlyTopMock.type = STNotificationTypeYourTop;
-    yourMonthlyTopMock.userName = @"Top Best Dressed";
-    yourMonthlyTopMock.postPhotoUrl = postMonthly.mainImageUrl;
-    yourMonthlyTopMock.postId = postMonthly.uuid;
 
-    return @[topTodayMock, topWeekMock, topMonthlyMock, yourDailyTopMock, yourWeeklyTopMock, yourMonthlyTopMock];
+    return result;
 }
 
 - (STListUser *)listUserFromNotification{
@@ -138,7 +173,7 @@
 + (NSArray<NSNumber *> *)topNotifications{
     return @[
              @(STNotificationTypeTop),
-             @(STNotificationTypeYourTop)
+             @(STNotificationTypeShareTop)
              ];
 }
 @end

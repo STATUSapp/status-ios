@@ -68,6 +68,9 @@
 		072FE0511F5FC4830090F8B6 /* STExploreFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072FE0501F5FC4830090F8B6 /* STExploreFilters.xib */; };
 		072FE0541F5FC4A60090F8B6 /* STExploreFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */; };
 		07311BA12003FA1E0031F261 /* UIImage+Assets.m in Sources */ = {isa = PBXBuildFile; fileRef = 07311BA02003FA1E0031F261 /* UIImage+Assets.m */; };
+		0735D5372139D8380059C291 /* NSDictionary+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0735D5362139D8380059C291 /* NSDictionary+Additions.m */; };
+		0735D5392139E89F0059C291 /* ShareTopsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0735D5382139E89F0059C291 /* ShareTopsScene.storyboard */; };
+		0735E2E2213B119100BDD027 /* STShareTopViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0735E2E1213B119100BDD027 /* STShareTopViewControler.m */; };
 		0736222420B191F700092DB1 /* STDeleteAccountRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0736222320B191F700092DB1 /* STDeleteAccountRequest.m */; };
 		0738639A1F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073863991F9F0EC500FE13ED /* STMissingProductTVCTableViewController.m */; };
 		073912E120C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 073912E020C5CFBE005E4AE8 /* UICollectionViewCell+Additions.m */; };
@@ -470,6 +473,11 @@
 		072FE0531F5FC4A60090F8B6 /* STExploreFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STExploreFilters.m; sourceTree = "<group>"; };
 		07311B9F2003FA1E0031F261 /* UIImage+Assets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Assets.h"; sourceTree = "<group>"; };
 		07311BA02003FA1E0031F261 /* UIImage+Assets.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Assets.m"; sourceTree = "<group>"; };
+		0735D5352139D8380059C291 /* NSDictionary+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Additions.h"; sourceTree = "<group>"; };
+		0735D5362139D8380059C291 /* NSDictionary+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Additions.m"; sourceTree = "<group>"; };
+		0735D5382139E89F0059C291 /* ShareTopsScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShareTopsScene.storyboard; sourceTree = "<group>"; };
+		0735E2E0213B119100BDD027 /* STShareTopViewControler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STShareTopViewControler.h; sourceTree = "<group>"; };
+		0735E2E1213B119100BDD027 /* STShareTopViewControler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STShareTopViewControler.m; sourceTree = "<group>"; };
 		0736222220B191F700092DB1 /* STDeleteAccountRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDeleteAccountRequest.h; sourceTree = "<group>"; };
 		0736222320B191F700092DB1 /* STDeleteAccountRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDeleteAccountRequest.m; sourceTree = "<group>"; };
 		073863981F9F0EC500FE13ED /* STMissingProductTVCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMissingProductTVCTableViewController.h; sourceTree = "<group>"; };
@@ -1173,6 +1181,15 @@
 			path = Sync;
 			sourceTree = "<group>";
 		};
+		0735E2DF213B113400BDD027 /* ShareTop */ = {
+			isa = PBXGroup;
+			children = (
+				0735E2E0213B119100BDD027 /* STShareTopViewControler.h */,
+				0735E2E1213B119100BDD027 /* STShareTopViewControler.m */,
+			);
+			path = ShareTop;
+			sourceTree = "<group>";
+		};
 		077811561EB712290043A2E8 /* cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1483,6 +1500,8 @@
 				99B385F21C82FAA2005B4D8C /* NSString+VersionComparison.m */,
 				072DBBE11FF91A0000DFA8F0 /* NSString+Letters.h */,
 				072DBBE21FF91A0000DFA8F0 /* NSString+Letters.m */,
+				0735D5352139D8380059C291 /* NSDictionary+Additions.h */,
+				0735D5362139D8380059C291 /* NSDictionary+Additions.m */,
 				99B385F31C82FAA2005B4D8C /* UIImage+Alpha.h */,
 				99B385F41C82FAA2005B4D8C /* UIImage+Alpha.m */,
 				99B385F51C82FAA2005B4D8C /* UIImage+FixedOrientation.h */,
@@ -1912,6 +1931,7 @@
 		99B386BF1C82FAA2005B4D8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0735E2DF213B113400BDD027 /* ShareTop */,
 				0722C0181ECE4ACC00A15E08 /* UIAppearanceContainers */,
 				170911FC1DF87F5C00B2AF81 /* Activity */,
 				99B386CF1C82FAA2005B4D8C /* CustomViews */,
@@ -2055,6 +2075,7 @@
 				0755E23A1E882CBD0016519E /* TagProductsScene.storyboard */,
 				070DFA081F15F7F80002357B /* EarningsDashboardScene.storyboard */,
 				07272BAE1F68FACC004A090F /* Launch Screen.storyboard */,
+				0735D5382139E89F0059C291 /* ShareTopsScene.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2325,6 +2346,7 @@
 				17AC8ECF1E11192B002D213E /* STLoadingView.xib in Resources */,
 				0727A6251FFBB5F30040F349 /* STSectionView.xib in Resources */,
 				2AC7777B1C83A65200DAA273 /* LaunchScene.storyboard in Resources */,
+				0735D5392139E89F0059C291 /* ShareTopsScene.storyboard in Resources */,
 				99B387911C82FAA2005B4D8C /* ProximaNova-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2638,6 +2660,7 @@
 				99B3878C1C82FAA2005B4D8C /* STContactsDataProcessor.m in Sources */,
 				17232F191CFC50F300280B6B /* BadgeService.m in Sources */,
 				174D0B971CABDAA7001EB6E2 /* STUserProfilePool.m in Sources */,
+				0735D5372139D8380059C291 /* NSDictionary+Additions.m in Sources */,
 				99B387DD1C82FAA2005B4D8C /* STTutorialPresenterViewController.m in Sources */,
 				074BFD6E20D83C4100347941 /* STGDPRViewController.m in Sources */,
 				07552B3620474912005F4542 /* STImageSuggestionsService.m in Sources */,
@@ -2674,6 +2697,7 @@
 				071D515F1F195C1E0011ACF3 /* STEarningsCell.m in Sources */,
 				072BACB81E81012E0055B6F3 /* STGetUsedSuggestionsRequest.m in Sources */,
 				0736222420B191F700092DB1 /* STDeleteAccountRequest.m in Sources */,
+				0735E2E2213B119100BDD027 /* STShareTopViewControler.m in Sources */,
 				2A1D66831C8472D400633D87 /* STUIHelper.m in Sources */,
 				99B387461C82FAA2005B4D8C /* UIImage+RoundedCorner.m in Sources */,
 				072443AE1EBBCE4900E219CE /* STTagProductsEmptyWardrobe.m in Sources */,

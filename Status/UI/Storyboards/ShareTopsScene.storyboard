@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
+        </array>
+        <array key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Share Top View Controler-->
+        <scene sceneID="ICI-UZ-34v">
+            <objects>
+                <viewController storyboardIdentifier="SHARE_TOP_VC" id="f0U-mv-pPy" customClass="STShareTopViewControler" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yld-VC-dVU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIg-sX-QhM">
+                                <rect key="frame" x="293" y="29" width="53" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="nb0-5l-Hxm"/>
+                                    <constraint firstAttribute="height" constant="44" id="qps-th-X6X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                <state key="normal" title="CLOSE">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCloseButtonPressed:" destination="f0U-mv-pPy" eventType="touchUpInside" id="dXu-iu-aF8"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Big Congrats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4b-fK-eBO">
+                                <rect key="frame" x="109.5" y="54" width="156" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Mty-9a-sVE"/>
+                                    <constraint firstAttribute="width" constant="156" id="XXL-cq-cYD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your outfit is number 1 in Tob Best Dressed People today with 3637 likes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqb-Pu-IB3">
+                                <rect key="frame" x="88.5" y="107" width="198" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="198" id="5gL-bG-SsU"/>
+                                    <constraint firstAttribute="height" constant="75" id="7Hy-14-Sq9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMy-Gq-0Yd">
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="HQy-FY-V5Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
+                                <state key="normal" title="SHARE" backgroundImage="orange-base-0">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSharePressed:" destination="f0U-mv-pPy" eventType="touchUpInside" id="0KS-Sb-rWu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTQ-pP-RCF">
+                                <rect key="frame" x="165.5" y="549" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="JOk-xd-Ac6"/>
+                                    <constraint firstAttribute="height" constant="44" id="uQE-Ig-Hzk"/>
+                                </constraints>
+                                <state key="normal" image="facebook_normal"/>
+                                <state key="selected" image="facebook_pressed"/>
+                                <connections>
+                                    <action selector="onFacebookPressed:" destination="f0U-mv-pPy" eventType="touchUpInside" id="AFF-6E-To0"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAq-I1-iao">
+                                <rect key="frame" x="155" y="524" width="65" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="5hn-yo-cZX"/>
+                                    <constraint firstAttribute="height" constant="14" id="a3J-og-Ycb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SYf-Ri-exc">
+                                <rect key="frame" x="88" y="196" width="199" height="307"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bx6-rM-zZ2">
+                                <rect key="frame" x="67" y="175" width="74" height="74"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="gAw-xk-8HP"/>
+                                    <constraint firstAttribute="width" constant="74" id="kOA-QJ-55I"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SYf-Ri-exc" firstAttribute="top" secondItem="sqb-Pu-IB3" secondAttribute="bottom" constant="14" id="28o-n5-T5h"/>
+                            <constraint firstItem="sqb-Pu-IB3" firstAttribute="top" secondItem="B4b-fK-eBO" secondAttribute="bottom" constant="29" id="2FU-OW-kqS"/>
+                            <constraint firstItem="EMy-Gq-0Yd" firstAttribute="bottom" secondItem="DuO-sw-3Uc" secondAttribute="bottom" id="9o6-7a-zgX"/>
+                            <constraint firstItem="DuO-sw-3Uc" firstAttribute="trailing" secondItem="vIg-sX-QhM" secondAttribute="trailing" constant="29" id="AtH-IM-Qfa"/>
+                            <constraint firstItem="sqb-Pu-IB3" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="BJa-8A-XNE"/>
+                            <constraint firstItem="AAq-I1-iao" firstAttribute="top" secondItem="SYf-Ri-exc" secondAttribute="bottom" constant="21" id="Doi-gp-YA3"/>
+                            <constraint firstItem="EMy-Gq-0Yd" firstAttribute="trailing" secondItem="DuO-sw-3Uc" secondAttribute="trailing" id="Mbf-CY-ZWI"/>
+                            <constraint firstItem="B4b-fK-eBO" firstAttribute="top" secondItem="DuO-sw-3Uc" secondAttribute="top" constant="34" id="Nh5-jS-SJu"/>
+                            <constraint firstItem="kTQ-pP-RCF" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="XLF-9R-3q0"/>
+                            <constraint firstItem="AAq-I1-iao" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="YYa-bQ-bka"/>
+                            <constraint firstItem="SYf-Ri-exc" firstAttribute="top" secondItem="bx6-rM-zZ2" secondAttribute="top" constant="21" id="ciu-tx-PVM"/>
+                            <constraint firstItem="B4b-fK-eBO" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="ejB-hu-Fdb"/>
+                            <constraint firstItem="DuO-sw-3Uc" firstAttribute="trailing" secondItem="SYf-Ri-exc" secondAttribute="trailing" constant="88" id="gMc-jY-Xzo"/>
+                            <constraint firstItem="SYf-Ri-exc" firstAttribute="leading" secondItem="DuO-sw-3Uc" secondAttribute="leading" constant="88" id="q2Y-OP-9YM"/>
+                            <constraint firstItem="EMy-Gq-0Yd" firstAttribute="leading" secondItem="DuO-sw-3Uc" secondAttribute="leading" id="q7X-xS-5m9"/>
+                            <constraint firstItem="vIg-sX-QhM" firstAttribute="top" secondItem="DuO-sw-3Uc" secondAttribute="top" constant="9" id="qc3-xX-13d"/>
+                            <constraint firstItem="kTQ-pP-RCF" firstAttribute="top" secondItem="AAq-I1-iao" secondAttribute="bottom" constant="11" id="udE-vy-jPJ"/>
+                            <constraint firstItem="SYf-Ri-exc" firstAttribute="leading" secondItem="bx6-rM-zZ2" secondAttribute="leading" constant="21" id="ukv-Hi-xaw"/>
+                            <constraint firstItem="EMy-Gq-0Yd" firstAttribute="top" secondItem="kTQ-pP-RCF" secondAttribute="bottom" constant="26" id="xT7-Bh-xus"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DuO-sw-3Uc"/>
+                    </view>
+                    <connections>
+                        <outlet property="shareDetailsLabel" destination="pkV-hm-e6k" id="hBd-Wl-FK7"/>
+                        <outlet property="shareImageBottomConstr" destination="70a-Ba-rhi" id="sfn-oP-6WB"/>
+                        <outlet property="shareImageLeadingConstr" destination="S8E-c3-Mgs" id="nrZ-Gs-w97"/>
+                        <outlet property="shareImageTopConstr" destination="Sls-2c-LkF" id="YWF-7O-eCc"/>
+                        <outlet property="shareImageTrailingConstr" destination="khz-Gv-dcR" id="Hpi-VL-qra"/>
+                        <outlet property="sharePostImage" destination="va0-ms-oMs" id="QrI-j0-WJc"/>
+                        <outlet property="shareRankBadge" destination="ZF2-x7-31f" id="FMi-pA-3LR"/>
+                        <outlet property="shareView" destination="dfJ-35-ZOu" id="dHG-LA-RGQ"/>
+                        <outlet property="topShareDetailsLabel" destination="sqb-Pu-IB3" id="aAw-do-OVl"/>
+                        <outlet property="topShareImageBottomConstr" destination="Doi-gp-YA3" id="uug-sw-KrN"/>
+                        <outlet property="topShareImageLeadingConstr" destination="q2Y-OP-9YM" id="IJf-ok-Rwp"/>
+                        <outlet property="topShareImageTopConstr" destination="28o-n5-T5h" id="CYP-ou-3lu"/>
+                        <outlet property="topShareImageTrailingConstr" destination="gMc-jY-Xzo" id="GFe-fV-4h8"/>
+                        <outlet property="topSharePostImage" destination="SYf-Ri-exc" id="nJP-nz-3cD"/>
+                        <outlet property="topShareRankBadge" destination="bx6-rM-zZ2" id="7Dm-0a-8q8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m69-F7-YhW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="dfJ-35-ZOu">
+                    <rect key="frame" x="0.0" y="0.0" width="360" height="640"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WOW!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQW-4g-a0U">
+                            <rect key="frame" x="102" y="48" width="156" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="156" id="1FG-c8-lQ9"/>
+                                <constraint firstAttribute="height" constant="24" id="PSb-9f-EIF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="26"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My outfit is number 1 in Tob Best Dressed People today with 3637 likes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkV-hm-e6k">
+                            <rect key="frame" x="81" y="101" width="198" height="75"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="198" id="bn7-Fw-8h6"/>
+                                <constraint firstAttribute="height" constant="75" id="sYx-tb-AAL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="va0-ms-oMs">
+                            <rect key="frame" x="59" y="190" width="242" height="377"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZF2-x7-31f">
+                            <rect key="frame" x="38" y="169" width="74" height="74"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="74" id="a6B-Qd-XHk"/>
+                                <constraint firstAttribute="height" constant="74" id="nmx-Td-xxO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="30"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.getstatus.co/install" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TD1-FH-VbP">
+                            <rect key="frame" x="93" y="597" width="174" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="D39-c8-SYx"/>
+                                <constraint firstAttribute="width" constant="174" id="jNo-qc-M5q"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="pkV-hm-e6k" firstAttribute="centerX" secondItem="h1l-lY-C4t" secondAttribute="centerX" id="6m2-1S-aFr"/>
+                        <constraint firstItem="TD1-FH-VbP" firstAttribute="top" secondItem="va0-ms-oMs" secondAttribute="bottom" constant="30" id="70a-Ba-rhi"/>
+                        <constraint firstItem="TD1-FH-VbP" firstAttribute="centerX" secondItem="h1l-lY-C4t" secondAttribute="centerX" id="BhC-j9-f4j"/>
+                        <constraint firstItem="va0-ms-oMs" firstAttribute="leading" secondItem="ZF2-x7-31f" secondAttribute="leading" constant="21" id="Dag-ck-Y2N"/>
+                        <constraint firstItem="pkV-hm-e6k" firstAttribute="top" secondItem="cQW-4g-a0U" secondAttribute="bottom" constant="29" id="Jf8-oU-69p"/>
+                        <constraint firstItem="cQW-4g-a0U" firstAttribute="centerX" secondItem="h1l-lY-C4t" secondAttribute="centerX" id="Prd-cK-JjC"/>
+                        <constraint firstItem="va0-ms-oMs" firstAttribute="leading" secondItem="dfJ-35-ZOu" secondAttribute="leading" constant="59" id="S8E-c3-Mgs"/>
+                        <constraint firstItem="cQW-4g-a0U" firstAttribute="top" secondItem="dfJ-35-ZOu" secondAttribute="top" constant="48" id="SO2-VW-AIe"/>
+                        <constraint firstItem="va0-ms-oMs" firstAttribute="top" secondItem="pkV-hm-e6k" secondAttribute="bottom" constant="14" id="Sls-2c-LkF"/>
+                        <constraint firstItem="va0-ms-oMs" firstAttribute="top" secondItem="ZF2-x7-31f" secondAttribute="top" constant="21" id="e9k-Pr-yqd"/>
+                        <constraint firstAttribute="trailing" secondItem="va0-ms-oMs" secondAttribute="trailing" constant="59" id="khz-Gv-dcR"/>
+                        <constraint firstAttribute="bottom" secondItem="TD1-FH-VbP" secondAttribute="bottom" constant="27" id="nsj-U3-rzi"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="h1l-lY-C4t"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="184.80000000000001" y="-35.532233883058474"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="facebook_normal" width="34" height="34"/>
+        <image name="facebook_pressed" width="34" height="34"/>
+        <image name="orange-base-0" width="481" height="72"/>
+    </resources>
+</document>
