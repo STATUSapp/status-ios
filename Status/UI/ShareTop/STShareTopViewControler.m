@@ -17,6 +17,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <AVFoundation/AVFoundation.h>
 #import "STFacebookHelper.h"
+#import "STInstagramShareService.h"
 
 CGFloat kMinVerticalMarginForImage = 21.f;
 
@@ -40,6 +41,8 @@ CGFloat kMinVerticalMarginForImage = 21.f;
 @property (nonatomic, strong) STLoadingView *customLoadingView;
 
 @property (nonatomic, assign) BOOL facebookSelected;
+@property (nonatomic, assign) BOOL instagramSelected;
+
 @property (nonatomic, strong) UIImage *shareImage;
 
 @property (nonatomic, strong) STTopBase *top;
@@ -86,7 +89,7 @@ CGFloat kMinVerticalMarginForImage = 21.f;
     //configure details string
     NSString *rankString = [NSString stringWithFormat:@"number %@", _top.rank];
     NSString *topName = @"Top Best Dressed People";
-    NSString *likesString = [NSString stringWithFormat:@"%@", _post.numberOfLikes];
+    NSString *likesString = [NSString stringWithFormat:@"%@", _top.likesCount];
     NSString *topTypeString = [self.top topTypeString];
     NSString *detailsString = [NSString stringWithFormat:@"Your outfit is %@ \nin %@ \n%@ with %@ likes!", rankString, topName, topTypeString, likesString];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:detailsString attributes:@{
@@ -117,7 +120,9 @@ CGFloat kMinVerticalMarginForImage = 21.f;
     self.topShareImageLeadingConstr.constant = self.topShareImageLeadingConstr.constant + adjustedX;
     self.topShareImageTrailingConstr.constant = self.topShareImageTrailingConstr.constant + adjustedX;
     
-    [self.topSharePostImage sd_setImageWithURL:[NSURL URLWithString:self.post.mainImageUrl]];
+    [self.topSharePostImage sd_setImageWithURL:[NSURL URLWithString:self.post.mainImageUrl]completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        NSLog(@"error: %@", error);
+    }];
     
     [self.view layoutSubviews];
 }
@@ -188,10 +193,29 @@ CGFloat kMinVerticalMarginForImage = 21.f;
     btn.selected = !btn.selected;
     self.facebookSelected = btn.selected;
 }
+- (IBAction)onInstagramPressed:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    btn.selected = !btn.selected;
+    self.instagramSelected = btn.selected;
+
+}
 - (IBAction)onSharePressed:(id)sender {
-    if (self.facebookSelected) {
+    if (self.facebookSelected ||
+        self.instagramSelected) {
         self.shareImage = [self imageWithView:self.shareView];
+    }
+    if (self.facebookSelected) {
         [[CoreManager facebookService] shareTopImage:self.shareImage];
+    }
+    if (self.instagramSelected) {
+        [[CoreManager instagramShareService] shareImageToStory:self.shareImage
+                                                    contentURL:@"https://getstatus.co/" completion:^(STInstagramShareError error) {
+                                                        if (error == STInstagramShareErrorNoInstragramApp) {
+                                                            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Your phone does not appear to have Instagram app installed. Please install or update Instagram app on this device." preferredStyle:UIAlertControllerStyleAlert];
+                                                            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                                                            [self presentViewController:alert animated:YES completion:nil];
+                                                        }
+                                                    }];
     }
 }
 @end
