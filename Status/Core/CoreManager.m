@@ -32,6 +32,7 @@
 #import "STInstagramLoginService.h"
 #import "STImageResizeService.h"
 #import "STResetBaseUrlService.h"
+#import "STInstagramShareService.h"
 
 #import "SDWebImageManager.h"
 
@@ -61,6 +62,7 @@
 @property (nonatomic, strong) STInstagramLoginService *instagramLoginService;
 @property (nonatomic, strong) STImageResizeService *imageResizeService;
 @property (nonatomic, strong) STResetBaseUrlService *resetBaseUrlService;
+@property (nonatomic, strong) STInstagramShareService *instagramShareService;
 
 @end
 
@@ -104,6 +106,7 @@
         _instagramLoginService = [STInstagramLoginService new];
         _imageResizeService = [STImageResizeService new];
         _resetBaseUrlService = [STResetBaseUrlService new];
+        _instagramShareService = [STInstagramShareService new];
         
         [SDWebImageManager sharedManager].imageCache.config.shouldDecompressImages = NO;
         [SDWebImageDownloader sharedDownloader].shouldDecompressImages = NO;
@@ -230,6 +233,10 @@
 
 + (STResetBaseUrlService *)resetBaseUrlService{
     return [[CoreManager sharedInstance] resetBaseUrlService];
+}
+
++ (STInstagramShareService *)instagramShareService{
+    return [[CoreManager sharedInstance] instagramShareService];
 }
 
 #pragma mark - Private implementation

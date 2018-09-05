@@ -73,18 +73,44 @@
                                     <action selector="onSharePressed:" destination="f0U-mv-pPy" eventType="touchUpInside" id="0KS-Sb-rWu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTQ-pP-RCF">
-                                <rect key="frame" x="165.5" y="549" width="44" height="44"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p6F-na-Lat">
+                                <rect key="frame" x="135" y="544" width="105" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTQ-pP-RCF">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="JOk-xd-Ac6"/>
+                                            <constraint firstAttribute="height" constant="44" id="uQE-Ig-Hzk"/>
+                                        </constraints>
+                                        <state key="normal" image="facebook_normal"/>
+                                        <state key="selected" image="facebook_pressed"/>
+                                        <connections>
+                                            <action selector="onFacebookPressed:" destination="f0U-mv-pPy" eventType="touchUpInside" id="AFF-6E-To0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnB-xp-eg5">
+                                        <rect key="frame" x="61" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Zhj-dM-kZ3"/>
+                                            <constraint firstAttribute="width" constant="44" id="pDu-iy-erJ"/>
+                                        </constraints>
+                                        <state key="normal" image="instagram_normal"/>
+                                        <state key="selected" image="instagram_pressed"/>
+                                        <connections>
+                                            <action selector="onInstagramPressed:" destination="f0U-mv-pPy" eventType="touchUpInside" id="8GL-V5-e5V"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="JOk-xd-Ac6"/>
-                                    <constraint firstAttribute="height" constant="44" id="uQE-Ig-Hzk"/>
+                                    <constraint firstAttribute="width" constant="105" id="1Qx-6L-zkX"/>
+                                    <constraint firstItem="EnB-xp-eg5" firstAttribute="top" secondItem="p6F-na-Lat" secondAttribute="top" id="2nE-Vu-e6F"/>
+                                    <constraint firstAttribute="trailing" secondItem="EnB-xp-eg5" secondAttribute="trailing" id="65L-cb-GPT"/>
+                                    <constraint firstItem="kTQ-pP-RCF" firstAttribute="top" secondItem="p6F-na-Lat" secondAttribute="top" id="b09-Yz-M9I"/>
+                                    <constraint firstItem="kTQ-pP-RCF" firstAttribute="leading" secondItem="p6F-na-Lat" secondAttribute="leading" id="dSr-se-G9B"/>
+                                    <constraint firstAttribute="height" constant="44" id="pxN-Km-KUx"/>
                                 </constraints>
-                                <state key="normal" image="facebook_normal"/>
-                                <state key="selected" image="facebook_pressed"/>
-                                <connections>
-                                    <action selector="onFacebookPressed:" destination="f0U-mv-pPy" eventType="touchUpInside" id="AFF-6E-To0"/>
-                                </connections>
-                            </button>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAq-I1-iao">
                                 <rect key="frame" x="155" y="524" width="65" height="14"/>
                                 <constraints>
@@ -116,12 +142,14 @@
                             <constraint firstItem="SYf-Ri-exc" firstAttribute="top" secondItem="sqb-Pu-IB3" secondAttribute="bottom" constant="14" id="28o-n5-T5h"/>
                             <constraint firstItem="sqb-Pu-IB3" firstAttribute="top" secondItem="B4b-fK-eBO" secondAttribute="bottom" constant="29" id="2FU-OW-kqS"/>
                             <constraint firstItem="EMy-Gq-0Yd" firstAttribute="bottom" secondItem="DuO-sw-3Uc" secondAttribute="bottom" id="9o6-7a-zgX"/>
+                            <constraint firstItem="p6F-na-Lat" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="ASE-7G-sQQ"/>
                             <constraint firstItem="DuO-sw-3Uc" firstAttribute="trailing" secondItem="vIg-sX-QhM" secondAttribute="trailing" constant="29" id="AtH-IM-Qfa"/>
                             <constraint firstItem="sqb-Pu-IB3" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="BJa-8A-XNE"/>
+                            <constraint firstItem="p6F-na-Lat" firstAttribute="top" secondItem="AAq-I1-iao" secondAttribute="bottom" constant="6" id="Bc0-at-XVT"/>
                             <constraint firstItem="AAq-I1-iao" firstAttribute="top" secondItem="SYf-Ri-exc" secondAttribute="bottom" constant="21" id="Doi-gp-YA3"/>
+                            <constraint firstItem="EMy-Gq-0Yd" firstAttribute="top" secondItem="p6F-na-Lat" secondAttribute="bottom" constant="31" id="G0T-Dy-g1d"/>
                             <constraint firstItem="EMy-Gq-0Yd" firstAttribute="trailing" secondItem="DuO-sw-3Uc" secondAttribute="trailing" id="Mbf-CY-ZWI"/>
                             <constraint firstItem="B4b-fK-eBO" firstAttribute="top" secondItem="DuO-sw-3Uc" secondAttribute="top" constant="34" id="Nh5-jS-SJu"/>
-                            <constraint firstItem="kTQ-pP-RCF" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="XLF-9R-3q0"/>
                             <constraint firstItem="AAq-I1-iao" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="YYa-bQ-bka"/>
                             <constraint firstItem="SYf-Ri-exc" firstAttribute="top" secondItem="bx6-rM-zZ2" secondAttribute="top" constant="21" id="ciu-tx-PVM"/>
                             <constraint firstItem="B4b-fK-eBO" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="ejB-hu-Fdb"/>
@@ -129,9 +157,7 @@
                             <constraint firstItem="SYf-Ri-exc" firstAttribute="leading" secondItem="DuO-sw-3Uc" secondAttribute="leading" constant="88" id="q2Y-OP-9YM"/>
                             <constraint firstItem="EMy-Gq-0Yd" firstAttribute="leading" secondItem="DuO-sw-3Uc" secondAttribute="leading" id="q7X-xS-5m9"/>
                             <constraint firstItem="vIg-sX-QhM" firstAttribute="top" secondItem="DuO-sw-3Uc" secondAttribute="top" constant="9" id="qc3-xX-13d"/>
-                            <constraint firstItem="kTQ-pP-RCF" firstAttribute="top" secondItem="AAq-I1-iao" secondAttribute="bottom" constant="11" id="udE-vy-jPJ"/>
                             <constraint firstItem="SYf-Ri-exc" firstAttribute="leading" secondItem="bx6-rM-zZ2" secondAttribute="leading" constant="21" id="ukv-Hi-xaw"/>
-                            <constraint firstItem="EMy-Gq-0Yd" firstAttribute="top" secondItem="kTQ-pP-RCF" secondAttribute="bottom" constant="26" id="xT7-Bh-xus"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DuO-sw-3Uc"/>
                     </view>
@@ -228,6 +254,8 @@
     <resources>
         <image name="facebook_normal" width="34" height="34"/>
         <image name="facebook_pressed" width="34" height="34"/>
+        <image name="instagram_normal" width="34" height="34"/>
+        <image name="instagram_pressed" width="34" height="34"/>
         <image name="orange-base-0" width="481" height="72"/>
     </resources>
 </document>
