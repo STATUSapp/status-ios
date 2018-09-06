@@ -11,7 +11,7 @@
 #import "STTopBase.h"
 
 CGFloat const kBorderRadius = 0.04;
-CGFloat const kFontSizeProportion = 0.4;
+CGFloat const kFontSizeProportion = 0.5;
 
 @implementation UILabel (TopRanking)
 

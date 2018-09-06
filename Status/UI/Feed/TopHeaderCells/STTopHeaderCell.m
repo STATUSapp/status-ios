@@ -36,14 +36,14 @@
     [self.topOneImageView topOneMask];
     NSURL *topOneImageURL = [NSURL URLWithString:topOnePost.smallPhotoUrl];
     [self.topOneImageView sd_setImageWithURL:topOneImageURL];
-    self.topOneNameLabel.text = topOnePost.userName;
+    self.topOneNameLabel.text = [topOnePost firstName];
     STTopBase *topOne = [topOnePost topForTopId:topId];
     self.topOneLikesLable.text = [NSString stringWithFormat:@"%@", topOne.likesCount?:@(0)];
     
     [self.topTwoImageView topTwoMask];
     NSURL *topTwoImageURL = [NSURL URLWithString:topTwoPost.smallPhotoUrl];
     [self.topTwoImageView sd_setImageWithURL:topTwoImageURL];
-    self.topTwoNameLabel.text = topTwoPost.userName;
+    self.topTwoNameLabel.text = [topTwoPost firstName];
     STTopBase *topTwo = [topTwoPost topForTopId:topId];
     self.topTwoLikesLabel.text = [NSString stringWithFormat:@"%@", topTwo.likesCount?:@(0)];
     [self.topTwoLikesLabel setTransform:CGAffineTransformMakeRotation(-M_PI / 30)];
@@ -51,7 +51,7 @@
     [self.topThreeImageView topThreeMask];
     NSURL *topThreeImageURL = [NSURL URLWithString:topThreePost.smallPhotoUrl];
     [self.topThreeImageView sd_setImageWithURL:topThreeImageURL];
-    self.topThreeNameLabel.text = topThreePost.userName;
+    self.topThreeNameLabel.text = [topThreePost firstName];
     STTopBase *topThree = [topThreePost topForTopId:topId];
     self.topThreeLikesLabel.text = [NSString stringWithFormat:@"%@", topThree.likesCount?:@(0)];
     [self.topThreeLikesLabel setTransform:CGAffineTransformMakeRotation(M_PI / 30)];

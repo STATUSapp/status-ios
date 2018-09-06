@@ -247,4 +247,13 @@
     return [self bestOfTops];
 }
 
+-(NSString *)firstName{
+    NSString *result = @"";
+    NSArray *names = [self.userName componentsSeparatedByString:@" "];
+    if (names.count > 0) {
+        result = [names firstObject];
+    }
+    return result;
+}
+
 @end

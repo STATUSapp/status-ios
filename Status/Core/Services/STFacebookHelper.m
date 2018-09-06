@@ -25,6 +25,8 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 
 @interface STFacebookHelper()<FBSDKAppInviteDialogDelegate, FBSDKSharingDelegate>
 @property (nonatomic, strong) STNativeAdsController *fbNativeAdService;
+@property (nonatomic, copy) shareCompletion shareCompletion;
+
 @end
 
 @implementation STFacebookHelper
@@ -204,12 +206,15 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
     }];
 }
 
--(void)shareTopImage:(UIImage * _Nullable)topImage{
-    [self shareImage:topImage withHashTag:@"#STATUSappTopBestDressedPeople"];
+-(void)shareTopImage:(UIImage * _Nullable)topImage
+      withCompletion:(shareCompletion)completion{
+    [self shareImage:topImage withHashTag:@"#STATUSapp" completion:completion];
 }
 
 - (void)shareImage:(UIImage * _Nullable)image
-       withHashTag:(NSString *) hashtagString{
+       withHashTag:(NSString *) hashtagString
+        completion:(shareCompletion)completion{
+    self.shareCompletion = completion;
     FBSDKHashtag *hashtag = [FBSDKHashtag hashtagWithString:hashtagString];
     UIViewController *viewController = [STNavigationService viewControllerForSelectedTab];
     if ([viewController presentedViewController]) {
@@ -235,7 +240,9 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
                               NSLog(@"Error downloading image: %@", error.debugDescription);
                           }
                           else if(finished){
-                              [self shareImage:image withHashTag:@"#STATUSapp"];
+                              [self shareImage:image
+                                   withHashTag:@"#STATUSapp"
+                                    completion:nil];
                           }
                       }];
 }
@@ -324,14 +331,23 @@ NSString *const kGetPhotosGraph = @"/%@/photos?fields=source,picture&limit=30";
 
 -(void)sharerDidCancel:(id<FBSDKSharing>)sharer{
     NSLog(@"Share canceled");
+    if (self.shareCompletion) {
+        self.shareCompletion(NO);
+    }
 }
 
 -(void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error{
     NSLog(@"Share failed with error: %@", error.description);
+    if (self.shareCompletion) {
+        self.shareCompletion(NO);
+    }
 }
 
 -(void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results{
     NSLog(@"Share complete with results: %@", results);
+    if (self.shareCompletion) {
+        self.shareCompletion(YES);
+    }
 }
 
 #pragma mark - FB Native Ads

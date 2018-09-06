@@ -41,9 +41,9 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Big Congrats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4b-fK-eBO">
-                                <rect key="frame" x="109.5" y="54" width="156" height="24"/>
+                                <rect key="frame" x="109.5" y="54" width="156" height="26"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="Mty-9a-sVE"/>
+                                    <constraint firstAttribute="height" constant="26" id="Mty-9a-sVE"/>
                                     <constraint firstAttribute="width" constant="156" id="XXL-cq-cYD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="26"/>
@@ -140,7 +140,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SYf-Ri-exc" firstAttribute="top" secondItem="sqb-Pu-IB3" secondAttribute="bottom" constant="14" id="28o-n5-T5h"/>
-                            <constraint firstItem="sqb-Pu-IB3" firstAttribute="top" secondItem="B4b-fK-eBO" secondAttribute="bottom" constant="29" id="2FU-OW-kqS"/>
+                            <constraint firstItem="sqb-Pu-IB3" firstAttribute="top" secondItem="B4b-fK-eBO" secondAttribute="bottom" constant="27" id="2FU-OW-kqS"/>
                             <constraint firstItem="EMy-Gq-0Yd" firstAttribute="bottom" secondItem="DuO-sw-3Uc" secondAttribute="bottom" id="9o6-7a-zgX"/>
                             <constraint firstItem="p6F-na-Lat" firstAttribute="centerX" secondItem="DuO-sw-3Uc" secondAttribute="centerX" id="ASE-7G-sQQ"/>
                             <constraint firstItem="DuO-sw-3Uc" firstAttribute="trailing" secondItem="vIg-sX-QhM" secondAttribute="trailing" constant="29" id="AtH-IM-Qfa"/>
@@ -252,10 +252,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="facebook_normal" width="34" height="34"/>
-        <image name="facebook_pressed" width="34" height="34"/>
-        <image name="instagram_normal" width="34" height="34"/>
-        <image name="instagram_pressed" width="34" height="34"/>
+        <image name="facebook_normal" width="40" height="40"/>
+        <image name="facebook_pressed" width="40" height="40"/>
+        <image name="instagram_normal" width="40" height="40"/>
+        <image name="instagram_pressed" width="40" height="40"/>
         <image name="orange-base-0" width="481" height="72"/>
     </resources>
 </document>

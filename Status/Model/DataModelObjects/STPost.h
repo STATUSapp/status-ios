@@ -41,4 +41,5 @@
 -(NSString *)hasttagForRange:(NSRange )range;
 -(STTopBase *)bestOfTops;
 -(STTopBase *)topForTopId:(NSString *)topId;
+-(NSString *)firstName;
 @end

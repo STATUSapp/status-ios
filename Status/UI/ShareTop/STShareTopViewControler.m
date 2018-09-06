@@ -204,18 +204,24 @@ CGFloat kMinVerticalMarginForImage = 21.f;
         self.instagramSelected) {
         self.shareImage = [self imageWithView:self.shareView];
     }
+    shareCompletion facebookShareCompletion = ^(BOOL result) {
+        if (self.instagramSelected) {
+            if (self.instagramSelected) {
+                [[CoreManager instagramShareService] shareImageToStory:self.shareImage
+                                                            contentURL:@"http://getstatus.co/install" completion:^(STInstagramShareError error) {
+                                                                if (error == STInstagramShareErrorNoInstragramApp) {
+                                                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Your phone does not appear to have Instagram app installed. Please install or update Instagram app on this device." preferredStyle:UIAlertControllerStyleAlert];
+                                                                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                                                                    [self presentViewController:alert animated:YES completion:nil];
+                                                                }
+                                                            }];
+            }
+        }
+    };
     if (self.facebookSelected) {
-        [[CoreManager facebookService] shareTopImage:self.shareImage];
-    }
-    if (self.instagramSelected) {
-        [[CoreManager instagramShareService] shareImageToStory:self.shareImage
-                                                    contentURL:@"https://getstatus.co/" completion:^(STInstagramShareError error) {
-                                                        if (error == STInstagramShareErrorNoInstragramApp) {
-                                                            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Your phone does not appear to have Instagram app installed. Please install or update Instagram app on this device." preferredStyle:UIAlertControllerStyleAlert];
-                                                            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-                                                            [self presentViewController:alert animated:YES completion:nil];
-                                                        }
-                                                    }];
+        [[CoreManager facebookService] shareTopImage:self.shareImage withCompletion:facebookShareCompletion];
+    }else{
+        facebookShareCompletion(YES);
     }
 }
 @end
