@@ -22,8 +22,8 @@
 #import "STConversationsListViewController.h"
 
 #import "STCoreDataManager.h"
+#import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
 #import "STSetAPNTokenRequest.h"
 #import "STGetNotificationsCountRequest.h"
 #import "STBaseRequest.h"
@@ -85,7 +85,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
         [[NSUserDefaults standardUserDefaults] setObject:kSTNewInstallKey forKey:kSTNewInstallKey];
     }
 //    [Crashlytics startWithAPIKey:@"b4369a0a1dca4a6745a3905bf41aa6964c863da1"];
-    [Crashlytics startWithAPIKey:@"93e0064668657d3332278aaa1ed765b8f48c6ad6"];
+//    [Crashlytics startWithAPIKey:@"93e0064668657d3332278aaa1ed765b8f48c6ad6"];
+    [Fabric with:@[[Crashlytics class]]];
     [Appirater setAppId:APP_STORE_ID];
     [Appirater setDaysUntilPrompt:7];
     [Appirater setUsesUntilPrompt:10];

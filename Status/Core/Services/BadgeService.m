@@ -95,7 +95,9 @@ NSString * const kBadgeCountNotificationsKey = @"kBadgeCountNotificationsKey";
                 });
             }
         };
-        [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:nil];
+        [STGetNotificationsCountRequest getNotificationsCountWithCompletion:completion failure:^(NSError *error) {
+            NSLog(@"error received on get notifications count: %@", error);
+        }];
     }
 }
 
