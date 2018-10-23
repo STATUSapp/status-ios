@@ -12,7 +12,7 @@
 #import "STResetBaseUrlService.h"
 
 NSInteger const kLoginViewTag = 1001;
-CGFloat const kLoginButtonViewDefaultHeight = 317.f;
+CGFloat const kLoginButtonViewDefaultHeight = 397.f;
 CGFloat const kAnimationDuration = 0.25f;
 @interface STLoginView ()
 
