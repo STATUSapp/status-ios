@@ -1,1 +1,0 @@
-# cocoapod2.0
