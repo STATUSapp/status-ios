@@ -31,7 +31,8 @@
     }
     _nativeAd = [[FBNativeAd alloc] initWithPlacementID:@"642056059181757_1505991126121575"];
     _nativeAd.delegate = self;
-    _nativeAd.mediaCachePolicy = FBNativeAdsCachePolicyAll;
+    //TODO: activate Facebook Ads
+//    _nativeAd.mediaCachePolicy = FBNativeAdsCachePolicyAll;
     [_nativeAd loadAd];
 }
 

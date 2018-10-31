@@ -288,19 +288,20 @@ NSInteger const kFacebookAdsTimeframe = 10;
 }
 
 -(void)addFacebookAdsToArray{
-    NSInteger startIndex = [self getLastAdPostIndex];
-    NSInteger allObjectsCount = [_objectIds count];
-    NSInteger nextIndex = startIndex + kFacebookAdsTimeframe;
-    if (startIndex > 0) {
-        nextIndex+=1;
-    }
-    while (nextIndex < allObjectsCount) {
-        STAdPost *adPost = [STAdPost new];
-        [_objectIds insertObject:adPost.uuid atIndex:nextIndex];
-        [self addObjectsToObjectPool:@[adPost]];
-        nextIndex = nextIndex+ 1 + kFacebookAdsTimeframe;
-        allObjectsCount ++;
-    }
+    //TODO: activate Facebook Ads
+//    NSInteger startIndex = [self getLastAdPostIndex];
+//    NSInteger allObjectsCount = [_objectIds count];
+//    NSInteger nextIndex = startIndex + kFacebookAdsTimeframe;
+//    if (startIndex > 0) {
+//        nextIndex+=1;
+//    }
+//    while (nextIndex < allObjectsCount) {
+//        STAdPost *adPost = [STAdPost new];
+//        [_objectIds insertObject:adPost.uuid atIndex:nextIndex];
+//        [self addObjectsToObjectPool:@[adPost]];
+//        nextIndex = nextIndex+ 1 + kFacebookAdsTimeframe;
+//        allObjectsCount ++;
+//    }
 }
 #pragma mark - Actions
 

@@ -75,8 +75,8 @@ static NSString * const kSTNewInstallKey = @"kSTNewInstallKey";
     
     // Used to pass us the IFA, enables highly accurate 1-to-1 attribution.
     // Required for many advertising networks.
-    [Tune setAppleAdvertisingIdentifier:[[ASIdentifierManager sharedManager] advertisingIdentifier]
-                         advertisingTrackingEnabled:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
+//    [Tune setAppleAdvertisingIdentifier:[[ASIdentifierManager sharedManager] advertisingIdentifier]
+//                         advertisingTrackingEnabled:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
     
     NSString * newInstall = [[NSUserDefaults standardUserDefaults] objectForKey:kSTNewInstallKey];
     
